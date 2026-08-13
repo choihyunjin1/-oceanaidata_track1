@@ -54,6 +54,8 @@
 | [P1_FAILURE_RECON_2026-08-13.md](reports/P1_FAILURE_RECON_2026-08-13.md) | OOF 실패군·모델 불일치 재정찰과 연구 전용 진단 |
 | [P1_DATA_LOADING_BENCHMARK_2026-08-13.md](reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md) | CSV·Arrow·Parquet 로딩 벤치마크와 캐시 권고 |
 | [P1_BREAKTHROUGH_RESEARCH_2026-08-13.md](reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md) | 1차 출처 기반 돌파 실험 10개 우선순위 |
+| [P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md](reports/P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md) | CAPA·PELT·CPOP·반사실적 재구성·성층 gate의 학술 근거와 동결 실험 순서 |
+| [P1 학술 정찰 HTML 보고서](reports/p1_academic_methods_20260813/report.html) | 검증된 지표·차트·우선순위 표가 포함된 휴대형 기술 보고서 |
 | `reports/ENVIRONMENT_2026-08-13.md` | Python·패키지 lock·CPU/GPU 실행 환경 |
 | `reports/EXTERNAL_DATA_APPROVAL_DRAFT.md` | 외부자료와 운영 범위 서면 문의 초안 |
 
