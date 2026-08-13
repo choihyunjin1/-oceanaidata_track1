@@ -89,10 +89,41 @@ means this result must not be read as comprehensive transfer robustness.
 The CSV and model remain ignored local artifacts. They must not be committed, placed
 in the public code archive, or uploaded until the user approves that exact file.
 
-## Deep and SSL status
+## Deep and SSL full result
 
-The fold-local TCN, patch Transformer, masked-reconstruction SSL, 12-setting search
-spaces, three-seed finalist retraining, checkpoint provenance, and leakage tests are
-implemented. CUDA forward/backward and bounded end-to-end smoke experiments pass.
-Their full multi-hour screen is not used in this first candidate and cannot be claimed
-as a measured improvement until the fixed outer evaluation completes.
+The full fold-local masked-reconstruction SSL and sequence-model experiment completed
+under `artifacts/sequence_full_20260813`. Both architectures used the same purged outer
+folds, inner-only configuration and threshold selection, and three-seed finalist
+retraining. Outer labels were not used to select the architecture or configuration.
+
+| Architecture | Mean inner-selection F1 | Outer micro F1 | Outer weighted F1 | Decision |
+|---|---:|---:|---:|---|
+| TCN | 0.732815 | 0.767582 | 0.740445 | not promoted |
+| Patch Transformer | 0.726876 | 0.799755 | 0.759598 | not promoted |
+| Frozen XGBoost reference | — | **0.860371** | **0.813316** | remains selected |
+
+The experiment's inner-only rule selected TCN configuration 8: non-causal channels
+`[64, 128, 128]`, kernel 3, dropout 0.1. It won the fold-vote/mean-inner-validation
+criterion and the architecture-level mean inner F1. The fact that the Patch Transformer
+later had a higher aggregate outer diagnostic does not permit changing that selection;
+doing so would select on outer labels.
+
+### Test-share-weighted F1 by outer fold
+
+| Fold | Patch Transformer | TCN |
+|---|---:|---:|
+| 2025 Q2 | 0.640938 | 0.574057 |
+| 2025 Q3 | 0.809159 | 0.666813 |
+| 2025 Q4 | 0.889441 | 0.921813 |
+
+The sequence models therefore remain research ablations and possible conditional
+experts; neither is a replacement for the frozen XGBoost candidate. No upload was made.
+
+Artifact provenance rechecked against the full result record:
+
+- `sequence_experiment.json`: SHA-256
+  `d9462dffc6db59afb5676f823ec1a9b9b35ce2a83a537fefff82b4a09e217f50`
+- `oof_tcn.npz`: 421,032 rows, SHA-256
+  `9f09d09eb0b5c3b9c2503756ede8eb83063f8a91d70702b74fd402797417d8e4`
+- `oof_patch_transformer.npz`: 421,032 rows, SHA-256
+  `d6cf4e527c88b81cc9d0333c4d15a2fe8e6bc6507be0d5b946f4972ad09e011a`

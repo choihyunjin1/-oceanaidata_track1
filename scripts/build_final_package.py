@@ -32,6 +32,8 @@ ALLOWLIST_GLOBS = (
     "src/p1_qc/**/*.py",
     "scripts/bootstrap_env.ps1",
     "scripts/smoke_cuda.py",
+    "scripts/analyze_oof_failures.py",
+    "scripts/benchmark_data_io.py",
     "scripts/validate_submission.py",
     "scripts/build_final_package.py",
     "tests/**/*.py",
@@ -41,6 +43,9 @@ ALLOWLIST_GLOBS = (
     "reports/ENVIRONMENT_2026-08-13.md",
     "reports/P1_RECONNAISSANCE_2026-08-13.md",
     "reports/P1_MODEL_SELECTION_2026-08-13.md",
+    "reports/P1_FAILURE_RECON_2026-08-13.md",
+    "reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md",
+    "reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md",
 )
 
 REQUIRED_LOGICAL_FILES = (
@@ -53,6 +58,11 @@ REQUIRED_LOGICAL_FILES = (
     "src/p1_qc/__init__.py",
     "src/p1_qc/__main__.py",
     "reports/ENVIRONMENT_2026-08-13.md",
+    "scripts/analyze_oof_failures.py",
+    "scripts/benchmark_data_io.py",
+    "reports/P1_FAILURE_RECON_2026-08-13.md",
+    "reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md",
+    "reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md",
 )
 
 FORBIDDEN_SUFFIXES = {

@@ -65,6 +65,11 @@ def _minimal_package_project(root: Path) -> None:
         "src/p1_qc/__init__.py": "\n",
         "src/p1_qc/__main__.py": "\n",
         "reports/ENVIRONMENT_2026-08-13.md": "# Environment\n",
+        "scripts/analyze_oof_failures.py": "# Failure analysis\n",
+        "scripts/benchmark_data_io.py": "# Data-loading benchmark\n",
+        "reports/P1_FAILURE_RECON_2026-08-13.md": "# Failure reconnaissance\n",
+        "reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md": "# Data-loading benchmark\n",
+        "reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md": "# Breakthrough research\n",
     }
     for relative, content in files.items():
         path = root / relative
@@ -73,6 +78,8 @@ def _minimal_package_project(root: Path) -> None:
     (root / "train.csv").write_text("must,not,ship\n", encoding="utf-8")
     (root / "artifacts" / "cache").mkdir(parents=True)
     (root / "artifacts" / "cache" / "features.parquet").write_bytes(b"not parquet")
+    (root / "artifacts" / "runs" / "candidate").mkdir(parents=True)
+    (root / "artifacts" / "runs" / "candidate" / "oof.parquet").write_bytes(b"not oof")
 
 
 def test_final_package_is_allowlisted_and_manifest_uses_logical_hashes(tmp_path: Path) -> None:
@@ -85,8 +92,20 @@ def test_final_package_is_allowlisted_and_manifest_uses_logical_hashes(tmp_path:
 
     with zipfile.ZipFile(output) as archive:
         names = archive.namelist()
+        required_new_members = {
+            "scripts/analyze_oof_failures.py",
+            "scripts/benchmark_data_io.py",
+            "reports/P1_FAILURE_RECON_2026-08-13.md",
+            "reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md",
+            "reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md",
+        }
+        assert required_new_members <= set(names)
         assert "train.csv" not in names
         assert not any("artifacts" in name for name in names)
+        assert "artifacts/runs/candidate/oof.parquet" not in names
+        assert not any(
+            Path(name).suffix.casefold() in {".csv", ".parquet", ".zip"} for name in names
+        )
         manifest = json.loads(archive.read("PACKAGE_MANIFEST.json"))
     assert manifest["excludes_source_data"] is True
     assert all(not Path(item["logical_path"]).is_absolute() for item in manifest["files"])

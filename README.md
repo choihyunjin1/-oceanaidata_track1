@@ -51,6 +51,9 @@
 | `reports/P1_RECONNAISSANCE_2026-08-13.md` | 검증된 데이터 정찰 통계 |
 | `reports/P1_IMPLEMENTATION_GUIDE.md` | 구현·검증·승격·제출 기준 |
 | `reports/P1_MODEL_SELECTION_2026-08-13.md` | 모델 비교, stress, 첫 후보의 해시와 미업로드 상태 |
+| [P1_FAILURE_RECON_2026-08-13.md](reports/P1_FAILURE_RECON_2026-08-13.md) | OOF 실패군·모델 불일치 재정찰과 연구 전용 진단 |
+| [P1_DATA_LOADING_BENCHMARK_2026-08-13.md](reports/P1_DATA_LOADING_BENCHMARK_2026-08-13.md) | CSV·Arrow·Parquet 로딩 벤치마크와 캐시 권고 |
+| [P1_BREAKTHROUGH_RESEARCH_2026-08-13.md](reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md) | 1차 출처 기반 돌파 실험 10개 우선순위 |
 | `reports/ENVIRONMENT_2026-08-13.md` | Python·패키지 lock·CPU/GPU 실행 환경 |
 | `reports/EXTERNAL_DATA_APPROVAL_DRAFT.md` | 외부자료와 운영 범위 서면 문의 초안 |
 
