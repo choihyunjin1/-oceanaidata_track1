@@ -614,6 +614,7 @@ def extract_ssl_embeddings(
             **asdict(result.train_config),
             "window_steps": effective_window,
             "stride_steps": effective_stride,
+            "mask_block_steps": min(result.train_config.mask_block_steps, effective_window),
         }
     )
     dataset = _WindowDataset(values, windows, inference_config, training=False)

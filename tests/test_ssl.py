@@ -114,6 +114,17 @@ def test_tiny_cpu_training_embeddings_and_checkpoint_roundtrip(tmp_path: Path) -
     assert embeddings.shape == (24, model_config.channels[-1])
     assert np.isfinite(embeddings).all()
 
+    short_embeddings = extract_ssl_embeddings(
+        result,
+        validation_features[:2],
+        np.zeros(2, dtype=np.int16),
+        window_steps=2,
+        stride_steps=1,
+        device="cpu",
+    )
+    assert short_embeddings.shape == (2, model_config.channels[-1])
+    assert np.isfinite(short_embeddings).all()
+
     checkpoint = save_ssl_checkpoint(result, tmp_path / "ssl.pt")
     restored = load_ssl_checkpoint(checkpoint, device="cpu")
     restored_embeddings = extract_ssl_embeddings(
