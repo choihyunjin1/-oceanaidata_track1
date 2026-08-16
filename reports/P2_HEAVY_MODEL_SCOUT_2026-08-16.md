@@ -4,7 +4,7 @@
 
 정찰 후보 8개 계열을 동일한 69,850행 target-proxy OOF에서 실제 비교했다. 모든 모델은 공개 layer 1·5·6·7·8과 공개층 기반 선형보간, 시간·조석 특징만 입력으로 사용했고, 목표 layer 2·3·4의 temp·psal은 입력에서 제외했다. 외부 관측값과 pretrained weight는 사용하지 않았다.
 
-- 단독 최강: 3-seed `LSTI-style`, RMSE `0.771751°C`
+- 단독 최강: 3-seed `LSTI-style`, RMSE `0.764545°C` (1-seed tournament `0.771751°C`)
 - 단일 계열 blend 최강: `TimeMixer++-style 50% + frozen tree 50%`, RMSE `0.756885°C`
 - 최종 layer별 convex stack: RMSE `0.745814°C`
 - 기존 400-round router: RMSE `0.788890°C`
