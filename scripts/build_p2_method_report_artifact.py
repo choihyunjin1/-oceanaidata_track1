@@ -39,6 +39,7 @@ def build_artifact(
     result: dict[str, object],
     candidate: dict[str, object],
     phase_result: dict[str, object] | None = None,
+    tuning_result: dict[str, object] | None = None,
 ) -> dict[str, object]:
     generated = datetime.now().astimezone().isoformat()
     stability = result["stability_blocks"]
@@ -88,6 +89,20 @@ def build_artifact(
                     "current_rmse": round(reference, 6),
                     "phase_rmse": round(phase_candidate, 6),
                     "delta_rmse": round(phase_candidate - reference, 6),
+                }
+            )
+
+    tuning_rows = []
+    if tuning_result is not None:
+        for block_name, block in tuning_result["guard_blocks"].items():
+            reference = float(block["current_blend50"]["rmse"])
+            tuned = float(block["tuned_blend50"]["rmse"])
+            tuning_rows.append(
+                {
+                    "block": block_name.replace("_", " "),
+                    "current_rmse": round(reference, 6),
+                    "tuned_rmse": round(tuned, 6),
+                    "delta_rmse": round(tuned - reference, 6),
                 }
             )
 
@@ -241,6 +256,36 @@ def build_artifact(
                 "tables_used": [],
                 "metric_definitions": {
                     "delta_rmse": "Local-M2 phase candidate RMSE minus current Blend50 RMSE; negative is better"
+                },
+            },
+        },
+        {
+            "id": "tuning_result",
+            "label": "P2 preregistered LightGBM structure and parameter search",
+            "path": "artifacts/p2_lgbm_nested_tuning_v1/result.json",
+        },
+        {
+            "id": "tuning_sql",
+            "label": "Reviewed tuned-LightGBM guard comparison",
+            "path": "artifacts/p2_lgbm_nested_tuning_v1/result.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    tuning_rows
+                    or [
+                        {
+                            "block": "not run",
+                            "current_rmse": None,
+                            "tuned_rmse": None,
+                            "delta_rmse": None,
+                        }
+                    ],
+                    ("block", "current_rmse", "tuned_rmse", "delta_rmse"),
+                ),
+                "description": "Materializes the frozen Blend50 versus tuned-LightGBM guard comparison.",
+                "tables_used": [],
+                "metric_definitions": {
+                    "delta_rmse": "Tuned candidate RMSE minus current Blend50 RMSE; negative is better"
                 },
             },
         },
@@ -401,6 +446,24 @@ def build_artifact(
                 },
             ],
         },
+        {
+            "id": "tuning_comparison",
+            "title": "Bounded LightGBM tuning guard result",
+            "subtitle": "Four frozen guard blocks; negative delta favors the tuned candidate.",
+            "dataset": "tuning_comparison",
+            "sourceId": "tuning_sql",
+            "columns": [
+                {"field": "block", "label": "Guard block", "type": "text"},
+                {"field": "current_rmse", "label": "Current RMSE (°C)", "type": "number"},
+                {"field": "tuned_rmse", "label": "Tuned RMSE (°C)", "type": "number"},
+                {
+                    "field": "delta_rmse",
+                    "label": "Delta RMSE (°C)",
+                    "type": "number",
+                    "semantic": "movement",
+                },
+            ],
+        },
     ]
 
     blocks = [
@@ -417,7 +480,9 @@ def build_artifact(
                 f"그 결과 {sum(int(v['rows']) for v in stability.values()):,}행에서 모든 8개 블록이 "
                 f"개선됐고 aggregate RMSE는 {v0_rmse:.4f}→{blend_rmse:.4f}°C였다. "
                 "후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 "
-                "계절 안정성 2개 게이트를 위반해 기각했다. 이는 hidden test 점수가 아니며 "
+                "계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 "
+                "LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. "
+                "이는 hidden test 점수가 아니며 "
                 "현재 산출물은 연구 후보이다."
             ),
         },
@@ -466,6 +531,21 @@ def build_artifact(
             ),
         },
         {"id": "phase_table_block", "type": "table", "tableId": "phase_comparison"},
+        {
+            "id": "tuning_finding",
+            "type": "markdown",
+            "sourceId": "tuning_result",
+            "body": (
+                "## 최적 파라미터는 개발 구간에 맞았지만 guard로 전이되지 않았다\n\n"
+                "층별 모델은 shared 모델보다 개발 RMSE가 0.0017°C 높아 탈락했다. shared 구조의 "
+                "40-trial Optuna 탐색은 개발 score-month RMSE를 1.6402→1.5834°C로 낮췄고, "
+                "최대 5,000 round early stopping에서 블록별 best iteration은 91·269·1,249·2,038이었다. "
+                "median 759 round와 최적 파라미터를 고정한 guard에서는 RMSE가 "
+                "0.7939→0.8026°C로 +0.0087°C 악화했고 90% CI도 [+0.0048, +0.0127]°C였다. "
+                "따라서 단일 epoch와 파라미터가 계절별 최적점을 안정적으로 대표하지 못한다고 판단한다."
+            ),
+        },
+        {"id": "tuning_table_block", "type": "table", "tableId": "tuning_comparison"},
         {
             "id": "screen_finding",
             "type": "markdown",
@@ -528,8 +608,9 @@ def build_artifact(
                 "## 권장 다음 단계\n\n"
                 "1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n"
                 "2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n"
-                "3. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n"
-                "4. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+                "3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n"
+                "4. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n"
+                "5. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
             ),
         },
         {
@@ -587,6 +668,12 @@ def build_artifact(
             "evidence": "Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C",
             "interpretation": "Average gain did not satisfy the preregistered seasonal-stability contract",
         },
+        {
+            "method": "Shared/layerwise + 40-trial LightGBM tuning",
+            "decision": "Reject and close generation",
+            "evidence": "Dev -0.0568°C; guard +0.0087°C with positive 90% CI",
+            "interpretation": "Development optimum and median 759 rounds did not transfer across seasons",
+        },
     ]
     next(source for source in sources if source["id"] == "decisions_sql")["query"]["sql"] = (
         _union_sql(decisions, ("method", "decision", "evidence", "interpretation"))
@@ -616,6 +703,7 @@ def build_artifact(
                 "monthly": month_rows,
                 "method_screen": screen_rows,
                 "phase_comparison": phase_rows,
+                "tuning_comparison": tuning_rows,
                 "decisions": decisions,
             },
         },
@@ -635,6 +723,7 @@ def main() -> int:
     parser.add_argument("--result", type=Path, required=True)
     parser.add_argument("--candidate-manifest", type=Path, required=True)
     parser.add_argument("--phase-result", type=Path)
+    parser.add_argument("--tuning-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = json.loads(args.result.read_text(encoding="utf-8"))
@@ -642,7 +731,10 @@ def main() -> int:
     phase_result = (
         json.loads(args.phase_result.read_text(encoding="utf-8")) if args.phase_result else None
     )
-    artifact = build_artifact(result, candidate, phase_result)
+    tuning_result = (
+        json.loads(args.tuning_result.read_text(encoding="utf-8")) if args.tuning_result else None
+    )
+    artifact = build_artifact(result, candidate, phase_result, tuning_result)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding="utf-8")
     print(args.output.as_posix())

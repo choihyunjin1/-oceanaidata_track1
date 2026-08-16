@@ -1,0 +1,78 @@
+{
+  "experiment_id": "p2_lgbm_nested_tuning_v1",
+  "created_at_kst": "2026-08-16",
+  "status": "authorized_one_shot",
+  "research_only": true,
+  "upload_allowed": false,
+  "question": "Can a bounded structure choice and train-only LightGBM hyperparameter search improve the frozen P2 Blend50 candidate without seasonal regression?",
+  "frozen_reference": {
+    "method": "0.5 * V0 + 0.5 * lean_M2",
+    "result_sha256": "e56ae49c178e988862c0d226e405703ad8537915fdce7a53454892bcdce44a9e",
+    "model_sha256": "615d5705020fabbbe64642b879bdbf160f6a1087a4ec86b0b47ad5c37b3ff688",
+    "submission_sha256": "4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7"
+  },
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036"
+  },
+  "fixed_model_surface": {
+    "base_arm": "V0 frozen parameters and 400 rounds",
+    "tuned_arm": "existing lean_M2 feature schema only",
+    "blend_weight": 0.5,
+    "blend_weight_search": false,
+    "feature_window_search": false,
+    "external_observations": false,
+    "structures": ["shared", "layerwise"],
+    "structure_selection": "development score only; current 400-round parameters"
+  },
+  "development_blocks": {
+    "2024_may_jun": {"early_stop": ["2024-05-01", "2024-06-01"], "score": ["2024-06-01", "2024-07-01"]},
+    "2024_jul_aug": {"early_stop": ["2024-07-01", "2024-08-01"], "score": ["2024-08-01", "2024-09-01"]},
+    "2024_nov_dec": {"early_stop": ["2024-11-01", "2024-12-01"], "score": ["2024-12-01", "2025-01-01"]},
+    "2025_may_jun": {"early_stop": ["2025-05-01", "2025-06-01"], "score": ["2025-06-01", "2025-07-01"]}
+  },
+  "guard_blocks": {
+    "2024_sep_oct": ["2024-09-01", "2024-11-01"],
+    "2025_mar_apr": ["2025-03-01", "2025-05-01"],
+    "2025_jul_aug": ["2025-07-01", "2025-09-01"],
+    "2025_nov_dec": ["2025-11-01", "2026-01-01"]
+  },
+  "guard_status": "reused historical diagnostic; not a virgin holdout",
+  "search": {
+    "sampler": "Optuna TPESampler multivariate-group seed 20260816",
+    "pruner": "MedianPruner startup 8, warmup 1",
+    "trials": 40,
+    "threads_per_fit": 8,
+    "max_estimators": 5000,
+    "early_stopping_rounds": 200,
+    "early_stopping_min_delta": 0.00001,
+    "best_iteration_freeze": "median across four development blocks; per-layer median for layerwise",
+    "space": {
+      "learning_rate": [0.008, 0.08, "log"],
+      "num_leaves": [15, 31, 63, 127],
+      "max_depth": [5, 7, 9, -1],
+      "min_child_samples": [50, 800, "log-int"],
+      "feature_fraction": [0.65, 1.0],
+      "bagging_fraction": [0.65, 1.0],
+      "bagging_freq": 1,
+      "reg_alpha": [0.0001, 5.0, "log"],
+      "reg_lambda": [0.001, 10.0, "log"],
+      "min_split_gain": [0.0, 0.1],
+      "max_bin": [127, 255, 511]
+    }
+  },
+  "selection_metric": "row-weighted RMSE across four development score months",
+  "guard_metric": "row RMSE Celsius",
+  "bootstrap": {"unit": "KST day", "replicates": 2000, "seed": 20260816},
+  "promotion_gates": {
+    "aggregate_delta_rmse_lte": -0.005,
+    "bootstrap_ci90_high_lt": 0.0,
+    "minimum_improved_guard_blocks": 3,
+    "maximum_guard_block_regression": 0.02,
+    "maximum_layer_regression": 0.01,
+    "same_season_2024_sep_oct_max_regression": 0.005,
+    "pre_target_2025_jul_aug_max_regression": 0.005
+  },
+  "failure_action": "Retain P2_RESEARCH_BLEND50 and close this tuning generation. Do not extend trials or search bounds after guard evaluation."
+}

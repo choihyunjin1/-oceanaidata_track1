@@ -89,6 +89,9 @@ station,layer,time,temp
 - 후속 사전등록 실험에서 공개층 수온의 고정 7일 local M2 amplitude·phase 특징 20개를 lean arm에 추가했다. aggregate RMSE는 1.1234→1.0787℃로 개선됐고 paired KST-day bootstrap 90% CI는 [-0.0551, -0.0347]℃였다.
 - 그러나 8개 블록 중 5개만 개선됐으며 2025년 3~4월은 +0.0469℃ 악화해 사전등록된 최대 블록 회귀 +0.02℃를 넘었다. 따라서 이 후보는 `REJECT_AND_CLOSE_FAMILY`이며 제출 CSV를 만들지 않았다.
 - M2 amplitude·phase 계열의 window, 최소관측수, blend weight를 사후 재탐색하지 않는다. 현재 최선 로컬 후보는 계속 `P2_RESEARCH_BLEND50.csv`다.
+- 이어서 기존 lean-M2 특징을 고정한 채 shared 대 layerwise 구조를 비교하고, 개발 구간에서 이긴 shared 구조만 Optuna 40 trials로 탐색했다. 최대 boosting round는 5,000, early stopping은 200 rounds였다.
+- 개발 score-month RMSE는 1.6402→1.5834℃로 개선됐지만 블록별 best iteration은 91·269·1,249·2,038로 불안정했다. median 759 round로 동결한 guard RMSE는 0.7939→0.8026℃로 악화했고 paired KST-day 90% CI는 [+0.0048, +0.0127]℃였다.
+- 이 튜닝 세대는 `REJECT_AND_CLOSE_GENERATION`이다. guard 결과를 보고 trial 수, 탐색 범위, epoch 집계법을 바꾸지 않는다. 현재 최선 후보는 계속 `P2_RESEARCH_BLEND50.csv`다.
 
 ## 8. 원본·Git·제출 금지선
 
