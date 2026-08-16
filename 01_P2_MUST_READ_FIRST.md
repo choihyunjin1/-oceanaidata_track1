@@ -103,6 +103,10 @@ station,layer,time,temp
 - router RMSE는 400 rounds의 `0.7888895064`가 최저였고 5,000 rounds는 `0.8665403270`으로 `+0.0776508206` 악화했다. 기존 frozen 400-round OOF와 최대 절대오차 0으로 일치했으므로 모델 변경이 아닌 순수 boosting-horizon 비교다.
 - 따라서 현재 learning rate 0.04에서는 **400 rounds를 수렴 최적 checkpoint로 유지**한다. 5,000 rounds 모델은 과적합 진단용이며 제출 우선순위에서 제외한다.
 - 제출 1순위는 기존과 byte-identical한 `submissions/p2/P2_SCORE_ROUTER_ROUND400.csv` SHA256 `069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5`다. 최대학습 진단 파일 `P2_SCORE_ROUTER_5000.csv` SHA256은 `8284e630ada9eee678a6bdb9b47466b1d36282b13cbe59fec14606d43963fcac`이며 업로드하지 않는다.
+- 2026-08-16 구조·대형 모델 문헌 정찰 결과, 다음 1순위는 공개층 수직 set encoder + 61일 양방향 multi-scale TCN + DeepONet식 target-depth query를 결합하고 선형보간 잔차를 공동 출력하는 3–8M parameter 모델이다. 단순히 범용 Transformer의 크기만 키우지 않는다.
+- 61일 exact-cadence 창 중 공개층 관측률과 목표 정답 가용률이 각각 95% 이상인 창은 endpoint 19,595개, 6시간 stride 약 545개지만 목표 3층이 모든 시각에서 완전한 61일 창은 0개다. 따라서 deep loss는 관측된 목표 정답에만 적용하고 세 목표층을 같은 중앙 구간에서 함께 가리는 structured mask를 사용해야 한다.
+- 첫 deep screen은 AdamW learning rate `{1e-4, 3e-4, 1e-3}` × weight decay `{1e-4, 1e-3}`, 최대 300 epoch, patience 30으로 제한한다. 마지막 epoch가 아니라 최저 validation RMSE checkpoint를 복원하고, 선택된 구조 하나만 3개 seed로 재학습한다.
+- 우선순위는 custom depth-query BiTCN → ImputeFormer block-missing benchmark → SSSD-S4/CSDI posterior-mean 상한선이다. MOMENT/UniTS pretrained weight는 운영진 허용 확인 전 사용하지 않는다. 문헌 benchmark 개선율은 P2 기대효과가 아니며 모든 승격은 현재 router의 동일 target-proxy RMSE `0.7888895064`와 비교한다.
 
 ## 8. 원본·Git·제출 금지선
 

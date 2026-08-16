@@ -190,6 +190,57 @@ def build_artifact(
             ]
         )
 
+    heavy_model_rows = [
+        {
+            "rank": 1,
+            "candidate": "Depth-query BiTCN residual hybrid",
+            "structural_fit": "Very high",
+            "compute": "Medium-high",
+            "evidence_limit": "Proposed P2 synthesis; not locally trained yet",
+            "decision": "Implement first",
+        },
+        {
+            "rank": 2,
+            "candidate": "ImputeFormer + depth graph",
+            "structural_fit": "High",
+            "compute": "High",
+            "evidence_limit": "Official block-missing code; low-rank smoothing risk",
+            "decision": "Second benchmark",
+        },
+        {
+            "rank": 3,
+            "candidate": "SSSD-S4 / CSDI posterior mean",
+            "structural_fit": "Medium-high",
+            "compute": "Very high",
+            "evidence_limit": "Blackout/probabilistic evidence; P2 uses deterministic RMSE",
+            "decision": "Ceiling and ensemble test",
+        },
+        {
+            "rank": 4,
+            "candidate": "TimeMixer++",
+            "structural_fit": "Medium",
+            "compute": "High",
+            "evidence_limit": "Official masks are random and shorter than P2 blackout",
+            "decision": "Temporal-backbone ablation",
+        },
+        {
+            "rank": 5,
+            "candidate": "MOMENT / UniTS fine-tuning",
+            "structural_fit": "Medium-low",
+            "compute": "High",
+            "evidence_limit": "Generic pretraining; external-weight policy unresolved",
+            "decision": "Conditional challenger",
+        },
+        {
+            "rank": 6,
+            "candidate": "Standalone Fourier neural operator",
+            "structural_fit": "Low",
+            "compute": "High",
+            "evidence_limit": "Sparse irregular depth and only two observed years",
+            "decision": "Do not prioritize",
+        },
+    ]
+
     sources = [
         {
             "id": "p2_result",
@@ -489,6 +540,87 @@ def build_artifact(
             },
         },
         {
+            "id": "heavy_model_scout",
+            "label": "P2 structural and heavy-model literature scout",
+            "path": "reports/P2_HEAVY_MODEL_SCOUT_2026-08-16.md",
+        },
+        {
+            "id": "heavy_model_sql",
+            "label": "Reviewed P2 heavy-model priority mapping",
+            "path": "reports/P2_HEAVY_MODEL_SCOUT_2026-08-16.md",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    heavy_model_rows,
+                    (
+                        "rank",
+                        "candidate",
+                        "structural_fit",
+                        "compute",
+                        "evidence_limit",
+                        "decision",
+                    ),
+                ),
+                "description": "Materializes the literature-to-P2 model priority review; no deep-model score is implied.",
+                "tables_used": [],
+                "filters": [
+                    "No external observation values",
+                    "Official or primary research sources",
+                    "P2 61-day simultaneous three-layer blackout",
+                ],
+            },
+        },
+        {
+            "id": "lsti",
+            "label": "Long Short-Term Imputer, TMLR 2025",
+            "href": "https://openreview.net/forum?id=9NVJ0ZgEfT",
+        },
+        {
+            "id": "deeponet",
+            "label": "DeepONet, Nature Machine Intelligence 2021",
+            "href": "https://doi.org/10.1038/s42256-021-00302-5",
+        },
+        {
+            "id": "timemixerpp",
+            "label": "TimeMixer++, ICLR 2025",
+            "href": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/2b187165e28fdfdc0ffb34d1bfff2b0c-Abstract-Conference.html",
+        },
+        {
+            "id": "moderntcn",
+            "label": "ModernTCN, ICLR 2024",
+            "href": "https://openreview.net/forum?id=vpJMJerXHU",
+        },
+        {
+            "id": "imputeformer",
+            "label": "ImputeFormer, KDD 2024",
+            "href": "https://doi.org/10.1145/3637528.3671751",
+        },
+        {
+            "id": "sssd",
+            "label": "SSSD-S4, Transactions on Machine Learning Research",
+            "href": "https://openreview.net/forum?id=hHiIbk7ApW",
+        },
+        {
+            "id": "csdi",
+            "label": "CSDI, NeurIPS 2021",
+            "href": "https://proceedings.neurips.cc/paper/2021/hash/cfe8504bda37b575c70ee1a8276f3486-Abstract.html",
+        },
+        {
+            "id": "moment",
+            "label": "MOMENT, ICML 2024",
+            "href": "https://proceedings.mlr.press/v235/goswami24a.html",
+        },
+        {
+            "id": "units",
+            "label": "UniTS, NeurIPS 2024",
+            "href": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/fe248e22b241ae5a9adf11493c8c12bc-Abstract-Conference.html",
+        },
+        {
+            "id": "physical_guided_ocean",
+            "label": "Physical-guided deep learning for subsurface T-S reconstruction",
+            "href": "https://doi.org/10.3390/rs17172954",
+        },
+        {
             "id": "dineof",
             "label": "Beckers and Rixen (2003), EOF calculations and data filling",
             "href": "https://orbi.uliege.be/handle/2268/4291",
@@ -738,6 +870,21 @@ def build_artifact(
                 {"field": "sha256", "label": "SHA-256", "type": "text"},
             ],
         },
+        {
+            "id": "heavy_model_priorities",
+            "title": "Structural and heavy-model priority",
+            "subtitle": "Qualitative P2 fit from primary literature; these are not local RMSE results.",
+            "dataset": "heavy_model_priorities",
+            "sourceId": "heavy_model_sql",
+            "columns": [
+                {"field": "rank", "label": "Rank", "type": "number"},
+                {"field": "candidate", "label": "Candidate", "type": "text"},
+                {"field": "structural_fit", "label": "P2 structural fit", "type": "text"},
+                {"field": "compute", "label": "Compute", "type": "text"},
+                {"field": "evidence_limit", "label": "Evidence boundary", "type": "text"},
+                {"field": "decision", "label": "Decision", "type": "text"},
+            ],
+        },
     ]
 
     blocks = [
@@ -765,6 +912,10 @@ def build_artifact(
                 "동일 모델을 5,000 boosting round까지 연장한 수렴 실험에서는 400 round가 "
                 "0.7889°C로 최저였고 5,000 round는 0.8665°C로 악화했다. 따라서 현재 "
                 "learning rate 0.04에서 400 round를 유지한다. "
+                "추가 문헌 정찰에서는 단순 대형 Transformer보다 수직 depth query, 양방향 61일 문맥, "
+                "multi-scale M2 encoder를 결합한 residual network를 다음 1순위로 선정했다. "
+                "ImputeFormer는 두 번째 deterministic benchmark, SSSD-S4/CSDI는 가장 무거운 "
+                "상한선 후보로 두되 아직 로컬 deep RMSE는 없다. "
                 "이는 hidden test 점수가 아니며 "
                 "세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
             ),
@@ -889,6 +1040,70 @@ def build_artifact(
         },
         {"id": "max_round_candidates_block", "type": "table", "tableId": "max_round_candidates"},
         {
+            "id": "heavy_model_conclusion",
+            "type": "markdown",
+            "sourceId": "heavy_model_scout",
+            "body": (
+                "## 더 무거운 모델보다 먼저 바꿔야 할 것은 수직·시간 구조다\n\n"
+                "문헌과 P2의 결측 형태를 대조한 1순위는 **Depth-query Bidirectional "
+                "Multi-scale Residual Network**다. 공개 layer 1·5·6·7·8의 동시각 수온·염분·실제 "
+                "수심을 수직 encoder로 읽고, 양방향 dilated TCN/TimeMixer++ 계열이 61일 blackout "
+                "전후와 12.42시간 조석을 함께 처리한 뒤, DeepONet식 depth query가 7.04·9.44·14.74 m "
+                "잔차를 공동 출력한다. 최종 온도는 현재 선형보간값에 이 잔차를 더한다. 이는 단순히 "
+                "Transformer 크기를 키우는 것보다 P2의 수온약층 곡률·긴 연속 결측·불규칙 수심에 "
+                "맞는 출발점이다. 아직 로컬 deep RMSE는 없으므로 제안과 검증 결과를 혼동하지 않는다."
+            ),
+        },
+        {"id": "heavy_model_table_block", "type": "table", "tableId": "heavy_model_priorities"},
+        {
+            "id": "heavy_model_evidence",
+            "type": "markdown",
+            "sourceId": "heavy_model_scout",
+            "body": (
+                "## 직접 근거와 P2 적용 경계\n\n"
+                "[LSTI](https://openreview.net/forum?id=9NVJ0ZgEfT)는 긴 연속 결측에 forward/backward "
+                "예측과 consistency를 쓰며, [DeepONet](https://doi.org/10.1038/s42256-021-00302-5)은 "
+                "관측 함수와 출력 좌표를 분리해 연속 operator를 학습한다. "
+                "[TimeMixer++](https://proceedings.iclr.cc/paper_files/paper/2025/hash/2b187165e28fdfdc0ffb34d1bfff2b0c-Abstract-Conference.html)와 "
+                "[ModernTCN](https://openreview.net/forum?id=vpJMJerXHU)은 multi-scale 시간·주파수 및 "
+                "긴 convolution 문맥의 근거다. 다만 이들의 일반 imputation benchmark는 P2의 "
+                "8,784-step 동시 3층 blackout과 같지 않다. 논문 개선율을 P2 기대 RMSE로 옮기지 않고 "
+                "동일 69,850행 target proxy에서 새로 비교한다."
+            ),
+        },
+        {
+            "id": "heavy_model_ceiling",
+            "type": "markdown",
+            "sourceId": "heavy_model_scout",
+            "body": (
+                "## 무거운 상한선은 ImputeFormer 다음 diffusion 순서가 합리적이다\n\n"
+                "[ImputeFormer](https://doi.org/10.1145/3637528.3671751)는 공식 block-missing 구현과 "
+                "low-rank/deep 표현의 절충이 있어 두 번째 benchmark로 적합하다. 다만 로컬 rank-3 EOF "
+                "실패와 thermocline smoothing 위험 때문에 depth encoding과 baseline residual head가 필요하다. "
+                "[SSSD-S4](https://openreview.net/forum?id=hHiIbk7ApW)와 "
+                "[CSDI](https://proceedings.neurips.cc/paper/2021/hash/cfe8504bda37b575c70ee1a8276f3486-Abstract.html)는 "
+                "blackout/conditional diffusion의 높은 표현 상한을 제공하지만 sampling 비용이 크고 P2는 "
+                "확률 점수가 아니라 단일 RMSE다. 따라서 posterior sample 평균이 deterministic model과 "
+                "상보적인 경우에만 마지막 ensemble 후보로 올린다."
+            ),
+        },
+        {
+            "id": "heavy_model_protocol",
+            "type": "markdown",
+            "sourceId": "heavy_model_scout",
+            "body": (
+                "## 첫 deep 실험 계약\n\n"
+                "128 hidden, 8 temporal blocks, kernel 7, dilation 1–128의 약 3–8M parameter 모델을 "
+                "RTX 5090 bf16으로 학습한다. AdamW learning rate {1e-4, 3e-4, 1e-3} × weight decay "
+                "{1e-4, 1e-3}의 6개 조합을 최대 300 epoch·patience 30으로 screen하고, 선택된 한 구조만 "
+                "3 seeds로 재학습한다. 61일 창은 공개층과 정답이 완전한 사례가 없으므로 관측 정답에만 "
+                "masked MSE를 적용하고, 목표 세 층을 같은 중앙 구간에서 6시간·1일·7일·30일·61일로 "
+                "함께 가린다. 최종 비교는 current 400-round router 0.7888895064°C와 standalone 및 "
+                "inner-selected convex blend 모두에서 수행한다. 마지막 epoch가 아니라 최저 validation "
+                "RMSE checkpoint를 복원한다."
+            ),
+        },
+        {
             "id": "screen_finding",
             "type": "markdown",
             "sourceId": "p2_result",
@@ -950,13 +1165,14 @@ def build_artifact(
             "body": (
                 "## 권장 다음 단계\n\n"
                 "1. layer 2·3 phase, layer 4 state의 400-round router를 첫 공식 점수 후보로 유지한다.\n"
-                "2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n"
-                "3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n"
-                "4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n"
-                "5. 5,000-round 파일은 과적합 진단용으로만 보존하고 공식 제출 우선순위에서 제외한다.\n"
-                "6. phase와 state는 일일 제출용 독립 challenger로 보존한다.\n"
-                "7. 저장 모델 재추론과 모든 CSV의 26,061행·SHA 검증 결과를 유지한다.\n"
-                "8. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+                "2. Depth-query BiTCN residual hybrid의 6개 optimizer 조합을 최대 300 epoch로 screen한다.\n"
+                "3. 선택된 deep 구조 하나만 3 seeds로 재학습하고 current router와 OOF convex blend를 비교한다.\n"
+                "4. 이 구조가 개선될 때만 동일 masking 계약의 ImputeFormer를 두 번째 benchmark로 실행한다.\n"
+                "5. diffusion은 deterministic deep과 오류 상관이 낮을 때 posterior mean ensemble로만 시험한다.\n"
+                "6. 기각된 M2·LightGBM·state gate 파라미터 계열은 다시 열지 않는다.\n"
+                "7. 5,000-round 파일은 과적합 진단용으로만 보존한다.\n"
+                "8. 저장 모델 재추론과 모든 CSV의 26,061행·SHA 검증 결과를 유지한다.\n"
+                "9. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
             ),
         },
         {
@@ -1049,7 +1265,7 @@ def build_artifact(
             "version": 1,
             "surface": "report",
             "title": "P2 연직 수온 구조 복원 방법 정찰",
-            "description": "문헌 기반 프로파일 복원 기법과 공개층 M2 동역학을 blocked validation으로 비교한 기술 보고서",
+            "description": "프로파일·M2 기반 로컬 검증과 구조적·대형 시계열 모델 문헌을 P2 결측 계약에 매핑한 기술 보고서",
             "generatedAt": generated,
             "cards": cards,
             "charts": charts,
@@ -1073,6 +1289,7 @@ def build_artifact(
                 "score_candidates": score_candidate_rows,
                 "max_round_curve": max_round_rows,
                 "max_round_candidates": max_round_candidate_rows,
+                "heavy_model_priorities": heavy_model_rows,
                 "decisions": decisions,
             },
         },
