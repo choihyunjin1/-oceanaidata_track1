@@ -1,0 +1,1104 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "P2 연직 수온 구조 복원 방법 정찰",
+    "description": "문헌 기반 프로파일 복원 기법과 공개층 M2 동역학을 blocked validation으로 비교한 기술 보고서",
+    "generatedAt": "2026-08-16T09:34:05.387335+09:00",
+    "cards": [
+      {
+        "id": "aggregate_delta",
+        "description": "166,268 rows across eight usable seasonal blocks",
+        "dataset": "headline",
+        "sourceId": "headline_sql",
+        "metrics": [
+          {
+            "label": "Blend RMSE reduction",
+            "field": "aggregate_delta",
+            "format": "number",
+            "unit": " °C",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "block_wins",
+        "description": "Fixed blend compared with V0; no weight search",
+        "dataset": "headline",
+        "sourceId": "headline_sql",
+        "metrics": [
+          {
+            "label": "Season blocks improved",
+            "field": "block_wins"
+          }
+        ]
+      },
+      {
+        "id": "ci_high",
+        "description": "Paired KST-day bootstrap, 2,000 replicates",
+        "dataset": "headline",
+        "sourceId": "headline_sql",
+        "metrics": [
+          {
+            "label": "90% CI upper bound",
+            "field": "ci_high",
+            "format": "number",
+            "unit": " °C",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "candidate_rows",
+        "description": "Research candidate; not uploaded or frozen",
+        "dataset": "headline",
+        "sourceId": "candidate_sql",
+        "metrics": [
+          {
+            "label": "Submission-format rows",
+            "field": "candidate_rows"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "stability_chart",
+        "title": "Seasonal blocked-validation RMSE",
+        "subtitle": "Eight usable two-month blocks; lower is better, unit °C.",
+        "type": "bar",
+        "dataset": "stability",
+        "sourceId": "stability_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "block",
+            "type": "nominal",
+            "label": "Validation block"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Method"
+          },
+          "tooltip": [
+            {
+              "field": "rows",
+              "type": "quantitative",
+              "label": "Rows"
+            }
+          ]
+        }
+      },
+      {
+        "id": "monthly_chart",
+        "title": "Monthly RMSE across the seasonal stability screen",
+        "subtitle": "Lean M2 loses only in September–October 2024; the fixed blend hedges that shift.",
+        "type": "line",
+        "dataset": "monthly",
+        "sourceId": "monthly_sql",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "Month"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Method"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "screen_table",
+        "title": "Seven-method first screen",
+        "subtitle": "Three predeclared proxy windows; lower RMSE is better.",
+        "dataset": "method_screen",
+        "sourceId": "screen_sql",
+        "columns": [
+          {
+            "field": "block",
+            "label": "Block",
+            "type": "text"
+          },
+          {
+            "field": "method",
+            "label": "Method",
+            "type": "text"
+          },
+          {
+            "field": "rmse",
+            "label": "RMSE (°C)",
+            "type": "number"
+          },
+          {
+            "field": "bias",
+            "label": "Bias (°C)",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "method_decisions",
+        "title": "Method decisions and failure modes",
+        "subtitle": "Literature fit was necessary but not sufficient; local blocked validation controls adoption.",
+        "dataset": "decisions",
+        "sourceId": "decisions_sql",
+        "columns": [
+          {
+            "field": "method",
+            "label": "Method",
+            "type": "text"
+          },
+          {
+            "field": "decision",
+            "label": "Decision",
+            "type": "text"
+          },
+          {
+            "field": "evidence",
+            "label": "Local evidence",
+            "type": "text"
+          },
+          {
+            "field": "interpretation",
+            "label": "Interpretation",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "phase_comparison",
+        "title": "Local M2 amplitude/phase one-shot result",
+        "subtitle": "Eight fixed seasonal blocks; negative delta favors the phase candidate.",
+        "dataset": "phase_comparison",
+        "sourceId": "phase_sql",
+        "columns": [
+          {
+            "field": "block",
+            "label": "Block",
+            "type": "text"
+          },
+          {
+            "field": "current_rmse",
+            "label": "Current RMSE (°C)",
+            "type": "number"
+          },
+          {
+            "field": "phase_rmse",
+            "label": "Phase RMSE (°C)",
+            "type": "number"
+          },
+          {
+            "field": "delta_rmse",
+            "label": "Delta RMSE (°C)",
+            "type": "number",
+            "semantic": "movement"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "p2_result",
+        "label": "P2 aggregate method-screen result",
+        "path": "artifacts/p2_method_scout/result.json"
+      },
+      {
+        "id": "headline_sql",
+        "label": "Reviewed P2 headline metrics",
+        "path": "artifacts/p2_method_scout/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT -0.07688124099729032 AS aggregate_delta, '8 / 8' AS block_wins, -0.06936306910160317 AS ci_high, 26061 AS candidate_rows",
+          "description": "Materializes the reviewed aggregate stability and candidate headline values.",
+          "tables_used": [],
+          "filters": [
+            "Eight usable seasonal blocks",
+            "No external observations"
+          ],
+          "metric_definitions": {
+            "aggregate_delta": "Blend50 RMSE minus V0 RMSE across all stability rows",
+            "ci_high": "90% paired KST-day bootstrap upper bound"
+          }
+        }
+      },
+      {
+        "id": "stability_sql",
+        "label": "Reviewed seasonal stability rows",
+        "path": "artifacts/p2_method_scout/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024 may jun' AS block, 'V0' AS method, 2.053353 AS rmse, 22940 AS rows UNION ALL SELECT '2024 may jun' AS block, '50:50 blend' AS method, 1.918377 AS rmse, 22940 AS rows UNION ALL SELECT '2024 jul aug' AS block, 'V0' AS method, 1.333043 AS rmse, 26018 AS rows UNION ALL SELECT '2024 jul aug' AS block, '50:50 blend' AS method, 1.254434 AS rmse, 26018 AS rows UNION ALL SELECT '2024 sep oct' AS block, 'V0' AS method, 0.552622 AS rmse, 26273 AS rows UNION ALL SELECT '2024 sep oct' AS block, '50:50 blend' AS method, 0.542852 AS rmse, 26273 AS rows UNION ALL SELECT '2024 nov dec' AS block, 'V0' AS method, 0.152428 AS rmse, 18093 AS rows UNION ALL SELECT '2024 nov dec' AS block, '50:50 blend' AS method, 0.079354 AS rmse, 18093 AS rows UNION ALL SELECT '2025 mar apr' AS block, 'V0' AS method, 0.514069 AS rmse, 3978 AS rows UNION ALL SELECT '2025 mar apr' AS block, '50:50 blend' AS method, 0.506546 AS rmse, 3978 AS rows UNION ALL SELECT '2025 may jun' AS block, 'V0' AS method, 1.319694 AS rmse, 25389 AS rows UNION ALL SELECT '2025 may jun' AS block, '50:50 blend' AS method, 1.220899 AS rmse, 25389 AS rows UNION ALL SELECT '2025 jul aug' AS block, 'V0' AS method, 1.151457 AS rmse, 26693 AS rows UNION ALL SELECT '2025 jul aug' AS block, '50:50 blend' AS method, 1.103726 AS rmse, 26693 AS rows UNION ALL SELECT '2025 nov dec' AS block, 'V0' AS method, 0.66644 AS rmse, 16884 AS rows UNION ALL SELECT '2025 nov dec' AS block, '50:50 blend' AS method, 0.55753 AS rmse, 16884 AS rows",
+          "description": "Materializes V0 and fixed blend RMSE for each usable seasonal block.",
+          "tables_used": [],
+          "metric_definitions": {
+            "rmse": "Root mean squared error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "monthly_sql",
+        "label": "Reviewed monthly stability rows",
+        "path": "artifacts/p2_method_scout/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024-05' AS month, 'V0' AS method, 1.2775653454583704 AS rmse UNION ALL SELECT '2024-05' AS month, 'Lean M2' AS method, 1.1107079785472957 AS rmse UNION ALL SELECT '2024-05' AS month, '50:50 blend' AS method, 1.1364873374285374 AS rmse UNION ALL SELECT '2024-06' AS month, 'V0' AS method, 2.491571372959657 AS rmse UNION ALL SELECT '2024-06' AS month, 'Lean M2' AS method, 2.2675539408533267 AS rmse UNION ALL SELECT '2024-06' AS month, '50:50 blend' AS method, 2.3497119622685925 AS rmse UNION ALL SELECT '2024-07' AS month, 'V0' AS method, 1.380912993978603 AS rmse UNION ALL SELECT '2024-07' AS month, 'Lean M2' AS method, 1.1954800649770054 AS rmse UNION ALL SELECT '2024-07' AS month, '50:50 blend' AS method, 1.2611580073944528 AS rmse UNION ALL SELECT '2024-08' AS month, 'V0' AS method, 1.2805956332837884 AS rmse UNION ALL SELECT '2024-08' AS month, 'Lean M2' AS method, 1.2314612315717677 AS rmse UNION ALL SELECT '2024-08' AS month, '50:50 blend' AS method, 1.2473008800145824 AS rmse UNION ALL SELECT '2024-09' AS month, 'V0' AS method, 0.7360982809998469 AS rmse UNION ALL SELECT '2024-09' AS month, 'Lean M2' AS method, 0.7958349158003427 AS rmse UNION ALL SELECT '2024-09' AS month, '50:50 blend' AS method, 0.7270917804239782 AS rmse UNION ALL SELECT '2024-10' AS month, 'V0' AS method, 0.27590111085526214 AS rmse UNION ALL SELECT '2024-10' AS month, 'Lean M2' AS method, 0.2962271612718626 AS rmse UNION ALL SELECT '2024-10' AS month, '50:50 blend' AS method, 0.2604183796436458 AS rmse UNION ALL SELECT '2024-11' AS month, 'V0' AS method, 0.05569710225484413 AS rmse UNION ALL SELECT '2024-11' AS month, 'Lean M2' AS method, 0.04763922169169047 AS rmse UNION ALL SELECT '2024-11' AS month, '50:50 blend' AS method, 0.04227550792152561 AS rmse UNION ALL SELECT '2024-12' AS month, 'V0' AS method, 0.2721481696105209 AS rmse UNION ALL SELECT '2024-12' AS month, 'Lean M2' AS method, 0.0664503230231876 AS rmse UNION ALL SELECT '2024-12' AS month, '50:50 blend' AS method, 0.13298088128994484 AS rmse UNION ALL SELECT '2025-04' AS month, 'V0' AS method, 0.514068940825193 AS rmse UNION ALL SELECT '2025-04' AS month, 'Lean M2' AS method, 0.5056972665644794 AS rmse UNION ALL SELECT '2025-04' AS month, '50:50 blend' AS method, 0.5065463180154649 AS rmse UNION ALL SELECT '2025-05' AS month, 'V0' AS method, 0.9449280730943569 AS rmse UNION ALL SELECT '2025-05' AS month, 'Lean M2' AS method, 0.7998524246537083 AS rmse UNION ALL SELECT '2025-05' AS month, '50:50 blend' AS method, 0.8636324015897016 AS rmse UNION ALL SELECT '2025-06' AS month, 'V0' AS method, 1.5990019781027214 AS rmse UNION ALL SELECT '2025-06' AS month, 'Lean M2' AS method, 1.4238385242979514 AS rmse UNION ALL SELECT '2025-06' AS month, '50:50 blend' AS method, 1.4852409182095796 AS rmse UNION ALL SELECT '2025-07' AS month, 'V0' AS method, 1.3461256304230518 AS rmse UNION ALL SELECT '2025-07' AS month, 'Lean M2' AS method, 1.2702622049657846 AS rmse UNION ALL SELECT '2025-07' AS month, '50:50 blend' AS method, 1.2850385257213583 AS rmse UNION ALL SELECT '2025-08' AS month, 'V0' AS method, 0.9158668780908944 AS rmse UNION ALL SELECT '2025-08' AS month, 'Lean M2' AS method, 0.8833571051419111 AS rmse UNION ALL SELECT '2025-08' AS month, '50:50 blend' AS method, 0.8856370820601445 AS rmse UNION ALL SELECT '2025-11' AS month, 'V0' AS method, 0.7020949949098205 AS rmse UNION ALL SELECT '2025-11' AS month, 'Lean M2' AS method, 0.5241275283966071 AS rmse UNION ALL SELECT '2025-11' AS month, '50:50 blend' AS method, 0.5986675086653119 AS rmse UNION ALL SELECT '2025-12' AS month, 'V0' AS method, 0.5324112582725858 AS rmse UNION ALL SELECT '2025-12' AS month, 'Lean M2' AS method, 0.3669254765535239 AS rmse UNION ALL SELECT '2025-12' AS month, '50:50 blend' AS method, 0.3927049403872808 AS rmse",
+          "description": "Materializes monthly V0, lean-M2, and blend50 RMSE.",
+          "tables_used": [],
+          "metric_definitions": {
+            "rmse": "Root mean squared error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "screen_sql",
+        "label": "Reviewed seven-method screen rows",
+        "path": "artifacts/p2_method_scout/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024 sep oct' AS block, 'linear_baseline' AS method, 0.971554 AS rmse, -0.483936 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'pchip_profile' AS method, 0.948404 AS rmse, -0.354729 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'ridge_residual' AS method, 0.784847 AS rmse, -0.038065 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'eof_rank3' AS method, 1.921152 AS rmse, -0.059431 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'lgbm_v0' AS method, 0.542444 AS rmse, -0.13956 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'lgbm_dynamic' AS method, 0.563273 AS rmse, -0.052245 AS bias UNION ALL SELECT '2024 sep oct' AS block, 'dynamic_physics_blend' AS method, 0.537569 AS rmse, -0.102242 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'linear_baseline' AS method, 1.616104 AS rmse, -1.099316 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'pchip_profile' AS method, 1.742383 AS rmse, -1.115657 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'ridge_residual' AS method, 1.256217 AS rmse, 0.028086 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'eof_rank3' AS method, 8.057404 AS rmse, -4.395132 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'lgbm_v0' AS method, 1.146632 AS rmse, -0.115791 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'lgbm_dynamic' AS method, 1.088583 AS rmse, 0.061162 AS bias UNION ALL SELECT '2025 jul aug' AS block, 'dynamic_physics_blend' AS method, 1.082289 AS rmse, 0.049315 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'linear_baseline' AS method, 0.868601 AS rmse, -0.586118 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'pchip_profile' AS method, 1.245235 AS rmse, -0.792189 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'ridge_residual' AS method, 1.541471 AS rmse, 1.157172 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'eof_rank3' AS method, 2.793861 AS rmse, 1.207431 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'lgbm_v0' AS method, 0.753823 AS rmse, -0.208844 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'lgbm_dynamic' AS method, 0.467382 AS rmse, 0.086575 AS bias UNION ALL SELECT '2025 nov dec' AS block, 'dynamic_physics_blend' AS method, 0.868601 AS rmse, -0.586118 AS bias",
+          "description": "Materializes the first-screen RMSE and bias values.",
+          "tables_used": [],
+          "metric_definitions": {
+            "rmse": "Root mean squared error in degrees Celsius",
+            "bias": "Mean prediction minus target temperature"
+          }
+        }
+      },
+      {
+        "id": "decisions_sql",
+        "label": "P2 method decision synthesis",
+        "path": "artifacts/p2_method_scout/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'PCHIP vertical profile' AS method, 'Reject' AS decision, 'Worsened both 2025 proxy blocks' AS evidence, 'Deep public levels do not identify upper-thermocline curvature reliably' AS interpretation UNION ALL SELECT 'Rank-3 EOF' AS method, 'Reject' AS decision, '1.92–8.06°C RMSE in first screen' AS evidence, 'Global low-rank basis is unstable under seasonal and deployment shifts' AS interpretation UNION ALL SELECT 'Layerwise Ridge residual' AS method, 'Keep as sanity check' AS decision, 'Better than linear interpolation in 2/3 blocks' AS evidence, 'Public T–S state contains signal but the mapping is nonlinear' AS interpretation UNION ALL SELECT 'Full 120-feature dynamics' AS method, 'Do not promote' AS decision, 'Improved 2025 proxies but slightly worsened 2024 same season' AS evidence, 'Too many correlated lag/lead choices for the evidence budget' AS interpretation UNION ALL SELECT 'Lean M2 20 features' AS method, 'Useful arm' AS decision, '7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C' AS evidence, 'M2-scale public-layer dynamics carry transferable information' AS interpretation UNION ALL SELECT 'Fixed 50:50 V0 + Lean M2' AS method, 'Research candidate' AS decision, '8/8 blocks improved; bootstrap 90% upper bound < 0' AS evidence, 'Best current robustness/complexity trade-off; hidden score unknown' AS interpretation UNION ALL SELECT 'Local M2 amplitude/phase 20 features' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C' AS evidence, 'Average gain did not satisfy the preregistered seasonal-stability contract' AS interpretation",
+          "description": "Materializes reviewed method decisions from the local screen.",
+          "tables_used": []
+        }
+      },
+      {
+        "id": "p2_contract",
+        "label": "P2 immutable problem and data contract",
+        "path": "01_P2_MUST_READ_FIRST.md",
+        "query": {
+          "description": "Local transcription and audit notes for the official P2 problem bundle."
+        }
+      },
+      {
+        "id": "candidate_manifest",
+        "label": "P2 blend50 research candidate manifest",
+        "path": "artifacts/p2_blend50/manifest.json"
+      },
+      {
+        "id": "candidate_sql",
+        "label": "P2 candidate format and coverage metrics",
+        "path": "artifacts/p2_blend50/manifest.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 26061 AS rows, 0.687003568550708 AS finite_rate_min, 0.9834426921453513 AS finite_rate_median",
+          "description": "Materializes submission row count and lean-feature finite rates.",
+          "tables_used": []
+        }
+      },
+      {
+        "id": "phase_result",
+        "label": "P2 preregistered local-M2 amplitude/phase experiment",
+        "path": "artifacts/p2_m2_local_phase_v1/result.json"
+      },
+      {
+        "id": "phase_sql",
+        "label": "Reviewed local-M2 phase block comparison",
+        "path": "artifacts/p2_m2_local_phase_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024 may jun' AS block, 1.918377 AS current_rmse, 1.81925 AS phase_rmse, -0.099128 AS delta_rmse UNION ALL SELECT '2024 jul aug' AS block, 1.254434 AS current_rmse, 1.223485 AS phase_rmse, -0.03095 AS delta_rmse UNION ALL SELECT '2024 sep oct' AS block, 0.542852 AS current_rmse, 0.537521 AS phase_rmse, -0.005331 AS delta_rmse UNION ALL SELECT '2024 nov dec' AS block, 0.079354 AS current_rmse, 0.087975 AS phase_rmse, 0.008621 AS delta_rmse UNION ALL SELECT '2025 mar apr' AS block, 0.506546 AS current_rmse, 0.553421 AS phase_rmse, 0.046875 AS delta_rmse UNION ALL SELECT '2025 may jun' AS block, 1.220899 AS current_rmse, 1.119725 AS phase_rmse, -0.101174 AS delta_rmse UNION ALL SELECT '2025 jul aug' AS block, 1.103726 AS current_rmse, 1.114021 AS phase_rmse, 0.010295 AS delta_rmse UNION ALL SELECT '2025 nov dec' AS block, 0.55753 AS current_rmse, 0.527636 AS phase_rmse, -0.029894 AS delta_rmse",
+          "description": "Materializes the preregistered current-versus-local-M2 phase comparison.",
+          "tables_used": [],
+          "metric_definitions": {
+            "delta_rmse": "Local-M2 phase candidate RMSE minus current Blend50 RMSE; negative is better"
+          }
+        }
+      },
+      {
+        "id": "dineof",
+        "label": "Beckers and Rixen (2003), EOF calculations and data filling",
+        "href": "https://orbi.uliege.be/handle/2268/4291"
+      },
+      {
+        "id": "multivariate_dineof",
+        "label": "Alvera-Azcárate et al. (2007), multivariate DINEOF",
+        "href": "https://doi.org/10.1029/2006JC003660"
+      },
+      {
+        "id": "utide",
+        "label": "Codiga (2011), Unified Tidal Analysis and Prediction",
+        "href": "https://www.po.gso.uri.edu/~codiga/utide/2011Codiga-UTide-Report.pdf"
+      },
+      {
+        "id": "yellow_sea_m2",
+        "label": "Liu et al. (2019), seasonal M2 internal tide in the Yellow Sea",
+        "href": "https://doi.org/10.1029/2018JC014819"
+      },
+      {
+        "id": "yellow_sea_ml_tide",
+        "label": "South Yellow Sea thermal inversion with LightGBM and tides",
+        "href": "https://doi.org/10.3389/fmars.2022.1075938"
+      },
+      {
+        "id": "sors_platform",
+        "label": "S-ORS monitoring platform and scientific applications",
+        "href": "https://doi.org/10.3389/fmars.2019.00601"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# P2 연직 수온 구조 복원 방법 정찰"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "p2_result",
+        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이는 hidden test 점수가 아니며 현재 산출물은 연구 후보이다."
+      },
+      {
+        "id": "headline_strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "aggregate_delta",
+          "block_wins",
+          "ci_high",
+          "candidate_rows"
+        ]
+      },
+      {
+        "id": "stability_finding",
+        "type": "markdown",
+        "sourceId": "p2_result",
+        "body": "## 고정 50:50 앙상블은 계절 전이 위험을 줄였다\n\nLean M2 단독은 2024년 같은 계절에서 RMSE가 0.5526→0.5969°C로 악화했다. 50:50 평균은 0.5429°C로 오히려 V0보다 낮았다. 다른 계절의 큰 동역학 이득을 유지하면서 동일 계절의 분포 이동을 완화한 것이다."
+      },
+      {
+        "id": "stability_visual",
+        "type": "chart",
+        "chartId": "stability_chart"
+      },
+      {
+        "id": "month_finding",
+        "type": "markdown",
+        "sourceId": "p2_result",
+        "body": "## M2 동역학의 이득은 대부분의 관측 월에 재현됐다\n\nLean M2는 관측 가능한 15개월 중 13개월에서 개선됐고 2024년 9월과 10월에서만 악화했다. 50:50 평균은 그 두 달도 개선했다. 이 패턴은 조석 특징을 월 고정 규칙으로 사용하라는 뜻이 아니라, 계절에 따라 달라지는 오차 공분산을 단일 모델 교체보다 보수적 앙상블이 더 안정적으로 흡수한다는 증거다."
+      },
+      {
+        "id": "monthly_visual",
+        "type": "chart",
+        "chartId": "monthly_chart"
+      },
+      {
+        "id": "phase_finding",
+        "type": "markdown",
+        "sourceId": "phase_result",
+        "body": "## 국소 M2 진폭·위상은 평균 이득에도 계절 안정성 때문에 기각했다\n\n고정 7일 공개층 조화 특징 20개를 추가한 one-shot 후보는 166,268행 aggregate RMSE를 1.1234→1.0787°C로 낮췄고 paired KST-day bootstrap 90% CI도 [-0.0551, -0.0347]°C였다. 그러나 8개 블록 중 5개만 개선했고 2025년 3–4월은 +0.0469°C 악화해 사전등록된 최대 +0.02°C 블록 회귀 한도를 넘었다. 따라서 평균 성능만 보고 창·가중치를 재탐색하지 않고 계열을 종료했다."
+      },
+      {
+        "id": "phase_table_block",
+        "type": "table",
+        "tableId": "phase_comparison"
+      },
+      {
+        "id": "screen_finding",
+        "type": "markdown",
+        "sourceId": "p2_result",
+        "body": "## 단순 곡선 보간과 전역 EOF는 채택 근거가 없었다\n\nPCHIP은 2024년 동일 계절에서만 선형보간을 조금 개선했고 2025년 proxy에서 악화했다. Rank-3 EOF는 2025년 7–8월 8.06°C까지 붕괴했다. 연도별 센서 수심 재배치와 강한 계절 비정상성 때문에 하나의 전역 저랭크 공간이 맞지 않았다. Ridge는 선형보간보다 낫지만 LightGBM보다 일관되게 약했다."
+      },
+      {
+        "id": "screen_table_block",
+        "type": "table",
+        "tableId": "screen_table"
+      },
+      {
+        "id": "literature_mapping",
+        "type": "markdown",
+        "body": "## 문헌 근거와 로컬 적용\n\n[DINEOF](https://orbi.uliege.be/handle/2268/4291)는 불완전 해양자료를 EOF로 채우고 모드 수를 교차검증하는 근거를 제공하며, [multivariate DINEOF](https://doi.org/10.1029/2006JC003660)는 보조변수와 lagged field의 가치를 보였다. 그러나 이 데이터에서는 전역 EOF가 실패했다. [UTide](https://www.po.gso.uri.edu/~codiga/utide/2011Codiga-UTide-Report.pdf)는 정확한 시간과 조화성분·강건 회귀를 다루며, [Yellow Sea M2 연구](https://doi.org/10.1029/2018JC014819)는 12–18 m pycnocline의 10분 관측에서 M2 내부조석 진동을 확인했다. [South Yellow Sea LightGBM+tide 연구](https://doi.org/10.3389/fmars.2022.1075938)는 조석 결합이 thermocline 아래 복원을 개선할 수 있음을 보였다. 이 근거 때문에 시간동역학을 추가했지만, 최종 채택은 논문 성능이 아니라 로컬 blocked validation으로 결정했다."
+      },
+      {
+        "id": "decision_table_block",
+        "type": "table",
+        "tableId": "method_decisions"
+      },
+      {
+        "id": "scope_methods",
+        "type": "markdown",
+        "sourceId": "p2_contract",
+        "body": "## 범위, 데이터, 지표와 검증 설계\n\n대상은 S-ORS layer 2·3·4의 10분 수온이며, temp가 관측된 학습 행에서만 RMSE를 계산했다. 모든 모델 입력은 공개 layer 1·5·6·7·8의 temp·psal·depth, 목표 공칭수심, 시간 특징으로 제한했다. 가림층 temp·psal은 특징 생성 API에서 금지한다. 2025년 9–10월은 어떠한 로컬 모델 선택에도 사용하지 않았고, 외부 관측값도 사용하지 않았다."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "p2_result",
+        "body": "## 한계와 강건성\n\n8개 블록과 391 KST-day의 bootstrap은 hidden 2025년 9–10월 정답을 대체하지 않는다. 운영 결측으로 11개 예정 블록 중 8개만 평가 가능했다. 같은 데이터로 방법을 반복 비교하면 연구자 과적합이 누적되므로, 50:50 이후 가중치 탐색은 금지했다. Lean test 특징 20개의 최소 finite rate는 68.7%이며 LightGBM missing routing에 의존하는 시각이 남아 있다."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 권장 다음 단계\n\n1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n3. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n4. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## 남은 질문\n\n- 리더보드 분할이 시간·층·무작위 행 중 어떤 방식인지 공개되는가?\n- 태풍 통과 시각이나 바람 관측이 대회 허용 입력으로 제공되는가?\n- 최종 모델 패키지가 양방향 public-layer 문맥 사용을 허용하는가?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-16T09:34:05.387335+09:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "aggregate_delta": -0.07688124099729032,
+          "block_wins": "8 / 8",
+          "ci_high": -0.06936306910160317,
+          "candidate_rows": 26061
+        }
+      ],
+      "stability": [
+        {
+          "block": "2024 may jun",
+          "method": "V0",
+          "rmse": 2.053353,
+          "rows": 22940
+        },
+        {
+          "block": "2024 may jun",
+          "method": "50:50 blend",
+          "rmse": 1.918377,
+          "rows": 22940
+        },
+        {
+          "block": "2024 jul aug",
+          "method": "V0",
+          "rmse": 1.333043,
+          "rows": 26018
+        },
+        {
+          "block": "2024 jul aug",
+          "method": "50:50 blend",
+          "rmse": 1.254434,
+          "rows": 26018
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "V0",
+          "rmse": 0.552622,
+          "rows": 26273
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "50:50 blend",
+          "rmse": 0.542852,
+          "rows": 26273
+        },
+        {
+          "block": "2024 nov dec",
+          "method": "V0",
+          "rmse": 0.152428,
+          "rows": 18093
+        },
+        {
+          "block": "2024 nov dec",
+          "method": "50:50 blend",
+          "rmse": 0.079354,
+          "rows": 18093
+        },
+        {
+          "block": "2025 mar apr",
+          "method": "V0",
+          "rmse": 0.514069,
+          "rows": 3978
+        },
+        {
+          "block": "2025 mar apr",
+          "method": "50:50 blend",
+          "rmse": 0.506546,
+          "rows": 3978
+        },
+        {
+          "block": "2025 may jun",
+          "method": "V0",
+          "rmse": 1.319694,
+          "rows": 25389
+        },
+        {
+          "block": "2025 may jun",
+          "method": "50:50 blend",
+          "rmse": 1.220899,
+          "rows": 25389
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "V0",
+          "rmse": 1.151457,
+          "rows": 26693
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "50:50 blend",
+          "rmse": 1.103726,
+          "rows": 26693
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "V0",
+          "rmse": 0.66644,
+          "rows": 16884
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "50:50 blend",
+          "rmse": 0.55753,
+          "rows": 16884
+        }
+      ],
+      "monthly": [
+        {
+          "month": "2024-05",
+          "method": "V0",
+          "rmse": 1.2775653454583704
+        },
+        {
+          "month": "2024-05",
+          "method": "Lean M2",
+          "rmse": 1.1107079785472957
+        },
+        {
+          "month": "2024-05",
+          "method": "50:50 blend",
+          "rmse": 1.1364873374285374
+        },
+        {
+          "month": "2024-06",
+          "method": "V0",
+          "rmse": 2.491571372959657
+        },
+        {
+          "month": "2024-06",
+          "method": "Lean M2",
+          "rmse": 2.2675539408533267
+        },
+        {
+          "month": "2024-06",
+          "method": "50:50 blend",
+          "rmse": 2.3497119622685925
+        },
+        {
+          "month": "2024-07",
+          "method": "V0",
+          "rmse": 1.380912993978603
+        },
+        {
+          "month": "2024-07",
+          "method": "Lean M2",
+          "rmse": 1.1954800649770054
+        },
+        {
+          "month": "2024-07",
+          "method": "50:50 blend",
+          "rmse": 1.2611580073944528
+        },
+        {
+          "month": "2024-08",
+          "method": "V0",
+          "rmse": 1.2805956332837884
+        },
+        {
+          "month": "2024-08",
+          "method": "Lean M2",
+          "rmse": 1.2314612315717677
+        },
+        {
+          "month": "2024-08",
+          "method": "50:50 blend",
+          "rmse": 1.2473008800145824
+        },
+        {
+          "month": "2024-09",
+          "method": "V0",
+          "rmse": 0.7360982809998469
+        },
+        {
+          "month": "2024-09",
+          "method": "Lean M2",
+          "rmse": 0.7958349158003427
+        },
+        {
+          "month": "2024-09",
+          "method": "50:50 blend",
+          "rmse": 0.7270917804239782
+        },
+        {
+          "month": "2024-10",
+          "method": "V0",
+          "rmse": 0.27590111085526214
+        },
+        {
+          "month": "2024-10",
+          "method": "Lean M2",
+          "rmse": 0.2962271612718626
+        },
+        {
+          "month": "2024-10",
+          "method": "50:50 blend",
+          "rmse": 0.2604183796436458
+        },
+        {
+          "month": "2024-11",
+          "method": "V0",
+          "rmse": 0.05569710225484413
+        },
+        {
+          "month": "2024-11",
+          "method": "Lean M2",
+          "rmse": 0.04763922169169047
+        },
+        {
+          "month": "2024-11",
+          "method": "50:50 blend",
+          "rmse": 0.04227550792152561
+        },
+        {
+          "month": "2024-12",
+          "method": "V0",
+          "rmse": 0.2721481696105209
+        },
+        {
+          "month": "2024-12",
+          "method": "Lean M2",
+          "rmse": 0.0664503230231876
+        },
+        {
+          "month": "2024-12",
+          "method": "50:50 blend",
+          "rmse": 0.13298088128994484
+        },
+        {
+          "month": "2025-04",
+          "method": "V0",
+          "rmse": 0.514068940825193
+        },
+        {
+          "month": "2025-04",
+          "method": "Lean M2",
+          "rmse": 0.5056972665644794
+        },
+        {
+          "month": "2025-04",
+          "method": "50:50 blend",
+          "rmse": 0.5065463180154649
+        },
+        {
+          "month": "2025-05",
+          "method": "V0",
+          "rmse": 0.9449280730943569
+        },
+        {
+          "month": "2025-05",
+          "method": "Lean M2",
+          "rmse": 0.7998524246537083
+        },
+        {
+          "month": "2025-05",
+          "method": "50:50 blend",
+          "rmse": 0.8636324015897016
+        },
+        {
+          "month": "2025-06",
+          "method": "V0",
+          "rmse": 1.5990019781027214
+        },
+        {
+          "month": "2025-06",
+          "method": "Lean M2",
+          "rmse": 1.4238385242979514
+        },
+        {
+          "month": "2025-06",
+          "method": "50:50 blend",
+          "rmse": 1.4852409182095796
+        },
+        {
+          "month": "2025-07",
+          "method": "V0",
+          "rmse": 1.3461256304230518
+        },
+        {
+          "month": "2025-07",
+          "method": "Lean M2",
+          "rmse": 1.2702622049657846
+        },
+        {
+          "month": "2025-07",
+          "method": "50:50 blend",
+          "rmse": 1.2850385257213583
+        },
+        {
+          "month": "2025-08",
+          "method": "V0",
+          "rmse": 0.9158668780908944
+        },
+        {
+          "month": "2025-08",
+          "method": "Lean M2",
+          "rmse": 0.8833571051419111
+        },
+        {
+          "month": "2025-08",
+          "method": "50:50 blend",
+          "rmse": 0.8856370820601445
+        },
+        {
+          "month": "2025-11",
+          "method": "V0",
+          "rmse": 0.7020949949098205
+        },
+        {
+          "month": "2025-11",
+          "method": "Lean M2",
+          "rmse": 0.5241275283966071
+        },
+        {
+          "month": "2025-11",
+          "method": "50:50 blend",
+          "rmse": 0.5986675086653119
+        },
+        {
+          "month": "2025-12",
+          "method": "V0",
+          "rmse": 0.5324112582725858
+        },
+        {
+          "month": "2025-12",
+          "method": "Lean M2",
+          "rmse": 0.3669254765535239
+        },
+        {
+          "month": "2025-12",
+          "method": "50:50 blend",
+          "rmse": 0.3927049403872808
+        }
+      ],
+      "method_screen": [
+        {
+          "block": "2024 sep oct",
+          "method": "linear_baseline",
+          "rmse": 0.971554,
+          "bias": -0.483936
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "pchip_profile",
+          "rmse": 0.948404,
+          "bias": -0.354729
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "ridge_residual",
+          "rmse": 0.784847,
+          "bias": -0.038065
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "eof_rank3",
+          "rmse": 1.921152,
+          "bias": -0.059431
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "lgbm_v0",
+          "rmse": 0.542444,
+          "bias": -0.13956
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "lgbm_dynamic",
+          "rmse": 0.563273,
+          "bias": -0.052245
+        },
+        {
+          "block": "2024 sep oct",
+          "method": "dynamic_physics_blend",
+          "rmse": 0.537569,
+          "bias": -0.102242
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "linear_baseline",
+          "rmse": 1.616104,
+          "bias": -1.099316
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "pchip_profile",
+          "rmse": 1.742383,
+          "bias": -1.115657
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "ridge_residual",
+          "rmse": 1.256217,
+          "bias": 0.028086
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "eof_rank3",
+          "rmse": 8.057404,
+          "bias": -4.395132
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "lgbm_v0",
+          "rmse": 1.146632,
+          "bias": -0.115791
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "lgbm_dynamic",
+          "rmse": 1.088583,
+          "bias": 0.061162
+        },
+        {
+          "block": "2025 jul aug",
+          "method": "dynamic_physics_blend",
+          "rmse": 1.082289,
+          "bias": 0.049315
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "linear_baseline",
+          "rmse": 0.868601,
+          "bias": -0.586118
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "pchip_profile",
+          "rmse": 1.245235,
+          "bias": -0.792189
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "ridge_residual",
+          "rmse": 1.541471,
+          "bias": 1.157172
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "eof_rank3",
+          "rmse": 2.793861,
+          "bias": 1.207431
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "lgbm_v0",
+          "rmse": 0.753823,
+          "bias": -0.208844
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "lgbm_dynamic",
+          "rmse": 0.467382,
+          "bias": 0.086575
+        },
+        {
+          "block": "2025 nov dec",
+          "method": "dynamic_physics_blend",
+          "rmse": 0.868601,
+          "bias": -0.586118
+        }
+      ],
+      "phase_comparison": [
+        {
+          "block": "2024 may jun",
+          "current_rmse": 1.918377,
+          "phase_rmse": 1.81925,
+          "delta_rmse": -0.099128
+        },
+        {
+          "block": "2024 jul aug",
+          "current_rmse": 1.254434,
+          "phase_rmse": 1.223485,
+          "delta_rmse": -0.03095
+        },
+        {
+          "block": "2024 sep oct",
+          "current_rmse": 0.542852,
+          "phase_rmse": 0.537521,
+          "delta_rmse": -0.005331
+        },
+        {
+          "block": "2024 nov dec",
+          "current_rmse": 0.079354,
+          "phase_rmse": 0.087975,
+          "delta_rmse": 0.008621
+        },
+        {
+          "block": "2025 mar apr",
+          "current_rmse": 0.506546,
+          "phase_rmse": 0.553421,
+          "delta_rmse": 0.046875
+        },
+        {
+          "block": "2025 may jun",
+          "current_rmse": 1.220899,
+          "phase_rmse": 1.119725,
+          "delta_rmse": -0.101174
+        },
+        {
+          "block": "2025 jul aug",
+          "current_rmse": 1.103726,
+          "phase_rmse": 1.114021,
+          "delta_rmse": 0.010295
+        },
+        {
+          "block": "2025 nov dec",
+          "current_rmse": 0.55753,
+          "phase_rmse": 0.527636,
+          "delta_rmse": -0.029894
+        }
+      ],
+      "decisions": [
+        {
+          "method": "PCHIP vertical profile",
+          "decision": "Reject",
+          "evidence": "Worsened both 2025 proxy blocks",
+          "interpretation": "Deep public levels do not identify upper-thermocline curvature reliably"
+        },
+        {
+          "method": "Rank-3 EOF",
+          "decision": "Reject",
+          "evidence": "1.92–8.06°C RMSE in first screen",
+          "interpretation": "Global low-rank basis is unstable under seasonal and deployment shifts"
+        },
+        {
+          "method": "Layerwise Ridge residual",
+          "decision": "Keep as sanity check",
+          "evidence": "Better than linear interpolation in 2/3 blocks",
+          "interpretation": "Public T–S state contains signal but the mapping is nonlinear"
+        },
+        {
+          "method": "Full 120-feature dynamics",
+          "decision": "Do not promote",
+          "evidence": "Improved 2025 proxies but slightly worsened 2024 same season",
+          "interpretation": "Too many correlated lag/lead choices for the evidence budget"
+        },
+        {
+          "method": "Lean M2 20 features",
+          "decision": "Useful arm",
+          "evidence": "7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C",
+          "interpretation": "M2-scale public-layer dynamics carry transferable information"
+        },
+        {
+          "method": "Fixed 50:50 V0 + Lean M2",
+          "decision": "Research candidate",
+          "evidence": "8/8 blocks improved; bootstrap 90% upper bound < 0",
+          "interpretation": "Best current robustness/complexity trade-off; hidden score unknown"
+        },
+        {
+          "method": "Local M2 amplitude/phase 20 features",
+          "decision": "Reject and close family",
+          "evidence": "Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C",
+          "interpretation": "Average gain did not satisfy the preregistered seasonal-stability contract"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "p2_result",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "headline_sql",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "stability_sql",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "monthly_sql",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "screen_sql",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "decisions_sql",
+      "path": "artifacts/p2_method_scout/result.json"
+    },
+    {
+      "id": "p2_contract",
+      "path": "01_P2_MUST_READ_FIRST.md"
+    },
+    {
+      "id": "candidate_manifest",
+      "path": "artifacts/p2_blend50/manifest.json"
+    },
+    {
+      "id": "candidate_sql",
+      "path": "artifacts/p2_blend50/manifest.json"
+    },
+    {
+      "id": "phase_result",
+      "path": "artifacts/p2_m2_local_phase_v1/result.json"
+    },
+    {
+      "id": "phase_sql",
+      "path": "artifacts/p2_m2_local_phase_v1/result.json"
+    },
+    {
+      "id": "dineof",
+      "href": "https://orbi.uliege.be/handle/2268/4291"
+    },
+    {
+      "id": "multivariate_dineof",
+      "href": "https://doi.org/10.1029/2006JC003660"
+    },
+    {
+      "id": "utide",
+      "href": "https://www.po.gso.uri.edu/~codiga/utide/2011Codiga-UTide-Report.pdf"
+    },
+    {
+      "id": "yellow_sea_m2",
+      "href": "https://doi.org/10.1029/2018JC014819"
+    },
+    {
+      "id": "yellow_sea_ml_tide",
+      "href": "https://doi.org/10.3389/fmars.2022.1075938"
+    },
+    {
+      "id": "sors_platform",
+      "href": "https://doi.org/10.3389/fmars.2019.00601"
+    }
+  ]
+}

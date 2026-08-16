@@ -1,0 +1,68 @@
+{
+  "experiment_id": "p2_m2_local_phase_v1",
+  "created_at_kst": "2026-08-16",
+  "status": "authorized_one_shot",
+  "hypothesis": "A fixed local M2 amplitude/phase representation from public-layer temperature improves the existing fixed Blend50 reconstruction without sacrificing seasonal stability.",
+  "exactly_one_change": "Add 20 label-blind public-temperature local M2 harmonic features to the lean arm.",
+  "frozen_reference": {
+    "method": "fixed 50:50 V0 + lean-M2 dynamics",
+    "result_sha256": "e56ae49c178e988862c0d226e405703ad8537915fdce7a53454892bcdce44a9e",
+    "model_sha256": "615d5705020fabbbe64642b879bdbf160f6a1087a4ec86b0b47ad5c37b3ff688",
+    "submission_sha256": "4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7"
+  },
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036"
+  },
+  "feature_contract": {
+    "source_layers": [1, 5, 6, 7, 8],
+    "source_variable": "temp",
+    "target_layers_forbidden": [2, 3, 4],
+    "m2_period_hours": 12.42,
+    "detrend_window_steps": 144,
+    "detrend_min_observations": 72,
+    "harmonic_window_steps": 1008,
+    "harmonic_min_observations": 504,
+    "centered_offline_context": true,
+    "features_per_public_layer": [
+      "amplitude",
+      "phase_cos",
+      "phase_sin",
+      "reconstruction"
+    ],
+    "feature_count": 20,
+    "parameter_search": false
+  },
+  "comparison": {
+    "reference": "0.5 * V0 + 0.5 * lean_M2",
+    "candidate": "0.5 * V0 + 0.5 * (lean_M2 + local_M2_harmonics)",
+    "blend_weight": 0.5,
+    "seed_base": 20260816,
+    "validation_blocks": [
+      "2024_may_jun",
+      "2024_jul_aug",
+      "2024_sep_oct",
+      "2024_nov_dec",
+      "2025_mar_apr",
+      "2025_may_jun",
+      "2025_jul_aug",
+      "2025_nov_dec"
+    ],
+    "metric": "row_rmse_celsius",
+    "paired_unit": "KST_day",
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260816,
+    "outer_one_shot": true
+  },
+  "promotion_gates": {
+    "aggregate_delta_rmse_lte": -0.005,
+    "bootstrap_ci90_high_lt": 0.0,
+    "minimum_improved_blocks": 6,
+    "maximum_block_regression": 0.02,
+    "maximum_layer_regression": 0.01,
+    "same_season_2024_sep_oct_max_regression": 0.005
+  },
+  "failure_action": "Retain P2_RESEARCH_BLEND50 and close the local-M2-amplitude-phase family.",
+  "upload_allowed": false
+}
