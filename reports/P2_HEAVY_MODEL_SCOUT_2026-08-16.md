@@ -1,5 +1,20 @@
 # P2 구조·대형 모델 정찰 — 2026-08-16
 
+## 실행 결과 업데이트
+
+정찰 후보 8개 계열을 동일한 69,850행 target-proxy OOF에서 실제 비교했다. 모든 모델은 공개 layer 1·5·6·7·8과 공개층 기반 선형보간, 시간·조석 특징만 입력으로 사용했고, 목표 layer 2·3·4의 temp·psal은 입력에서 제외했다. 외부 관측값과 pretrained weight는 사용하지 않았다.
+
+- 단독 최강: 3-seed `LSTI-style`, RMSE `0.771751°C`
+- 단일 계열 blend 최강: `TimeMixer++-style 50% + frozen tree 50%`, RMSE `0.756885°C`
+- 최종 layer별 convex stack: RMSE `0.745814°C`
+- 기존 400-round router: RMSE `0.788890°C`
+- 최종 개선: `-0.043076°C`
+- leave-one-block-out stack: `0.775660°C`
+- KST-day paired bootstrap 90% CI: `[-0.055540, -0.030873]°C`
+- CSDI-style·SSSD-SSM-style은 최적 tree blend에서 deep weight가 `0`으로 선택되어 기각
+
+최종 후보 `submissions/p2/P2_DEEP_STACK_V1.csv`는 26,061행·키 순서·유한 범위를 통과했고 저장 가중치에서 SHA256 `ea5cedbd08817da4da00274e1078689f09a1d9c65d2a464f5f5f5ba9ffcc82e8`로 완전 재현됐다. 아직 업로드하지 않았다. 아래 내용은 실행 전 설계 근거이므로, 후보 우선순위보다 이 실행 결과가 최신 결론이다.
+
 ## 결론
 
 P2의 다음 1순위는 파라미터 수만 키운 범용 Transformer가 아니다. 현재 LightGBM의 강한 출발점인 수심 선형보간 잔차를 유지하면서, 다음 세 구조를 결합한 **Depth-query Bidirectional Multi-scale Residual Network**가 가장 적합하다.
@@ -84,4 +99,3 @@ P2의 다음 1순위는 파라미터 수만 키운 범용 Transformer가 아니�
 3. 개선이 확인되면 같은 masking/data contract로 ImputeFormer를 한 번 비교한다.
 4. tree와 deterministic deep model의 오류 상관이 충분히 다를 때만 SSSD-S4/CSDI posterior mean을 마지막 상한선 실험으로 실행한다.
 5. pretrained MOMENT/UniTS는 운영진이 외부 weight 사용을 허용한 경우에만 별도 challenger로 둔다.
-

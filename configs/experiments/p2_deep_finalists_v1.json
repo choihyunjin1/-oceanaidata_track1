@@ -1,0 +1,32 @@
+{
+  "experiment_id": "p2_deep_finalists_v1",
+  "status": "authorized_local_finalist_run",
+  "research_only": true,
+  "upload_allowed": false,
+  "source_tournament": "artifacts/p2_deep_model_tournament_v1/result.json",
+  "finalists": ["lsti_style", "timemixerpp_style"],
+  "seeds": [20260816, 20260817, 20260818],
+  "single_seed_contributors": ["depth_query_bitcn", "moment_units_scratch"],
+  "stacking": {
+    "scope": "same frozen 69850-row OOF",
+    "method": "nonnegative sum-to-one least-squares separately by target layer",
+    "lobo_diagnostic": true,
+    "contributors": [
+      "router_400",
+      "depth_query_bitcn",
+      "lsti_style",
+      "timemixerpp_style",
+      "moment_units_scratch"
+    ]
+  },
+  "full_training": {
+    "epoch_rule": "per-seed median outer best epoch",
+    "best_checkpoint_not_last_epoch": false,
+    "external_observations": false,
+    "external_pretrained_weights": false
+  },
+  "submission": {
+    "path": "submissions/p2/P2_DEEP_STACK_V1.csv",
+    "upload": false
+  }
+}

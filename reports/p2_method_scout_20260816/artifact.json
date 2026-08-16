@@ -3,9 +3,9 @@
   "manifest": {
     "version": 1,
     "surface": "report",
-    "title": "P2 연직 수온 구조 복원 방법 정찰",
-    "description": "프로파일·M2 기반 로컬 검증과 구조적·대형 시계열 모델 문헌을 P2 결측 계약에 매핑한 기술 보고서",
-    "generatedAt": "2026-08-16T13:28:28.016586+09:00",
+    "title": "P2 연직 수온 복원 모델 검증",
+    "description": "Tree 기준부터 8개 deep 계열, 복수 seed stack, 제출 재현성까지 검증한 P2 기술 보고서",
+    "generatedAt": "2026-08-16T14:41:39.535022+09:00",
     "cards": [
       {
         "id": "aggregate_delta",
@@ -58,6 +58,62 @@
           {
             "label": "Submission-format rows",
             "field": "candidate_rows"
+          }
+        ]
+      },
+      {
+        "id": "deep_stacked_rmse",
+        "description": "Three target-proxy blocks, 69,850 rows",
+        "dataset": "deep_headline",
+        "sourceId": "deep_headline_sql",
+        "metrics": [
+          {
+            "label": "Deep stack OOF RMSE",
+            "field": "stacked_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "deep_delta",
+        "description": "Deep stack minus frozen 400-round router",
+        "dataset": "deep_headline",
+        "sourceId": "deep_headline_sql",
+        "metrics": [
+          {
+            "label": "RMSE change",
+            "field": "delta_vs_incumbent",
+            "format": "number",
+            "unit": " °C",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "deep_lobo_rmse",
+        "description": "Weights fit on the other two blocks",
+        "dataset": "deep_headline",
+        "sourceId": "deep_headline_sql",
+        "metrics": [
+          {
+            "label": "LOBO stack RMSE",
+            "field": "lobo_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "deep_submission_rows",
+        "description": "Saved-weight reproduction and key-order validation passed",
+        "dataset": "deep_headline",
+        "sourceId": "deep_headline_sql",
+        "metrics": [
+          {
+            "label": "Frozen candidate rows",
+            "field": "submission_rows",
+            "format": "number"
           }
         ]
       }
@@ -154,6 +210,78 @@
               "field": "state_rmse",
               "type": "quantitative",
               "label": "State RMSE"
+            }
+          ]
+        }
+      },
+      {
+        "id": "deep_model_chart",
+        "title": "P2 deep-family OOF RMSE",
+        "subtitle": "Three frozen seasonal blocks and 69,850 rows; lower is better. Each family uses its development-selected learning rate.",
+        "type": "bar",
+        "dataset": "deep_model_ranking",
+        "sourceId": "deep_ranking_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Model family"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "variant",
+            "type": "nominal",
+            "label": "Prediction"
+          },
+          "tooltip": [
+            {
+              "field": "parameters_m",
+              "type": "quantitative",
+              "label": "Trainable parameters (M)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "deep_block_chart",
+        "title": "P2 stack RMSE by validation block",
+        "subtitle": "Same row-level metric by seasonal block; LOBO weights never use the held block.",
+        "type": "bar",
+        "dataset": "deep_block_metrics",
+        "sourceId": "deep_blocks_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "block",
+            "type": "nominal",
+            "label": "Validation block"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Method"
+          },
+          "tooltip": [
+            {
+              "field": "rows",
+              "type": "quantitative",
+              "label": "Rows"
             }
           ]
         }
@@ -436,6 +564,34 @@
             "field": "decision",
             "label": "Decision",
             "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "deep_layer_weights",
+        "title": "Final layer-specific stack weights",
+        "subtitle": "Nonnegative weights sum to one within each target layer; zero weights are omitted.",
+        "dataset": "deep_layer_weights",
+        "sourceId": "deep_weights_sql",
+        "defaultSort": {
+          "field": "layer",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "layer",
+            "label": "Layer",
+            "type": "number"
+          },
+          {
+            "field": "model",
+            "label": "Model",
+            "type": "text"
+          },
+          {
+            "field": "weight",
+            "label": "Weight",
+            "type": "number"
           }
         ]
       }
@@ -765,18 +921,102 @@
         "id": "sors_platform",
         "label": "S-ORS monitoring platform and scientific applications",
         "href": "https://doi.org/10.3389/fmars.2019.00601"
+      },
+      {
+        "id": "deep_tournament_result",
+        "label": "P2 eight-family deep-model tournament",
+        "path": "artifacts/p2_deep_model_tournament_v1/result.json"
+      },
+      {
+        "id": "deep_finalist_result",
+        "label": "P2 multi-seed finalist and frozen submission result",
+        "path": "artifacts/p2_deep_finalists_v1/result.json"
+      },
+      {
+        "id": "deep_headline_sql",
+        "label": "Reviewed P2 finalist headline metrics",
+        "path": "artifacts/p2_deep_finalists_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 0.745813909401072 AS stacked_rmse, -0.0430755970009532 AS delta_vs_incumbent, 0.7756600313144935 AS lobo_rmse, 26061 AS submission_rows",
+          "description": "Materializes the final deep-stack OOF, leave-one-block-out, incumbent delta, and submission row-count metrics.",
+          "tables_used": [],
+          "filters": [
+            "Three frozen target-proxy blocks",
+            "Validated local submission only"
+          ],
+          "metric_definitions": {
+            "stacked_rmse": "Fitted layer-specific convex stack RMSE in degrees Celsius",
+            "delta_vs_incumbent": "Stack RMSE minus frozen router RMSE in degrees Celsius",
+            "lobo_rmse": "Leave-one-block-out layer-stack RMSE in degrees Celsius",
+            "submission_rows": "Rows passing the exact P2 submission schema and key-order validator"
+          }
+        }
+      },
+      {
+        "id": "deep_ranking_sql",
+        "label": "Reviewed P2 deep-model RMSE ranking",
+        "path": "artifacts/p2_deep_model_tournament_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'timemixerpp_style' AS model, 'Standalone' AS variant, 0.784031 AS rmse, 2.513 AS parameters_m UNION ALL SELECT 'timemixerpp_style' AS model, 'Best tree blend' AS variant, 0.756885 AS rmse, 2.513 AS parameters_m UNION ALL SELECT 'lsti_style' AS model, 'Standalone' AS variant, 0.771751 AS rmse, 0.735 AS parameters_m UNION ALL SELECT 'lsti_style' AS model, 'Best tree blend' AS variant, 0.75702 AS rmse, 0.735 AS parameters_m UNION ALL SELECT 'depth_query_bitcn' AS model, 'Standalone' AS variant, 0.796487 AS rmse, 4.181 AS parameters_m UNION ALL SELECT 'depth_query_bitcn' AS model, 'Best tree blend' AS variant, 0.766253 AS rmse, 4.181 AS parameters_m UNION ALL SELECT 'moment_units_scratch' AS model, 'Standalone' AS variant, 0.798982 AS rmse, 5.016 AS parameters_m UNION ALL SELECT 'moment_units_scratch' AS model, 'Best tree blend' AS variant, 0.76755 AS rmse, 5.016 AS parameters_m UNION ALL SELECT 'imputeformer_style' AS model, 'Standalone' AS variant, 0.819105 AS rmse, 3.384 AS parameters_m UNION ALL SELECT 'imputeformer_style' AS model, 'Best tree blend' AS variant, 0.772036 AS rmse, 3.384 AS parameters_m UNION ALL SELECT 'fno_style' AS model, 'Standalone' AS variant, 0.853718 AS rmse, 4.317 AS parameters_m UNION ALL SELECT 'fno_style' AS model, 'Best tree blend' AS variant, 0.785498 AS rmse, 4.317 AS parameters_m UNION ALL SELECT 'csdi_style' AS model, 'Standalone' AS variant, 1.125927 AS rmse, 1.248 AS parameters_m UNION ALL SELECT 'csdi_style' AS model, 'Best tree blend' AS variant, 0.78889 AS rmse, 1.248 AS parameters_m UNION ALL SELECT 'sssd_ssm_style' AS model, 'Standalone' AS variant, 1.09885 AS rmse, 2.249 AS parameters_m UNION ALL SELECT 'sssd_ssm_style' AS model, 'Best tree blend' AS variant, 0.78889 AS rmse, 2.249 AS parameters_m UNION ALL SELECT 'Frozen LightGBM router' AS model, 'Incumbent' AS variant, 0.78889 AS rmse, 0.0 AS parameters_m",
+          "description": "Materializes identical-grain 69,850-row OOF RMSE for eight local architecture families and their best tree blends.",
+          "tables_used": [],
+          "filters": [
+            "Three frozen target-proxy blocks",
+            "No external values or pretrained weights"
+          ],
+          "metric_definitions": {
+            "rmse": "Row-level root mean squared temperature error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "deep_weights_sql",
+        "label": "Reviewed layer-specific convex stack weights",
+        "path": "artifacts/p2_deep_finalists_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 2 AS layer, 'router_400' AS model, 0.34448 AS weight UNION ALL SELECT 2 AS layer, 'lsti_style' AS model, 0.106267 AS weight UNION ALL SELECT 2 AS layer, 'timemixerpp_style' AS model, 0.447103 AS weight UNION ALL SELECT 2 AS layer, 'moment_units_scratch' AS model, 0.10215 AS weight UNION ALL SELECT 3 AS layer, 'router_400' AS model, 0.47487 AS weight UNION ALL SELECT 3 AS layer, 'lsti_style' AS model, 0.250198 AS weight UNION ALL SELECT 3 AS layer, 'timemixerpp_style' AS model, 0.165058 AS weight UNION ALL SELECT 3 AS layer, 'moment_units_scratch' AS model, 0.109874 AS weight UNION ALL SELECT 4 AS layer, 'router_400' AS model, 0.202343 AS weight UNION ALL SELECT 4 AS layer, 'depth_query_bitcn' AS model, 0.143312 AS weight UNION ALL SELECT 4 AS layer, 'lsti_style' AS model, 0.395616 AS weight UNION ALL SELECT 4 AS layer, 'timemixerpp_style' AS model, 0.258729 AS weight",
+          "description": "Materializes nonnegative sum-to-one OOF least-squares weights by target layer.",
+          "tables_used": [],
+          "filters": [
+            "Weights below 1e-8 omitted from the visible table"
+          ],
+          "metric_definitions": {
+            "weight": "Fractional prediction weight within one target layer"
+          }
+        }
+      },
+      {
+        "id": "deep_blocks_sql",
+        "label": "Reviewed P2 deep-stack blocked-validation metrics",
+        "path": "artifacts/p2_deep_finalists_v1/stacked_oof.parquet",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024_sep_oct' AS block, 'Frozen router' AS method, 0.531544 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'Deep stack' AS method, 0.434945 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'LOBO stack' AS method, 0.454622 AS rmse, 26273 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Frozen router' AS method, 1.092741 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Deep stack' AS method, 1.031317 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'LOBO stack' AS method, 1.064982 AS rmse, 26693 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Frozen router' AS method, 0.497215 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Deep stack' AS method, 0.570327 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'LOBO stack' AS method, 0.611823 AS rmse, 16884 AS rows",
+          "description": "Materializes frozen-router, fitted-stack, and leave-one-block-out stack RMSE by seasonal block.",
+          "tables_used": [],
+          "filters": [
+            "Target layers 2, 3, and 4",
+            "Finite target-proxy rows only"
+          ],
+          "metric_definitions": {
+            "rmse": "Row-level root mean squared temperature error in degrees Celsius"
+          }
+        }
       }
     ],
     "blocks": [
       {
         "id": "title",
         "type": "markdown",
-        "body": "# P2 연직 수온 구조 복원 방법 정찰"
+        "body": "# P2 연직 수온 복원 모델 검증"
       },
       {
         "id": "technical_summary",
         "type": "markdown",
-        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. 마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. 공식 RMSE만을 최적화하는 후속 단계에서는 개별 블록 veto를 제거하고, 같은 계절과 가림 전후 69,850행에서 layer 2·3은 phase, layer 4는 상태조건 arm을 쓰는 router를 선택했다. 이 구조는 관련 proxy RMSE 0.7889°C와 leave-one-block-out 0.7961°C로 두 단일 arm보다 낮았다. 동일 모델을 5,000 boosting round까지 연장한 수렴 실험에서는 400 round가 0.7889°C로 최저였고 5,000 round는 0.8665°C로 악화했다. 따라서 현재 learning rate 0.04에서 400 round를 유지한다. 추가 문헌 정찰에서는 단순 대형 Transformer보다 수직 depth query, 양방향 61일 문맥, multi-scale M2 encoder를 결합한 residual network를 다음 1순위로 선정했다. ImputeFormer는 두 번째 deterministic benchmark, SSSD-S4/CSDI는 가장 무거운 상한선 후보로 두되 아직 로컬 deep RMSE는 없다. 이는 hidden test 점수가 아니며 세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
+        "body": "## Technical Summary\n\n동일한 69,850개 target-proxy 행에서 8개 P2-adapted deep 계열을 비교했다. 단독 최강은 3-seed LSTI 계열이었고, 최종 layer별 convex stack은 400-round tree, Depth-query BiTCN, LSTI, TimeMixer++, local patch-foundation을 결합해 OOF RMSE **0.745814°C**를 기록했다. 기존 router 0.788890°C보다 0.043076°C 낮다. leave-one-block-out weight 진단도 0.775660°C로 기준보다 낮았고, 2,000회 KST-day bootstrap 90% CI는 [-0.055540, -0.030873]°C였다. CSDI와 SSSD-SSM은 posterior mean을 써도 tree 가중치가 100%로 선택되어 기각됐다. 26,061행 제출 후보는 저장 가중치에서 동일 SHA로 재현됐으며 업로드하지 않았다."
       },
       {
         "id": "headline_strip",
@@ -938,26 +1178,81 @@
         "body": "## 범위, 데이터, 지표와 검증 설계\n\n대상은 S-ORS layer 2·3·4의 10분 수온이며, temp가 관측된 학습 행에서만 RMSE를 계산했다. 모든 모델 입력은 공개 layer 1·5·6·7·8의 temp·psal·depth, 목표 공칭수심, 시간 특징으로 제한했다. 가림층 temp·psal은 특징 생성 API에서 금지한다. 2025년 9–10월은 어떠한 로컬 모델 선택에도 사용하지 않았고, 외부 관측값도 사용하지 않았다."
       },
       {
+        "id": "deep_results",
+        "type": "markdown",
+        "sourceId": "deep_finalist_result",
+        "body": "## 구조와 용량을 함께 늘렸지만 승자는 혼합이었다\n\n단순히 파라미터 수가 큰 모델이 우승하지 않았다. 0.73M LSTI는 단독 RMSE 0.7718°C로 가장 낮았고, 2.51M TimeMixer++는 tree와 50:50일 때 0.7569°C로 가장 좋은 단일-family blend였다. 5.02M patch-foundation과 4.18M BiTCN도 서로 다른 오차를 제공해 최종 stack에 일부 남았지만, 4.32M FNO와 두 diffusion 계열은 최종 가중치가 0이었다. 이는 P2에서 모델 크기보다 수직 baseline residual과 계절별 오류 다양성이 더 중요함을 보여준다."
+      },
+      {
+        "id": "deep_headline_strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "deep_stacked_rmse",
+          "deep_delta",
+          "deep_lobo_rmse",
+          "deep_submission_rows"
+        ]
+      },
+      {
+        "id": "deep_model_chart_block",
+        "type": "chart",
+        "chartId": "deep_model_chart"
+      },
+      {
+        "id": "deep_model_chart_note",
+        "type": "markdown",
+        "sourceId": "deep_tournament_result",
+        "body": "위 차트는 동일 OOF 행에서 standalone과 각 deep-family의 최적 tree blend를 비교한다. 확률적 CSDI·SSSD-SSM은 독립 오차를 제공하지 못해 blend가 incumbent와 같은 0.7889°C에 머물렀다. 반면 LSTI·TimeMixer++·BiTCN·patch-foundation은 모두 tree와 혼합할 때 standalone보다 낮아졌다."
+      },
+      {
+        "id": "deep_weights",
+        "type": "markdown",
+        "sourceId": "deep_finalist_result",
+        "body": "## 목표 수심마다 유효한 모델이 달랐다\n\nLayer 2는 TimeMixer++ 비중이 가장 컸고, layer 3은 tree가 약 절반을 담당했다. 가장 깊은 layer 4는 LSTI와 TimeMixer++ 비중이 높고 BiTCN도 남았다. 따라서 하나의 전역 가중치보다 층별 비음수 합-1 제약이 수직 구조 차이를 더 잘 반영했다."
+      },
+      {
+        "id": "deep_weights_table",
+        "type": "table",
+        "tableId": "deep_layer_weights"
+      },
+      {
+        "id": "deep_robustness",
+        "type": "markdown",
+        "sourceId": "deep_finalist_result",
+        "body": "## 평균 개선은 강하지만 블록 간 차이는 남았다\n\nAll-OOF fitted stack은 0.7458°C, 다른 두 블록에서만 가중치를 정한 LOBO stack은 0.7757°C였다. 둘 다 incumbent 0.7889°C보다 낮다. 다만 2025년 11–12월은 deep 조합이 tree보다 불리해 계절 전이 방향에 따른 편차가 남는다. hidden 2025년 9–10월은 2024 동일계절과 2025년 7–8월 사이에 있으므로 개선 가능성은 있지만, 이는 공식 점수가 아니라 로컬 proxy다."
+      },
+      {
+        "id": "deep_block_chart_block",
+        "type": "chart",
+        "chartId": "deep_block_chart"
+      },
+      {
+        "id": "deep_block_chart_note",
+        "type": "markdown",
+        "sourceId": "deep_blocks_sql",
+        "body": "차단별 막대는 fitted stack과 LOBO stack을 구분한다. fitted 값은 최종 test 가중치 설계용이며, LOBO 값은 한 블록의 라벨을 보지 않은 가중치가 그 블록으로 이동하는지 확인하는 보조 일반화 진단이다."
+      },
+      {
         "id": "limitations",
         "type": "markdown",
-        "sourceId": "p2_result",
-        "body": "## 한계와 강건성\n\n8개 블록과 391 KST-day의 bootstrap은 hidden 2025년 9–10월 정답을 대체하지 않는다. 운영 결측으로 11개 예정 블록 중 8개만 평가 가능했다. 같은 데이터로 방법을 반복 비교하면 연구자 과적합이 누적되므로, 50:50 이후 가중치 탐색은 금지했다. Lean test 특징 20개의 최소 finite rate는 68.7%이며 LightGBM missing routing에 의존하는 시각이 남아 있다. 상태조건 실험도 동일한 노출 블록을 재사용했으므로 강한 평균 개선을 독립 일반화 증거로 해석하지 않는다."
+        "sourceId": "deep_finalist_result",
+        "body": "## 한계와 검증 경계\n\n세 outer block은 모델 선택에 반복 노출됐으므로 0.7458°C를 독립 추정치로 볼 수 없다. LOBO 0.7757°C와 KST-day bootstrap은 이 위험을 줄이지만 hidden test를 대체하지 않는다. MOMENT·UniTS 공식 pretrained weight는 외부 가중치 허용 여부가 불명확해 사용하지 않았고, 보고서의 patch-foundation은 로컬 from-scratch proxy다. CSDI·SSSD 역시 upstream 완전 재현이 아니라 동일 P2 계약에 맞춘 구조 계열 비교다."
       },
       {
         "id": "next_steps",
         "type": "markdown",
-        "body": "## 권장 다음 단계\n\n1. layer 2·3 phase, layer 4 state의 400-round router를 첫 공식 점수 후보로 유지한다.\n2. Depth-query BiTCN residual hybrid의 6개 optimizer 조합을 최대 300 epoch로 screen한다.\n3. 선택된 deep 구조 하나만 3 seeds로 재학습하고 current router와 OOF convex blend를 비교한다.\n4. 이 구조가 개선될 때만 동일 masking 계약의 ImputeFormer를 두 번째 benchmark로 실행한다.\n5. diffusion은 deterministic deep과 오류 상관이 낮을 때 posterior mean ensemble로만 시험한다.\n6. 기각된 M2·LightGBM·state gate 파라미터 계열은 다시 열지 않는다.\n7. 5,000-round 파일은 과적합 진단용으로만 보존한다.\n8. 저장 모델 재추론과 모든 CSV의 26,061행·SHA 검증 결과를 유지한다.\n9. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+        "body": "## 권장 다음 단계\n\n1. `P2_DEEP_STACK_V1.csv`를 현재 첫 공식 제출 후보로 유지한다.\n2. 제출 전 파일 경로와 SHA를 사용자에게 다시 제시하고 정확한 파일 승인을 받는다.\n3. 첫 공식 점수가 로컬 tree 기준보다 악화하면 구조를 더 늘리지 말고 tree-only와 deep-stack 차이를 점검한다.\n4. 공식 점수가 개선되면 모델 family를 추가하지 않고 현재 stack의 epoch·weight 재현성을 유지한다.\n5. 원본·가중치·제출 CSV는 Git에 올리지 않고 코드·설정·보고서만 백업한다."
       },
       {
         "id": "questions",
         "type": "markdown",
-        "body": "## 남은 질문\n\n- 리더보드 분할이 시간·층·무작위 행 중 어떤 방식인지 공개되는가?\n- 태풍 통과 시각이나 바람 관측이 대회 허용 입력으로 제공되는가?\n- 최종 모델 패키지가 양방향 public-layer 문맥 사용을 허용하는가?"
+        "body": "## 남은 질문\n\n- 리더보드 분할이 층 또는 시계열 구간을 어떻게 나누는가?\n- 외부 pretrained time-series weight가 허용되는가?\n- 첫 공식 점수에서 layer별 오차 또는 public/private 분할 차이를 확인할 수 있는가?"
       }
     ]
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-16T13:28:28.016586+09:00",
+    "generatedAt": "2026-08-16T14:41:39.535022+09:00",
     "status": "ready",
     "datasets": {
       "headline": [
@@ -1799,6 +2094,236 @@
           "evidence": "Target-proxy RMSE 0.7889 at round 400 versus 0.8665 at round 5,000",
           "interpretation": "The incumbent learning rate converges before the maximum and later trees overfit"
         }
+      ],
+      "deep_headline": [
+        {
+          "stacked_rmse": 0.745813909401072,
+          "delta_vs_incumbent": -0.0430755970009532,
+          "lobo_rmse": 0.7756600313144935,
+          "submission_rows": 26061
+        }
+      ],
+      "deep_model_ranking": [
+        {
+          "model": "timemixerpp_style",
+          "variant": "Standalone",
+          "rmse": 0.784031,
+          "parameters_m": 2.513
+        },
+        {
+          "model": "timemixerpp_style",
+          "variant": "Best tree blend",
+          "rmse": 0.756885,
+          "parameters_m": 2.513
+        },
+        {
+          "model": "lsti_style",
+          "variant": "Standalone",
+          "rmse": 0.771751,
+          "parameters_m": 0.735
+        },
+        {
+          "model": "lsti_style",
+          "variant": "Best tree blend",
+          "rmse": 0.75702,
+          "parameters_m": 0.735
+        },
+        {
+          "model": "depth_query_bitcn",
+          "variant": "Standalone",
+          "rmse": 0.796487,
+          "parameters_m": 4.181
+        },
+        {
+          "model": "depth_query_bitcn",
+          "variant": "Best tree blend",
+          "rmse": 0.766253,
+          "parameters_m": 4.181
+        },
+        {
+          "model": "moment_units_scratch",
+          "variant": "Standalone",
+          "rmse": 0.798982,
+          "parameters_m": 5.016
+        },
+        {
+          "model": "moment_units_scratch",
+          "variant": "Best tree blend",
+          "rmse": 0.76755,
+          "parameters_m": 5.016
+        },
+        {
+          "model": "imputeformer_style",
+          "variant": "Standalone",
+          "rmse": 0.819105,
+          "parameters_m": 3.384
+        },
+        {
+          "model": "imputeformer_style",
+          "variant": "Best tree blend",
+          "rmse": 0.772036,
+          "parameters_m": 3.384
+        },
+        {
+          "model": "fno_style",
+          "variant": "Standalone",
+          "rmse": 0.853718,
+          "parameters_m": 4.317
+        },
+        {
+          "model": "fno_style",
+          "variant": "Best tree blend",
+          "rmse": 0.785498,
+          "parameters_m": 4.317
+        },
+        {
+          "model": "csdi_style",
+          "variant": "Standalone",
+          "rmse": 1.125927,
+          "parameters_m": 1.248
+        },
+        {
+          "model": "csdi_style",
+          "variant": "Best tree blend",
+          "rmse": 0.78889,
+          "parameters_m": 1.248
+        },
+        {
+          "model": "sssd_ssm_style",
+          "variant": "Standalone",
+          "rmse": 1.09885,
+          "parameters_m": 2.249
+        },
+        {
+          "model": "sssd_ssm_style",
+          "variant": "Best tree blend",
+          "rmse": 0.78889,
+          "parameters_m": 2.249
+        },
+        {
+          "model": "Frozen LightGBM router",
+          "variant": "Incumbent",
+          "rmse": 0.78889,
+          "parameters_m": 0.0
+        }
+      ],
+      "deep_layer_weights": [
+        {
+          "layer": 2,
+          "model": "router_400",
+          "weight": 0.34448
+        },
+        {
+          "layer": 2,
+          "model": "lsti_style",
+          "weight": 0.106267
+        },
+        {
+          "layer": 2,
+          "model": "timemixerpp_style",
+          "weight": 0.447103
+        },
+        {
+          "layer": 2,
+          "model": "moment_units_scratch",
+          "weight": 0.10215
+        },
+        {
+          "layer": 3,
+          "model": "router_400",
+          "weight": 0.47487
+        },
+        {
+          "layer": 3,
+          "model": "lsti_style",
+          "weight": 0.250198
+        },
+        {
+          "layer": 3,
+          "model": "timemixerpp_style",
+          "weight": 0.165058
+        },
+        {
+          "layer": 3,
+          "model": "moment_units_scratch",
+          "weight": 0.109874
+        },
+        {
+          "layer": 4,
+          "model": "router_400",
+          "weight": 0.202343
+        },
+        {
+          "layer": 4,
+          "model": "depth_query_bitcn",
+          "weight": 0.143312
+        },
+        {
+          "layer": 4,
+          "model": "lsti_style",
+          "weight": 0.395616
+        },
+        {
+          "layer": 4,
+          "model": "timemixerpp_style",
+          "weight": 0.258729
+        }
+      ],
+      "deep_block_metrics": [
+        {
+          "block": "2024_sep_oct",
+          "method": "Frozen router",
+          "rmse": 0.531544,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "Deep stack",
+          "rmse": 0.434945,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "LOBO stack",
+          "rmse": 0.454622,
+          "rows": 26273
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Frozen router",
+          "rmse": 1.092741,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Deep stack",
+          "rmse": 1.031317,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "LOBO stack",
+          "rmse": 1.064982,
+          "rows": 26693
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Frozen router",
+          "rmse": 0.497215,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Deep stack",
+          "rmse": 0.570327,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "LOBO stack",
+          "rmse": 0.611823,
+          "rows": 16884
+        }
       ]
     }
   },
@@ -1958,6 +2483,14 @@
     {
       "id": "sors_platform",
       "href": "https://doi.org/10.3389/fmars.2019.00601"
+    },
+    {
+      "id": "deep_tournament_result",
+      "path": "artifacts/p2_deep_model_tournament_v1/result.json"
+    },
+    {
+      "id": "deep_finalist_result",
+      "path": "artifacts/p2_deep_finalists_v1/result.json"
     }
   ]
 }

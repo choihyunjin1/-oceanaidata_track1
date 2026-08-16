@@ -1,0 +1,50 @@
+{
+  "experiment_id": "p2_deep_model_tournament_v1",
+  "status": "authorized_local_model_tournament",
+  "research_only": true,
+  "upload_allowed": false,
+  "objective": "pooled row-level RMSE on the frozen three target-proxy blocks",
+  "development_block": ["2024-07-01", "2024-09-01"],
+  "outer_blocks": {
+    "2024_sep_oct": ["2024-09-01", "2024-11-01"],
+    "2025_jul_aug": ["2025-07-01", "2025-09-01"],
+    "2025_nov_dec": ["2025-11-01", "2026-01-01"]
+  },
+  "input_contract": {
+    "allowed": "public layers 1,5,6,7,8 temp/psal/depth, masks, time harmonics, and public-depth interpolation baseline",
+    "forbidden": "target layers 2,3,4 temp and psal",
+    "simultaneous_blackout": true,
+    "external_observations": false,
+    "external_pretrained_weights": false
+  },
+  "families": [
+    "depth_query_bitcn",
+    "lsti_style",
+    "imputeformer_style",
+    "timemixerpp_style",
+    "fno_style",
+    "moment_units_scratch",
+    "csdi_style",
+    "sssd_ssm_style"
+  ],
+  "optimizer_selection": {
+    "scope": "development_block_only",
+    "screen_max_epochs": 12,
+    "screen_patience": 4,
+    "metric": "RMSE"
+  },
+  "full_training": {
+    "max_epochs_by_family": "src/p2_restore/deep_models.py::MODEL_SPECS",
+    "best_checkpoint_restore": true,
+    "seed": 20260816,
+    "bf16": true,
+    "gradient_clip": 1.0
+  },
+  "incumbent": {
+    "name": "P2_SCORE_ROUTER_ROUND400",
+    "oof_rows": 69850,
+    "rmse": 0.7888895064020252,
+    "oof_path": "artifacts/p2_max_round_convergence_v1/oof.parquet",
+    "column": "router_400"
+  }
+}
