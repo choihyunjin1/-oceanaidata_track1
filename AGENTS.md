@@ -15,14 +15,15 @@ Use this precedence when instructions conflict:
 Before reading data, changing code, running a notebook, training, using Git, or preparing a submission:
 
 1. Read 00_MUST_READ_FIRST.md completely.
-2. Read the source P1_qc_anomaly/README.md completely.
-3. Check git status --short --branch.
-4. Confirm the action does not mutate or redistribute source data.
-5. Stop and ask if any rule, data right, or submission action is ambiguous.
+2. For P2 work, also read 01_P2_MUST_READ_FIRST.md completely. For P3 work, read 02_P3_MUST_READ_FIRST.md completely.
+3. Read the source README for the active problem: P1_qc_anomaly/README.md, P2_profile_restore/README.md, or P3_wave_forecast/README.md.
+4. Check git status --short --branch.
+5. Confirm the action does not mutate or redistribute source data.
+6. Stop and ask if any rule, data right, or submission action is ambiguous.
 
 ## Source-data boundary
 
-- Treat the folder supplied through P1_DATA_DIR as immutable, local-only input.
+- Treat folders supplied through P1_DATA_DIR, P2_DATA_DIR, or P3_DATA_DIR as immutable, local-only input.
 - Never edit, move, rename, copy into tracked paths, commit, push, upload, or redistribute the source ZIP/CSV/README/score files.
 - Never include raw observation rows or values in Markdown, notebook prose, logs, screenshots, issues, or commit messages. Aggregated statistics and cryptographic hashes are allowed.
 - Generated models, predictions, submissions, caches, and large extracts belong only in ignored local directories.
@@ -50,7 +51,7 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 ## Portable and reproducible code
 
 - Do not hard-code a personal absolute path, drive letter, username, or Korean source-directory path in Python or notebooks.
-- Resolve P1 inputs from P1_DATA_DIR first; a repository search fallback may be used for local convenience and must fail on zero or multiple matches.
+- Resolve P1 inputs from P1_DATA_DIR, P2 inputs from P2_DATA_DIR, and P3 inputs from P3_DATA_DIR. A repository search fallback may be used for local convenience and must fail on zero or multiple matches.
 - Use UTF-8 for source and documentation files.
 - Keep runtime parameters, seeds, split definitions, feature windows, and source provenance visible.
 - Reader-facing notebooks must execute top-to-bottom, display aggregate output only, and use the section order tl;dr, Context & Methods, Data, Results, Takeaways.
