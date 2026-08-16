@@ -41,6 +41,7 @@ def build_artifact(
     phase_result: dict[str, object] | None = None,
     tuning_result: dict[str, object] | None = None,
     state_result: dict[str, object] | None = None,
+    score_result: dict[str, object] | None = None,
 ) -> dict[str, object]:
     generated = datetime.now().astimezone().isoformat()
     stability = result["stability_blocks"]
@@ -118,6 +119,34 @@ def build_artifact(
                     "current_rmse": round(reference, 6),
                     "state_rmse": round(state_candidate, 6),
                     "delta_rmse": round(state_candidate - reference, 6),
+                }
+            )
+
+    score_rows = []
+    score_candidate_rows = []
+    if score_result is not None:
+        score_diagnostics = score_result["diagnostics"]
+        for scope, label in (
+            ("all_blocks", "All 8 seasonal blocks"),
+            ("target_relevant", "Same-season + adjacent blocks"),
+        ):
+            values = score_diagnostics[scope]
+            score_rows.append(
+                {
+                    "scope": label,
+                    "rows": int(values["rows"]),
+                    "current_rmse": round(float(values["current_rmse"]), 6),
+                    "phase_rmse": round(float(values["phase_rmse"]), 6),
+                    "state_rmse": round(float(values["state_rmse"]), 6),
+                    "router_rmse": round(float(values["router_rmse"]), 6),
+                }
+            )
+        for name, values in score_result["candidates"].items():
+            score_candidate_rows.append(
+                {
+                    "candidate": name,
+                    "rows": int(values["rows"]),
+                    "sha256": values["sha256"],
                 }
             )
 
@@ -335,6 +364,59 @@ def build_artifact(
             },
         },
         {
+            "id": "score_result",
+            "label": "P2 official-RMSE score optimization result",
+            "path": "artifacts/p2_score_optimization_v1/result.json",
+        },
+        {
+            "id": "score_sql",
+            "label": "Reviewed P2 score-oriented candidate comparison",
+            "path": "artifacts/p2_score_optimization_v1/result.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    score_rows
+                    or [
+                        {
+                            "scope": "not run",
+                            "rows": 0,
+                            "current_rmse": None,
+                            "phase_rmse": None,
+                            "state_rmse": None,
+                            "router_rmse": None,
+                        }
+                    ],
+                    (
+                        "scope",
+                        "rows",
+                        "current_rmse",
+                        "phase_rmse",
+                        "state_rmse",
+                        "router_rmse",
+                    ),
+                ),
+                "description": "Materializes whole-screen and target-relevant RMSE for the frozen score candidates.",
+                "tables_used": [],
+                "metric_definitions": {
+                    "rmse": "Row-level root mean squared error in degrees Celsius"
+                },
+            },
+        },
+        {
+            "id": "score_candidates_sql",
+            "label": "Validated P2 score candidate files",
+            "path": "artifacts/p2_score_optimization_v1/manifest.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    score_candidate_rows or [{"candidate": "not run", "rows": 0, "sha256": ""}],
+                    ("candidate", "rows", "sha256"),
+                ),
+                "description": "Materializes validated submission row counts and file hashes.",
+                "tables_used": [],
+            },
+        },
+        {
             "id": "dineof",
             "label": "Beckers and Rixen (2003), EOF calculations and data filling",
             "href": "https://orbi.uliege.be/handle/2268/4291",
@@ -527,6 +609,33 @@ def build_artifact(
                 },
             ],
         },
+        {
+            "id": "score_comparison",
+            "title": "Official-RMSE candidate comparison",
+            "subtitle": "All exposed blocks versus the same-season and adjacent target proxies; lower is better.",
+            "dataset": "score_comparison",
+            "sourceId": "score_sql",
+            "columns": [
+                {"field": "scope", "label": "Evaluation scope", "type": "text"},
+                {"field": "rows", "label": "Rows", "type": "number"},
+                {"field": "current_rmse", "label": "Current RMSE (°C)", "type": "number"},
+                {"field": "phase_rmse", "label": "Phase RMSE (°C)", "type": "number"},
+                {"field": "state_rmse", "label": "State RMSE (°C)", "type": "number"},
+                {"field": "router_rmse", "label": "Router RMSE (°C)", "type": "number"},
+            ],
+        },
+        {
+            "id": "score_candidates",
+            "title": "Validated score candidate files",
+            "subtitle": "Three local-only 26,061-row files; none has been uploaded.",
+            "dataset": "score_candidates",
+            "sourceId": "score_candidates_sql",
+            "columns": [
+                {"field": "candidate", "label": "Candidate", "type": "text"},
+                {"field": "rows", "label": "Rows", "type": "number"},
+                {"field": "sha256", "label": "SHA-256", "type": "text"},
+            ],
+        },
     ]
 
     blocks = [
@@ -547,8 +656,12 @@ def build_artifact(
                 "마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 "
                 "전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 "
                 "2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. "
+                "공식 RMSE만을 최적화하는 후속 단계에서는 개별 블록 veto를 제거하고, 같은 계절과 "
+                "가림 전후 69,850행에서 layer 2·3은 phase, layer 4는 상태조건 arm을 쓰는 router를 "
+                "선택했다. 이 구조는 관련 proxy RMSE 0.7889°C와 leave-one-block-out 0.7961°C로 "
+                "두 단일 arm보다 낮았다. "
                 "이는 hidden test 점수가 아니며 "
-                "현재 산출물은 연구 후보이다."
+                "세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
             ),
         },
         {
@@ -627,6 +740,23 @@ def build_artifact(
         },
         {"id": "state_table_block", "type": "table", "tableId": "state_comparison"},
         {
+            "id": "score_finding",
+            "type": "markdown",
+            "sourceId": "score_result",
+            "body": (
+                "## 공식 RMSE 중심 선택은 layer 2·3 phase, layer 4 state를 택했다\n\n"
+                "개별 계절 회귀를 탈락 조건에서 제외하고, hidden 구간과 직접 연결되는 2024년 "
+                "9–10월·2025년 7–8월·11–12월의 69,850행 pooled RMSE만 최소화했다. 8개 가능한 "
+                "층별 phase/state router 중 layer 2·3=phase, layer 4=state가 0.7889°C로 phase "
+                "0.8064°C와 state 0.7982°C를 모두 앞섰다. 관련 3블록 leave-one-out에서도 "
+                "0.7961°C였고 phase 대비 paired KST-day bootstrap 차이는 -0.0175°C, 90% CI "
+                "[-0.0230, -0.0122]°C였다. 이는 hidden 정답을 보지 않은 target-proxy 최적화이며 "
+                "공식 점수 자체는 제출 전 알 수 없다."
+            ),
+        },
+        {"id": "score_table_block", "type": "table", "tableId": "score_comparison"},
+        {"id": "score_candidates_block", "type": "table", "tableId": "score_candidates"},
+        {
             "id": "screen_finding",
             "type": "markdown",
             "sourceId": "p2_result",
@@ -691,8 +821,9 @@ def build_artifact(
                 "2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n"
                 "3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n"
                 "4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n"
-                "5. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n"
-                "6. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+                "5. 첫 공식 점수 후보는 target-proxy layer router로 유지하고 phase와 state는 일일 제출용 독립 challenger로 보존한다.\n"
+                "6. 저장 모델 재추론과 세 CSV의 26,061행·SHA 검증 결과를 유지한다.\n"
+                "7. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
             ),
         },
         {
@@ -762,6 +893,12 @@ def build_artifact(
             "evidence": "Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C",
             "interpretation": "The training-only public contrast gate helped on average but missed the pre-gap safety veto",
         },
+        {
+            "method": "Layer 2/3 phase + layer 4 state router",
+            "decision": "Freeze as primary score candidate",
+            "evidence": "Target-proxy RMSE 0.7889°C; LOBO 0.7961°C; 90% CI versus phase entirely below zero",
+            "interpretation": "Layer-specific error structure improves the metric most relevant to the hidden Sep-Oct transition",
+        },
     ]
     next(source for source in sources if source["id"] == "decisions_sql")["query"]["sql"] = (
         _union_sql(decisions, ("method", "decision", "evidence", "interpretation"))
@@ -793,6 +930,8 @@ def build_artifact(
                 "phase_comparison": phase_rows,
                 "tuning_comparison": tuning_rows,
                 "state_comparison": state_rows,
+                "score_comparison": score_rows,
+                "score_candidates": score_candidate_rows,
                 "decisions": decisions,
             },
         },
@@ -814,6 +953,7 @@ def main() -> int:
     parser.add_argument("--phase-result", type=Path)
     parser.add_argument("--tuning-result", type=Path)
     parser.add_argument("--state-result", type=Path)
+    parser.add_argument("--score-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = json.loads(args.result.read_text(encoding="utf-8"))
@@ -827,7 +967,12 @@ def main() -> int:
     state_result = (
         json.loads(args.state_result.read_text(encoding="utf-8")) if args.state_result else None
     )
-    artifact = build_artifact(result, candidate, phase_result, tuning_result, state_result)
+    score_result = (
+        json.loads(args.score_result.read_text(encoding="utf-8")) if args.score_result else None
+    )
+    artifact = build_artifact(
+        result, candidate, phase_result, tuning_result, state_result, score_result
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding="utf-8")
     print(args.output.as_posix())

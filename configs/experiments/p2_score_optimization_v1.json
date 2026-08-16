@@ -1,0 +1,45 @@
+{
+  "experiment_id": "p2_score_optimization_v1",
+  "created_at_kst": "2026-08-16T12:00:00+09:00",
+  "status": "authorized_local_score_optimization",
+  "research_only": true,
+  "upload_allowed": false,
+  "official_objective": "row-level RMSE across the 26061 hidden test_index rows",
+  "selection_policy": {
+    "primary_proxy": "pooled row-level RMSE on 2024 Sep-Oct, 2025 Jul-Aug, and 2025 Nov-Dec",
+    "reason": "same-season transition plus the two public blocks adjacent to the hidden Sep-Oct 2025 interval",
+    "individual_block_regressions_are_vetoes": false,
+    "bootstrap_is_a_veto": false,
+    "candidate_structures": "all 8 deterministic per-layer choices between phase Blend50 and state Blend50",
+    "tie_break": "lexical layer-arm tuple with phase before state",
+    "additional_weight_or_threshold_search": false
+  },
+  "target_relevant_blocks": [
+    "2024_sep_oct",
+    "2025_jul_aug",
+    "2025_nov_dec"
+  ],
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036"
+  },
+  "oof_sources": {
+    "phase_path": "artifacts/p2_m2_local_phase_v1/oof.parquet",
+    "phase_sha256": "c432d16e2d52bb708efd9055f748fb09ad4356760f7869246f620569393a8796",
+    "phase_result_path": "artifacts/p2_m2_local_phase_v1/result.json",
+    "phase_result_sha256": "f8094390d03cd770af6422b073e18923ec98e1a6d15a82d87f339be9f4faedd7",
+    "state_path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+    "state_sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "state_result_path": "artifacts/p2_state_conditional_lean_v1/result.json",
+    "state_result_sha256": "5a349bf6485b519cd3ec12930bfdccf8aab3b90bb07919b3aad224b77af29684"
+  },
+  "model_contract": {
+    "phase_arm": "0.5 * V0 + 0.5 * lean-M2-plus-local-phase",
+    "state_arm": "0.5 * V0 + 0.5 * mixed-stratified lean-M2 expert",
+    "boosting_rounds_per_model": 400,
+    "lightgbm_parameter_search": false,
+    "external_values_used": false,
+    "hidden_target_values_used": false
+  }
+}
