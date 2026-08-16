@@ -1,0 +1,28 @@
+{
+  "experiment_id": "p2_max_round_convergence_v1",
+  "created_at_kst": "2026-08-16T12:54:33+09:00",
+  "status": "authorized_local_max_round_run",
+  "research_only": true,
+  "upload_allowed": false,
+  "objective": "minimize pooled row-level RMSE on the three target-relevant seasonal proxy blocks",
+  "single_change": "increase the incumbent LightGBM boosting horizon from 400 to 5000 and inspect frozen checkpoints",
+  "max_rounds": 5000,
+  "checkpoints": [50, 100, 150, 200, 300, 400, 600, 800, 1200, 1600, 2400, 3200, 4000, 5000],
+  "early_stopping": false,
+  "selection": {
+    "blocks": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "layer_router": {"2": "phase", "3": "phase", "4": "state"},
+    "primary": "pooled row-level router RMSE",
+    "tie_break": "lower boosting round",
+    "individual_block_veto": false,
+    "bootstrap_veto": false
+  },
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "phase_oof": "c432d16e2d52bb708efd9055f748fb09ad4356760f7869246f620569393a8796",
+    "state_oof": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "score_result": "19cad083b3da4f8427f7193da7a11656622d6ba6f1c6739e8507f77e07f5cf72"
+  }
+}

@@ -5,7 +5,7 @@
     "surface": "report",
     "title": "P2 연직 수온 구조 복원 방법 정찰",
     "description": "문헌 기반 프로파일 복원 기법과 공개층 M2 동역학을 blocked validation으로 비교한 기술 보고서",
-    "generatedAt": "2026-08-16T11:38:40.220250+09:00",
+    "generatedAt": "2026-08-16T13:06:48.453140+09:00",
     "cards": [
       {
         "id": "aggregate_delta",
@@ -123,6 +123,39 @@
             "type": "nominal",
             "label": "Method"
           }
+        }
+      },
+      {
+        "id": "max_round_chart",
+        "title": "Target-proxy RMSE by boosting round",
+        "subtitle": "Three relevant seasonal blocks, 69,850 rows; lower is better and 400 rounds is the minimum checkpoint.",
+        "type": "line",
+        "dataset": "max_round_curve",
+        "sourceId": "max_round_sql",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "round",
+            "type": "quantitative",
+            "label": "Boosting round"
+          },
+          "y": {
+            "field": "router_rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "tooltip": [
+            {
+              "field": "phase_rmse",
+              "type": "quantitative",
+              "label": "Phase RMSE"
+            },
+            {
+              "field": "state_rmse",
+              "type": "quantitative",
+              "label": "State RMSE"
+            }
+          ]
         }
       }
     ],
@@ -337,6 +370,35 @@
             "type": "text"
           }
         ]
+      },
+      {
+        "id": "max_round_candidates",
+        "title": "Validated convergence candidates",
+        "subtitle": "Selected 400-round and diagnostic 5,000-round files; neither has been uploaded.",
+        "dataset": "max_round_candidates",
+        "sourceId": "max_round_candidates_sql",
+        "columns": [
+          {
+            "field": "candidate",
+            "label": "Candidate",
+            "type": "text"
+          },
+          {
+            "field": "round",
+            "label": "Boosting round",
+            "type": "number"
+          },
+          {
+            "field": "rows",
+            "label": "Rows",
+            "type": "number"
+          },
+          {
+            "field": "sha256",
+            "label": "SHA-256",
+            "type": "text"
+          }
+        ]
       }
     ],
     "sources": [
@@ -413,7 +475,7 @@
         "path": "artifacts/p2_method_scout/result.json",
         "query": {
           "engine": "sqlite",
-          "sql": "SELECT 'PCHIP vertical profile' AS method, 'Reject' AS decision, 'Worsened both 2025 proxy blocks' AS evidence, 'Deep public levels do not identify upper-thermocline curvature reliably' AS interpretation UNION ALL SELECT 'Rank-3 EOF' AS method, 'Reject' AS decision, '1.92–8.06°C RMSE in first screen' AS evidence, 'Global low-rank basis is unstable under seasonal and deployment shifts' AS interpretation UNION ALL SELECT 'Layerwise Ridge residual' AS method, 'Keep as sanity check' AS decision, 'Better than linear interpolation in 2/3 blocks' AS evidence, 'Public T–S state contains signal but the mapping is nonlinear' AS interpretation UNION ALL SELECT 'Full 120-feature dynamics' AS method, 'Do not promote' AS decision, 'Improved 2025 proxies but slightly worsened 2024 same season' AS evidence, 'Too many correlated lag/lead choices for the evidence budget' AS interpretation UNION ALL SELECT 'Lean M2 20 features' AS method, 'Useful arm' AS decision, '7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C' AS evidence, 'M2-scale public-layer dynamics carry transferable information' AS interpretation UNION ALL SELECT 'Fixed 50:50 V0 + Lean M2' AS method, 'Research candidate' AS decision, '8/8 blocks improved; bootstrap 90% upper bound < 0' AS evidence, 'Best current robustness/complexity trade-off; hidden score unknown' AS interpretation UNION ALL SELECT 'Local M2 amplitude/phase 20 features' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C' AS evidence, 'Average gain did not satisfy the preregistered seasonal-stability contract' AS interpretation UNION ALL SELECT 'Shared/layerwise + 40-trial LightGBM tuning' AS method, 'Reject and close generation' AS decision, 'Dev -0.0568°C; guard +0.0087°C with positive 90% CI' AS evidence, 'Development optimum and median 759 rounds did not transfer across seasons' AS interpretation UNION ALL SELECT 'Mixed/stratified lean-M2 experts' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C' AS evidence, 'The training-only public contrast gate helped on average but missed the pre-gap safety veto' AS interpretation UNION ALL SELECT 'Layer 2/3 phase + layer 4 state router' AS method, 'Freeze as primary score candidate' AS decision, 'Target-proxy RMSE 0.7889°C; LOBO 0.7961°C; 90% CI versus phase entirely below zero' AS evidence, 'Layer-specific error structure improves the metric most relevant to the hidden Sep-Oct transition' AS interpretation",
+          "sql": "SELECT 'PCHIP vertical profile' AS method, 'Reject' AS decision, 'Worsened both 2025 proxy blocks' AS evidence, 'Deep public levels do not identify upper-thermocline curvature reliably' AS interpretation UNION ALL SELECT 'Rank-3 EOF' AS method, 'Reject' AS decision, '1.92–8.06°C RMSE in first screen' AS evidence, 'Global low-rank basis is unstable under seasonal and deployment shifts' AS interpretation UNION ALL SELECT 'Layerwise Ridge residual' AS method, 'Keep as sanity check' AS decision, 'Better than linear interpolation in 2/3 blocks' AS evidence, 'Public T–S state contains signal but the mapping is nonlinear' AS interpretation UNION ALL SELECT 'Full 120-feature dynamics' AS method, 'Do not promote' AS decision, 'Improved 2025 proxies but slightly worsened 2024 same season' AS evidence, 'Too many correlated lag/lead choices for the evidence budget' AS interpretation UNION ALL SELECT 'Lean M2 20 features' AS method, 'Useful arm' AS decision, '7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C' AS evidence, 'M2-scale public-layer dynamics carry transferable information' AS interpretation UNION ALL SELECT 'Fixed 50:50 V0 + Lean M2' AS method, 'Research candidate' AS decision, '8/8 blocks improved; bootstrap 90% upper bound < 0' AS evidence, 'Best current robustness/complexity trade-off; hidden score unknown' AS interpretation UNION ALL SELECT 'Local M2 amplitude/phase 20 features' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C' AS evidence, 'Average gain did not satisfy the preregistered seasonal-stability contract' AS interpretation UNION ALL SELECT 'Shared/layerwise + 40-trial LightGBM tuning' AS method, 'Reject and close generation' AS decision, 'Dev -0.0568°C; guard +0.0087°C with positive 90% CI' AS evidence, 'Development optimum and median 759 rounds did not transfer across seasons' AS interpretation UNION ALL SELECT 'Mixed/stratified lean-M2 experts' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C' AS evidence, 'The training-only public contrast gate helped on average but missed the pre-gap safety veto' AS interpretation UNION ALL SELECT 'Layer 2/3 phase + layer 4 state router' AS method, 'Freeze as primary score candidate' AS decision, 'Target-proxy RMSE 0.7889°C; LOBO 0.7961°C; 90% CI versus phase entirely below zero' AS evidence, 'Layer-specific error structure improves the metric most relevant to the hidden Sep-Oct transition' AS interpretation UNION ALL SELECT 'Maximum 5,000 boosting rounds' AS method, 'Reject maximum; retain 400 rounds' AS decision, 'Target-proxy RMSE 0.7889 at round 400 versus 0.8665 at round 5,000' AS evidence, 'The incumbent learning rate converges before the maximum and later trees overfit' AS interpretation",
           "description": "Materializes reviewed method decisions from the local screen.",
           "tables_used": []
         }
@@ -530,6 +592,41 @@
         }
       },
       {
+        "id": "max_round_result",
+        "label": "P2 5,000-round convergence result",
+        "path": "artifacts/p2_max_round_convergence_v1/result.json"
+      },
+      {
+        "id": "max_round_sql",
+        "label": "Reviewed P2 boosting-round convergence curve",
+        "path": "artifacts/p2_max_round_convergence_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 50 AS round, 0.820645 AS router_rmse, 0.827463 AS phase_rmse, 0.822884 AS state_rmse UNION ALL SELECT 100 AS round, 0.809025 AS router_rmse, 0.81692 AS phase_rmse, 0.811956 AS state_rmse UNION ALL SELECT 150 AS round, 0.799821 AS router_rmse, 0.81104 AS phase_rmse, 0.80501 AS state_rmse UNION ALL SELECT 200 AS round, 0.794814 AS router_rmse, 0.808687 AS phase_rmse, 0.800257 AS state_rmse UNION ALL SELECT 300 AS round, 0.789854 AS router_rmse, 0.8052 AS phase_rmse, 0.797867 AS state_rmse UNION ALL SELECT 400 AS round, 0.78889 AS router_rmse, 0.806369 AS phase_rmse, 0.798204 AS state_rmse UNION ALL SELECT 600 AS round, 0.794421 AS router_rmse, 0.810065 AS phase_rmse, 0.805359 AS state_rmse UNION ALL SELECT 800 AS round, 0.805899 AS router_rmse, 0.824553 AS phase_rmse, 0.817276 AS state_rmse UNION ALL SELECT 1200 AS round, 0.820956 AS router_rmse, 0.842727 AS phase_rmse, 0.831911 AS state_rmse UNION ALL SELECT 1600 AS round, 0.833102 AS router_rmse, 0.855529 AS phase_rmse, 0.843033 AS state_rmse UNION ALL SELECT 2400 AS round, 0.843109 AS router_rmse, 0.865514 AS phase_rmse, 0.85549 AS state_rmse UNION ALL SELECT 3200 AS round, 0.848501 AS router_rmse, 0.871839 AS phase_rmse, 0.860477 AS state_rmse UNION ALL SELECT 4000 AS round, 0.858515 AS router_rmse, 0.883643 AS phase_rmse, 0.870018 AS state_rmse UNION ALL SELECT 5000 AS round, 0.86654 AS router_rmse, 0.892473 AS phase_rmse, 0.877671 AS state_rmse",
+          "description": "Materializes the fixed 50-to-5,000 boosting-round target-proxy RMSE checkpoints.",
+          "tables_used": [],
+          "filters": [
+            "2024 Sep-Oct, 2025 Jul-Aug, and 2025 Nov-Dec",
+            "69,850 target-proxy rows",
+            "Frozen layer 2/3 phase and layer 4 state router"
+          ],
+          "metric_definitions": {
+            "router_rmse": "Pooled row-level root mean squared error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "max_round_candidates_sql",
+        "label": "Validated P2 selected-round and 5,000-round files",
+        "path": "artifacts/p2_max_round_convergence_v1/manifest.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'selected' AS candidate, 400 AS round, 26061 AS rows, '069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5' AS sha256 UNION ALL SELECT 'maximum' AS candidate, 5000 AS round, 26061 AS rows, '8284e630ada9eee678a6bdb9b47466b1d36282b13cbe59fec14606d43963fcac' AS sha256",
+          "description": "Materializes locally validated convergence candidate files and hashes.",
+          "tables_used": []
+        }
+      },
+      {
         "id": "dineof",
         "label": "Beckers and Rixen (2003), EOF calculations and data filling",
         "href": "https://orbi.uliege.be/handle/2268/4291"
@@ -569,7 +666,7 @@
       {
         "id": "technical_summary",
         "type": "markdown",
-        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. 마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. 공식 RMSE만을 최적화하는 후속 단계에서는 개별 블록 veto를 제거하고, 같은 계절과 가림 전후 69,850행에서 layer 2·3은 phase, layer 4는 상태조건 arm을 쓰는 router를 선택했다. 이 구조는 관련 proxy RMSE 0.7889°C와 leave-one-block-out 0.7961°C로 두 단일 arm보다 낮았다. 이는 hidden test 점수가 아니며 세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
+        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. 마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. 공식 RMSE만을 최적화하는 후속 단계에서는 개별 블록 veto를 제거하고, 같은 계절과 가림 전후 69,850행에서 layer 2·3은 phase, layer 4는 상태조건 arm을 쓰는 router를 선택했다. 이 구조는 관련 proxy RMSE 0.7889°C와 leave-one-block-out 0.7961°C로 두 단일 arm보다 낮았다. 동일 모델을 5,000 boosting round까지 연장한 수렴 실험에서는 400 round가 0.7889°C로 최저였고 5,000 round는 0.8665°C로 악화했다. 따라서 현재 learning rate 0.04에서 400 round를 유지한다. 이는 hidden test 점수가 아니며 세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
       },
       {
         "id": "headline_strip",
@@ -653,6 +750,28 @@
         "tableId": "score_candidates"
       },
       {
+        "id": "max_round_finding",
+        "type": "markdown",
+        "sourceId": "max_round_result",
+        "body": "## 5,000라운드 학습은 400라운드 이후 과적합을 확인했다\n\nLightGBM 파라미터·특징·층별 router·학습 행은 고정하고 boosting horizon만 400에서 5,000으로 늘렸다. 목표 계절 3블록 69,850행에서 router RMSE는 400라운드 0.788890°C가 14개 체크포인트 중 최저였고, 600라운드부터 상승해 5,000라운드에서 0.866540°C가 됐다. 최대 학습은 수렴 부족을 해결하지 않았으며 일반화 오차를 0.077651°C 악화했다. 400라운드 예측은 기존 frozen OOF와 최대 절대오차 0으로 일치했으므로 비교는 같은 모델 경로의 순수 epoch ablation이다."
+      },
+      {
+        "id": "max_round_visual",
+        "type": "chart",
+        "chartId": "max_round_chart"
+      },
+      {
+        "id": "max_round_interpretation",
+        "type": "markdown",
+        "sourceId": "max_round_result",
+        "body": "400라운드는 단순한 임의 상한이 아니라 이 검증 범위에서의 최적 checkpoint다. 5,000라운드 파일도 요청대로 진단 후보로 보존했지만, 검증 RMSE가 악화했으므로 제출 우선순위는 400라운드 router다. hidden 2025년 9–10월 정답을 보지 않았기 때문에 공식 RMSE 자체를 보장하지는 않는다."
+      },
+      {
+        "id": "max_round_candidates_block",
+        "type": "table",
+        "tableId": "max_round_candidates"
+      },
+      {
         "id": "screen_finding",
         "type": "markdown",
         "sourceId": "p2_result",
@@ -688,7 +807,7 @@
       {
         "id": "next_steps",
         "type": "markdown",
-        "body": "## 권장 다음 단계\n\n1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n5. 첫 공식 점수 후보는 target-proxy layer router로 유지하고 phase와 state는 일일 제출용 독립 challenger로 보존한다.\n6. 저장 모델 재추론과 세 CSV의 26,061행·SHA 검증 결과를 유지한다.\n7. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+        "body": "## 권장 다음 단계\n\n1. layer 2·3 phase, layer 4 state의 400-round router를 첫 공식 점수 후보로 유지한다.\n2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n5. 5,000-round 파일은 과적합 진단용으로만 보존하고 공식 제출 우선순위에서 제외한다.\n6. phase와 state는 일일 제출용 독립 challenger로 보존한다.\n7. 저장 모델 재추론과 모든 CSV의 26,061행·SHA 검증 결과를 유지한다.\n8. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
       },
       {
         "id": "questions",
@@ -699,7 +818,7 @@
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-16T11:38:40.220250+09:00",
+    "generatedAt": "2026-08-16T13:06:48.453140+09:00",
     "status": "ready",
     "datasets": {
       "headline": [
@@ -1324,6 +1443,106 @@
           "sha256": "069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5"
         }
       ],
+      "max_round_curve": [
+        {
+          "round": 50,
+          "router_rmse": 0.820645,
+          "phase_rmse": 0.827463,
+          "state_rmse": 0.822884
+        },
+        {
+          "round": 100,
+          "router_rmse": 0.809025,
+          "phase_rmse": 0.81692,
+          "state_rmse": 0.811956
+        },
+        {
+          "round": 150,
+          "router_rmse": 0.799821,
+          "phase_rmse": 0.81104,
+          "state_rmse": 0.80501
+        },
+        {
+          "round": 200,
+          "router_rmse": 0.794814,
+          "phase_rmse": 0.808687,
+          "state_rmse": 0.800257
+        },
+        {
+          "round": 300,
+          "router_rmse": 0.789854,
+          "phase_rmse": 0.8052,
+          "state_rmse": 0.797867
+        },
+        {
+          "round": 400,
+          "router_rmse": 0.78889,
+          "phase_rmse": 0.806369,
+          "state_rmse": 0.798204
+        },
+        {
+          "round": 600,
+          "router_rmse": 0.794421,
+          "phase_rmse": 0.810065,
+          "state_rmse": 0.805359
+        },
+        {
+          "round": 800,
+          "router_rmse": 0.805899,
+          "phase_rmse": 0.824553,
+          "state_rmse": 0.817276
+        },
+        {
+          "round": 1200,
+          "router_rmse": 0.820956,
+          "phase_rmse": 0.842727,
+          "state_rmse": 0.831911
+        },
+        {
+          "round": 1600,
+          "router_rmse": 0.833102,
+          "phase_rmse": 0.855529,
+          "state_rmse": 0.843033
+        },
+        {
+          "round": 2400,
+          "router_rmse": 0.843109,
+          "phase_rmse": 0.865514,
+          "state_rmse": 0.85549
+        },
+        {
+          "round": 3200,
+          "router_rmse": 0.848501,
+          "phase_rmse": 0.871839,
+          "state_rmse": 0.860477
+        },
+        {
+          "round": 4000,
+          "router_rmse": 0.858515,
+          "phase_rmse": 0.883643,
+          "state_rmse": 0.870018
+        },
+        {
+          "round": 5000,
+          "router_rmse": 0.86654,
+          "phase_rmse": 0.892473,
+          "state_rmse": 0.877671
+        }
+      ],
+      "max_round_candidates": [
+        {
+          "candidate": "selected",
+          "round": 400,
+          "rows": 26061,
+          "sha256": "069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5"
+        },
+        {
+          "candidate": "maximum",
+          "round": 5000,
+          "rows": 26061,
+          "sha256": "8284e630ada9eee678a6bdb9b47466b1d36282b13cbe59fec14606d43963fcac"
+        }
+      ],
       "decisions": [
         {
           "method": "PCHIP vertical profile",
@@ -1384,6 +1603,12 @@
           "decision": "Freeze as primary score candidate",
           "evidence": "Target-proxy RMSE 0.7889°C; LOBO 0.7961°C; 90% CI versus phase entirely below zero",
           "interpretation": "Layer-specific error structure improves the metric most relevant to the hidden Sep-Oct transition"
+        },
+        {
+          "method": "Maximum 5,000 boosting rounds",
+          "decision": "Reject maximum; retain 400 rounds",
+          "evidence": "Target-proxy RMSE 0.7889 at round 400 versus 0.8665 at round 5,000",
+          "interpretation": "The incumbent learning rate converges before the maximum and later trees overfit"
         }
       ]
     }
@@ -1460,6 +1685,18 @@
     {
       "id": "score_candidates_sql",
       "path": "artifacts/p2_score_optimization_v1/manifest.json"
+    },
+    {
+      "id": "max_round_result",
+      "path": "artifacts/p2_max_round_convergence_v1/result.json"
+    },
+    {
+      "id": "max_round_sql",
+      "path": "artifacts/p2_max_round_convergence_v1/result.json"
+    },
+    {
+      "id": "max_round_candidates_sql",
+      "path": "artifacts/p2_max_round_convergence_v1/manifest.json"
     },
     {
       "id": "dineof",

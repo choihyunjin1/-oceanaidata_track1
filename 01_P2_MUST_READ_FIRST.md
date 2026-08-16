@@ -88,17 +88,21 @@ station,layer,time,temp
 - 이 결과는 hidden 점수가 아니며 `P2_RESEARCH_BLEND50.csv`는 **연구 후보**다. 사용자 승인 전 제출 동결본으로 이름을 바꾸거나 업로드하지 않는다.
 - 후속 사전등록 실험에서 공개층 수온의 고정 7일 local M2 amplitude·phase 특징 20개를 lean arm에 추가했다. aggregate RMSE는 1.1234→1.0787℃로 개선됐고 paired KST-day bootstrap 90% CI는 [-0.0551, -0.0347]℃였다.
 - 그러나 8개 블록 중 5개만 개선됐으며 2025년 3~4월은 +0.0469℃ 악화해 사전등록된 최대 블록 회귀 +0.02℃를 넘었다. 따라서 이 후보는 `REJECT_AND_CLOSE_FAMILY`이며 제출 CSV를 만들지 않았다.
-- M2 amplitude·phase 계열의 window, 최소관측수, blend weight를 사후 재탐색하지 않는다. 현재 최선 로컬 후보는 계속 `P2_RESEARCH_BLEND50.csv`다.
+- M2 amplitude·phase 계열의 window, 최소관측수, blend weight를 사후 재탐색하지 않는다. 이 단계 당시 최선 로컬 후보는 `P2_RESEARCH_BLEND50.csv`였다.
 - 이어서 기존 lean-M2 특징을 고정한 채 shared 대 layerwise 구조를 비교하고, 개발 구간에서 이긴 shared 구조만 Optuna 40 trials로 탐색했다. 최대 boosting round는 5,000, early stopping은 200 rounds였다.
 - 개발 score-month RMSE는 1.6402→1.5834℃로 개선됐지만 블록별 best iteration은 91·269·1,249·2,038로 불안정했다. median 759 round로 동결한 guard RMSE는 0.7939→0.8026℃로 악화했고 paired KST-day 90% CI는 [+0.0048, +0.0127]℃였다.
-- 이 튜닝 세대는 `REJECT_AND_CLOSE_GENERATION`이다. guard 결과를 보고 trial 수, 탐색 범위, epoch 집계법을 바꾸지 않는다. 현재 최선 후보는 계속 `P2_RESEARCH_BLEND50.csv`다.
+- 이 튜닝 세대는 `REJECT_AND_CLOSE_GENERATION`이다. guard 결과를 보고 trial 수, 탐색 범위, epoch 집계법을 바꾸지 않는다. 이 단계 당시 최선 후보는 `P2_RESEARCH_BLEND50.csv`였다.
 - 공개 layer 1과 5의 동시각 수온차 절대값만으로 lean-M2 arm을 혼합·성층 전문가로 나누는 단일 구조 가설도 사전등록 후 1회 검증했다. q40·q60은 각 fold의 학습행에서만 계산했고 중앙 20%를 두 전문가가 공유했으며, 최종 weight는 V0 0.5 + 상태조건 lean 0.5로 고정했다.
 - 상태조건 후보는 166,268행 aggregate RMSE를 1.1234→1.0997℃로 낮췄고 90% paired KST-day bootstrap CI는 [-0.0300, -0.0173]℃였다. 8개 블록 중 6개와 세 층 모두 개선했지만, hidden 구간 직전 2025년 7~8월이 +0.0079℃ 악화해 사전등록 veto +0.005℃를 넘었다.
-- 따라서 `p2_state_conditional_lean_v1`은 `REJECT_AND_CLOSE_FAMILY`다. q40/q60, overlap, blend weight, 상태신호를 사후 재탐색하지 않는다. 제출 후보는 만들지 않았으며 현재 최선은 계속 `submissions/p2/P2_RESEARCH_BLEND50.csv`(SHA256 `4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7`)다.
+- 따라서 `p2_state_conditional_lean_v1`은 `REJECT_AND_CLOSE_FAMILY`다. q40/q60, overlap, blend weight, 상태신호를 사후 재탐색하지 않는다. 이 단계에서는 제출 후보를 만들지 않았으며 당시 최선은 `submissions/p2/P2_RESEARCH_BLEND50.csv`(SHA256 `4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7`)였다.
 - 이후 사용자는 공식 채점 기준인 26,061행 통합 RMSE의 직접 최적화를 우선하고, 개별 계절 블록의 소폭 악화를 자동 탈락 사유로 쓰지 않도록 결정했다. 개별 블록·bootstrap은 순위 해석과 위험 진단으로 유지하되 공식 RMSE proxy 최소화가 주 선택 기준이다.
 - 점수 최적화 v1은 hidden 구간과 직접 연결되는 2024년 9~10월, 2025년 7~8월, 2025년 11~12월의 69,850행 pooled RMSE로 8개 phase/state 층별 router를 전수 비교했다. layer 2·3은 M2 phase, layer 4는 상태조건 arm을 쓰는 구조가 RMSE 0.7889℃로 phase 0.8064℃, state 0.7982℃보다 낮았다.
 - 관련 3블록 leave-one-block-out router RMSE도 0.7961℃로 두 단일 arm보다 낮았고, phase 대비 paired KST-day ΔRMSE는 -0.0175℃, 90% CI [-0.0230, -0.0122]℃였다. 전체 8블록 평균은 phase가 더 낮으므로 이는 hidden Sep~Oct 전이에 맞춘 target-proxy 선택이며 공식 점수는 아니다.
 - 제출 가능한 세 후보를 로컬 동결했다. 1순위 `submissions/p2/P2_SCORE_LAYER_ROUTER.csv` SHA256 `069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5`, 전역 RMSE challenger `P2_SCORE_PHASE400.csv` SHA256 `dfa35ecbd11c3fd84cc984c84ceb37826a6d87b35bbf5418ee8f460dac90fba6`, 상태 challenger `P2_SCORE_STATE400.csv` SHA256 `a7fc79442f6f14fcb8575375534e5a4a1813733cf7f92e770880d60b5fdbbf10`이다. 모두 26,061행·제출 스키마·저장 모델 재추론을 통과했으며 업로드하지 않았다.
+- 400 rounds가 충분히 수렴했는지 확인하기 위해 특징·LightGBM 파라미터·층별 router·학습행을 그대로 두고 최대 5,000 rounds까지 학습했다. 50·100·150·200·300·400·600·800·1,200·1,600·2,400·3,200·4,000·5,000 checkpoint를 동일 69,850행에서 비교했다.
+- router RMSE는 400 rounds의 `0.7888895064`가 최저였고 5,000 rounds는 `0.8665403270`으로 `+0.0776508206` 악화했다. 기존 frozen 400-round OOF와 최대 절대오차 0으로 일치했으므로 모델 변경이 아닌 순수 boosting-horizon 비교다.
+- 따라서 현재 learning rate 0.04에서는 **400 rounds를 수렴 최적 checkpoint로 유지**한다. 5,000 rounds 모델은 과적합 진단용이며 제출 우선순위에서 제외한다.
+- 제출 1순위는 기존과 byte-identical한 `submissions/p2/P2_SCORE_ROUTER_ROUND400.csv` SHA256 `069b782588ccad2a1c74d68586769268b104d686f9dc443f8a8ba136afb192b5`다. 최대학습 진단 파일 `P2_SCORE_ROUTER_5000.csv` SHA256은 `8284e630ada9eee678a6bdb9b47466b1d36282b13cbe59fec14606d43963fcac`이며 업로드하지 않는다.
 
 ## 8. 원본·Git·제출 금지선
 

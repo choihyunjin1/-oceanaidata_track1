@@ -42,6 +42,7 @@ def build_artifact(
     tuning_result: dict[str, object] | None = None,
     state_result: dict[str, object] | None = None,
     score_result: dict[str, object] | None = None,
+    max_round_result: dict[str, object] | None = None,
 ) -> dict[str, object]:
     generated = datetime.now().astimezone().isoformat()
     stability = result["stability_blocks"]
@@ -150,6 +151,27 @@ def build_artifact(
                 }
             )
 
+    max_round_rows = []
+    max_round_candidate_rows = []
+    if max_round_result is not None:
+        max_round_rows = [
+            {
+                "round": int(row["round"]),
+                "router_rmse": round(float(row["router_rmse"]), 6),
+                "phase_rmse": round(float(row["phase_rmse"]), 6),
+                "state_rmse": round(float(row["state_rmse"]), 6),
+            }
+            for row in max_round_result["screen"]["curve"]
+        ]
+        for name, values in max_round_result["candidates"].items():
+            max_round_candidate_rows.append(
+                {
+                    "candidate": name,
+                    "round": int(values["round"]),
+                    "rows": int(values["rows"]),
+                    "sha256": values["sha256"],
+                }
+            )
     month_rows = []
     for month, metrics in result["stability_diagnostics"]["by_month"].items():
         month_rows.extend(
@@ -417,6 +439,56 @@ def build_artifact(
             },
         },
         {
+            "id": "max_round_result",
+            "label": "P2 5,000-round convergence result",
+            "path": "artifacts/p2_max_round_convergence_v1/result.json",
+        },
+        {
+            "id": "max_round_sql",
+            "label": "Reviewed P2 boosting-round convergence curve",
+            "path": "artifacts/p2_max_round_convergence_v1/result.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    max_round_rows
+                    or [
+                        {
+                            "round": 0,
+                            "router_rmse": None,
+                            "phase_rmse": None,
+                            "state_rmse": None,
+                        }
+                    ],
+                    ("round", "router_rmse", "phase_rmse", "state_rmse"),
+                ),
+                "description": "Materializes the fixed 50-to-5,000 boosting-round target-proxy RMSE checkpoints.",
+                "tables_used": [],
+                "filters": [
+                    "2024 Sep-Oct, 2025 Jul-Aug, and 2025 Nov-Dec",
+                    "69,850 target-proxy rows",
+                    "Frozen layer 2/3 phase and layer 4 state router",
+                ],
+                "metric_definitions": {
+                    "router_rmse": "Pooled row-level root mean squared error in degrees Celsius"
+                },
+            },
+        },
+        {
+            "id": "max_round_candidates_sql",
+            "label": "Validated P2 selected-round and 5,000-round files",
+            "path": "artifacts/p2_max_round_convergence_v1/manifest.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    max_round_candidate_rows
+                    or [{"candidate": "not run", "round": 0, "rows": 0, "sha256": ""}],
+                    ("candidate", "round", "rows", "sha256"),
+                ),
+                "description": "Materializes locally validated convergence candidate files and hashes.",
+                "tables_used": [],
+            },
+        },
+        {
             "id": "dineof",
             "label": "Beckers and Rixen (2003), EOF calculations and data filling",
             "href": "https://orbi.uliege.be/handle/2268/4291",
@@ -524,6 +596,23 @@ def build_artifact(
                 "x": {"field": "month", "type": "temporal", "label": "Month"},
                 "y": {"field": "rmse", "type": "quantitative", "label": "RMSE (°C)"},
                 "color": {"field": "method", "type": "nominal", "label": "Method"},
+            },
+        },
+        {
+            "id": "max_round_chart",
+            "title": "Target-proxy RMSE by boosting round",
+            "subtitle": "Three relevant seasonal blocks, 69,850 rows; lower is better and 400 rounds is the minimum checkpoint.",
+            "type": "line",
+            "dataset": "max_round_curve",
+            "sourceId": "max_round_sql",
+            "valueFormat": "number",
+            "encodings": {
+                "x": {"field": "round", "type": "quantitative", "label": "Boosting round"},
+                "y": {"field": "router_rmse", "type": "quantitative", "label": "RMSE (°C)"},
+                "tooltip": [
+                    {"field": "phase_rmse", "type": "quantitative", "label": "Phase RMSE"},
+                    {"field": "state_rmse", "type": "quantitative", "label": "State RMSE"},
+                ],
             },
         },
     ]
@@ -636,6 +725,19 @@ def build_artifact(
                 {"field": "sha256", "label": "SHA-256", "type": "text"},
             ],
         },
+        {
+            "id": "max_round_candidates",
+            "title": "Validated convergence candidates",
+            "subtitle": "Selected 400-round and diagnostic 5,000-round files; neither has been uploaded.",
+            "dataset": "max_round_candidates",
+            "sourceId": "max_round_candidates_sql",
+            "columns": [
+                {"field": "candidate", "label": "Candidate", "type": "text"},
+                {"field": "round", "label": "Boosting round", "type": "number"},
+                {"field": "rows", "label": "Rows", "type": "number"},
+                {"field": "sha256", "label": "SHA-256", "type": "text"},
+            ],
+        },
     ]
 
     blocks = [
@@ -660,6 +762,9 @@ def build_artifact(
                 "가림 전후 69,850행에서 layer 2·3은 phase, layer 4는 상태조건 arm을 쓰는 router를 "
                 "선택했다. 이 구조는 관련 proxy RMSE 0.7889°C와 leave-one-block-out 0.7961°C로 "
                 "두 단일 arm보다 낮았다. "
+                "동일 모델을 5,000 boosting round까지 연장한 수렴 실험에서는 400 round가 "
+                "0.7889°C로 최저였고 5,000 round는 0.8665°C로 악화했다. 따라서 현재 "
+                "learning rate 0.04에서 400 round를 유지한다. "
                 "이는 hidden test 점수가 아니며 "
                 "세 파일 모두 제출 형식으로 동결했지만 업로드하지 않았다."
             ),
@@ -757,6 +862,33 @@ def build_artifact(
         {"id": "score_table_block", "type": "table", "tableId": "score_comparison"},
         {"id": "score_candidates_block", "type": "table", "tableId": "score_candidates"},
         {
+            "id": "max_round_finding",
+            "type": "markdown",
+            "sourceId": "max_round_result",
+            "body": (
+                "## 5,000라운드 학습은 400라운드 이후 과적합을 확인했다\n\n"
+                "LightGBM 파라미터·특징·층별 router·학습 행은 고정하고 boosting horizon만 "
+                "400에서 5,000으로 늘렸다. 목표 계절 3블록 69,850행에서 router RMSE는 "
+                "400라운드 0.788890°C가 14개 체크포인트 중 최저였고, 600라운드부터 상승해 "
+                "5,000라운드에서 0.866540°C가 됐다. 최대 학습은 수렴 부족을 해결하지 않았으며 "
+                "일반화 오차를 0.077651°C 악화했다. 400라운드 예측은 기존 frozen OOF와 최대 "
+                "절대오차 0으로 일치했으므로 비교는 같은 모델 경로의 순수 epoch ablation이다."
+            ),
+        },
+        {"id": "max_round_visual", "type": "chart", "chartId": "max_round_chart"},
+        {
+            "id": "max_round_interpretation",
+            "type": "markdown",
+            "sourceId": "max_round_result",
+            "body": (
+                "400라운드는 단순한 임의 상한이 아니라 이 검증 범위에서의 최적 checkpoint다. "
+                "5,000라운드 파일도 요청대로 진단 후보로 보존했지만, 검증 RMSE가 악화했으므로 "
+                "제출 우선순위는 400라운드 router다. hidden 2025년 9–10월 정답을 보지 않았기 "
+                "때문에 공식 RMSE 자체를 보장하지는 않는다."
+            ),
+        },
+        {"id": "max_round_candidates_block", "type": "table", "tableId": "max_round_candidates"},
+        {
             "id": "screen_finding",
             "type": "markdown",
             "sourceId": "p2_result",
@@ -817,13 +949,14 @@ def build_artifact(
             "type": "markdown",
             "body": (
                 "## 권장 다음 단계\n\n"
-                "1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n"
+                "1. layer 2·3 phase, layer 4 state의 400-round router를 첫 공식 점수 후보로 유지한다.\n"
                 "2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n"
                 "3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n"
                 "4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n"
-                "5. 첫 공식 점수 후보는 target-proxy layer router로 유지하고 phase와 state는 일일 제출용 독립 challenger로 보존한다.\n"
-                "6. 저장 모델 재추론과 세 CSV의 26,061행·SHA 검증 결과를 유지한다.\n"
-                "7. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+                "5. 5,000-round 파일은 과적합 진단용으로만 보존하고 공식 제출 우선순위에서 제외한다.\n"
+                "6. phase와 state는 일일 제출용 독립 challenger로 보존한다.\n"
+                "7. 저장 모델 재추론과 모든 CSV의 26,061행·SHA 검증 결과를 유지한다.\n"
+                "8. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
             ),
         },
         {
@@ -899,6 +1032,12 @@ def build_artifact(
             "evidence": "Target-proxy RMSE 0.7889°C; LOBO 0.7961°C; 90% CI versus phase entirely below zero",
             "interpretation": "Layer-specific error structure improves the metric most relevant to the hidden Sep-Oct transition",
         },
+        {
+            "method": "Maximum 5,000 boosting rounds",
+            "decision": "Reject maximum; retain 400 rounds",
+            "evidence": "Target-proxy RMSE 0.7889 at round 400 versus 0.8665 at round 5,000",
+            "interpretation": "The incumbent learning rate converges before the maximum and later trees overfit",
+        },
     ]
     next(source for source in sources if source["id"] == "decisions_sql")["query"]["sql"] = (
         _union_sql(decisions, ("method", "decision", "evidence", "interpretation"))
@@ -932,6 +1071,8 @@ def build_artifact(
                 "state_comparison": state_rows,
                 "score_comparison": score_rows,
                 "score_candidates": score_candidate_rows,
+                "max_round_curve": max_round_rows,
+                "max_round_candidates": max_round_candidate_rows,
                 "decisions": decisions,
             },
         },
@@ -954,6 +1095,7 @@ def main() -> int:
     parser.add_argument("--tuning-result", type=Path)
     parser.add_argument("--state-result", type=Path)
     parser.add_argument("--score-result", type=Path)
+    parser.add_argument("--max-round-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = json.loads(args.result.read_text(encoding="utf-8"))
@@ -970,8 +1112,19 @@ def main() -> int:
     score_result = (
         json.loads(args.score_result.read_text(encoding="utf-8")) if args.score_result else None
     )
+    max_round_result = (
+        json.loads(args.max_round_result.read_text(encoding="utf-8"))
+        if args.max_round_result
+        else None
+    )
     artifact = build_artifact(
-        result, candidate, phase_result, tuning_result, state_result, score_result
+        result,
+        candidate,
+        phase_result,
+        tuning_result,
+        state_result,
+        score_result,
+        max_round_result,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding="utf-8")
