@@ -92,6 +92,9 @@ station,layer,time,temp
 - 이어서 기존 lean-M2 특징을 고정한 채 shared 대 layerwise 구조를 비교하고, 개발 구간에서 이긴 shared 구조만 Optuna 40 trials로 탐색했다. 최대 boosting round는 5,000, early stopping은 200 rounds였다.
 - 개발 score-month RMSE는 1.6402→1.5834℃로 개선됐지만 블록별 best iteration은 91·269·1,249·2,038로 불안정했다. median 759 round로 동결한 guard RMSE는 0.7939→0.8026℃로 악화했고 paired KST-day 90% CI는 [+0.0048, +0.0127]℃였다.
 - 이 튜닝 세대는 `REJECT_AND_CLOSE_GENERATION`이다. guard 결과를 보고 trial 수, 탐색 범위, epoch 집계법을 바꾸지 않는다. 현재 최선 후보는 계속 `P2_RESEARCH_BLEND50.csv`다.
+- 공개 layer 1과 5의 동시각 수온차 절대값만으로 lean-M2 arm을 혼합·성층 전문가로 나누는 단일 구조 가설도 사전등록 후 1회 검증했다. q40·q60은 각 fold의 학습행에서만 계산했고 중앙 20%를 두 전문가가 공유했으며, 최종 weight는 V0 0.5 + 상태조건 lean 0.5로 고정했다.
+- 상태조건 후보는 166,268행 aggregate RMSE를 1.1234→1.0997℃로 낮췄고 90% paired KST-day bootstrap CI는 [-0.0300, -0.0173]℃였다. 8개 블록 중 6개와 세 층 모두 개선했지만, hidden 구간 직전 2025년 7~8월이 +0.0079℃ 악화해 사전등록 veto +0.005℃를 넘었다.
+- 따라서 `p2_state_conditional_lean_v1`은 `REJECT_AND_CLOSE_FAMILY`다. q40/q60, overlap, blend weight, 상태신호를 사후 재탐색하지 않는다. 제출 후보는 만들지 않았으며 현재 최선은 계속 `submissions/p2/P2_RESEARCH_BLEND50.csv`(SHA256 `4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7`)다.
 
 ## 8. 원본·Git·제출 금지선
 

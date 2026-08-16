@@ -5,7 +5,7 @@
     "surface": "report",
     "title": "P2 연직 수온 구조 복원 방법 정찰",
     "description": "문헌 기반 프로파일 복원 기법과 공개층 M2 동역학을 blocked validation으로 비교한 기술 보고서",
-    "generatedAt": "2026-08-16T10:49:03.686834+09:00",
+    "generatedAt": "2026-08-16T11:20:12.361961+09:00",
     "cards": [
       {
         "id": "aggregate_delta",
@@ -244,6 +244,36 @@
             "semantic": "movement"
           }
         ]
+      },
+      {
+        "id": "state_comparison",
+        "title": "Mixed/stratified expert one-shot result",
+        "subtitle": "Eight fixed seasonal blocks; negative delta favors the state-conditioned arm.",
+        "dataset": "state_comparison",
+        "sourceId": "state_sql",
+        "columns": [
+          {
+            "field": "block",
+            "label": "Validation block",
+            "type": "text"
+          },
+          {
+            "field": "current_rmse",
+            "label": "Current RMSE (°C)",
+            "type": "number"
+          },
+          {
+            "field": "state_rmse",
+            "label": "State RMSE (°C)",
+            "type": "number"
+          },
+          {
+            "field": "delta_rmse",
+            "label": "Delta RMSE (°C)",
+            "type": "number",
+            "semantic": "movement"
+          }
+        ]
       }
     ],
     "sources": [
@@ -320,7 +350,7 @@
         "path": "artifacts/p2_method_scout/result.json",
         "query": {
           "engine": "sqlite",
-          "sql": "SELECT 'PCHIP vertical profile' AS method, 'Reject' AS decision, 'Worsened both 2025 proxy blocks' AS evidence, 'Deep public levels do not identify upper-thermocline curvature reliably' AS interpretation UNION ALL SELECT 'Rank-3 EOF' AS method, 'Reject' AS decision, '1.92–8.06°C RMSE in first screen' AS evidence, 'Global low-rank basis is unstable under seasonal and deployment shifts' AS interpretation UNION ALL SELECT 'Layerwise Ridge residual' AS method, 'Keep as sanity check' AS decision, 'Better than linear interpolation in 2/3 blocks' AS evidence, 'Public T–S state contains signal but the mapping is nonlinear' AS interpretation UNION ALL SELECT 'Full 120-feature dynamics' AS method, 'Do not promote' AS decision, 'Improved 2025 proxies but slightly worsened 2024 same season' AS evidence, 'Too many correlated lag/lead choices for the evidence budget' AS interpretation UNION ALL SELECT 'Lean M2 20 features' AS method, 'Useful arm' AS decision, '7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C' AS evidence, 'M2-scale public-layer dynamics carry transferable information' AS interpretation UNION ALL SELECT 'Fixed 50:50 V0 + Lean M2' AS method, 'Research candidate' AS decision, '8/8 blocks improved; bootstrap 90% upper bound < 0' AS evidence, 'Best current robustness/complexity trade-off; hidden score unknown' AS interpretation UNION ALL SELECT 'Local M2 amplitude/phase 20 features' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C' AS evidence, 'Average gain did not satisfy the preregistered seasonal-stability contract' AS interpretation UNION ALL SELECT 'Shared/layerwise + 40-trial LightGBM tuning' AS method, 'Reject and close generation' AS decision, 'Dev -0.0568°C; guard +0.0087°C with positive 90% CI' AS evidence, 'Development optimum and median 759 rounds did not transfer across seasons' AS interpretation",
+          "sql": "SELECT 'PCHIP vertical profile' AS method, 'Reject' AS decision, 'Worsened both 2025 proxy blocks' AS evidence, 'Deep public levels do not identify upper-thermocline curvature reliably' AS interpretation UNION ALL SELECT 'Rank-3 EOF' AS method, 'Reject' AS decision, '1.92–8.06°C RMSE in first screen' AS evidence, 'Global low-rank basis is unstable under seasonal and deployment shifts' AS interpretation UNION ALL SELECT 'Layerwise Ridge residual' AS method, 'Keep as sanity check' AS decision, 'Better than linear interpolation in 2/3 blocks' AS evidence, 'Public T–S state contains signal but the mapping is nonlinear' AS interpretation UNION ALL SELECT 'Full 120-feature dynamics' AS method, 'Do not promote' AS decision, 'Improved 2025 proxies but slightly worsened 2024 same season' AS evidence, 'Too many correlated lag/lead choices for the evidence budget' AS interpretation UNION ALL SELECT 'Lean M2 20 features' AS method, 'Useful arm' AS decision, '7/8 seasonal blocks improved; aggregate ΔRMSE -0.1093°C' AS evidence, 'M2-scale public-layer dynamics carry transferable information' AS interpretation UNION ALL SELECT 'Fixed 50:50 V0 + Lean M2' AS method, 'Research candidate' AS decision, '8/8 blocks improved; bootstrap 90% upper bound < 0' AS evidence, 'Best current robustness/complexity trade-off; hidden score unknown' AS interpretation UNION ALL SELECT 'Local M2 amplitude/phase 20 features' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0447°C but only 5/8 block wins; worst block +0.0469°C' AS evidence, 'Average gain did not satisfy the preregistered seasonal-stability contract' AS interpretation UNION ALL SELECT 'Shared/layerwise + 40-trial LightGBM tuning' AS method, 'Reject and close generation' AS decision, 'Dev -0.0568°C; guard +0.0087°C with positive 90% CI' AS evidence, 'Development optimum and median 759 rounds did not transfer across seasons' AS interpretation UNION ALL SELECT 'Mixed/stratified lean-M2 experts' AS method, 'Reject and close family' AS decision, 'Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C' AS evidence, 'The training-only public contrast gate helped on average but missed the pre-gap safety veto' AS interpretation",
           "description": "Materializes reviewed method decisions from the local screen.",
           "tables_used": []
         }
@@ -388,6 +418,25 @@
         }
       },
       {
+        "id": "state_result",
+        "label": "P2 preregistered mixed/stratified lean-M2 expert experiment",
+        "path": "artifacts/p2_state_conditional_lean_v1/result.json"
+      },
+      {
+        "id": "state_sql",
+        "label": "Reviewed state-conditioned expert block comparison",
+        "path": "artifacts/p2_state_conditional_lean_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024 may jun' AS block, 1.918377 AS current_rmse, 1.846993 AS state_rmse, -0.071384 AS delta_rmse UNION ALL SELECT '2024 jul aug' AS block, 1.254434 AS current_rmse, 1.246583 AS state_rmse, -0.007851 AS delta_rmse UNION ALL SELECT '2024 sep oct' AS block, 0.542852 AS current_rmse, 0.53011 AS state_rmse, -0.012742 AS delta_rmse UNION ALL SELECT '2024 nov dec' AS block, 0.079354 AS current_rmse, 0.080579 AS state_rmse, 0.001225 AS delta_rmse UNION ALL SELECT '2025 mar apr' AS block, 0.506546 AS current_rmse, 0.494189 AS state_rmse, -0.012357 AS delta_rmse UNION ALL SELECT '2025 may jun' AS block, 1.220899 AS current_rmse, 1.203752 AS state_rmse, -0.017147 AS delta_rmse UNION ALL SELECT '2025 jul aug' AS block, 1.103726 AS current_rmse, 1.111579 AS state_rmse, 0.007852 AS delta_rmse UNION ALL SELECT '2025 nov dec' AS block, 0.55753 AS current_rmse, 0.495081 AS state_rmse, -0.062449 AS delta_rmse",
+          "description": "Materializes the frozen Blend50 versus state-conditioned expert comparison.",
+          "tables_used": [],
+          "metric_definitions": {
+            "delta_rmse": "State-conditioned candidate RMSE minus current Blend50 RMSE; negative is better"
+          }
+        }
+      },
+      {
         "id": "dineof",
         "label": "Beckers and Rixen (2003), EOF calculations and data filling",
         "href": "https://orbi.uliege.be/handle/2268/4291"
@@ -427,8 +476,7 @@
       {
         "id": "technical_summary",
         "type": "markdown",
-        "sourceId": "p2_result",
-        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. 이는 hidden test 점수가 아니며 현재 산출물은 연구 후보이다."
+        "body": "## Technical Summary\n\n공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 LightGBM은 8개 유효 계절 블록 중 7개에서 V0를 개선했다. 정확한 2024년 9–10월만 소폭 악화했기 때문에 가중치를 탐색하지 않고 V0와 50:50으로 평균했다. 그 결과 166,268행에서 모든 8개 블록이 개선됐고 aggregate RMSE는 1.2003→1.1234°C였다. 후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. 마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. 이는 hidden test 점수가 아니며 현재 산출물은 연구 후보이다."
       },
       {
         "id": "headline_strip",
@@ -485,6 +533,17 @@
         "tableId": "tuning_comparison"
       },
       {
+        "id": "state_finding",
+        "type": "markdown",
+        "sourceId": "state_result",
+        "body": "## 상태조건 전문가는 평균 이득을 냈지만 가림 직전 안정성에서 기각됐다\n\n표층–layer 5 공개 수온차의 fold-train q40·q60만 사용해 lean M2를 두 전문가로 나눈 one-shot 후보는 166,268행 aggregate RMSE를 1.1234→1.0997°C로 낮췄고, paired KST-day bootstrap 90% CI는 [-0.0300, -0.0173]°C였다. 8개 블록 중 6개가 개선되고 모든 층도 개선됐지만, hidden 구간에 가장 인접한 2025년 7–8월이 +0.0079°C 악화해 사전등록된 +0.005°C veto를 넘었다. 분위수·전문가 overlap·blend weight를 사후 조정하지 않고 이 정확한 계열을 종료한다."
+      },
+      {
+        "id": "state_table_block",
+        "type": "table",
+        "tableId": "state_comparison"
+      },
+      {
         "id": "screen_finding",
         "type": "markdown",
         "sourceId": "p2_result",
@@ -515,12 +574,12 @@
         "id": "limitations",
         "type": "markdown",
         "sourceId": "p2_result",
-        "body": "## 한계와 강건성\n\n8개 블록과 391 KST-day의 bootstrap은 hidden 2025년 9–10월 정답을 대체하지 않는다. 운영 결측으로 11개 예정 블록 중 8개만 평가 가능했다. 같은 데이터로 방법을 반복 비교하면 연구자 과적합이 누적되므로, 50:50 이후 가중치 탐색은 금지했다. Lean test 특징 20개의 최소 finite rate는 68.7%이며 LightGBM missing routing에 의존하는 시각이 남아 있다."
+        "body": "## 한계와 강건성\n\n8개 블록과 391 KST-day의 bootstrap은 hidden 2025년 9–10월 정답을 대체하지 않는다. 운영 결측으로 11개 예정 블록 중 8개만 평가 가능했다. 같은 데이터로 방법을 반복 비교하면 연구자 과적합이 누적되므로, 50:50 이후 가중치 탐색은 금지했다. Lean test 특징 20개의 최소 finite rate는 68.7%이며 LightGBM missing routing에 의존하는 시각이 남아 있다. 상태조건 실험도 동일한 노출 블록을 재사용했으므로 강한 평균 개선을 독립 일반화 증거로 해석하지 않는다."
       },
       {
         "id": "next_steps",
         "type": "markdown",
-        "body": "## 권장 다음 단계\n\n1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n4. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n5. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+        "body": "## 권장 다음 단계\n\n1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n5. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n6. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
       },
       {
         "id": "questions",
@@ -531,7 +590,7 @@
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-16T10:49:03.686834+09:00",
+    "generatedAt": "2026-08-16T11:20:12.361961+09:00",
     "status": "ready",
     "datasets": {
       "headline": [
@@ -1071,6 +1130,56 @@
           "delta_rmse": 0.048104
         }
       ],
+      "state_comparison": [
+        {
+          "block": "2024 may jun",
+          "current_rmse": 1.918377,
+          "state_rmse": 1.846993,
+          "delta_rmse": -0.071384
+        },
+        {
+          "block": "2024 jul aug",
+          "current_rmse": 1.254434,
+          "state_rmse": 1.246583,
+          "delta_rmse": -0.007851
+        },
+        {
+          "block": "2024 sep oct",
+          "current_rmse": 0.542852,
+          "state_rmse": 0.53011,
+          "delta_rmse": -0.012742
+        },
+        {
+          "block": "2024 nov dec",
+          "current_rmse": 0.079354,
+          "state_rmse": 0.080579,
+          "delta_rmse": 0.001225
+        },
+        {
+          "block": "2025 mar apr",
+          "current_rmse": 0.506546,
+          "state_rmse": 0.494189,
+          "delta_rmse": -0.012357
+        },
+        {
+          "block": "2025 may jun",
+          "current_rmse": 1.220899,
+          "state_rmse": 1.203752,
+          "delta_rmse": -0.017147
+        },
+        {
+          "block": "2025 jul aug",
+          "current_rmse": 1.103726,
+          "state_rmse": 1.111579,
+          "delta_rmse": 0.007852
+        },
+        {
+          "block": "2025 nov dec",
+          "current_rmse": 0.55753,
+          "state_rmse": 0.495081,
+          "delta_rmse": -0.062449
+        }
+      ],
       "decisions": [
         {
           "method": "PCHIP vertical profile",
@@ -1119,6 +1228,12 @@
           "decision": "Reject and close generation",
           "evidence": "Dev -0.0568°C; guard +0.0087°C with positive 90% CI",
           "interpretation": "Development optimum and median 759 rounds did not transfer across seasons"
+        },
+        {
+          "method": "Mixed/stratified lean-M2 experts",
+          "decision": "Reject and close family",
+          "evidence": "Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C",
+          "interpretation": "The training-only public contrast gate helped on average but missed the pre-gap safety veto"
         }
       ]
     }
@@ -1175,6 +1290,14 @@
     {
       "id": "tuning_sql",
       "path": "artifacts/p2_lgbm_nested_tuning_v1/result.json"
+    },
+    {
+      "id": "state_result",
+      "path": "artifacts/p2_state_conditional_lean_v1/result.json"
+    },
+    {
+      "id": "state_sql",
+      "path": "artifacts/p2_state_conditional_lean_v1/result.json"
     },
     {
       "id": "dineof",

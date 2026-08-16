@@ -40,6 +40,7 @@ def build_artifact(
     candidate: dict[str, object],
     phase_result: dict[str, object] | None = None,
     tuning_result: dict[str, object] | None = None,
+    state_result: dict[str, object] | None = None,
 ) -> dict[str, object]:
     generated = datetime.now().astimezone().isoformat()
     stability = result["stability_blocks"]
@@ -103,6 +104,20 @@ def build_artifact(
                     "current_rmse": round(reference, 6),
                     "tuned_rmse": round(tuned, 6),
                     "delta_rmse": round(tuned - reference, 6),
+                }
+            )
+
+    state_rows = []
+    if state_result is not None:
+        for block_name, block in state_result["blocks"].items():
+            reference = float(block["current_blend50"]["rmse"])
+            state_candidate = float(block["state_blend50"]["rmse"])
+            state_rows.append(
+                {
+                    "block": block_name.replace("_", " "),
+                    "current_rmse": round(reference, 6),
+                    "state_rmse": round(state_candidate, 6),
+                    "delta_rmse": round(state_candidate - reference, 6),
                 }
             )
 
@@ -290,6 +305,36 @@ def build_artifact(
             },
         },
         {
+            "id": "state_result",
+            "label": "P2 preregistered mixed/stratified lean-M2 expert experiment",
+            "path": "artifacts/p2_state_conditional_lean_v1/result.json",
+        },
+        {
+            "id": "state_sql",
+            "label": "Reviewed state-conditioned expert block comparison",
+            "path": "artifacts/p2_state_conditional_lean_v1/result.json",
+            "query": {
+                "engine": "sqlite",
+                "sql": _union_sql(
+                    state_rows
+                    or [
+                        {
+                            "block": "not run",
+                            "current_rmse": None,
+                            "state_rmse": None,
+                            "delta_rmse": None,
+                        }
+                    ],
+                    ("block", "current_rmse", "state_rmse", "delta_rmse"),
+                ),
+                "description": "Materializes the frozen Blend50 versus state-conditioned expert comparison.",
+                "tables_used": [],
+                "metric_definitions": {
+                    "delta_rmse": "State-conditioned candidate RMSE minus current Blend50 RMSE; negative is better"
+                },
+            },
+        },
+        {
             "id": "dineof",
             "label": "Beckers and Rixen (2003), EOF calculations and data filling",
             "href": "https://orbi.uliege.be/handle/2268/4291",
@@ -464,6 +509,24 @@ def build_artifact(
                 },
             ],
         },
+        {
+            "id": "state_comparison",
+            "title": "Mixed/stratified expert one-shot result",
+            "subtitle": "Eight fixed seasonal blocks; negative delta favors the state-conditioned arm.",
+            "dataset": "state_comparison",
+            "sourceId": "state_sql",
+            "columns": [
+                {"field": "block", "label": "Validation block", "type": "text"},
+                {"field": "current_rmse", "label": "Current RMSE (°C)", "type": "number"},
+                {"field": "state_rmse", "label": "State RMSE (°C)", "type": "number"},
+                {
+                    "field": "delta_rmse",
+                    "label": "Delta RMSE (°C)",
+                    "type": "number",
+                    "semantic": "movement",
+                },
+            ],
+        },
     ]
 
     blocks = [
@@ -471,7 +534,6 @@ def build_artifact(
         {
             "id": "technical_summary",
             "type": "markdown",
-            "sourceId": "p2_result",
             "body": (
                 "## Technical Summary\n\n"
                 "공개층 수온의 **6시간 반주기와 12.42시간 M2 전후 변화 20개**를 추가한 "
@@ -482,6 +544,9 @@ def build_artifact(
                 "후속 사전등록 local-M2 amplitude/phase arm은 평균 RMSE를 더 낮췄지만 "
                 "계절 안정성 2개 게이트를 위반해 기각했다. 이어서 shared/layerwise 구조와 40회 "
                 "LightGBM 탐색을 수행했으나 guard RMSE가 0.7939→0.8026°C로 악화해 역시 기각했다. "
+                "마지막으로 공개 layer 1–5 수온차의 fold-train 분위수만으로 lean arm을 혼합·성층 "
+                "전문가로 나눈 후보는 aggregate RMSE를 1.1234→1.0997°C로 낮췄지만, 가림 직전 "
+                "2025년 7–8월이 +0.0079°C 악화해 고정 +0.005°C 안전 한도를 넘었다. "
                 "이는 hidden test 점수가 아니며 "
                 "현재 산출물은 연구 후보이다."
             ),
@@ -547,6 +612,21 @@ def build_artifact(
         },
         {"id": "tuning_table_block", "type": "table", "tableId": "tuning_comparison"},
         {
+            "id": "state_finding",
+            "type": "markdown",
+            "sourceId": "state_result",
+            "body": (
+                "## 상태조건 전문가는 평균 이득을 냈지만 가림 직전 안정성에서 기각됐다\n\n"
+                "표층–layer 5 공개 수온차의 fold-train q40·q60만 사용해 lean M2를 두 전문가로 "
+                "나눈 one-shot 후보는 166,268행 aggregate RMSE를 1.1234→1.0997°C로 낮췄고, "
+                "paired KST-day bootstrap 90% CI는 [-0.0300, -0.0173]°C였다. 8개 블록 중 "
+                "6개가 개선되고 모든 층도 개선됐지만, hidden 구간에 가장 인접한 2025년 7–8월이 "
+                "+0.0079°C 악화해 사전등록된 +0.005°C veto를 넘었다. 분위수·전문가 overlap·blend "
+                "weight를 사후 조정하지 않고 이 정확한 계열을 종료한다."
+            ),
+        },
+        {"id": "state_table_block", "type": "table", "tableId": "state_comparison"},
+        {
             "id": "screen_finding",
             "type": "markdown",
             "sourceId": "p2_result",
@@ -598,7 +678,8 @@ def build_artifact(
                 "운영 결측으로 11개 예정 블록 중 8개만 평가 가능했다. 같은 데이터로 방법을 반복 비교하면 "
                 "연구자 과적합이 누적되므로, 50:50 이후 가중치 탐색은 금지했다. Lean test 특징 20개의 "
                 f"최소 finite rate는 {candidate['test_feature_finite_rate_min']:.1%}이며 LightGBM missing routing에 "
-                "의존하는 시각이 남아 있다."
+                "의존하는 시각이 남아 있다. 상태조건 실험도 동일한 노출 블록을 재사용했으므로 "
+                "강한 평균 개선을 독립 일반화 증거로 해석하지 않는다."
             ),
         },
         {
@@ -609,8 +690,9 @@ def build_artifact(
                 "1. 현재 P2_RESEARCH_BLEND50을 최선의 로컬 후보로 유지한다.\n"
                 "2. 기각된 M2 진폭·위상의 창 길이·가중치·계절 gate를 재탐색하지 않는다.\n"
                 "3. 이번 40-trial LightGBM 탐색의 trial 수·범위를 guard 결과에 맞춰 연장하지 않는다.\n"
-                "4. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n"
-                "5. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
+                "4. 기각된 상태조건 전문가의 q40/q60·overlap·blend weight를 재탐색하지 않는다.\n"
+                "5. 제출 전 clean 재학습과 저장 모델 재추론으로 CSV SHA를 다시 확인한다.\n"
+                "6. 정확한 CSV와 SHA를 사용자 승인하기 전에는 업로드하지 않는다."
             ),
         },
         {
@@ -674,6 +756,12 @@ def build_artifact(
             "evidence": "Dev -0.0568°C; guard +0.0087°C with positive 90% CI",
             "interpretation": "Development optimum and median 759 rounds did not transfer across seasons",
         },
+        {
+            "method": "Mixed/stratified lean-M2 experts",
+            "decision": "Reject and close family",
+            "evidence": "Aggregate -0.0238°C and 6/8 block wins, but 2025 Jul–Aug +0.0079°C",
+            "interpretation": "The training-only public contrast gate helped on average but missed the pre-gap safety veto",
+        },
     ]
     next(source for source in sources if source["id"] == "decisions_sql")["query"]["sql"] = (
         _union_sql(decisions, ("method", "decision", "evidence", "interpretation"))
@@ -704,6 +792,7 @@ def build_artifact(
                 "method_screen": screen_rows,
                 "phase_comparison": phase_rows,
                 "tuning_comparison": tuning_rows,
+                "state_comparison": state_rows,
                 "decisions": decisions,
             },
         },
@@ -724,6 +813,7 @@ def main() -> int:
     parser.add_argument("--candidate-manifest", type=Path, required=True)
     parser.add_argument("--phase-result", type=Path)
     parser.add_argument("--tuning-result", type=Path)
+    parser.add_argument("--state-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = json.loads(args.result.read_text(encoding="utf-8"))
@@ -734,7 +824,10 @@ def main() -> int:
     tuning_result = (
         json.loads(args.tuning_result.read_text(encoding="utf-8")) if args.tuning_result else None
     )
-    artifact = build_artifact(result, candidate, phase_result, tuning_result)
+    state_result = (
+        json.loads(args.state_result.read_text(encoding="utf-8")) if args.state_result else None
+    )
+    artifact = build_artifact(result, candidate, phase_result, tuning_result, state_result)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding="utf-8")
     print(args.output.as_posix())
