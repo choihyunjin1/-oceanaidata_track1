@@ -1,0 +1,105 @@
+{
+  "experiment_id": "p2_tide_rts_v1",
+  "status": "preregistered_local_one_shot",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_after_prior_outer_exposure": true,
+  "fresh_holdout_claimed": false,
+  "external_values_used": false,
+  "hypothesis": "A public-layer-observed low-rank joint T/S state with one fixed 12.42-hour resonator is recoverable over a 61-day L2-L4 blackout and can explain residual error left by the frozen adaptive P2 proxy.",
+  "problem_contract": {
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "simultaneous_mask_variables": ["temp", "psal"],
+    "use_actual_depth": true,
+    "forbid_layer_as_depth": true,
+    "purge_days": 7,
+    "m2_period_hours": 12.42,
+    "official_blackout_days": 61
+  },
+  "frozen_inputs": {
+    "adaptive_oof": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "expected_rmse": 0.7683674566216134,
+      "prediction_column": "prediction"
+    },
+    "adaptive_submission": {
+      "path": "submissions/p2/P2_EXTRAPOLATED_SOFT_GATE_V2.csv",
+      "sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+    },
+    "physical_oof": {
+      "path": "artifacts/p2_physical_profile_projection_v1/oof.parquet",
+      "sha256": "adffb86b43ae69ad3f11863263fe3679cc0195053b46c1ec57a307d2c54eb7cc",
+      "expected_rmse": 0.7744179315612375,
+      "prediction_column": "prediction"
+    },
+    "physical_submission": {
+      "path": "submissions/p2/P2_PHYSICAL_PROFILE_PROJECTION_V1.csv",
+      "sha256": "fd803053475f1060f620861c0a79b7d303df7561ef4e75a70792286d58dc2ca6"
+    }
+  },
+  "validation": {
+    "blocks": {
+      "2024_sep_oct": ["2024-09-01", "2024-11-01"],
+      "2025_jul_aug": ["2025-07-01", "2025-09-01"],
+      "2025_nov_dec": ["2025-11-01", "2026-01-01"]
+    },
+    "outer_train_only": true,
+    "target_values_are_labels_only": true,
+    "mask_full_61_day_block": true,
+    "selection_policy": "One fixed preregistered setting. Precheck is terminal NO-GO when structural gates fail; no grid and no post-score adjustment."
+  },
+  "precheck": {
+    "target_temp_residual_reference": "frozen adaptive OOF prediction",
+    "target_psal_residual_reference": "outer-train actual-depth public-layer linear interpolation",
+    "factors": 4,
+    "ridge_alpha": 10.0,
+    "minimum_feature_coverage": 0.5,
+    "slow_phi_min": 0.9,
+    "slow_phi_max": 0.9999,
+    "resonator_damping": 0.9995,
+    "resonator_process_variance": 0.0001,
+    "gramian_horizon_steps": 1008,
+    "gramian_rank_tolerance": 1e-8,
+    "gramian_condition_max": 100000000.0,
+    "m2_windows_days": [30, 61],
+    "support_quantile": 0.99,
+    "minimum_support_share": 0.8,
+    "minimum_two_public_temp_coverage": 0.95,
+    "gates": {
+      "each_fold_pooled_temperature_residual_r2_strictly_above": 0.0,
+      "aggregate_each_temperature_layer_residual_r2_strictly_above": 0.0,
+      "observability_rank_must_equal_state_dimension": true,
+      "observability_condition_max": 100000000.0,
+      "support_share_min": 0.8,
+      "two_public_temp_coverage_min": 0.95
+    }
+  },
+  "conditional_model": {
+    "name": "small joint T/S slow-factor plus fixed M2 resonator Kalman/RTS residual smoother",
+    "stock_bayotide": false,
+    "neural_operator": false,
+    "posterior_sd_scale_max": 2.5,
+    "unsupported_policy": "byte-exact frozen adaptive prediction fallback",
+    "one_setting_only": true
+  },
+  "bootstrap": {
+    "unit": "KST calendar day",
+    "replicates": 2000,
+    "seed": 20260821,
+    "ci": 0.9
+  },
+  "promotion_gate": {
+    "candidate_rmse_max": 0.763367,
+    "paired_ci90_high_max": 0.0,
+    "minimum_improved_blocks": 2,
+    "worst_block_delta_rmse_max": 0.005,
+    "layer4_delta_rmse_max": 0.0
+  },
+  "outputs": {
+    "directory": "artifacts/p2_tide_rts_v1",
+    "status": "artifacts/status/p2_tide_rts_v1.json",
+    "submission_created": false
+  }
+}

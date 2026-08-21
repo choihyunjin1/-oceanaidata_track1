@@ -1,0 +1,151 @@
+{
+  "experiment_id": "p1_block_inpaint_v1",
+  "family_id": "normal_only_dual_flank_block_inpaint",
+  "created_at_kst": "2026-08-21T00:00:00+09:00",
+  "authorization": {
+    "commit": false,
+    "push": false,
+    "competition_upload": false,
+    "external_observations": false,
+    "source_mutation": false
+  },
+  "reference": {
+    "backend": "xgboost",
+    "trees": 700,
+    "run_id": "20260813T153038+0900_cv_378a4e89",
+    "model_relative_path": "artifacts/runs/20260813T155254+0900_train_378a4e89/model.joblib",
+    "model_sha256": "d4b60c543691f51526b3909101763309a6560cc274386a8fb3323773ad469d12",
+    "oof_relative_path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "submission_relative_path": "submissions/frozen/P1_FROZEN_READY_TO_UPLOAD_28243fda.csv",
+    "submission_sha256": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3",
+    "outer_micro_f1": 0.8603708380408055,
+    "outer_test_share_weighted_f1": 0.8133155525620019,
+    "p1_config_relative_path": "configs/p1.toml",
+    "p1_config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "selection_relative_path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/selection.json",
+    "selection_sha256": "ebc2dcdd57f5a610151d84a3e37f9bb4295030f0dcb40314972be4c419e01de8",
+    "metrics_relative_path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/metrics.json",
+    "metrics_sha256": "de7d92153df58b10177ac6c79a0733164c9c4630fa2c317495ddd8a1eb487e36",
+    "fixed_postprocess": {
+      "close_gap_rows": 0,
+      "high_threshold": 0.2,
+      "low_threshold": 0.1,
+      "minimum_positive_run": 12
+    }
+  },
+  "data": {
+    "train_file": "train.csv",
+    "test_file": "test.csv",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "source_read_only": true
+  },
+  "block_contract": {
+    "cadence_minutes": 10,
+    "mask_hours": [8, 24, 48, 96],
+    "stride_hours": 6,
+    "left_flank_hours": 24,
+    "right_flank_hours": 24,
+    "maximum_context_days": 6,
+    "purge_days": 7,
+    "training_rows": "fold-train label=0 windows only",
+    "target_inside_mask": "forbidden from every model input and normalizer",
+    "target_derived_inside_mask": "forbidden",
+    "peer_definition": "same station and timestamp, leave target layer out",
+    "gap_policy": "no window crosses station, layer, or non-10-minute boundary",
+    "uncovered_policy": "exact frozen-XGB probability fallback"
+  },
+  "model": {
+    "architecture": "shared one-layer GRU flank encoders plus separate fixed MLP decoders",
+    "hidden_size": 32,
+    "decoder_size": 64,
+    "dropout": 0.1,
+    "batch_size": 64,
+    "max_epochs": 12,
+    "patience": 3,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "consistency_weight": 0.05,
+    "train_windows_per_mask_length": 2500,
+    "validation_fraction": 0.1,
+    "use_bfloat16": true,
+    "seed": 20260813,
+    "hyperparameter_search": false,
+    "external_checkpoint": false
+  },
+  "additive_gate": {
+    "base_logit_coefficient": 1.0,
+    "score_columns": [
+      "bmi_signed_residual_at_max",
+      "bmi_abs_residual_max",
+      "bmi_abs_slope_max",
+      "bmi_fb_disagreement_at_max"
+    ],
+    "l2_penalty": 1.0,
+    "maximum_iterations": 200,
+    "coefficient_bounds": [
+      [-5.0, 5.0],
+      [0.0, 5.0],
+      [0.0, 5.0],
+      [-5.0, 0.0]
+    ],
+    "intercept": false,
+    "missing_score_delta": 0.0,
+    "hyperparameter_search": false
+  },
+  "historical_gate": {
+    "folds": [
+      {
+        "name": "hist_2024_summer",
+        "fit_end": "2024-05-24T23:50:00+09:00",
+        "calibration_start": "2024-06-01T00:00:00+09:00",
+        "calibration_end": "2024-06-30T23:50:00+09:00",
+        "validation_start": "2024-07-08T00:00:00+09:00",
+        "validation_end": "2024-08-31T23:50:00+09:00"
+      },
+      {
+        "name": "hist_2024_autumn",
+        "fit_end": "2024-08-24T23:50:00+09:00",
+        "calibration_start": "2024-09-01T00:00:00+09:00",
+        "calibration_end": "2024-09-30T23:50:00+09:00",
+        "validation_start": "2024-10-08T00:00:00+09:00",
+        "validation_end": "2024-11-30T23:50:00+09:00"
+      },
+      {
+        "name": "hist_2025_winter",
+        "fit_end": "2024-11-23T23:50:00+09:00",
+        "calibration_start": "2024-12-01T00:00:00+09:00",
+        "calibration_end": "2024-12-31T23:50:00+09:00",
+        "validation_start": "2025-01-08T00:00:00+09:00",
+        "validation_end": "2025-03-01T23:50:00+09:00"
+      }
+    ],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260813,
+    "promotion_gate": {
+      "test_share_weighted_f1_delta_min": 0.005,
+      "paired_bootstrap_90pct_lower_bound_gt": 0.0,
+      "normal_fp_day_relative_increase_lt": 0.1,
+      "station_layer_f1_delta_min": -0.01
+    }
+  },
+  "outer_evaluation": {
+    "enabled_only_after_historical_gate": true,
+    "maximum_evaluation_count": 1,
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260813,
+    "promotion_gate": {
+      "test_share_weighted_f1_delta_min": 0.005,
+      "paired_bootstrap_90pct_lower_bound_gt": 0.0,
+      "normal_fp_day_relative_increase_lt": 0.1,
+      "station_layer_f1_delta_min": -0.01
+    }
+  },
+  "artifacts": {
+    "output_relative_dir": "artifacts/p1_block_inpaint_v1",
+    "status_relative_path": "artifacts/status/p1_block_inpaint_v1.json",
+    "outer_lock_relative_path": "artifacts/p1_block_inpaint_v1/outer_exposure.lock"
+  }
+}
