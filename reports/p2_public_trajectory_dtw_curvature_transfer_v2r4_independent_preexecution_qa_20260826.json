@@ -1,0 +1,146 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r4.independent_preexecution_qa.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4",
+  "audited_at_kst": "2026-08-26T09:37:00+09:00",
+  "verdict": "PASS",
+  "design_sha256": "9863a283f8be657f93f710a19e88754a6ea7fcfbf7dfa51329c8c1ea848ecae5",
+  "seal_sha256": "e19a60ee1798d2dea9f76e1902de66bbdbf44f4a743902d5528337652ff3eaf9",
+  "severity_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 1
+  },
+  "blocking_finding_count": 0,
+  "authorization_receipt_compatibility": {
+    "required_report_verdict": "PASS",
+    "top_level_lineage_fields_present": true,
+    "authorization_may_be_issued_only_after_this_exact_report_is_pinned": true,
+    "current_external_authorization_remains_false": true,
+    "execution_performed_by_qa": false
+  },
+  "scope": {
+    "audited": [
+      "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r4_design.json",
+      "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r4_execution.json",
+      "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r4_execution_authorization.json",
+      "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r4.py",
+      "src/p2_restore/public_trajectory_dtw_v2r4.py",
+      "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r4.py",
+      "reports/p2_public_trajectory_dtw_curvature_transfer_v2r4_qa_closure_matrix_20260826.json",
+      "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2r4_preexecution/preexecution_seal.json",
+      "reports/p2_public_trajectory_dtw_curvature_transfer_v2r3_independent_preexecution_qa_20260826.json"
+    ],
+    "not_performed": [
+      "numerical execution",
+      "actual scientific materialization",
+      "p100 path resolve/stat/open/hash/parse",
+      "official test/sample/submission/candidate access",
+      "candidate or submission generation",
+      "upload"
+    ]
+  },
+  "scientific_and_integrity_verdict": {
+    "prospective_design_and_zero_fit_freeze": "PASS",
+    "portable_P2_DATA_DIR_observations_resolution_and_exact_pin": "PASS",
+    "actual_nonfuture_KST_and_filesystem_mtime_order": "PASS",
+    "canonical_p100_78156_row_keyed_binding": "PASS_BY_STATIC_AND_SYNTHETIC_REGRESSION_TEST",
+    "p100_pre_exact_GO_filesystem_operations": 0,
+    "exact_gate_before_p100": "PASS",
+    "physical_fit_calls": 0,
+    "materialization_slot_contract": 22,
+    "single_attempt_no_rerun": "PASS",
+    "held_design_execution_seal_authorization_QA_module_snapshots": "PASS",
+    "cross_seal_A_B_path_toggle": "PASS",
+    "authorization_path_swap_after_single_capture": "PASS",
+    "QA_real_PASS_digest_design_and_seal_lineage": "PASS",
+    "transitive_seal_inventory": "PASS",
+    "Windows_terminal_last_success_and_fault_boundaries": "PASS",
+    "official_path_firewall": "PASS"
+  },
+  "closure_matrix_review": {
+    "declared_closure_count": 10,
+    "scientific_or_executable_closure_failures": 0,
+    "documentation_caveat": {
+      "id": "V2R4-P2-DOC-01",
+      "severity": "P2",
+      "title": "Closure matrix cites stale test function names even though equivalent executable tests exist and pass",
+      "unique_nonexistent_test_names": 5,
+      "nonexistent_name_references": 7,
+      "stale_to_actual_mapping": {
+        "test_authorization_verifies_real_qa_receipt_and_lineage": "test_authorization_verifies_real_qa_receipt_and_snapshot_lineage",
+        "test_authorization_accepts_only_a_pinned_real_pass_receipt": "covered jointly by test_authorization_verifies_real_qa_receipt_and_snapshot_lineage (six corruptions) and test_authorization_uses_one_snapshot_even_if_auth_path_swaps (valid PASS acceptance)",
+        "test_authorization_bytes_swap_after_capture_cannot_change_decision": "test_authorization_uses_one_snapshot_even_if_auth_path_swaps",
+        "test_authorized_worker_loads_one_held_module_snapshot_without_package_init": "test_authorized_worker_compiles_retained_module_without_path_reopen",
+        "test_module_compilation_uses_captured_bytes_after_path_mutation": "test_module_compilation_ignores_path_mutation_after_seal_snapshot"
+      },
+      "affected_closure_entries": [
+        "V2-P1-01",
+        "V2-P1-02",
+        "V2R3-P1-NEW-01"
+      ],
+      "why_nonblocking": [
+        "The closure matrix is immutable and hash-pinned by the current seal, but the runner consumes it only as a pinned static/chronology artifact and does not dispatch tests by those names.",
+        "All mapped executable tests are present in the sealed test file and passed in the 67-test sealed run.",
+        "The authorization code independently enforces exact QA verdict PASS, QA bytes/hash, design hash, held seal hash, single-snapshot authorization, and operation ceilings without relying on these documentation strings."
+      ],
+      "recommended_follow_up": "Do not mutate the sealed matrix. Correct the names only in a future documentation successor or erratum that explicitly pins this r4 seal; no r4 code or numerical rerun is needed."
+    }
+  },
+  "test_and_static_verification": {
+    "parent_environment_without_P2_DATA_DIR": {
+      "collected": 67,
+      "passed": 64,
+      "skipped": 1,
+      "failed": 2,
+      "interpretation": "Expected fail-closed behavior: the only failures require P2_DATA_DIR for historical observations readiness/idempotence. No fallback path was used."
+    },
+    "command_scoped_P2_DATA_DIR": {
+      "collected": 67,
+      "passed": 66,
+      "skipped": 1,
+      "failed": 0,
+      "skip_reason": "Synthetic symlink creation is unavailable on this Windows account; exact-parent/basename and official-token resolver guards passed directly.",
+      "exit_code": 0
+    },
+    "ruff": {
+      "result": "All checks passed!",
+      "exit_code": 0,
+      "files": [
+        "src/p2_restore/public_trajectory_dtw_v2r4.py",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r4.py",
+        "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r4.py"
+      ]
+    },
+    "seal_hash_verification": {
+      "seal_bytes": 8879,
+      "bundle_entries": 8,
+      "transitive_static_inputs": 15,
+      "hash_or_byte_mismatches": 0,
+      "false_authorization_seal_pin_matches": true
+    }
+  },
+  "read_only_preflight_verification": {
+    "P2_DATA_DIR_relative_file": "observations.csv",
+    "calls": 2,
+    "stdout_byte_identical": true,
+    "stdout_sha256": "8d41ce33f19f8aadfc7524fc41c298c86c52477df57a18900ead31dd837baad1",
+    "tracked_static_and_control_state_identical_before_between_after": true,
+    "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+    "claim_exists": false,
+    "journal_exists": false,
+    "terminal_failure_exists": false,
+    "final_namespace_exists": false,
+    "operation_counters": {
+      "attempts": 0,
+      "physical_fit_calls": 0,
+      "materializations": 0,
+      "scores": 0,
+      "candidate_files": 0,
+      "official_test_reads": 0,
+      "sample_submission_reads": 0,
+      "submission_candidate_reads": 0,
+      "uploads": 0
+    }
+  },
+  "independent_conclusion": "PASS. No scientific, leakage, authorization, seal, single-attempt, p100-gate, materialization-budget, or publication blocker was found. The one P2 issue is a transparently recorded stale-test-name documentation defect with passing equivalent sealed tests and no runtime effect."
+}

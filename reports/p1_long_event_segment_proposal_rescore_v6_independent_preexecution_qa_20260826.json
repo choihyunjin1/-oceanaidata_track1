@@ -1,0 +1,269 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.independent_preexecution_qa.r6.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v6",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "audited_at_kst": "2026-08-26T11:18:37.9233330+09:00",
+  "verdict": "NO_GO",
+  "verdict_detail": "NO_GO_P0_TRANSITIVE_IMPORT_TOCTOU_AND_SELF_AUTHENTICATING_WORKER_MANIFEST",
+  "preexecution_seal_sha256": "0eb3667ed032b931c84b0948f1bcb6e0e9762eac378b4abcc99f784d60511bbf",
+  "contract_sha256": "f64704a47751756cd88d9802eb6cf6ec160290af1f3112051ced91fa72b0febc",
+  "trust_firewall_v5_sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563",
+  "bootstrap_target_firewall_v6_sha256": "16d726d217dc2b0d03264ce99eeacd796c8e34017901e02b29bcc76d479846f6",
+  "runner_sha256": "001109137fa4daa5408977d14473d95639ba51b8c70301e802626c60ea59509e",
+  "execution_module_sha256": "8b91db9234bde301730728dcffa4fd2c014b099d0c518571ddaa733608b81636",
+  "test_sha256": "49b99eca65f3676414b459314e5ec7366852ad25cdff9367fe0f61c0fb71cabd",
+  "authorization_template_sha256": "f7f5cd1c80e67bf11872624793503fb33d52db9211058bd09cea250edde153c3",
+  "severity_counts": {
+    "P0": 2,
+    "P1": 1,
+    "P2": 1
+  },
+  "blocking_finding_count": 3,
+  "authorization_decision": {
+    "independent_qa_pass": false,
+    "actual_authorization_may_be_created": false,
+    "numerical_execution_may_start": false,
+    "fits_may_start": false,
+    "scientific_materializations_may_start": false,
+    "outer_score_may_start": false,
+    "required_successor": "immutable superseding r7-or-later runner, authorization schema, tests, zero-fit seal, two deterministic preflights, and fresh independent QA"
+  },
+  "audited_file_pins": {
+    "bootstrap_target_firewall_v6_amendment": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v6_bootstrap_target_firewall_amendment.json",
+      "bytes": 7680,
+      "sha256": "16d726d217dc2b0d03264ce99eeacd796c8e34017901e02b29bcc76d479846f6"
+    },
+    "runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v6.py",
+      "bytes": 154280,
+      "sha256": "001109137fa4daa5408977d14473d95639ba51b8c70301e802626c60ea59509e"
+    },
+    "execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v6.py",
+      "bytes": 70467,
+      "sha256": "8b91db9234bde301730728dcffa4fd2c014b099d0c518571ddaa733608b81636"
+    },
+    "focused_tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v6.py",
+      "bytes": 52148,
+      "sha256": "49b99eca65f3676414b459314e5ec7366852ad25cdff9367fe0f61c0fb71cabd"
+    },
+    "authorization_false_template": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v6_execution_authorization_template.json",
+      "bytes": 1434,
+      "sha256": "f7f5cd1c80e67bf11872624793503fb33d52db9211058bd09cea250edde153c3"
+    },
+    "execution_contract": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v2_execution_contract.json",
+      "bytes": 5115,
+      "sha256": "f64704a47751756cd88d9802eb6cf6ec160290af1f3112051ced91fa72b0febc"
+    },
+    "trust_firewall_v5": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v5_trust_firewall_amendment.json",
+      "bytes": 4702,
+      "sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563"
+    },
+    "preexecution_seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v6/preexecution_seal.json",
+      "bytes": 30610,
+      "sha256": "0eb3667ed032b931c84b0948f1bcb6e0e9762eac378b4abcc99f784d60511bbf"
+    }
+  },
+  "findings": [
+    {
+      "id": "P0-01",
+      "severity": "P0",
+      "title": "The normal parent flow does not hold the complete private snapshot or runtime closure across import",
+      "evidence": [
+        "The sealed static snapshot has 51 entries and the execution snapshot has 54 after authorization, seal, and QA are added.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3571-3586 holds only seven private-snapshot paths: the runner plus authorization, seal, QA, design, execution module, and v5 trust amendment.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3243-3261 brackets project imports with exact-tree checks, but the remaining legacy runner and transitive project sources are reopened without deny-write/delete handles between those checks.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:1057-1161 prechecks only METADATA and top-level entrypoints for 12 distributions. The sealed receipt reports 1213 loaded runtime files, but their aggregate is computed only after import by scripts/run_p1_round_b_nonspike_long_event_residual_v1r6.py:936-1019.",
+        "The LightGBM native library and the Python executable are authenticated after they have already been loaded or started; post-execution hashing is evidence, not a pre-execution trust boundary."
+      ],
+      "attack_path": [
+        "Wait until the worker completes its first exact snapshot check.",
+        "Replace an unheld transitive project source or pure-Python runtime dependency, allow import-time code to execute, and restore the sealed bytes before the second check or post-import aggregate.",
+        "Both later digests can match even though untrusted code already executed before the claim and can mutate state or perform scientific work outside the ledger."
+      ],
+      "impact": "The r5 arbitrary-code-before-authentication class remains open below the now-correct isolated bootstrap, so the package is not safely authorizable.",
+      "required_fix": [
+        "Hold deny-write/delete handles over every executable/transitive private-snapshot file from final verification through worker termination, not only seven authorities.",
+        "Seal a full per-path runtime inventory including Python sources, extension modules, native libraries, and loaded dependencies; verify and hold each before any import or LoadLibrary and retain the handles through worker termination.",
+        "Recheck exact loaded-module/native membership after import and immediately before claim as defense in depth."
+      ]
+    },
+    {
+      "id": "P0-02",
+      "severity": "P0",
+      "title": "The directly callable hidden worker accepts a caller-authenticated manifest and caller-selected runtime search roots",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3642-3677 exposes --worker with caller-supplied manifest hash, bootstrap hash, deadline, and the externally readable authorization digest.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:2509-2528 places strict_readiness in a parent-created manifest, but scripts/run_p1_long_event_segment_proposal_rescore_v6.py:2652-2811 never binds that object back to the seal's readonly_preflight_verification_sha256 or sealed runtime receipt.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3231-3242 activates explicit runtime search paths from that caller-supplied strict_readiness before numerical imports.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3202-3216 compares post-import readiness only with the same caller-supplied manifest object."
+      ],
+      "attack_path": [
+        "After a valid authorization exists, copy the sealed snapshot authorities and create a manifest whose self-declared runtime inventory points at an attacker-controlled import root.",
+        "Pass the digest of that manifest on the hidden-worker command line; there is no parent-only secret or seal-bound manifest digest.",
+        "The worker verifies the attacker's self-consistent metadata and top-level hashes, inserts the root, and executes its imports before any fixed aggregate mismatch can stop it."
+      ],
+      "impact": "A valid external authorization does not constrain the worker to the sealed runtime readiness, allowing arbitrary pre-claim code execution despite correct -I -S -B bootstrap flags.",
+      "required_fix": [
+        "Bind the exact canonical manifest or strict-readiness digest, runtime inventory digest, canonical output root, and deadline policy into the seal and external authorization.",
+        "Require an unforgeable single-use parent capability or acquire the canonical one-shot claim before accepting any worker-controlled manifest field.",
+        "Reject every worker manifest whose canonical readiness digest differs from the sealed preflight authority before activating a search path."
+      ]
+    },
+    {
+      "id": "P1-01",
+      "severity": "P1",
+      "title": "Hidden-worker replay can bypass the canonical lifetime attempt and hard-wall boundaries",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:2509-2526 records output_project_root only in the self-created manifest, not in the seal or authorization.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:2562-2580 accepts any existing absolute root with the fixed relative artifact suffix rather than the canonical repository root.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3176-3182 considers a copied seal under each alternate root a clean one-shot namespace.",
+        "The hidden --deadline-epoch is caller supplied and is checked only for expiry at scripts/run_p1_long_event_segment_proposal_rescore_v6.py:3262-3263."
+      ],
+      "impact": "The same future authorization can be replayed into multiple alternate roots, repeating the 72 fits and 21 materializations and selecting an arbitrarily distant deadline.",
+      "required_fix": [
+        "Bind and exactly verify the resolved canonical repository/output identity in the seal and authorization.",
+        "Bind the fixed deadline derivation and parent supervision capability, and make the authorization digest consumable exactly once in the canonical namespace."
+      ]
+    },
+    {
+      "id": "P2-01",
+      "severity": "P2",
+      "title": "Duplicate JSON keys are collapsed before the claimed exact authorization-schema check",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:502-506 uses ordinary json.loads.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py:366-438 checks the resulting mapping's key sets and types, so duplicate top-level or nested wire keys have already been silently reduced to one value.",
+        "Focused negative tests cover wrong version, missing, extra, and wrong-type fields but not duplicate object keys."
+      ],
+      "impact": "No independent privilege bypass is needed for the P0 verdict, but the promised exact raw authorization schema is not literally enforced.",
+      "required_fix": [
+        "Parse authorization, seal, QA, and manifest JSON with recursive duplicate-key rejection before semantic validation.",
+        "Add duplicate top-level and nested-key negative tests that fail before any static read, import, snapshot, or claim."
+      ]
+    }
+  ],
+  "r5_issue_recheck": {
+    "private_snapshot_bootstrap_minus_I_minus_S_minus_B": "PASS IN ISOLATION: the worker command is sys.executable, -I, -S, -B, then the private snapshot runner; flags and absence of site startup modules are checked before manifest parsing.",
+    "full_transitive_static_runtime_trust_and_toctou": "FAIL: findings P0-01 and P0-02.",
+    "held_deny_write_delete_lifetime": "FAIL: only seven of 54 execution-snapshot entries are held; external runtime paths are not held as a full closure.",
+    "exact_snapshot_inventory": "PASS FOR POINT-IN-TIME MEMBERSHIP/HASHING, FAIL AS A LIFETIME IMPORT AUTHORITY under P0-01.",
+    "authorization_schema_exact": "PASS for expected semantic key/type/version checks in parent and worker; P2-01 remains at the raw JSON wire level.",
+    "prefreeze_target_free_parse": "PASS STATIC: only seven target-free training columns are materialized and protected later suffixes remain opaque.",
+    "bounded_historical_targets": "PASS STATIC: only rows through 2025-03-01T23:50:00+09:00 are decoded, and registered outer-key overlap must be zero.",
+    "outer_prediction_freeze_before_target_parse_score": "PASS STATIC: all fold, ensemble, and seed prediction hashes are durably create-only journaled after exactly 72 fits and 21 materializations before full target parsing or scoring.",
+    "official_or_candidate_actions": "PASS OBSERVED: no prohibited dataset was accessed, no output candidate was read or created, and no official action occurred. P1-01 still permits aggregate output under an unapproved root after future authorization."
+  },
+  "scientific_and_operational_static_checks": {
+    "scientific_contract_unchanged": true,
+    "round_b_seeds": [20260813, 20260829, 20260847],
+    "segment_seeds": [20260826, 20260843, 20260871],
+    "inner_windows": [
+      {
+        "id": "inner_2024_jul_aug",
+        "fit_end_inclusive": "2024-05-24T23:50:00+09:00",
+        "validation_start": "2024-07-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-08-31T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2024_oct_nov",
+        "fit_end_inclusive": "2024-08-24T23:50:00+09:00",
+        "validation_start": "2024-10-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-11-30T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2025_jan_feb",
+        "fit_end_inclusive": "2024-11-23T23:50:00+09:00",
+        "validation_start": "2025-01-08T00:00:00+09:00",
+        "validation_end_inclusive": "2025-03-01T23:50:00+09:00"
+      }
+    ],
+    "outer_windows": ["2025_q2", "2025_q3", "2025_q4"],
+    "context_banks_hours": [[24, 72], [48, 168], [24, 72, 168]],
+    "decoder_modes": ["CONNECTED_ONLY", "DUAL_BOUNDARY_DISCONNECTED_ALLOWED"],
+    "segment_threshold_candidates": [0.75, 0.85, 0.92],
+    "uniform_postprocess": {
+      "high_threshold": 0.2,
+      "low_threshold": 0.1,
+      "close_gap_rows": 0,
+      "minimum_positive_run": 12
+    },
+    "fit_plan": {
+      "inner_anchor": 9,
+      "inner_segment": 54,
+      "outer_segment": 9,
+      "total": 72
+    },
+    "materialization_plan": {
+      "inner_anchor_surfaces": 3,
+      "inner_context_surfaces": 9,
+      "outer_context_surfaces": 9,
+      "total": 21
+    },
+    "decision_gates": {
+      "research_pooled_f1_delta_gte": 0.0161,
+      "research_paired_ci90_lower_gte": 0.007,
+      "research_minimum_improving_outer_folds_of_3": 2,
+      "research_minimum_improving_stations_of_3": 2,
+      "research_equal_weight_supported_station_fold_delta_gte": 0.008,
+      "research_false_positive_ratio_lte": 1.05,
+      "research_disconnected_precision_gte": 0.75,
+      "submission_research_only_pooled_f1_delta_gte": 0.0255,
+      "submission_research_only_paired_ci90_lower_gte": 0.012,
+      "preferred_effect_delta_gte": 0.0255,
+      "stretch_effect_delta_gte": 0.055
+    }
+  },
+  "verification_runs": {
+    "focused_pytest": {
+      "scope": "tests/test_run_p1_long_event_segment_proposal_rescore_v6.py",
+      "P1_DATA_DIR": "repo-relative historical P1 QC directory containing train.csv",
+      "tests": 36,
+      "result": "36 passed",
+      "exit_code": 0
+    },
+    "ruff": {
+      "scope": [
+        "src/p1_qc/long_event_segment_proposal_rescore_execution_v6.py",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v6.py",
+        "tests/test_run_p1_long_event_segment_proposal_rescore_v6.py"
+      ],
+      "result": "All checks passed!",
+      "exit_code": 0
+    },
+    "read_only_preflight": {
+      "calls_compared": 2,
+      "exit_codes": [0, 0],
+      "stdout_bytes_each": 26481,
+      "stdout_sha256_both": "ec68350dbe50ee7326523ca5d316b4fab5262b70a6d6f661c691ea531173b12d",
+      "stdout_byte_identical": true,
+      "verification_sha256_both": "15922024421af623f20cf5b3ba0015804d61158021f4b4e20b371d193788be45",
+      "seal_sha256_both": "0eb3667ed032b931c84b0948f1bcb6e0e9762eac378b4abcc99f784d60511bbf",
+      "stderr_both_empty": true,
+      "actual_authorization_exists": false
+    }
+  },
+  "operation_counters_at_qa": {
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_reads": 0,
+    "uploads": 0
+  },
+  "scope_prohibitions_observed": {
+    "actual_authorization_created": false,
+    "execution_claim_created": false,
+    "fit_or_materialization_or_score_executed": false,
+    "prohibited_dataset_or_candidate_read": false,
+    "P3_accessed_or_mutated": false,
+    "files_modified_other_than_this_required_independent_qa_json": false
+  },
+  "final_instruction": "Do not create the actual v6 authorization and do not execute v6. Preserve this package and QA as immutable NO_GO evidence; close P0-01, P0-02, P1-01, and P2-01 in a new successor, reseal at zero operations, run two deterministic zero-fit preflights, and request fresh independent QA."
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "p2_public_group_balanced_celsius_residual.identifiability_certificate.v2",
+  "created_at_kst": "2026-08-26T11:57:30.4558101+09:00",
+  "problem": "P2",
+  "status": "PASS_TWO_WINDOW_TRAINING_AND_EXACT_EVALUATION_IDENTIFIABLE",
+  "scope": "Aggregate structural support, ordered-key identity, and immutable-input provenance only. No candidate model prediction, candidate metric, fit, score, official row, or leaderboard value was consumed.",
+  "immutable_inputs": {
+    "observations": {
+      "environment_variable": "P2_DATA_DIR",
+      "allowed_filename": "observations.csv",
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "exact_incumbent_oof": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "block": "2024_sep_oct"
+    },
+    "exact_incumbent_aggregate": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/result.json",
+      "bytes": 129770,
+      "sha256": "227db5f9181953e77f7b97d1c9ca26f529dafad91a9ea018997471ffadd7c20b",
+      "json_pointer": "/panels/exact_frozen_lineage/metrics_by_setting/INCUMBENT_NOOP/by_fold/2024_sep_oct"
+    },
+    "blocked_raw_v1_design": {
+      "path": "configs/experiments/p2_public_group_balanced_celsius_residual_v1_design.json",
+      "bytes": 15998,
+      "sha256": "e0970dc00f02eebb6fa6530ce3571635775137a81ab08c5d61785bb906f6f138"
+    }
+  },
+  "blocked_four_window_contract": {
+    "status": "NO_GO_SIX_OF_TWELVE_LAYER_WINDOW_GROUPS_EMPTY",
+    "2024_jan_feb": {
+      "2": {"eligible_rows": 0, "nonempty_kst_days": 0},
+      "3": {"eligible_rows": 0, "nonempty_kst_days": 0},
+      "4": {"eligible_rows": 0, "nonempty_kst_days": 0}
+    },
+    "2024_mar_apr": {
+      "2": {"eligible_rows": 0, "nonempty_kst_days": 0},
+      "3": {"eligible_rows": 0, "nonempty_kst_days": 0},
+      "4": {"eligible_rows": 0, "nonempty_kst_days": 0}
+    },
+    "consequence": "The frozen H=4 objective fails its empty-layer-window policy before the first fit. Drop, merge, renormalization, or replacement inside v1 is forbidden."
+  },
+  "identifiable_training_contract": {
+    "selection_basis": "Finite target truth, frozen public-baseline feature eligibility, and KST-day availability only; no prediction or metric values.",
+    "target_layers": [2, 3, 4],
+    "training_rows_total": 45935,
+    "windows": [
+      {
+        "window_id": "2024_may_jun",
+        "start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+        "end_exclusive_kst": "2024-07-01T00:00:00+09:00",
+        "layers": {
+          "2": {"raw_finite_truth_rows": 7666, "eligible_rows": 7650, "nonempty_kst_days": 54, "min_rows_per_day": 36, "max_rows_per_day": 144},
+          "3": {"raw_finite_truth_rows": 7658, "eligible_rows": 7642, "nonempty_kst_days": 54, "min_rows_per_day": 36, "max_rows_per_day": 144},
+          "4": {"raw_finite_truth_rows": 7664, "eligible_rows": 7648, "nonempty_kst_days": 54, "min_rows_per_day": 36, "max_rows_per_day": 144}
+        }
+      },
+      {
+        "window_id": "2024_jul_to_aug24",
+        "start_inclusive_kst": "2024-07-01T00:00:00+09:00",
+        "end_exclusive_kst": "2024-08-25T00:00:00+09:00",
+        "layers": {
+          "2": {"raw_finite_truth_rows": 7762, "eligible_rows": 7667, "nonempty_kst_days": 55, "min_rows_per_day": 18, "max_rows_per_day": 144},
+          "3": {"raw_finite_truth_rows": 7744, "eligible_rows": 7666, "nonempty_kst_days": 55, "min_rows_per_day": 18, "max_rows_per_day": 144},
+          "4": {"raw_finite_truth_rows": 7726, "eligible_rows": 7662, "nonempty_kst_days": 55, "min_rows_per_day": 18, "max_rows_per_day": 144}
+        }
+      }
+    ],
+    "required_invariants": {
+      "exactly_two_windows": true,
+      "exactly_three_target_layers": true,
+      "all_six_layer_window_groups_nonempty": true,
+      "all_training_rows_assigned_exactly_once": true,
+      "no_rows_outside_registered_windows": true,
+      "fail_before_claim_on_any_count_or_day_drift": true
+    }
+  },
+  "exact_evaluation_population": {
+    "rows": 26273,
+    "unique_time_layer_keys": 26273,
+    "unique_timestamps": 8779,
+    "target_layers": {"2": 8777, "3": 8774, "4": 8722},
+    "utc_min": "2024-08-31T15:00:00+00:00",
+    "utc_max": "2024-10-31T14:50:00+00:00",
+    "kst_days": 61,
+    "full_grid_timestamps": 8784,
+    "missing_union_timestamps": 5,
+    "canonical_digest_format": "Sort by (UTC_ns,layer). Key bytes per row are little-endian <q signed int64 UTC_ns><h signed int16 layer>. Key-value bytes append little-endian <d IEEE754 float64>.",
+    "key_sha256": "1a4e36c78dabf1055cfce825bb619b00cdf28229156ef742727fdd4c15c91477",
+    "key_truth_sha256": "d4651ae2eb5d9772386f740b9b4319a177a17b7aff517d3c904b8adbba17be62",
+    "key_incumbent_prediction_sha256": "fca6594333bdbaa51a390df7ba3a9c492db5e6e74750ef9bdf88e7991951c692",
+    "truth_must_equal_keyed_observations_exactly": true
+  },
+  "timestamp_guard": {
+    "canonical_unit": "UTC_ns",
+    "allowed_conversion": "DatetimeIndex(pd.to_datetime(values,utc=True)).as_unit('ns').asi8",
+    "allowed_integer_reconstruction": "pd.to_datetime(values,unit='ns',utc=True)",
+    "bare_datetime_astype_int64_for_semantic_keys": false,
+    "integer_reconstruction_without_explicit_unit": false,
+    "required_roundtrip": {
+      "integer_identity": true,
+      "raw_and_aligned_key_digest_equal": true,
+      "raw_and_aligned_utc_bounds_equal": true,
+      "raw_and_aligned_kst_days": 61,
+      "nat_count": 0
+    }
+  },
+  "operation_counters": {
+    "claims": 0,
+    "physical_fits": 0,
+    "materializations": 0,
+    "candidate_predictions": 0,
+    "scores": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "P3_reads": 0
+  }
+}

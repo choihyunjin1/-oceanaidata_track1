@@ -1,0 +1,105 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_recipe.v4",
+  "experiment_id": "p2_authoritative_nested_surrogate_recipe_20260825_v4",
+  "created_at_kst": "2026-08-25T23:55:00+09:00",
+  "status": "SEALED_RESUMABLE_CONTROL_REPAIR_NO_FIT_AUTHORIZATION",
+  "problem": "P2",
+  "research_only": true,
+  "training_authorized": false,
+  "submission_generation_authorized": false,
+  "base_recipe": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v3.json",
+    "sha256": "98c13756e6e431a5f47b7b5127de5f1692e7e8c8a44a36f95a7b819892e6a06a"
+  },
+  "supersedes": {
+    "execution_contract": "p2_authoritative_nested_surrogate_execution_20260825_v3",
+    "status": "SUPERSEDED_ORCHESTRATION_ONLY_NEVER_START_OR_RESUME_IN_V3_NAMESPACE",
+    "reason": "v3 scientifically passes but execute_actual requires the actual directory not to exist, then creates it and therefore cannot enter its already-implemented atomic JobStore resume path after a crash",
+    "v3_runner_failure_lines": "scripts/run_p2_authoritative_nested_surrogate_45cell_v3.py:522-526",
+    "v3_actual_model_fits": 0,
+    "v3_actual_directory_created": false,
+    "v3_readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v3",
+    "v3_preexecution_seal_sha256": "413b97d46f309afec1e18d0d9e473b2eb212c83820eb58476be0d8c06f80e9a9",
+    "external_independent_qa": {
+      "path": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v3_external_qa/qa.json",
+      "sha256": "21f58190dc8288f4bf8777b1ba09190d1b84b3b0c89821088237418a27c50521",
+      "bytes": 3351,
+      "science_and_data_semantic_status": "PASS",
+      "orchestration_status": "FAIL"
+    },
+    "cross_v1_v2_v3_job_or_cell_reuse_allowed": false
+  },
+  "authoritative_nested_surrogate_recipe": {
+    "identity": "P2_AUTHORITATIVE_NESTED_CAUSAL_SURROGATE_V4_RESUMABLE",
+    "claim": "v3-byte-pinned authoritative train-only local surrogate comparator with crash-safe same-command v4 resume; never the exact official incumbent",
+    "base_architecture": {
+      "architecture_or_feature_role_changes_allowed": 0,
+      "revision_from_v3": "none"
+    },
+    "operational_resume_contract_v4": {
+      "clean_start": "actual-data zero-fit semantic preflight before actual namespace creation",
+      "resume": "read-only namespace and every committed JobStore manifest audit, then nonblocking exclusive lock, repeat audit and semantic preflight before mutation or fit",
+      "same_exact_command_for_clean_start_and_resume": true,
+      "immutable_execution_start_binds": [
+        "execution contract",
+        "parent recipe",
+        "preexecution seal and JobStore contract",
+        "semantic preflight",
+        "exact command",
+        "authorization",
+        "module",
+        "runner"
+      ],
+      "initial_attempts": 1,
+      "maximum_resume_attempts_after_initial": 2,
+      "maximum_total_attempts": 3,
+      "automatic_resume_allowed_only_for": [
+        "absent process with a started attempt lacking a terminal receipt",
+        "explicit FAILED_TRANSIENT_RESUMABLE attempt receipt"
+      ],
+      "deterministic_failure_policy": "append-only failure receipt and fail closed without automatic resume",
+      "terminal_result": "binding-bearing JSON published by unique fsynced partial and atomic rename",
+      "terminal_receipt": "atomically published and pins exact terminal result SHA-256 and bytes",
+      "finalization_only_recovery": "verified bound result without terminal receipt may backfill receipts under lock without model execution or resume-budget consumption",
+      "partial_policy": "preserve and ignore every stale job, OOF, result, and control-receipt partial",
+      "terminal_result_rerun_allowed": false,
+      "result_based_tuning_allowed": false
+    }
+  },
+  "immutability_receipt": {
+    "supervised_common_ledger_changed": false,
+    "split_population_changed": false,
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "model_hyperparameters_changed": false,
+    "meta_refit_changed": false,
+    "postprocess_changed": false,
+    "family_views_changed": false,
+    "metrics_changed": false,
+    "outer_evaluation_population_changed": false,
+    "only_crash_resume_control_plane_repaired": true
+  },
+  "execution_gates": {
+    "semantic_preflight_may_run": true,
+    "new_training_may_start": false,
+    "separate_exact_command_authorization_required": true,
+    "same_command_resume_may_be_authorized_by_immutable_execution_start": true,
+    "result_based_rerun_or_tuning_allowed": false
+  },
+  "resource_and_external_action_contract": {
+    "new_model_fits_during_readiness": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_era5_process_mutations": 0
+  },
+  "output": {
+    "directory": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v4",
+    "append_only": true,
+    "prediction_files_written": false
+  }
+}

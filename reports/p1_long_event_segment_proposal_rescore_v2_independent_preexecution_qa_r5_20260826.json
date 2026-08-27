@@ -1,0 +1,245 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.independent_preexecution_qa.r5.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "audited_at_kst": "2026-08-26T10:16:00+09:00",
+  "verdict": "NO_GO",
+  "verdict_detail": "NO_GO_P0_UNSEALED_WORKER_BOOTSTRAP_AND_P1_PREFREEZE_OUTER_TARGET_PARSE",
+  "design_sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+  "seal_sha256": "20619d35471f396eecbb6d7e4e60d452eca63feea9488038663b2d41ce7da21d",
+  "preexecution_seal_sha256": "20619d35471f396eecbb6d7e4e60d452eca63feea9488038663b2d41ce7da21d",
+  "contract_sha256": "f64704a47751756cd88d9802eb6cf6ec160290af1f3112051ced91fa72b0febc",
+  "trust_firewall_v5_sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563",
+  "runner_sha256": "e97770f6b9a8657adfddb0cddb9a4fbc0416962810094eb4b86ca5bcc75aef84",
+  "execution_module_sha256": "68b644b1523fef498c00e03ee09058a7f9280761de70ec771e09e8c32a768e81",
+  "severity_counts": {
+    "P0": 1,
+    "P1": 1,
+    "P2": 1
+  },
+  "blocking_finding_count": 2,
+  "authorization_decision": {
+    "independent_qa_pass": false,
+    "actual_authorization_may_be_created": false,
+    "numerical_execution_may_start": false,
+    "fits_may_start": false,
+    "scientific_materializations_may_start": false,
+    "required_successor": "immutable superseding r6-or-later runner, module if needed, tests, seal, preflight proof, and fresh independent QA"
+  },
+  "scope": {
+    "audited": [
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v3_execution_closure_amendment.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v5_trust_firewall_amendment.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_execution_contract.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_execution_authorization_template.json",
+      "src/p1_qc/long_event_segment_proposal_rescore.py",
+      "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+      "scripts/run_p1_long_event_segment_proposal_rescore_v2.py",
+      "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2/preexecution_seal_r5.json",
+      "reports/p1_long_event_segment_proposal_rescore_v2_independent_preexecution_qa_20260826.json"
+    ],
+    "prohibited_and_not_performed": [
+      "execution authorization creation",
+      "execution claim creation",
+      "numerical screen execution",
+      "physical model fit",
+      "scientific materialization",
+      "outer score",
+      "official P1 test/sample/submission/candidate CSV access",
+      "candidate creation",
+      "P3 access or mutation"
+    ]
+  },
+  "audited_file_pins": {
+    "trust_firewall_v5_amendment": {
+      "bytes": 4702,
+      "sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563"
+    },
+    "runner": {
+      "bytes": 119130,
+      "sha256": "e97770f6b9a8657adfddb0cddb9a4fbc0416962810094eb4b86ca5bcc75aef84"
+    },
+    "execution_module": {
+      "bytes": 65898,
+      "sha256": "68b644b1523fef498c00e03ee09058a7f9280761de70ec771e09e8c32a768e81"
+    },
+    "focused_tests": {
+      "bytes": 42378,
+      "sha256": "d6281d9b38852fc2a31e5b7aebd16b0ac3bc933c24a80eef8ba2002cc8480673"
+    },
+    "authorization_false_template": {
+      "bytes": 1404,
+      "sha256": "72feb63603cd9cb48e2ee8a49dcb54bc7132fe13a3f556bd669ab18df4f4a7b6"
+    },
+    "preexecution_seal_r5": {
+      "bytes": 19820,
+      "sha256": "20619d35471f396eecbb6d7e4e60d452eca63feea9488038663b2d41ce7da21d"
+    }
+  },
+  "findings": [
+    {
+      "id": "P0-01",
+      "severity": "P0",
+      "title": "The actual worker bootstrap executes outside the sealed exact snapshot before any worker verification",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:1936-1993 verifies only files below snapshot_root against the exact inventory.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:2567-2583 constructs the worker command as sys.executable, -B, and live Path(__file__).resolve(); it does not execute a runner or bootstrap inside snapshot_root.",
+        "preexecution_seal_r5.json snapshot_static_inventory contains the legacy runner and numerical/project modules but no scripts/run_p1_long_event_segment_proposal_rescore_v2.py entry. The current runner digest is only a separate seal field.",
+        "The child interpreter receives neither -I nor -S. Python startup can therefore process PYTHONPATH, sitecustomize/usercustomize, and site-package .pth code before the live runner reaches authorization or snapshot verification.",
+        "A live runner replacement after parent verification also executes before the worker can compare manifest runner_sha256 at scripts/run_p1_long_event_segment_proposal_rescore_v2.py:1996-2015. A self-hash after process start cannot authenticate code that has already executed.",
+        "This contradicts the r5 amendment exact_worker_inventory claim that substituted or extra code fails before any project or numerical import."
+      ],
+      "concrete_exploit_path": [
+        "After the parent creates and verifies the private snapshot, alter the live runner path or supply startup code through PYTHONPATH/sitecustomize/.pth.",
+        "The supervised child starts that unsealed code under plain -B before _verify_snapshot_manifest is called.",
+        "The unsealed startup code can run arbitrary actions, bypass verification, or mutate process state before claim-bound controls become effective."
+      ],
+      "impact": "The sealed authority does not authenticate the first executable bytes of the actual numerical worker. Consequently r5 is not safely authorizable even though its in-process snapshot verifier is exact.",
+      "required_fix": [
+        "Place the current worker runner or a minimal bootstrap in the exact sealed snapshot inventory and start that snapshot path, never live Path(__file__).",
+        "Have the parent retain a write/delete-denying held handle over the bootstrap bytes from verified copy through worker startup/import completion, or provide an equivalent race-free held-byte launch mechanism.",
+        "Invoke the worker with -I -S -B and an explicit environment allowlist; reject PYTHONPATH, user-site, .pth, sitecustomize, and usercustomize effects.",
+        "After authorization, add only individually pinned runtime package paths without processing .pth files, and verify required interpreter flags.",
+        "Recheck the exact snapshot tree and every project module immediately before and after import, before claim.",
+        "Add negative tests in which malicious PYTHONPATH/sitecustomize tries to write a marker, the live runner is swapped after parent verification, and .pyc/extra/transitive source is raced into the snapshot. All must fail before marker, import, or claim."
+      ]
+    },
+    {
+      "id": "P1-01",
+      "severity": "P1",
+      "title": "Outer labels are parsed and retained before the all-fold prediction freeze",
+      "evidence": [
+        "The r5 amendment outer_label_firewall requires outer truth, anomaly_type, segment targets, precision, and target-derived audits to be first accessed only after record_outer_freeze.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:1020-1024 calls reader.read_csv for the entire train.csv without target-free usecols. The legacy HeldSnapshotInputs parser passes the held handle to unrestricted pandas.read_csv, so label/anomaly columns are materialized before freeze.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:1145-1157 retains that full train DataFrame in worker state.",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:1117-1118 calls legacy._left_censored_positive_event_counts before freeze; legacy runner:1305-1333 explicitly reads label. Although those indices are chronological training prefixes, this still disproves the package's claimed first target access chronology and leaves outer-period target columns resident and reachable.",
+        "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py:701-781 guards only frozen_truth_oof_* state keys. It does not instrument the initial train reader or reject eager outer-period target conversion.",
+        "The numerical candidate path itself correctly moved outer interval scoring after record_outer_freeze, but the earlier reader/state path remains outside that test."
+      ],
+      "impact": "The promised outer evaluation firewall is structurally false: evaluation-period targets are already parsed and available in state before the candidate and all outer predictions are frozen. Intentional non-use by current functions is weaker than enforced non-access.",
+      "required_fix": [
+        "Materialize the pre-freeze full training frame with target-free columns only.",
+        "Provide anchor/inner targets through a separately sealed historical-target view whose rows are physically restricted to the preregistered historical fit/inner-selection horizon and cannot contain any outer evaluation rows.",
+        "Keep all outer-period label/anomaly bytes opaque and outside the DataFrame/state API until record_outer_freeze has durably succeeded.",
+        "Remove or defer the pre-freeze label-based censor audit; if scientifically required for historical training, compute it only from the physically bounded historical-target view.",
+        "Add reader-level sentinels that fail on any pre-freeze outer-period label/anomaly conversion, indexing, column access, metric call, or target-derived audit."
+      ]
+    },
+    {
+      "id": "P2-01",
+      "severity": "P2",
+      "title": "Authorization schema version and nested object membership are not enforced exactly",
+      "evidence": [
+        "AUTHORIZATION_REQUIRED_KEYS at runner:149-165 enforces exact top-level membership.",
+        "Parent authorization checks at runner:1692-1768 and worker checks at runner:2027-2080 do not compare authorization.schema_version with an exact expected value.",
+        "preexecution_seal and independent_qa nested objects are accessed by selected fields but their exact nested membership and complete primitive types are not validated."
+      ],
+      "impact": "The external digest still authenticates all bytes and critical capabilities are compared, so no immediate privilege bypass was demonstrated. However the stated exact fail-closed authorization schema is looser than implemented and forward/unknown fields could be silently accepted in nested objects.",
+      "required_fix": [
+        "Enforce an exact authorization schema_version constant in parent and worker.",
+        "Enforce exact nested key sets and primitive types for preexecution_seal and independent_qa.",
+        "Add wrong-version, missing/extra nested field, and wrong-type negative tests that fail before snapshot, import, repository mutation, or claim."
+      ]
+    }
+  ],
+  "r4_finding_closure_recheck": {
+    "P0_01_authorization_cycle": "CLOSED IN ISOLATION: authorization digest is an external 64-lowercase-hex capability, the immutable runner contains no actual digest literal, and raw/normalized runner hashes are stable.",
+    "P0_02_preflight_transition": "CLOSED: immutable readiness verification excludes live authorization state; the live inspection is attached outside the stable digest.",
+    "P1_01_cross_seal_reopen": "CLOSED: authorization, seal, QA, design, amendment, and execution module use held bound bytes propagated into the private snapshot.",
+    "P1_02_self_declared_inventory": "PARTIALLY CLOSED BUT OVERALL OPEN: in-snapshot membership, hashes, bytecode, extras, links, and executable pins are checked exactly, but P0-01 shows that the actual worker bootstrap is outside that inventory and runs first.",
+    "P1_03_outer_truth_chronology": "PARTIALLY CLOSED BUT OVERALL OPEN: numerical _fit_outer no longer reads outer truth before record_outer_freeze, but P1-01 shows eager full-train target parsing and retention before that boundary.",
+    "P2_01_postunlink_recovery": "CLOSED: supervision failure with an absent lock uses read-only durable-success recovery; focused crash tests passed."
+  },
+  "scientific_and_operational_static_checks": {
+    "scientific_design_unchanged": true,
+    "anchor_column_exact": "event_day_balanced_binary_lgbm",
+    "round_b_seeds": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "segment_seeds": [
+      20260826,
+      20260843,
+      20260871
+    ],
+    "fit_plan": {
+      "inner_anchor": 9,
+      "inner_segment": 54,
+      "outer_segment": 9,
+      "total": 72
+    },
+    "materialization_plan": {
+      "inner_anchor_surfaces": 3,
+      "inner_context_surfaces": 9,
+      "outer_context_surfaces": 9,
+      "total": 21
+    },
+    "inner_fit_cutoffs_kst": [
+      "2024-05-24T23:50:00+09:00",
+      "2024-08-24T23:50:00+09:00",
+      "2024-11-23T23:50:00+09:00"
+    ],
+    "inner_oos_shelves": [
+      "inner_2024_jul_aug",
+      "inner_2024_oct_nov",
+      "inner_2025_jan_feb"
+    ],
+    "full_support_anchor_surface": "PASS STATIC: each of three original Round-B seeds transforms and predicts full support_positions, the mean is finite and bounded, uniform frozen postprocess is applied, every support row is strictly after fit_end, and the central calibration positions are an exact subset; the old p=1/prediction=0 sentinel is absent.",
+    "feature_firewall": "PASS STATIC EXCEPT FINDING P1-01: same-station/same-time other-layer peer is enforced, G has no peer, and context banks are bounded to 24/72, 48/168, and 24/72/168 on isolated cadence surfaces.",
+    "selection_and_evaluation": "PASS STATIC EXCEPT FINDING P1-01: inner-only structure/threshold selection, one outer evaluation, paired block bootstrap 5000 with seed 20260826 and unchanged gates are wired.",
+    "single_attempt_and_terminal_publication": "PASS STATIC/FOCUSED TESTS: 72-fit and 21-materialization ledgers, no-rerun lock, parent crash/timeout terminals, terminal-last success, and post-unlink read-only recovery are implemented."
+  },
+  "verification_runs": {
+    "focused_pytest_parent_environment_without_P1_DATA_DIR": {
+      "command": ".venv-p1\\Scripts\\python.exe -m pytest -q -ra -p no:cacheprovider tests\\test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "result": "26 passed, 1 skipped (P1_DATA_DIR not configured)",
+      "exit_code": 0
+    },
+    "focused_pytest_with_command_scoped_nonofficial_P1_DATA_DIR": {
+      "command": "P1_DATA_DIR=<historical P1 QC directory> .venv-p1\\Scripts\\python.exe -m pytest -q -ra -p no:cacheprovider tests\\test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "result": "27 passed",
+      "exit_code": 0
+    },
+    "ruff": {
+      "scope": [
+        "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py",
+        "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py"
+      ],
+      "result": "All checks passed!",
+      "exit_code": 0
+    },
+    "read_only_preflight": {
+      "calls_compared": 2,
+      "exit_codes": [
+        0,
+        0
+      ],
+      "stdout_bytes_each": 17960,
+      "stdout_sha256_both": "707c3d6215db4cc75f2e5d2e9838a76e8b9118b66ec0f0f51ed2d02c1abb89e0",
+      "stdout_byte_identical": true,
+      "verification_sha256_both": "793f131d279ff31d08dfb87ca8fe5f150fc05edfbeafffedc9af4cc9230e4fb3",
+      "seal_sha256_both": "20619d35471f396eecbb6d7e4e60d452eca63feea9488038663b2d41ce7da21d",
+      "tracked_namespace_state_before_after_identical": true,
+      "tracked_namespace_state_sha256": "5de8c47a9caa5cb1d89097b7c43b0b67cf0b8ba5f256b9d326ceecbd979acb43",
+      "actual_authorization_exists": false
+    }
+  },
+  "operation_counters_at_qa": {
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  },
+  "final_instruction": "Do not create the actual authorization and do not execute r5. Preserve r5 immutably as NO_GO, implement P0-01 and P1-01 plus the specified negative tests in a new successor package, tighten P2-01, reseal at zero operations, and request fresh independent QA."
+}

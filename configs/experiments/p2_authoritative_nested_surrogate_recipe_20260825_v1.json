@@ -1,0 +1,274 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_recipe.v1",
+  "experiment_id": "p2_authoritative_nested_surrogate_recipe_20260825_v1",
+  "created_at_kst": "2026-08-25T19:55:00+09:00",
+  "status": "SEALED_DRY_RUN_BEFORE_ANY_NEW_SCORE_OR_FIT",
+  "problem": "P2",
+  "research_only": true,
+  "exact_official_incumbent_claimed": false,
+  "promotion_authorized": false,
+  "training_authorized": false,
+  "submission_generation_authorized": false,
+  "chosen_decision": {
+    "verdict": "NEW_AUTHORITATIVE_SURROGATE_REQUIRED",
+    "path": "A_NEW_AUTHORITATIVE_NESTED_SURROGATE_RECIPE",
+    "central_contract_revision_required": false,
+    "reason": "Historical exact causal prefix state is unavailable, while one nested train-only recipe can own every exactness dimension for all compared families without weakening the exact-incumbent standard.",
+    "why_not_central_revision": "A wording revision cannot create missing prefix masks, component OOF, epoch selection, meta-refit, May-June OOF, or complete-pipeline seed state; it would relax the claim without producing a common causal comparison surface."
+  },
+  "evidence": {
+    "decisive_recon_preregistration": {
+      "path": "artifacts/decisive_local_recon_20260825_v1/preregistration.json",
+      "sha256": "6ead6ca745a0c204f04377c2510a2206b61fe6ccf976963fdb7a7cccc070b073"
+    },
+    "exact_audit": {
+      "path": "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+      "sha256": "8484b73deeb508f1471e0c0baf7f0cad9a92fbcd8d2a569e94ab22b0b11727ae"
+    },
+    "exact_audit_seal": {
+      "path": "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/seal.json",
+      "sha256": "b14468e73384a762ed30b84327b10a702e83641cb15196f7505ba8a47476b1e4"
+    },
+    "matched_common_protocol": {
+      "path": "artifacts/matched_budget_local_compare_20260825/common_protocol.json",
+      "sha256": "a92ba760a764d8f6759fa5ad281efe35139ddbc7f956654c76c7143fe573e2c8"
+    },
+    "matched_config": {
+      "path": "configs/experiments/p2_matched_budget_local_compare_20260825_v1.json",
+      "sha256": "7723ce7b640da9d9eed499e046b1aa26e8a264c89047eb762dfa64c3753323bc"
+    },
+    "matched_result": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/result.json",
+      "sha256": "227db5f9181953e77f7b97d1c9ca26f529dafad91a9ea018997471ffadd7c20b"
+    },
+    "matched_qa": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/qa.json",
+      "sha256": "e55e8840c90502cd3dde330b01535b4bbef094f42b8928bd1321f5983e31f242"
+    },
+    "matched_manifest": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/manifest.json",
+      "sha256": "fc6db1f65a701da38df1ab1327904056678155fc5cbf7a80988dae564f59ce7e"
+    },
+    "matched_preregistration_seal": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/preregistration_seal.json",
+      "sha256": "d016d6f2893cf85f791fa3c7bcdbca357810d58a485fbe4f49aca0ccde1ae717"
+    },
+    "matched_technical_resume_seal": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/technical_resume_seal.json",
+      "sha256": "85aa23f872dd52ba8637bc494999e688257eb1d008ad2459c3522c674cc00c5b"
+    }
+  },
+  "historical_exactness_verdict": {
+    "verdict": "NOT_CURRENTLY_REPRODUCIBLE_AS_EXACT_SAME_PREFIX_FOLD_TRAIN_ONLY_INCUMBENT",
+    "required_exact_prefix_cells": 15,
+    "currently_exact_cells": 0,
+    "blocking_recipe_gap_ids": [
+      "DEEP_PREFIX_MASK_API_MISSING",
+      "PREFIX_LOCAL_COMPONENT_OOF_RECIPE_MISSING",
+      "PREFIX_LOCAL_EPOCH_SELECTION_RECIPE_MISSING",
+      "COMPLETE_REFERENCE_SEED_REPLICATES_MISSING",
+      "REFERENCE_SEED_FROZEN_OOF_EQUALITY_IMPOSSIBLE_ON_REQUIRED_KEYS",
+      "META_PARAMETER_REFIT_SEMANTICS_UNDEFINED"
+    ]
+  },
+  "exactness_dimensions": {
+    "population and row keys": {
+      "historical_exact_state": "PARTIAL_AND_NONCOMMON",
+      "surrogate_owner": "sealed reference OOF hashes plus a pre-score key-manifest receipt",
+      "dry_run_evidence": "five cutoff surfaces each report 78156 rows and share one matched configuration",
+      "execution_requirement": "Every family, seed, and cutoff must reproduce the same ordered station/layer/time/truth key digest before any score is computed."
+    },
+    "outer folds": {
+      "historical_exact_state": "MAY_JUNE_MISSING_AND_EXISTING_WINDOWS_NONFORWARD",
+      "surrogate_owner": "outer_fold_contract",
+      "dry_run_evidence": "three required fold names occur on the matched causal surrogate",
+      "execution_requirement": "No family-specific fold or validation-window change is allowed."
+    },
+    "training cutoffs": {
+      "historical_exact_state": "FIVE_PREFIX_RECIPES_MISSING",
+      "surrogate_owner": "chronological_prefix_contract",
+      "dry_run_evidence": "matched surface carries all five registered fractions",
+      "execution_requirement": "The cutoff timestamp receipt must be identical across families for every outer fold and fraction."
+    },
+    "complete-pipeline seeds": {
+      "historical_exact_state": "MIXED_ONE_AND_THREE_SEED_COMPONENTS_ONLY",
+      "surrogate_owner": "complete_pipeline_seed_contract",
+      "dry_run_evidence": "matched causal surface has three complete-pipeline seed columns",
+      "execution_requirement": "Every stochastic component and meta fit derives its child seed from the same complete-pipeline seed."
+    },
+    "prefix mask semantics": {
+      "historical_exact_state": "MISSING_AND_COMPLEMENT_SPLIT_LEAKS_FUTURE_LABELS",
+      "surrogate_owner": "chronological_prefix_contract",
+      "dry_run_evidence": "semantic contract only; implementation conformance remains required",
+      "execution_requirement": "Target temp/psal labels outside the eligible chronological prefix are jointly unavailable to every fit and selector."
+    },
+    "component OOF availability": {
+      "historical_exact_state": "REQUIRED_MAY_JUNE_AND_PREFIX_LOCAL_OOF_MISSING",
+      "surrogate_owner": "nested_component_oof_contract",
+      "dry_run_evidence": "semantic contract only; no current exact component OOF claim",
+      "execution_requirement": "Stack and gate may fit only on nested expanding-window component OOF predictions."
+    },
+    "epoch and meta-refit semantics": {
+      "historical_exact_state": "UNDEFINED_FOR_ARBITRARY_PREFIX",
+      "surrogate_owner": "epoch_and_meta_contract",
+      "dry_run_evidence": "semantic contract only; no current exact refit claim",
+      "execution_requirement": "Epochs, stack weights, and gate coefficients must be selected inside each prefix without frozen exposed-block parameters."
+    },
+    "postprocess opportunity and metric aggregation": {
+      "historical_exact_state": "DETERMINISTIC_POSTPROCESS_REPRODUCIBLE_BUT_ON_NONCOMMON_OOF",
+      "surrogate_owner": "matched_budget_postprocess_metric_contract",
+      "dry_run_evidence": "matched comparison applies the same profile projection, RMSE aggregation, and day bootstrap",
+      "execution_requirement": "All families receive the identical fixed postprocess and metric implementation."
+    }
+  },
+  "authoritative_nested_surrogate_recipe": {
+    "identity": "P2_AUTHORITATIVE_NESTED_CAUSAL_SURROGATE_V1",
+    "claim": "new authoritative train-only surrogate comparator; never the exact official incumbent",
+    "base_architecture": {
+      "source": "official inference component roles and immutable model-family hyperparameters pinned by the exact audit source hashes",
+      "components": [
+        "400-round public-layer LightGBM router",
+        "depth_query_bitcn contributor",
+        "moment_units_scratch contributor",
+        "lsti_style contributor",
+        "timemixerpp_style contributor",
+        "layer-specific nonnegative sum-to-one stack",
+        "public-state soft contributor gate"
+      ],
+      "architecture_or_feature_role_changes_allowed": 0
+    },
+    "evaluation_population": {
+      "reference_surface": "matched_config.surfaces.forward_causal_surrogate.oof",
+      "expected_rows_per_prefix_fraction": 78156,
+      "expected_repeated_rows_all_fractions": 390780,
+      "target_layers": [2, 3, 4],
+      "same_ordered_key_and_truth_digest_across_families_required": true,
+      "key_columns": ["fold", "station", "layer", "time"],
+      "hidden_target_label_access_allowed": false
+    },
+    "outer_fold_contract": {
+      "timezone": "Asia/Seoul",
+      "folds": [
+        {"id": "outer_2024_sep_oct", "validation_half_open_kst": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"]},
+        {"id": "outer_2025_may_jun", "validation_half_open_kst": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"]},
+        {"id": "outer_2025_jul_aug", "validation_half_open_kst": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"]}
+      ],
+      "embargo_days": 7,
+      "eligible_training_rule": "time_kst < validation_start_kst - 7 days",
+      "future_or_validation_complement_labels_allowed": false
+    },
+    "chronological_prefix_contract": {
+      "fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+      "unit": "unique eligible KST timestamp",
+      "ordering": "ascending",
+      "count_rule": "ceil(fraction * eligible_unique_timestamp_count)",
+      "tie_rule": "include every row at the selected cutoff timestamp",
+      "population_rule": "oldest timestamps through the selected cutoff inclusive",
+      "joint_target_mask_columns": ["temp", "psal"],
+      "joint_target_mask_layers": [2, 3, 4],
+      "mask_rule": "all target labels later than the selected cutoff or inside validation/embargo are unavailable before every fit, epoch choice, stack fit, and gate fit"
+    },
+    "nested_component_oof_contract": {
+      "inner_fold_count": 3,
+      "construction": "split prefix unique timestamps into four deterministic contiguous equal-count blocks using integer boundaries floor(j*N/4); for inner fold j=1..3 train on blocks strictly before validation block j and validate on block j after a seven-day embargo",
+      "component_oof_population": "concatenated validation predictions from the three expanding inner folds",
+      "outer_validation_labels_available_to_inner_pipeline": false,
+      "stack_fit": "per target layer nonnegative least squares normalized to sum one; all-zero solution falls back to uniform contributor weights",
+      "gate_fit": "fixed public-state features only, trained on the same nested component OOF rows",
+      "frozen_official_stack_or_gate_reuse_allowed": false
+    },
+    "epoch_and_meta_contract": {
+      "router_rounds": 400,
+      "deep_epoch_selection": "for each component and complete-pipeline seed, choose the minimum-RMSE checkpoint inside each inner fold and use the middle of the three integer best epochs for the full-prefix refit",
+      "epoch_tie_break": "earliest epoch",
+      "full_prefix_contributor_refit": true,
+      "stack_and_gate_refit_per_outer_fold_prefix_seed": true,
+      "checkpoint_or_meta_parameter_reuse_across_outer_folds_or_prefixes": false
+    },
+    "complete_pipeline_seed_contract": {
+      "seeds": [20260823, 20260824, 20260825],
+      "child_seed_rule": "int(SHA256('P2_AUTH_NESTED_V1|complete_seed|component|outer_fold|prefix_fraction|inner_fold_or_full')[:16], 16) mod 2147483647",
+      "every_stochastic_component_replicated_for_every_complete_seed": true,
+      "seed_averaging": "arithmetic mean after identical per-seed postprocess"
+    },
+    "postprocess_contract": {
+      "public_layer_1_5_profile_projection": true,
+      "public_state_soft_gate": true,
+      "route_gate_layers": [2, 4],
+      "extrapolation_factors": {"2": 10.0, "3": 0.0, "4": 2.0},
+      "final_profile_projection": true,
+      "same_postprocess_for_every_family": true
+    }
+  },
+  "preregistered_comparison": {
+    "status": "SEALED_DESIGN_ONLY_NO_FIT_AUTHORIZATION",
+    "surface": "P2_AUTHORITATIVE_NESTED_CAUSAL_SURROGATE_V1",
+    "families": {
+      "incumbent_surrogate": {
+        "settings": ["INCUMBENT_NOOP"],
+        "default": "INCUMBENT_NOOP"
+      },
+      "conservative_stack": {
+        "settings": ["STACK_W0500", "STACK_W0625", "STACK_W0750"],
+        "default": "STACK_W0500"
+      },
+      "round_b": {
+        "settings": ["CAUSAL_RESIDUAL_SCALE025", "FALLBACK_BLEND50_A0625", "CAUSAL_ON_FALLBACK"],
+        "default": "CAUSAL_RESIDUAL_SCALE025"
+      }
+    },
+    "same_population_folds_cutoffs_seeds_postprocess_metric_required": true,
+    "outer_fold_count": 3,
+    "prefix_fraction_count": 5,
+    "complete_pipeline_seed_count": 3,
+    "required_outer_prefix_cells": 15,
+    "required_seeded_pipeline_cells": 45,
+    "primary_metric": "fold_equal_layer_equal_rmse_c",
+    "secondary_metrics": ["fixed_historical_row_weighted_rmse_c", "by_fold_rmse_c", "by_layer_rmse_c"],
+    "uncertainty": {
+      "unit": "KST calendar day sampled within outer fold with shared draws across families, cutoffs, and seeds",
+      "replicates": 5000,
+      "interval": 0.9,
+      "seed": 20260825
+    },
+    "family_or_grid_changes_after_first_score": 0,
+    "official_public_score_use": "post-hoc transport audit only",
+    "promotion_from_existing_or_future_surrogate_allowed": false
+  },
+  "execution_gates": {
+    "dry_run_contract_validator_may_run": true,
+    "new_training_may_start": false,
+    "requirements_before_separate_training_authorization": [
+      "prefix-mask API implements and unit-tests joint target temp/psal masking",
+      "nested component OOF generator writes ordered key/truth digests",
+      "epoch and meta-refit implementation is hash-pinned",
+      "three complete-pipeline seed fan-out is unit-tested",
+      "45-cell execution plan dry-runs without accessing labels outside each prefix",
+      "all family views declare one identical evaluation key digest",
+      "independent validator returns PASS on every exactness dimension"
+    ],
+    "automatic_stop_conditions": [
+      "any family differs in population, row order, outer fold, cutoff timestamp, seed set, postprocess, or metric",
+      "any exact-official-incumbent wording is emitted for the surrogate",
+      "any frozen exposed-block stack weight, gate coefficient, or epoch is reused",
+      "any official test/sample/submission value or Public score enters selection",
+      "any implementation or grid changes after the first score"
+    ]
+  },
+  "resource_and_external_action_contract": {
+    "new_model_fits": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_era5_process_mutations": 0,
+    "cpu_threads_if_future_training_is_separately_authorized": 4
+  },
+  "output": {
+    "directory": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v1",
+    "append_only": true,
+    "aggregate_contract_only": true,
+    "prediction_files_written": false
+  }
+}

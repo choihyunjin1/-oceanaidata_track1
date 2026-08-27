@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_era5_context_transfer_v1",
+  "status": "PREREGISTERED_BEFORE_FIRST_ERA5_VALUE_DOWNLOAD",
+  "created_at_kst": "2026-08-24T00:16:50.2355186+09:00",
+  "problem": "P3",
+  "objective": {
+    "metric": "pooled_case_lead_RMSE_m",
+    "direction": "minimize",
+    "single_hypothesis": "A station-agnostic model pretrained on pre-2024 ERA5 wave-state transitions and continued only on each causal local training prefix transfers storm growth and decay information that is absent from the small P3 training set.",
+    "structural_change": "same-location_pre2024_reanalysis_context_pretraining",
+    "not_a_direct_future_forcing_join": true
+  },
+  "bindings": {
+    "external_scope": {
+      "path": "configs/external_data/era5_p3_context_pretrain_scope_2026-08-24.json",
+      "sha256": "5b6c8c48abf25bf18da5870bbea2ac16c6cafce4f16836cc2cd876db6b543a05"
+    },
+    "transport_amendment_after_smoke": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1_transport_amendment_r2_2026-08-24.json",
+      "sha256": "0fa8f2b1642976157ce6827dc2215430926e7eb27030e8846b321294c710cf48"
+    },
+    "external_parent_preregistration": {
+      "path": "configs/experiments/p3_external_storm_pretrain_v1.json",
+      "sha256": "a2082936c86844a03ac814c7325b26cea4552e91a8222826a95677ee18e9d0a3"
+    },
+    "feature_contract": {
+      "path": "configs/experiments/p3_era5_context_transfer_features_v1.json",
+      "sha256": "d6b720b55b28d5fc4bbc065a9b585f2607acce7552bae89fd4683dda0c25cc9b",
+      "columns_sha256": "ef0a0a5ec822d2d5fa8fa875ed9ca584bbd5fee097789601d149a85c771bc454",
+      "feature_count": 286
+    },
+    "implementation_before_first_value_access": {
+      "era5_pretrain_data_sha256": "4b35297d5f0520300a5d2625ba4a9625beea169fbcd01d600b2e230e3ecb7273",
+      "era5_context_transfer_sha256": "d0e7e7fac28d745ae62f32918dc0396a0f9b53ac20444358788e8c03e4a9f039",
+      "prepare_era5_runner_sha256": "e963894a147994dc2bc6571b25db4c90c72a633ce3410d909271dbaae62ee28f",
+      "p3_validation_sha256": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+      "ocean_external_policy_sha256": "9681f329da94d5ff0c41a30b6dce00a813d3654c2318ed4c3c22a4dd5d043e7e",
+      "context_transfer_runner_sha256": "45ac9630fd30c0cfef25e82ec969e29dcd6b665c54580e58c432dea14164bbca",
+      "context_transfer_runner_tests_sha256": "8889fc23a18cb5729ecbf88048066cadbb0101e54d00912a8e645dc5c2e327cf"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "validation_keys": {
+      "path": "artifacts/p3_meaningful_learning_curve_20260823_v1/validation_keys.parquet",
+      "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+    },
+    "frozen_incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6",
+      "full_prefix_rows": 1086,
+      "full_prefix_cases": 181,
+      "full_prefix_rmse_m": 0.7799487224864321
+    }
+  },
+  "source_case_builder": {
+    "native_cadence_minutes": 60,
+    "context_hours": 48,
+    "anchor_spacing_hours": 6,
+    "minimum_current_hs_m": 1.5,
+    "lead_hours": [3, 6, 9, 12, 18, 24],
+    "all_six_targets_required": true,
+    "input_years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    "source_train_years": [2014, 2015, 2016, 2017, 2018, 2019, 2020],
+    "source_validation_years_exactly_three": [2021, 2022, 2023],
+    "split_boundary_rule": "every source case used for training or validation must have its complete [anchor-48h, anchor+24h] footprint inside its assigned calendar year; no context or target may cross a train/held-year boundary"
+  },
+  "features": {
+    "station_identity": false,
+    "absolute_calendar_or_timestamp": false,
+    "past_only": true,
+    "conceptual_common_state": [
+      "hs",
+      "tp",
+      "hmax",
+      "wvdir_sin",
+      "wvdir_cos",
+      "wspd",
+      "wdir_sin",
+      "wdir_cos",
+      "airt",
+      "relh",
+      "caph",
+      "wave_energy",
+      "wind_input_proxy"
+    ],
+    "lags_hours": [3, 6, 12, 24, 48],
+    "windows_hours": [6, 12, 24, 48],
+    "window_statistics": ["mean", "std", "delta", "slope"],
+    "expanded_feature_count": 286,
+    "expanded_feature_rule": "for each of the 13 conceptual series, current plus lags 3/6/12/24/48h plus mean/std/delta/slope for windows 6/12/24/48h, in conceptual-series order",
+    "missingness_contract": "missing common values remain NaN and are handled natively by CatBoost; no future fill and no explicit mask columns",
+    "source_scaling": "context-relative log-energy target and cadence-invariant summaries",
+    "local_feature_selection": "the exact 286 expanded names generated by common_feature_columns(), all of which must exist in the frozen train-only feature cache in the same order"
+  },
+  "model": {
+    "family": "CatBoost context transition pretrain followed by local continuation",
+    "target": "log1p(future_hs)-log1p(current_hs)",
+    "lead_h_as_numeric_feature": true,
+    "source_pretrain": {
+      "loss_function": "RMSE",
+      "iterations": 600,
+      "depth": 8,
+      "learning_rate": 0.04,
+      "l2_leaf_reg": 8.0,
+      "random_seed": 20260824,
+      "thread_count": -1,
+      "allow_writing_files": false
+    },
+    "local_continuation_each_fold": {
+      "init_model": "fixed source pretrain model",
+      "iterations": 250,
+      "depth": 8,
+      "learning_rate": 0.03,
+      "l2_leaf_reg": 12.0,
+      "random_seed": 20260824,
+      "sample_weight": "exp(-0.45*max(current_hs-1.5,0))",
+      "hyperparameter_search": false
+    },
+    "matched_local_only_control_purpose": "separate the value of ERA5 pretraining from model family, feature surface, optimizer schedule, tree budget, local continuation, and postprocessing effects; only stage-1 training data domain differs",
+    "matched_local_only_control": {
+      "stage1": {
+        "training_data": "same_local_fold_prefix",
+        "iterations": 600,
+        "depth": 8,
+        "learning_rate": 0.04,
+        "l2_leaf_reg": 8.0,
+        "sample_weight": "uniform",
+        "init_model": false
+      },
+      "stage2": {
+        "training_data": "same_local_fold_prefix",
+        "iterations": 250,
+        "depth": 8,
+        "learning_rate": 0.03,
+        "l2_leaf_reg": 12.0,
+        "sample_weight": "exp(-0.45*max(current_hs-1.5,0))",
+        "init_model": "independent_stage1_local_model"
+      },
+      "random_seed": 20260824,
+      "same_286_features_log_delta_and_postprocess": true
+    },
+    "prediction": "expm1(log1p(current_hs)+predicted_target), clipped to 0..30m",
+    "postprocess": {
+      "fixed_long_lead_persistence_weight": 0.2,
+      "active_leads_h": [12, 18, 24],
+      "same_as_frozen_incumbent_generation": true,
+      "blend_or_router_search": false
+    }
+  },
+  "validation": {
+    "source_checks": {
+      "three_unseen_years": [2021, 2022, 2023],
+      "required_metric": "RMSE versus persistence by year and lead",
+      "required_quality": "finite schema, complete time coverage, physical ranges, fixed cells, cutoff, checksum and provenance",
+      "source_validation_case_rule": "each validation anchor's complete [anchor-48h, anchor+24h] footprint must remain inside one held calendar year; select anchors at least 78h apart per station",
+      "source_bootstrap_cluster": "station-year 78h event block containing all six leads",
+      "minimum_finite_fraction_each_dynamic_variable": 0.995,
+      "all_three_year_rmse_deltas_vs_persistence_below_zero": true,
+      "pooled_source_event_bootstrap_ci90_upper_below_zero": true,
+      "long_leads_18h_24h_pooled_must_not_degrade": true,
+      "domain_classifier_auc": "always report; AUC >= 0.98 permanently forbids direct source/local pooling or pretrain-only promotion but does not cancel the already-restricted local-continuation transfer test",
+      "direct_source_local_row_pooling": false
+    },
+    "local_outer_windows_exactly_three": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "validation_universe": "exact full-prefix 181-case frozen incumbent keys",
+    "bootstrap_unit": "episode_id cluster containing its whole complete six-lead case; current frozen keys have one episode_id per case, so this is numerically case bootstrap but keeps the causal grouping explicit",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260824,
+    "outer_result_policy": "candidate predictions are durably written and hashed before target_hs is read; only prefix_fraction==1.0 comparator rows are allowed and keys must be unique",
+    "benchmark_status": "reused research benchmark previously viewed by earlier model generations; not an untouched confirmatory holdout",
+    "attempts": "one fixed model evaluated once across exactly three historical windows; no result-driven rerun"
+  },
+  "decision_gate": {
+    "viewpoint_signal_gate": {
+      "comparison": "ERA5-pretrained local continuation minus matched local-only control",
+      "pooled_rmse_delta_below_zero": true,
+      "minimum_improved_local_windows": 2,
+      "paired_episode_bootstrap_ci90_upper_below_zero": true
+    },
+    "solution_gate_comparison": "ERA5-pretrained local continuation minus frozen incumbent",
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_local_windows": 2,
+    "pooled_whole_case_bootstrap_ci90_upper_below_zero": true,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "all_source_quality_provenance_cutoff_checks": true,
+    "all_split_and_target_leakage_checks": true,
+    "on_pass": "research candidate only; test inference remains separately unauthorized",
+    "on_fail": "seal as no-go and stop this viewpoint without tuning"
+  },
+  "access_and_output": {
+    "artifact_dir": "artifacts/p3_era5_context_transfer_20260824_v1",
+    "external_quarantine": "external_data/quarantine/era5_p3_context_pretrain_v1",
+    "official_test_files_read": false,
+    "submission_created": false,
+    "submission_uploaded": false,
+    "upload_count": 0
+  },
+  "prohibitions": {
+    "evaluation_period_external_values": true,
+    "anonymous_test_timestamp_reconstruction": true,
+    "future_era5_values_as_runtime_features": true,
+    "test_context_or_test_index_read": true,
+    "hyperparameter_search": true,
+    "post_result_weight_threshold_or_feature_tuning": true,
+    "submission_creation_or_upload": true
+  }
+}

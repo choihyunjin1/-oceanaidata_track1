@@ -1,0 +1,116 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_execution.v5",
+  "experiment_id": "p2_authoritative_nested_surrogate_execution_20260825_v5",
+  "created_at_kst": "2026-08-25T23:59:50+09:00",
+  "status": "SEALED_EXECUTION_READY_DRY_RUN_NO_ACTUAL_FIT",
+  "base_config": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_execution_20260825_v4.json",
+    "sha256": "b7533ba1e435c25de9d0cf6e10b8febbed2637f4677a95b813ac6de3f5f9d466"
+  },
+  "supersedes": {
+    "status": "SUPERSEDES_V4_LAUNCH_BINDING_ONLY_NEVER_START_OR_RESUME_V4",
+    "reason": "independent QA found that v4 accepted no exact authorization schema_version and its command depended on an unset P2_DATA_DIR; v5 changes only these launch bindings",
+    "v4_actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v4",
+    "v4_actual_directory_created": false,
+    "v4_actual_model_fits": 0,
+    "v4_science_status": "PASS_INHERITED_BYTE_IDENTICAL",
+    "v4_resume_engine_status": "PASS_INHERITED_BYTE_PINNED",
+    "cross_v1_v2_v3_v4_job_or_cell_reuse_allowed": false
+  },
+  "parent_contract": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v5.json",
+    "sha256": "3ff52057567185f40537c182032b8d4079609fefda132535526e4762c362a520",
+    "contract_seal_path": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v5/contract_seal.json",
+    "contract_seal_sha256": "17b6d613c772c17e799b8684133673c600cca7befa8b6e2292ccd398f7e001a6"
+  },
+  "source_pins": {
+    "src/p2_restore/authoritative_nested_surrogate_execution_v4.py": "cfe48c1fd4566feca620724cf4616ec0cbdf2bf2d8ae7a5896f9038d69638967",
+    "tests/test_p2_authoritative_nested_surrogate_execution_v4.py": "5b4825f4a4203185131b35fbafd61852647a9c1794810efda5555f6223ca3a02",
+    "src/p2_restore/authoritative_nested_surrogate_execution_v5.py": "c2e4ca7a624eea003f7212e4f034e63e8b026930b55229cd493b38a8a45143e3",
+    "tests/test_p2_authoritative_nested_surrogate_execution_v5.py": "6b1f4d6bfb9dd3f3f20bb4b21b56f3a05087ab6242216393692eb2c22258bcc5"
+  },
+  "v5_evidence_pins": {
+    "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v4/preexecution_seal.json": "10bd64fb32ec6706a1d12dce473a91eb959b6549da12dcb1dc6aaa3d32c63c3d",
+    "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v4/actual_data_semantic_preflight.json": "70b5ce3b87f404969a731891d6228fc26502e7b62e6505cef0479643060798b4",
+    "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v4/qa.json": "889d8ed983109df3b75d2af527bac61f265d8861e9197951b1167ef36e75b1f4",
+    "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v4/manifest.json": "8086e2f941d7c16e9ac8f693c5296dd2ede722c48780429ec70b39d163f473b1"
+  },
+  "required_authorization": {
+    "schema_version": "p2_authoritative_nested_surrogate_execution_authorization.v5",
+    "exact_match_required": true,
+    "same_contract_crash_resume_authorized": true,
+    "maximum_automatic_resume_attempts_after_initial": 2,
+    "maximum_total_attempts": 3,
+    "result_based_rerun_or_tuning_authorized": false,
+    "v1_v2_v3_v4_job_or_cell_reuse_authorized": false,
+    "single_scientific_contract_only": true,
+    "single_execution_only": false
+  },
+  "resolved_data_dir_contract": {
+    "absolute_path": "C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore",
+    "observations_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "observations_bytes": 49058719,
+    "exact_command_contains_literal_path": true,
+    "environment_variable_dependency": false,
+    "directory_enumeration_allowed": false,
+    "official_test_sample_submission_reads_allowed": false
+  },
+  "semantic_preflight_v5": {
+    "science_surface_inherited_from_v4": true,
+    "expected_scientific_v4_sha256": "1deca277e1aba5411304af77102f18b57dece1b9eea399a6b58248d1d030eb99",
+    "actual_data_dir_exactly_bound": true,
+    "clean_start_before_actual_namespace": true,
+    "resume_under_exclusive_lock_before_fit": true,
+    "receipt_sha256_bound_to_preexecution_seal": true,
+    "actual_model_fits": 0,
+    "predictions": 0,
+    "scores": 0
+  },
+  "immutability_receipt_v5": {
+    "supervised_common_ledger_changed": false,
+    "source_local_split_changed": false,
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "component_hyperparameters_changed": false,
+    "meta_refit_changed": false,
+    "postprocess_changed": false,
+    "family_views_changed": false,
+    "metrics_changed": false,
+    "expected_evaluation_rows_per_fraction": 78156,
+    "v4_resume_engine_changed": false,
+    "only_authorization_schema_and_resolved_data_dir_binding_changed": true
+  },
+  "checkpoint_resume": {
+    "exclusive_process_lock": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/execution.lock",
+    "namespace": "p2_authoritative_nested_surrogate_actual_20260825_v5",
+    "same_exact_command_clean_or_resume": true,
+    "clean_start_preflight_before_namespace": true,
+    "resume_read_only_audit_before_lock": true,
+    "resume_strict_audit_and_semantic_preflight_under_lock_before_fit": true,
+    "immutable_execution_start_receipt": "execution_start.json",
+    "initial_attempts": 1,
+    "maximum_resume_attempts_after_initial": 2,
+    "maximum_total_attempts": 3,
+    "automatic_resume_gate": "latest started attempt has no terminal receipt, or has explicit FAILED_TRANSIENT_RESUMABLE receipt, and no active lock/result/deterministic failure",
+    "deterministic_failure_policy": "append-only FAILED_DETERMINISTIC_CLOSED receipt; no automatic resume",
+    "control_receipt_publish": "v4 byte-pinned unique partial, file fsync, atomic rename",
+    "terminal_result_publish": "binding-bearing JSON via unique partial, file fsync, atomic rename",
+    "terminal_receipt_publish": "pins exact result SHA-256 and bytes via atomic rename",
+    "finalization_only_recovery": "under lock, verified result may backfill terminal receipts without execute_curve or resume-budget consumption",
+    "stale_partial_policy": "preserve and ignore, never completion",
+    "terminal_result_rerun_allowed": false,
+    "result_based_tuning_allowed": false,
+    "v1_v2_v3_v4_job_reuse_allowed": false
+  },
+  "exact_command": "$env:OMP_NUM_THREADS='4'; $env:MKL_NUM_THREADS='4'; $env:OPENBLAS_NUM_THREADS='4'; $env:NUMEXPR_NUM_THREADS='4'; $env:CUDA_VISIBLE_DEVICES='0'; .\\.venv-p1\\Scripts\\python.exe scripts\\run_p2_authoritative_nested_surrogate_45cell_v5.py --config \"configs\\experiments\\p2_authoritative_nested_surrogate_execution_20260825_v5.json\" --execute --data-dir \"C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore\" --preexecution-seal \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v5\\preexecution_seal.json\" --authorization \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v5\\EXECUTION_AUTHORIZATION.json\"",
+  "output": {
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v5",
+    "actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5",
+    "append_only": true,
+    "readiness_prediction_files_written": false,
+    "readiness_model_checkpoints_written": false
+  }
+}

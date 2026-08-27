@@ -1,0 +1,86 @@
+{
+  "schema_version": "meaningful_score_ledger.v5",
+  "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v5",
+  "created_at_kst": "2026-08-23T03:46:26+09:00",
+  "status": "STATIC_IMPLEMENTATION_ONLY_NOT_INITIALIZED",
+  "scoring_contract": {
+    "path": "configs/goals/meaningful_score_maximization_v3.json",
+    "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0"
+  },
+  "scoring_evaluator": {
+    "path": "src/ocean_goal/meaningful_score_v3.py",
+    "sha256": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a"
+  },
+  "predecessor_ledger": {
+    "path": "artifacts/meaningful_score_goal_v3/registry.jsonl",
+    "sha256": "51817d6e4b0c4a9a8ef4b5207e2d852107371ebe7da457e2007fca9ce1adeb2c",
+    "bytes": 5137,
+    "event_count": 1,
+    "head_event_sha256": "5e3e6b56bee7df5324d31ef0dcc0f698ce7c2e28ad4be95e9d855bb69132f99a"
+  },
+  "failed_v4_lineage": {
+    "failed_registry": {
+      "path": "artifacts/meaningful_score_goal_v4/registry.jsonl",
+      "sha256": "13c48b8d0e3169b272bd624d83cb34fb92079c511dcd727e07f1da024164df1c",
+      "bytes": 2470
+    },
+    "pre_init_qa": {
+      "path": "artifacts/meaningful_score_goal_v4/pre_init_qa.json",
+      "sha256": "303e22cdf807f73e5846138447011a063ca25658b9666e602209aee7281c7450",
+      "bytes": 1815
+    },
+    "failure_receipt": {
+      "path": "artifacts/meaningful_score_goal_v4/initialization_failure_20260823.json",
+      "sha256": "1adc2ef84e10fc41730655a85ddda3e3e58946f4d8d67c15efa8bdbe60c1b18a",
+      "bytes": 2406
+    },
+    "valid_v4_event_count": 0,
+    "v4_retry_allowed": false,
+    "failure_reason": "WINDOWS_TEXT_MODE_TRANSLATED_TERMINAL_LF_TO_CRLF"
+  },
+  "canonical_paths": {
+    "ledger": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "pre_init_qa": "artifacts/meaningful_score_goal_v5/pre_init_qa.json"
+  },
+  "event_protocol": {
+    "genesis_event_type": "GOAL_INITIALIZED",
+    "later_event_types": [
+      "CURVE_RESULT",
+      "OFFICIAL_SCORE_RESULT",
+      "UPLOAD_READINESS",
+      "GOAL_COMPLETION"
+    ],
+    "unknown_event_types_forbidden": true,
+    "payload_must_deep_equal_recomputed_payload": true,
+    "evidence_must_be_workspace_relative_sha256_and_size_pinned": true,
+    "replay_every_event_on_every_validation": true,
+    "replay_before_append_lock_or_write": true,
+    "append_lock": "O_EXCL_ADJACENT_LOCK",
+    "genesis_creation": "O_EXCL",
+    "all_os_open_calls_use_o_binary": true,
+    "all_os_write_calls_use_robust_write_loop": true,
+    "canonical_line_ending": "LF_ONLY"
+  },
+  "initial_state": {
+    "status": "WAITING_OFFICIAL_WINDOW_RESEARCH_ACTIVE",
+    "official_uploads": 0,
+    "score_promotions": {"P1": false, "P2": false, "P3": false},
+    "meaningful_promotions": {"P1": false, "P2": false, "P3": false},
+    "execution_counts": {
+      "stage_a_fit": 0,
+      "stage_a_prediction": 0,
+      "stage_b_fit": 0,
+      "stage_b_prediction": 0,
+      "upload": 0
+    }
+  },
+  "prohibitions": {
+    "automatic_upload": true,
+    "initialize_without_independent_qa": true,
+    "mutate_v3_or_v4_pinned_files": true,
+    "retry_failed_v4_canonical_path": true,
+    "append_unreplayed_payload": true,
+    "append_unknown_event_type": true,
+    "fit_or_predict_during_ledger_operations": true
+  }
+}

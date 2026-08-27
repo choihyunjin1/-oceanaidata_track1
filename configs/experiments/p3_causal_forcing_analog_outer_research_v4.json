@@ -1,0 +1,309 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_causal_forcing_analog_outer_research_v4",
+  "status": "implemented_dry_preflight_only_pending_QA_and_parent_authorization",
+  "objective": {
+    "metric": "pooled_six_lead_RMSE_meters_candidate_vs_exact_incumbent",
+    "direction": "minimize",
+    "single_hypothesis": "The sealed v2 forcing-conditioned, episode-distinct analog adds long-lead storm-evolution information to the exact frozen incumbent at fixed alpha 0.2.",
+    "model_feature_alpha_threshold_search_count": 0
+  },
+  "adaptive_research_disclosure": {
+    "is_adaptive_research": true,
+    "outer_membership_and_labels_previously_inspected_in_prior_P3_research": true,
+    "independent_holdout_claimed": false,
+    "v2_B_and_v3_C_same_inner_split_reused": true,
+    "v3_C_conditioning_coverage": "19_of_57_analog_eligible_cases",
+    "v3_C_driver": "G-ORS-heavy forcing availability with a narrow 0.0009255m gate margin",
+    "interpretation": "One-shot outer research evidence only; even a local pass cannot replace the frozen incumbent without a separately authorized official hidden-score comparison.",
+    "promotion_without_hidden_score": false,
+    "public_score_alone_is_not_sufficient_for_promotion": true
+  },
+  "sealed_method": {
+    "history_points": 145,
+    "history_cadence_minutes": 20,
+    "history_hours": 48,
+    "history_center": "current_hs",
+    "history_scale": "raw_MAD_floor_0.1m",
+    "minimum_history_coverage": 0.95,
+    "same_station": true,
+    "episode_distinct": true,
+    "sakoe_chiba_radius_steps": 6,
+    "sakoe_chiba_radius_hours": 2,
+    "neighbor_count": 8,
+    "forcing_columns": [
+      "wind_input_proxy_mean_6h",
+      "wind_input_proxy_slope_6h",
+      "wind_wave_alignment_mean_6h",
+      "gust_excess_mean_6h",
+      "caph_slope_6h",
+      "tp_slope_6h"
+    ],
+    "forcing_scaling": "that_fold_that_station_complete_library_median_IQR",
+    "combined_distance": "sqrt(hs_DTW_squared_plus_forcing_RMS_squared)",
+    "missing_forcing_fallback": "exact_v1_unconditioned_retrieval",
+    "projection": "inverse_distance_six_lead_normalized_residual",
+    "distance_floor": 1e-6
+  },
+  "outer_membership": {
+    "source": "frozen_incumbent_OOF_key_columns_only",
+    "allowed_pre_component_seal_columns": ["fold", "anchor_id", "station", "lead_h"],
+    "forbidden_pre_component_seal_columns": ["prediction", "target_hs"],
+    "expected_rows": 1092,
+    "expected_cases": 182,
+    "expected_fold_cases": {
+      "2024_h2_storm": 49,
+      "winter_transition": 80,
+      "2025_h1": 53
+    },
+    "expected_station_cases": {
+      "G-ORS": 68,
+      "I-ORS": 46,
+      "S-ORS": 68
+    },
+    "expected_leads": [3, 6, 9, 12, 18, 24],
+    "canonical_row_key_sha256": "4a50249c367726d498ad5a33bee7cfa5cf1feddb8448d860921fc3a81fb2692b",
+    "canonical_case_key_sha256": "ed4d1a1e54cbb78ef4fd890cad4d1949dd77bd11b2a836c7a38a2f0faee3ef35"
+  },
+  "folds": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "library_cutoff": "validation_start_minus_78_hours",
+    "embargo_hours": 78,
+    "library_membership": "earlier_anchor_only_same_station_history_eligible_and_validation_episode_disjoint",
+    "current_fold_validation_target_in_library": false,
+    "future_fold_validation_target_in_earlier_library": false,
+    "prior_fold_validation_as_later_chronological_history": true
+  },
+  "candidate": {
+    "base": "exact_frozen_incumbent_OOF_prediction_opened_only_after_component_blind_seal",
+    "no_op_leads": [3, 6, 9],
+    "active_leads": [12, 18, 24],
+    "alpha": 0.2,
+    "formula": "candidate=incumbent at 3/6/9; candidate=0.8*incumbent+0.2*forcing_analog at 12/18/24 when analog applicable; otherwise exact incumbent",
+    "prediction_clip_m": [0.0, 30.0],
+    "incumbent_prediction_read_count": 1,
+    "incumbent_prediction_read_after_component_seal": true
+  },
+  "two_stage_blind_protocol": {
+    "stage_1": "write_fsync_reload_and_SHA_seal_analog_component_and_key_audit_before_opening_frozen_incumbent_prediction",
+    "stage_2": "read_exact_incumbent_prediction_once_without_target_then_write_fsync_reload_and_SHA_seal_all_final_blind_predictions",
+    "designated_target": "after_stage_2_seal_create_O_EXCL_scoring_locks_append_fsynced_ledger_then_read_target_hs_once",
+    "pre_component_seal_incumbent_prediction_read_count": 0,
+    "pre_final_seal_designated_target_read_count": 0,
+    "submission_or_test_access_count": 0
+  },
+  "promotion_gate": {
+    "pooled_candidate_minus_incumbent_RMSE_maximum_m": -0.01,
+    "paired_case_bootstrap_replicates": 5000,
+    "paired_case_bootstrap_seed": 20260822,
+    "paired_case_bootstrap_CI": 0.90,
+    "paired_case_bootstrap_CI90_upper_must_be_below_zero": true,
+    "minimum_strictly_improved_folds": 2,
+    "maximum_any_station_RMSE_degradation_m": 0.01,
+    "lead_18_must_not_degrade": true,
+    "lead_24_must_not_degrade": true,
+    "pass_action": "research_candidate_only_stop_without_promotion_pending_separate_hidden_score_authorization",
+    "failure_action": "permanent_stop_keep_frozen_incumbent_without_retune_or_rerun"
+  },
+  "row_artifacts": {
+    "component_blind_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "history_eligible",
+      "conditioning_used",
+      "fallback_reason",
+      "query_mad_scale",
+      "neighbor_anchor_ids_sha256",
+      "neighbor_episode_ids_sha256",
+      "neighbor_distance_mean",
+      "neighbor_distance_max",
+      "analog_prediction"
+    ],
+    "final_blind_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "history_eligible",
+      "conditioning_used",
+      "fallback_reason",
+      "query_mad_scale",
+      "neighbor_anchor_ids_sha256",
+      "neighbor_episode_ids_sha256",
+      "neighbor_distance_mean",
+      "neighbor_distance_max",
+      "analog_prediction",
+      "incumbent_final",
+      "candidate_final"
+    ],
+    "evaluated_additional_columns": [
+      "target_hs",
+      "incumbent_squared_error",
+      "candidate_squared_error"
+    ],
+    "row_level_predictions_fsync_reload_and_SHA_seal": true,
+    "metrics_independently_recomputed_from_evaluated_rows": true
+  },
+  "registered_inputs": {
+    "train_wave": {
+      "source_name": "train_wave.csv",
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "source_readme": {
+      "source_name": "README.md",
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"
+    },
+    "anchor_metadata_and_target_vault": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "incumbent_oof": {
+      "path": "artifacts/p3/long_persistence_shrink/oof.parquet",
+      "sha256": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "prediction_column": "prediction",
+      "target_column": "target_hs",
+      "expected_incumbent_RMSE_m": 0.7801609198910191
+    },
+    "v2_config": {
+      "path": "configs/experiments/p3_causal_forcing_conditioned_episode_analog_v2.json",
+      "sha256": "dc365249d6823cbea4aec52daa617dad7626e6a456d84cfa86877b59a49f5bee"
+    },
+    "v2_helper": {
+      "path": "src/p3_wave/causal_forcing_analog.py",
+      "sha256": "9543ae4e2aa9551c8ef2a3e4ddeb0eb0cc8b83feaaee6094b1e9ea809ddedcfe"
+    },
+    "v2_runner": {
+      "path": "scripts/run_p3_causal_forcing_conditioned_episode_analog_v2.py",
+      "sha256": "d81cba284cdc73a10266b91adc47a198fa3cc8d4b86f4bd8978092644522d534"
+    },
+    "v2_tests": {
+      "path": "tests/test_p3_causal_forcing_conditioned_episode_analog_v2.py",
+      "sha256": "fe108fb959a97cf24c67f569bebe034046d9f0d3bf0cb54f197f3f323b8ce6c6"
+    },
+    "v2_B_cases": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/b_precheck_cases.parquet",
+      "sha256": "c35033c83fb3eab8dac875cafb3174a622916676c9e7ec409f616c2a474dfb3a"
+    },
+    "v2_result": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/result.json",
+      "sha256": "e938df0e7f69372ae5a21b94671017ffe15c5d0894e3ab0d8a0dc80027eef3a4"
+    },
+    "v2_manifest": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/manifest.json",
+      "sha256": "139aeac5c45ee8fbc48ec3c074cdae88864d646b6fc8c0f37fe954c8adb438c4"
+    },
+    "v2_attempt_lock": {
+      "path": "artifacts/experiment_locks/p3_causal_forcing_conditioned_episode_analog_v2.B.attempt.lock",
+      "sha256": "9f96d7e7f86d912091d11baef1704d85a7a2c0c3850e8620c91ea14005cf9431"
+    },
+    "v3_config": {
+      "path": "configs/experiments/p3_causal_forcing_analog_inner_predictive_v3.json",
+      "sha256": "2b91ee492049daebcebf1555177719a0354eb673ed104d8e07fc489cbcfbc46c"
+    },
+    "v3_helper": {
+      "path": "src/p3_wave/causal_forcing_inner_predictive.py",
+      "sha256": "3640e0e380e732efe46333456580868792654b8563dece0065c4f912980b4be9"
+    },
+    "v3_runner": {
+      "path": "scripts/run_p3_causal_forcing_analog_inner_predictive_v3.py",
+      "sha256": "fe78a9a509f2bb28cbaeebaeb592c3522fc0f9142e288b110e0273f1b98afa7f"
+    },
+    "v3_tests": {
+      "path": "tests/test_p3_causal_forcing_analog_inner_predictive_v3.py",
+      "sha256": "9449a99e7b092f29f95519a9c7aa95f377607a3abe8a41f81be8ce9df5924ece"
+    },
+    "v3_dry_receipt": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/dry_run/receipt.json",
+      "sha256": "99f52e756de260d10e17419d5aff5618c5651c603da1646bc8b06d42ac4de28f"
+    },
+    "v3_blind_predictions": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/blind_inner_predictions.parquet",
+      "sha256": "d7985c784dddcd45f34f8befe667baa2784cff5d610f495b664c4a2f4b6c1064"
+    },
+    "v3_blind_seal": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/blind_seal.json",
+      "sha256": "eb49b98983f7dcca309b3f70b4836ede85a812d1b24b76518ff50bfbca9aa7b3"
+    },
+    "v3_metrics": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/metrics.json",
+      "sha256": "48311443657ec409dedd92579215e3b561e6d51302e2bc9b382fa39d204e5d77"
+    },
+    "v3_result": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/result.json",
+      "sha256": "2571a8819650c02039a4c93a57004d8e99708914f2129599a5df0c2b4017160b"
+    },
+    "v3_manifest": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/manifest.json",
+      "sha256": "a662ed011c02d82377ddfd9b990533d0855062489ea318751a5670d206b1a632"
+    },
+    "v3_target_access_log": {
+      "path": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/target_access_log.json",
+      "sha256": "a08fce940d295c5a4ab064749165295d8dc48df86dc4058e575d9dcb59e41f83"
+    },
+    "v3_attempt_lock": {
+      "path": "artifacts/experiment_locks/p3_causal_forcing_analog_inner_predictive_v3.C.attempt.lock",
+      "sha256": "0cfd36199c5c8e900d157aca470fa28f3a23a319eacb4164540dbe9e791f0e47"
+    },
+    "v1_analog_helper": {
+      "path": "src/p3_wave/episode_distinct_analog.py",
+      "sha256": "307dfbcfff7a1300ac8be27074a4c13255776e70e2cdbe8b909d0396d876e180"
+    },
+    "episode_split_helper": {
+      "path": "src/p3_wave/revin_patch.py",
+      "sha256": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3"
+    }
+  },
+  "artifacts": {
+    "dry_run_directory": "artifacts/p3_causal_forcing_analog_outer_research_v4/dry_run",
+    "QA_GO_receipt": "artifacts/p3_causal_forcing_analog_outer_research_v4/qa/QA_GO.json",
+    "authorization_amendment": "artifacts/p3_causal_forcing_analog_outer_research_v4/authorization_amendment.json",
+    "outer_output_directory": "artifacts/p3_causal_forcing_analog_outer_research_v4/outer_one_shot",
+    "status_path": "artifacts/status/p3_causal_forcing_analog_outer_research_v4.json",
+    "global_attempt_lock": "artifacts/experiment_locks/p3_causal_forcing_analog_outer_research_v4.attempt.lock",
+    "global_scoring_lock": "artifacts/experiment_locks/p3_causal_forcing_analog_outer_research_v4.outer_target.lock",
+    "canonical_scoring_lock": "artifacts/p3_causal_forcing_analog_outer_research_v4/outer_one_shot/DESIGNATED_TARGET.lock",
+    "global_outer_ledger": "artifacts/experiment_locks/p3_outer_truth_ledger.jsonl"
+  },
+  "execution": {
+    "allowed_modes": ["dry-run", "authorize", "outer-one-shot"],
+    "actual_authorized": false,
+    "authorization_requires_QA_GO_receipt": true,
+    "authorization_requires_separate_parent_token": true,
+    "parent_authorization_token": "ROOT_APPROVED_P3_CAUSAL_FORCING_ANALOG_V4",
+    "outer_one_shot_confirmation_token": "RUN_P3_CAUSAL_FORCING_ANALOG_V4_OUTER_ONCE",
+    "dry_model_fit_count": 0,
+    "dry_training_target_read_count": 0,
+    "dry_incumbent_prediction_read_count": 0,
+    "dry_designated_target_read_count": 0,
+    "dry_test_context_read_count": 0,
+    "dry_submission_write_count": 0,
+    "estimated_outer_runtime_minutes": [8, 20]
+  },
+  "prohibitions": {
+    "run_outer_before_QA_GO_and_parent_authorization": true,
+    "read_frozen_incumbent_prediction_before_component_blind_seal": true,
+    "read_designated_outer_target_before_final_blind_seal_and_O_EXCL_ledger": true,
+    "regenerate_or_change_outer_membership": true,
+    "read_current_or_future_fold_validation_target_for_library": true,
+    "change_v2_retrieval_or_v1_fallback": true,
+    "search_or_retune_model_feature_alpha_threshold_router": true,
+    "rerun_outer_one_shot": true,
+    "promote_from_adaptive_local_outer_without_hidden_score": true,
+    "read_test_context_or_test_index": true,
+    "generate_or_modify_submission": true,
+    "upload": true,
+    "mutate_v1_v2_v3_or_frozen_artifacts": true
+  }
+}

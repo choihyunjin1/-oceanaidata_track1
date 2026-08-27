@@ -1,0 +1,135 @@
+{
+  "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.r2_compatibility_verifier.v3",
+  "created_at_kst": "2026-08-23T13:30:00+09:00",
+  "status": "STATIC_OWNER_IMPLEMENTATION_AWAITING_FRESH_INDEPENDENT_QA_NO_RECEIPT",
+  "problem": "P3",
+  "identity": "P3_GEN6_INCUMBENT_PRESERVING_RESIDUAL_CALIBRATOR_R2_COMPATIBILITY_VERIFIER_V3",
+  "verifier_only": true,
+  "check_only_default": true,
+  "append_only_successor_of_v2": true,
+  "trusted_bootstrap": {
+    "path": "scripts/bootstrap_verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v3.py",
+    "role": "NONCYCLIC_EXTERNALLY_PINNED_EARLIEST_AUDIT_PREIMPORT_TRUST_ROOT",
+    "self_hash_embedded": false,
+    "canonical_launch": ".venv-p1/Scripts/python.exe -I -S -B scripts/bootstrap_verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v3.py --root . --mode check-only",
+    "independent_static_qa_required_before_attestation": true
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v3.json",
+    "HELPER": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v3.py",
+    "CLI": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v3.py",
+    "TESTS": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v3.py"
+  },
+  "authenticated_subordinate_pins": {
+    "HELPER": {"path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v3.py", "bytes": 13069, "sha256": "4943d4db0310a68949d87f112ccca185c9e48920241b2fac93111dc851a1a39e"},
+    "CLI": {"path": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v3.py", "bytes": 1007, "sha256": "2863c7b4e5fe5b16bb2df3b753ba8c935f5a8767fafb135782171dcc4d7349bb"},
+    "TESTS": {"path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v3.py", "bytes": 13804, "sha256": "b337173af7b97ea4088bc41717cde2c8192378c72469aa0d4f2c4542086a032d"}
+  },
+  "canonical_runtime_contract": {
+    "python_relative_to_workspace": ".venv-p1/Scripts/python.exe",
+    "python_pin": {"bytes": 274424, "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"},
+    "pyvenv_cfg_relative_to_workspace": ".venv-p1/pyvenv.cfg",
+    "pyvenv_cfg_pin": {"bytes": 339, "sha256": "d1fb970854073922d49959ae01539088550613e316cb67f9fac858f586361174"},
+    "python_version": "3.12.10",
+    "required_cli_flags": ["-I", "-S", "-B"],
+    "required_sys_flags": {"isolated": 1, "no_site": 1, "safe_path": true, "ignore_environment": 1, "no_user_site": 1, "dont_write_bytecode": 1},
+    "initial_sys_path_roles": ["python312.zip", "DLLs", "Lib", "BASE"],
+    "initial_meta_path": ["_frozen_importlib.BuiltinImporter", "_frozen_importlib.FrozenImporter", "_frozen_importlib_external.PathFinder"],
+    "stdlib_inventory": {
+      "recursive_roots": ["DLLs", "Lib"],
+      "base_root_direct_files": ["python3.dll", "python312.dll", "vcruntime140.dll", "vcruntime140_1.dll"],
+      "excluded_directory_names": ["__pycache__", "site-packages"],
+      "excluded_file_suffixes": [".pyc", ".pyo"],
+      "directories": 197,
+      "files": 2443,
+      "file_bytes": 66487423,
+      "algorithm": "SHA256_SORTED_TYPE_NUL_RELATIVE_NUL_BYTES_NUL_FILE_SHA256_LF",
+      "sha256": "2abb9059cf7d3cb2a9c74d296b528ddede30d51be764a0b357aeabe091b88afb"
+    },
+    "dependency_inventory_algorithm": "SHA256_SORTED_VENV_RELATIVE_NUL_BYTES_NUL_FILE_SHA256_LF",
+    "third_party_distributions": {
+      "numpy": {"version": "2.3.5", "dist_info": "numpy-2.3.5.dist-info", "record_bytes": 110571, "record_sha256": "28e9a4fcb2fa550a51a5c6f6639c2a5d3aed11407aded2cb8981747eb9640ca9", "files": 1332, "file_bytes": 54719592, "inventory_sha256": "be581587c7bfd68dc61d7dfbbf71c3c5e75d365c7741342fa52c4094bfd89b23", "native_files": 21, "native_bytes": 30400080, "native_sha256": "1863ef07e2bfd7937678ba726deba524672587a4abb071eea5886a1dc9d972ed"},
+      "pandas": {"version": "3.0.1", "dist_info": "pandas-3.0.1.dist-info", "record_bytes": 249268, "record_sha256": "98e530a3a2f22b4865b342652b94846b0d75b4aa7590f7a53ba6aea322e0d0e2", "files": 2989, "file_bytes": 64018796, "inventory_sha256": "a4730c50dcbebcd6582ed688b1cbb968bf91517a7c7b6af328b00b0efa59d6ab", "native_files": 46, "native_bytes": 13719632, "native_sha256": "8168570b35c01f683ed2f53d16794e963511d47b62fedeaf46a12f01d81f3c9a"},
+      "pyarrow": {"version": "25.0.1", "dist_info": "pyarrow-25.0.1.dist-info", "record_bytes": 78570, "record_sha256": "1eddf4fb72b1b071868dc02d6fc8242125d98c6557ae6af8f783b1c84ef6a797", "files": 867, "file_bytes": 90535543, "inventory_sha256": "4c5735c0678d1e127f1a67529fad6c43fd184a02639062efdf72b0dd2bf188f2", "native_files": 33, "native_bytes": 68921192, "native_sha256": "25aa14a5a9c0299785d394083d0c7710f7329f17b256689ee21379b727b9cf4c"},
+      "python_dateutil": {"version": "2.9.0.post0", "dist_info": "python_dateutil-2.9.0.post0.dist-info", "record_bytes": 3125, "record_sha256": "0c26b4b1542dbd1ebd8d2babdd501aed583d6ada9595517f936f00fe4ff9d254", "files": 44, "file_bytes": 742900, "inventory_sha256": "727a2cf7b75cf7e3d2f29b1f02f3d2185701962b5c64985d42aaed68422cf26a", "native_files": 0, "native_bytes": 0, "native_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+      "six": {"version": "1.17.0", "dist_info": "six-1.17.0.dist-info", "record_bytes": 561, "record_sha256": "d834e846ba51c0e7371968d0b5a0cdebdaa2f9ea2f0447a40b594fa96ca5d89f", "files": 8, "file_bytes": 79452, "inventory_sha256": "5267dd37edca79c94ab79a02c53441496e81371d631018938cbcfc6dc58303a5", "native_files": 0, "native_bytes": 0, "native_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+      "tzdata": {"version": "2026.3", "dist_info": "tzdata-2026.3.dist-info", "record_bytes": 56831, "record_sha256": "4e88bcacd1b80a7aff99638129717f504c6225c887a28f4ba0e193783f03c30e", "files": 656, "file_bytes": 588722, "inventory_sha256": "17540955217f069acd5978d3e6b92f7853f5090235dfc264c53a48f3b3b39807", "native_files": 0, "native_bytes": 0, "native_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+    },
+    "stdlib_source_execution": "AUTHENTICATED_BUFFER_COMPILE_EXEC_NO_PYC",
+    "dependency_source_execution": "PREAUTHENTICATED_RECORD_BUFFER_COMPILE_EXEC_NO_PYC",
+    "native_extension_execution": "AUTHENTICATED_ORIGIN_UNDER_HELD_FILE_SHARE_READ_ONLY_HANDLE",
+    "earliest_audit_hook_required": true,
+    "write_delete_process_forbidden_import_and_bytecode_attempts_required": 0
+  },
+  "stable_semantic_read_contract": {
+    "algorithm": "LSTAT_OPEN_READONLY_BINARY_NO_SHARE_WRITE_DELETE_FSTAT_SINGLE_READ_FSTAT_LSTAT",
+    "ancestor_link_and_reparse_containment": true,
+    "identity_attributes_and_sha256_bound": true,
+    "held_windows_handles_until_final_verification": true,
+    "strict_json_from_authenticated_buffer_only": true,
+    "npy_from_io_bytesio_only": true,
+    "parquet_from_pyarrow_buffer_reader_only": true,
+    "protected_path_reopen_allowed": false,
+    "final_same_handle_identity_and_stored_buffer_hash_required": true
+  },
+  "canonical_paths": {
+    "compatibility_control": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v3_control",
+    "pre_execution_qa": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v3_control/pre_execution_qa.json",
+    "compatibility_receipt": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v3_control/compatibility_receipt.json"
+  },
+  "v2_implementation_pins": {
+    "BOOTSTRAP": {"path": "scripts/bootstrap_verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py", "bytes": 22071, "sha256": "d2dec0e2d05d53da3d0489f8af9762d7e57524326143b1e9afa91d2a47537733"},
+    "CONFIG": {"path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v2.json", "bytes": 11074, "sha256": "a80aedd91cc1ed73d638fcaa2827f73344220d49b3f2c1073458e7040c044cc1"},
+    "HELPER": {"path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py", "bytes": 15462, "sha256": "054c271e2ba0d8aac8fc8f4436884b491ab7c03a397fd10aae0e0478ddcd681b"},
+    "CLI": {"path": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py", "bytes": 1417, "sha256": "39faf8b6f6d6a1acb043ed038cce396a85a4265be04678e8a9cdbc134980df13"},
+    "TESTS": {"path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py", "bytes": 12901, "sha256": "a64f7e865422d2ace395e17a3717cca1ebec9fa35a57c06c477f0983f23abb67"}
+  },
+  "v2_disposition": {
+    "reviewer": "/root/meaningful_improvement_audit/p2_stageb_blind_review",
+    "verdict": "P0=0_P1=2_OWNER_KNOWN_NO_GO",
+    "independent_qa_receipt_file_exists": false,
+    "independent_qa_receipt_hash_exists": false,
+    "finding_ids": ["PREIMPORT_AND_DEPENDENCY_TRUST_BOUNDARY_NOT_CLOSED", "PINNED_ARTIFACT_BYTES_NOT_BOUND_TO_SEMANTIC_REPLAY"],
+    "owner_no_go": {"path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v2_no_go/OWNER_STATIC_QA_NO_GO_20260823.json", "bytes": 4794, "sha256": "f97a45f567c328b134618e2a902689470d86ab7a7a7b194e5f2d01c8b8b3ea43"},
+    "execution_tombstone": {"path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v2_no_go/EXECUTION_TOMBSTONE.json", "bytes": 3419, "sha256": "91dae10e7e4c61e875da24999396afda90837aff4492bcd64671d11297e4ad13"}
+  },
+  "compatibility_contract": {
+    "only_scoped_science_adaptations": ["replace_frozen_r2_verifier_prefix_expectation_with_four_source_consensus", "admit_exact_pinned_historical_failure_receipt_to_the_r2_control_inventory"],
+    "adaptation_count": 2,
+    "corrected_science_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "frozen_r2_erroneous_prefix_fractions": [0.2, 0.4, 0.6, 0.8, 1.0],
+    "all_other_v1_and_r2_checks_reexecuted": true,
+    "independent_oof_bootstrap_gate_replay": true,
+    "bootstrap_replicates_per_point": 5000,
+    "bootstrap_points": 5,
+    "global_restore_guaranteed_by_finally": true,
+    "research_only_no_promotion": true
+  },
+  "expected_result": {
+    "status": "NO_LOCAL_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST",
+    "gate_decision": "RESEARCH_ONLY",
+    "local_gate_passed": false,
+    "validation_cases": 181,
+    "prediction_rows": 5430,
+    "fit_count_observed_exact": 11,
+    "identity_cells": 14,
+    "bounded_correction_cells": 1,
+    "prefix_0p70_delta_candidate_minus_incumbent_m": 0.019456413709285747,
+    "prefix_0p70_ci90_m": [0.01268218647428121, 0.026528875926353498],
+    "official_promotion": false,
+    "candidate_generated": false,
+    "test_prediction_generated": false,
+    "registry_appended": false,
+    "uploads": 0
+  },
+  "r2_mutation_allowed": false,
+  "r2_rerun_or_resume_allowed": false,
+  "qa_or_compatibility_receipt_write_allowed": false,
+  "execution_authorization_or_attempt_lock_allowed": false,
+  "fit_prediction_or_new_score_allowed": false,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "registry_append_allowed": false,
+  "upload_allowed": false,
+  "static_counters": {"independent_qa_receipts_created": 0, "compatibility_receipts_created": 0, "execution_authorizations_created": 0, "attempt_locks_created": 0, "model_fit_calls": 0, "prediction_calls": 0, "new_score_calls": 0, "candidate_files": 0, "test_prediction_files": 0, "registry_appends": 0, "uploads": 0}
+}

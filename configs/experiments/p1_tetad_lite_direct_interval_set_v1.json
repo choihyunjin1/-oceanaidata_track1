@@ -1,0 +1,306 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_tetad_lite_direct_interval_set_v1",
+  "status": "PREREGISTERED_AUTHORIZED_NEW_ARCHITECTURE_CYCLE_NOT_YET_EXECUTED",
+  "registered_at_kst": "2026-08-26",
+  "problem": "P1 ocean quality-control anomaly detection",
+  "hypothesis": "A small query-based interval-set detector can recover long offset, drift, and noise events that the frozen high-precision Round-B row classifier misses, while an anchor-preserving union prevents any incumbent positive from being removed.",
+  "research_basis": {
+    "selected_family": "TE-TAD/TadTR-style direct temporal interval set prediction",
+    "selection_reason": "It changes the prediction unit from independent rows to unordered event intervals and directly targets the observed long-event false-negative concentration.",
+    "primary_sources": [
+      "https://openaccess.thecvf.com/content/CVPR2024/html/Kim_TE-TAD_Towards_Full_End-to-End_Temporal_Action_Detection_via_Time-Aligned_Coordinate_CVPR_2024_paper.html",
+      "https://arxiv.org/abs/2106.10271",
+      "https://github.com/xlliu7/TadTR",
+      "https://mlanthology.org/tmlr/2022/benedict2022tmlr-sigmoidf1/"
+    ],
+    "non_selected_fallback": "target-free change-point proposal plus segment rescore; requires a separate preregistration if this cycle terminates"
+  },
+  "immutable_inputs": {
+    "feature_cache": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "rows": 776706,
+      "bytes": 156272400,
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"
+    },
+    "feature_key_sidecar": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet",
+      "rows": 776706,
+      "bytes": 1818144,
+      "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"
+    },
+    "training_labels": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "rows": 776706,
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "frozen_truth_and_folds": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "rows": 421032,
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "frozen_round_b_anchor": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/predictions.parquet",
+      "rows": 421032,
+      "bytes": 9848299,
+      "sha256": "953415097b2f43421cf40ffe98100f305e3fbd2ba1215656acc4d13bf2b8ec93",
+      "column": "round_b_prediction",
+      "pooled_confusion": {"tp": 12718, "fp": 644, "fn": 3337, "tn": 404333},
+      "pooled_f1": 0.8646700887
+    },
+    "frozen_round_b_prediction_parts": {
+      "prediction_column": "event_day_balanced_binary_lgbm__prediction",
+      "bit_identity_requirement": "must equal frozen_round_b_anchor.round_b_prediction on all 421032 ordered keys",
+      "2025_q2": {
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet",
+        "rows": 133170,
+        "bytes": 12673351,
+        "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"
+      },
+      "2025_q3": {
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet",
+        "rows": 176738,
+        "bytes": 16946250,
+        "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"
+      },
+      "2025_q4": {
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet",
+        "rows": 111124,
+        "bytes": 10631724,
+        "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"
+      }
+    }
+  },
+  "data_binding": {
+    "ordered_key": ["station", "year", "layer", "time"],
+    "required_sidecar_ordinal": "exact zero-based row order",
+    "feature_label_key_mismatches_allowed": 0,
+    "cadence_minutes": 10,
+    "segment_break": "station/year/layer change or timestamp difference not exactly 10 minutes",
+    "official_test_sample_submission_reads": 0
+  },
+  "target_definition": {
+    "positive_label": 1,
+    "eligible_anomaly_types": ["offset", "drift", "noise"],
+    "multi_type_membership": "a row is eligible once when its plus-delimited anomaly_type contains at least one of offset, drift, or noise",
+    "event_component": "maximal binary union run of eligible rows within one exact-cadence station/year/layer segment; type changes inside the run do not create duplicate targets",
+    "minimum_original_event_rows": 19,
+    "window_target_coordinates": "half-open [intersection_start/1024, (intersection_last+1)/1024]",
+    "boundary_censor_policy": "clip each qualifying original event to the window and train the clipped fragment, even when the fragment is shorter than 19 rows",
+    "cutoff_censor_policy": "for each phase first project labels to time < cutoff, then build events; exclude a right-censored run that reaches the prefix tail when the next exact-cadence row would be at or after cutoff",
+    "maximum_targets_observed_in_train_only_preflight": 2,
+    "query_overflow_policy": "hard fail before any fit when targets in a window exceed 5"
+  },
+  "selected_numeric_features": [
+    "temp_diff_1", "temp_abs_diff_1", "temp_backward_acceleration",
+    "temp_diff_next", "spike_min_abs_diff", "temp_center_curvature",
+    "plateau_elapsed", "plateau_full_length", "plateau_count",
+    "temp_median_resid_3h", "temp_abs_median_resid_3h", "temp_robust_z_3h",
+    "temp_median_resid_6h", "temp_abs_median_resid_6h", "temp_robust_z_6h",
+    "temp_median_resid_12h", "temp_abs_median_resid_12h", "temp_robust_z_12h",
+    "temp_median_resid_24h", "temp_abs_median_resid_24h", "temp_robust_z_24h",
+    "temp_median_resid_48h", "temp_abs_median_resid_48h", "temp_robust_z_48h",
+    "temp_median_resid_72h", "temp_abs_median_resid_72h", "temp_robust_z_72h",
+    "temp_median_resid_168h", "temp_abs_median_resid_168h", "temp_robust_z_168h",
+    "peer_count", "peer_available", "temp_peer_residual", "temp_abs_peer_residual",
+    "temp_long_resid_7d", "peer_detrended_resid_7d", "peer_abs_detrended_resid_7d",
+    "reference_resid_7d", "reference_abs_resid_7d", "reference_slope_1h_7d",
+    "temp_long_resid_14d", "peer_detrended_resid_14d", "peer_abs_detrended_resid_14d",
+    "reference_resid_14d", "reference_abs_resid_14d", "reference_slope_1h_14d"
+  ],
+  "preprocessing": {
+    "fit_scope": "strict fold training prefix only",
+    "numeric_transform": "median and IQR scaling; nonfinite becomes zero after scaling; append one missingness indicator per numeric feature",
+    "zero_iqr_replacement": 1.0,
+    "additional_channels": "train-prefix station one-hot; unseen station is the all-zero vector; robust-scaled numeric layer; valid-row mask",
+    "effective_channel_order": "46 scaled numeric, 46 numeric-missing indicators, 3 lexically sorted station indicators, scaled layer, valid-row mask",
+    "expected_input_features": 97,
+    "validation_statistics_fit": false
+  },
+  "windowing": {
+    "rows": 1024,
+    "stride_rows": 512,
+    "patch_rows": 8,
+    "span": "7 days 2 hours 30 minutes",
+    "generation_order": "split first, then exact-cadence segment, then window",
+    "starts": "0, 512, ... plus max(segment_length-1024, 0) when not already present",
+    "short_segment_policy": "one right-zero-padded window; valid-row channel is zero on padding; predictions clipped to valid length",
+    "train_validation_raw_dependency_guard": {
+      "offline_centered_feature_radius_days": 7,
+      "purge_days": 15,
+      "assertion": "the raw-row dependency sets of every training window and validation window are disjoint"
+    }
+  },
+  "architecture": {
+    "name": "TE-TAD-lite-tinygrad",
+    "patch_size": 8,
+    "d_model": 64,
+    "num_heads": 4,
+    "feedforward_multiplier": 4,
+    "bidirectional_encoder_layers": 2,
+    "learned_queries": 5,
+    "decoder": "single cross-attention query block",
+    "heads": ["query_presence_logit", "normalized_start", "normalized_end"],
+    "matching": "detached SciPy Hungarian assignment using class + endpoint L1 + 1D IoU cost",
+    "dropout": 0.0,
+    "maximum_patches": 128
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "tinygrad": "0.14.0",
+    "numpy": "2.3.5",
+    "scipy": "1.18.0",
+    "polars": "1.43.2",
+    "device": "CUDA:PTX",
+    "gpu_requirement": "an RTX-class CUDA parameter device must be observed before the sanity optimizer run",
+    "disk_cache": 0,
+    "windows_cuda_loader_patch": {
+      "path": ".venv-p1/Lib/site-packages/tinygrad/runtime/support/compiler_cuda.py",
+      "sha256": "415664bd7d8ef9ed24722c7068e65583878ace454b5b3fa5f44a54594bac87c6",
+      "purpose": "allow PTX-only compilation when blocked nvrtc/nvjitlink DLLs cannot be imported; nvcuda.dll remains required"
+    }
+  },
+  "training": {
+    "seed": 20260826,
+    "epochs": 20,
+    "batch_size": 16,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "loss_weights": {"classification": 1.0, "endpoint_l1": 2.0, "one_minus_iou": 2.0},
+    "positive_query_weight": 10.0,
+    "positive_windows": "all windows intersecting at least one qualifying event",
+    "negative_windows_per_epoch": "min(2 * positive_window_count, all empty-window count)",
+    "negative_selection": "selected once before fitting by ascending SHA256(seed|fold|station|year|layer|window_start_time); the fixed sample is reused every epoch",
+    "epoch_definition": "all positive windows plus the single pre-fit deterministic negative selection exactly once in a seeded permutation",
+    "fresh_random_initialization_per_fold": true,
+    "adamw_betas": [0.9, 0.999],
+    "adamw_epsilon": 1e-8,
+    "last_incomplete_batch": "execute without padding or dropping",
+    "early_stopping": false,
+    "hyperparameter_search": false,
+    "result_based_retry": false,
+    "main_fit_count": 3,
+    "sanity_fit_count": 1,
+    "optimizer_runs_total": 4
+  },
+  "implementation_sanity_gate": {
+    "source": "strict Q2 training prefix only",
+    "selection": "first 16 target windows and first 16 empty windows by registered SHA256 order",
+    "fresh_seed": 20260826,
+    "epochs": 300,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "threshold": 0.5,
+    "pass_if_all": {
+      "finite_loss_and_gradients": true,
+      "matched_target_probability_and_iou_recall_min": 0.90,
+      "matched_target_iou_cutoff": 0.70,
+      "median_matched_iou_min": 0.75,
+      "negative_windows_with_any_active_query_max": 1
+    },
+    "checkpoint_disposition": "always discard before main fit",
+    "failure_action": "NO_GO_IMPLEMENTATION_GATE; no outer fit or score"
+  },
+  "chronological_protocol": {
+    "membership": "exact frozen OOF fold keys",
+    "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+    "q2": {
+      "role": "design-only threshold selection; excluded from confirmation evidence",
+      "training_rows_time_before": "2025-03-17T00:00:00+09:00",
+      "threshold_grid": [0.5, 0.7, 0.85],
+      "selection": "maximum anchor-union micro-F1; exact tie chooses the highest threshold",
+      "kill_if": "all thresholds add zero rows, best delta F1 <= 0, or added-row precision <= anchor F1 / 2",
+      "seal_after_selection": true
+    },
+    "q3": {
+      "role": "prequential confirmation 1",
+      "training_rows_time_before": "2025-06-16T00:00:00+09:00",
+      "prediction_and_sha_receipt_before_truth_score": true
+    },
+    "q4": {
+      "role": "prequential confirmation 2",
+      "training_rows_time_before": "2025-09-16T00:00:00+09:00",
+      "recipe_fixed_regardless_of_q3_result": true,
+      "prediction_and_sha_receipt_before_truth_score": true
+    },
+    "interpretation": "historical reuse-stability evidence, not a fresh untouched holdout"
+  },
+  "decode_and_stitch": {
+    "proposal_indices": "floor(start*1024), ceil(end*1024), half-open and clipped",
+    "minimum_decoded_proposal_rows_before_outer_clip": 19,
+    "subminimum_proposal_action": "discard; never expand a proposal and never use the generic one-cell rasterizer",
+    "overlap_rule": "per-row maximum query sigmoid confidence across every covering validation window",
+    "candidate": "bitwise OR of frozen Round-B anchor and thresholded stitched detector rows",
+    "allowed_bit_transitions": ["0_to_0", "0_to_1", "1_to_1"],
+    "required_anchor_1_to_0_count": 0,
+    "gap_closing": 0,
+    "minimum_run_filter_after_stitch": 0,
+    "NMS": false
+  },
+  "outer_decision": {
+    "confirmation_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_unit": "q3+q4 fold-local station/year/layer exact-cadence segment",
+    "bootstrap_algorithm": "sample exactly the observed number of segments with replacement; concatenate all rows from sampled segments with multiplicity; compute candidate F1 minus anchor F1; CI90 is the simple 5th and 95th percentiles of 2000 paired deltas",
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260826,
+    "confidence_interval": 0.90,
+    "go_replication_if_all": {
+      "pooled_delta_f1_min": 0.003,
+      "each_fold_delta_f1_min": 0.0,
+      "paired_bootstrap_delta_f1_ci90_lower_strictly_above": 0.0,
+      "pooled_added_row_precision_strictly_above": "pooled_anchor_f1 / 2",
+      "normal_false_positive_per_day_relative_increase_max": 0.10,
+      "worst_supported_station_layer_f1_drop_max": 0.01,
+      "supported_station_layer_positive_rows_min": 50
+    },
+    "normal_false_positive_day_definition": "normal-row exposure days = count(label=0)/144; compare candidate FP/exposure to anchor FP/exposure; if anchor FP is zero, only candidate FP zero passes",
+    "worst_slice_definition": "pool q3+q4, retain station/layer groups with at least 50 positive rows, then take the minimum of candidate F1 minus anchor F1",
+    "one_seed_maximum_status": "GO_REPLICATION_ONLY_NOT_SUBMISSION_READY",
+    "otherwise": "NO_GO_NEW_ARCHITECTURE"
+  },
+  "execution_state_machine": [
+    "PREREGISTERED",
+    "IMPLEMENTATION_TESTED",
+    "EXECUTION_SEALED",
+    "SANITY_GATE_PASSED",
+    "Q2_BLIND_PREDICTION_COMMITTED",
+    "Q2_THRESHOLD_SEALED",
+    "Q3_BLIND_PREDICTION_COMMITTED",
+    "Q3_SCORED",
+    "Q4_BLIND_PREDICTION_COMMITTED",
+    "Q4_SCORED",
+    "TERMINAL_QA"
+  ],
+  "execution_integrity": {
+    "single_attempt_lock": "artifacts/p1_tetad_lite_direct_interval_set_v1.ATTEMPT_LOCK.json created with O_EXCL before the sanity fit",
+    "existing_attempt_or_terminal_receipt": "fail closed; no second optimizer run",
+    "execution_seal": "before the lock, bind SHA-256 of this config, runner, model module, experiment module, tests, tinygrad version, and the patched CUDA:PTX compiler support file",
+    "prediction_commit_meaning": "an atomic local score array plus SHA-256 receipt; never a Git commit",
+    "q2_truth_firewall": "OOF key/fold columns may be projected for membership, but q2 label/anomaly_type cannot be collected until the q2 blind-score receipt exists",
+    "q3_q4_truth_firewall": "each fold label/anomaly_type cannot be collected until that fold blind-score receipt exists",
+    "technical_failure_after_lock": "terminal technical failure; no silent retry or hyperparameter change"
+  },
+  "query_preflight": {
+    "must_run_before_attempt_lock": true,
+    "event_definition": "the registered binary union and cutoff-censor rule",
+    "registered_training_windows_including_short_padding": {"2025_q2": 918, "2025_q3": 1249, "2025_q4": 1786},
+    "observed_max_targets_per_window": {"2025_q2": 2, "2025_q3": 2, "2025_q4": 2},
+    "hard_fail_above": 5,
+    "receipt_must_bind": ["config_sha256", "model_module_sha256", "experiment_module_sha256", "phase_window_counts", "phase_max_target_counts"]
+  },
+  "prohibitions": {
+    "read_official_test": true,
+    "read_sample_submission": true,
+    "read_or_create_submission_candidate": true,
+    "generate_submission": true,
+    "upload": true,
+    "target_positive_rate_matching": true,
+    "outer_result_based_tuning_or_retry": true,
+    "remove_frozen_anchor_positive": true,
+    "modify_P3_ERA5_experiment": true
+  }
+}

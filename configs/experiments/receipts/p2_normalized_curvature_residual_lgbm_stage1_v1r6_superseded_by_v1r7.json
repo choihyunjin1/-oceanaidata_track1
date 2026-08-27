@@ -1,0 +1,44 @@
+{
+  "schema_version": "p2_ncr_zero_fit_supersession_receipt.v1r7",
+  "created_at_kst": "2026-08-26T00:00:00+09:00",
+  "superseded_experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r6",
+  "successor_experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7",
+  "disposition": "SUPERSEDED_INDEPENDENT_QA_NO_GO_NEVER_EXECUTE",
+  "numerical_execution_count": 0,
+  "physical_fit_calls": 0,
+  "official_test_reads": 0,
+  "sample_submission_reads": 0,
+  "submission_candidate_reads": 0,
+  "uploads": 0,
+  "v1r6_clean_namespace_at_supersession": {
+    "claim_exists": false,
+    "journal_exists": false,
+    "journal_init_failure_receipt_exists": false,
+    "postpublish_failure_receipt_exists": false,
+    "final_exists": false,
+    "staging_count": 0
+  },
+  "pinned_v1r6_files": {
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r6.json",
+      "bytes": 24491,
+      "sha256": "a0492740b5aea4c441c58d112a5ee9d0ec1b95e02bbc3df4d850e5412ab2c99a"
+    },
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r6.py",
+      "bytes": 104511,
+      "sha256": "01cbca79c896be57b1076029692a1ab2d283ac54f4596a140646aefda4f60cb9",
+      "normalized_sha256": "f083ed4cccad545457df97c49c7fd8885470c21ab87124e51c9c02b7a9412aec"
+    },
+    "test": {
+      "path": "tests/test_p2_normalized_curvature_residual_stage1_v1r6.py",
+      "bytes": 38192,
+      "sha256": "2de07f06e78767473f45da81d26b87d4aebdd72aa8a4a6c48e3fee983bf08a72"
+    }
+  },
+  "qa_blocker_fixed_only_in_v1r7": "A journal write can become readable before fsync reports failure. v1r6 could then create an out-of-band terminal receipt and append a second journal terminal record, or create OOB after a terminal append whose bytes were already complete.",
+  "v1r7_rule": "A fully validated OOB terminal receipt has highest precedence. A terminal-append exception must re-read and validate a complete same-attempt terminal event before deciding whether OOB fallback is permitted.",
+  "numerical_contract_change": false,
+  "automatic_rerun_allowed": false,
+  "authorization": "Only v1r7 may be considered after independent QA; v1r6 execution is permanently forbidden."
+}

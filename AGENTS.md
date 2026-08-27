@@ -32,7 +32,7 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 ## Leakage and validation
 
 - Keep test labels unknown. Do not reconstruct them from KORS/KHOA raw or real-time observations, public mirrors, exact source matching, leaderboards, or hidden-answer artifacts.
-- Do not use 2024-2026 external station observations. They overlap the train/test periods and may reveal the pre-injection source signal.
+- Do not recover hidden answers from exact-source observations: P1 clean 2026 temperature, P2 hidden 2025-09/10 target-layer temperature/salinity, or P3 anonymous-case timestamps/future waves. Independent public covariates and historical pretraining data are allowed only through the external-data gate.
 - Do not use random row splits as primary validation. Preserve station/layer groups, chronological blocks, anomaly runs, and real observation gaps.
 - Purge or embargo validation boundaries by at least the maximum feature and post-processing dependency.
 - Fit scalers, imputers, station/layer baselines, feature statistics, thresholds, and post-processing parameters on the training portion of each fold only.
@@ -42,9 +42,9 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 
 ## External-data quarantine
 
-- Current policy: no external values until written organizer approval.
-- Keep every external-data experiment in an explicitly named, disabled path with source DOI, version, license, retrieval date, checksum, and transformation log.
-- Even after approval, use only sources whose license permits the intended use. Competition permission and copyright permission are separate.
+- The official public FAQ API (id 9) allows public external data and requires source attribution. A separate organizer-approval wait is no longer required.
+- Keep every external-data experiment in an explicitly named quarantined path with source DOI/URL, version, license, retrieval date, checksum, transformation log, time range, and target-leakage classification.
+- Use only sources whose license permits the intended use. Competition permission and copyright permission are separate.
 - Do not use or redistribute the S-ORS ScienceWatch dataset until its rights holder clarifies the absent per-item open license.
 - Never place external raw files in Git.
 
@@ -68,7 +68,7 @@ For each candidate, record:
 - exact fold dates, groups, purge length, and metrics
 - candidate path, byte size, schema result, and SHA-256
 
-One submission opportunity is available per day according to the user-provided platform condition. Never upload without the user's explicit approval for the exact file. Before approval, run:
+The current official interface allows up to three prediction uploads per problem per day. Never upload without the user's explicit approval for the exact file. Before approval, run:
 
 ~~~powershell
 .venv-p1\Scripts\python.exe scripts\validate_submission.py <candidate.csv>
@@ -76,7 +76,7 @@ One submission opportunity is available per day according to the user-provided p
 
 ## Official milestone
 
-As checked on 2026-08-13, the latest competition UI shows problem release on 2026-08-13 and submission deadline/final-model selection on 2026-09-07. These current UI dates take operational precedence. The initial KIMST PDF's 2026-08-10 through 2026-09-04 hackathon and 2026-09-04 10:00 ZIP deadline are retained only as superseded schedule evidence. Re-check the UI and obtain written clarification of the exact deadline time before any final action.
+The 2026-08-07 and 2026-08-12 participant notices set problem release to 2026-08-13 and the final-model deadline to 2026-09-07. The current interface allows three prediction uploads per problem per day and locks later prediction uploads after final-model submission. The initial KIMST PDF's 2026-08-10 through 2026-09-04 schedule is retained only as superseded evidence. Re-check the participant UI immediately before any final action.
 
 ## Git safety
 

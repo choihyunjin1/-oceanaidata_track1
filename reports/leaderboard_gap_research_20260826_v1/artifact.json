@@ -1,0 +1,279 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "title": "해양 AI 해커톤 2~3점 개선 연구 설계",
+    "description": "공식 리더보드 격차를 원지표 목표로 환산하고, P1/P2/P3의 로컬-공식 운송 실패를 반영해 구조적으로 새로운 실험을 사전등록한 기술 보고서",
+    "generatedAt": "2026-08-26T04:02:55+09:00",
+    "sources": [
+      {
+        "id": "official_leaderboard",
+        "label": "Ocean AI Challenge official leaderboard",
+        "href": "https://oceanaidata.org/app/leaderboard",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT 1 AS rank, 'ChangCv' AS team, 30.885889 AS p1_points, 28.275657 AS p2_points, 23.517058 AS p3_points, 82.678604 AS total_points UNION ALL SELECT 2, 'OceanWorld', 29.310804, 27.621657, 24.072682, 81.005143 UNION ALL SELECT 3, '분당독고다이', 27.850529, 26.544054, 23.698280, 78.092863 UNION ALL SELECT 4, 'Equivalent Exchange', 26.456883, 26.736365, 24.014217, 77.207465 UNION ALL SELECT 5, 'OCN', 26.837113, 25.158971, 23.601441, 75.597525",
+          "description": "Read-only public leaderboard snapshot observed at approximately 2026-08-26 03:49 KST.",
+          "filters": ["Top five teams", "Public best score by problem", "No write action"],
+          "metric_definitions": ["Total points are the sum of each problem's Public best points."]
+        }
+      },
+      {
+        "id": "official_submissions",
+        "label": "Team official submission-management observations",
+        "href": "https://oceanaidata.org/app/submissions",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT 'original' AS version, 0.790709 AS p1_f1, 0.541085 AS p2_rmse_c, 0.607071 AS p3_rmse_m UNION ALL SELECT 'round_a', 0.786145, 0.713520, 0.611680 UNION ALL SELECT 'round_b', 0.793710, 0.599921, 0.609346",
+          "description": "Read-only original, Round A, and Round B metric observations for team 분당독고다이.",
+          "filters": ["No CSV opened", "No submission or upload action"],
+          "metric_definitions": ["P1 uses F1; P2 uses temperature RMSE in C; P3 uses position RMSE in metres."]
+        }
+      },
+      {
+        "id": "research_snapshot",
+        "label": "Leaderboard gap research snapshot",
+        "path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT 3 AS current_rank, 78.092863 AS current_total, 2.912280 AS gap_rank2, 81.091492 AS three_point_total",
+          "description": "Reviewed leaderboard rows, inferred score transforms, planning scenarios, and preregistered experiment gates.",
+          "filters": ["Official Public snapshot only", "Rounded three-point transforms used for planning only"],
+          "metric_definitions": ["Point headroom = current per-problem Public best points subtracted from the best observed per-problem points.", "Estimated scenario points use the linear transforms inferred from the team's three rounded official observations."]
+        }
+      },
+      {
+        "id": "transport_audit",
+        "label": "Matched-budget local to official transport audit",
+        "path": "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT 'P1' AS problem, 'Common chronological local OOF' AS reliable_surface, 'Round B local +0.004186 F1; official +0.003001 F1' AS observed_transport, 'Use B as backbone, not a calibration equation' AS decision UNION ALL SELECT 'P2', 'Exact same-season plus locked p100', 'A/B worsening direction matched official 2/2', 'Reject pooled surrogate for selection' UNION ALL SELECT 'P3', 'Large-effect three-window gate', 'Tiny local shrink gains reversed official 0/2', 'Require >=0.030 m local effect and slice safety'",
+          "description": "Frozen local comparisons and post-hoc official direction audit.",
+          "filters": ["Official feedback excluded from local selection", "Three candidate observations only"],
+          "metric_definitions": ["Candidate delta uses candidate minus incumbent; positive is better for F1 and worse for RMSE."]
+        }
+      },
+      {
+        "id": "p1_tradeoff",
+        "label": "P1 Round-B tradeoff diagnostic",
+        "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/metrics.json",
+        "query": {
+          "description": "Aggregate-only diagnosis of false positives removed and long-event true positives lost by Round B.",
+          "filters": ["421,032 aligned OOF rows", "No official test values"],
+          "metric_definitions": ["Micro F1 = 2TP/(2TP+FP+FN)."]
+        }
+      },
+      {
+        "id": "p2_p100",
+        "label": "P2 authoritative locked p100 result",
+        "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+        "query": {
+          "description": "Full-budget architecture-matched P2 result used with exact same-season transport diagnostics.",
+          "filters": ["p100 only for selection", "Three outer folds", "Three target layers"],
+          "metric_definitions": ["Primary RMSE equally weights registered folds and target layers."]
+        }
+      },
+      {
+        "id": "p3_fixed",
+        "label": "P3 ERA5 context-transfer frozen contract",
+        "path": "configs/experiments/p3_era5_context_transfer_v1.json",
+        "query": {
+          "description": "Fixed source/local split, 286 past-only features, and source/viewpoint/solution gates.",
+          "filters": ["No contract mutation", "No ERA5 value read during this research synthesis"],
+          "metric_definitions": ["P3 delta is candidate RMSE minus frozen incumbent RMSE in metres."]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "current_rank",
+        "description": "Approximate live Public leaderboard position at the observed snapshot.",
+        "dataset": "headline_metrics",
+        "sourceId": "official_leaderboard",
+        "metrics": [{"label": "Current rank", "field": "current_rank", "format": "number"}]
+      },
+      {
+        "id": "current_total",
+        "description": "Sum of the team's current P1/P2/P3 Public best points.",
+        "dataset": "headline_metrics",
+        "sourceId": "official_leaderboard",
+        "metrics": [{"label": "Current total points", "field": "current_total", "format": "number"}]
+      },
+      {
+        "id": "gap_rank2",
+        "description": "Additional points needed to tie the current second-place total.",
+        "dataset": "headline_metrics",
+        "sourceId": "research_snapshot",
+        "metrics": [{"label": "Gap to rank 2", "field": "gap_rank2", "format": "number", "unit": "pt"}]
+      },
+      {
+        "id": "three_point_total",
+        "description": "Planning total if the fixed 3-point metric targets are reached; this is not a performance forecast.",
+        "dataset": "headline_metrics",
+        "sourceId": "research_snapshot",
+        "metrics": [{"label": "3-point scenario total", "field": "three_point_total", "format": "number"}]
+      }
+    ],
+    "charts": [
+      {
+        "id": "leaderboard_total_chart",
+        "title": "공식 리더보드 상위 5개 팀 총점",
+        "subtitle": "분당독고다이는 3위이며, 현 2위와의 차이는 2.912280점이다.",
+        "type": "bar",
+        "dataset": "leaderboard_top5",
+        "sourceId": "official_leaderboard",
+        "valueFormat": "number",
+        "options": {"orientation": "horizontal", "grouping": "grouped"},
+        "encodings": {
+          "x": {"field": "team", "type": "nominal", "label": "Team"},
+          "y": {"field": "total_points", "type": "quantitative", "label": "Total Public points"},
+          "tooltip": [
+            {"field": "rank", "type": "quantitative", "label": "Rank"},
+            {"field": "p1_points", "type": "quantitative", "label": "P1"},
+            {"field": "p2_points", "type": "quantitative", "label": "P2"},
+            {"field": "p3_points", "type": "quantitative", "label": "P3"}
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "metric_target_table",
+        "title": "문제별 현재 지표와 현 2위 수준 목표",
+        "subtitle": "목표 지표는 세 번의 반올림된 팀 관측에서 추정한 점수 변환에 기반하며 공식 산식이 아니다.",
+        "dataset": "metric_targets",
+        "sourceId": "research_snapshot",
+        "defaultSort": {"field": "priority", "direction": "asc"},
+        "columns": [
+          {"field": "priority", "label": "Priority", "type": "number"},
+          {"field": "problem", "label": "Problem", "type": "text"},
+          {"field": "current_metric", "label": "Current metric", "type": "text"},
+          {"field": "rank2_metric", "label": "Rank-2-level metric", "type": "text"},
+          {"field": "required_change", "label": "Required change", "type": "text"},
+          {"field": "point_contribution", "label": "Point contribution", "type": "number"},
+          {"field": "transport_rule", "label": "Local selection rule", "type": "text"}
+        ]
+      },
+      {
+        "id": "scenario_table",
+        "title": "2점 및 3점 개선 계획 시나리오",
+        "subtitle": "현재 리더보드가 고정된다는 가정의 산술 시나리오이며 달성 확률 예측이 아니다.",
+        "dataset": "planning_scenarios",
+        "sourceId": "research_snapshot",
+        "defaultSort": {"field": "estimated_gain_points", "direction": "asc"},
+        "columns": [
+          {"field": "scenario", "label": "Scenario", "type": "text"},
+          {"field": "p1_f1", "label": "P1 F1", "type": "number"},
+          {"field": "p2_rmse_c", "label": "P2 RMSE C", "type": "number"},
+          {"field": "p3_rmse_m", "label": "P3 RMSE m", "type": "number"},
+          {"field": "estimated_gain_points", "label": "Gain", "type": "number"},
+          {"field": "estimated_total_points", "label": "Estimated total", "type": "number"}
+        ]
+      },
+      {
+        "id": "transport_table",
+        "title": "로컬 지표의 공식 운송 신뢰도",
+        "subtitle": "같은 문제라도 평가면에 따라 방향 신뢰도가 달라 하나의 공통 로컬 점수로 선택하지 않는다.",
+        "dataset": "transport_audit",
+        "sourceId": "transport_audit",
+        "defaultSort": {"field": "problem", "direction": "asc"},
+        "columns": [
+          {"field": "problem", "label": "Problem", "type": "text"},
+          {"field": "reliable_surface", "label": "Selection surface", "type": "text"},
+          {"field": "observed_transport", "label": "Observed transport", "type": "text"},
+          {"field": "decision", "label": "Decision", "type": "text"}
+        ]
+      },
+      {
+        "id": "experiment_table",
+        "title": "사전등록 연구 순서와 중단 게이트",
+        "subtitle": "각 문제는 최대 두 개 구조 가설만 허용하며 결과 기반 재튜닝·혼합을 금지한다.",
+        "dataset": "experiments",
+        "sourceId": "research_snapshot",
+        "defaultSort": {"field": "priority", "direction": "asc"},
+        "columns": [
+          {"field": "priority", "label": "Priority", "type": "number"},
+          {"field": "problem", "label": "Problem", "type": "text"},
+          {"field": "experiment", "label": "Experiment", "type": "text"},
+          {"field": "structural_change", "label": "Structural change", "type": "text"},
+          {"field": "primary_gate", "label": "Pass/stop gate", "type": "text"},
+          {"field": "budget", "label": "Maximum budget", "type": "text"},
+          {"field": "status", "label": "Status", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# 해양 AI 해커톤 2~3점 개선 연구 설계"},
+      {"id": "technical_summary", "type": "markdown", "sourceId": "research_snapshot", "body": "## 2~3점 개선은 보이지만 한 문제의 미세 튜닝으로는 불가능하다\n\n현재 팀은 **78.092863점, 3위**이며 현 2위와 **2.912280점** 차이다. 문제별 최고점까지 남은 공개 headroom은 P1 3.035360점, P2 1.817999점, P3 0.374402점이다. 그러나 P3 최고점만 따라가도 0.374점뿐이고, P2와 P3를 모두 현재 최고 수준으로 맞춰도 2.192점이므로 P1 개선이 반드시 필요하다. 현실적인 3점 경로는 P1 F1 0.840, P2 RMSE 0.430 C, P3 RMSE 0.583483 m의 조합이며 추정 총점은 81.091492점이다. 이는 각 문제 최고치를 모두 요구하지 않지만 **달성 보장이 아닌 연구 목표**다."},
+      {"id": "headline_strip", "type": "metric-strip", "cardIds": ["current_rank", "current_total", "gap_rank2", "three_point_total"]},
+      {"id": "leaderboard_finding", "type": "markdown", "sourceId": "official_leaderboard", "body": "## 현재 2위까지의 2.912점은 P1·P2·P3의 결합 개선으로만 닫힌다\n\nP1 최고팀의 F1은 추정 0.907907, P2 최고팀의 RMSE는 추정 0.396196 C, P3 최고팀의 RMSE는 추정 0.583483 m다. 분당독고다이가 현 2위 팀의 문제별 지표 수준을 각각 맞추면 현재 점수 체계에서 정확히 약 2.912점이 더해진다. 단, 리더보드는 변할 수 있고 지표 역산은 반올림된 세 관측에서 얻은 계획용 선형식이다."},
+      {"id": "leaderboard_chart_block", "type": "chart", "chartId": "leaderboard_total_chart"},
+      {"id": "metric_target_block", "type": "table", "tableId": "metric_target_table"},
+      {"id": "scenario_finding", "type": "markdown", "sourceId": "research_snapshot", "body": "## 3점 시나리오는 P1 1.230점, P2 1.394점, P3 0.374점의 분담이 가장 방어적이다\n\nP1만으로 3점을 얻으려면 현재 0.793710에서 약 0.907로 올라야 하고, P2나 P3 단독 3점은 현재 공개 최고보다도 좋은 값이 필요하다. 반면 세 문제를 분담하면 P1 0.840과 P2 0.430은 현재 문제별 최고보다 보수적이고, P3만 현재 공개 최고 수준을 목표로 하면 된다."},
+      {"id": "scenario_block", "type": "table", "tableId": "scenario_table"},
+      {"id": "transport_finding", "type": "markdown", "sourceId": "transport_audit", "body": "## 로컬 채점은 공통 신뢰도가 아니라 문제별로 다른 선택 규칙이 필요하다\n\nP1 Round B는 로컬 F1 +0.004186과 공식 F1 +0.003001로 방향이 일치했지만 Round A는 역전됐다. P2는 exact same-season과 locked p100이 A/B의 공식 악화 방향을 2/2로 맞췄고 pooled surrogate는 반대로 예측했다. P3의 0.0003~0.0004 m 수준 로컬 수축 개선은 공식에서 모두 악화로 뒤집혔다. 따라서 P1은 Round-B backbone에서 +0.003 이상, P2는 exact same-season과 p100의 교집합, P3는 최소 -0.030 m와 CI·slice gate를 요구한다."},
+      {"id": "transport_block", "type": "table", "tableId": "transport_table"},
+      {"id": "experimental_design", "type": "markdown", "sourceId": "research_snapshot", "body": "## 첫 실험은 기존 하이퍼파라미터를 더 찾는 대신 실패 구조를 직접 바꾼다\n\nP1은 Round B가 잃은 TP 376개가 모두 19행 이상 이벤트이고 82.18%가 상위 5개 이벤트에 집중된 점을 이용해, 이미 탐지된 비-spike 이벤트에 연결된 내부·연장 구간만 복구한다. P2는 절대 수온 residual 대신 공개 endpoint 사이의 무차원 곡률을 학습해 계절·성층 크기 이동을 제거한다. P3는 현재 고정 ERA5 source-to-local 전이 실험이 유일한 1차 구조 검증이다. 각 문제의 두 번째 가설은 첫 결과와 사전 조건이 맞을 때만 한 번 허용한다."},
+      {"id": "experiment_block", "type": "table", "tableId": "experiment_table"},
+      {"id": "methodology", "type": "markdown", "body": "## 측정과 검증 방법\n\n공식 페이지는 읽기 전용으로 관찰했고 제출 CSV는 열지 않았다. 문제별 점수 변환은 팀의 original/A/B 세 관측에 선형식을 맞춰 추정했다. 실험 선택에는 공식 결과를 소급 사용하지 않고, P1은 chronological fold와 KST-day bootstrap, P2는 exact 2024 Sep-Oct 26,273키 fail-fast 뒤 locked p100 78,156행 검증, P3는 source held-year gate 뒤 사전등록 3개 local window를 사용한다. 모든 후보는 seed·feature·postprocess·threshold 또는 무탐색 규칙을 결과 공개 전에 hash로 봉인한다."},
+      {"id": "limitations", "type": "markdown", "body": "## 불확실성과 강건성 한계\n\n- 리더보드는 20초마다 갱신될 수 있어 순위와 격차는 관찰 시점의 snapshot이다.\n- 점수 변환은 공식 산식이 아니라 세 개의 반올림 관측으로부터 추정한 선형식이다.\n- official original/A/B만 있어 일반적인 로컬-공식 상관이나 calibration을 추정할 수 없다.\n- P1에는 untouched retrospective labeled window가 없어 새 결과도 연구용 screening이다.\n- P2 exact incumbent의 causal prefix refit은 재현 정보가 부족해 exact surface는 transport diagnostic, p100은 공정성 확인으로 역할을 나눈다.\n- P3 ERA5는 다운로드·preflight·source gate가 끝나지 않았으므로 아직 성능 결과가 아니다.\n- 3점 시나리오는 arithmetic target이며 확률적 예측이나 순위 보장이 아니다."},
+      {"id": "next_steps", "type": "markdown", "body": "## 다음 실행은 P1 residual과 P2 normalized-curvature의 두 개 fail-fast다\n\n1. P1 residual과 P2 NCR의 preregistration·정적 QA를 완료한다.\n2. 공식 test/sample/submission과 무관한 로컬 Stage 1만 각각 정확히 한 번 실행한다.\n3. P1은 모든 연결성·precision·fold/station gate, P2는 exact same-season gate를 통과할 때만 다음 단계로 진행한다.\n4. P2 Stage 2는 locked p100에서만 수행하고 pooled surrogate는 선택에 사용하지 않는다.\n5. P3 ERA5는 현재 고정 계약을 그대로 완료한다.\n6. 세 결과 중 사전 gate를 통과한 후보만 독립 QA 후 사용자에게 제출 여부를 묻는다. 자동 후보 생성·업로드는 하지 않는다."},
+      {"id": "further_questions", "type": "markdown", "body": "## 이후 답해야 할 질문\n\n- P1의 연결된 장기-event residual이 공식 점수로 운송될 만큼 큰 +0.003 F1을 재현하는가?\n- P2의 무차원 곡률 표현이 exact same-season과 p100 양쪽에서 같은 방향으로 개선되는가?\n- P3 ERA5 source years에서 과거 48시간만으로 미래 폭풍 전이가 식별 가능한가?\n- 세 문제에서 gate를 통과한 효과 합이 실제로 2점 이상인지, 아니면 다음 구조 연구 사이클이 필요한가?"}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-26T04:02:55+09:00",
+    "status": "ready",
+    "datasets": {
+      "headline_metrics": [
+        {"current_rank": 3, "current_total": 78.092863, "gap_rank2": 2.912280, "three_point_total": 81.091492}
+      ],
+      "leaderboard_top5": [
+        {"rank": 1, "team": "ChangCv", "p1_points": 30.885889, "p2_points": 28.275657, "p3_points": 23.517058, "total_points": 82.678604},
+        {"rank": 2, "team": "OceanWorld", "p1_points": 29.310804, "p2_points": 27.621657, "p3_points": 24.072682, "total_points": 81.005143},
+        {"rank": 3, "team": "분당독고다이", "p1_points": 27.850529, "p2_points": 26.544054, "p3_points": 23.698280, "total_points": 78.092863},
+        {"rank": 4, "team": "Equivalent Exchange", "p1_points": 26.456883, "p2_points": 26.736365, "p3_points": 24.014217, "total_points": 77.207465},
+        {"rank": 5, "team": "OCN", "p1_points": 26.837113, "p2_points": 25.158971, "p3_points": 23.601441, "total_points": 75.597525}
+      ],
+      "metric_targets": [
+        {"priority": 1, "problem": "P1", "current_metric": "F1 0.793710", "rank2_metric": "F1 0.848649", "required_change": "+0.054939 F1", "point_contribution": 1.460281, "transport_rule": "Round-B backbone; delta F1 >= +0.003 with CI and precision gates"},
+        {"priority": 2, "problem": "P2", "current_metric": "RMSE 0.541085 C", "rank2_metric": "RMSE 0.455203 C", "required_change": "-0.085882 C", "point_contribution": 1.077605, "transport_rule": "Exact same-season AND locked p100"},
+        {"priority": 3, "problem": "P3", "current_metric": "RMSE 0.607071 m", "rank2_metric": "RMSE 0.583483 m", "required_change": "-0.023588 m", "point_contribution": 0.374399, "transport_rule": "ERA5 source gate then delta <= -0.030 m local solution gate"}
+      ],
+      "planning_scenarios": [
+        {"scenario": "현재", "p1_f1": 0.793710, "p2_rmse_c": 0.541085, "p3_rmse_m": 0.607071, "estimated_gain_points": 0.0, "estimated_total_points": 78.092863},
+        {"scenario": "2점 실용 목표", "p1_f1": 0.825000, "p2_rmse_c": 0.450000, "p3_rmse_m": 0.595000, "estimated_gain_points": 2.166176, "estimated_total_points": 80.259039},
+        {"scenario": "현 2위 지표 동률", "p1_f1": 0.848649, "p2_rmse_c": 0.455203, "p3_rmse_m": 0.583483, "estimated_gain_points": 2.912285, "estimated_total_points": 81.005148},
+        {"scenario": "3점 추격 목표", "p1_f1": 0.840000, "p2_rmse_c": 0.430000, "p3_rmse_m": 0.583483, "estimated_gain_points": 2.998629, "estimated_total_points": 81.091492}
+      ],
+      "transport_audit": [
+        {"problem": "P1", "reliable_surface": "Common chronological local OOF", "observed_transport": "Round B local +0.004186 F1; official +0.003001 F1", "decision": "Use B as backbone, not a calibration equation"},
+        {"problem": "P2", "reliable_surface": "Exact same-season plus locked p100", "observed_transport": "A/B worsening direction matched official 2/2", "decision": "Reject pooled surrogate for selection"},
+        {"problem": "P3", "reliable_surface": "Large-effect three-window gate", "observed_transport": "Tiny local shrink gains reversed official 0/2", "decision": "Require >=0.030 m local effect and slice safety"}
+      ],
+      "experiments": [
+        {"priority": 1, "problem": "P1", "experiment": "RB non-spike long-event residual v1", "structural_change": "Connected continuation/interior rescue only", "primary_gate": "F1 +0.003; CI>0; recall +0.008; precision loss <=0.002; no new singleton", "budget": "18 fits; <=30 min", "status": "Not executed"},
+        {"priority": 2, "problem": "P2", "experiment": "Normalized-curvature LGBM v1", "structural_change": "Dimensionless endpoint-normalized vertical curvature target", "primary_gate": "Exact Sep-Oct -0.015 C then p100 -0.010 C, CI/fold/layer gates", "budget": "3 then 9 fits; <=30 min", "status": "Not executed"},
+        {"priority": 3, "problem": "P3", "experiment": "ERA5 context-transfer v1", "structural_change": "Source transition pretraining vs matched local-only control", "primary_gate": "3 source years then local -0.030 m, CI and 2/3 windows", "budget": "Frozen contract", "status": "In progress"},
+        {"priority": 4, "problem": "P1", "experiment": "Station-season group DRO v1", "structural_change": "Fixed robust group-risk equalization without target density", "primary_gate": "Only if P1 residual passes", "budget": "9 fits; <=20 min", "status": "Conditional"},
+        {"priority": 5, "problem": "P2", "experiment": "Group-balanced incumbent LGBM v1", "structural_change": "One fixed group-balanced objective; no stack or gate", "primary_gate": "Same exact and p100 intersection gates", "budget": "9 fits; <=30 min", "status": "Conditional"},
+        {"priority": 6, "problem": "P3", "experiment": "ERA5 future-equivalence embedding v2", "structural_change": "Past-only metric embedding supervised by source future equivalence", "primary_gate": "Only one attempt after defined v1 failure modes", "budget": "Frozen if opened", "status": "Conditional"}
+      ]
+    }
+  },
+  "sources": [
+    {"id": "official_leaderboard", "href": "https://oceanaidata.org/app/leaderboard", "label": "Official leaderboard"},
+    {"id": "official_submissions", "href": "https://oceanaidata.org/app/submissions", "label": "Official submission management"},
+    {"id": "research_snapshot", "path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json", "label": "Research snapshot"},
+    {"id": "transport_audit", "path": "artifacts/matched_budget_local_compare_20260825/synthesis.json", "label": "Transport audit"},
+    {"id": "p1_tradeoff", "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/metrics.json", "label": "P1 tradeoff diagnostic"},
+    {"id": "p2_p100", "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json", "label": "P2 locked p100"},
+    {"id": "p3_fixed", "path": "configs/experiments/p3_era5_context_transfer_v1.json", "label": "P3 ERA5 fixed contract"}
+  ]
+}

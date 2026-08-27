@@ -1,0 +1,489 @@
+{
+  "schema_version": "p1_multiscale_cross_layer_offset_drift_unary.v6.static_preregistration.v1",
+  "experiment_id": "p1_multiscale_cross_layer_offset_drift_unary_v6",
+  "problem": "P1",
+  "stage": "STATIC_OWNER_PREREGISTRATION_ONLY",
+  "created_at_kst": "2026-08-23T11:20:00+09:00",
+  "metric": "binary_micro_F1",
+  "direction": "higher",
+  "comparison_mode": "EXACT_OFFICIAL_INCUMBENT_PREFIX_REFIT_WITH_ADDITIVE_SLOW_UNARY",
+  "single_hypothesis_contract": {
+    "hypothesis_count": 1,
+    "hypothesis_id": "robust_multiscale_cross_layer_offset_drift_unary",
+    "statement": "A train-prefix-only robust seasonal and adjacent-layer graph baseline, followed by fixed multiscale Haar level, slope, curvature, and cross-layer coherence residual geometry, contains offset/drift information that the frozen incumbent and prior unary families did not identify. A single deterministic unary head may add sustained slow-anomaly rows while preserving every incumbent positive; otherwise the output is the exact incumbent byte sequence.",
+    "primary_target": "combined_offset_or_drift_unary",
+    "alternatives_registered": 0,
+    "threshold_sweep": false,
+    "alpha_sweep": false,
+    "seed_sweep": false,
+    "architecture_search": false,
+    "hyperparameter_search": false,
+    "posthoc_subgroup_selection": false,
+    "why_genuinely_distinct": "The signal is reconstructed from robust seasonal and cross-layer trajectory geometry before supervised fitting. It neither re-decodes the same unary probabilities as the semi-Markov experiments nor replaces the incumbent with a generic TCN/SSL model, and unlike the earlier four matched-filter features it uses a train-prefix baseline plus five fixed temporal scales and fail-closed station-layer guards."
+  },
+  "diagnostic_identifiability": {
+    "question": "Does independent multiscale cross-layer trajectory geometry recover sustained offset/drift rows beyond the exact incumbent without degrading spike behavior or any supported station-layer?",
+    "identifiable": true,
+    "identification_unit": "fixed outer fold by prefix fraction with three chronological inner blind blocks",
+    "estimand": "candidate-minus-incumbent binary F1 and offset/drift recall deltas on identical frozen validation keys",
+    "positive_evidence_required": "the preregistered train-only gate and final learning-curve gates must all pass",
+    "negative_evidence_interpretation": "failure closes this exact geometry-unary family; it is not evidence that offset/drift is intrinsically unrecoverable",
+    "forbidden_inference": "historical outer error subgroups are motivation only and may not select windows, thresholds, stations, layers, or hyperparameters",
+    "unresolved_history_basis": {
+      "incumbent_false_negative_offset_drift_share": 0.927,
+      "incumbent_false_negative_longer_than_48h_share": 0.77,
+      "basis_scope": "sealed historical diagnostic, not a score or tuning population"
+    }
+  },
+  "sealed_history": {
+    "typed_duration_semimarkov_v2": {
+      "status": "CLOSED_NO_GO_UNARY_INSUFFICIENCY",
+      "reason": "same-unary duration decoding gained only 0.0024336282407236842 pooled F1, lost drift and spike recall, and had worst station-layer delta -0.6666666666666666; exact subset rescue is not identifiable from saved aggregates",
+      "pins": {
+        "config": {
+          "path": "configs/experiments/p1_typed_duration_semimarkov_v2.json",
+          "bytes": 5698,
+          "sha256": "296df847b5a67f5ed5336e62b388732526c24ddced150cb5597335126e373488"
+        },
+        "result": {
+          "path": "artifacts/p1_typed_duration_semimarkov_v2/result.json",
+          "bytes": 3794,
+          "sha256": "357059936f6eb123af177a555d90f1a4ce4d2aeddd0de6d271e346af8fb573b3"
+        },
+        "posthoc_identifiability": {
+          "path": "artifacts/p1_typed_duration_semimarkov_v2/posthoc_type_subset_diagnostic_unavailable.json",
+          "bytes": 3438,
+          "sha256": "07640702720ccb6a8ab85c6d3341d1fa1756c7341ee2763641a7db0f949ec9eb"
+        }
+      }
+    },
+    "station_layer_temporal_convolution_event_v2": {
+      "status": "CLOSED_RESEARCH_ONLY_REPLACEMENT_COLLAPSE",
+      "reason": "full-prefix delta was -0.3100741149973728 and the fixed TCN replacement failed worst-station and every improvement gate",
+      "pins": {
+        "metrics": {
+          "path": "artifacts/p1_station_layer_temporal_convolution_event_v2/metrics.json",
+          "bytes": 38522,
+          "sha256": "e7f577cc8c5cd4b06d0cbc6592a0900d6acf309e103076cf1aee145bc3a7ce8a"
+        },
+        "result": {
+          "path": "artifacts/p1_station_layer_temporal_convolution_event_v2/result.json",
+          "bytes": 35165,
+          "sha256": "2df30738162aa7117652be673985953b29fdfebc3524d04843e384ff6732d47b"
+        },
+        "manifest": {
+          "path": "artifacts/p1_station_layer_temporal_convolution_event_v2/manifest.json",
+          "bytes": 24254,
+          "sha256": "d6e5a55ab4372e17a5a37a386ba6366f42a243958cbbe3b25fc2d86c34672913"
+        }
+      }
+    },
+    "masked_pretrain_binary_event_v4r4": {
+      "status": "CLOSED_RESEARCH_ONLY_SSL_REPLACEMENT_COLLAPSE",
+      "reason": "full-prefix delta was -0.5080652138235318; masked pretraining retained neither incumbent rule geometry nor station-layer calibration",
+      "pins": {
+        "metrics": {
+          "path": "artifacts/p1_masked_pretrain_binary_event_v4r4/metrics.json",
+          "bytes": 38470,
+          "sha256": "6a0b3cc3988c88a2b67e73f84a3535501f188f8da552072010bca0a67d3b46d5"
+        },
+        "result": {
+          "path": "artifacts/p1_masked_pretrain_binary_event_v4r4/result.json",
+          "bytes": 35450,
+          "sha256": "6db6d61d9581e91819ad8184360774b38416449e8e614e9b4167d924121cabb2"
+        },
+        "manifest": {
+          "path": "artifacts/p1_masked_pretrain_binary_event_v4r4/manifest.json",
+          "bytes": 32412,
+          "sha256": "892995283dd4ef7aff6de4df3adc820245c9a0a228654b11f805576aad72662d"
+        }
+      }
+    },
+    "incumbent_rule_distillation_neural_residual_v5r6": {
+      "status": "CLOSED_RESEARCH_ONLY_EXACT_NO_OP",
+      "reason": "all 45 train-only residual gates failed, every saved final seed array was exact incumbent identity, all five deltas and confidence intervals were zero",
+      "pins": {
+        "metrics": {
+          "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/metrics.json",
+          "bytes": 35673,
+          "sha256": "38983689841502bc25f7a284c1e7581cfab70e38504919dd9ecdc05207633965"
+        },
+        "result": {
+          "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/result.json",
+          "bytes": 52816,
+          "sha256": "225eb859ce265dcaa3053dc13296d7027792fbcc7137e3e3208a5888c541a8b3"
+        },
+        "predictions_complete": {
+          "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/predictions_complete.json",
+          "bytes": 313087,
+          "sha256": "32b8a15d5bcc52523ff2483eff50a591ef7497ea87a0dcabbe7279fd468599b0"
+        },
+        "evidence": {
+          "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/learning_curve_evidence.json",
+          "bytes": 6443,
+          "sha256": "50e7c9b59d2cd0a4e43169ae65050c0e5222f11cd300ab62f61eec43ef6d75e4"
+        },
+        "manifest": {
+          "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/manifest.json",
+          "bytes": 111915,
+          "sha256": "bf43ea0aeb5fdf9099ae333ca9d48d09a765d085fab5622343a256ad4083d9ee"
+        }
+      }
+    },
+    "offset_drift_matched_filter_inner_v1": {
+      "status": "CLOSED_INNER_ONLY_GUARD_FAILURE",
+      "reason": "four boundary features increased mean slow recall but raised normal FP by 102.94117647058825 percent and produced worst-group F1 delta -0.6481481481481481; the new family must model baseline geometry and fail closed on both guards",
+      "pins": {
+        "config": {
+          "path": "configs/experiments/p1_offset_drift_matched_filter_v1.json",
+          "bytes": 3568,
+          "sha256": "3800a3e68a692f7c0c4734fef7b32813f4bf496f576cbd968f91e3aa6054a1df"
+        },
+        "metrics": {
+          "path": "artifacts/matched_filter_inner_v1/metrics.json",
+          "bytes": 44808,
+          "sha256": "3d4d802ac14b086caceb26d7125a1979b182c1cdf281790885d1a1698e6adaf9"
+        },
+        "manifest": {
+          "path": "artifacts/matched_filter_inner_v1/manifest.json",
+          "bytes": 502,
+          "sha256": "a13c97fd2637bc76d8709f573fba63d16d2b359a4141d92111c25a1dee332d22"
+        }
+      }
+    },
+    "failure_recon": {
+      "path": "reports/P1_FAILURE_RECON_2026-08-13.md",
+      "bytes": 19809,
+      "sha256": "92baf9d70d7147c36d67b85b478cc46fa53d8627eb7ad640b633ffc2a7bee42e"
+    }
+  },
+  "data_contract": {
+    "workspace_environment_variable": "P1_WORKSPACE_ROOT",
+    "data_environment_variable": "P1_DATA_DIR",
+    "path_fallback_allowed": false,
+    "source_data_read_only": true,
+    "test_values_forbidden_until_curve_pass_and_separate_authorization": true,
+    "input_only_columns": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "temp",
+      "psal",
+      "depth"
+    ],
+    "selective_target_columns": [
+      "label",
+      "anomaly_type"
+    ],
+    "source_pins": {
+      "README.md": {
+        "bytes": 1586,
+        "sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd"
+      },
+      "train.csv": {
+        "bytes": 50584654,
+        "sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+        "static_check_open_allowed": false
+      },
+      "test.csv": {
+        "bytes": 10353810,
+        "sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+        "static_check_open_allowed": false
+      },
+      "sample_submission.csv": {
+        "bytes": 7267517,
+        "sha256": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4",
+        "static_check_open_allowed": false
+      }
+    }
+  },
+  "incumbent": {
+    "identity": "immutable_exact_official_prefix_refits_from_p1_meaningful_learning_curve_generation_v1",
+    "outer_validation_keys": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "outer_validation_keys_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "probability_and_prediction_bytes_must_be_preserved_for_all_incumbent_positive_rows": true,
+    "failure_fallback": "EXACT_INCUMBENT_PROBABILITY_AND_PREDICTION_BYTES"
+  },
+  "prefix_protocol": {
+    "outer_folds": [
+      "2025_q2",
+      "2025_q3",
+      "2025_q4"
+    ],
+    "fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "execution_order": "fold_major_then_prefix_fraction",
+    "deterministic_seeds": [
+      20260823
+    ],
+    "seed_role": "library_tie_break_only_not_a_sweep",
+    "outer_purge_days": 7,
+    "inner_blocks": 3,
+    "inner_split": "chronological_expanding_three_block_with_seven_day_purge",
+    "prefix_ids": "exact immutable incumbent prefix IDs",
+    "rolling_origin_reuse": "earlier outer labels become later training history only after all five earlier-fold O_EXCL commitments",
+    "active_outer_target_reads_before_cell_commitment": 0,
+    "aggregate_target_reads_before_predictions_complete": 0
+  },
+  "label_free_baseline": {
+    "fit_scope": "explicit inner-train or outer-prefix IDs only",
+    "target_columns_read": 0,
+    "station_layer_seasonal_model": {
+      "design": "intercept plus annual Fourier harmonics 1,2,3,4 plus diurnal harmonics 1,2",
+      "annual_period_days": 365.2425,
+      "irls_iterations": 8,
+      "huber_delta": 1.5,
+      "ridge": 1e-06,
+      "minimum_group_rows": 32,
+      "scale": "1.4826 times residual MAD with 1e-6 floor"
+    },
+    "cross_layer_graph": {
+      "edges": "adjacent observed layers within each station",
+      "edge_state": "prefix median seasonal-residual difference and MAD",
+      "inference": "same-station same-time adjacent peer residuals adjusted by frozen edge medians then median combined; graph residual is normalized by the median frozen edge MAD",
+      "single_layer_fallback": "seasonal residual only",
+      "validation_values_are_label_free": true,
+      "future_target_or_label_values_read": false
+    }
+  },
+  "trajectory_geometry": {
+    "gap_break_minutes": 30,
+    "centered_offline_within_gap_safe_segment": true,
+    "scales_rows": [
+      48,
+      96,
+      192,
+      384,
+      576
+    ],
+    "scales_hours": [
+      8,
+      16,
+      32,
+      64,
+      96
+    ],
+    "features_per_scale": [
+      "level_abs_z",
+      "haar_abs_z",
+      "slope_abs_z",
+      "curvature_abs_z",
+      "coherence_deficit_z"
+    ],
+    "base_features": [
+      "abs_seasonal_residual_z",
+      "abs_graph_residual_z",
+      "graph_available",
+      "peer_count"
+    ],
+    "feature_count": 29,
+    "feature_dtype": "float32",
+    "missing_window_fill": 0.0,
+    "maximum_dependency_rows": 576,
+    "purge_rows_at_ten_minutes": 1008,
+    "purge_covers_dependency": true
+  },
+  "unary_head": {
+    "target": "label_is_one_and_anomaly_type_contains_offset_or_drift",
+    "model": "sklearn.linear_model.LogisticRegression",
+    "feature_scaler": "RobustScaler_quantiles_25_75_fit_on_same_explicit_train_ids",
+    "scaler_with_centering": true,
+    "scaler_with_scaling": true,
+    "scaler_unit_variance": false,
+    "penalty": "l2",
+    "C": 0.25,
+    "solver": "lbfgs",
+    "max_iter": 64,
+    "tol": 1e-06,
+    "class_weight": "balanced",
+    "fit_intercept": true,
+    "random_state": 20260823,
+    "threshold": 0.5,
+    "calibration": false,
+    "early_stopping": false,
+    "feature_selection": false,
+    "fixed_before_any_score": true
+  },
+  "protected_union": {
+    "operation": "incumbent OR sustained slow-unary additions",
+    "minimum_run_rows": 48,
+    "maximum_run_rows": 519,
+    "incumbent_positive_probability_bytes_unchanged": true,
+    "incumbent_positive_prediction_bytes_unchanged": true,
+    "incumbent_singleton_max_rows": 1,
+    "incumbent_singleton_protection_radius_rows": 6,
+    "failed_gate_probability_bytes": "exact incumbent",
+    "failed_gate_prediction_bytes": "exact incumbent",
+    "deletions_from_incumbent": 0
+  },
+  "selective_target_and_blind_commitment_protocol": {
+    "opaque_train_target_index_built_without_decoding": true,
+    "inner_order": [
+      "fit label-free baseline on explicit inner-train IDs",
+      "decode label and anomaly_type only for explicit inner-train IDs",
+      "fit fixed unary head",
+      "predict inner holdout without its labels",
+      "O_EXCL commit unary probability and protected candidate arrays",
+      "decode inner-holdout label and anomaly_type for the gate"
+    ],
+    "outer_order_on_gate_pass": [
+      "fit label-free baseline on exact outer prefix IDs",
+      "decode prefix target fields only",
+      "fit fixed unary head",
+      "predict active outer validation without target fields",
+      "O_EXCL commit candidate and exact incumbent bindings",
+      "decode active outer labels only after all five fold commitments"
+    ],
+    "outer_order_on_gate_fail": [
+      "skip optional refit",
+      "copy exact incumbent probability and prediction bytes",
+      "O_EXCL commit exact identity fallback before active outer labels"
+    ],
+    "commitment_chain": "15 cell commitments then 3 fold commitments then predictions_complete",
+    "inner_blind_commitments": 45,
+    "outer_cell_commitments": 15,
+    "fold_commitments": 3,
+    "mixed_or_uncommitted_scoring_forbidden": true
+  },
+  "train_only_gate": {
+    "metric_definitions": {
+      "micro_f1_delta": "candidate minus exact incumbent binary F1 over the union of the three sealed inner holdouts",
+      "offset_recall_delta": "candidate minus incumbent recall on pooled rows whose sealed anomaly_type contains offset",
+      "drift_recall_delta": "candidate minus incumbent recall on pooled rows whose sealed anomaly_type contains drift",
+      "spike_f1_delta": "candidate minus incumbent binary F1 on the union of each sealed true-spike row and its six-row same-segment flank; duplicate flank rows are unioned once",
+      "worst_station_layer_f1_delta": "minimum candidate-minus-incumbent binary F1 over the fixed 16 station-layer groups; missing either binary class fails closed",
+      "normal_fp_relative_increase": "candidate minus incumbent false-positive rows divided by max(1, incumbent false-positive rows) on sealed label-zero rows",
+      "nondegrading_inner_blocks": "count of the three sealed holdouts with micro F1 delta at least zero"
+    },
+    "required_station_layers": [
+      "G-ORS|1",
+      "I-ORS|1",
+      "I-ORS|2",
+      "I-ORS|3",
+      "I-ORS|4",
+      "I-ORS|5",
+      "I-ORS|6",
+      "I-ORS|7",
+      "S-ORS|1",
+      "S-ORS|2",
+      "S-ORS|3",
+      "S-ORS|4",
+      "S-ORS|5",
+      "S-ORS|6",
+      "S-ORS|7",
+      "S-ORS|8"
+    ],
+    "apply_only_if_all": {
+      "minimum_micro_f1_delta": 0.002,
+      "minimum_offset_recall_delta": 0.03,
+      "minimum_drift_recall_delta": 0.03,
+      "minimum_mean_offset_drift_recall_delta": 0.04,
+      "minimum_spike_f1_delta": 0.0,
+      "minimum_worst_station_layer_f1_delta": -0.002,
+      "maximum_normal_fp_relative_increase": 0.05,
+      "minimum_nondegrading_inner_blocks": 3,
+      "required_inner_blocks": 3,
+      "both_slow_types_observed": true,
+      "spike_observed": true,
+      "all_required_station_layers_observed": true,
+      "blind_predictions_sealed_before_gate_labels": true
+    },
+    "missing_type_or_group": "EXACT_INCUMBENT_BYTES",
+    "any_nonfinite_value": "EXACT_INCUMBENT_BYTES",
+    "any_failed_check": "EXACT_INCUMBENT_BYTES"
+  },
+  "final_curve_gate": {
+    "late_fractions_070_085_100_all_improve": true,
+    "full_fraction_delta_at_least": 0.02,
+    "full_fraction_ci90_excludes_zero": true,
+    "another_late_fraction_ci90_excludes_zero": true,
+    "minimum_improved_outer_folds": 2,
+    "full_offset_recall_delta_at_least": 0.03,
+    "full_drift_recall_delta_at_least": 0.03,
+    "full_mean_offset_drift_recall_delta_at_least": 0.04,
+    "full_spike_f1_delta_at_least": 0.0,
+    "worst_station_layer_f1_delta_at_least": -0.002,
+    "all_leakage_checks": true,
+    "all_reproducibility_checks": true,
+    "bootstrap_replicates_per_point": 5000,
+    "bootstrap_unit": "positive event or station-layer normal KST day",
+    "curve_alone_can_create_candidate": false,
+    "separate_authorization_required_after_pass": true
+  },
+  "resource_ceiling": {
+    "curve_cells": 15,
+    "deterministic_seed_count": 1,
+    "inner_blocks_per_cell": 3,
+    "maximum_label_free_baseline_fit_calls": 60,
+    "maximum_supervised_unary_fit_calls": 60,
+    "maximum_top_level_fit_calls": 120,
+    "maximum_station_layer_seasonal_subfits": 960,
+    "maximum_adjacent_graph_edge_estimations": 780,
+    "maximum_seasonal_irls_steps": 7680,
+    "maximum_unary_lbfgs_iterations": 3840,
+    "maximum_total_iterative_steps": 11520,
+    "maximum_wall_clock_seconds": 21600,
+    "maximum_peak_rss_bytes": 8589934592,
+    "maximum_vram_bytes": 0,
+    "gpu_allowed": false,
+    "maximum_threads": 8,
+    "maximum_artifact_disk_bytes": 1073741824,
+    "static_check_maximum_wall_clock_seconds": 60,
+    "static_check_fit_calls": 0,
+    "static_check_predictions": 0,
+    "static_check_scores": 0,
+    "static_check_test_value_reads": 0
+  },
+  "v9_binding": {
+    "path": "artifacts/meaningful_score_goal_v9/registry.jsonl",
+    "bytes": 15812,
+    "sha256": "232b6ed3133de11ee05150ec439efe05baa315bbb64ea0f319ffcbddd421b965",
+    "local_event_count": 3,
+    "head_seq": 5,
+    "head_event_sha256": "1b3e01be70c6f8ed2df04038deac3b3642804f70f9f17a238826c64d68090317",
+    "semantic_upload_count": 0,
+    "append_allowed_during_static_stage": false
+  },
+  "implementation_contract": {
+    "helper": {
+      "path": "src/p1_qc/multiscale_cross_layer_offset_drift.py",
+      "sha256": "434bce024437d5dea77a4827bfdde95f0726659f901993fd4c033df82ab605d8"
+    },
+    "runner": "scripts/run_p1_multiscale_cross_layer_offset_drift_unary_v6.py",
+    "tests": "tests/test_run_p1_multiscale_cross_layer_offset_drift_unary_v6.py",
+    "runner_mode": "CHECK_ONLY_NO_OUTPUT",
+    "actual_execution_entrypoint_present": false
+  },
+  "static_prohibitions": {
+    "qa_receipt": false,
+    "execution_authorization": false,
+    "attempt_lock": false,
+    "model_fit": false,
+    "prediction_generation": false,
+    "target_score": false,
+    "artifact_output": false,
+    "test_value_read": false,
+    "candidate_file": false,
+    "ledger_append": false,
+    "upload": false,
+    "commit": false,
+    "push": false
+  },
+  "future_output_paths_must_be_absent": [
+    "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6",
+    "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6_control",
+    "artifacts/status/p1_multiscale_cross_layer_offset_drift_unary_v6.json",
+    "outputs/p1_multiscale_cross_layer_offset_drift_unary_v6",
+    "submissions/p1_multiscale_cross_layer_offset_drift_unary_v6.csv"
+  ],
+  "on_static_pass": {
+    "status": "AWAIT_FRESH_INDEPENDENT_STATIC_QA_AND_SEPARATE_EXECUTION_AUTHORIZATION",
+    "actual_run_allowed": false
+  }
+}

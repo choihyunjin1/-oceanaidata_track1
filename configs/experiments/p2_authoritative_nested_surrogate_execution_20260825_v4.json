@@ -1,0 +1,101 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_execution.v4",
+  "experiment_id": "p2_authoritative_nested_surrogate_execution_20260825_v4",
+  "created_at_kst": "2026-08-25T23:59:00+09:00",
+  "status": "SEALED_EXECUTION_READY_DRY_RUN_NO_ACTUAL_FIT",
+  "base_config": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_execution_20260825_v3.json",
+    "sha256": "7eba50355d747a0306df5973447eba9c29ae0d240ba7def3887660b827d1d682"
+  },
+  "supersedes": {
+    "status": "SUPERSEDES_V3_ORCHESTRATION_ONLY_NEVER_START_OR_RESUME_V3",
+    "reason": "v3 science/data semantics pass, but its runner rejects every pre-existing actual directory before reaching atomic JobStore resume",
+    "v3_runner_failure_lines": "scripts/run_p2_authoritative_nested_surrogate_45cell_v3.py:522-526",
+    "v3_actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v3",
+    "v3_actual_directory_created": false,
+    "v3_actual_model_fits": 0,
+    "external_independent_qa": {
+      "path": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v3_external_qa/qa.json",
+      "sha256": "21f58190dc8288f4bf8777b1ba09190d1b84b3b0c89821088237418a27c50521",
+      "bytes": 3351,
+      "science_and_data_semantic_status": "PASS",
+      "orchestration_status": "FAIL"
+    },
+    "cross_v1_v2_v3_job_or_cell_reuse_allowed": false
+  },
+  "parent_contract": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v4.json",
+    "sha256": "6a7cb01e740f8af38db19af50c0603277e70a354921d84a903da9b4a2a71eefc",
+    "contract_seal_path": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v4/contract_seal.json",
+    "contract_seal_sha256": "70ebae571944c9c2c064afb6eeacb307c6620dd691f3cb96d905cb67d78529f2"
+  },
+  "source_pins": {
+    "src/p2_restore/authoritative_nested_surrogate_execution_v4.py": "cfe48c1fd4566feca620724cf4616ec0cbdf2bf2d8ae7a5896f9038d69638967",
+    "tests/test_p2_authoritative_nested_surrogate_execution_v4.py": "5b4825f4a4203185131b35fbafd61852647a9c1794810efda5555f6223ca3a02"
+  },
+  "semantic_preflight_v4": {
+    "science_surface_inherited_from_v3": true,
+    "expected_scientific_v3_sha256": "862210d79e4504cc7f85fe5b7229f13b0697643b5754f0ff48f4ab246d1ab77d",
+    "clean_start_before_actual_namespace": true,
+    "resume_under_exclusive_lock_before_fit": true,
+    "receipt_sha256_bound_to_preexecution_seal": true,
+    "actual_model_fits": 0,
+    "predictions": 0,
+    "scores": 0
+  },
+  "immutability_receipt_v4": {
+    "supervised_common_ledger_changed": false,
+    "source_local_split_changed": false,
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "component_hyperparameters_changed": false,
+    "meta_refit_changed": false,
+    "postprocess_changed": false,
+    "family_views_changed": false,
+    "metrics_changed": false,
+    "expected_evaluation_rows_per_fraction": 78156,
+    "only_crash_resume_control_plane_changed": true
+  },
+  "checkpoint_resume": {
+    "exclusive_process_lock": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v4/execution.lock",
+    "namespace": "p2_authoritative_nested_surrogate_actual_20260825_v4",
+    "same_exact_command_clean_or_resume": true,
+    "clean_start_preflight_before_namespace": true,
+    "resume_read_only_audit_before_lock": true,
+    "resume_strict_audit_and_semantic_preflight_under_lock_before_fit": true,
+    "immutable_execution_start_receipt": "execution_start.json",
+    "execution_start_binds": [
+      "execution_contract_sha256",
+      "parent_recipe_sha256",
+      "preexecution_seal_sha256",
+      "semantic_preflight_sha256",
+      "exact_command_sha256",
+      "authorization_sha256",
+      "module_sha256",
+      "runner_sha256"
+    ],
+    "initial_attempts": 1,
+    "maximum_resume_attempts_after_initial": 2,
+    "maximum_total_attempts": 3,
+    "automatic_resume_gate": "latest started attempt has no terminal receipt, or has explicit FAILED_TRANSIENT_RESUMABLE receipt, and no active lock/result/deterministic failure",
+    "deterministic_failure_policy": "append-only FAILED_DETERMINISTIC_CLOSED receipt; no automatic resume",
+    "control_receipt_publish": "unique partial, file fsync, atomic rename",
+    "terminal_result_publish": "binding-bearing JSON via unique partial, file fsync, atomic rename",
+    "terminal_receipt_publish": "pins exact result SHA-256 and bytes via atomic rename",
+    "finalization_only_recovery": "under lock, verified result may backfill terminal receipts without execute_curve or resume-budget consumption",
+    "stale_partial_policy": "preserve and ignore, never completion",
+    "terminal_result_rerun_allowed": false,
+    "result_based_tuning_allowed": false,
+    "v1_v2_v3_job_reuse_allowed": false
+  },
+  "exact_command": "$env:OMP_NUM_THREADS='4'; $env:MKL_NUM_THREADS='4'; $env:OPENBLAS_NUM_THREADS='4'; $env:NUMEXPR_NUM_THREADS='4'; $env:CUDA_VISIBLE_DEVICES='0'; .\\.venv-p1\\Scripts\\python.exe scripts\\run_p2_authoritative_nested_surrogate_45cell_v4.py --config \"configs\\experiments\\p2_authoritative_nested_surrogate_execution_20260825_v4.json\" --execute --data-dir \"$env:P2_DATA_DIR\" --preexecution-seal \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v4\\preexecution_seal.json\" --authorization \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v4\\EXECUTION_AUTHORIZATION.json\"",
+  "output": {
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v4",
+    "actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v4",
+    "append_only": true,
+    "readiness_prediction_files_written": false,
+    "readiness_model_checkpoints_written": false
+  }
+}

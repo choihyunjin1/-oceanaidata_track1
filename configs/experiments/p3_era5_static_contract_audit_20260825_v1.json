@@ -1,0 +1,83 @@
+{
+  "schema_version": "p3.era5_static_contract_audit.v1",
+  "audit_id": "p3_era5_static_contract_audit_20260825_v1",
+  "status": "PREREGISTERED_STATIC_READ_ONLY_AUDIT",
+  "common_secondary_recon": {
+    "path": "artifacts/decisive_local_recon_20260825_v1/preregistration.json",
+    "sha256": "6ead6ca745a0c204f04377c2510a2206b61fe6ccf976963fdb7a7cccc070b073"
+  },
+  "static_inputs": {
+    "experiment_config": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1.json",
+      "sha256": "79792f1a3d6b4c0dd15884fd6e3eed122c224a8c3318149b95dbfc3b2fac1ff9"
+    },
+    "preaccess_seal": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1_preaccess_seal.json",
+      "sha256": "f8dbda1983f94ff13bd5746f5dff15c25271093dcbb598926e4178bfa0870bbe"
+    },
+    "transport_amendment_r1": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1_transport_amendment_2026-08-24.json",
+      "sha256": "d64b992ca34820257dbc68a1c646d4ce644fcb9f59d719b558d95d3f6351bd7e"
+    },
+    "transport_amendment_r2": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1_transport_amendment_r2_2026-08-24.json",
+      "sha256": "0fa8f2b1642976157ce6827dc2215430926e7eb27030e8846b321294c710cf48"
+    },
+    "external_scope": {
+      "path": "configs/external_data/era5_p3_context_pretrain_scope_2026-08-24.json",
+      "sha256": "5b6c8c48abf25bf18da5870bbea2ac16c6cafce4f16836cc2cd876db6b543a05"
+    },
+    "feature_contract": {
+      "path": "configs/experiments/p3_era5_context_transfer_features_v1.json",
+      "sha256": "d6b720b55b28d5fc4bbc065a9b585f2607acce7552bae89fd4683dda0c25cc9b"
+    },
+    "prepare_runner": {
+      "path": "scripts/prepare_p3_era5_pretrain.py",
+      "sha256": "e963894a147994dc2bc6571b25db4c90c72a633ce3410d909271dbaae62ee28f"
+    },
+    "context_runner": {
+      "path": "scripts/run_p3_era5_context_transfer_v1.py",
+      "sha256": "45ac9630fd30c0cfef25e82ec969e29dcd6b665c54580e58c432dea14164bbca"
+    },
+    "context_runner_tests": {
+      "path": "tests/test_p3_era5_context_transfer_runner.py",
+      "sha256": "8889fc23a18cb5729ecbf88048066cadbb0101e54d00912a8e645dc5c2e327cf"
+    }
+  },
+  "mutable_state_metadata": {
+    "canonical_manifest": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/manifest.json",
+    "plan_receipt": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/plan_receipt.json",
+    "smoke_receipt": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/smoke_receipt.json",
+    "context_output": "artifacts/p3_era5_context_transfer_20260824_v1",
+    "attempt_lock": "artifacts/p3_era5_context_transfer_20260824_v1.attempt.lock"
+  },
+  "expected_final_manifest": {
+    "row_count": 262917,
+    "observed_start": "2014-01-01T00:00:00+00:00",
+    "observed_end": "2023-12-31T14:00:00+00:00",
+    "selected_cells": 3,
+    "year_requests": 363,
+    "official_test_or_submission_accessed": false
+  },
+  "expected_scientific_contract": {
+    "source_validation_years": [2021, 2022, 2023],
+    "local_windows": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "feature_count": 286,
+    "fixed_shrink_weight": 0.2,
+    "fixed_shrink_leads": [12, 18, 24],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260824,
+    "solution_delta_threshold_m": -0.03,
+    "minimum_improved_local_windows": 2,
+    "maximum_critical_slice_regression_m": 0.0075
+  },
+  "prohibitions": {
+    "era5_value_file_reads": true,
+    "running_process_inspection_or_mutation": true,
+    "model_or_feature_definition_changes": true,
+    "official_test_sample_submission_access": true,
+    "context_runner_execution": true,
+    "model_fits": true
+  },
+  "output_dir": "artifacts/p3_era5_static_contract_audit_20260825_v1"
+}

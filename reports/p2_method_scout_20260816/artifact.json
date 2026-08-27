@@ -4,8 +4,8 @@
     "version": 1,
     "surface": "report",
     "title": "P2 연직 수온 복원 모델 검증",
-    "description": "Tree 기준부터 8개 deep 계열, 복수 seed stack, 제출 재현성까지 검증한 P2 기술 보고서",
-    "generatedAt": "2026-08-16T14:41:39.535022+09:00",
+    "description": "P2 tree, deep, six-family structure screen, and nested top-three GBM tuning with independent OOF and submission reconciliation",
+    "generatedAt": "2026-08-16T16:59:08.534476+09:00",
     "cards": [
       {
         "id": "aggregate_delta",
@@ -114,6 +114,92 @@
             "label": "Frozen candidate rows",
             "field": "submission_rows",
             "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "gbm_best_standalone",
+        "description": "LightGBM ExtraTrees, fixed 400 iterations",
+        "dataset": "gbm_headline",
+        "sourceId": "gbm_headline_sql",
+        "metrics": [
+          {
+            "label": "Best GBM standalone RMSE",
+            "field": "best_standalone_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "gbm_fitted_pair",
+        "description": "Deep stack plus layerwise CatBoost",
+        "dataset": "gbm_headline",
+        "sourceId": "gbm_headline_sql",
+        "metrics": [
+          {
+            "label": "Fitted pair RMSE",
+            "field": "selected_fitted_pair_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "gbm_lobo_pair",
+        "description": "Pair weights learned without the held block",
+        "dataset": "gbm_headline",
+        "sourceId": "gbm_headline_sql",
+        "metrics": [
+          {
+            "label": "LOBO pair RMSE",
+            "field": "selected_lobo_pair_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "gbm_lobo_delta",
+        "description": "CatBoost pair minus frozen deep LOBO",
+        "dataset": "gbm_headline",
+        "sourceId": "gbm_headline_sql",
+        "metrics": [
+          {
+            "label": "LOBO RMSE change",
+            "field": "selected_lobo_delta",
+            "format": "number",
+            "unit": " °C",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "top3_tuning_outer_card",
+        "description": "Best tuned family: catboost_layerwise",
+        "dataset": "top3_tuning_headline",
+        "sourceId": "top3_tuning_ranking_sql",
+        "metrics": [
+          {
+            "label": "Best tuned outer RMSE",
+            "field": "best_outer_rmse",
+            "format": "number",
+            "unit": " °C"
+          }
+        ]
+      },
+      {
+        "id": "top3_tuning_lobo_card",
+        "description": "Tuned pair minus frozen deep-stack LOBO",
+        "dataset": "top3_tuning_headline",
+        "sourceId": "top3_tuning_ranking_sql",
+        "metrics": [
+          {
+            "label": "Best tuned LOBO change",
+            "field": "best_lobo_delta",
+            "format": "number",
+            "unit": " °C",
+            "signed": true
           }
         ]
       }
@@ -284,6 +370,144 @@
               "label": "Rows"
             }
           ]
+        }
+      },
+      {
+        "id": "gbm_family_chart",
+        "title": "P2 GBM-family RMSE comparison",
+        "subtitle": "Six fixed 400-iteration structures on 69,850 blocked OOF rows; lower is better.",
+        "type": "bar",
+        "dataset": "gbm_arm_ranking",
+        "sourceId": "gbm_ranking_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "arm",
+            "type": "nominal",
+            "label": "GBM arm"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "variant",
+            "type": "nominal",
+            "label": "Evaluation"
+          },
+          "tooltip": [
+            {
+              "field": "rank",
+              "type": "quantitative",
+              "label": "LOBO pair rank"
+            },
+            {
+              "field": "iterations",
+              "type": "quantitative",
+              "label": "Boosting iterations"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gbm_block_chart",
+        "title": "P2 CatBoost-pair RMSE by validation block",
+        "subtitle": "Deep, layerwise CatBoost, and pair variants across the three target-proxy periods.",
+        "type": "bar",
+        "dataset": "gbm_selected_blocks",
+        "sourceId": "gbm_blocks_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "block",
+            "type": "nominal",
+            "label": "Validation block"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Method"
+          },
+          "tooltip": [
+            {
+              "field": "rows",
+              "type": "quantitative",
+              "label": "Rows"
+            }
+          ]
+        }
+      },
+      {
+        "id": "top3_tuning_outer_chart",
+        "title": "Fixed-screen and tuned standalone RMSE",
+        "subtitle": "Tuning uses 12 inner-only trials per outer fold; lower is better.",
+        "type": "bar",
+        "dataset": "top3_tuning_chart",
+        "sourceId": "top3_tuning_ranking_sql",
+        "valueFormat": "number",
+        "settings": {
+          "groupMode": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "family",
+            "type": "nominal",
+            "label": "Family"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "RMSE (°C)"
+          },
+          "color": {
+            "field": "variant",
+            "type": "nominal",
+            "label": "Evaluation"
+          }
+        }
+      },
+      {
+        "id": "regime_diag_weekly_chart",
+        "title": "Weekly public-layer stratification contrast",
+        "subtitle": "Median |T1−T5| by KST week from 1 September; target-layer values are excluded.",
+        "type": "line",
+        "dataset": "regime_diag_weekly",
+        "sourceId": "regime_diag_weekly_sql",
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "top",
+          "title": "Period"
+        },
+        "encodings": {
+          "x": {
+            "field": "week",
+            "type": "quantitative",
+            "label": "Week from 1 September"
+          },
+          "y": {
+            "field": "contrast_median",
+            "type": "quantitative",
+            "label": "Median |T1−T5| (°C)"
+          },
+          "color": {
+            "field": "period",
+            "type": "nominal",
+            "label": "Period"
+          }
         }
       }
     ],
@@ -591,6 +815,260 @@
           {
             "field": "weight",
             "label": "Weight",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "gbm_exact_table",
+        "title": "Exact GBM structure-screen metrics",
+        "subtitle": "Same 69,850 OOF rows; rank follows LOBO pair RMSE.",
+        "dataset": "gbm_arm_exact",
+        "sourceId": "gbm_exact_sql",
+        "defaultSort": {
+          "field": "rank",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "rank",
+            "label": "Rank",
+            "type": "number"
+          },
+          {
+            "field": "arm",
+            "label": "Arm",
+            "type": "text"
+          },
+          {
+            "field": "standalone_rmse",
+            "label": "Standalone RMSE",
+            "type": "number"
+          },
+          {
+            "field": "fitted_pair_rmse",
+            "label": "Fitted pair RMSE",
+            "type": "number"
+          },
+          {
+            "field": "lobo_pair_rmse",
+            "label": "LOBO pair RMSE",
+            "type": "number"
+          },
+          {
+            "field": "lobo_delta",
+            "label": "LOBO delta",
+            "type": "number",
+            "movement": true
+          }
+        ]
+      },
+      {
+        "id": "gbm_weight_table",
+        "title": "Deep and CatBoost fitted weights by layer",
+        "subtitle": "Nonnegative weights sum to one within each target layer.",
+        "dataset": "gbm_selected_weights",
+        "sourceId": "gbm_weights_sql",
+        "defaultSort": {
+          "field": "layer",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "layer",
+            "label": "Layer",
+            "type": "number"
+          },
+          {
+            "field": "deep_weight",
+            "label": "Deep weight",
+            "type": "number"
+          },
+          {
+            "field": "catboost_weight",
+            "label": "CatBoost weight",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "top3_tuning_ranking_table",
+        "title": "Exact nested tuning metrics",
+        "subtitle": "All families use the same outer rows and total 36-trial budget.",
+        "dataset": "top3_tuning_ranking",
+        "sourceId": "top3_tuning_ranking_sql",
+        "defaultSort": {
+          "field": "rank",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "rank",
+            "label": "Rank",
+            "type": "number"
+          },
+          {
+            "field": "family",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "fixed_outer_rmse",
+            "label": "Fixed RMSE",
+            "type": "number"
+          },
+          {
+            "field": "tuned_outer_rmse",
+            "label": "Tuned RMSE",
+            "type": "number"
+          },
+          {
+            "field": "outer_delta",
+            "label": "Change",
+            "type": "number",
+            "movement": true
+          },
+          {
+            "field": "lobo_pair_rmse",
+            "label": "LOBO pair",
+            "type": "number"
+          },
+          {
+            "field": "lobo_delta_vs_deep",
+            "label": "LOBO change",
+            "type": "number",
+            "movement": true
+          }
+        ]
+      },
+      {
+        "id": "top3_tuning_iterations_table",
+        "title": "Frozen convergence checkpoints",
+        "subtitle": "Layer 0 denotes a pooled model.",
+        "dataset": "top3_tuning_iterations",
+        "sourceId": "top3_tuning_iterations_sql",
+        "defaultSort": {
+          "field": "family",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "family",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "layer",
+            "label": "Layer",
+            "type": "number"
+          },
+          {
+            "field": "iterations",
+            "label": "Rounds",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "top3_tuning_parameters_table",
+        "title": "Selected deployment hyperparameters",
+        "subtitle": "One parameter set per family; outer scores did not choose these values.",
+        "dataset": "top3_tuning_parameters",
+        "sourceId": "top3_tuning_parameters_sql",
+        "defaultSort": {
+          "field": "family",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "family",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "parameter",
+            "label": "Parameter",
+            "type": "text"
+          },
+          {
+            "field": "value",
+            "label": "Value",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "regime_diag_blocks_table",
+        "title": "Public-state similarity to the hidden interval",
+        "subtitle": "Normalized distances use hidden-block IQR; lower is more similar.",
+        "dataset": "regime_diag_blocks",
+        "sourceId": "regime_diag_public_sql",
+        "defaultSort": {
+          "field": "block",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "block",
+            "label": "Block",
+            "type": "text"
+          },
+          {
+            "field": "timestamps",
+            "label": "Times",
+            "type": "number"
+          },
+          {
+            "field": "contrast_coverage",
+            "label": "T1−T5 coverage",
+            "type": "number"
+          },
+          {
+            "field": "contrast_median",
+            "label": "Median |T1−T5|",
+            "type": "number"
+          },
+          {
+            "field": "temp_range_median",
+            "label": "Median public range",
+            "type": "number"
+          },
+          {
+            "field": "distance_to_hidden_contrast",
+            "label": "Contrast distance",
+            "type": "number"
+          },
+          {
+            "field": "distance_to_hidden_temp_range",
+            "label": "Range distance",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "regime_diag_convergence_table",
+        "title": "Layerwise CatBoost convergence by outer block",
+        "subtitle": "The large checkpoint spread is diagnostic evidence of non-stationarity, not proof of a better gate.",
+        "dataset": "regime_diag_convergence",
+        "sourceId": "regime_diag_convergence_sql",
+        "defaultSort": {
+          "field": "outer_block",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "outer_block",
+            "label": "Outer block",
+            "type": "text"
+          },
+          {
+            "field": "layer",
+            "label": "Layer",
+            "type": "number"
+          },
+          {
+            "field": "iterations",
+            "label": "Selected rounds",
             "type": "number"
           }
         ]
@@ -1005,6 +1483,224 @@
             "rmse": "Row-level root mean squared temperature error in degrees Celsius"
           }
         }
+      },
+      {
+        "id": "gbm_tournament_result",
+        "label": "P2 six-family fixed-budget GBM tournament",
+        "path": "artifacts/p2_gbm_family_tournament_v1/result.json"
+      },
+      {
+        "id": "gbm_independent_validation",
+        "label": "Independent P2 GBM OOF and submission reconciliation",
+        "path": "artifacts/p2_gbm_family_tournament_v1/independent_validation.json"
+      },
+      {
+        "id": "gbm_headline_sql",
+        "label": "Reviewed P2 GBM headline metrics",
+        "path": "artifacts/p2_gbm_family_tournament_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 0.8160964885405301 AS best_standalone_rmse, 0.7438598909048169 AS selected_fitted_pair_rmse, 0.7745773143897883 AS selected_lobo_pair_rmse, -0.0010827169247051849 AS selected_lobo_delta",
+          "description": "Materializes fixed-budget standalone and deep-pair GBM results.",
+          "tables_used": [],
+          "filters": [
+            "Three target-proxy blocks",
+            "69,850 unique target rows"
+          ],
+          "metric_definitions": {
+            "best_standalone_rmse": "Lowest row-level standalone GBM RMSE in degrees Celsius",
+            "selected_fitted_pair_rmse": "Layer-weighted deep plus CatBoost fitted OOF RMSE",
+            "selected_lobo_pair_rmse": "Layer weights fit on the other two blocks and applied to the held block",
+            "selected_lobo_delta": "LOBO pair RMSE minus frozen deep-stack LOBO RMSE"
+          }
+        }
+      },
+      {
+        "id": "gbm_ranking_sql",
+        "label": "Reviewed P2 GBM model-family ranking",
+        "path": "artifacts/p2_gbm_family_tournament_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'catboost_layerwise' AS arm, 'Standalone' AS variant, 0.833549 AS rmse, 1 AS rank, 400 AS iterations UNION ALL SELECT 'catboost_layerwise' AS arm, 'Fitted pair with deep' AS variant, 0.74386 AS rmse, 1 AS rank, 400 AS iterations UNION ALL SELECT 'catboost_layerwise' AS arm, 'LOBO pair with deep' AS variant, 0.774577 AS rmse, 1 AS rank, 400 AS iterations UNION ALL SELECT 'catboost_pooled' AS arm, 'Standalone' AS variant, 0.843419 AS rmse, 2 AS rank, 400 AS iterations UNION ALL SELECT 'catboost_pooled' AS arm, 'Fitted pair with deep' AS variant, 0.74467 AS rmse, 2 AS rank, 400 AS iterations UNION ALL SELECT 'catboost_pooled' AS arm, 'LOBO pair with deep' AS variant, 0.782503 AS rmse, 2 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_dart' AS arm, 'Standalone' AS variant, 0.82972 AS rmse, 3 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_dart' AS arm, 'Fitted pair with deep' AS variant, 0.745814 AS rmse, 3 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_dart' AS arm, 'LOBO pair with deep' AS variant, 0.784244 AS rmse, 3 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_gbdt' AS arm, 'Standalone' AS variant, 0.840923 AS rmse, 4 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_gbdt' AS arm, 'Fitted pair with deep' AS variant, 0.742085 AS rmse, 4 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_gbdt' AS arm, 'LOBO pair with deep' AS variant, 0.790544 AS rmse, 4 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_extra_trees' AS arm, 'Standalone' AS variant, 0.816096 AS rmse, 5 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_extra_trees' AS arm, 'Fitted pair with deep' AS variant, 0.745579 AS rmse, 5 AS rank, 400 AS iterations UNION ALL SELECT 'lgbm_extra_trees' AS arm, 'LOBO pair with deep' AS variant, 0.793065 AS rmse, 5 AS rank, 400 AS iterations UNION ALL SELECT 'xgboost_hist' AS arm, 'Standalone' AS variant, 0.965441 AS rmse, 6 AS rank, 400 AS iterations UNION ALL SELECT 'xgboost_hist' AS arm, 'Fitted pair with deep' AS variant, 0.745796 AS rmse, 6 AS rank, 400 AS iterations UNION ALL SELECT 'xgboost_hist' AS arm, 'LOBO pair with deep' AS variant, 0.806669 AS rmse, 6 AS rank, 400 AS iterations",
+          "description": "Materializes the same-grain six-family RMSE comparison.",
+          "tables_used": [],
+          "filters": [
+            "Fixed 400 boosting iterations",
+            "Public-only phase features"
+          ],
+          "metric_definitions": {
+            "rmse": "Row-level root mean squared temperature error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "gbm_exact_sql",
+        "label": "Reviewed P2 GBM exact comparison table",
+        "path": "artifacts/p2_gbm_family_tournament_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 1 AS rank, 'catboost_layerwise' AS arm, 0.833549 AS standalone_rmse, 0.74386 AS fitted_pair_rmse, 0.774577 AS lobo_pair_rmse, -0.001083 AS lobo_delta UNION ALL SELECT 2 AS rank, 'catboost_pooled' AS arm, 0.843419 AS standalone_rmse, 0.74467 AS fitted_pair_rmse, 0.782503 AS lobo_pair_rmse, 0.006843 AS lobo_delta UNION ALL SELECT 3 AS rank, 'lgbm_dart' AS arm, 0.82972 AS standalone_rmse, 0.745814 AS fitted_pair_rmse, 0.784244 AS lobo_pair_rmse, 0.008583 AS lobo_delta UNION ALL SELECT 4 AS rank, 'lgbm_gbdt' AS arm, 0.840923 AS standalone_rmse, 0.742085 AS fitted_pair_rmse, 0.790544 AS lobo_pair_rmse, 0.014884 AS lobo_delta UNION ALL SELECT 5 AS rank, 'lgbm_extra_trees' AS arm, 0.816096 AS standalone_rmse, 0.745579 AS fitted_pair_rmse, 0.793065 AS lobo_pair_rmse, 0.017405 AS lobo_delta UNION ALL SELECT 6 AS rank, 'xgboost_hist' AS arm, 0.965441 AS standalone_rmse, 0.745796 AS fitted_pair_rmse, 0.806669 AS lobo_pair_rmse, 0.031009 AS lobo_delta",
+          "description": "Materializes exact arm-level scores and LOBO deltas.",
+          "tables_used": [],
+          "filters": [
+            "Lower RMSE is better"
+          ],
+          "metric_definitions": {
+            "lobo_delta": "LOBO pair RMSE minus frozen deep-stack LOBO RMSE"
+          }
+        }
+      },
+      {
+        "id": "gbm_weights_sql",
+        "label": "Reviewed P2 CatBoost layer blend weights",
+        "path": "artifacts/p2_gbm_family_tournament_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 2 AS layer, 0.71916 AS deep_weight, 0.28084 AS catboost_weight UNION ALL SELECT 3 AS layer, 0.72074 AS deep_weight, 0.27926 AS catboost_weight UNION ALL SELECT 4 AS layer, 1.0 AS deep_weight, 0.0 AS catboost_weight",
+          "description": "Materializes nonnegative sum-to-one fitted pair weights by target layer.",
+          "tables_used": [],
+          "filters": [
+            "Selected arm: catboost_layerwise"
+          ],
+          "metric_definitions": {
+            "catboost_weight": "CatBoost fraction in the fitted deep-plus-CatBoost pair"
+          }
+        }
+      },
+      {
+        "id": "gbm_blocks_sql",
+        "label": "Reviewed P2 GBM block-level metrics",
+        "path": "artifacts/p2_gbm_family_tournament_v1/catboost_layerwise/paired_oof.parquet",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024_sep_oct' AS block, 'Deep fitted' AS method, 0.434945 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'CatBoost layerwise' AS method, 0.596245 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'Deep + CatBoost fitted' AS method, 0.443554 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'Deep LOBO' AS method, 0.454622 AS rmse, 26273 AS rows UNION ALL SELECT '2024_sep_oct' AS block, 'Deep + CatBoost LOBO' AS method, 0.483014 AS rmse, 26273 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Deep fitted' AS method, 1.031317 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'CatBoost layerwise' AS method, 1.135792 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Deep + CatBoost fitted' AS method, 1.028251 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Deep LOBO' AS method, 1.064982 AS rmse, 26693 AS rows UNION ALL SELECT '2025_jul_aug' AS block, 'Deep + CatBoost LOBO' AS method, 1.057227 AS rmse, 26693 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Deep fitted' AS method, 0.570327 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'CatBoost layerwise' AS method, 0.530806 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Deep + CatBoost fitted' AS method, 0.558074 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Deep LOBO' AS method, 0.611823 AS rmse, 16884 AS rows UNION ALL SELECT '2025_nov_dec' AS block, 'Deep + CatBoost LOBO' AS method, 0.593278 AS rmse, 16884 AS rows",
+          "description": "Materializes deep, CatBoost, and fitted or LOBO pair RMSE by block.",
+          "tables_used": [],
+          "filters": [
+            "Target layers 2, 3, and 4",
+            "Finite target-proxy rows"
+          ],
+          "metric_definitions": {
+            "rmse": "Row-level root mean squared temperature error in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "top3_tuning_ranking_sql",
+        "label": "Reviewed P2 nested top-three tuning comparison",
+        "path": "artifacts/p2_top3_parallel_tuning_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 1 AS rank, 'catboost_layerwise' AS family, 0.8335485999270905 AS fixed_outer_rmse, 0.90062496086258 AS tuned_outer_rmse, 0.06707636093548952 AS outer_delta, 0.778989247100089 AS lobo_pair_rmse, 0.0033292157855955296 AS lobo_delta_vs_deep, 1.1077893793888347 AS inner_rmse UNION ALL SELECT 2 AS rank, 'catboost_pooled' AS family, 0.8434187089995495 AS fixed_outer_rmse, 0.9102760432695386 AS tuned_outer_rmse, 0.06685733426998908 AS outer_delta, 0.780117873790237 AS lobo_pair_rmse, 0.004457842475743545 AS lobo_delta_vs_deep, 1.1088503174343867 AS inner_rmse UNION ALL SELECT 3 AS rank, 'lgbm_dart' AS family, 0.8297197084469423 AS fixed_outer_rmse, 0.9273218809429263 AS tuned_outer_rmse, 0.09760217249598402 AS outer_delta, 0.7962604830338402 AS lobo_pair_rmse, 0.02060045171934677 AS lobo_delta_vs_deep, 1.1240674768372234 AS inner_rmse",
+          "description": "Materializes independently validated nested tuning results.",
+          "tables_used": [],
+          "filters": [
+            "69,850 exact OOF rows",
+            "Three target layers",
+            "Lower RMSE is better"
+          ],
+          "metric_definitions": {
+            "tuned_outer_rmse": "Pooled row-level outer-fold RMSE in degrees Celsius",
+            "lobo_delta_vs_deep": "LOBO pair RMSE minus frozen deep-stack LOBO RMSE"
+          }
+        }
+      },
+      {
+        "id": "top3_tuning_iterations_sql",
+        "label": "Reviewed P2 convergence checkpoints",
+        "path": "artifacts/p2_top3_parallel_tuning_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'catboost_layerwise' AS family, 2 AS layer, 94 AS iterations UNION ALL SELECT 'catboost_layerwise' AS family, 3 AS layer, 132 AS iterations UNION ALL SELECT 'catboost_layerwise' AS family, 4 AS layer, 16 AS iterations UNION ALL SELECT 'catboost_pooled' AS family, 0 AS layer, 158 AS iterations UNION ALL SELECT 'lgbm_dart' AS family, 0 AS layer, 1600 AS iterations",
+          "description": "Materializes frozen full-fit boosting checkpoints.",
+          "tables_used": [],
+          "filters": [
+            "CatBoost max 3,000",
+            "DART inner-selected round count"
+          ],
+          "metric_definitions": {
+            "iterations": "Boosting round selected without using outer validation scores"
+          }
+        }
+      },
+      {
+        "id": "top3_tuning_parameters_sql",
+        "label": "Reviewed P2 selected hyperparameters",
+        "path": "artifacts/p2_top3_parallel_tuning_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'catboost_layerwise' AS family, 'bootstrap_type' AS parameter, 'MVS' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'learning_rate' AS parameter, '0.0952176995303601' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'depth' AS parameter, '10' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'l2_leaf_reg' AS parameter, '4.7480304513323635' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'random_strength' AS parameter, '1.1308491248486294' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'rsm' AS parameter, '0.9687935001696453' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'leaf_estimation_iterations' AS parameter, '2' AS value UNION ALL SELECT 'catboost_layerwise' AS family, 'subsample' AS parameter, '0.8920313838194773' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'bootstrap_type' AS parameter, 'MVS' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'learning_rate' AS parameter, '0.05872961273284538' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'depth' AS parameter, '8' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'l2_leaf_reg' AS parameter, '0.5622636573176658' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'random_strength' AS parameter, '0.26986739599783544' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'rsm' AS parameter, '0.8747898871048947' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'leaf_estimation_iterations' AS parameter, '1' AS value UNION ALL SELECT 'catboost_pooled' AS family, 'subsample' AS parameter, '0.7627895169354457' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'n_estimators' AS parameter, '1600' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'learning_rate' AS parameter, '0.02015547988009311' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'num_leaves' AS parameter, '43' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'max_depth' AS parameter, '12' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'min_child_samples' AS parameter, '464' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'feature_fraction' AS parameter, '0.5641720450686958' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'bagging_fraction' AS parameter, '0.8177593827741176' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'bagging_freq' AS parameter, '1' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'reg_alpha' AS parameter, '0.0009702787528501448' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'reg_lambda' AS parameter, '20.23008339095893' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'drop_rate' AS parameter, '0.11950804312573086' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'skip_drop' AS parameter, '0.3112737282783449' AS value UNION ALL SELECT 'lgbm_dart' AS family, 'max_drop' AS parameter, '31' AS value",
+          "description": "Materializes each family's deployment parameter set.",
+          "tables_used": [],
+          "filters": [
+            "Final policy fixed before outer scoring"
+          ],
+          "metric_definitions": {
+            "value": "Serialized selected parameter value"
+          }
+        }
+      },
+      {
+        "id": "regime_diag_public_sql",
+        "label": "Reviewed P2 public-layer regime aggregates",
+        "path": "artifacts/p2_regime_diagnostic_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024_sep_oct' AS block, 8779 AS timestamps, 0.9927098758400729 AS contrast_coverage, 0.47550000000000026 AS contrast_median, 4.791380000000002 AS contrast_q90, 11.3014 AS temp_range_median, 0.5542000000000016 AS contrast_change_24h_median, 0.157494085430592 AS distance_to_hidden_contrast, 0.21225358633083882 AS distance_to_hidden_temp_range, 0.3333333333333333 AS reference_low_share, 0.3333333333333333 AS reference_middle_share, 0.3333333333333333 AS reference_high_share UNION ALL SELECT '2025_jul_aug' AS block, 8928 AS timestamps, 0.9980958781362007 AS contrast_coverage, 6.6584 AS contrast_median, 10.424 AS contrast_q90, 14.858149999999998 AS temp_range_median, 1.4838499999999994 AS contrast_change_24h_median, 2.3188022968708224 AS distance_to_hidden_contrast, 0.7624990470739832 AS distance_to_hidden_temp_range, 0.00044888340253619125 AS reference_low_share, 0.02973852541802267 AS reference_middle_share, 0.9698125911794412 AS reference_high_share UNION ALL SELECT '2025_nov_dec' AS block, 5631 AS timestamps, 0.0 AS contrast_coverage, NULL AS contrast_median, NULL AS contrast_q90, 3.7128999999999994 AS temp_range_median, NULL AS contrast_change_24h_median, NULL AS distance_to_hidden_contrast, 1.8710402377288922 AS distance_to_hidden_temp_range, NULL AS reference_low_share, NULL AS reference_middle_share, NULL AS reference_high_share UNION ALL SELECT '2025_sep_oct_hidden_public' AS block, 8717 AS timestamps, 0.7054032350579328 AS contrast_coverage, 0.9150000000000027 AS contrast_median, 4.115000000000002 AS contrast_q90, 11.6229 AS temp_range_median, 0.7219999999999995 AS contrast_change_24h_median, 0.0 AS distance_to_hidden_contrast, 0.0 AS distance_to_hidden_temp_range, 0.17531305903398928 AS reference_low_share, 0.4465766791348187 AS reference_middle_share, 0.37811026183119206 AS reference_high_share",
+          "description": "Materializes target-blind public-layer regime diagnostics.",
+          "tables_used": [
+            "P2_DATA_DIR/observations.csv",
+            "P2_DATA_DIR/test_index.csv"
+          ],
+          "filters": [
+            "Public layers 1, 5, 6, 7, and 8 only",
+            "Exact OOF time support for three proxy blocks",
+            "Exact test_index time support for the hidden public interval"
+          ],
+          "metric_definitions": {
+            "contrast_coverage": "Share of timestamps with finite absolute layer-1 minus layer-5 temperature contrast",
+            "distance_to_hidden_contrast": "Wasserstein distance divided by hidden-block interquartile range"
+          }
+        }
+      },
+      {
+        "id": "regime_diag_weekly_sql",
+        "label": "Reviewed weekly public-layer stratification summaries",
+        "path": "artifacts/p2_regime_diagnostic_v1/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024 same season' AS period, 1 AS week, 0.3194499999999998 AS contrast_median, 14.88725 AS public_temp_range_median, 996 AS contrast_valid, 1008 AS timestamps, 0.9880952380952381 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 2 AS week, 3.996000000000002 AS contrast_median, 15.29605 AS public_temp_range_median, 1007 AS contrast_valid, 1008 AS timestamps, 0.9990079365079365 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 3 AS week, 2.6449999999999996 AS contrast_median, 14.80905 AS public_temp_range_median, 1007 AS contrast_valid, 1008 AS timestamps, 0.9990079365079365 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 4 AS week, 2.130600000000001 AS contrast_median, 12.2238 AS public_temp_range_median, 1008 AS contrast_valid, 1008 AS timestamps, 1.0 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 5 AS week, 0.4120500000000007 AS contrast_median, 11.713549999999998 AS public_temp_range_median, 992 AS contrast_valid, 1008 AS timestamps, 0.9841269841269841 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 6 AS week, 0.6714000000000002 AS contrast_median, 9.15045 AS public_temp_range_median, 1006 AS contrast_valid, 1008 AS timestamps, 0.998015873015873 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 7 AS week, 0.06445000000000078 AS contrast_median, 9.318000000000001 AS public_temp_range_median, 988 AS contrast_valid, 1008 AS timestamps, 0.9801587301587301 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 8 AS week, 0.013500000000000512 AS contrast_median, 5.972000000000001 AS public_temp_range_median, 997 AS contrast_valid, 1006 AS timestamps, 0.9910536779324056 AS contrast_coverage UNION ALL SELECT '2024 same season' AS period, 9 AS week, 0.06925000000000026 AS contrast_median, 5.534599999999999 AS public_temp_range_median, 714 AS contrast_valid, 717 AS timestamps, 0.99581589958159 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 1 AS week, 3.645100000000003 AS contrast_median, 14.621299999999998 AS public_temp_range_median, 1003 AS contrast_valid, 1004 AS timestamps, 0.999003984063745 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 2 AS week, 1.040499999999998 AS contrast_median, 14.576600000000001 AS public_temp_range_median, 1005 AS contrast_valid, 1008 AS timestamps, 0.9970238095238095 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 3 AS week, 0.35110000000000063 AS contrast_median, 13.693549999999998 AS public_temp_range_median, 1008 AS contrast_valid, 1008 AS timestamps, 1.0 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 4 AS week, 0.7181999999999995 AS contrast_median, 11.7851 AS public_temp_range_median, 1005 AS contrast_valid, 1008 AS timestamps, 0.9970238095238095 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 5 AS week, 0.6029500000000017 AS contrast_median, 12.49495 AS public_temp_range_median, 1006 AS contrast_valid, 1008 AS timestamps, 0.998015873015873 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 6 AS week, 0.3880999999999979 AS contrast_median, 9.7792 AS public_temp_range_median, 907 AS contrast_valid, 1008 AS timestamps, 0.8998015873015873 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 7 AS week, 3.8238999999999983 AS contrast_median, 10.365599999999999 AS public_temp_range_median, 215 AS contrast_valid, 1003 AS timestamps, 0.2143569292123629 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 8 AS week, NULL AS contrast_median, 8.1676 AS public_temp_range_median, 0 AS contrast_valid, 950 AS timestamps, 0.0 AS contrast_coverage UNION ALL SELECT '2025 hidden public' AS period, 9 AS week, NULL AS contrast_median, 7.014950000000001 AS public_temp_range_median, 0 AS contrast_valid, 720 AS timestamps, 0.0 AS contrast_coverage",
+          "description": "Materializes weekly public-layer contrast for the same-season and hidden intervals.",
+          "tables_used": [
+            "P2_DATA_DIR/observations.csv",
+            "P2_DATA_DIR/test_index.csv"
+          ],
+          "filters": [
+            "KST weeks beginning 1 September",
+            "Target layers excluded"
+          ],
+          "metric_definitions": {
+            "contrast_median": "Weekly median absolute layer-1 minus layer-5 temperature in degrees Celsius"
+          }
+        }
+      },
+      {
+        "id": "regime_diag_convergence_sql",
+        "label": "Reviewed layerwise CatBoost fold convergence",
+        "path": "artifacts/p2_top3_parallel_tuning_v1/catboost_layerwise/result.json",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '2024_sep_oct' AS outer_block, 2 AS layer, 126 AS iterations UNION ALL SELECT '2024_sep_oct' AS outer_block, 3 AS layer, 132 AS iterations UNION ALL SELECT '2024_sep_oct' AS outer_block, 4 AS layer, 508 AS iterations UNION ALL SELECT '2025_jul_aug' AS outer_block, 2 AS layer, 5 AS iterations UNION ALL SELECT '2025_jul_aug' AS outer_block, 3 AS layer, 10 AS iterations UNION ALL SELECT '2025_jul_aug' AS outer_block, 4 AS layer, 8 AS iterations UNION ALL SELECT '2025_nov_dec' AS outer_block, 2 AS layer, 94 AS iterations UNION ALL SELECT '2025_nov_dec' AS outer_block, 3 AS layer, 193 AS iterations UNION ALL SELECT '2025_nov_dec' AS outer_block, 4 AS layer, 16 AS iterations",
+          "description": "Materializes inner-selected CatBoost checkpoints by outer fold and target layer.",
+          "tables_used": [],
+          "filters": [
+            "12 independent inner-only trials per outer fold",
+            "Outer labels unused for selection"
+          ],
+          "metric_definitions": {
+            "iterations": "Best boosting checkpoint selected inside the outer training fold"
+          }
+        }
       }
     ],
     "blocks": [
@@ -1016,7 +1712,7 @@
       {
         "id": "technical_summary",
         "type": "markdown",
-        "body": "## Technical Summary\n\n동일한 69,850개 target-proxy 행에서 8개 P2-adapted deep 계열을 비교했다. 단독 최강은 3-seed LSTI 계열이었고, 최종 layer별 convex stack은 400-round tree, Depth-query BiTCN, LSTI, TimeMixer++, local patch-foundation을 결합해 OOF RMSE **0.745814°C**를 기록했다. 기존 router 0.788890°C보다 0.043076°C 낮다. leave-one-block-out weight 진단도 0.775660°C로 기준보다 낮았고, 2,000회 KST-day bootstrap 90% CI는 [-0.055540, -0.030873]°C였다. CSDI와 SSSD-SSM은 posterior mean을 써도 tree 가중치가 100%로 선택되어 기각됐다. 26,061행 제출 후보는 저장 가중치에서 동일 SHA로 재현됐으며 업로드하지 않았다."
+        "body": "## Technical Summary\n\n기존 8개 deep 계열의 layer별 stack은 동일 69,850개 target-proxy 행에서 RMSE **0.745814°C**, LOBO weight 진단 0.775660°C를 유지한다. 추가로 LightGBM GBDT·ExtraTrees·DART, XGBoost hist, CatBoost pooled·layerwise를 public-only phase 특징과 400 iteration으로 비교했다. 단독 최강은 ExtraTrees 0.816096°C였지만, deep stack에 LOBO 기준으로 보완 이득을 준 모델은 layerwise CatBoost뿐이었다 (0.774577°C, Δ -0.001083°C). 다만 2,000회 KST-day bootstrap 90% CI [-0.005133, 0.003215]°C가 0을 포함하므로, 현재 제출 1순위는 deep stack을 유지하고 다음 파라미터 최적화 대상만 layerwise CatBoost로 좁힌다."
       },
       {
         "id": "headline_strip",
@@ -1233,26 +1929,157 @@
         "body": "차단별 막대는 fitted stack과 LOBO stack을 구분한다. fitted 값은 최종 test 가중치 설계용이며, LOBO 값은 한 블록의 라벨을 보지 않은 가중치가 그 블록으로 이동하는지 확인하는 보조 일반화 진단이다."
       },
       {
+        "id": "gbm_results",
+        "type": "markdown",
+        "sourceId": "gbm_tournament_result",
+        "body": "## 단독 성능과 앙상블 가치는 다른 모델이 이겼다\n\n고정 400 iteration에서 ExtraTrees형 LightGBM이 단독 RMSE 0.816096°C로 가장 낮았다. 그러나 기존 deep stack과의 중복 오차가 커서 LOBO pair는 오히려 0.793065°C로 악화했다. 반대로 layerwise CatBoost의 단독 RMSE는 0.833549°C였지만, layer 2·3에서 deep과 다른 오차를 제공해 LOBO pair를 0.774577°C로 낮췄다. 구조 선택 목적이 최종 앙상블 개선이라면 CatBoost 층별형이 다음 튜닝 대상이다."
+      },
+      {
+        "id": "gbm_headline_strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "gbm_best_standalone",
+          "gbm_fitted_pair",
+          "gbm_lobo_pair",
+          "gbm_lobo_delta"
+        ]
+      },
+      {
+        "id": "gbm_family_chart_block",
+        "type": "chart",
+        "chartId": "gbm_family_chart"
+      },
+      {
+        "id": "gbm_family_note",
+        "type": "markdown",
+        "sourceId": "gbm_ranking_sql",
+        "body": "차트의 standalone은 각 GBM 자체 예측, fitted pair는 세 블록 전체에서 층별 가중치를 맞춘 낙관적 조합, LOBO pair는 다른 두 블록에서만 가중치를 정한 일반화 진단이다. LGBM GBDT의 fitted pair 0.742085°C는 가장 낮지만 LOBO 0.790544°C로 역전되므로 가중치 과적합 신호다."
+      },
+      {
+        "id": "gbm_exact_table_block",
+        "type": "table",
+        "tableId": "gbm_exact_table"
+      },
+      {
+        "id": "gbm_diversity",
+        "type": "markdown",
+        "sourceId": "gbm_tournament_result",
+        "body": "## CatBoost의 이득은 얕지만 층별로 해석 가능하다\n\n최종 fitted pair에서 CatBoost 가중치는 layer 2가 0.280840, layer 3이 0.279260, layer 4가 0이었다. 즉 현재 이득은 깊은 중간층 전체를 대체하는 것이 아니라 위쪽 두 목표층의 오차 다양성에서 나온다. layer 4는 deep stack을 그대로 유지하는 편이 낫다."
+      },
+      {
+        "id": "gbm_weight_table_block",
+        "type": "table",
+        "tableId": "gbm_weight_table"
+      },
+      {
+        "id": "gbm_robustness",
+        "type": "markdown",
+        "sourceId": "gbm_tournament_result",
+        "body": "## 현재 개선폭은 탐색 가치가 있지만 제출 승격 근거로는 약하다\n\nLayerwise CatBoost pair의 fitted 개선은 -0.001954°C였고 KST-day bootstrap 개선확률은 93.95%였지만 90% CI 상단이 +0.000120°C였다. 더 엄격한 LOBO 개선은 -0.001083°C, 개선확률 68.8%, 90% CI [-0.005133, +0.003215]°C다. 따라서 연구 challenger CSV는 생성했지만 현재 deep-stack 제출본을 교체하지 않는다."
+      },
+      {
+        "id": "gbm_block_chart_block",
+        "type": "chart",
+        "chartId": "gbm_block_chart"
+      },
+      {
+        "id": "gbm_block_note",
+        "type": "markdown",
+        "sourceId": "gbm_blocks_sql",
+        "body": "블록별 막대는 fitted 조합과 LOBO 조합을 구분한다. 세 블록이 이미 여러 구조 선택에 노출됐으므로 이 비교는 hidden 점수 추정치가 아니라 다음 탐색 방향을 고르는 진단으로 사용한다."
+      },
+      {
+        "id": "top3_tuning_summary",
+        "type": "markdown",
+        "sourceId": "top3_tuning_ranking_sql",
+        "body": "## 긴 학습 자체보다 계절 전이 안정성이 병목이었다\n\n상위 3개 계열을 outer 폴드별로 완전히 분리해 총 36회씩 탐색했다. 모든 모델이 설정된 최대 예산 안에서 체크포인트를 선택했지만, tuned standalone과 LOBO deep-pair 모두 동결 기준을 안정적으로 넘지 못했다. 따라서 이 세 튜닝 후보는 제출 후보로 승격하지 않는다."
+      },
+      {
+        "id": "top3_tuning_cards_block",
+        "type": "metric-strip",
+        "cardIds": [
+          "top3_tuning_outer_card",
+          "top3_tuning_lobo_card"
+        ]
+      },
+      {
+        "id": "top3_tuning_chart_block",
+        "type": "chart",
+        "chartId": "top3_tuning_outer_chart"
+      },
+      {
+        "id": "top3_tuning_ranking_block",
+        "type": "table",
+        "tableId": "top3_tuning_ranking_table"
+      },
+      {
+        "id": "top3_tuning_iterations_block",
+        "type": "table",
+        "tableId": "top3_tuning_iterations_table"
+      },
+      {
+        "id": "top3_tuning_parameters_block",
+        "type": "table",
+        "tableId": "top3_tuning_parameters_table"
+      },
+      {
+        "id": "regime_diag_public_finding",
+        "type": "markdown",
+        "sourceId": "regime_diag_public_sql",
+        "body": "## 계절 라벨보다 공개층의 물리 상태가 병목을 더 잘 설명한다\n\n숨은 2025년 9–10월은 2024년 같은 계절의 공개층 분포와 가깝다. `|T1−T5|` 정규화 거리는 `0.157`로, 직전 2025년 7–8월의 `2.319`보다 훨씬 작다. 하지만 숨은 구간 자체도 한 상태가 아니다. 2024년 같은 계절의 삼분위 기준으로 저성층 `17.5%`, 전이 `44.7%`, 강성층 `37.8%`가 섞여 있다. 따라서 월 단위 hard split은 전이 시점을 평균내며, 시점별 soft gate가 더 적합하다."
+      },
+      {
+        "id": "regime_diag_weekly_block",
+        "type": "chart",
+        "chartId": "regime_diag_weekly_chart"
+      },
+      {
+        "id": "regime_diag_weekly_note",
+        "type": "markdown",
+        "sourceId": "regime_diag_weekly_sql",
+        "body": "### 같은 9–10월 안에서도 성층 붕괴 경로가 달라진다\n\n주별 중앙값은 달력상 같은 계절이더라도 상태 전환의 시점과 속도가 다름을 보여준다. 또한 숨은 시각 중 `T1−T5`가 유효한 비율은 `70.5%`뿐이다. 따라서 이 한 변수만으로 gate를 만들면 나머지 시각이 모두 동일한 fallback으로 몰린다. 공개 전 층의 온도 범위, 염분 범위, 24시간 변화, M2 성분과 결측 mask를 함께 써야 한다."
+      },
+      {
+        "id": "regime_diag_blocks_block",
+        "type": "table",
+        "tableId": "regime_diag_blocks_table"
+      },
+      {
+        "id": "regime_diag_experiment_finding",
+        "type": "markdown",
+        "body": "## 기존 실험도 상태 조건화의 방향성은 지지하지만 충분하지 않았다\n\n단순한 `|T1−T5|` 2전문가 실험은 전체 연구 구간 RMSE를 `0.02376℃` 낮췄고, 전이 bin에서는 `0.03534℃` 낮췄다. 반면 CatBoost의 outer별 수렴 checkpoint 최대/최소 비율은 layer 2 `25.2×`, layer 3 `19.3×`, layer 4 `63.5×`였다. 이는 단일 전역 함수의 비정상성이 크다는 증거지만, 상태 분기만으로 hidden RMSE 개선이 보장된다는 뜻은 아니다."
+      },
+      {
+        "id": "regime_diag_convergence_block",
+        "type": "table",
+        "tableId": "regime_diag_convergence_table"
+      },
+      {
+        "id": "regime_diag_next_hypothesis",
+        "type": "markdown",
+        "body": "## 다음 실험은 hard split이 아니라 저복잡도 soft mixture로 한정한다\n\n현재 deep stack의 구성 모델과 학습 결과는 그대로 두고, 공개층 상태에 따라 layer별 simplex 가중치만 연속적으로 바꾸는 작은 gate를 우선 시험한다. 입력은 `|T1−T5|`, 공개층 온도·염분 범위, 두 지표의 24시간 변화, M2 amplitude/coherence, 결측 mask로 제한한다. 분할 경계는 target 정답이 아니라 fold-train 공개층에서만 학습하고, 계절 블록을 통째로 남기는 leave-one-block-out RMSE로 기존 deep stack `0.77566℃`와 비교한다. 별도 전문가를 처음부터 재학습하는 안은 이 저복잡도 gate가 실제로 개선된 뒤에만 진행한다."
+      },
+      {
         "id": "limitations",
         "type": "markdown",
-        "sourceId": "deep_finalist_result",
-        "body": "## 한계와 검증 경계\n\n세 outer block은 모델 선택에 반복 노출됐으므로 0.7458°C를 독립 추정치로 볼 수 없다. LOBO 0.7757°C와 KST-day bootstrap은 이 위험을 줄이지만 hidden test를 대체하지 않는다. MOMENT·UniTS 공식 pretrained weight는 외부 가중치 허용 여부가 불명확해 사용하지 않았고, 보고서의 patch-foundation은 로컬 from-scratch proxy다. CSDI·SSSD 역시 upstream 완전 재현이 아니라 동일 P2 계약에 맞춘 구조 계열 비교다."
+        "sourceId": "gbm_independent_validation",
+        "body": "## 한계와 검증 경계\n\n여섯 GBM 계열은 구조 비교를 위해 400 iteration과 한 개의 공통 초기 파라미터 세트를 사용했으므로 각 backend의 최고 성능을 의미하지 않는다. 특히 XGBoost의 0.965441°C는 현재 초기값의 결과이지 XGBoost 계열의 절대 상한이 아니다. 세 target-proxy block은 반복 노출됐으며, fitted pair는 같은 OOF에서 가중치를 맞췄다. 독립 validator가 69,850개 키·정답·RMSE·가중치 투영과 7개 제출 CSV의 26,061개 키를 재검산했지만 hidden 정답은 사용하지 않았다."
       },
       {
         "id": "next_steps",
         "type": "markdown",
-        "body": "## 권장 다음 단계\n\n1. `P2_DEEP_STACK_V1.csv`를 현재 첫 공식 제출 후보로 유지한다.\n2. 제출 전 파일 경로와 SHA를 사용자에게 다시 제시하고 정확한 파일 승인을 받는다.\n3. 첫 공식 점수가 로컬 tree 기준보다 악화하면 구조를 더 늘리지 말고 tree-only와 deep-stack 차이를 점검한다.\n4. 공식 점수가 개선되면 모델 family를 추가하지 않고 현재 stack의 epoch·weight 재현성을 유지한다.\n5. 원본·가중치·제출 CSV는 Git에 올리지 않고 코드·설정·보고서만 백업한다."
+        "body": "## 다음 단계\n\n1. 현재 1순위 제출 후보 `P2_DEEP_STACK_V1.csv`를 유지한다.\n2. 상위 3개 GBM의 추가 trial 확대는 중단한다. 세 계열 모두 수렴했지만 outer 전이가 악화됐다.\n3. 다음 실험은 파라미터 양이 아니라 2024→2025 전이 구조를 직접 설명하는 단일 특징·모델 가설로 제한한다.\n4. 어떤 CSV도 사용자 승인 전 플랫폼에 올리지 않는다."
       },
       {
         "id": "questions",
         "type": "markdown",
-        "body": "## 남은 질문\n\n- 리더보드 분할이 층 또는 시계열 구간을 어떻게 나누는가?\n- 외부 pretrained time-series weight가 허용되는가?\n- 첫 공식 점수에서 layer별 오차 또는 public/private 분할 차이를 확인할 수 있는가?"
+        "body": "## 남은 질문\n\n- CatBoost의 이득이 depth 7.04 m와 9.44 m에 안정적으로 집중되는가, 아니면 특정 계절 블록에 의존하는가?\n- layerwise CatBoost의 최적 boosting horizon이 층마다 다른가?\n- 첫 공식 점수에서 deep-only와 CatBoost challenger의 차이를 확인할 수 있는가?"
       }
     ]
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-16T14:41:39.535022+09:00",
+    "generatedAt": "2026-08-16T16:59:08.534476+09:00",
     "status": "ready",
     "datasets": {
       "headline": [
@@ -2324,6 +3151,817 @@
           "rmse": 0.611823,
           "rows": 16884
         }
+      ],
+      "gbm_headline": [
+        {
+          "best_standalone_rmse": 0.8160964885405301,
+          "selected_fitted_pair_rmse": 0.7438598909048169,
+          "selected_lobo_pair_rmse": 0.7745773143897883,
+          "selected_lobo_delta": -0.0010827169247051849
+        }
+      ],
+      "gbm_arm_ranking": [
+        {
+          "arm": "catboost_layerwise",
+          "variant": "Standalone",
+          "rmse": 0.833549,
+          "rank": 1,
+          "iterations": 400
+        },
+        {
+          "arm": "catboost_layerwise",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.74386,
+          "rank": 1,
+          "iterations": 400
+        },
+        {
+          "arm": "catboost_layerwise",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.774577,
+          "rank": 1,
+          "iterations": 400
+        },
+        {
+          "arm": "catboost_pooled",
+          "variant": "Standalone",
+          "rmse": 0.843419,
+          "rank": 2,
+          "iterations": 400
+        },
+        {
+          "arm": "catboost_pooled",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.74467,
+          "rank": 2,
+          "iterations": 400
+        },
+        {
+          "arm": "catboost_pooled",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.782503,
+          "rank": 2,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_dart",
+          "variant": "Standalone",
+          "rmse": 0.82972,
+          "rank": 3,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_dart",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.745814,
+          "rank": 3,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_dart",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.784244,
+          "rank": 3,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_gbdt",
+          "variant": "Standalone",
+          "rmse": 0.840923,
+          "rank": 4,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_gbdt",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.742085,
+          "rank": 4,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_gbdt",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.790544,
+          "rank": 4,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_extra_trees",
+          "variant": "Standalone",
+          "rmse": 0.816096,
+          "rank": 5,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_extra_trees",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.745579,
+          "rank": 5,
+          "iterations": 400
+        },
+        {
+          "arm": "lgbm_extra_trees",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.793065,
+          "rank": 5,
+          "iterations": 400
+        },
+        {
+          "arm": "xgboost_hist",
+          "variant": "Standalone",
+          "rmse": 0.965441,
+          "rank": 6,
+          "iterations": 400
+        },
+        {
+          "arm": "xgboost_hist",
+          "variant": "Fitted pair with deep",
+          "rmse": 0.745796,
+          "rank": 6,
+          "iterations": 400
+        },
+        {
+          "arm": "xgboost_hist",
+          "variant": "LOBO pair with deep",
+          "rmse": 0.806669,
+          "rank": 6,
+          "iterations": 400
+        }
+      ],
+      "gbm_arm_exact": [
+        {
+          "rank": 1,
+          "arm": "catboost_layerwise",
+          "standalone_rmse": 0.833549,
+          "fitted_pair_rmse": 0.74386,
+          "lobo_pair_rmse": 0.774577,
+          "lobo_delta": -0.001083
+        },
+        {
+          "rank": 2,
+          "arm": "catboost_pooled",
+          "standalone_rmse": 0.843419,
+          "fitted_pair_rmse": 0.74467,
+          "lobo_pair_rmse": 0.782503,
+          "lobo_delta": 0.006843
+        },
+        {
+          "rank": 3,
+          "arm": "lgbm_dart",
+          "standalone_rmse": 0.82972,
+          "fitted_pair_rmse": 0.745814,
+          "lobo_pair_rmse": 0.784244,
+          "lobo_delta": 0.008583
+        },
+        {
+          "rank": 4,
+          "arm": "lgbm_gbdt",
+          "standalone_rmse": 0.840923,
+          "fitted_pair_rmse": 0.742085,
+          "lobo_pair_rmse": 0.790544,
+          "lobo_delta": 0.014884
+        },
+        {
+          "rank": 5,
+          "arm": "lgbm_extra_trees",
+          "standalone_rmse": 0.816096,
+          "fitted_pair_rmse": 0.745579,
+          "lobo_pair_rmse": 0.793065,
+          "lobo_delta": 0.017405
+        },
+        {
+          "rank": 6,
+          "arm": "xgboost_hist",
+          "standalone_rmse": 0.965441,
+          "fitted_pair_rmse": 0.745796,
+          "lobo_pair_rmse": 0.806669,
+          "lobo_delta": 0.031009
+        }
+      ],
+      "gbm_selected_weights": [
+        {
+          "layer": 2,
+          "deep_weight": 0.71916,
+          "catboost_weight": 0.28084
+        },
+        {
+          "layer": 3,
+          "deep_weight": 0.72074,
+          "catboost_weight": 0.27926
+        },
+        {
+          "layer": 4,
+          "deep_weight": 1.0,
+          "catboost_weight": 0.0
+        }
+      ],
+      "gbm_selected_blocks": [
+        {
+          "block": "2024_sep_oct",
+          "method": "Deep fitted",
+          "rmse": 0.434945,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "CatBoost layerwise",
+          "rmse": 0.596245,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "Deep + CatBoost fitted",
+          "rmse": 0.443554,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "Deep LOBO",
+          "rmse": 0.454622,
+          "rows": 26273
+        },
+        {
+          "block": "2024_sep_oct",
+          "method": "Deep + CatBoost LOBO",
+          "rmse": 0.483014,
+          "rows": 26273
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Deep fitted",
+          "rmse": 1.031317,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "CatBoost layerwise",
+          "rmse": 1.135792,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Deep + CatBoost fitted",
+          "rmse": 1.028251,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Deep LOBO",
+          "rmse": 1.064982,
+          "rows": 26693
+        },
+        {
+          "block": "2025_jul_aug",
+          "method": "Deep + CatBoost LOBO",
+          "rmse": 1.057227,
+          "rows": 26693
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Deep fitted",
+          "rmse": 0.570327,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "CatBoost layerwise",
+          "rmse": 0.530806,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Deep + CatBoost fitted",
+          "rmse": 0.558074,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Deep LOBO",
+          "rmse": 0.611823,
+          "rows": 16884
+        },
+        {
+          "block": "2025_nov_dec",
+          "method": "Deep + CatBoost LOBO",
+          "rmse": 0.593278,
+          "rows": 16884
+        }
+      ],
+      "top3_tuning_headline": [
+        {
+          "best_family": "catboost_layerwise",
+          "best_outer_rmse": 0.90062496086258,
+          "best_lobo_pair_rmse": 0.778989247100089,
+          "best_lobo_delta": 0.0033292157855955296,
+          "validated_families": 3
+        }
+      ],
+      "top3_tuning_ranking": [
+        {
+          "rank": 1,
+          "family": "catboost_layerwise",
+          "fixed_outer_rmse": 0.8335485999270905,
+          "tuned_outer_rmse": 0.90062496086258,
+          "outer_delta": 0.06707636093548952,
+          "lobo_pair_rmse": 0.778989247100089,
+          "lobo_delta_vs_deep": 0.0033292157855955296,
+          "inner_rmse": 1.1077893793888347
+        },
+        {
+          "rank": 2,
+          "family": "catboost_pooled",
+          "fixed_outer_rmse": 0.8434187089995495,
+          "tuned_outer_rmse": 0.9102760432695386,
+          "outer_delta": 0.06685733426998908,
+          "lobo_pair_rmse": 0.780117873790237,
+          "lobo_delta_vs_deep": 0.004457842475743545,
+          "inner_rmse": 1.1088503174343867
+        },
+        {
+          "rank": 3,
+          "family": "lgbm_dart",
+          "fixed_outer_rmse": 0.8297197084469423,
+          "tuned_outer_rmse": 0.9273218809429263,
+          "outer_delta": 0.09760217249598402,
+          "lobo_pair_rmse": 0.7962604830338402,
+          "lobo_delta_vs_deep": 0.02060045171934677,
+          "inner_rmse": 1.1240674768372234
+        }
+      ],
+      "top3_tuning_iterations": [
+        {
+          "family": "catboost_layerwise",
+          "layer": 2,
+          "iterations": 94
+        },
+        {
+          "family": "catboost_layerwise",
+          "layer": 3,
+          "iterations": 132
+        },
+        {
+          "family": "catboost_layerwise",
+          "layer": 4,
+          "iterations": 16
+        },
+        {
+          "family": "catboost_pooled",
+          "layer": 0,
+          "iterations": 158
+        },
+        {
+          "family": "lgbm_dart",
+          "layer": 0,
+          "iterations": 1600
+        }
+      ],
+      "top3_tuning_parameters": [
+        {
+          "family": "catboost_layerwise",
+          "parameter": "bootstrap_type",
+          "value": "MVS"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "learning_rate",
+          "value": "0.0952176995303601"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "depth",
+          "value": "10"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "l2_leaf_reg",
+          "value": "4.7480304513323635"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "random_strength",
+          "value": "1.1308491248486294"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "rsm",
+          "value": "0.9687935001696453"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "leaf_estimation_iterations",
+          "value": "2"
+        },
+        {
+          "family": "catboost_layerwise",
+          "parameter": "subsample",
+          "value": "0.8920313838194773"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "bootstrap_type",
+          "value": "MVS"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "learning_rate",
+          "value": "0.05872961273284538"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "depth",
+          "value": "8"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "l2_leaf_reg",
+          "value": "0.5622636573176658"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "random_strength",
+          "value": "0.26986739599783544"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "rsm",
+          "value": "0.8747898871048947"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "leaf_estimation_iterations",
+          "value": "1"
+        },
+        {
+          "family": "catboost_pooled",
+          "parameter": "subsample",
+          "value": "0.7627895169354457"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "n_estimators",
+          "value": "1600"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "learning_rate",
+          "value": "0.02015547988009311"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "num_leaves",
+          "value": "43"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "max_depth",
+          "value": "12"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "min_child_samples",
+          "value": "464"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "feature_fraction",
+          "value": "0.5641720450686958"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "bagging_fraction",
+          "value": "0.8177593827741176"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "bagging_freq",
+          "value": "1"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "reg_alpha",
+          "value": "0.0009702787528501448"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "reg_lambda",
+          "value": "20.23008339095893"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "drop_rate",
+          "value": "0.11950804312573086"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "skip_drop",
+          "value": "0.3112737282783449"
+        },
+        {
+          "family": "lgbm_dart",
+          "parameter": "max_drop",
+          "value": "31"
+        }
+      ],
+      "top3_tuning_chart": [
+        {
+          "family": "catboost_layerwise",
+          "variant": "Fixed screen",
+          "rmse": 0.8335485999270905
+        },
+        {
+          "family": "catboost_layerwise",
+          "variant": "Nested tuned",
+          "rmse": 0.90062496086258
+        },
+        {
+          "family": "catboost_pooled",
+          "variant": "Fixed screen",
+          "rmse": 0.8434187089995495
+        },
+        {
+          "family": "catboost_pooled",
+          "variant": "Nested tuned",
+          "rmse": 0.9102760432695386
+        },
+        {
+          "family": "lgbm_dart",
+          "variant": "Fixed screen",
+          "rmse": 0.8297197084469423
+        },
+        {
+          "family": "lgbm_dart",
+          "variant": "Nested tuned",
+          "rmse": 0.9273218809429263
+        }
+      ],
+      "regime_diag_blocks": [
+        {
+          "block": "2024_sep_oct",
+          "timestamps": 8779,
+          "contrast_coverage": 0.9927098758400729,
+          "contrast_median": 0.47550000000000026,
+          "contrast_q90": 4.791380000000002,
+          "temp_range_median": 11.3014,
+          "contrast_change_24h_median": 0.5542000000000016,
+          "distance_to_hidden_contrast": 0.157494085430592,
+          "distance_to_hidden_temp_range": 0.21225358633083882,
+          "reference_low_share": 0.3333333333333333,
+          "reference_middle_share": 0.3333333333333333,
+          "reference_high_share": 0.3333333333333333
+        },
+        {
+          "block": "2025_jul_aug",
+          "timestamps": 8928,
+          "contrast_coverage": 0.9980958781362007,
+          "contrast_median": 6.6584,
+          "contrast_q90": 10.424,
+          "temp_range_median": 14.858149999999998,
+          "contrast_change_24h_median": 1.4838499999999994,
+          "distance_to_hidden_contrast": 2.3188022968708224,
+          "distance_to_hidden_temp_range": 0.7624990470739832,
+          "reference_low_share": 0.00044888340253619125,
+          "reference_middle_share": 0.02973852541802267,
+          "reference_high_share": 0.9698125911794412
+        },
+        {
+          "block": "2025_nov_dec",
+          "timestamps": 5631,
+          "contrast_coverage": 0.0,
+          "contrast_median": null,
+          "contrast_q90": null,
+          "temp_range_median": 3.7128999999999994,
+          "contrast_change_24h_median": null,
+          "distance_to_hidden_contrast": null,
+          "distance_to_hidden_temp_range": 1.8710402377288922,
+          "reference_low_share": null,
+          "reference_middle_share": null,
+          "reference_high_share": null
+        },
+        {
+          "block": "2025_sep_oct_hidden_public",
+          "timestamps": 8717,
+          "contrast_coverage": 0.7054032350579328,
+          "contrast_median": 0.9150000000000027,
+          "contrast_q90": 4.115000000000002,
+          "temp_range_median": 11.6229,
+          "contrast_change_24h_median": 0.7219999999999995,
+          "distance_to_hidden_contrast": 0.0,
+          "distance_to_hidden_temp_range": 0.0,
+          "reference_low_share": 0.17531305903398928,
+          "reference_middle_share": 0.4465766791348187,
+          "reference_high_share": 0.37811026183119206
+        }
+      ],
+      "regime_diag_weekly": [
+        {
+          "period": "2024 same season",
+          "week": 1,
+          "contrast_median": 0.3194499999999998,
+          "public_temp_range_median": 14.88725,
+          "contrast_valid": 996,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9880952380952381
+        },
+        {
+          "period": "2024 same season",
+          "week": 2,
+          "contrast_median": 3.996000000000002,
+          "public_temp_range_median": 15.29605,
+          "contrast_valid": 1007,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9990079365079365
+        },
+        {
+          "period": "2024 same season",
+          "week": 3,
+          "contrast_median": 2.6449999999999996,
+          "public_temp_range_median": 14.80905,
+          "contrast_valid": 1007,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9990079365079365
+        },
+        {
+          "period": "2024 same season",
+          "week": 4,
+          "contrast_median": 2.130600000000001,
+          "public_temp_range_median": 12.2238,
+          "contrast_valid": 1008,
+          "timestamps": 1008,
+          "contrast_coverage": 1.0
+        },
+        {
+          "period": "2024 same season",
+          "week": 5,
+          "contrast_median": 0.4120500000000007,
+          "public_temp_range_median": 11.713549999999998,
+          "contrast_valid": 992,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9841269841269841
+        },
+        {
+          "period": "2024 same season",
+          "week": 6,
+          "contrast_median": 0.6714000000000002,
+          "public_temp_range_median": 9.15045,
+          "contrast_valid": 1006,
+          "timestamps": 1008,
+          "contrast_coverage": 0.998015873015873
+        },
+        {
+          "period": "2024 same season",
+          "week": 7,
+          "contrast_median": 0.06445000000000078,
+          "public_temp_range_median": 9.318000000000001,
+          "contrast_valid": 988,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9801587301587301
+        },
+        {
+          "period": "2024 same season",
+          "week": 8,
+          "contrast_median": 0.013500000000000512,
+          "public_temp_range_median": 5.972000000000001,
+          "contrast_valid": 997,
+          "timestamps": 1006,
+          "contrast_coverage": 0.9910536779324056
+        },
+        {
+          "period": "2024 same season",
+          "week": 9,
+          "contrast_median": 0.06925000000000026,
+          "public_temp_range_median": 5.534599999999999,
+          "contrast_valid": 714,
+          "timestamps": 717,
+          "contrast_coverage": 0.99581589958159
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 1,
+          "contrast_median": 3.645100000000003,
+          "public_temp_range_median": 14.621299999999998,
+          "contrast_valid": 1003,
+          "timestamps": 1004,
+          "contrast_coverage": 0.999003984063745
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 2,
+          "contrast_median": 1.040499999999998,
+          "public_temp_range_median": 14.576600000000001,
+          "contrast_valid": 1005,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9970238095238095
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 3,
+          "contrast_median": 0.35110000000000063,
+          "public_temp_range_median": 13.693549999999998,
+          "contrast_valid": 1008,
+          "timestamps": 1008,
+          "contrast_coverage": 1.0
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 4,
+          "contrast_median": 0.7181999999999995,
+          "public_temp_range_median": 11.7851,
+          "contrast_valid": 1005,
+          "timestamps": 1008,
+          "contrast_coverage": 0.9970238095238095
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 5,
+          "contrast_median": 0.6029500000000017,
+          "public_temp_range_median": 12.49495,
+          "contrast_valid": 1006,
+          "timestamps": 1008,
+          "contrast_coverage": 0.998015873015873
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 6,
+          "contrast_median": 0.3880999999999979,
+          "public_temp_range_median": 9.7792,
+          "contrast_valid": 907,
+          "timestamps": 1008,
+          "contrast_coverage": 0.8998015873015873
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 7,
+          "contrast_median": 3.8238999999999983,
+          "public_temp_range_median": 10.365599999999999,
+          "contrast_valid": 215,
+          "timestamps": 1003,
+          "contrast_coverage": 0.2143569292123629
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 8,
+          "contrast_median": null,
+          "public_temp_range_median": 8.1676,
+          "contrast_valid": 0,
+          "timestamps": 950,
+          "contrast_coverage": 0.0
+        },
+        {
+          "period": "2025 hidden public",
+          "week": 9,
+          "contrast_median": null,
+          "public_temp_range_median": 7.014950000000001,
+          "contrast_valid": 0,
+          "timestamps": 720,
+          "contrast_coverage": 0.0
+        }
+      ],
+      "regime_diag_convergence": [
+        {
+          "outer_block": "2024_sep_oct",
+          "layer": 2,
+          "iterations": 126
+        },
+        {
+          "outer_block": "2024_sep_oct",
+          "layer": 3,
+          "iterations": 132
+        },
+        {
+          "outer_block": "2024_sep_oct",
+          "layer": 4,
+          "iterations": 508
+        },
+        {
+          "outer_block": "2025_jul_aug",
+          "layer": 2,
+          "iterations": 5
+        },
+        {
+          "outer_block": "2025_jul_aug",
+          "layer": 3,
+          "iterations": 10
+        },
+        {
+          "outer_block": "2025_jul_aug",
+          "layer": 4,
+          "iterations": 8
+        },
+        {
+          "outer_block": "2025_nov_dec",
+          "layer": 2,
+          "iterations": 94
+        },
+        {
+          "outer_block": "2025_nov_dec",
+          "layer": 3,
+          "iterations": 193
+        },
+        {
+          "outer_block": "2025_nov_dec",
+          "layer": 4,
+          "iterations": 16
+        }
       ]
     }
   },
@@ -2491,6 +4129,26 @@
     {
       "id": "deep_finalist_result",
       "path": "artifacts/p2_deep_finalists_v1/result.json"
+    },
+    {
+      "id": "gbm_tournament_result",
+      "path": "artifacts/p2_gbm_family_tournament_v1/result.json"
+    },
+    {
+      "id": "gbm_independent_validation",
+      "path": "artifacts/p2_gbm_family_tournament_v1/independent_validation.json"
+    },
+    {
+      "id": "top3_tuning_result",
+      "path": "artifacts/p2_top3_parallel_tuning_v1/result.json"
+    },
+    {
+      "id": "top3_tuning_validation",
+      "path": "artifacts/p2_top3_parallel_tuning_v1/independent_validation.json"
+    },
+    {
+      "id": "regime_diag_result",
+      "path": "artifacts/p2_regime_diagnostic_v1/result.json"
     }
   ]
 }

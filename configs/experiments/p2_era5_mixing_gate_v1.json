@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p2_era5_mixing_gate_v1",
+  "generation": 1,
+  "status": "dry_run_only_policy_validated_pending_independent_static_modeling_qa",
+  "research_only": true,
+  "upload_allowed": false,
+  "hypothesis": "A narrowly specified ERA5 mixing-state increment can improve a continuous convex blend between the same frozen deep and public-endpoint physical experts during stratification collapse.",
+  "single_change": "The challenger adds only the preregistered ERA5 mixing features to the identical public-state two-expert soft gate used by the control.",
+  "non_claims": [
+    "The physical literature motivates the covariates but does not guarantee predictive improvement.",
+    "This generation makes no fresh-holdout or leaderboard claim.",
+    "The earlier NASA POWER residual-correction no-op does not count as evidence for this different convex-gate hypothesis."
+  ],
+  "literature_basis": [
+    {
+      "citation": "Cooley et al., Journal of Geophysical Research: Oceans (2022)",
+      "doi": "10.1029/2021JC018338",
+      "url": "https://doi.org/10.1029/2021JC018338",
+      "design_link": "Uses ERA5 hourly accumulated surface wind-stress components and surface heat-flux components to study mixed-layer temperature change; motivates keeping stress magnitude and heat flux separate."
+    },
+    {
+      "citation": "Li et al., Geophysical Research Letters (2024)",
+      "doi": "10.1029/2023GL107160",
+      "url": "https://doi.org/10.1029/2023GL107160",
+      "design_link": "Links surface cooling/heating to stratification erosion/strengthening and mixed-layer deepening/shoaling; motivates causal cumulative and tendency summaries."
+    }
+  ],
+  "authorization": {
+    "dry_run": true,
+    "feature_value_validation": true,
+    "inner_fit_or_label_access": false,
+    "outer_fit_or_label_access": false,
+    "final_fit": false,
+    "model_read_or_write": false,
+    "test_read": false,
+    "submission_read_or_write": false,
+    "catalog_mutation": false,
+    "actual_requires_independent_qa": true,
+    "actual_requires_policy_reconciliation": true
+  },
+  "attempt_lock": {
+    "canonical_generation": 1,
+    "maximum_inner_attempts": 1,
+    "maximum_outer_attempts": 1,
+    "completed_inner_attempts": 0,
+    "completed_outer_attempts": 0,
+    "rerun_after_truth_exposure": false,
+    "new_generation_required_after_any_failed_actual_attempt": true
+  },
+  "policy_reconciliation": {
+    "status": "canonical_amendment_ready_pending_independent_static_modeling_qa",
+    "immutable_catalog_path": "configs/external_data/catalog.toml",
+    "immutable_catalog_sha256": "08645af1c6238fff256d60580f99154ac89070d655bff5e70ca11925c1cb52a8",
+    "permission_path": "configs/external_data/official_faq_permission.json",
+    "permission_sha256": "f4d2ea55461a8af2c1cf1ed1a1642224a93349a414dfa0af7b254606b7f64f62",
+    "canonical_amendment_path": "configs/external_data/era5_p2_scope_amendment_2026-08-21.json",
+    "canonical_amendment_sha256": "b2a1fa3059e1ee114b1be4d7f596b02e97ca8354365a3c1ee1bacd6f443940c9",
+    "canonical_validator_path": "src/ocean_external/p2_era5_scope.py",
+    "canonical_validator_sha256": "f1902279d01f04d5890e3d2e671d570f4c7675817320c82a5b1849d085567122",
+    "validator_api": "validate_p2_era5_scope_amendment",
+    "problem": "P2",
+    "source_id": "era5_pre2024",
+    "purpose": "feature_design",
+    "effective_cutoff_kst": "2025-12-31T23:59:59+09:00",
+    "read_rule": "validate before external values and then read ERA5 only through grant.parquet_path",
+    "independent_static_modeling_qa_required": true,
+    "independent_static_modeling_qa_status": "pending",
+    "fail_closed_rule": "policy reconciliation passes only through the hash-bound canonical validator; actual remains false until independent static modeling QA and separate actual authorization"
+  },
+  "frozen_inputs": {
+    "era5_parquet": {
+      "path": "external_data/quarantine/era5_cds_sors_p2_oof_exact17_v1/era5_sors_3x3_p2_oof_exact17.parquet",
+      "sha256": "9e84c704e85d77796dbd554986f376d77e838b96de28fd08ad8ab6191560a7a0",
+      "bytes": 1668285,
+      "rows": 44100,
+      "chunk_count": 17,
+      "unique_hour_count": 4900,
+      "unique_grid_point_count": 9
+    },
+    "era5_manifest": {
+      "path": "artifacts/p2_era5_full_retrieval_v1/manifest.json",
+      "sha256": "17591180646a762cfa9a309cf0cc934c8109879c17d10084055133e9aa4f5bee"
+    },
+    "deep_oof": {
+      "path": "artifacts/p2_deep_finalists_v1/stacked_oof.parquet",
+      "sha256": "76f52261259112d03289226c23712e27a17a17f9320c8565c96a662c1093be8d",
+      "prediction_column_for_actual": "lobo_prediction"
+    },
+    "physical_oof": {
+      "path": "artifacts/p2_physical_profile_projection_v1/oof.parquet",
+      "sha256": "adffb86b43ae69ad3f11863263fe3679cc0195053b46c1ec57a307d2c54eb7cc",
+      "prediction_column_for_actual": "prediction"
+    },
+    "public_state_implementation": {
+      "path": "src/p2_restore/regime_gate.py",
+      "sha256": "d0e384ce7d442a0091a2ac2081df899b7acf78a291bf3a1b311b99b0d3709b45"
+    },
+    "observations_sha256_for_future_actual_only": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "oof_contract": {
+    "rows": 69850,
+    "key_columns": ["time", "layer", "block"],
+    "key_unique": true,
+    "layers": [2, 3, 4],
+    "blocks": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "block_rows": {
+      "2024_sep_oct": 26273,
+      "2025_jul_aug": 26693,
+      "2025_nov_dec": 16884
+    },
+    "layer_rows": {
+      "2": 23298,
+      "3": 23280,
+      "4": 23272
+    },
+    "target_layer_joint_mask": {
+      "layers": [2, 3, 4],
+      "columns": ["temp", "psal"],
+      "scope": "the entire current validation block before any public-state feature construction",
+      "required_for_inner_and_outer": true
+    },
+    "external_covariate_rule": "ERA5 is independent meteorology and may cover the full current validation interval, but must be joined only by declared block/time keys and never used to reconstruct target values or hidden absolute test time."
+  },
+  "era5_source_contract": {
+    "spatial_aggregate": "unweighted arithmetic mean over cells with land_sea_mask <= 0.5",
+    "land_sea_mask_maximum": 0.5,
+    "expected_ocean_cells_per_hour": 9,
+    "hour_seconds": 3600,
+    "source_columns": {
+      "u10": "10m_u_component_of_wind",
+      "v10": "10m_v_component_of_wind",
+      "tau_east_accumulated": "eastward_turbulent_surface_stress",
+      "tau_north_accumulated": "northward_turbulent_surface_stress",
+      "ssr": "surface_net_solar_radiation",
+      "str": "surface_net_thermal_radiation",
+      "slhf": "surface_latent_heat_flux",
+      "sshf": "surface_sensible_heat_flux",
+      "lsm": "land_sea_mask"
+    },
+    "units": {
+      "10m_u_component_of_wind": "m s**-1",
+      "10m_v_component_of_wind": "m s**-1",
+      "eastward_turbulent_surface_stress": "N m**-2 s",
+      "northward_turbulent_surface_stress": "N m**-2 s",
+      "surface_net_solar_radiation": "J m**-2",
+      "surface_net_thermal_radiation": "J m**-2",
+      "surface_latent_heat_flux": "J m**-2",
+      "surface_sensible_heat_flux": "J m**-2",
+      "land_sea_mask": "(0 - 1)"
+    },
+    "sign_semantics": {
+      "10m_u_component_of_wind": "positive eastward",
+      "10m_v_component_of_wind": "positive northward",
+      "eastward_turbulent_surface_stress": "positive eastward accumulated N m-2 s",
+      "northward_turbulent_surface_stress": "positive northward accumulated N m-2 s",
+      "surface_net_solar_radiation": "net downward accumulated J m-2",
+      "surface_net_thermal_radiation": "net upward accumulated J m-2",
+      "surface_latent_heat_flux": "upward accumulated J m-2",
+      "surface_sensible_heat_flux": "upward accumulated J m-2"
+    },
+    "derived_formulas": {
+      "tau_east_nm2": "eastward_turbulent_surface_stress / 3600",
+      "tau_north_nm2": "northward_turbulent_surface_stress / 3600",
+      "tau_mag_nm2": "sqrt(tau_east_nm2^2 + tau_north_nm2^2)",
+      "tau_dir_sin": "tau_north_nm2 / tau_mag_nm2, or 0 when magnitude is zero",
+      "tau_dir_cos": "tau_east_nm2 / tau_mag_nm2, or 0 when magnitude is zero",
+      "qnet_native_jm2": "surface_net_solar_radiation + surface_net_thermal_radiation + surface_latent_heat_flux + surface_sensible_heat_flux",
+      "qnet_native_wm2": "qnet_native_jm2 / 3600"
+    },
+    "qnet_sign_guard": "The four stored ERA5 values are summed exactly with no downstream sign flip. The derived field is named native-sum and is not relabeled as downward-positive.",
+    "windows_hours": [6, 24, 72, 168],
+    "window_semantics": {
+      "means": "causal inclusive rolling arithmetic means",
+      "impulse": "causal sum(tau_mag_nm2 * 3600)",
+      "energy": "causal sum(qnet_native_jm2)",
+      "trend": "causal least-squares slope against integer hour 0..window-1",
+      "minimum_periods": "exactly the window length",
+      "block_reset": true
+    },
+    "alignment": {
+      "method": "causal backward floor-to-UTC-hour exact join within block",
+      "minimum_age_minutes": 0,
+      "maximum_age_minutes_exclusive": 60,
+      "required_join_coverage": 1.0,
+      "maximum_feature_dependency_hours": 168,
+      "purge_hours": 168
+    }
+  },
+  "public_state_features": [
+    "abs_t1_t5",
+    "public_temp_range",
+    "public_psal_range",
+    "contrast_delta_past_24h",
+    "temp_range_delta_past_24h",
+    "contrast_center_change_24h",
+    "temp_range_center_change_24h",
+    "m2_amplitude_mean",
+    "m2_amplitude_spread",
+    "m2_phase_coherence"
+  ],
+  "era5_mixing_features": [
+    "era5_u10_ms",
+    "era5_v10_ms",
+    "era5_tau_mag_nm2",
+    "era5_tau_dir_sin",
+    "era5_tau_dir_cos",
+    "era5_qnet_native_wm2",
+    "era5_u10_mean_6h_ms",
+    "era5_v10_mean_6h_ms",
+    "era5_tau_mag_impulse_6h_nsm2",
+    "era5_qnet_energy_6h_jm2",
+    "era5_tau_mag_trend_6h_nm2_per_h",
+    "era5_qnet_trend_6h_wm2_per_h",
+    "era5_u10_mean_24h_ms",
+    "era5_v10_mean_24h_ms",
+    "era5_tau_mag_impulse_24h_nsm2",
+    "era5_qnet_energy_24h_jm2",
+    "era5_tau_mag_trend_24h_nm2_per_h",
+    "era5_qnet_trend_24h_wm2_per_h",
+    "era5_u10_mean_72h_ms",
+    "era5_v10_mean_72h_ms",
+    "era5_tau_mag_impulse_72h_nsm2",
+    "era5_qnet_energy_72h_jm2",
+    "era5_tau_mag_trend_72h_nm2_per_h",
+    "era5_qnet_trend_72h_wm2_per_h",
+    "era5_u10_mean_168h_ms",
+    "era5_v10_mean_168h_ms",
+    "era5_tau_mag_impulse_168h_nsm2",
+    "era5_qnet_energy_168h_jm2",
+    "era5_tau_mag_trend_168h_nm2_per_h",
+    "era5_qnet_trend_168h_wm2_per_h"
+  ],
+  "arms": {
+    "control": {
+      "features": "public_state_features only",
+      "experts": ["deep_prediction", "physical_prediction"]
+    },
+    "challenger": {
+      "features": "public_state_features followed by era5_mixing_features",
+      "experts": ["deep_prediction", "physical_prediction"]
+    },
+    "only_allowed_difference": "the challenger design matrix appends the exact 30 ERA5 mixing features"
+  },
+  "gate_model": {
+    "form": "separate target-layer linear softmax over exactly two frozen experts",
+    "prediction": "(1 - w_physical) * deep_prediction + w_physical * physical_prediction",
+    "weight_constraint": "0 <= w_physical <= 1 and expert weights sum exactly to one",
+    "extrapolation_allowed": false,
+    "initialization": "fold-train nonnegative sum-to-one least-squares prior",
+    "robust_transform": "fold-train median/IQR, clip [-10,10], zero imputation plus missing masks",
+    "objective": "unweighted pooled row-level mean squared error",
+    "regularization": 10.0,
+    "optimizer": "L-BFGS-B with analytic gradient",
+    "max_iterations": 1000,
+    "seed": 20260821,
+    "parameter_grid": [],
+    "parameter_trials": 0,
+    "same_model_seed_iterations_weighting_between_arms": true
+  },
+  "validation": {
+    "outer_blocks": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "purge_hours": 168,
+    "inner_schedule": "For each held outer block, swap-train the other two blocks. Aggregate the two label-blind model specifications to one inner error summary per evaluated source block; no parameter is selected.",
+    "inner_minimum_gate": {
+      "pooled_delta_rmse_strictly_less_than": 0.0,
+      "minimum_improved_blocks": 2,
+      "block_count": 3
+    },
+    "outer_lock": {
+      "outer_truth_locked_until_inner_gate_passes": true,
+      "outer_labels_choose_parameters": false,
+      "blind_seal_required_before_truth_parse": true,
+      "one_canonical_outer_attempt": true
+    },
+    "outer_promotion_gate": {
+      "minimum_pooled_rmse_improvement_c": 0.005,
+      "paired_kst_day_bootstrap_ci": 0.9,
+      "ci_upper_delta_rmse_strictly_less_than": 0.0,
+      "minimum_improved_blocks": 2,
+      "block_count": 3,
+      "maximum_worst_layer_delta_rmse_c": 0.01
+    },
+    "bootstrap": {
+      "unit": "paired KST day",
+      "replicates": 5000,
+      "seed": 20260821
+    }
+  },
+  "dry_run_access_contract": {
+    "era5_value_columns_allowed": true,
+    "oof_parquet_columns_allowed": ["time", "layer", "block"],
+    "oof_container_bytes_allowed_only_for_sha256": true,
+    "truth_or_label_columns_parsed": false,
+    "expert_prediction_columns_parsed": false,
+    "public_observations_read": false,
+    "model_files_read_or_written": false,
+    "test_files_read": false,
+    "submission_files_read_or_written": false,
+    "raw_or_row_values_in_receipt": false
+  },
+  "outputs": {
+    "directory": "artifacts/p2_era5_mixing_gate_v1",
+    "dry_run_receipt": "dry_run.json",
+    "blind_seal": "blind_seal.json",
+    "dry_run_manifest": "manifest.json",
+    "status": "artifacts/status/p2_era5_mixing_gate_v1.json",
+    "collision_policy": "fail_close",
+    "catalog_update": false,
+    "upload": false
+  }
+}

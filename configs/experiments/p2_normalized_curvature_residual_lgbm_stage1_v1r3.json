@@ -1,0 +1,414 @@
+{
+  "schema_version": "p2_normalized_curvature_residual_lgbm_stage1.prereg.v1r3",
+  "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3",
+  "status": "PREREGISTERED_NOT_EXECUTED_SUPERSEDES_V1_AND_V1R2",
+  "problem": "P2",
+  "family": "NCR_LGBM",
+  "supersedes_experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r2",
+  "superseded_execution_forbidden": {
+    "enforced": true,
+    "experiment_ids": [
+      "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1",
+      "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r2"
+    ],
+    "policy": "Only this sealed v1r3 runner can become execution-eligible; v1 and v1r2 must remain unexecuted."
+  },
+  "hypothesis": "A LightGBM trained on dimensionless public-profile curvature, rather than absolute temperature level or calendar trend, can improve transport to the exact 2024 September-October same-season population while preserving the incumbent interpolation baseline.",
+  "selection_policy": {
+    "official_public_score_use": "POST_HOC_DIRECTIONAL_CONTEXT_ONLY",
+    "official_score_used_for_gate_or_tuning": false,
+    "result_based_retuning": false,
+    "candidate_grid_size": 1,
+    "stage1_seed_count": 3,
+    "stage1_model_fit_count": 3,
+    "stage2_is_separately_gated_and_not_implemented_here": true
+  },
+  "data_contract": {
+    "source_environment_variable": "P2_DATA_DIR",
+    "approved_literal_data_directory": "C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore",
+    "approved_literal_observations_path": "C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore\\observations.csv",
+    "allowed_source_files": [
+      "observations.csv"
+    ],
+    "observations_csv": {
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "preclaim_readiness": "After all implementation, lineage, immutable-reference, package, and native pins pass, the parent requires P2_DATA_DIR to resolve to the approved literal parent and verifies exact literal path, parent, filename, byte count, and held-handle SHA-256 before creating any permanent claim, control, or staging path.",
+    "hash_read_binding": "The parent builds an in-memory readiness receipt from held-handle bytes and passes the exact approved literal path only as a sealed internal-worker argument. The worker independently reopens that same literal path, verifies exact parent/name/bytes/SHA, parses only io.BytesIO of captured held-handle bytes, and rehashes captured bytes before every physical fit call.",
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "hidden_label_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  },
+  "implementation_pins": {
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r3.py",
+      "bytes": 63528,
+      "hash_mode": "sha256_config_hash_literal_normalized_v1",
+      "sha256": "9eab027e73a624bcd08de1ed86444b06a0ca14919e9b5ef96f57d60362b50fbd"
+    },
+    "normalized_curvature_module": {
+      "path": "src/p2_restore/normalized_curvature_residual.py",
+      "bytes": 27025,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "c5d88d9bbe90c4b2b03f135d434ed5f030b71732d50549aac17ced88516070a0"
+    },
+    "training_feature_builder": {
+      "path": "src/p2_restore/features.py",
+      "bytes": 6929,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7"
+    },
+    "feature_builder_data_dependency": {
+      "path": "src/p2_restore/data.py",
+      "bytes": 3588,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9"
+    },
+    "package_initializer": {
+      "path": "src/p2_restore/__init__.py",
+      "bytes": 339,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "16e6d31ff2b1f860344efaaefceeee8bf7b1380d44d41424d8a3ab6ec94f4e4f"
+    }
+  },
+  "superseded_lineage_pins": {
+    "v1r2_to_v1r3_supersession_receipt": {
+      "path": "configs/experiments/receipts/p2_normalized_curvature_residual_lgbm_stage1_v1r2_superseded_by_v1r3.json",
+      "bytes": 2961,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "d9a07645d85986556d375c28e68c0967294f9669b180c0fd4ea2d2d8023f6073"
+    },
+    "v1_to_v1r2_supersession_receipt": {
+      "path": "configs/experiments/receipts/p2_normalized_curvature_residual_lgbm_stage1_v1_superseded_by_v1r2.json",
+      "bytes": 2587,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "e865e548accb9b14569572f42e887dfdf99ddb80b59207ff64ee1a2f33b3bd14"
+    },
+    "superseded_v1_config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1.json",
+      "bytes": 10007,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "074ab4b55cb1a0efa8fdeec631d72070b2362352e20cf2d4eb07cc0d139e2206"
+    },
+    "superseded_v1_runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1.py",
+      "bytes": 21508,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "562b63ab6f641003161dc1311398d896ac5c095ae657f4e0676d8a1e779a6c6a"
+    },
+    "superseded_v1_test": {
+      "path": "tests/test_p2_normalized_curvature_residual.py",
+      "bytes": 8867,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "9f838b500747fca3e5bdf25d149c0bb9978a0069a510035f0ecad11777eb216a"
+    },
+    "superseded_v1r2_config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r2.json",
+      "bytes": 15094,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "8880efb45f2ccdaf8864769106c84a0d3911733c25dca05965d4b29020cb88b2"
+    },
+    "superseded_v1r2_runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r2.py",
+      "bytes": 51949,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "752cf59dbe367a7d24d7d02f99b28b541781c99ac1d278ddf6a849f3f72004a3"
+    },
+    "superseded_v1r2_test": {
+      "path": "tests/test_p2_normalized_curvature_residual_stage1_v1r2.py",
+      "bytes": 11509,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "7c56e59d56707691632afd859d4354ce8d558759511307a4d28e8a4b2911b3b0"
+    }
+  },
+  "runtime_pins": {
+    "python": "3.12.10",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "lightgbm": "4.7.0",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "joblib": "1.5.3",
+      "threadpoolctl": "3.6.0"
+    },
+    "lightgbm_native_files": [
+      {
+        "distribution_relative_path": "lightgbm/bin/lib_lightgbm.dll",
+        "bytes": 3888128,
+        "sha256": "7e366d2e49cd061aac3ab21676b2f99b0c7a758dc3e888d4b23812af1b7d301c"
+      },
+      {
+        "distribution_relative_path": "lightgbm/lib/lib_lightgbm.lib",
+        "bytes": 46438,
+        "sha256": "5e7fd850f0b0e2070db9fe7a3e6b1569cdf45ccb1a95d9f9be93889b8ab842b7"
+      }
+    ]
+  },
+  "immutable_references": {
+    "exact_same_season_aggregate": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/result.json",
+      "bytes": 129770,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "227db5f9181953e77f7b97d1c9ca26f529dafad91a9ea018997471ffadd7c20b",
+      "json_pointer": "/panels/exact_frozen_lineage/metrics_by_setting/INCUMBENT_NOOP/by_fold/2024_sep_oct",
+      "population": "2024_sep_oct",
+      "rows": 26273,
+      "incumbent_prediction_id": "INCUMBENT_NOOP",
+      "row_pooled_rmse_c": 0.4477930821525993,
+      "layer_equal_rmse_c": 0.44836647903591037,
+      "by_layer_rmse_c": {
+        "2": 0.16568157693298882,
+        "3": 0.35355859194314126,
+        "4": 0.6712998105893967
+      },
+      "causal_forward_unbiased": false,
+      "role": "Transport diagnostic and exact incumbent comparator; not a causal-refit claim."
+    },
+    "exact_same_season_incumbent_oof": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "block": "2024_sep_oct",
+      "key_columns": [
+        "time",
+        "layer"
+      ],
+      "truth_column": "truth",
+      "prediction_column": "prediction",
+      "hash_read_binding": "Open once, hash all bytes from the held handle, parse only io.BytesIO of those captured bytes while held, and rehash captured bytes before every physical fit call."
+    },
+    "stage2_authoritative_surrogate": {
+      "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+      "bytes": 78560,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc",
+      "population": "fraction_100_locked",
+      "locked_rows": 78156,
+      "incumbent_row_pooled_rmse_c": 0.9900226592930025,
+      "role": "Stage 2 gate only; never used to tune Stage 1."
+    }
+  },
+  "stage1_split": {
+    "timezone": "Asia/Seoul",
+    "validation_start_inclusive": "2024-09-01T00:00:00+09:00",
+    "validation_end_exclusive": "2024-11-01T00:00:00+09:00",
+    "training_rule": "time strictly before validation_start minus embargo",
+    "embargo_days": 7,
+    "expected_validation_rows_after_exact_alignment": 26273,
+    "target_layers": [
+      2,
+      3,
+      4
+    ]
+  },
+  "target_contract": {
+    "linear_baseline": "leakage-safe nearest public-depth interpolation from src/p2_restore/features.py",
+    "normalized_curvature": "z = (target_temperature - linear_baseline) / profile_scale",
+    "profile_scale": "max(abs(temp_layer_1 - temp_layer_5) when both endpoints are finite, otherwise finite public-temperature range, 0.5 C)",
+    "scale_floor_c": 0.5,
+    "decode": "candidate_temperature = linear_baseline + predicted_z * profile_scale"
+  },
+  "feature_contract": {
+    "public_layers": [
+      1,
+      5,
+      6,
+      7,
+      8
+    ],
+    "target_layers": [
+      2,
+      3,
+      4
+    ],
+    "allowed_feature_columns": [
+      "target_layer",
+      "target_depth_fraction",
+      "public_temp_count_fraction",
+      "public_psal_count_fraction",
+      "public_nominal_count_fraction",
+      "endpoint_pair_available",
+      "log1p_profile_scale",
+      "log1p_psal_scale",
+      "log1p_depth_scale",
+      "doy_sin",
+      "doy_cos",
+      "hour_sin",
+      "hour_cos",
+      "m2_sin",
+      "m2_cos",
+      "temp_offset_l1",
+      "temp_present_l1",
+      "psal_anomaly_l1",
+      "psal_present_l1",
+      "depth_offset_l1",
+      "depth_present_l1",
+      "nominal_offset_l1",
+      "nominal_present_l1",
+      "temp_offset_l5",
+      "temp_present_l5",
+      "psal_anomaly_l5",
+      "psal_present_l5",
+      "depth_offset_l5",
+      "depth_present_l5",
+      "nominal_offset_l5",
+      "nominal_present_l5",
+      "temp_offset_l6",
+      "temp_present_l6",
+      "psal_anomaly_l6",
+      "psal_present_l6",
+      "depth_offset_l6",
+      "depth_present_l6",
+      "nominal_offset_l6",
+      "nominal_present_l6",
+      "temp_offset_l7",
+      "temp_present_l7",
+      "psal_anomaly_l7",
+      "psal_present_l7",
+      "depth_offset_l7",
+      "depth_present_l7",
+      "nominal_offset_l7",
+      "nominal_present_l7",
+      "temp_offset_l8",
+      "temp_present_l8",
+      "psal_anomaly_l8",
+      "psal_present_l8",
+      "depth_offset_l8",
+      "depth_present_l8",
+      "nominal_offset_l8",
+      "nominal_present_l8"
+    ],
+    "forbidden_features": [
+      "year",
+      "elapsed_days",
+      "absolute linear baseline",
+      "target-layer temperature",
+      "target-layer salinity",
+      "official test metadata",
+      "official sample submission metadata"
+    ],
+    "salinity_scale_floor": 0.05,
+    "depth_scale_floor_m": 1.0,
+    "exact_equality_gate": "The ordered design.columns tuple must equal allowed_feature_columns for both train and validation before the first physical fit reservation."
+  },
+  "model": {
+    "implementation": "lightgbm.LGBMRegressor",
+    "seeds": [
+      20260823,
+      20260824,
+      20260825
+    ],
+    "ensemble": "arithmetic mean of the three decoded seed predictions",
+    "parameters": {
+      "objective": "regression_l2",
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "n_jobs": 8,
+      "verbosity": -1,
+      "deterministic": true,
+      "force_row_wise": true
+    }
+  },
+  "metrics": {
+    "primary": "row_pooled_rmse_c",
+    "delta_sign": "candidate_minus_incumbent; negative is improvement",
+    "paired_day_bootstrap": {
+      "timezone": "Asia/Seoul",
+      "replicates": 5000,
+      "confidence": 0.9,
+      "seed": 20260826
+    }
+  },
+  "stage1_gate": {
+    "all_conditions_required": true,
+    "candidate_minus_incumbent_row_pooled_rmse_c_max": -0.015,
+    "paired_day_bootstrap_ci90_upper_c_max": -0.005,
+    "candidate_minus_incumbent_each_layer_rmse_c_max": 0.003,
+    "on_fail": "STOP_NCR_LGBM_NO_STAGE2",
+    "on_pass": "ELIGIBLE_FOR_SEPARATELY_PREREGISTERED_STAGE2"
+  },
+  "stage2_gate_contract_not_executed_by_this_runner": {
+    "candidate_minus_incumbent_row_pooled_rmse_c_max": -0.01,
+    "paired_day_bootstrap_ci90_upper_c_strictly_below": 0.0,
+    "minimum_fold_wins": "2/3",
+    "minimum_layer_wins": "2/3",
+    "worst_fold_delta_rmse_c_max": 0.01,
+    "worst_layer_delta_rmse_c_max": 0.005
+  },
+  "controls": {
+    "claim_path": "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3.claim.json",
+    "journal_path": "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3.ndjson",
+    "preclaim_barrier": "All sealed implementation, lineage, immutable-reference, runtime/native pins and approved literal observations readiness must pass in memory before any parent directory, claim, journal, final, or staging mutation.",
+    "claim_creation": "After the preclaim barrier only, os.open with O_CREAT|O_EXCL before any numerical worker launch or physical fit reservation",
+    "journal": "append-only newline-delimited JSON; initial event contains contract hash, bundle hash, PID/start/deadline, and slots 1..3; every reservation is a single O_APPEND write followed by fsync before model.fit",
+    "claim_persists_after_terminal_state": true,
+    "existing_claim_journal_final_or_staging_policy": "FAIL_CLOSED_NO_AUTOMATIC_RERUN"
+  },
+  "execution": {
+    "default_mode": "strict_preflight_only",
+    "numerical_execution_flag": "--execute-stage1",
+    "internal_worker_flag": "--internal-worker",
+    "worker_process": "the same presealed runner file",
+    "worker_restart_count": 0,
+    "maximum_physical_fit_calls_lifetime": 3,
+    "physical_fit_slots": [
+      {
+        "slot": 1,
+        "seed": 20260823
+      },
+      {
+        "slot": 2,
+        "seed": 20260824
+      },
+      {
+        "slot": 3,
+        "seed": 20260825
+      }
+    ],
+    "hard_wall_seconds": 1800,
+    "deadline_policy": "Parent subprocess timeout uses remaining time since permanent claim; worker checks the same absolute deadline before each reservation and again after durable reservation before model.fit.",
+    "automatic_resume_after_crash": false,
+    "command": "$env:P2_DATA_DIR='C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore'; .venv-p1\\Scripts\\python.exe scripts\\run_p2_normalized_curvature_residual_stage1_v1r3.py --execute-stage1",
+    "expected_wall_time": "approximately 5-15 minutes on the sealed local CPU, with a hard 30-minute worker ceiling"
+  },
+  "output": {
+    "directory": "artifacts/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3",
+    "aggregate_only": true,
+    "allowed_final_files": [
+      "result.json",
+      "manifest.json"
+    ],
+    "row_predictions_written": false,
+    "csv_files_written": false,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "append_only": true,
+    "transactional_publish": "flush and fsync each new file in a same-filesystem hidden staging directory, best-effort fsync the directories, then os.replace the complete directory into the final namespace"
+  },
+  "scientific_limitations": [
+    "Optimizing unweighted L2 on z=(temperature-baseline)/profile_scale is equivalent to weighting Celsius squared error by profile_scale^-2; rows with smaller profile scale receive greater effective Celsius-MSE weight.",
+    "v1r3 records this weighting consequence but deliberately does not add sample weights or alter the preregistered model mathematics."
+  ],
+  "known_limitations": [
+    "The parent readiness check and worker reopen are separate operations; v1r3 narrows this TOCTOU window by sealing the literal path and exact bytes in the claim, removing P2_DATA_DIR from the worker environment, independently rehashing through the worker-held handle, and rechecking captured bytes before every fit.",
+    "Filesystem hashing and Python import cannot be one operating-system-atomic transaction; the sealed bundle is checked before import, after import, before every fit reservation, after every fit, and before publish.",
+    "A hard crash can leave the permanent claim, an incomplete durable journal, or hidden staging; all such states are intentionally reported and fail closed with no automatic rerun.",
+    "Directory fsync is best effort on Windows; every claim, journal append, result, and manifest file itself is flushed with os.fsync, and final publication uses same-filesystem directory rename.",
+    "The 1800-second hard wall covers worker preprocessing, all physical fits, predictions, and local metric construction; parent-side terminal journal append and atomic final publication can occur after a successfully returned worker but cannot start another fit.",
+    "The repository may be dirty because pre-existing user work is preserved; Git HEAD and dirty state are recorded, while every experiment-relevant implementation and lineage file is independently hash-pinned."
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.independent_preexecution_qa.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+  "qa_scope": "independent zero-fit preexecution audit",
+  "audited_at_kst": "2026-08-26T07:54:18.3381860+09:00",
+  "verdict": "NO_GO",
+  "execution_authorized": false,
+  "severity_counts": {
+    "P0": 2,
+    "P1": 4,
+    "P2": 1
+  },
+  "safety_attestation": {
+    "official_test_sample_submission_candidate_paths_accessed": false,
+    "official_actions_or_uploads": 0,
+    "physical_fit_calls": 0,
+    "numerical_materializations": 0,
+    "actual_p100_anchor_open_stat_hash_or_parse": 0,
+    "synthetic_fault_probes_used_temporary_directories_only": true,
+    "actual_experiment_namespace_mutated": false,
+    "actual_namespace_clean_after_qa": true
+  },
+  "audited_bundle": {
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json": {
+      "bytes": 20025,
+      "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6"
+    },
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json": {
+      "bytes": 4373,
+      "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9"
+    },
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_execution.json": {
+      "bytes": 2771,
+      "sha256": "1ecb3bc700a0e831209f76fdaa335b7bc04f5df3b5af87712ccb3e7b50b9020f"
+    },
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_execution_authorization.json": {
+      "bytes": 2734,
+      "sha256": "fc5474ce6a0d42463deeab8995cb1105626ace99ce323dd9acd93c8f79fc4701"
+    },
+    "src/p2_restore/public_trajectory_dtw_v2.py": {
+      "bytes": 67970,
+      "sha256": "3c9d057b523553eaa367644d38b444df73ce26be989040eb914032d4ca903cc6"
+    },
+    "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py": {
+      "bytes": 57517,
+      "sha256": "ddb03c44d0ccf57370f6f63596a1b017439dffd97dbad64cac10abf5d74a7d72"
+    },
+    "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2.py": {
+      "bytes": 29075,
+      "sha256": "2f8723020ab69ccf3eb750a3dd76b9d5ee45b9801f887063c9a83f956402cef4"
+    },
+    "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2_preexecution/preexecution_seal.json": {
+      "bytes": 6655,
+      "sha256": "088b4dc4a6208d6e14df1dfc35be1a83e0d73d563a071e0f7ac5627655adef87"
+    }
+  },
+  "findings": [
+    {
+      "id": "P0-01",
+      "severity": "P0",
+      "title": "Locked-p100 fold and station metadata are positionally rebound after a different key sort",
+      "evidence": {
+        "source": "src/p2_restore/public_trajectory_dtw_v2.py:1220,1238,1239",
+        "mechanism": "align_on_utc_ns sorts merged keys by layer then UTC-ns, while verified is sorted by time then layer; merged fold/station arrays are assigned to verified by position rather than key.",
+        "synthetic_rows": 78156,
+        "synthetic_fold_key_mismatches": 52104,
+        "synthetic_mismatch_fraction": 0.6666666666666666
+      },
+      "impact": "The three locked folds can contain the wrong time-layer keys, source windows and slice partitions, invalidating p100 metrics and every p100 decision gate.",
+      "required_fix": "Construct the verified p100 frame directly from a one-to-one key merge, or join fold/station through an indexed (UTC-ns, layer) mapping; assert zero key-to-fold/station mismatches after arbitrary input permutation and add a 78,156-row adversarial regression test."
+    },
+    {
+      "id": "P0-02",
+      "severity": "P0",
+      "title": "Windows success publication deterministically fails on read-only descriptor fsync",
+      "evidence": {
+        "source": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py:946,957",
+        "platform": "Windows, sealed Python 3.12.10",
+        "synthetic_success_path_error": "OSError [Errno 9] Bad file descriptor",
+        "failure_point": "first result.json hardlink verification",
+        "observed_final_files_after_fault": [
+          "result.json"
+        ],
+        "terminal_success_exists": false
+      },
+      "impact": "After consuming the single attempt and all numerical work, publication cannot reach a terminal success on the supported host.",
+      "required_fix": "Use a Windows-supported durable file-handle strategy (or rely on the already-fsynced same inode and durably flush only link metadata), then exercise the real non-mocked Windows success publication path through terminal commit."
+    },
+    {
+      "id": "P1-01",
+      "severity": "P1",
+      "title": "External authorization accepts an unverified or nonexistent independent-QA receipt",
+      "evidence": {
+        "source": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py:304,330",
+        "probe": "An in-memory AUTHORIZED_AFTER_INDEPENDENT_QA object with report_path reports/definitely_absent_qa.json and report_sha256 deadbeef was accepted.",
+        "report_existed": false,
+        "authorization_bundle_contains_qa_report": false
+      },
+      "impact": "The claimed independent trust boundary is only a nonempty string assertion, not a pinned and parsed proof.",
+      "required_fix": "Require an exact QA-receipt schema; verify safe report path, bytes and SHA-256; parse PASS/GO plus experiment/design/seal/bundle lineage; include the receipt pin in the external authorization bundle."
+    },
+    {
+      "id": "P1-02",
+      "severity": "P1",
+      "title": "The preexecution seal is not transitively complete",
+      "evidence": {
+        "source": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py:250-273 and worker import at 1059-1062",
+        "unsealed_executable_imports": [
+          "src/p2_restore/__init__.py",
+          "src/p2_restore/data.py",
+          "src/p2_restore/features.py"
+        ],
+        "unverified_trigger_dependencies": [
+          "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+          "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r7.json",
+          "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.claim.json",
+          "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.ndjson"
+        ],
+        "current_referenced_dependency_pins_match": true
+      },
+      "impact": "Authorized execution imports mutable project code outside the seal, and the frozen trigger evidence is asserted but not reverified by the runner.",
+      "required_fix": "Either import the sealed numerical file without executing package __init__, or pin and verify every transitive project module. Add base-v1 and predecessor evidence pins plus semantic terminal checks to the seal and runtime preflight."
+    },
+    {
+      "id": "P1-03",
+      "severity": "P1",
+      "title": "Pre-exact readiness resolves the p100 path before the exact gate while reporting zero filesystem accesses",
+      "evidence": {
+        "source": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py:121,122,356,368,374",
+        "call_chain": "_source_readiness -> _source_pins -> _safe_project_path(P100_ANCHOR_PATH) -> Path.resolve(strict=False)"
+      },
+      "impact": "The implementation cannot substantiate its strict deferred-access counter on Windows, where real-path resolution may query filesystem metadata.",
+      "required_fix": "Do not resolve or validate the p100 path before durable exact GO; carry only literal sealed pin metadata and perform safe resolution inside the one-shot lazy loader. Add a Path.resolve/stat/open/hash spy test."
+    },
+    {
+      "id": "P1-04",
+      "severity": "P1",
+      "title": "Fallible durability and verification I/O remains after the terminal-success link",
+      "evidence": {
+        "source": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py:1017-1025",
+        "fault_probe": "A directory-fsync fault immediately after terminal link left terminal_success.json present, no OOB failure, logical_state SUCCESS, but propagated OSError/nonzero execution."
+      },
+      "impact": "Process outcome and artifact outcome diverge, while terminal-link durability is not proven; downstream single-attempt interpretation can be ambiguous.",
+      "required_fix": "Define one recoverable commit boundary, complete all possible verification before it, and make post-commit handling non-failing and explicitly recoverable. Add exact post-terminal fsync/hash/terminal-state fault tests."
+    },
+    {
+      "id": "P2-01",
+      "severity": "P2",
+      "title": "The design uses query_start for both prediction-day boundary and trajectory-start concepts",
+      "evidence": {
+        "code_and_seal_behavior": "source_end <= beginning-of-trajectory minus seven full days",
+        "design_query_unit_wording": "query_start is D 00:00 KST, while the trajectory is [query_start-context_days, query_start)"
+      },
+      "impact": "The code is fail-safer and matches the seal's trajectory-start wording, but the preregistration text is needlessly ambiguous.",
+      "required_fix": "Rename prediction_day_start and trajectory_start explicitly without changing the frozen numeric rule."
+    }
+  ],
+  "verified_passes": {
+    "v1_v2_numeric_contract": {
+      "six_cells_equal": true,
+      "research_go_gates_equal": true,
+      "submission_go_numeric_thresholds_equal": true,
+      "preferred_and_stretch_effects_equal": true,
+      "corridor_hours": 12,
+      "path_slope_range": [
+        0.5,
+        2.0
+      ]
+    },
+    "utc_datetime64_ns_roundtrip": true,
+    "seven_full_day_embargo_against_trajectory_start": true,
+    "candidate_and_selected_source_guard_present": true,
+    "exact_truth_and_candidate_key_verification_before_score": true,
+    "weak_support_and_missing_endpoint_exact_noop": true,
+    "fixed_materialization_graph": "18 inner + 1 exact + conditional 3 p100 = 22",
+    "physical_fit_ceiling": 0,
+    "p100_open_hash_parse_deferred_until_durable_exact_go": true,
+    "required_p100_slice_gate_derived_not_literal": true,
+    "default_authorization_state": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+    "official_path_literals_or_actions_in_runtime": false
+  },
+  "verification_commands": [
+    {
+      "command": ".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p2_public_trajectory_dtw_curvature_transfer_v2.py -q -p no:cacheprovider",
+      "result": "40 passed"
+    },
+    {
+      "command": ".\\.venv-p1\\Scripts\\python.exe -m ruff check src/p2_restore/public_trajectory_dtw_v2.py scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py tests/test_p2_public_trajectory_dtw_curvature_transfer_v2.py",
+      "result": "All checks passed"
+    },
+    {
+      "command": ".\\.venv-p1\\Scripts\\python.exe scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py",
+      "result": "read-only preflight; NOT_AUTHORIZED_PENDING_INDEPENDENT_QA; namespace clean; all operation counters zero; p100 content/stat/hash/parse counter zero"
+    },
+    {
+      "command": "synthetic 78,156-row key-order permutation probe",
+      "result": "52,104 key-to-fold mismatches"
+    },
+    {
+      "command": "temporary-directory real Windows hardlink publication probe",
+      "result": "OSError [Errno 9] Bad file descriptor at first published file"
+    },
+    {
+      "command": "in-memory nonexistent-QA authorization injection",
+      "result": "incorrectly accepted"
+    },
+    {
+      "command": "temporary-directory post-terminal directory-fsync fault injection",
+      "result": "success marker/logical success persisted while OSError propagated"
+    }
+  ],
+  "actual_namespace": {
+    "claim_exists": false,
+    "journal_exists": false,
+    "oob_terminal_exists": false,
+    "final_exists": false,
+    "staging_matches": 0
+  },
+  "execution_instruction": "DO_NOT_EXECUTE. Repair, regenerate all affected hashes and the seal, create a truly pinned independent-QA authorization template, and request a new independent zero-fit QA."
+}

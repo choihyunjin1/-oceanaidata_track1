@@ -1,0 +1,109 @@
+{
+  "schema_version": "p1_round_b_nonspike_long_event_residual.execution_authorization.v1r3",
+  "status": "AUTHORIZED_FOR_ONE_LOCAL_OUTER_SCREEN",
+  "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r3",
+  "authorized_at_kst": "2026-08-26T05:37:19.3987972+09:00",
+  "authorization_mechanism": "The raw SHA-256 of this file must be supplied through P1_V1R3_EXECUTION_AUTHORIZATION_SHA256 and must equal the literal embedded in the sealed runner before any config or numerical import.",
+  "config_sha256": "3660cf3f89c5225225c7fdf6cb2f72270cab31c6f6e6d5f03daa994fdb75f03a",
+  "runner_normalized_sha256": "46e2335ef831d6c713786d43205a7e3987b25d58507e964c15333c69410e6624",
+  "dependency_sha256": {
+    "scripts/run_p1_round_b_nonspike_long_event_residual_v1.py": "867e1f9c4d42564be8419f4612bdf595fc11005f460989b45b0c088f00ca6b45",
+    "src/p1_qc/__init__.py": "5a7743ab77b2f9bd6851f12ebe694313c4fb361611821ed68dfd3b7574a82088",
+    "src/p1_qc/audit.py": "fe339592bdacf6d8dbbb3f87dbfdbb11976767cb52f30a116046da4d1cbf1e62",
+    "src/p1_qc/augment.py": "290a9b17d5c32940c745f70ea5f5ffe803180e401005a1febfc17e575d3a884a",
+    "src/p1_qc/config.py": "adf2e04123b95e51bcc7989e2c80b9faee776cb32fe63179b984a48cba2651f1",
+    "src/p1_qc/data.py": "5dc1dac588faa2f50323d15ab2d83231eb06c3a709845d539ba7efbb99addd69",
+    "src/p1_qc/experiment.py": "a331d15447abe1601dc98f351e5a47c23c8d2f50cc3145c48d07dd6814b75ab1",
+    "src/p1_qc/features.py": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+    "src/p1_qc/metrics.py": "8ef58064c09b4d9710b1485151321d90ee0433b45f125dd52da9b3808464abbc",
+    "src/p1_qc/models_tabular.py": "07b068a21c9101f9a4de53ee5f458d89ee9101468a148d8cde6f0afc50599311",
+    "src/p1_qc/nonspike_long_event_residual.py": "32a2c993001813c42fee73235862b185e62cdbaa01bcca7bd6293e4be8a089b2",
+    "src/p1_qc/pipeline.py": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669",
+    "src/p1_qc/postprocess.py": "2066d8a45c71cdd1b77365a2334c16efb075c7e6d8feb7808d76aaef22cb5bf5",
+    "src/p1_qc/rules.py": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c",
+    "src/p1_qc/splits.py": "86e0f3990c73a0dbfa0810dce403001dbae726b8806df0e4f9483d3a05d7eb9d",
+    "src/p1_qc/submission.py": "3d36d58c839536823c080d9ac7d377af73dae0ea00f3bf0d098f6d2fd125bb10",
+    "src/p1_qc/validation.py": "7794d8c2c69fd35f93272088fecf9b80be553581351c0dbf6c5211b11df8ada6"
+  },
+  "verification_sha256": {
+    "tests/test_run_p1_round_b_nonspike_long_event_residual_v1r3.py": "c352891ba414ba0f3f807949ca3b6c82235c055cc64c705a71ab7b0e9d2db204"
+  },
+  "provenance_sha256": {
+    "scripts/build_p1_v1r3_feature_key_binding.py": "bf6f69ebfddd07b80d211bfd454c13b840d7721f49cea6339406288216e84de8"
+  },
+  "preexecution_evidence_sha256": {
+    "feature_cache_key_binding": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100",
+    "feature_cache_key_binding_receipt": "0228b354b2b1512ff4fff498ba7bdece2bf80ea9fbfd135bfbe8575965c457d8"
+  },
+  "runtime_versions": {
+    "python": "3.12.10",
+    "joblib": "1.5.3",
+    "lightgbm": "4.7.0",
+    "narwhals": "2.24.0",
+    "numpy": "2.3.5",
+    "p1-qc": "0.1.0",
+    "pandas": "3.0.1",
+    "psutil": "7.2.2",
+    "pyarrow": "25.0.1",
+    "python-dateutil": "2.9.0.post0",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0",
+    "six": "1.17.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "lightgbm_native": {
+    "distribution_relative_path": "lightgbm/bin/lib_lightgbm.dll",
+    "bytes": 3888128,
+    "sha256": "7e366d2e49cd061aac3ab21676b2f99b0c7a758dc3e888d4b23812af1b7d301c"
+  },
+  "supersedes": {
+    "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r2",
+    "reason": "Independent QA NO_GO: add parent-worker timeout enforcement, pre-claim complete readiness, immutable byte snapshots, exact feature row-key binding, complete runtime pins, external authorization, and true create-only publication without changing the numerical experiment.",
+    "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r2.json",
+    "config_sha256": "7447ab2053b0d46d4257f27fa05ca487a8d6d50518e1c040d7a4f0f68b76603d",
+    "runner_path": "scripts/run_p1_round_b_nonspike_long_event_residual_v1r2.py",
+    "runner_sha256": "f7588825a0895415afa9c4c64649464851418228fd3bad2bc7081550245b7252",
+    "test_path": "tests/test_run_p1_round_b_nonspike_long_event_residual_v1r2.py",
+    "test_sha256": "648b8bf2d966c1353f21575f70df43ccabece826511549081230d14774a880ec",
+    "seal_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r2/preexecution_seal.json",
+    "seal_sha256": "0db1018821d1de4016b7871c70e8294d9ed9125b675314d875b3a730d00f284e"
+  },
+  "lineage_evidence": {
+    "v1": {
+      "config_sha256": "dbdb9b7e433180b075c1c61481693e200486f98901f776225efc35dc3667a31e",
+      "runner_sha256": "867e1f9c4d42564be8419f4612bdf595fc11005f460989b45b0c088f00ca6b45",
+      "test_sha256": "88f5a9512202e8a38d59945a7d75e7af4c54326cd19e0aadbfb5cf1e4ba19d75",
+      "seal_sha256": "c213c8737e9def4c049715a00ea6ab420c3afeb152d81c7365b5b4a004aee377"
+    },
+    "v1r2": {
+      "config_sha256": "7447ab2053b0d46d4257f27fa05ca487a8d6d50518e1c040d7a4f0f68b76603d",
+      "runner_sha256": "f7588825a0895415afa9c4c64649464851418228fd3bad2bc7081550245b7252",
+      "test_sha256": "648b8bf2d966c1353f21575f70df43ccabece826511549081230d14774a880ec",
+      "seal_sha256": "0db1018821d1de4016b7871c70e8294d9ed9125b675314d875b3a730d00f284e"
+    },
+    "independent_qa_observations": [
+      "v1r2 runner lacked a same-runner supervised 1800-second worker boundary.",
+      "v1r2 could create a permanent zero-fit attempt before all runtime and input readiness checks completed.",
+      "v1r2 did not bind parsed source, OOF, and feature-cache bytes through held handles or a private verified snapshot.",
+      "v1r2 did not pin pyarrow, joblib, the imported transitive runtime file aggregate, or the loaded native LightGBM binary.",
+      "v1r2 used an overwrite-capable publication primitive and did not prove exact source-key to feature-cache positional binding."
+    ]
+  },
+  "authorized_operation_ceiling": {
+    "local_outer_screens": 1,
+    "physical_model_fits": 9,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0
+  },
+  "execution_state_at_authorization": {
+    "local_outer_screens": 0,
+    "physical_model_fits": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "uploads": 0
+  }
+}

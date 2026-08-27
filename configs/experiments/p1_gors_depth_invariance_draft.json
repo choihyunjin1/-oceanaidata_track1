@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0-draft",
+  "experiment_id": "P1_gors_depth_invariance_v1",
+  "family_id": "gors_deployment_depth_invariance",
+  "created_at_kst": "2026-08-13T21:15:00+09:00",
+  "status": "implementation_only_not_outer_evaluated",
+  "input_contract": {
+    "config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387"
+  },
+  "hypothesis": {
+    "single_sentence": "Training and evaluating G-ORS with the same deterministic unknown-depth representation will reduce the documented 2026 deployment shift without changing the frozen XGBoost decision system.",
+    "source_fact": "The distributed README states that G-ORS is single-layer and its 2026 depth is entirely missing.",
+    "diagnostic_only_motivation": {
+      "frozen_validation_only_mask_group_f1_delta": -0.05700166350510916,
+      "frozen_validation_only_mask_test_share_weighted_f1_delta": -0.008917524282360256,
+      "warning": "These exposed outer-label diagnostics motivate the invariant transform but must not determine any parameter or imply independent validation."
+    },
+    "exactly_one_change": {
+      "kind": "deterministic_feature_transform_before_encoder_fit",
+      "name": "gors_fold_symmetric_depth_mask",
+      "station": "G-ORS",
+      "depth_numeric_columns": [
+        "depth_raw",
+        "nominal_depth_m",
+        "depth_diff_1",
+        "depth_abs_diff_1"
+      ],
+      "depth_numeric_value": "NaN",
+      "depth_missing": 1,
+      "depth_regime_template": "{station}|unknown|l{layer}",
+      "apply_to": [
+        "fold_train",
+        "fold_validation",
+        "full_train",
+        "test"
+      ],
+      "mask_inputs": [
+        "station",
+        "layer"
+      ],
+      "uses_labels": false,
+      "category_map_fit": "fold_train_only",
+      "categorical_encoding_policy": "preserve original fold-train codes for shared categories; candidate-only fallback=max(original)+1; validation-only=-1",
+      "arm_encoding_consequence": "A G-ORS fallback is -1 when unseen in natural-depth fold-train; B G-ORS fallback is known because symmetric mask exposes it in fold-train"
+    },
+    "forbidden_changes": [
+      "non_gors_rows",
+      "sors_layer5",
+      "feature_columns",
+      "xgboost_parameters",
+      "iteration_counts",
+      "postprocess",
+      "thresholds",
+      "positive_rate_targeting",
+      "augmentation",
+      "ensemble",
+      "external_observations"
+    ]
+  },
+  "baseline": {
+    "run_id": "20260813T153038+0900_cv_378a4e89",
+    "backend": "xgboost",
+    "feature_mode": "offline",
+    "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "micro_f1": 0.8603708380408055,
+    "test_share_weighted_f1": 0.8133155525620019,
+    "fold_iteration_counts": [
+      700,
+      700,
+      700
+    ],
+    "reference_artifacts": {
+      "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+      "metrics_sha256": "de7d92153df58b10177ac6c79a0733164c9c4630fa2c317495ddd8a1eb487e36",
+      "selection_sha256": "ebc2dcdd57f5a610151d84a3e37f9bb4295030f0dcb40314972be4c419e01de8",
+      "deployment_stress_sha256": "ea2a3e797dc9edbd2716b517f3ff35611abfbc4bd7e1b29eddcfb8ca2971bc8e"
+    },
+    "fold_postprocess": {
+      "2025_q2": {
+        "close_gap_rows": 0,
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "minimum_positive_run": 12
+      },
+      "2025_q3": {
+        "close_gap_rows": 0,
+        "high_threshold": 0.2,
+        "low_threshold": 0.1,
+        "minimum_positive_run": 12
+      },
+      "2025_q4": {
+        "close_gap_rows": 6,
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "minimum_positive_run": 6
+      }
+    },
+    "reuse_exact_fold_postprocess": true,
+    "inner_reselection": false
+  },
+  "comparison": {
+    "primary_comparator": {
+      "id": "A_deployment_matched_frozen_baseline",
+      "training": "original natural-depth fold-train",
+      "validation": "mask G-ORS depth inputs only",
+      "model": "frozen XGBoost refit with same fold, seed, parameters, and 700 trees",
+      "postprocess": "exact frozen per-fold values",
+      "expected_test_share_weighted_f1": 0.8043980282796417,
+      "expected_gors_f1": 0.7633410672853829
+    },
+    "candidate": {
+      "id": "B_gors_fold_symmetric_depth_mask",
+      "training": "mask G-ORS depth inputs in fold-train",
+      "validation": "mask G-ORS depth inputs in fold-validation",
+      "model": "refit XGBoost with same fold, seed, parameters, and 700 trees",
+      "postprocess": "exact frozen per-fold values"
+    },
+    "secondary_context": "original frozen natural-depth OOF; never substitutes for comparator A",
+    "additional_hyperparameters": [],
+    "adaptive_search_allowed": false,
+    "inner_reselection_allowed": false,
+    "inner_or_outer_labels_for_transform": false,
+    "outer_label_values_accessed_for_metrics_only_after_both_predictions": true,
+    "frozen_event_protected_fold_membership_acknowledged": true,
+    "non_g_encoded_inputs_bitwise_equal_before_fit": true,
+    "candidate_refits": "same frozen folds, seeds, XGBoost parameters, exactly 700 trees, and exact per-fold postprocess",
+    "outer_execution_authorized": false
+  },
+  "one_shot_evaluation_after_separate_authorization": {
+    "outer_label_values_accessed_for_metrics_only_after_both_predictions": true,
+    "frozen_event_protected_fold_membership_acknowledged": true,
+    "outer_is_independent_holdout": false,
+    "primary_promotion_gates": {
+      "primary_delta": "B_minus_A",
+      "test_share_weighted_f1_delta_min": 0.005,
+      "paired_bootstrap_90pct_lower_bound_gt": 0.0,
+      "gors_group_f1_delta_min": 0.02,
+      "non_g_test_share_weighted_f1_delta_min": -0.001,
+      "non_g_station_layer_f1_drop_max": 0.01,
+      "folds_non_degrading_min": 2,
+      "normal_fp_day_relative_increase_lt": 0.1
+    },
+    "secondary_incumbent_safety_gate": {
+      "comparator": "original frozen natural-depth OOF",
+      "test_share_weighted_f1_delta_min": -0.001,
+      "role": "veto-only incumbent safety gate; cannot replace or rescue a failed B-minus-A primary gate"
+    },
+    "known_support_caveat": {
+      "2025_q4_gors_positive_rows": 0,
+      "interpretation": "Q4 G-ORS F1 is undefined/non-informative; it cannot count as evidence for the G-group uplift gate."
+    },
+    "deployment_diagnostic": "Compare the candidate's G-ORS result with both the frozen natural-depth arm and the already-recorded frozen validation-only-mask stress; this diagnostic cannot override a failed primary gate.",
+    "stop_rule": "Close this family after the single outer comparison; do not tune station, layer, columns, missing code, thresholds, or model settings from the result."
+  },
+  "authorization": {
+    "outer_cv": false,
+    "competition_upload": false,
+    "commit": false,
+    "push": false,
+    "external_observations": false
+  }
+}

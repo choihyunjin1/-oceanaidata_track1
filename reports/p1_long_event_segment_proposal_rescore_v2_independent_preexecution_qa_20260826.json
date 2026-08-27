@@ -1,0 +1,221 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.independent_preexecution_qa.v4",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "audited_at_kst": "2026-08-26T09:12:00+09:00",
+  "verdict": "NO_GO",
+  "verdict_detail": "NO_GO_P0_NONEXECUTABLE_AUTHORITY_AND_PREFLIGHT_TRANSITION",
+  "design_sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+  "contract_sha256": "f64704a47751756cd88d9802eb6cf6ec160290af1f3112051ced91fa72b0febc",
+  "seal_sha256": "c00fc68ff68e5d3883bf892d05312c6962567b4b340f288c57e9dc2aab6dde68",
+  "preexecution_seal_sha256": "c00fc68ff68e5d3883bf892d05312c6962567b4b340f288c57e9dc2aab6dde68",
+  "severity_counts": {
+    "P0": 2,
+    "P1": 3,
+    "P2": 1
+  },
+  "authorization_decision": {
+    "independent_qa_pass": false,
+    "actual_authorization_may_be_created": false,
+    "numerical_execution_may_start": false,
+    "fits_may_start": false,
+    "scientific_materializations_may_start": false,
+    "required_successor": "immutable superseding r5-or-later runner, seal, preflight proof, tests, and fresh independent QA"
+  },
+  "scope": {
+    "audited": [
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v3_execution_closure_amendment.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_execution_contract.json",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v2_execution_authorization_template.json",
+      "src/p1_qc/long_event_segment_proposal_rescore.py",
+      "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+      "scripts/run_p1_long_event_segment_proposal_rescore_v2.py",
+      "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2/preexecution_seal_r4.json"
+    ],
+    "prohibited_and_not_performed": [
+      "numerical screen execution",
+      "physical model fit",
+      "scientific materialization",
+      "outer score",
+      "official test/sample/submission/candidate path access",
+      "candidate creation",
+      "P3 access or mutation"
+    ]
+  },
+  "findings": [
+    {
+      "id": "P0-01",
+      "severity": "P0",
+      "title": "Embedded authorization digest and raw-runner seal form a non-executable circular authority chain",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py:105 leaves AUTHORIZATION_SHA256 as a non-hex placeholder, and lines 1373-1380 reject execution until that literal is replaced by the actual authorization digest.",
+        "Replacing the single literal necessarily changes the raw runner bytes. The current raw runner is e210aac5de924e94de30a602158d074501a22de3d1301121d5eb74ad93c6a9b3, exactly the value pinned by r4 seal.",
+        "A read-only in-memory replacement with 64 lowercase hex characters produced a different raw runner digest (db9c7fc2c36b8b675ddea6ad00f71ce6b1e406b1f89b1347fd96e53672eec406).",
+        "Runner lines 1468-1482 require seal.runner_sha256 to equal the current raw runner digest, so the authorized runner cannot pass r4 seal verification.",
+        "The template additionally requires a new runner and seal after any sealed byte change while authorization itself pins the raw seal; embedding the authorization digest back into the runner closes an unsatisfiable runner -> seal -> authorization -> runner cycle."
+      ],
+      "impact": "No future PASS QA or correctly formed authorization file can make the sealed r4 package reach the numerical worker. This is a terminal executability defect, not merely the deliberate current not-authorized state.",
+      "required_fix": [
+        "Keep the successor runner byte-immutable and remove the actual authorization digest literal as a code dependency.",
+        "Take the expected authorization digest only from an external capability such as P1_LONG_EVENT_SEGMENT_V2_AUTHORIZATION_SHA256, validate its 64-hex form, and held-read the authorization file against it.",
+        "Use the immutable raw or normalized runner digest as the seal trust root, then build the acyclic lineage runner -> seal -> independent QA -> authorization.",
+        "Create a new successor seal and rerun independent zero-fit QA; do not mutate or authorize r4."
+      ]
+    },
+    {
+      "id": "P0-02",
+      "severity": "P0",
+      "title": "The sealed read-only preflight digest is guaranteed to change when authorization becomes real",
+      "evidence": [
+        "Runner lines 942-945 include actual_authorization_exists, AUTHORIZATION_SHA256, and execute_authorized in the preflight object; lines 963-964 include that object in verification_sha256.",
+        "The sealed r4 verification digest 92178d551730af7f9910ef7d7a76f63ecef972ac06b83089411386d6597d5f6b was generated with (false, placeholder, false).",
+        "Any actual authorization necessarily changes those fields to (true, 64-hex digest, true).",
+        "execute_parent lines 2177-2183 require the post-authorization preflight verification digest to equal the pre-authorization digest pinned by r4 seal."
+      ],
+      "impact": "Even if P0-01 were patched in isolation, authorized execution would still fail before claim because the readiness digest transition is mathematically unavoidable.",
+      "required_fix": [
+        "Exclude mutable authorization state from the immutable scientific/readiness verification payload.",
+        "Report authorization state in a separate authenticated receipt or normalize it to a stable sentinel in the sealed digest.",
+        "Add a zero-fit transition test that constructs a synthetic valid authorization and proves the sealed readiness digest remains identical before claim."
+      ]
+    },
+    {
+      "id": "P1-01",
+      "severity": "P1",
+      "title": "Authorization authenticates held seal A, but parent and worker reopen an unbound seal B",
+      "evidence": [
+        "Runner lines 1406-1419 held-read the authorization-pinned seal and return its value and digest receipt.",
+        "execute_parent lines 2172-2175 and worker lines 2013-2016 subsequently call _verify_seal, which reopens SEAL_PATH at lines 1468-1485 without an expected digest tied to held seal A.",
+        "The second seal supplies its own project_file_sha256 and other expectations, so a path swap can separate authorization/QA lineage from the seal used for execution checks."
+      ],
+      "impact": "A cross-seal path race can break the promised single transitive authority lineage before claim.",
+      "required_fix": [
+        "Pass the held seal value and read receipt from preimport authorization through parent and worker without reopening the path, or require _verify_seal(expected_sha256=held_A_digest).",
+        "Add an adversarial A-to-B swap test that must fail before snapshot or claim."
+      ]
+    },
+    {
+      "id": "P1-02",
+      "severity": "P1",
+      "title": "Worker snapshot inventory is self-declared and can execute an unpinned legacy runner",
+      "evidence": [
+        "Runner lines 1597-1626 accept any nonempty manifest files map and verify each entry only against the digest declared by that same manifest; exact required path membership and runner-owned digests are not compared.",
+        "Worker state loading at lines 1982-1990 hard-pins only the legacy config before importing the snapshot legacy runner. The legacy runner itself is executed without a hardcoded digest check at that load boundary.",
+        "The execution module receives a hardcoded check later, but arbitrary legacy import code can already run before that check. A crafted hidden-worker manifest can therefore satisfy the self-declared inventory while substituting the executable legacy runner."
+      ],
+      "impact": "A purportedly authorized fixed screen is not cryptographically bound to the exact executable snapshot before claim; unregistered code could run in the worker process.",
+      "required_fix": [
+        "Require exact equality between manifest inventory paths and a runner-owned expected inventory with runner-owned digests.",
+        "Load executable modules from held verified bytes, or at minimum verify path identity and digest immediately before and after module execution.",
+        "Add a direct hidden-worker adversarial test with a valid-shaped manifest and altered legacy runner that must fail before import and claim."
+      ]
+    },
+    {
+      "id": "P1-03",
+      "severity": "P1",
+      "title": "Outer truth-derived interval audit runs before all outer predictions are frozen and journaled",
+      "evidence": [
+        "Execution module _fit_outer calls _accepted_interval_audit for each fold at lines 1194-1199 before record_outer_freeze at line 1235.",
+        "_accepted_interval_audit lines 1072-1078 calls segment_training_targets with outer surface truth and anomaly_type.",
+        "The closure requires every outer seed prediction to be frozen and digest-journaled before any score or target-derived outer audit, and states that outer labels are evaluation-only."
+      ],
+      "impact": "The candidate is not changed by this audit, but outer evaluation truth is consumed before the mandatory all-fold freeze boundary, violating the one-shot label firewall and making the claimed chronology false.",
+      "required_fix": [
+        "Before freeze, retain only target-free accepted interval geometry and prediction digests.",
+        "Move disconnected targets, disconnected precision, and every other truth-derived interval audit into _score_outer after record_outer_freeze.",
+        "Add a sentinel test that raises on any outer truth/anomaly_type access before the freeze journal event."
+      ]
+    },
+    {
+      "id": "P2-01",
+      "severity": "P2",
+      "title": "Durable success can be misreported as failure if the worker exits after lock unlink but before stdout receipt",
+      "evidence": [
+        "_final_success_commit lines 1939-1961 durably verifies and unlinks execution.lock, then _worker_execute returns and main prints worker_ok later.",
+        "Parent lines 2199-2205 require a stdout receipt before read-only verification.",
+        "The parent failure path at lines 2209-2232 records a failure only if the lock remains; with the lock absent it rethrows without recognizing the already complete 0999 terminal and manifest."
+      ],
+      "impact": "A narrow postcommit process failure leaves a valid durable success namespace but reports execution failure, with no safe automatic rerun allowed.",
+      "required_fix": [
+        "When supervision fails and the lock is absent, perform a read-only completed-terminal/manifest/result verification and publish or return a deterministic recovered-success receipt.",
+        "Add a synthetic Windows test that terminates immediately after unlink and before stdout, and prove exactly-once success recovery without writes."
+      ]
+    }
+  ],
+  "verified_closures_and_positive_evidence": {
+    "prior_v1_findings": {
+      "worker_stub": "CLOSED: run_authorized_screen contains actual anchor, inner, outer, freeze, scoring, and gate orchestration.",
+      "fit_and_materialization_graph": "CLOSED: exact 9 inner anchor + 54 inner segment + 9 outer segment = 72 physical fits and 3 + 9 + 9 = 21 materializations are both implemented and journal-enforced.",
+      "inner_anchor_oos_definition": "CLOSED: exact fit cutoffs 2024-05-24, 2024-08-24, and 2024-11-23, seven-day purges, and June/September/December central shelves are enforced.",
+      "full_support_anchor_surface": "CLOSED versus r3: each of the three Round-B seeds predicts every full support_positions row plus validation; the three-seed mean is finite in [0,1], uniformly postprocessed, strictly future of fit_end, and contains the exact central key subset. The p=1/prediction=0 sentinel path is absent.",
+      "round_b_lineage": "CLOSED: exact event_day_balanced_binary_lgbm anchor prefix, three original seeds, event/day weights, 80-feature encoder path, parameters, and deployment postprocess are bound.",
+      "peer_axis": "CLOSED: feature peer is same-station, same-time, other-layer only for I-ORS/S-ORS; G-ORS is neutral and other-station values do not affect it.",
+      "bounded_contexts": "CLOSED: only the registered 24/72, 48/168, and 24/72/168 banks are accepted; rolling/proposal/flank computations are isolated by exact cadence segment and supplied surface.",
+      "segment_model_parameters": "CLOSED: prospective LightGBM family, full parameter set, and three segment seeds are fixed in the v3 closure and implementation.",
+      "bootstrap_and_gates": "CLOSED statically: paired bootstrap 5000/seed 20260826/90% and the unchanged RESEARCH, research-only SUBMISSION, preferred, and stretch gates are wired. Numerical values were not executed."
+    },
+    "seal_and_hashes": {
+      "r4_seal_bytes": 12161,
+      "r4_seal_sha256": "c00fc68ff68e5d3883bf892d05312c6962567b4b340f288c57e9dc2aab6dde68",
+      "runner_sha256": "e210aac5de924e94de30a602158d074501a22de3d1301121d5eb74ad93c6a9b3",
+      "runner_normalized_sha256": "a57e542b5fe21f0fe5ff61c57c8957e26b184ee621e4717ed219a2aedd97e082",
+      "execution_module_sha256": "a71ca25d287fe240211ed78cf3854e79745cf5d7e7274cf525d573ad55cb269a",
+      "test_sha256": "f7863de59b42157b1e2f9e8b952b8d6605c2abd1f9f9987d618fcfd2eac1ecbf",
+      "authorization_template_sha256": "b4332610bf1b74f5f704d43c52c42b270d6d50c4431bbe9069143425ec35eb87",
+      "project_dependency_count": 21,
+      "project_dependency_hash_mismatches": 0,
+      "direct_seal_binding_mismatches": 0
+    }
+  },
+  "verification_runs": {
+    "focused_pytest_parent_environment_without_P1_DATA_DIR": {
+      "command": ".venv-p1\\Scripts\\python.exe -m pytest -q -p no:cacheprovider tests\\test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "result": "17 passed, 1 skipped",
+      "exit_code": 0
+    },
+    "focused_pytest_with_command_scoped_nonofficial_P1_DATA_DIR": {
+      "result": "18 passed",
+      "exit_code": 0
+    },
+    "ruff": {
+      "scope": [
+        "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+        "scripts/run_p1_long_event_segment_proposal_rescore_v2.py",
+        "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py"
+      ],
+      "result": "All checks passed!",
+      "exit_code": 0
+    },
+    "read_only_preflight": {
+      "calls_compared": 2,
+      "stdout_byte_identical": true,
+      "verification_sha256_both": "92178d551730af7f9910ef7d7a76f63ecef972ac06b83089411386d6597d5f6b",
+      "seal_sha256": "c00fc68ff68e5d3883bf892d05312c6962567b4b340f288c57e9dc2aab6dde68",
+      "tracked_static_and_namespace_entries": 14,
+      "tracked_state_identical_before_after": true,
+      "actual_authorization_exists": false,
+      "namespace": [
+        "preexecution_seal.json",
+        "preexecution_seal_r2.json",
+        "preexecution_seal_r3.json",
+        "preexecution_seal_r4.json"
+      ]
+    }
+  },
+  "operation_counters_at_qa": {
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  },
+  "final_instruction": "Do not create the actual authorization and do not execute r4. Preserve r4 immutably as NO_GO, implement all P0/P1 fixes in a successor package, add the specified transition/race/firewall tests, reseal from zero operation state, and request fresh independent QA."
+}

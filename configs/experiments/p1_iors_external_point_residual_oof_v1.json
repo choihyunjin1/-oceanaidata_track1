@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_iors_external_point_residual_oof_v1",
+  "status": "preregistered_one_shot",
+  "created_at_kst": "2026-08-21T17:20:00+09:00",
+  "authorization": {
+    "competition_labels_for_nested_oof": true,
+    "competition_outer_validation_once": true,
+    "competition_upload": false,
+    "frozen_submission_mutation": false,
+    "frozen_model_mutation": false,
+    "hyperparameter_search": false
+  },
+  "hypothesis": "A point-only external I-ORS vertical-profile residual adds stable evidence for persistent temperature offset or drift while avoiding the failed cross-domain q10/q90 interval calibration.",
+  "non_virgin_follow_up": {
+    "disclosed": true,
+    "caveat": "This point-only P1 OOF experiment was formulated after observing external-only v1 and v2 results; it is not a virgin hypothesis or independent confirmation.",
+    "v1_result": "artifacts/p1_iors_external_precheck_v1/20260821T171120+0900/result.json",
+    "v1_result_sha256": "357ead1749a93e9c67701e3c8db8215d28f2a911fc5500038d0d4abf5c61233e",
+    "v1_point_rmse_relative_improvement": 0.504356928664215,
+    "v1_layers_not_worse": 5,
+    "v1_evaluated_layers": 6,
+    "v2_result": "artifacts/p1_iors_external_profile_conformal_v2/20260821T171756+0900/result.json",
+    "v2_result_sha256": "af5820c8f2ed645c71f9be886d0cf37a6344acb3ad8918ee49851a1b30688aab",
+    "q10_q90_excluded": true
+  },
+  "amendments": [
+    {
+      "amendment_id": "A1_q2_label_blind_noop_and_canonical_lock",
+      "created_at_kst": "2026-08-21T17:42:00+09:00",
+      "reason": "The first actual attempt stopped before any outer truth access because the Q2 outer-train I-ORS support had no externally eligible row. Independent QA also found that a CLI output directory could otherwise bypass a non-canonical one-shot lock.",
+      "aborted_attempt": {
+        "run_dir": "artifacts/p1_iors_external_point_residual_oof_v1/20260821T173459+0900",
+        "failure_receipt_sha256": "e71106d600f0941e709512dd5e8ea34b7059278709ea48e40a5eddd345cc0677",
+        "external_q50_model_sha256": "adad5a98b552fc66370431f0bfda7fb4edce2c7d7a7521ddde1166453d19a7c3",
+        "outer_truth_accessed": false,
+        "outer_lock_created": false,
+        "preserve_artifacts": true
+      },
+      "label_blind_support_evidence": {
+        "source": "fixed external q50 eligibility joined only to frozen incumbent OOF key/fold membership; no P1 label or anomaly_type opened",
+        "2025_q2": {"outer_train": 0, "inner_fit": 0, "inner_calibration": 0, "validation": 37663},
+        "2025_q3": {"outer_train": 31616, "inner_fit": 8365, "inner_calibration": 16202, "validation": 76190},
+        "2025_q4": {"outer_train": 108019, "inner_fit": 53198, "inner_calibration": 48798, "validation": 50596}
+      },
+      "fold_policy": {
+        "incumbent_noop_folds": ["2025_q2"],
+        "candidate_folds": ["2025_q3", "2025_q4"],
+        "q2_probability_and_prediction": "exact incumbent bytes",
+        "minimum_improved_folds_unchanged": 2
+      },
+      "one_shot_hardening": {
+        "canonical_output_status_and_lock_only": true,
+        "hardcoded_canonical_experiment_config": "configs/experiments/p1_iors_external_point_residual_oof_v1.json",
+        "experiment_wide_lock": "artifacts/one_shot_locks/p1_iors_external_point_residual_oof_v1.lock",
+        "append_only_exposure_ledger": "artifacts/one_shot_exposure_ledger.jsonl",
+        "alternate_output_or_status_rejected": true,
+        "atomic_lock_creation": "O_CREAT|O_EXCL",
+        "implementation_sha_sealed_before_outer_truth": true,
+        "blind_parquet_reloaded_after_fsync_and_sha_verification": true
+      },
+      "outer_gate_changed": false,
+      "outer_truth_seen_before_amendment": false
+    }
+  ],
+  "external_source": {
+    "manifest": "configs/external_data/i_ors_ctd_v1_1_1.json",
+    "manifest_sha256": "8c8c223aa82794e0bdf27c531204b9b307fcdd3deb27f2199920ac47f4983c20",
+    "catalog": "configs/external_data/catalog.toml",
+    "catalog_sha256": "08645af1c6238fff256d60580f99154ac89070d655bff5e70ca11925c1cb52a8",
+    "organizer_permission": "configs/external_data/official_faq_permission.json",
+    "organizer_permission_sha256": "f4d2ea55461a8af2c1cf1ed1a1642224a93349a414dfa0af7b254606b7f64f62",
+    "organizer_evidence_sha256": "41e762264c667baf401f60bef104110d3dd1bc668ab209c4e635b46b0a924be9",
+    "archive_sha256": "c6a0ffaf6367c5a6555d6fe3e7fd5354797538ba52872d96569b3b5c4010f964",
+    "years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    "qc": 1,
+    "use_all_eligible_rows": true,
+    "hard_cutoff_kst": "2023-12-31T23:50:00+09:00",
+    "minimum_peer_temperatures": 2,
+    "target_grid_m": {
+      "1": 5.708,
+      "2": 7.779,
+      "3": 10.869,
+      "4": 15.775,
+      "5": 20.601,
+      "6": 30.560,
+      "7": 38.591
+    },
+    "maximum_mapping_distance_m": 2.0
+  },
+  "external_q50_model": {
+    "backend": "LightGBM quantile",
+    "objective": "quantile",
+    "alpha": 0.5,
+    "n_estimators": 300,
+    "learning_rate": 0.04,
+    "num_leaves": 63,
+    "max_bin": 127,
+    "min_child_samples": 200,
+    "subsample": 1.0,
+    "colsample_bytree": 0.85,
+    "reg_alpha": 0.05,
+    "reg_lambda": 0.2,
+    "deterministic": true,
+    "force_col_wise": true,
+    "n_jobs": 12,
+    "verbosity": -1
+  },
+  "point_feature_contract": {
+    "target_temperature_masked_from_external_model": true,
+    "q10_q90_features": false,
+    "columns": [
+      "ext_q50_signed_residual",
+      "ext_q50_abs_residual",
+      "ext_peer_count",
+      "ext_peer_support",
+      "ext_residual_median_24h",
+      "ext_residual_slope_24h",
+      "ext_residual_median_72h",
+      "ext_residual_slope_72h"
+    ],
+    "rolling": {
+      "mode": "offline_centered",
+      "windows_hours": [24, 72],
+      "median_min_fraction": 0.25,
+      "robust_slope": "centered rolling median of consecutive signed-residual differences, converted to degree_C_per_hour",
+      "break_on": [
+        "station change",
+        "layer change",
+        "non-10-minute timestamp step",
+        "ineligible or missing residual"
+      ]
+    }
+  },
+  "p1_reference": {
+    "config": "configs/p1.toml",
+    "config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "incumbent_oof": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "incumbent_oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "incumbent_weighted_f1": 0.8133155525620019,
+    "compose": "replace only eligible I-ORS outer predictions; S-ORS, G-ORS, and ineligible I-ORS probability/prediction remain bit-identical"
+  },
+  "candidate_model": {
+    "scope": "I-ORS eligible rows only",
+    "backend": "xgboost",
+    "base_features": "unchanged frozen offline P1 feature bundle plus exactly eight point-residual columns",
+    "seed": 20260821,
+    "parameters": {
+      "n_estimators": 700,
+      "learning_rate": 0.04,
+      "max_depth": 7,
+      "min_child_weight": 20.0,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85
+    },
+    "inner_early_stopping_rounds": 80,
+    "threshold_candidates": [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90],
+    "threshold_objective": "inner I-ORS eligible micro F1 with exact flatline override; higher threshold wins ties",
+    "augmentation": false,
+    "hyperparameter_search": false
+  },
+  "outer_validation": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "purge_days": 7,
+    "inner_calibration_days": 60,
+    "outer_evaluation_count": 1,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260821
+  },
+  "promotion_gate": {
+    "overall_weighted_f1_delta_min": 0.005,
+    "iors_micro_f1_delta_min": 0.010,
+    "offset_or_drift_recall_delta_min": 0.05,
+    "every_anomaly_type_recall_delta_min": -0.02,
+    "normal_fp_day_relative_increase_lt": 0.10,
+    "worst_iors_layer_f1_delta_min": -0.01,
+    "paired_bootstrap_ci90_lower_gt": 0.0,
+    "minimum_improved_folds": 2
+  },
+  "artifacts": {
+    "output_dir": "artifacts/p1_iors_external_point_residual_oof_v1",
+    "status": "artifacts/status/p1_iors_external_point_residual_oof_v1.json",
+    "outer_lock": "artifacts/p1_iors_external_point_residual_oof_v1/outer_exposure.lock"
+  }
+}

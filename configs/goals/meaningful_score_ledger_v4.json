@@ -1,0 +1,62 @@
+{
+  "schema_version": "meaningful_score_ledger.v4",
+  "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v4",
+  "created_at_kst": "2026-08-23T03:20:00+09:00",
+  "status": "STATIC_IMPLEMENTATION_ONLY_NOT_INITIALIZED",
+  "scoring_contract": {
+    "path": "configs/goals/meaningful_score_maximization_v3.json",
+    "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0"
+  },
+  "scoring_evaluator": {
+    "path": "src/ocean_goal/meaningful_score_v3.py",
+    "sha256": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a"
+  },
+  "predecessor_ledger": {
+    "path": "artifacts/meaningful_score_goal_v3/registry.jsonl",
+    "sha256": "51817d6e4b0c4a9a8ef4b5207e2d852107371ebe7da457e2007fca9ce1adeb2c",
+    "bytes": 5137,
+    "event_count": 1,
+    "head_event_sha256": "5e3e6b56bee7df5324d31ef0dcc0f698ce7c2e28ad4be95e9d855bb69132f99a"
+  },
+  "canonical_paths": {
+    "ledger": "artifacts/meaningful_score_goal_v4/registry.jsonl",
+    "pre_init_qa": "artifacts/meaningful_score_goal_v4/pre_init_qa.json"
+  },
+  "event_protocol": {
+    "genesis_event_type": "GOAL_INITIALIZED",
+    "later_event_types": [
+      "CURVE_RESULT",
+      "OFFICIAL_SCORE_RESULT",
+      "UPLOAD_READINESS",
+      "GOAL_COMPLETION"
+    ],
+    "unknown_event_types_forbidden": true,
+    "payload_must_deep_equal_recomputed_payload": true,
+    "evidence_must_be_workspace_relative_sha256_and_size_pinned": true,
+    "replay_every_event_on_every_validation": true,
+    "replay_before_append_lock_or_write": true,
+    "append_lock": "O_EXCL_ADJACENT_LOCK",
+    "genesis_creation": "O_EXCL"
+  },
+  "initial_state": {
+    "status": "WAITING_OFFICIAL_WINDOW_RESEARCH_ACTIVE",
+    "official_uploads": 0,
+    "score_promotions": {"P1": false, "P2": false, "P3": false},
+    "meaningful_promotions": {"P1": false, "P2": false, "P3": false},
+    "execution_counts": {
+      "stage_a_fit": 0,
+      "stage_a_prediction": 0,
+      "stage_b_fit": 0,
+      "stage_b_prediction": 0,
+      "upload": 0
+    }
+  },
+  "prohibitions": {
+    "automatic_upload": true,
+    "initialize_without_independent_qa": true,
+    "mutate_v3_pinned_files": true,
+    "append_unreplayed_payload": true,
+    "append_unknown_event_type": true,
+    "fit_or_predict_during_ledger_operations": true
+  }
+}

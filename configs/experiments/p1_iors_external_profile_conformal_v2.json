@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_iors_external_profile_conformal_v2",
+  "status": "preregistered_external_only",
+  "objective": "Calibrate the fixed I-ORS profile quantile interval on 2022 with one global split-CQR widening value, then evaluate the unchanged point model and interval once on 2023.",
+  "source_manifest": "configs/external_data/i_ors_ctd_v1_1_1.json",
+  "external_catalog": "configs/external_data/catalog.toml",
+  "external_catalog_sha256": "08645af1c6238fff256d60580f99154ac89070d655bff5e70ca11925c1cb52a8",
+  "split": {
+    "fit_years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021],
+    "calibration_year": 2022,
+    "test_year": 2023,
+    "hard_cutoff_kst": "2023-12-31T23:50:00+09:00",
+    "min_peer_temperatures": 2,
+    "max_fit_rows_per_year_layer": 6000,
+    "fit_sampling": "deterministic evenly spaced after chronological sort",
+    "calibration_sampling": "all eligible rows",
+    "test_sampling": "all eligible rows"
+  },
+  "target_grid": {
+    "provenance": "label-blind aggregate P1 I-ORS deployment-depth medians fixed before v1",
+    "max_mapping_distance_m": 2.0,
+    "layers": {
+      "1": 5.708,
+      "2": 7.779,
+      "3": 10.869,
+      "4": 15.775,
+      "5": 20.601,
+      "6": 30.560,
+      "7": 38.591
+    }
+  },
+  "model": {
+    "family": "LightGBM quantile",
+    "quantiles": [0.1, 0.5, 0.9],
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.04,
+      "num_leaves": 63,
+      "max_bin": 127,
+      "min_child_samples": 200,
+      "subsample": 1.0,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.05,
+      "reg_lambda": 0.2,
+      "random_state": 20260821,
+      "deterministic": true,
+      "force_col_wise": true,
+      "n_jobs": 12,
+      "verbosity": -1
+    },
+    "early_stopping": false,
+    "hyperparameter_search": false
+  },
+  "conformal": {
+    "method": "global split conformalized quantile regression widening",
+    "target_coverage": 0.8,
+    "alpha": 0.2,
+    "raw_bounds": "rowwise min/max of q10 and q90",
+    "score": "max(q10_lower_minus_y, y_minus_q90_upper, 0)",
+    "finite_sample_rank": "ceil((n_calibration + 1) * (1 - alpha)), one-based",
+    "quantile_selection": "deterministic order statistic; no interpolation",
+    "application": "q10_test - correction, q90_test + correction",
+    "scope": "one global non-negative scalar; no layer, month, or regime tuning",
+    "calibration_labels_only": "external I-ORS 2022 QC=1 temperature",
+    "grid_search": false
+  },
+  "stop_gate": {
+    "minimum_calibration_rows": 50000,
+    "minimum_test_rows": 50000,
+    "minimum_evaluated_layers": 6,
+    "minimum_rmse_relative_improvement": 0.05,
+    "minimum_mae_relative_improvement": 0.05,
+    "minimum_layers_not_worse": 5,
+    "maximum_single_layer_relative_rmse_degradation": 0.05,
+    "conformal_coverage_min": 0.75,
+    "conformal_coverage_max": 0.85,
+    "all_source_integrity_checks_required": true
+  },
+  "decision_scope": {
+    "pass": "GO_TO_ISOLATED_P1_OOF",
+    "fail": "NO_GO_EXTERNAL_PROFILE",
+    "cannot_promote_to_submission": true,
+    "competition_labels_used": false,
+    "competition_oof_used": false,
+    "competition_outer_validation_used": false,
+    "competition_upload": false
+  },
+  "cross_experiment_provenance": {
+    "within_v2_test_not_used_for_fit_or_calibration": true,
+    "global_2023_first_look": false,
+    "caveat": "The same 2023 external year was evaluated in v1; v2 is a fixed calibration follow-up and is not an independent first-look confirmation.",
+    "v1_result": "artifacts/p1_iors_external_precheck_v1/20260821T171120+0900/result.json",
+    "v1_result_sha256": "357ead1749a93e9c67701e3c8db8215d28f2a911fc5500038d0d4abf5c61233e",
+    "v1_receipt": "artifacts/p1_iors_external_precheck_v1/20260821T171120+0900/receipt.json",
+    "v1_receipt_sha256": "ca72fd8541d1c6493f837b556b0a076760f8a6aa47b15f0399f5a72fef887193",
+    "v1_pre_format_code_sha256": {
+      "src/ocean_external/iors_ctd.py": "173112394e614aba0039d7fa24318768d2108059c3464df552b0c47499112be7",
+      "src/ocean_external/iors_precheck.py": "4114b90bfbe779f7204bd13abca350cecde247fd1e155a07be980f64cb16bb5d",
+      "scripts/run_p1_iors_external_precheck.py": "375b547d612d4ee42ae0b95781c8de477d9572427d4403baea51968e3bfbf4b7",
+      "tests/test_iors_ctd_external.py": "033b86ff796b23015014e4e32adf247467a8cb465bd41ee7b4ba986616768e2d"
+    }
+  }
+}

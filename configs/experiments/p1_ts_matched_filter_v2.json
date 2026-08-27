@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0-adaptive-inner-only",
+  "experiment_id": "P1_ts_matched_filter_v2",
+  "family_id": "generator_aligned_temperature_salinity_consistency",
+  "created_at_kst": "2026-08-13T22:48:00+09:00",
+  "adaptive_provenance": {
+    "previous_experiment": "P1_offset_drift_matched_filter_v1",
+    "previous_inner_labels_exposed": true,
+    "claim_independent_validation": false,
+    "previous_result": "aggregate gain but rejected for summer S-ORS and sparse G-ORS false positives",
+    "scientific_correction": "P1 anomalies modify temp; natural water-mass changes often co-move temp and psal",
+    "maximum_followup_runs_in_same_inner_blocks": 1,
+    "no_further_same_family_retry": true
+  },
+  "single_change": {
+    "base_feature_count": 80,
+    "added_features": [
+      "ts_offset_pair_score_8_86h",
+      "ts_offset_pair_duration_rows",
+      "ts_drift_reset_score_9_86h",
+      "ts_drift_reset_duration_rows"
+    ],
+    "salinity_gate": "temperature_score/(1+same_boundary_psal_score)",
+    "missing_psal_policy": "retain_temperature_score",
+    "all_other_model_and_postprocess_settings_frozen": true
+  },
+  "fingerprint_gate": {
+    "maximum_label_time_kst": "2025-03-24T23:50:00+09:00",
+    "offset_events": 14,
+    "drift_events": 13,
+    "offset_gated_true_boundary_auc": 1.0,
+    "offset_events_above_matched_normal_p99": 1.0,
+    "drift_gated_true_boundary_auc": 1.0,
+    "drift_events_above_matched_normal_p99": 1.0,
+    "offset_event_median_score": 46.51,
+    "offset_matched_normal_p99": 3.271,
+    "drift_event_median_score": 97.842,
+    "drift_matched_normal_p99": 17.559,
+    "interpretation": "adaptive development diagnostic; not independent or outer evidence"
+  },
+  "inner_blocks": [
+    {
+      "name": "I1",
+      "train_end_kst": "2024-06-23T23:50:00+09:00",
+      "validation_start_kst": "2024-07-01T00:00:00+09:00",
+      "validation_end_exclusive_kst": "2024-09-01T00:00:00+09:00"
+    },
+    {
+      "name": "I2",
+      "train_end_kst": "2024-09-23T23:50:00+09:00",
+      "validation_start_kst": "2024-10-01T00:00:00+09:00",
+      "validation_end_exclusive_kst": "2024-12-01T00:00:00+09:00"
+    },
+    {
+      "name": "I3",
+      "train_end_kst": "2024-12-23T23:50:00+09:00",
+      "validation_start_kst": "2025-01-01T00:00:00+09:00",
+      "validation_end_exclusive_kst": "2025-03-01T00:00:00+09:00"
+    }
+  ],
+  "model": {
+    "backend": "xgboost",
+    "n_estimators": 700,
+    "base_seed": 20260813,
+    "seed_rule": "base_seed+block_ordinal",
+    "augmentation": false,
+    "hyperparameter_search": false,
+    "early_stopping": false
+  },
+  "postprocess": {
+    "high_threshold": 0.2,
+    "low_threshold": 0.1,
+    "close_gap_rows": 0,
+    "minimum_positive_run": 12,
+    "selection": "frozen_from_incumbent"
+  },
+  "promotion_gates": {
+    "minimum_aggregate_weighted_f1_delta": 0.005,
+    "minimum_aggregate_micro_f1_delta": 0.005,
+    "minimum_bootstrap_ci90_lower": 0.0,
+    "minimum_probability_improved": 0.9,
+    "minimum_nondegrading_blocks": 3,
+    "maximum_worst_group_f1_drop": 0.01,
+    "maximum_normal_fp_per_day_relative_increase": 0.1,
+    "minimum_mean_offset_drift_recall_delta": 0.03,
+    "maximum_individual_offset_or_drift_recall_drop": 0.01
+  },
+  "hashes": {
+    "ts_module_sha256": "28a2834b475e70f4a885ffe187bc23ea9eec64f69cfa7ddf80c27715a83d0a4c",
+    "config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "base_feature_cache_sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+    "v1_metrics_sha256": "3d4d802ac14b086caceb26d7125a1979b182c1cdf281790885d1a1698e6adaf9",
+    "v1_manifest_sha256": "a13c97fd2637bc76d8709f573fba63d16d2b359a4141d92111c25a1dee332d22"
+  },
+  "authorization": {
+    "inner_comparison": true,
+    "outer_one_shot": false,
+    "test_prediction": false,
+    "submission": false,
+    "commit": false,
+    "push": false
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "schema_version": "p1.mstcn_checkpoint_diagnostic.v2",
+  "experiment_id": "p1_mstcn_checkpoint_diagnostic_20260827_v2",
+  "status": "PREREGISTERED_LOCAL_RETROSPECTIVE_DIAGNOSTIC_ONLY",
+  "source_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+  "purpose": "Re-run the fixed Q2 plateau recipe on fresh Q3/Q4 fits while preserving a blind checkpoint curve. Epoch 150 is the only scientific decision recipe. After both blind receipts and the fixed epoch-150 decision are sealed, the other registered epochs may be scored only as a same-truth oracle diagnostic that cannot mutate the recipe or count as promotion evidence.",
+  "execution_recovery": {
+    "scientific_change_from_v1": false,
+    "v1_terminal_status": "FAILED_NO_AUTOMATIC_RETRY",
+    "v1_failure_stage": "first Q3 seed epoch-145 state serialization before either phase receipt or truth access",
+    "v1_failure_type": "Windows OSError 9 from fsync on a read-only temporary file descriptor",
+    "v2_only_change": "serialize torch state to a writable temporary handle, then flush and fsync that same writable handle before atomic replace",
+    "reuse_v1_model_or_optimizer_state": false,
+    "fresh_refit_required": true
+  },
+  "source_pins": {
+    "diagnostic_v1_runner": {
+      "path": "scripts/run_p1_mstcn_checkpoint_diagnostic_20260827_v1.py",
+      "bytes": 54045,
+      "sha256": "5197715acb4305335e1f91435da96c2df2dba5a41c94e7b037103b6d588a374f"
+    },
+    "runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "bytes": 162708,
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "bytes": 25120,
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "model": {
+      "path": "src/p1_qc/ms_tcn_asrf.py",
+      "bytes": 23220,
+      "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"
+    },
+    "data": {
+      "path": "src/p1_qc/ms_tcn_asrf_data.py",
+      "bytes": 30025,
+      "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"
+    },
+    "q2_grid": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "bytes": 173949505,
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "q2_receipt": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_receipt.json",
+      "bytes": 14102,
+      "sha256": "50483ac14ed6f7b60d28b937161f51043b3dd39f522909c087a5c00b5ac6df85"
+    },
+    "current_router_anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "bytes": 1071684,
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "frozen_oof": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    }
+  },
+  "q2_revalidation": {
+    "fold": "2025_q2",
+    "development_windows_kst": [
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "plateau_neighbor_offset_epochs": 5,
+    "plateau_radius": 1,
+    "selection_objective": "maximize the minimum full-Q2 delta-F1 at epoch-5, epoch, epoch+5; deterministic ties use neighbor mean, center delta, smaller width, higher threshold, earlier epoch",
+    "monthly_gate": "epoch150 must have positive delta-F1 in all three KST month windows and added precision strictly above that month's Router F1/2",
+    "expected_plateau_winner": {
+      "width": 512,
+      "epoch": 150,
+      "threshold": 0.8,
+      "neighbor_epochs": [
+        145,
+        150,
+        155
+      ],
+      "neighbor_delta_f1": [
+        0.07658753493598902,
+        0.07540016179589171,
+        0.07421657248412383
+      ]
+    },
+    "expected_monthly_metrics": {
+      "2025-04": {
+        "rows": 42967,
+        "anchor_f1": 0.7809663968604366,
+        "candidate_f1": 0.8357606990813354,
+        "delta_f1": 0.05479430222089887,
+        "added_precision": 0.7072538860103627
+      },
+      "2025-05": {
+        "rows": 35056,
+        "anchor_f1": 0.9530284301606922,
+        "candidate_f1": 0.9880668257756563,
+        "delta_f1": 0.035038395614964135,
+        "added_precision": 0.9827586206896551
+      },
+      "2025-06": {
+        "rows": 55147,
+        "anchor_f1": 0.5831495368328187,
+        "candidate_f1": 0.7792823290453622,
+        "delta_f1": 0.19613279221254354,
+        "added_precision": 0.7132459970887919
+      }
+    },
+    "absolute_tolerance": 1e-12
+  },
+  "fixed_recipe": {
+    "width": 512,
+    "epoch": 150,
+    "threshold": 0.8,
+    "representation": "raw_three_seed_ensemble_mean",
+    "seeds": [
+      20260827,
+      20260839,
+      20260863
+    ],
+    "blind_prediction_epochs": [
+      120,
+      125,
+      130,
+      145,
+      150
+    ],
+    "saved_state_epochs": [
+      145,
+      150
+    ]
+  },
+  "training_contract": {
+    "fresh_refit_phases": [
+      "q3",
+      "q4"
+    ],
+    "source_optimizer": "AdamW",
+    "source_learning_rate": 0.0003,
+    "source_weight_decay": 0.0001,
+    "source_warmup_epochs": 10,
+    "source_schedule_horizon_epochs": 300,
+    "stop_epoch": 150,
+    "minimum_learning_rate": 0.000003,
+    "gradient_clip_norm": 1.0,
+    "precision": "bf16 mixed precision",
+    "schedule_change_from_source": false,
+    "state_storage_policy": "save only epochs 145 and 150 for each phase/seed; store blind ensemble predictions for the five registered diagnostic epochs"
+  },
+  "evaluation_contract": {
+    "truth_access_order": [
+      "seal fixed Q2 plateau recipe",
+      "fresh-fit and seal every registered Q3 checkpoint prediction",
+      "fresh-fit and seal every registered Q4 checkpoint prediction",
+      "verify both blind receipts and semantic replays",
+      "open Q3 and Q4 truth",
+      "score epoch 150 and seal the fixed scientific decision",
+      "only then score epochs 120/125/130/145 in a separately labeled same-truth oracle diagnostic"
+    ],
+    "scientific_metric_epoch": 150,
+    "truth_scored_epochs": [
+      150
+    ],
+    "same_truth_oracle_diagnostic_epochs": [
+      120,
+      125,
+      130,
+      145
+    ],
+    "same_truth_oracle_promotion_evidence": false,
+    "same_truth_oracle_recipe_mutation_allowed": false,
+    "role": "retrospective diagnostic on already exposed historical folds; never fresh promotion evidence",
+    "official_probe_authorized": false
+  },
+  "output_contract": {
+    "artifact_directory": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2",
+    "attempt_lock": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2.ATTEMPT_LOCK.json",
+    "append_only_namespace": true,
+    "automatic_retry": false,
+    "manifest_required": true
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_read_or_creation": true,
+    "upload": true,
+    "q3_or_q4_truth_based_epoch_selection": true,
+    "q3_or_q4_oracle_mutates_fixed_recipe": true,
+    "same_truth_oracle_used_as_promotion_evidence": true,
+    "modify_source_v2_artifacts": true,
+    "modify_p3_era5_experiment": true,
+    "reuse_failed_v1_training_state": true
+  }
+}

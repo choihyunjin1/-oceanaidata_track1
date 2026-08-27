@@ -1,0 +1,162 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.independent_preexecution_qa.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T07:58:50+09:00",
+  "auditor": "independent_subagent_p1_long_event_cycle1_qa",
+  "status": "FAIL_NO_GO_PREEXECUTION",
+  "verdict": "NO_GO_P0_EXECUTION_INCOMPLETE",
+  "authorization_recommendation": "DO_NOT_AUTHORIZE_OR_EXECUTE_CURRENT_V1",
+  "scope": {
+    "numerical_execution_performed": false,
+    "model_fits_performed": 0,
+    "feature_or_proposal_materializations_performed": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_created": 0,
+    "uploads": 0,
+    "P3_accesses_or_mutations": 0
+  },
+  "package_sha256": {
+    "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+    "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+    "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+    "configs/experiments/p1_long_event_segment_proposal_rescore_v1_execution_authorization_template.json": "aa71b8529d878a67466195da8220db8ad8cc59ff4c86c47d0084b45374d021fc",
+    "src/p1_qc/long_event_segment_proposal_rescore.py": "68aaf1fae9902b386b024500b5873328af5b0dddaf9d99243d799d68aa5c5feb",
+    "scripts/run_p1_long_event_segment_proposal_rescore_v1.py": "2c1bacac8039fec9b5370cddf452fac1516bb4d014e6ebd9e08e683688b5faba",
+    "tests/test_run_p1_long_event_segment_proposal_rescore_v1.py": "4aecf7e88a0f2570931e0d545ee542ce30017abb4c7c178d2fcce16e64972c5d",
+    "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/preexecution_seal.json": "ebd54c60e2953ec66956d94a632f7b949dba321cdddbab3640dd0ce058d1c03e",
+    "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/strict_preflight_receipt.json": "ffafcb55531964d463e836ecb71a339c8d7d0c0c14b8f3533fc8dda97b6f2103"
+  },
+  "requested_checks": {
+    "prospective_design_immutable_and_trigger_resolves_exact_round_b": {
+      "status": "PASS",
+      "evidence": "Frozen design digest matches; trigger reconstruction and v1r4/v1r5/v1r6 numerical-section equality pass; terminal v1r6 scientific NO_GO selects FROZEN_ROUND_B only."
+    },
+    "budget_9_plus_54_plus_9_equals_72_and_materializations_lte_21": {
+      "status": "PASS_STATIC_LEDGER_ONLY",
+      "evidence": "Module constants, amendment, journal reservation order, seal, and focused tests agree on 9 anchor + 54 inner segment + 9 outer segment fits and 21 materializations. No numerical orchestration consumes the ledger."
+    },
+    "original_round_b_family_features_weights_postprocess": {
+      "status": "PASS_PRIMITIVE_AND_LINEAGE_ONLY",
+      "evidence": "Pinned family is event_day_balanced_binary_lgbm, original seeds are 20260813/20260829/20260847, parameters and event/day weights are implemented, and held outer parsing uses event_day_balanced_binary_lgbm__probability/prediction rather than a legacy XGB column. The worker does not construct or apply the inner anchors."
+    },
+    "chronology_leakage_and_firewall": {
+      "status": "FAIL",
+      "evidence": "No executable training/evaluation route proves chronological isolation. The source of leakage-safe anchor probabilities for segment-model training rows is undefined; current global segment robust normalization/CUSUM is not bounded by the declared context bank."
+    },
+    "transitive_seal_authorization_qa_and_crash_publication": {
+      "status": "FAIL",
+      "evidence": "The future authorization checker does not require or verify the preexecution seal, strict-preflight receipt, independent-QA report, QA verdict, or exact equality of authorization-controlled scientific/input maps with the sealed template. There is no success publisher or completed journal transition."
+    },
+    "official_path_firewall": {
+      "status": "PASS_FOR_AUDITED_ZERO_FIT_PACKAGE",
+      "evidence": "No official test/sample/submission/candidate path was read by this audit; actual authorization, execution.lock, attempt_journal, result.json, manifest.json, and 999_completed.json are absent."
+    },
+    "actual_72_fit_numerical_orchestration_is_complete": {
+      "status": "FAIL_P0",
+      "evidence": "execute_worker always raises AuthorizationError after static/data preflight. It never claims AttemptJournal, imports/calls the numerical primitives, fits any model, computes bootstrap/gates, or publishes aggregate outputs."
+    }
+  },
+  "findings": [
+    {
+      "id": "P0-001",
+      "severity": "P0",
+      "title": "The sealed worker is an unconditional zero-fit stop, not an executable Cycle-1 package",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v1.py:1195-1204 calls authorization/static/data checks and then unconditionally raises AuthorizationError.",
+        "There is no numerical orchestration function, no AttemptJournal.begin call on the worker path, and no result/manifest/report/completed-journal publisher.",
+        "tests/test_run_p1_long_event_segment_proposal_rescore_v1.py:413-431 explicitly expects execution rejection and a placeholder authorization; all 18 tests can pass while the worker remains non-executable."
+      ],
+      "impact": "Embedding a valid authorization digest cannot produce the preregistered 72 fits or any scientific decision. Current-v1 execution would only fail after expensive readiness reads.",
+      "required_fix": "Create a new sealed successor revision with a complete execute_worker orchestration. Keep the frozen design/trigger/amendment hashes as authorities; do not mutate the current sealed files."
+    },
+    {
+      "id": "P0-002",
+      "severity": "P0",
+      "title": "Authorization is not transitively bound to the seal, preflight, or independent QA proof",
+      "evidence": [
+        "scripts/run_p1_long_event_segment_proposal_rescore_v1.py:853-879 verifies status, experiment id, normalized runner, and maps supplied by the authorization itself.",
+        "It does not require the preexecution-seal hash, strict-preflight hash, independent-QA report hash/verdict, or exact equality between authorization scientific/input maps and the sealed template.",
+        "An authorization can therefore replace its own dependency/input/outer-surface maps and still be checked against those replacement values."
+      ],
+      "impact": "A nominal AUTHORIZED_INDEPENDENT_QA_PASS file is not cryptographic evidence that the independently audited package and inputs are the ones executed.",
+      "required_fix": "Make the successor authorization pin the predecessor seal, preflight receipt, this QA JSON/MD pair, PASS successor-QA verdict, normalized runner, module/tests, and one canonical immutable template. Validate byte-for-byte equality of all scientific, budget, input, and outer-surface maps against that canonical sealed template before any import or claim."
+    },
+    {
+      "id": "P1-003",
+      "severity": "P1",
+      "title": "Declared receipt chronology is impossible",
+      "evidence": [
+        "Authorization template declares created_at_kst=2026-08-26T08:20:00+09:00.",
+        "The seal that claims to have read that template declares created_at_kst=2026-08-26T07:52:22.590435+09:00.",
+        "The strict preflight declares created_at_kst=2026-08-26T07:52:30.843172+09:00; both receipts precede the template they attest."
+      ],
+      "impact": "The current chronology claim cannot support a trustworthy pre-execution chain even though hashes match.",
+      "required_fix": "Issue a new correctly timestamped template and only then create a new seal and strict preflight. Add monotonic declared-time checks and include filesystem-independent predecessor receipt hashes."
+    },
+    {
+      "id": "P1-004",
+      "severity": "P1",
+      "title": "Leakage-safe segment-model training surface is unspecified",
+      "evidence": [
+        "The nine prospective Round-B fits define one three-seed prefix model per inner window and honest validation prediction, but neither code nor amendment states how anchor probabilities for labeled segment-model training proposals are obtained without in-sample stacking.",
+        "The 54 inner segment fits and nine outer segment fits have no implemented training-row constructor, prefix/validation masks, encoder-fit boundary, or exact source of anchor surfaces."
+      ],
+      "impact": "A naive implementation would train the meta-model on anchor probabilities produced by models fitted on the same labels, causing meta-feature target leakage and a train/validation calibration shift.",
+      "required_fix": "Before any fit, freeze and test the exact row-level segment-training protocol. Every segment-training anchor probability must be from a model that did not fit that row's label, or the experiment must stop/re-register with the extra cross-fit budget. Do not silently exceed 72 fits."
+    },
+    {
+      "id": "P1-005",
+      "severity": "P1",
+      "title": "Peer residual is computed across stations instead of across simultaneous layers within a station",
+      "evidence": [
+        "src/p1_qc/long_event_segment_proposal_rescore.py:421-430 groups by (time, layer) and subtracts values from other stations.",
+        "The canonical P1 feature implementation at src/p1_qc/features.py:274-283 defines peers as simultaneous same-station layers and naturally yields no peer for G-ORS."
+      ],
+      "impact": "The implemented feature is geographically cross-station and does not implement the stated I/S dynamic cross-layer peer channel; it can inject unrelated ocean-regime differences.",
+      "required_fix": "Group by (station, time), exclude the target layer/row, retain I/S only and the G univariate fallback, then add a synthetic axis test proving cross-station values cannot affect a row."
+    },
+    {
+      "id": "P1-006",
+      "severity": "P1",
+      "title": "Proposal normalization and two-sided CUSUM have unbounded full-segment dependency",
+      "evidence": [
+        "src/p1_qc/long_event_segment_proposal_rescore.py:357-397 estimates robust center/scale and prefix/suffix CUSUM over each entire contiguous segment.",
+        "The preregistered structures are explicitly 24/72/168-hour context banks and the outer purge is seven days."
+      ],
+      "impact": "If a full station-layer segment is supplied, a row can depend on values arbitrarily far beyond the declared bank/purge; if partitions are supplied separately, boundary behavior and feature definitions change. No worker currently resolves this.",
+      "required_fix": "Use fixed bank-bounded leave-center-out statistics/CUSUM within exact segments, or register a finite maximum dependency and matching purge before fit. Add a far-future perturbation test beyond the declared dependency."
+    },
+    {
+      "id": "P1-007",
+      "severity": "P1",
+      "title": "Segment-classifier hyperparameters are absent from the prospective design/amendment authority",
+      "evidence": [
+        "SEGMENT_MODEL_PARAMETERS (400 trees, learning rate 0.03, 31 leaves, and related values) appear only in src/p1_qc/long_event_segment_proposal_rescore.py:93-108 and its post-hoc implementation contract.",
+        "The design and operational amendment enumerate Round-B anchor parameters but not the segment-model parameters or a pinned pre-existing lineage for them."
+      ],
+      "impact": "The package cannot substantiate the design claim that every numeric choice was immutable at original preregistration time.",
+      "required_fix": "In a prospective successor amendment created before Cycle-1 numerical results, enumerate the already-coded segment parameters and their non-result-based lineage; do not tune or change them after any inner result."
+    }
+  ],
+  "required_successor_acceptance_tests": [
+    "A temp-directory integration test with fake fit/predict callables reaches exactly 72 reserve/complete pairs and at most 21 materialization reservations, with exact phase/window/cell/seed order.",
+    "The same test proves three anchor fits are shared across six cells per inner window and that held outer labels are not reachable until the selected cell is immutable.",
+    "Exact Round-B 80-feature ordering, per-prefix TabularEncoder fit, event/day weights, three original seeds, probability mean, plateau/singleton detectors, and 0.2/0.1/0/12 postprocess are asserted on every inner anchor.",
+    "The segment-training anchor surface is demonstrably out-of-sample for every labeled proposal row; otherwise fail before claim or register a new budget/design.",
+    "Pooled inner threshold selection, deterministic cell selection, outer one-shot scoring, 5000-replicate event/day paired bootstrap, every research/submission gate, and seed/fold/station/slice metrics are implemented and tested.",
+    "Success publication is create-only and durable on Windows: aggregate result/report/manifest are flushed while lock exists, 999_completed is last journal entry, lock unlink is the final commit, directory is flushed, and no post-release operation occurs.",
+    "Injected failures at initialization, each fit, metric/bootstrap, and publication retain the lock and write one sanitized terminal failure; no automatic resume/rerun is possible.",
+    "Authorization tamper tests reject changed seal, preflight, QA report, dependency, scientific map, input map, outer surface, runtime, runner, module, tests, or user-approval proof before numerical import and claim.",
+    "Path-firewall tests prove zero reads of official test/sample/submission/candidate/P3 paths and zero candidate generation."
+  ],
+  "test_evidence": {
+    "command": ".venv-p1\\Scripts\\python.exe -m pytest -q tests/test_run_p1_long_event_segment_proposal_rescore_v1.py",
+    "result": "18 passed",
+    "interpretation": "Static primitives and the fail-closed zero-fit state are internally consistent; this does not establish executability.",
+    "lint_command": ".venv-p1\\Scripts\\python.exe -m ruff check src/p1_qc/long_event_segment_proposal_rescore.py scripts/run_p1_long_event_segment_proposal_rescore_v1.py tests/test_run_p1_long_event_segment_proposal_rescore_v1.py",
+    "lint_result": "All checks passed"
+  },
+  "terminal_statement": "The frozen scientific design and Round-B trigger selection are preserved, but the current sealed package is not an executable experiment. It must not be authorized. A new independently audited successor revision is required; no current-v1 fit budget has been consumed."
+}

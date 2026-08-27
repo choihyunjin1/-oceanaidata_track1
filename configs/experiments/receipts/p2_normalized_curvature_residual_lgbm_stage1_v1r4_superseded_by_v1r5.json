@@ -1,0 +1,58 @@
+{
+  "schema_version": "p2_experiment_supersession_receipt.v1",
+  "receipt_id": "p2_ncr_lgbm_stage1_v1r4_superseded_by_v1r5_20260826",
+  "status": "APPEND_ONLY_ZERO_FIT_INFRASTRUCTURE_SUPERSESSION_RECEIPT",
+  "effective_date_kst": "2026-08-26",
+  "append_only": true,
+  "superseded": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r4",
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r4.json",
+      "bytes": 20365,
+      "sha256": "a7120e557709cc083682dbca3c27e4874c1b9bfc4ff9e28a59a7f7204adaea29"
+    },
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r4.py",
+      "bytes": 68269,
+      "sha256_raw": "e3f9202be81d9dfe544978e8168a95b4b3a41ef8f20fb7d6c129f90f36d920bc",
+      "sha256_config_hash_literal_normalized": "bd415099593aec6df88cf7ab36d2b22754ef8c4c8f1cd5e206d6ab5d8fefeecd"
+    },
+    "test": {
+      "path": "tests/test_p2_normalized_curvature_residual_stage1_v1r4.py",
+      "bytes": 18547,
+      "sha256": "ab3da6dca44007238f7b3217efb4a3b544c8a7c3cba2a5a1b0c318d913d05dfa"
+    },
+    "strict_preflight_bundle_sha256": "d18f11f463a6ebd43931828f3eff5d3a8cb1199821fefef616837ba44c0deef1",
+    "numerical_stage1_fit_calls_observed": 0,
+    "claim_exists_observed": false,
+    "journal_exists_observed": false,
+    "final_artifact_directory_observed": false,
+    "staging_directory_count_observed": 0,
+    "execution_authorized_after_receipt": false
+  },
+  "inherited_v1r3_incident_evidence": {
+    "incident_receipt_path": "configs/experiments/receipts/p2_normalized_curvature_residual_lgbm_stage1_v1r3_infra_failed_superseded_by_v1r4.json",
+    "incident_receipt_sha256": "c2777800e28189a6c003c14c26e003a65ee3c4e1387f1f28037b9d45bae817dc",
+    "claim_sha256": "377e43a54f22ee1c9232086f7e7acfbdb5babc5575d16ea62b11f22eace8e448",
+    "journal_sha256": "eb95c80d4b3f429d49cf3c8d66181b920b3ff4b0938c07debb15a6a72c88839f",
+    "physical_fit_calls": 0
+  },
+  "supersession_reason": {
+    "classification": "POST_AUTHORIZATION_WORKER_FAILURE_PROVENANCE_GAP",
+    "finding": "v1r4 worker main re-called the exact-two-event authorization validator after WORKER_STARTED or FIT events existed. That second validation necessarily failed and suppressed WORKER_FAILED provenance.",
+    "numerical_or_scientific_change_required": false
+  },
+  "superseding": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r5",
+    "config_path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r5.json",
+    "runner_path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r5.py",
+    "scope": "Zero-fit failure-provenance recovery only; numerical contract is unchanged."
+  },
+  "external_actions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "experiment_id": "p2_nasa_power_residual_meta_v1",
+  "status": "authorized_local_external_one_shot",
+  "research_only": true,
+  "upload_allowed": false,
+  "fresh_holdout_claimed": false,
+  "hypothesis": "Hourly public meteorology contains incremental information about autumn vertical-structure transition residuals beyond the frozen P2 incumbent and the ten public-layer state features.",
+  "external_data_policy": {
+    "official_faq_rule": "Public external data are allowed when source provenance is disclosed.",
+    "hidden_target_values_forbidden": true,
+    "source_id": "nasa_power_kors_meteorology",
+    "title": "NASA POWER hourly meteorological analysis-ready data at S-ORS coordinates",
+    "official_url": "https://power.larc.nasa.gov/docs/services/api/temporal/hourly/",
+    "license_name": "NASA POWER free public data; source/version/access-date attribution requested",
+    "coordinate_wgs84": {
+      "latitude": 37.4231333,
+      "longitude": 124.7380389
+    },
+    "retrieved_date_kst": "2026-08-21",
+    "cutoff_utc": "2025-12-31T14:59:00+00:00",
+    "cutoff_reason": "This equals 2025-12-31 23:59 KST and prevents post-2025 covariates from entering the one-shot.",
+    "transformation": "Unmodified hourly API JSON is parsed in UTC; only causal backward as-of alignment with a 70-minute tolerance and fixed rolling summaries is used."
+  },
+  "raw_files": [
+    {
+      "year": 2024,
+      "path": "external_data/quarantine/nasa_power_sors_meteorology/nasa_power_sors_2024.json",
+      "manifest_path": "external_data/quarantine/nasa_power_sors_meteorology/manifest_2024.json",
+      "file_sha256": "806f1ac160d15de70ec533fbdcdf14de1c55b5710fcfffdd5ca4c9642796013a",
+      "manifest_sha256": "3c5457109f1c0ec74ae384f038f4e399ff3d8ba31acc430313844a3ef4851d0a",
+      "observed_start": "2024-01-01T00:00:00+00:00",
+      "observed_end": "2024-12-31T23:00:00+00:00",
+      "row_count": 8784,
+      "transformation_log": "Unmodified NASA POWER Hourly API JSON; S-ORS WGS84 point 37.4231333N, 124.7380389E; UTC; retrieved 2026-08-21 KST."
+    },
+    {
+      "year": 2025,
+      "path": "external_data/quarantine/nasa_power_sors_meteorology/nasa_power_sors_2025.json",
+      "manifest_path": "external_data/quarantine/nasa_power_sors_meteorology/manifest_2025.json",
+      "file_sha256": "ceee0d3f079b36ac2209ead5ceff5a9ad7ecdeb60679690e103282368cca22a6",
+      "manifest_sha256": "23b88050436512ce51b42cc56df38cd38c84646c0c0291a1d9fb0edf7a6216e8",
+      "observed_start": "2025-01-01T00:00:00+00:00",
+      "observed_end": "2025-12-31T23:00:00+00:00",
+      "row_count": 8760,
+      "transformation_log": "Unmodified NASA POWER Hourly API JSON; S-ORS WGS84 point 37.4231333N, 124.7380389E; UTC; retrieved 2026-08-21 KST."
+    }
+  ],
+  "expected_power_contract": {
+    "parameters": [
+      "WS10M",
+      "WD10M",
+      "U10M",
+      "V10M",
+      "PS",
+      "T2M",
+      "RH2M",
+      "PRECTOTCORR",
+      "ALLSKY_SFC_SW_DWN"
+    ],
+    "rows_after_cutoff": 17535,
+    "start_utc": "2024-01-01T00:00:00+00:00",
+    "end_utc": "2025-12-31T14:00:00+00:00",
+    "maximum_missing_values": 0,
+    "maximum_duplicate_timestamps": 0,
+    "maximum_non_hourly_gaps": 0,
+    "minimum_feature_coverage": 0.995,
+    "minimum_fully_finite_row_share": 0.995
+  },
+  "frozen_incumbent": {
+    "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+    "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+    "rows": 69850,
+    "prediction_column": "prediction",
+    "expected_rmse": 0.7683674566216134,
+    "expected_block_rows": {
+      "2024_sep_oct": 26273,
+      "2025_jul_aug": 26693,
+      "2025_nov_dec": 16884
+    }
+  },
+  "validation": {
+    "outer_blocks": [
+      "2024_sep_oct",
+      "2025_jul_aug",
+      "2025_nov_dec"
+    ],
+    "outer_policy": "Leave one seasonal block out. The held-out block truth is used only for final reporting.",
+    "inner_policy": "Within each outer-training pair, leave each training block out once and choose correction alpha on pooled inner predictions.",
+    "alpha_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260821,
+    "bootstrap_unit": "Asia/Seoul calendar day"
+  },
+  "features": {
+    "control": [
+      "abs_t1_t5",
+      "public_temp_range",
+      "public_psal_range",
+      "contrast_delta_past_24h",
+      "temp_range_delta_past_24h",
+      "contrast_center_change_24h",
+      "temp_range_center_change_24h",
+      "m2_amplitude_mean",
+      "m2_amplitude_spread",
+      "m2_phase_coherence",
+      "layer_2",
+      "layer_3",
+      "layer_4"
+    ],
+    "candidate_policy": "The control feature list plus every feature emitted by p2_restore.external_meteorology.build_power_features.",
+    "forbidden_names": [
+      "truth",
+      "target",
+      "residual",
+      "temp_2",
+      "temp_3",
+      "temp_4",
+      "psal_2",
+      "psal_3",
+      "psal_4"
+    ]
+  },
+  "model": {
+    "family": "lightgbm.LGBMRegressor",
+    "objective": "regression_l2",
+    "n_estimators": 160,
+    "learning_rate": 0.03,
+    "num_leaves": 15,
+    "max_depth": 4,
+    "min_child_samples": 200,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 5.0,
+    "random_state": 20260821,
+    "deterministic": true,
+    "force_col_wise": true,
+    "n_jobs": 1,
+    "verbosity": -1
+  },
+  "promotion_gate": {
+    "minimum_external_incremental_improvement_c": 0.01,
+    "external_bootstrap_ci90_high_max": 0.0,
+    "minimum_external_improved_blocks": 2,
+    "maximum_external_layer_regression_c": 0.005,
+    "final_must_beat_incumbent": true,
+    "maximum_final_layer_regression_vs_incumbent_c": 0.01,
+    "pass_action": "GO_TO_ERA5_ONE_SHOT_REVIEW",
+    "fail_action": "NO_GO_EXTERNAL_METEOROLOGY_FAMILY"
+  },
+  "outputs": {
+    "directory": "artifacts/p2_nasa_power_residual_meta_v1",
+    "status": "artifacts/status/p2_nasa_power_residual_meta_oof.json",
+    "oof": "artifacts/p2_nasa_power_residual_meta_v1/oof.parquet",
+    "result": "artifacts/p2_nasa_power_residual_meta_v1/result.json",
+    "manifest": "artifacts/p2_nasa_power_residual_meta_v1/manifest.json"
+  }
+}

@@ -58,6 +58,7 @@
 | [P1 학술 정찰 HTML 보고서](reports/p1_academic_methods_20260813/report.html) | 검증된 지표·차트·우선순위 표가 포함된 휴대형 기술 보고서 |
 | `reports/ENVIRONMENT_2026-08-13.md` | Python·패키지 lock·CPU/GPU 실행 환경 |
 | `reports/EXTERNAL_DATA_APPROVAL_DRAFT.md` | 외부자료와 운영 범위 서면 문의 초안 |
+| [EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md](reports/EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md) | 공식 FAQ에 따른 외부 공개 데이터 허용·출처·누출 정책 갱신 |
 
 ## 환경 구성
 
@@ -127,8 +128,8 @@ PowerShell 예시:
 - 행 단위 무작위 분할, test 양성률 4% 강제, 결측을 정답처럼 사용하는 모델을 금지합니다.
 - centered 피처는 동일 연속 segment 안에서만 계산하며 fold의 purge가 최대 의존 범위를 덮어야 합니다.
 - causal 결과는 offline 결과와 분리해 보고합니다.
-- 외부 관측값은 운영진 서면 승인 전 0건 사용합니다. 2024~2026 KORS/KHOA 원자료·실시간값은 승인 여부와 관계없이 제외합니다.
-- 일일 1회 제출 기회를 보호하기 위해 로컬 validator와 재현 검사를 통과한 정확한 파일만 사용자에게 제시합니다.
+- 공식 FAQ에 따라 출처를 명시한 외부 공개 데이터는 사용할 수 있습니다. 숨은 정답을 직접 복원하는 동일 센서 원자료는 제외하고, 라이선스·기간·SHA-256·가공 이력과 external-off ablation을 기록합니다.
+- 문제별 하루 3회 제출 기회를 보호하기 위해 로컬 validator와 재현 검사를 통과한 정확한 파일만 사용자에게 제시합니다.
 - 최종 모델 지정 뒤 예측 업로드가 잠길 수 있으므로 별도 경고와 사용자 재확인 없이 최종 모델을 지정하지 않습니다.
 
 ## 공식 일정
@@ -136,6 +137,7 @@ PowerShell 예시:
 | 출처 | 단계 | 일정 |
 |---|---|---|
 | 최신 대회 UI | 문제 공개 | 2026-08-13 |
+| 참가자 전용 제출 안내(수정) | 답안 채점 시작 | 2026-08-25(8월 20일 업로드분 포함) |
 | 최신 대회 UI | 제출 마감·최종 모델 | 2026-09-07(정확한 시각 확인 필요) |
 | 초기 공고 PDF | 온라인 해커톤 | 2026-08-10 ~ 2026-09-04 |
 | 초기 공고 PDF | 코드·데이터셋 zip 마감 | 2026-09-04 10:00 |
@@ -149,4 +151,5 @@ PowerShell 예시:
 
 - [KIMST 대회 공고](https://www.kimst.re.kr/u/news/notice_01/board.do?bno=153421765145711&searchDiv=&searchKeyword=&type=view)
 - [경진대회 홈페이지](https://www.oceanaidata.org)
+- [공식 FAQ API](https://oceanaidata.org/api/faqs)
 - [GitHub 백업 저장소](https://github.com/choihyunjin1/-oceanaidata_track1)

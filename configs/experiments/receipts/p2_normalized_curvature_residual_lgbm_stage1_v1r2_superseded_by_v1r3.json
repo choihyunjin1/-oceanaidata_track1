@@ -1,0 +1,58 @@
+{
+  "schema_version": "p2_experiment_supersession_receipt.v1",
+  "receipt_id": "p2_ncr_lgbm_stage1_v1r2_superseded_by_v1r3_20260826",
+  "status": "APPEND_ONLY_SUPERSESSION_RECEIPT",
+  "effective_date_kst": "2026-08-26",
+  "append_only": true,
+  "superseded": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r2",
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r2.json",
+      "bytes": 15094,
+      "sha256": "8880efb45f2ccdaf8864769106c84a0d3911733c25dca05965d4b29020cb88b2"
+    },
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r2.py",
+      "bytes": 51949,
+      "sha256_raw": "752cf59dbe367a7d24d7d02f99b28b541781c99ac1d278ddf6a849f3f72004a3",
+      "sha256_config_hash_literal_normalized": "696c6bef0c6fb821569416d1e602f1e8c0a85a31dceed8f1ada1d84711084a25"
+    },
+    "test": {
+      "path": "tests/test_p2_normalized_curvature_residual_stage1_v1r2.py",
+      "bytes": 11509,
+      "sha256": "7c56e59d56707691632afd859d4354ce8d558759511307a4d28e8a4b2911b3b0"
+    },
+    "numerical_stage1_fit_calls_observed": 0,
+    "final_artifact_directory_observed": false,
+    "execution_authorized_after_receipt": false
+  },
+  "superseding": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3",
+    "config_path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r3.json",
+    "runner_path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r3.py"
+  },
+  "unchanged_scientific_contract": [
+    "NCR_LGBM normalized-curvature target and decode mathematics",
+    "the exact ordered set of 55 public-profile feature columns",
+    "LightGBM parameters",
+    "seeds 20260823, 20260824, and 20260825",
+    "exactly three physical fit slots and the 1800-second hard wall",
+    "Stage 1 split, metrics, bootstrap, and decision gates",
+    "exclusive claim, append-and-fsync journal, no retry, hash-read binding, and transactional publication"
+  ],
+  "supersession_reason": "v1r2 could resolve observations through an unpinned P2_DATA_DIR before creating its permanent claim. v1r3 requires the approved literal observations path, exact parent and filename, byte count, held-handle SHA-256, immutable references, runtime and native pins to pass before any permanent claim, control, or staging path is created; the worker re-verifies that same sealed literal path.",
+  "execution_prohibition": {
+    "forbidden_experiment_ids": [
+      "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1",
+      "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r2"
+    ],
+    "policy": "Neither superseded runner may be executed. Only v1r3 can become eligible after strict preflight and explicit --execute-stage1."
+  },
+  "external_actions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  }
+}

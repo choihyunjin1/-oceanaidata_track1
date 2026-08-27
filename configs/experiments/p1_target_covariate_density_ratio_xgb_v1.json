@@ -1,0 +1,163 @@
+{
+  "schema_version": "p1_target_covariate_density_ratio_xgb.v1",
+  "experiment_id": "p1_target_covariate_density_ratio_xgb_v1",
+  "problem": "P1",
+  "created_at_kst": "2026-08-25T17:30:00+09:00",
+  "objective": "Test whether label-blind station-layer KST-day covariate density weighting transports the frozen 80-feature XGBoost incumbent toward the official 2026 input distribution.",
+  "artifact_dir": "artifacts/p1_target_covariate_density_ratio_xgb_v1",
+  "policy": {
+    "source_data_mutation_allowed": false,
+    "frozen_output_mutation_allowed": false,
+    "submission_upload_allowed": false,
+    "test_label_reads_allowed": false,
+    "unlabeled_test_covariates_allowed": true,
+    "official_score_use_allowed": false,
+    "adaptive_tuning_after_public_score_allowed": false,
+    "primary_seed_selected_before_fit": true,
+    "robustness_seed_predictions_averaged_or_selected": false
+  },
+  "paths": {
+    "base_config": "configs/p1.toml",
+    "incumbent_oof": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "incumbent_selection": "artifacts/runs/20260813T153038+0900_cv_378a4e89/selection.json",
+    "incumbent_submission": "output/2026-08-20/ready/P1_submission.csv",
+    "train_feature_cache": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+    "train_feature_metadata": "artifacts/cache/train_offline_e9fe1eb46cb7431f.json",
+    "test_feature_cache": "artifacts/cache/test_offline_c2a3877bdecea937.parquet",
+    "test_feature_metadata": "artifacts/cache/test_offline_c2a3877bdecea937.json",
+    "reference_curve_config": "configs/p1_meaningful_learning_curve_generation_v1.json",
+    "reference_curve_predictions_complete": "artifacts/p1_meaningful_learning_curve_generation_v1/predictions_complete.json",
+    "reference_curve_parts": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts",
+    "round_a_candidate": "artifacts/p1_full_improvement_cycle_20260822_v1/candidate/P1_IMPROVED_ENSEMBLE_V1.csv",
+    "round_a_model": "artifacts/p1_full_improvement_cycle_20260822_v1/resume_models/p1_improved_ensemble_corrected.joblib",
+    "round_a_resume_seal": "artifacts/p1_full_improvement_cycle_20260822_v1/resume_preexecution_seal.json",
+    "fallback_config": "configs/p1_meaningful_learning_curve_generation_v1.json",
+    "fallback_result": "artifacts/p1_meaningful_learning_curve_generation_v1/result.json"
+  },
+  "immutable_sha256": {
+    "README.md": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train.csv": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test.csv": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "sample_submission.csv": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4",
+    "configs/p1.toml": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "artifacts/runs/20260813T153038+0900_cv_378a4e89/selection.json": "ebc2dcdd57f5a610151d84a3e37f9bb4295030f0dcb40314972be4c419e01de8",
+    "output/2026-08-20/ready/P1_submission.csv": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3",
+    "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+    "artifacts/cache/train_offline_e9fe1eb46cb7431f.json": "396386d48bf3588bd765d26d66625184a5af9a41312703ffbcfd58da9dbe0abd",
+    "artifacts/cache/test_offline_c2a3877bdecea937.parquet": "9442ebcda96cd626185718e17a139f9649eb741c3126d97200fdf6dc9ba399c6",
+    "artifacts/cache/test_offline_c2a3877bdecea937.json": "0cefaf5c5a5a898a0ae436b67993f5fa42f6f08050c9d20160dda5507178c10d",
+    "configs/p1_meaningful_learning_curve_generation_v1.json": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7",
+    "artifacts/p1_meaningful_learning_curve_generation_v1/predictions_complete.json": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb",
+    "artifacts/p1_full_improvement_cycle_20260822_v1/candidate/P1_IMPROVED_ENSEMBLE_V1.csv": "8c0f4627b8da2af1c8362233e6a563e1033dd7119db126d6097272a0cc37bd6e",
+    "artifacts/p1_full_improvement_cycle_20260822_v1/resume_models/p1_improved_ensemble_corrected.joblib": "42755cd99a8a4fae23867c598c17eca76448e0edf8f4a58dee7aa8234024623d",
+    "artifacts/p1_full_improvement_cycle_20260822_v1/resume_preexecution_seal.json": "4bb6b05a99130eaf1c61b37192a0d0128ac09970727a535b7728c8de43f0b324"
+  },
+  "domain": {
+    "unit": "station-layer-KST-day",
+    "cadence_minutes": 10,
+    "expected_rows_per_day": 144,
+    "categorical_features": ["station", "layer_category"],
+    "numeric_features": [
+      "coverage_fraction",
+      "temp_missing_rate", "psal_missing_rate", "depth_missing_rate",
+      "temp_median", "temp_iqr", "temp_std_population", "temp_median_abs_diff",
+      "psal_median", "psal_iqr", "psal_std_population", "psal_median_abs_diff",
+      "depth_median", "depth_iqr", "depth_std_population", "depth_median_abs_diff",
+      "day_of_year_sin", "day_of_year_cos"
+    ],
+    "forbidden_features": [
+      "label", "anomaly_type", "year", "incumbent_probability",
+      "incumbent_prediction", "official_score"
+    ],
+    "classifier": {
+      "type": "LogisticRegression",
+      "C": 0.1,
+      "solver": "lbfgs",
+      "max_iter": 2000,
+      "class_weight": "balanced",
+      "numeric_pipeline": "median_imputer_with_missing_indicators_then_standard_scaler",
+      "categorical_pipeline": "most_frequent_imputer_then_one_hot_ignore_unknown"
+    },
+    "oof": {
+      "splitter": "StratifiedGroupKFold",
+      "n_splits": 5,
+      "shuffle": true,
+      "group": "KST_ISO_year_week"
+    },
+    "ratio": {
+      "formula": "P(target|x)/(1-P(target|x))",
+      "prior_correction": false,
+      "clip": [0.1, 8.0]
+    },
+    "support_gates": {
+      "required_group_overlap": 0,
+      "require_all_target_station_layers_in_source": true,
+      "minimum_daily_ratio_ess_fraction": 0.25,
+      "minimum_row_ratio_ess_fraction": 0.25,
+      "minimum_station_layer_daily_ratio_ess_fraction": 0.20,
+      "require_full_row_mapping": true,
+      "require_finite_positive_weights": true,
+      "require_exact_base_weight_sum_after_normalization": true
+    }
+  },
+  "model": {
+    "feature_mode": "offline",
+    "feature_count": 80,
+    "backend": "xgboost",
+    "parameters": {
+      "n_estimators": 700,
+      "learning_rate": 0.04,
+      "max_depth": 7,
+      "min_child_weight": 20.0,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "tree_method": "hist",
+      "device": "cpu"
+    },
+    "base_sample_weight": "positive=sqrt(N_negative/N_positive), negative=1",
+    "combined_sample_weight": "base_weight*density_ratio_then_total_sum_renormalized_to_base",
+    "deployment_postprocess": {
+      "high_threshold": 0.2,
+      "low_threshold": 0.1,
+      "close_gap_rows": 0,
+      "minimum_positive_run": 12
+    }
+  },
+  "validation": {
+    "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "primary_seed": 20260813,
+    "robustness_seeds": [20260829, 20260847],
+    "seed_rule": "registered_seed_plus_outer_fold_ordinal",
+    "candidate_probability_rule": "primary_seed_only",
+    "bootstrap": {
+      "replicates": 5000,
+      "seed": 20260825,
+      "unit": "positive_event_or_normal_station_layer_KST_day",
+      "confidence": 0.90
+    },
+    "safety_gate": {
+      "minimum_full_weighted_f1_delta": -0.002,
+      "minimum_noncatastrophic_fold_count": 2,
+      "minimum_noncatastrophic_fold_delta": -0.01,
+      "maximum_relative_fp_per_normal_day_increase": 0.10
+    },
+    "research_promotion_gate": {
+      "minimum_full_weighted_f1_delta": 0.005,
+      "require_weighted_ci90_lower_above_zero": true,
+      "require_all_late_fractions_positive": true,
+      "minimum_improved_fold_count": 2,
+      "maximum_worst_station_f1_regression": 0.005,
+      "minimum_positive_seed_count": 2,
+      "maximum_relative_fp_per_normal_day_increase": 0.10,
+      "public_f1_minimum_if_uploaded": 0.795709
+    }
+  },
+  "fallback": {
+    "trigger": "primary_density_structural_gate_failure_only",
+    "id": "event_day_balanced_binary_lgbm",
+    "requires_existing_leakage_and_reproducibility_checks": true,
+    "performance_failure_does_not_trigger_fallback": true
+  }
+}

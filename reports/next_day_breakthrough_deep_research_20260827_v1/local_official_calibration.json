@@ -1,0 +1,293 @@
+{
+  "schema_version": "ocean_hackathon.local_official_calibration_20260827.v1",
+  "status": "PASS",
+  "global_scalar_fit_performed": false,
+  "reason_no_global_fit": "n is small, observations are family-correlated, treatment lineages differ, and sign reversals occur.",
+  "problem_analysis": {
+    "P1": {
+      "rows": 421032,
+      "scores": {
+        "O": 0.8604836038423319,
+        "A": 0.8625704956960523,
+        "B": 0.8646700887242071,
+        "G": 0.8655185298413669,
+        "I": 0.8652761736531014,
+        "GI": 0.8661235573659198,
+        "Router": 0.8668999966019912,
+        "Intersection": 0.8630765019843986,
+        "Union": 0.8620428585536061
+      },
+      "local_cell_counts": {
+        "G_add": 22,
+        "I_add": 21,
+        "removal": 31
+      },
+      "local_cell_truth_utility": {
+        "G_add_beneficial": 22,
+        "G_add_harmful": 0,
+        "I_add_beneficial": 18,
+        "I_add_harmful": 3,
+        "removal_beneficial": 29,
+        "removal_harmful": 2
+      },
+      "test_cell_counts": {
+        "G_add": 81,
+        "I_add": 136,
+        "removal": 12
+      },
+      "support_rate_ratio_test_over_local": {
+        "G_add": 9.171966752029588,
+        "I_add": 16.133171382758686,
+        "removal": 0.9643166955538873
+      },
+      "decision": "Use family/cell-specific diagnostics; do not fit a global local-to-official scalar."
+    },
+    "P2": {
+      "rows": 78156,
+      "scores": {
+        "O": 0.9903269119971646,
+        "global_neg_t": 0.9854435250124535,
+        "L2_neg_t": 0.9892059615892566,
+        "L3_neg_t": 0.9869265171260154,
+        "L4_neg_t": 0.9899703740973449,
+        "U": 0.9891680347087561,
+        "E": 0.9889194351024279,
+        "F": 0.9889786114616151
+      },
+      "upcoming_local_deltas_vs_O": {
+        "U": -0.0011588772884084664,
+        "E": -0.0014074768947367478,
+        "F": -0.0013483005355494626
+      },
+      "postprocess": {
+        "envelope_eligible_rows": 77423,
+        "envelope_active_rows": 9396,
+        "full_eligible_rows": 76827,
+        "full_active_rows": 14377
+      },
+      "decision": "The official all-row quadratic is algebraically reliable; local surrogate scores are only weak postprocess ordering evidence and must not replace it."
+    },
+    "P3": {
+      "rows": 1086,
+      "scores": {
+        "O": 0.7791048399763751,
+        "A": 0.7786608799293823,
+        "B": 0.7788294787748635,
+        "C1": 0.7812709941075366,
+        "C2": 0.7851285488542176,
+        "C3": 0.7844989433991085,
+        "L12_neg2": 0.7792340922653909,
+        "L1824_neg2": 0.7811420788561605
+      },
+      "upcoming_local_deltas_vs_O": {
+        "C1": 0.002166154131161502,
+        "C2": 0.006023708877842426,
+        "C3": 0.005394103422733387
+      },
+      "decision": "Reject the current local analogue as a scalar selection metric for this official correction family. Use C1 as the scorer/lineage guard and C2/C3 to identify Public curvature."
+    }
+  },
+  "calibration_rows": [
+    {
+      "problem": "P1",
+      "family": "backbone",
+      "contrast": "A vs O",
+      "local_delta_candidate_minus_anchor": 0.002086891853720352,
+      "official_delta_candidate_minus_anchor": -0.0045640000000000125,
+      "local_gain_positive_is_better": 0.002086891853720352,
+      "official_gain_positive_is_better": -0.0045640000000000125,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 2.1869844342262685,
+      "comparability_grade": "B",
+      "caveat": "Matched local family, but deployment surface and hidden official population differ."
+    },
+    {
+      "problem": "P1",
+      "family": "backbone",
+      "contrast": "B vs O",
+      "local_delta_candidate_minus_anchor": 0.00418648488187523,
+      "official_delta_candidate_minus_anchor": 0.0030010000000000314,
+      "local_gain_positive_is_better": 0.00418648488187523,
+      "official_gain_positive_is_better": 0.0030010000000000314,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 0.716830487789988,
+      "comparability_grade": "B",
+      "caveat": "Direction transported once; uncertainty and station/fold heterogeneity remain."
+    },
+    {
+      "problem": "P1",
+      "family": "disagreement_router",
+      "contrast": "Router vs B",
+      "local_delta_candidate_minus_anchor": 0.0022299078777840986,
+      "official_delta_candidate_minus_anchor": 0.024162999999999935,
+      "local_gain_positive_is_better": 0.0022299078777840986,
+      "official_gain_positive_is_better": 0.024162999999999935,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 10.835873643359278,
+      "comparability_grade": "A-",
+      "caveat": "Same frozen cell rules; support frequency moved 9-16x for additions."
+    },
+    {
+      "problem": "P1",
+      "family": "set_operation",
+      "contrast": "Intersection vs B",
+      "local_delta_candidate_minus_anchor": -0.0015935867398085835,
+      "official_delta_candidate_minus_anchor": 0.009217999999999948,
+      "local_gain_positive_is_better": -0.0015935867398085835,
+      "official_gain_positive_is_better": 0.009217999999999948,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 5.784435681930426,
+      "comparability_grade": "A-",
+      "caveat": "Same file operation, but F1 is nonlinear and official evaluation may use a hidden subset."
+    },
+    {
+      "problem": "P1",
+      "family": "set_operation",
+      "contrast": "Union vs B",
+      "local_delta_candidate_minus_anchor": -0.0026272301706010692,
+      "official_delta_candidate_minus_anchor": -0.01140400000000008,
+      "local_gain_positive_is_better": -0.0026272301706010692,
+      "official_gain_positive_is_better": -0.01140400000000008,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 4.3406931480963555,
+      "comparability_grade": "A-",
+      "caveat": "Same file operation, but F1 is nonlinear and official evaluation may use a hidden subset."
+    },
+    {
+      "problem": "P2",
+      "family": "A-O axis",
+      "contrast": "global -t vs O",
+      "local_delta_candidate_minus_anchor": -0.0048833869847111355,
+      "official_delta_candidate_minus_anchor": -0.003847000000000045,
+      "local_gain_positive_is_better": 0.0048833869847111355,
+      "official_gain_positive_is_better": 0.003847000000000045,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 0.7877729149961283,
+      "comparability_grade": "C",
+      "caveat": "Same algebra but local surrogate and official A-O directions are not exact-lineage matches."
+    },
+    {
+      "problem": "P2",
+      "family": "A-O axis",
+      "contrast": "L2 -t vs O",
+      "local_delta_candidate_minus_anchor": -0.0011209504079080501,
+      "official_delta_candidate_minus_anchor": 0.0008319999999999439,
+      "local_gain_positive_is_better": 0.0011209504079080501,
+      "official_gain_positive_is_better": -0.0008319999999999439,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 0.7422273047321034,
+      "comparability_grade": "C",
+      "caveat": "Layer-2 sign reverses; local axis is unsuitable for layer selection."
+    },
+    {
+      "problem": "P2",
+      "family": "A-O axis",
+      "contrast": "L3 -t vs O",
+      "local_delta_candidate_minus_anchor": -0.0034003948711491816,
+      "official_delta_candidate_minus_anchor": -0.00013610323709867256,
+      "local_gain_positive_is_better": 0.0034003948711491816,
+      "official_gain_positive_is_better": 0.00013610323709867256,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 0.04002571532307827,
+      "comparability_grade": "C",
+      "caveat": "Official L3 score is inferred by additive MSE decomposition."
+    },
+    {
+      "problem": "P2",
+      "family": "A-O axis",
+      "contrast": "L4 -t vs O",
+      "local_delta_candidate_minus_anchor": -0.00035653789981970885,
+      "official_delta_candidate_minus_anchor": -0.004549000000000025,
+      "local_gain_positive_is_better": 0.00035653789981970885,
+      "official_gain_positive_is_better": 0.004549000000000025,
+      "sign_agreement": true,
+      "magnitude_ratio_abs_official_over_local": 12.758811902746737,
+      "comparability_grade": "C",
+      "caveat": "Direction agrees but magnitude differs by more than an order of magnitude."
+    },
+    {
+      "problem": "P3",
+      "family": "shrink coefficient",
+      "contrast": "A vs O",
+      "local_delta_candidate_minus_anchor": -0.00044396004699287506,
+      "official_delta_candidate_minus_anchor": 0.004608999999999974,
+      "local_gain_positive_is_better": 0.00044396004699287506,
+      "official_gain_positive_is_better": -0.004608999999999974,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 10.381564807956565,
+      "comparability_grade": "D",
+      "caveat": "Official A includes base-lineage drift and early-lead changes absent from local A."
+    },
+    {
+      "problem": "P3",
+      "family": "shrink coefficient",
+      "contrast": "B vs O",
+      "local_delta_candidate_minus_anchor": -0.0002753612015116147,
+      "official_delta_candidate_minus_anchor": 0.002275000000000027,
+      "local_gain_positive_is_better": 0.0002753612015116147,
+      "official_gain_positive_is_better": -0.002275000000000027,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 8.261875629214481,
+      "comparability_grade": "C-",
+      "caveat": "B is long-lead midpoint officially, but score population is a hidden 66-case subset."
+    },
+    {
+      "problem": "P3",
+      "family": "reverse long axis",
+      "contrast": "C1/long -2 vs O",
+      "local_delta_candidate_minus_anchor": 0.002166154131161502,
+      "official_delta_candidate_minus_anchor": -0.008084006281438572,
+      "local_gain_positive_is_better": -0.002166154131161502,
+      "official_gain_positive_is_better": 0.008084006281438572,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 3.7319626360585385,
+      "comparability_grade": "C",
+      "caveat": "Official value is preregistered from exact disjoint-support additivity, not yet observed."
+    },
+    {
+      "problem": "P3",
+      "family": "reverse long axis",
+      "contrast": "L12 -2 vs O",
+      "local_delta_candidate_minus_anchor": 0.00012925228901572439,
+      "official_delta_candidate_minus_anchor": -0.00039000000000000146,
+      "local_gain_positive_is_better": -0.00012925228901572439,
+      "official_gain_positive_is_better": 0.00039000000000000146,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 3.017354686481068,
+      "comparability_grade": "C",
+      "caveat": "Same lead support but local and official delta lineages are not identical."
+    },
+    {
+      "problem": "P3",
+      "family": "reverse long axis",
+      "contrast": "L18/24 -2 vs O",
+      "local_delta_candidate_minus_anchor": 0.0020372388797853525,
+      "official_delta_candidate_minus_anchor": -0.007689000000000057,
+      "local_gain_positive_is_better": -0.0020372388797853525,
+      "official_gain_positive_is_better": 0.007689000000000057,
+      "sign_agreement": false,
+      "magnitude_ratio_abs_official_over_local": 3.774226025379108,
+      "comparability_grade": "C",
+      "caveat": "Same lead support but local and official delta lineages are not identical."
+    }
+  ],
+  "summary": {
+    "rows": 14,
+    "sign_agreement_all": 6,
+    "sign_agreement_high_comparability": 3,
+    "high_comparability_rows": 5,
+    "policy": {
+      "P1": "Use cell-specific support transport and official factorial contrasts.",
+      "P2": "Trust official all-row quadratic algebra; use local only for postprocess ordering.",
+      "P3": "Do not use current local analogue for selection; identify hidden-Public curves with official probes."
+    }
+  },
+  "source_hashes": {
+    "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260826_round_D_preregistered_P1x3_P2x3_P3x3\\OFFICIAL_RESULTS_20260826.json": "26e73e5fa74876377f7c7f15cf07c89bd512d31f10fe36d459a6e6f7fb350cee",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p1_matched_budget_local_compare_20260825_v1\\predictions.parquet": "23f9b59cc54a7502c87786280ef76319e64288a95a44f8c9ec37188a761033c5",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\runs\\20260813T153038+0900_cv_378a4e89\\oof.parquet": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_authoritative_nested_surrogate_actual_20260825_v5\\evaluated_oof_100.parquet": "e83090138df39d1af42e6eb622262b8f87814281754b8f2df090232cc5628526",
+    "C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore\\observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p3_corrected_fixed_long_shrink_v4\\oof.parquet": "8a26d13bd1f4075145e83437e7956a679570e11f3ed54fccfbe039aee7f2a398"
+  }
+}

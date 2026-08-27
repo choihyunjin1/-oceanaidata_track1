@@ -1,0 +1,138 @@
+{
+  "schema_version": "p2_matched_budget_local_compare.v1",
+  "experiment_id": "p2_matched_budget_local_compare_20260825_v1",
+  "created_at_kst": "2026-08-25T18:45:00+09:00",
+  "status": "SEALED_BEFORE_NEW_MATCHED_COMPARISON_SCORE",
+  "research_only": true,
+  "promotion_authorized": false,
+  "submission_generation_authorized": false,
+  "official_public_score_use": "POST_HOC_INTERPRETATION_ONLY",
+  "common_protocol": {
+    "path": "artifacts/matched_budget_local_compare_20260825/common_protocol.json",
+    "sha256": "a92ba760a764d8f6759fa5ad281efe35139ddbc7f956654c76c7143fe573e2c8",
+    "bytes": 4439
+  },
+  "data_contract": {
+    "observations_csv_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "readme_sha256": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "hidden_label_reads": 0
+  },
+  "exact_prefix_refit_audit": {
+    "audit_path": "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+    "audit_sha256": "8484b73deeb508f1471e0c0baf7f0cad9a92fbcd8d2a569e94ab22b0b11727ae",
+    "seal_path": "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/seal.json",
+    "seal_sha256": "b14468e73384a762ed30b84327b10a702e83641cb15196f7505ba8a47476b1e4",
+    "verdict": "NOT_CURRENTLY_REPRODUCIBLE_AS_EXACT_SAME_PREFIX_FOLD_TRAIN_ONLY_INCUMBENT"
+  },
+  "surfaces": {
+    "exact_frozen_lineage": {
+      "role": "Exact final incumbent postprocess on its original frozen local OOF lineage; diagnostic, not a causal forward refit.",
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "bytes": 2477660,
+      "manifest_path": "artifacts/p2_extrapolated_soft_gate_v2/manifest.json",
+      "manifest_sha256": "f2147fea7a4d0708904460c58ba2cc43d1325020104a29b133545015b4946d3b",
+      "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+      "seed_budget": "UNAVAILABLE_FOR_FROZEN_LINEAGE",
+      "exact_official_incumbent_architecture": true,
+      "causal_forward_unbiased": false
+    },
+    "forward_causal_surrogate": {
+      "role": "Architecture/feature-role matched time-safe surrogate with identical folds, cutoffs, three complete-pipeline seeds, and five prefix fractions for every family.",
+      "exact_official_incumbent_architecture": false,
+      "causal_forward_unbiased": true,
+      "folds": ["outer_2024_sep_oct", "outer_2025_may_jun", "outer_2025_jul_aug"],
+      "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+      "seed_columns": ["seed_20260823", "seed_20260824", "seed_20260825"],
+      "oof": {
+        "040": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_040.csv", "sha256": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626"},
+        "055": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_055.csv", "sha256": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168"},
+        "070": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_070.csv", "sha256": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf"},
+        "085": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_085.csv", "sha256": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8"},
+        "100": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_100.csv", "sha256": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06"}
+      },
+      "architecture_manifest": {"path": "artifacts/p2_architecture_matched_reference_v3/architecture_manifest.json", "sha256": "0486bd6aaca94bbe9bc2e7b8a49aeba9144d5d38b86f695f18d917a90b7fc791"},
+      "training_recipe": {"path": "artifacts/p2_architecture_matched_reference_v3/training_recipe.json", "sha256": "fb01f8017a6af4fbaec1d9a27bc15972f80153012b6fcff91f2f877d61e1b3e1"}
+    }
+  },
+  "families": {
+    "incumbent": {
+      "default_setting": "INCUMBENT_NOOP",
+      "settings": [
+        {"id": "INCUMBENT_NOOP", "operation": "identity_then_profile_projection"}
+      ]
+    },
+    "conservative_stack": {
+      "default_setting": "STACK_W0500",
+      "settings": [
+        {"id": "STACK_W0500", "incumbent_weight": 0.5},
+        {"id": "STACK_W0625", "incumbent_weight": 0.625},
+        {"id": "STACK_W0750", "incumbent_weight": 0.75}
+      ],
+      "formula": "local_depth_interpolation + incumbent_weight * (incumbent - local_depth_interpolation)"
+    },
+    "round_b": {
+      "default_setting": "CAUSAL_RESIDUAL_SCALE025",
+      "settings": [
+        {"id": "CAUSAL_RESIDUAL_SCALE025", "operation": "incumbent + fixed causal residual correction scale 0.25"},
+        {"id": "FALLBACK_BLEND50_A0625", "operation": "0.5 * incumbent + 0.5 * STACK_W0625"},
+        {"id": "CAUSAL_ON_FALLBACK", "operation": "FALLBACK_BLEND50_A0625 + fixed causal residual correction scale 0.25"}
+      ],
+      "causal_residual_contract": {
+        "public_layers": [1, 5, 6, 7, 8],
+        "jointly_masked_columns": ["temp", "psal"],
+        "rolling_hours": 24,
+        "minimum_samples": 72,
+        "minimum_anchors": 4,
+        "required_anchors": [1, 5],
+        "ridge_slope_lambda": 10.0,
+        "correction_scale": 0.25,
+        "correction_clip_c": 0.125,
+        "coherent_sign_required": true,
+        "maximum_anchor_span_c": 0.5
+      }
+    }
+  },
+  "matched_budget": {
+    "maximum_settings_per_family": 3,
+    "surrogate_seed_count_per_setting": 3,
+    "new_model_fits": 0,
+    "saved_prediction_reuse": true,
+    "same_split_surface_within_panel": true,
+    "same_postprocess": "profile_projection_after_each_setting",
+    "candidate_or_grid_changes_after_first_score": 0
+  },
+  "metrics": {
+    "primary": "fold_equal_layer_equal_rmse_c",
+    "secondary": ["historical_row_pooled_rmse_c", "by_fold_rmse_c", "by_layer_rmse_c"],
+    "tuning_gain": "family_default_rmse_minus_family_best_rmse",
+    "structure_gain": "incumbent_default_rmse_minus_family_default_rmse",
+    "complementarity": ["paired_residual_pearson", "residual_disagreement_rms_c", "fixed_50_50_blend_rmse_c"],
+    "bootstrap": {
+      "unit": "KST calendar day sampled within fold",
+      "replicates": 5000,
+      "interval": 0.9,
+      "seed": 20260825
+    }
+  },
+  "implementation_pins": {
+    "profile_projection": {"path": "src/p2_restore/profile_projection.py", "sha256": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"},
+    "causal_residual": {"path": "src/p2_restore/public_layer_causal_residual.py", "sha256": "70f72c3abe3cb359985b6202072094e0625a9899498fee8743ba2f58ec9a4392"}
+  },
+  "resource_policy": {
+    "cpu_threads": 4,
+    "gpu_training": false,
+    "p3_era5_process_mutation": false
+  },
+  "output": {
+    "directory": "artifacts/p2_matched_budget_local_compare_20260825_v1",
+    "aggregate_only": true,
+    "oof_predictions_written": false,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "append_only": true
+  }
+}

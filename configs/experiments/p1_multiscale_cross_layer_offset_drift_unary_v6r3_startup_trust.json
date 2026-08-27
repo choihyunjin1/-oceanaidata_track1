@@ -1,0 +1,180 @@
+{
+  "schema_version": "p1_multiscale_cross_layer_offset_drift_unary.v6r3.external_startup_trust.v1",
+  "generation": "p1_multiscale_cross_layer_offset_drift_unary_v6r3",
+  "trust_boundary": "The independently pinned PowerShell launcher authenticates this declaration, the bootstrap, the interpreter chain, and every pre-script encoding source before starting Python. The Python process cannot retroactively authenticate code executed before its earliest audit hook.",
+  "external_powershell_trust_root": {
+    "canonical_absolute_host_source": "externally injected P1_POWERSHELL_HOST; must be an absolute resolved plain-file path and must not come from PATH lookup",
+    "version": "7.6.4",
+    "bytes": 301368,
+    "sha256": "db6dd81183fe57d22e03b911ec9a30a2fd7c40542e97743615355a6fb44f458f",
+    "host_distribution_and_launcher_must_both_be_authenticated_before_either_executes": true,
+    "path_lookup_invocation_forbidden": true,
+    "post_start_self_hash_is_not_a_trust_root": true,
+    "canonical_invocation_template": "$env:P1_POWERSHELL_HOST -NoLogo -NoProfile -NonInteractive -EncodedCommand <fresh-QA-pinned-UTF16LE-base64-stage0>"
+  },
+  "inline_powershell_stage0": {
+    "reference_source_path": "scripts/p1_multiscale_cross_layer_offset_drift_unary_v6r3_stage0.ps1.txt",
+    "reference_source_is_never_invoked_by_path": true,
+    "fresh_qa_must_pin_reference_source_and_exact_utf16le_encoded_command": true,
+    "mode_source": "externally set P1_LAUNCH_MODE exact CheckOnly or Execute",
+    "opens_stage1_launcher_with_open_reparse_point_and_file_share_read_only": true,
+    "authenticates_stage1_bytes_before_compilation": true,
+    "executes_only_authenticated_stage1_text_in_memory": true,
+    "retains_stage1_handle_through_stage1_and_python_child": true,
+    "direct_powershell_file_invocation_forbidden": true
+  },
+  "external_powershell_distribution_inventory": {
+    "root_source": "directory containing the externally injected absolute P1_POWERSHELL_HOST",
+    "files": 983,
+    "bytes": 296034085,
+    "inventory_sha256": "fcbbc18499e682ca08a0860dcb3b5353099a2a846e9eedc50afbb0c28ed728dc",
+    "canonical_row": "ordinal-sorted <relative-forward-slash-path> NUL <bytes> NUL <sha256> LF",
+    "fresh_external_qa_must_authenticate_inventory_before_powershell_start": true,
+    "launcher_post_start_inventory_check_is_not_retroactive": true,
+    "launcher_must_hold_every_inventory_file_share_deny_until_child_exit": true,
+    "launcher_must_same_handle_rehash_every_inventory_file_after_child": true
+  },
+  "declared_outer_tcb": {
+    "components": [
+      "fresh independent QA process that authenticates the PowerShell distribution, host, and launcher before invocation",
+      "Windows kernel/file-sharing semantics",
+      "the user-authorized Codex execution environment that performs that pre-start authentication"
+    ],
+    "launcher_self_checks_preserve_but_do_not_create_pre_start_trust": true
+  },
+  "external_qa_requirements": {
+    "powershell_distribution_inventory_must_be_independently_pinned_before_process_start": true,
+    "external_qa_must_hold_distribution_handles_through_powershell_start": true,
+    "exact_inline_stage0_encoded_command_must_be_independently_pinned": true,
+    "launcher_must_be_independently_pinned": true,
+    "launcher_must_authenticate_bootstrap_before_process_creation": true,
+    "launcher_must_authenticate_all_declared_startup_files_before_process_creation": true,
+    "launcher_must_open_every_startup_file_with_open_reparse_point_and_file_share_read_only": true,
+    "launcher_must_require_nlink_one_non_reparse_and_stable_handle_identity": true,
+    "launcher_must_retain_all_startup_handles_until_child_exit": true,
+    "launcher_must_post_child_rehash_every_startup_file_through_the_same_handle": true,
+    "launcher_must_hold_regular_file_pycache_sentinel_through_child": true,
+    "launcher_must_rehash_pycache_sentinel_through_same_handle_after_child": true,
+    "no_python_self_attestation_claim_for_pre_script_code": true
+  },
+  "canonical_python": {
+    "version": "3.12.10",
+    "implementation": "CPython",
+    "architecture": "AMD64",
+    "flags": [
+      "-I",
+      "-S",
+      "-B",
+      "-X",
+      "pycache_prefix=<workspace>/configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r3_startup_trust.json"
+    ],
+    "workspace_environment": "P1_WORKSPACE_ROOT=<absolute-workspace>",
+    "pycache_prefix_must_be_held_regular_file_sentinel": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r3_startup_trust.json"
+  },
+  "pycache_sentinel": {
+    "uses_this_exact_startup_trust_manifest_as_the_regular_file_sentinel": true,
+    "pin_source": "CONFIG owner role plus externally QA-pinned launcher",
+    "must_exist_before_python_start": true,
+    "must_be_nlink_one_non_reparse_regular_file": true,
+    "must_be_opened_with_open_reparse_point_and_file_share_read_only": true,
+    "must_remain_held_until_child_exit": true,
+    "same_handle_post_child_rehash_required": true,
+    "security_property": "A regular file cannot acquire the child path components CPython would need for a redirected __pycache__, closing absent-directory create/remove TOCTOU."
+  },
+  "startup_files": [
+    {
+      "role": "venv_interpreter_stub",
+      "path_kind": "workspace_relative",
+      "path": ".venv-p1/Scripts/python.exe",
+      "bytes": 274424,
+      "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"
+    },
+    {
+      "role": "venv_base_prefix_binding",
+      "path_kind": "workspace_relative",
+      "path": ".venv-p1/pyvenv.cfg",
+      "bytes": 339,
+      "sha256": "d1fb970854073922d49959ae01539088550613e316cb67f9fac858f586361174"
+    },
+    {
+      "role": "base_interpreter",
+      "path_kind": "base_prefix_relative",
+      "path": "python.exe",
+      "bytes": 104952,
+      "sha256": "4d6f5f81a4bca11191c4c7c6b43632694d0a4ce74e068619d8fdc161d469859a"
+    },
+    {
+      "role": "python_runtime",
+      "path_kind": "base_prefix_relative",
+      "path": "python312.dll",
+      "bytes": 6945272,
+      "sha256": "9a0e3435aaa680d868150f87ab3e388ad2eebc22f87e036155c7b4eda8cd2120"
+    },
+    {
+      "role": "stable_abi_runtime",
+      "path_kind": "base_prefix_relative",
+      "path": "python3.dll",
+      "bytes": 70376,
+      "sha256": "fb975a606e7fbf74f64260e3f60c3490b4f74a183c0926fd6ed1ac4c52ac7b1c"
+    },
+    {
+      "role": "msvc_runtime",
+      "path_kind": "base_prefix_relative",
+      "path": "vcruntime140.dll",
+      "bytes": 120400,
+      "sha256": "052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4"
+    },
+    {
+      "role": "startup_encoding_package",
+      "path_kind": "base_prefix_relative",
+      "path": "Lib/encodings/__init__.py",
+      "bytes": 6058,
+      "sha256": "8b997e9f7beef09de01c34ac34191866d3ab25e17164e08f411940b070bc3e74"
+    },
+    {
+      "role": "startup_encoding_aliases",
+      "path_kind": "base_prefix_relative",
+      "path": "Lib/encodings/aliases.py",
+      "bytes": 16228,
+      "sha256": "1893cfb597bc5eafd38ef03ac85d8874620112514eb42660408811929cc0d6f8"
+    },
+    {
+      "role": "startup_encoding_utf8",
+      "path_kind": "base_prefix_relative",
+      "path": "Lib/encodings/utf_8.py",
+      "bytes": 1047,
+      "sha256": "9c54c7db8ce0722ca4ddb5f45d4e170357e37991afb3fcdc091721bf6c09257e"
+    },
+    {
+      "role": "startup_encoding_console",
+      "path_kind": "base_prefix_relative",
+      "path": "Lib/encodings/cp949.py",
+      "bytes": 1062,
+      "sha256": "da13fd6f1bd7a1d3b48aed1fc75f7516d6a33814086cf971e030625590e9dda0"
+    }
+  ],
+  "expected_pre_script_path_backed_modules": [
+    "encodings",
+    "encodings.aliases",
+    "encodings.cp949",
+    "encodings.utf_8"
+  ],
+  "expected_pre_script_builtin_modules": [
+    "_codecs_kr",
+    "_multibytecodec"
+  ],
+  "pyvenv_base_prefix_binding": {
+    "pyvenv_home_must_resolve_to_observed_sys_base_prefix": true,
+    "sys_base_executable_must_equal_base_prefix_python_exe": true,
+    "sys_orig_argv_zero_must_equal_base_prefix_python_exe": true,
+    "venv_stub_and_base_interpreter_must_both_remain_held": true
+  },
+  "forbidden_pre_script_origins": [
+    "*.pyc",
+    "*.pyo",
+    "sitecustomize.py",
+    "usercustomize.py",
+    "personal-site-packages/*",
+    "PYTHONPATH/*"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "p1.mstcn_asrf.external_execution_seal.v1",
+  "experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+  "created_at_kst": "2026-08-27T05:46:40+09:00",
+  "status": "CONTROLLED_LAUNCHER_ONLY_ONE_SHOT_LOCAL_EXECUTION_GO",
+  "scope": "local historical Q2 selection and conditional Q3/Q4 confirmation only; no official test/sample/submission read, generation, upload, or authorization",
+  "one_shot": true,
+  "automatic_retry_authorized": false,
+  "final_bytes": {
+    "runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "bytes": 162708,
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "bytes": 25120,
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "launcher": {
+      "path": "scripts/launch_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "bytes": 5199,
+      "sha256": "ad5c7a043bc3ce652c8a7b35c8a9ada60a16c23481a67c33b4d7acddfb518d05"
+    },
+    "package_init": {
+      "path": "src/p1_qc/__init__.py",
+      "bytes": 124,
+      "sha256": "5a7743ab77b2f9bd6851f12ebe694313c4fb361611821ed68dfd3b7574a82088"
+    },
+    "model": {
+      "path": "src/p1_qc/ms_tcn_asrf.py",
+      "bytes": 23220,
+      "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"
+    },
+    "data": {
+      "path": "src/p1_qc/ms_tcn_asrf_data.py",
+      "bytes": 30025,
+      "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"
+    },
+    "runner_test": {
+      "path": "tests/test_run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "bytes": 37357,
+      "sha256": "a68efdaed61e3d56e438bc3f95cd258a3b5f7df5cdb72ba7412656a5e08db6d8"
+    }
+  },
+  "runtime_identity": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.1",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "cudnn": 92000,
+    "device": "NVIDIA GeForce RTX 5090"
+  },
+  "parent_verification": {
+    "focused_pytest_passed": 44,
+    "ruff": "PASS",
+    "compile": "PASS",
+    "launcher_check_only": "PASS",
+    "cuda_two_epoch_synthetic_smoke": "PASS_REAL_INPUT_READS_0",
+    "direct_runner_execute": "BLOCKED_BEFORE_LOCK",
+    "canonical_artifact_absent_before_launch": true,
+    "canonical_lock_absent_before_launch": true
+  },
+  "independent_qa": {
+    "science_statistics": {
+      "verdict": "GO",
+      "p0": 0,
+      "p1": 0,
+      "p2": 0
+    },
+    "integrity": {
+      "verdict": "GO_CONTROLLED_LAUNCHER_ONLY",
+      "p0": 0,
+      "p1": 0,
+      "p2": 2,
+      "residuals": [
+        "hostile same-process Python capability forgery is outside the integrity boundary",
+        "hostile concurrent same-user path swap-and-restore is outside the integrity boundary"
+      ]
+    }
+  },
+  "required_launch_argument": {
+    "expected_launcher_sha256": "ad5c7a043bc3ce652c8a7b35c8a9ada60a16c23481a67c33b4d7acddfb518d05"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.trigger_resolution.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T07:28:00+09:00",
+  "status": "TRIGGER_RESOLVED_INFRASTRUCTURE_ONLY_SUCCESSOR_SCIENTIFIC_NO_GO",
+  "purpose": "Resolve only the frozen predecessor identity after infrastructure-only successors. This receipt may select the already preregistered anchor branch and may not change any numeric choice, feature, split, threshold, model, decoder, seed, gate, or resource ceiling.",
+  "frozen_design": {
+    "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+    "bytes": 14389,
+    "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+    "modified": false
+  },
+  "design_predecessor_reconstruction": {
+    "design_expected_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4.json",
+    "design_expected_bytes": 12869,
+    "design_expected_sha256": "3d1ff35478928d063cfcbad888d149e28ccaed00f5b11e00433da3cd02d78d6c",
+    "current_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4.json",
+    "current_bytes": 12905,
+    "current_sha256": "53a3edfdb209577db39229b4136d17cc40ce922ead9d015412af68e96d4a5027",
+    "single_permitted_reconstruction": {
+      "json_pointer": "/trust_contract/runner_normalized_sha256",
+      "current_value": "2695682f57e56e84563475efe1b3ebde211c28d2a44f8b07989bed98f700fc07",
+      "reconstructed_value": "__RUNNER_NORMALIZED_SHA256__",
+      "required_current_value_occurrences": 1,
+      "reconstructed_bytes": 12869,
+      "reconstructed_sha256": "3d1ff35478928d063cfcbad888d149e28ccaed00f5b11e00433da3cd02d78d6c",
+      "interpretation": "The design pinned the pre-seal placeholder form. Materializing the 64-hex normalized-runner trust anchor added exactly 36 bytes and changed no numerical section."
+    },
+    "fail_closed_if_reconstruction_differs": true
+  },
+  "infrastructure_only_lineage": {
+    "required_numerical_sections": [
+      "base_config",
+      "surface",
+      "residual_target",
+      "residual_model",
+      "rescue_decoder",
+      "outer_protocol",
+      "fail_fast_gates",
+      "resource_budget"
+    ],
+    "section_equality_required": "Exact parsed-JSON equality for every listed section across v1r4, v1r5, and v1r6.",
+    "common_order_preserving_compact_json_sha256": {
+      "base_config": "2ee629afda58e74c097e3228b98cf4bc4082061d9ba9d601effda67d081ecdf8",
+      "surface": "8cd1ae42e1be9c7e5775df53d96b3f31d5debab40cf66d87801875660bffc845",
+      "residual_target": "f3d9fc2521500e8aaebc75ab8ec14835171706bdf2a7b63d5a8d7e395eedbdb9",
+      "residual_model": "0c858609b78288dce6e3a2945a8f7bff50b3bb0bb3f8df3fbcb7e0591d5635f8",
+      "rescue_decoder": "5cdc422bd7fe3acdddf2278314103ba75931984052479576dd4e09fa11e0ac46",
+      "outer_protocol": "91063e1a303e4b0aca84ea1fac66d007b1d043f0440412d56e1f8aa9e1129468",
+      "fail_fast_gates": "681f370668095c53ceea56866cfb2993c2bc2b02509a5b06e9bf69fb1598ee6e",
+      "resource_budget": "71ce09d5d239e2ee3f4c2768a8abf28ac9db3da509a364713cf619a1526dd6fe"
+    },
+    "versions": [
+      {
+        "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r4",
+        "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4.json",
+        "config_sha256": "53a3edfdb209577db39229b4136d17cc40ce922ead9d015412af68e96d4a5027",
+        "supersession_receipt_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r4/supersession_receipt.json",
+        "supersession_receipt_sha256": "7a3f9c5874ecf0b089a96e4738e2dfe775d6a59b29cf9b4ef50dd964858b2be7"
+      },
+      {
+        "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r5",
+        "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r5.json",
+        "config_sha256": "8e6d75f87ee3a62676905c86c7846877b63c471ec0b13396e7a85c141ffc8443",
+        "supersession_receipt_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r5/supersession_receipt.json",
+        "supersession_receipt_sha256": "fe86a39806f9d251c93030bfd1f0ad38c430868341e4180875cc21c222e370bd"
+      },
+      {
+        "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r6",
+        "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r6.json",
+        "config_sha256": "e447106eef3123f52b06a1577944f006ec9fd469c325069bda8b87cd37fbacc1",
+        "supersession_receipt_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/supersession_receipt.json",
+        "supersession_receipt_sha256": "1b78609544186670e5dd5d845fe5681ccded245680d7a3e5ac32f91049efd02c"
+      }
+    ],
+    "v1r5_reason_is_infrastructure_only": "Move every fallible completion flush before execution.lock release and make lock unlink the final commit.",
+    "v1r6_reason_is_infrastructure_only": "Eliminate the initialization rollback hole by rejecting stale journal state before claim and retaining the lock after any claimed initialization failure.",
+    "numerical_change_count": 0,
+    "fail_closed_if_any_section_differs": true
+  },
+  "terminal_scientific_successor": {
+    "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r6",
+    "result": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/result.json",
+      "bytes": 308345,
+      "sha256": "9136acf5c1f7072e29a3ee7456795dd0c0ba8f1785f7a7d8a6aab4588aa8064c",
+      "status": "COMPLETE_LOCAL_SCREEN_ONLY_PARENT_QA_PENDING",
+      "decision": "NO_GO_LOCAL_GATE",
+      "passed_all_gates": false
+    },
+    "manifest": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/manifest.json",
+      "bytes": 9215,
+      "sha256": "0d2c0434b7f6eb4053c6c3935e6b18f6333213f4230673f6885d2f98701e76bb",
+      "terminal_order_ends_with": [
+        "attempt_journal/999_completed.json",
+        "flush journal and artifact directories while execution.lock exists",
+        "release execution.lock as final nonrecoverable commit",
+        "zero post-release operations"
+      ]
+    },
+    "metrics": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/metrics.json",
+      "bytes": 12333,
+      "sha256": "5d0c6c6858cadf4283d32e6faf2974cc63a8e03a019492adc59d944219e40535",
+      "required_gate_names": [
+        "adequately_supported_worst_cell_f1_delta",
+        "all_seed_f1_deltas",
+        "equal_weight_station_fold_f1_delta",
+        "new_disconnected_events",
+        "new_singletons",
+        "nonnegative_fold_count",
+        "nonnegative_station_count",
+        "normal_fp_per_day_ratio",
+        "paired_bootstrap_ci90_lower",
+        "pooled_micro_f1_delta",
+        "precision_delta",
+        "recall_delta",
+        "spike_recall_delta"
+      ],
+      "pooled_anchor_f1": 0.8646700887242071,
+      "pooled_candidate_f1": 0.8646700887242071,
+      "pooled_f1_delta": 0.0,
+      "rescued_rows": 0,
+      "removed_round_b_positive_rows": 0,
+      "new_disconnected_events": 0,
+      "new_singletons": 0
+    },
+    "completed_physical_fits": 9,
+    "candidate_files": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  },
+  "resolved_anchor_branch": "FROZEN_ROUND_B",
+  "branch_reason": "The terminal infrastructure-equivalent successor evaluated every original residual gate and failed the scientific aggregate gate. Per the frozen Cycle-1 design, result values select only the Round-B anchor branch.",
+  "cycle_1_immutable_contract": {
+    "context_banks_hours": [[24, 72], [48, 168], [24, 72, 168]],
+    "decoder_modes": ["CONNECTED_ONLY", "DUAL_BOUNDARY_DISCONNECTED_ALLOWED"],
+    "seeds": [20260826, 20260843, 20260871],
+    "threshold_candidates": [0.75, 0.85, 0.92],
+    "minimum_new_interval_rows": 19,
+    "inner_seed_cells_per_window": 18,
+    "inner_windows": 3,
+    "inner_physical_fit_calls": 54,
+    "outer_locked_physical_fit_calls": 9,
+    "maximum_lifetime_physical_fit_calls": 63,
+    "maximum_feature_or_proposal_materializations": 21,
+    "numeric_changes_from_frozen_design": 0
+  },
+  "authorization": {
+    "implementation_package_allowed": true,
+    "numerical_execute_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_independent_qa_and_new_explicit_execution_authorization": true
+  },
+  "fail_closed_conditions": [
+    "the v1r4 placeholder reconstruction does not reproduce the frozen design hash and byte count",
+    "any listed numerical section differs across v1r4, v1r5, and v1r6",
+    "any pinned successor result, manifest, metrics, config, or supersession receipt hash differs",
+    "the v1r6 result is not terminal scientific NO_GO or any original gate is missing",
+    "any result value changes a Cycle-1 numeric choice rather than only selecting the anchor branch"
+  ]
+}

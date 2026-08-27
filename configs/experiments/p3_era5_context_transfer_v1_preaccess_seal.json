@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "seal_id": "p3_era5_context_transfer_v1_preaccess_seal",
+  "sealed_at_kst": "2026-08-24T00:54:45.2157445+09:00",
+  "state": "SEALED_BEFORE_FIRST_ERA5_VALUE_DOWNLOAD",
+  "research_only": true,
+  "method_changes_after_seal_allowed": false,
+  "technical_parser_repairs_after_value_access_allowed": false,
+  "outer_result_driven_rerun_allowed": false,
+  "catalog_access_flag": {
+    "era5_pre2024": true,
+    "semantics": "Conservatively set at access authorization immediately before first CDS contact; no ERA5 value file existed when this seal was written."
+  },
+  "preaccess_assertions": {
+    "raw_era5_value_files_present": 0,
+    "failed_preaccess_client_initializations": 1,
+    "era5_value_requests_completed": 0,
+    "credential_adapter_repaired_before_first_value_access": true,
+    "canonical_era5_manifest_present": false,
+    "one_shot_attempt_lock_present": false,
+    "research_output_directory_present": false,
+    "official_test_sample_or_submission_accessed": false,
+    "check_only_passed": true,
+    "check_only_writes": 0,
+    "check_only_model_fits": 0,
+    "check_only_outcome_values_read": 0,
+    "pytest_passed": 52
+  },
+  "fixed_decision": {
+    "source_validation_years": [2021, 2022, 2023],
+    "local_validation_windows": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "solution_delta_m_at_most": -0.03,
+    "minimum_improved_local_windows": 2,
+    "paired_episode_ci90_upper_below_zero": true,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "viewpoint_control": "same two-stage 600+250 CatBoost schedule on the same causal local prefix; only stage-1 training domain differs",
+    "no_tuning_or_rerun_after_result": true
+  },
+  "sha256": {
+    "experiment_config": "7cafea9fba2dd7c7320db9c67d16622224337bb3eb23dc21036e52c6ff3eb2df",
+    "feature_contract": "d6b720b55b28d5fc4bbc065a9b585f2607acce7552bae89fd4683dda0c25cc9b",
+    "feature_columns": "ef0a0a5ec822d2d5fa8fa875ed9ca584bbd5fee097789601d149a85c771bc454",
+    "external_scope": "49a0a47bcec9b55a37a35bc06481af58b8e0565eee499b805ca32bdcf1799bc4",
+    "external_catalog": "96c0a7d7d820741cb8699b9bd4d896e4d9b263bc1de6aa4f8607d7f836d01d5c",
+    "external_parent_preregistration": "a2082936c86844a03ac814c7325b26cea4552e91a8222826a95677ee18e9d0a3",
+    "era5_pretrain_data": "08cd50fdb37fdae734d12c5dd2c349eccc751ef9641f3ed137f6fa86e7099b21",
+    "era5_context_transfer": "d0e7e7fac28d745ae62f32918dc0396a0f9b53ac20444358788e8c03e4a9f039",
+    "prepare_era5_runner": "0ffba044c96d86656cd4386e0d19201d1ed46a1e4b49fd4a54d5e688f61e4eff",
+    "p3_validation": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "ocean_external_policy": "9681f329da94d5ff0c41a30b6dce00a813d3654c2318ed4c3c22a4dd5d043e7e",
+    "context_transfer_runner": "09764318967f30ec4f54f2f1061866884d6cff2739d52f65f4066d095941a8c1",
+    "era5_pretrain_data_tests": "d818e5f1f20e0277fb9a5625e0f47300698e850074bed768ccf9fd7cd69a5691",
+    "era5_context_transfer_tests": "12544fd77e099af5d16b774af7e628317f5436196dd2b6f7cd97af92174affd6",
+    "context_transfer_runner_tests": "8889fc23a18cb5729ecbf88048066cadbb0101e54d00912a8e645dc5c2e327cf",
+    "train_features": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "train_anchors": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "validation_keys": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+    "frozen_incumbent_oof": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+  }
+}

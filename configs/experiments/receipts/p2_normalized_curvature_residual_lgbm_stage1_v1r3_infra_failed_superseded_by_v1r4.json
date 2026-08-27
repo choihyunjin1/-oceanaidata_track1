@@ -1,0 +1,66 @@
+{
+  "schema_version": "p2_experiment_infrastructure_incident_receipt.v1",
+  "receipt_id": "p2_ncr_lgbm_stage1_v1r3_infra_failed_superseded_by_v1r4_20260826",
+  "status": "APPEND_ONLY_TERMINAL_INFRASTRUCTURE_FAILURE_RECEIPT",
+  "effective_date_kst": "2026-08-26",
+  "append_only": true,
+  "superseded": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3",
+    "execution_authorized_after_receipt": false,
+    "claim_and_journal_must_not_be_deleted_or_modified": true,
+    "automatic_or_manual_rerun_forbidden": true
+  },
+  "incident_evidence": {
+    "claim": {
+      "path": "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3.claim.json",
+      "bytes": 1908,
+      "sha256": "377e43a54f22ee1c9232086f7e7acfbdb5babc5575d16ea62b11f22eace8e448",
+      "schema_version": "p2_ncr_stage1_execution_claim.v1r3",
+      "contract_sha256": "7cd9b8025ba01855dec7120ee4717ff01cc943b1832f762120c84ecfa93d0c04",
+      "bundle_sha256": "e6e8c339b59dd704a8a75fab6ae85c959145a8b97432437b1d7101d103695c5c",
+      "attempt_token_sha256": "6b9ca3aebdb4a55fad442d5606e3e2e896353c5071eb0242cdf2a51de51a95c5"
+    },
+    "journal": {
+      "path": "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r3.ndjson",
+      "bytes": 1889,
+      "sha256": "eb95c80d4b3f429d49cf3c8d66181b920b3ff4b0938c07debb15a6a72c88839f",
+      "event_count": 3,
+      "event_order": [
+        "ATTEMPT_CLAIMED",
+        "PARENT_LAUNCHING_SINGLE_WORKER",
+        "ATTEMPT_TERMINAL_FAILED"
+      ],
+      "worker_returncode": 1,
+      "worker_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worker_stderr_sha256": "2af5a3248d326ef7973312db334bc231174a9b751de2e3e42d6ae8e6d2112d2b"
+    },
+    "observed_absence": {
+      "worker_started_events": 0,
+      "fit_slot_reserved_events": 0,
+      "fit_slot_completed_events": 0,
+      "fit_slot_failed_events": 0,
+      "physical_fit_calls": 0,
+      "final_artifact_directory_exists": false,
+      "staging_directory_count": 0
+    }
+  },
+  "root_cause": {
+    "classification": "PARENT_WORKER_JOURNAL_PROTOCOL_MISMATCH",
+    "parent_behavior": "Parent durably appended PARENT_LAUNCHING_SINGLE_WORKER after ATTEMPT_CLAIMED and before launching the worker.",
+    "worker_behavior": "The v1r3 worker validator required the journal to contain exactly one pristine ATTEMPT_CLAIMED event and rejected the valid two-event prelaunch prefix.",
+    "numerical_or_scientific_failure": false
+  },
+  "superseding": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r4",
+    "config_path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r4.json",
+    "runner_path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r4.py",
+    "scope": "Zero-fit infrastructure recovery only; all numerical and scientific sections remain unchanged."
+  },
+  "external_actions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  }
+}

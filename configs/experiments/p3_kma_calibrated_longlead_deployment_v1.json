@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_kma_calibrated_longlead_deployment_v1",
+  "status": "authorized_local_secondary_inference_only",
+  "created_at_kst": "2026-08-21T00:00:00+09:00",
+  "objective": {
+    "metric": "pooled_six_lead_rmse_meters",
+    "direction": "minimize",
+    "classification": "low_confidence_secondary_research_candidate",
+    "promotion_claimed": false,
+    "upload_allowed": false,
+    "single_hypothesis": "Refitting the validated per-lead affine calibration on all public P3 training anchors may retain the local 18h/24h benefit when applied to anonymous test contexts."
+  },
+  "validation_evidence": {
+    "experiment_id": "p3_kma_calibrated_longlead_blend_v2",
+    "result": {
+      "path": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/result.json",
+      "sha256": "f3b00dcb6a8134148edbdd92d03282472caf4b9b0ba41cbc1b45b2fb362838b9"
+    },
+    "required_decision": "NO_GO_EXACT_INCUMBENT",
+    "outer_candidate_minus_incumbent_rmse_m": -0.0025293726008623896,
+    "outer_bootstrap_ci90": [
+      -0.008046136259744468,
+      0.002910861118130509
+    ],
+    "reason_not_promoted": "The local improvement was below 0.010 m and the paired case bootstrap CI crossed zero.",
+    "inner_selected_fold_alphas": [
+      0.4,
+      0.2,
+      0.4
+    ],
+    "deployment_alpha_rule": "median_of_three_inner_selected_fold_alphas",
+    "deployment_alpha": 0.4
+  },
+  "sealed_source_reuse": {
+    "fit_new_source_model": false,
+    "source_model": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_model.cbm",
+      "sha256": "63d34f6499e4978853551023f21ac1ccc34a2d16ee5c682c53dcb46a63c62bd4",
+      "expected_feature_count": 447,
+      "expected_output_count": 6
+    },
+    "source_feature_medians": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_feature_medians.json",
+      "sha256": "2a3674764086d989822d9af0873c5bc45672284939aeb202b3d8b2f6f7e363b3",
+      "expected_count": 447
+    },
+    "source_meta_predictions": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_meta_predictions.parquet",
+      "sha256": "5ab567d6508b1f5596aaee2ee2dfd7bd47e52e5ad2675248f14a42311cf426f0",
+      "expected_rows": 20952,
+      "expected_columns": 7
+    },
+    "source_meta_seal": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_meta_seal.json",
+      "sha256": "c13db148c25f38a7833e2f0d7074b0a7016272ff7c2d9d51a19d53506b9fe71c"
+    },
+    "source_helper": {
+      "path": "src/p3_wave/kma_source_meta.py",
+      "sha256": "05cf494a963724464150868a6f4774acea5755250737bb28a98a7312972acd44"
+    },
+    "feature_columns_sha256": "a5d8c4accbd0c77fdc2285435eccee628b208031f787e77824cb10da42a2d52d",
+    "period_features": 0,
+    "source_station_or_proxy_features": 0,
+    "absolute_calendar_features": 0,
+    "missingness_fingerprint_features": 0
+  },
+  "full_refit": {
+    "single_refit_generation": true,
+    "model_count": 2,
+    "one_per_active_lead": true,
+    "active_leads": [
+      18,
+      24
+    ],
+    "family": "Ridge",
+    "target": "future_hs_minus_current_hs_residual",
+    "predictor": "sealed_kma_prediction_minus_current_hs_residual",
+    "design_columns": [
+      "source_residual",
+      "station_G-ORS",
+      "station_I-ORS",
+      "station_S-ORS"
+    ],
+    "ridge_alpha": 10.0,
+    "fit_intercept": false,
+    "solver": "cholesky",
+    "standardize": false,
+    "hyperparameter_grid_size": 0,
+    "expected_full_train_anchor_count": 24360,
+    "expected_reused_source_meta_count": 20952,
+    "expected_generated_source_meta_count": 3408
+  },
+  "test_inference": {
+    "history_hours": 48,
+    "relative_grid_minutes": 30,
+    "history_rows_including_anchor": 97,
+    "lead_order": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "active_leads": [
+      18,
+      24
+    ],
+    "byte_exact_no_op_leads": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "blend_formula": "candidate=(1-0.4)*frozen_incumbent+0.4*calibrated_source",
+    "deployment_alpha": 0.4,
+    "unsupported_case_policy": "exact_incumbent_no_op_on_all_leads",
+    "ordinary_missing_value_policy": "frozen_source_training_median_imputation",
+    "absolute_timestamp_reconstruction": false,
+    "external_test_join": false,
+    "same_case_context_only": true,
+    "expected_case_count": 200,
+    "expected_row_count": 1200,
+    "prediction_range_m": [
+      0.0,
+      30.0
+    ]
+  },
+  "frozen_inputs": {
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "incumbent_submission": {
+      "path": "submissions/p3_long_persistence_shrink/submission.csv",
+      "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+    },
+    "calibration_helper": {
+      "path": "src/p3_wave/kma_calibrated_longlead_blend.py",
+      "sha256": "c55591980e1d2007e59b02eae60bea386b18e1081f9ebde5437ee0af8e3b255d"
+    }
+  },
+  "p3_data_sha256": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110"
+  },
+  "external_data_attribution": {
+    "source_id": "kma_ocean_buoy_pre2024",
+    "manifest": {
+      "path": "external_data/p3_kma_buoy_pre2024/manifest.json",
+      "sha256": "0286a74ab323f060bef611b58e21619e5778eb68beda09e9c03a3c75d3fff078"
+    },
+    "license": "Korea Open Government Licence Type 1",
+    "official_urls": [
+      "https://apihub.kma.go.kr/apiList.do?seqApi=3",
+      "https://apihub.kma.go.kr/apiInfo.do",
+      "https://data.kma.go.kr/data/sea/selectBuoyRltmList.do?pgmNo=52&tabNo=1"
+    ],
+    "observed_end_kst": "2023-12-31T23:30:00+09:00"
+  },
+  "artifacts": {
+    "output_directory": "artifacts/p3_kma_calibrated_longlead_deployment_v1/inference",
+    "submission_directory": "submissions/p3_kma_calibrated_longlead_secondary_v1",
+    "submission_path": "submissions/p3_kma_calibrated_longlead_secondary_v1/submission.csv",
+    "status_path": "artifacts/status/p3_kma_calibrated_longlead_deployment_v1.json",
+    "attempt_lock": "artifacts/experiment_locks/p3_kma_calibrated_longlead_deployment_v1.attempt.lock"
+  },
+  "execution": {
+    "authorized_by_parent": true,
+    "run_once": true,
+    "source_model_fit_count": 0,
+    "ridge_model_fit_count": 2,
+    "test_context_read_count": 1,
+    "saved_model_roundtrip_required": true,
+    "submission_upload_allowed": false,
+    "incumbent_overwrite_allowed": false
+  },
+  "prohibitions": {
+    "new_source_model_fit": true,
+    "ridge_or_blend_hyperparameter_search": true,
+    "pooled_shared_18h_24h_ridge": true,
+    "period_feature": true,
+    "missingness_fingerprint_feature": true,
+    "absolute_calendar_feature": true,
+    "external_station_feature": true,
+    "test_absolute_time_matching": true,
+    "external_test_data_join": true,
+    "incumbent_or_frozen_artifact_mutation": true,
+    "official_upload": true
+  }
+}

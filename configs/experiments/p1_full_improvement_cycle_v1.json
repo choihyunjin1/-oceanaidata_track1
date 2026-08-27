@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_full_improvement_cycle_v1",
+  "created_at_kst": "2026-08-22T20:05:00+09:00",
+  "objective": "Produce an append-only P1 model whose label-safe walk-forward outer micro F1 exceeds the frozen offline XGBoost on the exact same 421032 keys, then refit all base and meta components on full allowed training data and emit a 169011-row candidate.",
+  "policy": {
+    "source_data_mutation_allowed": false,
+    "frozen_output_mutation_allowed": false,
+    "upload_allowed": false,
+    "test_label_reads_allowed": false,
+    "maximum_preregistered_branches": 3,
+    "winner_rule": "first branch in fixed branch_order that satisfies every success_guard; later branches are not evaluated after a winner",
+    "outer_label_exposure": "Each target fold prediction is fixed using only strictly earlier outer-fold labels; 2025_q2 is an exact incumbent fallback. Target-fold labels are opened only after that fold prediction is materialized."
+  },
+  "paths": {
+    "p1_config": "configs/p1.toml",
+    "source_readme": "데이터셋 원본/데이터셋_P1/P1_qc_anomaly/README.md",
+    "train_csv": "데이터셋 원본/데이터셋_P1/P1_qc_anomaly/train.csv",
+    "test_csv": "데이터셋 원본/데이터셋_P1/P1_qc_anomaly/test.csv",
+    "sample_submission": "데이터셋 원본/데이터셋_P1/P1_qc_anomaly/sample_submission.csv",
+    "incumbent_oof": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "causal_oof": "artifacts/runs/20260813T145038+0900_cv_95b55b7f/oof.parquet",
+    "incumbent_selection": "artifacts/runs/20260813T153038+0900_cv_378a4e89/selection.json",
+    "causal_selection": "artifacts/runs/20260813T145038+0900_cv_95b55b7f/selection.json",
+    "incumbent_full_model_audit_only": "artifacts/runs/20260813T155254+0900_train_378a4e89/model.joblib",
+    "causal_full_model_audit_only": "artifacts/p1_candidate_pool_20260822/P1_LIGHTGBM_CAUSAL_V1/model.joblib",
+    "incumbent_test_probability_audit_only": "artifacts/runs/20260813T155449+0900_predict_378a4e89/test_probabilities.parquet",
+    "causal_test_probability_audit_only": "artifacts/runs/20260822T190019+0900_predict_5ca02cdc/test_probabilities.parquet",
+    "frozen_submission": "output/2026-08-20/ready/P1_submission.csv",
+    "artifact_root": "artifacts/p1_full_improvement_cycle_20260822_v1"
+  },
+  "expected_sha256": {
+    "train_csv": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_csv": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "incumbent_oof": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "causal_oof": "454f8b386e4e9bf68d6f126c3bdf11308e77396bf71bdf0a0f24d91b8fe50389",
+    "incumbent_full_model_audit_only": "d4b60c543691f51526b3909101763309a6560cc274386a8fb3323773ad469d12",
+    "causal_full_model_audit_only": "81e6237592dd2ce9f7293f02de361dcf864ffc67367bd6f015c2dab2871da609",
+    "incumbent_test_probability_audit_only": "e690f8cabc57c2e9c68b0f4093633184ea8a2cc6c9ae130620978a15b2c67bae",
+    "causal_test_probability_audit_only": "7705f57d3b5d04fc3dcd1ffdad85b496af8ae85be66df6447e198f16119047bf",
+    "frozen_submission": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3"
+  },
+  "key_columns": ["station", "year", "layer", "time"],
+  "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+  "branch_order": [
+    "causal_event_rescue_walk_forward",
+    "logit_convex_walk_forward",
+    "logistic_stack_walk_forward"
+  ],
+  "branches": {
+    "causal_event_rescue_walk_forward": {
+      "causal_probability_floors": [0.35, 0.45, 0.55, 0.65, 0.75, 0.85],
+      "incumbent_probability_floors": [0.0, 0.01, 0.03, 0.05, 0.1, 0.15],
+      "rule": "Add a complete contiguous causal-positive event only when at least one causal-only row in that event meets both probability floors.",
+      "tie_break": "highest calibration F1, then fewest added rows, then higher causal floor, then higher incumbent floor"
+    },
+    "logit_convex_walk_forward": {
+      "incumbent_logit_weights": [0.55, 0.7, 0.85, 0.95],
+      "postprocess_profiles": [
+        {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12},
+        {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+        {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 6, "minimum_positive_run": 6},
+        {"high_threshold": 0.25, "low_threshold": 0.125, "close_gap_rows": 0, "minimum_positive_run": 12},
+        {"high_threshold": 0.3, "low_threshold": 0.15, "close_gap_rows": 3, "minimum_positive_run": 12},
+        {"high_threshold": 0.4, "low_threshold": 0.2, "close_gap_rows": 6, "minimum_positive_run": 12}
+      ],
+      "tie_break": "highest calibration F1, then larger incumbent weight, then profile list order"
+    },
+    "logistic_stack_walk_forward": {
+      "regularization_C": [0.01, 0.1, 1.0],
+      "max_iter": 300,
+      "solver": "lbfgs",
+      "class_weight": null,
+      "features": ["incumbent_logit", "causal_logit", "probability_difference", "absolute_probability_difference", "plateau", "spike_candidate", "station_one_hot", "layer_one_hot"],
+      "postprocess_profiles_source": "logit_convex_walk_forward",
+      "tie_break": "highest calibration F1, then smaller C, then profile list order"
+    }
+  },
+  "success_guards": {
+    "minimum_pooled_micro_f1_delta": 0.0001,
+    "maximum_fold_f1_degradation": 0.02,
+    "maximum_station_f1_degradation": 0.015,
+    "minimum_station_positive_support": 100,
+    "require_exact_same_outer_keys": true,
+    "require_source_hash_unchanged": true,
+    "require_frozen_submission_hash_unchanged": true,
+    "require_saved_model_reproduction": true
+  },
+  "bootstrap": {
+    "unit": "KST calendar day",
+    "replicates": 1000,
+    "seed": 20260822,
+    "confidence": 0.9
+  },
+  "full_fit": {
+    "retrain_incumbent_xgboost": true,
+    "retrain_causal_lightgbm": true,
+    "train_rows_expected": 776706,
+    "candidate_rows_expected": 169011,
+    "seed": 20260813,
+    "reuse_feature_cache_only_when_source_sha_matches": true
+  }
+}

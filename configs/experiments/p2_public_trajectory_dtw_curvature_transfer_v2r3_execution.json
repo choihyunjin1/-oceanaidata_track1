@@ -1,0 +1,48 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r3.execution.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r3",
+  "created_at_kst": "2026-08-26T08:27:20.1075023+09:00",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "authorized": false,
+  "design": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r3_design.json", "bytes": 8877, "sha256": "27e67f5fb9bd0a99033bd256f43f16e85fa7924374bc5d30845cdbacfbad3bc9"},
+  "operation_ceiling": {
+    "attempts": 1,
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0
+  },
+  "portable_observations": {
+    "root_environment": "P2_DATA_DIR",
+    "exact_relative_path": "observations.csv",
+    "fallback_absolute_path": null,
+    "required_bytes": 49058719,
+    "required_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "held_byte_parse": true,
+    "directory_enumeration": false
+  },
+  "snapshot_bindings": {
+    "authorization": "single open/read/hash/parse byte snapshot",
+    "numerical_module": "single open/read/hash/compile/exec byte snapshot"
+  },
+  "chronology": {
+    "timezone": "Asia/Seoul",
+    "clock": "UTC now converted with ZoneInfo",
+    "required_order": ["design", "implementation", "tests", "seal", "preflight"],
+    "future_timestamp_allowed": false,
+    "filesystem_mtime_verification": true
+  },
+  "p100": {
+    "literal_relative_path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/evaluated_oof_100.parquet",
+    "pre_exact_path_resolve_stat_open_hash_parse": 0
+  },
+  "default_action": "READ_ONLY_PREFLIGHT_ONLY",
+  "prohibitions": {"numerical_execute_before_authorization": true, "official_test_sample_submission_candidate_access": true, "candidate_or_submission_generation": true, "upload": true, "fit": true, "result_driven_rerun_or_tuning": true}
+}

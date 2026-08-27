@@ -1,0 +1,105 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.design.v2r2",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r2",
+  "created_at_kst": "2026-08-26T07:50:47+09:00",
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "problem": "P2",
+  "cycle_index": 1,
+  "problem_cycle_ceiling": 2,
+  "design_only": true,
+  "preimplementation_freeze": {
+    "frozen_before_v2r2_module_runner_tests_fit_or_result": true,
+    "fit_calls_at_freeze": 0,
+    "materializations_at_freeze": 0,
+    "p100_filesystem_accesses_at_freeze": 0,
+    "numeric_choices_may_change_after_freeze": false
+  },
+  "supersession": {
+    "superseded_experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+    "superseded_status": "SUPERSEDED_CRITICAL_P0_DO_NOT_USE",
+    "superseded_files_mutated": false,
+    "superseded_design": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json", "bytes": 20025, "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6"},
+    "superseded_seal": {"path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2_preexecution/preexecution_seal.json", "bytes": 6655, "sha256": "088b4dc4a6208d6e14df1dfc35be1a83e0d73d563a071e0f7ac5627655adef87"},
+    "p0_root_cause": "v2 load_p100_anchor aligned metadata in layer-then-time merge order, then positionally assigned it into a separately time-then-layer sorted verified frame. This could bind fold/station metadata to the wrong canonical rows without changing row count.",
+    "scientific_results_from_v2": 0,
+    "v2_execution_or_materialization_occurred": false
+  },
+  "lineage": {
+    "base_v1_design": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json", "bytes": 15387, "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb"},
+    "v2_trigger_resolution": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json", "bytes": 4373, "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9"},
+    "scientific_hypothesis_search_splits_metrics_and_gates_changed": false,
+    "operational_fix_only": true
+  },
+  "trigger_resolution": {
+    "branch": "FROZEN_EXACT_INCUMBENT_ONLY",
+    "ncr_v1r7_scientific_outcome": "UNEVALUATED_INFRASTRUCTURE_FAILURE",
+    "ncr_predictions_metrics_or_fit_outputs_consumed": false,
+    "independent_qa_must_accept_trigger_resolution": true,
+    "fail_closed_if_any_transitive_pin_or_lineage_fails": true
+  },
+  "transitive_static_inputs": [
+    {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json", "bytes": 15387, "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb", "role": "base scientific design"},
+    {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json", "bytes": 20025, "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6", "role": "superseded operational amendment evidence"},
+    {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json", "bytes": 4373, "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9", "role": "prospective frozen-exact trigger resolution"},
+    {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_execution.json", "bytes": 2771, "sha256": "1ecb3bc700a0e831209f76fdaa335b7bc04f5df3b5af87712ccb3e7b50b9020f", "role": "superseded execution state evidence"},
+    {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_execution_authorization.json", "bytes": 2734, "sha256": "fc5474ce6a0d42463deeab8995cb1105626ace99ce323dd9acd93c8f79fc4701", "role": "superseded false-authorization evidence"},
+    {"path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2_preexecution/preexecution_seal.json", "bytes": 6655, "sha256": "088b4dc4a6208d6e14df1dfc35be1a83e0d73d563a071e0f7ac5627655adef87", "role": "superseded seal evidence"},
+    {"path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r7.json", "bytes": 26038, "sha256": "5be45ad6198f55e39d3f2a32a70e4784345a75a4fcdcd9f88c9124591621209c", "role": "actual predecessor execution contract"},
+    {"path": "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.claim.json", "bytes": 1910, "sha256": "22b739c869cb1e57b3f68fe5ef19bfa480db9530af20692f2d047ed16d4624d3", "role": "predecessor permanent claim"},
+    {"path": "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.ndjson", "bytes": 5820, "sha256": "ab250c745ca104d4b3439d3c51bdb1283c5723a72bf6becc59711ae900ebb38d", "role": "predecessor terminal infrastructure-failure journal"},
+    {"path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json", "bytes": 7350, "sha256": "943ff9ac9723c36445a2a6af2112073799a4bf52185fde91d1e6e5bad9bdfb45", "role": "aggregate planning evidence"},
+    {"path": "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json", "bytes": 11091, "sha256": "3db8dae64f03b1c8a98873e2def80d5093c909a21687ed0799fe9cb61267ee30", "role": "aggregate comparator evidence"},
+    {"path": "artifacts/p2_matched_budget_local_compare_20260825_v1/manifest.json", "bytes": 5802, "sha256": "fc6db1f65a701da38df1ab1327904056678155fc5cbf7a80988dae564f59ce7e", "role": "aggregate comparator integrity"},
+    {"path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json", "bytes": 78560, "sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc", "role": "locked p100 aggregate evidence"},
+    {"path": "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/manifest.json", "bytes": 1821, "sha256": "099a15480b33c039571a2bac41059b7e07dac5afe1c350c6b5bc8217e733d633", "role": "locked p100 aggregate QA"}
+  ],
+  "documented_nonconsumed_drift": {
+    "base_v1_declared_v1r6_pin": {"bytes": 22662, "sha256": "6495a7ae21f490970884be775b82b5112bb9b8478dd9ab93aae88cf0b3cca97f"},
+    "current_v1r6_path_state": {"path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r6.json", "bytes": 24491, "sha256": "a0492740b5aea4c441c58d112a5ee9d0ec1b95e02bbc3df4d850e5412ab2c99a"},
+    "effect": "The obsolete v1r6 predecessor branch is invalid and prohibited. v2r2 consumes only the separately pinned v1r7 infrastructure incident and frozen exact anchor branch; no v1r6 content or result is used."
+  },
+  "p100_canonical_metadata_binding": {
+    "canonical_key": ["fold", "station", "UTC-ns time", "layer"],
+    "algorithm": "Normalize anchor and observations independently; validate unique canonical keys; explicitly merge anchor keys to observation truth on station, UTC-ns time, and layer; compare claimed and observed truth; retain fold and station from that same keyed merge; sort only after the merge by fold, station, UTC-ns time, layer.",
+    "positional_assignment_between_different_sort_orders": false,
+    "ordering_invariance_required": true,
+    "shuffled_anchor_and_observation_order_must_produce_identical_key_metadata_truth_digest": true,
+    "metadata_or_truth_permutation_negative_test_required": true,
+    "candidate_scoring_key": ["fold", "station", "UTC-ns time", "layer"]
+  },
+  "authorization_and_independent_qa": {
+    "authorized": false,
+    "required_qa_report_fields": ["path", "bytes", "sha256", "verdict", "design_sha256", "seal_sha256"],
+    "qa_report_must_be_in_authorization_bundle": true,
+    "qa_report_file_bytes_and_sha256_must_be_verified": true,
+    "qa_report_verdict_must_equal": "PASS",
+    "qa_report_design_and_seal_lineage_must_match": true,
+    "pending_template_uses_null_report_pin_and_cannot_authorize": true
+  },
+  "terminal_last_contract": {
+    "all_result_manifest_file_and_directory_fsyncs_before_terminal_link": true,
+    "durable_ATTEMPT_COMMIT_READY_before_terminal_link": true,
+    "terminal_success_hardlink_is_last_repository_filesystem_operation": true,
+    "no_terminal_journal_append_or_hash_read_after_terminal_link": true,
+    "failure_before_terminal_link": "Record one terminal failure; final success marker must be absent.",
+    "exception_after_terminal_visibility": "Never write a conflicting failure. Existing terminal identity is authoritative and the namespace remains consumed; no rerun.",
+    "commit_ready_without_terminal": "COMMIT_INCOMPLETE_FAIL_CLOSED; no scientific result and no rerun.",
+    "fault_injection_required": ["preterminal directory fsync", "commit-ready journal", "terminal hardlink", "forbidden post-terminal I/O"]
+  },
+  "unchanged_scientific_contract": {
+    "hypothesis": "Whole-trajectory public temperature/salinity DTW transfers only historical target-layer residual from contemporaneous public-depth interpolation.",
+    "cells": ["d1_k3", "d1_k7", "d3_k3", "d3_k7", "d7_k3", "d7_k7"],
+    "inner_windows": ["2024-03", "2024-05", "2024-07"],
+    "exact_rows": 26273,
+    "p100_rows": 78156,
+    "model_fit_calls": 0,
+    "maximum_materializations": 22,
+    "exact_RESEARCH_GO": {"delta_rmse_c_lte": -0.060, "ci90_upper_c_lte": -0.040, "each_layer_delta_lte": 0.003, "layer4_delta_lt": 0.0, "weekly_p90_lte": 0.015},
+    "p100_RESEARCH_GO": {"delta_rmse_c_lt": 0.0, "ci90_upper_c_lt": 0.0, "minimum_improving_folds": 2, "minimum_improving_layers": 2, "worst_fold_lte": 0.010, "worst_layer_lte": 0.005},
+    "submission_preferred_exact_delta_lte": -0.0759,
+    "result_driven_tuning_or_rerun": false
+  },
+  "resource_ceiling": {"hard_wall_seconds": 7200, "maximum_process_tree_rss_bytes": 1610612736, "maximum_working_array_bytes": 536870912, "automatic_reruns": 0},
+  "prohibitions": {"official_test_reads": 0, "sample_submission_reads": 0, "submission_candidate_reads": 0, "candidate_files": 0, "uploads": 0, "physical_fit_calls": 0, "result_driven_reruns": 0, "p100_access_before_exact_RESEARCH_GO": 0, "P3_mutations": 0}
+}

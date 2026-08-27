@@ -1,0 +1,152 @@
+"""Check or execute the append-only P3 Gen5r2 dense72 curve."""
+
+from __future__ import annotations
+
+import argparse
+import importlib
+import json
+import sys
+from pathlib import Path
+from types import ModuleType
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+GUARD_MODULE = "p3_wave.hierarchical_residual_basis_dense72_contract_r1"
+GUARD_RELATIVE = "src/p3_wave/hierarchical_residual_basis_dense72_contract_r1.py"
+ENGINE_MODULE = "p3_wave.hierarchical_residual_basis_dense72_execution_r1"
+ENGINE_RELATIVE = "src/p3_wave/hierarchical_residual_basis_dense72_execution_r1.py"
+CONFIG_RELATIVE = "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json"
+
+
+def _canonical_module(module: ModuleType, path: Path, *, name: str) -> None:
+    observed = Path(str(module.__file__)).resolve(strict=True)
+    expected = path.resolve(strict=True)
+    if observed != expected:
+        raise PermissionError(f"{name} resolved outside the canonical workspace")
+
+
+def check_only(
+    *,
+    root: Path,
+    data_dir: Path,
+    config_path: Path | None = None,
+) -> dict[str, Any]:
+    workspace = root.resolve(strict=True)
+    guard = importlib.import_module(GUARD_MODULE)
+    _canonical_module(guard, workspace / GUARD_RELATIVE, name="Gen5r2 guard")
+    requested = config_path or workspace / CONFIG_RELATIVE
+    report = guard.static_preflight(workspace, data_dir, requested_config=requested)
+    return {
+        "schema_version": "p3_hierarchical_residual_basis.gen5r2_dense72.check_only.r1",
+        "status": report["status"],
+        "stage": guard.STAGE,
+        "preflight": report,
+        "independent_qa_created": False,
+        "authorization_created": False,
+        "attempt_lock_created": False,
+        "output_created": False,
+        "fits": 0,
+        "predictions": 0,
+        "scores": 0,
+        "test_predictions": 0,
+        "uploads": 0,
+    }
+
+
+def run_once(
+    *,
+    root: Path,
+    data_dir: Path,
+    config_path: Path | None = None,
+) -> dict[str, Any]:
+    workspace = root.resolve(strict=True)
+    guard = importlib.import_module(GUARD_MODULE)
+    _canonical_module(guard, workspace / GUARD_RELATIVE, name="Gen5r2 guard")
+    requested = config_path or workspace / CONFIG_RELATIVE
+    config, preflight = guard.prepare_execution_preflight(
+        workspace,
+        data_dir,
+        requested_config=requested,
+    )
+    _qa, qa_sha256 = guard.verify_pre_execution_qa(
+        workspace,
+        config,
+        static_preflight_sha256=preflight["summary_sha256"],
+    )
+    authorization, authorization_sha256 = guard.verify_execution_authorization(
+        workspace,
+        config,
+        qa_sha256=qa_sha256,
+    )
+    pins_before_lock = guard.implementation_pins(workspace, config)
+    if pins_before_lock != preflight["implementation_pins"]:
+        raise PermissionError("Gen5r2 implementation changed after preflight")
+    capability = guard.issue_execution_capability(
+        workspace,
+        config,
+        preflight,
+        qa_sha256=qa_sha256,
+        authorization_sha256=authorization_sha256,
+    )
+    lock_created = False
+    try:
+        lock = guard.consume_attempt_lock(
+            workspace,
+            config,
+            capability=capability,
+            preflight=preflight,
+        )
+        lock_created = True
+        engine = importlib.import_module(ENGINE_MODULE)
+        _canonical_module(engine, workspace / ENGINE_RELATIVE, name="Gen5r2 engine")
+        execute = getattr(engine, "execute_curve_stage", None)
+        if not callable(execute):
+            raise RuntimeError("canonical Gen5r2 engine lacks execute_curve_stage")
+        result = execute(
+            capability=capability,
+            root=workspace,
+            data_dir=data_dir.resolve(strict=True),
+            config=config,
+            preflight=preflight,
+        )
+    except BaseException as exc:
+        if lock_created:
+            guard.write_run_failure_receipt(workspace, config, exception=exc)
+        raise
+    finally:
+        guard.revoke_execution_capability(capability)
+    return {
+        **result,
+        "authorization": authorization,
+        "attempt_lock": lock.relative_to(workspace).as_posix(),
+        "comparison_mode": guard.COMPARISON_MODE,
+        "exact_official_incumbent_comparison": False,
+        "official_promotion_allowed": False,
+        "candidate_generated": False,
+        "test_prediction_generated": False,
+        "uploads": 0,
+    }
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser.add_argument("--data-dir", type=Path, required=True)
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--mode", choices=("check-only", "run"), default="check-only")
+    return parser
+
+
+def main() -> None:
+    args = _parser().parse_args()
+    operation = check_only if args.mode == "check-only" else run_once
+    result = operation(root=args.root, data_dir=args.data_dir, config_path=args.config)
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

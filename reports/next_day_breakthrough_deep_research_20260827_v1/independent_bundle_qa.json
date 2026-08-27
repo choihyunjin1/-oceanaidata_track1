@@ -1,0 +1,64 @@
+{
+  "schema_version": "ocean_hackathon.round_e_independent_bundle_qa.v1",
+  "status": "PASS_GO_TO_APPROVAL_BOUNDARY",
+  "scope": "Final unsuffixed 20260827 Round E P1x3/P2x3/P3x3 bundle only",
+  "performed_by": "independent subagent /root/rounde_independent_qa",
+  "file_mutations_by_qa_agent": 0,
+  "findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "manifest_sha256": "7dd80d6288cd957192055916627b6bd31778565defb60f56c9baf078c8d487bc",
+  "inventory": {
+    "candidate_csv_hashes_matching_manifest": 9,
+    "input_lineage_hash_and_size_matches": 17,
+    "backup_byte_and_hash_matches": 3,
+    "sha256sums_entries_matching": 25,
+    "sha256sums_entries_checked": 25
+  },
+  "schema_and_keys": {
+    "P1": {"files": 3, "rows_each": 169011, "duplicate_keys": 0, "null_keys": 0},
+    "P2": {"files": 3, "rows_each": 26061, "duplicate_keys": 0, "null_keys": 0},
+    "P3": {"files": 3, "rows_each": 1200, "duplicate_keys": 0, "null_keys": 0}
+  },
+  "P1": {
+    "changed_rows_G_I_GI": [81, 136, 217],
+    "G_I_intersection": 0,
+    "unintended_changes_vs_B": 0,
+    "positive_counts_G_I_GI": [5937, 5992, 6073],
+    "router_equals_GI_then_remove_12": true
+  },
+  "P2": {
+    "layer_rows": {"2": 8713, "3": 8712, "4": 8636},
+    "alpha_star": {
+      "2": 0.14425740489974548,
+      "3": -0.09317805131171075,
+      "4": -0.207647470805942
+    },
+    "predicted_U_RMSE": 0.5357504803611377,
+    "rounding_interval": [0.5357484709886129, 0.5357524897265927],
+    "max_formula_error": 5.01e-13,
+    "envelope_eligible_active": [18415, 5274],
+    "full_pava_eligible_active": [18357, 7522],
+    "final_E_sha256": "f0298212b4be3552597524dab7d876128eacebb4333efe9ccc61becfcb5d72b7"
+  },
+  "P3": {
+    "formula_max_error": 5e-13,
+    "changed_rows_C1_C2_C3": [600, 600, 400],
+    "C1_disjoint_merge_identity": true,
+    "C1_expected_RMSE": 0.5989869937185615,
+    "C1_rounding_interval": [0.5989854802165493, 0.5989885072171668],
+    "round_d_long_midpoint_max_error": 4.440892098500626e-16,
+    "round_d_early_B_minus_O_max_error": 0,
+    "round_d_global_rms_off_axis": 0.00019365428951460554
+  },
+  "separation": {
+    "manifest_status": "FROZEN_READY_NOT_UPLOADED",
+    "official_submissions_performed": 0,
+    "fresh_explicit_approval_required": true,
+    "network_or_upload_path_in_builder": false,
+    "training_path_in_builder": false,
+    "ERA5_execution_path_in_builder": false
+  }
+}

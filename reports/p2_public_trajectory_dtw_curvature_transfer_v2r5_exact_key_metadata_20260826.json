@@ -1,0 +1,81 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r5.exact_key_metadata.v1",
+  "created_at_kst": "2026-08-26T09:43:47.1970628+09:00",
+  "status": "READ_ONLY_METADATA_DIAGNOSIS_NO_MATERIALIZATION",
+  "source": {
+    "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+    "bytes": 2477660,
+    "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+    "columns_read": ["time", "layer", "block"],
+    "truth_or_prediction_values_read": false
+  },
+  "full_file_metadata": {
+    "rows": 69850,
+    "row_groups": 1,
+    "blocks": {"2024_sep_oct": 26273, "2025_jul_aug": 26693, "2025_nov_dec": 16884}
+  },
+  "exact_2024_sep_oct": {
+    "rows": 26273,
+    "unique_time_layer_keys": 26273,
+    "duplicate_time_layer_keys": 0,
+    "layers": [2, 3, 4],
+    "layer_rows": {"2": 8777, "3": 8774, "4": 8722},
+    "layer_missing_from_full_8784_grid": {"2": 7, "3": 10, "4": 62},
+    "unique_timestamps": 8779,
+    "expected_full_grid_timestamps": 8784,
+    "missing_union_timestamps": 5,
+    "gap_intervals_in_observed_union": 2,
+    "off_canonical_grid_timestamps": 0,
+    "minimum_kst": "2024-09-01T00:00:00+09:00",
+    "maximum_kst": "2024-10-31T23:50:00+09:00",
+    "kst_days": 61,
+    "timestamp_unit": "ns",
+    "nat_count": 0
+  },
+  "v2r4_failure_lineage": {
+    "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4",
+    "attempt_id": "908becd9672518ad93afb039",
+    "claim": {"path": "artifacts/_p2_trajectory_claims/p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4.claim.json", "bytes": 561, "sha256": "003916cd1b062f97be39e85d422f954c25895519fecacbc9f4a7d8dbd53e2062"},
+    "journal": {"path": "artifacts/_p2_trajectory_attempt_journals/p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4.ndjson", "bytes": 2485, "sha256": "10f2efc207c3a5d768da630a8c89b9dfc92fb3b8bfee89ffede8f213bd817f69"},
+    "terminal_state": "TERMINAL_FAILURE_NO_RERUN",
+    "journal_materialization_accounting": {"reserved": 0, "completed": 0, "failed": 0, "skipped_gate": 0},
+    "physical_fit_calls": 0,
+    "read_only_reproduced_exception": "builtins.ValueError: exact timestamp grid is not continuous 10-minute UTC-ns"
+  },
+  "root_cause": {
+    "classification": "INTEGRITY_ADAPTER_FALSE_REJECTION_BEFORE_FIRST_MATERIALIZATION",
+    "incorrect_invariant": "Every timestamp in the sparse verified exact-anchor union must be present at a continuous ten-minute cadence.",
+    "why_incorrect": "The exact anchor contains only observed truth keys. Missing truth keys and missing whole timestamps are allowed, while every present timestamp still lies on the canonical frozen ten-minute grid.",
+    "scientific_result_available": false,
+    "result_driven_choice_used": false
+  },
+  "prospective_correct_invariant": {
+    "required": [
+      "exactly 26273 rows after block equals 2024_sep_oct",
+      "unique (time, layer) keys",
+      "all timestamps are valid UTC nanoseconds with exact roundtrip identity",
+      "all present timestamps satisfy (time_ns - frozen_start_ns) modulo 600000000000 equals zero",
+      "frozen minimum and maximum bounds match 2024-09-01 00:00 through 2024-10-31 23:50 Asia/Seoul",
+      "61 distinct KST days",
+      "layers are exactly 2, 3, and 4",
+      "independent observation key and truth equality before scoring"
+    ],
+    "explicitly_allowed": [
+      "missing timestamps in the observed union",
+      "different missing-key counts by layer",
+      "noncontinuous adjacent differences after absent truth keys are removed"
+    ],
+    "required_diagnostics": ["unique timestamp count", "missing union timestamp count", "gap interval count", "per-layer observed and missing key counts"]
+  },
+  "safety_accounting": {
+    "physical_fit_calls": 0,
+    "materializations": 0,
+    "scores": 0,
+    "p100_resolve_stat_open_hash_parse": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0
+  }
+}

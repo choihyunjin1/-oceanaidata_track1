@@ -1,0 +1,195 @@
+{
+  "schema_version": "p1_incumbent_rule_distillation_neural_residual.static_design.v1",
+  "experiment_id": "p1_incumbent_rule_distillation_neural_residual_v5",
+  "status": "STATIC_DESIGN_ONLY_NOT_PREREGISTERED_NOT_EXECUTABLE",
+  "problem": "P1",
+  "metric": "binary_micro_F1",
+  "direction": "higher",
+  "comparison_mode": "EXACT_OFFICIAL_PREFIX_REFIT",
+  "execution_authorized": false,
+  "attempt_lock_creation_authorized": false,
+  "test_value_reads_authorized": false,
+  "candidate_creation_authorized": false,
+  "upload_authorized": false,
+  "ledger_binding_status": "STATIC_DESIGN_REBASED_TO_V5_SEQ9_NOT_EXECUTABLE",
+  "v5_ledger_binding": {
+    "path": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+    "bytes": 29320,
+    "event_count": 9,
+    "head_seq": 9,
+    "head_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066",
+    "all_event_upload_performed_false": true,
+    "semantic_upload_count": 0
+  },
+  "failed_generation_binding": {
+    "experiment_id": "p1_masked_pretrain_binary_event_v4r4",
+    "config_sha256": "dcedcd7129687554969fd87aceacde50897583476c5aad32d811d2791a5ef803",
+    "preregistration_sha256": "139e349e782482f2e5eb18ccf45723bafdf30376f8c9c154cb87c04cebbb0ddf",
+    "metrics_sha256": "6a0b3cc3988c88a2b67e73f84a3535501f188f8da552072010bca0a67d3b46d5",
+    "learning_curve_evidence_sha256": "483234662877fb78d9f3017aa32bd3b77666044c60f43253c14c0c76af865781",
+    "result_sha256": "6db6d61d9581e91819ad8184360774b38416449e8e614e9b4167d924121cabb2",
+    "manifest_sha256": "892995283dd4ef7aff6de4df3adc820245c9a0a228654b11f805576aadd72662d",
+    "full_fraction_incumbent_f1": 0.8604836038423319,
+    "full_fraction_challenger_f1": 0.3524183900188002,
+    "full_fraction_delta": -0.5080652138235318,
+    "full_fraction_ci90": [-0.5748498973850913, -0.4456730709307532],
+    "full_fraction_fold_deltas": [-0.5355342104658202, -0.4569177526733682, -0.45627862389461893],
+    "full_fraction_station_deltas": {
+      "G-ORS": -0.12881688658454482,
+      "I-ORS": -0.46640225012236786,
+      "S-ORS": -0.5554835792392505
+    },
+    "structural_diagnosis": "The raw-causal masked-pretraining encoder did not retain the incumbent's engineered offline and rule geometry. Its full-prefix seed F1 values were unstable, station-layer calibration collapsed in deep I-ORS and S-ORS layers, and the learning curve was non-monotone, so additional exposure or threshold adjustment is not an adequate response."
+  },
+  "single_hypothesis": {
+    "id": "incumbent_rule_distillation_with_out_of_fold_neural_residual",
+    "hypothesis_count": 1,
+    "score_derived_tuning": false,
+    "structure": "Use the immutable incumbent seed probabilities and fixed rule decision as an identity base. Learn only a bounded neural logit residual from time-safe inner cross-fitted incumbent predictions, while an auxiliary distillation head forces the residual encoder to reproduce incumbent rule geometry. Apply the residual only when one preregistered held-out inner block passes the no-op gate; otherwise emit the exact incumbent probability for that seed.",
+    "why_structurally_distinct": "The candidate cannot discard the incumbent as Gen2-Gen4 did. It is an identity-preserving error-correction model with cross-fitted teacher predictions and a train-only no-op gate, not a threshold, class-weight, seed, or postprocess variation."
+  },
+  "outer_curve_contract": {
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "outer_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "seed_ids": [20260813, 20260829, 20260847],
+    "seed_aggregation": "PREDICTION_MEAN_THEN_METRIC",
+    "exact_incumbent_comparator": "sealed Gen1 same-prefix same-fold three-seed fresh refits",
+    "same_fold_keys_metric_postprocess": true,
+    "incumbent_reference_seed_full_prediction_exact_to_frozen_oof": true,
+    "candidate_fresh_refit_each_prefix": true,
+    "outer_validation_target_reads_before_all_blind_predictions_sealed": 0,
+    "historical_prefix_cutoff_provenance": "Four adjusted prefix cutoffs were historically derived in Gen1 by reading training labels to retreat complete positive event boundaries. The successor must read only the sealed cutoff timestamps and exact row-count/SHA receipts; current-run prefix-selection target reads are zero.",
+    "nominal_boundary_split_risk_disclosed": true
+  },
+  "inner_cross_fit_contract": {
+    "purpose": "Create teacher/base probabilities for residual training without any row being scored by an incumbent model fitted on that row's label.",
+    "split_count": 3,
+    "split_rule": "Three fixed expanding chronological validation blocks inside each exact outer-prefix training set.",
+    "cutoff_rule": "Timestamp-count fractions fixed before implementation; no label-based cutoff retreat.",
+    "purge_days": 7,
+    "event_boundary_safety": "The seven-day purge exceeds the maximum documented injected-event duration; nominal boundary risk is recorded without reading labels to move cutoffs.",
+    "teacher_structure": "Official immutable incumbent XGBoost encoder/model parameters and three registered seeds, with prefix-local feature construction and no raw row outside the exact prefix.",
+    "teacher_fit_count_per_outer_cell": 9,
+    "teacher_prediction_rows_disjoint_from_teacher_fit_rows": true,
+    "teacher_target_reads_outside_teacher_fit_rows": 0,
+    "outer_validation_rows_forbidden": true,
+    "feature_statistics_fit_on_teacher_train_rows_only": true,
+    "inner_gate_metric_and_postprocess": "Apply the same fixed outer-fold binary F1 and postprocess to teacher-base and residual probabilities; no inner threshold fitting."
+  },
+  "candidate_inputs": {
+    "identity_base": [
+      "incumbent_seed_probability",
+      "incumbent_three_seed_mean_probability",
+      "incumbent_three_seed_probability_standard_deviation",
+      "incumbent_fixed_postprocess_decision"
+    ],
+    "residual_context": [
+      "nine audited causal raw features from Gen4r4",
+      "station embedding",
+      "layer embedding",
+      "causal sequence gap mask"
+    ],
+    "target_columns_forbidden_as_features": ["label", "anomaly_type"],
+    "out_of_prefix_raw_context_zero_masked": true,
+    "future_row_mutation_outside_prefix_must_not_change_inputs": true,
+    "test_values": "FORBIDDEN_DURING_CURVE"
+  },
+  "residual_model": {
+    "encoder": "small station-layer causal temporal encoder",
+    "inference_head": "bounded_logit_residual_only",
+    "auxiliary_head": "incumbent_logit_distillation_training_only",
+    "candidate_seed_logit": "logit(incumbent_seed_probability) + 0.5*tanh(raw_residual_logit)",
+    "maximum_absolute_logit_correction": 0.5,
+    "identity_output_when_gate_fails": "np.array_equal to the sealed incumbent seed probability array, with the incumbent seed prediction array also exactly reproduced after the fixed postprocess",
+    "auxiliary_probability_use_at_inference": false,
+    "probability_clip": [1e-06, 0.999999]
+  },
+  "loss_contract": {
+    "main_loss": "dense natural-row BCEWithLogits on base-offset plus bounded residual",
+    "distillation_loss": "SmoothL1 between auxiliary head and inner-OOF incumbent mean logit",
+    "identity_regularizer": "mean squared bounded residual",
+    "loss_weights": {
+      "main": 1.0,
+      "distillation": 1.0,
+      "identity_regularizer": 0.05
+    },
+    "phase_balanced_resampling": false,
+    "class_weight_search": false,
+    "threshold_search": false,
+    "outer_score_selection": false
+  },
+  "train_only_no_op_gate": {
+    "gate_block": "third and latest inner cross-fit validation block, never used to fit the gate model",
+    "residual_fit_blocks_before_gate": [1, 2],
+    "refit_after_gate": "After the gate decision, refit on all three inner-OOF blocks with the same fixed hyperparameters.",
+    "apply_residual_if_all": {
+      "micro_f1_delta_at_least": 0.002,
+      "improved_station_count_at_least": 2,
+      "worst_station_f1_delta_at_least": -0.005
+    },
+    "otherwise": "NO_OP_EXACT_INCUMBENT",
+    "missing_required_station_in_gate_block": "NO_OP_EXACT_INCUMBENT",
+    "missing_binary_class_in_gate_block": "NO_OP_EXACT_INCUMBENT",
+    "outer_validation_metrics_available_to_gate": false,
+    "gate_threshold_or_weight_tuning": false,
+    "full_fit_identity_decision_reference": "2025_q4_fixed_postprocess",
+    "full_fit_gate_application_rule": "residual_must_pass_under_all_three_fixed_fold_postprocess_mappings"
+  },
+  "fixed_training_budget": {
+    "residual_optimizer_steps_per_fit": 120,
+    "residual_batch_size": 8192,
+    "residual_learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "early_stopping": false,
+    "checkpoint_selection": false,
+    "teacher_curve_fits": 135,
+    "residual_gate_fits": 45,
+    "residual_refits": 45,
+    "maximum_total_curve_fits": 225,
+    "full_fit_teacher_cross_fits_on_pass": 9,
+    "full_fit_incumbent_inference_base_fits_on_pass": 3,
+    "full_fit_residual_gate_and_refits_on_pass": 6,
+    "maximum_total_full_fit_fits_on_pass": 18
+  },
+  "meaningful_improvement_gate": {
+    "bootstrap_replicates": 5000,
+    "bootstrap_cluster": "event_or_normal_day_by_station_layer",
+    "late_fraction_deltas_all_gt_zero": true,
+    "full_fraction_delta_at_least": 0.02,
+    "full_fraction_ci90_lower_gt_zero": true,
+    "another_late_fraction_ci90_lower_gt_zero": true,
+    "minimum_improved_outer_folds": 2,
+    "maximum_worst_station_f1_regression": 0.005,
+    "all_leakage_checks": true,
+    "all_reproducibility_checks": true
+  },
+  "required_static_implementation_before_preregistration": [
+    "Prefix-local official-incumbent feature builder with outside-prefix future-row perturbation regression tests.",
+    "Three-block chronological inner cross-fitting module with seven-day purge and exact key/order receipts.",
+    "Bounded residual plus training-only distillation model with identity-byte no-op tests.",
+    "Direct-call and one-shot lock guards, canonical root/data guards, and start/end immutable-pin equality tests.",
+    "End-to-end synthetic test proving gate labels come only from inner block three and outer validation labels remain unread until blind prediction sealing.",
+    "Canonical v3 evidence and v5 ledger dry replay tests after rebasing to the then-current ledger head."
+  ],
+  "hard_prohibitions": {
+    "execution_before_new_frozen_preregistration_and_independent_static_QA_GO": true,
+    "reuse_of_outer_validation_scores_for_gate_or_hyperparameters": true,
+    "reactive_threshold_weight_seed_or_postprocess_tuning": true,
+    "teacher_prediction_on_a_row_fitted_with_that_rows_label": true,
+    "out_of_prefix_feature_context": true,
+    "test_value_reads": true,
+    "candidate_creation": true,
+    "upload": true,
+    "source_cache_current_or_frozen_mutation": true
+  },
+  "static_design_counters": {
+    "model_fits": 0,
+    "target_fold_scores": 0,
+    "test_value_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "attempt_locks": 0
+  }
+}

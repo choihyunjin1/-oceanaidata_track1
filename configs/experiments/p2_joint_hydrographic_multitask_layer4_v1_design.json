@@ -1,0 +1,211 @@
+{
+  "schema_version": "p2_joint_hydrographic_multitask_layer4.design.v1",
+  "experiment_id": "p2_joint_hydrographic_multitask_layer4_v1",
+  "created_at_kst": "2026-08-23T08:03:14+09:00",
+  "status": "DESIGN_ONLY_NOT_EXECUTABLE_NOT_PREREGISTERED",
+  "problem": "P2",
+  "research_only": true,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "official_submission_count": 0,
+  "generation_contract": {
+    "generation_id": "P2_BASE_REPRESENTATION_GENERATION_4",
+    "hypothesis_count": 1,
+    "hypothesis_selected_before_any_new_fit": true,
+    "score_derived_threshold_weight_seed_or_epoch_tuning": false,
+    "failed_family_micro_tuning": false,
+    "structurally_distinct_from_prior_residual_analog_kernel_tree_and_scalar_blend_families": true,
+    "single_sentence": "Learn a shared public-sequence representation that jointly reconstructs hidden temperature and salinity at layers 2, 3, and 4, while deploying only its layer-4 temperature head and preserving the sealed Stage-A layer-2/3 predictions exactly."
+  },
+  "diagnostic_basis_known_before_preregistration": {
+    "reference_fraction_100_rmse_c": 1.0109798870010898,
+    "reference_fraction_100_layer_rmse_c": {
+      "2": 0.505278401292343,
+      "3": 0.8832637998524321,
+      "4": 1.4254045151840877
+    },
+    "bottleneck": "Layer 4 dominates the sealed full-fraction reference error.",
+    "prior_joint_target_linear_state_precheck": "p2_tide_rts_v1 was rejected because a linear state/RTS residual model had negative residual R2; this hypothesis instead changes the shared nonlinear representation and supervised objective.",
+    "prior_stage_b_and_generation_3_failures": "Analog manifold and post-hoc residual families worsened the full-data reference, so neither neighbor selection nor reference-residual correction is reused."
+  },
+  "reference": {
+    "mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+    "exact_official_incumbent": false,
+    "local_qualification_only": true,
+    "stage_a_manifest": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/manifest.json",
+      "sha256": "bb21341f94b866be7e2d6dc0e0f0b78b9c84a1898d4844ff75637f95798f21c6",
+      "bytes": 5058
+    },
+    "stage_a_seal": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/seal.json",
+      "sha256": "315e52da6b7f4ab7bf3a1970301b4391b9f31611da6187667760ed0d3a501ba2",
+      "bytes": 1298
+    },
+    "reference_oof": {
+      "0.40": {
+        "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_040.csv",
+        "sha256": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626",
+        "bytes": 9689175
+      },
+      "0.55": {
+        "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_055.csv",
+        "sha256": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168",
+        "bytes": 9725466
+      },
+      "0.70": {
+        "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_070.csv",
+        "sha256": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf",
+        "bytes": 9776617
+      },
+      "0.85": {
+        "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_085.csv",
+        "sha256": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8",
+        "bytes": 9832417
+      },
+      "1.00": {
+        "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_100.csv",
+        "sha256": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06",
+        "bytes": 9826903
+      }
+    }
+  },
+  "source_contract": {
+    "data_directory_is_runtime_injected": true,
+    "personal_absolute_path_in_code_or_config": false,
+    "observations": {
+      "relative_to_data_directory": "observations.csv",
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "bytes": 49058719
+    },
+    "readme": {
+      "relative_to_data_directory": "README.md",
+      "sha256": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+      "bytes": 1616
+    },
+    "official_scorer": {
+      "relative_to_data_directory": "score.py",
+      "sha256": "218165bebd45f6f8e0db06d3e8d0039144f121a4d56e84fa5a67ae13146ce82a",
+      "bytes": 1846
+    }
+  },
+  "outer_protocol": {
+    "folds": [
+      {
+        "name": "outer_2024_sep_oct",
+        "start_kst": "2024-09-01T00:00:00+09:00",
+        "stop_kst": "2024-11-01T00:00:00+09:00"
+      },
+      {
+        "name": "outer_2025_may_jun",
+        "start_kst": "2025-05-01T00:00:00+09:00",
+        "stop_kst": "2025-07-01T00:00:00+09:00"
+      },
+      {
+        "name": "outer_2025_jul_aug",
+        "start_kst": "2025-07-01T00:00:00+09:00",
+        "stop_kst": "2025-09-01T00:00:00+09:00"
+      }
+    ],
+    "embargo_days": 7,
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_rule": "Reuse the exact Stage-A eligible chronological timestamp prefixes and verify key, row-count, and digest equality before every fit.",
+    "pipeline_seeds": [20260823, 20260824, 20260825],
+    "seed_aggregation": "PREDICTION_MEAN_THEN_METRIC",
+    "fit_cells": 45,
+    "outer_truth_may_select_or_tune_model": false
+  },
+  "blindness_contract": {
+    "public_layers_available_at_all_times": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "training_target_variables": ["temp", "psal"],
+    "fold_local_target_cutoff": "strictly before outer start minus 7 KST days",
+    "validation_target_temp_psal_scalar_decode_before_all_45_blind_predictions_are_exclusively_committed": 0,
+    "raw_source_bytes_before_commit": "integrity hash and station/layer/time key routing only",
+    "all_predictions_committed_before_truth_load": true,
+    "test_index_or_sample_submission_semantic_reads": 0,
+    "test_prediction_count": 0,
+    "hidden_label_proxy_or_score_derived_prevalence": false
+  },
+  "hypothesis": {
+    "id": "H1_JOINT_HYDROGRAPHIC_MULTITASK_TCN_LAYER4",
+    "family": "SHARED_PUBLIC_SEQUENCE_DUAL_TARGET_DEPTH_QUERY_NETWORK",
+    "inputs": "Public-layer 1/5/6/7/8 temperature, salinity, depth, finite masks, public-to-target temperature and salinity interpolation baselines, target nominal depths, and fixed KST annual/diurnal/M2 harmonics.",
+    "forbidden_inputs": "Target-layer temperature or salinity at or after the fold cutoff, validation truth, test values, prior official score magnitude, and any score-derived threshold or blend.",
+    "architecture": {
+      "shared_width": 160,
+      "temporal_blocks": 6,
+      "block_type": "depthwise_gated_TCN",
+      "kernel_size": 5,
+      "dilations": [1, 2, 4, 8, 16, 32],
+      "dropout": 0.05,
+      "depth_query_encoding": "fixed nominal depth plus two sine/cosine harmonic pairs",
+      "heads": ["temperature_residual_layers_2_3_4", "salinity_residual_layers_2_3_4"],
+      "output_dimensions": 6
+    },
+    "normalization": "Fold-and-prefix training-only robust median/MAD independently for public inputs and each of six residual targets.",
+    "loss": {
+      "temperature_standardized_masked_mse_weight": 1.0,
+      "salinity_standardized_masked_mse_weight": 1.0,
+      "vertical_first_difference_consistency_weight": 0.25,
+      "consistency_scope": "Only timestamps where all compared train targets are jointly finite.",
+      "validation_or_outer_labels_in_loss": false
+    },
+    "training": {
+      "optimizer": "AdamW",
+      "learning_rate": 0.0003,
+      "weight_decay": 0.001,
+      "epochs": 28,
+      "epoch_or_checkpoint_selection": false,
+      "chunk_length": 512,
+      "chunk_stride": 384,
+      "batch_size": 12,
+      "gradient_clip_norm": 1.0,
+      "cuda_bfloat16": true,
+      "fixed_seed_ids": [20260823, 20260824, 20260825]
+    },
+    "deployment_ablation": {
+      "layers_2_and_3": "Exact sealed Stage-A prediction_mean bytes after canonical numeric parsing; no recomputation or postprocess.",
+      "layer_4": "Three-seed mean of the new temperature head, clipped to [-5,45] and canonical CSV float-roundtripped.",
+      "post_hoc_blend_weight": null,
+      "threshold_or_router": null,
+      "profile_projection_after_layer4_replacement": false,
+      "reason": "Isolate whether joint hydrographic supervision improves the documented layer-4 bottleneck while making layer-2/3 regression mathematically impossible."
+    }
+  },
+  "evaluation": {
+    "primary_delta": "challenger minus sealed Stage-A reference integrated RMSE in degrees C; negative is better",
+    "bootstrap": {
+      "replicates": 5000,
+      "cluster": "KST day",
+      "paired": true,
+      "confidence_interval": 0.9,
+      "seed": 20260823
+    },
+    "curve_gates": {
+      "fractions_70_85_100_all_improve": true,
+      "full_fraction_ci90_upper_strictly_below_zero": true,
+      "at_least_one_other_late_fraction_ci90_upper_strictly_below_zero": true,
+      "full_fraction_delta_rmse_c_at_most": -0.03,
+      "outer_folds_improved_at_least": 2,
+      "maximum_layer_regression_c": 0.0075,
+      "maximum_same_season_2024_sep_oct_regression_c": 0.0075
+    },
+    "candidate_creation_only_if_all_gates_pass": true,
+    "local_curve_pass_can_promote_official_incumbent": false,
+    "official_paired_ab_and_user_approval_still_required": true
+  },
+  "execution_firewall": {
+    "design_file_alone_is_not_authorization": true,
+    "implementation_and_transitive_sources_must_be_sha_pinned_before_first_fit": true,
+    "independent_static_qa_p0_and_p1_must_equal_zero": true,
+    "separate_append_only_authorization_required": true,
+    "canonical_workspace_and_runtime_injected_data_identity_required": true,
+    "persistent_o_excl_attempt_lock_required": true,
+    "all_blind_model_and_prediction_artifacts_use_o_excl_binary_write_loops": true,
+    "direct_engine_call_requires_live_post_lock_capability": true,
+    "duplicate_or_resume_allowed": false,
+    "candidate_test_prediction_or_upload_allowed": false
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.v1",
+  "experiment_id": "p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1",
+  "created_at_kst": "2026-08-23T10:00:00+09:00",
+  "status": "PREREGISTERED_APPEND_ONLY_STATIC_ONLY_NO_FIT_NO_PREDICTION_NO_SCORE_NO_TEST_NO_UPLOAD",
+  "problem": "P3",
+  "hypothesis_count": 1,
+  "hypothesis": {
+    "id": "prequential_crossfit_bounded_residual_calibration_of_sealed_incumbent",
+    "claim": "A deterministic, strongly regularized residual calibrator trained only on chronologically earlier sealed Gen1 OOF cases can correct stable station/lead incumbent bias enough to reduce full-prefix integrated RMSE by at least 0.030 m, while a fixed inner evidence gate and exact identity fallback prevent unsupported corrections.",
+    "structural_distinction": "The Gen6 candidate is the sealed incumbent plus at most 0.12 m of prequentially cross-fitted calibration. It does not replace, refit, blend, route, or retune the incumbent model and it never uses a current outer fold target to decide whether that fold is corrected.",
+    "falsifier": "The hypothesis fails if the unchanged five-point meaningful-curve gate fails, if any inner gate fails and the corresponding output is not byte-exact to the incumbent, or if any central-ledger, leakage, reproducibility, candidate, test, or upload prohibition is violated."
+  },
+  "comparison_mode": "SEALED_GEN1_OOF_INCUMBENT_PRESERVING_RESEARCH_ONLY",
+  "exact_official_incumbent_comparison": false,
+  "local_numeric_curve_qualification_allowed": true,
+  "official_promotion_allowed": false,
+  "official_score_route_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "registry_append_allowed": false,
+  "upload_allowed": false,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1.json",
+    "helper": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator.py",
+    "runner": "scripts/run_p3_gen6_incumbent_preserving_residual_calibrator_v1.py",
+    "tests": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_v1.py",
+    "output": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1",
+    "control": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1_control",
+    "pre_execution_qa": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1_control/pre_execution_qa.json",
+    "authorization": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1_control/authorization.json",
+    "attempt_lock": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1_control/attempt.lock",
+    "run_failure_receipt": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1_control/run_failure_receipt.json",
+    "sealed_gen1_oof": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "sealed_validation_keys": "artifacts/p3_meaningful_learning_curve_20260823_v1/validation_keys.parquet",
+    "train_anchor_metadata": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+    "central_v9_ledger": "artifacts/meaningful_score_goal_v9/registry.jsonl"
+  },
+  "canonical_workspace_identity": {
+    "root_st_dev": 8372226647648079724,
+    "root_st_ino": 844424930439257,
+    "git_config_sha256": "8630fd27025aabe4e750d901f3766d8da9ea2a379221e7dc31bc27a857ee10e7",
+    "origin_url": "https://github.com/choihyunjin1/-oceanaidata_track1.git",
+    "personal_absolute_path_stored": false
+  },
+  "central_ledger_anchor": {
+    "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v9",
+    "path": "artifacts/meaningful_score_goal_v9/registry.jsonl",
+    "bytes": 13030,
+    "sha256": "0cc77ee79856c168dabc40d9a5357ead515ce6a34af0bd8e170f6b6be4833afc",
+    "physical_event_lines": 2,
+    "global_head_seq": 4,
+    "head_event_sha256": "db78fc78d8097eddde827253b1627c18cd990cb1bfb3423151a64b650700ba66",
+    "official_uploads_through_anchor": 0,
+    "on_any_change": "FAIL_CLOSE_REQUIRE_APPEND_ONLY_REBASE_BEFORE_QA_OR_EXECUTION",
+    "automatic_rebase_allowed": false
+  },
+  "failure_diagnosis": {
+    "source": "SEALED_AGGREGATE_ARTIFACTS_ONLY",
+    "gen1": {
+      "status": "NO_HYPOTHESIS_CURVE_QUALIFIED_STOPPED_BEFORE_TEST_READS",
+      "full_delta_candidate_minus_incumbent_m": 0.0005707322005434889,
+      "late_deltas_candidate_minus_incumbent_m": [0.003735037792458429, 0.0020186760249399915, 0.0005707322005434889],
+      "diagnosis": "Changing only single/multi/splice representation around the same fitted components did not create a stable material gain."
+    },
+    "gen2": {
+      "status": "NO_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST_READS",
+      "full_delta_candidate_minus_incumbent_m": 0.03785402015984651,
+      "full_ci90_m": [0.01409769856877904, 0.06144745214959834],
+      "diagnosis": "The pooled causal sequence replacement was materially miscalibrated in 2024-H2 storm and G/S regimes."
+    },
+    "gen3": {
+      "status": "NO_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST_READS",
+      "full_delta_candidate_minus_incumbent_m": 0.042782536910337954,
+      "full_ci90_m": [0.018103542662230722, 0.06791567222677251],
+      "diagnosis": "Spectral random features lost ordered storm growth and decay and worsened every fold."
+    },
+    "gen4": {
+      "status": "NO_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST_READS",
+      "full_delta_candidate_minus_incumbent_m": 0.04281365149503025,
+      "full_ci90_m": [0.015614564021500021, 0.07126510628717048],
+      "diagnosis": "The stable physical-state replacement improved early prefixes but regressed at 0.85 and 1.00, especially S-ORS and long leads."
+    },
+    "gen5r4": {
+      "status": "NO_LOCAL_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST",
+      "prefix_deltas_candidate_minus_incumbent_m": [0.003914455833476493, 0.01820222027063878, 0.04931969456255847, 0.06153022481517356, 0.06729476403367496],
+      "full_delta_candidate_minus_incumbent_m": 0.06729476403367496,
+      "fold_deltas_candidate_minus_incumbent_m": [0.10827323057022131, 0.04351888205695076, 0.06686365161621466],
+      "critical_slice_deltas_candidate_minus_incumbent_m": {
+        "G-ORS": 0.08298370486768569,
+        "I-ORS": -0.006204296921762942,
+        "S-ORS": 0.10745420150517615,
+        "lead_12": 0.046679668684818876,
+        "lead_18": 0.09414531409146554,
+        "lead_24": 0.09308440860897649
+      },
+      "diagnosis": "The dense72 hierarchical replacement worsened progressively with more data and had large G/S and long-lead regressions; Gen6 must preserve the incumbent rather than introduce another wholesale forecasting family."
+    }
+  },
+  "immutable_inputs": {
+    "source/train_wave.csv": {"path": "train_wave.csv", "bytes": 6132036, "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"},
+    "source/README.md": {"path": "README.md", "bytes": 3037, "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"},
+    "anchor_metadata": {"path": "artifacts/p3/features_all20_v1/train_anchors.parquet", "bytes": 461964, "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"},
+    "feature_manifest": {"path": "artifacts/p3/features_all20_v1/manifest.json", "bytes": 1602, "sha256": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e"},
+    "gen1_oof": {"path": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet", "bytes": 215998, "sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404"},
+    "gen1_validation_keys": {"path": "artifacts/p3_meaningful_learning_curve_20260823_v1/validation_keys.parquet", "bytes": 4147, "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"},
+    "gen1_evidence": {"path": "artifacts/p3_meaningful_learning_curve_20260823_v1/learning_curve_evidence.json", "bytes": 4871, "sha256": "497fc3ec756cc6ceb7eff7f9c658afe27f49e8ab441f07b1dad2cfdbf3193325"},
+    "gen1_metrics": {"path": "artifacts/p3_meaningful_learning_curve_20260823_v1/metrics.json", "bytes": 65655, "sha256": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1"},
+    "gen1_manifest": {"path": "artifacts/p3_meaningful_learning_curve_20260823_v1/manifest.json", "bytes": 23277, "sha256": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6"},
+    "gen2_evidence": {"path": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1/learning_curve_evidence.json", "bytes": 5082, "sha256": "7303993fbff3a301a1779ae29ea0fc7288f332d6a7b96276edf06ca01ee6c7ac"},
+    "gen2_metrics": {"path": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1/metrics.json", "bytes": 67942, "sha256": "adab38a1244b532e4e47cb4308f6a8d8c2a61cb0495b716db171f224537eba21"},
+    "gen2_manifest": {"path": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1/manifest.json", "bytes": 23988, "sha256": "204c36727e3f033e1650985ee2d0cbefe9aac75e0494cd70d61eaa685cf0de2e"},
+    "gen3_evidence": {"path": "artifacts/p3_causal_spectral_kernel_20260823_v1/learning_curve_evidence.json", "bytes": 5174, "sha256": "bd69ca56f60d6bfb6244238de04ff45eb45de3756792822aa43ff1c6e8baf91f"},
+    "gen3_metrics": {"path": "artifacts/p3_causal_spectral_kernel_20260823_v1/metrics.json", "bytes": 81657, "sha256": "dfe938d28e89e2d41c65f86230f06f9221083b0fec759c9c9b556293082ec9c5"},
+    "gen3_manifest": {"path": "artifacts/p3_causal_spectral_kernel_20260823_v1/manifest.json", "bytes": 24510, "sha256": "c9957bc9d2449ca6f6d31fcec69933a1c4e6c07a8e8ca54c78006136b333fd2b"},
+    "gen4_evidence": {"path": "artifacts/p3_station_stable_energy_state_space_20260823_v1/learning_curve_evidence.json", "bytes": 5380, "sha256": "f0c76e0703ed7389845d4ab727a44713b8ea1f8a8b9703b7981703973e6c5382"},
+    "gen4_metrics": {"path": "artifacts/p3_station_stable_energy_state_space_20260823_v1/metrics.json", "bytes": 49714, "sha256": "f5b60e5fe2ea919d6d3fe51c5efac04485f48c6951e3a3f57a9a2e32fcea6a2e"},
+    "gen4_manifest": {"path": "artifacts/p3_station_stable_energy_state_space_20260823_v1/manifest.json", "bytes": 13367, "sha256": "854a87bd21f9824bb969ba79b9af0032ebd24d6489184e0a8fddd953292bf3a0"},
+    "gen5_evidence": {"path": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/learning_curve_evidence.json", "bytes": 2983, "sha256": "0ee58d63460dd989331a776f705b078f125f033c34fca777f5b630ebbd4bdedd"},
+    "gen5_metrics": {"path": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/metrics.json", "bytes": 112306, "sha256": "5a6209de2f6e258a64479844ad3c2ef947d29e9dabdc9b536f8480493cf49969"},
+    "gen5_manifest": {"path": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/manifest.json", "bytes": 58154, "sha256": "c4c104b11679584249588605932a7efd767704addffa5a1dccf72ce7a89d8f0f"}
+  },
+  "transitive_implementation_pins": {
+    "src/p3_wave/meaningful_learning_curve.py": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "src/p3_wave/corrected_repeated_forward.py": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30"
+  },
+  "sealed_surface_contract": {
+    "rows": 5430,
+    "cases_per_prefix": 181,
+    "rows_per_prefix": 1086,
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "outer_fold_order": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "validation_case_counts": {"2024_h2_storm": 49, "winter_transition": 79, "2025_h1": 53},
+    "official_leads_h": [3, 6, 9, 12, 18, 24],
+    "stations": ["G-ORS", "I-ORS", "S-ORS"],
+    "incumbent_column": "incumbent_prediction",
+    "truth_column": "target_hs",
+    "target_or_hidden_values_read_during_static_check": 0,
+    "anonymous_test_values_read_during_static_check_or_curve": 0
+  },
+  "calibrator": {
+    "class": "DeterministicStandardizedRidgeResidualCalibrator",
+    "features": [
+      "intercept",
+      "station_one_hot_fixed_3",
+      "lead_one_hot_fixed_6",
+      "standardized_incumbent_hs",
+      "standardized_current_hs",
+      "standardized_persistence_gap",
+      "standardized_incumbent_minus_current",
+      "standardized_incumbent_minus_persistence",
+      "standardized_lead_scaled_times_incumbent_minus_persistence"
+    ],
+    "residual_target": "target_hs_minus_sealed_incumbent_prediction",
+    "residual_target_clip_m": [-0.75, 0.75],
+    "ridge_alpha": 32.0,
+    "intercept_penalized": false,
+    "numeric_scale_floor": 1e-8,
+    "maximum_absolute_correction_m": 0.12,
+    "prediction_clip_m": [0.0, 30.0],
+    "hyperparameter_search_count": 0,
+    "alpha_search_count": 0,
+    "threshold_search_count": 0,
+    "seed_search_count": 0,
+    "blend_weight_search_count": 0,
+    "router_search_count": 0
+  },
+  "prequential_crossfit": {
+    "outer_fold_2024_h2_storm": "IDENTITY_NO_PRIOR_TRUTH_AVAILABLE",
+    "outer_fold_winter_transition": {
+      "inner_fit": "chronological_first_60_percent_per_station_of_2024_h2_storm",
+      "inner_gate": "chronological_last_40_percent_per_station_of_2024_h2_storm_after_78h_station_embargo",
+      "outer_refit_if_gate_passes": "all_2024_h2_storm_cases"
+    },
+    "outer_fold_2025_h1": {
+      "inner_fit": "all_2024_h2_storm_cases",
+      "inner_gate": "all_winter_transition_cases",
+      "outer_refit_if_gate_passes": "all_2024_h2_storm_and_winter_transition_cases"
+    },
+    "same_prefix_only": true,
+    "current_outer_fold_target_used_by_calibrator_fit_gate_or_prediction": false,
+    "cross_prefix_target_sharing": false,
+    "gap_hours": 78
+  },
+  "inner_gate": {
+    "minimum_complete_cases": 12,
+    "delta_candidate_minus_incumbent_m_at_most": -0.005,
+    "paired_whole_case_ci90_upper_below_zero": true,
+    "maximum_station_or_lead_regression_m": 0.0075,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed_base": 20260823,
+    "failed_gate_action": "COPY_INCUMBENT_FLOAT64_C_CONTIGUOUS_AND_ASSERT_EXACT_TOBYTES_EQUAL",
+    "successful_gate_action": "REFIT_SAME_FIXED_CALIBRATOR_ON_ALL_CHRONOLOGICALLY_PRIOR_CASES_AND_APPLY_BOUNDED_CORRECTION"
+  },
+  "outer_gate": {
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "on_pass": "SEAL_LOCAL_RESEARCH_EVIDENCE_ONLY_NO_CANDIDATE_NO_TEST_NO_LEDGER_APPEND_NO_UPLOAD",
+    "on_fail": "SEAL_RESEARCH_EVIDENCE_AND_STOP"
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "static_preflight_before_qa_authorization_lock_fit_or_output": true,
+    "actual_curve_requires_independent_static_qa_p0_0_p1_0_go": true,
+    "actual_curve_requires_separate_exact_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "central_v9_anchor_reverified_before_qa_before_authorization_before_lock_and_before_publish": true,
+    "attempt_lock_o_excl": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "full_incumbent_refit_allowed": false,
+    "anonymous_test_read_allowed": false,
+    "full_fit_allowed": false,
+    "candidate_creation_allowed": false,
+    "submission_or_frozen_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "upload_allowed": false,
+    "run_now_authorized": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.independent_static_qa.v1",
+    "reviewer_independent_of_implementation_owner": true,
+    "p0_count": 0,
+    "p1_count": 0,
+    "verdict": "GO",
+    "must_bind_config_helper_runner_tests_and_central_ledger": true
+  },
+  "authorization_contract": {
+    "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.execution_authorization.v1",
+    "must_bind_qa_sha256": true,
+    "must_bind_config_helper_runner_tests_and_central_ledger": true,
+    "execute_once": true,
+    "candidate_or_test_prediction_allowed": false,
+    "registry_append_allowed": false,
+    "upload_allowed": false
+  },
+  "resource_estimate": {
+    "sealed_oof_rows": 5430,
+    "outer_application_cells": 15,
+    "minimum_calibrator_fits": 10,
+    "maximum_calibrator_fits": 20,
+    "model_seed_count": 0,
+    "bootstrap_replicates_outer_per_point": 5000,
+    "device": "cpu_float64_deterministic",
+    "estimated_runtime_seconds": [30, 180],
+    "estimated_peak_ram_gib": 1.0,
+    "estimated_peak_vram_gib": 0.0,
+    "estimated_output_disk_mib_upper_bound": 10,
+    "anonymous_test_value_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0
+  },
+  "static_counters": {
+    "qa_receipts_created": 0,
+    "authorizations_created": 0,
+    "attempt_locks_created": 0,
+    "fits": 0,
+    "predictions": 0,
+    "scores": 0,
+    "test_value_reads": 0,
+    "candidate_files_created": 0,
+    "registry_appends": 0,
+    "uploads": 0
+  }
+}

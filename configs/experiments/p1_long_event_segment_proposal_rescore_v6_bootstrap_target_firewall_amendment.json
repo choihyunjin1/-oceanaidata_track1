@@ -1,0 +1,132 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.bootstrap_target_firewall_amendment.v6",
+  "amendment_id": "p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v6",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T10:17:03.4277316+09:00",
+  "status": "PROSPECTIVE_INFRASTRUCTURE_RECOVERY_NOT_AUTHORIZED",
+  "prospective": true,
+  "created_before_v6_implementation_test_seal_claim_fit_materialization_or_score": true,
+  "reason": "Fresh independent r5 QA reproduced one bootstrap trust-boundary P0 and one pre-freeze target-access P1 before any scientific operation. This amendment fixes only those execution boundaries and exact authorization schema enforcement.",
+  "predecessor_r5": {
+    "status": "INDEPENDENT_QA_NO_GO_BEFORE_AUTHORIZATION_DO_NOT_EXECUTE",
+    "runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v2.py",
+      "bytes": 119130,
+      "sha256": "e97770f6b9a8657adfddb0cddb9a4fbc0416962810094eb4b86ca5bcc75aef84"
+    },
+    "execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+      "bytes": 65898,
+      "sha256": "68b644b1523fef498c00e03ee09058a7f9280761de70ec771e09e8c32a768e81"
+    },
+    "tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v2.py",
+      "bytes": 42378,
+      "sha256": "d6281d9b38852fc2a31e5b7aebd16b0ac3bc933c24a80eef8ba2002cc8480673"
+    },
+    "trust_firewall_v5": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v5_trust_firewall_amendment.json",
+      "bytes": 4702,
+      "sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563"
+    },
+    "seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2/preexecution_seal_r5.json",
+      "bytes": 19820,
+      "sha256": "20619d35471f396eecbb6d7e4e60d452eca63feea9488038663b2d41ce7da21d"
+    },
+    "fresh_independent_qa_path": "reports/p1_long_event_segment_proposal_rescore_v2_independent_preexecution_qa_r5_20260826.json",
+    "qa_sha256_pending_at_freeze": true,
+    "authorization_created": false,
+    "claim_count": 0,
+    "physical_fit_count": 0,
+    "scientific_materialization_count": 0,
+    "outer_score_count": 0
+  },
+  "fixed_findings": {
+    "P0_worker_bootstrap_outside_snapshot": {
+      "observed": "r5 launched live Path(__file__) with python -B, so live-runner replacement and PYTHONPATH/sitecustomize/.pth execution could precede snapshot verification.",
+      "required_v6": [
+        "The exact worker bootstrap bytes are copied into and pinned by the private snapshot before launch.",
+        "The parent retains held source authorities until the worker has authenticated its snapshot.",
+        "The worker starts with Python isolated mode and bytecode disabled; its first executable project bytes are the pinned snapshot bootstrap.",
+        "No PYTHONPATH, user-site, sitecustomize, usercustomize, or .pth processing may precede authorization and exact-tree verification.",
+        "Any required third-party import path is derived only after authentication from a sealed explicit inventory without .pth processing.",
+        "The exact snapshot tree, directories, links, bytecode ban, and file hashes are verified immediately before and after all project-module imports and before claim."
+      ]
+    },
+    "P1_eager_train_target_parse": {
+      "observed": "r5 parsed the full train.csv and computed a label-derived left-censor audit before the all-fold outer prediction freeze.",
+      "required_v6": [
+        "Pre-freeze readiness may materialize only an explicitly enumerated target-free training view.",
+        "Historical labels needed for strictly earlier anchor and inner fits are separated from every registered outer-evaluation key and protected by the fixed cutoffs and purge.",
+        "Outer-period label and anomaly_type remain opaque held bytes until record_outer_freeze succeeds after all 72 fits and 21 materializations.",
+        "Every label-derived outer audit, including left-censor counts and Round-B metrics, runs only after freeze.",
+        "Reader-level sentinels fail on any pre-freeze conversion, indexing, merge, serialization, or aggregate involving protected outer target columns."
+      ]
+    },
+    "P2_authorization_schema_exactness": {
+      "observed": "r5 authenticated raw bytes and core values but did not require the exact schema_version value or exact nested key/type membership in both parent and worker.",
+      "required_v6": [
+        "Parent and worker enforce one exact schema_version.",
+        "Parent and worker enforce exact top-level and nested key membership and primitive types for seal and QA receipts.",
+        "Wrong version, extra nested fields, missing fields, and wrong types fail before repository/static read, snapshot creation, project import, or claim."
+      ]
+    }
+  },
+  "mandatory_negative_tests": [
+    "Malicious PYTHONPATH/sitecustomize marker is not created and execution fails closed.",
+    "A live-runner swap after parent verification executes zero substituted bytes.",
+    "A pre-import snapshot extra .py, .pyc, link, or transitive-source swap fails before claim.",
+    "Any pre-freeze protected train label/anomaly_type access triggers a sentinel before value conversion.",
+    "Wrong authorization version, unknown nested capability, missing field, extra field, and wrong type all fail before static read or import."
+  ],
+  "unchanged_scientific_contract": {
+    "design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "bytes": 14389,
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"
+    },
+    "trigger_resolution_sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+    "operational_v2_sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+    "closure_v3_sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99",
+    "hypothesis_features_windows_split_model_seeds_postprocess_and_gates_changed": false,
+    "round_b_seeds": [20260813, 20260829, 20260847],
+    "segment_seeds": [20260826, 20260843, 20260871],
+    "structure_cells": 6,
+    "inner_windows": 3,
+    "outer_windows": 3,
+    "maximum_lifetime_physical_fits": 72,
+    "maximum_scientific_materializations": 21,
+    "outer_scores": 1,
+    "candidate_files": 0,
+    "uploads": 0,
+    "automatic_reruns_after_v6": 0
+  },
+  "authorization": {
+    "implementation_and_tests_allowed": true,
+    "numerical_execution_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "score_authorized": false,
+    "official_action_authorized": false,
+    "requires_fresh_v6_seal_fresh_independent_qa_pass_and_new_external_digest_bound_authorization": true
+  },
+  "fail_closed_if": [
+    "any scientific or numerical choice differs from the pinned v1/v2/v3 authorities",
+    "the r5 independent QA report does not preserve the reproduced P0/P1 findings",
+    "the worker can execute any unpinned bootstrap or environment startup hook",
+    "any protected outer target is parsed before the all-fold prediction freeze",
+    "authorization schema is not exact in parent and worker",
+    "any official test/sample/submission/candidate path is accessed",
+    "any prior v6 claim, fit, materialization, score, candidate, or upload exists"
+  ],
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "result_driven_tuning_or_reruns": 0,
+    "P3_mutations": 0
+  }
+}

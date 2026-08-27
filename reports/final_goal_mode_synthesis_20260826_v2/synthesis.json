@@ -1,0 +1,491 @@
+{
+  "schema_version": "final_goal_mode_synthesis.v2",
+  "generated_at_kst": "2026-08-26T00:45:58+09:00",
+  "title": "Ocean AI P1–P3 최종 종합 v2 — P2 권위 평가 반영",
+  "headline_decision": {
+    "conclusion": "실행 결함은 해결되었지만 P2 신규 구조는 공정한 full-budget 평가에서 incumbent보다 열등했다. 해결책은 신규 구조의 결과 기반 재튜닝이 아니라 incumbent를 유지하는 것이다.",
+    "p1": "배포용 full fit을 안전하게 완료하고 3-seed 모델 번들을 동결했다.",
+    "p2": "900/900 jobs와 45/45 cells를 재개 없이 완료했으나 승격 후보는 0개다.",
+    "p3": "ERA5 다운로드가 225/363까지 진행되었고 아직 성능 미판정이다.",
+    "submission_action": "CSV·submission 생성 및 업로드를 수행하지 않았다."
+  },
+  "scope_and_safety": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_mutations_by_p1_or_p2": 0,
+    "result_based_p2_reruns": 0,
+    "comparison_rule": "서로 다른 validation surface의 절대 RMSE는 직접 비교하지 않고 각 surface 내부의 candidate-minus-incumbent 방향만 비교한다.",
+    "metric_definition": "P2 primary는 3개 outer fold와 3개 layer를 동일 가중한 RMSE(℃)다. arithmetic ΔRMSE는 후보 primary RMSE minus incumbent primary RMSE다.",
+    "uncertainty_definition": "동일 KST calendar day draw를 공유하는 paired-day bootstrap 5,000회의 bootstrap ΔRMSE와 90% CI를 사용한다. bootstrap Δ는 비선형 aggregate 때문에 primary RMSE 산술차와 미세하게 다를 수 있다."
+  },
+  "p1_full_deployment_fit": {
+    "namespace": "p1_round_b_full_deployment_fit_contract_20260825_v2",
+    "status": "PASS_TERMINAL_FROZEN_DEPLOYMENT_FIT",
+    "decision": "FULL_DEPLOYMENT_FIT_FROZEN",
+    "train_rows": 776706,
+    "positive_rows": 32126,
+    "features_per_model": 80,
+    "real_model_fits": 3,
+    "seeds": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "predictions_materialized": 0,
+    "scores_computed": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "model_bundle": {
+      "path": "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/frozen_deployment/round_b_event_day_balanced_full_3seed.joblib",
+      "bytes": 6879614,
+      "sha256": "fdcf0d96aa88603841778a82546e404d15bf5c479443db453fa3751cee5c0052"
+    },
+    "interpretation": "이 결과는 학습·동결 파이프라인의 운영 완료를 뜻한다. 새로운 local 또는 official 성능 개선을 주장하는 결과는 아니다."
+  },
+  "p2_authoritative_v5": {
+    "namespace": "p2_authoritative_nested_surrogate_actual_20260825_v5",
+    "status": "COMPLETE_LOCAL_AUTHORITATIVE_SURROGATE_V5_NO_PROMOTION",
+    "qa_status": "PASS_TERMINAL_V5_RECURSIVE_GRAPH_AND_SCORE_QA",
+    "execution": {
+      "top_level_component_jobs": 900,
+      "completed_jobs": 900,
+      "seeded_cells": 45,
+      "completed_cells": 45,
+      "outer_prefix_cells": 15,
+      "initial_attempts": 1,
+      "resume_attempts": 0,
+      "partials_remaining": 0,
+      "official_test_sample_submission_reads": 0,
+      "submission_files_generated": 0,
+      "uploads": 0,
+      "p3_process_mutations": 0
+    },
+    "contract": {
+      "outer_folds": [
+        "outer_2024_sep_oct",
+        "outer_2025_may_jun",
+        "outer_2025_jul_aug"
+      ],
+      "fold_rows": {
+        "outer_2024_sep_oct": 26167,
+        "outer_2025_may_jun": 25338,
+        "outer_2025_jul_aug": 26651
+      },
+      "locked_rows_per_fraction": 78156,
+      "layers": [
+        2,
+        3,
+        4
+      ],
+      "seeds": [
+        20260823,
+        20260824,
+        20260825
+      ],
+      "fractions": [
+        0.4,
+        0.55,
+        0.7,
+        0.85,
+        1.0
+      ],
+      "same_population_digest": "23510883ca050d3caabd2343cd85afba01fabadcfb49818df9179cdfc4dadd62"
+    },
+    "fraction_100": {
+      "incumbent_rmse_c": 0.9900226592930025,
+      "rows": 78156,
+      "settings": [
+        {
+          "setting": "INCUMBENT_NOOP",
+          "role": "incumbent",
+          "rmse_c": 0.9900226592930025,
+          "arithmetic_delta_rmse_c": 0.0,
+          "bootstrap_delta_rmse_c": 0.0,
+          "ci90_c": [
+            0.0,
+            0.0
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "KEEP"
+        },
+        {
+          "setting": "CAUSAL_RESIDUAL_SCALE025",
+          "role": "registered but inactive",
+          "rmse_c": 0.9900226592930025,
+          "arithmetic_delta_rmse_c": 0.0,
+          "bootstrap_delta_rmse_c": 0.0,
+          "ci90_c": [
+            0.0,
+            0.0
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "supported_correction_rows": 0,
+          "nonzero_correction_rows": 0,
+          "decision": "NOT_AN_IMPROVEMENT_CANDIDATE"
+        },
+        {
+          "setting": "CAUSAL_ON_FALLBACK",
+          "role": "candidate; identical output to FALLBACK_BLEND50_A0625",
+          "rmse_c": 1.0146708668348625,
+          "arithmetic_delta_rmse_c": 0.02464820754186,
+          "bootstrap_delta_rmse_c": 0.024752638825656016,
+          "ci90_c": [
+            0.017022632523497682,
+            0.03230269017639212
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "REJECT"
+        },
+        {
+          "setting": "FALLBACK_BLEND50_A0625",
+          "role": "candidate; identical output to CAUSAL_ON_FALLBACK",
+          "rmse_c": 1.0146708668348625,
+          "arithmetic_delta_rmse_c": 0.02464820754186,
+          "bootstrap_delta_rmse_c": 0.024752638825656016,
+          "ci90_c": [
+            0.017022632523497682,
+            0.03230269017639212
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "REJECT"
+        },
+        {
+          "setting": "STACK_W0750",
+          "role": "candidate",
+          "rmse_c": 1.0259545564574992,
+          "arithmetic_delta_rmse_c": 0.0359318971644967,
+          "bootstrap_delta_rmse_c": 0.03606437327023373,
+          "ci90_c": [
+            0.02586638279228893,
+            0.04602026647003722
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "REJECT"
+        },
+        {
+          "setting": "STACK_W0625",
+          "role": "candidate",
+          "rmse_c": 1.0528375679869697,
+          "arithmetic_delta_rmse_c": 0.0628149086939672,
+          "bootstrap_delta_rmse_c": 0.06299406487308723,
+          "ci90_c": [
+            0.04804620992860974,
+            0.07746972895158064
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "REJECT"
+        },
+        {
+          "setting": "STACK_W0500",
+          "role": "candidate",
+          "rmse_c": 1.0851088902249861,
+          "arithmetic_delta_rmse_c": 0.0950862309319837,
+          "bootstrap_delta_rmse_c": 0.0953006648224762,
+          "ci90_c": [
+            0.07604728559274597,
+            0.114234376505052
+          ],
+          "probability_candidate_improves": 0.0,
+          "fold_wins": 0,
+          "fold_total": 3,
+          "layer_wins": 0,
+          "layer_total": 3,
+          "decision": "REJECT"
+        }
+      ],
+      "registered_grid_interpretation": "STACK_W0500에서 W0750로 incumbent 비중을 높일수록 paired-day bootstrap 악화가 +0.095301℃에서 +0.036064℃로 감소하고 no-op에서 0이 된다. 등록 grid 안의 최적 방향은 신규 성분 강화가 아니라 incumbent로의 복귀다."
+    },
+    "learning_curve": [
+      {
+        "fraction": 0.4,
+        "incumbent_rmse_c": 1.4329985599846635,
+        "fallback_bootstrap_delta_rmse_c": -0.04950630185597498,
+        "fallback_ci90_c": [
+          -0.059749744397813366,
+          -0.039250618520163566
+        ],
+        "stack_w0500_bootstrap_delta_rmse_c": -0.11590363221598864,
+        "stack_w0500_ci90_c": [
+          -0.1427059043504833,
+          -0.08942141609922792
+        ],
+        "interpretation": "저자료 구간에서만 robust improvement"
+      },
+      {
+        "fraction": 0.55,
+        "incumbent_rmse_c": 1.1169036231088048,
+        "fallback_bootstrap_delta_rmse_c": 0.001878824242950165,
+        "fallback_ci90_c": [
+          -0.00376260763759365,
+          0.00768141927752787
+        ],
+        "stack_w0500_bootstrap_delta_rmse_c": 0.031598867645614793,
+        "stack_w0500_ci90_c": [
+          0.0167738211349461,
+          0.0467377350755814
+        ],
+        "interpretation": "fallback 이득 소멸, stack 악화"
+      },
+      {
+        "fraction": 0.7,
+        "incumbent_rmse_c": 1.14842005704081,
+        "fallback_bootstrap_delta_rmse_c": 0.005941553574339466,
+        "fallback_ci90_c": [
+          0.000531413196338426,
+          0.0113919211074538
+        ],
+        "stack_w0500_bootstrap_delta_rmse_c": 0.03163870188251024,
+        "stack_w0500_ci90_c": [
+          0.0173705851067003,
+          0.0458820593730967
+        ],
+        "interpretation": "두 후보 모두 악화"
+      },
+      {
+        "fraction": 0.85,
+        "incumbent_rmse_c": 1.0255293725071413,
+        "fallback_bootstrap_delta_rmse_c": 0.026755813534422815,
+        "fallback_ci90_c": [
+          0.021879547101094087,
+          0.03168668264200225
+        ],
+        "stack_w0500_bootstrap_delta_rmse_c": 0.0904443716953683,
+        "stack_w0500_ci90_c": [
+          0.07782413842811245,
+          0.10301392518226189
+        ],
+        "interpretation": "두 후보 모두 명확히 악화"
+      },
+      {
+        "fraction": 1.0,
+        "incumbent_rmse_c": 0.9900226592930025,
+        "fallback_bootstrap_delta_rmse_c": 0.024752638825656016,
+        "fallback_ci90_c": [
+          0.017022632523497682,
+          0.03230269017639212
+        ],
+        "stack_w0500_bootstrap_delta_rmse_c": 0.0953006648224762,
+        "stack_w0500_ci90_c": [
+          0.07604728559274597,
+          0.114234376505052
+        ],
+        "interpretation": "full-budget에서 두 후보 모두 명확히 악화"
+      }
+    ],
+    "learning_curve_interpretation": "p040의 개선은 저자료 regularization 신호다. p055부터 이득이 사라지고 p070·p085·p100에서 악화하므로 full-budget 우월성으로 운반되지 않는다.",
+    "hashes": {
+      "result_sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc",
+      "terminal_receipt_sha256": "dbde6e3da46c0e8e8b179f0a818295106ff2f84296b6a564158c0704b6fa22d9",
+      "postexecution_qa_sha256": "1c61704a53c95bbc2093324019fb5f9ade79acb51fd276e5647282f1027eb94a",
+      "postexecution_manifest_sha256": "099a15480b33c039571a2bac41059b7e07dac5afe1c350c6b5bc8217e733d633"
+    }
+  },
+  "p2_previous_surfaces": [
+    {
+      "surface": "exact frozen lineage diagnostic",
+      "incumbent_rmse_c": 0.7495301617960987,
+      "candidate": "STACK_W0750 grid-best",
+      "candidate_rmse_c": 0.7882784358970871,
+      "candidate_minus_incumbent_c": 0.0387482741009884,
+      "direction": "worse",
+      "comparability_to_v5": "not directly comparable"
+    },
+    {
+      "surface": "old forward causal surrogate",
+      "incumbent_rmse_c": 1.2225320618665545,
+      "candidate": "STACK_W0500 default",
+      "candidate_rmse_c": 1.1499597247434654,
+      "candidate_minus_incumbent_c": -0.07257233712308908,
+      "direction": "better on that surrogate only",
+      "comparability_to_v5": "not directly comparable"
+    },
+    {
+      "surface": "old forward causal surrogate, protocol-aligned p100",
+      "incumbent_rmse_c": 1.012448338,
+      "candidate": "STACK_W0500",
+      "candidate_rmse_c": 1.077449852,
+      "candidate_minus_incumbent_c": 0.065001514,
+      "direction": "worse",
+      "comparability_to_v5": "direction comparable; fit semantics differ"
+    },
+    {
+      "surface": "v5 authoritative full-budget",
+      "incumbent_rmse_c": 0.9900226592930025,
+      "candidate": "STACK_W0500",
+      "candidate_rmse_c": 1.0851088902249861,
+      "candidate_minus_incumbent_c": 0.0950862309319837,
+      "direction": "worse",
+      "comparability_to_v5": "primary decision surface"
+    }
+  ],
+  "p2_old_optimized_vs_new_untuned_answer": {
+    "answer": "등록된 grid 범위에서는 단순한 미세 튜닝 부족 가설을 지지하지 않는다.",
+    "evidence": "full-budget에서 incumbent 비중을 0.50→0.625→0.75로 늘릴수록 paired-day bootstrap 악화가 +0.095301→+0.062994→+0.036064℃로 단조 감소하고, incumbent/no-op에서 0이 된다.",
+    "scope_limit": "이 결론은 사전 등록된 grid에 한정되며 모든 가능한 새 파라미터를 수학적으로 배제하지는 않는다.",
+    "action": "결과를 보고 grid를 확장하거나 재실행하지 않는다."
+  },
+  "local_official_transport_audit": {
+    "source": "user-provided original/round-A/round-B leaderboard observations recorded after local selections were frozen",
+    "receipt_path": "artifacts/matched_budget_local_compare_20260825/official_scores_user_provided_receipt.json",
+    "receipt_sha256": "4828e8895b8ce32b1c82a0d62c17779fd068fa98455464e6326d039c5c7a63e1",
+    "independently_verified_from_local_submission_packages": false,
+    "used_for_selection_or_tuning": false,
+    "official_scores": {
+      "original": {"P1_F1": 0.790709, "P2_RMSE_C": 0.541085, "P3_RMSE_m": 0.607071},
+      "round_a": {"P1_F1": 0.786145, "P2_RMSE_C": 0.71352, "P3_RMSE_m": 0.61168},
+      "round_b": {"P1_F1": 0.79371, "P2_RMSE_C": 0.599921, "P3_RMSE_m": 0.609346}
+    },
+    "direction_agreement": [
+      {
+        "problem_surface": "P1 common local surface",
+        "round_a_local": "improve",
+        "round_a_official": "worse",
+        "round_b_local": "improve",
+        "round_b_official": "improve",
+        "agreement_count": 1,
+        "comparisons": 2
+      },
+      {
+        "problem_surface": "P2 exact frozen lineage",
+        "round_a_local": "worse",
+        "round_a_official": "worse",
+        "round_b_local": "worse",
+        "round_b_official": "worse",
+        "agreement_count": 2,
+        "comparisons": 2
+      },
+      {
+        "problem_surface": "P2 old 5-fraction pooled surrogate",
+        "round_a_local": "improve",
+        "round_a_official": "worse",
+        "round_b_local": "improve",
+        "round_b_official": "worse",
+        "agreement_count": 0,
+        "comparisons": 2
+      },
+      {
+        "problem_surface": "P2 old protocol-aligned p100",
+        "round_a_local": "worse",
+        "round_a_official": "worse",
+        "round_b_local": "worse",
+        "round_b_official": "worse",
+        "agreement_count": 2,
+        "comparisons": 2
+      },
+      {
+        "problem_surface": "P3 shrink local surface",
+        "round_a_local": "improve",
+        "round_a_official": "worse",
+        "round_b_local": "improve",
+        "round_b_official": "worse",
+        "agreement_count": 0,
+        "comparisons": 2
+      }
+    ],
+    "p2_conclusion": "P2 exact와 protocol-aligned p100은 A/B 2개 방향 모두 공식과 일치했고 pooled surrogate는 0/2였다. 따라서 P2 선택에는 exact/full-budget surface를 우선하고 pooled surrogate를 배제한다.",
+    "calibration_claimed": false,
+    "rank_equivalence_claimed": false,
+    "interpretation": "문제별 3개 공식 점수는 두 후보의 방향 감사를 가능하게 하지만, n=3과 lineage·평가모집단 차이 및 package mapping 미독립검증 때문에 절대 보정식이나 일반적 순위 신뢰도를 추정하기에는 부족하다."
+  },
+  "p3_era5_metadata": {
+    "observed_at_kst": "2026-08-26T00:45:58+09:00",
+    "raw_yearly_complete_files": 225,
+    "target_files": 363,
+    "progress_percent": 61.98,
+    "partial_files": 0,
+    "prepare_python_processes": 2,
+    "performance_status": "PENDING",
+    "data_values_opened_for_this_snapshot": false,
+    "model_or_protocol_mutated": false,
+    "interpretation": "다운로드는 정상 진행 중이며 preflight와 봉인 실행 전이므로 P3 성능 결론에 포함하지 않는다."
+  },
+  "final_problem_states": [
+    {
+      "problem": "P1",
+      "state": "OPERATIONALLY_COMPLETE",
+      "result": "776,706행·32,126 positive·80 features·3 fits의 full model bundle 동결",
+      "decision": "동결 모델 유지; 성능 주장과 제출은 별도"
+    },
+    {
+      "problem": "P2",
+      "state": "SCIENTIFICALLY_DECIDED_NO_PROMOTION",
+      "result": "권위 v5 full-budget에서 모든 active candidate 악화",
+      "decision": "incumbent 유지; 결과 기반 재튜닝·재실행 금지"
+    },
+    {
+      "problem": "P3",
+      "state": "DATA_PREPARATION_ACTIVE",
+      "result": "ERA5 raw/yearly 225/363, partial 0",
+      "decision": "봉인 protocol 완료 전 미판정"
+    }
+  ],
+  "recommended_next_steps": [
+    {
+      "priority": 1,
+      "action": "P2 incumbent를 유지하고 v5 후보는 승격하지 않는다.",
+      "reason": "full-budget 78,156행에서 모든 active candidate의 paired-day bootstrap ΔRMSE와 90% CI가 악화 방향이다."
+    },
+    {
+      "priority": 2,
+      "action": "P2 결과를 보고 새 weight·grid를 추가하거나 재실행하지 않는다.",
+      "reason": "사전 등록 범위를 벗어난 사후 튜닝은 이번 권위 평가의 해석을 훼손한다."
+    },
+    {
+      "priority": 3,
+      "action": "p040 신호는 저자료 regularization 연구 가설로만 보존한다.",
+      "reason": "p055 이후 이득이 운반되지 않아 full-budget 배포 근거가 아니다."
+    },
+    {
+      "priority": 4,
+      "action": "P3 ERA5는 현재 봉인 protocol 그대로 완료 후 별도 판정한다.",
+      "reason": "현재는 61.98% 다운로드 metadata만 존재하며 성능 증거가 없다."
+    },
+    {
+      "priority": 5,
+      "action": "추가 제출 판단에는 exact/full-budget local gate를 사용하고 독립적인 공식 관측 쌍을 계속 누적한다.",
+      "reason": "현재 original/A/B 3점은 P2 방향 감사에는 유용하지만 보정식이나 일반적 순위 신뢰도를 추정하기에는 작고 lineage mapping도 독립 검증되지 않았다."
+    }
+  ],
+  "source_inventory": [
+    "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/deployment_fit_contract.json",
+    "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/execution_receipt.json",
+    "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/model_hash_freeze.json",
+    "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/postexecution_independent_qa.json",
+    "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+    "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/terminal_receipt.json",
+    "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/postexecution_qa.json",
+    "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/manifest.json",
+    "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json",
+    "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+    "artifacts/matched_budget_local_compare_20260825/official_scores_user_provided_receipt.json",
+    "reports/final_goal_mode_synthesis_20260825/synthesis.json",
+    "P3 process and raw/yearly file-count metadata observed at 2026-08-26T00:45:58+09:00"
+  ]
+}

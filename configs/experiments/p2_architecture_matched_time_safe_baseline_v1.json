@@ -1,0 +1,241 @@
+{
+  "schema_version": "p2_architecture_matched_time_safe_baseline.v1",
+  "experiment_id": "p2_architecture_matched_time_safe_baseline_v1",
+  "created_at_kst": "2026-08-23T02:35:00+09:00",
+  "status": "STATIC_IMPLEMENTATION_CHECK_ONLY_NO_EXECUTION_AUTHORIZATION",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "explicitly_not_exact_official_incumbent": true,
+  "training_recipe_origin": "NEW_PREREGISTERED_TIME_SAFE_RECIPE",
+  "research_only": true,
+  "upload_allowed": false,
+  "official_submission_count": 0,
+  "central_contract": {
+    "path": "configs/goals/meaningful_score_maximization_v3.json",
+    "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p2_architecture_matched_time_safe_baseline_v1.json",
+    "stage_a_output": "artifacts/p2_architecture_matched_reference_v1",
+    "stage_a_control": "artifacts/p2_architecture_matched_reference_v1_control",
+    "stage_a_authorization": "artifacts/p2_architecture_matched_reference_v1_control/authorization.json",
+    "stage_a_attempt_lock": "artifacts/p2_architecture_matched_reference_v1_control/attempt.lock",
+    "stage_b_output": "artifacts/p2_meaningful_learning_curve_generation_v2",
+    "stage_b_control": "artifacts/p2_meaningful_learning_curve_generation_v2_control",
+    "stage_b_authorization": "artifacts/p2_meaningful_learning_curve_generation_v2_control/authorization.json",
+    "stage_b_attempt_lock": "artifacts/p2_meaningful_learning_curve_generation_v2_control/attempt.lock"
+  },
+  "execution_policy": {
+    "static_check_only_now": true,
+    "actual_stage_a_requires_separate_append_only_authorization": true,
+    "actual_stage_b_requires_separate_append_only_authorization": true,
+    "check_only_must_not_import_training_or_prediction_modules": true,
+    "stage_b_must_verify_stage_a_seal_before_challenger_import": true,
+    "stage_b_must_verify_stage_a_seal_before_attempt_lock": true,
+    "output_materialization": "O_EXCL_ONLY",
+    "rerun_allowed": false,
+    "frozen_mutation_allowed": false,
+    "submission_mutation_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "official_incumbent": {
+    "identity": "P2_EXTRAPOLATED_SOFT_GATE_V2",
+    "path": "output/2026-08-20/ready/P2_submission.csv",
+    "sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf",
+    "role": "OFFICIAL_PAIRED_AB_BASELINE_ONLY_NOT_LOCAL_CURVE_REFERENCE",
+    "local_exact_prefix_refit_available": false
+  },
+  "deployed_inference_graph": {
+    "identity": "P2_EXTRAPOLATED_SOFT_GATE_V2_INFERENCE_DAG",
+    "architecture_match_scope": "DAG_TOPOLOGY_FEATURE_ROLES_META_ROLES_AND_DETERMINISTIC_POSTPROCESS_NOT_FROZEN_WEIGHT_OR_TRAINING_LINEAGE",
+    "nodes_in_order": [
+      "public_layer_router_400",
+      "depth_query_bitcn",
+      "moment_units_scratch",
+      "lsti_style",
+      "timemixerpp_style",
+      "layer_specific_nonnegative_sum_to_one_stack",
+      "public_endpoint_profile_projection",
+      "public_state_soft_gate",
+      "route_gate_only_to_layers_2_and_4",
+      "profile_projection_after_route",
+      "fixed_layer_extrapolation_10_0_2",
+      "final_public_endpoint_profile_projection",
+      "csv_float_roundtrip"
+    ],
+    "deep_contributor_roles": [
+      "depth_query_bitcn",
+      "moment_units_scratch",
+      "lsti_style",
+      "timemixerpp_style"
+    ],
+    "gate_route_layers": [2, 4],
+    "layer_extrapolation_factors": {"2": 10.0, "3": 0.0, "4": 2.0},
+    "source_pins": {
+      "src/p2_restore/final_inference.py": "60e54f5c67cabe777497b81a2eb29356733d279edfe7254d72b2bc0cfd64fe7b",
+      "src/p2_restore/data.py": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9",
+      "src/p2_restore/features.py": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7",
+      "src/p2_restore/score_optimization.py": "04eed1f3f508304edef1cdab4ae6a440646dacb28035f7abcf1ac3dd6a711ba4",
+      "src/p2_restore/deep_data.py": "aab7b89d47715f3b6e3c3543ef39cb5d450974e3a415370d364c3f5c875ec95c",
+      "src/p2_restore/deep_models.py": "0cb418fe54f0feedc378c6eb3723338384364dc5322279958181df54d338fca5",
+      "src/p2_restore/deep_training.py": "d1fd74e62bee2f483256afac479b3777da0e285417aab7f1d65df6664a178139",
+      "src/p2_restore/regime_gate.py": "d0e384ce7d442a0091a2ac2081df899b7acf78a291bf3a1b311b99b0d3709b45",
+      "src/p2_restore/profile_projection.py": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"
+    },
+    "deployed_asset_pins": {
+      "artifacts/p2_score_optimization_v1/model.joblib": "c418abe0f4dd3059add0fa5b0af19322e114506eae762c66f6f82e32b3717871",
+      "artifacts/p2_deep_finalists_v1/result.json": "6e8324908234f3071078e4846393de30776a422e6b6cea6d62a5f1953be2c8ac",
+      "artifacts/p2_public_state_soft_gate_v1/gate_model.joblib": "2fe3f87db31ee85112bfc65fd59767443189fbc2d0c0b29eadb7c909c95f2523",
+      "configs/experiments/p2_extrapolated_soft_gate_v2.json": "6619daaa0a442c113452607bf45eae9d3aaff1dfa52bc69cd31e9b3bce54e4b9",
+      "output/2026-08-20/ready/P2_submission.csv": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+    },
+    "deployed_checkpoint_topology": {
+      "depth_query_bitcn": [
+        {"seed": 20260816, "epochs": 38, "path": "artifacts/p2_deep_finalists_v1/full/depth_query_bitcn_seed20260816.pt", "sha256": "7863bf6fee4251bedcbf40fe6e7054a5ec58529c4985b08a886892e06c78b750"}
+      ],
+      "moment_units_scratch": [
+        {"seed": 20260816, "epochs": 42, "path": "artifacts/p2_deep_finalists_v1/full/moment_units_scratch_seed20260816.pt", "sha256": "7e095ba5b2a8071a5b163b72abf73b15ce042d06c91aa4ed2bb22caa39bf5528"}
+      ],
+      "lsti_style": [
+        {"seed": 20260816, "epochs": 40, "path": "artifacts/p2_deep_finalists_v1/full/lsti_style_seed20260816.pt", "sha256": "9aa643803c85f821bd8c703b15a7d1829f700894669a49480251e53cfbd67600"},
+        {"seed": 20260817, "epochs": 32, "path": "artifacts/p2_deep_finalists_v1/full/lsti_style_seed20260817.pt", "sha256": "8c7fd2fa58fa2b13d602f38679bed5051c64cddf645604a665dc9012b4e4e6a0"},
+        {"seed": 20260818, "epochs": 48, "path": "artifacts/p2_deep_finalists_v1/full/lsti_style_seed20260818.pt", "sha256": "8e0a394c9745097df0eb6f83a037d44e88cbdd1cd1c7f13ec0e2e210f8c263e8"}
+      ],
+      "timemixerpp_style": [
+        {"seed": 20260816, "epochs": 46, "path": "artifacts/p2_deep_finalists_v1/full/timemixerpp_style_seed20260816.pt", "sha256": "cd36f321241f0ed4ba98db080bf403599b1926a4e42511fffb18d41db6c06534"},
+        {"seed": 20260817, "epochs": 38, "path": "artifacts/p2_deep_finalists_v1/full/timemixerpp_style_seed20260817.pt", "sha256": "e2d2fe075f76b01ea55ce2c54919674e3f986c2699ccc1cce9018b5a3abd8c05"},
+        {"seed": 20260818, "epochs": 12, "path": "artifacts/p2_deep_finalists_v1/full/timemixerpp_style_seed20260818.pt", "sha256": "a72d5152dad73c4e243f60c0be06cb1320c632a19881ec8d005769e060bcac10"}
+      ]
+    }
+  },
+  "training_recipe": {
+    "recipe_id": "P2_ARCHITECTURE_MATCHED_NESTED_CHRONOLOGICAL_V1",
+    "complete_pipeline_seed_ids": [20260823, 20260824, 20260825],
+    "seed_aggregation": "PREDICTION_MEAN_THEN_METRIC",
+    "outer_folds": [
+      {"name": "outer_2024_sep_oct", "start_kst": "2024-09-01T00:00:00+09:00", "stop_kst": "2024-11-01T00:00:00+09:00"},
+      {"name": "outer_2025_may_jun", "start_kst": "2025-05-01T00:00:00+09:00", "stop_kst": "2025-07-01T00:00:00+09:00"},
+      {"name": "outer_2025_jul_aug", "start_kst": "2025-07-01T00:00:00+09:00", "stop_kst": "2025-09-01T00:00:00+09:00"}
+    ],
+    "outer_training_rule": "labels strictly earlier than outer_start_minus_7_KST_days",
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_unit": "chronologically_ordered_unique_UTC_timestamps_keep_complete_timestamp_groups",
+    "embargo_days": 7,
+    "inner_oof": {
+      "splitter": "EXPANDING_CHRONOLOGICAL",
+      "validation_fraction_edges": [0.55, 0.7, 0.85, 1.0],
+      "validation_block_count": 3,
+      "train_rule": "all prefix timestamps strictly before inner_validation_start_minus_7_KST_days",
+      "meta_fit_rows": "union_of_three_inner_validation_blocks_only",
+      "future_or_outer_labels_allowed": false
+    },
+    "epoch_selection": {
+      "scope": "each_outer_prefix_inner_split_component_pipeline_seed",
+      "calibration": "terminal_15_percent_unique_timestamps_of_inner_train_after_7_day_gap",
+      "epoch_grid": [12, 20, 28, 36, 44, 52],
+      "selection_metric": "official_layer_weighted_RMSE_degC",
+      "tie_break": "lowest_epoch",
+      "inner_oof_prediction": "selected_checkpoint_before_inner_validation",
+      "outer_prefix_epoch": "lower_median_of_three_selected_inner_epochs",
+      "outer_prefix_refit": "all_prefix_labels_for_fixed_selected_epoch"
+    },
+    "meta_training": {
+      "stack": "layer_specific_nonnegative_sum_to_one_fit_only_on_prefix_inner_component_OOF",
+      "gate": "public_state_soft_gate_fit_only_on_prefix_inner_component_OOF",
+      "gate_route_layers": [2, 4],
+      "frozen_stack_or_gate_reuse_allowed": false
+    },
+    "metric": "sqrt(mean_over_outer_folds_of_official_layer_weighted_MSE)",
+    "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+    "postprocess": "same_deployed_public_projection_route_projection_extrapolation_10_0_2_final_projection_and_csv_roundtrip",
+    "bootstrap": {"cluster": "KST_day", "replicates": 5000, "confidence_level": 0.9, "seed": 20260823}
+  },
+  "stage_a_reference_contract": {
+    "generate_all_five_prefix_oof_before_challenger": true,
+    "reference_100_percent_oof_must_be_sealed_before_challenger_scoring": true,
+    "row_predictions_may_contain_targets": false,
+    "reference_oof_columns": ["fold", "station", "layer", "time", "seed_20260823", "seed_20260824", "seed_20260825", "prediction_mean"],
+    "artifacts": {
+      "deployed_graph_manifest": "deployed_graph_manifest.json",
+      "training_recipe": "training_recipe.json",
+      "reference_oof_100": "reference_oof_100.parquet",
+      "reference_curve_metrics": "reference_curve_metrics.json",
+      "manifest": "manifest.json",
+      "seal": "seal.json"
+    },
+    "seal_must_record": {
+      "complete": true,
+      "all_five_prefixes_sealed": true,
+      "challenger_fit_or_score_count_before_seal": 0,
+      "exact_official_incumbent_comparison": false
+    }
+  },
+  "stage_b_challenger_contract": {
+    "hypothesis_count": 1,
+    "hypotheses": [
+      {
+        "id": "H2_JOINT_PROFILE_LATENT_RESIDUAL",
+        "structural_change": "Fit a training-only rank-2 latent basis to the three-layer architecture-reference OOF residual profile, predict its two coefficients from fixed public-state features with 400-round CatBoost models, reconstruct a joint profile residual, add it without blend tuning, and apply the identical deployed postprocess.",
+        "rank": 2,
+        "basis_fit_scope": "prefix_inner_OOF_training_profiles_only",
+        "coefficient_model": "CatBoostRegressor_400_rounds_fixed_defaults",
+        "residual_scale": 1.0,
+        "hyperparameter_searches": 0,
+        "score_derived_tuning": false,
+        "fixed_complete_pipeline_seed_ids": [20260823, 20260824, 20260825]
+      }
+    ],
+    "stage_a_seal_must_verify_before_any_challenger_import_fit_or_score": true,
+    "same_prefix_fold_keys_metric_postprocess": true,
+    "numeric_pass_gates": {
+      "late_fractions_all_improve": [0.7, 0.85, 1.0],
+      "full_and_one_other_late_ci90_exclude_zero": true,
+      "full_delta_candidate_minus_reference_at_most_c": -0.03,
+      "minimum_improved_folds": 2,
+      "maximum_each_layer_regression_c": 0.0075,
+      "maximum_2024_sep_oct_regression_c": 0.0075,
+      "joint_temp_psal_mask_required": true,
+      "leakage_checks_required": true,
+      "reproducibility_checks_required": true
+    },
+    "local_pass_decision": "ARCHITECTURE_MATCHED_CURVE_QUALIFIED_PENDING_OFFICIAL_PAIRED_AB",
+    "local_pass_can_promote": false
+  },
+  "official_promotion_contract": {
+    "actual_immutable_csv_sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf",
+    "baseline_scored_before_challenger": true,
+    "same_official_scoring_version_and_split": true,
+    "distinct_official_receipts": true,
+    "minimum_raw_integrated_rmse_improvement_c": 0.03,
+    "explicit_user_approval_required_for_each_upload": true,
+    "team_wide_daily_upload_limit": 3,
+    "official_uploads_now": 0
+  },
+  "data_contract": {
+    "check_only_access": "HEADERS_AND_STATION_LAYER_TIME_KEYS_ONLY",
+    "observations_header": ["station", "year", "layer", "time", "temp", "psal", "depth", "nominal_depth"],
+    "test_index_header": ["station", "layer", "time", "nominal_depth"],
+    "sample_submission_header": ["station", "layer", "time", "temp"],
+    "canonical_test_rows": 26061,
+    "canonical_station_layer_time_key_sha256": "600fc19da0f15c6c7979932f057807e59e01962c5ec65ad38ca908f18a295439",
+    "source_pins": {
+      "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+      "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+      "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886"
+    },
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "jointly_mask_before_feature_or_fit": ["temp", "psal"]
+  },
+  "resource_estimate": {
+    "stage_a_outer_prefix_cells": 15,
+    "stage_a_deep_training_jobs_upper_bound": 720,
+    "stage_a_router_training_jobs_upper_bound": 180,
+    "expected_single_RTX_5090_gpu_hours_range": [8, 16],
+    "expected_wall_hours_range": [9, 20],
+    "expected_peak_gpu_memory_gib_range": [8, 20],
+    "expected_append_only_disk_gib_range": [5, 25],
+    "estimate_is_preflight_only": true
+  }
+}

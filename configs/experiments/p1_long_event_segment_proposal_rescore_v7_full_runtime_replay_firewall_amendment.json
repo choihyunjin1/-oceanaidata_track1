@@ -1,0 +1,187 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.infrastructure_amendment.v7",
+  "amendment_id": "p1_long_event_segment_proposal_rescore_v7_full_runtime_replay_firewall_20260826",
+  "problem": "P1",
+  "created_at_kst": "2026-08-26T11:28:58.8368702+09:00",
+  "status": "PROSPECTIVE_INFRASTRUCTURE_FIX_ONLY_NOT_IMPLEMENTED_NOT_AUTHORIZED",
+  "purpose": "Close the r6 independent-QA snapshot/runtime time-of-check-to-time-of-use and replay/output-root findings before any scientific claim, fit, materialization, or score.",
+  "created_before_scientific_execution": {
+    "r6_actual_authorization_existed": false,
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_actions": 0
+  },
+  "immutable_scientific_lineage": {
+    "design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "bytes": 14389,
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "bytes": 8884,
+      "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1"
+    },
+    "operational_amendment_v2_sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+    "execution_closure_v3_sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99",
+    "trust_firewall_v5_sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563",
+    "bootstrap_target_firewall_v6_sha256": "16d726d217dc2b0d03264ce99eeacd796c8e34017901e02b29bcc76d479846f6",
+    "requirements_unchanged": {
+      "inner_anchor_physical_fits": 9,
+      "inner_segment_physical_fits": 54,
+      "outer_segment_physical_fits": 9,
+      "maximum_lifetime_physical_fits": 72,
+      "scientific_materializations": 21,
+      "outer_scores": 1,
+      "inner_windows": [
+        "inner_2024_jul_aug",
+        "inner_2024_oct_nov",
+        "inner_2025_jan_feb"
+      ],
+      "outer_windows": [
+        "2025_q2",
+        "2025_q3",
+        "2025_q4"
+      ],
+      "round_b_seeds": [20260813, 20260829, 20260847],
+      "segment_seeds": [20260826, 20260843, 20260871],
+      "structure_cells": 6,
+      "postprocess_changed": false,
+      "feature_contract_changed": false,
+      "selection_rule_changed": false,
+      "decision_gates_changed": false,
+      "target_cutoff_changed": false
+    }
+  },
+  "r6_zero_fit_package": {
+    "runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v6.py",
+      "bytes": 154280,
+      "sha256": "001109137fa4daa5408977d14473d95639ba51b8c70301e802626c60ea59509e"
+    },
+    "execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v6.py",
+      "bytes": 70467,
+      "sha256": "8b91db9234bde301730728dcffa4fd2c014b099d0c518571ddaa733608b81636"
+    },
+    "tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v6.py",
+      "bytes": 52148,
+      "sha256": "49b99eca65f3676414b459314e5ec7366852ad25cdff9367fe0f61c0fb71cabd"
+    },
+    "authorization_template": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v6_execution_authorization_template.json",
+      "bytes": 1434,
+      "sha256": "f7f5cd1c80e67bf11872624793503fb33d52db9211058bd09cea250edde153c3"
+    },
+    "preexecution_seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v6/preexecution_seal.json",
+      "bytes": 30610,
+      "sha256": "0eb3667ed032b931c84b0948f1bcb6e0e9762eac378b4abcc99f784d60511bbf"
+    },
+    "independent_qa": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v6_independent_preexecution_qa_20260826.json",
+      "bytes": 16921,
+      "sha256": "932662de49fd1bdfcd7a546bdeb2a88732dd36e9db54e849354fbdd5c34e2c08",
+      "verdict_required": "NO_GO",
+      "finding_counts": {
+        "P0": 2,
+        "P1": 1,
+        "P2": 1
+      },
+      "final_bytes_and_sha256_must_be_pinned_by_v7_execution_contract": true
+    }
+  },
+  "finding_resolution": {
+    "full_snapshot_authority": {
+      "requirement": "Before worker launch, the parent must open and retain Windows read handles denying write/delete for every file in the exact private-snapshot inventory plus the snapshot manifest. The handles remain live until the supervised worker is proved terminated. Any missing handle, identity mismatch, extra tree entry, link/reparse point, or close failure is a preclaim terminal stop.",
+      "minimum_inventory": "Every manifest-declared static, authorization, seal, QA, design, configuration, project-module, input-snapshot, runner, and execution-module file; selecting only bootstrap authorities is forbidden.",
+      "worker_read_rule": "Imports and authority parsing must use files whose underlying identities are held by the parent. Pre-import and pre-fit exact tree membership and per-file size/SHA-256 checks are required."
+    },
+    "isolated_full_runtime_authority": {
+      "requirement": "Build an execution-only clean runtime root containing only the complete files of the twelve sealed distributions and their native-library payloads. Enumerate every regular file by exact relative path, byte size, SHA-256, and resolved source identity before worker launch; no .pth, site, sitecustomize, usercustomize, symlink, junction, or undeclared entry is permitted.",
+      "distributions": [
+        "joblib",
+        "lightgbm",
+        "narwhals",
+        "numpy",
+        "pandas",
+        "psutil",
+        "pyarrow",
+        "python-dateutil",
+        "scikit-learn",
+        "scipy",
+        "six",
+        "threadpoolctl"
+      ],
+      "resource_dependencies": [
+        {
+          "distribution": "tzdata",
+          "version": "2026.3",
+          "role": "Windows zoneinfo resource provider for Asia/Seoul; resource files must be inventoried, isolated, sealed, and held even if no tzdata Python module appears in the imported-module aggregate"
+        }
+      ],
+      "distribution_record_scope": "Include every regular importable package, metadata, native extension, dependent library, and runtime resource file under the sealed runtime root. Console-entry executables outside site-packages that cannot be imported by the worker are explicitly classified and excluded; their exact exclusion list and digests must be sealed.",
+      "source_and_snapshot_handles": "The parent must hold deny-write/delete handles for every declared live source file and every execution runtime file until worker termination. The Python executable and every explicitly resolved native DLL or extension loaded by the worker must be included.",
+      "search_path_rule": "After -I -S -B bootstrap authentication, the worker may add only the clean isolated runtime root and private project source root to sys.path. The live site-packages root is forbidden.",
+      "verification_rule": "Verify exact runtime tree membership and every per-file digest before any non-stdlib import, immediately after the full eager import closure, immediately before claim, and immediately before the first fit. Retain the previous loaded-module aggregate only as secondary evidence.",
+      "authority_binding_rule": "The canonical full-runtime inventory byte length and SHA-256 must be immutable fields in the preexecution seal and exact external authorization. The worker must reconstruct and compare them directly from those held authorities; a caller-supplied manifest readiness object is never an authority.",
+      "lazy_import_rule": "Either eagerly import and verify the complete runtime closure before claim or install a fail-closed import guard that rejects every module origin outside the sealed runtime/project roots and every undeclared file."
+    },
+    "canonical_one_shot_replay_binding": {
+      "canonical_project_root": "C:/Users/cedis/PycharmProjects/PythonProject",
+      "canonical_artifact_relative_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v7",
+      "requirement": "The resolved canonical project root, fixed artifact-relative path, experiment id, and single-attempt namespace must be fields in both the seal and exact external authorization schema. The worker must require exact equality before binding any output path.",
+      "manifest_capability": "The parent-generated manifest must bind its creation time, absolute deadline, parent process identity, a cryptographically random launch nonce, canonical root, canonical artifact path, authorization digest, seal digest, QA digest, and exact snapshot/runtime inventory digests. Hidden-worker CLI values must equal the manifest values.",
+      "atomicity": "Exactly one canonical create-only execution claim may win. A copied snapshot/manifest/authorization cannot redirect output, extend the deadline, claim a second root, or repeat the 72-fit graph. The canonical namespace remains fail-closed after any claim."
+    }
+  },
+  "implementation_and_QA_contract": {
+    "append_only_successor_required": true,
+    "new_runner_module_tests_seal_template_and_authorization_paths_required": true,
+    "r6_files_immutable": true,
+    "implementation_authorized": true,
+    "scientific_execution_authorized": false,
+    "fresh_independent_QA_required": true,
+    "authorization_may_become_true_only_after_fresh_QA_PASS": true,
+    "focused_negative_tests_required": [
+      "snapshot non-bootstrap transitive source mutation is denied for worker lifetime",
+      "runtime pure-Python source mutation is denied before and during import",
+      "runtime native extension or DLL mutation is denied before and during load",
+      "undeclared runtime file insertion or module origin is rejected",
+      "copied valid snapshot cannot redirect output root",
+      "copied valid capability cannot claim a second namespace",
+      "deadline or launch nonce substitution is rejected",
+      "existing canonical claim prevents every replay",
+      "authorization remains exact-schema and zero-fit until QA PASS",
+      "duplicate JSON object keys are rejected at byte parse before schema validation",
+      "caller-supplied runtime readiness cannot replace the seal-bound inventory",
+      "all r6 target-firewall and scientific-invariance tests remain passing"
+    ]
+  },
+  "wire_format_contract": {
+    "json_duplicate_keys": "REJECT_BEFORE_SCHEMA_VALIDATION",
+    "non_finite_numbers": "REJECT",
+    "exact_object_membership": true,
+    "authorization_and_seal_reads": "single held byte snapshot with pre/post identity proof",
+    "manifest_role": "transport receipt only; never an independent authority for runtime, roots, operation ceilings, or science"
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "P3_reads_mutations_or_fits": 0,
+    "scientific_hyperparameter_changes": 0,
+    "feature_changes": 0,
+    "split_or_window_changes": 0,
+    "postprocess_changes": 0,
+    "gate_changes": 0,
+    "post_result_tuning": 0,
+    "result_driven_reruns": 0
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_episode_distinct_raw_shape_analog_v1",
+  "status": "authorized_inner_only_one_shot",
+  "objective": {
+    "metric": "pooled_six_lead_rmse_meters",
+    "direction": "minimize",
+    "single_hypothesis": "A current-centred, robustly scaled 48-hour raw hs shape identifies a more useful same-station storm evolution analog than summary-feature regression alone, provided retrieval contributes at most one anchor per distinct high-wave episode.",
+    "not_hyperparameter_retuning": true,
+    "not_external_kma_meta": true
+  },
+  "analog": {
+    "source": "native_train_wave_hs_only",
+    "history_cadence_minutes": 20,
+    "history_hours": 48,
+    "history_points_including_current": 145,
+    "centering": "current_hs",
+    "scale": "raw_median_absolute_deviation",
+    "mad_floor_m": 0.1,
+    "minimum_history_coverage": 0.95,
+    "gap_fill": "past_context_linear_interpolation_with_nearest_edge_fill",
+    "station_scope": "same_station_only",
+    "distance": "exact_sakoe_chiba_dtw_fixed_length_rms",
+    "sakoe_chiba_radius_hours": 2,
+    "sakoe_chiba_radius_steps": 6,
+    "episode_definition": "maximal_contiguous_native_20m_run_with_finite_hs_ge_1_5m",
+    "episode_representative": "nearest_anchor_within_episode",
+    "neighbor_count": 8,
+    "weight": "inverse_distance",
+    "distance_floor": 1e-6,
+    "target": "six_lead_future_hs_minus_current_hs_divided_by_anchor_mad_scale",
+    "prediction_clip_m": [0.0, 30.0],
+    "exact_search_batch_size": 1024,
+    "lb_keogh_pruning_is_admissible": true
+  },
+  "candidate": {
+    "base_for_inner_gate": "fixed_nested_catboost_control_proxy",
+    "base_for_any_future_outer_research": "exact_frozen_incumbent_prediction",
+    "no_op_leads": [3, 6, 9],
+    "active_leads": [12, 18, 24],
+    "alpha": 0.2,
+    "formula": "candidate=control at 3/6/9; candidate=0.8*control+0.2*analog at 12/18/24",
+    "fallback_when_query_history_ineligible": "exact_control_on_all_leads",
+    "alpha_search_count": 0,
+    "router_search_count": 0
+  },
+  "b_precheck": {
+    "purpose": "label_safe_nearest_episode_analogs_vs_uniform_random_episode_panels",
+    "target_scope": "inner_validation_only_six_lead_normalized_residual",
+    "random_reference": "deterministic_uniform_random_distinct_episode_panels_then_nearest_anchor_within_each_episode",
+    "random_panel_count": 16,
+    "random_seed": 20260822,
+    "maximum_nearest_to_random_mse_ratio_per_passing_fold": 0.9,
+    "minimum_passing_folds": 2,
+    "failure_action": "stop_before_catboost_control_fit_and_C_gate"
+  },
+  "inner_control_proxy": {
+    "purpose": "honest_frozen_like_control_for_inner_gate_only",
+    "limitation": "The exact frozen multi-model/router OOF is unavailable inside nested training without leakage; this preregistered single CatBoost proxy preserves its 591-feature single-model parameters and fixed long-lead persistence shrink.",
+    "feature_count": 591,
+    "family": "CatBoostRegressor",
+    "target": "future_hs_minus_current_hs_residual",
+    "iterations": 700,
+    "learning_rate": 0.035,
+    "depth": 6,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "random_seed": 20260817,
+    "loss_function": "RMSE",
+    "task_type": "CPU",
+    "thread_count": 8,
+    "allow_writing_files": false,
+    "categorical_columns": ["station", "lead_h"],
+    "sample_weight": "frozen_threshold_case_weights",
+    "persistence_shrink_active_leads": [12, 18, 24],
+    "persistence_shrink_weight": 0.2,
+    "model_or_iteration_search_count": 0
+  },
+  "validation": {
+    "outer_windows_used_only_as_training_cutoffs": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "outer_membership_or_target_read": false,
+    "outer_train_cutoff": "window_start_minus_78h",
+    "inner_validation_days": 45,
+    "inner_case_spacing_hours": 78,
+    "inner_episode_disjoint": true,
+    "inner_gate": {
+      "maximum_pooled_full_six_lead_delta_m": -0.005,
+      "minimum_strictly_improved_folds": 2,
+      "maximum_any_station_rmse_degradation_m": 0.01,
+      "lead_18_must_not_degrade": true,
+      "lead_24_must_not_degrade": true,
+      "failure_action": "stop_permanently_without_outer_or_test_execution"
+    },
+    "one_shot_no_rerun": true
+  },
+  "registered_inputs": {
+    "train_wave": {
+      "source_name": "train_wave.csv",
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "source_readme": {
+      "source_name": "README.md",
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "anchor_metadata_schema_reference": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "value_read_in_inner_run": false
+    },
+    "feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1",
+      "expected_count": 591
+    },
+    "trajectory_helper": {
+      "path": "src/p3_trajectory.py",
+      "sha256": "3af6f4f2580cade66c23048a63b97c64e9bdadd7c1b794b45fc056d363109116"
+    },
+    "episode_split_helper": {
+      "path": "src/p3_wave/revin_patch.py",
+      "sha256": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3"
+    },
+    "weight_helper": {
+      "path": "src/p3_wave/models.py",
+      "sha256": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084"
+    }
+  },
+  "artifacts": {
+    "dry_run_directory": "artifacts/p3_episode_distinct_raw_shape_analog_v1/dry_run",
+    "inner_output_directory": "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot",
+    "status_path": "artifacts/status/p3_episode_distinct_raw_shape_analog_v1.json",
+    "attempt_lock": "artifacts/experiment_locks/p3_episode_distinct_raw_shape_analog_v1.inner.attempt.lock"
+  },
+  "execution": {
+    "allowed_modes": ["dry-run", "inner"],
+    "inner_confirmation_token": "RUN_P3_EPISODE_DISTINCT_ANALOG_INNER_ONCE",
+    "outer_designated_scoring_open_count": 0,
+    "test_context_read_count": 0,
+    "submission_write_count": 0
+  },
+  "prohibitions": {
+    "read_frozen_outer_oof_or_182_outer_targets": true,
+    "score_outer_182_cases": true,
+    "read_test_context_or_test_index": true,
+    "generate_or_modify_submission": true,
+    "fit_or_predict_on_test_context": true,
+    "hyperparameter_or_alpha_search": true,
+    "append_or_calibrate_kma_meta": true,
+    "mutate_existing_artifacts_or_frozen_outputs": true
+  }
+}

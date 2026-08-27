@@ -1,0 +1,163 @@
+{
+  "schema_version": "ocean_hackathon.prospective_exactly_two_cycle_contingency_amendment.v1",
+  "amendment_id": "p2_cycle1_exactly_two_cycle_contingency_20260826_v1",
+  "problem": "P2",
+  "created_at_kst": "2026-08-26T07:29:17.5923721+09:00",
+  "status": "PROSPECTIVE_DESIGN_ONLY_NOT_IMPLEMENTED_NOT_AUTHORIZED",
+  "scope": {
+    "supersedes_only": "The Cycle-1 cycle_relation rule that exact or locked-p100 scientific RESEARCH_NO_GO prohibits every Cycle-2 experiment.",
+    "new_rule": "Exactly one final Cycle-2 branch is selected by the already defined terminal Cycle-1 scientific label: retain the existing matched incremental meta confirmation after complete RESEARCH_GO; use the fixed orthogonal raw-Celsius group-balanced residual branch after scientific RESEARCH_NO_GO.",
+    "does_not_modify_existing_files": true,
+    "cycle1_hypothesis_search_splits_budget_or_gates_changed": false,
+    "integrity_failure_incomplete_or_unevaluated_cycle1_still_prohibits_cycle2": true,
+    "third_cycle_allowed": false,
+    "result_driven_substitute_or_reconfiguration_allowed": false
+  },
+  "created_before_cycle1_result_evidence": {
+    "observed_at_kst": "2026-08-26T07:29:17.5923721+09:00",
+    "cycle1_result_path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_20260826_v2/result.json",
+    "cycle1_result_existed": false,
+    "cycle1_manifest_path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_20260826_v2/manifest.json",
+    "cycle1_manifest_existed": false,
+    "cycle1_numeric_result_consumed": false,
+    "official_score_or_rank_consumed_for_branch_design": false
+  },
+  "frozen_cycle1_binding": {
+    "design": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json",
+      "bytes": 20025,
+      "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6"
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json",
+      "bytes": 4373,
+      "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9",
+      "required_anchor_branch": "FROZEN_EXACT_INCUMBENT_ONLY"
+    },
+    "preserved_section_canonical_sha256": {
+      "hypothesis": "ef490e1124df30eefd068159db6f42f9075fdd054549f0501e396688a8a426f4",
+      "data_features_target_firewall": "2168de82b6cc6669a1025c9b740a0009c68f9b94d81723ac7e4de2dfd5177a71",
+      "trajectory_algorithm": "f23b54c32dc5e61728e6dcc603e6dfa6b4c68a9b710849533ca38d9bb18a72dd",
+      "leakage_safe_splits": "cf1f4118f00d2279dd059b765f2906b78582aa69ffcdb5e1827983f3672dc04f",
+      "fixed_search_and_budget": "1eabbeb50e24ff722c37e95af95c712ce9ef15235af2af0eac9f22cdb1389923",
+      "decision_gates": "c9e2af4b6532f36a4ad1f7f5261b9bca0b98d448f47ed9c4be65e95e2e620f2e",
+      "resource_ceiling": "b402e7deca5952fc988c8d5682776b08caecf8ad683bef0d57272ac90d52f75d"
+    },
+    "verification_rule": "Before any Cycle-1 or Cycle-2 authorization, recompute every listed raw and canonical hash; fail closed on any mismatch."
+  },
+  "exactly_one_cycle2_router": {
+    "cycle1_terminal_complete_RESEARCH_GO": {
+      "branch": "EXISTING_MATCHED_INCREMENTAL_META_CONFIRMATION",
+      "design_path": "configs/experiments/p2_trajectory_incremental_group_balanced_meta_v1_design.json",
+      "design_bytes": 16883,
+      "design_sha256": "26fcee56dd1b5ea2801794d5e307c4af8f0f753b283a6280368f190f559f51d5",
+      "numeric_changes_allowed": false
+    },
+    "cycle1_terminal_scientific_RESEARCH_NO_GO": {
+      "branch": "ORTHOGONAL_RAW_CELSIUS_GROUP_BALANCED_RESIDUAL",
+      "eligible_when": "The exact gate fails scientifically, or exact passes and locked-p100 fails scientifically, with all reached gates and integrity checks evaluated.",
+      "design_embedded_below": true,
+      "numeric_changes_allowed_after_cycle1_result": false
+    },
+    "all_other_cycle1_states": "STOP_NO_CYCLE2",
+    "branch_exclusivity": "Exactly one branch may ever claim a Cycle-2 namespace. Either branch is P2_CYCLE_2_OF_EXACTLY_2_FINAL and terminates P2 research regardless of outcome."
+  },
+  "orthogonal_failure_branch_cycle2": {
+    "experiment_id": "p2_public_group_balanced_celsius_residual_cycle2_20260826_v1",
+    "family": "RAW_CELSIUS_PUBLIC_FEATURE_GROUP_BALANCED_LGBM",
+    "orthogonality": "Cycle 1 is a fitted-model-free DTW trajectory retrieval and historical residual transfer. This branch performs no trajectory matching and instead fits one fixed public-feature LightGBM directly to raw-Celsius interpolation residual under deterministic layer-window-day weights.",
+    "historical_seed_design": {
+      "path": "configs/experiments/p2_public_group_balanced_celsius_residual_v1_design.json",
+      "bytes": 15998,
+      "sha256": "e0970dc00f02eebb6fa6530ce3571635775137a81ab08c5d61785bb906f6f138",
+      "method_bundle_canonical_sha256": "b7848a99a6a990c17edd977d5c9b86bf48c3e8acf257e153dcca7df7df5c695b",
+      "status_at_freeze": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+      "result_namespace_existed_at_freeze": false
+    },
+    "hypothesis": "The historical public-layer feature signal may be usable when optimized in official raw-Celsius units with exact layer-window-day risk balance, even if shape retrieval cannot identify trustworthy target-layer neighbors.",
+    "historical_rationale": {
+      "pointwise_analog_failure": {"path": "artifacts/p2_teos_analog_v1/result.json", "bytes": 13363, "sha256": "f8c315bc352913fefa085236b3107e2761dc045b2bef50838c8be72e38436eb0", "delta_rmse_c": 0.04919094415416969},
+      "day_sequence_failure": {"path": "artifacts/p2_public_day_sequence_analog_v1_design_fail_fast.json", "bytes": 3808, "sha256": "0dad562859c2e2136b05e2dbf81851780eadfea53e9c3ba064229d178340973b", "full_fraction_delta_rmse_c": 2.1646127703511118},
+      "frozen_facts": ["Pointwise and whole-day analog families were terminally rejected across blocks and layers.", "The raw-Celsius group-balanced design remained conditional and has no completed result artifact.", "This branch avoids both trajectory retrieval and normalized-curvature target scaling."],
+      "closed_families_not_repeated": ["pointwise TEOS analog", "public-day sequence analog", "DTW trajectory transfer", "normalized curvature residual"]
+    },
+    "fixed_data_features_target_and_splits": {
+      "observations": {"environment_variable": "P2_DATA_DIR", "allowed_file": "observations.csv", "bytes": 49058719, "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"},
+      "public_layers": [1, 5, 6, 7, 8],
+      "target_layers": [2, 3, 4],
+      "feature_columns_source": "Exact ordered /feature_contract/allowed_feature_columns array in the pinned historical seed design.",
+      "feature_columns_count": 55,
+      "feature_columns_canonical_sha256": "f7cb379d480c5a2e4b7768340f3ccb0208f6c2e56d369693099ff1c618da4663",
+      "forbidden_features": ["year", "elapsed_days", "absolute linear baseline", "target-layer temperature", "target-layer salinity", "official evaluation metadata"],
+      "target": "target_temperature_c minus contemporaneous leakage-safe nearest-public-depth linear interpolation, in raw degrees Celsius",
+      "historical_training_windows_source": "Exact /fixed_historical_training_windows array in the pinned historical seed design.",
+      "historical_training_windows_canonical_sha256": "1e2ab36ddb166a7b1f517bf4721171f32eedff11bc753bd5c89e63baefc33519",
+      "training_cutoff": "2024-08-25T00:00:00+09:00 exclusive; the same frozen training population is used for exact and locked-p100 inference.",
+      "exact_surface": {"start": "2024-09-01T00:00:00+09:00", "end_exclusive": "2024-11-01T00:00:00+09:00", "rows": 26273},
+      "locked_p100_surface": {"rows": 78156, "folds": ["outer_2024_sep_oct", "outer_2025_may_jun", "outer_2025_jul_aug"], "access": "Do not open, stat-hash, hash, or parse until the branch's exact meaningful gate passes durably."}
+    },
+    "fixed_model_objective_and_search": {
+      "family": "lightgbm.LGBMRegressor",
+      "seeds": [20260823, 20260824, 20260825],
+      "parameters": {"objective": "regression_l2", "n_estimators": 400, "learning_rate": 0.04, "num_leaves": 31, "max_depth": 7, "min_child_samples": 200, "subsample": 0.85, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0, "n_jobs": 8, "verbosity": -1, "deterministic": true, "force_row_wise": true},
+      "group_weights": "Exact full equalization over target layer, the four pinned historical windows, KST day, and rows within layer-window-day, as defined in /group_balanced_celsius_objective of the pinned historical seed design.",
+      "ensemble": "Unweighted arithmetic mean of the three decoded raw-Celsius predictions.",
+      "blend": "NONE",
+      "inference_gate": "NONE",
+      "projection_or_postprocess": "NONE",
+      "search": {"configurations": 1, "target_definitions": 1, "weighting_definitions": 1, "hyperparameter_grid": 0, "selection": "NONE"}
+    },
+    "single_use_evaluation": {
+      "exact_comparator": "Frozen exact incumbent on the same independently verified 26273 keys and truth rows.",
+      "p100_comparator": "Frozen locked-p100 incumbent on the same independently verified 78156 keys and truth rows.",
+      "paired_bootstrap": {"unit": "KST day", "replicates": 5000, "seed": 20260826, "confidence": 0.90},
+      "procedure": "Score exact once. Only after durable exact pass, apply the already fitted three-seed ensemble without refit to all locked-p100 folds and score once. No surface selects any parameter."
+    },
+    "fixed_meaningful_gates": {
+      "exact": {
+        "row_pooled_delta_rmse_c_lte": -0.0759,
+        "paired_ci90_upper_c_lte": -0.050,
+        "all_layer_deltas_lte": 0.0,
+        "layer4_delta_rmse_c_lt": 0.0,
+        "weekly_delta_rmse_c_p90_lte": 0.015,
+        "all_seed_exact_deltas_lte": 0.0,
+        "all_values_finite": true,
+        "exact_key_truth_and_feature_order_alignment": true
+      },
+      "locked_p100": {
+        "row_pooled_delta_rmse_c_lte": -0.030,
+        "paired_ci90_upper_c_lt": 0.0,
+        "minimum_improving_folds_of_3": 2,
+        "minimum_improving_layers_of_3": 2,
+        "worst_fold_delta_rmse_c_lte": 0.010,
+        "worst_layer_delta_rmse_c_lte": 0.005,
+        "all_layer_deltas_lte": 0.0,
+        "fold_layer_season_and_week_slices_logged": true,
+        "no_tuning_refit_or_rerun": true
+      },
+      "independent_aggregate_QA": "PASS",
+      "exact_reproduction_from_pinned_inputs": true,
+      "interpretation": "Equal to or stricter than the frozen Cycle-1 SUBMISSION_GO exact and locked-p100 effect thresholds; pass remains local-only and is not submission authorization."
+    },
+    "resource_budget": {"maximum_lifetime_physical_fit_calls": 3, "exact_materializations": 1, "maximum_locked_p100_fold_materializations": 3, "maximum_parallel_workers": 3, "hard_wall_seconds": 1800, "automatic_resume_or_rerun_count": 0, "full_deployment_fits": 0, "candidate_files": 0}
+  },
+  "authorization_and_outputs": {
+    "implementation_authorized": false,
+    "fit_or_materialization_authorized": false,
+    "requires_future_independent_QA_and_explicit_authorization": true,
+    "aggregate_only_files": ["result.json", "manifest.json", "report_ko.md"],
+    "row_predictions_persisted": false
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "official_score_or_rank_used_for_selection": 0,
+    "P3_reads_mutations_or_fits": 0,
+    "post_result_tuning": 0,
+    "result_driven_reruns": 0,
+    "third_cycle": 0
+  }
+}

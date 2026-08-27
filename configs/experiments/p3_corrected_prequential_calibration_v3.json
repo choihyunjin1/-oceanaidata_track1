@@ -1,0 +1,92 @@
+{
+  "experiment_id": "p3_corrected_prequential_calibration_v3",
+  "created_kst": "2026-08-22",
+  "status": "PREREGISTERED_APPEND_ONLY_THREE_BRANCH_ONE_CYCLE",
+  "problem": "P3_wave_forecast",
+  "objective": "beat corrected repeated-forward CatBoost v2 on the identical sealed 181-case/1086-row OOF surface, then fit the winning calibration on all OOF rows and create a saved-model-reproducible 1200-row candidate",
+  "comparison": {
+    "incumbent_artifact": "artifacts/p3_corrected_repeated_forward_catboost_v2",
+    "incumbent_oof": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+    "incumbent_oof_sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e",
+    "incumbent_metrics_sha256": "2c797e6169b7af27d343edb31fae5acfd4ce704149c63b732480fe33692c22e6",
+    "incumbent_candidate_sha256": "24a360dd85978155b883378459f6d4d46a6b847569f1c3b6636a728c96e5ba11",
+    "incumbent_rmse_m": 0.7791048399763751,
+    "fold_order": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "first_fold_policy": "exact incumbent no-op because no earlier corrected fold exists",
+    "later_fold_fit_policy": "completed corrected folds only; current and future fold labels forbidden"
+  },
+  "branches": [
+    {
+      "id": "lead_blend_ridge",
+      "kind": "closed_form_group_blend",
+      "group_columns": ["lead_h"],
+      "model_prediction": "routed_pred",
+      "anchor_prediction": "persistence_pred",
+      "default_model_weight_short": 1.0,
+      "default_model_weight_long": 0.8,
+      "active_leads": [3, 6, 9, 12, 18, 24],
+      "ridge_pseudo_rows": 48.0,
+      "weight_bounds": [0.45, 1.15],
+      "intercept": false
+    },
+    {
+      "id": "station_lead_blend_ridge",
+      "kind": "closed_form_hierarchical_group_blend",
+      "group_columns": ["station", "lead_h"],
+      "parent_group_columns": ["lead_h"],
+      "model_prediction": "routed_pred",
+      "anchor_prediction": "persistence_pred",
+      "default_model_weight_short": 1.0,
+      "default_model_weight_long": 0.8,
+      "active_leads": [3, 6, 9, 12, 18, 24],
+      "parent_ridge_pseudo_rows": 48.0,
+      "child_ridge_pseudo_rows": 36.0,
+      "weight_bounds": [0.45, 1.15],
+      "intercept": false
+    },
+    {
+      "id": "station_lead_bias_shrink",
+      "kind": "hierarchical_residual_bias",
+      "base_prediction": "final_pred",
+      "group_columns": ["station", "lead_h"],
+      "parent_group_columns": ["lead_h"],
+      "parent_ridge_pseudo_rows": 72.0,
+      "child_ridge_pseudo_rows": 48.0,
+      "maximum_absolute_correction_m": 0.15
+    }
+  ],
+  "selection": {
+    "metric": "pooled_row_RMSE_m",
+    "selection_rule": "lowest preregistered branch pooled RMSE",
+    "required_strict_rmse_below_m": 0.7791048399763751,
+    "minimum_strictly_improved_folds": 2,
+    "first_fold_exact_no_op_counts_as_guard_not_improvement": true,
+    "major_station_max_rmse_degradation_m": 0.01,
+    "lead_18_24_combined_max_rmse_degradation_m": 0.01,
+    "prediction_range_m": [0.0, 30.0],
+    "on_no_winner": "fail_closed_without_test_inference",
+    "on_winner": "fit winner parameters on all corrected OOF rows, save calibrator, infer from saved incumbent full models, create and reproduce candidate"
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_corrected_prequential_calibration_v3",
+    "candidate_relative_path": "candidate/submission.csv",
+    "reproduced_candidate_relative_path": "candidate/reproduced_submission.csv"
+  },
+  "fixed_inputs": {
+    "feature_cache": "artifacts/p3/features_all20_v1",
+    "test_index_sha256": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "sample_submission_sha256": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "baseline_persistence_sha256": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "full_single_model_sha256": "b59972b88932a860ae38318f626e13f70e9429dd71234c2b4d52fc7369eedeac",
+    "full_multi_model_sha256": "9dffba79e9ccf33482fd7212b3eda5ec3a98606d5b14a2e34e156988b87280cc",
+    "full_router_model_sha256": "897caa8e357b58db59f3ce8746a01fa85750f9379fc56d8ea00986cf5fed4bca"
+  },
+  "prohibitions": {
+    "branch_or_hyperparameter_change_after_oof_label_read": true,
+    "test_target_or_hidden_label_access": true,
+    "absolute_test_timestamp_recovery": true,
+    "current_or_frozen_mutation": true,
+    "source_or_cache_mutation": true,
+    "submission_upload": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "p2_conservative_stack_improvement.resume.v1",
+  "experiment_id": "p2_conservative_stack_improvement_v1",
+  "status": "authorized_same_attempt_serialization_correction",
+  "same_original_attempt": 1,
+  "new_generation_or_attempt": false,
+  "research_only": true,
+  "upload_allowed": false,
+  "metrics_exposed_before_correction": true,
+  "winner_exposed_before_correction": {
+    "id": "STACK_W0625",
+    "candidate_weight": 0.625,
+    "outer_primary_rmse_c": 1.042512377552349
+  },
+  "behavior_changes": {
+    "branches": 0,
+    "weights": 0,
+    "parameters": 0,
+    "features": 0,
+    "folds": 0,
+    "thresholds": 0,
+    "postprocessing": 0
+  },
+  "fit_accounting": {
+    "initial_underlying_lightgbm_estimator_fits": 14,
+    "correction_model_refits": 0,
+    "total_underlying_lightgbm_estimator_fits": 14
+  },
+  "failure": {
+    "phase": "saved_stack_model_reload_before_reproduction",
+    "exception_type": "ValueError",
+    "root_cause": "Binary joblib and parquet payloads were written through a Windows text-mode os.open descriptor without O_BINARY, expanding every LF byte to CRLF.",
+    "candidate_created_before_failure": true,
+    "result_manifest_seal_created_before_failure": false,
+    "correction": "For each pinned affected binary, write raw_bytes.replace(CRLF, LF) to a new append-only path using O_BINARY; never overwrite the initial artifact.",
+    "initial_progress_event_count": 11,
+    "last_progress_event_sha256": "d3bfb4f34cac02da5cb7eeaa02d6bb57719ab219df102e3bb4dbe961372cf35e"
+  },
+  "initial_pins": {
+    "canonical_config": {
+      "path": "configs/experiments/p2_conservative_stack_improvement_v1.json",
+      "sha256": "4917f8daf1a84e3a63d2cb5ab884b483d331eed3f0279afb339e944786842212",
+      "bytes": 6378
+    },
+    "initial_runner": {
+      "path": "scripts/run_p2_conservative_stack_improvement_v1.py",
+      "sha256": "202cd777b073b1df65102bfbe23d1f11f8ee3630cac0d7e04ae8be1f7c536e94",
+      "bytes": 48667
+    },
+    "attempt_lock": {
+      "path": "artifacts/p2_conservative_stack_improvement_v1_control/attempt.lock",
+      "sha256": "4d5a3acd66ce91ab22d46227905e8e99a05ba778442e721e8ab8a195292f0bbd",
+      "bytes": 297
+    },
+    "metrics": {
+      "path": "artifacts/p2_conservative_stack_improvement_v1/metrics.json",
+      "sha256": "b8614593b69cd7dad3f7efa05c5902f4b9e134467ce198a585620fea6069ef99",
+      "bytes": 32652
+    },
+    "candidate": {
+      "path": "artifacts/p2_conservative_stack_improvement_v1/candidate/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+      "sha256": "3960660b1e4076c88efdb927a50073aa2d8f1435bc1c7d6f2f40885aea2f2350",
+      "bytes": 1360814
+    }
+  },
+  "affected_binary_pins": {
+    "oof/inner_stack.parquet": "0c5f5561164586c2e0b75793374778acf59ede54bc900202e17ff7caeba55222",
+    "oof/outer_stack.parquet": "ffc778c7b3c9bf92ffd44282c6534621ef2661c795f2cdda302aece0094ea045",
+    "models/final_stack_model.joblib": "128942a1dedbc471f74f528c3689bec9960a0a7c6a994c551596f92b0b5cd2c9",
+    "models/final_underlying_blend.joblib": "fdeffd55bb256987ed7b3c14fd8d9ec68f650d8dd2432180c30b1fce58e10bfe",
+    "models/outer_2024_sep_oct_inner.joblib": "2cc87f169d57bee6cebfbd31d609fd0a7e169cc95eebbabd66cf4420fa2c2ba3",
+    "models/outer_2024_sep_oct_outer.joblib": "916888a02a1f2c8b52d5d6b1dcfc6c98796667882032cdfe148d754aa7a0c0fb",
+    "models/outer_2025_may_jun_inner.joblib": "351f43030eda51b5a071615c58719740c92141049a2c1712feff19daa0adbd28",
+    "models/outer_2025_may_jun_outer.joblib": "b17885e6db5cbdee010fb2873198abba7edc356d550a53f380b8cadb7f73bdbb",
+    "models/outer_2025_jul_aug_inner.joblib": "13045142b1d52cb118d93a9b346c78add870328a02ff98013eae84b0e7997d63",
+    "models/outer_2025_jul_aug_outer.joblib": "5a985b30c487f85fe9cdbfb631e3ad985470c1467262434d1c186619458dea3b"
+  },
+  "correction_output": {
+    "append_only": true,
+    "repaired_root": "artifacts/p2_conservative_stack_improvement_v1/resume_repaired",
+    "reproduction_path": "artifacts/p2_conservative_stack_improvement_v1/reproduction/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+    "failure_receipt": "artifacts/p2_conservative_stack_improvement_v1/serialization_failure.json",
+    "resume_completion": "artifacts/p2_conservative_stack_improvement_v1/resume_completion_status.json",
+    "result": "artifacts/p2_conservative_stack_improvement_v1/result.json",
+    "manifest": "artifacts/p2_conservative_stack_improvement_v1/manifest.json",
+    "seal": "artifacts/p2_conservative_stack_improvement_v1/seal.json",
+    "resume_lock": "artifacts/p2_conservative_stack_improvement_v1_control/resume.lock",
+    "original_files_may_be_overwritten": false
+  }
+}

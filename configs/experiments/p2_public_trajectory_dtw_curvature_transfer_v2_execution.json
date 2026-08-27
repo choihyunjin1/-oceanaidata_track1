@@ -1,0 +1,56 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.execution_config.v2",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+  "created_at_kst": "2026-08-26T07:20:24+09:00",
+  "design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json",
+    "bytes": 20025,
+    "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6"
+  },
+  "trigger_resolution": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json",
+    "bytes": 4373,
+    "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9",
+    "required_independent_qa": "PASS"
+  },
+  "default_mode": "READ_ONLY_PREFLIGHT",
+  "external_authorization_required": true,
+  "authorized": false,
+  "single_attempt": true,
+  "automatic_resume_or_rerun_count": 0,
+  "operation_ceiling": {
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "candidate_files": 0,
+    "uploads": 0
+  },
+  "source_access_order": [
+    "held-byte observations after authorization",
+    "held-byte exact anchor after authorization",
+    "18 inner materializations",
+    "one exact materialization and durable exact gate",
+    "held-byte p100 hash and parse only after exact RESEARCH_GO",
+    "zero or three locked p100 materializations"
+  ],
+  "exact_truth_policy": "Reconstruct exact keys and truth independently from held historical observations; compare anchor truth and then candidate keys before score.",
+  "weak_support_policy": "Weak support or missing/nonfinite L1/L5 endpoint is exact anchor no-op.",
+  "p100_slice_policy": "Compute fold, layer, season, distance decile, missingness decile, coverage decile, and distance-by-layer partitions; derive completeness and gates from inventories.",
+  "durability": {
+    "claim": "create-only + file fsync + directory durability barrier",
+    "journal": "append-only + per-event fsync",
+    "result": "unique create-only temp + file fsync + atomic replace + directory durability barrier",
+    "publication": "create-only verified hardlinks with terminal marker last",
+    "terminal": "one conflict-free logical terminal state",
+    "oob": "create-only identity-bound receipt with verified inventory and sanitized error provenance",
+    "windows_tree": "enumerate descendants before termination and verify all captured identities absent"
+  },
+  "aggregate_outputs_only": true,
+  "official_test_sample_submission_candidate_paths_allowed": false,
+  "row_predictions_persisted": false,
+  "fit_calls_at_config_freeze": 0,
+  "materializations_at_config_freeze": 0
+}

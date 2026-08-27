@@ -1,0 +1,74 @@
+{
+  "schema_version": "p2_dtw_v2r6.trigger_resolution.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r6",
+  "created_at_kst": "2026-08-26T10:42:30+09:00",
+  "status": "PROSPECTIVE_IMPLEMENTATION_RESOLUTION_AFTER_PREREGISTERED_DIAGNOSIS",
+  "design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_design.json",
+    "bytes": 14145,
+    "sha256": "dc8684950bf7466038270a33ab2f2c6425820433aa205790bd40c1d5e842004e",
+    "mutated_after_freeze": false
+  },
+  "diagnostic_inputs": [
+    {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_slot1_error_only_diagnostic_20260826.json",
+      "bytes": 1599,
+      "sha256": "c091f5afb612015f2f8390462aa557117154f0468e8afbc7306699c5c80504d7"
+    },
+    {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_inner_identifiability_certificate_20260826.json",
+      "bytes": 3802,
+      "sha256": "a84f09e87322b3561e8e7109515d576f27e73e3063ae846159876d045b54a864"
+    }
+  ],
+  "resolution": {
+    "root_cause": "The registered March pseudo-gap has 4,464 keys for each target layer but zero finite target-temperature truth keys in every target layer. HistoricalTrajectoryMaterializer returns an empty scoring surface and score_prediction_frame correctly fails closed.",
+    "classification": "SCIENTIFIC_EVALUATION_WINDOW_NONIDENTIFIABILITY_NOT_A_REPAIRABLE_RUNTIME_DEFECT",
+    "design_stop_clause_triggered": "slot1 readiness fails",
+    "terminal_status": "NO_GO_INNER_WINDOW_UNIDENTIFIABLE",
+    "claim_may_be_created": false,
+    "worker_may_launch": false,
+    "materialization_may_run": false,
+    "score_may_run": false,
+    "authorization_may_become_true": false,
+    "automatic_reruns": 0
+  },
+  "readiness_interpretation": {
+    "materialization_ready_boundary_requires": [
+      "post truth-and-anchor finite-mask rows greater than zero",
+      "at least one row in each target layer 2, 3, and 4",
+      "at least two KST days",
+      "all three frozen inner windows satisfy those requirements"
+    ],
+    "why_not_a_design_change": "These are necessary identifiability preconditions of the already frozen scorer, not new model, window, feature, metric, threshold, or tuning choices.",
+    "observed": {
+      "inner_2024_mar_rows_after_mask": 0,
+      "inner_2024_may_rows_after_mask": 9985,
+      "inner_2024_jul_rows_after_mask": 13358,
+      "all_three_identifiable": false
+    }
+  },
+  "provenance_repair_scope": {
+    "implement_and_test_even_though_execution_is_blocked": true,
+    "purpose": "Close the v2r5 infrastructure defect that discarded the worker root exception, for audit and future separately preregistered experiments.",
+    "does_not_unblock_v2r6_execution": true
+  },
+  "forbidden_resolutions": [
+    "drop March from the 18-cell mean",
+    "replace March after observing its missing truth",
+    "score the empty March surface as zero or no-op",
+    "select cells using only May and July",
+    "consume exact or p100 labels to replace the missing inner decision",
+    "authorize or rerun v2r6",
+    "access official test, sample submission, submission candidate, or p100"
+  ],
+  "next_scientific_action": "Retire Cycle1 as non-identifiable and route only through a separately frozen Cycle2 trigger/design; this resolution itself authorizes no Cycle2 fit, materialization, or result.",
+  "operation_counters": {
+    "v2r6_claims": 0,
+    "v2r6_worker_launches": 0,
+    "v2r6_materializations": 0,
+    "v2r6_scores": 0,
+    "physical_fit_calls": 0,
+    "p100_accesses": 0
+  }
+}

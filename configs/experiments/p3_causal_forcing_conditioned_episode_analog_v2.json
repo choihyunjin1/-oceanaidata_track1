@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_causal_forcing_conditioned_episode_analog_v2",
+  "status": "authorized_B_inner_only_one_shot",
+  "objective": {
+    "metric": "six_lead_normalized_residual_mse_nearest_vs_random",
+    "direction": "minimize",
+    "single_structural_hypothesis": "Conditioning episode-distinct hs-DTW on a causal multivariate wind-wave forcing state resolves growth-versus-decay state aliasing that made v1 station- and regime-unstable.",
+    "single_change_from_v1": "one_equal_weight_forcing_state_distance_term",
+    "hyperparameter_search_count": 0,
+    "threshold_search_count": 0,
+    "model_fit_count_allowed": 0
+  },
+  "adaptive_research_disclosure": {
+    "is_adaptive_research": true,
+    "reason": "The forcing-state hypothesis and variables were chosen after reading the sealed v1 B inner result and its aggregate-only failure diagnostic.",
+    "same_inner_split_reused": true,
+    "same_split_result_is_not_independent_confirmation": true,
+    "v1_result": "NO_GO_B_NEAREST_NOT_BETTER_THAN_RANDOM",
+    "v1_diagnostic_conclusion": "larger episode pools and smaller hs-DTW distances did not stabilize future residuals across station and regime",
+    "interpretation_if_pass": "hypothesis-supporting adaptive inner evidence only; not an unbiased outer performance estimate",
+    "interpretation_if_fail": "permanent stop for this exact v2 structure without threshold relaxation or rerun"
+  },
+  "v1_contract_preserved": {
+    "history_source": "native_20m_train_wave_hs",
+    "history_hours": 48,
+    "history_points_including_current": 145,
+    "history_center": "current_hs",
+    "history_scale": "raw_median_absolute_deviation",
+    "history_mad_floor_m": 0.1,
+    "minimum_history_coverage": 0.95,
+    "station_scope": "same_station_only",
+    "sakoe_chiba_radius_hours": 2,
+    "sakoe_chiba_radius_steps": 6,
+    "episode_definition": "maximal_contiguous_native_20m_run_with_finite_hs_ge_1_5m",
+    "episode_distinct": true,
+    "neighbor_count": 8,
+    "inverse_distance_floor": 1e-6,
+    "random_panel_count": 16,
+    "random_seed": 20260822,
+    "random_reference": "v1_uniform_random_distinct_episode_panels_with_hs_DTW_nearest_anchor_within_episode",
+    "candidate_no_op_leads": [3, 6, 9],
+    "candidate_active_leads": [12, 18, 24],
+    "candidate_alpha": 0.2
+  },
+  "forcing_state": {
+    "source": "frozen_causal_train_feature_cache_built_from_each_anchors_past_48h_only",
+    "window_hours": 6,
+    "columns_in_fixed_order": [
+      "wind_input_proxy_mean_6h",
+      "wind_input_proxy_slope_6h",
+      "wind_wave_alignment_mean_6h",
+      "gust_excess_mean_6h",
+      "caph_slope_6h",
+      "tp_slope_6h"
+    ],
+    "definitions_and_units": {
+      "wind_input_proxy_mean_6h": {
+        "definition": "mean(wspd^2 * max(cos(wdir-wvdir),0)) over finite past-context pairs",
+        "unit": "m2_s-2"
+      },
+      "wind_input_proxy_slope_6h": {
+        "definition": "ordinary-least-squares time slope of wspd^2 * max(cos(wdir-wvdir),0) over finite past-context pairs",
+        "unit": "m2_s-2_per_hour"
+      },
+      "wind_wave_alignment_mean_6h": {
+        "definition": "mean(cos(wdir-wvdir)) over finite past-context pairs; both directions are coming-from true-north clockwise degrees",
+        "unit": "dimensionless"
+      },
+      "gust_excess_mean_6h": {
+        "definition": "mean(gust-wspd) over finite past-context pairs",
+        "unit": "m_s-1"
+      },
+      "caph_slope_6h": {
+        "definition": "ordinary-least-squares time slope of local pressure over finite past-context values",
+        "unit": "hPa_per_hour"
+      },
+      "tp_slope_6h": {
+        "definition": "ordinary-least-squares time slope of mean wave period over finite past-context values",
+        "unit": "seconds_per_hour"
+      }
+    },
+    "causality": {
+      "absolute_calendar_features": 0,
+      "future_values": 0,
+      "window_endpoint": "forecast_origin_inclusive",
+      "statistics_fit_scope": "that_fold_that_station_inner_train_library_only"
+    },
+    "scaling": {
+      "center": "componentwise_library_median_over_complete_rows",
+      "scale": "componentwise_library_IQR_q75_minus_q25_over_complete_rows",
+      "zero_or_nonfinite_IQR_fallback": 1.0,
+      "unit_after_scaling": "dimensionless",
+      "query_or_validation_statistics_used": false
+    },
+    "missing_fallback": {
+      "candidate_row_with_any_nonfinite_state": "exclude_from_conditioned_index_only; retain in the v1 fallback and random-reference index",
+      "query_with_any_nonfinite_state": "exact_v1_unconditioned_retrieval_and_projection",
+      "complete_candidate_pool_with_fewer_than_8_distinct_episodes": "exact_v1_unconditioned_retrieval_and_projection",
+      "imputation": "none"
+    },
+    "distance_and_selection": {
+      "forcing_distance": "sqrt(mean((query_scaled-candidate_scaled)^2)) over exactly six fixed state components",
+      "forcing_weight": 1.0,
+      "combined_anchor_distance": "sqrt(hs_DTW_distance^2 + forcing_distance^2)",
+      "admissible_search_bound": "sqrt(hs_LB_Keogh^2 + forcing_distance^2)",
+      "episode_representative": "anchor_with_minimum_combined_distance_in_each_episode",
+      "episode_rank": "ascending_combined_distance_then_episode_id_then_anchor_id",
+      "selected_episode_count": 8,
+      "projection_weight": "inverse_combined_distance",
+      "search_batch_size": 1024
+    }
+  },
+  "B_gate": {
+    "identical_to_v1": true,
+    "target_scope": "same_inner_validation_six_lead_normalized_residual",
+    "maximum_nearest_to_random_mse_ratio_per_passing_fold": 0.9,
+    "minimum_passing_folds": 2,
+    "failure_action": "stop_before_C_model_outer_test_or_submission",
+    "success_action": "stop_and_report_adaptive_inner_evidence; await_separate_authorization",
+    "C_execution_in_v2": false
+  },
+  "validation": {
+    "outer_windows_used_only_as_training_cutoffs": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "outer_membership_or_target_read": false,
+    "outer_train_cutoff": "window_start_minus_78h",
+    "inner_validation_days": 45,
+    "inner_case_spacing_hours": 78,
+    "inner_episode_disjoint": true,
+    "membership_contract": "must_exactly_match_v1_B_fold_anchor_station_keys",
+    "random_reference_contract": "must_match_v1_per_case_random_normalized_mse_with_atol_1e-12",
+    "one_shot_no_rerun": true
+  },
+  "registered_inputs": {
+    "train_wave": {
+      "source_name": "train_wave.csv",
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "source_readme": {
+      "source_name": "README.md",
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "v1_B_cases": {
+      "path": "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot/b_precheck_cases.parquet",
+      "sha256": "70a51f2e15dcca0640fef2d2ad0d754697a750e53e1740d0346141d29e49974a"
+    },
+    "v1_B_result": {
+      "path": "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot/b_precheck.json",
+      "sha256": "8d3170647c3b8cbe0bf705582194af10bb03c862f00f6e4b770e0aa954a0d412"
+    },
+    "v1_manifest": {
+      "path": "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot/manifest.json",
+      "sha256": "0ff45a4bc9bcdb3c0b0f0a14e5e876de5b379a4590cf465f4d0547d338226929"
+    },
+    "v1_diagnostic": {
+      "path": "artifacts/p3_episode_distinct_raw_shape_analog_v1/diagnostics/b_aggregate_diagnostic.json",
+      "sha256": "f87c604c08eb120f540d9579c5e28617c7a1ee86e37810eb16ba54287c877d66"
+    },
+    "v1_helper": {
+      "path": "src/p3_wave/episode_distinct_analog.py",
+      "sha256": "307dfbcfff7a1300ac8be27074a4c13255776e70e2cdbe8b909d0396d876e180"
+    },
+    "trajectory_helper": {
+      "path": "src/p3_trajectory.py",
+      "sha256": "3af6f4f2580cade66c23048a63b97c64e9bdadd7c1b794b45fc056d363109116"
+    },
+    "episode_split_helper": {
+      "path": "src/p3_wave/revin_patch.py",
+      "sha256": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3"
+    }
+  },
+  "artifacts": {
+    "dry_run_directory": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/dry_run",
+    "B_output_directory": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot",
+    "status_path": "artifacts/status/p3_causal_forcing_conditioned_episode_analog_v2.json",
+    "attempt_lock": "artifacts/experiment_locks/p3_causal_forcing_conditioned_episode_analog_v2.B.attempt.lock"
+  },
+  "execution": {
+    "allowed_modes": ["dry-run", "B-inner"],
+    "B_confirmation_token": "RUN_P3_CAUSAL_FORCING_ANALOG_V2_B_ONCE",
+    "model_fit_count": 0,
+    "outer_designated_scoring_open_count": 0,
+    "test_context_read_count": 0,
+    "submission_write_count": 0
+  },
+  "prohibitions": {
+    "C_or_model_execution": true,
+    "hyperparameter_feature_threshold_or_weight_search": true,
+    "rerun_after_one_shot": true,
+    "read_frozen_outer_oof_or_182_outer_targets": true,
+    "score_outer_182_cases": true,
+    "read_test_context_or_test_index": true,
+    "generate_or_modify_submission": true,
+    "upload": true,
+    "mutate_v1_or_existing_artifacts": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "p3.era5_manifest_collision_recovery.contract.v1",
+  "recovery_id": "p3_era5_manifest_collision_recovery_20260825_v1",
+  "status": "PREREGISTERED_DRY_RUN_DEFAULT",
+  "canonical_manifest": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/manifest.json",
+  "recoverable_backup": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/recovery/manifest.incomplete.55e5545a3cc7df6df288eb04f2f437f2a157b3968f9ea10a3c7f669223d94525.json",
+  "apply_receipt_dir": "artifacts/p3_era5_manifest_collision_recovery_20260825_v1/apply_receipt",
+  "rollback_receipt_dir": "artifacts/p3_era5_manifest_collision_recovery_20260825_v1/rollback_receipt",
+  "attempt_output": "artifacts/p3_era5_context_transfer_20260824_v1",
+  "attempt_lock": "artifacts/p3_era5_context_transfer_20260824_v1.attempt.lock",
+  "known_incomplete_manifest": {
+    "sha256": "55e5545a3cc7df6df288eb04f2f437f2a157b3968f9ea10a3c7f669223d94525",
+    "schema_version": "1.0",
+    "source_id": "era5_pre2024",
+    "stage": null,
+    "row_count": 0,
+    "local_file": null,
+    "file_sha256": null,
+    "observed_start": null,
+    "observed_end": null,
+    "selected_cells": 0,
+    "selected_single_cell_year_requests": 0,
+    "files": 0,
+    "checksums": 0,
+    "official_test_or_submission_accessed": false
+  },
+  "pinned_upstream": {
+    "fixed_prepare_runner": {
+      "path": "scripts/prepare_p3_era5_pretrain.py",
+      "sha256": "e963894a147994dc2bc6571b25db4c90c72a633ce3410d909271dbaae62ee28f"
+    },
+    "fixed_pretrain_data": {
+      "path": "src/p3_wave/era5_pretrain_data.py",
+      "sha256": "4b35297d5f0520300a5d2625ba4a9625beea169fbcd01d600b2e230e3ecb7273"
+    },
+    "guarded_launch_manifest": {
+      "path": "artifacts/p3_era5_guarded_launch_20260825_v1/manifest.json",
+      "sha256": "db4a8247715eaa8415b58d538e153c7b518c827bc9e95ba6e9986774de1282ef"
+    }
+  },
+  "exact_prepare_resume_argv": [
+    ".venv-p1/Scripts/python.exe",
+    "scripts/prepare_p3_era5_pretrain.py",
+    "--stage",
+    "years",
+    "--execute-download"
+  ],
+  "process_guard": {
+    "matched_script_basename": "prepare_p3_era5_pretrain.py",
+    "apply_requires_active_matches": 0,
+    "apply_requires_explicit_abnormal_termination_acknowledgement": true
+  },
+  "recovery_budget": {
+    "automation_max_prepare_resumes_after_abnormal_exit": 1,
+    "migration_apply_consumes_prepare_resume": 0,
+    "subsequent_exact_prepare_command_consumes_prepare_resume": 1,
+    "apply_required_budget_token": "remaining-one"
+  },
+  "verdicts": [
+    "DRY_RUN_ELIGIBLE_AFTER_PROCESS_EXIT",
+    "BLOCKED_ACTIVE_PREPARE_PROCESS",
+    "BLOCKED_UNKNOWN_OR_CHANGED_MANIFEST",
+    "BLOCKED_COMPLETED_MANIFEST",
+    "BLOCKED_ATTEMPT_STATE",
+    "BLOCKED_BACKUP_OR_RECEIPT_COLLISION",
+    "BLOCKED_RECOVERY_BUDGET",
+    "APPLY_COMPLETE_PREPARE_RESUME_AUTHORIZED",
+    "ROLLBACK_COMPLETE"
+  ],
+  "artifact_dir": "artifacts/p3_era5_manifest_collision_recovery_20260825_v1",
+  "prohibitions": {
+    "apply_during_current_audit": true,
+    "active_prepare_process_mutation_or_termination": true,
+    "era5_value_file_read_or_modification": true,
+    "scientific_runner_execution": true,
+    "model_fit_prediction_or_tuning": true,
+    "official_p3_test_sample_submission_access": true
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "experiment_id": "p1_target_masked_quantile_v1",
+  "family_id": "target_masked_normal_only_conditional_quantiles",
+  "created_at_kst": "2026-08-21T00:00:00+09:00",
+  "authorization": {
+    "commit": false,
+    "push": false,
+    "competition_upload": false,
+    "external_observations": false,
+    "source_mutation": false
+  },
+  "hypothesis": "A fold-train-normal-only conditional temperature distribution that cannot read the target temperature will expose persistent temperature-only offset and drift while salinity, contemporaneous other-layer structure, and seasonal/tidal phase remain physically consistent.",
+  "reference": {
+    "backend": "xgboost",
+    "trees": 700,
+    "run_id": "20260813T153038+0900_cv_378a4e89",
+    "oof_relative_path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "outer_micro_f1": 0.8603708380408055,
+    "outer_test_share_weighted_f1": 0.8133155525620019,
+    "p1_config_relative_path": "configs/p1.toml",
+    "p1_config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947"
+  },
+  "data": {
+    "train_file": "train.csv",
+    "test_file": "test.csv",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "source_read_only": true
+  },
+  "conditional_input_contract": {
+    "allowed": [
+      "station",
+      "layer_category",
+      "psal_raw",
+      "psal_missing",
+      "same_station_time_other_layer_temp_moments",
+      "same_station_time_other_layer_psal_moments",
+      "peer_count_and_missingness",
+      "annual_phase",
+      "clock_phase",
+      "m2_12_42h_phase"
+    ],
+    "forbidden": [
+      "target_temp",
+      "target_temp_lags",
+      "target_temp_differences",
+      "target_temp_rolling_statistics",
+      "depth",
+      "depth_regime",
+      "year"
+    ],
+    "gors_fallback": "psal plus season/time plus station/layer and peer-missing masks; no depth and no peer required"
+  },
+  "quantile_model": {
+    "backend": "lightgbm_regressor",
+    "alphas": [0.05, 0.5, 0.95],
+    "n_estimators": 180,
+    "learning_rate": 0.04,
+    "num_leaves": 31,
+    "min_child_samples": 200,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "crossfit_folds": 2,
+    "crossfit_block": "KST calendar-day ordinal modulo 2",
+    "threads": 8,
+    "seed": 20260813,
+    "training_rows": "fold-train label=0 and finite temp only",
+    "quantile_crossing_policy": "sort q05 q50 q95 row-wise",
+    "hyperparameter_search": false
+  },
+  "xgboost_candidate": {
+    "base_features": "unchanged frozen offline P1 feature bundle",
+    "added_score_columns": [
+      "tmq_signed_residual",
+      "tmq_interval_width",
+      "tmq_lower_tail_distance",
+      "tmq_upper_tail_distance",
+      "tmq_outside_tail_distance",
+      "tmq_signed_residual_mean_24h",
+      "tmq_signed_residual_mean_72h",
+      "tmq_outside_tail_mean_24h",
+      "tmq_quantile_available"
+    ],
+    "model_parameters": "exact configs/p1.toml xgboost section",
+    "inner_iteration_and_postprocess_selection": "unchanged past-only nuisance selection",
+    "augmentation": false,
+    "hyperparameter_search": false
+  },
+  "outer_evaluation": {
+    "one_shot_research_diagnostic": true,
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "purge_days": 7,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260813,
+    "promotion_gate": {
+      "test_share_weighted_f1_delta_min": 0.005,
+      "paired_bootstrap_90pct_lower_bound_gt": 0.0,
+      "normal_fp_day_relative_increase_lt": 0.1,
+      "station_layer_f1_delta_min": -0.01
+    }
+  },
+  "artifacts": {
+    "output_relative_dir": "artifacts/p1_target_masked_quantile_v1",
+    "status_relative_path": "artifacts/status/p1_target_masked_quantile_v1.json",
+    "outer_lock_relative_path": "artifacts/p1_target_masked_quantile_v1/outer_exposure.lock"
+  }
+}

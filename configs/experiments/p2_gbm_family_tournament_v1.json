@@ -1,0 +1,50 @@
+{
+  "experiment_id": "p2_gbm_family_tournament_v1",
+  "status": "authorized_local_structure_screen",
+  "research_only": true,
+  "upload_allowed": false,
+  "objective": "Compare six fixed-budget GBM structures on the exact P2 target-proxy OOF rows before backend-specific parameter optimization.",
+  "feature_arm": "phase_81_public_only_features",
+  "metric": "pooled_row_rmse_celsius",
+  "validation_blocks": [
+    "2024_sep_oct",
+    "2025_jul_aug",
+    "2025_nov_dec"
+  ],
+  "families": [
+    "lgbm_gbdt",
+    "lgbm_extra_trees",
+    "lgbm_dart",
+    "xgboost_hist",
+    "catboost_pooled",
+    "catboost_layerwise"
+  ],
+  "fixed_budget": {
+    "boosting_iterations": 400,
+    "hyperparameter_optimization": false,
+    "purpose": "structure_screen_only"
+  },
+  "comparison": {
+    "standalone_reference": "frozen_lightgbm_layer_router_round400",
+    "ensemble_reference": "p2_deep_stack_v1",
+    "pair_blend": "layer_specific_nonnegative_sum_to_one",
+    "robustness": "leave_one_validation_block_out_pair_weight",
+    "bootstrap": {
+      "unit": "KST_day",
+      "replicates": 2000,
+      "seed": 20260816
+    }
+  },
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "frozen_router_oof": "50ab1d2931bd0eb3853fd421c9326cb422e3cd3b3ac265845bb7e2932aae8e2a",
+    "deep_stack_oof": "76f52261259112d03289226c23712e27a17a17f9320c8565c96a662c1093be8d",
+    "deep_stack_submission": "ea5cedbd08817da4da00274e1078689f09a1d9c65d2a464f5f5f5ba9ffcc82e8"
+  },
+  "next_generation": {
+    "eligible_for_parameter_search": "best standalone arm plus any arm with negative LOBO pair-blend delta",
+    "search_not_part_of_this_run": true
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "schema_version": "p2_normalized_curvature_residual_lgbm_stage1.prereg.v1",
+  "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "problem": "P2",
+  "family": "NCR_LGBM",
+  "hypothesis": "A LightGBM trained on dimensionless public-profile curvature, rather than absolute temperature level or calendar trend, can improve transport to the exact 2024 September-October same-season population while preserving the incumbent interpolation baseline.",
+  "selection_policy": {
+    "official_public_score_use": "POST_HOC_DIRECTIONAL_CONTEXT_ONLY",
+    "official_score_used_for_gate_or_tuning": false,
+    "result_based_retuning": false,
+    "candidate_grid_size": 1,
+    "stage1_seed_count": 3,
+    "stage1_model_fit_count": 3,
+    "stage2_is_separately_gated_and_not_implemented_here": true
+  },
+  "data_contract": {
+    "source_environment_variable": "P2_DATA_DIR",
+    "allowed_source_files": [
+      "observations.csv"
+    ],
+    "observations_csv_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "hidden_label_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  },
+  "implementation_pins": {
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1.py",
+      "bytes": 21508,
+      "hash_mode": "sha256_config_hash_literal_normalized_v1",
+      "sha256": "a2206eca65286d8acbd8e97f7999b47d0f30a62552d9a4effd55a6eaa8f1bf53",
+      "normalization": "Replace exactly the EXPECTED_CONFIG_SHA256 assignment line with the canonical sentinel before hashing; every other runner byte remains sealed. This breaks only the config-runner hash cycle."
+    },
+    "normalized_curvature_module": {
+      "path": "src/p2_restore/normalized_curvature_residual.py",
+      "bytes": 27025,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "c5d88d9bbe90c4b2b03f135d434ed5f030b71732d50549aac17ced88516070a0"
+    },
+    "training_feature_builder": {
+      "path": "src/p2_restore/features.py",
+      "bytes": 6929,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7"
+    },
+    "feature_builder_data_dependency": {
+      "path": "src/p2_restore/data.py",
+      "bytes": 3588,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9"
+    },
+    "package_initializer": {
+      "path": "src/p2_restore/__init__.py",
+      "bytes": 339,
+      "hash_mode": "sha256_raw_v1",
+      "sha256": "16e6d31ff2b1f860344efaaefceeee8bf7b1380d44d41424d8a3ab6ec94f4e4f"
+    }
+  },
+  "runtime_pins": {
+    "python": "3.12.10",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "lightgbm": "4.7.0",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.0"
+    }
+  },
+  "seal_protocol": {
+    "pre_numerical_import_verification": true,
+    "verify_config_full_sha256_against_runner_constant": true,
+    "verify_runner_normalized_sha256_against_config": true,
+    "verify_transitive_local_implementation_raw_sha256": true,
+    "verify_runtime_versions": true,
+    "recheck_after_import_before_fit_after_fit_and_before_publish": true,
+    "transactional_aggregate_publish": "write result.json and manifest.json in a same-filesystem staging directory, then rename the complete directory to the final append-only path"
+  },
+  "known_seal_limitations": [
+    "Filesystem hashing and Python import cannot be made one operating-system-atomic transaction; the runner fails closed on repeated hash checks before import, after import, before fit, after fit, and before publish.",
+    "A hard process or machine crash can leave an orphan hidden staging directory, but transactional directory rename prevents a partial final artifact directory.",
+    "The repository is permitted to be dirty because pre-existing user work must be preserved; Git HEAD and the dirty boolean are recorded in the execution manifest, while every experiment-relevant local implementation file is independently hash-pinned."
+  ],
+  "immutable_references": {
+    "exact_same_season_aggregate": {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/result.json",
+      "bytes": 129770,
+      "sha256": "227db5f9181953e77f7b97d1c9ca26f529dafad91a9ea018997471ffadd7c20b",
+      "json_pointer": "/panels/exact_frozen_lineage/metrics_by_setting/INCUMBENT_NOOP/by_fold/2024_sep_oct",
+      "population": "2024_sep_oct",
+      "rows": 26273,
+      "incumbent_prediction_id": "INCUMBENT_NOOP",
+      "row_pooled_rmse_c": 0.4477930821525993,
+      "layer_equal_rmse_c": 0.44836647903591037,
+      "by_layer_rmse_c": {
+        "2": 0.16568157693298882,
+        "3": 0.35355859194314126,
+        "4": 0.6712998105893967
+      },
+      "causal_forward_unbiased": false,
+      "role": "Transport diagnostic and exact incumbent comparator; not a causal-refit claim."
+    },
+    "exact_same_season_incumbent_oof": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "block": "2024_sep_oct",
+      "key_columns": [
+        "time",
+        "layer"
+      ],
+      "truth_column": "truth",
+      "prediction_column": "prediction"
+    },
+    "stage2_authoritative_surrogate": {
+      "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+      "bytes": 78560,
+      "sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc",
+      "population": "fraction_100_locked",
+      "locked_rows": 78156,
+      "incumbent_row_pooled_rmse_c": 0.9900226592930025,
+      "role": "Stage 2 gate only; never used to tune Stage 1."
+    }
+  },
+  "stage1_split": {
+    "timezone": "Asia/Seoul",
+    "validation_start_inclusive": "2024-09-01T00:00:00+09:00",
+    "validation_end_exclusive": "2024-11-01T00:00:00+09:00",
+    "training_rule": "time strictly before validation_start minus embargo",
+    "embargo_days": 7,
+    "expected_validation_rows_after_exact_alignment": 26273,
+    "target_layers": [
+      2,
+      3,
+      4
+    ]
+  },
+  "target_contract": {
+    "linear_baseline": "leakage-safe nearest public-depth interpolation from src/p2_restore/features.py",
+    "normalized_curvature": "z = (target_temperature - linear_baseline) / profile_scale",
+    "profile_scale": "max(abs(temp_layer_1 - temp_layer_5) when both endpoints are finite, otherwise finite public-temperature range, 0.5 C)",
+    "scale_floor_c": 0.5,
+    "decode": "candidate_temperature = linear_baseline + predicted_z * profile_scale"
+  },
+  "feature_contract": {
+    "public_layers": [
+      1,
+      5,
+      6,
+      7,
+      8
+    ],
+    "target_layers": [
+      2,
+      3,
+      4
+    ],
+    "allowed_feature_families": [
+      "public temperature offsets from linear baseline divided by profile scale",
+      "public salinity anomalies divided by a row-wise public salinity range with 0.05 floor",
+      "public measured and nominal depth offsets from target depth divided by row-wise public nominal-depth span with 1 m floor",
+      "target depth fraction within the public nominal-depth span",
+      "public-value availability masks and counts",
+      "target layer identifier",
+      "cyclic day-of-year, hour-of-day, and M2 phase"
+    ],
+    "forbidden_features": [
+      "year",
+      "elapsed_days",
+      "absolute linear baseline",
+      "target-layer temperature",
+      "target-layer salinity",
+      "official test metadata",
+      "official sample submission metadata"
+    ],
+    "salinity_scale_floor": 0.05,
+    "depth_scale_floor_m": 1.0
+  },
+  "model": {
+    "implementation": "lightgbm.LGBMRegressor",
+    "seeds": [
+      20260823,
+      20260824,
+      20260825
+    ],
+    "ensemble": "arithmetic mean of the three decoded seed predictions",
+    "parameters": {
+      "objective": "regression_l2",
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "n_jobs": 8,
+      "verbosity": -1,
+      "deterministic": true,
+      "force_row_wise": true
+    }
+  },
+  "metrics": {
+    "primary": "row_pooled_rmse_c",
+    "delta_sign": "candidate_minus_incumbent; negative is improvement",
+    "paired_day_bootstrap": {
+      "timezone": "Asia/Seoul",
+      "replicates": 5000,
+      "confidence": 0.9,
+      "seed": 20260826
+    }
+  },
+  "stage1_gate": {
+    "all_conditions_required": true,
+    "candidate_minus_incumbent_row_pooled_rmse_c_max": -0.015,
+    "paired_day_bootstrap_ci90_upper_c_max": -0.005,
+    "candidate_minus_incumbent_each_layer_rmse_c_max": 0.003,
+    "on_fail": "STOP_NCR_LGBM_NO_STAGE2",
+    "on_pass": "ELIGIBLE_FOR_SEPARATELY_PREREGISTERED_STAGE2"
+  },
+  "stage2_gate_contract_not_executed_by_this_runner": {
+    "candidate_minus_incumbent_row_pooled_rmse_c_max": -0.01,
+    "paired_day_bootstrap_ci90_upper_c_strictly_below": 0.0,
+    "minimum_fold_wins": "2/3",
+    "minimum_layer_wins": "2/3",
+    "worst_fold_delta_rmse_c_max": 0.01,
+    "worst_layer_delta_rmse_c_max": 0.005
+  },
+  "output": {
+    "directory": "artifacts/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1",
+    "aggregate_only": true,
+    "allowed_files": [
+      "result.json",
+      "manifest.json"
+    ],
+    "row_predictions_written": false,
+    "csv_files_written": false,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "append_only": true
+  },
+  "execution": {
+    "default_mode": "preflight_only",
+    "numerical_execution_flag": "--execute-stage1",
+    "command": ".venv-p1\\Scripts\\python.exe scripts\\run_p2_normalized_curvature_residual_stage1.py --execute-stage1",
+    "expected_wall_time": "approximately 5-15 minutes on the registered local CPU; stop after three fits",
+    "maximum_new_model_fits": 3
+  }
+}

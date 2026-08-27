@@ -1,0 +1,301 @@
+{
+  "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.r2_compatibility_verifier.v1",
+  "created_at_kst": "2026-08-23T11:41:24.3294564+09:00",
+  "status": "STATIC_OWNER_COMPLETE_AWAITING_FRESH_INDEPENDENT_QA_NO_RECEIPT",
+  "problem": "P3",
+  "identity": "P3_GEN6_INCUMBENT_PRESERVING_RESIDUAL_CALIBRATOR_R2_COMPATIBILITY_VERIFIER_V1",
+  "verifier_only": true,
+  "check_only_default": true,
+  "r2_mutation_allowed": false,
+  "r2_rerun_or_resume_allowed": false,
+  "execution_authorization_or_attempt_lock_allowed": false,
+  "fit_prediction_source_truth_decode_or_experiment_scoring_allowed": false,
+  "compatibility_receipt_write_allowed": false,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "registry_append_allowed": false,
+  "upload_allowed": false,
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v1.json",
+    "HELPER": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py",
+    "CLI": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v1.py",
+    "TESTS": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py"
+  },
+  "canonical_paths": {
+    "r2_output": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2",
+    "r2_control": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_control",
+    "compatibility_control": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v1_control",
+    "pre_execution_qa": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v1_control/pre_execution_qa.json",
+    "compatibility_receipt": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v1_control/compatibility_receipt.json",
+    "sealed_gen1_oof": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "sealed_validation_keys": "artifacts/p3_meaningful_learning_curve_20260823_v1/validation_keys.parquet",
+    "central_v9_ledger": "artifacts/meaningful_score_goal_v9/registry.jsonl"
+  },
+  "r2_implementation_pins": {
+    "CONFIG": {
+      "path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2.json",
+      "bytes": 16968,
+      "sha256": "77bcd142862795c1d5e8dbcc900c4bc728ce867ca018afc44ef6ff3038202f1f"
+    },
+    "CONTRACT": {
+      "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_contract_r2.py",
+      "bytes": 73236,
+      "sha256": "24245a5ed9e47c335607560bb02185259984ffae70b18edb7e8afd57a4aafe51"
+    },
+    "ENGINE": {
+      "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_execution_r2.py",
+      "bytes": 46244,
+      "sha256": "e272c48abe092445186602090f963142e1bf65b0fddcf407554f065e8e0b1bcf"
+    },
+    "RUNNER": {
+      "path": "scripts/run_p3_gen6_incumbent_preserving_residual_calibrator_v1r2.py",
+      "bytes": 10171,
+      "sha256": "6588a8b88a33367a354fffbbb8dfed89c7e8e74f6b762c9957afe92a35f151ef"
+    },
+    "TESTS": {
+      "path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_v1r2.py",
+      "bytes": 15932,
+      "sha256": "cefcff2fd41fc095b82973758164ff08f66b10a79146a2b90cdcd484c42ae5b8"
+    }
+  },
+  "r2_control_pins": {
+    "PRE_EXECUTION_QA": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_control/pre_execution_qa.json",
+      "bytes": 9964,
+      "sha256": "01156d67271b18509ab4f56c69fec7d85c15b677a1b041e1b4b701fdde8ea052"
+    },
+    "AUTHORIZATION": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_control/authorization.json",
+      "bytes": 9854,
+      "sha256": "1015c77ea3ed9f841686001445e28c605dd27e2d3fecfbfc12ce527419a4d7ba"
+    },
+    "ATTEMPT_LOCK": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_control/attempt.lock",
+      "bytes": 6081,
+      "sha256": "b209c36d1d649176c3108710e6d69200fd90b4c5de5b8604ef714fa4bf33d268"
+    },
+    "RUN_FAILURE_RECEIPT": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_control/run_failure_receipt.json",
+      "bytes": 470,
+      "sha256": "f17b14511da38aae4f192630dd3d8f7e77f8f36dd1ded2234fc83426b08b5a97"
+    }
+  },
+  "r2_control_inventory": {
+    "directories": 0,
+    "files": 4,
+    "file_bytes": 26369,
+    "algorithm": "SHA256_CANONICAL_JSON_SORTED_RELATIVE_PATH_TYPE_BYTES_SHA256_WITH_LF",
+    "sha256": "4e2ec9dce471f066367482f93f4ac0ccd303e6e3a3af63b1ccd465caa12f5f5c"
+  },
+  "r2_output_contract": {
+    "allowed_directories": [
+      ".",
+      "blind",
+      "commitments"
+    ],
+    "allowed_files": [
+      "blind/fold_00_2024_h2_storm.npy",
+      "blind/fold_01_winter_transition.npy",
+      "blind/fold_02_2025_h1.npy",
+      "commitments/fold_00_2024_h2_storm.json",
+      "commitments/fold_01_winter_transition.json",
+      "commitments/fold_02_2025_h1.json",
+      "commitments/predictions_complete.json",
+      "calibrator_models.json",
+      "learning_curve_evidence.json",
+      "metrics.json",
+      "oof.parquet",
+      "manifest.json",
+      "manifest.sha256",
+      "seal.json"
+    ],
+    "file_count": 14,
+    "subdirectory_count": 2
+  },
+  "r2_output_pins": {
+    "BLIND_FOLD_0": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/blind/fold_00_2024_h2_storm.npy",
+      "bytes": 11888,
+      "sha256": "dcbd6537c5aafab18ea879aca5505c996cc184fe976aecf1afe3e578907dd237"
+    },
+    "BLIND_FOLD_1": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/blind/fold_01_winter_transition.npy",
+      "bytes": 19088,
+      "sha256": "1de92a4e9bc780a95b5c12da41da82fc14cd1374495e3af610127837e18a5688"
+    },
+    "BLIND_FOLD_2": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/blind/fold_02_2025_h1.npy",
+      "bytes": 12848,
+      "sha256": "fb9fb5609d9827e919bb1e2c274aa75ff7f9a717a421ae467e0e6108fa2b9e95"
+    },
+    "COMMITMENT_FOLD_0": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/commitments/fold_00_2024_h2_storm.json",
+      "bytes": 1549,
+      "sha256": "416ffb871ef6eb38230bb78106c8bdd383d7049f9ce8ea595354fb9e0b2389ae"
+    },
+    "COMMITMENT_FOLD_1": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/commitments/fold_01_winter_transition.json",
+      "bytes": 5761,
+      "sha256": "8ada9652785719d3c8c91ca4b4e4a3838fd2c0397df40aef65d507c52cfb6197"
+    },
+    "COMMITMENT_FOLD_2": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/commitments/fold_02_2025_h1.json",
+      "bytes": 5594,
+      "sha256": "d6be9d6ae637a3aff06c6a9fc4a0e9ac8457da1464edb165cfb18fedf68f170a"
+    },
+    "PREDICTIONS_COMPLETE": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/commitments/predictions_complete.json",
+      "bytes": 1268,
+      "sha256": "f37d9871ef636eaa3f26df0831d25026722a3da8d60fa5de5353e90b44b6bfcf"
+    },
+    "CALIBRATOR_MODELS": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/calibrator_models.json",
+      "bytes": 12932,
+      "sha256": "1d413a27782261cfe10db3b09a5d3b6c1c9fd8c8ab3eeaff555198413b9c92ed"
+    },
+    "LEARNING_CURVE_EVIDENCE": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/learning_curve_evidence.json",
+      "bytes": 2314,
+      "sha256": "feb8b29e605aedb05742482e740aaf9ca7d1db52acc4e3b4fc2b60a9a662d5f5"
+    },
+    "METRICS": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/metrics.json",
+      "bytes": 16569,
+      "sha256": "07cb654b0d82769c28d50a85583fb85dd532732c721902a8341ef4189cb1ff85"
+    },
+    "OOF": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "bytes": 122784,
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    },
+    "MANIFEST": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/manifest.json",
+      "bytes": 8696,
+      "sha256": "6419ee8db51d5f3cf477bba6c131b46de64d6c04141066412cdffc39a98f5a68"
+    },
+    "MANIFEST_SIDECAR": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/manifest.sha256",
+      "bytes": 80,
+      "sha256": "422e1bcbcbac7dd560a6a3d047a5e5f1caf7a6d4f640d42293990b277def7957"
+    },
+    "SEAL": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/seal.json",
+      "bytes": 5123,
+      "sha256": "84ed20ed0641000e91d1a20b4a8406387a5c769aaac43d5bed9f6fd0d4bef3c6"
+    }
+  },
+  "r2_output_inventory": {
+    "directories": 2,
+    "files": 14,
+    "file_bytes": 226494,
+    "algorithm": "SHA256_CANONICAL_JSON_SORTED_RELATIVE_PATH_TYPE_BYTES_SHA256_WITH_LF",
+    "sha256": "15c2fea4907b1e16215b2d76d24c5ad483fc5cac84d9872adb902c023a4332d5"
+  },
+  "compatibility_contract": {
+    "historical_failure": {
+      "exception_type": "R2ContractError",
+      "message": "sealed fold commitment identity differs",
+      "message_sha256": "d3e1c00aaadbcd5f2a62a00b1a9e16999ae6e3877ba91ce7484f27e5852b99b1",
+      "failure_receipt_capability_revoked": true
+    },
+    "frozen_r2_erroneous_prefix_fractions": [
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "corrected_science_prefix_fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "prefix_derivation_sources": {
+      "meaningful_learning_curve_ast": {
+        "path": "src/p3_wave/meaningful_learning_curve.py",
+        "bytes": 11983,
+        "sha256": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+        "symbol": "PREFIX_FRACTIONS"
+      },
+      "science_config": {
+        "path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1.json",
+        "bytes": 16930,
+        "sha256": "f7584a811524f0dbe1a17f288cd82f3d3665bd44385d3355006a13bb49fb9968",
+        "json_pointer": "/sealed_surface_contract/prefix_fractions"
+      },
+      "fold_commitments": [
+        "COMMITMENT_FOLD_0",
+        "COMMITMENT_FOLD_1",
+        "COMMITMENT_FOLD_2"
+      ],
+      "metrics_pin": "METRICS"
+    },
+    "only_compatibility_adaptations": [
+      "replace_frozen_r2_verifier_prefix_expectation_with_four_source_consensus",
+      "admit_exact_pinned_historical_failure_receipt_to_the_r2_control_inventory"
+    ],
+    "all_other_frozen_r2_post_publish_checks_reexecuted": true,
+    "additional_independent_checks": [
+      "output_oof_keys_and_truth_exact_to_sealed_gen1_oof",
+      "commitment_key_and_validation_id_digests_recomputed",
+      "five_points_recomputed_with_5000_complete_case_bootstrap_replicates_each",
+      "gate_and_central_evidence_deep_equal",
+      "r2_tree_control_and_v9_unchanged_before_and_after"
+    ]
+  },
+  "expected_result": {
+    "status": "NO_LOCAL_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST",
+    "gate_decision": "RESEARCH_ONLY",
+    "local_gate_passed": false,
+    "validation_cases": 181,
+    "prediction_rows": 5430,
+    "fit_count_observed_exact": 11,
+    "fit_count_authorized_upper_bound": 20,
+    "identity_cells": 14,
+    "bounded_correction_cells": 1,
+    "bounded_correction_fold": "winter_transition",
+    "bounded_correction_prefix_fraction": 0.7,
+    "maximum_absolute_correction_m_at_most": 0.120000000001,
+    "prefix_0p70_delta_candidate_minus_incumbent_m": 0.019456413709285747,
+    "prefix_0p70_ci90_m": [
+      0.01268218647428121,
+      0.026528875926353498
+    ],
+    "full_fit_performed": false,
+    "official_promotion": false,
+    "candidate_generated": false,
+    "test_prediction_generated": false,
+    "registry_appended": false,
+    "uploads": 0
+  },
+  "v9_anchor": {
+    "path": "artifacts/meaningful_score_goal_v9/registry.jsonl",
+    "bytes": 15812,
+    "sha256": "232b6ed3133de11ee05150ec439efe05baa315bbb64ea0f319ffcbddd421b965",
+    "record_count": 3,
+    "sequences": [
+      3,
+      4,
+      5
+    ],
+    "head_sequence": 5,
+    "head_event_sha256": "1b3e01be70c6f8ed2df04038deac3b3642804f70f9f17a238826c64d68090317",
+    "uploads": 0
+  },
+  "static_counters": {
+    "independent_qa_receipts_created": 0,
+    "compatibility_receipts_created": 0,
+    "execution_authorizations_created": 0,
+    "attempt_locks_created": 0,
+    "model_fit_calls": 0,
+    "prediction_calls": 0,
+    "source_train_target_scalar_decodes": 0,
+    "experiment_score_calls": 0,
+    "candidate_files": 0,
+    "test_prediction_files": 0,
+    "registry_appends": 0,
+    "uploads": 0
+  }
+}

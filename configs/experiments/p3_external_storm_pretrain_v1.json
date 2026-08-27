@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "P3_external_storm_pretrain_v1",
+  "created_at_kst": "2026-08-17T00:00:00+09:00",
+  "status": "ready_for_open_source_preflight",
+  "execution_authorized": true,
+  "objective": {
+    "problem": "P3",
+    "metric": "rmse_meters",
+    "direction": "minimize",
+    "hypothesis": "Pre-2024 storm-life-cycle pretraining can improve six-horizon significant-wave-height forecasts, especially at 18 and 24 hours, without reconstructing anonymous evaluation timestamps.",
+    "single_structural_change": "station_agnostic_storm_lifecycle_pretraining"
+  },
+  "external_preflight": {
+    "required": true,
+    "validator": "scripts/validate_external_preflight.py",
+    "catalog": "configs/external_data/catalog.toml",
+    "organizer_approval_required": false,
+    "competition_permission_receipt": "configs/external_data/official_faq_permission.json",
+    "primary_sources": [
+      "kma_ocean_buoy_pre2024",
+      "era5_pre2024"
+    ],
+    "blocked_optional_source": "noaa_ww3_hindcast_pre2019",
+    "maximum_observation_time_kst": "2023-12-31T23:59:59+09:00",
+    "forbidden_period": "2024-01-01 onward",
+    "forbidden_eval_period": "2025-07-04 through 2026-06-30",
+    "absolute_test_timestamp_reconstruction": false,
+    "raw_values_accessed": false
+  },
+  "case_builder": {
+    "context_hours": 48,
+    "grid_minutes": 10,
+    "lead_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "anchor_minimum_hs_m": 1.5,
+    "minimum_same_station_anchor_separation_hours": 78,
+    "all_leads_required": true,
+    "case_group_isolation_required": true,
+    "external_station_identity_feature": false
+  },
+  "model": {
+    "family": "storm_lifecycle_encoder_with_energy_residual_head",
+    "targets": [
+      "delta_hs_squared_at_each_lead",
+      "hs_quantiles_at_each_lead"
+    ],
+    "inputs": [
+      "past wave state",
+      "past wind vector",
+      "past pressure tendency",
+      "past air temperature and humidity",
+      "missingness masks"
+    ],
+    "fine_tuning": "distributed KORS 2024 through 2025-06-30 only",
+    "local_baseline_and_postprocessing": "frozen until the external-only pretraining ablation passes"
+  },
+  "validation": {
+    "external_stage": "year-blocked and storm-event-blocked grouped cases",
+    "local_stage": "existing P3 station-time blocked validation, evaluated once",
+    "selection_scope": "external pre-2024 cases and local inner folds only",
+    "test_context_or_hidden_labels_used_for_selection": false,
+    "required_breakdowns": [
+      "station",
+      "lead hour",
+      "storm growth versus decay",
+      "hs intensity bin"
+    ],
+    "domain_shift_checks": [
+      "variable availability",
+      "sampling cadence",
+      "hs and wind distribution",
+      "domain classifier AUC",
+      "missingness-pattern match"
+    ]
+  },
+  "promotion_gates": {
+    "minimum_local_rmse_improvement_meters": 0.01,
+    "maximum_any_station_rmse_degradation_meters": 0.01,
+    "maximum_any_lead_rmse_degradation_meters": 0.015,
+    "long_lead_18_24h_must_not_degrade": true,
+    "event_block_bootstrap_90pct_ci_upper_for_rmse_delta_below_zero": true,
+    "external_training_values_must_remain_outside_git": true
+  },
+  "stop_conditions": [
+    "official FAQ permission evidence is missing or invalid",
+    "any observation exceeds the approved pre-2024 cutoff",
+    "any source reveals or can be aligned to anonymous evaluation timestamps",
+    "source rights or pretrained-weight provenance is unresolved",
+    "domain-shift checks fail",
+    "local RMSE gate fails"
+  ],
+  "execution": {
+    "downloaded": false,
+    "trained": false,
+    "evaluated": false,
+    "submitted": false
+  }
+}

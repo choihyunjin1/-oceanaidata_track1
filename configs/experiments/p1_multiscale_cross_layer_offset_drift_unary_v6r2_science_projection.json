@@ -1,0 +1,274 @@
+{
+  "schema_version": "p1_multiscale_cross_layer_offset_drift_unary.v6r2.science_projection.v1",
+  "created_at_kst": "2026-08-23T13:32:00+09:00",
+  "problem": "P1",
+  "generation": "p1_multiscale_cross_layer_offset_drift_unary_v6r2",
+  "hypothesis_count": 1,
+  "hypothesis_id": "robust_multiscale_cross_layer_offset_drift_unary",
+  "statement": "A train-prefix-only robust seasonal and adjacent-layer graph baseline followed by fixed multiscale trajectory geometry contains independent offset/drift signal that may add sustained positives while preserving the exact incumbent; otherwise every output is the exact incumbent.",
+  "scientific_relation_to_v6": "same single preregistered scientific family with only the two independently required fail-closed gate corrections and execution-security completion",
+  "search_forbidden": {
+    "threshold": true,
+    "alpha": true,
+    "seed": true,
+    "architecture": true,
+    "hyperparameter": true,
+    "posthoc_subgroup": true
+  },
+  "input_only_columns": [
+    "station",
+    "year",
+    "layer",
+    "time",
+    "temp",
+    "psal",
+    "depth"
+  ],
+  "selective_target_columns": [
+    "label",
+    "anomaly_type"
+  ],
+  "prefix_protocol": {
+    "outer_folds": [
+      "2025_q2",
+      "2025_q3",
+      "2025_q4"
+    ],
+    "fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "order": "fold_major_then_fraction",
+    "seed": 20260823,
+    "seed_count": 1,
+    "inner_blocks": 3,
+    "inner_split_exact": "sort unique input-only timestamps; first quarter is warmup; remaining quarters are blocks 1,2,3; each expanding train set ends at least seven days before its block",
+    "purge_days": 7,
+    "purge_rows_at_ten_minutes": 1008,
+    "rolling_origin_reuse": "earlier outer labels may become later history only after all five commitments for the earlier fold"
+  },
+  "inner_incumbent": {
+    "source": "exact Gen5r6 three-block official-incumbent teacher probability artifacts",
+    "seed_order": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "aggregation": "float32 mean in fixed seed order",
+    "fixed_fold_postprocess": {
+      "2025_q2": {
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "close_gap_rows": 0,
+        "minimum_positive_run": 12
+      },
+      "2025_q3": {
+        "high_threshold": 0.2,
+        "low_threshold": 0.1,
+        "close_gap_rows": 0,
+        "minimum_positive_run": 12
+      },
+      "2025_q4": {
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "close_gap_rows": 6,
+        "minimum_positive_run": 6
+      }
+    },
+    "frozen_reference_source_pins": {
+      "science_projection": {
+        "path": "configs/experiments/p1_incumbent_rule_distillation_neural_residual_v5_science_projection.json",
+        "bytes": 9589,
+        "sha256": "1b571ee9b755b1e0ff791bfd72adc47b22d7ae571f34affbf2bccfcab4eaa72b"
+      },
+      "pipeline": {
+        "path": "src/p1_qc/pipeline.py",
+        "bytes": 27779,
+        "sha256": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669"
+      },
+      "postprocess": {
+        "path": "src/p1_qc/postprocess.py",
+        "bytes": 12125,
+        "sha256": "2066d8a45c71cdd1b77365a2334c16efb075c7e6d8feb7808d76aaef22cb5bf5"
+      },
+      "rules": {
+        "path": "src/p1_qc/rules.py",
+        "bytes": 12159,
+        "sha256": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c"
+      }
+    },
+    "golden_fixture": {
+      "encoding": "float64_values_C_bytes_then_float32_probability_C_bytes",
+      "sha256": "c79c62b2a11d4d8942ddd824815fb7588dd64597c27a0b97f56fc15e14e3c882",
+      "output_int8_sha256_by_fold": {
+        "2025_q2": "e0b888ec76897d91beef59ffca652fb910c28c57be391ac485ca71307b729e66",
+        "2025_q3": "8366e4de39a6897417bfe2f60fcabf45f428c50c03fd2c62702600e0854be723",
+        "2025_q4": "9e38cc5f1c0259d10db9a1d7565147fd37519c31a66cd556bdf63b8c24b011e1"
+      }
+    },
+    "refit_calls": 0,
+    "prediction_and_split_files_manifest_pinned": true
+  },
+  "label_free_baseline": {
+    "fit_scope": "exact explicit dependency-closed train IDs only",
+    "seasonal_design": "intercept plus annual Fourier harmonics 1,2,3,4 plus diurnal harmonics 1,2",
+    "annual_period_days": 365.2425,
+    "irls_iterations": 8,
+    "huber_delta": 1.5,
+    "ridge": 1e-06,
+    "minimum_group_rows": 32,
+    "scale": "1.4826 residual MAD with 1e-6 floor",
+    "graph_edges": "adjacent observed layers within station",
+    "graph_state": "prefix median seasonal-residual difference and MAD",
+    "single_layer_fallback": "seasonal residual only",
+    "validation_input_values_label_free": true,
+    "target_fields_read": 0
+  },
+  "trajectory_geometry": {
+    "offline_centered": true,
+    "gap_break_minutes": 30,
+    "scales_rows": [
+      48,
+      96,
+      192,
+      384,
+      576
+    ],
+    "scales_hours": [
+      8,
+      16,
+      32,
+      64,
+      96
+    ],
+    "base_features": [
+      "abs_seasonal_residual_z",
+      "abs_graph_residual_z",
+      "graph_available",
+      "peer_count"
+    ],
+    "features_per_scale": [
+      "level_abs_z",
+      "haar_abs_z",
+      "slope_abs_z",
+      "curvature_abs_z",
+      "coherence_deficit_z"
+    ],
+    "feature_count": 29,
+    "feature_dtype": "float32",
+    "maximum_dependency_rows": 576,
+    "dependency_closed_train_ids_required": true,
+    "purge_rows": 1008,
+    "purge_strictly_exceeds_dependency": true,
+    "continuous_segment_only": true
+  },
+  "unary_head": {
+    "target": "label_is_one_and_anomaly_type_contains_offset_or_drift",
+    "model": "sklearn.linear_model.LogisticRegression",
+    "scaler": "RobustScaler_quantiles_25_75",
+    "penalty": "l2",
+    "C": 0.25,
+    "solver": "lbfgs",
+    "max_iter": 64,
+    "tol": 1e-06,
+    "class_weight": "balanced",
+    "fit_intercept": true,
+    "seed": 20260823,
+    "threshold": 0.5,
+    "calibration": false,
+    "feature_selection": false,
+    "same_exact_row_ids_for_geometry_target_scaler_and_unary": true
+  },
+  "protected_union": {
+    "operation": "incumbent OR sustained slow-unary additions",
+    "minimum_run_rows": 48,
+    "maximum_run_rows": 519,
+    "incumbent_singleton_max_rows": 1,
+    "incumbent_singleton_protection_radius_rows": 6,
+    "incumbent_positive_probability_bytes_unchanged": true,
+    "incumbent_positive_prediction_bytes_unchanged": true,
+    "failure_or_unavailable_fallback_before_candidate_validation": "EXACT_INCUMBENT_DTYPE_SHAPE_ORDER_AND_BYTES",
+    "deletions_from_incumbent": 0
+  },
+  "train_only_gate": {
+    "minimum_micro_f1_delta": 0.002,
+    "minimum_offset_recall_delta": 0.03,
+    "minimum_drift_recall_delta": 0.03,
+    "minimum_mean_offset_drift_recall_delta": 0.04,
+    "minimum_spike_f1_delta": 0.0,
+    "minimum_worst_station_layer_f1_delta": 0.0,
+    "maximum_normal_fp_relative_increase": 0.05,
+    "required_inner_blocks": 3,
+    "minimum_nondegrading_inner_blocks": 3,
+    "count_domain": "non_boolean_integral_json_number_exactly_3",
+    "required_support": [
+      "offset",
+      "drift",
+      "spike",
+      "all_16_station_layers"
+    ],
+    "blind_predictions_required": true
+  },
+  "final_curve_gate": {
+    "late_fractions": [
+      0.7,
+      0.85,
+      1.0
+    ],
+    "all_late_fraction_micro_deltas_strictly_positive": true,
+    "full_fraction_micro_f1_delta_at_least": 0.02,
+    "full_fraction_ci90_low_strictly_positive": true,
+    "another_late_fraction_ci90_low_strictly_positive": true,
+    "minimum_improved_outer_folds_at_full_fraction": 2,
+    "full_offset_recall_delta_at_least": 0.03,
+    "full_drift_recall_delta_at_least": 0.03,
+    "full_mean_offset_drift_recall_delta_at_least": 0.04,
+    "full_spike_f1_delta_at_least": 0.0,
+    "worst_station_layer_f1_delta_at_least": 0.0,
+    "bootstrap_replicates_per_point": 5000,
+    "bootstrap_unit": "positive_event_or_station_layer_normal_KST_day",
+    "all_leakage_checks": true,
+    "all_reproducibility_checks": true,
+    "separate_post_curve_authorization_required": true,
+    "curve_may_create_candidate_test_prediction_or_upload": false
+  },
+  "blind_commitments": {
+    "inner": 45,
+    "outer_cells": 15,
+    "outer_folds": 3,
+    "predictions_complete": 1,
+    "write_mode": "O_EXCL",
+    "hash_chain": true,
+    "durable_prediction_bytes_before_each_commitment": true,
+    "target_decode_after_corresponding_commitment_only": true,
+    "aggregate_target_decode_after_predictions_complete_only": true
+  },
+  "resource_ceiling": {
+    "curve_cells": 15,
+    "maximum_label_free_baseline_fit_calls": 60,
+    "maximum_supervised_unary_fit_calls": 60,
+    "maximum_top_level_fit_calls": 120,
+    "maximum_station_layer_seasonal_subfits": 960,
+    "maximum_adjacent_graph_edge_estimations": 780,
+    "maximum_seasonal_irls_steps": 7680,
+    "maximum_unary_lbfgs_iterations": 3840,
+    "maximum_total_iterative_steps": 11520,
+    "maximum_wall_clock_seconds": 21600,
+    "maximum_peak_rss_bytes": 8589934592,
+    "maximum_vram_bytes": 0,
+    "maximum_threads": 8,
+    "maximum_artifact_disk_bytes": 1073741824,
+    "maximum_files_written": 192,
+    "gpu_allowed": false
+  },
+  "identifiability": {
+    "question": "Does independent multiscale cross-layer trajectory geometry recover sustained offset/drift rows beyond the exact incumbent without degrading spike behavior or any supported station-layer?",
+    "positive_evidence": "every fixed train and final gate passes",
+    "negative_evidence": "closes this exact geometry-unary family only",
+    "missing_support": "not identifiable and exact incumbent fallback",
+    "causal_claim": false
+  }
+}

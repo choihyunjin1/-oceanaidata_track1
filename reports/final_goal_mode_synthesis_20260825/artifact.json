@@ -1,0 +1,806 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Ocean AI P1–P3 최종 종합 — ERA5 결과 제외",
+    "description": "지금까지의 개선·실패·검증 한계와 다음 의사결정을 분리해 정리한 한국어 기술보고서",
+    "generatedAt": "2026-08-25T15:43:03+09:00",
+    "charts": [
+      {
+        "id": "confirmation_pass_chart",
+        "title": "새 관점의 3회 확인: 실행 가능 후보와 사후 상한",
+        "subtitle": "문제별 3회; 사후 상한은 held truth를 사용한 비배포 진단이며 P2·P3의 oracle 정의는 서로 다름",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "실행 가능한 후보와 사후 상한은 문제별 3회 중 몇 회 사전 기준을 통과했는가?",
+        "rationale": "통과 기준 2회와 실행 가능·사후 상한의 격차를 같은 축에서 비교하면 모델 용량 부족과 선택 정보 부족을 구분할 수 있다.",
+        "dataset": "confirmation_pass_counts",
+        "sourceId": "final_synthesis_json",
+        "encodings": {
+          "x": {
+            "field": "problem",
+            "type": "nominal",
+            "label": "문제"
+          },
+          "y": {
+            "field": "pass_count",
+            "type": "quantitative",
+            "label": "3회 중 통과 횟수"
+          },
+          "color": {
+            "field": "evidence_type",
+            "type": "nominal",
+            "label": "증거 유형"
+          },
+          "tooltip": [
+            {
+              "field": "required_passes",
+              "type": "quantitative",
+              "label": "필요 통과 횟수"
+            },
+            {
+              "field": "threshold",
+              "type": "text",
+              "label": "반복별 기준"
+            },
+            {
+              "field": "pooled_delta",
+              "type": "quantitative",
+              "label": "pooled Δ"
+            },
+            {
+              "field": "pooled_ci90",
+              "type": "text",
+              "label": "pooled 90% CI"
+            },
+            {
+              "field": "diagnostic",
+              "type": "text",
+              "label": "해석"
+            }
+          ]
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "orientation": "vertical",
+          "showValues": true
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "feasible-vs-posthoc-ceiling"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec",
+          "title": "증거 유형",
+          "interactive": true
+        },
+        "labels": {
+          "values": "always"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 2,
+            "label": "통과 기준",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "valueFormat": "number",
+        "layout": "full",
+        "maxRows": 6
+      }
+    ],
+    "tables": [
+      {
+        "id": "early_progress_table",
+        "title": "초기에 확보한 기준점",
+        "subtitle": "초기 진전과 후속 승격 실패를 혼동하지 않기 위한 분리",
+        "dataset": "early_progress",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "problem",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "problem",
+            "label": "문제",
+            "type": "text"
+          },
+          {
+            "field": "comparison",
+            "label": "비교",
+            "type": "text"
+          },
+          {
+            "field": "candidate",
+            "label": "후보/기준점",
+            "type": "text"
+          },
+          {
+            "field": "delta",
+            "label": "Δ",
+            "type": "text"
+          },
+          {
+            "field": "ci90",
+            "label": "90% CI",
+            "type": "text"
+          },
+          {
+            "field": "assessment",
+            "label": "판정",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "cycle_audit_table",
+        "title": "Full-improvement-cycle 5개 기준 감사",
+        "subtitle": "점추정 개선과 일반화 승격을 엄격히 분리",
+        "dataset": "cycle_audit",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "problem",
+          "direction": "asc"
+        },
+        "density": "compact",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "problem",
+            "label": "문제",
+            "type": "text"
+          },
+          {
+            "field": "metric",
+            "label": "지표",
+            "type": "text"
+          },
+          {
+            "field": "comparator",
+            "label": "Comparator",
+            "type": "number"
+          },
+          {
+            "field": "candidate",
+            "label": "Candidate",
+            "type": "number"
+          },
+          {
+            "field": "delta",
+            "label": "Δ",
+            "type": "number"
+          },
+          {
+            "field": "ci90",
+            "label": "90% CI",
+            "type": "text"
+          },
+          {
+            "field": "criteria_passed",
+            "label": "통과 기준 수",
+            "type": "number"
+          },
+          {
+            "field": "verdict",
+            "label": "판정",
+            "type": "text"
+          },
+          {
+            "field": "primary_reason",
+            "label": "주요 이유",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "problem_state_table",
+        "title": "문제별 최종 상태와 결정",
+        "subtitle": "어떤 시도가 남았고 어떤 family를 닫는지 명시",
+        "dataset": "problem_state",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "problem",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "problem",
+            "label": "문제",
+            "type": "text"
+          },
+          {
+            "field": "current_reference",
+            "label": "현 기준점",
+            "type": "text"
+          },
+          {
+            "field": "what_worked",
+            "label": "확인된 성과",
+            "type": "text"
+          },
+          {
+            "field": "what_failed",
+            "label": "닫힌 시도",
+            "type": "text"
+          },
+          {
+            "field": "diagnosis",
+            "label": "진단",
+            "type": "text"
+          },
+          {
+            "field": "decision",
+            "label": "결정",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "p3_external_table",
+        "title": "P3 외생 forcing 증거와 ERA5 경계",
+        "subtitle": "완료된 KMA 결과와 미완료 ERA5를 분리",
+        "dataset": "p3_external_evidence",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "experiment",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "experiment",
+            "label": "실험",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "결과",
+            "type": "text"
+          },
+          {
+            "field": "interpretation",
+            "label": "해석",
+            "type": "text"
+          },
+          {
+            "field": "decision",
+            "label": "판정",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "timeline_table",
+        "title": "학습 사이클에서 실제로 축적된 것",
+        "subtitle": "모델 성능뿐 아니라 검증 체계와 반증도 산출물로 기록",
+        "dataset": "timeline",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "stage",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "stage",
+            "label": "단계",
+            "type": "number"
+          },
+          {
+            "field": "phase",
+            "label": "국면",
+            "type": "text"
+          },
+          {
+            "field": "outcome",
+            "label": "산출물",
+            "type": "text"
+          },
+          {
+            "field": "scientific_status",
+            "label": "과학적 상태",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "recommendation_table",
+        "title": "권고안과 재개 조건",
+        "subtitle": "같은 검증면에서의 추가 튜닝은 권고하지 않음",
+        "dataset": "recommendations",
+        "sourceId": "final_synthesis_json",
+        "defaultSort": {
+          "field": "priority",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "priority",
+            "label": "우선순위",
+            "type": "number"
+          },
+          {
+            "field": "action",
+            "label": "실행",
+            "type": "text"
+          },
+          {
+            "field": "reason",
+            "label": "근거",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "final_synthesis_json",
+        "label": "P1–P3 최종 종합 근거 스냅샷",
+        "path": "reports/final_goal_mode_synthesis_20260825/synthesis.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "SQL",
+          "sql": "SELECT * FROM read_json_auto('reports/final_goal_mode_synthesis_20260825/synthesis.json', format = 'auto');",
+          "description": "문제별 원 결과·검증 감사·strict confirmation을 aggregate 수준에서 교차대조해 만든 고정 스냅샷.",
+          "executed_at": "2026-08-25T15:43:03+09:00",
+          "tables_used": [
+            "reports/P1_MODEL_SELECTION_2026-08-13.md",
+            "artifacts/validation_system_audit_20260822/p1.json",
+            "artifacts/full_improvement_cycle_20260822/meaningful_improvement_audit.json",
+            "artifacts/perspective_confirmation_20260823/synthesis.json",
+            "artifacts/perspective_confirmation_20260823/validation.json",
+            "artifacts/p2_extrapolated_soft_gate_v2/result.json",
+            "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+            "reports/generated/p3_long_persistence_shrink_2026-08-17/artifact.json",
+            "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+            "configs/goals/meaningful_score_ledger_v9.json",
+            "configs/experiments/p3_era5_context_transfer_v1.json"
+          ],
+          "filters": [
+            "aggregate metrics and metadata only",
+            "official P3 test, sample, submission and upload excluded",
+            "initial leaking P2 confirmation excluded; p2_strict only",
+            "ERA5 performance excluded because no final artifact exists",
+            "oracle evidence separated from deployable evidence"
+          ],
+          "metric_definitions": [
+            "P1 delta = candidate F1 minus comparator F1; higher is better",
+            "P2 and P3 delta = candidate RMSE minus comparator RMSE; lower is better",
+            "full-cycle promotion requires all five evidence criteria",
+            "confirmation success requires at least two of three repeat passes plus the preregistered pooled CI direction",
+            "official README baselines and local OOF metrics are not directly comparable"
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Ocean AI P1–P3 최종 종합 — ERA5 결과 제외"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 기술 요약\n\n**최종 판정은 incumbent 유지입니다.** Full-improvement-cycle에서 일반화 개선으로 승격된 문제는 **0/3**, 관점을 바꿔 문제별로 정확히 3회 확인한 실행 가능 후보의 사전 기준 통과는 **0/9**였습니다. 따라서 지금까지의 후반부 접근, 즉 반복 노출된 local validation surface에서 residual·router·threshold·blend를 계속 미세 조정하는 방식은 종료하는 것이 맞습니다.\n\n다만 ‘아무것도 개선하지 못했다’는 뜻은 아닙니다. P1은 초기 XGBoost가 이전 LightGBM보다 weighted F1 **+0.044511** 개선했고 90% CI도 전부 양수였습니다. 이후에 추가한 복잡성이 그 동결 기준점을 넘어서는 재현 가능한 이득을 만들지 못한 것입니다. P2·P3는 정답을 본 사후 oracle에서만 큰 개선 여지가 나타났고, 실제 예측 시점 정보로 만든 router는 실패했습니다. 현재 핵심 병목은 모델 용량보다 **regime을 식별할 관측 정보와 fresh 평가면**입니다.\n\n본 보고서는 진행 중인 P3 ERA5 context-transfer의 성능을 포함하지 않습니다. 공식 P3 test·sample·submission은 열지 않았고 submission을 만들거나 업로드하지 않았습니다."
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 범위와 판정 규칙\n\nP1은 F1이 높을수록 좋고, P2와 P3는 RMSE가 낮을수록 좋습니다. 승격은 같은 평가 행·사례에서의 비교 가능성, 실질 효과, 선택을 고려해 허용 가능한 불확실성, fresh holdout 또는 honest nested 평가, fold·critical-slice 안정성의 **다섯 조건을 모두** 요구했습니다. P1의 실질 효과 기준은 +0.005 F1, P2는 -0.012101℃, P3는 -0.028792m입니다.\n\n공식 README의 baseline은 hidden 평가면에 대한 참고값일 뿐 local OOF와 직접 빼서 비교하지 않았습니다. 또한 ‘3회’는 seed만 바꾼 반복이 아니라 서로 다른 역사 시간 분할·마스크 위상·held episode이지만, 완전히 독립적인 신규 실험은 아닌 historical pseudo-test입니다."
+      },
+      {
+        "id": "early_progress_intro",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 초기에 실제로 전진한 부분\n\n성과와 실패를 같은 문장으로 뭉개면 판단이 왜곡됩니다. 가장 분명한 성과는 P1 기준 모델의 교체였습니다. P2의 soft gate도 local 수치는 좋아졌지만 outer 재사용과 time-safe 재현성 문제가 있어 confirmatory 개선으로 분류하지 않았습니다. P3의 long-lead shrink는 현재 비교의 불변 기준점이지 이번 사이클의 새 승격 결과가 아닙니다."
+      },
+      {
+        "id": "early_progress_block",
+        "type": "table",
+        "tableId": "early_progress_table",
+        "layout": "full"
+      },
+      {
+        "id": "confirmation_intro",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 관점을 바꾼 뒤 3회 확인한 결과\n\n실행 가능한 후보는 세 문제 모두 0/3이었습니다. P1은 label-aware 상한마저 0/3이라 현재 합성 주입 family 자체가 닫혔습니다. 반면 P2·P3는 정답을 본 사후 상한이 3/3이었습니다. 이것은 개선 가능한 경우가 존재하지만 **예측 시점의 공개 정보로 그 경우를 고르는 규칙이 없었다**는 뜻입니다. oracle은 배포할 수 없으므로 성능 결과가 아니라 병목 진단으로만 해석해야 합니다."
+      },
+      {
+        "id": "confirmation_chart_block",
+        "type": "chart",
+        "chartId": "confirmation_pass_chart",
+        "layout": "full"
+      },
+      {
+        "id": "full_cycle_intro",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 마지막 full-improvement-cycle의 독립 감사\n\n세 후보 모두 점추정만 보면 좋아졌습니다. 그러나 P1은 +0.000571 F1로 너무 작고 CI가 0을 포함했습니다. P2는 -0.073375℃로 큰 local 효과였지만 동일 outer에서 branch weight를 골랐고 같은 계절 fold가 +0.077036℃ 악화했습니다. P3는 -0.000444m로 materiality gate의 1.54%에 불과하고 CI가 0을 포함했습니다. 다섯 기준의 엄격한 결합을 통과한 후보는 없습니다."
+      },
+      {
+        "id": "cycle_audit_block",
+        "type": "table",
+        "tableId": "cycle_audit_table",
+        "layout": "full"
+      },
+      {
+        "id": "problem_findings",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 문제별 핵심 발견\n\n**P1.** 동결 XGBoost가 초기에 만든 이득은 유효했지만, peer·boundary·event·inpainting·duration·TCN·masked pretrain·외부 IORS·합성 주입은 이를 안정적으로 넘지 못했습니다. validation audit은 최소 13회의 outer-result 노출, 10개 family, virgin local tail 0, OOF 대 official-test domain AUC 0.880을 확인했습니다. 현재 cached rule/peer family는 닫는 편이 합리적입니다.\n\n**P2.** conservative stack는 가장 강한 local point gain을 보였지만 outer-selected였고 same-season 및 layer별 안정성이 깨졌습니다. time-safe 구조를 다시 맞추자 parser correction은 +0.138081℃, joint hydro는 +0.006663℃로 악화했습니다. truth-aware oracle은 좋았으나 strict public-time router는 +0.016879℃로 나빠져, 보완 신호의 존재와 그 신호의 식별 가능성이 별개임을 보여줍니다.\n\n**P3.** 공식 불변 local incumbent는 20% long-lead persistence shrink, RMSE 0.780160920m, 182 cases/1,092 rows입니다. ERA5 protocol이 사용하는 0.779948722m, 181/1,086 comparator와는 다른 surface이므로 혼용하지 않았습니다. sequence·spectral·state-space·hierarchical residual·analog는 모두 승격에 실패했고, expanded oracle만 컸습니다."
+      },
+      {
+        "id": "problem_state_block",
+        "type": "table",
+        "tableId": "problem_state_table",
+        "layout": "full"
+      },
+      {
+        "id": "p3_external_intro",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## P3 외생 forcing: KMA는 실패, ERA5는 아직 미판정\n\nKMA source와 local의 domain AUC는 0.996779였고 effective source sample은 65,536개 중 55.09에 불과했습니다. calibrated blend의 Δ는 -0.002529m였지만 CI90이 0을 포함해 철회했습니다. 이 결과는 ‘외생 정보’라는 관점 전체를 부정하지 않고 **이 source와 transfer 방식**을 부정합니다.\n\nERA5는 286개 past-only feature, source 2014–2020 train, 2021·2022·2023 source validation, source gate 선행, 사전 등록된 정확히 3개 local historical window, 결과 기반 재실행·튜닝 금지로 봉인되어 있습니다. 2026-08-25 15:50 KST의 파일·프로세스 metadata 관찰에서는 raw/yearly 178/363, partial 0, downloader active였으며 combined와 평가 결과는 없었습니다. 따라서 성공이나 실패로 세지 않았습니다."
+      },
+      {
+        "id": "p3_external_block",
+        "type": "table",
+        "tableId": "p3_external_table",
+        "layout": "full"
+      },
+      {
+        "id": "what_was_achieved",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 성능 외에 남은 유효한 산출물\n\n이번 작업은 다수의 후보 파일을 만드는 데서 끝나지 않았습니다. 비교 surface 고정, source·local 분리, prediction commitment, hash·seal, preflight, leakage·접근 감사, fold·slice gate, strict 재실행 금지 규칙이 정리되었습니다. 또한 작은 point gain과 승격 가능한 일반화 증거를 분리했고, 음성 결과를 family 종료 결정으로 바꾸었습니다. 이것이 다음 실험의 false positive를 줄이는 가장 큰 실질 성과입니다."
+      },
+      {
+        "id": "timeline_block",
+        "type": "table",
+        "tableId": "timeline_table",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 한계와 불확실성\n\n- 대부분의 수치는 official hidden test가 아니라 historical train/OOF pseudo-test입니다.\n- P1·P3 일부 upstream cache의 과거 생성 과정까지 official test 비접촉이었다고 주장하지 않습니다. 다만 이번 종합 작업에서는 공식 P3 test·sample·submission을 열지 않았습니다.\n- P2의 세 phase는 row occurrence 61.79%가 중복되므로 pooled CI는 독립 표본 추론이 아니라 일정 민감도 요약입니다. 서로 다른 P2 validation surface의 RMSE도 직접 비교하지 않았습니다.\n- 기존 experiment ledger는 최근 P2·P3 원 결과를 모두 반영하지 않아, 본 보고서는 ledger만이 아니라 raw aggregate result·seal·QA를 우선 근거로 사용했습니다.\n- oracle은 held truth를 사용하므로 배포 가능한 후보가 아닙니다.\n- ERA5 결과가 나오면 P3의 외생 forcing 결론만 갱신할 수 있습니다. P1·P2의 이번 종료 판정은 변하지 않습니다."
+      },
+      {
+        "id": "recommendations_intro",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 최종 권고\n\n현재 상태에서 같은 데이터·같은 validation surface로 모델을 더 복잡하게 만드는 것은 기대수익이 낮습니다. 다음 행동은 incumbent 동결, ERA5 one-shot 완료, 그리고 fresh 정보가 생길 때만 재개하는 순서입니다."
+      },
+      {
+        "id": "recommendation_block",
+        "type": "table",
+        "tableId": "recommendation_table",
+        "layout": "full"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 다음에 답해야 할 질문\n\n1. 공식 또는 조직 차원에서 완전히 untouched인 평가 구간을 새로 확보할 수 있는가?\n2. P1의 라벨 생성 규칙, P2의 수괴·비영향층 상태, P3의 storm phase를 예측 시점에 관측할 수 있는 외생 proxy가 있는가?\n3. ERA5 source gate 또는 local gate가 실패할 경우 외생 pretraining family를 즉시 닫는 데 동의할 수 있는가?\n4. 다음 promotion 전에 ledger·seal·hash·decision rule을 하나의 원장으로 동기화할 수 있는가?"
+      },
+      {
+        "id": "provenance",
+        "type": "markdown",
+        "sourceId": "final_synthesis_json",
+        "body": "## 출처와 재현성\n\n본 보고서는 reports/final_goal_mode_synthesis_20260825/synthesis.json을 표시용 canonical snapshot으로 사용합니다. 이 snapshot은 full-cycle 감사, perspective confirmation과 독립 replay, 문제별 incumbent 및 외생 실험의 aggregate 결과를 참조합니다. 보고서 생성 과정은 데이터 값 파일이나 공식 submission 경로를 열지 않았고, 실행 중인 ERA5 downloader와 고정 protocol을 변경하지 않았습니다."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T15:43:03+09:00",
+    "status": "ready",
+    "datasets": {
+      "confirmation_pass_counts": [
+        {
+          "problem": "P1",
+          "evidence_type": "실행 가능",
+          "pass_count": 0,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "F1 ↑",
+          "threshold": "ΔF1 ≥ +0.010",
+          "pooled_delta": -0.005691759157904985,
+          "pooled_ci90": "[-0.021012, +0.004945]",
+          "diagnostic": "합성 주입 family의 label-aware ceiling도 0/3"
+        },
+        {
+          "problem": "P1",
+          "evidence_type": "사후 상한",
+          "pass_count": 0,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "F1 ↑",
+          "threshold": "ΔF1 ≥ +0.010",
+          "pooled_delta": null,
+          "pooled_ci90": "not pooled",
+          "diagnostic": "held-label 사용 비배포 상한"
+        },
+        {
+          "problem": "P2",
+          "evidence_type": "실행 가능",
+          "pass_count": 0,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "RMSE ℃ ↓",
+          "threshold": "ΔRMSE ≤ -0.030 ℃",
+          "pooled_delta": 0.01687896857416349,
+          "pooled_ci90": "[+0.013250, +0.020464] sensitivity only",
+          "diagnostic": "strict public-time router"
+        },
+        {
+          "problem": "P2",
+          "evidence_type": "사후 상한",
+          "pass_count": 3,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "RMSE ℃ ↓",
+          "threshold": "ΔRMSE ≤ -0.030 ℃",
+          "pooled_delta": -0.12293382224594085,
+          "pooled_ci90": "[-0.148074, -0.097015] sensitivity only",
+          "diagnostic": "truth-aware block mixture; 비배포"
+        },
+        {
+          "problem": "P3",
+          "evidence_type": "실행 가능",
+          "pass_count": 0,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "RMSE m ↓",
+          "threshold": "ΔRMSE ≤ -0.030 m",
+          "pooled_delta": 0.0011914829698140839,
+          "pooled_ci90": "[-0.003743, +0.006282]",
+          "diagnostic": "past-only analog/router"
+        },
+        {
+          "problem": "P3",
+          "evidence_type": "사후 상한",
+          "pass_count": 3,
+          "required_passes": 2,
+          "total_repeats": 3,
+          "metric": "RMSE m ↓",
+          "threshold": "ΔRMSE ≤ -0.030 m",
+          "pooled_delta": -0.22885024634727524,
+          "pooled_ci90": "[-0.255841, -0.202947]",
+          "diagnostic": "expanded trajectory retrieval + continuous blend; 비배포"
+        }
+      ],
+      "early_progress": [
+        {
+          "problem": "P1",
+          "comparison": "동결 XGBoost 대 이전 LightGBM",
+          "comparator": "weighted F1 0.768804369",
+          "candidate": "weighted F1 0.813315553",
+          "delta": "+0.044511184 F1",
+          "ci90": "[+0.019929, +0.070360]",
+          "assessment": "초기 기준 모델 교체는 의미 있는 로컬 진전"
+        },
+        {
+          "problem": "P2",
+          "comparison": "extrapolated soft gate v2 대 physical projection",
+          "comparator": "RMSE 0.774417932 ℃",
+          "candidate": "RMSE 0.768367457 ℃",
+          "delta": "-0.006050475 ℃",
+          "ci90": "[-0.009975, -0.002307] nominal",
+          "assessment": "adaptive outer reuse와 exact time-safe 재현 실패로 confirmatory 아님"
+        },
+        {
+          "problem": "P3",
+          "comparison": "불변 local incumbent",
+          "comparator": "20% long-lead persistence shrink",
+          "candidate": "RMSE 0.780160920 m; 182 cases / 1,092 rows",
+          "delta": "not a new promotion",
+          "ci90": "not applicable",
+          "assessment": "현 연구 기준점 유지"
+        }
+      ],
+      "cycle_audit": [
+        {
+          "problem": "P1",
+          "metric": "micro F1",
+          "comparator": 0.8603708380408055,
+          "candidate": 0.8609416445623342,
+          "delta": 0.0005708065215287439,
+          "ci90": "[-0.001001, +0.001985]",
+          "materiality_gate": "+0.005 F1",
+          "criteria_passed": 1,
+          "criteria_total": 5,
+          "verdict": "FAIL — research only",
+          "primary_reason": "효과가 작고 CI가 0을 포함하며 개선이 한 fold에 집중"
+        },
+        {
+          "problem": "P2",
+          "metric": "fold-equal layer-weighted RMSE ℃",
+          "comparator": 1.1158878559665548,
+          "candidate": 1.042512377552349,
+          "delta": -0.07337547841420577,
+          "ci90": "[-0.101691, -0.044689] nominal",
+          "materiality_gate": "-0.012101 ℃",
+          "criteria_passed": 2,
+          "criteria_total": 5,
+          "verdict": "FAIL — research only",
+          "primary_reason": "동일 outer에서 branch를 선택했고 same-season fold가 +0.077036 ℃ 악화"
+        },
+        {
+          "problem": "P3",
+          "metric": "wave-height RMSE m",
+          "comparator": 0.7791048399763751,
+          "candidate": 0.7786608799293823,
+          "delta": -0.00044396004699287506,
+          "ci90": "[-0.002048, +0.001116]",
+          "materiality_gate": "-0.028792 m",
+          "criteria_passed": 1,
+          "criteria_total": 5,
+          "verdict": "FAIL — research only",
+          "primary_reason": "효과가 gate의 1.54%이고 CI가 0을 포함하며 노출된 surface를 재사용"
+        }
+      ],
+      "problem_state": [
+        {
+          "problem": "P1",
+          "current_reference": "동결 XGBoost: micro F1 0.860370838; weighted F1 0.813315553",
+          "what_worked": "초기 LightGBM 대비 weighted F1 +0.044511, CI90 전부 양수",
+          "what_failed": "peer·boundary·event·inpainting·typed-duration·TCN·masked pretrain·외부 IORS·합성 주입",
+          "diagnosis": "검증면 재사용과 큰 domain shift; 현재 cached rule/peer family의 상한 부족",
+          "decision": "동결 incumbent 유지; 새 라벨 구조 또는 새 관측 신호 없이는 이 family 종료"
+        },
+        {
+          "problem": "P2",
+          "current_reference": "extrapolated soft gate v2 local RMSE 0.768367457 ℃; research-only caveat",
+          "what_worked": "conservative stack는 노출된 local outer에서 Δ -0.073375 ℃의 강한 탐색 신호",
+          "what_failed": "exact time-safe 재현, parser correction, joint hydro, DINEOF, boundary reconstruction, strict router",
+          "diagnosis": "보완 신호는 존재하지만 공개 시점 정보만으로 어느 regime에 쓸지 식별하지 못함",
+          "decision": "현재 후보를 동결하되 일반화 개선으로 주장하지 않음; fresh holdout 또는 외생 proxy 전까지 종료"
+        },
+        {
+          "problem": "P3",
+          "current_reference": "공식 불변 local incumbent 0.780160920 m; 182 cases / 1,092 rows",
+          "what_worked": "truth-aware expanded oracle은 큰 상한을 보였고 외생 forcing 가설을 만들었음",
+          "what_failed": "fixed splice·hierarchical residual·causal sequence/spectral/state-space·forcing analog·KMA transfer",
+          "diagnosis": "과거 48시간만으로 storm/regime을 고르는 정보가 부족; KMA source shift가 극심",
+          "decision": "incumbent 유지; 완료 전 ERA5는 별도 봉인 one-shot으로만 판정"
+        }
+      ],
+      "p3_external_evidence": [
+        {
+          "experiment": "KMA source/local domain audit",
+          "result": "AUC 0.996779; effective source sample 55.09 / 65,536",
+          "interpretation": "직접 concat·full fine-tune·pretrain-only를 정당화하기 어려운 극심한 shift",
+          "decision": "NO-GO"
+        },
+        {
+          "experiment": "KMA source meta",
+          "result": "inner Δ +0.009352 m; 1/3 folds",
+          "interpretation": "평균적으로 악화",
+          "decision": "NO-GO"
+        },
+        {
+          "experiment": "KMA calibrated blend",
+          "result": "outer Δ -0.002529 m; CI90 [-0.008046, +0.002911]",
+          "interpretation": "작고 불확실하며 exact gate 실패",
+          "decision": "철회; 제출 금지"
+        },
+        {
+          "experiment": "ERA5 context-transfer v1",
+          "result": "미완료; 2026-08-25 15:50 KST metadata 관찰 기준 raw/yearly 178/363, partial 0, downloader active",
+          "interpretation": "286개 past-only feature, source gate 후 사전 등록 3 local windows를 한 번만 평가",
+          "decision": "PENDING — 본 보고서 성능 결론에서 제외"
+        }
+      ],
+      "timeline": [
+        {
+          "stage": 1,
+          "phase": "초기 기준선 구축",
+          "outcome": "P1 XGBoost의 유의한 local 개선과 P2·P3 동결 기준점 확보",
+          "scientific_status": "P1은 강한 초기 증거; P2·P3는 각 프로토콜 caveat 유지"
+        },
+        {
+          "stage": 2,
+          "phase": "다수의 residual·rule·sequence·inpainting 탐색",
+          "outcome": "일부 local point gain과 다수의 명확한 음성 결과",
+          "scientific_status": "검증면 반복 노출이 누적"
+        },
+        {
+          "stage": 3,
+          "phase": "검증 시스템 감사",
+          "outcome": "P1 outer 노출 ≥13회/10 families, P2 ≥18 generations, virgin local tail 부재 등을 확인",
+          "scientific_status": "작은 개선의 confirmatory 해석을 중단"
+        },
+        {
+          "stage": 4,
+          "phase": "full-improvement-cycle",
+          "outcome": "세 문제 모두 point estimate는 좋아졌으나 5개 승격 조건의 엄격한 결합은 0/3",
+          "scientific_status": "전부 research-only"
+        },
+        {
+          "stage": 5,
+          "phase": "관점 전환 3회 확인",
+          "outcome": "실행 가능 후보 0/9; P2·P3 truth-aware oracle만 3/3",
+          "scientific_status": "정보·식별 병목 가설 지지, 단 historical pseudo-test caveat"
+        },
+        {
+          "stage": 6,
+          "phase": "외생 forcing 검증",
+          "outcome": "KMA는 극심한 domain shift로 실패; ERA5는 봉인 다운로드·preflight 진행 중",
+          "scientific_status": "ERA5 결과는 아직 없음"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": 1,
+          "action": "P1·P2·P3의 현 기준점을 동결하고 같은 검증면에서의 미세 튜닝을 중단한다.",
+          "reason": "재사용된 surface에서의 작은 개선은 일반화 증거가 되지 못한다."
+        },
+        {
+          "priority": 2,
+          "action": "P3 ERA5는 봉인된 protocol 그대로 source gate와 정확히 3개 local historical window를 한 번만 실행한다.",
+          "reason": "현재 남은 유일한 새 정보 가설이며 결과 기반 재튜닝은 해석을 다시 훼손한다."
+        },
+        {
+          "priority": 3,
+          "action": "ERA5가 실패하면 P3 외생 pretraining family를 종료한다.",
+          "reason": "KMA 실패와 함께 외생 transfer 관점에 대한 두 번째 독립적인 반증이 된다."
+        },
+        {
+          "priority": 4,
+          "action": "P1·P2는 genuinely fresh holdout 또는 예측 시점에 관측 가능한 새 causal proxy가 있을 때만 재개한다.",
+          "reason": "현재 oracle gap은 용량보다 선택 정보를 요구한다."
+        },
+        {
+          "priority": 5,
+          "action": "다음 실험 전에 ledger를 원자료·seal·hash와 동기화하고 promotion rule을 다시 고정한다.",
+          "reason": "최근 P2·P3 결과가 기존 ledger에 완전하게 반영되지 않아 추적성이 약하다."
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "final_synthesis_json",
+      "label": "P1–P3 최종 종합 근거 스냅샷",
+      "path": "reports/final_goal_mode_synthesis_20260825/synthesis.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "SQL",
+        "sql": "SELECT * FROM read_json_auto('reports/final_goal_mode_synthesis_20260825/synthesis.json', format = 'auto');",
+        "description": "문제별 원 결과·검증 감사·strict confirmation을 aggregate 수준에서 교차대조해 만든 고정 스냅샷.",
+        "executed_at": "2026-08-25T15:43:03+09:00",
+        "tables_used": [
+          "reports/P1_MODEL_SELECTION_2026-08-13.md",
+          "artifacts/validation_system_audit_20260822/p1.json",
+          "artifacts/full_improvement_cycle_20260822/meaningful_improvement_audit.json",
+          "artifacts/perspective_confirmation_20260823/synthesis.json",
+          "artifacts/perspective_confirmation_20260823/validation.json",
+          "artifacts/p2_extrapolated_soft_gate_v2/result.json",
+          "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+          "reports/generated/p3_long_persistence_shrink_2026-08-17/artifact.json",
+          "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+          "configs/goals/meaningful_score_ledger_v9.json",
+          "configs/experiments/p3_era5_context_transfer_v1.json"
+        ]
+      }
+    }
+  ]
+}

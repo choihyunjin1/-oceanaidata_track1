@@ -1,0 +1,82 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r2.qa_closure_matrix.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r2",
+  "status": "IMPLEMENTED_ZERO_FIT_PENDING_NEW_INDEPENDENT_QA",
+  "prospective_design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r2_design.json",
+    "bytes": 9993,
+    "sha256": "e90a866e69d01731704db878332c121a4f42a0258e61d8489afa9344fa8264a1",
+    "frozen_before_v2r2_code_fit_materialization_or_result": true
+  },
+  "superseded_v2_independent_qa": {
+    "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2_independent_preexecution_qa_20260826.json",
+    "bytes": 11977,
+    "sha256": "eb4ab772197c723511c0b3dffaffd51e76d07fa120e131a60576b37acc68410a",
+    "verdict": "NO_GO",
+    "severity_counts": {"P0": 2, "P1": 4, "P2": 1}
+  },
+  "closures": [
+    {
+      "finding_id": "P0-01",
+      "status": "CLOSED_IN_CODE_AND_ADVERSARIAL_TEST_PENDING_NEW_INDEPENDENT_QA",
+      "root_cause": "fold/station arrays from a layer-time ordering were positionally rebound to a time-layer ordering; the legacy synthetic mismatch was 52104/78156 (66.67%).",
+      "repair": "Canonical one-to-one key merge binds fold, station, UTC-ns time, layer, observation truth, and incumbent in one frame; sorting occurs only after the merge; candidate scoring re-verifies the identical canonical key.",
+      "tests": ["test_p100_78156_row_canonical_binding_is_order_invariant_and_adversarial"],
+      "evidence": {"synthetic_rows": 78156, "legacy_mismatches_reproduced": 52104, "permutation_runs": 2, "positional_assignment_used": false}
+    },
+    {
+      "finding_id": "P0-02",
+      "status": "CLOSED_ON_ACTUAL_WINDOWS_HOST_PENDING_NEW_INDEPENDENT_QA",
+      "root_cause": "os.fsync on an os.O_RDONLY CRT descriptor is invalid on sealed Windows/Python 3.12 and failed immediately after the first result hardlink.",
+      "repair": "Regular files use CreateFileW with GENERIC_READ|GENERIC_WRITE and FlushFileBuffers; terminal publication uses a create-only hardlink only after all file verification and durability barriers.",
+      "tests": ["test_real_windows_publication_reaches_terminal_and_terminal_link_is_last_io"],
+      "evidence": {"actual_supported_platform_path": true, "synthetic_temp_namespace_only": true, "terminal_success_reached": true, "bad_file_descriptor": false}
+    },
+    {
+      "finding_id": "P1-01",
+      "status": "CLOSED_IN_FAIL_CLOSED_AUTHORIZATION_TESTS_PENDING_NEW_INDEPENDENT_QA",
+      "repair": "Authorization requires one identical QA receipt entry in independent_qa and bundle.independent_qa_report, verifies safe path, actual bytes, actual SHA-256, PASS verdict, and design+seal lineage, then parses and rechecks the report content.",
+      "tests": ["test_authorization_verifies_real_qa_receipt_and_lineage", "test_authorization_accepts_only_a_pinned_real_pass_receipt"],
+      "negative_cases": ["missing report", "wrong bytes", "wrong sha256", "wrong verdict", "wrong design lineage", "wrong seal lineage"]
+    },
+    {
+      "finding_id": "P1-02",
+      "status": "CLOSED_BY_DIRECT_FILE_IMPORT_AND_TRANSITIVE_SEAL_PENDING_NEW_INDEPENDENT_QA",
+      "repair": "The worker imports the pinned numerical file with importlib.util.spec_from_file_location and does not execute p2_restore.__init__; the seal exactly mirrors all 14 prospective transitive inputs and the runner semantically verifies the v1r7 terminal infrastructure failure.",
+      "tests": ["test_authorized_worker_loads_sealed_module_without_package_init", "test_seal_transitive_inventory_is_exact_and_fail_closed"]
+    },
+    {
+      "finding_id": "P1-03",
+      "status": "CLOSED_WITH_LITERAL_ONLY_PRE_GATE_PIN_PENDING_NEW_INDEPENDENT_QA",
+      "repair": "Pre-exact readiness carries p100 path text and pin metadata only. Safe path resolution, stat/open/read/hash/parse occur inside the one-shot loader after one durable exact RESEARCH_GO event.",
+      "tests": ["test_pre_exact_source_readiness_never_verifies_p100"],
+      "pre_gate_p100_filesystem_accesses": 0
+    },
+    {
+      "finding_id": "P1-04",
+      "status": "CLOSED_WITH_COMMIT_READY_AND_TERMINAL_LAST_PENDING_NEW_INDEPENDENT_QA",
+      "repair": "Result and manifest hardlinks, verification, file and directory barriers, materialization accounting, durable ATTEMPT_COMMIT_READY, terminal bytes, and terminal hash all precede the terminal hardlink. That hardlink is the last repository filesystem operation; no terminal journal append or verification follows.",
+      "tests": ["test_real_windows_publication_reaches_terminal_and_terminal_link_is_last_io", "test_publication_faults_fail_closed_before_terminal_success", "test_terminal_success_failure_conflict_is_rejected"],
+      "faults": ["preterminal fsync", "commit-ready append", "terminal link", "success/failure conflict"]
+    },
+    {
+      "finding_id": "P2-01",
+      "status": "CLOSED_BY_EXPLICIT_TERMINOLOGY_WITHOUT_NUMERIC_CHANGE_PENDING_NEW_INDEPENDENT_QA",
+      "repair": "The numerical module distinguishes prediction_day_start, trajectory_start, and trajectory_end; the unchanged seven-full-day embargo is checked only against trajectory_start.",
+      "tests": ["test_continuous_block_and_seven_day_source_embargo"],
+      "numeric_rule_changed": false
+    }
+  ],
+  "safety_accounting": {
+    "physical_fit_calls": 0,
+    "numerical_materializations": 0,
+    "actual_p100_path_resolution_stat_open_hash_parse": 0,
+    "official_test_sample_submission_candidate_access": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "actual_experiment_namespace_mutations": 0,
+    "synthetic_publication_tests": "temporary directories only"
+  },
+  "authorization": false,
+  "execution_instruction": "DO_NOT_EXECUTE. A new independent zero-fit preexecution QA must issue a separately pinned PASS report before any authorization can become true."
+}

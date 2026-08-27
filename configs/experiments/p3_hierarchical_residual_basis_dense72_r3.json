@@ -1,0 +1,232 @@
+{
+  "schema_version": "p3_hierarchical_residual_basis.gen5r3_dense72.r1",
+  "experiment_id": "p3_hierarchical_residual_basis_dense72_r3",
+  "created_at_kst": "2026-08-23T00:00:00+09:00",
+  "status": "PREREGISTERED_APPEND_ONLY_STATIC_ONLY_NO_FIT_NO_TEST_NO_UPLOAD",
+  "problem": "P3",
+  "comparison_mode": "STRUCTURE_MATCHED_FRESH_REFIT_PENDING_OFFICIAL_PAIRED_AB",
+  "exact_official_incumbent_comparison": false,
+  "local_numeric_curve_qualification_allowed": true,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_hierarchical_residual_basis_dense72_r3.json",
+    "output": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3",
+    "control": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3_control",
+    "pre_execution_qa": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3_control/pre_execution_qa.json",
+    "authorization": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3_control/authorization.json",
+    "attempt_lock": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3_control/attempt.lock",
+    "run_failure_receipt": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r3_control/run_failure_receipt.json"
+  },
+  "canonical_workspace_identity": {
+    "root_st_dev": 8372226647648079724,
+    "root_st_ino": 844424930439257,
+    "git_config_sha256": "8630fd27025aabe4e750d901f3766d8da9ea2a379221e7dc31bc27a857ee10e7",
+    "origin_url": "https://github.com/choihyunjin1/-oceanaidata_track1.git",
+    "personal_absolute_path_stored": false
+  },
+  "predecessor_r2": {
+    "status": "INDEPENDENT_QA_NO_GO_P0_0_P1_3_NEVER_FIT",
+    "files": {
+      "config": {
+        "path": "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json",
+        "bytes": 20646,
+        "sha256": "7e085bdac8c5460205ce7909090d59ccec3e876ad9bc50473af343bbe363c91c"
+      },
+      "target_accessor": {
+        "path": "src/p3_wave/dense72_targets_r1.py",
+        "bytes": 20070,
+        "sha256": "8ed817fc7517287a12fb502897d8b89104159b6256b554f8eb6e62ddb6744a69"
+      },
+      "model": {
+        "path": "src/p3_wave/hierarchical_residual_basis_dense72_r1.py",
+        "bytes": 22143,
+        "sha256": "e850642592d599ebfc8e48ca9e3054548be553f8d0aa22918f409d0b2797ca55"
+      },
+      "contract": {
+        "path": "src/p3_wave/hierarchical_residual_basis_dense72_contract_r1.py",
+        "bytes": 49188,
+        "sha256": "8d3228c28ea2da9e99345e9fc765976ab786da73242ca039f3451e42d0a713a7"
+      },
+      "engine": {
+        "path": "src/p3_wave/hierarchical_residual_basis_dense72_execution_r1.py",
+        "bytes": 31925,
+        "sha256": "9061827eb3c77fc17796740999aa9dd722c082638e5e9470b4c6277265826b17"
+      },
+      "runner": {
+        "path": "scripts/run_p3_hierarchical_residual_basis_dense72_r1.py",
+        "bytes": 5223,
+        "sha256": "54af59d7bbb61adbbd224e9e31d8991ebc3b3d5c5378057b14aa639893e1cce8"
+      },
+      "model_tests": {
+        "path": "tests/test_p3_hierarchical_residual_basis_dense72_r1.py",
+        "bytes": 8877,
+        "sha256": "9bede4a288068d21b8379a68705568ddf55bdf4a2c0e48b9f201fa7595fd124f"
+      },
+      "runner_tests": {
+        "path": "tests/test_p3_hierarchical_residual_basis_dense72_runner_r1.py",
+        "bytes": 7953,
+        "sha256": "5db4c47becde3ae5961cd109c22b8fc2b68cc2d17fac4fe7c1a61ef7c171f2be"
+      }
+    },
+    "qa_findings_corrected": [
+      "capability was minted before the canonical attempt lock and private curve replay remained possible",
+      "preflight decoded the full train_wave hs column while claiming process-wide target-scalar blindness",
+      "parquet output used an exists-then-to_parquet TOCTOU path instead of O_EXCL"
+    ],
+    "independent_qa_p0_count": 0,
+    "independent_qa_p1_count": 3,
+    "attempt_lock_created": false,
+    "fit_count": 0,
+    "prediction_count": 0,
+    "score_count": 0,
+    "test_prediction_count": 0,
+    "upload_count": 0
+  },
+  "scientific_structure": {
+    "predecessor_config_path": "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json",
+    "deep_equal_keys": [
+      "problem",
+      "hypothesis",
+      "comparison_mode",
+      "exact_official_incumbent_comparison",
+      "local_numeric_curve_qualification_allowed",
+      "official_promotion_allowed",
+      "candidate_or_test_prediction_allowed",
+      "upload_allowed",
+      "validation",
+      "compact_preflight",
+      "dense72_supervision",
+      "model",
+      "training",
+      "postprocess",
+      "comparator",
+      "gate",
+      "resource_estimate"
+    ],
+    "deep_sha256": "b837887406e6ed4030286409f7abeea2352d16d0c820bdddbd3a179704cc1f8e",
+    "objective_folds_prefixes_seeds_gates_changed": false
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p3_hierarchical_residual_basis_dense72_r3.json",
+    "GUARD": "src/p3_wave/hierarchical_residual_basis_dense72_contract_r3.py",
+    "ENGINE": "src/p3_wave/hierarchical_residual_basis_dense72_execution_r3.py",
+    "RUNNER": "scripts/run_p3_hierarchical_residual_basis_dense72_r3.py",
+    "TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_r3.py",
+    "RUNNER_TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_runner_r3.py",
+    "R2_CONFIG": "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json",
+    "R2_TARGET_ACCESSOR": "src/p3_wave/dense72_targets_r1.py",
+    "R2_MODEL": "src/p3_wave/hierarchical_residual_basis_dense72_r1.py",
+    "R2_GUARD": "src/p3_wave/hierarchical_residual_basis_dense72_contract_r1.py",
+    "R2_ENGINE": "src/p3_wave/hierarchical_residual_basis_dense72_execution_r1.py",
+    "R2_RUNNER": "scripts/run_p3_hierarchical_residual_basis_dense72_r1.py",
+    "R2_MODEL_TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_r1.py",
+    "R2_RUNNER_TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_runner_r1.py"
+  },
+  "target_free_split": {
+    "metadata_path_in_predecessor_inputs": "gen4/validation_keys.parquet",
+    "metadata_sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+    "metadata_bytes": 4147,
+    "metadata_rows": 181,
+    "canonical_rows_csv_sha256": "c46beffcc763f4c622411e51b888e35d7bd9bcc728751a79c824ef1b97e2a27a",
+    "historical_lineage": "The pinned validation anchor and episode IDs were originally derived before r3 from the observed train-wave hs>=1.5 storm definition.",
+    "historical_label_derived": true,
+    "r3_recomputes_episode_or_split_from_hs": false,
+    "r3_preflight_train_wave_hs_float_decodes": 0,
+    "folds": {
+      "2024_h2_storm": {
+        "validation_count": 49,
+        "validation_ids_sha256": "058089fedd65e0c73e546c98265b27f3f8f8bdde37b1c520cab8f7a2ed8d2166",
+        "station_episode_rows_sha256": "03d9f640b6a61a2ad3c5ae7febaa394f0b583d64b3870432e5e76d21f71c7623",
+        "train_count": 7912,
+        "train_ids_sha256": "4f4f6b96b860902dca43fdffd42f341297960ef86550c79ebd85fd452e4fce82"
+      },
+      "winter_transition": {
+        "validation_count": 79,
+        "validation_ids_sha256": "86dac73ae8f4b70e7e47596863a7ff83ac1dca673c8243dd2a4dca5fe1f096b8",
+        "station_episode_rows_sha256": "8f6371688567aaf331f745a86b7ade4c552c4ab9ce05f0e573ded71d63f31251",
+        "train_count": 11754,
+        "train_ids_sha256": "ea2f83139e9d40516e1bcef41c69a634b21d0a4260a3b0415c7a8f1f8afab47a"
+      },
+      "2025_h1": {
+        "validation_count": 53,
+        "validation_ids_sha256": "6616515fa5f66ee1ce410cff76d54c5fd4a08d5287b34563c9a3a97f083f1aee",
+        "station_episode_rows_sha256": "40f74907d33505b570982026a7e8d00edc51bc45c3b4f27796ee042d08fe029f",
+        "train_count": 20899,
+        "train_ids_sha256": "587890c16f5578c80d41fadcabad16ffd07eea3b92bececd6a86683547f8ea7d"
+      }
+    },
+    "historical_same_episode_train_removals": {
+      "2024_h2_storm": 0,
+      "winter_transition": 0,
+      "2025_h1": 0
+    }
+  },
+  "correction_contract": {
+    "attempt_lock_created_and_deep_verified_before_capability_mint": true,
+    "capability_binds_attempt_lock_sha256": true,
+    "capability_binds_canonical_output_stage": true,
+    "capability_binds_operational_snapshot_canonical_json_and_sha256": true,
+    "full_predecessor_transitive_dependency_closure_pinned": true,
+    "direct_engine_requires_live_locked_phase": true,
+    "direct_private_curve_requires_single_use_curve_phase": true,
+    "capability_replay_allowed": false,
+    "preflight_full_train_wave_hs_float_decode_allowed": false,
+    "cell_training_future_hs_decode_mode": "selective_train_ids_only",
+    "cell_training_current_hs_decode_mode": "selective_train_ids_only",
+    "unreleased_validation_future_hs_float_decodes": 0,
+    "unreleased_validation_current_hs_float_decodes_before_raw_fold_commitment": 0,
+    "raw_delta_fold_commitment_precedes_validation_current_hs_decode": true,
+    "disclosed_input_cache_current_hs_allowed_for_model_features": true,
+    "parquet_serialization": "BytesIO_before_open",
+    "parquet_write": "os.open_O_EXCL_O_BINARY_full_write_loop_fsync",
+    "full_preflight_poison_test_required": true,
+    "duplicate_and_partial_write_tests_required": true
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "static_preflight_before_qa_authorization_or_lock": true,
+    "actual_curve_requires_independent_static_qa": true,
+    "actual_curve_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_inside_attempt_lock_creation": true,
+    "attempt_lock_before_capability": true,
+    "engine_imported_after_attempt_lock_and_capability": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "candidate_or_test_prediction_allowed": false,
+    "full_fit_allowed_in_current_stage": false,
+    "frozen_or_submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p3_hierarchical_residual_basis.gen5r3_dense72.pre_execution_qa.r1",
+    "decision": "GO_AUTHORIZE_P3_GEN5R3_DENSE72_R1",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_all_implementation_roles": true,
+    "must_pin_static_preflight_sha256": true,
+    "must_pin_operational_snapshot_sha256": true
+  },
+  "authorization_contract": {
+    "schema_version": "p3_hierarchical_residual_basis.gen5r3_dense72.authorization.r1",
+    "authorization_phrase_prefix": "AUTHORIZE_P3_GEN5R3_DENSE72_R1:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "curve_execution_authorized": true,
+    "full_fit_or_candidate_authorized": false,
+    "test_prediction_authorized": false,
+    "upload_authorized": false
+  },
+  "static_counters": {
+    "qa_receipts": 0,
+    "execution_authorizations": 0,
+    "attempt_locks": 0,
+    "model_fits": 0,
+    "predictions": 0,
+    "scores": 0,
+    "test_predictions": 0,
+    "uploads": 0
+  }
+}

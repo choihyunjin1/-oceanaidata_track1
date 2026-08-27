@@ -1,0 +1,183 @@
+{
+  "schema_version": "p3.matched_budget_local_compare.v1",
+  "experiment_id": "p3_matched_budget_local_compare_20260825_v1",
+  "status": "PREREGISTERED_BEFORE_AGGREGATE_RESCORING",
+  "common_protocol": {
+    "path": "artifacts/matched_budget_local_compare_20260825/common_protocol.json",
+    "sha256": "a92ba760a764d8f6759fa5ad281efe35139ddbc7f956654c76c7143fe573e2c8"
+  },
+  "output_dir": "artifacts/p3_matched_budget_local_compare_20260825_v1",
+  "data_boundary": {
+    "sealed_training_oof_only": true,
+    "official_public_score_selection_count": 0,
+    "official_evaluation_value_reads": 0,
+    "submission_value_reads": 0,
+    "submission_files_generated": 0,
+    "era5_path_or_process_accesses": 0,
+    "new_model_fits": 0
+  },
+  "surface": {
+    "fixed_windows": [
+      "2024_h2_storm",
+      "winter_transition",
+      "2025_h1"
+    ],
+    "expected_cases": 181,
+    "expected_rows": 1086,
+    "case_keys": [
+      "fold",
+      "station",
+      "anchor_id"
+    ],
+    "row_keys": [
+      "fold",
+      "station",
+      "anchor_id",
+      "lead_h"
+    ],
+    "leads_h": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "additional_windows": [],
+    "additional_window_reason": "No untouched, demonstrably nonoverlapping sealed historical support remains outside the three preregistered windows; adding windows after prior results would violate split freeze and risk 78-hour episode overlap."
+  },
+  "coefficient_family": {
+    "model_source": "canonical corrected repeated-forward CatBoost routed OOF",
+    "base_prediction": "routed_prediction",
+    "persistence_prediction": "persistence",
+    "active_leads_h": [
+      12,
+      18,
+      24
+    ],
+    "settings": [
+      {
+        "id": "current_shrink_20pct",
+        "persistence_weight": 0.2,
+        "role": "incumbent_default"
+      },
+      {
+        "id": "round_b_shrink_22p5pct",
+        "persistence_weight": 0.225,
+        "role": "fixed_round_b"
+      },
+      {
+        "id": "round_a_shrink_25pct",
+        "persistence_weight": 0.25,
+        "role": "fixed_round_a"
+      }
+    ],
+    "settings_per_family": 3,
+    "post_score_grid_changes": 0
+  },
+  "incumbent_structure_baseline": {
+    "id": "incumbent_router_unshrunk",
+    "prediction": "routed_prediction",
+    "role": "diagnostic_model_structure_before_long_lead_shrink"
+  },
+  "structural_families": [
+    {
+      "id": "causal_forcing_sequence",
+      "hypothesis": "lead_coupled_causal_48h_sequence_forcing_encoder",
+      "oof_path": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1/oof/learning_curve_oof.parquet",
+      "oof_sha256": "3b5534130b3427611ac085ec98ec19bdf49c28938bc6bb04f8d5df5f767884c8",
+      "metrics_path": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1/metrics.json",
+      "metrics_sha256": "adab38a1244b532e4e47cb4308f6a8d8c2a61cb0495b716db171f224537eba21",
+      "prefix_fraction": 1.0,
+      "seed_count_each_side": 3,
+      "fit_cells_each_side": 45,
+      "fixed_postprocess": "clip_0_30_then_long_lead_shrink_20pct"
+    },
+    {
+      "id": "causal_spectral_kernel",
+      "hypothesis": "causal_multiresolution_spectral_rff_kernel",
+      "oof_path": "artifacts/p3_causal_spectral_kernel_20260823_v1/oof/learning_curve_oof.parquet",
+      "oof_sha256": "4bad8cf5ded05f47765d9e97542340eaa55725a6c79d4982fe4e1f294da1a09d",
+      "metrics_path": "artifacts/p3_causal_spectral_kernel_20260823_v1/metrics.json",
+      "metrics_sha256": "dfe938d28e89e2d41c65f86230f06f9221083b0fec759c9c9b556293082ec9c5",
+      "prefix_fraction": 1.0,
+      "seed_count_each_side": 3,
+      "fit_cells_each_side": 45,
+      "fixed_postprocess": "clip_0_30_then_long_lead_shrink_20pct"
+    },
+    {
+      "id": "hierarchical_residual_basis_dense72",
+      "hypothesis": "hierarchical_residual_basis_nhits_dense72_masked_supervision",
+      "oof_path": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/oof/learning_curve_oof.parquet",
+      "oof_sha256": "594f53316a308150d022523de46a555483086c0c146f67425f40fc1600f0d619",
+      "metrics_path": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/metrics.json",
+      "metrics_sha256": "5a6209de2f6e258a64479844ad3c2ef947d29e9dabdc9b536f8480493cf49969",
+      "prefix_fraction": 1.0,
+      "seed_count_each_side": 3,
+      "fit_cells_each_side": 45,
+      "fixed_postprocess": "clip_0_30_then_long_lead_shrink_20pct"
+    }
+  ],
+  "excluded_existing_candidates": [
+    {
+      "id": "target_mix_density_reweighted_catboost",
+      "reason": "Label-free ESS gate is already NO_GO; override is forbidden. Only its fixed 22.5 percent fallback coefficient is represented in the coefficient family.",
+      "override_allowed": false
+    },
+    {
+      "id": "station_stable_energy_state_space",
+      "reason": "One deterministic fit per fold-prefix was replicated across three seed metric slots, so challenger fit budget is not the exact 45-cell three-seed budget."
+    },
+    {
+      "id": "gen6_residual_calibrator",
+      "reason": "Adaptive inner-gate identity fallback and 11 observed fits do not match the common fixed three-seed fit budget or isolate a model-family structure effect."
+    }
+  ],
+  "input_files": {
+    "canonical_oof": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+      "sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e"
+    },
+    "canonical_metrics": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/metrics.json",
+      "sha256": "2c797e6169b7af27d343edb31fae5acfd4ce704149c63b732480fe33692c22e6"
+    },
+    "round_a_oof_reference": {
+      "path": "artifacts/p3_corrected_fixed_long_shrink_v4/oof.parquet",
+      "sha256": "8a26d13bd1f4075145e83437e7956a679570e11f3ed54fccfbe039aee7f2a398"
+    },
+    "round_a_metrics_reference": {
+      "path": "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+      "sha256": "07d5b2fa1c593e0cecccd568d6238d124f06bb36f6400e3d6eb90f5d8c1db603"
+    },
+    "density_gate_metrics": {
+      "path": "artifacts/p3_target_mix_density_reweighted_catboost_v1/metrics.json",
+      "sha256": "80d5c68483e78080ff5366027465ea0019273cbd6e8ddca3c7392785c1280f29"
+    },
+    "round_b_fallback_metrics": {
+      "path": "artifacts/p3_target_mix_density_reweighted_catboost_v1/fallback_local_metrics.json",
+      "sha256": "41b7e38be04862968a6a0e5e0f5d4f9fcafce011736c1c394fcb4d3127fdd649"
+    }
+  },
+  "evaluation": {
+    "primary_metric": "RMSE_m",
+    "required_slices": [
+      "pooled",
+      "fold",
+      "station",
+      "lead"
+    ],
+    "bootstrap_unit": "complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260825,
+    "bootstrap_ci": 0.9,
+    "residual_correlation": "Pearson",
+    "candidate_selection_after_score": false,
+    "promotion_authorized": false
+  },
+  "runtime": {
+    "model_training": false,
+    "aggregation_cpu_thread_cap": 2,
+    "reason": "Read-only aggregation is intentionally lightweight so the separately running ERA5 preparation process is not starved."
+  }
+}

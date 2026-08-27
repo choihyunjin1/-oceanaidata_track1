@@ -1,0 +1,86 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_recipe.v5",
+  "experiment_id": "p2_authoritative_nested_surrogate_recipe_20260825_v5",
+  "created_at_kst": "2026-08-25T23:59:30+09:00",
+  "status": "SEALED_LAUNCH_BINDING_REPAIR_NO_FIT_AUTHORIZATION",
+  "problem": "P2",
+  "research_only": true,
+  "training_authorized": false,
+  "submission_generation_authorized": false,
+  "base_recipe": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v4.json",
+    "sha256": "6a7cb01e740f8af38db19af50c0603277e70a354921d84a903da9b4a2a71eefc"
+  },
+  "supersedes": {
+    "execution_contract": "p2_authoritative_nested_surrogate_execution_20260825_v4",
+    "status": "SUPERSEDES_V4_LAUNCH_BINDING_ONLY_NEVER_START_OR_RESUME_V4",
+    "reason": "independent QA found that v4 did not require an exact authorization schema_version and its exact command depended on an unset P2_DATA_DIR environment variable",
+    "v4_science_and_resume_engine_status": "PASS_BYTE_PINNED_AND_INHERITED",
+    "v4_actual_model_fits": 0,
+    "v4_actual_directory_created": false,
+    "v4_source_sha256": "cfe48c1fd4566feca620724cf4616ec0cbdf2bf2d8ae7a5896f9038d69638967",
+    "v4_test_sha256": "5b4825f4a4203185131b35fbafd61852647a9c1794810efda5555f6223ca3a02",
+    "v4_preexecution_seal_sha256": "10bd64fb32ec6706a1d12dce473a91eb959b6549da12dcb1dc6aaa3d32c63c3d",
+    "cross_v1_v2_v3_v4_job_or_cell_reuse_allowed": false
+  },
+  "authoritative_nested_surrogate_recipe": {
+    "identity": "P2_AUTHORITATIVE_NESTED_CAUSAL_SURROGATE_V5_LAUNCH_BOUND",
+    "claim": "v4-byte-pinned science and crash-resume engine with exact v5 authorization schema and literal approved observations directory binding; never the exact official incumbent",
+    "base_architecture": {
+      "architecture_or_feature_role_changes_allowed": 0,
+      "revision_from_v4": "none"
+    },
+    "operational_launch_contract_v5": {
+      "required_authorization_schema_version": "p2_authoritative_nested_surrogate_execution_authorization.v5",
+      "resolved_data_directory": "C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore",
+      "exact_command_contains_literal_data_dir": true,
+      "environment_data_dir_dependency": false,
+      "v4_resume_engine_byte_pinned": true,
+      "same_exact_command_for_clean_start_and_resume": true,
+      "initial_attempts": 1,
+      "maximum_resume_attempts_after_initial": 2,
+      "maximum_total_attempts": 3,
+      "terminal_result_rerun_allowed": false,
+      "result_based_tuning_allowed": false,
+      "v1_v2_v3_v4_job_or_cell_reuse_allowed": false
+    }
+  },
+  "immutability_receipt": {
+    "supervised_common_ledger_changed": false,
+    "split_population_changed": false,
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "model_hyperparameters_changed": false,
+    "meta_refit_changed": false,
+    "postprocess_changed": false,
+    "family_views_changed": false,
+    "metrics_changed": false,
+    "outer_evaluation_population_changed": false,
+    "v4_resume_engine_changed": false,
+    "only_authorization_schema_and_resolved_data_dir_binding_changed": true
+  },
+  "execution_gates": {
+    "semantic_preflight_may_run": true,
+    "new_training_may_start": false,
+    "separate_exact_command_authorization_required": true,
+    "required_authorization_schema_version": "p2_authoritative_nested_surrogate_execution_authorization.v5",
+    "same_command_resume_may_be_authorized_by_immutable_execution_start": true,
+    "result_based_rerun_or_tuning_allowed": false
+  },
+  "resource_and_external_action_contract": {
+    "new_model_fits_during_readiness": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_era5_process_mutations": 0
+  },
+  "output": {
+    "directory": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v5",
+    "append_only": true,
+    "prediction_files_written": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "p3_era5_context_transfer_terminal.v1",
+  "created_at_kst": "2026-08-28T00:02:00+09:00",
+  "status": "TERMINAL_DEPENDENCY_FAILURE_AFTER_ONE_SHOT_LOCK",
+  "download": {
+    "raw_complete": 363,
+    "raw_target": 363,
+    "partial_count": 0,
+    "derived_complete": 363,
+    "combined_rows": 262917,
+    "combined_sha256": "5106c4ee35c7d434dcea13d1b436691eea9b05ef9f8c59fdd900d4c19bad9ac1",
+    "canonical_manifest_sha256": "72c1b49791a1c73be34f8cf9c78430e074354dfad5a83f0d891edf46e20752b2"
+  },
+  "preflight": {
+    "passed": true,
+    "common_feature_count": 286,
+    "source_quarantine_ready": true,
+    "source_preflight_accepted": true,
+    "source_preflight_problem": "P3",
+    "source_preflight_purpose": "pretraining",
+    "local_validation_cases": 181,
+    "full_prefix_rows": 1086
+  },
+  "execution": {
+    "execute_invocations": 1,
+    "attempt_lock_sha256": "da35167d20ea2d2aa62a13bb885b9966b4c655399fac22495eeb74c293e811f7",
+    "failed_import": "catboost.CatBoostRegressor",
+    "exception": "ModuleNotFoundError: No module named 'catboost'",
+    "model_fits_completed": 0,
+    "source_gate_completed": false,
+    "local_windows_completed": 0,
+    "blind_prediction_seal_created": false,
+    "result_json_created": false,
+    "rerun_performed": false
+  },
+  "root_cause": "The scientific runner was launched with the ERA5 download-only environment, whose requirements intentionally exclude the competition ML stack.",
+  "required_future_guard": "Before creating a fresh preregistered scientific attempt, verify the exact interpreter imports and versions of catboost, sklearn, numpy, pandas and pyarrow before consuming the attempt lock.",
+  "official_test_sample_submission_accessed": false
+}

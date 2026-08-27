@@ -1,0 +1,123 @@
+{
+  "schema_version": "p2_corrected_repeated_forward.v1",
+  "experiment_id": "p2_corrected_repeated_forward_v1",
+  "created_at_kst": "2026-08-22T18:20:00+09:00",
+  "status": "INVALID_ABORTED_QA_P1_DO_NOT_RUN",
+  "invalidated_reason": "Canonical config/path equality and an exclusive one-shot attempt lock were absent. The generation is permanently closed and must not produce a candidate.",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_research": true,
+  "fresh_holdout_claimed": false,
+  "purpose": "Correct the denominator, masking, and forward-validation defects identified in the 2026-08-22 P2 validation-system audit without opening a new hyperparameter search.",
+  "source_contract": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886"
+  },
+  "candidate": {
+    "family": "fixed_public_layer_lightgbm_residual_blend50_with_physical_projection",
+    "base_arm": "existing V0 public-layer residual LightGBM",
+    "lean_arm": "existing public-temperature 6h and M2 dynamics residual LightGBM",
+    "blend_weights": {
+      "base": 0.5,
+      "lean": 0.5
+    },
+    "postprocess": "existing label-blind layer-1/layer-5 envelope clip plus three-layer unit-weight isotonic projection",
+    "target_layer_inputs": [],
+    "public_input_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "model_parameters": {
+      "objective": "regression_l2",
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "deterministic": true,
+      "force_row_wise": true
+    },
+    "hyperparameter_searches": 0,
+    "checkpoint_selection": "none_fixed_400_rounds",
+    "seed": 20260822
+  },
+  "masking": {
+    "scope": "all timestamps used for feature construction",
+    "jointly_null_columns": ["temp", "psal"],
+    "jointly_null_layers": [2, 3, 4],
+    "labels": "target temperature is retained in a separate in-memory label population and never reintroduced into feature context",
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_non_null_allowed": false
+  },
+  "validation": {
+    "timezone": "Asia/Seoul",
+    "embargo_days": 7,
+    "outer_predictions_read_once_per_run": true,
+    "inner_role": "training-side diagnostic only; it selects no epoch, feature, weight, factor, threshold, or postprocess",
+    "primary_metric": "sqrt(mean over outer folds of official-layer-weighted MSE)",
+    "official_layer_counts": {
+      "2": 8713,
+      "3": 8712,
+      "4": 8636
+    },
+    "minimum_inner_target_coverage": 0.96,
+    "minimum_outer_target_coverage": 0.96,
+    "preflight_amendment": {
+      "made_before_model_fit": true,
+      "model_fits_before_amendment": 0,
+      "reason": "Exact official-like eligibility includes finite public interpolation support in addition to finite target temperature. The initial 0.975 raw-target assumption rejected otherwise full 61/62-day windows at 0.9714 and 0.9634 coverage. A fixed 0.96 floor retains natural gaps while still excluding the materially truncated 0.87, 0.69, 0.15, and 0.64 windows.",
+      "performance_metrics_or_prediction_values_used": false
+    },
+    "bootstrap": {
+      "unit": "KST calendar day within fold",
+      "replicates": 2000,
+      "interval": 0.9,
+      "seed": 20260822
+    },
+    "folds": [
+      {
+        "name": "outer_2024_sep_oct",
+        "outer": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+        "inner": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+        "same_season_priority": true
+      },
+      {
+        "name": "outer_2025_may_jun",
+        "outer": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+        "inner": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+        "same_season_priority": false
+      },
+      {
+        "name": "outer_2025_jul_aug",
+        "outer": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+        "inner": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+        "same_season_priority": false
+      }
+    ],
+    "excluded_primary_windows": {
+      "2024_may_jun": "official-like eligible target coverage below the fixed 0.96 floor",
+      "2024_nov_dec": "truncated target coverage",
+      "2025_mar_apr": "truncated target coverage",
+      "2025_nov_dec": "truncated target coverage",
+      "2025_sep_oct": "hidden target window"
+    }
+  },
+  "final_training": {
+    "population": "all finite legally distributed target temperatures outside the hidden null window with finite public-layer interpolation support",
+    "uses_post_hidden_observed_labels": true,
+    "interpretation": "legal offline full-train reconstruction; forward OOF remains a conservative research diagnostic and is not an absolute hidden calibration"
+  },
+  "output_contract": {
+    "append_only": true,
+    "default_directory": "artifacts/p2_corrected_repeated_forward_v1",
+    "candidate_relative_path": "candidate/P2_CORRECTED_REPEATED_FORWARD_V1.csv",
+    "current_frozen_submission_mutation_allowed": false,
+    "test_rows": 26061,
+    "columns": ["station", "layer", "time", "temp"]
+  }
+}

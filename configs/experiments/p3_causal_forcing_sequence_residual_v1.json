@@ -1,0 +1,189 @@
+{
+  "experiment_id": "p3_causal_forcing_sequence_residual_v1",
+  "status": "PREREGISTERED_APPEND_ONLY_ONE_SHOT_RESEARCH_NOT_UPLOAD_AUTHORIZATION",
+  "problem": "P3",
+  "target": "significant_wave_height_hs",
+  "metric": "pooled_row_RMSE_m",
+  "canonical_paths": {
+    "config": "configs/experiments/p3_causal_forcing_sequence_residual_v1.json",
+    "goal_contract": "configs/goals/meaningful_score_maximization_v2.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "gen1_artifact": "artifacts/p3_meaningful_learning_curve_20260823_v1",
+    "output": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1",
+    "attempt_lock": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1.ATTEMPT_LOCK.json",
+    "execution_claim": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1.EXECUTION_CLAIM.json"
+  },
+  "implementation_sha256": {
+    "gen1_runner": "02b9abfa4da33d4926303d3f600225b490f42b9f52a39c3ee776cd82d3275b21",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "learning_curve_module": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "sequence_module": "81a4cf5f6a634bde955e479bfe6d0b0cf34d8954678896076b96d5c2b10a36a2",
+    "revin_preparation_module": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3",
+    "causal_forcing_analog_module": "9543ae4e2aa9551c8ef2a3e4ddeb0eb0cc8b83feaaee6094b1e9ea809ddedcfe",
+    "causal_forcing_sequence_module": "88713d6c804219960c309bc064580a78116e849e1a01858ceb2f8d0a8cfac0d5",
+    "models_module": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "persistence_shrink_module": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "one_shot_guard_module": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5",
+    "goal_contract": "8fc6b03aba3b88b07b954030759f351644513490f7a9c030b7d7f1b950023549",
+    "goal_evaluator": "69b9dc1168a47e0d1b1a50e5590c3d2f0966f2885f0f92730d4c38c4ea92800c"
+  },
+  "reference_evidence_sha256": {
+    "gen1_metrics": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1_learning_curve_oof": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1_manifest": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1_independent_qa": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98"
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "storm_threshold_hs_m": 1.5,
+    "raw_wave_episode_contiguous_minutes": 20,
+    "episode_reuse_within_validation": false,
+    "same_episode_train_validation": false,
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_rule": "earliest_global_chronological_prefix_of_each_already_safe_outer_train_set",
+    "bootstrap_unit": "whole_complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260823
+  },
+  "hypotheses": [
+    {
+      "id": "lead_coupled_causal_48h_sequence_forcing_encoder",
+      "structure": "two-stream causal depthwise TCN with causal six-signal forcing state, compact train-only context branch, horizon attention, and unidirectional lead decoder",
+      "selection_or_weight_search": false,
+      "prior_exposure_note": "preregistered after sealed Gen1 structural failure; this generation changes representation rather than alpha, shrink, or ensemble weights"
+    }
+  ],
+  "features": {
+    "raw_columns": ["hs", "tp", "hmax", "wvdir", "wspd", "gust", "wdir", "airt", "relh", "caph"],
+    "raw_context_rows_10m": 289,
+    "wave_native_rows_20m": 145,
+    "compact_feature_count": 591,
+    "compact_scaler": "prefix_train_only_componentwise_median_iqr_with_missing_mask",
+    "forcing_window_steps_10m": 37,
+    "forcing_signals": [
+      "wind_input_proxy_mean_6h",
+      "wind_input_proxy_slope_6h",
+      "wind_wave_alignment_mean_6h",
+      "gust_excess_mean_6h",
+      "caph_slope_6h",
+      "tp_slope_6h"
+    ],
+    "forcing_missingness": "six_values_plus_six_finite_masks",
+    "wave_to_10m_alignment": "native_20m_observations_in_past_only_rolling_windows_no_interpolation"
+  },
+  "model": {
+    "class": "LeadCoupledCausalForcingEncoder",
+    "d_model": 64,
+    "wave_input_channels": 10,
+    "atmos_forcing_input_channels": 26,
+    "wave_tcn_dilations": [1, 2, 4, 8, 16, 32, 64],
+    "atmos_tcn_dilations": [1, 2, 4, 8, 16, 32, 64, 128],
+    "causal_kernel_size": 3,
+    "group_norm_groups": 8,
+    "dropout": 0.1,
+    "compact_input_channels": 1182,
+    "compact_hidden": 128,
+    "attention_heads": 4,
+    "lead_decoder": "unidirectional_GRU_64",
+    "official_leads_h": [3, 6, 9, 12, 18, 24],
+    "seed_replicates": [20260816, 20260817, 20260818],
+    "seed_reducer": "arithmetic_mean_prediction_within_fold_prefix",
+    "full_train_seed_replicates": [20260816, 20260817, 20260818],
+    "residual_target": "target_hs_minus_current_hs",
+    "case_weight": "exp(-0.45*max(current_hs-1.5,0))_mean_normalized",
+    "prediction_clip_m": [0.0, 30.0]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0002,
+    "batch_size": 512,
+    "fixed_epochs": 8,
+    "precision": "bf16_amp_on_cuda",
+    "gradient_clip_norm": 1.0,
+    "num_workers": 0,
+    "fixed_epoch_permutation": "seed_plus_epoch",
+    "warm_start_between_cells": false,
+    "early_stopping": false,
+    "checkpoint_or_epoch_selection": false,
+    "auxiliary_loss": false,
+    "hyperparameter_search": false,
+    "expected_fit_cells": 45,
+    "expected_optimizer_steps": 6840
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_gen1_comparator": true,
+    "new_router_or_blend": false
+  },
+  "comparator": {
+    "source": "sealed Gen1 fresh-refit exact-current structure at every prefix and seed, aggregated by prediction mean",
+    "source_oof_path": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "source_oof_sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_historical_frozen_oof": false,
+    "fail_closed_surrogate_only_if_false": true
+  },
+  "gate": {
+    "baseline": "same_prefix_same_fold_sealed_gen1_exact_current_structure_prediction_mean",
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "all_split_leakage_and_reproducibility_checks": true,
+    "on_pass": "full_train_three_seed_mean_then_same_case_only_200_test_inference_and_byte_reproduction",
+    "on_no_pass": "seal_results_stop_before_test_reads"
+  },
+  "expected_sha256": {
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "source/test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "source/test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "source/sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "source/baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "compact_cache/manifest.json": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+    "compact_cache/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "compact_cache/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "sequence_cache/manifest.json": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+    "sequence_cache/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "sequence_cache/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "gen1/metrics.json": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1/learning_curve_oof.parquet": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1/manifest.json": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1/independent_qa.json": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "frozen/current_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "frozen/current_manifest.json": "886637d3f7c92437a6ac40f0aee496d67b44f5913acf75a1502abb566e3c62fd",
+    "current/ready_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1",
+    "candidate_relative_path": "candidate/P3_CAUSAL_FORCING_SEQUENCE_V1.csv",
+    "reproduced_candidate_relative_path": "candidate/P3_CAUSAL_FORCING_SEQUENCE_V1_REPRODUCED.csv",
+    "uploaded": false
+  },
+  "prohibitions": {
+    "hyperparameter_search": true,
+    "shrink_alpha_or_weight_micro_tuning": true,
+    "absolute_test_timestamp_recovery": true,
+    "test_target_or_hidden_label_access": true,
+    "current_or_frozen_submission_mutation": true,
+    "submission_upload": true,
+    "config_copy_or_arbitrary_output": true,
+    "rerun_after_attempt_lock": true,
+    "candidate_path_traversal_or_overwrite": true
+  }
+}

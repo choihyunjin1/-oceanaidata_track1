@@ -1,0 +1,62 @@
+{
+  "experiment_id": "p2_public_state_soft_gate_v1",
+  "status": "authorized_local_full_test",
+  "research_only": true,
+  "upload_allowed": false,
+  "objective": "pooled row-level RMSE on the exact 69,850 target-proxy OOF rows",
+  "contributors": [
+    "router_400",
+    "depth_query_bitcn",
+    "lsti_style",
+    "timemixerpp_style",
+    "moment_units_scratch"
+  ],
+  "public_state_features": [
+    "abs_t1_t5",
+    "public_temp_range",
+    "public_psal_range",
+    "contrast_delta_past_24h",
+    "temp_range_delta_past_24h",
+    "contrast_center_change_24h",
+    "temp_range_center_change_24h",
+    "m2_amplitude_mean",
+    "m2_amplitude_spread",
+    "m2_phase_coherence"
+  ],
+  "feature_contract": {
+    "source_layers": [1, 5, 6, 7, 8],
+    "target_layer_temp_or_psal": false,
+    "external_values": false,
+    "offline_public_context": true,
+    "robust_transform": "fold-train median/IQR, clip [-10,10], zero imputation plus missing masks"
+  },
+  "gate": {
+    "form": "separate target-layer linear softmax over frozen contributor predictions",
+    "initialization": "fold-train nonnegative sum-to-one least-squares weights",
+    "regularization_grid": [0.0, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0],
+    "optimizer": "L-BFGS-B with analytic gradient",
+    "max_iterations": 1000
+  },
+  "validation": {
+    "outer_blocks": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "selection": "for each outer block, swap-train the other two blocks and minimize pooled inner RMSE",
+    "outer_labels_choose_parameters": false,
+    "final_regularization": "numeric median of the three inner-selected values",
+    "reference": "frozen deep-stack leave-one-block-out prediction"
+  },
+  "frozen_inputs": {
+    "router_oof_sha256": "50ab1d2931bd0eb3853fd421c9326cb422e3cd3b3ac265845bb7e2932aae8e2a",
+    "depth_query_oof_sha256": "190e43b4c36064741b0967d28a3760b540f74362af058a4119783ab9661eed52",
+    "moment_oof_sha256": "1393389dbadc94a345a0943f1dc479c6806c755e76a0ec94732d9fdb0d3852ab",
+    "lsti_oof_sha256": "f5801397102fb124c93458f61ab94ab0779050e1be257bfaa8b2644ca56690b5",
+    "timemixer_oof_sha256": "98d02a2b887d234e8158943723cb3308a8ded6e8becbd454a6f2d94f4bba04af",
+    "deep_stacked_oof_sha256": "76f52261259112d03289226c23712e27a17a17f9320c8565c96a662c1093be8d",
+    "deep_result_sha256": "6e8324908234f3071078e4846393de30776a422e6b6cea6d62a5f1953be2c8ac",
+    "deep_submission_sha256": "ea5cedbd08817da4da00274e1078689f09a1d9c65d2a464f5f5f5ba9ffcc82e8"
+  },
+  "outputs": {
+    "directory": "artifacts/p2_public_state_soft_gate_v1",
+    "submission": "submissions/p2/P2_PUBLIC_STATE_SOFT_GATE_V1.csv",
+    "upload": false
+  }
+}

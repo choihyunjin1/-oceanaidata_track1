@@ -1,0 +1,161 @@
+{
+  "schema_version": "ocean_ai.final_goal_mode_synthesis.final_qa.v2",
+  "generated_at_kst": "2026-08-26T01:16:23+09:00",
+  "status": "PASS_FINAL_SYNTHESIS_V2",
+  "meaning": "The execution defect is resolved and the evidence package is internally consistent. PASS does not mean that the registered P2 challengers improved; the scientific decision is NO_PROMOTION.",
+  "problem_states": {
+    "P1": {
+      "state": "OPERATIONALLY_COMPLETE",
+      "terminal_status": "PASS_TERMINAL_FROZEN_DEPLOYMENT_FIT",
+      "decision": "FULL_DEPLOYMENT_FIT_FROZEN",
+      "train_rows": 776706,
+      "positive_rows": 32126,
+      "features_per_model": 80,
+      "real_model_fits": 3,
+      "bundle_sha256": "fdcf0d96aa88603841778a82546e404d15bf5c479443db453fa3751cee5c0052"
+    },
+    "P2": {
+      "state": "SCIENTIFICALLY_DECIDED_NO_PROMOTION",
+      "terminal_status": "TERMINAL_COMPLETE_NO_RERUN",
+      "result_status": "COMPLETE_LOCAL_AUTHORITATIVE_SURROGATE_V5_NO_PROMOTION",
+      "independent_qa_status": "PASS_TERMINAL_V5_RECURSIVE_GRAPH_AND_SCORE_QA",
+      "execution": {
+        "completed_component_jobs": 900,
+        "expected_component_jobs": 900,
+        "completed_seeded_cells": 45,
+        "expected_seeded_cells": 45,
+        "initial_attempts": 1,
+        "resume_attempts": 0,
+        "partials_remaining": 0
+      },
+      "launcher_resolution": {
+        "shell_wrapper_exit_code_observed": 1,
+        "runner_main_return_code": 0,
+        "terminal_artifacts_atomically_committed": true,
+        "resolution": "The terminal receipt and independent verifier establish a complete valid run. No scientific rerun was performed because the terminal state was already closed.",
+        "result_based_rerun_performed": false
+      },
+      "full_budget": {
+        "rows": 78156,
+        "incumbent_rmse_c": 0.9900226592930025,
+        "least_harmful_active_candidate": "CAUSAL_ON_FALLBACK / FALLBACK_BLEND50_A0625",
+        "candidate_rmse_c": 1.0146708668348625,
+        "arithmetic_delta_rmse_c": 0.02464820754186,
+        "paired_day_bootstrap_delta_rmse_c": 0.024752638825656016,
+        "paired_day_bootstrap_ci90_c": [
+          0.017022632523497682,
+          0.03230269017639212
+        ],
+        "probability_candidate_improves": 0.0,
+        "active_candidate_fold_wins": "0/3 for every active candidate",
+        "active_candidate_layer_wins": "0/3 for every active candidate",
+        "decision": "KEEP_INCUMBENT_NO_PROMOTION"
+      }
+    },
+    "P3": {
+      "state": "DATA_PREPARATION_ACTIVE",
+      "snapshot_observed_at_kst": "2026-08-26T00:45:58+09:00",
+      "raw_yearly_complete_files": 225,
+      "target_files": 363,
+      "progress_percent": 61.98,
+      "partial_files": 0,
+      "performance_status": "PENDING"
+    }
+  },
+  "p2_source_hashes": {
+    "result_json_sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc",
+    "terminal_receipt_sha256": "dbde6e3da46c0e8e8b179f0a818295106ff2f84296b6a564158c0704b6fa22d9",
+    "postexecution_qa_sha256": "1c61704a53c95bbc2093324019fb5f9ade79acb51fd276e5647282f1027eb94a",
+    "postexecution_manifest_sha256": "099a15480b33c039571a2bac41059b7e07dac5afe1c350c6b5bc8217e733d633"
+  },
+  "official_transport_audit": {
+    "receipt_sha256": "4828e8895b8ce32b1c82a0d62c17779fd068fa98455464e6326d039c5c7a63e1",
+    "official_p2_rmse_c": {
+      "original": 0.541085,
+      "round_a": 0.71352,
+      "round_b": 0.599921
+    },
+    "p2_exact_frozen_direction_agreement": "2/2",
+    "p2_protocol_aligned_p100_direction_agreement": "2/2",
+    "p2_old_pooled_surrogate_direction_agreement": "0/2",
+    "selection_use": "POST_HOC_AUDIT_ONLY",
+    "calibration_claimed": false,
+    "rank_equivalence_claimed": false,
+    "candidate_package_mapping_independently_verified": false
+  },
+  "independent_numeric_and_structural_qa": {
+    "status": "PASS",
+    "independent_agent": "baseline_extract",
+    "p2_numeric_fields_cross_checked": 117,
+    "checked": [
+      "P2 full-fraction primary RMSE, arithmetic deltas, bootstrap deltas and confidence intervals",
+      "p040 through p100 learning-curve evidence",
+      "official original/A/B scores and five local-to-official direction audits",
+      "P1, P2, official receipt and QA manifest hashes",
+      "portable artifact datasets, five tables, one chart, source references and zero reference line",
+      "DuckDB source provenance and timestamp ordering",
+      "absence of prohibited official and submission paths"
+    ],
+    "blocking_issues": 0,
+    "major_issues": 0,
+    "minor_issues": 0
+  },
+  "test_and_code_qa": {
+    "focused_postexecution_verifier_tests": {
+      "status": "PASS",
+      "passed": 14,
+      "failed": 0,
+      "rechecked_at_kst": "2026-08-26T01:15:00+09:00"
+    },
+    "postterminal_lifecycle_appropriate_suite": {
+      "status": "PASS",
+      "passed": 16,
+      "failed": 0,
+      "excluded": "One intentionally pre-execution-only assertion that the actual namespace does not yet exist."
+    },
+    "ruff_scope": {
+      "status": "PASS",
+      "files": [
+        "scripts/verify_p2_authoritative_nested_surrogate_postexecution_v5.py",
+        "tests/test_verify_p2_authoritative_nested_surrogate_postexecution_v5.py"
+      ]
+    },
+    "pinned_execution_test": {
+      "bytes": 8096,
+      "sha256": "6b1f4d6bfb9dd3f3f20bb4b21b56f3a05087ab6242216393692eb2c22258bcc5",
+      "status": "RESTORED_TO_PINNED_BYTES_AND_NOT_MODIFIED"
+    }
+  },
+  "report_package_qa": {
+    "portable_builder_validation": "passed",
+    "portable_builder_package": "passed",
+    "portable_builder_verification": "structural_only",
+    "manual_visual_qa": "PASS_TOP_VIEWPORT_CHROME_HEADLESS_1440x1200",
+    "report_blocks": 19,
+    "charts": 1,
+    "tables": 5,
+    "arithmetic_and_bootstrap_deltas_separated": true,
+    "exact_nine_decimal_display_verified": true,
+    "source_query_executed": true,
+    "source_query_rows": 1,
+    "source_query_top_level_columns": 14
+  },
+  "final_crosscheck": {
+    "status": "PASS_FINAL_CROSSCHECK",
+    "assertions_passed": 69,
+    "p2_numeric_settings_checked": 7,
+    "source_references": "ALL_RESOLVED",
+    "timestamp_order": "PASS",
+    "stale_markers_found": 0,
+    "manifest_coverage": "7/7 listed payload files, no unlisted payload files"
+  },
+  "safety_audit": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_mutations_by_p1_or_p2": 0,
+    "result_based_p2_reruns": 0
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_typed_factorial_semimarkov_v1",
+  "status": "preregistered_historical_inner_only",
+  "created_at_kst": "2026-08-22T12:00:00+09:00",
+  "hypothesis": "The injected anomaly label is the union of up to two duration-constrained type processes. Five typed unary heads followed by a factorial semi-Markov MAP decoder can recover weak offset/drift interiors and ordered overlaps more faithfully than an independent row-wise union of the exact same unary probabilities.",
+  "authorization": {
+    "historical_inner_labels": true,
+    "outer_validation_or_scoring": false,
+    "test_read_or_prediction": false,
+    "submission_generation_or_mutation": false,
+    "upload": false,
+    "existing_file_mutation": false,
+    "hyperparameter_or_threshold_search": false
+  },
+  "source_contract": {
+    "p1_config": "configs/p1.toml",
+    "train_file": "train.csv",
+    "feature_cache_metadata": "artifacts/cache/train_offline_e9fe1eb46cb7431f.json",
+    "feature_cache_parquet": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+    "historical_truth_cutoff_inclusive": "2025-03-01T23:50:00+09:00",
+    "precheck_scope_end_inclusive": "2024-05-23T23:50:00+09:00",
+    "source_qc_flag_available": false,
+    "qc_good_only_condition": "Organizer guarantee only; the distributed train file has no source QC flag, so it is audited as a provenance invariant and is not reconstructed from missingness."
+  },
+  "grammar": {
+    "type_order": ["spike", "noise", "flatline", "offset", "drift"],
+    "raw_token_order_preserved": true,
+    "raw_token_multiplicity_preserved": true,
+    "duration_rows_inclusive": {
+      "spike": [1, 1],
+      "noise": [18, 353],
+      "flatline": [12, 283],
+      "offset": [48, 519],
+      "drift": [54, 519]
+    },
+    "maximum_concurrent_events": 2,
+    "super_event_connection": "overlap_or_touch_within_exact_10_minute_segment",
+    "embargo_days": 8
+  },
+  "unary_model": {
+    "heads": "five_one_vs_rest",
+    "backend": "xgboost",
+    "seed": 20260822,
+    "seed_per_head": "base_seed_plus_canonical_type_index",
+    "sample_weight": "sqrt_negative_to_positive_ratio_per_head",
+    "parameters": {
+      "n_estimators": 700,
+      "learning_rate": 0.04,
+      "max_depth": 7,
+      "min_child_weight": 20.0,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "tree_method": "hist",
+      "device": "cpu"
+    },
+    "threads": 8,
+    "early_stopping": false,
+    "augmentation": false
+  },
+  "rowwise_control": {
+    "definition": "union_of_the_same_five_unary_probabilities",
+    "threshold": 0.5,
+    "type_specific_thresholds": false,
+    "postprocessing": false
+  },
+  "decoder": {
+    "algorithm": "deterministic_factorial_semi_markov_beam_map",
+    "beam_width": 24,
+    "maximum_concurrent_events": 2,
+    "maximum_start_candidates_per_row": 2,
+    "start_penalty": 3.1780538303479458,
+    "start_penalty_derivation": "log((1-0.04)/0.04) from the organizer's approximate injected-row rate",
+    "overlap_penalty": 1.0,
+    "duplicate_type_start_penalty": 3.1780538303479458,
+    "probability_clip": 0.000001,
+    "hard_minimum_and_maximum_durations": true,
+    "break_on_non_10_minute_gap": true,
+    "invalid_unary_fallback": "exact_rowwise_control",
+    "hidden_search": false
+  },
+  "historical_inner_blocks": [
+    {
+      "name": "hist_2024_summer",
+      "fit_end_inclusive": "2024-05-23T23:50:00+09:00",
+      "validation_start_inclusive": "2024-07-08T00:00:00+09:00",
+      "validation_end_inclusive": "2024-08-31T23:50:00+09:00"
+    },
+    {
+      "name": "hist_2024_autumn",
+      "fit_end_inclusive": "2024-08-23T23:50:00+09:00",
+      "validation_start_inclusive": "2024-10-08T00:00:00+09:00",
+      "validation_end_inclusive": "2024-11-30T23:50:00+09:00"
+    },
+    {
+      "name": "hist_2025_winter",
+      "fit_end_inclusive": "2024-11-22T23:50:00+09:00",
+      "validation_start_inclusive": "2025-01-08T00:00:00+09:00",
+      "validation_end_inclusive": "2025-03-01T23:50:00+09:00"
+    }
+  ],
+  "fail_fast_precheck": {
+    "scope": "first_block_fit_only",
+    "all_five_types_present": true,
+    "minimum_complete_presence_runs_per_type": 3,
+    "minimum_composite_super_events": 1,
+    "minimum_order_or_multiplicity_sensitive_signatures": 1,
+    "minimum_positive_row_recognized_coverage": 1.0,
+    "minimum_positive_row_max_two_coverage": 0.99,
+    "minimum_positive_row_duration_decomposable_coverage": 0.95,
+    "split_embargo_and_super_event_disjointness_required": true
+  },
+  "inner_decision_gate": {
+    "comparison": "factorial_decoder_vs_same_unary_rowwise_union",
+    "minimum_pooled_micro_f1_delta_exclusive": 0.0,
+    "minimum_improved_blocks": 2,
+    "minimum_decoder_pooled_micro_f1": 0.7,
+    "minimum_offset_or_drift_recall_gain": 0.03,
+    "maximum_other_type_recall_drop": 0.02,
+    "maximum_normal_false_positive_relative_increase": 0.1,
+    "maximum_worst_station_layer_f1_drop": 0.01,
+    "promotion_target": "RESEARCH_ONLY_GO_TO_SEPARATE_NESTED_OUTER_PREREGISTRATION",
+    "failure_target": "NO_GO_EXACT_CONFIGURATION"
+  },
+  "artifacts": {
+    "output_dir": "artifacts/p1_typed_factorial_semimarkov_v1",
+    "status_json": "artifacts/status/p1_typed_factorial_semimarkov_v1.json",
+    "attempt_lock": "artifacts/p1_typed_factorial_semimarkov_v1/attempt.lock",
+    "raw_rows_or_values_exported": false,
+    "row_level_predictions_exported": false
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.execution_closure_amendment.v3",
+  "amendment_id": "p1_long_event_segment_proposal_rescore_20260826_v1_execution_closure_v3",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T08:05:00+09:00",
+  "status": "PROSPECTIVE_EXECUTION_CLOSURE_NOT_AUTHORIZED",
+  "prospective": true,
+  "created_before_any_cycle1_fit_materialization_score_or_result": true,
+  "preserved_authorities": {
+    "scientific_design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+      "modified": false
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+      "modified": false
+    },
+    "operational_amendment_v2": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json",
+      "sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+      "modified": false
+    }
+  },
+  "superseded_zero_fit_package": {
+    "status": "SUPERSEDED_DO_NOT_AUTHORIZE_OR_EXECUTE",
+    "runner_path": "scripts/run_p1_long_event_segment_proposal_rescore_v1.py",
+    "runner_sha256": "2c1bacac8039fec9b5370cddf452fac1516bb4d014e6ebd9e08e683688b5faba",
+    "module_path": "src/p1_qc/long_event_segment_proposal_rescore.py",
+    "module_sha256": "68aaf1fae9902b386b024500b5873328af5b0dddaf9d99243d799d68aa5c5feb",
+    "seal_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/preexecution_seal.json",
+    "seal_sha256": "ebd54c60e2953ec66956d94a632f7b949dba321cdddbab3640dd0ce058d1c03e",
+    "preflight_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/strict_preflight_receipt.json",
+    "preflight_sha256": "ffafcb55531964d463e836ecb71a339c8d7d0c0c14b8f3533fc8dda97b6f2103",
+    "reasons": [
+      "authorized worker was unconditionally non-executable",
+      "authorization supplied its own dependency and input maps instead of consuming runner trust roots",
+      "seal/template chronology was impossible",
+      "there was no durable success publication protocol",
+      "inner segment stacking lacked an explicitly out-of-sample anchor surface",
+      "peer and bounded-context implementations differed from the design",
+      "segment-model and proposal parameters lacked prospective authority"
+    ],
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0
+  },
+  "out_of_sample_anchor_surfaces": {
+    "rule": "Each of the three registered Round-B seed models is trained through the exact frozen v2 fit_end_inclusive, then predicts a buffered gap surface and the later inner validation surface. Only central-shelf proposals whose full maximum-bank support remains inside the gap are used to train the segment classifier. No anchor prediction used as a segment-model input is in-sample.",
+    "windows": [
+      {
+        "id": "inner_2024_jul_aug",
+        "anchor_fit_end_inclusive": "2024-05-24T23:50:00+09:00",
+        "support_surface_start": "2024-05-25T00:00:00+09:00",
+        "segment_calibration_start": "2024-06-01T00:00:00+09:00",
+        "segment_calibration_end_exclusive": "2024-07-01T00:00:00+09:00",
+        "support_surface_end_exclusive": "2024-07-08T00:00:00+09:00",
+        "central_grid_slots_per_continuous_station_layer": 4320,
+        "inner_validation_start": "2024-07-08T00:00:00+09:00",
+        "inner_validation_end_inclusive": "2024-08-31T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2024_oct_nov",
+        "anchor_fit_end_inclusive": "2024-08-24T23:50:00+09:00",
+        "support_surface_start": "2024-08-25T00:00:00+09:00",
+        "segment_calibration_start": "2024-09-01T00:00:00+09:00",
+        "segment_calibration_end_exclusive": "2024-10-01T00:00:00+09:00",
+        "support_surface_end_exclusive": "2024-10-08T00:00:00+09:00",
+        "central_grid_slots_per_continuous_station_layer": 4320,
+        "inner_validation_start": "2024-10-08T00:00:00+09:00",
+        "inner_validation_end_inclusive": "2024-11-30T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2025_jan_feb",
+        "anchor_fit_end_inclusive": "2024-11-23T23:50:00+09:00",
+        "support_surface_start": "2024-11-24T00:00:00+09:00",
+        "segment_calibration_start": "2024-12-01T00:00:00+09:00",
+        "segment_calibration_end_exclusive": "2025-01-01T00:00:00+09:00",
+        "support_surface_end_exclusive": "2025-01-08T00:00:00+09:00",
+        "central_grid_slots_per_continuous_station_layer": 4464,
+        "inner_validation_start": "2025-01-08T00:00:00+09:00",
+        "inner_validation_end_inclusive": "2025-03-01T23:50:00+09:00"
+      }
+    ],
+    "minimum_purge_days_between_anchor_fit_and_calibration": 7,
+    "minimum_purge_days_between_calibration_and_inner_validation": 7,
+    "central_shelf_formula": "C0=anchor_fit_end_inclusive+7 days+10 minutes; C1=inner_validation_start-7 days; retain proposals with start>=C0 and end_exclusive<=C1",
+    "maximum_context_support_rule": "For H=max(context bank)<=168h, every retained proposal must satisfy support_start<=start-H and end_exclusive+H<=support_end_exclusive, where support_start is the first 10-minute row after fit_end and support_end_exclusive equals validation_start.",
+    "round_b_seeds_unchanged": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "round_b_parameters_and_event_day_weight": "exactly the v2 operational amendment",
+    "uniform_postprocess": {
+      "high_threshold": 0.2,
+      "low_threshold": 0.1,
+      "close_gap_rows": 0,
+      "minimum_positive_run": 12
+    },
+    "physical_anchor_fits": 9
+  },
+  "segment_training_and_outer_rule": {
+    "inner_training": "For each inner window, train segment models only on that window's OOS calibration proposals and evaluate only on its later OOS validation proposals.",
+    "inner_selection": "Pool validation-proposal precision across all three inner windows for each fixed cell; apply the frozen threshold and cell selection exactly once.",
+    "outer_training_corpus": "After inner selection is frozen, each outer-fold segment model is trained only on the three OOS central calibration-shelf proposal pools for the selected bank. Inner validation labels remain selection-only and outer labels remain evaluation-only.",
+    "outer_validation_anchor": "Use the already frozen fold-specific p100 event_day_balanced_binary_lgbm probability and postprocessed prediction; do not refit an outer anchor.",
+    "outer_one_shot": true,
+    "row_level_predictions_persisted": false
+  },
+  "bounded_target_free_proposal_contract": {
+    "cadence_minutes": 10,
+    "context_banks_hours": [
+      [24, 72],
+      [48, 168],
+      [24, 72, 168]
+    ],
+    "surface_isolation": "Every rolling statistic, two-sided score, proposal flank, and feature flank is computed only within the supplied OOS surface and one exact-cadence station-layer segment. It never crosses a gap, station, layer, surface boundary, or purge boundary.",
+    "robust_channel_per_context": "For each temperature and salinity channel and each declared context h, compute a centered rolling median and 1.4826*MAD over at most h*6 rows with min_periods=6; robust_z=(x-median)/max(MAD,1e-6).",
+    "bounded_two_sided_cusum": "Within each exact-cadence segment and declared context h, take max(abs(trailing rolling sum robust_z/sqrt(count)), abs(leading rolling sum robust_z/sqrt(count))); each side uses at most h*6 rows and min_periods=6.",
+    "physical_score": "max across registered channels and contexts of abs(robust_z) and bounded two-sided CUSUM, divided by 6 and clipped to [0,1]",
+    "anchor_low_conjunction": "proposal_probability=min(physical_score,1-anchor_probability)",
+    "change_point_parameters": {
+      "high_seed_threshold": 0.65,
+      "low_seed_threshold": 0.35,
+      "min_baseline_rows": 6,
+      "min_return_rows": 3,
+      "mean_gain_threshold": 0.5,
+      "variance_gain_threshold": 0.25,
+      "slope_gain_threshold": 0.25,
+      "baseline_z_threshold": 3.0,
+      "return_z_threshold": 3.0,
+      "max_candidates_per_seed_run": 8,
+      "robust_epsilon": 1e-06,
+      "minimum_interval_rows": 19,
+      "maximum_interval_rows_rule": "2*max(context_bank_hours)*6"
+    },
+    "peer_contract": "Only I-ORS and S-ORS may use a same-station, same-time, other-layer leave-one-layer-out median residual. G-ORS has the fixed univariate fallback. Other-station peers are prohibited.",
+    "target_or_event_type_in_proposals_or_features": false
+  },
+  "fixed_segment_model_authority": {
+    "family": "lightgbm.LGBMClassifier",
+    "parameters": {
+      "objective": "binary",
+      "n_estimators": 400,
+      "learning_rate": 0.03,
+      "num_leaves": 31,
+      "max_depth": -1,
+      "min_child_samples": 20,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "n_jobs": 1,
+      "deterministic": true,
+      "force_row_wise": true,
+      "verbosity": -1,
+      "random_state": "registered_segment_seed",
+      "feature_fraction_seed": "registered_segment_seed",
+      "bagging_seed": "registered_segment_seed",
+      "data_random_seed": "registered_segment_seed",
+      "extra_seed": "registered_segment_seed"
+    },
+    "registered_segment_seeds": [
+      20260826,
+      20260843,
+      20260871
+    ],
+    "post_result_parameter_changes": 0
+  },
+  "evaluation_closure": {
+    "paired_bootstrap": {
+      "unit": "positive connected event or normal station-layer KST day",
+      "replicates": 5000,
+      "seed": 20260826,
+      "confidence": 0.9,
+      "normal_day_timezone": "Asia/Seoul"
+    },
+    "adequately_supported_station_fold_cell": {
+      "minimum_positive_rows": 100,
+      "minimum_positive_connected_events": 5,
+      "minimum_positive_kst_days": 10
+    },
+    "score_only_after_all_outer_seed_predictions_are_frozen_in_memory_and_digest_journaled": true,
+    "decision_gates": "exactly the unchanged v1 scientific design RESEARCH_GO, SUBMISSION_GO, preferred, and stretch gates",
+    "incumbent_fallback": "If the candidate fails any gate, the scientific decision is RESEARCH_NO_GO and the frozen Round-B anchor remains the only retained model. No candidate file is generated."
+  },
+  "exact_resource_and_materialization_plan": {
+    "inner_anchor_fits": 9,
+    "inner_segment_fits": 54,
+    "outer_segment_fits": 9,
+    "maximum_lifetime_physical_fits": 72,
+    "inner_anchor_surface_materializations": 3,
+    "inner_context_surface_materializations": 9,
+    "outer_context_surface_materializations": 9,
+    "maximum_lifetime_scientific_materializations": 21,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds": 21600,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "execution_integrity": {
+    "preimport_trust_roots_live_in_runner_not_authorization": true,
+    "actual_authorization_must_pin_raw_seal_and_independent_QA_report_hashes": true,
+    "private_verified_snapshot_before_claim": true,
+    "all_snapshot_inputs_parsed_from_digest_bound_held_handles": true,
+    "exclusive_single_attempt_namespace": true,
+    "crash_or_failure_retains_lock_and_exact_once_terminal": true,
+    "result_manifest_and_terminal_publication": "temp write, file flush, create-only publish, directory flush while lock exists; lock unlink is the last success commit operation",
+    "read_only_preflight_is_idempotent": true,
+    "windows_unlink_durability_limit": "Windows exposes no portable directory-fsync guarantee for deletion. All artifacts and directories are flushed before lock unlink; failure to unlink retains the lock and fails closed."
+  },
+  "authorization": {
+    "implementation_allowed": true,
+    "numerical_execute_authorized": false,
+    "fit_authorized": false,
+    "scientific_materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_independent_qa_and_new_digest_bound_authorization": true
+  },
+  "operation_counters_at_amendment": {
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  }
+}

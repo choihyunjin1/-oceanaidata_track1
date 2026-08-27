@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_event_balanced_trajectory_v1",
+  "status": "preregistered_one_shot",
+  "objective": "Test whether event-balanced dense 20-minute trajectory supervision improves the frozen P3 local incumbent.",
+  "seed": 20260821,
+  "data_contract": {
+    "context_hours": 48,
+    "wave_grid_minutes": 20,
+    "future_path_steps": 72,
+    "future_path_hours": 24,
+    "anchor_minimum_hs_m": 1.5,
+    "all_72_future_hs_required_for_training": true,
+    "official_leads_h": [3, 6, 9, 12, 18, 24],
+    "official_path_steps": [9, 18, 27, 36, 54, 72]
+  },
+  "sampling": {
+    "storm_episode_definition": "station-local contiguous 20-minute current hs >= 1.5m run",
+    "anchor_weight": "1/sqrt(number of outer-train anchors in episode)",
+    "normalize_anchor_weight_mean_to_one": true
+  },
+  "loss": {
+    "official_step_weight": 1.0,
+    "auxiliary_path_step_weight": 0.1,
+    "target": "future_hs_minus_current_hs"
+  },
+  "models": {
+    "variants": ["nlinear", "dlinear_trend"],
+    "selection_rule": "lowest selection-phase pooled RMSE; tie resolves to nlinear",
+    "ridge_alpha": 100.0,
+    "dlinear_trend_window_steps": 13,
+    "hyperparameter_search": false,
+    "external_pretrained_weights": false
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "selection_lattice_phase_hours": 0,
+    "final_holdout_lattice_phase_hours": 39,
+    "lattice_gap_hours": 78,
+    "holdout_label_contract": "Generate and hash both variants' holdout predictions before attaching any holdout target.",
+    "bootstrap_replicates": 5000
+  },
+  "gate": {
+    "incumbent_rmse": 0.7801609198910191,
+    "maximum_candidate_rmse": 0.7701609198910191,
+    "paired_event_bootstrap_ci90_upper_below_zero": true,
+    "leads_18_24_must_not_degrade": true,
+    "maximum_station_rmse_degradation": 0.01
+  },
+  "frozen_inputs": {
+    "incumbent_oof": "artifacts/p3/long_persistence_shrink/oof.parquet",
+    "incumbent_metrics": "artifacts/p3/long_persistence_shrink/metrics.json",
+    "incumbent_submission": "submissions/p3_long_persistence_shrink/submission.csv",
+    "anchor_compatibility_cache": "artifacts/p3/features_all20_v1/train_anchors.parquet"
+  },
+  "output_dir": "artifacts/p3_event_balanced_trajectory_v1",
+  "prohibitions": {
+    "future_test_values": true,
+    "external_observations": true,
+    "hyperparameter_search": true,
+    "submission_mutation_or_upload": true,
+    "frozen_model_or_router_mutation": true,
+    "n_hits_or_vmd_before_gate": true
+  }
+}

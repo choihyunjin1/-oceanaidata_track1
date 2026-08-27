@@ -1,0 +1,218 @@
+{
+  "experiment_id": "p3_station_stable_energy_state_space_v1",
+  "status": "PREREGISTERED_APPEND_ONLY_ONE_SHOT_RESEARCH_NOT_UPLOAD_AUTHORIZATION",
+  "problem": "P3",
+  "target": "significant_wave_height_hs",
+  "metric": "pooled_row_RMSE_m",
+  "created_before_first_fit": true,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_station_stable_energy_state_space_v1.json",
+    "goal_contract": "configs/goals/meaningful_score_maximization_v3.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "gen1_artifact": "artifacts/p3_meaningful_learning_curve_20260823_v1",
+    "gen3_artifact": "artifacts/p3_causal_spectral_kernel_20260823_v1",
+    "v5_ledger": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "output": "artifacts/p3_station_stable_energy_state_space_20260823_v1",
+    "attempt_lock": "artifacts/p3_station_stable_energy_state_space_20260823_v1.ATTEMPT_LOCK.json",
+    "execution_claim": "artifacts/p3_station_stable_energy_state_space_20260823_v1.EXECUTION_CLAIM.json"
+  },
+  "implementation_sha256": {
+    "gen3_runner": "5d162f6153b14bab1f4f58204235e22a1d0035d1679564ec07fe250291e87234",
+    "gen3_config": "3bf5aaa053a702f46f34ab696b7876bdf954845dbea275279c58dc0c204e3f1b",
+    "stable_energy_state_space_module": "bb130957e6527efe61dfbcdaa7cad22c9e355953946f9ef0f551dddb9865accf",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "learning_curve_module": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "persistence_shrink_module": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "one_shot_guard_module": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5",
+    "goal_contract": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "goal_evaluator": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "v5_ledger_contract": "6c61e71016d3c4cf9b8a34e818ca865b7246e3b02ad2cb22348dd2a6e71d6b35",
+    "v5_ledger_evaluator": "aaf54e6cafac0cc01af7f3265af42a7a80e2738a4d5a682070bd47b41e4b0053"
+  },
+  "reference_evidence_sha256": {
+    "gen1_metrics": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1_learning_curve_oof": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1_manifest": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1_independent_qa": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "gen3_metrics": "dfe938d28e89e2d41c65f86230f06f9221083b0fec759c9c9b556293082ec9c5",
+    "gen3_learning_curve_evidence": "bd69ca56f60d6bfb6244238de04ff45eb45de3756792822aa43ff1c6e8baf91f",
+    "gen3_manifest": "c9957bc9d2449ca6f6d31fcec69933a1c4e6c07a8e8ca54c78006136b333fd2b",
+    "gen3_validation_keys": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+  },
+  "reference_attestations": {
+    "gen3_independent_post_run_qa": "message-only GO P0=0 P1=0; evidence SHA bd69ca56f60d6bfb6244238de04ff45eb45de3756792822aa43ff1c6e8baf91f independently reproduced; no file receipt invented"
+  },
+  "central_ledger_anchor": {
+    "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v5",
+    "gen3_event_seq": 6,
+    "gen3_event_sha256": "86cdb7f7727c1bf719646807cd11c20bd07c54db6abfb9ff3cd3bc7d7665b65b",
+    "gen3_evidence_sha256": "bd69ca56f60d6bfb6244238de04ff45eb45de3756792822aa43ff1c6e8baf91f",
+    "gen3_decision": "RESEARCH_ONLY",
+    "official_uploads_through_anchor": 0
+  },
+  "gen3_failure_diagnosis": {
+    "aggregate_only": true,
+    "full_delta_candidate_minus_incumbent_m": 0.042782536910337954,
+    "full_ci90_m": [0.018103542662230722, 0.06791567222677251],
+    "all_five_prefix_point_estimates_worse": true,
+    "fold_delta_m": {
+      "2024_h2_storm": 0.0767371843488065,
+      "winter_transition": 0.03136463153706692,
+      "2025_h1": 0.030945073985622185
+    },
+    "critical_slice_delta_m": {
+      "G-ORS": 0.053233635462515916,
+      "I-ORS": 0.006843427677518332,
+      "S-ORS": 0.060813632763937586,
+      "winter": 0.03136463153706692,
+      "lead_12": 0.03625116921449101,
+      "lead_18": 0.03771562664227979,
+      "lead_24": 0.022872241710642505
+    },
+    "interpretation": "spectral summary plus random-feature regression loses ordered storm growth and decay and worsens every fold, especially G/S and long leads; Gen4 changes to a causal station-partial-pooled stable physical-state transition family rather than tuning alpha, weight, seed, or routing"
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "storm_threshold_hs_m": 1.5,
+    "raw_wave_episode_contiguous_minutes": 20,
+    "episode_reuse_within_validation": false,
+    "same_episode_train_validation": false,
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_rule": "earliest_global_chronological_prefix_of_each_already_safe_outer_train_set",
+    "bootstrap_unit": "whole_complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260823
+  },
+  "hypotheses": [
+    {
+      "id": "station_partial_pooled_stable_wave_energy_state_space",
+      "structure": "past-only 145-step physical wave-energy and atmospheric state; unique station-time one-step system identification; shared global VAR plus station residual transition; fixed spectral-radius projection; 72-step open-loop rollout",
+      "structurally_distinct_from": [
+        "CatBoost scalar or multi-output trees",
+        "TCN GRU or trainable neural sequence encoder",
+        "spectral random-feature kernel regression",
+        "NLinear direct multi-horizon regression",
+        "analog retrieval",
+        "shrink alpha or router weight adjustment"
+      ],
+      "selection_or_weight_search": false,
+      "score_derived_tuning": false,
+      "prior_exposure_note": "preregistered only after sealed Gen3 aggregate failure; fixed constants were not selected on Gen4 validation scores"
+    }
+  ],
+  "state_features": {
+    "source": "train-only raw 48h sequence cache",
+    "native_cadence_minutes": 20,
+    "sequence_steps": 145,
+    "state_columns": [
+      "log1p_hs_energy",
+      "log1p_tp",
+      "log1p_hmax_energy",
+      "wave_direction_sin",
+      "wave_direction_cos",
+      "log1p_wind_speed",
+      "log1p_gust",
+      "wind_direction_sin",
+      "wind_direction_cos",
+      "air_temperature",
+      "relative_humidity",
+      "pressure"
+    ],
+    "scaler": "exact_prefix_fold_train_only_componentwise_median_iqr",
+    "missing_value_rule": "train-scaler-centered zero after transformation",
+    "transition_deduplication": "exact station and physical destination timestamp before fit"
+  },
+  "model": {
+    "class": "StationPartialPooledStableWaveEnergyStateSpace",
+    "global_transition": "closed_form_VAR1_ridge",
+    "station_adjustment": "closed_form_residual_VAR1_ridge",
+    "global_ridge": 0.001,
+    "station_residual_ridge": 0.01,
+    "maximum_spectral_radius": 0.995,
+    "rollout_steps_20m": 72,
+    "standardized_state_clip": 10.0,
+    "official_lead_steps_20m": [9, 18, 27, 36, 54, 72],
+    "deterministic": true,
+    "seed_metric_replica_ids": [20260816, 20260817, 20260818],
+    "seed_replica_rule": "deterministic identical prediction copied into three protocol metric slots; seeds do not affect fit",
+    "hyperparameter_search": false,
+    "expected_actual_fit_cells": 15,
+    "expected_protocol_seed_metric_cells": 45,
+    "expected_closed_form_solves": 60
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_gen1_comparator": true,
+    "new_router_or_blend": false
+  },
+  "comparator": {
+    "source": "sealed Gen1 fresh-refit exact-current structure at every prefix and seed, aggregated by prediction mean",
+    "source_oof_path": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "source_oof_sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_historical_frozen_oof": false,
+    "fail_closed_surrogate_only_if_false": true
+  },
+  "gate": {
+    "baseline": "same_prefix_same_fold_sealed_gen1_exact_current_structure_prediction_mean",
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "all_split_leakage_and_reproducibility_checks": true,
+    "on_pass": "full_train_then_same_case_only_200_test_inference_and_byte_reproduction",
+    "on_no_pass": "seal_results_stop_before_test_reads"
+  },
+  "expected_sha256": {
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "source/test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "source/test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "source/sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "source/baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "compact_cache/manifest.json": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+    "compact_cache/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "compact_cache/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "sequence_cache/manifest.json": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+    "sequence_cache/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "sequence_cache/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "gen1/metrics.json": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1/learning_curve_oof.parquet": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1/manifest.json": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1/independent_qa.json": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "frozen/current_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "frozen/current_manifest.json": "886637d3f7c92437a6ac40f0aee496d67b44f5913acf75a1502abb566e3c62fd",
+    "current/ready_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_station_stable_energy_state_space_20260823_v1",
+    "candidate_relative_path": "candidate/P3_STATION_STABLE_ENERGY_STATE_SPACE_V1.csv",
+    "reproduced_candidate_relative_path": "candidate/P3_STATION_STABLE_ENERGY_STATE_SPACE_V1_REPRODUCED.csv",
+    "uploaded": false
+  },
+  "prohibitions": {
+    "hyperparameter_search": true,
+    "shrink_alpha_or_weight_micro_tuning": true,
+    "absolute_test_timestamp_recovery": true,
+    "test_target_or_hidden_label_access": true,
+    "current_or_frozen_submission_mutation": true,
+    "submission_upload": true,
+    "config_copy_or_arbitrary_output": true,
+    "rerun_after_attempt_lock": true,
+    "candidate_path_traversal_or_overwrite": true
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "schema_version": "p2_architecture_matched_stage_b_challenger.v3",
+  "experiment_id": "p2_architecture_matched_stage_b_challenger_v3",
+  "created_at_kst": "2026-08-23T05:42:00+09:00",
+  "status": "PREREGISTERED_STATIC_IMPLEMENTATION_AWAITING_INDEPENDENT_QA_AND_AUTHORIZATION",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "explicitly_not_exact_official_incumbent": true,
+  "local_qualification_only": true,
+  "official_promotion_allowed": false,
+  "research_only": true,
+  "upload_allowed": false,
+  "official_submission_count": 0,
+  "preregistration": {
+    "generation_id": "P2_ARCHITECTURE_MATCHED_STAGE_B_CHALLENGER_V3",
+    "created_before_first_fit": true,
+    "hypothesis_count": 1,
+    "score_derived_tuning": false,
+    "prior_result_used_for_parameter_search": false
+  },
+  "hypothesis": {
+    "id": "H1_SEEDED_CONDITIONAL_ANALOG_RANK2_PROFILE_MANIFOLD",
+    "family": "GPU_CONDITIONAL_ANALOG_LOCAL_AFFINE_PROFILE_MANIFOLD",
+    "structural_change": "Project each sealed Stage-A seed profile onto a prefix-fit local rank-2 affine temperature-profile manifold selected only by public covariates; then apply the identical public-endpoint final profile projection and CSV float roundtrip.",
+    "not_a_blend_weight_or_alpha_tweak": true,
+    "catboost_used": false,
+    "failed_generation_v1_reused": false,
+    "hyperparameter_searches": 0,
+    "reference_anchor_is_not_a_training_label": true,
+    "target_layer_values_in_features": false,
+    "joint_temp_psal_training_mask": true,
+    "model": {
+      "public_feature_source": "P2Panel.inputs",
+      "prefix_scaler": "per-feature training-prefix median and MAD-times-1.4826 with standard-deviation then one fallback",
+      "standardized_clip": 12.0,
+      "seeded_projection": "Gaussian matrix followed by reduced QR, derived independently for every fold-prefix-seed",
+      "projection_dimensions": 16,
+      "nearest_neighbors": 128,
+      "neighbor_backend": "CUDA_FLOAT32_BATCHED_CDIST_TOPK",
+      "query_batch_size": 256,
+      "distance_weight": "softmax(-distance/max(kth_neighbor_distance,1e-6))",
+      "local_manifold_rank": 2,
+      "profile_update": "mu + U_rank2 @ U_rank2.T @ (stage_a_seed_profile - mu)",
+      "incomplete_three_layer_groups": "identity_keep_stage_a_seed_prediction",
+      "final_postprocess": [
+        "public_endpoint_profile_projection",
+        "csv_float_roundtrip"
+      ]
+    }
+  },
+  "stage_a_reference": {
+    "identity": "P2_ARCHITECTURE_MATCHED_STAGE_A_EXECUTION_V3",
+    "seal_verified_before_challenger_import_fit_or_score": true,
+    "artifacts": {
+      "CONFIG": {"path": "configs/experiments/p2_architecture_matched_stage_a_execution_v3.json", "sha256": "482a646fc36c7639befbd1cea8fde91b358d54e931dad8e82cbb36026c98c649", "bytes": 5883},
+      "MANIFEST": {"path": "artifacts/p2_architecture_matched_reference_v3/manifest.json", "sha256": "bb21341f94b866be7e2d6dc0e0f0b78b9c84a1898d4844ff75637f95798f21c6", "bytes": 5058},
+      "SEAL": {"path": "artifacts/p2_architecture_matched_reference_v3/seal.json", "sha256": "315e52da6b7f4ab7bf3a1970301b4391b9f31611da6187667760ed0d3a501ba2", "bytes": 1298},
+      "ARCHITECTURE_MANIFEST": {"path": "artifacts/p2_architecture_matched_reference_v3/architecture_manifest.json", "sha256": "0486bd6aaca94bbe9bc2e7b8a49aeba9144d5d38b86f695f18d917a90b7fc791", "bytes": 1979},
+      "TRAINING_RECIPE": {"path": "artifacts/p2_architecture_matched_reference_v3/training_recipe.json", "sha256": "fb01f8017a6af4fbaec1d9a27bc15972f80153012b6fcff91f2f877d61e1b3e1", "bytes": 3961},
+      "TRAINING_RECEIPT": {"path": "artifacts/p2_architecture_matched_reference_v3/training_receipt.json", "sha256": "13111faaf7c622740f3afb5dba7e53a98c67e75493ade69ff3eae00bed13364b", "bytes": 174623},
+      "CURVE_METRICS": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_curve_metrics.json", "sha256": "950657e015ce31ecc2045f359ef02b4c99ab0d20a7ee917088a1c8b785491ef7", "bytes": 2365},
+      "OOF_040": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_040.csv", "sha256": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626", "bytes": 9689175},
+      "OOF_055": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_055.csv", "sha256": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168", "bytes": 9725466},
+      "OOF_070": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_070.csv", "sha256": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf", "bytes": 9776617},
+      "OOF_085": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_085.csv", "sha256": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8", "bytes": 9832417},
+      "OOF_100": {"path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_100.csv", "sha256": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06", "bytes": 9826903},
+      "QA_RECEIPT": {"path": "artifacts/p2_architecture_matched_reference_v3_control/pre_execution_qa.json", "sha256": "c2067846f72dcc173e5954e11a391b137343656f71e5121b8eefc0abbd32da8e", "bytes": 3347},
+      "AUTHORIZATION": {"path": "artifacts/p2_architecture_matched_reference_v3_control/authorization.json", "sha256": "e1756aabf77da3f57f231ceb576883dd5b2967ca310f5e381c02b0f358562ade", "bytes": 1766},
+      "ATTEMPT_LOCK": {"path": "artifacts/p2_architecture_matched_reference_v3_control/attempt.lock", "sha256": "a447eeee2d0d55676f274d20807aee9b2fa50359e7be9cd33b5610d7c4cbe237", "bytes": 1496}
+    },
+    "expected": {
+      "complete": true,
+      "all_five_prefixes_sealed": true,
+      "cells": 45,
+      "deep_training_jobs": 720,
+      "router_training_jobs": 180,
+      "challenger_fit_or_score_count_before_seal": 0,
+      "submission_predictions": 0,
+      "uploads": 0,
+      "full_reference_rmse_c": 1.0109798870010898
+    }
+  },
+  "source_pins": {
+    "STAGE_A_V3_GUARD": {"path": "src/p2_restore/architecture_matched_stage_a_contract_v3.py", "sha256": "8e607205809f9f6d1951aa5e7ac692d2c49664c4ea3074130d8def14c558f46e", "bytes": 27726},
+    "STAGE_A_V3_ENGINE": {"path": "src/p2_restore/architecture_matched_stage_a_execution_v3.py", "sha256": "8f190aa0987f2becd02c6b344107812c2e585238632cf9f25f6ea03263630725", "bytes": 15870},
+    "STAGE_A_V2_ENGINE": {"path": "src/p2_restore/architecture_matched_stage_a_execution_v2.py", "sha256": "0dad7be0c7110ebae327866201be3e7a2ca09113d432c86c1d9bef58ce892912", "bytes": 50831},
+    "DEEP_DATA": {"path": "src/p2_restore/deep_data.py", "sha256": "aab7b89d47715f3b6e3c3543ef39cb5d450974e3a415370d364c3f5c875ec95c", "bytes": 9626},
+    "PROFILE_PROJECTION": {"path": "src/p2_restore/profile_projection.py", "sha256": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6", "bytes": 9097},
+    "FINAL_INFERENCE": {"path": "src/p2_restore/final_inference.py", "sha256": "60e54f5c67cabe777497b81a2eb29356733d279edfe7254d72b2bc0cfd64fe7b", "bytes": 8904},
+    "DATA": {"path": "src/p2_restore/data.py", "sha256": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9", "bytes": 3588},
+    "CURVE_GATE": {"path": "src/p2_restore/meaningful_learning_curve.py", "sha256": "8417010ecea16ca31670b1fadb93781a2710678eaba47dad59f3ddd3a84d7034", "bytes": 5191},
+    "PACKAGE_INIT": {"path": "src/p2_restore/__init__.py", "sha256": "16e6d31ff2b1f860344efaaefceeee8bf7b1380d44d41424d8a3ab6ec94f4e4f", "bytes": 339},
+    "MODEL_MODULE": {"path": "src/p2_restore/model.py", "sha256": "5a1b4af4f7092e490741f576b1bf7595ff7e2f38a0d1d3605db9c865b5c20020", "bytes": 3342},
+    "CENTRAL_V3_EVALUATOR": {"path": "src/ocean_goal/meaningful_score_v3.py", "sha256": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a", "bytes": 33680},
+    "CENTRAL_V3_CONTRACT": {"path": "configs/goals/meaningful_score_maximization_v3.json", "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0", "bytes": 7922}
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p2_architecture_matched_stage_b_challenger_v3.json",
+    "GUARD": "src/p2_restore/architecture_matched_stage_b_contract_v3.py",
+    "ENGINE": "src/p2_restore/architecture_matched_stage_b_execution_v3.py",
+    "RUNNER": "scripts/run_p2_architecture_matched_stage_b_v3.py",
+    "TESTS": "tests/test_p2_architecture_matched_stage_b_v3.py"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p2_architecture_matched_stage_b_challenger_v3.json",
+    "output": "artifacts/p2_architecture_matched_stage_b_v3",
+    "control": "artifacts/p2_architecture_matched_stage_b_v3_control",
+    "pre_execution_qa": "artifacts/p2_architecture_matched_stage_b_v3_control/pre_execution_qa.json",
+    "authorization": "artifacts/p2_architecture_matched_stage_b_v3_control/authorization.json",
+    "attempt_lock": "artifacts/p2_architecture_matched_stage_b_v3_control/attempt.lock"
+  },
+  "curve_protocol": {
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "outer_folds": [
+      {"name": "outer_2024_sep_oct", "start_kst": "2024-09-01T00:00:00+09:00", "stop_kst": "2024-11-01T00:00:00+09:00"},
+      {"name": "outer_2025_may_jun", "start_kst": "2025-05-01T00:00:00+09:00", "stop_kst": "2025-07-01T00:00:00+09:00"},
+      {"name": "outer_2025_jul_aug", "start_kst": "2025-07-01T00:00:00+09:00", "stop_kst": "2025-09-01T00:00:00+09:00"}
+    ],
+    "embargo_days": 7,
+    "seed_ids": [20260823, 20260824, 20260825],
+    "seed_aggregation": "PREDICTION_MEAN_THEN_METRIC",
+    "derived_seed_rule": "uint31_from_sha256(base_seed|fold|fraction|conditional_analog_rank2)",
+    "bootstrap_replicates": 5000,
+    "bootstrap_cluster": "KST_day",
+    "bootstrap_seed": 20260823,
+    "reference_fresh_refit_each_prefix": true,
+    "challenger_fresh_refit_each_prefix": true,
+    "same_fold_keys_metric_postprocess": true,
+    "reference_100_percent_oof_sealed_before_challenger_scoring": true,
+    "all_45_blind_predictions_committed_before_validation_truth_read_or_merge": true,
+    "prediction_commitment_write": "O_EXCL_AGGREGATE_SHA_COUNT_KEY_ORDER_ONLY",
+    "validation_truth_load_boundary": "AFTER_O_EXCL_COMMITMENT_RELOAD_DEEP_EQUAL_THEN_REVERIFY_AFTER_TRUTH_LOAD_BEFORE_MERGE",
+    "row_level_outputs_allowed": false
+  },
+  "metric_and_gates": {
+    "metric": "sqrt(mean_over_outer_folds_of_official_layer_count_weighted_MSE)",
+    "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_exclude_zero": true,
+    "full_delta_candidate_minus_reference_at_most_c": -0.03,
+    "minimum_improved_folds": 2,
+    "critical_slices": ["layer_2", "layer_3", "layer_4", "2024_sep_oct"],
+    "maximum_each_critical_slice_regression_c": 0.0075,
+    "all_leakage_checks_required": true,
+    "all_reproducibility_checks_required": true
+  },
+  "runtime_contract": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "lightgbm": "4.7.0",
+    "torch": "2.13.0+cu130",
+    "torch_cuda": "13.0",
+    "cuda_available": true,
+    "gpu_name_contains": "NVIDIA GeForce RTX 5090",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true
+  },
+  "data_contract": {
+    "check_only_access": "HEADERS_AND_STATION_LAYER_TIME_KEYS_ONLY",
+    "canonical_test_rows": 26061,
+    "canonical_station_layer_time_key_sha256": "600fc19da0f15c6c7979932f057807e59e01962c5ec65ad38ca908f18a295439",
+    "source_pins": {
+      "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+      "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+      "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+      "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+      "score.py": "218165bebd45f6f8e0db06d3e8d0039144f121a4d56e84fa5a67ae13146ce82a"
+    },
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_temp_and_psal_jointly_masked": true
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "stage_a_seal_verified_before_challenger_engine_import": true,
+    "actual_run_requires_independent_static_qa": true,
+    "actual_run_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "challenger_engine_imported_after_attempt_lock": true,
+    "direct_engine_entry_reruns_fresh_preflight": true,
+    "fold_local_training_targets_loaded_without_validation_truth_values": true,
+    "precommitment_raw_observation_bytes_limited_to_integrity_hash_and_selective_key_routing": true,
+    "withheld_current_fold_target_scalar_fields_decoded_or_converted_before_commitment": false,
+    "validation_target_scalar_attachment_after_commitment_only": true,
+    "all_blind_predictions_before_validation_truth_read_or_merge": true,
+    "prediction_commitment_reloaded_before_truth_and_reverified_after_truth_load_before_merge": true,
+    "output_and_files_use_o_excl_semantics": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "candidate_or_test_prediction_allowed": false,
+    "frozen_or_submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p2_architecture_matched_stage_b.pre_execution_qa.v3",
+    "decision": "GO_AUTHORIZE_P2_STAGE_B_CHALLENGER_V3",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_exact_roles": ["CONFIG", "GUARD", "ENGINE", "RUNNER", "TESTS"]
+  },
+  "authorization_contract": {
+    "schema_version": "p2_architecture_matched_stage_b.authorization.v3",
+    "authorization_phrase_prefix": "AUTHORIZE_P2_STAGE_B_CHALLENGER_V3:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "execution_authorized": true,
+    "upload_allowed": false
+  },
+  "output_contract": {
+    "aggregate_only": true,
+    "artifacts": {
+      "prediction_commitment": "prediction_commitment.json",
+      "learning_curve_evidence": "learning_curve_evidence.json",
+      "gate_decision": "gate_decision.json",
+      "training_receipt": "training_receipt.json",
+      "manifest": "manifest.json",
+      "seal": "seal.json"
+    },
+    "full_fit_performed": false,
+    "candidate_generated": false,
+    "test_prediction_generated": false,
+    "upload_performed": false,
+    "if_local_gate_passes": "STOP_PENDING_SEPARATE_FULL_FIT_CANDIDATE_AND_UPLOAD_APPROVAL"
+  },
+  "resource_estimate": {
+    "outer_prefix_cells": 15,
+    "complete_pipeline_seeds": 3,
+    "challenger_fits": 45,
+    "challenger_outer_predictions": 45,
+    "bootstrap_replicates_per_fraction": 5000,
+    "expected_single_RTX_5090_wall_minutes_range": [20, 60],
+    "expected_peak_gpu_memory_gib_range": [2, 8],
+    "expected_append_only_disk_gib_range": [0.001, 0.05],
+    "estimate_is_static_only": true
+  }
+}

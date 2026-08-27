@@ -1,0 +1,197 @@
+{
+  "schema_version": "ocean_hackathon.frozen_submission_rounds.v1",
+  "batch_id": "20260825_two_round_challengers",
+  "team": "분당독고다이",
+  "policy_authorization": "artifacts/official_feedback_policy_amendment_20260825/authorization.json",
+  "current_official": {
+    "P1": {
+      "metric": "F1",
+      "direction": "higher_is_better",
+      "raw_score": 0.790709,
+      "candidate_source": "output/2026-08-20/ready/P1_submission.csv",
+      "submission_sha256": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3"
+    },
+    "P2": {
+      "metric": "RMSE_C",
+      "direction": "lower_is_better",
+      "raw_score": 0.541085,
+      "candidate_source": "output/2026-08-20/ready/P2_submission.csv",
+      "submission_sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+    },
+    "P3": {
+      "metric": "RMSE_M",
+      "direction": "lower_is_better",
+      "raw_score": 0.607071,
+      "candidate_source": "output/2026-08-20/ready/P3_submission.csv",
+      "submission_sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+    }
+  },
+  "calibration_policy": {
+    "signed_gain": {
+      "P1": "candidate_minus_current",
+      "P2": "current_minus_candidate",
+      "P3": "current_minus_candidate"
+    },
+    "official_improvement": "strictly positive signed gain at the platform-displayed raw-metric precision",
+    "practical_significance": "An official improvement that changes rank or reverses a team-total ordering is practically meaningful even when numerically small.",
+    "statistical_confidence": "Report local point estimate, fold/station direction, and interval separately; practical leaderboard impact does not turn an interval-crossing-zero result into statistically confirmed evidence.",
+    "promotion_rule": "Promote only when local and official directions agree. If local evidence is unavailable or only inferred, keep the result provisional even when the official metric improves.",
+    "mapping_rule": "Do not fit a local-to-official scalar mapping from only three current baselines. After the two frozen rounds, report pairwise sign/order agreement and rank correlation as descriptive calibration only.",
+    "adaptation_ban": "Round B is immutable before any Round A score and must not be changed from intermediate leaderboard feedback."
+  },
+  "rounds": {
+    "A": {
+      "directory": "20260825_round_A_existing_challengers",
+      "label": "기존 독립 개선 후보",
+      "problems": {
+        "P1": {
+          "candidate_id": "P1_IMPROVED_ENSEMBLE_V1",
+          "source": "artifacts/p1_full_improvement_cycle_20260822_v1/candidate/P1_IMPROVED_ENSEMBLE_V1.csv",
+          "expected_sha256": "8c0f4627b8da2af1c8362233e6a563e1033dd7119db126d6097272a0cc37bd6e",
+          "evidence_files": [
+            "artifacts/p1_full_improvement_cycle_20260822_v1/result.json",
+            "artifacts/p1_full_improvement_cycle_20260822_v1/qa/independent_validation.json",
+            "artifacts/p1_full_improvement_cycle_20260822_v1/manifest.json"
+          ],
+          "title": "P1 인과 이벤트 구조 앙상블 v1",
+          "one_line_summary": "오프라인 XGBoost에 누출 없는 인과 LightGBM 이벤트 구조를 결합해 이상 구간 재현율을 보강했습니다.",
+          "local_evidence": {
+            "surface": "421032-row causal walk-forward OOF",
+            "incumbent": 0.8603708380408055,
+            "candidate": 0.8609416445623342,
+            "signed_gain": 0.0005708065215287439,
+            "ci90": [-0.001000625887793999, 0.0019853048894418186],
+            "direction": "favorable",
+            "confidence": "weak_interval_crosses_zero"
+          },
+          "risk_flags": ["interval_crosses_zero", "strict_improvement_in_one_of_three_folds"]
+        },
+        "P2": {
+          "candidate_id": "P2_CONSERVATIVE_STACK_IMPROVEMENT_V1",
+          "source": "artifacts/p2_conservative_stack_improvement_v1/candidate/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+          "expected_sha256": "3960660b1e4076c88efdb927a50073aa2d8f1435bc1c7d6f2f40885aea2f2350",
+          "evidence_files": [
+            "artifacts/p2_conservative_stack_improvement_v1/result.json",
+            "artifacts/p2_conservative_stack_improvement_v1/metrics.json",
+            "artifacts/p2_conservative_stack_improvement_v1/manifest.json",
+            "artifacts/p2_public_layer_causal_residual_correction_v1/round_a_qa.json"
+          ],
+          "title": "P2 보수적 복원 스택 앙상블 v1",
+          "one_line_summary": "시간·수심 구조를 학습한 복원 모델을 0.625 가중 스택으로 결합해 수온 복원의 안정성과 정확도를 높였습니다.",
+          "local_evidence": {
+            "surface": "3-fold equal-weight official-layer-weighted outer validation",
+            "comparison_mode": "surrogate_predecessor_not_exact_official_incumbent",
+            "incumbent": 1.1158878559665548,
+            "candidate": 1.042512377552349,
+            "signed_gain": 0.07337547841420577,
+            "ci90": [0.04468915720888248, 0.10169064438448504],
+            "improved_folds": "2/3",
+            "direction": "favorable",
+            "confidence": "strong_local"
+          },
+          "risk_flags": ["one_of_three_folds_regressed", "comparator_not_exact_official_incumbent"]
+        },
+        "P3": {
+          "candidate_id": "P3_CORRECTED_FIXED_LONG_SHRINK_V4",
+          "source": "artifacts/p3_corrected_fixed_long_shrink_v4/candidate/submission.csv",
+          "expected_sha256": "607f7cd4ed2c126d5aa4eb6d8130a651ac465a0c88b4e74c112d585c3421d708",
+          "evidence_files": [
+            "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+            "artifacts/p3_corrected_fixed_long_shrink_v4/manifest.json"
+          ],
+          "title": "P3 장기리드 지속성 수축 v4",
+          "one_line_summary": "단기 예측은 유지하고 12~24시간 장기 리드만 관측 지속성 방향으로 25% 수축해 예측 오차를 안정화했습니다.",
+          "local_evidence": {
+            "surface": "181 cases, 1086 rows, 3 fixed historical windows",
+            "incumbent": 0.7791048399763751,
+            "candidate": 0.7786608799293823,
+            "signed_gain": 0.00044396004699287506,
+            "ci90": [-0.0011163550501478439, 0.0020481402282327087],
+            "improved_folds": "2/3",
+            "all_station_directions_favorable": true,
+            "direction": "favorable",
+            "confidence": "weak_interval_crosses_zero"
+          },
+          "risk_flags": ["interval_crosses_zero", "effect_size_tiny", "one_of_three_folds_regressed"]
+        }
+      }
+    },
+    "B": {
+      "directory": "20260825_round_B_target_adaptive",
+      "label": "사전고정 직교·안전 대안",
+      "problems": {
+        "P1": {
+          "candidate_id": "P1_EVENT_DAY_BALANCED_LGBM_FALLBACK_V1",
+          "source": "artifacts/p1_target_covariate_density_ratio_xgb_v1/candidate/P1_EVENT_DAY_BALANCED_LGBM_FALLBACK_V1.csv",
+          "expected_sha256": "decedb8a9b3df7d955ae9b3848cd8f985c5228e6727accbb514516507755adbf",
+          "evidence_files": [
+            "artifacts/p1_target_covariate_density_ratio_xgb_v1/result.json",
+            "artifacts/p1_target_covariate_density_ratio_xgb_v1/domain_audit.json",
+            "artifacts/p1_target_covariate_density_ratio_xgb_v1/qa/independent_validation.json",
+            "artifacts/p1_target_covariate_density_ratio_xgb_v1/manifest.json"
+          ],
+          "title": "P1 이벤트일 균형 LightGBM v1",
+          "one_line_summary": "이상 이벤트 지속시간과 정상일 균형 가중치를 적용한 3시드 LightGBM으로 희귀 이상 구간을 보강했습니다.",
+          "primary_no_go": "Density-ratio XGBoost failed the label-free ESS gate (daily 0.219616, row 0.219004, minimum station-layer 0.150930).",
+          "local_evidence": {
+            "surface": "fixed full-fraction fallback validation",
+            "signed_gain": 0.00418648488187523,
+            "ci90": [-0.00942869728988131, 0.016910901472633685],
+            "worst_station_delta": -0.010278109678992675,
+            "improved_folds": "2/3",
+            "direction": "favorable_pooled",
+            "confidence": "research_only_interval_crosses_zero"
+          },
+          "risk_flags": ["primary_density_gate_failed", "interval_crosses_zero", "worst_station_regressed"]
+        },
+        "P2": {
+          "candidate_id": "P2_PUBLIC_LAYER_CAUSAL_RESIDUAL_CORRECTION_V1_FALLBACK_BLEND50",
+          "source": "artifacts/p2_public_layer_causal_residual_correction_v1/candidate/P2_PUBLIC_LAYER_CAUSAL_RESIDUAL_CORRECTION_V1_FALLBACK_BLEND50.csv",
+          "expected_sha256": "d7bb021525012de6765e43a30253fe1ae1c4ba438801ff56d5d08ab7919ec046",
+          "evidence_files": [
+            "artifacts/p2_public_layer_causal_residual_correction_v1/result.json",
+            "artifacts/p2_public_layer_causal_residual_correction_v1/selection.json",
+            "artifacts/p2_public_layer_causal_residual_correction_v1/metrics.json",
+            "artifacts/p2_public_layer_causal_residual_correction_v1/manifest.json"
+          ],
+          "title": "P2 독립 복원모델 50:50 안전 블렌드 v1",
+          "one_line_summary": "현재 공식 예측과 보수적 스택 후보를 사전고정 50:50으로 평균해 두 모델의 구조적 오차를 완화했습니다.",
+          "primary_no_go": "The causal public-layer residual correction was an exact no-op in all 15 preregistered validation cells because no timestamp passed all support gates.",
+          "local_evidence": {
+            "surface": "fixed fallback formula; exact matched local score unavailable",
+            "formula": "0.50 * current_official_candidate + 0.50 * round_A_candidate",
+            "direction": "inferred_from_round_A_not_measured",
+            "confidence": "provisional_only"
+          },
+          "risk_flags": ["primary_correction_exact_no_op", "fallback_not_exactly_local_scored", "direction_inferred_only"]
+        },
+        "P3": {
+          "candidate_id": "P3_FIXED_LONG_SHRINK_22P5_V1",
+          "source": "artifacts/p3_target_mix_density_reweighted_catboost_v1/candidate/submission.csv",
+          "expected_sha256": "c1be3931909e16ba854ac08a57bd606517835cdeea5829be04e84ab486717aa3",
+          "evidence_files": [
+            "artifacts/p3_target_mix_density_reweighted_catboost_v1/metrics.json",
+            "artifacts/p3_target_mix_density_reweighted_catboost_v1/fallback_local_metrics.json",
+            "artifacts/p3_target_mix_density_reweighted_catboost_v1/domain_receipts.json",
+            "artifacts/p3_target_mix_density_reweighted_catboost_v1/manifest.json"
+          ],
+          "title": "P3 장기리드 지속성 수축 22.5% v1",
+          "one_line_summary": "단기 리드는 그대로 두고 12~24시간 예측만 관측 지속성 방향으로 22.5% 수축한 저위험 대안입니다.",
+          "primary_no_go": "The density-reweighted CatBoost failed the label-free 2025-H1 overlap gate (ratio ESS 0.155217, combined ESS 0.139998).",
+          "local_evidence": {
+            "surface": "181 cases, 1086 rows, 3 fixed historical windows",
+            "incumbent": 0.7791048399763751,
+            "candidate": 0.7788294787748635,
+            "signed_gain": 0.0002753612015116147,
+            "ci90": [-0.0005161372499952133, 0.0010365383108267346],
+            "improved_folds": "2/3",
+            "all_station_directions_favorable": true,
+            "direction": "favorable",
+            "confidence": "weak_interval_crosses_zero"
+          },
+          "risk_flags": ["primary_density_gate_failed", "interval_crosses_zero", "effect_size_tiny", "one_of_three_folds_regressed"]
+        }
+      }
+    }
+  }
+}

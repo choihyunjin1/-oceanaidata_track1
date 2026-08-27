@@ -1,0 +1,181 @@
+{
+  "schema_version": "p2_joint_hydrographic_multitask_layer4.checkpoint_v1",
+  "experiment_id": "p2_joint_hydrographic_multitask_layer4_checkpoint_v1",
+  "problem": "P2",
+  "status": "APPEND_ONLY_RESEARCH_ONLY_READY_FOR_PREFLIGHT",
+  "research_only": true,
+  "exact_official_incumbent_comparison": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "source_boundary": {
+    "allowed_files": {
+      "README.md": {
+        "sha256": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+        "bytes": 1616
+      },
+      "observations.csv": {
+        "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+        "bytes": 49058719
+      }
+    },
+    "forbidden_semantic_reads": [
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_interp.csv",
+      "score.py"
+    ],
+    "active_outer_target_temp_psal_decoded_only_after_aggregate_commitment": true
+  },
+  "pinned_implementation": {
+    "pure_model": {
+      "path": "src/p2_restore/joint_hydrographic_multitask.py",
+      "sha256": "8d667256fe37e5b6bf72e09f233efd17b514b40dae1597a047c0c343a344a314",
+      "bytes": 18491
+    },
+    "r3_engine": {
+      "path": "src/p2_restore/joint_hydrographic_multitask_layer4_execution_r3.py",
+      "sha256": "bea31df11c4c228ec68722994dcd10525a85ba5e50eddd075098d939dffe0f7c",
+      "bytes": 82609
+    },
+    "r3_config": {
+      "path": "configs/experiments/p2_joint_hydrographic_multitask_layer4_execution_r3.json",
+      "sha256": "a09adb67a5edac484c4a2c0bbaa402ada4b12f155a823b4a796c3aafe5748747",
+      "bytes": 19723
+    }
+  },
+  "checkpoint_implementation": {
+    "engine": {
+      "path": "src/p2_restore/joint_hydrographic_multitask_layer4_checkpoint_v1.py",
+      "sha256": "2d1cf0a88aaa8b19c973721a157d21a31991f2e2ac5e23df514f11ebbfe35e3b",
+      "bytes": 55419
+    },
+    "runner": {
+      "path": "scripts/run_p2_joint_hydrographic_multitask_layer4_checkpoint_v1.py",
+      "sha256": "9e6bacb55148787fdc9129a1ead2d20b7aa492fba8112906d0d0974e055320c2",
+      "bytes": 1686
+    },
+    "tests": {
+      "path": "tests/test_p2_joint_hydrographic_multitask_layer4_checkpoint_v1.py",
+      "sha256": "31041e85bb7e2c87e2d59e9d43d2ecef6f0db7b35e756f56871f862f15681412",
+      "bytes": 3656
+    }
+  },
+  "reference_predictions": {
+    "0.4": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_040.csv",
+      "sha256": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626",
+      "bytes": 9689175
+    },
+    "0.55": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_055.csv",
+      "sha256": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168",
+      "bytes": 9725466
+    },
+    "0.7": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_070.csv",
+      "sha256": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf",
+      "bytes": 9776617
+    },
+    "0.85": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_085.csv",
+      "sha256": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8",
+      "bytes": 9832417
+    },
+    "1.0": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_100.csv",
+      "sha256": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06",
+      "bytes": 9826903
+    }
+  },
+  "r3_final_comparator": {
+    "path": "artifacts/p2_joint_hydrographic_multitask_layer4_execution_r3/learning_curve_oof.csv",
+    "sha256": "c9d3cf8992734b66eb5e2ea1664d3a10965f74ad5c4661f1a539c77634d2615a",
+    "bytes": 75500178,
+    "semantic_read_phase": "AFTER_OWN_AGGREGATE_COMMITMENT_ONLY"
+  },
+  "folds": [
+    {
+      "name": "outer_2024_sep_oct",
+      "start_kst": "2024-09-01T00:00:00+09:00",
+      "stop_kst": "2024-11-01T00:00:00+09:00"
+    },
+    {
+      "name": "outer_2025_may_jun",
+      "start_kst": "2025-05-01T00:00:00+09:00",
+      "stop_kst": "2025-07-01T00:00:00+09:00"
+    },
+    {
+      "name": "outer_2025_jul_aug",
+      "start_kst": "2025-07-01T00:00:00+09:00",
+      "stop_kst": "2025-09-01T00:00:00+09:00"
+    }
+  ],
+  "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+  "seed_ids": [20260823, 20260824, 20260825],
+  "prefix_pins": [
+    {"fold": "outer_2024_sep_oct", "fraction": 0.4, "timestamps": 6129, "timestamp_order_sha256": "977ccdc9946969ac09e4ddebf4d23aa21db7afae0347b0bca4d57ae0d368edca", "training_chunks": 18},
+    {"fold": "outer_2024_sep_oct", "fraction": 0.55, "timestamps": 8428, "timestamp_order_sha256": "f11c535aa26bb86bdbc69a42d2fd7861a14750cd39f3b18bdf4985b3481c4f59", "training_chunks": 24},
+    {"fold": "outer_2024_sep_oct", "fraction": 0.7, "timestamps": 10726, "timestamp_order_sha256": "82e2683c158c606c5952051df7d172d8dff5af6ff03d78b6fb00254c18257ac2", "training_chunks": 30},
+    {"fold": "outer_2024_sep_oct", "fraction": 0.85, "timestamps": 13024, "timestamp_order_sha256": "94e172a46caef0571383476c998ccd74c060be1bb47cb39b0ccf3696c8b6802e", "training_chunks": 36},
+    {"fold": "outer_2024_sep_oct", "fraction": 1.0, "timestamps": 15322, "timestamp_order_sha256": "95454eb3e242dda58c4901bcef3acd5f0062a8ff908d1df70c4114773bbc7b35", "training_chunks": 42},
+    {"fold": "outer_2025_may_jun", "fraction": 0.4, "timestamps": 12584, "timestamp_order_sha256": "daa35d3301fe57eccf1f24343ac3f2e8f1e12d39b3aa2315caa5421581ecadfe", "training_chunks": 34},
+    {"fold": "outer_2025_may_jun", "fraction": 0.55, "timestamps": 17303, "timestamp_order_sha256": "e55693a7409a60ac90f6fb2f8b22c741707c4614de8aead50e84631d1f5c32d7", "training_chunks": 47},
+    {"fold": "outer_2025_may_jun", "fraction": 0.7, "timestamps": 22022, "timestamp_order_sha256": "dffd622ff779eb7e643b2d89b68868e46c12f076097a8447572d062c692f09c6", "training_chunks": 60},
+    {"fold": "outer_2025_may_jun", "fraction": 0.85, "timestamps": 26741, "timestamp_order_sha256": "c68b84ffa8a3eac89a11228eae4ef96eac1b0b546afec1d0e14a27332860ef77", "training_chunks": 72},
+    {"fold": "outer_2025_may_jun", "fraction": 1.0, "timestamps": 31459, "timestamp_order_sha256": "75ad1de46507002cc9f56c58d431fa9f21cfea70157b531e0a82f3eb6a923e64", "training_chunks": 85},
+    {"fold": "outer_2025_jul_aug", "fraction": 0.4, "timestamps": 15972, "timestamp_order_sha256": "d4445b19de8bed903cfb7f1b58d3cdaf74848ae07bd1ca6233064c371da7df28", "training_chunks": 44},
+    {"fold": "outer_2025_jul_aug", "fraction": 0.55, "timestamps": 21961, "timestamp_order_sha256": "6b35645fae508afd1c79f9a72dc397b8eee359c2ff735523528895905d112686", "training_chunks": 60},
+    {"fold": "outer_2025_jul_aug", "fraction": 0.7, "timestamps": 27951, "timestamp_order_sha256": "75ef670bb039b10526ed1fa6a4d3b79191f7c4aaed5b7833c900ec9c2bddf8b8", "training_chunks": 75},
+    {"fold": "outer_2025_jul_aug", "fraction": 0.85, "timestamps": 33940, "timestamp_order_sha256": "f086fdafe66919d95fe07ca34ea6054ee09dfcf79bf76393ef116b4ce7541817", "training_chunks": 91},
+    {"fold": "outer_2025_jul_aug", "fraction": 1.0, "timestamps": 39929, "timestamp_order_sha256": "b6bd5e3b6b9d7f94d79e7c5bbef2988993bd147300f4dc06993ca16484b03169", "training_chunks": 108}
+  ],
+  "model_and_training": {
+    "input_channels": 54,
+    "hidden_width": 160,
+    "dilations": [1, 2, 4, 8, 16, 32],
+    "dropout": 0.05,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.001,
+    "chunk_length": 512,
+    "chunk_stride": 384,
+    "batch_size": 12,
+    "gradient_clip_norm": 1.0,
+    "vertical_difference_weight": 0.25,
+    "parameter_count": 1021602,
+    "layer4_clip_c": [-5.0, 45.0],
+    "cuda_bfloat16": true
+  },
+  "checkpoint_protocol": {
+    "inner_train_fraction": 0.75,
+    "inner_embargo_days": 7,
+    "minimum_inner_calibration_layer4_rows": 144,
+    "max_epochs": 120,
+    "patience_epochs": 30,
+    "evaluation_interval": 1,
+    "selection_metric": "UNIQUE_TIMESTAMP_LAYER4_TEMPERATURE_RMSE_C",
+    "selection_rule": "EXACT_MINIMUM_THEN_EARLIEST_EPOCH",
+    "seed_epoch_aggregation": "MEDIAN_OF_THREE",
+    "full_prefix_refit": true,
+    "outer_truth_available_to_checkpoint_selection": false
+  },
+  "metric_contract": {
+    "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+    "aggregate": "SQRT_MEAN_OF_THREE_OUTER_FOLD_WEIGHTED_MSE",
+    "primary_comparisons": [
+      "CHECKPOINT_V1_MINUS_R3_FINAL_EPOCH",
+      "CHECKPOINT_V1_MINUS_ARCHITECTURE_MATCHED_STAGE_A"
+    ],
+    "promotion_status": "DIAGNOSTIC_ONLY_OUTER_WINDOWS_PREVIOUSLY_EXPOSED"
+  },
+  "output": {
+    "path": "artifacts/p2_joint_hydrographic_multitask_layer4_checkpoint_v1",
+    "attempt_lock": "attempt.lock",
+    "prediction_commitment": "prediction_commitment.json",
+    "training_receipt": "training_receipt.json",
+    "metrics": "metrics.json",
+    "oof": "checkpoint_oof.csv",
+    "manifest": "manifest.json",
+    "manifest_sidecar": "manifest.sha256",
+    "seal": "seal.json"
+  }
+}

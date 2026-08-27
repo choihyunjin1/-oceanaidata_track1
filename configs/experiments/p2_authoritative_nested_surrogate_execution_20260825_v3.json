@@ -1,0 +1,97 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_execution.v3",
+  "experiment_id": "p2_authoritative_nested_surrogate_execution_20260825_v3",
+  "created_at_kst": "2026-08-25T22:54:00+09:00",
+  "status": "SEALED_EXECUTION_READY_DRY_RUN_NO_ACTUAL_FIT",
+  "base_config": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_execution_20260825_v2.json",
+    "sha256": "b05fe56730ef8116b0aa6b914823dedfbb878595190d5d7a9366987eb07685b4"
+  },
+  "supersedes": {
+    "status": "SUPERSEDES_TERMINAL_PREFIT_V2_NEVER_CROSS_RESUME",
+    "reason": "v2 split denominator included public-only timestamps and failed before its first model fit",
+    "v2_readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v2",
+    "v2_preexecution_seal_sha256": "1d00be8c4dcec0ec120024b68f1527f29e50c80b5131a6afdf5f738b56aae673",
+    "v2_actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v2",
+    "v2_terminal_receipt_sha256": "6b7ea718ab80c7379da70303ef62c973d92c396ee0c18795c809b7395535d01a",
+    "v2_label_support_audit_sha256": "da8add0b3af691d772254658f924060299ac42ee1b56aef1e1c1516e20ffa5d6",
+    "v2_actual_model_fits": 0,
+    "cross_namespace_job_or_cell_reuse_allowed": false
+  },
+  "parent_contract": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v3.json",
+    "sha256": "98c13756e6e431a5f47b7b5127de5f1692e7e8c8a44a36f95a7b819892e6a06a",
+    "contract_seal_path": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v3/contract_seal.json",
+    "contract_seal_sha256": "2cc5770559bfd0306400e0659909e5a4e36ca45c2617da300a1c4a8561a1a7d1"
+  },
+  "source_pins": {
+    "src/p2_restore/authoritative_nested_surrogate_execution_v3.py": "36e7eee973b5e7f697a2ff132d0cb09c36a72dd727203ee9357e8d5281bd4f86",
+    "tests/test_p2_authoritative_nested_surrogate_execution_v3.py": "f51c2abd8aefb26d399d56d47c6b602a93b0e2e909a8b21a7096c060f30e21ff"
+  },
+  "data_contract": {
+    "semantic_preflight_columns": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "temp",
+      "psal",
+      "depth",
+      "nominal_depth"
+    ],
+    "semantic_preflight_allowed_file": "observations.csv",
+    "official_test_sample_submission_allowed": false
+  },
+  "supervised_population_v3": {
+    "ledger_id": "P2_TARGET_234_TEMP_PSAL_ROUTER_DEEP_COMMON_V3",
+    "target_layers": [2, 3, 4],
+    "finite_columns": ["temp", "psal"],
+    "expected_common_supervised_time_count": 54711,
+    "expected_ordered_time_sha256": "488a5b3f79bdd9b8b1952bdb3ae9e2b1f6ff58c60449a331fde3b00c411cb26b",
+    "prefix_fraction_denominator": "eligible supervised common-ledger timestamp count",
+    "deep_continuous_public_context_preserved": true,
+    "nonregistered_target_labels_masked": true
+  },
+  "semantic_preflight_gates": {
+    "must_complete_before_actual_directory_lock_partial_or_fit": true,
+    "outer_prefix_scopes": 15,
+    "inner_scopes": 45,
+    "minimum_router_train_rows_per_layer": 100,
+    "minimum_router_validation_rows_per_layer": 1,
+    "minimum_deep_train_rows_per_layer": 1,
+    "minimum_deep_validation_rows_per_layer": 1,
+    "minimum_deep_supervised_chunks": 1,
+    "minimum_router_state_partition_rows": 100,
+    "minimum_meta_oof_rows_per_layer": 1,
+    "minimum_full_deep_supervised_chunks": 1,
+    "expected_outer_evaluation_rows_per_fraction": 78156,
+    "receipt_sha256_bound_to_preexecution_seal": true,
+    "actual_model_fits": 0,
+    "predictions": 0,
+    "scores": 0
+  },
+  "immutability_receipt": {
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "component_hyperparameters_changed": false,
+    "meta_refit_changed": false,
+    "postprocess_changed": false,
+    "family_views_changed": false,
+    "metrics_changed": false
+  },
+  "checkpoint_resume": {
+    "exclusive_process_lock": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v3/execution.lock",
+    "namespace": "p2_authoritative_nested_surrogate_actual_20260825_v3",
+    "v1_or_v2_job_reuse_allowed": false
+  },
+  "exact_command": "$env:OMP_NUM_THREADS='4'; $env:MKL_NUM_THREADS='4'; $env:OPENBLAS_NUM_THREADS='4'; $env:NUMEXPR_NUM_THREADS='4'; $env:CUDA_VISIBLE_DEVICES='0'; .\\.venv-p1\\Scripts\\python.exe scripts\\run_p2_authoritative_nested_surrogate_45cell_v3.py --config \"configs\\experiments\\p2_authoritative_nested_surrogate_execution_20260825_v3.json\" --execute --data-dir \"$env:P2_DATA_DIR\" --preexecution-seal \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v3\\preexecution_seal.json\" --authorization \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v3\\EXECUTION_AUTHORIZATION.json\"",
+  "output": {
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v3",
+    "actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v3",
+    "append_only": true,
+    "readiness_prediction_files_written": false,
+    "readiness_model_checkpoints_written": false
+  }
+}

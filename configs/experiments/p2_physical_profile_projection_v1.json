@@ -1,0 +1,27 @@
+{
+  "experiment_id": "p2_physical_profile_projection_v1",
+  "status": "authorized_local_adaptive_research",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_after_outer_exposure": true,
+  "fresh_holdout_claimed": false,
+  "hypothesis": "Public layer-1/layer-5 endpoints can safely constrain reconstructed middle-layer profiles to the observed envelope and endpoint-implied vertical order.",
+  "single_change": "Apply unit-weight three-layer isotonic projection followed by clipping to the simultaneous public layer-1/layer-5 temperature envelope.",
+  "no_op": "If either public endpoint is missing or all three target-layer predictions are not present, preserve the frozen prediction exactly.",
+  "inputs": {
+    "prediction": "artifacts/p2_deep_finalists_v1/stacked_oof.parquet::lobo_prediction",
+    "submission": "submissions/p2/P2_DEEP_STACK_V1.csv",
+    "public_covariates": ["layer 1 temp", "layer 5 temp"],
+    "target_labels_used_by_transform": false,
+    "external_values": false
+  },
+  "validation": {
+    "metric": "pooled row-level RMSE in Celsius",
+    "paired_bootstrap": "2000 KST-day replicates, seed 20260816",
+    "required_cuts": ["block", "layer", "endpoint coverage", "active share"]
+  },
+  "submission": {
+    "path": "submissions/p2/P2_PHYSICAL_PROFILE_PROJECTION_V1.csv",
+    "upload": false
+  }
+}

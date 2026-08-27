@@ -1,0 +1,69 @@
+{
+  "schema_version": "ocean_hackathon.leaderboard_gap_research.v1",
+  "generated_at_kst": "2026-08-26T04:02:55+09:00",
+  "leaderboard_observed_at_kst_approx": "2026-08-26T03:49:00+09:00",
+  "team": "분당독고다이",
+  "official_urls": {
+    "leaderboard": "https://oceanaidata.org/app/leaderboard",
+    "submissions": "https://oceanaidata.org/app/submissions",
+    "p1": "https://oceanaidata.org/app/problems/5",
+    "p2": "https://oceanaidata.org/app/problems/6",
+    "p3": "https://oceanaidata.org/app/problems/7"
+  },
+  "leaderboard_top5": [
+    {"rank": 1, "team": "ChangCv", "p1_points": 30.885889, "p2_points": 28.275657, "p3_points": 23.517058, "total_points": 82.678604},
+    {"rank": 2, "team": "OceanWorld", "p1_points": 29.310804, "p2_points": 27.621657, "p3_points": 24.072682, "total_points": 81.005143},
+    {"rank": 3, "team": "분당독고다이", "p1_points": 27.850529, "p2_points": 26.544054, "p3_points": 23.698280, "total_points": 78.092863},
+    {"rank": 4, "team": "Equivalent Exchange", "p1_points": 26.456883, "p2_points": 26.736365, "p3_points": 24.014217, "total_points": 77.207465},
+    {"rank": 5, "team": "OCN", "p1_points": 26.837113, "p2_points": 25.158971, "p3_points": 23.601441, "total_points": 75.597525}
+  ],
+  "current_position": {
+    "rank": 3,
+    "total_points": 78.092863,
+    "gap_to_rank_2_points": 2.912280,
+    "gap_to_rank_1_points": 4.585741
+  },
+  "team_official_submissions": {
+    "original": {"p1_f1": 0.790709, "p2_rmse_c": 0.541085, "p3_rmse_m": 0.607071},
+    "round_a": {"p1_f1": 0.786145, "p2_rmse_c": 0.713520, "p3_rmse_m": 0.611680},
+    "round_b": {"p1_f1": 0.793710, "p2_rmse_c": 0.599921, "p3_rmse_m": 0.609346},
+    "provenance_note": "Official submission-management page was inspected read-only. No submission CSV was opened and no upload was performed."
+  },
+  "score_mapping_inferred_from_three_team_observations": {
+    "p1_points": "6.7536890869 + 26.5800428671 * F1",
+    "p2_points": "33.3333252308 - 12.5475122444 * RMSE_C",
+    "p3_points": "33.3339603647 - 15.8724138238 * RMSE_m",
+    "caveat": "Linear transforms are inferred from three rounded team observations and are used for planning, not as an official scoring specification."
+  },
+  "problem_headroom": [
+    {"problem": "P1", "current_points": 27.850529, "best_points": 30.885889, "point_headroom": 3.035360, "current_metric": 0.793710, "best_metric_inferred": 0.9079067342, "metric_change_to_best": 0.1141967342, "metric": "F1; higher is better"},
+    {"problem": "P2", "current_points": 26.544054, "best_points": 28.362053, "point_headroom": 1.817999, "current_metric": 0.541085, "best_metric_inferred": 0.3961958462, "metric_change_to_best": -0.1448891538, "metric": "RMSE C; lower is better"},
+    {"problem": "P3", "current_points": 23.698280, "best_points": 24.072682, "point_headroom": 0.374402, "current_metric": 0.607071, "best_metric_inferred": 0.5834826679, "metric_change_to_best": -0.0235883321, "metric": "RMSE m; lower is better"}
+  ],
+  "planning_scenarios": [
+    {"scenario": "현재", "p1_f1": 0.793710, "p2_rmse_c": 0.541085, "p3_rmse_m": 0.607071, "estimated_gain_points": 0.0, "estimated_total_points": 78.092863},
+    {"scenario": "2점 실용 목표", "p1_f1": 0.825000, "p2_rmse_c": 0.450000, "p3_rmse_m": 0.595000, "estimated_gain_points": 2.166176, "estimated_total_points": 80.259039},
+    {"scenario": "3점 추격 목표", "p1_f1": 0.840000, "p2_rmse_c": 0.430000, "p3_rmse_m": 0.583483, "estimated_gain_points": 2.998629, "estimated_total_points": 81.091492},
+    {"scenario": "현 2위 지표 동률", "p1_f1": 0.848649, "p2_rmse_c": 0.455203, "p3_rmse_m": 0.583483, "estimated_gain_points": 2.912285, "estimated_total_points": 81.005148}
+  ],
+  "local_official_transport": [
+    {"problem_surface": "P1 common local", "round_a_local": "improve", "round_a_official": "worse", "round_b_local": "improve", "round_b_official": "improve", "selection_rule": "Use Round B as backbone; require effect materially larger than local uncertainty."},
+    {"problem_surface": "P2 exact same-season and p100", "round_a_local": "worse", "round_a_official": "worse", "round_b_local": "worse", "round_b_official": "worse", "selection_rule": "Require intersection of exact same-season and locked p100 gates; ignore pooled surrogate."},
+    {"problem_surface": "P3 shrink local", "round_a_local": "improve", "round_a_official": "worse", "round_b_local": "improve", "round_b_official": "worse", "selection_rule": "Reject sub-millimetre local gains; require at least 0.030 m local gain with CI and slice gates."}
+  ],
+  "registered_research_priority": [
+    {"priority": 1, "problem": "P1", "experiment": "P1_RB_nonspike_long_event_residual_v1", "structural_change": "Recover only connected non-spike medium/long false-negative interiors on the frozen Round-B backbone.", "primary_gate": "Delta F1 >= +0.003; CI90 lower > 0; recall +0.008; precision loss <= 0.002; no new singleton or disconnected event.", "maximum_fit_budget": 18, "wall_cap_minutes": 30, "status": "NOT_YET_EXECUTED"},
+    {"priority": 2, "problem": "P2", "experiment": "P2_NCR_LGBM_v1", "structural_change": "Learn dimensionless endpoint-normalized vertical curvature instead of absolute temperature residual.", "primary_gate": "Exact 2024 Sep-Oct Delta RMSE <= -0.015 C and CI90 upper <= -0.005; then locked p100 Delta <= -0.010 with 2/3 fold and layer wins.", "maximum_fit_budget": 9, "wall_cap_minutes": 30, "status": "NOT_YET_EXECUTED"},
+    {"priority": 3, "problem": "P3", "experiment": "P3_ERA5_context_transfer_v1", "structural_change": "Pretrain future-transition representation on 2014-2020 ERA5 and transfer through matched local-only control.", "primary_gate": "Three held source years pass; local pooled Delta RMSE <= -0.030 m; CI90 upper < 0; 2/3 windows improve.", "maximum_fit_budget": null, "wall_cap_minutes": null, "status": "FIXED_EXPERIMENT_IN_PROGRESS"},
+    {"priority": 4, "problem": "P1", "experiment": "P1_RB_station_season_group_DRO_v1", "structural_change": "Equalize robust group risk across station x season x coverage without target-density ratios.", "primary_gate": "Only after P1 residual passes; fixed single strength; station-season transport stability.", "maximum_fit_budget": 9, "wall_cap_minutes": 20, "status": "CONDITIONAL_NOT_EXECUTED"},
+    {"priority": 5, "problem": "P2", "experiment": "P2_GBR_LGBM_v1", "structural_change": "Apply one fixed group-balanced objective to the incumbent family instead of adding another stack or gate.", "primary_gate": "Same exact and p100 intersection gates as NCR; no combination or post-result weight changes.", "maximum_fit_budget": 9, "wall_cap_minutes": 30, "status": "CONDITIONAL_NOT_EXECUTED"},
+    {"priority": 6, "problem": "P3", "experiment": "P3_ERA5_future_equivalence_embedding_v2", "structural_change": "Past-only metric embedding supervised by future-trajectory equivalence on source years.", "primary_gate": "Only if v1 source integrity passes but representation/viewpoint/solution gate fails; one fixed attempt.", "maximum_fit_budget": null, "wall_cap_minutes": null, "status": "CONDITIONAL_NOT_EXECUTED"}
+  ],
+  "hard_constraints": {
+    "official_test_sample_submission_reads": 0,
+    "submission_candidates_created": 0,
+    "uploads_performed": 0,
+    "p3_fixed_contract_mutations": 0,
+    "result_driven_tuning_allowed": false
+  }
+}

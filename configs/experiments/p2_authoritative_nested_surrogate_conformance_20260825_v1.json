@@ -1,0 +1,121 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_conformance.v1",
+  "experiment_id": "p2_authoritative_nested_surrogate_conformance_20260825_v1",
+  "created_at_kst": "2026-08-25T21:25:00+09:00",
+  "status": "SEALED_BEFORE_CONFORMANCE_RESULTS_NO_45_CELL_FIT",
+  "problem": "P2",
+  "research_only": true,
+  "parent_contract_mutation_allowed": false,
+  "actual_45_cell_fit_authorized": false,
+  "official_test_access_authorized": false,
+  "sample_submission_access_authorized": false,
+  "submission_candidate_access_authorized": false,
+  "public_score_selection_authorized": false,
+  "submission_generation_authorized": false,
+  "upload_authorized": false,
+  "p3_process_mutation_authorized": false,
+  "parent_contract": {
+    "config_path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v1.json",
+    "config_sha256": "8b442b31ec1b2af8d1f356d728cc83aa94636c34528e26adad48ff268f2ce2b2",
+    "artifact_contract_seal_path": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v1/contract_seal.json",
+    "artifact_contract_seal_sha256": "7686c20002f5f7503c60f056950bfb69918588425841f96c9880025ad59dd27a",
+    "decision_sha256": "ab0c937d74ef531c399f46c1cf44ae625a29f01118855d95c05928963dd06346",
+    "decisive_recon_preregistration_path": "artifacts/decisive_local_recon_20260825_v1/preregistration.json",
+    "decisive_recon_preregistration_sha256": "6ead6ca745a0c204f04377c2510a2206b61fe6ccf976963fdb7a7cccc070b073"
+  },
+  "source_pins": {
+    "src/p2_restore/authoritative_nested_surrogate_contract.py": "6bd0d5883831aee57b29f135f45a058ac86bb6ab9fab42c6aace2fd845f2016f",
+    "src/p2_restore/deep_data.py": "aab7b89d47715f3b6e3c3543ef39cb5d450974e3a415370d364c3f5c875ec95c",
+    "src/p2_restore/deep_training.py": "d1fd74e62bee2f483256afac479b3777da0e285417aab7f1d65df6664a178139",
+    "src/p2_restore/model.py": "5a1b4af4f7092e490741f576b1bf7595ff7e2f38a0d1d3605db9c865b5c20020",
+    "src/p2_restore/regime_gate.py": "d0e384ce7d442a0091a2ac2081df899b7acf78a291bf3a1b311b99b0d3709b45"
+  },
+  "train_metadata_contract": {
+    "filename": "observations.csv",
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "bytes": 49058719,
+    "columns_read": ["station", "layer", "time"],
+    "value_columns_read": [],
+    "allowed_files": ["observations.csv"],
+    "official_test_sample_submission_files_allowed": []
+  },
+  "pending_dimensions": {
+    "prefix mask semantics": {
+      "implementation": "joint target-layer TEMP/PSAL observation mask plus deep-panel physical subset adapters",
+      "required_assertions": [
+        "target TEMP and PSAL mask identically outside allowed prefix",
+        "public-layer values remain unchanged",
+        "train_fold complement equals only registered inner training timestamps",
+        "train_full_model sees only registered full-prefix timestamps",
+        "seven-day embargo and later timestamps are absent from fit panels"
+      ]
+    },
+    "component OOF availability": {
+      "implementation": "ordered five-component nested OOF ledger with registered-key and truth digest equality",
+      "component_order": [
+        "router_400",
+        "depth_query_bitcn",
+        "moment_units_scratch",
+        "lsti_style",
+        "timemixerpp_style"
+      ],
+      "required_assertions": [
+        "three expanding inner folds",
+        "no duplicate or nonfinite OOF rows",
+        "same ordered key and truth surface across all components",
+        "meta fits consume only the current scope ledger"
+      ]
+    },
+    "epoch and meta-refit semantics": {
+      "implementation": "earliest min-RMSE checkpoint, middle of three integer epochs, full-prefix refit, fresh per-scope NNLS stack and fixed-feature soft gate",
+      "gate_regularization": 10.0,
+      "required_assertions": [
+        "earliest epoch wins exact RMSE ties",
+        "middle of exactly three best epochs sets full-prefix epochs",
+        "no epoch, stack, or gate parameter is reused across scopes",
+        "NNLS stack is nonnegative and normalized sum-one",
+        "all-zero NNLS uses uniform weights"
+      ]
+    }
+  },
+  "complete_pipeline_seed_concretization": {
+    "namespace": "P2_AUTH_NESTED_V1",
+    "prefix_fraction_token": "fixed two-decimal ASCII such as 0.40",
+    "phase_tokens": ["inner_1", "inner_2", "inner_3", "full"],
+    "rule": "int(SHA256('P2_AUTH_NESTED_V1|complete_seed|component|outer_fold|prefix_fraction_2dp|phase')[:16], 16) mod 2147483647"
+  },
+  "dry_run_contract": {
+    "synthetic_target_values_allowed": true,
+    "real_training_metadata_allowed": true,
+    "real_train_target_values_allowed": false,
+    "new_model_fits": 0,
+    "new_scores": 0,
+    "required_outer_prefix_cells": 15,
+    "required_seeded_cells": 45,
+    "expected_component_fit_count_if_later_authorized": 900,
+    "expected_deep_fit_count_if_later_authorized": 720,
+    "expected_router_fit_count_if_later_authorized": 180
+  },
+  "resource_estimation_reference": {
+    "historical_result_path": "artifacts/p2_deep_finalists_v1/result.json",
+    "historical_result_sha256": "6e8324908234f3071078e4846393de30776a422e6b6cea6d62a5f1953be2c8ac",
+    "historical_elapsed_seconds": 272.0385468000022,
+    "historical_checkpoint_count": 20,
+    "historical_checkpoint_bytes": 154184236,
+    "estimate_is_not_a_45_cell_benchmark": true,
+    "future_cpu_thread_cap": 4
+  },
+  "decision_rule": {
+    "GO_TECHNICAL_CONFORMANCE": "all three pending dimensions, source APIs, 15/45 plan, synthetic receipts, metadata-only access, unit tests, and hash QA pass",
+    "BLOCKED_TECHNICAL": "any registered semantic assertion or hash pin fails",
+    "BLOCKED_AUTHORIZATION_ONLY": "technical conformance passes but actual 45-cell training remains prohibited by the parent contract"
+  },
+  "portable_single_command": ".\\.venv-p1\\Scripts\\python.exe scripts\\validate_p2_authoritative_nested_surrogate_conformance_v1.py --execute --data-dir \"$env:P2_DATA_DIR\"",
+  "output": {
+    "directory": "artifacts/p2_authoritative_nested_surrogate_conformance_20260825_v1",
+    "append_only": true,
+    "aggregate_only": true,
+    "prediction_files_written": false,
+    "model_checkpoints_written": false
+  }
+}
