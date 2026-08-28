@@ -1,0 +1,245 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "title": "최신 리더보드가 증명하는 문제별 개선여지",
+    "description": "공식 Public 리더보드 격차, 팀 제출 이력, 공개 코드 탐색, 1차 문헌을 이중 교차검증한 기술 보고서",
+    "generatedAt": "2026-08-29T02:35:00+09:00",
+    "sources": [
+      {
+        "id": "official_leaderboard",
+        "label": "2026 해양과학 AI 빅데이터 경진대회 공식 리더보드",
+        "href": "https://oceanaidata.org/app/leaderboard",
+        "query": {
+          "description": "2026-08-29 01:55:20 KST 로그인 참가자 화면의 read-only live snapshot",
+          "filters": ["25 visible teams", "18 teams with all three scores", "Public best scores only"],
+          "metric_definitions": ["Total is the sum of each problem's best Public score", "Each problem is worth 100/3 points"]
+        }
+      },
+      {
+        "id": "official_problems",
+        "label": "공식 문제 정의 P1 P2 P3",
+        "href": "https://oceanaidata.org/app/problems",
+        "query": {
+          "description": "문제별 평가 지표, 데이터 범위, baseline, Public 경고와 구조적 힌트",
+          "filters": ["P1 problem 5", "P2 problem 6", "P3 problem 7"]
+        }
+      },
+      {
+        "id": "official_submissions",
+        "label": "분당독고다이 공식 제출관리",
+        "href": "https://oceanaidata.org/app/submissions",
+        "query": {
+          "description": "팀의 공식 원지표와 점수 쌍; 경험적 점수 변환 추정에 사용",
+          "metric_definitions": ["P1 F1 higher is better", "P2 RMSE C lower is better", "P3 RMSE m lower is better"]
+        }
+      },
+      {
+        "id": "snapshot",
+        "label": "리더보드 격차 분석 스냅샷",
+        "path": "reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json",
+        "query": {"description": "정확한 격차, 순위, 상관, 종단 gap closure, 경험적 점수 변환"}
+      },
+      {
+        "id": "research_ledger",
+        "label": "주장 근거 원장",
+        "path": "reports/leaderboard_headroom_double_research_20260829_v1/claim-source-ledger.md",
+        "query": {"description": "주장별 출처, 확신도, 반증과 한계"}
+      },
+      {
+        "id": "sors_paper",
+        "label": "SORS 계절 성층 1차 연구",
+        "href": "https://doi.org/10.3390/w16010023"
+      },
+      {
+        "id": "nhits_paper",
+        "label": "N-HiTS AAAI 2023",
+        "href": "https://doi.org/10.1609/aaai.v37i6.25854"
+      },
+      {
+        "id": "wave_bias_paper",
+        "label": "유의파고 실시간 편향보정 Ocean Modelling 2024",
+        "href": "https://doi.org/10.1016/j.ocemod.2023.102289"
+      },
+      {
+        "id": "selection_bias_paper",
+        "label": "Cawley and Talbot JMLR 2010",
+        "href": "https://www.jmlr.org/papers/v11/cawley10a.html"
+      }
+    ],
+    "charts": [
+      {
+        "id": "gap_chart",
+        "title": "문제별 Public 최고점까지의 격차",
+        "subtitle": "P1의 3.096057점이 가장 큰 구조적 연구 여지다.",
+        "type": "bar",
+        "dataset": "problem_headroom",
+        "sourceId": "official_leaderboard",
+        "source": {
+          "id": "official_leaderboard",
+          "label": "Official leaderboard snapshot",
+          "href": "https://oceanaidata.org/app/leaderboard",
+          "query": {
+            "engine": "sqlite",
+            "language": "sql",
+            "sql": "SELECT 'P1' AS problem, 28.909341 AS our_score, 32.005398 AS best_score, 3.096057 AS gap_points, 7 AS our_rank UNION ALL SELECT 'P2', 27.934759, 28.633273, 0.698514, 6 UNION ALL SELECT 'P3', 24.203126, 24.784043, 0.580917, 2",
+            "description": "Problem-level headroom from the 2026-08-29 01:55:20 KST official Public leaderboard snapshot."
+          }
+        },
+        "valueFormat": "number",
+        "options": {"orientation": "horizontal", "grouping": "grouped"},
+        "encodings": {
+          "x": {"field": "problem", "type": "nominal", "label": "문제"},
+          "y": {"field": "gap_points", "type": "quantitative", "label": "최고점까지 격차"},
+          "tooltip": [
+            {"field": "our_score", "type": "quantitative", "label": "우리 점수"},
+            {"field": "best_score", "type": "quantitative", "label": "문제별 최고"},
+            {"field": "our_rank", "type": "quantitative", "label": "문제 순위"}
+          ]
+        }
+      },
+      {
+        "id": "gap_history_chart",
+        "title": "8월 27일 대비 문제별 최고점 격차",
+        "subtitle": "합계 2.097452점의 headroom을 실제로 회수했다.",
+        "type": "bar",
+        "dataset": "gap_history",
+        "sourceId": "snapshot",
+        "source": {
+          "id": "snapshot",
+          "label": "Longitudinal headroom snapshot",
+          "path": "reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json",
+          "query": {
+            "engine": "sqlite",
+            "language": "sql",
+            "sql": "SELECT 'P1' AS problem, '2026-08-27' AS snapshot, 3.512662 AS gap_points UNION ALL SELECT 'P1','2026-08-29',3.096057 UNION ALL SELECT 'P2','2026-08-27',2.001464 UNION ALL SELECT 'P2','2026-08-29',0.698514 UNION ALL SELECT 'P3','2026-08-27',0.958814 UNION ALL SELECT 'P3','2026-08-29',0.580917",
+            "description": "Problem-best score gaps on the two reviewed leaderboard snapshots."
+          }
+        },
+        "valueFormat": "number",
+        "options": {"orientation": "vertical", "grouping": "grouped"},
+        "encodings": {
+          "x": {"field": "problem", "type": "nominal", "label": "문제"},
+          "y": {"field": "gap_points", "type": "quantitative", "label": "최고점까지 격차"},
+          "color": {"field": "snapshot", "type": "nominal", "label": "관측 시점"}
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "headroom_table",
+        "title": "문제별 점수와 원지표 headroom",
+        "subtitle": "최고 원지표는 공식 식이 아니라 우리 공식 제출쌍의 경험적 OLS 역산이다.",
+        "dataset": "problem_headroom",
+        "sourceId": "snapshot",
+        "source": {
+          "id": "snapshot",
+          "label": "Headroom and inferred raw-metric planning table",
+          "path": "reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json",
+          "query": {
+            "engine": "sqlite",
+            "language": "sql",
+            "sql": "SELECT 1 AS priority, 'P1' AS problem, 28.909341 AS our_score, 32.005398 AS best_score, 3.096057 AS gap_points, 7 AS our_rank, '+0.116489 F1' AS metric_gap, '유형별 사건 모델로 재설계' AS decision UNION ALL SELECT 2,'P2',27.934759,28.633273,0.698514,6,'-0.055669 C RMSE','성층 상태 OAS 잔차' UNION ALL SELECT 3,'P3',24.203126,24.784043,0.580917,2,'-0.036601 m RMSE','lead-aware MOS 잔차'",
+            "description": "Exact score gaps plus planning-only raw-metric inverse estimates."
+          }
+        },
+        "defaultSort": {"field": "priority", "direction": "asc"},
+        "columns": [
+          {"field": "priority", "label": "우선", "type": "number"},
+          {"field": "problem", "label": "문제", "type": "text"},
+          {"field": "our_score", "label": "우리 점수", "type": "number"},
+          {"field": "best_score", "label": "최고 점수", "type": "number"},
+          {"field": "gap_points", "label": "점수 여지", "type": "number"},
+          {"field": "our_rank", "label": "문제 순위", "type": "number"},
+          {"field": "metric_gap", "label": "필요 원지표 변화", "type": "text"},
+          {"field": "decision", "label": "판단", "type": "text"}
+        ]
+      },
+      {
+        "id": "experiment_table",
+        "title": "문제별 다음 구조 실험과 중단 기준",
+        "subtitle": "강한 incumbent는 보존하고 한 번에 하나의 구조 가설만 바꾼다.",
+        "dataset": "experiments",
+        "sourceId": "research_ledger",
+        "source": {
+          "id": "research_ledger",
+          "label": "Preregistered structural experiment shortlist",
+          "path": "reports/leaderboard_headroom_double_research_20260829_v1/claim-source-ledger.md",
+          "query": {
+            "engine": "sqlite",
+            "language": "sql",
+            "sql": "SELECT 1 AS priority, 'P1' AS problem, '5-type event heads + OOF residual stacker' AS experiment, 'hard folds majority positive; aggregate F1 improves' AS primary_gate, 'precision collapse or gain concentrated in one type/fold' AS stop_rule UNION ALL SELECT 2,'P1','duration-aware decoder only','same fixed probabilities; segment recall improves without F1 loss','benefit exists only after result-based retuning' UNION ALL SELECT 3,'P2','two-regime OAS residual ridge or GBM','2024 Sep-Oct and 2025 pseudo-mask both improve','one target layer materially worsens' UNION ALL SELECT 4,'P2','low-rank vertical residual basis','same split and gate; incremental RMSE gain','generic FPCA failure mode repeats' UNION ALL SELECT 5,'P3','shrunken lead-aware MOS residual','3+ leads improve; tail bootstrap safe','local sign unstable or Public sign reverses' UNION ALL SELECT 6,'P3','small N-HiTS residual','beats linear or tree MOS on fixed purged OOF','tiny gain with high prediction correlation and variance'",
+            "description": "Problem-specific structural hypotheses with promotion and stop rules."
+          }
+        },
+        "defaultSort": {"field": "priority", "direction": "asc"},
+        "columns": [
+          {"field": "priority", "label": "우선", "type": "number"},
+          {"field": "problem", "label": "문제", "type": "text"},
+          {"field": "experiment", "label": "구조 실험", "type": "text"},
+          {"field": "primary_gate", "label": "승격 기준", "type": "text"},
+          {"field": "stop_rule", "label": "중단 기준", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# 최신 리더보드가 증명하는 문제별 개선여지"},
+      {"id": "summary", "type": "markdown", "sourceId": "official_leaderboard", "body": "## 결론: 격차는 실재하지만 P1과 P2·P3의 처방은 다르다\n\n분당독고다이는 **81.047226점, 4위**이고 1위와 **3.674841점** 차이다. 이 차이는 더 높은 Public 해법이 실제로 존재한다는 직접 증거다. 특히 P1 격차 3.096057점이 1위 총격차의 84.25%를 설명한다. 반면 우리 P3는 완주 18팀 중 2위다. 따라서 세 문제를 모두 새로 엎기보다 P1은 구조 재설계, P2·P3는 강한 incumbent를 보존한 좁은 구조 실험이 맞다."},
+      {"id": "gap_intro", "type": "markdown", "sourceId": "snapshot", "body": "## 문제별 원지표로 보면 P1은 미세조정 범위를 벗어난다\n\n경험적 점수 변환으로 문제별 최고를 역산하면 P1은 F1 약 +0.116489, P2는 RMSE 약 -0.055669 C, P3는 약 -0.036601 m가 필요하다. P1의 최근 GI 미세 후처리는 +0.007978점에 그쳤으므로 남은 3.096057점을 같은 축으로 닫을 수 없다."},
+      {"id": "gap_chart_block", "type": "chart", "chartId": "gap_chart"},
+      {"id": "headroom_table_block", "type": "table", "tableId": "headroom_table"},
+      {"id": "history_finding", "type": "markdown", "sourceId": "snapshot", "body": "## 리더보드 headroom은 과거에도 실제로 회수됐다\n\n8월 27일 대비 문제별 최고와의 격차는 P1 0.416605점, P2 1.302950점, P3 0.377897점 줄었다. 합계 2.097452점이다. 이는 상위권 차이를 연구 목표로 쓰는 것이 공허한 산술이 아니었음을 보여준다. 다만 이 회수량 중 Public 반복 적응과 Private 일반화 가능한 개선을 분리할 증거는 아직 없다."},
+      {"id": "history_chart_block", "type": "chart", "chartId": "gap_history_chart"},
+      {"id": "proof_limits", "type": "markdown", "sourceId": "selection_bias_paper", "body": "## 리더보드가 증명하지 못하는 것\n\n상위팀의 코드와 접근법은 공개 웹에서 검증되지 않았다. Public 최고점은 Private 우월성도 보장하지 않는다. 유한 holdout을 반복해 후보 선택에 쓰면 선택 기준 자체를 과적합할 수 있다. 문제별 최고도 서로 다른 팀이 달성했으므로 85.422714점은 단일 팀의 확인된 점수가 아니라 oracle ceiling이다."},
+      {"id": "p1", "type": "markdown", "sourceId": "official_problems", "body": "## P1은 유형별 사건 head와 시간 디코더가 최우선이다\n\nspike, noise, flatline, offset, drift는 시간 형태와 지속시간이 다르고 겹칠 수 있다. 짧은 창 변화량·분산, run-length·극저분산, change-point·누적기울기를 별도 head로 학습하고 관련 변수 일관성 head를 더한다. 사건 단위 OOF 확률을 작은 stacker와 duration-aware decoder로 결합한다. 범용 anomaly score 하나를 더 튜닝하는 실험과 구조적으로 다르다."},
+      {"id": "p2", "type": "markdown", "sourceId": "sors_paper", "body": "## P2는 성층 상태에 조건부인 OAS 잔차 복원이다\n\nSORS는 8-9월 완전 성층, 10-11월 약화를 보이며 하층은 표층과 다르게 안정적이다. 현재 OAS를 base로 고정하고 공개층의 수직 온도·염분 기울기, 12.42시간 조석, 계절로 mixed/weakening-stratified gate를 만든다. 절대 수온이 아니라 layer 2/3/4 OAS residual만 학습하고 gate 불확실 시 0으로 shrink한다."},
+      {"id": "p3", "type": "markdown", "sourceId": "wave_bias_paper", "body": "## P3는 스칼라 KMA를 끝내고 lead-aware MOS 잔차로 간다\n\nKMA 40% 결합은 유효했지만 Public 세 점의 MSE 곡선 정점 alpha 약 0.424865에서 추가 RMSE 이득은 0.0000299 m뿐이다. alpha 탐색은 포화했다. alpha=0.4 base의 잔차를 past-only 파고·파주기·파향, 풍속·풍향, 기압 변화, lead와 계절/폭풍 regime으로 예측하는 작은 MOS residual이 다음 직교 축이다."},
+      {"id": "experiments_intro", "type": "markdown", "sourceId": "research_ledger", "body": "## 다음 실험은 효과보다 먼저 가설을 분리해야 한다\n\n각 문제에서 incumbent를 덮어쓰지 않고 한 번에 하나의 구조 변화만 허용한다. P1은 유형별 head와 decoder를 분리하고, P2는 two-regime residual과 저랭크 basis를 분리하며, P3는 선형/tree MOS와 소형 N-HiTS를 같은 분할에서 비교한다."},
+      {"id": "experiments_block", "type": "table", "tableId": "experiment_table"},
+      {"id": "promotion", "type": "markdown", "body": "## 로컬에서 Public으로의 승격 기준\n\n1. P1 사건 group split, P2 연도·계절 contiguous mask, P3 anchor case/time purged split을 고정한다.\n2. 사전등록 hard window 과반에서 개선 방향이 일치해야 한다.\n3. P1은 사건 block bootstrap F1 차이, P2/P3는 case/time block bootstrap paired RMSE를 기록하고 median, worst quartile, tail 손실을 함께 본다.\n4. 성능 후보와 정보 후보를 분리한다. 정보 후보도 한 구조 가설만 바뀌어 결과가 해석 가능해야 한다.\n5. Public 제출 전 예상 방향·실패 결론·재시도 금지를 기록하고 Public 점수를 학습 target으로 쓰지 않는다."},
+      {"id": "limitations", "type": "markdown", "body": "## 한계와 강건성\n\n- 관측은 20초마다 변하는 live Public snapshot이다.\n- P3 Public은 66 cases이고 P1 Public 이벤트 수도 제한적이다.\n- 원지표 최고치는 공식 변환식이 아닌 경험적 역산이다.\n- 타 참가자 공개 코드를 찾지 못해 상위팀 구조를 추정하지 않았다.\n- 외부 문헌은 다른 해역과 표본의 원리 근거이며 대회 점수 보증이 아니다.\n- 3-7위 총점 범위가 1.229598점으로 조밀해 작은 Public 변동으로 순위가 바뀔 수 있다."},
+      {"id": "next", "type": "markdown", "body": "## 다음 실행 순서\n\n1. P1 5개 유형별 OOF confusion과 segment recall 원장을 만든다.\n2. P1 유형별 residual stacker와 decoder를 각각 한 번 실행한다.\n3. 병렬로 P2 two-regime residual ridge를 값싼 구조 검증으로 실행한다.\n4. P3 alpha 탐색은 중단하고 가장 작은 MOS residual부터 실행한다.\n5. 로컬 기준을 통과한 후보만 성능 후보와 정보 후보로 나눠 공식 제출 판단표에 올린다."},
+      {"id": "questions", "type": "markdown", "body": "## 추가로 확인할 질문\n\n- P1 합성 데이터에서 유형별 anomaly provenance를 복원할 수 있는가?\n- P2 2025 결측 전후에 동일 센서 보정 이력이 있는가?\n- P3 KMA issue time과 valid time 정렬은 모든 anchor에서 엄밀한가?\n- 대학부 마감일은 운영 공지의 9월 7일과 홈페이지의 9월 30일 중 어느 날짜인가?"}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-29T02:35:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [{"rank": 4, "total": 81.047226, "rank1_gap": 3.674841, "gap_closed": 2.097452}],
+      "problem_headroom": [
+        {"priority": 1, "problem": "P1", "our_score": 28.909341, "best_score": 32.005398, "gap_points": 3.096057, "our_rank": 7, "metric_gap": "+0.116489 F1", "decision": "유형별 사건 모델로 재설계"},
+        {"priority": 2, "problem": "P2", "our_score": 27.934759, "best_score": 28.633273, "gap_points": 0.698514, "our_rank": 6, "metric_gap": "-0.055669 C RMSE", "decision": "성층 상태 OAS 잔차"},
+        {"priority": 3, "problem": "P3", "our_score": 24.203126, "best_score": 24.784043, "gap_points": 0.580917, "our_rank": 2, "metric_gap": "-0.036601 m RMSE", "decision": "lead-aware MOS 잔차"}
+      ],
+      "gap_history": [
+        {"problem": "P1", "snapshot": "2026-08-27", "gap_points": 3.512662},
+        {"problem": "P1", "snapshot": "2026-08-29", "gap_points": 3.096057},
+        {"problem": "P2", "snapshot": "2026-08-27", "gap_points": 2.001464},
+        {"problem": "P2", "snapshot": "2026-08-29", "gap_points": 0.698514},
+        {"problem": "P3", "snapshot": "2026-08-27", "gap_points": 0.958814},
+        {"problem": "P3", "snapshot": "2026-08-29", "gap_points": 0.580917}
+      ],
+      "experiments": [
+        {"priority": 1, "problem": "P1", "experiment": "5-type event heads + OOF residual stacker", "primary_gate": "hard folds majority positive; aggregate F1 improves", "stop_rule": "precision collapse or gain concentrated in one type/fold"},
+        {"priority": 2, "problem": "P1", "experiment": "duration-aware decoder only", "primary_gate": "same fixed probabilities; segment recall improves without F1 loss", "stop_rule": "benefit exists only after result-based retuning"},
+        {"priority": 3, "problem": "P2", "experiment": "two-regime OAS residual ridge or GBM", "primary_gate": "2024 Sep-Oct and 2025 pseudo-mask both improve", "stop_rule": "one target layer materially worsens"},
+        {"priority": 4, "problem": "P2", "experiment": "low-rank vertical residual basis", "primary_gate": "same split and gate; incremental RMSE gain", "stop_rule": "generic FPCA failure mode repeats"},
+        {"priority": 5, "problem": "P3", "experiment": "shrunken lead-aware MOS residual", "primary_gate": "3+ leads improve; tail bootstrap safe", "stop_rule": "local sign unstable or Public sign reverses"},
+        {"priority": 6, "problem": "P3", "experiment": "small N-HiTS residual", "primary_gate": "beats linear or tree MOS on fixed purged OOF", "stop_rule": "tiny gain with high prediction correlation and variance"}
+      ]
+    }
+  },
+  "sources": [
+    {"id": "official_leaderboard", "href": "https://oceanaidata.org/app/leaderboard", "label": "Official leaderboard"},
+    {"id": "official_problems", "href": "https://oceanaidata.org/app/problems", "label": "Official problem definitions"},
+    {"id": "official_submissions", "href": "https://oceanaidata.org/app/submissions", "label": "Official submission management"},
+    {"id": "snapshot", "path": "reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json", "label": "Leaderboard snapshot"},
+    {"id": "research_ledger", "path": "reports/leaderboard_headroom_double_research_20260829_v1/claim-source-ledger.md", "label": "Claim source ledger"},
+    {"id": "sors_paper", "href": "https://doi.org/10.3390/w16010023", "label": "SORS stratification paper"},
+    {"id": "nhits_paper", "href": "https://doi.org/10.1609/aaai.v37i6.25854", "label": "N-HiTS paper"},
+    {"id": "wave_bias_paper", "href": "https://doi.org/10.1016/j.ocemod.2023.102289", "label": "Wave bias correction paper"},
+    {"id": "selection_bias_paper", "href": "https://www.jmlr.org/papers/v11/cawley10a.html", "label": "Model selection bias paper"}
+  ]
+}
