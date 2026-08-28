@@ -1,0 +1,73 @@
+{
+  "schema_version": "p3.champion_lineage_matched_energy_residual_replay.preregistration.v1",
+  "experiment_id": "p3_champion_lineage_matched_energy_residual_replay_20260828_v1",
+  "created_at_kst": "2026-08-28T13:16:28+09:00",
+  "status": "AUTHORIZED_LOCAL_ONE_SHOT",
+  "problem": "P3",
+  "authorization": {
+    "authorized_at_kst": "2026-08-28",
+    "scope": "historical champion-lineage replay only",
+    "official_candidate_or_upload_authorized": false
+  },
+  "claim_scope": "Rebuild the current Public champion lineage on the sealed 181-case historical surface before testing one fixed ERA5 Hs-squared residual correction. The earlier Gen6-anchored delta is excluded from promotion evidence.",
+  "immutable_inputs": {
+    "original_oof": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+      "bytes": 74036,
+      "sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e"
+    },
+    "axis_a_oof": {
+      "path": "artifacts/p3_corrected_fixed_long_shrink_v4/oof.parquet",
+      "bytes": 84411,
+      "sha256": "8a26d13bd1f4075145e83437e7956a679570e11f3ed54fccfbe039aee7f2a398"
+    },
+    "sealed_transfer_predictions": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/sealed_historical_blind_predictions.parquet",
+      "bytes": 37356,
+      "sha256": "25accc81915e95bebcf4e69cd313b73520c36969b88521a186f5be214c4ba2a7"
+    }
+  },
+  "champion_lineage": {
+    "formula": "O + alpha * (A - O) on leads 12/18/24; exact O on leads 3/6/9",
+    "alpha": -10.21743189862218,
+    "active_leads_h": [12, 18, 24],
+    "inactive_leads_h": [3, 6, 9]
+  },
+  "candidate": {
+    "formula": "E_candidate = E_champion + 0.25 * (E_transfer - E_champion), E=Hs^2",
+    "active_leads_h": [18, 24],
+    "energy_weight": 0.25,
+    "inactive_rule": "bit_exact_champion",
+    "station_rule": "identical_for_all_stations",
+    "new_model_fit_count": 0,
+    "parameter_search_count": 0
+  },
+  "validation": {
+    "surface": "same 181 complete six-lead historical cases and 1086 rows",
+    "expected_rows": 1086,
+    "expected_cases": 181,
+    "bootstrap_unit": "complete six-lead anchor_id case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "truth_attach_after_prediction_seal": true
+  },
+  "promotion_gate": {
+    "overall_delta_candidate_minus_champion_below_zero": true,
+    "minimum_improved_folds": 2,
+    "maximum_any_station_or_lead_regression_m": 0.0075
+  },
+  "execution_policy": {
+    "one_shot": true,
+    "result_based_rerun": false,
+    "old_gen6_delta_as_promotion_evidence": false,
+    "official_input_read_authorized": false,
+    "submission_generation_authorized": false,
+    "official_upload_authorized": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1",
+    "report": "reports/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/summary.md",
+    "persist_target_free_sealed_predictions": true,
+    "submission_generated_or_uploaded": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "p2.bayotide_dynamic_factor.preregistration.v1",
+  "experiment_id": "p2_bayotide_dynamic_factor_20260828_v1",
+  "created_at_kst": "2026-08-28T15:30:00+09:00",
+  "status": "AUTHORIZED_LOCAL_ONE_SHOT_20260828",
+  "authorization": {
+    "authorized_at_kst": "2026-08-28T11:44:20+09:00",
+    "scope": "single_bounded_historical_oof_execution_only",
+    "official_input_or_upload_authorized": false
+  },
+  "problem": "P2",
+  "hypothesis": "A dynamic low-rank state-space model updated by public temperature and salinity channels can recover time-depth structure missed by static profile PCA and pointwise heave correction.",
+  "closed_families": [
+    "public_only_one_mode_heave_retuning",
+    "static_rank4_cmfpca_retuning",
+    "safe_gate_threshold_retuning"
+  ],
+  "inputs": {
+    "channels": "actual_depth_registered_temperature_and_salinity",
+    "target_layers_masked_together": [2, 3, 4],
+    "masked_target_temperature_or_salinity_used_in_fit": false,
+    "structural_absence_handling": "separate_deployment_regime",
+    "forbidden": ["official_gap_truth", "answer_mirror", "sample_submission", "submission_csv"]
+  },
+  "model": {
+    "family": "BayOTIDE_style_functional_low_rank_state_space",
+    "trend_factors": 3,
+    "trend_kernel": "Matern_3_2",
+    "trend_lengthscale_hours": [6.0, 48.0, 336.0],
+    "periodic_factors": [
+      {"period_hours": 12.42, "count": 1},
+      {"period_hours": 24.0, "count": 1}
+    ],
+    "factor_or_kernel_search_count": 0,
+    "inference": "forward_filter_plus_RTS_smoother",
+    "uncertainty_fallback": "exact_incumbent_no_op",
+    "fixed_fit": {
+      "matrix_completion_iterations": 8,
+      "minimum_channel_coverage": 0.2,
+      "minimum_observed_public_channels": 4,
+      "observation_noise_floor_normalized": 0.0025,
+      "periodic_damping_per_10min_step": 0.9995,
+      "posterior_sd_training_residual_multiplier": 1.25,
+      "posterior_sd_absolute_cap_c": 1.0,
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 20260828,
+      "cpu_thread_limit": 2
+    },
+    "candidate_policy": "posterior_guarded_dynamic_replacement_else_bit_exact_incumbent"
+  },
+  "validation": {
+    "surface": "existing_three_common_historical_OOF_blocks",
+    "purge_days": 7,
+    "comparator": "p2_extrapolated_soft_gate_v2",
+    "fresh_holdout_claim_allowed": false,
+    "random_point_mask_primary_allowed": false,
+    "folds": {
+      "2024_sep_oct": ["2024-09-01 00:00:00", "2024-11-01 00:00:00"],
+      "2025_jul_aug": ["2025-07-01 00:00:00", "2025-09-01 00:00:00"],
+      "2025_nov_dec": ["2025-11-01 00:00:00", "2026-01-01 00:00:00"]
+    },
+    "expected_oof_rows": 69850
+  },
+  "promotion_gate": {
+    "pooled_delta_rmse_c_max": -0.003,
+    "paired_day_bootstrap_ci90_upper_lt": 0.0,
+    "improved_folds_min": 2,
+    "fold_count": 3,
+    "worst_layer_regression_c_max": 0.005,
+    "posterior_sd_guard_required": true
+  },
+  "stop_conditions": [
+    "actual_depth_channel_alignment_failure",
+    "masked_target_leakage_detected",
+    "non_finite_filter_or_smoother",
+    "promotion_gate_failure"
+  ],
+  "execution_policy": {
+    "check_only_until_new_authorization": false,
+    "single_bounded_run": true,
+    "result_based_factor_kernel_gate_rerun": false,
+    "official_upload_authorized": false
+  },
+  "input_pins": {
+    "observations_logical_path": "P2_DATA_DIR/observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "comparator_path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+    "comparator_sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"
+  },
+  "primary_sources": [
+    "https://proceedings.mlr.press/v235/fang24d.html",
+    "https://github.com/xuangu-fang/BayOTIDE"
+  ]
+}

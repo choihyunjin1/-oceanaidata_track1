@@ -1,0 +1,55 @@
+{
+  "schema_version": "p1.mstcn_e125_only_iors_l5_drift_rescue.20260828.v1",
+  "experiment_id": "p1_mstcn_e125_only_iors_l5_drift_rescue_20260828_v1",
+  "status": "AUTHORIZED_LOCAL_REPLAY_BUILD_QA_ONLY",
+  "problem": "P1",
+  "recipe": {
+    "width": 512,
+    "capture_epoch": 125,
+    "replay_epoch": 150,
+    "threshold": 0.8,
+    "seeds": [20260827, 20260839, 20260863],
+    "source_schedule_horizon_epochs": 300,
+    "representation": "raw_three_seed_ensemble_mean"
+  },
+  "cell": {
+    "station": "I-ORS",
+    "layer": 5,
+    "epoch125_candidate": 1,
+    "epoch150_candidate": 0,
+    "champion_candidate": 0
+  },
+  "gates": {
+    "minimum_added_rows": 8,
+    "maximum_added_rows": 80,
+    "minimum_component_rows": 8,
+    "minimum_components": 1,
+    "maximum_components": 4,
+    "anchor_positive_removals": 0,
+    "require_e150_prediction_array_exact": true,
+    "require_e150_decoded_exact": true
+  },
+  "pins": {
+    "source_deployment_config": "configs/experiments/p1_mstcn_e150_full_deployment_20260827_v1.json",
+    "source_deployment_runner": "scripts/run_p1_mstcn_e150_full_deployment_20260827_v1.py",
+    "source_artifact_dir": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1",
+    "champion_sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b",
+    "source_e150_prediction_sha256": {
+      "20260827": "ed9ce0ba44fbc393091b0072215ecee718ba456720655471b5de383f205c135e",
+      "20260839": "5533dae91bf430e0346ed882afcad33f6a0c6febd39ae2f4331484edf50ea36f",
+      "20260863": "f2cdfdfe69c102c42d2eb97d3c49d7a8348bcfe5872b2b0596aea7b9cd6e3bcd"
+    }
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p1_mstcn_e125_only_iors_l5_drift_rescue_20260828_v1",
+    "ready_directory_name": "20260828_P1_MSTCN_E125_ONLY_IORS_L5_DRIFT_RESCUE_READY",
+    "candidate_filename": "P1_submission.csv"
+  },
+  "leakage_contract": {
+    "test_labels_read": false,
+    "hidden_answer_or_mirror_allowed": false,
+    "source_data_mutation_allowed": false,
+    "official_upload_authorized": false,
+    "result_based_cell_or_threshold_change_allowed": false
+  }
+}

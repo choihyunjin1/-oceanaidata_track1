@@ -1,0 +1,150 @@
+{
+  "schema_version": "p2.oas40_target_weighted_nonlinear_thermocline_residual.experiment.20260828.v1",
+  "experiment_id": "p2_oas40_target_weighted_nonlinear_thermocline_residual_20260828_v1",
+  "problem": "P2",
+  "status": "USER_AUTHORIZED_EXACTLY_ONE_BOUNDED_HISTORICAL_PILOT",
+  "authorization": {
+    "date_kst": "2026-08-28",
+    "scope": "historical local-only validation; no official input, candidate CSV, or upload",
+    "execution_count": 1,
+    "hyperparameter_search_count": 0
+  },
+  "historical_exposure": "All three forward blocks and the frozen OOF base have prior repository exposure. This is a committed architecture/transport pilot, not a fresh untouched holdout.",
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "folds": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "parameter_training_blocks": ["2024_may_jun", "2024_jul_aug"]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "parameter_training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun"
+      ]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "parameter_training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun",
+        "2025_jul_aug"
+      ]
+    }
+  },
+  "validation": {
+    "purge_days": 7,
+    "target_layers": [2, 3, 4],
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_variables_masked_together": ["temp", "psal"],
+    "actual_depth_else_nominal": true,
+    "prediction_hash_before_truth_metric": true
+  },
+  "oas_anchor": {
+    "reference_alpha": 0.40,
+    "direction_alpha": 0.20,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "validation_anchor_path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+    "validation_anchor_sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "base_prediction_column": "current_blend50"
+  },
+  "thermocline": {
+    "formula": "temp=offset+amplitude*expit((center-depth)/width)",
+    "center_bounds_m": [4.0, 49.5],
+    "width_bounds_m": [0.5, 25.0],
+    "target_nominal_depth_m": [7.04, 9.44, 14.74],
+    "minimum_full_profile_points": 6,
+    "minimum_public_points": 4,
+    "minimum_public_depth_span_m": 30.0,
+    "profile_fit_stride_minutes": 120,
+    "deterministic_start_center_fractions": [0.25, 0.5, 0.75],
+    "deterministic_start_width_m": [2.0, 6.0, 14.0],
+    "least_squares_max_nfev": 80,
+    "least_squares_ftol": 1e-8,
+    "least_squares_xtol": 1e-8,
+    "least_squares_gtol": 1e-8,
+    "boundary_fraction": 0.01,
+    "finite_difference_center_step_m": 0.02,
+    "finite_difference_log_width_step": 0.002,
+    "minimum_abs_amplitude_c": 0.2,
+    "minimum_profile_r2": 0.90,
+    "maximum_scaled_jacobian_condition": 10000.0,
+    "maximum_multistart_target_spread_c": 0.05,
+    "latent_ridge_alpha": 1.0,
+    "minimum_feature_coverage": 0.05,
+    "minimum_latent_training_rows": 200,
+    "recent_change_hours": [6, 24, 48, 72],
+    "latent_support_weighted_quantile": 0.70
+  },
+  "target_shift": {
+    "method": "fixed logistic source-vs-pseudo-target density-ratio weighting",
+    "logistic_c": 1.0,
+    "logistic_max_iter": 300,
+    "seed": 20260828,
+    "weight_clip": [0.25, 4.0],
+    "minimum_effective_sample_fraction": 0.30,
+    "maximum_cross_day_discriminator_auc": 0.80
+  },
+  "correction": {
+    "fixed_blend": 0.05,
+    "minimum_profile_raw_max_absolute_c": 0.01,
+    "maximum_profile_raw_max_absolute_c": 0.20,
+    "maximum_rms_c": 0.05,
+    "maximum_p99_absolute_c": 0.20,
+    "endpoint_order_envelope_veto": true,
+    "exact_no_op_on_any_veto": true
+  },
+  "gate": {
+    "adapted_pooled_delta_rmse_max_c": -0.002,
+    "paired_kst_day_bootstrap_ci90_upper_max_c": 0.001,
+    "minimum_improved_folds": 2,
+    "maximum_unweighted_pooled_regression_c": 0.005,
+    "maximum_worst_layer_regression_c": 0.010,
+    "minimum_active_share": 0.10,
+    "maximum_active_share": 0.70,
+    "minimum_correction_rms_c": 0.01,
+    "maximum_correction_rms_c": 0.05,
+    "maximum_correction_p99_c": 0.20,
+    "maximum_absolute_cosine_with_alpha20_to_alpha40": 0.85,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828
+  },
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "dynamic_sigmoid_dependency_sha256": "aa5b8ae8358c88c9a1c0fdd29ff872e9862e5e7564ac5acfd41211d0baf8f4f5",
+    "oas_dependency_sha256": "0342ab7314b8cb800c06aecba36434b1b318322f2c98d6592df2ad875ef432c6",
+    "profile_projection_dependency_sha256": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"
+  },
+  "leakage_contract": {
+    "official_test_index_sample_submission_paths_read": false,
+    "hidden_interval_values_used": false,
+    "official_answer_or_mirror_allowed": false,
+    "candidate_csv_generation_authorized": false,
+    "official_upload_authorized": false,
+    "target_layer_temp_psal_as_input_or_state_update": false,
+    "post_result_parameter_search_allowed": false
+  }
+}

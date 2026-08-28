@@ -1,0 +1,178 @@
+{
+  "schema_version": "p1.frozen_83_event_ranker_recall_guard.v1",
+  "experiment_id": "p1_frozen_83_event_ranker_recall_guard_20260828_v1",
+  "status": "PREREGISTERED_SINGLE_BOUNDED_ATTEMPT",
+  "claim": "A shallow event-level ranker can remove false long-event proposals while retaining at least 90 percent of the frozen generator's matched eligible events",
+  "historical_surface": "Only the frozen pre-Q2 calibration proposal bank may fit, calibrate, and qualify the ranker; Q2 is an outer directional surface opened only after every historical gate passes",
+  "immutable_inputs": {
+    "frozen_proposals": {
+      "path": "artifacts/p1_conditional_real_event_donor_20260828_v1/sealed_predictions.npz",
+      "bytes": 220708,
+      "sha256": "8f1461777d2ad41332e20784c5c6105178cbbdf8b40b631413bf8274218fc206",
+      "calibration_score_array": "calibration_scores",
+      "calibration_addition_array": "calibration_additions",
+      "q2_score_array": "q2_scores",
+      "q2_addition_array": "q2_additions"
+    },
+    "frozen_proposal_receipt": {
+      "path": "artifacts/p1_conditional_real_event_donor_20260828_v1/blind_prediction_receipt.json",
+      "bytes": 818,
+      "sha256": "f781b87cbb7dd61cd661170eefd86285ea5a9ca53790bed45c491d7d94ef05ec"
+    },
+    "feature_cache": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "bytes": 156272400,
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"
+    },
+    "feature_key_sidecar": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet",
+      "bytes": 1818144,
+      "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"
+    },
+    "training_labels": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "frozen_truth_and_folds": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "q2_anchor": {
+      "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz",
+      "bytes": 7898,
+      "sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1",
+      "array": "anchor"
+    },
+    "q2_anchor_receipt": {
+      "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction_receipt.json",
+      "bytes": 954,
+      "sha256": "470b6269010a8436809eb3fd5451bdc356d3ad0e86db8c089d6675e5149b0409"
+    }
+  },
+  "frozen_generator": {
+    "threshold": 0.5,
+    "score_smoothing_rows": 19,
+    "minimum_component_rows": 19,
+    "bridge_rows": 2,
+    "expected_calibration_proposals": 83,
+    "expected_calibration_addition_rows": 10039,
+    "regeneration_allowed": false
+  },
+  "surface": {
+    "calibration_start_utc": "2024-10-01T00:00:00+00:00",
+    "calibration_end_exclusive_utc": "2025-03-16T15:00:00+00:00",
+    "q2_fold": "2025_q2"
+  },
+  "split": {
+    "chronological_proposal_fractions": [0.4, 0.3, 0.3],
+    "boundary_purge_days": 15,
+    "assignment_time": "proposal_end_time",
+    "boundary_definition": "ordered_proposal_count_floor_40_and_70_percent",
+    "purge_definition": "calibration and qualification proposals must start at least 15 days after the preceding boundary",
+    "same_truth_event_may_cross_splits": false
+  },
+  "event": {
+    "eligible_types": ["offset", "drift", "noise"],
+    "minimum_rows": 19,
+    "iou_match_threshold": 0.3,
+    "context_rows_each_side": 72
+  },
+  "support_preflight": {
+    "minimum_total_positive_proposals": 8,
+    "minimum_total_positive_cells": 4,
+    "minimum_train_positive_proposals": 3,
+    "minimum_calibration_positive_proposals": 2,
+    "minimum_qualification_positive_proposals": 2,
+    "minimum_calibration_matched_truth_events": 2,
+    "minimum_qualification_matched_truth_events": 2,
+    "minimum_normality_reference_coverage": 0.8,
+    "failure_action": "NO_GO_SUPPORT"
+  },
+  "features": {
+    "station_and_layer_ids_as_model_features": false,
+    "numeric_sources": [
+      "temp_abs_diff_1",
+      "temp_abs_median_resid_24h",
+      "temp_roll_std_24h",
+      "diff_roll_std_24h",
+      "temp_robust_z_24h",
+      "temp_long_resid_7d",
+      "temp_abs_peer_residual",
+      "peer_abs_detrended_resid_7d",
+      "reference_abs_resid_7d",
+      "reference_slope_1h_7d",
+      "psal_diff_1",
+      "depth_diff_1"
+    ],
+    "event_aggregates": ["median", "absolute_q90", "absolute_event_minus_context_median"],
+    "normality": "train-only station-layer-quarter median and MAD with station-quarter then global fallback",
+    "score_aggregates": ["mean", "minimum", "maximum", "q10", "q50", "q90", "fraction_gte_frozen_threshold", "center_edge_contrast"]
+  },
+  "model": {
+    "family": "sklearn LogisticRegression",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": 20260828,
+    "fit_count": 1,
+    "cpu_threads": 1,
+    "feature_scaler": "RobustScaler fit on train proposals only",
+    "feature_selection": false,
+    "hyperparameter_search": false,
+    "result_based_retry": false
+  },
+  "threshold": {
+    "method": "largest observed calibration score retaining at least 90 percent of raw matched calibration truth events",
+    "minimum_raw_matched_event_retention": 0.9,
+    "selection_count": 1,
+    "precision_optimization": false,
+    "grid_search": false
+  },
+  "qualification_gate": {
+    "minimum_raw_matched_event_retention": 0.9,
+    "row_precision_strictly_above_raw": true,
+    "row_f1_strictly_above_raw": true,
+    "minimum_false_proposal_reduction": 0.3,
+    "matched_cells_must_not_decrease": true,
+    "minimum_eligible_truth_row_recall_relative": 0.9,
+    "bootstrap_replicates": 1000,
+    "bootstrap_block_days": 7,
+    "bootstrap_seed": 20260828,
+    "bootstrap_probability_positive_gte": 0.8,
+    "bootstrap_ci90_lower_gte": -0.005,
+    "failure_action": "NO_GO_QUALIFICATION"
+  },
+  "q2_outer_gate": {
+    "minimum_raw_matched_event_retention": 0.9,
+    "delta_f1_strictly_above": 0.0,
+    "added_precision_strictly_above_anchor_f1_over_2": true,
+    "selected_fp_per_day_relative_to_raw_bank_lte": 0.7,
+    "minimum_newly_recovered_long_events": 2,
+    "matched_cells_must_not_decrease": true,
+    "block_bootstrap_replicates": 500,
+    "block_days": 3,
+    "block_bootstrap_seed": 20260828,
+    "ci90_lower_gte": -0.001,
+    "exact_anchor_union": true
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_frozen_83_event_ranker_recall_guard_20260828_v1",
+    "append_only": true,
+    "persist_raw_values": false,
+    "persist_keys": false,
+    "persist_model": false
+  },
+  "prohibitions": {
+    "proposal_regeneration": true,
+    "q3_q4_read": true,
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_generation": true,
+    "upload": true,
+    "post_result_tuning_or_retry": true,
+    "git_commit_or_push": true
+  }
+}

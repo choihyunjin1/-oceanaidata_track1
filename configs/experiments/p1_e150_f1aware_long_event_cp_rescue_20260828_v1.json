@@ -1,0 +1,68 @@
+{
+  "schema_version": "p1.e150_f1aware_long_event_cp_rescue.v1",
+  "experiment_id": "p1_e150_f1aware_long_event_cp_rescue_20260828_v1",
+  "status": "PREREGISTERED_LOCAL_BLIND_SCREEN_ONLY",
+  "purpose": "Add only high-utility long physical-change intervals to the frozen e150 Router-union anchor in G/L1, I/L1, and S/L2.",
+  "source_experiment": "p1_mstcn_checkpoint_diagnostic_20260827_v2",
+  "design_fold": "2025_q2",
+  "blind_folds": ["2025_q3", "2025_q4"],
+  "target_cells": [["G-ORS", 1], ["I-ORS", 1], ["S-ORS", 2]],
+  "anchor_contract": {
+    "width": 512,
+    "epoch": 150,
+    "threshold": 0.8,
+    "anchor_positive_removal_allowed": false
+  },
+  "past_only_proposals": {
+    "score_thresholds": [1.0, 1.5, 2.0, 3.0],
+    "minimum_support_rows": [6, 12, 18],
+    "maximum_gap_rows": 12,
+    "padding_rows": 6,
+    "minimum_interval_rows": 19,
+    "maximum_interval_rows": 520,
+    "same_time_same_station_peer_layers_allowed": true,
+    "future_rows_used_by_row_features": 0
+  },
+  "proposal_scorer": {
+    "model": "standardized_balanced_logistic_regression",
+    "C": 0.25,
+    "seed": 20260828,
+    "cross_fit": "expanding KST calendar month; validation month sees only earlier proposal labels",
+    "q3_or_q4_labels_used_to_fit_or_select": false,
+    "threshold_candidates": [0.35, 0.5, 0.65, 0.8, 0.9],
+    "zero_add_no_op_arm_required": true
+  },
+  "selection_guards": {
+    "maximum_added_false_positives_per_day_per_station_level": 0.1,
+    "minimum_added_row_precision": 0.6
+  },
+  "blind_decision_gates": {
+    "selected_non_noop_arm": true,
+    "pooled_delta_f1_gte": 0.003,
+    "minimum_improving_blind_folds_of_2": 2,
+    "q4_delta_f1_gte": 0.0,
+    "paired_block_bootstrap_ci90_lower_gt": 0.0,
+    "maximum_added_false_positives_per_day_per_station_level": 0.1,
+    "minimum_added_row_precision": 0.6,
+    "anchor_positive_removed_rows_eq": 0
+  },
+  "bootstrap": {
+    "replicates": 4000,
+    "block_days": 21,
+    "seed": 20260828
+  },
+  "output_contract": {
+    "artifact_directory": "artifacts/p1_e150_f1aware_long_event_cp_rescue_20260828_v1",
+    "append_only_namespace": true,
+    "official_submission_created": false,
+    "official_upload_authorized": false
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_creation": true,
+    "upload": true,
+    "modify_existing_artifacts_or_locks": true,
+    "result_driven_rerun_or_retune": true
+  }
+}

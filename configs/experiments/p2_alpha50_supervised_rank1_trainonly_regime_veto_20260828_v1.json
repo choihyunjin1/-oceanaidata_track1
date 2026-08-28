@@ -1,0 +1,38 @@
+{
+  "experiment_id": "p2_alpha50_supervised_rank1_trainonly_regime_veto_20260828_v1",
+  "status": "PREREGISTERED",
+  "comparator": "INCUMBENT_PROXY_VALIDATION",
+  "comparator_disclosure": "Official alpha50 has no exact historical OOF lineage. The veto is evaluated against the frozen forward alpha50 proxy and must remain labeled INCUMBENT_PROXY_VALIDATION; no exact official OOF or Private transport claim is made.",
+  "base_experiment": {
+    "config": {"path": "configs/experiments/p2_alpha50_supervised_rank1_functional_residual_20260828_v1.json", "bytes": 3326, "sha256": "70d9892c8de6ae1915c8a220df6dae0e81fefa93d395878867032568c5e196d8"},
+    "runner": {"path": "scripts/run_p2_alpha50_supervised_rank1_functional_residual_20260828_v1.py", "bytes": 21421, "sha256": "41794412f1c8c143a1162e05fd55d7751a31d340f60ad2b4aa178897b0b8987d"},
+    "result": {"path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/result.json", "bytes": 3060, "sha256": "562b6a298219a3e5f3bdbc969af35f242393916559fbaa9177e625d60a694090"},
+    "commitment": {"path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/prediction_commitment.json", "bytes": 21415, "sha256": "c3c4ec544d4d58581b2938b1c74ae6555e09e7a688d57f00955c8672aeddaa62"},
+    "predictions": {
+      "2024_sep_oct": {"path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/predictions/2024_sep_oct.npz", "bytes": 479704, "sha256": "0aa90edebf569ee29287044057104efb1e88f56d65bad5e47118c098d89f9640"},
+      "2025_jul_aug": {"path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/predictions/2025_jul_aug.npz", "bytes": 744659, "sha256": "4458d697f27b45bd7abd90a3eeaee7c09c708c1d4d016eee582f7d0bf4c85f45"},
+      "2025_nov_dec": {"path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/predictions/2025_nov_dec.npz", "bytes": 483383, "sha256": "c55a275b2f981b3ab7c1ecd18af7a5250edd106936aeed8a2938af2a605123a0"}
+    }
+  },
+  "veto": {
+    "inner_split": "leave_one_block_out_within_outer_training_only",
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_source_blocks": 2,
+    "minimum_profiles": 100,
+    "minimum_kst_days": 10,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "ci90_upper_below_c": 0.0,
+    "correction_vector_modified": false,
+    "disabled_profile_action": "bit_exact_alpha50_proxy_reference"
+  },
+  "execution_policy": {
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "result_based_retry": false,
+    "maximum_executions": 1
+  },
+  "artifact_directory": "artifacts/p2_alpha50_supervised_rank1_trainonly_regime_veto_20260828_v1"
+}

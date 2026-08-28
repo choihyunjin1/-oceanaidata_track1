@@ -1,0 +1,66 @@
+{
+  "schema_version": "p3.era5_longlead_energy_residual_shrink.preregistration.v1",
+  "experiment_id": "p3_era5_longlead_energy_residual_shrink_20260828_v1",
+  "created_at_kst": "2026-08-28T19:42:00+09:00",
+  "status": "AUTHORIZED_LOCAL_ONE_SHOT",
+  "problem": "P3",
+  "claim_scope": "Post-outer-result adapted deployment probe. It tests the originally preregistered 18/24h external-transfer hypothesis with one fixed physics-space shrink and is not fresh model-family evidence.",
+  "hypothesis": "At 18 and 24 hours, a conservative residual update in Hs-squared wave-energy space can retain the ERA5 transfer expert's long-lead gain while leaving all short leads bit-exact to the incumbent.",
+  "adaptation_disclosure": {
+    "prior_result_used": true,
+    "used_only_for_structure": "The parent result confirmed the preregistered long-lead direction and motivated limiting intervention to 18/24h.",
+    "weight_search_used": false,
+    "station_selection_used": false,
+    "seed_search_used": false
+  },
+  "immutable_inputs": {
+    "sealed_transfer_predictions": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/sealed_historical_blind_predictions.parquet",
+      "bytes": 37356,
+      "sha256": "25accc81915e95bebcf4e69cd313b73520c36969b88521a186f5be214c4ba2a7"
+    },
+    "incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "bytes": 122784,
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    },
+    "parent_result": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/result.json",
+      "bytes": 14218,
+      "sha256": "ac92a530d230ea29c475e0b03acb7e16d577633b64401632cebb46fa4e0bbd2f"
+    }
+  },
+  "model": {
+    "family": "incumbent_preserving_Hs_squared_longlead_residual_shrink",
+    "active_leads_h": [18, 24],
+    "energy_weight": 0.25,
+    "inactive_rule": "bit_exact_incumbent",
+    "station_rule": "identical_for_all_stations",
+    "new_model_fit_count": 0,
+    "parameter_search_count": 0
+  },
+  "validation": {
+    "surface": "same sealed 181 complete cases and 1086 rows as parent",
+    "bootstrap_unit": "complete six-lead anchor_id case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828
+  },
+  "promotion_gate": {
+    "overall_delta_candidate_minus_incumbent_below_zero": true,
+    "minimum_improved_folds": 2,
+    "maximum_any_station_or_lead_regression_m": 0.0075,
+    "confidence_interval": "descriptive_only_under_adapted_probe"
+  },
+  "execution_policy": {
+    "one_shot": true,
+    "result_based_weight_or_lead_rerun": false,
+    "official_input_read_authorized": false,
+    "submission_generation_authorized": false,
+    "official_upload_authorized": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p3_era5_longlead_energy_residual_shrink_20260828_v1",
+    "persist_target_free_sealed_predictions": true,
+    "submission_generated_or_uploaded": false
+  }
+}

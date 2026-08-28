@@ -1,0 +1,142 @@
+{
+  "schema_version": "p3_era5_incumbent_safe_advantage_router.v1",
+  "experiment_id": "p3_era5_incumbent_safe_advantage_router_20260828_v1",
+  "created_at_kst": "2026-08-28",
+  "problem": "P3",
+  "status": "PREREGISTERED_ONE_SHOT_RESEARCH_ONLY",
+  "research_only": true,
+  "hypothesis_count": 1,
+  "hypothesis": "A low-capacity causal router can safely use the already-sealed ERA5 transfer expert only where past-only state and expert disagreement predict lower squared error, while emitting the frozen incumbent bit-for-bit everywhere else.",
+  "frozen_inputs": {
+    "era5_v2_result": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/result.json",
+      "bytes": 14218,
+      "sha256": "ac92a530d230ea29c475e0b03acb7e16d577633b64401632cebb46fa4e0bbd2f"
+    },
+    "sealed_expert_predictions": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/sealed_historical_blind_predictions.parquet",
+      "bytes": 37356,
+      "sha256": "25accc81915e95bebcf4e69cd313b73520c36969b88521a186f5be214c4ba2a7"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "bytes": 461964,
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "bytes": 106288494,
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "bytes": 122784,
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    },
+    "feature_contract": {
+      "path": "configs/experiments/p3_era5_context_transfer_features_v1.json",
+      "bytes": 6933,
+      "sha256": "d6b720b55b28d5fc4bbc065a9b585f2607acce7552bae89fd4683dda0c25cc9b",
+      "columns_sha256": "ef0a0a5ec822d2d5fa8fa875ed9ca584bbd5fee097789601d149a85c771bc454",
+      "feature_count": 286
+    },
+    "era5_feature_implementation": {
+      "path": "src/p3_wave/era5_context_transfer.py",
+      "bytes": 34468,
+      "sha256": "d0e7e7fac28d745ae62f32918dc0396a0f9b53ac20444358788e8c03e4a9f039"
+    }
+  },
+  "outer_contract": {
+    "fold_order": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "inner_blocks_per_outer": 4,
+    "inner_block_days": 60,
+    "inner_block_gap_hours": 78,
+    "inner_roles": {"I1": "fit", "I2": "fit", "I3": "tau", "I4": "blind_gate"},
+    "minimum_cases_each_block": 12,
+    "minimum_fit_cases_i1_i2": 24,
+    "support_source": "only exact prior-fold rows already sealed by the frozen ERA5 v2 and incumbent OOF",
+    "unsupported_outer_action": "bit_exact_incumbent_fallback"
+  },
+  "router_contract": {
+    "base_features_from_frozen_286": [
+      "hs_current",
+      "hs_delta_6h",
+      "hs_std_12h",
+      "hs_slope_24h",
+      "tp_current",
+      "wave_energy_current",
+      "wave_energy_delta_6h",
+      "wave_energy_std_12h",
+      "wind_input_proxy_current",
+      "wind_input_proxy_delta_6h",
+      "wind_input_proxy_std_12h"
+    ],
+    "derived_features": ["lead_h_div_24", "transfer_minus_incumbent", "abs_transfer_minus_incumbent"],
+    "forbidden": [
+      "station",
+      "source",
+      "fold",
+      "calendar",
+      "absolute_time",
+      "lead_one_hot",
+      "specific_lead_subset",
+      "anonymous_timestamp_inference"
+    ],
+    "missing_values": "fit-prefix median imputation without missingness indicators; fail if a fit column is all missing",
+    "scaler": "sklearn.preprocessing.StandardScaler",
+    "model": "sklearn.linear_model.Ridge",
+    "ridge_alpha": 100.0,
+    "target": "(truth-incumbent)^2-(truth-transfer)^2",
+    "tau": "I3 absolute model residual q90, linear quantile",
+    "activation": "predicted_advantage_strictly_greater_than_tau",
+    "blend_strength": 0.2,
+    "inactive_prediction": "bit_exact_incumbent",
+    "hyperparameter_or_feature_search": false
+  },
+  "gates": {
+    "inner_i4": {
+      "candidate_minus_incumbent_rmse_m_at_most": -0.003,
+      "case_bootstrap_ci90_upper_below_m": 0.0,
+      "coverage_min": 0.05,
+      "coverage_max": 0.5,
+      "maximum_each_station_or_lead_regression_m": 0.0075
+    },
+    "outer": {
+      "candidate_minus_incumbent_rmse_m_at_most": -0.003,
+      "case_bootstrap_ci90_upper_below_m": 0.0,
+      "minimum_improved_folds": 2,
+      "maximum_each_station_or_lead_regression_m": 0.0075
+    },
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828
+  },
+  "resources": {
+    "catboost_cpu_threads_max": 4,
+    "other_cpu_threads_max": 2,
+    "expected_catboost_fits": 0,
+    "maximum_ridge_fits": 1
+  },
+  "access_and_output": {
+    "artifact_dir": "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1",
+    "attempt_lock": "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1.attempt.lock",
+    "official_test_context_read": false,
+    "official_test_index_read": false,
+    "sample_or_submission_read_or_write": false,
+    "submission_created": false,
+    "upload_count": 0
+  },
+  "execution_policy": {
+    "check_only_before_execute": true,
+    "execute_exactly_once": true,
+    "blind_fold_prediction_sealed_before_that_fold_truth": true,
+    "i4_prediction_sealed_before_i4_truth": true,
+    "result_driven_retry_or_retune": false,
+    "existing_v2_or_incumbent_artifact_mutation": false
+  }
+}

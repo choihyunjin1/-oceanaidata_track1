@@ -1,0 +1,39 @@
+{
+  "experiment_id": "p3_past_only_wind_wave_memory_regime_increment_20260828_v1",
+  "status": "PREREGISTERED",
+  "immutable_inputs": {
+    "features": {"path": "artifacts/p3/features_all20_v1/train_features.parquet", "bytes": 106288494, "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"},
+    "anchors": {"path": "artifacts/p3/features_all20_v1/train_anchors.parquet", "bytes": 461964, "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"},
+    "raw_contexts": {"path": "artifacts/p3/sequences_all20_v1/train_values.npy", "bytes": 281601728, "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"},
+    "station_codes": {"path": "artifacts/p3/sequences_all20_v1/train_station.npy", "bytes": 195008, "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"},
+    "champion_surface": {"path": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/sealed_candidate_predictions.parquet", "bytes": 62785, "sha256": "f6d89264eca2e718bba348f3b5cb0041dfb38352a41a4fb35ed079c6067f6a56"},
+    "validation_keys": {"path": "artifacts/p3_corrected_repeated_forward_catboost_v2/validation_keys.parquet", "bytes": 4147, "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"},
+    "kma_axis": {"path": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet", "bytes": 47489, "sha256": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"},
+    "spectral_axis": {"path": "artifacts/p3_causal_spectral_kernel_20260823_v1/oof/learning_curve_oof.parquet", "bytes": 115292, "sha256": "4bad8cf5ded05f47765d9e97542340eaa55725a6c79d4982fe4e1f294da1a09d"},
+    "energy_axis": {"path": "artifacts/p3_station_stable_energy_state_space_20260823_v1/oof/learning_curve_oof.parquet", "bytes": 115157, "sha256": "e232b5e17723b7edf03b654fc832195e767b283b6dd01355a86050f8d9553997"},
+    "era5_axis": {"path": "artifacts/p3_era5_longlead_energy_residual_shrink_20260828_v1/sealed_candidate_predictions.parquet", "bytes": 41251, "sha256": "b80acff4bde82cf1bf69fc651691d32801381a0c32286a10e8d854eddc6a0d8c"}
+  },
+  "source_train_wave": {"filename": "train_wave.csv", "bytes": 6132036, "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"},
+  "windows": {
+    "shadow": [["2024_h1_shadow", "2024-05-01", "2024-06-25"]],
+    "outer": [["2024_h2_storm", "2024-07-01", "2024-11-01"], ["winter_transition", "2024-11-01", "2025-03-01"], ["2025_h1", "2025-03-01", "2025-06-25"]],
+    "gap_hours": 78,
+    "footprint_hours": 72
+  },
+  "model": {
+    "backend": "catboost",
+    "iterations": 700,
+    "learning_rate": 0.035,
+    "depth": 6,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "thread_count": 4,
+    "fold_seeds": {"2024_h1_shadow": 20260816, "2024_h2_storm": 20260817, "winter_transition": 20260818, "2025_h1": 20260819},
+    "maximum_fits": 8
+  },
+  "candidate": {"active_leads": [18, 24], "increment_weight": 0.20, "protected_leads": [3, 6, 9, 12]},
+  "shadow_gate": {"minimum_cases": 30, "minimum_cases_per_station": 8, "longlead_delta_rmse_below": 0.0, "maximum_station_regression": 0.003, "minimum_nonregressing_stations": 2},
+  "outer_gate": {"pooled_delta_rmse_at_most": -0.003, "bootstrap_replicates": 5000, "bootstrap_seed": 20260828, "bootstrap_ci90_upper_below": 0.0, "minimum_improved_folds": 2, "minimum_improved_stations": 2, "maximum_worst_station_lead_regression": 0.003, "maximum_absolute_axis_correlation": 0.25},
+  "execution_policy": {"official_test_sample_submission_read_allowed": false, "submission_csv_generation_allowed": false, "official_upload_authorized": false, "result_based_retry": false, "maximum_executions": 1},
+  "artifact_directory": "artifacts/p3_past_only_wind_wave_memory_regime_increment_20260828_v1"
+}

@@ -1,0 +1,74 @@
+{
+  "experiment_id": "p1_temporally_fused_rpca_offset_drift_anchor_union_20260828_v1",
+  "status": "PREREGISTERED",
+  "immutable_inputs": {
+    "training_rows": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "bytes": 1071684,
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "truth_after_commit": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    }
+  },
+  "scope": {
+    "stations": ["I-ORS", "S-ORS"],
+    "g_ors_exact_no_op": true,
+    "minimum_layers": 3,
+    "minimum_layer_coverage": 0.95,
+    "small_gap_fill_rows": 2
+  },
+  "split": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "purge_days": 15,
+    "calibration_days": 42
+  },
+  "decomposition": {
+    "window_rows": 2016,
+    "hop_rows": 1008,
+    "minimum_segment_rows": 48,
+    "maximum_iterations": 200,
+    "proximal_iterations": 40,
+    "tolerance": 1e-6,
+    "lambda_rule": "1/sqrt(max(T,L))",
+    "overlap_reducer": "median"
+  },
+  "decoder": {
+    "normal_score_quantile": 0.999,
+    "minimum_duration_rows": 48,
+    "maximum_duration_rows": 519,
+    "anchor_deletions_allowed": false,
+    "result_based_retry": false
+  },
+  "gates": {
+    "minimum_panel_coverage": 0.95,
+    "minimum_convergence_rate": 0.99,
+    "pooled_delta_f1_strictly_positive": true,
+    "minimum_positive_folds": 2,
+    "minimum_fold_delta_f1": -0.001,
+    "minimum_added_precision": 0.4166,
+    "minimum_recovered_offset_drift_events": 3,
+    "minimum_recovery_folds": 2,
+    "minimum_recovery_cells": 2,
+    "maximum_normal_false_positive_rows_per_cell_day": 0.25,
+    "bootstrap_blocks_days": 7,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260828,
+    "minimum_probability_delta_positive": 0.8,
+    "minimum_ci90_lower": -0.001
+  },
+  "execution_policy": {
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "maximum_executions": 1
+  },
+  "artifact_directory": "artifacts/p1_temporally_fused_rpca_offset_drift_anchor_union_20260828_v1"
+}

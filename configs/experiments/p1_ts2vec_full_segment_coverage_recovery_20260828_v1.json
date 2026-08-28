@@ -1,0 +1,91 @@
+{
+  "schema_version": "p1.ts2vec_full_segment_coverage_recovery.preregistration.v1",
+  "experiment_id": "p1_ts2vec_full_segment_coverage_recovery_20260828_v1",
+  "created_at_kst": "2026-08-28T19:20:00+09:00",
+  "status": "AUTHORIZED_LOCAL_ONE_SHOT",
+  "problem": "P1",
+  "claim_scope": "Post-failure technical recovery audit using the frozen label-free parent encoder; not a fresh model-family trial and not an upload candidate.",
+  "hypothesis": "The parent encoder's 90.8087% coverage was caused exactly by minimum-512-row inference windows. Same-length full-segment inference will reach complete historical coverage and reveal whether the frozen representation has useful long-event signal.",
+  "parent_experiment": {
+    "experiment_id": "p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1",
+    "terminal_status": "NO_GO_COVERAGE_NO_RERUN",
+    "encoder_path": "artifacts/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1/encoder.pt",
+    "encoder_bytes": 533983,
+    "encoder_sha256": "7ec66a19f7a538295934906604c6a5f08a9b4c1a00ecd24fc806068925fa464e",
+    "result_path": "artifacts/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1/result.json",
+    "result_sha256": "4caaa900d387527fae879c5527f2b71d57d7e9962846bbc7bef41a7a1da208c7",
+    "final_qa_path": "artifacts/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1/final_qa.json",
+    "final_qa_sha256": "ac39dc511288481e6bbad29d00f1f127e414935239b720a892c2b428d245687c",
+    "parent_model_fit_count": 1
+  },
+  "immutable_inputs": {
+    "feature_cache": {"path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet", "bytes": 156272400, "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"},
+    "feature_key_sidecar": {"path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet", "bytes": 1818144, "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"},
+    "training_labels": {"path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet", "bytes": 6227554, "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"}
+  },
+  "encoder_features": [
+    "temp_raw", "psal_raw", "depth_raw", "psal_missing", "depth_missing",
+    "temp_diff_1", "psal_diff_1", "depth_diff_1", "temp_median_resid_24h",
+    "temp_roll_std_24h", "temp_long_resid_7d", "temp_peer_residual"
+  ],
+  "calendar_features": ["day_sin", "day_cos"],
+  "representation": {
+    "family": "frozen_TS2Vec_style_encoder_complete_native_segment_inference",
+    "hidden_width": 64,
+    "embedding_width": 64,
+    "dilations": [1, 2, 4, 8, 16],
+    "dropout": 0.1,
+    "encoder_fit_stop_kst": "2024-09-15T00:00:00+09:00",
+    "parent_training_window_rows": 512,
+    "inference_rule": "one deterministic eval pass per complete eligible contiguous segment with no minimum length and no chunk boundary",
+    "new_model_fit_count": 0,
+    "seed": 20260828
+  },
+  "historical_scope": {
+    "exclusive_stop_kst": "2025-04-01T00:00:00+09:00",
+    "label_parquet_predicate": "time < 2025-04-01T00:00:00+09:00",
+    "normal_reference_stop_kst": "2024-10-01T00:00:00+09:00",
+    "calibration": ["2024-10-01T00:00:00+09:00", "2024-12-15T23:59:59+09:00"],
+    "qualification": ["2025-01-01T00:00:00+09:00", "2025-03-16T23:59:59+09:00"]
+  },
+  "scoring": {
+    "cell_shrinkage_rows": 512,
+    "scale_floor": 0.001,
+    "normal_knn_k": 5,
+    "normal_knn_bank_per_cell": 512,
+    "prototype_weight": 0.75,
+    "normal_tail_alpha": 0.001,
+    "minimum_component_rows": 19,
+    "bridge_rows": 2,
+    "gpu_distance_batch_rows": 4096,
+    "positive_prevalence_targeting": false,
+    "anchor_deletions_allowed": false
+  },
+  "historical_gate": {
+    "coverage_min": 0.999999,
+    "qualification_new_eligible_long_events_min": 2,
+    "direction_consistent_cells_min": 2,
+    "block_bootstrap_days": 7,
+    "block_bootstrap_replicates": 500,
+    "block_bootstrap_seed": 20260828,
+    "probability_delta_f1_gt_zero_min": 0.8,
+    "false_positive_per_day_cap": 0.25
+  },
+  "execution_policy": {
+    "one_shot": true,
+    "parent_experiment_rerun": false,
+    "new_encoder_training": false,
+    "q2_truth_read_authorized": false,
+    "q3_q4_truth_read_authorized": false,
+    "official_input_read_authorized": false,
+    "submission_generation_authorized": false,
+    "official_upload_authorized": false,
+    "result_based_threshold_or_architecture_rerun": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_ts2vec_full_segment_coverage_recovery_20260828_v1",
+    "persist_raw_values": false,
+    "persist_embeddings": false,
+    "persist_keys": false
+  }
+}

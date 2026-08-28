@@ -1,0 +1,63 @@
+{
+  "schema_version": "p2.depth_registered_cmfpca.experiment.20260828.v1",
+  "experiment_id": "p2_depth_registered_cmfpca_v1_20260828",
+  "problem": "P2",
+  "status": "AUTHORIZED_EXACTLY_ONE_BOUNDED_LOCAL_EXECUTION",
+  "historical_exposure": "All four validation blocks have been used by prior repository research; no fresh-holdout claim is permitted.",
+  "folds": {
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "model": {
+    "target_layers": [2, 3, 4],
+    "physical_depth_source": "nominal_depth",
+    "spline_degree": 3,
+    "spline_df": 5,
+    "spline_boundary_m": [4.0, 50.0],
+    "spline_internal_knot_m": 20.0,
+    "coefficient_ridge": 1e-6,
+    "seasonal_harmonics": 4,
+    "variance_threshold": 0.95,
+    "rank_cap": 4,
+    "noise_floor": 1e-4,
+    "blend_weight": 0.20,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828
+  },
+  "validation_anchor": {
+    "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+    "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "prediction_column": "current_blend50",
+    "rationale": "Frozen public-only OOF anchor with all four preregistered blocks; both arms use the identical anchor within each fold."
+  },
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "score_py_sha256": "218165bebd45f6f8e0db06d3e8d0039144f121a4d56e84fa5a67ae13146ce82a",
+    "deployment_base_u_sha256": "13181dff0e749a1ea6dac7327b4ea34b8a7efd57a2f57170ba0d206f919cf592"
+  },
+  "gate": {
+    "aggregate_delta_rmse_max_c": -0.003,
+    "paired_kst_day_bootstrap_ci90_upper_max_c": 0.0,
+    "minimum_improved_folds": 3,
+    "maximum_worst_fold_regression_c": 0.010,
+    "maximum_layer_regression_c": 0.005
+  },
+  "candidate_on_pass": {
+    "ready_directory_name": "20260828_P2_DEPTH_REGISTERED_CMF_PCA20_PROJECTED_READY",
+    "required_rows": 26061,
+    "required_columns": ["station", "layer", "time", "temp"],
+    "temperature_range_c": [-5.0, 45.0],
+    "pava_idempotence_tolerance": 1e-12
+  },
+  "leakage_contract": {
+    "hidden_answer_or_mirror_allowed": false,
+    "official_gap_target_temp_or_psal_used": false,
+    "target_temp_psal_masked_together": true,
+    "official_upload_authorized": false,
+    "post_result_parameter_search_allowed": false
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": "p3.timexer_past_exogenous_direct_multilead.preregistration.v1",
+  "experiment_id": "p3_timexer_past_exogenous_direct_multilead_20260828_v1",
+  "created_at_kst": "2026-08-28T15:30:00+09:00",
+  "status": "LOCAL_EXECUTION_AUTHORIZED_PENDING_GPU_RESOURCE_COORDINATION",
+  "authorization": {
+    "approved_at_kst": "2026-08-28T11:42:39.4927006+09:00",
+    "scope": "single_bounded_local_only_nested_run",
+    "full_gpu_launch_requires_resource_coordination": true,
+    "official_context_or_submission_access_authorized": false
+  },
+  "problem": "P3",
+  "hypothesis": "Separating endogenous wave patches from past-only exogenous atmospheric tokens and predicting all six leads directly can improve the incumbent without relying on sparse expert-routing support.",
+  "closed_families": [
+    "era5_advantage_router_threshold_retuning",
+    "chronos2_step_or_lora_expansion",
+    "tsmixer_weight_retuning"
+  ],
+  "inputs": {
+    "endogenous": ["past_hs_49_points"],
+    "past_only_exogenous": ["tp", "hmax", "wvdir", "wspd", "gust", "wdir", "caph", "airt", "relh", "missing_masks"],
+    "future_weather_allowed": false,
+    "absolute_time_allowed": false,
+    "cross_case_or_future_station_context_allowed": false,
+    "era5_286_feature_experiment_mutation_allowed": false
+  },
+  "bindings": {
+    "train_sequences": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "train_station": {
+      "path": "artifacts/p3/sequences_all20_v1/train_station.npy",
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    }
+  },
+  "model": {
+    "family": "TimeXer_style_asymmetric_endogenous_exogenous_encoder",
+    "endogenous_attention": "patch_self_attention",
+    "exogenous_attention": "variate_cross_attention",
+    "hourly_points": 49,
+    "derived_channels": 12,
+    "endogenous_channels": ["hs"],
+    "exogenous_channels": ["tp", "hmax", "wspd", "gust", "relh", "caph", "airt", "wvdir_sin", "wvdir_cos", "wdir_sin", "wdir_cos"],
+    "patch_length": 7,
+    "patch_stride": 7,
+    "patch_count": 7,
+    "d_model": 64,
+    "attention_heads": 4,
+    "encoder_layers": 2,
+    "feedforward_width": 128,
+    "dropout": 0.1,
+    "station_embedding": 8,
+    "output_leads_h": [3, 6, 9, 12, 18, 24],
+    "output_mode": "direct_joint_residual",
+    "skip": "additive_persistence_current_hs_only",
+    "router_allowed": false,
+    "posthoc_lead_selection_allowed": false,
+    "seeds": [142857, 271828, 314159]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0002,
+    "batch_size": 256,
+    "maximum_epochs": 80,
+    "patience": 10,
+    "minimum_inner_improvement_m": 0.0001,
+    "minimum_inner_persistence_improvement_m": 0.0001,
+    "minimum_inner_improved_seeds_per_fold": 2,
+    "precision": "bf16_amp_on_cuda",
+    "gradient_clip_norm": 1.0,
+    "loss": "uniform_six_lead_residual_mse",
+    "maximum_single_fold_seed_seconds": 1200,
+    "maximum_total_seconds": 10800,
+    "result_based_hyperparameter_changes": false
+  },
+  "validation": {
+    "outer_folds": 3,
+    "outer_windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "outer_embargo_hours": 78,
+    "outer_membership": "exact_prefix_fraction_1p0_frozen_incumbent_cases",
+    "inner_window_days": 60,
+    "inner_gap_hours": 78,
+    "inner_checkpoint_selection": "train_only_inner_best",
+    "outer_prediction_sealed_before_truth_attach": true,
+    "case_bootstrap_required": true,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828
+  },
+  "promotion_gate": {
+    "pooled_delta_rmse_m_max": -0.005,
+    "improved_folds_min": 2,
+    "fold_count": 3,
+    "case_bootstrap_ci90_upper_lt": 0.0,
+    "worst_station_regression_m_max": 0.01,
+    "lead_12_18_24_non_regression_required": true
+  },
+  "stop_conditions": [
+    "sequence_or_feature_reproduction_failure",
+    "non_finite_cuda_smoke",
+    "vram_budget_exceeded",
+    "inner_direct_head_fails_to_stably_beat_persistence"
+  ],
+  "execution_policy": {
+    "local_execution_authorized": true,
+    "check_and_cpu_smoke_authorized_now": true,
+    "full_gpu_launch_requires_resource_coordination": true,
+    "single_bounded_nested_run": true,
+    "result_based_patch_width_depth_epoch_gate_rerun": false,
+    "official_input_access_authorized": false,
+    "official_candidate_csv_authorized": false,
+    "official_upload_authorized": false
+  },
+  "artifact_dir": "artifacts/p3_timexer_past_exogenous_direct_multilead_20260828_v1",
+  "primary_sources": [
+    "https://arxiv.org/abs/2402.19072",
+    "https://github.com/thuml/TimeXer"
+  ]
+}

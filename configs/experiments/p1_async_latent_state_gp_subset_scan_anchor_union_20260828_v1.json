@@ -1,0 +1,113 @@
+{
+  "experiment_id": "p1_async_latent_state_gp_subset_scan_anchor_union_20260828_v1",
+  "status": "PREREGISTERED_LOCAL_EXECUTION_AUTHORIZED_2026-08-28",
+  "immutable_inputs": {
+    "feature_matrix": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "bytes": 156272400,
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"
+    },
+    "feature_keys": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet",
+      "bytes": 1818144,
+      "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"
+    },
+    "training_labels": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "outer_truth_after_prediction_seal": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "e150_q2": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "bytes": 173949505,
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "e150_q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+      "bytes": 22946468,
+      "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+    },
+    "e150_q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+      "bytes": 14747269,
+      "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+    }
+  },
+  "scope": {
+    "stations": ["I-ORS", "S-ORS"],
+    "g_ors_exact_no_op": true,
+    "feature": "temp_long_resid_7d",
+    "peer_tolerance_minutes": 10,
+    "minimum_peer_layers": 2,
+    "minimum_peer_coverage": 0.95,
+    "minimum_matched_rows_per_cell": 500,
+    "target_layer_measurement_updates_allowed": false
+  },
+  "split": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "purge_days": 15,
+    "calibration_days": 84,
+    "conformal_block_days": 7
+  },
+  "state_model": {
+    "kind": "fixed_exact_matern32_state_space_approximation",
+    "lengthscale_hours": [6.0, 48.0],
+    "factor_variance": [0.5, 0.5],
+    "peer_observation_variance": 0.25,
+    "target_idiosyncratic_variance": 1.0,
+    "standardization": "fit_prefix_normal_median_mad",
+    "minimum_mad": 0.000001
+  },
+  "scan": {
+    "types": ["noise", "offset", "drift"],
+    "duration_rows": {
+      "noise": [18, 36, 72, 144, 288, 353],
+      "offset": [48, 96, 192, 384, 519],
+      "drift": [54, 108, 216, 432, 519]
+    },
+    "maximum_intervals_per_station_layer_block": 1,
+    "result_based_threshold_or_duration_search": false
+  },
+  "conformal": {
+    "alpha": 0.01,
+    "minimum_normal_calibration_blocks": 100,
+    "normal_block_requires_all_labels_zero": true,
+    "threshold_rule": "ceil((n+1)*(1-alpha))-th order statistic clipped to n"
+  },
+  "anchor": {
+    "recipe": "mstcn width512 epoch150 threshold0.8",
+    "anchor_deletions_allowed": false,
+    "union_only": true
+  },
+  "gates": {
+    "minimum_posterior_finite_coverage": 0.95,
+    "pooled_delta_f1_strictly_positive": true,
+    "minimum_positive_folds": 2,
+    "minimum_fold_delta_f1": -0.001,
+    "minimum_added_precision_rule": "strictly_greater_than_fold_anchor_f1_divided_by_2",
+    "minimum_recovered_long_events": 3,
+    "minimum_recovery_folds": 2,
+    "minimum_recovery_cells": 2,
+    "minimum_recovery_types": 2,
+    "maximum_normal_false_positive_rows_per_cell_day": 0.25,
+    "bootstrap_blocks_days": 7,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260828,
+    "minimum_probability_delta_positive": 0.8,
+    "minimum_ci90_lower": -0.001
+  },
+  "execution_policy": {
+    "local_execution_authorized": true,
+    "maximum_executions": 1,
+    "result_based_retry": false,
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false
+  },
+  "artifact_directory": "artifacts/p1_async_latent_state_gp_subset_scan_anchor_union_20260828_v1"
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "p1.direct_interval_set_torch_nested.v1",
+  "experiment_id": "p1_direct_interval_set_torch_nested_20260828_v1",
+  "purpose": "Test whether a supervised direct interval-set predictor with auxiliary patch actionness can recover long events without the change-point proposal FP bottleneck.",
+  "provenance": {
+    "sealed_predecessor_read_only": "p1_tetad_lite_direct_interval_set_v1",
+    "predecessor_results_used_for_hyperparameter_selection": false,
+    "previous_cp_rescue_results_used_for_hyperparameter_selection": false
+  },
+  "target": {
+    "eligible_types": ["offset", "drift", "noise"],
+    "minimum_original_rows": 19,
+    "all_station_layer_cells": true
+  },
+  "windowing": {
+    "rows": 512,
+    "stride_rows": 256,
+    "patch_rows": 16,
+    "queries": 3,
+    "purge_days": 15,
+    "inner_train_end_days_before_outer": 45,
+    "inner_validation_start_days_before_outer": 30,
+    "inner_validation_end_days_before_outer": 15
+  },
+  "model": {
+    "d_model": 48,
+    "heads": 4,
+    "encoder_layers": 2,
+    "dropout": 0.0,
+    "fixed_query_threshold": 0.5,
+    "minimum_decoded_rows": 19
+  },
+  "training": {
+    "seed": 20260828,
+    "maximum_epochs": 24,
+    "batch_size": 32,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.0001,
+    "negative_to_positive_window_ratio": 2,
+    "positive_weight": 6.0,
+    "endpoint_weight": 3.0,
+    "iou_weight": 3.0,
+    "actionness_weight": 0.5,
+    "checkpoint_selection": "maximum inner (target_recall + 0.25*median_iou - 0.01*negative_window_fp_rate); exact tie selects earlier epoch",
+    "restore_inner_best_checkpoint": true,
+    "result_based_retry": false
+  },
+  "chronological_protocol": {
+    "q2": {"fold": "2025_q2", "training_rows_time_before": "2025-03-17T00:00:00+09:00", "role": "fresh arm qualification only"},
+    "q3": {"fold": "2025_q3", "training_rows_time_before": "2025-06-16T00:00:00+09:00", "role": "blind outer 1"},
+    "q4": {"fold": "2025_q4", "training_rows_time_before": "2025-09-16T00:00:00+09:00", "role": "blind outer 2"},
+    "truth_access": "fold truth opens only after prediction NPZ and SHA256 receipt"
+  },
+  "anchor": {
+    "family": "frozen e150 Router-union",
+    "width": 512,
+    "epoch": 150,
+    "threshold": 0.8,
+    "union_only": true,
+    "positive_removal_allowed": false,
+    "exact_zero_add_no_op_arm": true
+  },
+  "qualification": {
+    "q2_choose_non_noop_if_all": {
+      "delta_f1_strictly_above": 0.0,
+      "added_precision_gte": 0.75,
+      "added_false_positive_rows_lte": 100
+    },
+    "blind_go_if_all": {
+      "pooled_delta_f1_gte": 0.003,
+      "each_fold_delta_f1_gte": 0.0,
+      "added_precision_gte": 0.75,
+      "anchor_positive_removed_rows_eq": 0
+    }
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1",
+    "append_only": true,
+    "persist_raw_keys": false,
+    "persist_model_checkpoint": false
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_generation": true,
+    "upload": true,
+    "git_commit_or_push": true,
+    "posthoc_threshold_or_feature_tuning": true
+  }
+}

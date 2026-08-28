@@ -1,0 +1,132 @@
+{
+  "schema_version": "p3.champion_matched_era5_hs2_official_deploy.v1",
+  "experiment_id": "p3_champion_matched_era5_hs2_official_deploy_20260828_v1",
+  "status": "PREREGISTERED_BEFORE_OFFICIAL_FEATURE_INFERENCE",
+  "authorized_at_kst": "2026-08-28",
+  "scope": "official_no_truth_candidate_generation_only",
+  "immutable_inputs": {
+    "base_experiment": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1.json",
+      "bytes": 10945,
+      "sha256": "79792f1a3d6b4c0dd15884fd6e3eed122c224a8c3318149b95dbfc3b2fac1ff9"
+    },
+    "dependency_recovery_config": {
+      "path": "configs/experiments/p3_era5_context_transfer_dependency_recovery_20260828_v2.json",
+      "bytes": 1653,
+      "sha256": "6ec2aa9d4b1185eb7f553ee295f2988b77f03faed7e8be4e795c792e47d16bd4"
+    },
+    "dependency_recovery_result": {
+      "path": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/result.json",
+      "bytes": 14218,
+      "sha256": "ac92a530d230ea29c475e0b03acb7e16d577633b64401632cebb46fa4e0bbd2f"
+    },
+    "historical_replay_result": {
+      "path": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/result.json",
+      "bytes": 4292,
+      "sha256": "92e87f4b033b563cbc59a85bbcd9ad72fec347e4141a38db815fd72a1ab646b7"
+    },
+    "historical_replay_manifest": {
+      "path": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/manifest.json",
+      "bytes": 1303,
+      "sha256": "41bbcdfa1f25e3efb6c26482d18269fd497dc9e57441a4dcf76b7441d9528348"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "bytes": 106288494,
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "bytes": 461964,
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_model_module": {
+      "path": "src/p3_wave/era5_context_transfer.py",
+      "bytes": 34468,
+      "sha256": "d0e7e7fac28d745ae62f32918dc0396a0f9b53ac20444358788e8c03e4a9f039"
+    },
+    "frozen_scientific_runner": {
+      "path": "scripts/run_p3_era5_context_transfer_v1.py",
+      "bytes": 60494,
+      "sha256": "45ac9630fd30c0cfef25e82ec969e29dcd6b665c54580e58c432dea14164bbca"
+    },
+    "champion_submission": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_P3_REFINED_PUBLIC_OPTIMUM_READY/P3_submission.csv",
+      "bytes": 39822,
+      "sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa"
+    },
+    "champion_manifest": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_P3_REFINED_PUBLIC_OPTIMUM_READY/MANIFEST.json",
+      "bytes": 1231,
+      "sha256": "b3557bdee8b70a3bfbb09b211c777589e4ff93127797d2972af98416db8068ca"
+    }
+  },
+  "deployment_lineage": {
+    "source": {
+      "source_id": "era5_pre2024",
+      "years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+      "case_rule": "all fixed 6-hour anchors whose complete anchor-48h through anchor+24h footprint stays in the same listed year",
+      "stage": "one source pretrain fit after the frozen 2021-2023 source gate",
+      "iterations": 600
+    },
+    "local": {
+      "input": "all 24360 rows of the immutable local anchor and 286-feature caches",
+      "stage": "one continuation fit initialized from the single source model",
+      "iterations": 250
+    },
+    "features": {
+      "count": 286,
+      "surface": "frozen common_feature_columns order",
+      "test_time_basis": "case-local step_minute only; fixed synthetic epoch is used solely to express elapsed offsets",
+      "absolute_time_features": false,
+      "future_covariates": false,
+      "station_identity_features": false
+    },
+    "model": {
+      "family": "frozen FixedContextTransferRegressor",
+      "seed": 20260824,
+      "scientific_fit_count": 2,
+      "parameter_search_count": 0,
+      "source_or_local_hyperparameter_changes": 0,
+      "fixed_model_postprocess": "20 percent persistence at leads 12,18,24"
+    }
+  },
+  "candidate": {
+    "champion_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+    "active_leads_h": [18, 24],
+    "energy_weight": 0.25,
+    "formula": "sqrt(max(champion_hs^2 + 0.25*(era5_transfer_hs^2-champion_hs^2),0))",
+    "inactive_leads_h": [3, 6, 9, 12],
+    "inactive_rule": "numeric bit-exact current champion",
+    "clip_m": [0.0, 30.0]
+  },
+  "official_contract": {
+    "data_dir_env": "P3_DATA_DIR",
+    "files_read": ["test_context.parquet", "test_index.csv"],
+    "feature_inference_and_schema_alignment_only": true,
+    "official_truth_rows": 0,
+    "anonymous_absolute_time_reconstruction": false,
+    "external_observation_match": false,
+    "raw_value_logging_or_reporting": false,
+    "expected_rows": 1200,
+    "expected_cases": 200,
+    "expected_active_rows": 400,
+    "expected_inactive_rows": 800
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p3_champion_matched_era5_hs2_official_deploy_20260828_v1",
+    "report": "reports/p3_champion_matched_era5_hs2_official_deploy_20260828_v1/summary.md",
+    "candidate_dir": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_P3_ERA5_HS2_CHAMPION_MATCHED_READY",
+    "candidate_filename": "P3_submission.csv",
+    "fail_if_any_output_exists": true
+  },
+  "execution_policy": {
+    "check_only_before_execute": true,
+    "execute_exactly_once": true,
+    "result_driven_retry_or_tuning": false,
+    "existing_artifact_or_champion_mutation": false,
+    "submission_generation_authorized": true,
+    "official_upload_authorized": false,
+    "upload_count": 0
+  }
+}

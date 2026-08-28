@@ -1,0 +1,99 @@
+{
+  "schema_version": "p2.alpha40_quasiperiodic_gp_residual.experiment.20260828.v1",
+  "experiment_id": "p2_alpha40_quasiperiodic_gp_residual_20260828_v1",
+  "problem": "P2",
+  "status": "AUTHORIZED_EXACTLY_ONE_BOUNDED_LOCAL_PILOT",
+  "historical_exposure": "The three validation blocks and frozen OOF anchor were used by prior repository research. This is an architecture-fresh committed forward-fold pilot, not an untouched-data claim.",
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "folds": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "residual_training_blocks": ["2024_may_jun", "2024_jul_aug"]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "residual_training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun"
+      ]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "residual_training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun",
+        "2025_jul_aug"
+      ]
+    }
+  },
+  "model": {
+    "reference_alpha": 0.40,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "m2_period_hours": 12.42,
+    "state_rff_components": 64,
+    "state_rff_gamma": 0.02,
+    "rff_seed": 20260828,
+    "bayesian_ridge_max_iter": 150,
+    "bayesian_ridge_tolerance": 1e-5,
+    "residual_blend": 0.10,
+    "uncertainty_training_quantile": 0.80,
+    "minimum_public_temperature_count": 2,
+    "minimum_public_depth_span_m": 10.0,
+    "maximum_standardized_state_absolute": 8.0,
+    "correction_rms_cap_c": 0.05,
+    "correction_p99_cap_c": 0.20,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "hyperparameter_search_count": 0
+  },
+  "gate": {
+    "aggregate_delta_rmse_max_c": -0.003,
+    "paired_kst_day_bootstrap_ci90_upper_max_c": 0.0,
+    "minimum_improved_folds": 2,
+    "maximum_worst_fold_regression_c": 0.010,
+    "maximum_layer_regression_c": 0.005,
+    "maximum_correction_rms_c": 0.05,
+    "maximum_correction_p99_c": 0.20
+  },
+  "validation_anchor": {
+    "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+    "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "prediction_column": "current_blend50",
+    "role": "Frozen public-only OOF base U surrogate. The new residual learner is prefix-only; the frozen comparator itself is not claimed to be a fully forward-fitted model."
+  },
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "leakage_contract": {
+    "official_test_sample_submission_paths_read": false,
+    "official_answer_or_mirror_allowed": false,
+    "validation_target_temp_psal_masked_together": true,
+    "validation_truth_loaded_before_prediction_commitment": false,
+    "official_upload_authorized": false,
+    "candidate_csv_generation_authorized": false,
+    "post_result_parameter_search_allowed": false
+  }
+}

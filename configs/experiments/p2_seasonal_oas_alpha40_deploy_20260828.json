@@ -1,0 +1,64 @@
+{
+  "schema_version": "p2.seasonal_oas_alpha40.deploy.20260828.v1",
+  "experiment_id": "p2_seasonal_oas_alpha40_deploy_20260828_v1",
+  "deploy_tag": "p2_seasonal_oas_submission_20260828_v3_alpha40",
+  "created_at_kst": "2026-08-28T10:20:00+09:00",
+  "status": "AUTHORIZED_LOCAL_BUILD_AND_QA_ONLY",
+  "problem": "P2",
+  "candidate": "P2-SEASONAL-OAS-TS-40-PROJECTED",
+  "alpha": 0.4,
+  "ready_directory_name": "20260828_P2_SEASONAL_OAS_TS40_PROJECTED_READY",
+  "lineage": {
+    "builder": "scripts/build_p2_seasonal_oas_submission_20260827.py",
+    "builder_sha256": "80d6e9f2be7afb8cc192e5972990b3e64168b130ca8f14fe501923ac373e7e58",
+    "module_sha256": {
+      "src/p2_restore/data.py": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9",
+      "src/p2_restore/profile_projection.py": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6",
+      "src/p2_restore/submission.py": "ac04940e1643d3ca6d933b39f74be03cfee953464aec5ab76d8329903dc4dcc7"
+    },
+    "alpha10": {
+      "stored": "artifacts/p2_seasonal_oas_submission_20260827_v1/P2_submission.csv",
+      "sha256": "65b754c83c520609e7bd7979b35f86366903cfebf07d3e411f8f97ab3b59abd5",
+      "reproduction_tag": "p2_oas_lineage_repro_check_20260828_alpha10"
+    },
+    "alpha20": {
+      "stored": "artifacts/p2_seasonal_oas_submission_20260827_v2_alpha20/P2_submission.csv",
+      "sha256": "f46dec7944fe4565307b0242fdab5772a684027f1a42a62404d6e01ba13e0ef7",
+      "reproduction_tag": "p2_oas_lineage_repro_check_20260828_alpha20"
+    }
+  },
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "base_u_sha256": "13181dff0e749a1ea6dac7327b4ea34b8a7efd57a2f57170ba0d206f919cf592"
+  },
+  "official_evidence": {
+    "alpha10_rmse": 0.507628,
+    "alpha10_score": 26.963865,
+    "alpha20_rmse": 0.483661,
+    "alpha20_score": 27.264587,
+    "score_slope_points_per_rmse": -12.5475179808,
+    "selection_rule": "Minimize the Cauchy-Schwarz upper RMSE bound derived from the exact alpha10, alpha20, and candidate prediction vectors. Alpha 0.40 had the lowest upper bound among 0.25 through 0.50 in the preregistered reconnaissance.",
+    "expected_alpha40_rmse_center": 0.448627,
+    "expected_alpha40_rmse_lower": 0.427593,
+    "expected_alpha40_rmse_upper": 0.468719,
+    "minimum_expected_score_gain_at_upper_bound": 0.187
+  },
+  "gates": {
+    "lineage_reproduction_byte_identical": true,
+    "required_rows": 26061,
+    "required_columns": ["station", "layer", "time", "temp"],
+    "required_layers": [2, 3, 4],
+    "temperature_range_c": [-5.0, 45.0],
+    "require_sample_and_test_key_order": true,
+    "require_pava_idempotence_tolerance": 1e-12,
+    "require_geometry_upper_rmse_below_alpha20": true
+  },
+  "leakage_contract": {
+    "answer_file_read": false,
+    "hidden_answer_or_mirror_allowed": false,
+    "official_gap_target_temp_or_psal_used": false,
+    "official_upload_authorized": false
+  }
+}

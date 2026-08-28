@@ -1,0 +1,12 @@
+# P3 Chronos-2 research runtime.  The upstream package is pinned to the
+# exact official amazon-science/chronos-forecasting commit inspected before
+# this experiment; do not replace it with an unpinned PyPI release.
+torch @ https://download-r2.pytorch.org/whl/cu130/torch-2.13.0%2Bcu130-cp312-cp312-win_amd64.whl#sha256=2efab1e83604ca628c6d85b9e188c153690980498d1297081a9dad704919303c
+transformers==5.16.1
+accelerate==1.14.0
+peft==0.20.0
+numpy==2.3.5
+pandas==3.0.1
+pyarrow==25.0.1
+einops==0.8.1
+chronos-forecasting @ git+https://github.com/amazon-science/chronos-forecasting.git@8589d1988e9676817548e9626738ff06b6ca6370

@@ -1,0 +1,99 @@
+{
+  "schema_version": "p1.frozen_direct_event_verifier_blocked.v1",
+  "experiment_id": "p1_frozen_direct_event_verifier_blocked_20260828_v1",
+  "status": "PREREGISTERED_SINGLE_BOUNDED_ATTEMPT",
+  "historical_surface": "Q2 is historically exposed; this is feasibility and directional evidence, not a fresh confirmation surface.",
+  "generator": {
+    "prediction_path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz",
+    "prediction_bytes": 7898,
+    "prediction_sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1",
+    "receipt_path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction_receipt.json",
+    "query_threshold": 0.5,
+    "minimum_component_rows": 19,
+    "retrain_allowed": false
+  },
+  "split": {
+    "surface": "2025_q2 only",
+    "time_fraction_boundaries": [0.5, 0.75],
+    "boundary_purge_days": 15,
+    "assignment": "train ends 15 days before first boundary; calibration starts at first boundary and ends 15 days before second boundary; qualification starts at second boundary",
+    "proposal_must_be_fully_contained": true
+  },
+  "features": {
+    "context_rows_each_side": 72,
+    "station_and_layer_ids_as_model_features": false,
+    "numeric_sources": [
+      "temp_diff_1", "temp_abs_diff_1", "temp_backward_acceleration",
+      "spike_min_abs_diff", "temp_center_curvature", "temp_median_resid_24h",
+      "temp_abs_median_resid_24h", "temp_roll_std_24h", "diff_roll_std_24h",
+      "temp_robust_z_24h", "temp_long_resid_7d", "peer_detrended_resid_7d",
+      "peer_abs_detrended_resid_7d", "reference_resid_7d",
+      "reference_abs_resid_7d", "reference_slope_1h_7d"
+    ],
+    "labels_or_anomaly_type_in_features": false
+  },
+  "target": {
+    "anchor_preserving_union": true,
+    "utility": "(2-anchor_f1)*added_tp - anchor_f1*added_fp",
+    "positive_if_utility_strictly_above": 0.0,
+    "eligible_long_event_types": ["offset", "drift", "noise"],
+    "minimum_long_event_rows": 19
+  },
+  "support_preflight": {
+    "minimum_utility_positive_proposals": {"train": 10, "calibration": 4, "qualification": 4},
+    "minimum_hard_negative_to_positive_ratio_train": 5.0,
+    "maximum_single_station_layer_positive_share_train": 0.7,
+    "failure_action": "NO_GO_SUPPORT_PREFLIGHT"
+  },
+  "verifier": {
+    "model": "sklearn HistGradientBoostingClassifier",
+    "max_depth": 3,
+    "max_iter": 100,
+    "learning_rate": 0.05,
+    "l2_regularization": 1.0,
+    "class_weight": "balanced",
+    "random_state": 20260828,
+    "probability_threshold": 0.5,
+    "fit_count": 1,
+    "threshold_search": false,
+    "grid_search": false,
+    "result_based_retry": false
+  },
+  "calibration_arm": {
+    "arms": ["ZERO_ADD_NO_OP", "FIXED_SCORE_GTE_0.5"],
+    "choose_model_if_all": {
+      "delta_f1_strictly_above": 0.0,
+      "added_precision_strictly_above_anchor_f1_over_2": true,
+      "normal_fp_per_day_relative_lte": 1.05
+    }
+  },
+  "qualification_gate": {
+    "delta_f1_strictly_above": 0.0,
+    "added_precision_strictly_above_anchor_f1_over_2": true,
+    "normal_fp_per_day_relative_lte": 1.05,
+    "minimum_newly_recovered_long_events": 2,
+    "minimum_nonnegative_supported_type_fraction": 0.5,
+    "minimum_nonnegative_supported_station_layer_fraction": 0.5,
+    "supported_positive_rows_min": 19,
+    "block_bootstrap_replicates": 500,
+    "block_bootstrap_days": 3,
+    "block_bootstrap_ci90_lower_gte": -0.001,
+    "strict_fresh_claim_allowed": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_frozen_direct_event_verifier_blocked_20260828_v1",
+    "append_only": true,
+    "persist_raw_keys": false,
+    "persist_feature_matrix": false,
+    "persist_model": false
+  },
+  "prohibitions": {
+    "q3_read": true,
+    "q4_read": true,
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_generation": true,
+    "upload": true,
+    "git_commit_or_push": true
+  }
+}
