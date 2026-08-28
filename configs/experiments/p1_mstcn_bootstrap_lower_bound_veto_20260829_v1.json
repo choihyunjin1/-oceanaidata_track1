@@ -1,0 +1,30 @@
+{
+  "schema_version": "p1.mstcn_bootstrap_lower_bound_veto.v1",
+  "experiment_id": "p1_mstcn_bootstrap_lower_bound_veto_20260829_v1",
+  "problem": "P1",
+  "role": "adaptive retrospective follow-up after single-fit veto instability",
+  "hypothesis": "Requiring at least 90 percent agreement across truth-event-group bootstrap classifier and utility models will retain only transport-stable MSTCN additions.",
+  "training_fold": "2025_q3",
+  "evaluation_fold": "2025_q4",
+  "nested_group_bootstrap_replicates": 200,
+  "full_group_bootstrap_replicates": 1000,
+  "acceptance_frequency": 0.9,
+  "seed": 20260829,
+  "models": {
+    "classifier": "same deployable balanced logistic model as p1_mstcn_deployable_type_veto_stability_20260829_v1",
+    "utility_regressor": "same deployable ridge utility model as p1_mstcn_deployable_type_veto_stability_20260829_v1",
+    "segment_acceptance": "bootstrap fraction where classifier probability is at least 0.5 and predicted marginal utility is positive"
+  },
+  "diagnostic_gate": {
+    "q3_grouped_nested_candidate_nonnegative_vs_incumbent": true,
+    "q3_accepted_row_precision_minimum": 0.9,
+    "q3_accepts_at_least_one_segment": true,
+    "q4_exact_incumbent_fallback": true,
+    "q4_improves_raw_e150": true,
+    "no_official_test_or_submission_access": true
+  },
+  "official_test_reads_allowed": 0,
+  "submission_creation_allowed": false,
+  "upload_allowed": false,
+  "result_driven_reruns_allowed": false
+}
