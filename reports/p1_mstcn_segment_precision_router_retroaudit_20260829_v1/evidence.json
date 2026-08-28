@@ -1,0 +1,51 @@
+{
+  "schema_version": "p1.mstcn_segment_precision_router.retroaudit.report_evidence.v1",
+  "experiment_id": "p1_mstcn_segment_precision_router_retroaudit_20260829_v1",
+  "formal_status": "NO_GO_RETROSPECTIVE_GATE",
+  "result_sha256": "388334dbb543afecb1ac129a712ecbd3c1542343a928fada3b064e098f97e8bb",
+  "segment_inventory": {
+    "2025_q2": {"segments": 27, "beneficial_segments": 18, "added_rows": 1189},
+    "2025_q3": {"segments": 46, "beneficial_segments": 34, "added_rows": 439},
+    "2025_q4": {"segments": 4, "beneficial_segments": 0, "added_rows": 142}
+  },
+  "core_router": {
+    "2025_q3": {
+      "f1": 0.9070847851335656,
+      "delta_f1_vs_incumbent": 0.012105276936844267,
+      "delta_f1_vs_raw_e150": -0.005103512125919196
+    },
+    "2025_q4": {
+      "f1": 0.8992266795553407,
+      "delta_f1_vs_incumbent": -0.015115215491974032,
+      "delta_f1_vs_raw_e150": 0.00032584612135111435
+    },
+    "pooled_q3_q4": {
+      "f1": 0.9038858829316281,
+      "delta_f1_vs_incumbent": 0.0009688594039944931,
+      "delta_f1_vs_raw_e150": -0.002917837087951014
+    }
+  },
+  "type_augmented_q4": {
+    "training_fold": "2025_q3",
+    "evaluation_segments": 4,
+    "accepted_segments": 0,
+    "f1": 0.9143418950473148,
+    "delta_f1_vs_incumbent": 0.0,
+    "delta_f1_vs_raw_e150": 0.015441061613325147,
+    "exact_incumbent_fallback": true
+  },
+  "derived_posthoc_diagnostic_not_promotion_evidence": {
+    "definition": "Q3 core candidate plus Q4 type-augmented exact fallback",
+    "f1": 0.9100094101332277,
+    "delta_f1_vs_pooled_incumbent": 0.007092386605594081,
+    "delta_f1_vs_pooled_raw_e150": 0.003205690113648574
+  },
+  "qa": {
+    "status": "PASS_QA_OF_NO_GO_RESULT",
+    "ruff": "PASS",
+    "pytest": "2 passed",
+    "official_test_rows_read": 0,
+    "submission_files_created": 0,
+    "uploads": 0
+  }
+}

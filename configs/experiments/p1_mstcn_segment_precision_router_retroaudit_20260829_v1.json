@@ -1,0 +1,75 @@
+{
+  "schema_version": "p1.mstcn_segment_precision_router.retroaudit.v1",
+  "experiment_id": "p1_mstcn_segment_precision_router_retroaudit_20260829_v1",
+  "problem": "P1",
+  "role": "retrospective research only on previously exposed historical folds",
+  "hypothesis": "A low-capacity event-level classifier can reject low-precision MSTCN additions while preserving the frozen incumbent, and MSTCN type posteriors may add conditional value beyond row and boundary confidence.",
+  "official_test_reads_allowed": 0,
+  "submission_creation_allowed": false,
+  "upload_allowed": false,
+  "fold_schedule": [
+    {
+      "arm": "core",
+      "fit_folds": ["2025_q2"],
+      "evaluation_fold": "2025_q3"
+    },
+    {
+      "arm": "core",
+      "fit_folds": ["2025_q2", "2025_q3"],
+      "evaluation_fold": "2025_q4"
+    },
+    {
+      "arm": "type_augmented",
+      "fit_folds": ["2025_q3"],
+      "evaluation_fold": "2025_q4"
+    }
+  ],
+  "segment_target": "beneficial iff segment precision is strictly greater than frozen incumbent fold F1 divided by two",
+  "model": {
+    "family": "standardized logistic regression",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "maximum_iterations": 2000,
+    "acceptance_probability": 0.5,
+    "random_state": 20260829
+  },
+  "core_features": [
+    "log_length",
+    "row_mean",
+    "row_min",
+    "row_max",
+    "row_q10",
+    "row_median",
+    "row_q90",
+    "row_std",
+    "boundary_start_mean",
+    "boundary_start_max",
+    "boundary_end_mean",
+    "boundary_end_max",
+    "incumbent_probability_mean",
+    "incumbent_probability_max",
+    "station",
+    "layer"
+  ],
+  "type_augmented_features": [
+    "type_spike_mean",
+    "type_noise_mean",
+    "type_flatline_mean",
+    "type_offset_mean",
+    "type_drift_mean",
+    "type_entropy_mean"
+  ],
+  "diagnostic_gate": {
+    "core_improves_raw_e150_on_q3": true,
+    "core_improves_raw_e150_on_q4": true,
+    "core_nonnegative_vs_incumbent_on_q3": true,
+    "core_nonnegative_vs_incumbent_on_q4": true,
+    "type_augmented_improves_core_on_q4": true
+  },
+  "limitations": [
+    "All Q2-Q4 labels have been exposed by earlier research, so this cannot be fresh promotion evidence.",
+    "The segment sample is small and clustered by synthetic anomaly event.",
+    "No result-driven rerun or hyperparameter change is allowed within this experiment."
+  ]
+}
