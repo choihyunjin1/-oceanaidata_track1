@@ -1,0 +1,76 @@
+{
+  "experiment_id": "p3_kma_alpha_surface_sweep_20260829_v1",
+  "purpose": "Exhaustively diagnose the frozen KMA long-lead correction axis without reading official test values.",
+  "inputs": {
+    "blind_predictions": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet",
+    "evaluated_incumbent_oof": "artifacts/p3/long_persistence_shrink/oof.parquet",
+    "old_official_submission": "submissions/p3_long_persistence_shrink/submission.csv",
+    "kma_alpha40_official_submission": "submissions/p3_kma_calibrated_longlead_secondary_v1/submission.csv"
+  },
+  "alpha_grid": {
+    "start": -1.0,
+    "stop": 2.0,
+    "step": 0.01
+  },
+  "hierarchical_shrink_grid": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20260829
+  },
+  "official_public_points": [
+    {"uniform_alpha": 0.0, "rmse": 0.583892},
+    {"uniform_alpha": 0.2, "rmse": 0.577671},
+    {"uniform_alpha": 0.4, "rmse": 0.575262}
+  ],
+  "candidate_menu": [
+    {
+      "id": "P3_KMA_UNIFORM_0425",
+      "alpha_18": 0.425,
+      "alpha_24": 0.425,
+      "role": "quadratic-uniform-near-optimum"
+    },
+    {
+      "id": "P3_KMA_L18_040_L24_050",
+      "alpha_18": 0.4,
+      "alpha_24": 0.5,
+      "role": "conservative-lead24-isolation"
+    },
+    {
+      "id": "P3_KMA_L18_040_L24_060",
+      "alpha_18": 0.4,
+      "alpha_24": 0.6,
+      "role": "lead24-information-probe"
+    },
+    {
+      "id": "P3_KMA_L18_020_L24_060",
+      "alpha_18": 0.2,
+      "alpha_24": 0.6,
+      "role": "lead18-direction-isolation"
+    },
+    {
+      "id": "P3_KMA_L18_020_L24_080",
+      "alpha_18": 0.2,
+      "alpha_24": 0.8,
+      "role": "higher-information-long-lead-probe"
+    }
+  ],
+  "prohibitions": {
+    "read_official_test_context": true,
+    "read_hidden_target": true,
+    "fit_or_refit_kma_model": true,
+    "upload_submission": true,
+    "write_row_level_oof_values_to_report": true
+  }
+}
