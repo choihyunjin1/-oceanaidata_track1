@@ -1,0 +1,65 @@
+{
+  "schema_version": "ocean_hackathon.parallel_deep_research_decision.20260828.v1",
+  "status": "RESEARCH_COMPLETE_NO_SUBMISSION",
+  "official_baseline": {
+    "P1": {"score": 28.901363, "metric": "F1", "value": 0.833248},
+    "P2": {"score": 27.264587, "metric": "RMSE", "value": 0.483661},
+    "P3": {"score": 24.066168, "metric": "RMSE", "value": 0.583892},
+    "total": 80.232118
+  },
+  "next_actions": [
+    {
+      "rank": 1,
+      "problem": "P2",
+      "candidate": "seasonal_oas_alpha_0.40",
+      "decision": "BUILD_AND_QA_FOR_OFFICIAL_PROBE",
+      "expected_wall_time": "10-20 minutes",
+      "confidence": "high_for_information_value_medium_for_score_gain",
+      "official_gain_center_points": 0.44,
+      "official_gain_conservative_lower_points": 0.19,
+      "caveat": "Extrapolation from same-lineage official points and prediction-vector geometry; not guaranteed."
+    },
+    {
+      "rank": 2,
+      "problem": "P1",
+      "candidate": "f1_aware_long_event_change_point_rescue",
+      "decision": "IMPLEMENT_AND_BLIND_VALIDATE",
+      "expected_wall_time": "4-9 hours",
+      "confidence": "medium",
+      "caveat": "Large oracle headroom exists, but a causal past-only proposal scorer has not yet been fit."
+    },
+    {
+      "rank": 3,
+      "problem": "P3",
+      "candidate": "chronos2_zero_shot_then_lora_transfer",
+      "decision": "DEPENDENCY_SMOKE_THEN_EXPERIMENT",
+      "expected_wall_time": "1-4 hours",
+      "confidence": "medium",
+      "caveat": "Official implementation supports LoRA, but dependency/version and P3 transfer quality are unverified."
+    },
+    {
+      "rank": 4,
+      "problem": "P2",
+      "candidate": "depth_registered_conditional_mfpca",
+      "decision": "STRUCTURAL_DEVELOPMENT",
+      "expected_wall_time": "1-3 hours",
+      "confidence": "high_for_defect_medium_for_official_gain",
+      "caveat": "Layer-to-depth semantic mismatch is verified; effect size on hidden official rows is not."
+    },
+    {
+      "rank": 5,
+      "problem": "P3",
+      "candidate": "era5_masked_pretrain_patchtst",
+      "decision": "SECOND_BACKBONE_AFTER_CHRONOS_PROBE",
+      "expected_wall_time": "2-6 hours",
+      "confidence": "medium",
+      "caveat": "Source/local domain shift requires staged transfer and fixed validation gates."
+    }
+  ],
+  "promotion_policy": {
+    "global_local_to_official_scalar": "FORBIDDEN",
+    "public_champion_and_private_ready_are_separate": true,
+    "submission_slot_roles": ["exploit", "mechanism", "guard"],
+    "minimum_slot_value": "Expected best-score gain or a result that changes the next model-family decision."
+  }
+}

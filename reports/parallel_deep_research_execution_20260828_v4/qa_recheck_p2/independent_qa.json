@@ -1,0 +1,130 @@
+{
+  "schema_version": "p2.public_heave_tangent_incumbent.independent_qa.20260828.v1",
+  "experiment_id": "p2_public_heave_tangent_incumbent_20260828_v1",
+  "completed_at_kst": "2026-08-28T05:44:06.603008+09:00",
+  "passed": false,
+  "checks": {
+    "experiment_identity": true,
+    "commitment_pretruth": true,
+    "strongest_comparator_selected": true,
+    "result_hash": true,
+    "commitment_hash": true,
+    "source_hashes": true,
+    "row_key_contract": true,
+    "bit_exact_noop": true,
+    "correction_identity": false,
+    "aggregate_metrics": true,
+    "fold_metrics": true,
+    "layer_metrics": true,
+    "bootstrap_reproduction": true,
+    "gate_reproduction": true,
+    "no_candidate_csv": true,
+    "leakage_flags": true
+  },
+  "recomputed": {
+    "rows": 69850,
+    "metrics": {
+      "aggregate": {
+        "rows": 69850,
+        "incumbent_rmse_c": 0.7683674566216134,
+        "heave_candidate_rmse_c": 0.7683786975158644,
+        "delta_rmse_c": 1.124089425097452e-05
+      },
+      "by_fold": {
+        "2024_sep_oct": {
+          "rows": 26273,
+          "incumbent_rmse_c": 0.4477930821525993,
+          "heave_candidate_rmse_c": 0.4478471037861598,
+          "delta_rmse_c": 5.402163356049705e-05
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "incumbent_rmse_c": 1.053477058571144,
+          "heave_candidate_rmse_c": 1.0534759103941784,
+          "delta_rmse_c": -1.1481769655041774e-06
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "incumbent_rmse_c": 0.6130805359589601,
+          "heave_candidate_rmse_c": 0.6130805359589601,
+          "delta_rmse_c": 0.0
+        }
+      },
+      "by_layer": {
+        "2": {
+          "rows": 23298,
+          "incumbent_rmse_c": 0.3763590317948058,
+          "heave_candidate_rmse_c": 0.3763602060660836,
+          "delta_rmse_c": 1.174271277826211e-06
+        },
+        "3": {
+          "rows": 23280,
+          "incumbent_rmse_c": 0.6668354975770936,
+          "heave_candidate_rmse_c": 0.666843286857731,
+          "delta_rmse_c": 7.78928063738249e-06
+        },
+        "4": {
+          "rows": 23272,
+          "incumbent_rmse_c": 1.088761397690709,
+          "heave_candidate_rmse_c": 1.088780029523189,
+          "delta_rmse_c": 1.863183248018707e-05
+        }
+      }
+    },
+    "paired_kst_day_bootstrap": {
+      "unit": "KST calendar day",
+      "days": 163,
+      "replicates": 5000,
+      "seed": 20260828,
+      "mean_delta_rmse_c": 1.1116360456593832e-05,
+      "ci90_low_c": -9.082260584625245e-06,
+      "ci90_high_c": 4.2714689238460005e-05,
+      "probability_improved": 0.332
+    },
+    "correction": {
+      "enabled_rows": 48,
+      "enabled_fraction": 0.0006871868289191124,
+      "rms_c": 0.0016876666566877719,
+      "p99_absolute_c": 0.0,
+      "maximum_absolute_c": 0.16996650541311342
+    },
+    "gate": {
+      "passed": false,
+      "checks": {
+        "aggregate_delta_rmse": false,
+        "paired_ci90_upper": false,
+        "improved_folds": false,
+        "worst_fold_regression": true,
+        "maximum_layer_regression": true,
+        "minimum_active_fraction": false,
+        "correction_rms": true,
+        "correction_p99": true,
+        "correction_maximum": true
+      },
+      "observed": {
+        "aggregate_delta_rmse_c": 1.124089425097452e-05,
+        "bootstrap_ci90_high_c": 4.2714689238460005e-05,
+        "improved_folds": 1,
+        "worst_fold_regression_c": 5.402163356049705e-05,
+        "maximum_layer_regression_c": 1.863183248018707e-05,
+        "active_fraction": 0.0006871868289191124,
+        "correction_rms_c": 0.0016876666566877719,
+        "correction_p99_c": 0.0,
+        "correction_maximum_c": 0.16996650541311342
+      },
+      "thresholds": {
+        "aggregate_delta_rmse_max_c": -0.003,
+        "paired_kst_day_bootstrap_ci90_upper_max_c": 0.0,
+        "minimum_improved_folds": 2,
+        "maximum_worst_fold_regression_c": 0.005,
+        "maximum_layer_regression_c": 0.005,
+        "minimum_active_fraction": 0.05,
+        "maximum_correction_rms_c": 0.05,
+        "maximum_correction_p99_c": 0.2,
+        "maximum_correction_absolute_c": 0.2
+      }
+    }
+  },
+  "candidate_csv_generated": false,
+  "official_upload_performed": false
+}

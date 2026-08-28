@@ -1,0 +1,58 @@
+{
+  "schema_version": "p3_target_shift_retroaudit.qa.20260828.v11",
+  "checked_at_utc": "2026-08-28T06:12:02.3733038Z",
+  "status": "PASS",
+  "checks": {
+    "python_compile": "PASS",
+    "pytest": {
+      "status": "PASS",
+      "tests_passed": 8,
+      "command": ".venv-p1/Scripts/python.exe -m pytest -q tests/test_p3_target_shift_retroaudit_20260828_v1.py tests/test_p3_atmosphere_complete_residual_pilot_20260828_v1.py"
+    },
+    "json_parse": "PASS",
+    "scope_guards_all_false": "PASS",
+    "official_submission_created": false,
+    "official_upload_performed": false,
+    "guarded_output_csv_count": 0,
+    "v1_recorded_runner_hash_matches": true,
+    "v2_recorded_runner_hash_matches": true,
+    "pilot_recorded_runner_hash_matches": true,
+    "semantic_assertions": {
+      "source_cases": 181,
+      "target_cases": 200,
+      "complete_wind_source_cases": 126,
+      "source_rising_fraction": 0.8287292817679558,
+      "target_rising_fraction": 0.815,
+      "wave_state_auc": 0.5624309392265193,
+      "full_feature_auc": 0.7260773480662983,
+      "official_hs2_direction": "WORSE",
+      "all_three_weighted_local_hs2_directions": "BETTER",
+      "residual_pilot_complete_cases": 124,
+      "residual_pilot_model_count": 4,
+      "residual_pilot_best_delta_rmse_m": 0.008173280953336914,
+      "residual_pilot_promotion_count": 0,
+      "promotion_decision": "NO_GO_CLOSE_WIND_RESIDUAL_DIRECTION"
+    }
+  },
+  "sha256": {
+    "configs/experiments/p3_target_shift_retroaudit_20260828_v1.json": "aa86b9ed1d6f31ce0d215fcf72283072fe829464c882d661b3177ede3dd6f5d6",
+    "configs/experiments/p3_target_shift_retroaudit_20260828_v2.json": "69e58648893766e44b6828b4cc9104317342027ef03c5665c8a43768eae6d454",
+    "configs/experiments/p3_atmosphere_complete_residual_pilot_20260828_v1.json": "544681ec2c4cf665774251883c410360d86ab4f672f39ab69aca4339b30b2647",
+    "scripts/run_p3_target_shift_retroaudit_20260828_v1.py": "a48005a06df828639a3b10956b3f355ff973838dd9ba7dd9727162bc885ea08d",
+    "scripts/run_p3_target_shift_retroaudit_20260828_v2.py": "03b1f862e6268cda6e8c5fab3aaf8b120c7329511a1922613c1109ff3b117285",
+    "scripts/run_p3_atmosphere_complete_residual_pilot_20260828_v1.py": "05fb36e910a6aa1f738aa953f3217fd7aec2ee47719f0efa94e823909e38f6fb",
+    "tests/test_p3_target_shift_retroaudit_20260828_v1.py": "437be5c78633ef04ac30ae9d49d790324e93e81b2fe164199177d903d822a34a",
+    "tests/test_p3_atmosphere_complete_residual_pilot_20260828_v1.py": "2ecefb6d69098b2eec241b4443e2b00dcfd67bac3965ab9a04bf9a1e0fa5d15d",
+    "artifacts/p3_target_shift_retroaudit_20260828_v1/result.json": "95190a1aca7fb7ef4dbfcf60dabc4037e0ea88e410ddef91b6fbb81d54317e55",
+    "artifacts/p3_target_shift_retroaudit_20260828_v1/case_domain_weights.parquet": "45a25d7b9f8e59ffdcfe1f1bcd15a644ee8ea3bf722b8238d06edb9678b1f6d9",
+    "artifacts/p3_target_shift_retroaudit_20260828_v2/result.json": "42e1622064485fda7b8043ab3256323df92ae96b03a82886273067f691be7605",
+    "artifacts/p3_target_shift_retroaudit_20260828_v2/surface_case_weights.parquet": "15744358bbf1bf9cfedc2a9626f62ea3a2f236b804302ac35bcffa365b948bc0",
+    "artifacts/p3_atmosphere_complete_residual_pilot_20260828_v1/result.json": "d40805c6c853c1353022ad585bca9d8862b3c1be76bd22d902cec72b9b2924da",
+    "artifacts/p3_atmosphere_complete_residual_pilot_20260828_v1/outer_predictions.parquet": "31cec296324c5123f519aa5d031bfc9e3adafd9c9a89e8f7aece8c3857e7bf11",
+    "reports/approved_parallel_execution_20260828_v9/p3_official_submission_receipt_20260828.json": "a04799d36261d945adf4baa78779181262b201966cfc210625ba18560eeaccd3",
+    "reports/p3_target_shift_retroaudit_20260828_v11/report-source.md": "d887d5a7a216e3dabf26feacd565a27113f87041e19899d6cd599d1cfe28179b",
+    "reports/p3_target_shift_retroaudit_20260828_v11/claim-source-ledger.md": "a1489b7038c0cb9829475cc1c9e27a84ee7ac3186bc75dfa0794fb6b8532227e",
+    "reports/p3_target_shift_retroaudit_20260828_v11/gap-matrix.md": "78afd82b89be4ccf9b6a06271583c4ae35cf2816d61744576d915e9d3bab0343",
+    "reports/p3_target_shift_retroaudit_20260828_v11/decision.json": "1c7f11a69073dbfd76c165feae1a499d555875e201ad75fe9cc55291d6f8dfed"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": "p2.oas40.official_probe_readiness.20260828.v1",
+  "assessment_date_kst": "2026-08-28",
+  "decision": "OFFICIAL_PROBE_READY",
+  "decision_scope": "Eligible for exactly one explicitly approved official probe; not promoted as the final P2 champion before the score returns.",
+  "candidate": {
+    "name": "P2-SEASONAL-OAS-TS-40-PROJECTED",
+    "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_P2_SEASONAL_OAS_TS40_PROJECTED_READY/P2_submission.csv",
+    "bytes": 1284060,
+    "sha256": "6e28ddb8d78c0969e5104d7efbe28e1762f51e80d759fceb86cdef52baa29b96",
+    "byte_identical_to_canonical_artifact": true,
+    "qa": {
+      "columns": ["station", "layer", "time", "temp"],
+      "rows": 26061,
+      "layer_rows": {"2": 8713, "3": 8712, "4": 8636},
+      "keys_unique": true,
+      "keys_nonnull": true,
+      "key_order_matches_test": true,
+      "key_order_matches_sample": true,
+      "finite": true,
+      "range_pass_minus5_to45_c": true,
+      "minimum_c": 16.302557235458977,
+      "maximum_c": 29.081288554475904,
+      "pava_idempotent_roundtrip_max_abs": 0.0
+    },
+    "difference_vs_alpha20": {
+      "changed_rows": 19531,
+      "rms_c": 0.09140466493492092,
+      "maximum_absolute_c": 1.4394537926463968
+    }
+  },
+  "same_lineage_reproducibility": {
+    "alpha10_byte_reproduction": true,
+    "alpha10_sha256": "65b754c83c520609e7bd7979b35f86366903cfebf07d3e411f8f97ab3b59abd5",
+    "alpha20_byte_reproduction": true,
+    "alpha20_sha256": "f46dec7944fe4565307b0242fdab5772a684027f1a42a62404d6e01ba13e0ef7",
+    "fit_receipts_identical": true,
+    "projection_receipts_identical": true
+  },
+  "official_same_lineage_evidence": {
+    "alpha10": {"rmse_c": 0.507628, "score_points": 26.963865},
+    "alpha20": {"rmse_c": 0.483661, "score_points": 27.264587},
+    "alpha20_minus_alpha10_rmse_c": -0.023967,
+    "alpha20_minus_alpha10_score_points": 0.300722,
+    "alpha40_vector_geometry": {
+      "projection_coefficient_on_alpha10_to_alpha20": 2.903834701462552,
+      "orthogonal_residual_rms_c": 0.01815386015406719,
+      "rmse_lower_c": 0.4310422117799511,
+      "rmse_center_c": 0.4486271878452957,
+      "rmse_upper_c": 0.46554840673318193,
+      "minimum_score_gain_vs_alpha20_at_upper_bound": 0.22726808969431686,
+      "assumption": "The official scorer is the distributed 26,061-row integrated RMSE and the recorded alpha10/20 RMSE values are six-decimal rounded scores for the pinned files."
+    }
+  },
+  "local_exposed_oof_diagnostic": {
+    "scope": "Existing 69,850-row, three-block exposed OOF only; no fresh-holdout claim.",
+    "projection_note": "Alpha20 projected metric is from the frozen strength audit. Exact alpha40 local comparison below is unprojected because this re-audit did not read raw public endpoints and no frozen projected-alpha40 local artifact exists.",
+    "reference_rmse_c": 0.7683674566216134,
+    "alpha20": {
+      "unprojected_rmse_c": 0.7592011942811839,
+      "unprojected_delta_vs_reference_c": -0.009166262340429499,
+      "projected_rmse_c": 0.7577143780343567,
+      "projected_delta_vs_reference_c": -0.010653078587256726,
+      "bootstrap_unprojected_vs_reference": {
+        "unit": "KST calendar day",
+        "days": 163,
+        "replicates": 5000,
+        "seed": 20260828,
+        "mean_delta_rmse_c": -0.0091735217169876,
+        "ci90_c": [-0.01861993858533434, -0.00020289621549861149],
+        "probability_improved": 0.953
+      }
+    },
+    "alpha40_unprojected": {
+      "rmse_c": 0.775603206385199,
+      "delta_vs_reference_c": 0.007235749763585542,
+      "delta_vs_alpha20_c": 0.016402012104015114,
+      "bootstrap_vs_alpha20": {
+        "unit": "KST calendar day",
+        "days": 163,
+        "replicates": 5000,
+        "seed": 20260828,
+        "mean_delta_rmse_c": 0.01637670372284876,
+        "ci90_c": [0.007859657660489211, 0.024632428842716908],
+        "probability_alpha40_improved": 0.001
+      },
+      "fold_delta_vs_alpha20_c": {
+        "outer_2024_sep_oct": 0.031368310633601126,
+        "outer_2025_jul_aug": 0.04579114731894074,
+        "outer_2025_nov_dec": -0.11557827874853349
+      },
+      "layer_delta_vs_alpha20_c": {
+        "2": 0.015648381024285007,
+        "3": 0.00800333557867483,
+        "4": 0.02436030199317707
+      },
+      "direction_consistency": "FAIL_LOCAL: alpha40 is worse than alpha20 pooled, in two of three folds, and in all three layers; the winter-transition gain dominates the one improving fold."
+    }
+  },
+  "transport_assessment": {
+    "global_scalar_calibration_allowed": false,
+    "existing_p2_policy": "Trust exact official all-row algebra for a pinned file axis; local surrogate scores are weak ordering evidence and must not replace the official geometry.",
+    "supporting_context": "Historical P2 A-O global direction agreed once between local and official, while layer effects showed a sign reversal and more-than-order-of-magnitude variation. Family-specific evidence is required.",
+    "oas_specific_judgment": "The alpha10-to-alpha20 improvement is direct same-lineage official evidence, and the alpha40 vector bound uses the exact pinned candidate vectors rather than a global local-to-official scalar. This outweighs, but does not erase, the exposed-local reversal for probe readiness."
+  },
+  "new_criteria": {
+    "reproducible_file_and_lineage": "PASS",
+    "local_repeatable_alpha40_improvement": "FAIL",
+    "same_lineage_official_direction": "PASS",
+    "fold_and_layer_direction_guard": "FAIL_LOCAL",
+    "official_probe_information_value": "PASS_HIGH",
+    "overall": "OFFICIAL_PROBE_READY",
+    "rationale": "A third same-lineage official point resolves the explicit local-versus-official curvature contradiction. It is materially distinct from alpha20 and has a geometry-derived official upper RMSE below alpha20, while another local alpha search would add little information."
+  },
+  "stopping_rule": "If this exact alpha40 file is probed, do not submit alpha60/alpha80 or tune this axis until the official alpha40 result is recorded and reconciled against the predeclared geometry interval.",
+  "prohibited_actions_confirmed": {
+    "raw_observation_values_read": false,
+    "official_answer_read": false,
+    "new_prediction_csv_created": false,
+    "retraining_or_parameter_search": false,
+    "official_upload_performed": false,
+    "existing_artifact_modified": false
+  },
+  "sources": {
+    "artifacts/p2_oas_conditional_profile_20260827_v3/oof.parquet": "c89aa6e7d7f25eb34e22c31d9c5fb0c6accb8b20761821f1a7319784b59661d9",
+    "artifacts/p2_oas_strength_followup_20260827_v1/result.json": "d8ee5055720e5949956e9e508afbcdf821fa17c0b10efde373570a0114519f01",
+    "artifacts/p2_seasonal_oas_submission_20260828_v3_alpha40/receipt.json": "26564721035d7a1e260d8260e1501a2cab50f4890005b23a097e137c0c1f764f",
+    "artifacts/p2_seasonal_oas_submission_20260828_v3_alpha40/independent_qa.json": "ef44eb7a9e501a97f921b9fedc566cc11de4f4a65e8a6f8d3676edbd3fafd688",
+    "reports/HACKATHON_HANDOFF_2026-08-28.md": "f2c6a2b023477c7df4f0bafddc6c112521fc575ed3ba29ae0846754c1fbc8613",
+    "reports/next_day_breakthrough_deep_research_20260827_v1/local_official_calibration.json": "b5457a08eed9a2d71b51f3c20828207fd1b7812980b8c17467c9a1d88808fa7a"
+  }
+}

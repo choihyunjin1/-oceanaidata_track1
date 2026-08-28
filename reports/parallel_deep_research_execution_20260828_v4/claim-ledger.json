@@ -1,0 +1,84 @@
+{
+  "schema_version": "parallel.deep_research.execution.claim_ledger.20260828.v4",
+  "created_at_kst": "2026-08-28",
+  "scope": "P1-P3 parallel deep research and one-shot bounded local executions",
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "No new candidate passed promotion and no official submission opportunity was consumed.",
+      "kind": "local_verified",
+      "evidence": [
+        "artifacts/p1_frozen_83_event_ranker_recall_guard_20260828_v1/result.json",
+        "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/result.json",
+        "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1/result.json"
+      ]
+    },
+    {
+      "id": "C2",
+      "claim": "P1 terminated before fit because the qualification split had one positive proposal and one matched event and normality coverage was 55.42 percent.",
+      "kind": "local_verified",
+      "evidence": [
+        "artifacts/p1_frozen_83_event_ranker_recall_guard_20260828_v1/result.json#sha256=8afca6fc57c7bd98e99478de235533d3c69aa7a994844a71aa466f1c61ec9f4e",
+        "artifacts/p1_frozen_83_event_ranker_recall_guard_20260828_v1/independent_qa.json#sha256=9c6381e90375fac2a7ad10a18c2b4f2f88df6a07f5dd1e027be5299476fb97eb"
+      ]
+    },
+    {
+      "id": "C3",
+      "claim": "P2 worsened the strongest common OOF by 0.0000112409 C and activated only 0.0687 percent of rows.",
+      "kind": "local_verified",
+      "evidence": [
+        "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/result.json#sha256=f9626d17833a01f0ae2095eb0eaf2a9c055a16659ac31bc002c589413af52400",
+        "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/independent_qa_recovery1.json#sha256=e0a7ada02641d2c02b16847395daed291bef852ed20941e2aa1a6fad2cf5a8b1"
+      ]
+    },
+    {
+      "id": "C4",
+      "claim": "P3 I4 showed a small negative delta but failed the fixed magnitude, confidence, and coverage gates, producing bit-exact incumbent fallback on every outer row.",
+      "kind": "local_verified",
+      "evidence": [
+        "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1/result.json#sha256=aa9b4931e479c10ee7540a2b688072da433c4353375fa43a673a63946045ec3f",
+        "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1/sealed_outer_predictions.parquet#sha256=cf98f7b507008b2150b31cbb992c699ebf88fc04fd80334b8ad7b56c09614cf7",
+        "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1/independent_qa.json#sha256=af09d5898a312fc949dc76ef3742babbb4d525fa73cca6d773bc4ee924cedaf3"
+      ]
+    },
+    {
+      "id": "C5",
+      "claim": "Neyman-Pearson and conformal risk methods motivate constrained selection but do not remove the need for adequate event support.",
+      "kind": "source_supported_synthesis",
+      "evidence": [
+        "https://pubmed.ncbi.nlm.nih.gov/29423442/",
+        "https://proceedings.iclr.cc/paper_files/paper/2024/hash/f3549ef9b5ff520a7e41ff3cc306ab2b-Abstract-Conference.html"
+      ]
+    },
+    {
+      "id": "C6",
+      "claim": "Thermocline displacement has a physical temperature-gradient interpretation, but horizontal advection and site-specific vertical structure limit direct transfer to P2.",
+      "kind": "source_supported_synthesis",
+      "evidence": [
+        "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021JC018283",
+        "https://os.copernicus.org/articles/20/945/2024/",
+        "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023JC020317"
+      ]
+    },
+    {
+      "id": "C7",
+      "claim": "P3 routing must use forward-sealed out-of-fold evidence and separate learning from testing under temporal shift.",
+      "kind": "source_supported_synthesis",
+      "evidence": [
+        "https://doi.org/10.2202/1544-6115.1309",
+        "https://proceedings.mlr.press/v202/hasson23a.html",
+        "https://arxiv.org/abs/2110.01052",
+        "https://arxiv.org/abs/2310.01262"
+      ]
+    },
+    {
+      "id": "C8",
+      "claim": "Local physical-unit deltas cannot be numerically converted into official composite-score points without paired official observations.",
+      "kind": "methodological_constraint",
+      "evidence": [
+        "reports/parallel_deep_research_execution_20260828_v4/baseline-conclusion.md",
+        "reports/parallel_deep_research_execution_20260828_v4/report-source.md"
+      ]
+    }
+  ]
+}

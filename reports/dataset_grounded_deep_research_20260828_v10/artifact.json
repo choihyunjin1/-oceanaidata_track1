@@ -1,0 +1,222 @@
+{
+  "manifest": {
+    "version": "1.0",
+    "title": "제공 데이터셋 재감사 기반 P1·P2·P3 돌파구 연구",
+    "description": "공식 점수와 배포 데이터의 사건·결측·선택 구조를 함께 감사해 다음 실험의 우선순위와 중단 조건을 정한 기술 보고서",
+    "generatedAt": "2026-08-28T00:00:00+09:00",
+    "language": "ko"
+  },
+  "sources": [
+    {
+      "id": "dataset_audit",
+      "title": "배포 데이터셋 구조 및 메커니즘 감사",
+      "type": "local",
+      "path": "scripts/audit_dataset_mechanisms_20260828.py"
+    },
+    {
+      "id": "dataset_profile",
+      "title": "배포 데이터셋 프로파일",
+      "type": "local",
+      "path": "scripts/profile_competition_datasets_20260828.py"
+    },
+    {
+      "id": "official_and_local",
+      "title": "공식 점수 및 기존 로컬 결과",
+      "type": "local",
+      "path": "reports/approved_parallel_execution_20260828_v9/report-source.md"
+    },
+    {
+      "id": "p1_research",
+      "title": "P1 시계열 이상탐지 1차 연구",
+      "type": "web",
+      "url": "https://doi.org/10.1109/TKDE.2021.3112126"
+    },
+    {
+      "id": "p2_research",
+      "title": "P2 해양 장기 결측 복원 1차 연구",
+      "type": "web",
+      "url": "https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2021.637759/full"
+    },
+    {
+      "id": "p3_research",
+      "title": "P3 풍파 지연 다중 리드 예측 1차 연구",
+      "type": "web",
+      "url": "https://www.mdpi.com/2076-3417/16/15/7447"
+    }
+  ],
+  "datasets": [
+    {
+      "id": "p3_regimes",
+      "sourceId": "dataset_audit",
+      "data": [
+        {"cohort": "역사 고파고", "regime": "하강", "share_pct": 29.34, "count": 6910, "denominator": 23548},
+        {"cohort": "역사 고파고", "regime": "정체", "share_pct": 17.66, "count": 4158, "denominator": 23548},
+        {"cohort": "역사 고파고", "regime": "상승", "share_pct": 53.00, "count": 12480, "denominator": 23548},
+        {"cohort": "공식 테스트 문맥", "regime": "하강", "share_pct": 7.14, "count": 14, "denominator": 196},
+        {"cohort": "공식 테스트 문맥", "regime": "정체", "share_pct": 10.71, "count": 21, "denominator": 196},
+        {"cohort": "공식 테스트 문맥", "regime": "상승", "share_pct": 82.14, "count": 161, "denominator": 196}
+      ]
+    },
+    {
+      "id": "p1_events",
+      "sourceId": "dataset_audit",
+      "data": [
+        {"anomaly_type": "spike", "events": 101, "labeled_rows": 101, "median_duration_h": 0.0, "signature": "단일점"},
+        {"anomaly_type": "flatline", "events": 55, "labeled_rows": 6030, "median_duration_h": 14.17, "signature": "구간 내 온도 고유값 1"},
+        {"anomaly_type": "noise", "events": 53, "labeled_rows": 9442, "median_duration_h": 32.33, "signature": "국소 변동성 블록"},
+        {"anomaly_type": "offset", "events": 35, "labeled_rows": 7296, "median_duration_h": 30.5, "signature": "시작·종료 큰 점프"},
+        {"anomaly_type": "drift", "events": 32, "labeled_rows": 8575, "median_duration_h": 50.92, "signature": "작은 시작점프·선형 누적"}
+      ]
+    },
+    {
+      "id": "dataset_summary",
+      "sourceId": "dataset_profile",
+      "data": [
+        {"problem": "P1", "train_rows": 776706, "test_rows": 169011, "dominant_shift": "test depth 결측 9.685%; G-ORS 100%", "structural_signal": "289개 사건과 타입별 결정적 경계", "priority": 3},
+        {"problem": "P2", "train_rows": 789408, "test_rows": 26061, "dominant_shift": "2025 공개층 T/S 결측 급증", "structural_signal": "61일 갭 양쪽 10분 경계 관측", "priority": 2},
+        {"problem": "P3", "train_rows": 118152, "test_rows": 57800, "dominant_shift": "테스트 상승 국면 82.14%", "structural_signal": "선택일치 분리 앵커 약 254개", "priority": 1}
+      ]
+    },
+    {
+      "id": "candidate_plan",
+      "data": [
+        {"priority": 1, "problem": "P3", "candidate": "상승 폭풍 선택일치 직접 리드 전문가", "validation": "254개 분리 앵커·6리드·관측소별 paired RMSE", "stop_condition": "3관측소 중 2곳 미개선 또는 소수 사건 의존", "submission_status": "연구 검증만"},
+        {"priority": 2, "problem": "P2", "candidate": "OAS40 + 양방향 목표층 잔차 브리지", "validation": "연속 61일 의사결측·결측난이도층·경계연속성", "stop_condition": "OAS40 및 앞경계-only를 안정적으로 못 넘음", "submission_status": "연구 검증만"},
+        {"priority": 3, "problem": "P1", "candidate": "타입별 사건 경계 후보은행 + e150 보존", "validation": "FN 사건 후보 오라클·event/year/station 외부검증", "stop_condition": "추가 F1 오라클 상한 부족 또는 순도 훼손", "submission_status": "연구 검증만"}
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "p3_regime_chart",
+      "title": "P3 공식 문맥은 상승 국면에 강하게 편중",
+      "subtitle": "직전 12시간 Hs 변화로 정의한 국면 비율",
+      "type": "bar",
+      "intent": "comparison",
+      "question": "역사 고파고 검증이 공식 테스트의 국면 구성을 재현하는가?",
+      "rationale": "상승 비율 차이가 기존 로컬-공식 괴리의 가장 직접적인 데이터 근거다.",
+      "dataset": "p3_regimes",
+      "source": {
+        "query": {
+          "engine": "duckdb",
+          "language": "SQL",
+          "sql": "SELECT * FROM (VALUES ('역사 고파고','하강',29.34,6910,23548),('역사 고파고','정체',17.66,4158,23548),('역사 고파고','상승',53.00,12480,23548),('공식 테스트 문맥','하강',7.14,14,196),('공식 테스트 문맥','정체',10.71,21,196),('공식 테스트 문맥','상승',82.14,161,196)) AS t(cohort, regime, share_pct, count, denominator)",
+          "description": "배포 데이터 감사에서 집계한 역사 고파고와 공식 테스트 문맥의 직전 12시간 파고 국면 비율.",
+          "tables_used": ["scripts/audit_dataset_mechanisms_20260828.py"]
+        }
+      },
+      "encodings": {
+        "x": {"field": "regime", "type": "nominal", "label": "국면"},
+        "y": {"field": "share_pct", "type": "quantitative", "label": "비율 (%)"},
+        "color": {"field": "cohort", "type": "nominal", "label": "표본군"},
+        "tooltip": [
+          {"field": "cohort", "label": "표본군"},
+          {"field": "regime", "label": "국면"},
+          {"field": "share_pct", "label": "비율 (%)"},
+          {"field": "count", "label": "건수"},
+          {"field": "denominator", "label": "분모"}
+        ]
+      },
+      "options": {"grouping": "grouped"},
+      "settings": {"showValues": true},
+      "labels": {"values": "always"},
+      "layout": "full"
+    },
+    {
+      "id": "p1_event_chart",
+      "title": "P1은 행 수보다 사건 수가 작다",
+      "subtitle": "순수 이상 타입별 사건 수; 복합 사건 13개는 제외",
+      "type": "bar",
+      "intent": "comparison",
+      "question": "P1을 사건 단위로 보면 유효 표본 규모와 오염 구조가 어떻게 달라지는가?",
+      "rationale": "사건 단위 분할과 타입별 경계 복원이 필요한 이유를 보여준다.",
+      "dataset": "p1_events",
+      "source": {
+        "query": {
+          "engine": "duckdb",
+          "language": "SQL",
+          "sql": "SELECT * FROM (VALUES ('spike',101,101,0.0,'단일점'),('flatline',55,6030,14.17,'구간 내 온도 고유값 1'),('noise',53,9442,32.33,'국소 변동성 블록'),('offset',35,7296,30.5,'시작·종료 큰 점프'),('drift',32,8575,50.92,'작은 시작점프·선형 누적')) AS t(anomaly_type, events, labeled_rows, median_duration_h, signature)",
+          "description": "배포 P1 학습 라벨에서 연속 사건으로 묶은 순수 이상 타입별 사건 수와 지속시간.",
+          "tables_used": ["scripts/audit_dataset_mechanisms_20260828.py"]
+        }
+      },
+      "encodings": {
+        "x": {"field": "anomaly_type", "type": "nominal", "label": "이상 타입"},
+        "y": {"field": "events", "type": "quantitative", "label": "사건 수"},
+        "tooltip": [
+          {"field": "anomaly_type", "label": "이상 타입"},
+          {"field": "events", "label": "사건 수"},
+          {"field": "labeled_rows", "label": "라벨 행 수"},
+          {"field": "median_duration_h", "label": "중앙 지속시간 (h)"},
+          {"field": "signature", "label": "대표 서명"}
+        ]
+      },
+      "settings": {"showValues": true},
+      "labels": {"values": "always"},
+      "layout": "full"
+    }
+  ],
+  "tables": [
+    {
+      "id": "dataset_table",
+      "title": "문제별 데이터 구조 감사 요약",
+      "dataset": "dataset_summary",
+      "source": {
+        "query": {
+          "engine": "duckdb",
+          "language": "SQL",
+          "sql": "SELECT * FROM (VALUES ('P1',776706,169011,'test depth 결측 9.685%; G-ORS 100%','289개 사건과 타입별 결정적 경계',3),('P2',789408,26061,'2025 공개층 T/S 결측 급증','61일 갭 양쪽 10분 경계 관측',2),('P3',118152,57800,'테스트 상승 국면 82.14%','선택일치 분리 앵커 약 254개',1)) AS t(problem, train_rows, test_rows, dominant_shift, structural_signal, priority)",
+          "description": "P1-P3 배포 데이터 구조 감사 요약.",
+          "tables_used": ["scripts/profile_competition_datasets_20260828.py", "scripts/audit_dataset_mechanisms_20260828.py"]
+        }
+      },
+      "columns": [
+        {"field": "problem", "label": "문제"},
+        {"field": "train_rows", "label": "학습 행"},
+        {"field": "test_rows", "label": "테스트/제출 행"},
+        {"field": "dominant_shift", "label": "지배적 이동"},
+        {"field": "structural_signal", "label": "핵심 구조"},
+        {"field": "priority", "label": "실행 우선순위"}
+      ],
+      "defaultSort": {"field": "priority", "direction": "asc"},
+      "layout": "full"
+    },
+    {
+      "id": "candidate_table",
+      "title": "재승격 후보와 반증 조건",
+      "dataset": "candidate_plan",
+      "source": {
+        "query": {
+          "engine": "duckdb",
+          "language": "SQL",
+          "sql": "SELECT * FROM (VALUES (1,'P3','상승 폭풍 선택일치 직접 리드 전문가','254개 분리 앵커·6리드·관측소별 paired RMSE','3관측소 중 2곳 미개선 또는 소수 사건 의존','연구 검증만'),(2,'P2','OAS40 + 양방향 목표층 잔차 브리지','연속 61일 의사결측·결측난이도층·경계연속성','OAS40 및 앞경계-only를 안정적으로 못 넘음','연구 검증만'),(3,'P1','타입별 사건 경계 후보은행 + e150 보존','FN 사건 후보 오라클·event/year/station 외부검증','추가 F1 오라클 상한 부족 또는 순도 훼손','연구 검증만')) AS t(priority, problem, candidate, validation, stop_condition, submission_status)",
+          "description": "데이터 재감사와 기존 실패를 함께 반영한 실행 우선순위와 사전 중단 조건.",
+          "tables_used": ["reports/dataset_grounded_deep_research_20260828_v10/gap-matrix.md"]
+        }
+      },
+      "columns": [
+        {"field": "priority", "label": "우선순위"},
+        {"field": "problem", "label": "문제"},
+        {"field": "candidate", "label": "후보"},
+        {"field": "validation", "label": "필수 검증"},
+        {"field": "stop_condition", "label": "중단 조건"},
+        {"field": "submission_status", "label": "현재 상태"}
+      ],
+      "defaultSort": {"field": "priority", "direction": "asc"},
+      "layout": "full"
+    }
+  ],
+  "blocks": [
+    {"id": "title", "type": "markdown", "body": "# 제공 데이터셋 재감사 기반 P1·P2·P3 돌파구 연구"},
+    {"id": "summary", "type": "markdown", "body": "## 기술 요약\n\n새 대형 모델보다 데이터 생성·선택·결측 구조에 맞춘 검증면 교정이 우선이다. P3는 공식 문맥의 82.14%가 상승 국면이어서 선택일치 검증이 먼저이고, P2는 61일 갭 양쪽의 목표층 경계를 OAS40 잔차 상태로 연결하는 것이 가장 강한 미사용 정보다. P1은 77만 행보다 289개 사건의 타입별 경계를 복원할 수 있는지가 핵심이다. 이 보고서는 연구 설계이며 제출본을 만들거나 업로드하지 않았다."},
+    {"id": "dataset_table_block", "type": "table", "tableId": "dataset_table"},
+    {"id": "p3_text", "type": "markdown", "body": "## P3: 로컬-공식 괴리의 데이터 근거\n\n역사 고파고 표본은 상승 53.00%였지만 공식 테스트 문맥은 82.14%가 상승이었다. 따라서 과거의 평균 고파고 검증 개선을 공식 성능으로 곧바로 운반하면 안 된다. Hs 범위, 직전 12시간 상승폭, 관측소, 폭풍 사건 간격을 맞춘 약 254개 역사 앵커에서 다시 비교하는 것이 첫 단계다.", "sourceId": "dataset_audit"},
+    {"id": "p3_chart_block", "type": "chart", "chartId": "p3_regime_chart"},
+    {"id": "p2_text", "type": "markdown", "body": "## P2: 양쪽 경계를 쓰되 과거연도 등록은 반복하지 않는다\n\n목표층 2·3·4에는 결측 시작 10분 전과 종료 10분 후의 관측이 모두 있다. 기존 OAS40을 기저로 두고 두 경계의 목표층 잔차를 내부로 연결하는 스무더/브리지를 역사 61일 의사결측에서 검증한다. 공개층이 3개 미만인 69개 시각에는 더 강한 수축과 불확실성 처리가 필요하다.", "sourceId": "dataset_profile"},
+    {"id": "p1_text", "type": "markdown", "body": "## P1: 289개 사건의 경계를 복원할 수 있는가\n\n타입별 결정적 서명은 뚜렷하지만 비슷한 구간 검출 계열의 실패도 누적됐다. 그래서 새 모델 전체 학습보다 챔피언 미검출 사건에서 후보은행의 오라클 F1 상한을 먼저 계산한다. 충분한 상한이 없으면 즉시 중단한다.", "sourceId": "dataset_audit"},
+    {"id": "p1_chart_block", "type": "chart", "chartId": "p1_event_chart"},
+    {"id": "priority_text", "type": "markdown", "body": "## 실행 우선순위와 중단 조건\n\n권장 순서는 P3 선택편향 교정 검증, P2 양방향 잔차 브리지 파일럿, P1 사건형 오라클 상한이다. 모든 후보는 공식 입력 조건과 유사한 검증면, 반복 안정성, 기존 모델과의 구조적 차별성, 실패하더라도 다음 결정을 바꾸는 정보가 있는지를 함께 본다."},
+    {"id": "candidate_table_block", "type": "table", "tableId": "candidate_table"},
+    {"id": "limitations", "type": "markdown", "body": "## 한계\n\nP3 상승 편중은 선택 메커니즘의 인과 증명이 아니다. P2 양쪽 경계는 61일 내부를 완전히 결정하지 않는다. P1 학습의 오염 서명이 테스트에서 그대로 반복된다는 보장도 없다. 따라서 이번 결과는 우월 모델의 선언이 아니라 다음 계산을 가장 정보가 큰 실험에 배치하기 위한 결정 자료다."}
+  ]
+}

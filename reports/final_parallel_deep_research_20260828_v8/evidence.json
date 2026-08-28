@@ -1,0 +1,59 @@
+{
+  "schema_version": "ocean_hackathon.final_parallel_deep_research.v1",
+  "created_at_kst": "2026-08-28",
+  "status": "RESEARCH_COMPLETE_NO_NEW_SUBMISSION",
+  "official_access": {
+    "official_hidden_rows_read": 0,
+    "submission_csv_created": false,
+    "upload_count": 0
+  },
+  "current_public": {
+    "P1": {"metric": "F1", "value": 0.833248, "points": 28.901363},
+    "P2": {"metric": "RMSE_C", "value": 0.445147, "points": 27.747847},
+    "P3": {"metric": "RMSE_m", "value": 0.583892, "points": 24.066168}
+  },
+  "decisions": {
+    "P1": {
+      "decision": "BOUNDED_IMPLEMENTATION_RECOMMENDED",
+      "candidate": "exact_degradation_mask_transformer_frozen_anchor_union",
+      "closed_axes": ["coverage_only", "generic_synthetic_exposure", "typed_duration_decoder"]
+    },
+    "P2": {
+      "decision": "BOUNDED_LOCAL_ORTHOGONAL_PROBE_RECOMMENDED",
+      "candidate": "oas40_plus_target_shift_weighted_recent_context_nonlinear_thermocline_residual",
+      "anchor": "OAS40"
+    },
+    "P3": {
+      "decision": "NO_SUBMIT_LINEAGE_MISMATCH",
+      "current_local_anchor": "old_Gen6_OOF",
+      "current_public_champion_lineage": "O_plus_alpha_times_A_minus_O_long_leads",
+      "champion_alpha": -10.21743189862218,
+      "required_next_step": "champion_matched_historical_replay"
+    }
+  },
+  "p3_local_probe": {
+    "rmse_delta_m": -0.003639034810415942,
+    "bootstrap_ci90_delta_m": [-0.006128524981259093, -0.0012619566751847608],
+    "local_probability_improves_descriptive_only": 0.995,
+    "official_below_T_point_slope_per_rmse": -15.872414,
+    "conditional_point_gain": {
+      "ci90_low": 0.02003029879859605,
+      "center": 0.05776026707133334,
+      "ci90_high": 0.09727448571188656,
+      "double_center": 0.11552053414266668
+    },
+    "three_point_target_rmse_reduction_m": 0.189006,
+    "three_point_multiple_of_local_center": 51.94,
+    "scenario_not_forecast": true
+  },
+  "source_sha256": {
+    "p2_official_receipt": "80394fbadeb95bb6acf41f923848daf15f06f7a447674ff8947096e11bf6c4e8",
+    "p1_coverage_recovery_result": "46ee7ead92835816f1a46c7b9cc00e9fa825b2693d097163d8649e5749d90974",
+    "p1_ncad_result": "f6212a2c09a3f71bbfe0aac0072961540ee4d88fe947390b84484617db587d9b",
+    "p1_typed_duration_result": "357059936f6eb123af177a555d90f1a4ce4d2aeddd0de6d271e346af8fb573b3",
+    "p2_bayotide_result": "36d8a8f6d6773b47c464aa71ffb04f0f637a73e6d3dd61f96dc4ecc6534c122c",
+    "p2_cmfpca_result": "59c3490076bea94e89841fdb72a3a12937852da841792d8058eb29c5e4371029",
+    "p3_energy_probe_result": "8c4b7438bada22fe03306dcc9e4e744cb595e43565d8f1ef9c145bc43ccf9943",
+    "p3_public_champion_manifest": "b3557bdee8b70a3bfbb09b211c777589e4ff93127797d2972af98416db8068ca"
+  }
+}
