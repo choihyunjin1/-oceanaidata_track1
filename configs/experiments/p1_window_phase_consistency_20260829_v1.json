@@ -1,0 +1,75 @@
+{
+  "schema_version": "p1.window_phase_consistency.v1",
+  "experiment_id": "p1_window_phase_consistency_20260829_v1",
+  "status": "PREREGISTERED_LOCAL_ONLY_NOT_SUBMISSION_AUTHORIZED",
+  "base_commit": "de1392076f15e3d08b6ab361760950eba880ddad",
+  "source_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+  "checkpoint_experiment_id": "p1_mstcn_checkpoint_diagnostic_20260827_v2",
+  "fixed_recipe": {
+    "width": 512,
+    "epoch": 150,
+    "threshold": 0.8,
+    "seeds": [20260827, 20260839, 20260863],
+    "window_rows": 2048,
+    "stride_rows": 512,
+    "alternate_phase_rows": 256,
+    "prediction_representation": "raw_three_seed_ensemble_mean",
+    "inference_combination": "arithmetic_mean_of_default_and_plus256_views_before_fixed_decoder"
+  },
+  "q2_preflight": {
+    "replay_reason": "The historical Q2 e150 probabilities were sealed but the corresponding model states were not retained. Recreate the exact three-seed state and require bitwise identity of default-view decoder and boundary arrays before treating plus256 as the alternate view.",
+    "truth_firewall": "seal and hash aligned default/plus256 probabilities and fixed proposals before opening Q2 truth",
+    "kill_if_any": {
+      "default_replay_not_bitwise_identical": true,
+      "q99_absolute_probability_difference_below": 0.05,
+      "proposal_xor_rows_below": 50,
+      "fixed_average_anchor_union_delta_f1_below": 0.001
+    }
+  },
+  "paired_view_warm_start": {
+    "authorized_only_after_all_q2_gates_pass": true,
+    "run_count": 1,
+    "epochs": 5,
+    "optimizer": "AdamW",
+    "learning_rate": 0.00001,
+    "weight_decay": 0.0001,
+    "schedule": "constant",
+    "gradient_clip_norm": 1.0,
+    "micro_batch_size": 16,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 64,
+    "supervised_loss": "unchanged source MS-TCN++/ASRF loss averaged over both views",
+    "consistency_loss": "Bernoulli symmetric Jensen-Shannon divergence on real-row overlap of paired views",
+    "consistency_weight": 1.0,
+    "paired_view_definition": "default start s paired with phase-shifted start s-256; absent boundary context is zero padded and invalid-masked"
+  },
+  "confirmatory_gate": {
+    "q3_delta_f1_strictly_positive": true,
+    "q4_delta_f1_strictly_positive": true,
+    "pooled_delta_f1_min": 0.001,
+    "anchor_positive_removed_rows": 0
+  },
+  "source_pins": {
+    "runner": {"path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py", "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"},
+    "config": {"path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json", "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"},
+    "model": {"path": "src/p1_qc/ms_tcn_asrf.py", "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"},
+    "data": {"path": "src/p1_qc/ms_tcn_asrf_data.py", "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"},
+    "q2_grid": {"path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz", "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"},
+    "q2_receipt": {"path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_receipt.json", "sha256": "50483ac14ed6f7b60d28b937161f51043b3dd39f522909c087a5c00b5ac6df85"},
+    "checkpoint_manifest": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/manifest.json", "sha256": "664500df14b8d1749b90c00398a6360ba4c36484e269c53b25ca29637695c381"}
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_read_or_creation": true,
+    "prediction_csv_creation": true,
+    "upload": true,
+    "result_based_grid_or_rerun": true,
+    "source_data_mutation": true
+  },
+  "outputs": {
+    "attempt_lock": "artifacts/p1_window_phase_consistency_20260829_v1.ATTEMPT_LOCK.json",
+    "artifact_directory": "artifacts/p1_window_phase_consistency_20260829_v1",
+    "aggregate_json": "reports/p1_window_phase_consistency_20260829_v1/aggregate.json"
+  }
+}

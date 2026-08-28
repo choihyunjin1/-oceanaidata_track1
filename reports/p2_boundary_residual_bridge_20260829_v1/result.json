@@ -1,0 +1,110 @@
+{
+  "schema_version": "p2.boundary_residual_bridge.contract_audit.v1",
+  "experiment_id": "p2_boundary_residual_bridge_20260829_v1",
+  "decision": "NO_GO_CONTRACT_LEAKAGE",
+  "family_status": "CLOSED_NO_RETRY",
+  "terminal_reason": "The fixed outside 72-hour flanks for two historical blocks overlap the official hidden 2025-09/10 target interval. The contract cannot be evaluated without forbidden target access.",
+  "baseline_commit": "de1392076f15e3d08b6ab361760950eba880ddad",
+  "execution_count": 1,
+  "bridge_fit_count": 0,
+  "prediction_rows_generated": 0,
+  "prediction_files_generated": 0,
+  "model_files_generated": 0,
+  "csv_files_generated": 0,
+  "official_hidden_target_rows_read": 0,
+  "official_test_index_rows_read": 0,
+  "official_sample_submission_rows_read": 0,
+  "official_submission_rows_read": 0,
+  "source_observation_rows_read": 0,
+  "data_paths_opened": [],
+  "flank_contract": {
+    "2024_sep_oct": {
+      "left": {
+        "start": "2024-08-29T00:00:00+09:00",
+        "stop": "2024-09-01T00:00:00+09:00",
+        "official_hidden_overlap": false
+      },
+      "right": {
+        "start": "2024-11-01T00:00:00+09:00",
+        "stop": "2024-11-04T00:00:00+09:00",
+        "official_hidden_overlap": false
+      }
+    },
+    "2025_jul_aug": {
+      "left": {
+        "start": "2025-06-28T00:00:00+09:00",
+        "stop": "2025-07-01T00:00:00+09:00",
+        "official_hidden_overlap": false
+      },
+      "right": {
+        "start": "2025-09-01T00:00:00+09:00",
+        "stop": "2025-09-04T00:00:00+09:00",
+        "official_hidden_overlap": true,
+        "overlap_start": "2025-09-01T00:00:00+09:00",
+        "overlap_stop": "2025-09-04T00:00:00+09:00"
+      }
+    },
+    "2025_nov_dec": {
+      "left": {
+        "start": "2025-10-29T00:00:00+09:00",
+        "stop": "2025-11-01T00:00:00+09:00",
+        "official_hidden_overlap": true,
+        "overlap_start": "2025-10-29T00:00:00+09:00",
+        "overlap_stop": "2025-11-01T00:00:00+09:00"
+      },
+      "right": {
+        "start": "2026-01-01T00:00:00+09:00",
+        "stop": "2026-01-04T00:00:00+09:00",
+        "official_hidden_overlap": false
+      }
+    }
+  },
+  "hidden_target_collisions": [
+    {
+      "block": "2025_jul_aug",
+      "side": "right",
+      "overlap_start": "2025-09-01T00:00:00+09:00",
+      "overlap_stop": "2025-09-04T00:00:00+09:00"
+    },
+    {
+      "block": "2025_nov_dec",
+      "side": "left",
+      "overlap_start": "2025-10-29T00:00:00+09:00",
+      "overlap_stop": "2025-11-01T00:00:00+09:00"
+    }
+  ],
+  "required_flanks": 6,
+  "blocked_flanks": 2,
+  "metric_gate_evaluated": false,
+  "gate_thresholds": {
+    "pooled_delta_rmse_max_c": -0.002,
+    "2024_sep_oct_delta_rmse_max_c": -0.0015,
+    "minimum_improved_blocks": 2,
+    "maximum_worst_block_regression_c": 0.0005,
+    "maximum_layer_regression_c": 0.001,
+    "bootstrap_unit": "KST calendar day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260829,
+    "bootstrap_ci90_upper_max_c": 0.0,
+    "maximum_absolute_axis_cosine": 0.3,
+    "maximum_correction_p99_c": 0.15
+  },
+  "gate_checks": {
+    "pooled_delta_rmse": null,
+    "2024_sep_oct_delta_rmse": null,
+    "minimum_improved_blocks": null,
+    "maximum_worst_block_regression": null,
+    "maximum_layer_regression": null,
+    "day_bootstrap_ci90_upper": null,
+    "maximum_absolute_axis_cosine": null,
+    "maximum_correction_p99": null
+  },
+  "contract_reinterpreted": false,
+  "internal_first_or_last_72h_used": false,
+  "smoothstep_applied": false,
+  "projector_applied": false,
+  "submission_generated_or_uploaded": false,
+  "runtime": {
+    "python": "3.12.10"
+  }
+}
