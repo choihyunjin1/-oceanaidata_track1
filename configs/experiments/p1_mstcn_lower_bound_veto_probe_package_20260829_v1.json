@@ -1,0 +1,33 @@
+{
+  "schema_version": "p1.mstcn_lower_bound_veto_probe_package.v1",
+  "experiment_id": "p1_mstcn_lower_bound_veto_probe_package_20260829_v1",
+  "problem": "P1",
+  "package_directory": "20260829_P1_MSTCN_LOWER_BOUND_VETO_PROBE_READY",
+  "candidate_directory": "P1_1_BOOTSTRAP_LOWER_BOUND_VETO",
+  "backup_directory": "backup_current_champion",
+  "submission_title": "P1 MS-TCN 부트스트랩 하한 Veto",
+  "one_line_summary": "Q3/Q4 그룹 부트스트랩 90% 이상이 동의한 e150 추가 8행만 유지하고 현 anchor와 GI 2행을 보존한 고정밀 구간 probe",
+  "expected": {
+    "rows": 169011,
+    "positive_rows": 6071,
+    "anchor_positive_rows": 6061,
+    "official_champion_positive_rows": 6396,
+    "e150_added_rows": 333,
+    "accepted_segments": 3,
+    "accepted_e150_rows": 8,
+    "gi_only_rows": 2,
+    "shadow_label_sha256": "a983976e3a334363dae8968f158f20f57613a521cb0c734731b9cf5f49df77f9"
+  },
+  "validation_contract": {
+    "historical_folds": [
+      "2025_q3",
+      "2025_q4"
+    ],
+    "historical_oof_purge": "inherited from frozen upstream rolling-origin OOF surfaces",
+    "bootstrap_replicates": 1000,
+    "acceptance_frequency": 0.9,
+    "seed": 20260829
+  },
+  "candidate_creation_authorized": true,
+  "upload_authorized": false
+}

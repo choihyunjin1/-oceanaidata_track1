@@ -19,7 +19,8 @@ def test_paths_and_contract_are_shadow_only() -> None:
     assert config["acceptance_frequency"] == 0.9
     assert config["deployment_contract"]["write_candidate_csv"] is False
     assert config["deployment_contract"]["upload"] is False
-    assert MODULE.CHAMPION_PATH.name == "P1_submission.csv"
+    assert MODULE.CHAMPION_ENV == "P1_CHAMPION_SUBMISSION"
+    assert MODULE.resolve_champion_path({"P1_CHAMPION_SUBMISSION": str(SCRIPT)}).name == SCRIPT.name
 
 
 def test_candidate_preservation_logic() -> None:

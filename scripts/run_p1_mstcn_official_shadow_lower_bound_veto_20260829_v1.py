@@ -37,11 +37,7 @@ DEPLOYMENT_DIR = ROOT / "artifacts" / "p1_mstcn_e150_full_deployment_20260827_v1
 DEPLOYMENT_PREFLIGHT_PATH = DEPLOYMENT_DIR / "preflight.json"
 DEPLOYMENT_QA_PATH = DEPLOYMENT_DIR / "independent_qa.json"
 E150_PATH = DEPLOYMENT_DIR / "P1_MSTCN_E150_ROUTER_UNION_ALL.csv"
-CHAMPION_PATH = Path(
-    r"C:\Users\cedis\Downloads\해양 해커톤 제출용"
-    r"\20260828_DEADLINE_INFORMATION_PROBES_READY"
-    r"\P1_1_E150_PLUS_GI_SPIKE2\P1_submission.csv"
-)
+CHAMPION_ENV = "P1_CHAMPION_SUBMISSION"
 PREDICTION_PATHS = [
     DEPLOYMENT_DIR / f"full_width_512_seed_{seed}_epoch_150_test_prediction.npz"
     for seed in (20260827, 20260839, 20260863)
@@ -61,6 +57,15 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1 << 20), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def resolve_champion_path(environment: dict[str, str] | None = None) -> Path:
+    values = os.environ if environment is None else environment
+    configured = values.get(CHAMPION_ENV)
+    require(bool(configured), f"set {CHAMPION_ENV} to the exact official champion CSV")
+    path = Path(str(configured)).expanduser().resolve()
+    require(path.is_file(), f"missing official champion: {path}")
+    return path
 
 
 def _load_historical_training(config: dict) -> tuple[pd.DataFrame, np.ndarray, np.ndarray]:
@@ -200,12 +205,13 @@ def execute() -> dict:
     require(config["experiment_id"] == EXPERIMENT_ID, "config id")
     require(historical_result["status"] == "PASS_SHADOW_AUDIT_ELIGIBLE", "historical gate")
     require(contract["write_candidate_csv"] is False and contract["upload"] is False, "write contract")
+    champion_path = resolve_champion_path()
     anchor_path = Path(preflight["external_inputs"]["current_router"]["path"])
     require(sha256(anchor_path) == preflight["external_inputs"]["current_router"]["sha256"], "anchor hash")
     require(sha256(E150_PATH) == deployment_qa["candidate_all"]["artifact"]["sha256"], "e150 hash")
     anchor_frame = pd.read_csv(anchor_path)
     e150_frame = pd.read_csv(E150_PATH)
-    champion_frame = pd.read_csv(CHAMPION_PATH)
+    champion_frame = pd.read_csv(champion_path)
     rows = int(contract["official_rows_expected"])
     require(len(anchor_frame) == len(e150_frame) == len(champion_frame) == rows, "row count")
     require(anchor_frame[KEYS].astype(str).equals(e150_frame[KEYS].astype(str)), "anchor/e150 keys")
@@ -311,7 +317,7 @@ def execute() -> dict:
             "deployment_qa": sha256(DEPLOYMENT_QA_PATH),
             "anchor": sha256(anchor_path),
             "e150": sha256(E150_PATH),
-            "official_champion": sha256(CHAMPION_PATH),
+            "official_champion": sha256(champion_path),
             "prediction_archives": {path.name: sha256(path) for path in PREDICTION_PATHS},
         },
         "operation_counters": {

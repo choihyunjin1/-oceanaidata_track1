@@ -1,0 +1,53 @@
+{
+  "schema_version": "p1.mstcn_partial_pooling.shadow.v1",
+  "experiment_id": "p1_mstcn_partial_pooling_calibrator_shadow_20260829_v1",
+  "hypothesis": "A global e150 score slope plus L2-shrunk station-layer intercepts learned on Q2 can add high-marginal-utility long-event rows without deleting any e150 positive.",
+  "scientific_epoch": 150,
+  "baseline_threshold": 0.8,
+  "regularization_c_grid": [0.01, 0.1, 1.0, 10.0],
+  "calibrated_threshold_grid": [0.005, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5],
+  "epsilon": 1e-5,
+  "decoder": {
+    "minimum_added_segment_rows": 19,
+    "boundary_peak_snap_radius_rows": 12,
+    "low_threshold_ratio": 0.5,
+    "anchor_union": true,
+    "baseline_positive_deletions_allowed": false
+  },
+  "selection": {
+    "fold": "2025_q2",
+    "fit_rows": "anchor-negative rows only",
+    "objective": "maximum raw row-F1 of baseline_e150 OR calibrated proposal",
+    "tie_break": ["higher added precision", "fewer added rows", "stronger shrinkage"]
+  },
+  "confirmation_gate": {
+    "pooled_delta_f1_min": 0.001,
+    "each_fold_delta_f1_min": -0.001,
+    "minimum_positive_folds": 1,
+    "minimum_added_precision_relative_to_baseline_f1": 0.5
+  },
+  "pinned_blind_inputs": {
+    "q2": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "bytes": 173949505,
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+      "bytes": 22946468,
+      "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+    },
+    "q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+      "bytes": 14747269,
+      "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+    }
+  },
+  "operation_boundaries": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_csv_creation": false,
+    "upload": false,
+    "result_driven_rerun": false
+  }
+}

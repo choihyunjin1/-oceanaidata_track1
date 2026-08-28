@@ -21,7 +21,7 @@ SHADOW_RESULT_PATH = SHADOW_DIR / "result.json"
 HISTORICAL_RESULT_PATH = ROOT / "artifacts" / "p1_mstcn_bootstrap_lower_bound_veto_20260829_v1" / "result.json"
 DEPLOYMENT_PREFLIGHT_PATH = ROOT / "artifacts" / "p1_mstcn_e150_full_deployment_20260827_v1" / "preflight.json"
 E150_PATH = ROOT / "artifacts" / "p1_mstcn_e150_full_deployment_20260827_v1" / "P1_MSTCN_E150_ROUTER_UNION_ALL.csv"
-CHAMPION_PATH = Path(r"C:\Users\cedis\Downloads\해양 해커톤 제출용\20260828_DEADLINE_INFORMATION_PROBES_READY\P1_1_E150_PLUS_GI_SPIKE2\P1_submission.csv")
+CHAMPION_ENV = "P1_CHAMPION_SUBMISSION"
 OUTPUT_PATH = REPORT_DIR / "qa.json"
 KEYS = ["station", "year", "layer", "time"]
 
@@ -39,13 +39,21 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def champion_path() -> Path:
+    configured = os.environ.get(CHAMPION_ENV)
+    require(bool(configured), f"set {CHAMPION_ENV}")
+    path = Path(str(configured)).expanduser().resolve()
+    require(path.is_file(), f"missing official champion: {path}")
+    return path
+
+
 def execute() -> dict:
     evidence = json.loads(EVIDENCE_PATH.read_text(encoding="utf-8"))
     historical = json.loads(HISTORICAL_RESULT_PATH.read_text(encoding="utf-8"))
     shadow = json.loads(SHADOW_RESULT_PATH.read_text(encoding="utf-8"))
     preflight = json.loads(DEPLOYMENT_PREFLIGHT_PATH.read_text(encoding="utf-8"))
     report = REPORT_PATH.read_text(encoding="utf-8")
-    require(evidence["decision"] == "PASS_LABEL_FREE_SHADOW_RELEVANCE_NOT_PROMOTED", "evidence decision")
+    require(evidence["decision"] == "OFFICIAL_NO_GO_SPARSE_VETO", "evidence decision")
     require(historical["status"] == "PASS_SHADOW_AUDIT_ELIGIBLE", "historical status")
     require(shadow["status"] == "PASS_LABEL_FREE_SHADOW_RELEVANCE", "shadow status")
     require(all(historical["gate_checks"].values()), "historical gate")
@@ -59,7 +67,8 @@ def execute() -> dict:
     anchor_path = Path(preflight["external_inputs"]["current_router"]["path"])
     anchor = pd.read_csv(anchor_path)
     e150 = pd.read_csv(E150_PATH)
-    champion = pd.read_csv(CHAMPION_PATH)
+    champion_csv = champion_path()
+    champion = pd.read_csv(champion_csv)
     require(len(anchor) == len(e150) == len(champion) == 169011, "official row count")
     require(anchor[KEYS].astype(str).equals(e150[KEYS].astype(str)), "anchor/e150 keys")
     require(anchor[KEYS].astype(str).equals(champion[KEYS].astype(str)), "anchor/champion keys")
@@ -73,7 +82,11 @@ def execute() -> dict:
     require(observed["anchor_rows_removed"] == 0 and observed["gi_only_rows_removed"] == 0, "preservation")
     require(observed["shadow_positive_rows"] == observed["anchor_positive_rows"] + observed["official_champion_gi_only_rows"] + observed["accepted_e150_rows"], "shadow arithmetic")
     require(observed["accepted_frequency_minimum"] >= 0.9, "frequency threshold")
-    for marker in ("공식 검증 가치가 있는 무라벨 shadow 후보", "CSV 생성과 업로드는 이번 사이클에서 모두 0회", "적응적 회고 증거"):
+    official = evidence["official_probe_result"]
+    require(official["public_f1"] == 0.820339, "official Public F1")
+    require(official["decision"] == "NO_GO_OFFICIAL_SPARSE_VETO", "official decision")
+    require(official["remaining_p1_submissions"] == 2, "remaining submission count")
+    for marker in ("최종 `NO_GO`", "공식 e150 개선이 소수 고정밀 구간에만 집중됐다는 가설을 반증", "적응적 회고 증거"):
         require(marker in report, f"report marker: {marker}")
     return {
         "schema_version": "p1.mstcn_lower_bound_veto.report_qa.v2",
@@ -81,6 +94,8 @@ def execute() -> dict:
         "status": "PASS",
         "historical_status": historical["status"],
         "shadow_status": shadow["status"],
+        "official_status": official["decision"],
+        "official_public_f1": official["public_f1"],
         "accepted_segments": observed["accepted_segments"],
         "accepted_rows": observed["accepted_e150_rows"],
         "anchor_rows_removed": observed["anchor_rows_removed"],
@@ -94,7 +109,7 @@ def execute() -> dict:
             "shadow_result": sha256(SHADOW_RESULT_PATH),
             "anchor": sha256(anchor_path),
             "e150": sha256(E150_PATH),
-            "official_champion": sha256(CHAMPION_PATH),
+            "official_champion": sha256(champion_csv),
         },
     }
 

@@ -1,7 +1,7 @@
 {
   "schema_version": "p1.mstcn_lower_bound_veto.report_evidence.v2",
   "problem": "P1",
-  "decision": "PASS_LABEL_FREE_SHADOW_RELEVANCE_NOT_PROMOTED",
+  "decision": "OFFICIAL_NO_GO_SPARSE_VETO",
   "single_fit_stability_result": {
     "path": "artifacts/p1_mstcn_deployable_type_veto_stability_20260829_v1/result.json",
     "sha256": "95ff758e5ec6c86ba4235b02d36131f338dc1822d3e1279b81aa561b7f447685",
@@ -20,7 +20,7 @@
   },
   "official_shadow_result": {
     "path": "artifacts/p1_mstcn_official_shadow_lower_bound_veto_20260829_v1/result.json",
-    "sha256": "b84076a2b3ed7a357516d38a1972a088cfa319976dfbdb31cffb0a505732c525",
+    "sha256": "1f4e379d5bb76884d5699432b1b02c68edfb74a3ce214665431add410c356fef",
     "status": "PASS_LABEL_FREE_SHADOW_RELEVANCE",
     "e150_added_segments": 35,
     "e150_added_rows": 333,
@@ -33,19 +33,29 @@
     "model_fits": 2000
   },
   "official_score_evidence": {
-    "round_f_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_F_mstcn_e150_P1x3/OFFICIAL_RESULTS.md",
+    "round_f_path_contract": "P1_SUBMISSION_ROOT/20260827_round_F_mstcn_e150_P1x3/OFFICIAL_RESULTS.md",
     "round_f_sha256": "7a6bb6b81c83fd3a74cbce7e2a5ca6ea9aecb3fd149ce524611e8ebb6c59bf2d",
     "e150_union_all_public_f1": 0.833248,
     "deadline_path": "reports/deadline_submission_results_20260828_v1/official-results.md",
     "deadline_sha256": "d268aaca88906ff5151cd02f3434b21117982bc6bd8fe81915098ef2052df41a",
     "e150_plus_gi2_public_f1": 0.833548
   },
+  "official_probe_result": {
+    "submitted_date_kst": "2026-08-29",
+    "candidate_sha256": "a8e91f8686666946cb92b5106cba9932d1a427281391714946ea1d20fccfc949",
+    "public_f1": 0.820339,
+    "official_score": 28.558277,
+    "delta_public_f1_vs_champion": -0.013209,
+    "delta_score_vs_champion": -0.351064,
+    "remaining_p1_submissions": 2,
+    "decision": "NO_GO_OFFICIAL_SPARSE_VETO"
+  },
   "operation_counters": {
     "official_prediction_rows_read": 169011,
     "official_test_feature_values_read": 0,
     "official_truth_values_read": 0,
     "submission_files_created": 0,
-    "uploads": 0
+    "uploads": 1
   },
-  "claim_limit": "Adaptive retrospective and label-free shadow evidence only; no official F1 estimate and no promotion without an official probe."
+  "claim_limit": "Public-split evidence only; the official probe rejects sparse veto promotion but does not reveal Private performance."
 }

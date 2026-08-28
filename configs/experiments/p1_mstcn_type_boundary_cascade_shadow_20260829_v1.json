@@ -1,0 +1,62 @@
+{
+  "schema_version": "p1.mstcn_type_boundary_cascade_shadow.v1",
+  "experiment_id": "p1_mstcn_type_boundary_cascade_shadow_20260829_v1",
+  "status": "PREREGISTERED_LOCAL_SHADOW_NOT_SUBMISSION_AUTHORIZED",
+  "problem": "P1",
+  "hypothesis": "An exact warm-start of e150 that lets every refinement stage use previous row/type/boundary posteriors and prediction-generator context can reduce long-event false positives without losing the incumbent-preserving recall gain.",
+  "phases": [
+    "q3",
+    "q4"
+  ],
+  "fixed_seed": 20260827,
+  "baseline_epoch": 150,
+  "width": 512,
+  "fine_tune": {
+    "epochs": 25,
+    "learning_rate": 0.00002,
+    "minimum_learning_rate": 0.000003,
+    "warmup_epochs": 1,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0
+  },
+  "decoder": {
+    "high_threshold": 0.9,
+    "minimum_added_segment_rows": 19,
+    "boundary_peak_snap_radius_rows": 12,
+    "anchor_union": true,
+    "tuning_after_truth_read": false
+  },
+  "warm_start_checkpoints": {
+    "q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_width_512_seed_20260827_epoch_150_state.pt",
+      "sha256": "4f1e69f753fa2caacd9617e96a2e72b8fa32f4834ac890289b2ecf61239856a5"
+    },
+    "q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_width_512_seed_20260827_epoch_150_state.pt",
+      "sha256": "7201479a6fe903dd877f90d2a972224fdc17cf0807bc73035abcfdb04b8aa7da"
+    }
+  },
+  "evaluation": {
+    "same_fold_truth_reads_before_all_four_blind_receipts": 0,
+    "primary_contrast": "within-seed e150 warm start versus 25-epoch type-boundary-context fine-tune",
+    "performance_gate": {
+      "pooled_delta_f1_min": 0.0,
+      "each_phase_delta_f1_min": -0.005,
+      "anchor_positive_removed_rows": 0
+    },
+    "information_gate": {
+      "zero_step_max_abs_difference": 0.000001,
+      "new_pathways_must_change": true,
+      "nonfinite_count": 0
+    },
+    "official_score_claim": false,
+    "official_upload_authorized": false
+  },
+  "operation_boundaries": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_csv_creation": false,
+    "upload": false,
+    "q3_q4_results_may_not_change_this_run": true
+  }
+}
