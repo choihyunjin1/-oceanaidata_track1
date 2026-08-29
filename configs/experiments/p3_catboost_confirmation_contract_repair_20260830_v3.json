@@ -1,0 +1,118 @@
+{
+  "experiment_id": "p3_catboost_confirmation_contract_repair_20260830_v3",
+  "status": "ROOT_AUTHORIZED_CONFIRMATION_ONLY_ONE_SHOT",
+  "base_commit": "d6d48731a425e8a31559859a75a41cb4bc3ac9e0",
+  "purpose": "Reuse the frozen v2 selection winner without rerunning search, repair only the confirmation schema contract, and evaluate the three preregistered historical confirmation windows.",
+  "data_boundary": {
+    "historical_train_only": true,
+    "official_rows_read": 0,
+    "official_files_forbidden": [
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv",
+      "score.py"
+    ],
+    "absolute_official_time_reconstruction_allowed": false,
+    "external_evaluation_period_matching_allowed": false,
+    "csv_output_allowed": false,
+    "submission_or_upload_allowed": false,
+    "source_mutation_allowed": false
+  },
+  "frozen_v2": {
+    "config_path": "configs/experiments/p3_catboost_valid_hpo_20260829_v2.json",
+    "config_sha256": "9ef8193fd8e3a94dcad4f041440f0e63b72034badcf04e6171593f7bc0f49512",
+    "selection_path": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/selection_aggregate.json",
+    "selection_sha256": "cc9451f3fe6c1138daba947e902b000e0ca371d861d0abc823b47f7a39fc3fb4",
+    "selection_search_rerun_allowed": false,
+    "selected_candidate_id": "challenger_21",
+    "selected_best_iterations": [418, 212, 589, 1, 64, 2],
+    "selected_iteration": 138,
+    "selected_parameters": {
+      "allow_writing_files": false,
+      "bagging_temperature": 0.2,
+      "boosting_type": "Plain",
+      "bootstrap_type": "Bayesian",
+      "border_count": 254,
+      "depth": 9,
+      "eval_metric": "RMSE",
+      "grow_policy": "Depthwise",
+      "l2_leaf_reg": 20.0,
+      "leaf_estimation_iterations": 1,
+      "learning_rate": 0.02,
+      "loss_function": "RMSE",
+      "random_seed": 20260829,
+      "random_strength": 0.1,
+      "rsm": 0.75,
+      "task_type": "CPU",
+      "thread_count": 6,
+      "verbose": false
+    }
+  },
+  "confirmation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "membership": "exact_frozen_182_case_router_and_kma_oof_intersection",
+    "expected_cases": 182,
+    "expected_rows": 1092,
+    "prediction_sealed_and_hashed_before_truth_metric": true,
+    "challenger_fit_count": 3,
+    "control_fit_count": 0,
+    "maximum_historical_fit_count": 6,
+    "bootstrap": {
+      "unit": "whole_six_lead_case",
+      "replicates": 5000,
+      "seed": 20260829,
+      "ci": 0.9
+    },
+    "gate": {
+      "all_required": true,
+      "pooled_delta_rmse_m_max": -0.002,
+      "paired_case_bootstrap_ci90_upper_strictly_below_m": 0.0,
+      "minimum_nonworse_folds": 2,
+      "minimum_nonworse_stations": 2,
+      "lead_18_delta_rmse_m_max": 0.0,
+      "lead_24_delta_rmse_m_max": 0.0,
+      "short_lead_pooled_delta_rmse_m_max": 0.0005,
+      "worst_station_by_lead_delta_rmse_m_max": 0.005
+    },
+    "failure_action": "close_frozen_challenger_without_full_refit_or_submission"
+  },
+  "schema_contract": {
+    "required_supplemental_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "single_prediction"
+    ],
+    "fail_before_attempt_lock": true,
+    "exact_order_dtype_finite_key_and_row_checks": true
+  },
+  "hardware": {
+    "max_workers": 1,
+    "threads_per_fit": 6,
+    "wall_time_hours_max": 2
+  },
+  "execution": {
+    "allowed_mode_now": "one-shot-execute",
+    "actual_authorized": true,
+    "future_execute_token": "ROOT_APPROVED_P3_CATBOOST_CONFIRMATION_REPAIR_20260830_V3",
+    "search_fit_count": 0,
+    "model_fit_count_in_static_preflight": 0,
+    "official_rows_read_in_static_preflight": 0,
+    "csv_write_count": 0
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3",
+    "static_preflight_receipt": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/static_preflight.json",
+    "attempt_lock": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/attempt.lock",
+    "confirmation_blind_predictions": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/confirmation_blind_predictions.parquet",
+    "confirmation_seal": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/confirmation_seal.json",
+    "result": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/result.json"
+  }
+}

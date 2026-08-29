@@ -59,6 +59,7 @@ P2 OAS/rank-1 **전체**를 닫지 않는다. OAS40과 후속 rank-1 강도축�
 | ERA5 transfer solution | source/transfer 신호는 있었지만 incumbent 대비 +0.00233m, S-ORS +0.02170m | 현 solution gate recipe 종료; ERA5 전체는 미반증 | `parallel_deep_research_execution_20260828_v3` |
 | future-wind MOS | perfect-future-wind oracle도 pooled +0.00134m 악화, 7/7 gate 실패 | predicted-future-wind + frozen-KMA MOS 계약 종료 | `parallel_local_preflight_cycle_20260829_v1` |
 | KMA local alpha surface | cross-fit 최선도 +0.00618m 악화, 1/3 fold 개선 | local 세분화 α를 제출값으로 쓰는 전략 종료 | `p3_kma_alpha_surface_sweep_20260829_v1` |
+| frozen CatBoost challenger_21 | selection ΔRMSE -0.02286m가 confirmation에서 +0.00797m로 역전; 3/3 fold, 3/3 station, 6/6 lead 악화, bootstrap CI90 전부 양수 | frozen candidate·iteration·router·KMA 조합 종료; 138-fit search 재실행 금지 | `p3_catboost_confirmation_contract_repair_20260830_v3` |
 
 P3의 18/24h KMA 공식 축은 0→20%→40%에서 개선했으나, 이후 lead 분리·강도 외삽은 공식 성능이 다시 나빠지는 관측이 있었다. 따라서 동일 축을 더 세분화해 Public을 반복 질의하는 접근은 종료하고, 새 정보축 또는 기술적으로 완결된 local confirmation을 요구한다.
 
@@ -68,7 +69,7 @@ P3의 18/24h KMA 공식 축은 0→20%→40%에서 개선했으나, 이후 lead 
 |---|---|---|---|
 | P2 copula support audit | `TRAIN_ONLY_SUPPORT_PASS_QUERY_AUDIT_NOT_AUTHORIZED` | 47,216 complete timestamps와 최소 unique 2,353은 support 증거일 뿐 복원 성능이 아님 | query-independent 모델을 새 ID로 평가하거나 별도 승인된 query audit |
 | P3 CatBoost ordered HPO v1 | `INVALID_TERMINAL_TECHNICAL_FAILURE` | `Ordered + Depthwise` 비호환으로 75번째 시도에서 중단; ranking 0 | valid-combination smoke를 선행한 새 ID |
-| P3 CatBoost valid HPO v2 | `INVALID_TERMINAL_TECHNICAL_FAILURE` | 138-fit selection은 ΔRMSE -0.02286m로 통과했지만 첫 confirmation 뒤 컬럼 계약 KeyError | schema contract test와 새 one-shot ID; 기존 lock 재사용 금지 |
+| P3 CatBoost valid HPO v2 | `INVALID_TERMINAL_TECHNICAL_FAILURE_RESOLVED_BY_V3` | 138-fit selection은 ΔRMSE -0.02286m로 통과했지만 첫 confirmation 뒤 컬럼 계약 KeyError. v3에서 contract를 수리해 과학적 NO_GO를 판정함 | 기존 v2 lock 재사용 금지; v3 frozen candidate는 닫힌 exact family로 이동 |
 | P2 boundary residual bridge | `NO_GO_CONTRACT_LEAKAGE` | 성능 실패가 아니라 필요한 입력이 금지 기간과 충돌 | 같은 이름으로 내부 flank로 바꾸지 말 것 |
 
 ## 공식 점수로 확인된 exact 축
@@ -92,7 +93,7 @@ P3의 18/24h KMA 공식 축은 0→20%→40%에서 개선했으나, 이후 lead 
 
 - 전체 2026-08-27 family 재분류: `reports/promotion_retroaudit_20260827_v1/report-source.md`
 - 2026-08-28 구조 실행 계보: `reports/parallel_deep_research_execution_20260828_v2`~`v4`, `execution_followup_20260828_v7`, `approved_parallel_execution_20260828_v9`
-- 2026-08-29 preflight/HPO/repair: `reports/parallel_local_preflight_cycle_20260829_v1`, `parallel_hpo_cycle_20260829_v1`, `parallel_robust_repair_cycle_20260829_v2`
+- 2026-08-29~30 preflight/HPO/repair: `reports/parallel_local_preflight_cycle_20260829_v1`, `parallel_hpo_cycle_20260829_v1`, `parallel_robust_repair_cycle_20260829_v2`, `p3_catboost_confirmation_contract_repair_20260830_v3`
 - 공식 점수 계보: `reports/deadline_submission_results_20260828_v1/official-results.md`, `reports/p1_mstcn_lower_bound_veto_20260829_v2/report-source.md`
 
 이 문서는 과거 보고서를 대체하지 않는다. 연구 자원 배분을 위한 상위 색인이고, 상세 수치·해시·한계는 각 원 보고서가 권위 원장이다.
