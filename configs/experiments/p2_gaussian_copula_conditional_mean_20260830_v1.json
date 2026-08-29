@@ -1,0 +1,113 @@
+{
+  "experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v1",
+  "status": "PREREGISTERED_ONE_SHOT_CLOSE_FAMILY_NONLINEAR_PILOT",
+  "preregistered_lineage_commit": "d6d48731a425e8a31559859a75a41cb4bc3ac9e0",
+  "question": "Can a train-only seasonal nonparanormal Gaussian-copula conditional mean improve the frozen alpha50 historical proxy without repeating the closed linear PLS family?",
+  "comparator": "FROZEN_ALPHA50_PROXY",
+  "comparator_disclosure": "The official incumbent has no exact historical OOF. The alpha50 proxy and all three historical outer blocks are frozen but historically exposed, so any pass is research-only evidence.",
+  "source_observations": {
+    "filename": "observations.csv",
+    "bytes": 49058719,
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "immutable_inputs": {
+    "alpha50_proxy": {
+      "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+      "bytes": 6077707,
+      "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+    },
+    "train_only_support_audit": {
+      "path": "reports/p2_copula_support_audit_20260829_v1/train-only-audit.json",
+      "bytes": 16440,
+      "sha256": "e5d000ba5d52c78d79a9149646a8b67777813e864fe245eb6d7e1607a77a839e"
+    }
+  },
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "folds": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug"]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun"]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun", "2025_jul_aug"]
+    }
+  },
+  "reference": {
+    "alpha": 0.5,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "spline_ridge": 0.001,
+    "change_hours": [6, 24, 72]
+  },
+  "copula": {
+    "conditioner": ["current_blend50_layers_2_3_4", "oas_minus_current_layers_2_3_4"],
+    "target": "truth_minus_alpha50_reference_layers_2_3_4",
+    "marginal_granularity": "meteorological_season_with_global_fallback",
+    "season_definition": {
+      "DJF": [12, 1, 2],
+      "MAM": [3, 4, 5],
+      "JJA": [6, 7, 8],
+      "SON": [9, 10, 11]
+    },
+    "shrinkage_candidates": [0.1, 0.3, 0.5],
+    "inner_time_groups": 3,
+    "minimum_inner_group_profiles": 100,
+    "minimum_season_profiles": 200,
+    "quadrature_order": 15,
+    "eigenvalue_floor": 1e-8,
+    "maximum_condition_number": 1000000.0,
+    "correction_rms_cap_c": 0.075,
+    "correction_p99_cap_c": 0.2,
+    "inner_eligibility": {
+      "pooled_delta_lt_c": 0.0,
+      "maximum_worst_group_regression_c": 0.003
+    },
+    "tie_break": ["candidate_rmse", "distance_to_0_3", "shrinkage"]
+  },
+  "gate": {
+    "pooled_delta_rmse_max_c": 0.0,
+    "minimum_improved_folds": 2,
+    "maximum_worst_fold_regression_c": 0.0,
+    "maximum_layer_regression_c": 0.001,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260830,
+    "bootstrap_upper_max_c": 0.0,
+    "maximum_correction_rms_c": 0.075,
+    "maximum_correction_p99_c": 0.2
+  },
+  "resource_contract": {
+    "maximum_total_threads": 4,
+    "blas_threads": 4,
+    "maximum_conceptual_copula_fits": 30
+  },
+  "execution_policy": {
+    "official_hidden_gap_values_read_allowed": false,
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "result_based_retry": false,
+    "wide_hpo_allowed": false,
+    "maximum_executions": 1
+  },
+  "artifact_directory": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v1",
+  "report_directory": "reports/p2_gaussian_copula_conditional_mean_20260830_v1"
+}

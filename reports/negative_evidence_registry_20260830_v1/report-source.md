@@ -68,9 +68,14 @@ P3의 18/24h KMA 공식 축은 0→20%→40%에서 개선했으나, 이후 lead 
 | 항목 | 현재 상태 | 이유 | 다음 조건 |
 |---|---|---|---|
 | P2 copula support audit | `TRAIN_ONLY_SUPPORT_PASS_QUERY_AUDIT_NOT_AUTHORIZED` | 47,216 complete timestamps와 최소 unique 2,353은 support 증거일 뿐 복원 성능이 아님 | query-independent 모델을 새 ID로 평가하거나 별도 승인된 query audit |
+| P2 copula conditional mean v1 | `INVALID_TERMINAL_TECHNICAL_FAILURE_RESOLVED_BY_V2` | incomplete historical profile mapper가 첫 metric 전 종료; prediction 0개, 과학적 점수 0개 | 같은 ID 재실행 금지; v2 exact-zero fallback으로 계약 수리 |
 | P3 CatBoost ordered HPO v1 | `INVALID_TERMINAL_TECHNICAL_FAILURE` | `Ordered + Depthwise` 비호환으로 75번째 시도에서 중단; ranking 0 | valid-combination smoke를 선행한 새 ID |
 | P3 CatBoost valid HPO v2 | `INVALID_TERMINAL_TECHNICAL_FAILURE_RESOLVED_BY_V3` | 138-fit selection은 ΔRMSE -0.02286m로 통과했지만 첫 confirmation 뒤 컬럼 계약 KeyError. v3에서 contract를 수리해 과학적 NO_GO를 판정함 | 기존 v2 lock 재사용 금지; v3 frozen candidate는 닫힌 exact family로 이동 |
 | P2 boundary residual bridge | `NO_GO_CONTRACT_LEAKAGE` | 성능 실패가 아니라 필요한 입력이 금지 기간과 충돌 | 같은 이름으로 내부 flank로 바꾸지 말 것 |
+
+## 2026-08-30 P2 copula 판정
+
+`p2_gaussian_copula_conditional_mean_20260830_v2`는 pooled `-0.010616°C`, 2/3 fold, 3/3 layer 개선, bootstrap CI90 upper `-0.007700°C`로 사전등록 핵심 신호를 모두 통과했다. 그러나 `2025_nov_dec +0.034267°C`와 training-only inner worst-group instability 때문에 더 엄격한 실행 gate는 실패했다. 따라서 copula 전체를 닫지 않고, 동일 seasonal empirical margins + Kendall latent correlation + `[0.1,0.3,0.5]` shrinkage + 동일 split recipe만 재실행 금지한다. 결과 분류는 `PRIMARY_SIGNAL_PASS_STRICT_STABILITY_NO_GO_RESEARCH_ONLY`다.
 
 ## 공식 점수로 확인된 exact 축
 
@@ -93,7 +98,7 @@ P3의 18/24h KMA 공식 축은 0→20%→40%에서 개선했으나, 이후 lead 
 
 - 전체 2026-08-27 family 재분류: `reports/promotion_retroaudit_20260827_v1/report-source.md`
 - 2026-08-28 구조 실행 계보: `reports/parallel_deep_research_execution_20260828_v2`~`v4`, `execution_followup_20260828_v7`, `approved_parallel_execution_20260828_v9`
-- 2026-08-29~30 preflight/HPO/repair: `reports/parallel_local_preflight_cycle_20260829_v1`, `parallel_hpo_cycle_20260829_v1`, `parallel_robust_repair_cycle_20260829_v2`, `p3_catboost_confirmation_contract_repair_20260830_v3`
+- 2026-08-29~30 preflight/HPO/repair: `reports/parallel_local_preflight_cycle_20260829_v1`, `parallel_hpo_cycle_20260829_v1`, `parallel_robust_repair_cycle_20260829_v2`, `p3_catboost_confirmation_contract_repair_20260830_v3`, `p2_gaussian_copula_conditional_mean_20260830_v2`
 - 공식 점수 계보: `reports/deadline_submission_results_20260828_v1/official-results.md`, `reports/p1_mstcn_lower_bound_veto_20260829_v2/report-source.md`
 
 이 문서는 과거 보고서를 대체하지 않는다. 연구 자원 배분을 위한 상위 색인이고, 상세 수치·해시·한계는 각 원 보고서가 권위 원장이다.
