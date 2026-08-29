@@ -1,0 +1,66 @@
+{
+  "experiment_id": "p3_catboost_ordered_hpo_20260829_v1",
+  "grid_version": "cartesian_48_v1",
+  "candidate_count": 48,
+  "ordering": [
+    "boosting_type",
+    "grow_policy",
+    "depth",
+    "bootstrap",
+    "regularization_profile"
+  ],
+  "axes": {
+    "boosting_type": ["Plain", "Ordered"],
+    "grow_policy": ["SymmetricTree", "Depthwise"],
+    "depth": [5, 7, 9],
+    "bootstrap": ["bayesian_02", "mvs_08"],
+    "regularization_profile": ["A", "B"]
+  },
+  "bootstrap_profiles": {
+    "bayesian_02": {
+      "bootstrap_type": "Bayesian",
+      "bagging_temperature": 0.2
+    },
+    "mvs_08": {
+      "bootstrap_type": "MVS",
+      "subsample": 0.8
+    }
+  },
+  "regularization_profiles": {
+    "A": {
+      "learning_rate": 0.02,
+      "l2_leaf_reg": 20.0,
+      "random_strength": 0.1,
+      "rsm": 0.75
+    },
+    "B": {
+      "learning_rate": 0.04,
+      "l2_leaf_reg": 8.0,
+      "random_strength": 0.5,
+      "rsm": 1.0
+    }
+  },
+  "fixed_parameters": {
+    "loss_function": "RMSE",
+    "eval_metric": "RMSE",
+    "task_type": "CPU",
+    "thread_count": 6,
+    "random_seed": 20260829,
+    "border_count": 254,
+    "leaf_estimation_iterations": 1,
+    "allow_writing_files": false,
+    "verbose": false
+  },
+  "control": {
+    "candidate_id": "control_incumbent",
+    "boosting_type": "Plain",
+    "grow_policy": "SymmetricTree",
+    "depth": 6,
+    "learning_rate": 0.035,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "rsm": 1.0,
+    "bootstrap_type": "MVS",
+    "subsample": 0.8
+  }
+}

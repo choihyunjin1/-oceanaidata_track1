@@ -1,0 +1,36 @@
+{
+  "experiment_id": "p3_catboost_ordered_hpo_20260829_v1",
+  "amendment_id": "resource_only_20260829_cpu_handoff_v1",
+  "status": "SEALED_BEFORE_ANY_HPO_FIT_OR_METRIC",
+  "authorization_basis": "P2 terminal complete; P1 retains two logical CPU threads",
+  "resource_change_only": true,
+  "before": {
+    "max_workers": 1,
+    "threads_per_fit": 8,
+    "grid_sha256": "9c611287ec44de83d380d526015ac2261fc7b86f158c57cc29ac7b6de19471b9",
+    "config_sha256": "37244782f9009cf9824f92953bf94e4b855efaca4e6d4d3ff8c447d200087196"
+  },
+  "after": {
+    "max_workers": 1,
+    "threads_per_fit": 6,
+    "grid_sha256": "98710828d73af2ecb44f0db64cd369ff4504e4eca27587b793e85c403150571e",
+    "wall_time_cap_hours": 12
+  },
+  "unchanged_contract": {
+    "challenger_grid_count": 48,
+    "control_count": 1,
+    "maximum_selection_fit_count": 174,
+    "selection_windows_and_78h_embargo": true,
+    "fixed_591_features_multi_router_shrink_kma_alpha_0_4": true,
+    "selection_and_confirmation_gates": true,
+    "result_based_grid_or_rerun": false,
+    "official_rows_allowed": 0,
+    "csv_outputs_allowed": 0
+  },
+  "state_at_seal": {
+    "model_fit_count": 0,
+    "truth_metric_count": 0,
+    "official_rows_read": 0,
+    "attempt_lock_exists": false
+  }
+}
