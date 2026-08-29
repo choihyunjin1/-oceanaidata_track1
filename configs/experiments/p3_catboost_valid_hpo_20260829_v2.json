@@ -1,0 +1,53 @@
+{
+  "extends": "configs/experiments/p3_catboost_ordered_hpo_20260829_v1.json",
+  "extends_sha256": "d162ece22da5c8461c4a1352c8249b9210ebec995cb54e7cbcc4085d0fdf0adc",
+  "experiment_id": "p3_catboost_valid_hpo_20260829_v2",
+  "status": "ROOT_AUTHORIZED_VALID_COMBINATION_ONE_SHOT",
+  "base_commit": "a6141a73356ed8ca319d8591429492d364ca172f",
+  "purpose": "Repair the terminal v1 compatibility failure under a new ID by searching only three CatBoost-valid structure families after a sealed all-candidate synthetic fit smoke.",
+  "inputs": {
+    "grid": {
+      "path": "configs/experiments/p3_catboost_valid_hpo_20260829_v2.grid.json",
+      "sha256": "422d7996e79ef8dab4169d597fa71ed0d9ac84f14c01b8a4ad1dfbe54c1fb10c"
+    }
+  },
+  "successive_halving": {
+    "rungs": [
+      {"name": "rung_300", "iterations": 300, "selection_fold_count": 2, "challenger_keep": 9},
+      {"name": "rung_900", "iterations": 900, "selection_fold_count": 4, "challenger_keep": 3},
+      {"name": "rung_2500", "iterations": 2500, "selection_fold_count": 6, "challenger_keep": 1, "early_stopping_rounds": 120}
+    ],
+    "challenger_count": 36,
+    "control_count": 1,
+    "maximum_fit_count": 138,
+    "result_based_grid_expansion_allowed": false,
+    "rerun_allowed": false
+  },
+  "synthetic_smoke": {
+    "catboost_version": "1.2.10",
+    "rows": 128,
+    "features": 591,
+    "iterations": 1,
+    "seed": 20260829,
+    "candidate_plus_control_fit_count": 37,
+    "historical_fit_count_before_attempt_lock": 0
+  },
+  "execution": {
+    "allowed_mode_now": "one-shot-execute",
+    "actual_authorized": true,
+    "future_execute_token": "ROOT_APPROVED_P3_CATBOOST_VALID_HPO_20260829_V2",
+    "synthetic_smoke_fit_count_in_static_preflight": 37,
+    "historical_fit_count_in_static_preflight": 0,
+    "official_rows_read_in_static_preflight": 0,
+    "csv_write_count": 0
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p3_catboost_valid_hpo_20260829_v2",
+    "static_preflight_receipt": "artifacts/p3_catboost_valid_hpo_20260829_v2/static_preflight.json",
+    "attempt_lock": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/attempt.lock",
+    "selection_aggregate": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/selection_aggregate.json",
+    "confirmation_blind_predictions": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/confirmation_blind_predictions.parquet",
+    "confirmation_seal": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/confirmation_seal.json",
+    "result": "artifacts/p3_catboost_valid_hpo_20260829_v2/one_shot/result.json"
+  }
+}

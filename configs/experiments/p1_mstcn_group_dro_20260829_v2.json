@@ -1,0 +1,72 @@
+{
+  "schema_version": "p1.mstcn_group_dro.v2",
+  "experiment_id": "p1_mstcn_group_dro_20260829_v2",
+  "status": "PREREGISTERED_ROOT_AUTHORIZED_ONE_SHOT",
+  "purpose": "Test one fixed vectorized station-layer-quarter worst-group BCE objective on the selected MS-TCN Sobol recipe while keeping architecture, 165 past-only features, decoder, anchor union, and historical folds frozen.",
+  "source_pins": {
+    "sobol_runner": {"path": "scripts/run_p1_mstcn_sobol_hpo_20260829_v1.py", "sha256": "155e7719472d55e3c0f3f291264726378e749fb68a9d1d3816f085ae86817401"},
+    "sobol_config": {"path": "configs/experiments/p1_mstcn_sobol_hpo_20260829_v1.json", "sha256": "c9ff0cee7add360b37b303a283732107246df2f079046f9f814e37026814316b"},
+    "sobol_preconfirm": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q2_preconfirm_gate.json", "sha256": "5dfb9d76b6ab05f1689cd054dd04c7b85803798c39f5b0b5ea1c23e6c84f73fe"},
+    "base_runner": {"path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py", "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"}
+  },
+  "selected_source_trial": {
+    "trial_id": "trial_18",
+    "trial_index": 18,
+    "width": 512,
+    "batch_size": 64,
+    "dropout": 0.27312047565355896,
+    "learning_rate": 0.00012369572021723587,
+    "weight_decay": 0.00011410050763570612,
+    "row_soft_dice_weight": 1.2971082174846487,
+    "temporal_smoothing_weight": 0.18311458542011677,
+    "boundary_type_weight": 0.3945243320427835,
+    "stage_weights": [1.0, 1.0, 1.0, 1.0]
+  },
+  "group_objective": {
+    "group_key": "station_x_layer_x_calendar_quarter_utc",
+    "minimum_rows_before_sparse_merge": 2048,
+    "strength": 0.5,
+    "scope": "event_bce_all_stages_only",
+    "pooled_dice_smoothing_boundary_type_unchanged": true,
+    "vectorized_scatter_add": true
+  },
+  "training_contract": {
+    "seeds": [20260827, 20260839, 20260863],
+    "epochs": 150,
+    "source_schedule_horizon_epochs": 300,
+    "strong_weight_decay": 0.001,
+    "threshold_grid": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "torch_cpu_threads_max": 2,
+    "historical_fit_count_q2": 3,
+    "historical_fit_count_confirmation_if_gate_pass": 6,
+    "maximum_lifetime_historical_fit_count": 9
+  },
+  "q2_gate": {
+    "all_monthly_delta_f1_strictly_positive": true,
+    "pooled_delta_f1_strictly_positive": true,
+    "anchor_positive_removed_rows": 0,
+    "maximum_station_changed_row_share": 0.8
+  },
+  "confirmation_gate": {
+    "q3_delta_f1_strictly_positive": true,
+    "q4_delta_f1_strictly_positive": true,
+    "pooled_delta_f1_strictly_positive": true,
+    "anchor_positive_removed_rows": 0,
+    "maximum_station_changed_row_share": 0.8
+  },
+  "outputs": {
+    "artifact_directory": "artifacts/p1_mstcn_group_dro_20260829_v2",
+    "attempt_lock": "artifacts/p1_mstcn_group_dro_20260829_v2.ATTEMPT_LOCK.json"
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_read_or_creation": true,
+    "csv_creation": true,
+    "upload": true,
+    "q3_or_q4_used_for_selection": true,
+    "truth_read_before_blind_prediction_seal": true,
+    "result_based_rerun_or_tuning": true,
+    "source_data_mutation": true
+  }
+}

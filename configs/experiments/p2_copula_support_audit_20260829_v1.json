@@ -1,0 +1,23 @@
+{
+  "experiment_id": "p2_copula_support_audit_20260829_v1",
+  "status": "TRAIN_ONLY_ZERO_FIT_AUDIT",
+  "source_environment": "P2_DATA_DIR",
+  "allowed_source_file": "observations.csv",
+  "forbidden_files": ["test_index.csv", "sample_submission.csv", "baseline_interp.csv", "score.py"],
+  "season_definition": {"DJF": [12, 1, 2], "MAM": [3, 4, 5], "JJA": [6, 7, 8], "SON": [9, 10, 11]},
+  "gates": {
+    "minimum_complete_historical_timestamps": 1000,
+    "minimum_unique_values_per_layer_coordinate": 200,
+    "duplicate_station_layer_time_rows": 0,
+    "nonfinite_rank_gaussian_values": 0
+  },
+  "query_dependent_checks": {
+    "nearest_prefix_fallback_cells": "NOT_RUN_OFFICIAL_PUBLIC_INPUT_BOUNDARY",
+    "pooled_outside_train_minmax_ratio_lte": 0.05,
+    "worst_cell_coordinate_outside_ratio_lte": 0.10
+  },
+  "model_fit_count": 0,
+  "official_input_rows_read": 0,
+  "csv_output_count": 0,
+  "upload_count": 0
+}
