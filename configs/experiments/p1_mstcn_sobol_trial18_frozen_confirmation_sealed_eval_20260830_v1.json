@@ -1,0 +1,105 @@
+{
+  "schema_version": "p1.mstcn_sobol_trial18_frozen_confirmation.sealed_eval.20260830.v1",
+  "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1",
+  "status": "PREREGISTERED_ZERO_FIT_SEALED_ARTIFACT_EVALUATION_ONLY",
+  "purpose": "Recover only the historical metric evaluation that the original v3 runner could not enter because it referenced EncodedSurface.keys instead of EncodedSurface.surface.keys after all six fits and both blind predictions were already sealed.",
+  "recovery_contract": {
+    "original_runner_reexecution": false,
+    "additional_model_fits": 0,
+    "reprediction": false,
+    "retuning": false,
+    "threshold_search": false,
+    "historical_truth_metric_evaluations": 1,
+    "allowed_code_delta": "In the evaluator-only truth loader, bind holdout_keys from holdout.surface.keys; all source model, recipe, threshold, seed, gate and sealed prediction bytes remain unchanged.",
+    "claim_annotation": "original runner technical failure recovered by sealed-artifact independent evaluation"
+  },
+  "frozen_recipe_identity": {
+    "trial_id": "trial_18",
+    "threshold": 0.8,
+    "epoch": 150,
+    "seeds": [20260827, 20260839, 20260863],
+    "fit_count_already_completed": 6,
+    "recipe_sha256": "0206dbed2d509ecb930593d4621eb53ccce2e528adbbdec09696911bffbb2d6e"
+  },
+  "pinned_inputs": {
+    "original_config": {
+      "path": "configs/experiments/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.json",
+      "bytes": 10742,
+      "sha256": "5a4336b38b1377f2a54ee7f4d8c3ec4966ed6ced8e5347e7d7a1363abf1c2b68"
+    },
+    "original_runner": {
+      "path": "scripts/run_p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.py",
+      "bytes": 47512,
+      "sha256": "cf8a7aff4356281b80c611ba6d34c7621c564ddeecab0a4f0bf14f987016a57f"
+    },
+    "original_attempt_lock": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.ATTEMPT_LOCK.json",
+      "bytes": 568,
+      "sha256": "d7e6ac47127a6265d1b736abb0e0161a185746428af3b49b91c000908cf8b957"
+    },
+    "original_failure_terminal": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/terminal_result.json",
+      "bytes": 678,
+      "sha256": "bb5819246d9b604b6bd11c5a85c73c4a8c6cef0bc8f250b725f7921036fbefdb"
+    },
+    "q3_blind_prediction": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q3_confirmatory_blind.npz",
+      "bytes": 4470851,
+      "sha256": "61a18c30a904659bb5aca909558d83d2d8f1125e4596ee4ec0f2985e8c8eb6b3"
+    },
+    "q3_blind_receipt": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q3_confirmatory_blind_receipt.json",
+      "bytes": 3151,
+      "sha256": "ca627deddb189cd650057eb7ab4d2952a36fa31844ca681c4505314ea38c2c64"
+    },
+    "q4_blind_prediction": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q4_confirmatory_blind.npz",
+      "bytes": 2882876,
+      "sha256": "da746ae4286eacf50407ed577650f3539618807fadf02e84725ff5bf46966ab1"
+    },
+    "q4_blind_receipt": {
+      "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q4_confirmatory_blind_receipt.json",
+      "bytes": 3151,
+      "sha256": "776d85125a18d27df8fd3734e3a9c618711348fa4f0e74efee64c99824469d86"
+    }
+  },
+  "required_original_terminal": {
+    "status": "FAILED_EXECUTION_NO_RETRY_AUTHORIZED",
+    "error_type": "AttributeError",
+    "error": "'EncodedSurface' object has no attribute 'keys'",
+    "completed_fit_count": 6,
+    "claim_scope": "NO_PERFORMANCE_CLAIM",
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "csv_created": false,
+    "upload_performed": false
+  },
+  "evaluation_contract": {
+    "source": "original v3 governing evaluation_contract, unchanged",
+    "primary": "pooled Q3+Q4 row-level binary micro-F1 delta versus incumbent",
+    "directional_margin": 0.0,
+    "uncertainty": "paired 10000-replicate 21-day circular moving-block bootstrap, central 90 percent interval, seed 20260830",
+    "legacy_fixed_delta_or_all_slice_veto_used": false,
+    "diagnostic_slices_are_vetoes": false
+  },
+  "outputs": {
+    "artifact_directory": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1",
+    "attempt_lock": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1.ATTEMPT_LOCK.json",
+    "terminal_result": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1/terminal_result.json",
+    "independent_qa": "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1/independent-qa.json"
+  },
+  "prohibitions": {
+    "model_fit": true,
+    "model_prediction": true,
+    "checkpoint_creation": true,
+    "source_or_original_artifact_mutation": true,
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_or_hidden_answer_read": true,
+    "csv_creation": true,
+    "upload": true,
+    "retry": true,
+    "tuning": true,
+    "outlier_hard_deletion": true,
+    "label_1_or_anomaly_event_deletion": true
+  }
+}

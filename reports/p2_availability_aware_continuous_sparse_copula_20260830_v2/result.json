@@ -1,0 +1,1916 @@
+{
+  "access_receipt": {
+    "csv_output_count": 0,
+    "hard_deleted_training_profiles": 0,
+    "historical_truth_rows_read_after_prediction_commitment": 69850,
+    "official_interface_rows_read": 0,
+    "query_support_rows_read": 0,
+    "submission_generated": false,
+    "upload_count": 0
+  },
+  "base_config_sha256": "c0b6419ab83380ee56f33e64ae31f205b58ff65fef45227e80153a57281a24a0",
+  "classification": "RESEARCH_ONLY_EXPOSED_HISTORICAL_SURFACE",
+  "closed_family_rerun": false,
+  "comparator": "FROZEN_ALPHA50_HISTORICAL_PROXY",
+  "comparator_disclosure": "The alpha50 proxy, all three historical windows, and all seven Stage-0 edges are historically exposed. Any favorable result is research-only and is not fresh confirmation or official-deployment authority.",
+  "config_canonical_sha256": "b67f7017603f4556624396a12407df34d11a7ede1360104a3d0444ef58c8cb0b",
+  "config_sha256": "3bc7ed47431977c08f310701bfbccff1d7a006402223a88e8b3cec87c942d57f",
+  "correction": {
+    "maximum_absolute_c": 0.1999999999999993,
+    "p99_absolute_c_diagnostic": 0.1999999999999993,
+    "rms_c_diagnostic": 0.05045005367067513,
+    "structural_bound_c": [
+      -0.2,
+      0.2
+    ]
+  },
+  "decision": "PRIMARY_HARM_RESEARCH_ONLY",
+  "dependence_aware_bootstrap": {
+    "block_length_days": 7,
+    "ci90_high": 0.004967253376855786,
+    "ci90_low": 0.0006617799475544305,
+    "confidence": 0.9,
+    "days": 163,
+    "days_by_window": {
+      "2024_sep_oct": 61,
+      "2025_jul_aug": 62,
+      "2025_nov_dec": 40
+    },
+    "layers_preserved_together_within_day": true,
+    "mean_delta_rmse": 0.0023197971225479984,
+    "method": "moving_block_bootstrap_within_each_frozen_window",
+    "probability_improved": 0.0028,
+    "replicates": 5000,
+    "seed": 20260830,
+    "unit": "contiguous_KST_day_block_preserving_layers_2_3_4_together",
+    "windows_resampled_separately": true
+  },
+  "diagnostics": {
+    "correction_magnitude_is_not_a_performance_veto": true,
+    "support_is_not_a_performance_veto": true,
+    "tail_risk": {
+      "cell_definition": "nonoverlapping_7_KST_day_by_layer",
+      "cell_records": [
+        {
+          "block": 0,
+          "delta_rmse": -0.0024990188607964536,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.014218966029548752,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.018287472624111345,
+          "layer": 4,
+          "rows": 1005,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.0030704188403114507,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.01785320142780611,
+          "layer": 3,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.023697547153917142,
+          "layer": 4,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.0013996238804065975,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.0168263066816019,
+          "layer": 3,
+          "rows": 1007,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.006909627606952018,
+          "layer": 4,
+          "rows": 1005,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.004107841833031145,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.026958866483006272,
+          "layer": 3,
+          "rows": 1007,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.01656371515931765,
+          "layer": 4,
+          "rows": 997,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 4,
+          "delta_rmse": -0.0014160233159106195,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.006880598172100294,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.027613442156636303,
+          "layer": 4,
+          "rows": 1004,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 5,
+          "delta_rmse": -0.0011233188914774872,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.009199753248468556,
+          "layer": 3,
+          "rows": 1007,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.029587254129221696,
+          "layer": 4,
+          "rows": 981,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 6,
+          "delta_rmse": 0.0005153573466534778,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 6,
+          "delta_rmse": 0.014159457071589276,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 6,
+          "delta_rmse": 0.018920652975081165,
+          "layer": 4,
+          "rows": 1003,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 4.462844993134013e-05,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 0.00016421987658210568,
+          "layer": 3,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 0.00016522740109436995,
+          "layer": 4,
+          "rows": 1006,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 8,
+          "delta_rmse": 6.443765278260627e-05,
+          "layer": 2,
+          "rows": 717,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 8,
+          "delta_rmse": 8.369904989535826e-06,
+          "layer": 3,
+          "rows": 717,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 8,
+          "delta_rmse": 3.330561522219e-05,
+          "layer": 4,
+          "rows": 715,
+          "window": "2024_sep_oct"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.006454706741328864,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 0,
+          "delta_rmse": -7.239319481433526e-06,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 0,
+          "delta_rmse": -0.04652472963869547,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.008271236379269964,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.0017459761283606934,
+          "layer": 3,
+          "rows": 1003,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 1,
+          "delta_rmse": -0.024583504946696255,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.00762731439023856,
+          "layer": 2,
+          "rows": 994,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.003917033221365163,
+          "layer": 3,
+          "rows": 1000,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 2,
+          "delta_rmse": -0.010788772457894336,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.007534166153412181,
+          "layer": 2,
+          "rows": 1007,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.0019844997391198493,
+          "layer": 3,
+          "rows": 1006,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 3,
+          "delta_rmse": -0.0031371735309160265,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.006071952831597005,
+          "layer": 2,
+          "rows": 1007,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.0013072565121270419,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.0008482267355109929,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 5,
+          "delta_rmse": -0.000594335122141687,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 5,
+          "delta_rmse": -0.0016570730886409368,
+          "layer": 3,
+          "rows": 1005,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.009641497972046054,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 6,
+          "delta_rmse": -0.0009539433726922231,
+          "layer": 2,
+          "rows": 1006,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 6,
+          "delta_rmse": -1.143365441091948e-05,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 6,
+          "delta_rmse": 0.026608044657474794,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 0.0006210567240166887,
+          "layer": 2,
+          "rows": 1002,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 0.0003973021135216248,
+          "layer": 3,
+          "rows": 995,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 7,
+          "delta_rmse": 0.009133103706604473,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 8,
+          "delta_rmse": 0.0024015177041823987,
+          "layer": 2,
+          "rows": 856,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 8,
+          "delta_rmse": 0.0006824363020075386,
+          "layer": 3,
+          "rows": 842,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 8,
+          "delta_rmse": -0.009979540089085415,
+          "layer": 4,
+          "rows": 864,
+          "window": "2025_jul_aug"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 0,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 1001,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 1,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 1006,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 2,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 3,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 4,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 1008,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.0,
+          "layer": 2,
+          "rows": 591,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.0,
+          "layer": 3,
+          "rows": 591,
+          "window": "2025_nov_dec"
+        },
+        {
+          "block": 5,
+          "delta_rmse": 0.0,
+          "layer": 4,
+          "rows": 591,
+          "window": "2025_nov_dec"
+        }
+      ],
+      "cells": 72,
+      "maximum_cell_regression_rmse_c": 0.029587254129221696,
+      "minimum_cell_delta_rmse_c": -0.04652472963869547,
+      "positive_part_cvar80_rmse_c": 0.018617952098428765,
+      "role": "DIAGNOSTIC_SENSITIVITY_ONLY_NOT_A_PROMOTION_GATE"
+    },
+    "transport_slices_are_not_hard_vetoes": true
+  },
+  "execution_receipt": {
+    "aggregate_json_only": true,
+    "attempts": 1,
+    "prediction_values_changed_by_overlay": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "technical_failure_retry": false,
+    "v1_reexecution": false
+  },
+  "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v2",
+  "fit_counts": {
+    "continuous_edge_estimations": 21,
+    "hpo_trials": 0,
+    "inner_selection_fits": 0,
+    "outer_dependence_model_fits": 3
+  },
+  "fold_receipts": {
+    "2024_sep_oct": {
+      "active_profiles": 5191,
+      "correction_p99_c_diagnostic": 0.1999999999999993,
+      "correction_rms_c_diagnostic": 0.06976286873552574,
+      "fold": "2024_sep_oct",
+      "inactive_profiles": 3588,
+      "maximum_absolute_inactive_correction": 0.0,
+      "model": {
+        "availability": {
+          "candidate_training_profiles": 16339,
+          "complete_training_profiles": 15814,
+          "missing_by_mask": {
+            "conditioner_missing": 419,
+            "thermal_change_12h_missing": 231,
+            "thermal_change_24h_missing": 367,
+            "thermal_contrast_missing": 42
+          },
+          "missing_training_profiles": 525
+        },
+        "continuous_edge_estimations": 7,
+        "hpo_trials": 0,
+        "inner_selection_fits": 0,
+        "model": {
+          "conditioner_ood_lower": [
+            0.03251950000000071,
+            -2.0665180000000007,
+            -9.0224465
+          ],
+          "conditioner_ood_upper": [
+            12.823312499999997,
+            0.278154499999998,
+            7.240721999999998
+          ],
+          "continuous_edge_estimations": 7,
+          "degrees_of_freedom_per_edge": 4,
+          "diagonal_shrinkage": 0.8,
+          "edge_receipts": {
+            "psal_contrast_signed__residual_l4": {
+              "coefficients": [
+                -0.15329352056044684,
+                0.004226713679864648,
+                0.0035838360326575346,
+                0.0005625955554638964
+              ],
+              "raw_fitted_max": -0.11956662351218743,
+              "raw_fitted_min": -0.18746790324831722
+            },
+            "residual_l2__residual_l4": {
+              "coefficients": [
+                0.4344903945314808,
+                0.0648629464941039,
+                0.018383396986689702,
+                0.005054530121318684
+              ],
+              "raw_fitted_max": 0.7251288961033685,
+              "raw_fitted_min": 0.1923664881535754
+            },
+            "residual_l3__residual_l4": {
+              "coefficients": [
+                0.6591634858594101,
+                0.09172252581877367,
+                0.023991479711702512,
+                0.015687679554512075
+              ],
+              "raw_fitted_max": 1.1046501727944789,
+              "raw_fitted_min": 0.2789407711082975
+            },
+            "temp_contrast_signed__residual_l2": {
+              "coefficients": [
+                -0.0924556404796994,
+                -0.06457415173534833,
+                -0.0226369761923009,
+                -0.01801431380112209
+              ],
+              "raw_fitted_max": 0.2586279225364862,
+              "raw_fitted_min": -0.4761196168047285
+            },
+            "temp_contrast_signed__residual_l3": {
+              "coefficients": [
+                -0.10760622774828982,
+                -0.14273336708410891,
+                -0.019325426737755617,
+                -0.019441929601790323
+              ],
+              "raw_fitted_max": 0.32563560066986813,
+              "raw_fitted_min": -0.6719892949685187
+            },
+            "temp_contrast_signed__residual_l4": {
+              "coefficients": [
+                0.08038516957450204,
+                -0.0996406578893686,
+                -0.017818459160152986,
+                -0.016525352666525193
+              ],
+              "raw_fitted_max": 0.43162903702472766,
+              "raw_fitted_min": -0.35401565020073944
+            },
+            "thermal_change_24h_signed__residual_l4": {
+              "coefficients": [
+                0.08752438200225732,
+                -0.026500266191183303,
+                -0.016550618359408395,
+                -0.05032763663922165
+              ],
+              "raw_fitted_max": 0.5451688142100116,
+              "raw_fitted_min": -0.3417080630209948
+            }
+          },
+          "kst_days": 114,
+          "nearest_psd_projection_applied": false,
+          "nuisance_edge_receipts": {
+            "psal_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": -0.07545228352713056,
+              "latent_correlation": -0.11824288855690208,
+              "shrunk_correlation": -0.02364857771138041
+            },
+            "temp_contrast_signed__psal_contrast_signed": {
+              "kendall_tau_b": -0.061969216849650614,
+              "latent_correlation": -0.09718736887968786,
+              "shrunk_correlation": -0.019437473775937568
+            },
+            "temp_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": 0.26634582008747154,
+              "latent_correlation": 0.40627617857194576,
+              "shrunk_correlation": 0.08125523571438913
+            }
+          },
+          "profiles": 15814,
+          "response_scale_c": [
+            0.7889605261509116,
+            2.133236945249132,
+            2.676578850123626
+          ],
+          "ridge": 1.0,
+          "state_center": [
+            4.45885,
+            0.04004999999999903,
+            0.07165000000000088
+          ],
+          "state_ood_lower": [
+            0.07961949999999918,
+            -7.940095500000002,
+            -9.0224465
+          ],
+          "state_ood_upper": [
+            12.823312499999997,
+            7.453966999999975,
+            7.240721999999998
+          ],
+          "state_scale": [
+            3.0607025524106968,
+            1.6567894466522792,
+            1.7862020878000855
+          ],
+          "training_blocks": 2
+        },
+        "model_guard_exact_noop": false,
+        "outer_dependence_model_fits": 1,
+        "support": {
+          "kst_days": 114,
+          "passes_support_diagnostic": true,
+          "profiles": 15814,
+          "training_blocks": 2
+        }
+      },
+      "no_op_profile_counts": {
+        "correlation_matrix_guard": 0,
+        "incomplete_target_profile": 64,
+        "missing_public_state": 193,
+        "ood_public_state": 3331,
+        "outer_model_guard": 0
+      },
+      "outlier_diagnostic": {
+        "coherent_multilayer_temp_event_profiles": 99,
+        "diagnostic_weight_sum": 15420.25,
+        "hard_deleted_profiles": 0,
+        "physical_extreme_profiles": 735,
+        "preserved_physical_extreme_profiles": 735,
+        "profiles": 16339,
+        "sensor_suspect_profiles": 1225,
+        "weights_enter_fit_or_metric": false
+      },
+      "physical_domain_guard": {
+        "absolute_domain_c": [
+          -5.0,
+          45.0
+        ],
+        "active_candidate_outside_count": 0,
+        "candidate_all_finite": true,
+        "candidate_outside_count": 18,
+        "changed_preexisting_extreme_count": 0,
+        "contract": "relative_to_frozen_reference_preserve_preexisting_extrema_exact_noop",
+        "inactive_changed_count": 0,
+        "new_candidate_outside_count": 0,
+        "prediction_values_changed_by_overlay": false,
+        "reference_outside_count": 18
+      },
+      "prediction_sha256": "27516c979b343ef367c21ec3cb2d8529a808583972961d842faaeb5265cb8f31",
+      "query_profiles": 8779,
+      "query_rows": 26273,
+      "reference": {
+        "query_reference": [
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.000509393339092432,
+            "season_bin": 17,
+            "train_timestamps": 7883
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.000751981978995631,
+            "season_bin": 18,
+            "train_timestamps": 6095
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.0016559740530185196,
+            "season_bin": 19,
+            "train_timestamps": 4139
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.0021654638877070436,
+            "season_bin": 20,
+            "train_timestamps": 2172
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.012542884592061833,
+            "season_bin": 21,
+            "train_timestamps": 428
+          }
+        ],
+        "training_reference": {
+          "2024_jul_aug": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0007211174617975618,
+              "season_bin": 13,
+              "train_timestamps": 7275
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000942378983264804,
+              "season_bin": 14,
+              "train_timestamps": 5353
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0016074593757161948,
+              "season_bin": 15,
+              "train_timestamps": 3434
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.003289876211459017,
+              "season_bin": 16,
+              "train_timestamps": 1491
+            },
+            {
+              "nearest_prefix_fallback_used": true,
+              "oas_shrinkage": 0.0060323985123570305,
+              "season_bin": 17,
+              "train_timestamps": 1000
+            }
+          ],
+          "2024_may_jun": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.004243405169506607,
+              "season_bin": 9,
+              "train_timestamps": 1370
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.001237386470004877,
+              "season_bin": 10,
+              "train_timestamps": 3286
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0006388941409760843,
+              "season_bin": 11,
+              "train_timestamps": 5253
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005231286520195022,
+              "season_bin": 12,
+              "train_timestamps": 7219
+            }
+          ]
+        },
+        "validation_target_temp_psal_masked_together": true
+      },
+      "structural_correction_bound_c": [
+        -0.2,
+        0.2
+      ],
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug"
+      ],
+      "training_rows": 48958
+    },
+    "2025_jul_aug": {
+      "active_profiles": 8140,
+      "correction_p99_c_diagnostic": 0.1824504938269873,
+      "correction_rms_c_diagnostic": 0.04324345611367009,
+      "fold": "2025_jul_aug",
+      "inactive_profiles": 788,
+      "maximum_absolute_inactive_correction": 0.0,
+      "model": {
+        "availability": {
+          "candidate_training_profiles": 40955,
+          "complete_training_profiles": 39222,
+          "missing_by_mask": {
+            "conditioner_missing": 1298,
+            "thermal_change_12h_missing": 800,
+            "thermal_change_24h_missing": 1009,
+            "thermal_contrast_missing": 287
+          },
+          "missing_training_profiles": 1733
+        },
+        "continuous_edge_estimations": 7,
+        "hpo_trials": 0,
+        "inner_selection_fits": 0,
+        "model": {
+          "conditioner_ood_lower": [
+            -0.7756580000000006,
+            -1.9327895000000004,
+            -7.293538000000001
+          ],
+          "conditioner_ood_upper": [
+            12.271789999999992,
+            0.2628580000000007,
+            6.285334499999964
+          ],
+          "continuous_edge_estimations": 7,
+          "degrees_of_freedom_per_edge": 4,
+          "diagonal_shrinkage": 0.8,
+          "edge_receipts": {
+            "psal_contrast_signed__residual_l4": {
+              "coefficients": [
+                -0.12876643241024086,
+                -0.058020585185558075,
+                -0.010165028660081404,
+                -0.023159535956778794
+              ],
+              "raw_fitted_max": 0.30783118235783313,
+              "raw_fitted_min": -0.618338346808739
+            },
+            "residual_l2__residual_l4": {
+              "coefficients": [
+                0.49834697584501103,
+                0.15700924105116,
+                0.010030701300087668,
+                -0.005845909068394042
+              ],
+              "raw_fitted_max": 0.9839679663223793,
+              "raw_fitted_min": 0.27747968536560363
+            },
+            "residual_l3__residual_l4": {
+              "coefficients": [
+                0.658358075419138,
+                0.23829022984160467,
+                0.00566215261317292,
+                -0.009626587580695446
+              ],
+              "raw_fitted_max": 1.34653978408384,
+              "raw_fitted_min": 0.4379618923069237
+            },
+            "temp_contrast_signed__residual_l2": {
+              "coefficients": [
+                -0.021804786479099857,
+                -0.07114422955252456,
+                -0.010425862308437159,
+                0.0037873676596873788
+              ],
+              "raw_fitted_max": 0.14795005642047676,
+              "raw_fitted_min": -0.3062886139051854
+            },
+            "temp_contrast_signed__residual_l3": {
+              "coefficients": [
+                -0.023803486338594516,
+                -0.021704975840655363,
+                0.005442978834353076,
+                0.015494782146011512
+              ],
+              "raw_fitted_max": 0.15215045035663782,
+              "raw_fitted_min": -0.265619378829616
+            },
+            "temp_contrast_signed__residual_l4": {
+              "coefficients": [
+                -0.07679860018547194,
+                -0.013465559108229358,
+                0.008806734705502556,
+                0.01731281550719334
+              ],
+              "raw_fitted_max": 0.16792490935628274,
+              "raw_fitted_min": -0.390511128251079
+            },
+            "thermal_change_24h_signed__residual_l4": {
+              "coefficients": [
+                0.005964499795507172,
+                -0.007321221714922009,
+                0.008662019374866731,
+                0.07088236139563621
+              ],
+              "raw_fitted_max": 0.8530530708552706,
+              "raw_fitted_min": -0.9241801931634752
+            }
+          },
+          "kst_days": 285,
+          "nearest_psd_projection_applied": false,
+          "nuisance_edge_receipts": {
+            "psal_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": -0.09290287378584085,
+              "latent_correlation": -0.1454140846081207,
+              "shrunk_correlation": -0.029082816921624132
+            },
+            "temp_contrast_signed__psal_contrast_signed": {
+              "kendall_tau_b": -0.20885163087828496,
+              "latent_correlation": -0.32221029227095016,
+              "shrunk_correlation": -0.06444205845419002
+            },
+            "temp_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": 0.17701596647726636,
+              "latent_correlation": 0.2744868645532522,
+              "shrunk_correlation": 0.05489737291065043
+            }
+          },
+          "profiles": 39222,
+          "response_scale_c": [
+            0.37587010174104496,
+            0.5759172917908174,
+            1.0434251550755465
+          ],
+          "ridge": 1.0,
+          "state_center": [
+            2.66625,
+            0.0035500000000006082,
+            0.004900000000001015
+          ],
+          "state_ood_lower": [
+            0.0005000000000006111,
+            -6.5802245,
+            -7.293538000000001
+          ],
+          "state_ood_upper": [
+            12.271789999999992,
+            6.155956499999952,
+            6.285334499999964
+          ],
+          "state_scale": [
+            3.868553968746666,
+            0.8442122357448183,
+            0.946344996072126
+          ],
+          "training_blocks": 6
+        },
+        "model_guard_exact_noop": false,
+        "outer_dependence_model_fits": 1,
+        "support": {
+          "kst_days": 285,
+          "passes_support_diagnostic": true,
+          "profiles": 39222,
+          "training_blocks": 6
+        }
+      },
+      "no_op_profile_counts": {
+        "correlation_matrix_guard": 0,
+        "incomplete_target_profile": 77,
+        "missing_public_state": 78,
+        "ood_public_state": 633,
+        "outer_model_guard": 0
+      },
+      "outlier_diagnostic": {
+        "coherent_multilayer_temp_event_profiles": 1049,
+        "diagnostic_weight_sum": 37061.0,
+        "hard_deleted_profiles": 0,
+        "physical_extreme_profiles": 1726,
+        "preserved_physical_extreme_profiles": 1726,
+        "profiles": 40955,
+        "sensor_suspect_profiles": 5192,
+        "weights_enter_fit_or_metric": false
+      },
+      "physical_domain_guard": {
+        "absolute_domain_c": [
+          -5.0,
+          45.0
+        ],
+        "active_candidate_outside_count": 0,
+        "candidate_all_finite": true,
+        "candidate_outside_count": 0,
+        "changed_preexisting_extreme_count": 0,
+        "contract": "relative_to_frozen_reference_preserve_preexisting_extrema_exact_noop",
+        "inactive_changed_count": 0,
+        "new_candidate_outside_count": 0,
+        "prediction_values_changed_by_overlay": false,
+        "reference_outside_count": 0
+      },
+      "prediction_sha256": "86e8557a918144ac4bbe9ab08b39c873719b5ca6aceaa136617d7b6b76b3a796",
+      "query_profiles": 8928,
+      "query_rows": 26693,
+      "reference": {
+        "query_reference": [
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00017754405263022038,
+            "season_bin": 12,
+            "train_timestamps": 23310
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00018225630231194238,
+            "season_bin": 13,
+            "train_timestamps": 23072
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00020016818729429213,
+            "season_bin": 14,
+            "train_timestamps": 21185
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00023385415394927827,
+            "season_bin": 15,
+            "train_timestamps": 19521
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00030010984564307044,
+            "season_bin": 16,
+            "train_timestamps": 17545
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.0003425876129233424,
+            "season_bin": 17,
+            "train_timestamps": 16281
+          }
+        ],
+        "training_reference": {
+          "2024_jul_aug": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004149665642167024,
+              "season_bin": 13,
+              "train_timestamps": 14807
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003953456686760796,
+              "season_bin": 14,
+              "train_timestamps": 12920
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004456213429614776,
+              "season_bin": 15,
+              "train_timestamps": 11256
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005703945732742926,
+              "season_bin": 16,
+              "train_timestamps": 9280
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0006113623292484811,
+              "season_bin": 17,
+              "train_timestamps": 8398
+            }
+          ],
+          "2024_may_jun": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003254487276385075,
+              "season_bin": 9,
+              "train_timestamps": 10736
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00027037116303602787,
+              "season_bin": 10,
+              "train_timestamps": 12652
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00023400594000576858,
+              "season_bin": 11,
+              "train_timestamps": 14619
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00023886179760227973,
+              "season_bin": 12,
+              "train_timestamps": 16000
+            }
+          ],
+          "2024_nov_dec": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005530071142918522,
+              "season_bin": 21,
+              "train_timestamps": 8826
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0006304392622650838,
+              "season_bin": 22,
+              "train_timestamps": 6879
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0008086966154532317,
+              "season_bin": 23,
+              "train_timestamps": 4958
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0013566544633436884,
+              "season_bin": 24,
+              "train_timestamps": 3028
+            }
+          ],
+          "2024_sep_oct": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000509393339092432,
+              "season_bin": 17,
+              "train_timestamps": 7883
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0006235135316610279,
+              "season_bin": 18,
+              "train_timestamps": 8097
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005572455105847683,
+              "season_bin": 19,
+              "train_timestamps": 8074
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000480402306531823,
+              "season_bin": 20,
+              "train_timestamps": 7918
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005785789876250099,
+              "season_bin": 21,
+              "train_timestamps": 6174
+            }
+          ],
+          "2025_mar_apr": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004195031029900743,
+              "season_bin": 7,
+              "train_timestamps": 10909
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003216105386740059,
+              "season_bin": 8,
+              "train_timestamps": 14721
+            }
+          ],
+          "2025_may_jun": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000537004606240435,
+              "season_bin": 8,
+              "train_timestamps": 8200
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004662120049462363,
+              "season_bin": 9,
+              "train_timestamps": 9966
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00037364150945818747,
+              "season_bin": 10,
+              "train_timestamps": 11882
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00029028471949388193,
+              "season_bin": 11,
+              "train_timestamps": 13849
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0002876170630219247,
+              "season_bin": 12,
+              "train_timestamps": 15230
+            }
+          ]
+        },
+        "validation_target_temp_psal_masked_together": true
+      },
+      "structural_correction_bound_c": [
+        -0.2,
+        0.2
+      ],
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun"
+      ],
+      "training_rows": 122691
+    },
+    "2025_nov_dec": {
+      "active_profiles": 0,
+      "correction_p99_c_diagnostic": 0.0,
+      "correction_rms_c_diagnostic": 0.0,
+      "fold": "2025_nov_dec",
+      "inactive_profiles": 5631,
+      "maximum_absolute_inactive_correction": 0.0,
+      "model": {
+        "availability": {
+          "candidate_training_profiles": 49883,
+          "complete_training_profiles": 47995,
+          "missing_by_mask": {
+            "conditioner_missing": 1363,
+            "thermal_change_12h_missing": 836,
+            "thermal_change_24h_missing": 1045,
+            "thermal_contrast_missing": 304
+          },
+          "missing_training_profiles": 1888
+        },
+        "continuous_edge_estimations": 7,
+        "hpo_trials": 0,
+        "inner_selection_fits": 0,
+        "model": {
+          "conditioner_ood_lower": [
+            -0.6677620000000003,
+            -1.8847089999999986,
+            -7.367406
+          ],
+          "conditioner_ood_upper": [
+            12.866095999999997,
+            0.281012000000002,
+            6.625759999999985
+          ],
+          "continuous_edge_estimations": 7,
+          "degrees_of_freedom_per_edge": 4,
+          "diagonal_shrinkage": 0.8,
+          "edge_receipts": {
+            "psal_contrast_signed__residual_l4": {
+              "coefficients": [
+                -0.06714376330319849,
+                -0.04365293107650779,
+                -0.011671407697794359,
+                -0.026011587098289924
+              ],
+              "raw_fitted_max": 0.33548875992832194,
+              "raw_fitted_min": -0.577033898558032
+            },
+            "residual_l2__residual_l4": {
+              "coefficients": [
+                0.4293048965339828,
+                0.12459239781587574,
+                -0.0038585438799285843,
+                -0.013709025019865938
+              ],
+              "raw_fitted_max": 0.7624413315730201,
+              "raw_fitted_min": 0.32512742930012634
+            },
+            "residual_l3__residual_l4": {
+              "coefficients": [
+                0.6326110818928148,
+                0.2113221396489948,
+                0.004960920348902711,
+                -0.006280724131085536
+              ],
+              "raw_fitted_max": 1.2631536350354116,
+              "raw_fitted_min": 0.41613512807839725
+            },
+            "temp_contrast_signed__residual_l2": {
+              "coefficients": [
+                0.11974022557085663,
+                0.03083150971051469,
+                0.003819006017250464,
+                0.0030756377873794715
+              ],
+              "raw_fitted_max": 0.2708878248778289,
+              "raw_fitted_min": 0.027691721320887534
+            },
+            "temp_contrast_signed__residual_l3": {
+              "coefficients": [
+                0.10833359821142398,
+                0.01662988283705572,
+                0.01224403754082655,
+                0.017005961578232705
+              ],
+              "raw_fitted_max": 0.4602438863185358,
+              "raw_fitted_min": -0.1977999721216045
+            },
+            "temp_contrast_signed__residual_l4": {
+              "coefficients": [
+                -0.05814637018319342,
+                -0.03952964468476773,
+                0.0006538854593621731,
+                0.013628808542408251
+              ],
+              "raw_fitted_max": 0.004011444426206682,
+              "raw_fitted_min": -0.19977876208575066
+            },
+            "thermal_change_24h_signed__residual_l4": {
+              "coefficients": [
+                -0.0153720226283849,
+                -0.01117549467656441,
+                0.008827430831498425,
+                0.062132026401220244
+              ],
+              "raw_fitted_max": 0.7089099384816329,
+              "raw_fitted_min": -0.6880958360054392
+            }
+          },
+          "kst_days": 347,
+          "nearest_psd_projection_applied": false,
+          "nuisance_edge_receipts": {
+            "psal_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": -0.08711339632331618,
+              "latent_correlation": -0.1364107678294961,
+              "shrunk_correlation": -0.027282153565899213
+            },
+            "temp_contrast_signed__psal_contrast_signed": {
+              "kendall_tau_b": -0.14365995860038927,
+              "latent_correlation": -0.2237501993090371,
+              "shrunk_correlation": -0.044750039861807415
+            },
+            "temp_contrast_signed__thermal_change_24h_signed": {
+              "kendall_tau_b": 0.17203204328728727,
+              "latent_correlation": 0.26695049654679215,
+              "shrunk_correlation": 0.05339009930935842
+            }
+          },
+          "profiles": 47995,
+          "response_scale_c": [
+            0.2668808685997936,
+            0.5271039628461053,
+            1.007330213552068
+          ],
+          "ridge": 1.0,
+          "state_center": [
+            3.5412999999999997,
+            0.00280000000000058,
+            0.004199999999999093
+          ],
+          "state_ood_lower": [
+            0.0006000000000021544,
+            -6.766656000000001,
+            -7.367406
+          ],
+          "state_ood_upper": [
+            12.866095999999997,
+            6.581927000000003,
+            6.625759999999985
+          ],
+          "state_scale": [
+            4.232384553167942,
+            1.0627292702248143,
+            1.154984193271327
+          ],
+          "training_blocks": 7
+        },
+        "model_guard_exact_noop": false,
+        "outer_dependence_model_fits": 1,
+        "support": {
+          "kst_days": 347,
+          "passes_support_diagnostic": true,
+          "profiles": 47995,
+          "training_blocks": 7
+        }
+      },
+      "no_op_profile_counts": {
+        "correlation_matrix_guard": 0,
+        "incomplete_target_profile": 9,
+        "missing_public_state": 5622,
+        "ood_public_state": 0,
+        "outer_model_guard": 0
+      },
+      "outlier_diagnostic": {
+        "coherent_multilayer_temp_event_profiles": 1168,
+        "diagnostic_weight_sum": 45203.0,
+        "hard_deleted_profiles": 0,
+        "physical_extreme_profiles": 2187,
+        "preserved_physical_extreme_profiles": 2187,
+        "profiles": 49883,
+        "sensor_suspect_profiles": 6240,
+        "weights_enter_fit_or_metric": false
+      },
+      "physical_domain_guard": {
+        "absolute_domain_c": [
+          -5.0,
+          45.0
+        ],
+        "active_candidate_outside_count": 0,
+        "candidate_all_finite": true,
+        "candidate_outside_count": 0,
+        "changed_preexisting_extreme_count": 0,
+        "contract": "relative_to_frozen_reference_preserve_preexisting_extrema_exact_noop",
+        "inactive_changed_count": 0,
+        "new_candidate_outside_count": 0,
+        "prediction_values_changed_by_overlay": false,
+        "reference_outside_count": 0
+      },
+      "prediction_sha256": "843f6806e05c53278ac7f0c860723a63a0ac6ba1e2f6077809cbbaf870938715",
+      "query_profiles": 5631,
+      "query_rows": 16884,
+      "reference": {
+        "query_reference": [
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.0003248644690340252,
+            "season_bin": 21,
+            "train_timestamps": 14842
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00035759483645502225,
+            "season_bin": 22,
+            "train_timestamps": 12625
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.0004034167427225217,
+            "season_bin": 23,
+            "train_timestamps": 10704
+          },
+          {
+            "nearest_prefix_fallback_used": false,
+            "oas_shrinkage": 0.00044184602731742607,
+            "season_bin": 24,
+            "train_timestamps": 8774
+          }
+        ],
+        "training_reference": {
+          "2024_jul_aug": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00021825556189508308,
+              "season_bin": 13,
+              "train_timestamps": 23227
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00022835725649844048,
+              "season_bin": 14,
+              "train_timestamps": 21340
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00025877972992860584,
+              "season_bin": 15,
+              "train_timestamps": 19676
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003351307876465454,
+              "season_bin": 16,
+              "train_timestamps": 17700
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00039530139633070293,
+              "season_bin": 17,
+              "train_timestamps": 16272
+            }
+          ],
+          "2024_may_jun": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00030598908227029,
+              "season_bin": 9,
+              "train_timestamps": 12387
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0002520724644804895,
+              "season_bin": 10,
+              "train_timestamps": 16163
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00020586967413971258,
+              "season_bin": 11,
+              "train_timestamps": 20058
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00019183015796702798,
+              "season_bin": 12,
+              "train_timestamps": 23370
+            }
+          ],
+          "2024_nov_dec": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005481122552270474,
+              "season_bin": 21,
+              "train_timestamps": 9096
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0006304392622650838,
+              "season_bin": 22,
+              "train_timestamps": 6879
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0008086966154532317,
+              "season_bin": 23,
+              "train_timestamps": 4958
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0013566544633436884,
+              "season_bin": 24,
+              "train_timestamps": 3028
+            }
+          ],
+          "2024_sep_oct": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00029159854522606624,
+              "season_bin": 17,
+              "train_timestamps": 15757
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00044980950931178124,
+              "season_bin": 18,
+              "train_timestamps": 14082
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004463658842276107,
+              "season_bin": 19,
+              "train_timestamps": 12175
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000408665632892507,
+              "season_bin": 20,
+              "train_timestamps": 10076
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0005927692113235354,
+              "season_bin": 21,
+              "train_timestamps": 6444
+            }
+          ],
+          "2025_jul_aug": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00017754405263022038,
+              "season_bin": 12,
+              "train_timestamps": 23310
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00018225630231194238,
+              "season_bin": 13,
+              "train_timestamps": 23072
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00020016818729429213,
+              "season_bin": 14,
+              "train_timestamps": 21185
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00023385415394927827,
+              "season_bin": 15,
+              "train_timestamps": 19521
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00030010984564307044,
+              "season_bin": 16,
+              "train_timestamps": 17545
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003425876129233424,
+              "season_bin": 17,
+              "train_timestamps": 16281
+            }
+          ],
+          "2025_mar_apr": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004195031029900743,
+              "season_bin": 7,
+              "train_timestamps": 10909
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003216105386740059,
+              "season_bin": 8,
+              "train_timestamps": 14721
+            }
+          ],
+          "2025_may_jun": [
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.000537004606240435,
+              "season_bin": 8,
+              "train_timestamps": 8200
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0004110864842318395,
+              "season_bin": 9,
+              "train_timestamps": 11617
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0003229799625653784,
+              "season_bin": 10,
+              "train_timestamps": 15393
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.0002512250932092174,
+              "season_bin": 11,
+              "train_timestamps": 19288
+            },
+            {
+              "nearest_prefix_fallback_used": false,
+              "oas_shrinkage": 0.00022018373409722955,
+              "season_bin": 12,
+              "train_timestamps": 22600
+            }
+          ]
+        },
+        "validation_target_temp_psal_masked_together": true
+      },
+      "structural_correction_bound_c": [
+        -0.2,
+        0.2
+      ],
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun",
+        "2025_jul_aug"
+      ],
+      "training_rows": 149384
+    }
+  },
+  "governing_policy": {
+    "bytes": 6837,
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65"
+  },
+  "immutable_training_input_hashes": {
+    "alpha50_oof_anchor": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f",
+    "stage0_result": "62fb0d97028fec1c299c333110625563149a76bb5187bbc623be6903af95cebd"
+  },
+  "implementation_hashes": {
+    "core": "649267ba82b56b75dea2ed9aeae579595d88353ec63d8ce916d978f2296be946",
+    "inherited_v1_core": "fdfb34ffe93dabd8dcc85e2a8dd27ddd5c5a7356b1e19824147513c4ab27d6a2",
+    "runner": "c48fd6aa83ce4c2991a707971229e27c7adca9d22e03669893fd32571ed4aa2b"
+  },
+  "metrics": {
+    "by_layer": {
+      "2": {
+        "candidate_rmse": 0.9796784508972057,
+        "delta_rmse": 0.0018538668846019846,
+        "reference_rmse": 0.9778245840126037,
+        "rows": 23298
+      },
+      "3": {
+        "candidate_rmse": 1.6205686338960468,
+        "delta_rmse": 0.005973288151289502,
+        "reference_rmse": 1.6145953457447573,
+        "rows": 23280
+      },
+      "4": {
+        "candidate_rmse": 5.00290390481066,
+        "delta_rmse": 0.001391174430275477,
+        "reference_rmse": 5.001512730380385,
+        "rows": 23272
+      }
+    },
+    "by_season": {
+      "DJF": {
+        "candidate_rmse": 0.22193861634935502,
+        "delta_rmse": 0.0,
+        "reference_rmse": 0.22193861634935502,
+        "rows": 3933
+      },
+      "JJA": {
+        "candidate_rmse": 1.182886073478638,
+        "delta_rmse": -0.0028713757428220354,
+        "reference_rmse": 1.18575744922146,
+        "rows": 26693
+      },
+      "SON": {
+        "candidate_rmse": 4.002703264505823,
+        "delta_rmse": 0.003313004868128022,
+        "reference_rmse": 3.999390259637695,
+        "rows": 39224
+      }
+    },
+    "by_window": {
+      "2024_sep_oct": {
+        "candidate_rmse": 4.886313205227371,
+        "delta_rmse": 0.0040516946572211054,
+        "reference_rmse": 4.8822615105701495,
+        "rows": 26273
+      },
+      "2025_jul_aug": {
+        "candidate_rmse": 1.182886073478638,
+        "delta_rmse": -0.0028713757428220354,
+        "reference_rmse": 1.18575744922146,
+        "rows": 26693
+      },
+      "2025_nov_dec": {
+        "candidate_rmse": 0.28073218471331673,
+        "delta_rmse": 0.0,
+        "reference_rmse": 0.28073218471331673,
+        "rows": 16884
+      }
+    },
+    "pooled": {
+      "candidate_rmse": 3.087777278713823,
+      "delta_rmse": 0.001990430450011793,
+      "reference_rmse": 3.0857868482638113,
+      "rows": 69850
+    }
+  },
+  "prediction_commitment_sha256": "20ad9f0c9452d75340a2a584fde0ccc084436dacc191ca88f750b9c600c46cb8",
+  "primary_decision_receipt": {
+    "diagnostic_slice_hard_veto_count": 0,
+    "evidence_state": "PRIMARY_HARM_RESEARCH_ONLY",
+    "metric": "pooled_all_69850_row_rmse_c",
+    "paired_interval_wholly_favorable": false,
+    "pooled_point_favorable": false
+  },
+  "runtime": {
+    "elapsed_seconds": 23.773044999979902,
+    "maximum_total_threads": 4,
+    "maximum_wall_seconds": 240.0,
+    "python": "3.12.10"
+  },
+  "schema_version": "p2.availability_aware_continuous_sparse_copula.result.20260830.v2",
+  "sealed_failure_evidence": {
+    "diagnostic_claim": "The failed fold had finite candidates, bounded corrections, zero newly out-of-domain candidates, and only unchanged inactive candidates whose frozen references were already outside the absolute domain. No performance metric, interval, or decision was computed.",
+    "failure_receipt": {
+      "bytes": 5179,
+      "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/failure-receipt.json",
+      "sha256": "8a511b151bad037965fd1d93ef38e8b69ca25fbde0688e8a07f72ff90abe922a"
+    },
+    "guard_diagnostic": {
+      "bytes": 3828,
+      "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/guard-diagnostic.json",
+      "sha256": "fb7924636a2f06a04b35e20e9c0bdb9b938bb542f8da8a8669efc858a20088b7"
+    },
+    "guard_diagnostic_script": {
+      "bytes": 11557,
+      "path": "scripts/diagnose_p2_availability_aware_continuous_sparse_copula_20260830_v1_guard.py",
+      "sha256": "2b048557c023f40dc5bc4b58cb131719a3a9b24d9841a13064717463dceb85cf"
+    }
+  },
+  "source": {
+    "basename": "observations.csv",
+    "bytes": 49058719,
+    "rows": 789408,
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "source_basenames_opened": [
+    "observations.csv"
+  ],
+  "source_open_counts": {
+    "observations.csv": 1
+  },
+  "stage0_exposed_edges": [
+    "temp_contrast_signed__residual_l2",
+    "temp_contrast_signed__residual_l3",
+    "temp_contrast_signed__residual_l4",
+    "psal_contrast_signed__residual_l4",
+    "thermal_change_24h_signed__residual_l4",
+    "residual_l2__residual_l4",
+    "residual_l3__residual_l4"
+  ],
+  "technical_overlay": {
+    "changed_component": "post_prediction_physical_domain_guard_only",
+    "continuous_state_changed": false,
+    "correction_bound_changed": false,
+    "diagnostic_veto_policy_changed": false,
+    "missing_or_ood_noop_changed": false,
+    "model_changed": false,
+    "new_guard": {
+      "absolute_domain_c": [
+        -5.0,
+        45.0
+      ],
+      "active_out_of_domain_candidate_count_must_equal": 0,
+      "finite_candidate_required": true,
+      "inactive_rows_must_equal_reference_exactly": true,
+      "newly_out_of_domain_candidate_count_must_equal": 0,
+      "preexisting_out_of_domain_reference_must_be_exact_unchanged": true
+    },
+    "old_guard": "reject if any finite candidate is below -5C or above 45C, including an unchanged frozen-reference extreme",
+    "outer_splits_changed": false,
+    "outlier_policy_changed": false,
+    "prediction_values_changed_by_overlay": false,
+    "primary_metric_or_interval_changed": false,
+    "seven_edges_changed": false
+  }
+}

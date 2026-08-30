@@ -1,0 +1,112 @@
+{
+  "schema_version": "official_information_probe_cycle.independent_qa.20260830.v1",
+  "status": "PASS_OFFICIAL_CYCLE_COMPLETE",
+  "verified_platform_snapshot_kst": "2026-08-30T22:57:00+09:00",
+  "official_action_summary": {
+    "uploads_completed": 7,
+    "p1_uploads": 3,
+    "p2_uploads": 2,
+    "p3_uploads": 2,
+    "p1_remaining_daily_submissions": 0,
+    "p2_remaining_daily_submissions": 0,
+    "p3_remaining_daily_submissions": 0,
+    "final_model_submitted": false,
+    "final_model_button_clicked": false,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0
+  },
+  "official_leaderboard": {
+    "team": "분당독고다이",
+    "rank": 5,
+    "p1_points": 28.909341,
+    "p2_points": 27.935464,
+    "p3_points": 24.203599,
+    "total_points": 81.048404,
+    "previous_total_points": 81.048217,
+    "delta_total_points": 0.000187,
+    "sum_check": 81.048404
+  },
+  "p1": {
+    "status": "KEEP_EXISTING_CHAMPION_INFORMATION_GAINED",
+    "champion_public_f1": 0.833548,
+    "candidate_sha256": [
+      "59d862b62b24a03c637f58a676d9dc99186f148a6f710f9d0cd3f162f6ca2ce8",
+      "9f5e8ca7a19d17b317e969fb152f2cc77f50fb5d1cc53757de200b68be720983",
+      "e6a54b0aaf6bf6227362a2706447e4c09bfe80c8510248c2206f204f1ad5c042"
+    ],
+    "official_public_f1_in_frozen_order": [0.829029, 0.833548, 0.829029],
+    "displayed_finite_differences": {
+      "g_given_s_present": 0.004519,
+      "g_given_s_absent": 0.004519,
+      "s_given_g_present": 0.0,
+      "s_given_g_absent": 0.0,
+      "g_by_s_interaction": 0.0
+    },
+    "resolution_limit": "Six-decimal displayed F1 only; exact or Private equivalence is not claimed.",
+    "receipt_sha256": "642ac00a955ec98a48ba6b154cf862cffd8643b42ae8e9653b4eeb2d7713aea2"
+  },
+  "p2": {
+    "status": "NEW_PUBLIC_CHAMPION_BIN17_ONLY",
+    "candidate_sha256": [
+      "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+      "0d213e97b9435862bbc892ac358afdc99b0a8834740915720f96bd420761d557"
+    ],
+    "official_public_rmse_c_in_frozen_order": [0.430194, 0.431267],
+    "new_champion_public_score": 27.935464,
+    "delta_rmse_vs_prior_champion_c": -0.000015,
+    "delta_points_vs_prior_champion": 0.000187,
+    "mse_decomposition_c2": {
+      "bin17_increment_from_alpha50": -0.000911409868,
+      "bin18_increment_from_alpha50": 0.000012937785,
+      "sum_of_bin_increments": -0.000898472083,
+      "observed_champion_increment_from_alpha50": -0.000898503823,
+      "identity_residual": -0.000000031740,
+      "zero_inside_six_decimal_rounding_envelope": true
+    },
+    "private_score_status": "UNKNOWN",
+    "receipt_sha256": "742647f2f033c6ca4070485deef396140c39ba78a5309764358b3443c3f1d984"
+  },
+  "p3": {
+    "status": "KEEP_UNIFORM_ALPHA_0425_CHAMPION",
+    "candidate_sha256": [
+      "a5a16ba207ed1cccf16383e1de7b932417666917b0eb2b9c54a00fdb7ab67351",
+      "868d18d7a2d62d49b6d97712e686db7a55bbb16e38cea2659584a0c397275f4f"
+    ],
+    "official_public_rmse_m_in_frozen_order": [0.579102, 0.578951],
+    "champion_public_rmse_m": 0.575233,
+    "station_mse_benefit": {
+      "g_ors": 0.001279485148,
+      "i_ors": 0.004291256112,
+      "s_ors": 0.004466122115,
+      "total": 0.010036863375
+    },
+    "station_share": {
+      "g_ors": 0.12747858570905375,
+      "i_ors": 0.42754951937362603,
+      "s_ors": 0.44497189491732022,
+      "i_plus_s": 0.8725214142909463
+    },
+    "six_decimal_rounding_corner_check": {
+      "corners": 16,
+      "all_station_contributions_positive": true,
+      "ranking_unchanged": "S-ORS>I-ORS>G-ORS"
+    },
+    "receipt_sha256": "948b50af724d6136fe267656253e322f113211e9a8990c75348d02dcd0f41d54"
+  },
+  "cross_checks": {
+    "candidate_hashes_match_pre_frozen_manifests": true,
+    "official_result_order_matches_frozen_order": true,
+    "all_seven_candidates_frozen_before_first_new_score": true,
+    "adaptive_retuning_between_uploads": false,
+    "official_submission_history_cross_checked": true,
+    "leaderboard_sum_matches_displayed_problem_points": true,
+    "receipt_json_parse_errors": 0,
+    "receipt_hash_mismatches": 0
+  },
+  "limitations": [
+    "Public aggregate feedback is not an independent Private validation set.",
+    "Six-decimal UI values do not reveal row-level losses or hidden labels.",
+    "The P2 improvement is real at displayed precision but too small to imply Private stability.",
+    "The selected exact predictions still require a reproducible code and weights package before the official final-model deadline."
+  ]
+}

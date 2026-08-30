@@ -1,0 +1,144 @@
+{
+  "conclusion": {
+    "status": "OFFICIAL_INFORMATION_PROBE_COMPLETE",
+    "headline": "The exact frozen 15-row G-ORS e150 set is beneficial on the displayed Public F1, while the exact frozen 238-row S-ORS e150 set is score-neutral at six-decimal display resolution.",
+    "primary_findings": [
+      "Removing the 15 G-ORS e150 additions reduced displayed Public F1 from 0.833548 to 0.829029, a displayed delta of -0.004519 F1 and -0.120101 contest points.",
+      "Removing the 238 S-ORS e150 additions left displayed Public F1 and contest points unchanged at 0.833548 and 28.909341.",
+      "The I-only candidate equaled remove-G at 0.829029, so the displayed S marginal is zero both with and without G; the displayed G marginal is +0.004519 both with and without S.",
+      "The displayed G-by-S difference-in-differences interaction is 0.000000 F1. This is a resolution-limited statement, not proof of exact equality or private-surface equivalence."
+    ],
+    "decision": "KEEP_CURRENT_CHAMPION; RECORD_REMOVE_S_AS_PUBLIC_TIE_DIAGNOSTIC_ONLY; DO_NOT_REUSE_THE_G_REMOVAL_AXIS",
+    "scope": "Exact frozen Public-platform probes only. No claim about private labels, individual-row utility, causal station effects, or future transport."
+  },
+  "schema_version": "p1.official_information_probe.result.v1",
+  "experiment_id": "p1_station_ablation_information_probes_20260830_v1",
+  "problem": "P1",
+  "official_metric": "row-level binary F1",
+  "official_result_source": {
+    "type": "platform UI values reported by the root operator after the three frozen uploads",
+    "received_at_kst_date": "2026-08-30",
+    "additional_browser_access_for_receipt": 0,
+    "hidden_truth_access": 0,
+    "score_py_access": 0
+  },
+  "frozen_provenance": {
+    "manifest_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P1_STATION_ABLATION_INFORMATION_PROBES_READY_V1/SET_MANIFEST.json",
+    "manifest_sha256": "bff0daedd4ba483e0b833df8db6750abbaf340fdd55dadf03038b080164376b6",
+    "independent_qa_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P1_STATION_ABLATION_INFORMATION_PROBES_READY_V1/INDEPENDENT_QA.json",
+    "independent_qa_sha256": "794886fe1a28e9c2ebbcf151a5fec2f26019ba91f8fa4a916640d340d1f48819",
+    "mapping_contract": "Official values are mapped to candidates by the preregistered fixed submission order remove-G, remove-S, remove-GS/I-only. Candidate CSVs were not reopened while writing this receipt.",
+    "current_champion": {
+      "name": "e150 plus GI spike 2 rows",
+      "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+      "positive_rows": 6396,
+      "public_f1_displayed": 0.833548,
+      "contest_points_displayed": 28.909341
+    }
+  },
+  "official_results_in_frozen_order": [
+    {
+      "order": 1,
+      "candidate_id": "remove_g_ors_e150",
+      "title": "P1 e150 G-station ablation",
+      "hypothesis_state": {"g_e150_present": false, "s_e150_present": true, "i_e150_present": true},
+      "sha256": "59d862b62b24a03c637f58a676d9dc99186f148a6f710f9d0cd3f162f6ca2ce8",
+      "label_sha256": "a7b6d5a49024886c3ab078148cbcd2eba16e73759e384f9919c4e4cabb8635ea",
+      "positive_rows": 6381,
+      "changed_rows_vs_champion": 15,
+      "public_f1_displayed": 0.829029,
+      "contest_points_displayed": 28.789240,
+      "delta_f1_vs_champion_displayed": -0.004519,
+      "delta_points_vs_champion_displayed": -0.120101,
+      "result_state": "PRIMARY_HARM_EXACT_G_REMOVAL"
+    },
+    {
+      "order": 2,
+      "candidate_id": "remove_s_ors_e150",
+      "title": "P1 e150 S-station ablation",
+      "hypothesis_state": {"g_e150_present": true, "s_e150_present": false, "i_e150_present": true},
+      "sha256": "9f5e8ca7a19d17b317e969fb152f2cc77f50fb5d1cc53757de200b68be720983",
+      "label_sha256": "f2b64946d5dbceda377c7c00f0d0142262616b1a3ada15437ffabcafceca9037",
+      "positive_rows": 6158,
+      "changed_rows_vs_champion": 238,
+      "public_f1_displayed": 0.833548,
+      "contest_points_displayed": 28.909341,
+      "delta_f1_vs_champion_displayed": 0.000000,
+      "delta_points_vs_champion_displayed": 0.000000,
+      "result_state": "PUBLIC_TIE_AT_DISPLAY_RESOLUTION"
+    },
+    {
+      "order": 3,
+      "candidate_id": "keep_i_ors_e150_only",
+      "title": "P1 e150 I-only transport",
+      "hypothesis_state": {"g_e150_present": false, "s_e150_present": false, "i_e150_present": true},
+      "sha256": "e6a54b0aaf6bf6227362a2706447e4c09bfe80c8510248c2206f204f1ad5c042",
+      "label_sha256": "cba6bb9c24a568c15571374ccf3a61b2b2c599e8080fb8353e0f4fef617649f6",
+      "positive_rows": 6143,
+      "changed_rows_vs_champion": 253,
+      "public_f1_displayed": 0.829029,
+      "contest_points_displayed": 28.789240,
+      "delta_f1_vs_champion_displayed": -0.004519,
+      "delta_points_vs_champion_displayed": -0.120101,
+      "result_state": "PRIMARY_HARM_EXACT_G_PLUS_S_REMOVAL"
+    }
+  ],
+  "factorial_arithmetic": {
+    "cell_definition": "I-ORS e150 additions, anchor positives, and GI2 are present in all four cells. G and S indicate presence of their exact frozen e150 addition sets.",
+    "cells_public_f1_displayed": {
+      "G1_S1_champion": 0.833548,
+      "G0_S1_remove_g": 0.829029,
+      "G1_S0_remove_s": 0.833548,
+      "G0_S0_i_only": 0.829029
+    },
+    "marginals_f1_displayed": {
+      "add_G_given_S_present": 0.004519,
+      "add_G_given_S_absent": 0.004519,
+      "add_S_given_G_present": 0.000000,
+      "add_S_given_G_absent": 0.000000
+    },
+    "marginals_points_displayed": {
+      "add_G_given_S_present": 0.120101,
+      "add_G_given_S_absent": 0.120101,
+      "add_S_given_G_present": 0.000000,
+      "add_S_given_G_absent": 0.000000
+    },
+    "interaction_difference_in_differences_f1_displayed": 0.000000,
+    "interaction_formula": "F1(G1,S1) - F1(G1,S0) - F1(G0,S1) + F1(G0,S0)",
+    "interpretation": [
+      "The G result replicates across both S contexts at the displayed resolution: the exact 15-row G set contributes +0.004519 displayed Public F1 relative to its removal.",
+      "The S result replicates across both G contexts at the displayed resolution: the exact 238-row S set has zero displayed marginal F1.",
+      "A zero net S marginal does not mean every S row is irrelevant; positive and negative row contributions can cancel under aggregate F1.",
+      "No G-by-S interaction is detectable at six-decimal display resolution."
+    ]
+  },
+  "display_rounding_limit": {
+    "platform_f1_decimals_observed": 6,
+    "platform_points_decimals_observed": 6,
+    "platform_rounding_rule_documented": false,
+    "conditional_nearest_rounding_bounds": {
+      "single_displayed_f1_absolute_error_at_most": 0.0000005,
+      "two_cell_marginal_absolute_error_at_most": 0.000001,
+      "four_cell_interaction_absolute_error_at_most": 0.000002,
+      "G_marginal_true_range_if_nearest_rounding": [0.004518, 0.004520],
+      "zero_S_marginal_true_range_if_nearest_rounding": [-0.000001, 0.000001],
+      "zero_interaction_true_range_if_nearest_rounding": [-0.000002, 0.000002]
+    },
+    "warning": "These numeric bounds apply only if the UI rounds independently to nearest at six decimals. If it truncates, uses more precise hidden values for contest points, or applies another display rule, only the displayed arithmetic is established.",
+    "equivalence_limit": "Equal displayed Public F1 is not a noninferiority test and does not establish exact confusion-matrix equality, private-surface equality, or statistical equivalence."
+  },
+  "integrity": {
+    "candidate_hashes_match_frozen_manifest": true,
+    "candidate_order_matches_frozen_manifest": true,
+    "candidate_count": 3,
+    "official_uploads_completed_by_root": 3,
+    "this_receipt_additional_uploads": 0,
+    "this_receipt_csv_reads": 0,
+    "this_receipt_browser_accesses": 0,
+    "this_receipt_model_fits": 0,
+    "this_receipt_hidden_truth_reads": 0,
+    "this_receipt_score_py_reads": 0,
+    "this_receipt_commits": 0,
+    "this_receipt_pushes": 0
+  }
+}

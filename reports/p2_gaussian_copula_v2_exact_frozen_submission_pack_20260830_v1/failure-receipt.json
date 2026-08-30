@@ -1,0 +1,50 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.failure.20260830.v1",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1",
+  "status": "INVALID_TECHNICAL_PREATTEMPT_IMPORT_FAILURE",
+  "failed_at_kst": "2026-08-30T21:20:14.9192387+09:00",
+  "failure_stage": "PYTHON_MODULE_IMPORT_BEFORE_ARGUMENT_PARSING_OR_ATTEMPT_RESERVATION",
+  "exception": {
+    "type": "ModuleNotFoundError",
+    "message": "No module named 'scripts'",
+    "origin": "src/p2_restore/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.py line 18",
+    "cause": "The runner inserted REPO/src but not REPO into sys.path before the new module imported the existing scripts package."
+  },
+  "immutability": {
+    "same_id_rerun_allowed": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "scientific_recipe_changed": false,
+    "completion_only_overlay_requires_new_id_and_explicit_authorization": true
+  },
+  "execution_receipt": {
+    "shell_invocations": 1,
+    "attempt_lock_created": false,
+    "official_observations_rows_read": 0,
+    "official_test_index_rows_read": 0,
+    "official_sample_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "score_py_reads": 0,
+    "baseline_reads": 0,
+    "model_fits": 0,
+    "performance_metrics_computed": 0,
+    "staging_directory_created": false,
+    "csv_created": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  },
+  "hashes": {
+    "config": "061e8667085278282d4a23d792ac04c90bef91dcbad3b32395ac00bbcfa6773f",
+    "runner": "bec3a0b8a68dc201d59600e589bb7adba775892aa4f7522bfc4802d8845bee3a",
+    "module": "70bd37bbba9b84032aa96e8ef89e0cc55385f7e285e9dcf09713ff6c7e6e50ba"
+  },
+  "authorized_minimal_repair_if_separately_approved": "A new unique completion-only overlay may add REPO to sys.path before importing the unchanged module; model, data pins, seven training blocks, shrinkage 0.5, correction caps, projection, output contract, and duplicate gates must remain byte-for-byte or semantically unchanged.",
+  "fallback": {
+    "role": "current official best mapped local file",
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260829_ADAPTIVE_FINAL_PROBES_READY\\P2_1_OFFICIAL_MSE_VERTEX_A083419\\P2_submission.csv",
+    "sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+    "official_public_rmse_c": 0.430209,
+    "official_points": 27.935277
+  }
+}

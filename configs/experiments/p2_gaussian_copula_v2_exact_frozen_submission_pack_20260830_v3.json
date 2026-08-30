@@ -1,0 +1,88 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.completion_overlay.20260830.v3",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3",
+  "problem": "P2",
+  "status": "AUTHORIZED_COMPLETION_ONLY_QUERY_SCHEMA_REPAIR_AND_QA_NO_UPLOAD",
+  "overlay_scope": "OFFICIAL_TEST_INDEX_INPUT_SUPERSET_TO_EXACT_OUTPUT_CONTRACT_ONLY",
+  "sealed_scientific_base": {
+    "path": "configs/experiments/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.json",
+    "sha256": "061e8667085278282d4a23d792ac04c90bef91dcbad3b32395ac00bbcfa6773f"
+  },
+  "prior_attempts": {
+    "v1_failure_receipt": {
+      "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1/failure-receipt.json",
+      "sha256": "510f8dd90c3ef08961d7f0b84db9f7efc52461ca53e1e99e33742afec5d0c8d3"
+    },
+    "v2_overlay": {
+      "path": "configs/experiments/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2.json",
+      "sha256": "6e17046601dbb9f433a472e2eaac39f38ca68155707f6533071ce33f1ab79c76"
+    },
+    "v2_attempt_lock": {
+      "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2/attempt.lock.json",
+      "sha256": "e2f3debedf73ab2e8b58c6708ba3914c651266bce4176b92c39a6a71adc44b2e"
+    },
+    "v2_failure_receipt": {
+      "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2/failure-receipt.json",
+      "sha256": "50426e34ad40b969b9c516a14c566410aafbccd8749c5819b9321ae9fc2d76c8"
+    }
+  },
+  "repair": {
+    "cause": "The sealed reader rejected the documented nominal_depth auxiliary column before selecting submission keys.",
+    "exact_change": "ACCEPT_AND_VALIDATE_EXACT_TEST_INDEX_SUPERSET_THEN_SELECT_UNCHANGED_THREE_KEYS",
+    "model_or_prediction_logic_changed": false,
+    "data_values_or_order_changed": false,
+    "selection_or_refit_changed": false,
+    "gates_or_caps_changed": false
+  },
+  "query_contract": {
+    "official_test_index_columns_exact_order": [
+      "station",
+      "layer",
+      "time",
+      "nominal_depth"
+    ],
+    "submission_key_columns_exact_order": ["station", "layer", "time"],
+    "nominal_depth_role": "preserved input schema/order/QA auxiliary only; never a fitted feature or tuned signal",
+    "sample_submission_columns_exact_order": ["station", "layer", "time", "temp"],
+    "candidate_output_columns_exact_order": ["station", "layer", "time", "temp"],
+    "required_rows": 26061
+  },
+  "frozen_scientific_invariants": {
+    "candidate": "P2-GAUSSIAN-COPULA-V2-EXACT-FROZEN",
+    "deployment_training_outer": "2025_nov_dec",
+    "training_block_count": 7,
+    "selected_shrinkage": 0.5,
+    "expected_refit_model_receipt_sha256": "446f70411d646fab4568a15080c09a374184e44bca669a5c954a34c25d867e7d",
+    "maximum_copula_fits": 1,
+    "inner_search_or_hpo": 0,
+    "correction_rms_cap_c": 0.075,
+    "correction_p99_cap_c": 0.2,
+    "incomplete_profile_behavior": "exact zero residual correction",
+    "profile_projection": "public endpoint envelope plus unit-weight isotonic projection"
+  },
+  "output_contract": {
+    "external_staging_directory_name": "20260830_P2_GAUSSIAN_COPULA_V2_FROZEN_READY_V3",
+    "submission_filename": "P2_submission.csv",
+    "report_directory": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3",
+    "research_only": true
+  },
+  "execution_policy": {
+    "maximum_executions": 1,
+    "maximum_copula_fits": 1,
+    "maximum_threads": 1,
+    "official_observations_test_index_sample_read_authorized": true,
+    "official_hidden_truth_read_allowed": false,
+    "score_py_read_allowed": false,
+    "baseline_read_allowed": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "upload_authorized_in_this_runner": false,
+    "commit": false,
+    "push": false
+  },
+  "decision_policy": {
+    "any_overlay_base_or_query_contract_mismatch": "INVALID_TECHNICAL_STOP_NO_RETRY_NO_CSV",
+    "candidate_hash_matches_prior_submission": "BLOCK_DUPLICATE_NO_UPLOAD",
+    "all_materialization_and_qa_checks_pass": "READY_NOT_UPLOADED_RESEARCH_ONLY"
+  }
+}

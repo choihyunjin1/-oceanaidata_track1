@@ -1,0 +1,77 @@
+{
+  "schema_version": "p2.rank1_bin_decomposition_probes.20260830.v1",
+  "experiment_id": "p2_rank1_bin_decomposition_probes_20260830_v1",
+  "status": "PREREGISTERED_PRE_SCORE_PREPARATION_ONLY_NO_UPLOAD",
+  "problem": "OCN-02",
+  "freeze_time_kst": "2026-08-30T22:32:00+09:00",
+  "recipe": {
+    "season_bin_days": 14,
+    "timezone": "Asia/Seoul",
+    "season_bin_formula": "floor((KST day-of-year - 1) / 14)",
+    "anchor": "official alpha50",
+    "correction_source": "current official champion minus official alpha50",
+    "candidates": [
+      {
+        "priority": 1,
+        "name": "P2_1_RANK1_BIN17_ONLY",
+        "enabled_bins": [17],
+        "title": "P2 rank-1 계절 bin17 단독 분해",
+        "summary": "현재 공식 champion의 계절 rank-1 보정 중 14일 bin17만 유지하고 bin18은 alpha50 no-op로 되돌려 두 bin의 공식 순효과를 분리합니다."
+      },
+      {
+        "priority": 2,
+        "name": "P2_2_RANK1_BIN18_ONLY",
+        "enabled_bins": [18],
+        "title": "P2 rank-1 계절 bin18 단독 분해",
+        "summary": "현재 공식 champion의 계절 rank-1 보정 중 14일 bin18만 유지하고 bin17은 alpha50 no-op로 되돌려 두 bin의 공식 순효과를 분리합니다."
+      }
+    ],
+    "adaptive_change_after_score": false
+  },
+  "source_pins": {
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "alpha50_sha256": "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+    "champion_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f"
+  },
+  "evidence": {
+    "alpha50_official_rmse_c": 0.431252,
+    "champion_official_rmse_c": 0.430209,
+    "bin17_crossfit_ci90_delta_rmse_c": [-0.018404050127013672, -0.010274367517385596],
+    "bin18_crossfit_ci90_delta_rmse_c": [-0.010380992512013897, -0.0017105663148015314],
+    "gaussian_positive_blend_kill": {
+      "direction_rms_c": 0.05289482971601095,
+      "alpha_0p1_rounding_robust_predicted_rmse_c": [0.4311367167573278, 0.43113771739931117],
+      "reason": "Every positive champion-to-Gaussian blend initially moves uphill; no positive blend is prepared."
+    }
+  },
+  "prior_platform_submission_sha256": [
+    "3960660b1e4076c88efdb927a50073aa2d8f1435bc1c7d6f2f40885aea2f2350",
+    "d7bb021525012de6765e43a30253fe1ae1c4ba438801ff56d5d08ab7919ec046",
+    "9cc951801cf6b6cdacc2c826126d9c2f72ef34fc67e46c6a21261c7a1ba845ff",
+    "5507317f45bf06969d7da6c2ebd750bc5805564d1e3955920eab036724fc1ccc",
+    "98890354fe792c905b44f9467c0651506c7696abd7091f1380e1825669865cff",
+    "13181dff0e749a1ea6dac7327b4ea34b8a7efd57a2f57170ba0d206f919cf592",
+    "65b754c83c520609e7bd7979b35f86366903cfebf07d3e411f8f97ab3b59abd5",
+    "f46dec7944fe4565307b0242fdab5772a684027f1a42a62404d6e01ba13e0ef7",
+    "6e28ddb8d78c0969e5104d7efbe28e1762f51e80d759fceb86cdef52baa29b96",
+    "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+    "665485e1b47705cf03ae3537ffe31ebc47c309408428d9c3847fd973ffca94f1",
+    "7d06cf01c67541ec77d4e6af7afefca710774bda50f33155573c382d440672d9",
+    "dbcef773a9bbff62c66b2b6a0bca1b9279eb664209ff1560c2dc02e83855b019",
+    "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+    "f498c6e1d7e22d11d5571b971454f0e375247fc2ff5ae3387bfcb4186460c4a3"
+  ],
+  "contract": {
+    "rows": 26061,
+    "test_columns": ["station", "layer", "time", "nominal_depth"],
+    "output_columns": ["station", "layer", "time", "temp"],
+    "temperature_range_c": [-5.0, 45.0],
+    "model_fits": 0,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  }
+}

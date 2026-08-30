@@ -1,0 +1,174 @@
+{
+  "schema_version": "p1.mstcn_sobol_trial18_frozen_confirmation.20260830.v3",
+  "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3",
+  "status": "PREREGISTERED_ONE_SHOT_LOCAL_HISTORICAL_RESEARCH_ONLY",
+  "purpose": "Exactly one confirmation-only evaluation of the Sobol-selected vanilla trial_18 recipe on its previously untouched Q3 and Q4 candidate cells. The exposed Q2 search is immutable and is never replayed.",
+  "governing_policy": {
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "bytes": 6837,
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65"
+  },
+  "selection_lineage": {
+    "source_experiment_id": "p1_mstcn_sobol_hpo_20260829_v1",
+    "selection_surface": "2025_q2_historical_exposed",
+    "selected_by": "sealed 32-point scrambled Sobol design followed by fixed top-2 three-seed Q2 evaluation",
+    "legacy_gate_observation": {
+      "all_monthly_delta_f1_strictly_positive": true,
+      "pooled_delta_f1": 0.0005656370384116149,
+      "legacy_pooled_delta_f1_min": 0.003,
+      "anchor_positive_removed_rows": 0,
+      "legacy_stop_reason": "unsupported fixed +0.003 delta only",
+      "future_interpretation": "the fixed delta and all-month rule are audit diagnostics and do not veto this one frozen confirmation"
+    },
+    "q2_search_or_threshold_replay_authorized": false,
+    "q2_artifact_mutation_authorized": false
+  },
+  "frozen_recipe": {
+    "schema_version": "p1.mstcn_sobol_hpo.selected_recipe.v1",
+    "trial": {
+      "trial_index": 18,
+      "trial_id": "trial_18",
+      "sobol_u": [
+        0.8103897590190172,
+        0.8924819026142359,
+        0.10226519498974085,
+        0.6857625255361199,
+        0.687649424187839,
+        0.5324583416804671,
+        0.981747773475945,
+        0.6735849333927035
+      ],
+      "width": 512,
+      "batch_size": 64,
+      "dropout": 0.27312047565355896,
+      "learning_rate": 0.00012369572021723587,
+      "weight_decay": 0.00011410050763570612,
+      "row_soft_dice_weight": 1.2971082174846487,
+      "temporal_smoothing_weight": 0.18311458542011677,
+      "boundary_type_weight": 0.3945243320427835,
+      "stage_weights": [1.0, 1.0, 1.0, 1.0]
+    },
+    "threshold": 0.8,
+    "epoch": 150,
+    "seeds": [20260827, 20260839, 20260863],
+    "source_schedule_horizon_epochs": 300,
+    "representation": "raw_three_seed_ensemble_mean",
+    "decoder": "source long-event decoder at the single fixed high threshold 0.8",
+    "anchor_union": true
+  },
+  "confirmation_contract": {
+    "phases": ["q3", "q4"],
+    "historical_fits_per_phase": 3,
+    "maximum_lifetime_fit_count": 6,
+    "fresh_fit_all_three_seeds": true,
+    "fit_order": [
+      "q3_seed_20260827",
+      "q3_seed_20260839",
+      "q3_seed_20260863",
+      "q4_seed_20260827",
+      "q4_seed_20260839",
+      "q4_seed_20260863"
+    ],
+    "seal_both_phase_predictions_before_any_phase_truth_metric": true,
+    "checkpoint_persistence": false,
+    "automatic_retry": false,
+    "result_based_tuning": false,
+    "surface_freshness": "exact vanilla trial_18 candidate cells untouched before v3; Q3/Q4 historical truth surfaces are already globally exposed",
+    "claim_scope": "RESEARCH_ONLY; retrospective historical transport, never fresh confirmation"
+  },
+  "evaluation_contract": {
+    "level_0_hard_validity": [
+      "all pinned bytes and the frozen recipe match",
+      "old Q2 aggregate says q3_q4_training_started=false and its confirmatory artifacts are absent",
+      "Q3 and Q4 candidate predictions are both sealed before either truth projection is opened",
+      "ordered holdout key hashes match the frozen fold memberships",
+      "candidate is predeclared and no result-driven retry or mutation occurs",
+      "raw anchor positive deletion count is zero",
+      "official/test/sample/submission/hidden reads, CSV creation and upload are zero",
+      "outlier hard deletion is zero"
+    ],
+    "level_1_primary": {
+      "metric": "pooled Q3+Q4 row-level binary micro-F1",
+      "benefit": "candidate_f1 - incumbent_f1",
+      "directional_margin": 0.0,
+      "arbitrary_positive_delta_margin": null
+    },
+    "level_2_uncertainty": {
+      "method": "paired circular moving-block bootstrap over pooled Q3+Q4 whole KST-day cross-sections",
+      "replicates": 10000,
+      "block_days": 21,
+      "seed": 20260830,
+      "interval": "central 90 percent"
+    },
+    "level_3_diagnostics_only": [
+      "Q3 and Q4 fold deltas",
+      "station deltas",
+      "layer deltas",
+      "KST month deltas",
+      "anomaly-type recall deltas",
+      "incumbent-relative add/remove counts and conditional F1/2 algebra"
+    ],
+    "evidence_states": {
+      "positive_point_and_ci_lower_gt_zero": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+      "positive_point_and_ci_includes_zero": "EXPLORATORY_CHALLENGER_RESEARCH_ONLY",
+      "negative_point_and_ci_upper_lt_zero": "PRIMARY_HARM_RESEARCH_ONLY",
+      "otherwise": "INCONCLUSIVE_RESEARCH_ONLY",
+      "level_0_failure": "QA_BLOCKED"
+    },
+    "submission_readiness": "No automatic submission readiness; a favorable result remains research-only and would require explicit user authorization for any official probe."
+  },
+  "source_pins": {
+    "legacy_hpo_config": {"path": "configs/experiments/p1_mstcn_sobol_hpo_20260829_v1.json", "bytes": 6292, "sha256": "c9ff0cee7add360b37b303a283732107246df2f079046f9f814e37026814316b"},
+    "legacy_hpo_runner": {"path": "scripts/run_p1_mstcn_sobol_hpo_20260829_v1.py", "bytes": 44736, "sha256": "155e7719472d55e3c0f3f291264726378e749fb68a9d1d3816f085ae86817401"},
+    "legacy_attempt_lock": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1.ATTEMPT_LOCK.json", "bytes": 446, "sha256": "a3d9dc43fb5a5124e8f3e33ed1c33873c0b326dcca343c87dbe5c4ab2ffb78fe"},
+    "legacy_sealed_design": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/sealed_design.json", "bytes": 23930, "sha256": "98a52582b883460888d736cfe75327db6dd55ada395d796b51c5034b56e723ed"},
+    "legacy_sealed_design_receipt": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/sealed_design_receipt.json", "bytes": 323, "sha256": "033877f23b8ac9028186189d915d2e2265ee550a2188cd8c20cfd49e87c026c1"},
+    "legacy_q2_discovery_selection": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q2_discovery_selection.json", "bytes": 463697, "sha256": "8e9a00e775f8457f92c08203051ed8684e524658d4c4a226114f97a5738c1511"},
+    "legacy_q2_top2_score": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q2_top2_three_seed_blind.npz", "bytes": 6827954, "sha256": "6e342a5dbc850cc0174d061e3dbccaea5d4e186a3cfa01a9d119711663d775b6"},
+    "legacy_q2_top2_receipt": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q2_top2_three_seed_blind_receipt.json", "bytes": 3940, "sha256": "0c1325319040be7c12d00018282221475516d12b419f51c576a3fc453fb5a139"},
+    "legacy_q2_preconfirm_gate": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q2_preconfirm_gate.json", "bytes": 31237, "sha256": "5dfb9d76b6ab05f1689cd054dd04c7b85803798c39f5b0b5ea1c23e6c84f73fe"},
+    "legacy_aggregate": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json", "bytes": 35092, "sha256": "fb42fe28abd4590ac4c5affeacef4a497e792f647d54f88f93f91f743d4fcf98"},
+    "legacy_terminal": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/terminal_result.json", "bytes": 35092, "sha256": "fb42fe28abd4590ac4c5affeacef4a497e792f647d54f88f93f91f743d4fcf98"},
+    "legacy_independent_qa": {"path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/independent_qa.json", "bytes": 1309, "sha256": "437ee74d04bd468eac34305827ec99c1fd6fdd27b696a5b44a718052f7a8cc46"},
+    "base_runner": {"path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py", "bytes": 162708, "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"},
+    "base_config": {"path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json", "bytes": 25120, "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"},
+    "model_implementation": {"path": "src/p1_qc/ms_tcn_asrf.py", "bytes": 23220, "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"},
+    "data_implementation": {"path": "src/p1_qc/ms_tcn_asrf_data.py", "bytes": 30025, "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"},
+    "incumbent_q3_score": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz", "bytes": 22946468, "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"},
+    "incumbent_q3_receipt": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve_receipt.json", "bytes": 5856, "sha256": "69bc50cf508d6b6061d0cf40e84e0d2825066dfaecfcad59006e9e0ccc7ba7f2"},
+    "incumbent_q4_score": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz", "bytes": 14747269, "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"},
+    "incumbent_q4_receipt": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve_receipt.json", "bytes": 5856, "sha256": "f5ef758679f1afbed7008cb367d9a9789b3876e9673f580e68762328ceed7e91"}
+  },
+  "legacy_namespace_absence_contract": [
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/selected_recipe.json",
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q3_confirmatory_blind.npz",
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q3_confirmatory_blind_receipt.json",
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q4_confirmatory_blind.npz",
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/q4_confirmatory_blind_receipt.json",
+    "artifacts/p1_mstcn_sobol_hpo_20260829_v1/confirmatory_metrics.json"
+  ],
+  "output_contract": {
+    "artifact_directory": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3",
+    "attempt_lock": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.ATTEMPT_LOCK.json",
+    "terminal_result": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/terminal_result.json",
+    "independent_qa": "reports/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/independent-qa.json",
+    "append_only_terminal": true,
+    "prediction_csv": null,
+    "checkpoint_storage": null
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_or_hidden_answer_read": true,
+    "prediction_csv_creation": true,
+    "upload": true,
+    "q2_search_replay": true,
+    "threshold_search": true,
+    "q3_q4_truth_before_both_blind_seals": true,
+    "result_based_retry_or_tuning": true,
+    "source_or_old_artifact_mutation": true,
+    "checkpoint_persistence": true,
+    "outlier_hard_deletion": true,
+    "label_1_or_anomaly_event_deletion": true
+  }
+}

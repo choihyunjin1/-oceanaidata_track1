@@ -1,0 +1,165 @@
+{
+  "schema_version": "p1.addonly_hierarchical_event_precision_lcb.20260830.v1",
+  "experiment_id": "p1_addonly_hierarchical_event_precision_lcb_20260830_v1",
+  "status": "PREREGISTERED_ONE_SHOT_EXPOSED_OOF_RESEARCH_ONLY",
+  "purpose": "Fit exactly two chronological train-only partial-pooling binomial event-precision heads on the frozen heterogeneous proposal bank, add only proposals whose one-sided precision LCB exceeds the fit-prefix incumbent F1/2 threshold, and evaluate each untouched next fold once. The sole primary comparison is pooled row-level binary micro-F1 over the two next-fold evaluations.",
+  "governing_policy": {
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "bytes": 6837,
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65",
+    "required_status": "GOVERNING_FUTURE_RESEARCH_POLICY_NO_OFFICIAL_ACTION"
+  },
+  "frozen_inputs": {
+    "proposal_bank_source_preregistration": {
+      "path": "configs/experiments/p1_heterogeneous_event_utility_preflight_20260830_v1.json",
+      "bytes": 10856,
+      "sha256": "e1f1f350295010c7b54ef1d181e94311c1c52f2b3af69e5671c89112a96db622"
+    },
+    "proposal_bank_source_loader": {
+      "path": "scripts/run_p1_heterogeneous_event_utility_preflight_20260830_v1.py",
+      "bytes": 33809,
+      "sha256": "cba95fb7577c04485063a643f8520978cc998ccc1b2fb100c06856b3e5537cb2"
+    },
+    "proposal_bank_receipt": {
+      "path": "artifacts/p1_heterogeneous_event_utility_preflight_20260830_v1/terminal_result.json",
+      "bytes": 11985,
+      "sha256": "76a513f6b78a1ea94b6965c532524fc985feb25d4d51b02c147c5544e836d39a",
+      "required_experiment_id": "p1_heterogeneous_event_utility_preflight_20260830_v1",
+      "required_bank_sha256": "000d5f0bfc47277c2f38d97e6dea9402b28f3bc663275380de12699a46991a2c",
+      "required_anchor_positive_removed_rows": 0,
+      "required_provenance_complete": true
+    }
+  },
+  "chronological_prefixes": [
+    {
+      "name": "q2_to_q3",
+      "fit_folds": ["2025_q2"],
+      "blind_next_fold": "2025_q3"
+    },
+    {
+      "name": "q2_q3_to_q4",
+      "fit_folds": ["2025_q2", "2025_q3"],
+      "blind_next_fold": "2025_q4"
+    }
+  ],
+  "head": {
+    "family": "aggregated_binomial_logistic_partial_pooling",
+    "features": [
+      "log1p_event_rows",
+      "active_source_count",
+      "station_random_intercept_proxy",
+      "layer_random_intercept_proxy",
+      "frozen_source_signature_random_intercept_proxy"
+    ],
+    "categorical_levels_fit_prefix_only": true,
+    "unknown_next_fold_level_encoding": "all_zero_global_backoff",
+    "ridge_strength": 4.0,
+    "ridge_intercept": false,
+    "maximum_newton_iterations": 100,
+    "newton_tolerance": 1e-10,
+    "precision_lcb_one_sided_confidence": 0.95,
+    "precision_lcb_z": 1.6448536269514722,
+    "hyperparameter_or_feature_search_count": 0
+  },
+  "candidate_rule": {
+    "proposal_bank_rule": "anchor == 0 AND any frozen heterogeneous source == 1",
+    "event_group": ["fold", "station", "year", "layer"],
+    "contiguous_cadence_minutes": 10,
+    "accept_event_if": "train_only_predicted_precision_one_sided_95pct_lcb > fit_prefix_anchor_f1 / 2",
+    "threshold_search_count": 0,
+    "candidate": "anchor OR accepted_proposal_event_rows",
+    "anchor_positive_removal_allowed": false,
+    "persist_row_predictions_or_keys": false
+  },
+  "decision_hierarchy": {
+    "level_0_hard_validity": [
+      "all registered input bytes and sha256 match",
+      "proposal bank digest and anchor-preserving lineage match the sealed receipt",
+      "chronological fit folds precede and exclude the blind next fold",
+      "next-fold outcomes are not used by feature encoding, fitting, LCB prediction or acceptance",
+      "all accepted rows were anchor-negative frozen-bank rows",
+      "anchor positive removals equal zero",
+      "F1/2 add-only algebra is exact on each prefix and pooled",
+      "exactly two fits and zero searches, retries, mutations or outlier deletions"
+    ],
+    "level_1_sole_primary": "pooled row-level binary micro-F1 on the disjoint Q3 and Q4 next-fold predictions; benefit = candidate - anchor; directional margin = 0",
+    "level_2_uncertainty": "paired event-preserving joint KST-day circular moving-block bootstrap; one-sided 95% percentile bounds at zero",
+    "level_3_diagnostics_only": [
+      "prefix F1",
+      "accepted event and row support",
+      "station",
+      "layer",
+      "KST month",
+      "frozen source signature",
+      "proposal precision"
+    ],
+    "forbidden_hard_gates": [
+      "minimum event count",
+      "minimum improved window count",
+      "all-window improvement",
+      "station concentration cap",
+      "worst-slice veto",
+      "post-result numeric delta"
+    ]
+  },
+  "paired_resampling": {
+    "method": "circular_moving_block_bootstrap",
+    "paired_unit": "joint KST-day with all station-layer observations; every proposal event is kept complete by assigning all of its rows to its KST start-day unit",
+    "block_length_rule": "maximum inclusive KST-day span among frozen proposal events on the evaluation folds, with minimum 1",
+    "replicates": 5000,
+    "seed": 20260830,
+    "lower_quantile": 0.05,
+    "upper_quantile": 0.95
+  },
+  "evidence_states": {
+    "positive_point_and_lower_bound_gt_zero": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+    "positive_point_otherwise": "EXPLORATORY_CHALLENGER_RESEARCH_ONLY",
+    "negative_point_and_upper_bound_lt_zero": "PRIMARY_HARM_RESEARCH_ONLY",
+    "otherwise": "INCONCLUSIVE_RESEARCH_ONLY",
+    "level_0_failure": "QA_BLOCKED"
+  },
+  "execution_contract": {
+    "authorized_attempts": 1,
+    "model_fit_count": 2,
+    "threshold_search_count": 0,
+    "retry_or_tuning_count": 0,
+    "official_interface_rows_read": 0,
+    "raw_training_rows_read": 0,
+    "raw_temp_rows_read": 0,
+    "auxiliary_psal_depth_rows_read": 0,
+    "prediction_csv_count": 0,
+    "upload_count": 0
+  },
+  "outlier_policy": {
+    "remove_label_1_rows_or_events": false,
+    "clip_or_remove_raw_temp_anomaly_signal": false,
+    "hard_delete_any_input_row": false,
+    "auxiliary_psal_depth_quality_role": "diagnostic_only_not_loaded",
+    "target_positive_rows_removed": 0
+  },
+  "outputs": {
+    "attempt_lock": "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/attempt_lock.json",
+    "result": "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/result.json",
+    "exclusive_create": true,
+    "allowed_extensions": [".json"],
+    "raw_prediction_or_key_files": 0,
+    "model_or_checkpoint_files": 0,
+    "csv_files": 0
+  },
+  "forbidden_path_tokens": ["test", "sample", "submission", "hidden"],
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_read": true,
+    "submission_read_or_creation": true,
+    "hidden_data_read": true,
+    "raw_training_data_read": true,
+    "threshold_or_hyperparameter_search": true,
+    "result_based_retry_or_tuning": true,
+    "prediction_or_key_persistence": true,
+    "model_or_checkpoint_persistence": true,
+    "anchor_positive_removal": true,
+    "label_1_event_removal": true,
+    "outlier_hard_deletion": true,
+    "upload": true
+  }
+}

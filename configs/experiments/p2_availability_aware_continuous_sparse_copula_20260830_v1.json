@@ -1,0 +1,352 @@
+{
+  "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v1",
+  "status": "PREREGISTERED_ONE_SHOT_TRAIN_ONLY_HISTORICAL_EXPERIMENT",
+  "question": "Does one low-DF availability-aware continuous sparse Gaussian-rank dependence correction improve the frozen alpha50 historical proxy on the official-aligned pooled RMSE objective?",
+  "classification": "HISTORICALLY_EXPOSED_RESEARCH_ONLY",
+  "comparator": "FROZEN_ALPHA50_HISTORICAL_PROXY",
+  "comparator_disclosure": "The alpha50 proxy, all three historical windows, and all seven Stage-0 edges are historically exposed. Any favorable result is research-only and is not fresh confirmation or official-deployment authority.",
+  "governing_policy": {
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "bytes": 6837,
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65"
+  },
+  "source_contract": {
+    "explicit_cli_argument": "--p2-dir",
+    "allowed_basenames": [
+      "observations.csv"
+    ],
+    "forbidden_name_fragments": [
+      "test_index",
+      "sample",
+      "baseline",
+      "score",
+      "submission",
+      "query_support"
+    ],
+    "directory_listing_allowed": false,
+    "environment_fallback_allowed": false,
+    "observations": {
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "observation_schema": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "temp",
+      "psal",
+      "depth",
+      "nominal_depth"
+    ]
+  },
+  "immutable_training_inputs": {
+    "stage0_result": {
+      "path": "artifacts/p2_state_conditioned_copula_preflight_20260830_v1/result.json",
+      "bytes": 342070,
+      "sha256": "62fb0d97028fec1c299c333110625563149a76bb5187bbc623be6903af95cebd"
+    },
+    "alpha50_oof_anchor": {
+      "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+      "bytes": 6077707,
+      "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+    }
+  },
+  "code_lineage": {
+    "scripts/run_p2_state_conditioned_copula_20260830_v1.py": {
+      "bytes": 44805,
+      "sha256": "8f7e4dda07905136ccf13f736ead3f9dde6bea3f4ab5b993aad4b72d8ba4d183"
+    },
+    "scripts/run_p2_alpha50_supervised_rank1_functional_residual_20260828_v1.py": {
+      "bytes": 21421,
+      "sha256": "41794412f1c8c143a1162e05fd55d7751a31d340f60ad2b4aa178897b0b8987d"
+    },
+    "scripts/run_p2_state_conditioned_copula_preflight_20260830_v1.py": {
+      "bytes": 33476,
+      "sha256": "09e0c23e33631fb52063b98db03d2a6d8ac9c39927261be58498b64075edf133"
+    },
+    "src/p2_restore/depth_registered_cmfpca.py": {
+      "bytes": 20532,
+      "sha256": "84b3fb73c90f3444eac184deeeb88c8a5811699b566033c54b021d1b9d039422"
+    },
+    "src/p2_restore/profile_projection.py": {
+      "bytes": 9097,
+      "sha256": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"
+    },
+    "src/p2_restore/p2_alpha40_quasiperiodic_gp_residual_20260828_v1.py": {
+      "bytes": 16747,
+      "sha256": "0342ab7314b8cb800c06aecba36434b1b318322f2c98d6592df2ad875ef432c6"
+    }
+  },
+  "closed_family_exclusion": {
+    "closed_experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v2",
+    "seasonal_empirical_residual_margins": false,
+    "shrinkage_grid_or_selection": false,
+    "discrete_state_cell_recipe": false,
+    "inner_model_selection": false,
+    "gauss_hermite_quadrature": false,
+    "prior_copula_predictions_reused": false,
+    "exact_closed_recipe_rerun": false
+  },
+  "block_bounds": {
+    "2024_may_jun": [
+      "2024-05-01T00:00:00+09:00",
+      "2024-07-01T00:00:00+09:00"
+    ],
+    "2024_jul_aug": [
+      "2024-07-01T00:00:00+09:00",
+      "2024-09-01T00:00:00+09:00"
+    ],
+    "2024_sep_oct": [
+      "2024-09-01T00:00:00+09:00",
+      "2024-11-01T00:00:00+09:00"
+    ],
+    "2024_nov_dec": [
+      "2024-11-01T00:00:00+09:00",
+      "2025-01-01T00:00:00+09:00"
+    ],
+    "2025_mar_apr": [
+      "2025-03-01T00:00:00+09:00",
+      "2025-05-01T00:00:00+09:00"
+    ],
+    "2025_may_jun": [
+      "2025-05-01T00:00:00+09:00",
+      "2025-07-01T00:00:00+09:00"
+    ],
+    "2025_jul_aug": [
+      "2025-07-01T00:00:00+09:00",
+      "2025-09-01T00:00:00+09:00"
+    ],
+    "2025_nov_dec": [
+      "2025-11-01T00:00:00+09:00",
+      "2026-01-01T00:00:00+09:00"
+    ]
+  },
+  "frozen_historical_windows": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug"
+      ]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun"
+      ]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun",
+        "2025_jul_aug"
+      ]
+    }
+  },
+  "reference": {
+    "alpha": 0.5,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "spline_ridge": 0.001,
+    "change_hours": [
+      6,
+      24,
+      72
+    ]
+  },
+  "state": {
+    "public_endpoint_layers": [
+      1,
+      5
+    ],
+    "continuous_features": [
+      "thermal_contrast_abs",
+      "thermal_change_12h_signed",
+      "thermal_change_24h_signed"
+    ],
+    "missing_mask_features": [
+      "thermal_contrast_missing",
+      "thermal_change_12h_missing",
+      "thermal_change_24h_missing",
+      "conditioner_missing"
+    ],
+    "lag_hours": [
+      12,
+      24
+    ],
+    "basis": "intercept_plus_three_robust_standardized_linear_terms",
+    "degrees_of_freedom_per_edge": 4,
+    "robust_center": "median",
+    "robust_scale": "iqr_divided_by_1.3489795003921634",
+    "minimum_robust_scale": 1e-06,
+    "minimum_training_profiles": 500,
+    "minimum_kst_days": 30,
+    "minimum_training_blocks": 2,
+    "ood_lower_quantile": 0.005,
+    "ood_upper_quantile": 0.995,
+    "missing_action": "EXACT_ZERO_DEPENDENCE_CORRECTION",
+    "ood_action": "EXACT_ZERO_DEPENDENCE_CORRECTION",
+    "model_guard_failure_action": "EXACT_ZERO_DEPENDENCE_CORRECTION"
+  },
+  "dependence": {
+    "conditioners": [
+      "temp_contrast_signed",
+      "psal_contrast_signed",
+      "thermal_change_24h_signed"
+    ],
+    "responses": [
+      "residual_l2",
+      "residual_l3",
+      "residual_l4"
+    ],
+    "stage0_exposed_edges": [
+      "temp_contrast_signed__residual_l2",
+      "temp_contrast_signed__residual_l3",
+      "temp_contrast_signed__residual_l4",
+      "psal_contrast_signed__residual_l4",
+      "thermal_change_24h_signed__residual_l4",
+      "residual_l2__residual_l4",
+      "residual_l3__residual_l4"
+    ],
+    "actionable_conditioner_response_edges": [
+      "temp_contrast_signed__residual_l2",
+      "temp_contrast_signed__residual_l3",
+      "temp_contrast_signed__residual_l4",
+      "psal_contrast_signed__residual_l4",
+      "thermal_change_24h_signed__residual_l4"
+    ],
+    "response_response_structure_edges": [
+      "residual_l2__residual_l4",
+      "residual_l3__residual_l4"
+    ],
+    "conditioner_conditioner_correlations_are_global_nuisance": true,
+    "unlisted_target_linked_edges_fixed_to_zero": true,
+    "rank_transform": "outer_training_empirical_normal_score",
+    "edge_target": "latent_normal_score_cross_product",
+    "continuous_state_slope_ridge": 1.0,
+    "ridge_selected_or_tuned": false,
+    "diagonal_shrinkage": 0.8,
+    "shrinkage_selected_or_tuned": false,
+    "raw_edge_correlation_clip": 0.95,
+    "nearest_psd_projection_allowed": false,
+    "minimum_eigenvalue": 1e-08,
+    "maximum_condition_number": 1000000.0,
+    "response_scale": "outer_training_iqr_divided_by_1.3489795003921634",
+    "minimum_response_scale_c": 1e-06,
+    "maximum_absolute_latent_mean": 1.0
+  },
+  "correction": {
+    "structural_minimum_c": -0.2,
+    "structural_maximum_c": 0.2,
+    "rms_is_diagnostic_only": true,
+    "p99_is_diagnostic_only": true,
+    "magnitude_is_promotion_veto": false
+  },
+  "outlier_diagnostic": {
+    "policy": "AGGREGATE_FLAG_AND_DIAGNOSTIC_WEIGHT_ONLY_NEVER_DELETE",
+    "temporal_neighbor_max_gap_minutes": 20,
+    "temporal_isolated_robust_z": 8.0,
+    "physical_extreme_lower_quantile": 0.005,
+    "physical_extreme_upper_quantile": 0.995,
+    "sensor_suspect_profile_weight": 0.25,
+    "ordinary_and_preserved_physical_extreme_weight": 1.0,
+    "sensor_suspect_definition": "exactly_one_layer_has_an_isolated_temperature_spike",
+    "physical_extrema_are_never_hard_deleted": true,
+    "threshold_tuning_allowed": false,
+    "weights_enter_state_normalization": false,
+    "weights_enter_support_counts": false,
+    "weights_enter_dependence_fit": false,
+    "weights_enter_metrics": false
+  },
+  "season_definition": {
+    "DJF": [
+      12,
+      1,
+      2
+    ],
+    "MAM": [
+      3,
+      4,
+      5
+    ],
+    "JJA": [
+      6,
+      7,
+      8
+    ],
+    "SON": [
+      9,
+      10,
+      11
+    ]
+  },
+  "primary_decision": {
+    "metric": "pooled_all_69850_row_rmse_c",
+    "benefit_direction": "reference_rmse_minus_candidate_rmse_positive",
+    "paired_interval": {
+      "method": "moving_block_bootstrap_within_each_frozen_window",
+      "independent_unit": "contiguous_KST_day_block_preserving_layers_2_3_4_together",
+      "block_length_days": 7,
+      "replicates": 5000,
+      "seed": 20260830,
+      "confidence": 0.9
+    },
+    "high_value_challenger": "pooled_delta_rmse_lt_0_and_ci90_upper_lt_0",
+    "exploratory_challenger": "pooled_delta_rmse_lt_0_and_ci90_includes_0",
+    "primary_harm": "pooled_delta_rmse_gt_0_and_ci90_lower_gt_0",
+    "otherwise": "INCONCLUSIVE_RESEARCH_ONLY",
+    "minimum_improved_windows_is_hard_veto": false,
+    "worst_season_cap_is_hard_veto": false,
+    "all_layers_nonworse_is_hard_veto": false,
+    "support_is_hard_veto_after_level0_validity": false,
+    "correction_magnitude_is_hard_veto": false
+  },
+  "diagnostics": {
+    "report_by_window": true,
+    "report_by_season": true,
+    "report_by_layer": true,
+    "report_state_support": true,
+    "report_missing_and_ood_noop": true,
+    "report_correction_magnitude": true,
+    "all_are_diagnostic_only": true
+  },
+  "resource_contract": {
+    "maximum_total_threads": 4,
+    "blas_threads": 4,
+    "outer_dependence_model_fits": 3,
+    "inner_selection_fits": 0,
+    "hpo_trials": 0,
+    "continuous_edge_estimations": 21,
+    "maximum_wall_seconds": 240.0
+  },
+  "execution_policy": {
+    "real_training_execution_authorized": true,
+    "maximum_executions": 1,
+    "result_based_tuning": false,
+    "result_based_retry": false,
+    "technical_failure_retry": false,
+    "official_interface_reads_allowed": false,
+    "query_support_reads_allowed": false,
+    "csv_output_allowed": false,
+    "submission_generation_allowed": false,
+    "upload_allowed": false,
+    "aggregate_json_only": true
+  },
+  "artifact_path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/result.json"
+}

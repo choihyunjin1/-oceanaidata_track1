@@ -1,0 +1,98 @@
+{
+  "schema_version": "p2.availability_aware_continuous_sparse_copula.failure_receipt.20260830.v1",
+  "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v1",
+  "status": "INVALID_TECHNICAL_NO_PERFORMANCE_RESULT",
+  "sealed_at_kst": "2026-08-30T15:55:34.2202706+09:00",
+  "execution": {
+    "attempts": 1,
+    "command": "& '.venv-p1\\Scripts\\python.exe' 'scripts\\run_p2_availability_aware_continuous_sparse_copula_20260830_v1.py' --p2-dir 'C:\\Users\\cedis\\Downloads\\p2\\데이터셋_P2\\P2_profile_restore' --output-json 'reports\\p2_availability_aware_continuous_sparse_copula_20260830_v1\\result.json' --execute",
+    "exit_code": 1,
+    "terminal_wall_seconds": 9.4764981,
+    "result_based_tuning": false,
+    "result_based_retry": false,
+    "technical_failure_retry": false,
+    "v1_reexecution_allowed": false
+  },
+  "failure": {
+    "exception_type": "p2_restore.p2_availability_aware_continuous_sparse_copula_20260830_v1.ExperimentContractError",
+    "exception_message": "candidate left the finite physical temperature domain",
+    "guard_source_path": "src/p2_restore/p2_availability_aware_continuous_sparse_copula_20260830_v1.py",
+    "guard_source_line": 669,
+    "traceback": [
+      "Traceback (most recent call last):",
+      "  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\scripts\\run_p2_availability_aware_continuous_sparse_copula_20260830_v1.py\", line 19, in <module>",
+      "    raise SystemExit(main())",
+      "  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\src\\p2_restore\\p2_availability_aware_continuous_sparse_copula_20260830_v1.py\", line 1026, in main",
+      "    result = run(config, args.p2_dir)",
+      "  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\src\\p2_restore\\p2_availability_aware_continuous_sparse_copula_20260830_v1.py\", line 835, in run",
+      "    prediction, receipt = _predict_outer(",
+      "  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\src\\p2_restore\\p2_availability_aware_continuous_sparse_copula_20260830_v1.py\", line 669, in _predict_outer",
+      "    raise ExperimentContractError(\"candidate left the finite physical temperature domain\")",
+      "p2_restore.p2_availability_aware_continuous_sparse_copula_20260830_v1.ExperimentContractError: candidate left the finite physical temperature domain"
+    ]
+  },
+  "pre_execution_gate": {
+    "focused_pytest": {
+      "command": "& '.venv-p1\\Scripts\\python.exe' -m pytest -q 'tests\\test_p2_availability_aware_continuous_sparse_copula_20260830_v1.py'",
+      "exit_code": 0,
+      "tests_passed": 6
+    },
+    "ruff": {
+      "command": "& '.venv-p1\\Scripts\\python.exe' -m ruff check 'src\\p2_restore\\p2_availability_aware_continuous_sparse_copula_20260830_v1.py' 'scripts\\run_p2_availability_aware_continuous_sparse_copula_20260830_v1.py' 'tests\\test_p2_availability_aware_continuous_sparse_copula_20260830_v1.py'",
+      "exit_code": 0,
+      "summary": "All checks passed!"
+    },
+    "cli_help_exit_code": 0,
+    "sealed_result_existed_before_execution": false
+  },
+  "sealed_files": {
+    "config": {
+      "path": "configs/experiments/p2_availability_aware_continuous_sparse_copula_20260830_v1.json",
+      "bytes": 11259,
+      "sha256": "c0b6419ab83380ee56f33e64ae31f205b58ff65fef45227e80153a57281a24a0",
+      "canonical_sha256": "e501fc89433061c13ef05b8157a6e1a9186dd0aee7841a7f538eb4bfae55bc41"
+    },
+    "core": {
+      "path": "src/p2_restore/p2_availability_aware_continuous_sparse_copula_20260830_v1.py",
+      "bytes": 46208,
+      "sha256": "fdfb34ffe93dabd8dcc85e2a8dd27ddd5c5a7356b1e19824147513c4ab27d6a2"
+    },
+    "runner": {
+      "path": "scripts/run_p2_availability_aware_continuous_sparse_copula_20260830_v1.py",
+      "bytes": 503,
+      "sha256": "da38729591d2cf3a446e6ed670f5bdcfa8d9ea5ce879935f7ef8aea95b01f98e"
+    },
+    "focused_tests": {
+      "path": "tests/test_p2_availability_aware_continuous_sparse_copula_20260830_v1.py",
+      "bytes": 8516,
+      "sha256": "a5cd663033d22a7c69104628df752b1a1e698d4eec77edff5d5234f6e42a9002"
+    }
+  },
+  "artifact_receipt": {
+    "expected_result_path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/result.json",
+    "result_exists_after_failure": false,
+    "aggregate_performance_json_count": 0,
+    "performance_metrics_computed": false,
+    "historical_truth_binding_reached": false,
+    "pooled_rmse_available": false,
+    "dependence_aware_interval_available": false,
+    "decision_available": false
+  },
+  "access_receipt": {
+    "source_open_counts_inferred_from_sealed_control_flow": {
+      "observations.csv": 1
+    },
+    "official_interface_rows_read": 0,
+    "query_support_rows_read": 0,
+    "csv_output_count": 0,
+    "submission_generated": false,
+    "upload_count": 0,
+    "hard_deleted_training_profiles": 0
+  },
+  "diagnosis_status": "PENDING_AGGREGATE_GUARD_OPERAND_DIAGNOSTIC",
+  "notes": [
+    "No performance result was emitted before the exception.",
+    "The source-open count is an inference from the sealed code path because the process terminated before emitting its runtime ledger.",
+    "This receipt seals the v1 attempt; v1 must not be rerun."
+  ]
+}

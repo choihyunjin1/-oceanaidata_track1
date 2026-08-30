@@ -1,0 +1,73 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.failure.20260830.v2",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2",
+  "status": "INVALID_TECHNICAL_ONE_SHOT_QUERY_SCHEMA_GUARD_FAILURE",
+  "failed_at_kst": "2026-08-30T21:26:05+09:00",
+  "failure_stage": "AFTER_ATTEMPT_RESERVATION_AND_INPUT_HASH_PINS_BEFORE_SAMPLE_PARSE_OBSERVATIONS_PARSE_OR_MODEL_FIT",
+  "exception": {
+    "type": "SubmissionPackError",
+    "message": "CSV schema mismatch: <authorized P2 dir>/test_index.csv",
+    "origin": "src/p2_restore/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.py read_keyed_csv",
+    "guard_expected_columns": ["station", "layer", "time"],
+    "authorized_official_header_columns": [
+      "station",
+      "layer",
+      "time",
+      "nominal_depth"
+    ],
+    "cause": "The unchanged v1 query reader requires exact key-only columns and rejects the documented extra nominal_depth feature before selecting the three submission keys. This is a deterministic query-loader contract defect, not a scientific-model result."
+  },
+  "immutability": {
+    "same_id_rerun_allowed": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "scientific_recipe_changed": false,
+    "authorized_loader_repair_completed": true,
+    "additional_query_schema_repair_authorized": false,
+    "disposition": "STOP_NO_RETRY_NO_CSV"
+  },
+  "preexecution_qa": {
+    "focused_pytest": "4 passed",
+    "ruff": "All checks passed",
+    "report_directory_absent_before_attempt": true,
+    "staging_directory_absent_before_attempt": true,
+    "thread_budget": 1
+  },
+  "execution_receipt": {
+    "shell_invocations": 1,
+    "attempt_lock_created": true,
+    "input_sha256_pins_verified": true,
+    "official_test_index_rows_parsed": 26061,
+    "official_sample_rows_parsed": 0,
+    "official_observations_rows_parsed": 0,
+    "official_observations_file_hashed": true,
+    "hidden_truth_rows_read": 0,
+    "score_py_reads": 0,
+    "baseline_reads": 0,
+    "model_fits": 0,
+    "performance_metrics_computed": 0,
+    "independent_candidate_qa_runs": 0,
+    "staging_directory_created": false,
+    "csv_created": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  },
+  "hashes": {
+    "overlay_config": "6e17046601dbb9f433a472e2eaac39f38ca68155707f6533071ce33f1ab79c76",
+    "base_scientific_config": "061e8667085278282d4a23d792ac04c90bef91dcbad3b32395ac00bbcfa6773f",
+    "v1_scientific_module": "70bd37bbba9b84032aa96e8ef89e0cc55385f7e285e9dcf09713ff6c7e6e50ba",
+    "v2_runner": "5a3be678170fbe235977fdbae1d1a8522d67d0101273c6d43e84db4051cde2ba",
+    "v2_independent_qa": "46b14e11c5711cffad891ced3bf984a11b0f6252e05f4f3c131588af1e87e491",
+    "v2_focused_test": "4cd5372e8001065173d2d918065c4494efc9b8e245124ff0865a4dc32767c661",
+    "attempt_lock": "e2f3debedf73ab2e8b58c6708ba3914c651266bce4176b92c39a6a71adc44b2e"
+  },
+  "unexecuted_minimal_repair": "A separately authorized new unique attempt could accept exactly the documented nominal_depth column while retaining station/layer/time as submission keys; this v2 attempt does not implement or execute that change.",
+  "fallback": {
+    "role": "current official best mapped local file",
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260829_ADAPTIVE_FINAL_PROBES_READY\\P2_1_OFFICIAL_MSE_VERTEX_A083419\\P2_submission.csv",
+    "sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+    "official_public_rmse_c": 0.430209,
+    "official_points": 27.935277
+  }
+}

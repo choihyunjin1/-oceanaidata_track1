@@ -1,0 +1,317 @@
+{
+  "schema_version": "parallel_frozen_candidate_confirmation.p1_trial18_sealed_evaluation_qa.20260830.v1",
+  "lane": "P1",
+  "experiment_family": "Sobol-selected frozen trial_18 at threshold 0.8",
+  "final_decision": "PRIMARY_HARM_RESEARCH_ONLY",
+  "candidate_submission_readiness": "NOT_READY",
+  "submission_action": "DO_NOT_MATERIALIZE_TRIAL18_OFFICIAL_CSV",
+  "claim_scope": "RESEARCH_ONLY_EXPOSED_HISTORICAL_Q3_Q4",
+  "recovery_annotation": "original runner technical failure recovered by sealed-artifact independent evaluation",
+  "failure_and_recovery_chain": [
+    {
+      "stage": "original_v3_one_shot",
+      "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3",
+      "terminal_status": "FAILED_EXECUTION_NO_RETRY_AUTHORIZED",
+      "failure_boundary": "after all six fits and both Q3/Q4 blind artifacts were sealed, before historical truth was opened",
+      "error": "AttributeError: 'EncodedSurface' object has no attribute 'keys'",
+      "completed_fit_count": 6,
+      "elapsed_seconds": 9850.738882999984,
+      "claim_scope": "NO_PERFORMANCE_CLAIM",
+      "files": {
+        "config": {
+          "path": "configs/experiments/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.json",
+          "sha256": "5a4336b38b1377f2a54ee7f4d8c3ec4966ed6ced8e5347e7d7a1363abf1c2b68"
+        },
+        "runner": {
+          "path": "scripts/run_p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.py",
+          "sha256": "cf8a7aff4356281b80c611ba6d34c7621c564ddeecab0a4f0bf14f987016a57f"
+        },
+        "attempt_lock": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.ATTEMPT_LOCK.json",
+          "sha256": "d7e6ac47127a6265d1b736abb0e0161a185746428af3b49b91c000908cf8b957"
+        },
+        "terminal": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/terminal_result.json",
+          "sha256": "bb5819246d9b604b6bd11c5a85c73c4a8c6cef0bc8f250b725f7921036fbefdb"
+        }
+      }
+    },
+    {
+      "stage": "sealed_eval_v1_pre_truth_validation",
+      "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1",
+      "terminal_status": "FAILED_ZERO_FIT_EVALUATION_NO_RETRY_AUTHORIZED",
+      "failure_boundary": "before frozen_truth_and_folds was opened; no historical metric was computed",
+      "error": "ContractError: blind receipt changed: q4_confirmatory_blind_receipt.json",
+      "cause": "the inherited verification loop compared both phase receipts to one phase holdout key",
+      "additional_model_fit_count": 0,
+      "reprediction_count": 0,
+      "historical_truth_metric_evaluation_count": 0,
+      "elapsed_seconds": 21.00783460002276,
+      "files": {
+        "config": {
+          "path": "configs/experiments/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1.json",
+          "sha256": "5f2c6a91bae16460c58a390a6be6df8cb36538f1992e55a868c8efe4aa430a5b"
+        },
+        "runner": {
+          "path": "scripts/run_p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1.py",
+          "sha256": "2cdc5e1c34407bb795d6022645b9fe2ca35d26b97f71e5bcd9117faa71441b05"
+        },
+        "attempt_lock": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1.ATTEMPT_LOCK.json",
+          "sha256": "a85e771ef5dce966d0f59caf0e55e85132e19d957484cccd4fabeab7e09e3af9"
+        },
+        "terminal": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v1/terminal_result.json",
+          "sha256": "6a3c98009811146ccb95a72ac287ed059891074e2b80cbca50e53e6f085ee8c3"
+        }
+      }
+    },
+    {
+      "stage": "sealed_eval_v2_independent_recovery",
+      "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2",
+      "terminal_status": "PRIMARY_HARM_RESEARCH_ONLY",
+      "recovery_status": "ORIGINAL_RUNNER_TECHNICAL_FAILURE_RECOVERED_BY_SEALED_ARTIFACT_INDEPENDENT_EVALUATION",
+      "authorized_repairs_only": [
+        "EncodedSurface key access uses holdout.surface.keys",
+        "q3 receipt is verified only against q3 holdout key and q4 receipt only against q4 holdout key"
+      ],
+      "additional_model_fit_count": 0,
+      "reprediction_count": 0,
+      "historical_truth_store_open_count": 1,
+      "historical_truth_metric_evaluation_count": 1,
+      "elapsed_seconds": 37.34409460000461,
+      "files": {
+        "config": {
+          "path": "configs/experiments/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2.json",
+          "bytes": 5910,
+          "sha256": "a4c6d2e1fa3e508f34b00969d1aa5c4f5cc75c927b1255e3214cd73bf5dadedc"
+        },
+        "runner": {
+          "path": "scripts/run_p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2.py",
+          "bytes": 24378,
+          "sha256": "47e7c2839e52ac60308860a4d65b3b08cdaa95b55230e4174bab5843ad573a08"
+        },
+        "attempt_lock": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2.ATTEMPT_LOCK.json",
+          "sha256": "ed73cad916482ca108e9b89752717a2f9e00a5fca95cb8c0eb6f45b2c2e1aa81"
+        },
+        "metrics": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/confirmatory_metrics.json",
+          "sha256": "05cb119e9210b0b742d8dd586ec7709664bcaee5a994456cfe103e2a8c0b343a"
+        },
+        "manifest": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/artifact_manifest.json",
+          "sha256": "e3221d6bebd77e966cc39e5966ebf6006aee15e99fb03c0dbe0142139672e530"
+        },
+        "terminal": {
+          "path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/terminal_result.json",
+          "sha256": "59d25c6a2e6d6fb71d3ae132986a9385983ca3a0a1b54136123c5edc4a60f13f"
+        },
+        "independent_qa": {
+          "path": "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json",
+          "sha256": "1d6a594c532c86f45905962624cc663cdc2928b626d7727d00bcd777355c437d"
+        }
+      }
+    }
+  ],
+  "sealed_prediction_provenance": {
+    "recipe": {
+      "trial_id": "trial_18",
+      "threshold": 0.8,
+      "epoch": 150,
+      "seeds": [20260827, 20260839, 20260863],
+      "recipe_sha256": "0206dbed2d509ecb930593d4621eb53ccce2e528adbbdec09696911bffbb2d6e"
+    },
+    "q3": {
+      "rows": 176738,
+      "ordered_holdout_key_sha256": "8e4b225fc912a335383ebdcffd2c5a5304020f80acd5e52d53ff1b893248baec",
+      "prediction_path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q3_confirmatory_blind.npz",
+      "prediction_sha256": "61a18c30a904659bb5aca909558d83d2d8f1125e4596ee4ec0f2985e8c8eb6b3",
+      "receipt_path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q3_confirmatory_blind_receipt.json",
+      "receipt_sha256": "ca627deddb189cd650057eb7ab4d2952a36fa31844ca681c4505314ea38c2c64",
+      "fit_count": 3,
+      "optimizer_steps": 7650
+    },
+    "q4": {
+      "rows": 111124,
+      "ordered_holdout_key_sha256": "4a91345f68decb5e25d02c721ae53063b0807c3e5b3acdd970093ca36d857f6a",
+      "prediction_path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q4_confirmatory_blind.npz",
+      "prediction_sha256": "da746ae4286eacf50407ed577650f3539618807fadf02e84725ff5bf46966ab1",
+      "receipt_path": "artifacts/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3/q4_confirmatory_blind_receipt.json",
+      "receipt_sha256": "776d85125a18d27df8fd3734e3a9c618711348fa4f0e74efee64c99824469d86",
+      "fit_count": 3,
+      "optimizer_steps": 9900
+    },
+    "total_fit_count": 6,
+    "total_optimizer_steps": 17550,
+    "checkpoint_files_created": 0,
+    "all_fit_nonfinite_counts_zero": true,
+    "source_predictions_unchanged_after_both_recovery_attempts": true
+  },
+  "scientific_gate": {
+    "primary_metric": "pooled Q3+Q4 row-level binary micro-F1",
+    "rows": 287862,
+    "directional_margin": 0.0,
+    "incumbent": {
+      "tp": 9263,
+      "fp": 482,
+      "fn": 1422,
+      "precision": 0.9505387378142637,
+      "recall": 0.8669162377164249,
+      "f1": 0.9068037200195791
+    },
+    "trial18": {
+      "tp": 9274,
+      "fp": 767,
+      "fn": 1411,
+      "precision": 0.9236131859376556,
+      "recall": 0.8679457182966775,
+      "f1": 0.8949146000192995
+    },
+    "delta_f1": -0.01188912000027964,
+    "point_estimate_favorable": false,
+    "paired_block_bootstrap": {
+      "replicates": 10000,
+      "block_days": 21,
+      "seed": 20260830,
+      "central_interval": 0.9,
+      "delta_f1_mean": -0.012308582970204228,
+      "ci90_lower": -0.02609953049674526,
+      "ci90_upper": -0.0019713774981613198,
+      "pooled_unique_kst_calendar_days": 163
+    },
+    "diagnostic_folds": {
+      "q3_delta_f1": -0.004464553900269452,
+      "q4_delta_f1": -0.022443407924626735
+    },
+    "legacy_fixed_delta_or_all_slice_veto_used_for_decision": false,
+    "level_0_pass": true,
+    "interpretation": "The primary pooled point estimate and the full central 90% interval are below zero. This is scientific primary harm, not a legacy arbitrary-veto rejection."
+  },
+  "access_and_mutation_attestation": {
+    "original_v3": {
+      "official_test_sample_submission_hidden_rows_read": 0,
+      "csv_created": false,
+      "upload_performed": false
+    },
+    "sealed_eval_v1": {
+      "official_test_sample_submission_hidden_rows_read": 0,
+      "csv_created": false,
+      "upload_performed": false,
+      "additional_model_fit_count": 0,
+      "reprediction_count": 0
+    },
+    "sealed_eval_v2": {
+      "official_test_sample_submission_hidden_rows_read": 0,
+      "csv_created": false,
+      "upload_performed": false,
+      "additional_model_fit_count": 0,
+      "reprediction_count": 0,
+      "outlier_rows_hard_deleted": 0,
+      "label_1_or_anomaly_events_deleted": 0
+    },
+    "old_config_or_artifact_mutations": 0,
+    "trial18_official_csv_materialized": false,
+    "commit_or_push_performed": false
+  },
+  "verification": {
+    "original_v3_pre_execution": {
+      "focused_pytest": "9 passed",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS"
+    },
+    "sealed_eval_v1_pre_execution": {
+      "focused_pytest": "6 passed",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "outcome": "pre-truth validation failure exposed missing cross-phase regression"
+    },
+    "sealed_eval_v2_pre_execution": {
+      "focused_pytest": "8 passed",
+      "required_distinct_q3_q4_positive_fixture": "PASS",
+      "required_cross_swap_negative_fixture": "PASS",
+      "required_full_receipt_loop_dry_test": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "pin_only_preflight": "PASS"
+    },
+    "sealed_eval_v2_independent_qa": "PASS"
+  },
+  "fallback_read_only_inventory": {
+    "reconciled_at_utc": "2026-08-30T13:07:15.1428362+00:00",
+    "reconciliation_status": "NO_ELIGIBLE_FALLBACK_FROM_AUDITED_PAIR",
+    "policy": "Trial18 is not eligible. The two initially suggested GI single-row files are also ineligible because manifest chronology reconciled to the live platform UI shows that both were already submitted on 2026-08-29. No new model fit or CSV was produced.",
+    "source_manifest": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260829_DEADLINE_ADAPTIVE_AXIS_PROBES_READY_v2/SET_MANIFEST.json",
+      "sha256": "997d65a3a9ff293de386b908ca51a9211195a38cc5dec6964b3fb02fbcb5732f",
+      "filesystem_mtime_utc": "2026-08-29T12:51:21.6148188+00:00",
+      "snapshot_status_at_pack_creation": "READY_NOT_UPLOADED",
+      "snapshot_official_uploads_at_pack_creation": 0,
+      "chronology_limitation": "The local counter describes only pack creation. It is not an append-only platform submission ledger and became stale after later UI uploads."
+    },
+    "same_batch_platform_ledger_anchor": {
+      "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/result.json",
+      "sha256": "1788893add5d009993f32d9089ce9a20942182106cd7dc1ae553d488d70e51a5",
+      "manifest_record": {
+        "candidate_role": "rank1_axis_alpha_2",
+        "submission_sha256": "7d06cf01c67541ec77d4e6af7afefca710774bda50f33155573c382d440672d9"
+      },
+      "live_ui_mapping": {
+        "observed_time_kst": "2026-08-29T22:20:00+09:00",
+        "public_rmse_c": 0.432244,
+        "mapping_basis": "local pack manifest plus live UI chronology"
+      },
+      "relevance": "This P2 file is the third record in the same adaptive-axis SET_MANIFEST and independently anchors that the manifest batch reached the platform at 22:20 KST."
+    },
+    "platform_ui_chronology": {
+      "source": "live official UI chronology observed by the root reconciliation audit; the UI exposes metric and minute-level time, not file SHA-256",
+      "observed_time_kst": "2026-08-29T22:20:00+09:00",
+      "p1_entries_in_manifest_order": [
+        {
+          "manifest_ordinal": 1,
+          "candidate_role": "P1_1_GI_SINGLE_ROW_1",
+          "public_f1": 0.833548
+        },
+        {
+          "manifest_ordinal": 2,
+          "candidate_role": "P1_2_GI_SINGLE_ROW_2",
+          "public_f1": 0.833248
+        }
+      ],
+      "mapping_basis": "The pack was created before the UI entries; the two P1 records and the independently anchored P2 record occur in one ordered SET_MANIFEST, and all three corresponding UI results appear at 22:20 KST. This establishes platform semantic submission despite the UI not displaying hashes.",
+      "confidence": "HIGH_SEMANTIC_CHRONOLOGY_INFERENCE"
+    },
+    "local_exact_hash_observation": {
+      "files_match_pack_manifest": true,
+      "candidate_hashes_are_mutually_distinct": true,
+      "why_prior_conclusion_was_wrong": "Exact-hash distinctness from other local candidates does not imply that the same exact candidate was never uploaded. The stale pack counter was incorrectly treated as current platform state."
+    },
+    "eligible_fallback_candidates": [],
+    "rejected_platform_semantic_duplicates": [
+      {
+        "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260829_DEADLINE_ADAPTIVE_AXIS_PROBES_READY_v2/P1_1_GI_SINGLE_ROW_1/P1_submission.csv",
+        "rows": 169011,
+        "sha256": "63156b4282c64415d48d898b9eef72ac886585437f9f746695dd4934c2942675",
+        "title": "P1 e150 + GI 단일행 분해 1",
+        "hash_matches_manifest": true,
+        "manifest_ordinal": 1,
+        "platform_observed_time_kst": "2026-08-29T22:20:00+09:00",
+        "platform_public_f1": 0.833548,
+        "platform_semantic_duplicate": true,
+        "submission_eligibility": "REJECT_ALREADY_SUBMITTED_DO_NOT_UPLOAD"
+      },
+      {
+        "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260829_DEADLINE_ADAPTIVE_AXIS_PROBES_READY_v2/P1_2_GI_SINGLE_ROW_2/P1_submission.csv",
+        "rows": 169011,
+        "sha256": "b02f08496655b455a73fa0dbb640486988ffe7f8c50e4752ca250c400adb8598",
+        "title": "P1 e150 + GI 단일행 분해 2",
+        "hash_matches_manifest": true,
+        "manifest_ordinal": 2,
+        "platform_observed_time_kst": "2026-08-29T22:20:00+09:00",
+        "platform_public_f1": 0.833248,
+        "platform_semantic_duplicate": true,
+        "submission_eligibility": "REJECT_ALREADY_SUBMITTED_DO_NOT_UPLOAD"
+      }
+    ]
+  }
+}

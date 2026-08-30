@@ -1,0 +1,119 @@
+{
+  "access_receipt": {
+    "csv_output_count": 0,
+    "hard_deleted_training_profiles": 0,
+    "official_interface_rows_read": 0,
+    "query_support_rows_read": 0,
+    "submission_generated": false,
+    "upload_count": 0
+  },
+  "diagnostic_scope": {
+    "bootstrap_computed": false,
+    "decision_computed": false,
+    "diagnostic_outer_fits": 1,
+    "model_or_threshold_changes": false,
+    "performance_metrics_computed": false,
+    "result_based_tuning": false,
+    "v1_main_called": false,
+    "validation_truth_bound": false
+  },
+  "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v1",
+  "guard_operands": {
+    "absolute_domain_c": [
+      -5.0,
+      45.0
+    ],
+    "bounded_pre_guard_correction": {
+      "above_upper_count": 0,
+      "below_lower_count": 0,
+      "finite_rows": 26273,
+      "maximum_absolute_c": 0.2,
+      "maximum_c": 0.1932538792203886,
+      "minimum_c": -0.2,
+      "outside_count": 0,
+      "rows": 26273
+    },
+    "failed_fold": "2024_sep_oct",
+    "guard_predicates": {
+      "active_candidate_outside_count": 0,
+      "candidate_all_finite": true,
+      "candidate_minus_reference_minus_correction_max_abs_c": 1.7763568394002505e-15,
+      "candidate_outside_count": 18,
+      "inactive_candidate_outside_count": 18,
+      "new_candidate_outside_count": 0,
+      "preexisting_reference_outside_and_candidate_outside_count": 18,
+      "reference_outside_count": 18
+    },
+    "minimal_relative_domain_repair_diagnostic": {
+      "candidate": {
+        "above_upper_count": 18,
+        "below_lower_count": 0,
+        "finite_rows": 26273,
+        "maximum_c": 281.15888381865193,
+        "minimum_c": 7.064664565903678,
+        "outside_count": 18,
+        "rows": 26273
+      },
+      "changed_rows_from_raw_candidate": 0,
+      "description": "pre-existing reference extremes are exact no-ops; active rows whose reference is in-domain are clipped only to the fixed absolute domain",
+      "inactive_rows_changed": 0,
+      "invalid_outside_rows_after_relative_contract": 0,
+      "maximum_absolute_correction_c": 0.1999999999999993,
+      "preexisting_reference_extreme_noop_rows": 18
+    },
+    "raw_candidate": {
+      "above_upper_count": 18,
+      "below_lower_count": 0,
+      "finite_rows": 26273,
+      "maximum_c": 281.15888381865193,
+      "minimum_c": 7.064664565903678,
+      "outside_count": 18,
+      "rows": 26273
+    },
+    "reference": {
+      "above_upper_count": 18,
+      "below_lower_count": 0,
+      "finite_rows": 26273,
+      "maximum_c": 281.15888381865193,
+      "minimum_c": 7.064664565903678,
+      "outside_count": 18,
+      "rows": 26273
+    },
+    "violations_by_layer": {
+      "2": {
+        "candidate_outside_count": 0,
+        "new_candidate_outside_count": 0,
+        "reference_outside_count": 0,
+        "rows": 8777
+      },
+      "3": {
+        "candidate_outside_count": 10,
+        "new_candidate_outside_count": 0,
+        "reference_outside_count": 10,
+        "rows": 8774
+      },
+      "4": {
+        "candidate_outside_count": 8,
+        "new_candidate_outside_count": 0,
+        "reference_outside_count": 8,
+        "rows": 8722
+      }
+    }
+  },
+  "runtime_seconds": 23.019275800004834,
+  "schema_version": "p2.availability_aware_continuous_sparse_copula.guard_diagnostic.20260830.v1",
+  "sealed_failure_receipt": {
+    "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/failure-receipt.json",
+    "sha256": "8a511b151bad037965fd1d93ef38e8b69ca25fbde0688e8a07f72ff90abe922a"
+  },
+  "source": {
+    "basename": "observations.csv",
+    "bytes": 49058719,
+    "rows": 789408,
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "source_open_counts": {
+    "observations.csv": 1
+  },
+  "status": "AGGREGATE_TECHNICAL_DIAGNOSTIC_NO_PERFORMANCE_SCORING"
+}

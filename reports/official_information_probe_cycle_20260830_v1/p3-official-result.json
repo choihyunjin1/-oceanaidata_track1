@@ -1,0 +1,112 @@
+{
+  "schema_version": "p3.official_information_probe_cycle.20260830.v1",
+  "conclusion": {
+    "headline": "All three stations contributed positive Public MSE benefit to the KMA alpha=0.425 champion. S-ORS contributed the most, I-ORS nearly as much, and G-ORS a smaller but still positive share.",
+    "decision": "KEEP_ALPHA_0425_CHAMPION_CLOSE_EXACT_STATION_REMOVAL_PROBES",
+    "transport_finding": "The local station-by-lead suggestion that S-ORS should receive near-zero KMA correction did not transport to the official Public surface.",
+    "current_champion": {
+      "id": "P3_KMA_UNIFORM_0425_20260830_V1",
+      "sha256": "144f5e1740a338df881b5076b8d0a8764630c5836982a6ff4326e93c2e24219e",
+      "official_rmse_m": 0.575233,
+      "official_score": 24.203599
+    }
+  },
+  "candidate_reconciliation": [
+    {
+      "id": "P3_1_KMA_LEAVE_S_ORS_OUT",
+      "sha256": "a5a16ba207ed1cccf16383e1de7b932417666917b0eb2b9c54a00fdb7ab67351",
+      "frozen_support": "S-ORS at 18h and 24h only",
+      "official_rmse_m": 0.579102,
+      "official_score": 24.142185,
+      "delta_rmse_vs_champion_m": 0.003869,
+      "delta_score_vs_champion": -0.061414,
+      "result": "WORSE_THAN_CHAMPION_S_CORRECTION_BENEFICIAL"
+    },
+    {
+      "id": "P3_2_KMA_LEAVE_I_ORS_OUT",
+      "sha256": "868d18d7a2d62d49b6d97712e686db7a55bbb16e38cea2659584a0c397275f4f",
+      "frozen_support": "I-ORS at 18h and 24h only",
+      "official_rmse_m": 0.578951,
+      "official_score": 24.144591,
+      "delta_rmse_vs_champion_m": 0.003718,
+      "delta_score_vs_champion": -0.059008,
+      "result": "WORSE_THAN_CHAMPION_I_CORRECTION_BENEFICIAL"
+    }
+  ],
+  "axis_endpoints": {
+    "alpha_0_base": {
+      "id": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+      "official_rmse_m": 0.583892,
+      "official_score": 24.066168,
+      "mse_from_displayed_rmse": 0.340929867664
+    },
+    "alpha_0425_all_stations": {
+      "official_rmse_m": 0.575233,
+      "official_score": 24.203599,
+      "mse_from_displayed_rmse": 0.330893004289
+    },
+    "total_delta_rmse_m": -0.008659,
+    "total_delta_score": 0.137431,
+    "total_public_mse_benefit": 0.010036863375
+  },
+  "mse_decomposition": {
+    "definition": "Positive station benefit is q_without_station - q_all, where q=displayed_RMSE^2. G benefit is total benefit minus S and I benefits.",
+    "displayed_rmse_squared": {
+      "q_all": 0.330893004289,
+      "q_base": 0.340929867664,
+      "q_without_s": 0.335359126404,
+      "q_without_i": 0.335184260401
+    },
+    "station_public_mse_benefit": {
+      "G-ORS": 0.001279485148,
+      "I-ORS": 0.004291256112,
+      "S-ORS": 0.004466122115,
+      "sum": 0.010036863375
+    },
+    "share_of_total_public_mse_benefit": {
+      "G-ORS": 0.12747858570905375,
+      "I-ORS": 0.42754951937362603,
+      "S-ORS": 0.44497189491732022,
+      "I_plus_S": 0.8725214142909463,
+      "sum": 1.0
+    },
+    "ranking": [
+      "S-ORS",
+      "I-ORS",
+      "G-ORS"
+    ]
+  },
+  "display_rounding_sensitivity": {
+    "assumption": "Each displayed RMSE is independently rounded to nearest 0.000001, so its latent value lies within displayed value plus or minus 0.0000005.",
+    "method": "Enumerate all 16 corners of the four RMSE rounding intervals and recompute q, station benefits, and shares.",
+    "public_mse_benefit_intervals": {
+      "total": [0.01003570425, 0.0100380225],
+      "G-ORS": [0.00127716797, 0.001281802326],
+      "I-ORS": [0.004290101928, 0.004292410296],
+      "S-ORS": [0.00446496778, 0.00446727645]
+    },
+    "share_intervals": {
+      "G-ORS": [0.12724782874101333, 0.12770934227893734],
+      "I-ORS": [0.42743415612625514, 0.4276648828200494],
+      "S-ORS": [0.4448565015948075, 0.4450872884389373],
+      "I_plus_S": [0.8722906577210627, 0.8727521712589867]
+    },
+    "robust_conclusion": "Every station contribution remains strictly positive and the S > I > G ranking is unchanged at every enumerated rounding corner.",
+    "limit": "These intervals cover displayed-RMSE rounding only. They do not recover hidden full-precision metrics, account for nonstandard truncation, or establish Private-set transport. Displayed scores were not used to infer extra precision."
+  },
+  "provenance": {
+    "official_result_values": "User-provided official platform results in the current conversation.",
+    "frozen_candidate_ledger": "submissions/p3_20260830_station_ablation_probes_v1/FREEZE_MANIFEST.json",
+    "pre_submit_qa": "submissions/p3_20260830_station_ablation_probes_v1/QA_RECEIPT.json",
+    "champion_receipt": "reports/p3_kma_uniform_0425_official_submission_20260830_v1/official-submission-receipt.json",
+    "hash_match_status": "MATCHES_FROZEN_CANDIDATE_IDS_AND_SHA256"
+  },
+  "access_and_action": {
+    "browser_access_count": 0,
+    "csv_read_count": 0,
+    "hidden_truth_or_score_py_read_count": 0,
+    "new_submission_or_training_count": 0,
+    "commit_count": 0,
+    "push_count": 0
+  }
+}

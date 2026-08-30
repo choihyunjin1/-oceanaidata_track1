@@ -1,0 +1,136 @@
+{
+  "schema_version": "tolerance_recalibration_and_failure_replay.20260830.v2",
+  "status": "GOVERNING_INTERPRETATION_POLICY_NO_OFFICIAL_ACTION",
+  "purpose": "Separate numerical replay tolerance, scientific evidence, transport diagnostics, and expiring-submission action value; then replay every canonical historical family and closed group without fitting a model or reading official inputs.",
+  "non_retroactivity": {
+    "historical_artifacts_are_immutable": true,
+    "historical_attempt_locks_remain_consumed": true,
+    "same_exposed_surface_retuning_is_forbidden": true,
+    "reopening_means_exact_frozen_confirmation_or_predeclared_probe_only": true
+  },
+  "tolerance_layers": {
+    "level_0_validity": {
+      "hard": true,
+      "requirements": [
+        "exact lineage, comparator, metric, row, key and ordering contract",
+        "no target, temporal, event, episode or official-interface leakage",
+        "finite predictions and valid schema/domain",
+        "candidate, population and action table frozen before outcome access",
+        "no result-driven retry, mutation or threshold search"
+      ]
+    },
+    "numerical_replay": {
+      "hash_and_key_contract": "exact",
+      "deterministic_metric_absolute_epsilon": 1e-12,
+      "leaderboard_six_decimal_apparent_tie_band": 1e-6,
+      "warning": "Numerical tolerance is only a reproduction check. It is never an effect-size or promotion margin."
+    },
+    "scientific_effect": {
+      "normalized_benefit": "positive is better: P1 candidate-incumbent F1; P2/P3 incumbent-candidate RMSE",
+      "default_directional_margin_when_no_justified_sesoi_exists": 0.0,
+      "confidence_interval": "paired dependence-preserving two-sided 90 percent interval, equivalent to one-sided alpha 0.05 directional checks",
+      "strong_challenger": "benefit point > 0 and lower bound > 0",
+      "exploratory_or_inconclusive": "interval crosses 0, or a favorable point has no valid interval",
+      "primary_harm": "upper bound < 0, or overwhelming valid degradation on the pooled primary",
+      "equivalence": "allowed only when the entire interval lies inside a separately justified, pre-result SESOI band",
+      "universal_nonzero_raw_metric_margin": null
+    },
+    "transport": {
+      "role": "diagnostic by default",
+      "dimensions": [
+        "P1 month, station, layer and anomaly type",
+        "P2 historical window, season and layer",
+        "P3 forward window, station and lead"
+      ],
+      "hard_only_if": "the official mixture, explicit safety objective, or quantified operational cost makes the slice a predeclared requirement"
+    },
+    "competition_action": {
+      "hard_raw_metric_threshold": null,
+      "candidate_value": "probability of official improvement times expected leaderboard-point gain plus value of information minus the opportunity cost of the best alternative slot",
+      "expiring_quota_rule": "Near expiry, a valid nonduplicate candidate with positive expected action value or decision-changing information value may be probed even when local uncertainty crosses zero.",
+      "three_daily_submissions": "three correlated Public queries, not three independent confirmations",
+      "portfolio_default": "one exploit or frozen confirmation, one structurally orthogonal probe, and one reserve/replicate only when each has a predeclared result-to-action table"
+    }
+  },
+  "problem_primary_metrics": {
+    "P1": {
+      "metric": "pooled row-level binary micro-F1",
+      "benefit": "candidate_minus_incumbent",
+      "paired_unit": "joint KST-day blocks preserving complete events and station-layer observations",
+      "objective_aligned_sanity": "For a pure add-positive union on the same rows, proposal precision must exceed incumbent F1 divided by two. This is not a promotion delta."
+    },
+    "P2": {
+      "metric": "pooled all-row temperature RMSE in Celsius",
+      "benefit": "incumbent_minus_candidate",
+      "paired_unit": "contiguous KST-day blocks preserving layers 2-4 together"
+    },
+    "P3": {
+      "metric": "pooled all-row six-lead significant-wave-height RMSE in meters",
+      "benefit": "incumbent_minus_candidate",
+      "paired_unit": "storm episode where available, otherwise window-stratified contiguous anchor-day blocks with all six leads intact"
+    }
+  },
+  "leaderboard_point_bands_for_description_only": [
+    {"lower": 0.0, "upper": 0.01, "label": "trace"},
+    {"lower": 0.01, "upper": 0.05, "label": "small"},
+    {"lower": 0.05, "upper": 0.1, "label": "material"},
+    {"lower": 0.1, "upper": null, "label": "large"}
+  ],
+  "family_overrides": {
+    "P1-F02": {
+      "new_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+      "reason": "Positive pooled F1 with an interval crossing zero was rejected by an unsupported worst-slice veto."
+    },
+    "P1-F15": {
+      "new_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+      "reason": "Positive pooled micro-F1 with an interval crossing zero was rejected by an unsupported worst-group veto."
+    },
+    "P1-F16": {
+      "new_state": "INCONCLUSIVE_RESEARCH_ONLY",
+      "reason": "Positive weighted aggregate and a negative G-ORS slice coexist inside an interval crossing zero; neither benefit nor harm is established."
+    },
+    "P2-F10": {
+      "new_state": "INCONCLUSIVE_RESEARCH_ONLY",
+      "reason": "The confirmation interval crosses zero; the exact universal penalty may stay closed, but population harm is not established."
+    },
+    "P3-F05": {
+      "new_state": "INCONCLUSIVE_EXACT_DEPLOYMENT_CLOSED",
+      "reason": "The exact KMA deployment is unresolved; the broader KMA information axis is demonstrably not closed."
+    },
+    "P3-F06": {
+      "new_state": "INCONCLUSIVE_RESEARCH_ONLY",
+      "reason": "The outer analog interval crosses zero; the exact chain remains closed to same-surface retuning."
+    },
+    "P3-F09": {
+      "new_state": "EXPLORATORY_CHALLENGER_RESEARCH_ONLY",
+      "reason": "The pooled direction is favorable and the legacy interval crosses zero; failure of a 0.005m magnitude gate is not scientific harm."
+    }
+  },
+  "closed_group_overrides": {
+    "P1:block_inpaint_target_masked_quantile_semimarkov_rules": "PARTIAL_REOPEN_BLOCK_INPAINT_ONLY",
+    "P1:seeded_boundary_peer_reliability_depth_invariance": "PARTIAL_REOPEN_PEER_AND_DEPTH_INCONCLUSIVE",
+    "P1:environment_balanced_replay_proxy": "REOPEN_FROZEN_CONFIRMATION_ONLY_LOW_PRIORITY",
+    "P1:mstcn_sparse_bootstrap_lower_bound_veto": "PARTIAL_REOPEN_SEGMENT_ROUTER_ONLY_OFFICIAL_SPARSE_VETO_REMAINS_HARM",
+    "P1:window_phase_consistency": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+    "P1:sealed_32_point_sobol_mstcn_space": "REOPEN_SELECTED_TRIAL18_CONFIRMATION_ONLY_SEARCH_SPACE_REMAINS_CLOSED",
+    "P2:tested_supervised_rank1_and_heave_residual_recipes": "PARTIAL_REOPEN_SUPERVISED_AND_CROSSFIT_RANK1",
+    "P2:sealed_nested_pls_capacity_grid": "REOPEN_WINNER_CONFIRMATION_ONLY_GRID_REMAINS_CLOSED",
+    "P2:seasonal_empirical_kendall_copula_alpha50_residual_strict_stability_recipe": "REOPEN_GAUSSIAN_AND_STATE_COPULA_CHALLENGERS",
+    "P3:local_crossfit_kma_alpha_transport_strategy": "EXACT_LOCAL_STRATEGY_CLOSED_KMA_AXIS_NOT_CLOSED"
+  },
+  "outlier_policy": {
+    "default_hard_delete": false,
+    "allowed": "predeclared diagnostic flags, robust loss, bounded correction or abstention",
+    "hard_delete_requires": "independently validated sensor-error label/rule plus a frozen estimand and evaluation contract",
+    "candidate_created_domain_violation": "hard validity failure",
+    "inherited_comparator_extreme_with_exact_candidate_noop": "preserve the row and record the inherited condition"
+  },
+  "boundaries": {
+    "model_fits": 0,
+    "raw_training_or_prediction_rows_read": 0,
+    "official_test_sample_submission_hidden_or_query_rows_read": 0,
+    "csv_created": 0,
+    "uploads": 0,
+    "commit_or_push_authorized": false
+  }
+}
