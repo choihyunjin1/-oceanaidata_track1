@@ -1,0 +1,369 @@
+{
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "2026-08-31 다음 돌파구 실행 전 과학적 프리플라이트",
+    "description": "P1/P2/P3의 남은 독립 검증면과 공식 집계 근거를 대조해 새 학습의 정보가치를 판정한 기술 보고서",
+    "generatedAt": "2026-08-31T02:22:27+09:00",
+    "sources": [
+      {
+        "id": "preflight_result",
+        "label": "Next-cycle breakthrough preflight result",
+        "path": "reports/next_cycle_breakthrough_preflight_20260831_v1/result.json",
+        "query": {
+          "sql": "SELECT problem, state, action, reason, reopen_trigger FROM next_cycle_decisions ORDER BY problem",
+          "description": "저장된 validation audit, historical ledger, 공식 집계 receipt를 결정 단위로 재구성한다. 공식 test/sample/submission 행은 조회하지 않는다.",
+          "language": "json",
+          "executed_at": "2026-08-31T02:22:27+09:00",
+          "filters": [
+            "problem IN ('P1','P2','P3')",
+            "aggregate receipts only",
+            "hidden, test, sample, submission, raw, prediction rows excluded"
+          ],
+          "metric_definitions": [
+            "delta_rmse_m = candidate RMSE minus its declared contemporary baseline RMSE; negative is better.",
+            "fresh_surface_count counts untouched local labeled evaluation surfaces, not folds repeatedly reused for selection.",
+            "authorized_fit_count counts new model fits allowed after identifiability and duplication checks."
+          ],
+          "tables_used": [
+            "artifacts/validation_system_audit_20260822/p1.json",
+            "artifacts/validation_system_audit_20260822/p2.json",
+            "artifacts/validation_system_audit_20260822/p3.json",
+            "reports/official_information_probe_cycle_20260830_v1/p2-official-result.json",
+            "reports/official_information_probe_cycle_20260830_v1/p3-official-result.json",
+            "reports/approved_parallel_execution_20260828_v9/p3_official_submission_receipt_20260828.json"
+          ]
+        }
+      },
+      {
+        "id": "model_selection_source",
+        "label": "Cawley and Talbot 2010",
+        "href": "https://www.jmlr.org/papers/v11/cawley10a.html"
+      },
+      {
+        "id": "time_cv_source",
+        "label": "Bergmeir and Benitez 2012",
+        "href": "https://doi.org/10.1016/j.ins.2011.12.028"
+      },
+      {
+        "id": "range_metric_source",
+        "label": "Tatbul et al. 2018",
+        "href": "https://papers.nips.cc/paper_files/paper/2018/hash/8f468c873a32bb0619eaeb2050ba45d1-Abstract.html"
+      },
+      {
+        "id": "eof_source",
+        "label": "Beckers and Rixen 2003",
+        "href": "https://doi.org/10.1175/1520-0426(2003)020%3C1839:ECADFF%3E2.0.CO;2"
+      },
+      {
+        "id": "wave_residual_source",
+        "label": "Ellenson et al. 2020",
+        "href": "https://doi.org/10.1016/j.coastaleng.2019.103595"
+      }
+    ],
+    "cards": [
+      {
+        "id": "authorized_fits",
+        "description": "프리플라이트 이후 허용된 새 모델 fit",
+        "dataset": "headline_metrics",
+        "sourceId": "preflight_result",
+        "metrics": [
+          {
+            "label": "승인된 새 fit",
+            "field": "authorized_fit_count",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "fresh_surfaces",
+        "description": "P1/P2/P3에서 확인된 미사용 로컬 라벨 평가면",
+        "dataset": "headline_metrics",
+        "sourceId": "preflight_result",
+        "metrics": [
+          {
+            "label": "새 독립 평가면",
+            "field": "fresh_surface_count",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "problems_adjudicated",
+        "description": "근거와 재개 조건까지 판정한 문제 수",
+        "dataset": "headline_metrics",
+        "sourceId": "preflight_result",
+        "metrics": [
+          {
+            "label": "판정 완료 문제",
+            "field": "problem_count",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "p3_official_axis_chart",
+        "title": "P3 공식 집계 축의 후보별 RMSE 변화",
+        "subtitle": "Uniform KMA 0.425만 선언된 기준보다 개선됐고, station 제거와 ERA5 exact residual은 각 기준보다 악화됐다.",
+        "type": "bar",
+        "dataset": "p3_official_axis",
+        "sourceId": "preflight_result",
+        "encodings": {
+          "x": {
+            "field": "candidate",
+            "type": "nominal",
+            "label": "후보"
+          },
+          "y": {
+            "field": "delta_rmse_m",
+            "type": "quantitative",
+            "label": "기준 대비 RMSE 변화 (m)",
+            "format": ".6f"
+          },
+          "color": {
+            "field": "outcome",
+            "type": "nominal",
+            "label": "판정"
+          },
+          "tooltip": [
+            {
+              "field": "candidate",
+              "type": "nominal",
+              "label": "후보"
+            },
+            {
+              "field": "baseline",
+              "type": "nominal",
+              "label": "비교 기준"
+            },
+            {
+              "field": "candidate_rmse_m",
+              "type": "quantitative",
+              "label": "후보 RMSE (m)",
+              "format": ".6f"
+            },
+            {
+              "field": "baseline_rmse_m",
+              "type": "quantitative",
+              "label": "기준 RMSE (m)",
+              "format": ".6f"
+            },
+            {
+              "field": "delta_rmse_m",
+              "type": "quantitative",
+              "label": "RMSE 변화 (m)",
+              "format": ".6f"
+            }
+          ]
+        },
+        "options": {
+          "orientation": "horizontal",
+          "grouping": "grouped"
+        },
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "decision_table",
+        "title": "문제별 실행 판정과 재개 조건",
+        "subtitle": "현재 후보를 반복하는 대신 새로운 정보가 생겼을 때만 닫힌 축을 다시 연다.",
+        "dataset": "decisions",
+        "sourceId": "preflight_result",
+        "defaultSort": {
+          "field": "problem",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "problem",
+            "label": "문제",
+            "type": "text"
+          },
+          {
+            "field": "state",
+            "label": "현재 상태",
+            "type": "text"
+          },
+          {
+            "field": "evidence",
+            "label": "핵심 근거",
+            "type": "text"
+          },
+          {
+            "field": "action",
+            "label": "지금 할 일",
+            "type": "text"
+          },
+          {
+            "field": "reopen_trigger",
+            "label": "재개 조건",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 2026-08-31 다음 돌파구 실행 전 과학적 프리플라이트",
+        "layout": "full"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## 결론\n\n지금 새 학습을 시작할 근거는 없다. P1은 미사용 로컬 라벨 평가면이 0이고, P2는 bin17 공식 양성 뒤 같은 Public 결과로 추가 적응하면 선택 편향이 커지며, P3는 KMA 0.425가 유지되는 반면 station 제거와 champion-matched ERA5 residual이 모두 악화됐다. 따라서 이번 실행 산출물은 0-fit fail-fast이며, 실패가 아니라 다음 유효 실험의 정보 조건을 고정한 결과다.",
+        "sourceId": "preflight_result",
+        "layout": "full"
+      },
+      {
+        "id": "findings_heading",
+        "type": "markdown",
+        "body": "## 핵심 수치",
+        "layout": "full"
+      },
+      {
+        "id": "headline_strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "authorized_fits",
+          "fresh_surfaces",
+          "problems_adjudicated"
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "p3_chart_heading",
+        "type": "markdown",
+        "body": "## P3에서 이미 닫힌 두 축\n\n음수 변화는 개선, 양수 변화는 악화다. 각 후보는 표에 적힌 당시의 선언된 기준과 비교했으므로 막대 길이는 절대 순위가 아니라 해당 실험의 증분 효과다.",
+        "sourceId": "preflight_result",
+        "layout": "full"
+      },
+      {
+        "id": "p3_chart",
+        "type": "chart",
+        "chartId": "p3_official_axis_chart",
+        "layout": "full"
+      },
+      {
+        "id": "decision_heading",
+        "type": "markdown",
+        "body": "## 문제별 실행 판정",
+        "layout": "full"
+      },
+      {
+        "id": "decision_table_block",
+        "type": "table",
+        "tableId": "decision_table",
+        "layout": "full"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## 판정 정의\n\n`NO_NEW_FIT`은 모델 계열 전체가 끝났다는 뜻이 아니다. 같은 feature, split, checkpoint, threshold 또는 Public feedback를 다시 사용해 후보를 고르는 정확 축이 닫혔다는 뜻이다. `fresh surface`는 어떤 선택에도 쓰이지 않은 시간 순서 또는 episode 단위 라벨 블록이다.",
+        "layout": "full"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "body": "## 방법\n\n48-family 재감사 ledger와 문제별 validation audit를 먼저 대조하고, 후보가 기존 exact 또는 semantic 축을 반복하는지 검사했다. 이어 공식 aggregate receipt 세 개만 읽어 방향성을 확인했다. 반복된 선택 기준 자체가 과적합될 수 있다는 [Cawley and Talbot 2010](https://www.jmlr.org/papers/v11/cawley10a.html)과 시계열의 blocked evaluation 원칙인 [Bergmeir and Benitez 2012](https://doi.org/10.1016/j.ins.2011.12.028)를 실행 gate에 반영했다.",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 한계\n\n공식 test/sample/submission/hidden 행, raw 데이터, prediction 행은 읽지 않았다. Public 방향은 Private 성능 보장이 아니며 P1 F1, P2 섭씨 RMSE, P3 미터 RMSE를 서로 크기로 비교하지 않는다. 이상치는 자동 제거하지 않았다. P1 anomaly와 P3 storm extreme은 목표 신호일 수 있어, 라벨이나 점수를 본 뒤 제거하면 estimand와 선택 자유도가 함께 바뀐다.",
+        "sourceId": "preflight_result",
+        "layout": "full"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 다음 실행 조건\n\nP1은 완전히 미사용인 새 chronological label block을 확보한 뒤 trial과 threshold를 미리 고정한다. P2는 Public 피드백과 무관한 같은 계절 블록에서 EOF/rank를 봉인하며, DINEOF 원리처럼 reconstruction rank를 독립 교차검증한다. P3는 여러 fresh episode-disjoint storm에서 forcing-error target과 correction rule을 먼저 봉인한다. 이 조건이 충족되기 전에는 계산량을 늘리지 않는다.",
+        "layout": "full"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 후속 질문\n\n1. 새 라벨을 얻을 수 없다면 외부 자료 중 어떤 것이 selection과 독립인 proxy가 될 수 있는가?\n2. P2의 물리적 low-rank factor를 Public feedback 없이 정의할 수 있는가?\n3. P3 forcing-error residual에 필요한 fresh storm 수와 episode 분할을 사전에 어떻게 정할 것인가?\n4. 센서 QC 규칙을 라벨과 무관한 metadata만으로 고정할 수 있는가?",
+        "layout": "full"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-31T02:22:27+09:00",
+    "status": "ready",
+    "datasets": {
+      "headline_metrics": [
+        {
+          "authorized_fit_count": 0,
+          "fresh_surface_count": 0,
+          "problem_count": 3
+        }
+      ],
+      "p3_official_axis": [
+        {
+          "candidate": "Uniform KMA 0.425",
+          "baseline": "alpha=0",
+          "candidate_rmse_m": 0.575233,
+          "baseline_rmse_m": 0.583892,
+          "delta_rmse_m": -0.008659,
+          "outcome": "유지"
+        },
+        {
+          "candidate": "LEAVE_S_ORS_OUT",
+          "baseline": "uniform KMA 0.425",
+          "candidate_rmse_m": 0.579102,
+          "baseline_rmse_m": 0.575233,
+          "delta_rmse_m": 0.003869,
+          "outcome": "악화"
+        },
+        {
+          "candidate": "LEAVE_I_ORS_OUT",
+          "baseline": "uniform KMA 0.425",
+          "candidate_rmse_m": 0.578951,
+          "baseline_rmse_m": 0.575233,
+          "delta_rmse_m": 0.003718,
+          "outcome": "악화"
+        },
+        {
+          "candidate": "ERA5 Hs-squared residual",
+          "baseline": "2026-08-28 champion",
+          "candidate_rmse_m": 0.585738,
+          "baseline_rmse_m": 0.583892,
+          "delta_rmse_m": 0.001846,
+          "outcome": "악화"
+        }
+      ],
+      "decisions": [
+        {
+          "problem": "P1",
+          "state": "새 독립 라벨 평가면 없음",
+          "evidence": "virgin tail 0행; candidate-fold 평가 하한 5,265",
+          "action": "새 fit 금지; best checkpoint 자산만 보존",
+          "reopen_trigger": "선택에 한 번도 쓰지 않은 새 chronological label block"
+        },
+        {
+          "problem": "P2",
+          "state": "bin17 champion 유지",
+          "evidence": "bin17 delta -0.001058 C; bin18 delta +0.000015 C",
+          "action": "같은 Public 결과 기반 bin/rank 확장 금지",
+          "reopen_trigger": "Public 피드백과 무관하게 봉인한 same-season block 또는 mechanistic factor"
+        },
+        {
+          "problem": "P3",
+          "state": "KMA 0.425 유지; KMA/ERA5 exact 축 종료",
+          "evidence": "KMA delta -0.008659 m; station 제거와 ERA5 residual 모두 악화",
+          "action": "KMA micro-tune 및 동일 ERA5 residual 금지",
+          "reopen_trigger": "여러 fresh episode-disjoint storm과 사전 봉인 forcing-error target"
+        }
+      ]
+    }
+  }
+}
