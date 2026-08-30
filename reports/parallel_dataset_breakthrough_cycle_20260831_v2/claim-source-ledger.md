@@ -19,6 +19,7 @@
 ## Local evidence inventory
 
 - `reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json`
+- `reports/parallel_dataset_breakthrough_cycle_20260831_v2/leaderboard-readonly-recheck.json`
 - `artifacts/validation_system_audit_20260822/p1.json`
 - `artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_disposition/OWNER_STATIC_QA_NO_GO_20260823.json`
 - `configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r2_science_projection.json`

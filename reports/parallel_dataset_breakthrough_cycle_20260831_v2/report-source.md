@@ -2,7 +2,7 @@
 
 ## 기술 요약
 
-결론은 **P1을 다시 연다. 단, 기존 신경망 재튜닝이 아니라 `clean-state cross-layer CAPA segment likelihood` 한 축만 Stage-1 후보로 올린다.** 2026-08-29의 시간표시 리더보드 스냅샷에서 우리 P1은 28.909341점, 문제 최고는 32.005398점으로 3.096057점 차이다. 과거 제출 이력으로 만든 비공식 경험식으로는 F1 약 0.116489 차이지만, 이 변환은 주최 측 공식식이 아니므로 연구 우선순위를 정하는 참고치다.
+결론은 **P1을 다시 연다. 단, 기존 신경망 재튜닝이 아니라 `clean-state cross-layer CAPA segment likelihood` 한 축만 Stage-1 후보로 올린다.** 2026-08-31 02:54 KST 공식 리더보드 읽기 전용 재확인에서 우리 P1은 28.909341점, 문제 최고는 32.110453점으로 **3.201112점 차이**다. 같은 시점 P2·P3 차이는 각각 0.739438점, 0.580444점이어서 P1 우선순위는 유지가 아니라 강화됐다. 문제별 배점과 원지표의 정확한 변환은 주최 측 공식식으로 단정하지 않는다.
 
 P1의 재개 이유는 명확하다. 강건한 계절 clean state, 인접 층 관계, 8–96시간 다중척도 offset/drift 표현을 쓰는 v6 계보는 성능 실패가 아니라 실행 격리 QA 실패로 `fit=0`이었다. 다만 옛 pointwise logistic+고정 run filter를 그대로 실행하지 않고, point anomaly와 collective segment를 함께 비교하는 penalized segment likelihood decoder로 바꾼다. Stage-0 12개 검사는 모두 통과했지만, 새 decoder의 실행 계약과 독립 QA가 아직 없으므로 현재 상태는 `READY_TO_PREREGISTER_RESEARCH_ONLY_NOT_READY_TO_FIT`이다.
 
@@ -62,6 +62,6 @@ P3에서 검증할 가치가 있는 새 정보원은 마지막으로 발행 완�
 
 ## 남은 질문
 
-- 최신 리더보드에서도 P1 격차가 여전히 3점대인지 재확인해야 한다. 본 보고서의 격차는 2026-08-29 01:55 KST 스냅샷이다.
+- 2026-08-31 02:54 KST 재확인에서 P1 격차는 3.201112점이었다. 이후 실시간 리더보드 변동은 별도 시간표시 스냅샷으로만 갱신한다.
 - P1의 새 segment decoder를 fresh label 없이 공식 제출로 검증할지, research-only local falsification 후 기다릴지는 제출 기회와 9월 7일 최종 모델 일정에 맞춰 별도로 결정해야 한다.
 - P2의 untouched 61-day surface와 P3 issue-time manifest를 주최 측이 제공할 수 있는지 확인이 필요하다.
