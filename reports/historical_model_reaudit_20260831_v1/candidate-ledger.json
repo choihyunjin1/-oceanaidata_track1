@@ -1,0 +1,3795 @@
+{
+  "schema_version": "historical_model_reaudit.v1",
+  "as_of_kst": "2026-08-31",
+  "status": "COMPLETE_EXHAUSTIVE_REAUDIT",
+  "status_taxonomy": {
+    "CLOSED_EXACT": "The exact tested recipe, split, feature set, postprocess, and gate is closed. The broader model class is not closed.",
+    "INVALID_TECHNICAL": "No scientific conclusion is admissible because execution, schema, dependency, or observability failed.",
+    "DISCOVERY_ONLY": "Useful for mechanism discovery or lineage comparison, but not independently confirmed or submission-ready.",
+    "OLD_GATE_REJECTED": "A positive or inconclusive signal was rejected by an old unsupported hard gate; only a frozen confirmation may reopen it.",
+    "CHECKPOINT_PEAK": "A best intermediate checkpoint or selected point exists; it is preserved as a candidate, not treated as final-epoch evidence.",
+    "INFORMATION_POSITIVE": "The result yielded verified directional information or a positive official/local mechanism signal; this is not automatically deployment readiness.",
+    "PROXY_EXPOSED": "Selection/proxy evidence changed sign or materially weakened on a later sealed or official surface."
+  },
+  "counting_rule": "The four grains overlap and must never be summed as unique experiments. The exhaustive family denominator is 48.",
+  "coverage": {
+    "historical_family": 48,
+    "canonical_group": 35,
+    "key_case": 20,
+    "workflow_exception": 4
+  },
+  "status_counts_by_grain": {
+    "historical_family": {
+      "CLOSED_EXACT": 25,
+      "DISCOVERY_ONLY": 11,
+      "INFORMATION_POSITIVE": 6,
+      "INVALID_TECHNICAL": 1,
+      "OLD_GATE_REJECTED": 2,
+      "PROXY_EXPOSED": 3
+    },
+    "canonical_group": {
+      "CLOSED_EXACT": 21,
+      "DISCOVERY_ONLY": 2,
+      "INFORMATION_POSITIVE": 4,
+      "INVALID_TECHNICAL": 3,
+      "OLD_GATE_REJECTED": 5
+    },
+    "key_case": {
+      "CLOSED_EXACT": 7,
+      "DISCOVERY_ONLY": 4,
+      "INFORMATION_POSITIVE": 4,
+      "OLD_GATE_REJECTED": 5
+    },
+    "workflow_exception": {
+      "INVALID_TECHNICAL": 4
+    }
+  },
+  "historical_family_status_counts_by_problem": {
+    "P1": {
+      "CLOSED_EXACT": 9,
+      "DISCOVERY_ONLY": 2,
+      "INFORMATION_POSITIVE": 3,
+      "OLD_GATE_REJECTED": 2,
+      "PROXY_EXPOSED": 1
+    },
+    "P2": {
+      "CLOSED_EXACT": 13,
+      "DISCOVERY_ONLY": 4,
+      "INFORMATION_POSITIVE": 1,
+      "PROXY_EXPOSED": 1
+    },
+    "P3": {
+      "CLOSED_EXACT": 3,
+      "DISCOVERY_ONLY": 5,
+      "INFORMATION_POSITIVE": 2,
+      "INVALID_TECHNICAL": 1,
+      "PROXY_EXPOSED": 1
+    }
+  },
+  "model_card_count": 14,
+  "records": [
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F00",
+      "problem": "P1",
+      "name": "offline tabular screen",
+      "model_card_id": "p1-event-router-anchor",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "ee547b304aa333a40f33bcd8985bc18aa3a12a69813ee64c3460da5e1f9098e5",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F00",
+        "name": "offline tabular screen",
+        "variants": [
+          "offline LightGBM",
+          "causal LightGBM",
+          "augmented LightGBM",
+          "CatBoost",
+          "offline XGBoost"
+        ],
+        "historical_label": "XGBOOST_SELECTED_AND_ORIGINAL_PUBLIC_ANCHOR",
+        "historical_disposition": "KEEP_XGBOOST_AS_SUPERSEDED_LINEAGE_ANCHOR; STOP_DOMINATED_VARIANTS",
+        "sources": [
+          "reports/P1_MODEL_SELECTION_2026-08-13.md",
+          "artifacts/validation_system_audit_20260822/p1.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "local micro-F1 0.816737/0.757248/0.609332/0.806831/0.860371; XGB-original Public 0.790709",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A preregistered, hash-frozen factor or a genuinely new router mechanism on a fresh surface.",
+      "do_not_replay": [
+        "Round A exact rescue recipe and union disagreement rule.",
+        "Any unfrozen recombination of G/I/S after observing an official score."
+      ],
+      "source_paths": [
+        "reports/P1_MODEL_SELECTION_2026-08-13.md",
+        "artifacts/validation_system_audit_20260822/p1.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F01",
+      "problem": "P1",
+      "name": "deep sequence screen",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "2a9bd805ca4656afee1233a1f0b2264ebc102d82337742fd30f0538cfa58f812",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F01",
+        "name": "deep sequence screen",
+        "variants": [
+          "TCN",
+          "Patch Transformer"
+        ],
+        "historical_label": "REJECTED_BELOW_XGB",
+        "historical_disposition": "STOP_EXACT_ARCHITECTURES",
+        "sources": [
+          "reports/P1_MODEL_SELECTION_2026-08-13.md",
+          "reports/P1_FAILURE_RECON_2026-08-13.md"
+        ]
+      },
+      "evidence_summary": "local micro-F1 0.767582 and 0.799755",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "reports/P1_MODEL_SELECTION_2026-08-13.md",
+        "reports/P1_FAILURE_RECON_2026-08-13.md"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F02",
+      "problem": "P1",
+      "name": "block inpaint",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "db26bcb10ffce71012c5c97407886b0502a64d66c57ad704a659d3151c887836",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F02",
+        "name": "block inpaint",
+        "variants": [
+          "fixed historical block-inpaint postprocess"
+        ],
+        "historical_label": "FAILED_GATE",
+        "historical_disposition": "STOP_EXACT_RULE_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p1_block_inpaint_v1/historical_metrics.json"
+        ]
+      },
+      "evidence_summary": "benefit +0.002591 F1; legacy CI90 [-0.015669,+0.051219]; worst station-layer -0.058874",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/p1_block_inpaint_v1/historical_metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F03",
+      "problem": "P1",
+      "name": "target-masked quantile",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "8779c0da9d6501ed3301808bd138c69f38ffd994385fbc4bd33f07a50dcb7f1c",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F03",
+        "name": "target-masked quantile",
+        "variants": [
+          "target-masked quantile postprocess"
+        ],
+        "historical_label": "REJECT",
+        "historical_disposition": "STOP_EXACT_QUANTILE_RULE_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/three_breakthrough_validation_20260821/validation.json",
+          "artifacts/p1_target_masked_quantile_v1/metrics.json"
+        ]
+      },
+      "evidence_summary": "benefit -0.630823 F1; legacy CI90 [-0.704246,-0.599631]",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/three_breakthrough_validation_20260821/validation.json",
+        "artifacts/p1_target_masked_quantile_v1/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F04",
+      "problem": "P1",
+      "name": "IORS external transfer",
+      "model_card_id": "p1-external-density-transfer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "e8547f5b3dd0753606f090181767366475d66c0bbd25021c06d439e38369cea3",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F04",
+        "name": "IORS external transfer",
+        "variants": [
+          "external profile v1",
+          "conformal v2",
+          "point-residual OOF"
+        ],
+        "historical_label": "NO_GO_EXTERNAL_PROFILE_AND_POINT_RESIDUAL",
+        "historical_disposition": "STOP_EXACT_EXTERNAL_POINT_RESIDUAL; PROFILE_DOMAIN_DIAGNOSTIC_ONLY",
+        "sources": [
+          "artifacts/p1_iors_external_point_residual_oof_v1/20260821T174744+0900/result.json",
+          "artifacts/p1_iors_external_profile_conformal_v2/20260821T171756+0900/result.json",
+          "artifacts/p1_independent_window_data_boundary_20260825_v1/result.json"
+        ]
+      },
+      "evidence_summary": "point-residual benefit -0.063301 F1; external profiles have no P1 anomaly target labels",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New labeled transport information or a new causal transfer hypothesis.",
+      "do_not_replay": [
+        "Exact external point-residual and density-ratio recipes."
+      ],
+      "source_paths": [
+        "artifacts/p1_iors_external_point_residual_oof_v1/20260821T174744+0900/result.json",
+        "artifacts/p1_iors_external_profile_conformal_v2/20260821T171756+0900/result.json",
+        "artifacts/p1_independent_window_data_boundary_20260825_v1/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F05",
+      "problem": "P1",
+      "name": "Round A causal event rescue",
+      "model_card_id": "p1-event-router-anchor",
+      "primary_status": "PROXY_EXPOSED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "95f7a8301c6d59c32f8c17e8f3032de942282c4486e58f268389429fe7b11f13",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F05",
+        "name": "Round A causal event rescue",
+        "variants": [
+          "causal event-rescue ensemble",
+          "matched-budget reconstruction"
+        ],
+        "historical_label": "CANDIDATE_READY",
+        "historical_disposition": "STOP_EXACT_ROUND_A",
+        "sources": [
+          "artifacts/p1_full_improvement_cycle_20260822_v1/result.json",
+          "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "local benefit +0.000571 to +0.002087; Public benefit -0.004564",
+      "adjudication": "Local gain reversed on the official surface; the exact rescue recipe is closed.",
+      "reopen_trigger": "A preregistered, hash-frozen factor or a genuinely new router mechanism on a fresh surface.",
+      "do_not_replay": [
+        "Round A exact rescue recipe and union disagreement rule.",
+        "Any unfrozen recombination of G/I/S after observing an official score."
+      ],
+      "source_paths": [
+        "artifacts/p1_full_improvement_cycle_20260822_v1/result.json",
+        "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F06",
+      "problem": "P1",
+      "name": "Round B event-day balanced",
+      "model_card_id": "p1-event-router-anchor",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "36e596c23c9f93d271fd695b3ffea6554f97fb6a79071c9ad66fe49d5ec520bf",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F06",
+        "name": "Round B event-day balanced",
+        "variants": [
+          "station-routed",
+          "typed-multiclass",
+          "event-day-balanced"
+        ],
+        "historical_label": "PUBLIC_BEST_THEN_SUPERSEDED",
+        "historical_disposition": "KEEP_AS_ROUTER_BACKBONE_AND_FACTORIAL_ANCHOR",
+        "sources": [
+          "artifacts/p1_meaningful_learning_curve_generation_v1/result.json",
+          "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+          "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/postexecution_independent_qa.json"
+        ]
+      },
+      "evidence_summary": "event-day local benefit +0.004186; Public benefit +0.003001",
+      "adjudication": "Event-day balancing produced positive local and Public directional evidence.",
+      "reopen_trigger": "A preregistered, hash-frozen factor or a genuinely new router mechanism on a fresh surface.",
+      "do_not_replay": [
+        "Round A exact rescue recipe and union disagreement rule.",
+        "Any unfrozen recombination of G/I/S after observing an official score."
+      ],
+      "source_paths": [
+        "artifacts/p1_meaningful_learning_curve_generation_v1/result.json",
+        "artifacts/matched_budget_local_compare_20260825/synthesis.json",
+        "artifacts/p1_round_b_full_deployment_fit_contract_20260825_v2/postexecution_independent_qa.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F07",
+      "problem": "P1",
+      "name": "sequence successor cycles",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "5a5d81fda79f1188aaebab763fdbdc43d88487459469481ad1fde4bfc07519c9",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F07",
+        "name": "sequence successor cycles",
+        "variants": [
+          "station-layer temporal convolution v2",
+          "binary-event TCN v3",
+          "masked-pretrain v4r4",
+          "incumbent-distillation residual v5r6"
+        ],
+        "historical_label": "RESEARCH_ONLY_OR_NO_GO",
+        "historical_disposition": "STOP_LISTED_EXACT_ARCHITECTURES_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p1_station_layer_temporal_convolution_event_v2/canonical_curve_decision.json",
+          "artifacts/p1_binary_event_tcn_dense_natural_v3/canonical_curve_decision.json",
+          "artifacts/p1_masked_pretrain_binary_event_v4r4/canonical_curve_decision.json",
+          "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/canonical_curve_decision.json"
+        ]
+      },
+      "evidence_summary": "full-fraction benefits -0.310074/-0.338562/-0.508065/0.0",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "artifacts/p1_station_layer_temporal_convolution_event_v2/canonical_curve_decision.json",
+        "artifacts/p1_binary_event_tcn_dense_natural_v3/canonical_curve_decision.json",
+        "artifacts/p1_masked_pretrain_binary_event_v4r4/canonical_curve_decision.json",
+        "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/canonical_curve_decision.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F08",
+      "problem": "P1",
+      "name": "synthetic event injection",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c93d49608e2264f8696cffccddf6594c283d660b014d9a156c6a087c998e231b",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F08",
+        "name": "synthetic event injection",
+        "variants": [
+          "rule-peer threshold ceiling",
+          "preregistered synthetic anomaly injection"
+        ],
+        "historical_label": "DIRECTION_CLOSED",
+        "historical_disposition": "STOP_EXACT_GENERATOR_AND_THRESHOLD",
+        "sources": [
+          "artifacts/perspective_reset_20260823/p1/result.json",
+          "artifacts/perspective_confirmation_20260823/p1/result.json"
+        ]
+      },
+      "evidence_summary": "honest-forward threshold benefit 0; synthetic pooled benefit -0.005692 with heterogeneous folds",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/perspective_reset_20260823/p1/result.json",
+        "artifacts/perspective_confirmation_20260823/p1/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F09",
+      "problem": "P1",
+      "name": "long-event semimarkov and residual",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c67b20b9600b4d72dfa7a552cb612efc57ee3eee3df8765c1d41d347be915790",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F09",
+        "name": "long-event semimarkov and residual",
+        "variants": [
+          "typed-duration semimarkov",
+          "connected nonspike residual v1r6"
+        ],
+        "historical_label": "NO_GO_EXACT_CONFIGURATION",
+        "historical_disposition": "STOP_EXACT_DECODERS_NO_FUTILITY_OR_HARM_CLAIM",
+        "sources": [
+          "artifacts/p1_typed_duration_semimarkov_v2/result.json",
+          "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/metrics.json"
+        ]
+      },
+      "evidence_summary": "semimarkov inner-only +0.002434 with catastrophic cell; residual pooled benefit 0 and rescued rows 0",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/p1_typed_duration_semimarkov_v2/result.json",
+        "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F10",
+      "problem": "P1",
+      "name": "Round D disagreement factorial",
+      "model_card_id": "p1-event-router-anchor",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "9152dac20c4f6dfb76b636d79bd57f3c49d7c8bcf1baf57c5542728d6c427141",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F10",
+        "name": "Round D disagreement factorial",
+        "variants": [
+          "Router",
+          "Intersection",
+          "Union"
+        ],
+        "historical_label": "BLIND_OFFICIAL_BATCH_3_OF_3",
+        "historical_disposition": "KEEP_ROUTER_CURRENT_PUBLIC_CHAMPION; ARCHIVE_INTERSECTION_MECHANISM; STOP_UNION",
+        "sources": [
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+          "reports/next_day_breakthrough_deep_research_20260827_v1/local_official_calibration.json"
+        ]
+      },
+      "evidence_summary": "Public vs B: Router +0.024163, Intersection +0.009218, Union -0.011404 F1",
+      "adjudication": "Official disagreement factorial identified a positive router and harmful union.",
+      "reopen_trigger": "A preregistered, hash-frozen factor or a genuinely new router mechanism on a fresh surface.",
+      "do_not_replay": [
+        "Round A exact rescue recipe and union disagreement rule.",
+        "Any unfrozen recombination of G/I/S after observing an official score."
+      ],
+      "source_paths": [
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+        "reports/next_day_breakthrough_deep_research_20260827_v1/local_official_calibration.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F11",
+      "problem": "P1",
+      "name": "topology bridge",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "f653e661723bb7ec23ef11b8492214360a65d7af1aec87595cd2f93c33e25378",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F11",
+        "name": "topology bridge",
+        "variants": [
+          "endpoint-unanimity internal-gap bridge"
+        ],
+        "historical_label": "REJECT",
+        "historical_disposition": "STOP_EXACT_RULE_NO_HARM_CLAIM",
+        "sources": [
+          "artifacts/structural_challenger_20260827_v1/p1/result.json",
+          "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+        ]
+      },
+      "evidence_summary": "benefit -0.00145376 F1; 1/3 folds improved",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/structural_challenger_20260827_v1/p1/result.json",
+        "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F12",
+      "problem": "P1",
+      "name": "Round E G/I/GI additions",
+      "model_card_id": "p1-event-router-anchor",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "a3eb0f8994b62519cdd30f3fba72d6a4b0a109fefcdfa4b060218229f75b7afa",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F12",
+        "name": "Round E G/I/GI additions",
+        "variants": [
+          "G-only",
+          "I-only",
+          "GI-no-removals"
+        ],
+        "historical_label": "FROZEN_READY_NOT_UPLOADED",
+        "historical_disposition": "ONE_FACTORIAL_QUERY_NOT_THREE_CONFIRMATIONS",
+        "sources": [
+          "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json"
+        ]
+      },
+      "evidence_summary": "local vs B +0.000848/+0.000606/+0.001453 F1; test/local support shifts 9.17x and 16.13x",
+      "adjudication": "Later official probes isolated a positive G contribution and zero displayed S marginal.",
+      "reopen_trigger": "A preregistered, hash-frozen factor or a genuinely new router mechanism on a fresh surface.",
+      "do_not_replay": [
+        "Round A exact rescue recipe and union disagreement rule.",
+        "Any unfrozen recombination of G/I/S after observing an official score."
+      ],
+      "source_paths": [
+        "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F13",
+      "problem": "P1",
+      "name": "target covariate density correction",
+      "model_card_id": "p1-external-density-transfer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "f4549650a2037689c5fbe20bf8966d2380ac2d5a4e0d357a3a36562780933fe4",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F13",
+        "name": "target covariate density correction",
+        "variants": [
+          "density-ratio XGBoost",
+          "Round B fallback"
+        ],
+        "historical_label": "STRUCTURAL_GATE_FAILED_FALLBACK_ONLY",
+        "historical_disposition": "STOP_DENSITY_CORRECTION; DO_NOT_COUNT_FALLBACK_AS_NEW_FAMILY",
+        "sources": [
+          "artifacts/p1_target_covariate_density_ratio_xgb_v1/result.json"
+        ]
+      },
+      "evidence_summary": "no new target comparison; emitted artifact reproduces Round B fallback",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New labeled transport information or a new causal transfer hypothesis.",
+      "do_not_replay": [
+        "Exact external point-residual and density-ratio recipes."
+      ],
+      "source_paths": [
+        "artifacts/p1_target_covariate_density_ratio_xgb_v1/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F14",
+      "problem": "P1",
+      "name": "seeded boundary completion",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "INVALID_TECHNICAL"
+      ],
+      "fingerprint_sha256": "6875bb4679c81c14cf08bc5c07e034785aed0b4ffc35ce36a2afd85d5f35c258",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F14",
+        "name": "seeded boundary completion",
+        "variants": [
+          "v1 invalid implementation",
+          "v1 final invalid no-op",
+          "v2 filter-fix valid"
+        ],
+        "historical_label": "FAILED_ALL_PROMOTION_GATES_AFTER_VALID_FIX",
+        "historical_disposition": "STOP_EXACT_PAIRED_CHANGE_BOUNDARY; INVALID_SUBRUNS_EXPOSURE_COUNT_ONLY",
+        "sources": [
+          "reports/EXPERIMENT_LEDGER.jsonl",
+          "artifacts/runs/20260813T193000+0900_r1_boundary_v2_filter_fix/independent_validation.json"
+        ]
+      },
+      "evidence_summary": "valid v2 micro benefit -0.00541901 F1; weighted benefit -0.00421524; legacy CI90 [-0.0134226,+0.0016918]; two earlier subruns invalid",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "reports/EXPERIMENT_LEDGER.jsonl",
+        "artifacts/runs/20260813T193000+0900_r1_boundary_v2_filter_fix/independent_validation.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F15",
+      "problem": "P1",
+      "name": "dynamic peer reliability gate",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "c048e29617b518206dbc959cf5363476ed1201ba26f19f84da9967664b9bd2ea",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F15",
+        "name": "dynamic peer reliability gate",
+        "variants": [
+          "fixed24h peer coherence one-shot"
+        ],
+        "historical_label": "NO_GO_FAMILY_CLOSED",
+        "historical_disposition": "STOP_EXACT_FIXED24H_PEER_GATE",
+        "sources": [
+          "reports/EXPERIMENT_LEDGER.jsonl",
+          "artifacts/runs/20260813T205237+0900_strat_gate_fixed24h_59f6d5c6/independent_validation.json"
+        ]
+      },
+      "evidence_summary": "micro benefit +0.00463978 F1; weighted benefit +0.000120772; legacy CI90 [-0.001677,+0.011611]; worst group -0.0477463",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "reports/EXPERIMENT_LEDGER.jsonl",
+        "artifacts/runs/20260813T205237+0900_strat_gate_fixed24h_59f6d5c6/independent_validation.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P1-F16",
+      "problem": "P1",
+      "name": "G-ORS deployment depth invariance",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "37865de3b223ea7a1b84b170b75586f1c53fc6f97fd48e1c55727598fee7373e",
+      "fingerprint": {
+        "problem": "P1",
+        "family_id": "P1-F16",
+        "name": "G-ORS deployment depth invariance",
+        "variants": [
+          "deployment-matched mask A",
+          "fold-symmetric depth mask B"
+        ],
+        "historical_label": "NO_GO",
+        "historical_disposition": "STOP_EXACT_SYMMETRIC_DEPTH_MASK",
+        "sources": [
+          "reports/EXPERIMENT_LEDGER.jsonl",
+          "reports/P1_GORS_DEPTH_INVARIANCE_2026-08-13.md",
+          "artifacts/runs/20260813T214518+0900_gors_depth_invariance_one_shot_9d915ffe/metrics.json"
+        ]
+      },
+      "evidence_summary": "B-A test-share weighted benefit +0.00268799 F1, G-ORS benefit -0.00794118, legacy CI90 [-0.00921025,+0.00355313], normal FP-day +14.38%",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "reports/EXPERIMENT_LEDGER.jsonl",
+        "reports/P1_GORS_DEPTH_INVARIANCE_2026-08-13.md",
+        "artifacts/runs/20260813T214518+0900_gors_depth_invariance_one_shot_9d915ffe/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F00",
+      "problem": "P2",
+      "name": "early router and LGBM round selection",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "4959aca181f883dc216a2eced26e1faa5bedd9108b38afb1b0620f1a0227ec4f",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F00",
+        "name": "early router and LGBM round selection",
+        "variants": [
+          "method scout",
+          "M2 nested LGBM",
+          "score router",
+          "max-round convergence"
+        ],
+        "historical_label": "EARLY_SELECTED_COMPONENT",
+        "historical_disposition": "KEEP_400_ROUND_ROUTER_AS_HISTORICAL_COMPONENT",
+        "sources": [
+          "artifacts/p2_max_round_convergence_v1/result.json",
+          "artifacts/validation_system_audit_20260822/p2.json"
+        ]
+      },
+      "evidence_summary": "router 400 rounds 0.788890; 5000 rounds 0.866540",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/p2_max_round_convergence_v1/result.json",
+        "artifacts/validation_system_audit_20260822/p2.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F01",
+      "problem": "P2",
+      "name": "deep models and stack",
+      "model_card_id": "p2-deep-gbm-stack",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "b75e445e11e9856559a7b5deb0aee9f55da8a624cb5ba020fb787f39f5ee37f1",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F01",
+        "name": "deep models and stack",
+        "variants": [
+          "eight deep models",
+          "two finalists three seeds",
+          "five-contributor stack"
+        ],
+        "historical_label": "APPARENT_LOCAL_WINNER",
+        "historical_disposition": "FITTED_CI_IS_SELECTION_OPTIMISM_EVIDENCE; KEEP_LOBO_REFERENCE_ONLY",
+        "sources": [
+          "artifacts/p2_deep_finalists_v1/result.json",
+          "artifacts/validation_system_audit_20260822/p2.json"
+        ]
+      },
+      "evidence_summary": "fitted benefit +0.043076 C; LOBO benefit +0.013229 C; optimism gap 0.029846 C",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation with nested outer evaluation, not a wider search of the same addon space.",
+      "do_not_replay": [
+        "Exact deep finalist stack and CatBoost layerwise/top-3 HPO recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_deep_finalists_v1/result.json",
+        "artifacts/validation_system_audit_20260822/p2.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F02",
+      "problem": "P2",
+      "name": "GBM addon and top-3 HPO",
+      "model_card_id": "p2-deep-gbm-stack",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "d0420fdc8e34f1512a3a20a7f55ff5c12bff738195fce706c97eb7373a2a5894",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F02",
+        "name": "GBM addon and top-3 HPO",
+        "variants": [
+          "six GBM families",
+          "CatBoost layerwise",
+          "three by 36 tuning"
+        ],
+        "historical_label": "NO_STABLE_ADDON",
+        "historical_disposition": "STOP_EXACT_GBM_ADDON",
+        "sources": [
+          "artifacts/p2_gbm_family_tournament_v1/result.json",
+          "artifacts/p2_top3_parallel_tuning_v1/result.json"
+        ]
+      },
+      "evidence_summary": "CatBoost-layerwise LOBO benefit +0.001083 C with CI crossing zero; tuned final blend weight 0",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation with nested outer evaluation, not a wider search of the same addon space.",
+      "do_not_replay": [
+        "Exact deep finalist stack and CatBoost layerwise/top-3 HPO recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_gbm_family_tournament_v1/result.json",
+        "artifacts/p2_top3_parallel_tuning_v1/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F03",
+      "problem": "P2",
+      "name": "soft physical extrapolation incumbent",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "335f060bdc20baeb36734d7cac596ab30e4d36226f8668e4f1e5c6b1f1ca916f",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F03",
+        "name": "soft physical extrapolation incumbent",
+        "variants": [
+          "soft gate",
+          "safe residual",
+          "physical projection",
+          "structured mask",
+          "extrap v1/v2"
+        ],
+        "historical_label": "ORIGINAL_PUBLIC_ANCHOR",
+        "historical_disposition": "KEEP_AS_SUPERSEDED_PUBLIC_AXIS_ANCHOR",
+        "sources": [
+          "artifacts/p2_extrapolated_soft_gate_v2/result.json",
+          "artifacts/validation_system_audit_20260822/p2.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "pooled v2 benefit +0.006050 C; same-season CI crosses zero; original O hash matches v2",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/p2_extrapolated_soft_gate_v2/result.json",
+        "artifacts/validation_system_audit_20260822/p2.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F04",
+      "problem": "P2",
+      "name": "external and physical addons",
+      "model_card_id": "p2-physical-surrogate-transfer",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "e28be6fbdad15842dd0b1aeead103110d7b38b5da68fbe5300cd78408f22e0fc",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F04",
+        "name": "external and physical addons",
+        "variants": [
+          "TEOS analog",
+          "tide RTS",
+          "NASA residual",
+          "ERA5 mixing"
+        ],
+        "historical_label": "NO_GO_OR_NOOP",
+        "historical_disposition": "STOP_LISTED_EXACT_EXTERNAL_ADDONS",
+        "sources": [
+          "artifacts/p2_teos_analog_v1/result.json",
+          "artifacts/p2_tide_rts_v1/result.json",
+          "artifacts/p2_nasa_power_residual_meta_v1/result.json",
+          "artifacts/p2_era5_mixing_gate_actual_v1_run1/result.json"
+        ]
+      },
+      "evidence_summary": "TEOS benefit -0.049191 C; tide NO_GO; NASA exact no-op; ERA5 negligible harm",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A genuinely new physical variable with causal timing and supported-row coverage.",
+      "do_not_replay": [
+        "Exact surrogate v5, matched-budget fallback A/B, and tested external addons."
+      ],
+      "source_paths": [
+        "artifacts/p2_teos_analog_v1/result.json",
+        "artifacts/p2_tide_rts_v1/result.json",
+        "artifacts/p2_nasa_power_residual_meta_v1/result.json",
+        "artifacts/p2_era5_mixing_gate_actual_v1_run1/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F05",
+      "problem": "P2",
+      "name": "forward surrogate conservative stack",
+      "model_card_id": "p2-physical-surrogate-transfer",
+      "primary_status": "PROXY_EXPOSED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "f74d8dd848d7d6977ceb574601969d3a9cd421a30e42c796bdec900d9772529d",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F05",
+        "name": "forward surrogate conservative stack",
+        "variants": [
+          "corrected repeated-forward",
+          "W=.625 stack",
+          "Round A"
+        ],
+        "historical_label": "LOCAL_WINNER_OFFICIAL_FAILURE",
+        "historical_disposition": "STOP_EXACT_FORWARD_SURROGATE_STACK",
+        "sources": [
+          "artifacts/p2_conservative_stack_improvement_v1/result.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "surrogate benefit +0.073375 C; official benefit -0.172435 C",
+      "adjudication": "Forward-surrogate local benefit reversed strongly on the official surface.",
+      "reopen_trigger": "A genuinely new physical variable with causal timing and supported-row coverage.",
+      "do_not_replay": [
+        "Exact surrogate v5, matched-budget fallback A/B, and tested external addons."
+      ],
+      "source_paths": [
+        "artifacts/p2_conservative_stack_improvement_v1/result.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F06",
+      "problem": "P2",
+      "name": "architecture-matched curve and layer-4 multitask",
+      "model_card_id": "p2-physical-surrogate-transfer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "INVALID_TECHNICAL"
+      ],
+      "fingerprint_sha256": "759728be7edf48c376fd7f9802f67cb62519083f2104788832b93239d5468db7",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F06",
+        "name": "architecture-matched curve and layer-4 multitask",
+        "variants": [
+          "meaningful curve",
+          "exact-prefix audit",
+          "Stage A/B",
+          "joint L4 r3"
+        ],
+        "historical_label": "NO_GO_WITH_LINEAGE_BLOCK",
+        "historical_disposition": "STOP_STAGE_B_AND_L4_EXACT_HYPOTHESES; INFRASTRUCTURE_REFERENCE_ONLY",
+        "sources": [
+          "artifacts/p2_architecture_matched_stage_b_parser_correction_r1/gate_decision.json",
+          "artifacts/p2_joint_hydrographic_multitask_layer4_execution_r3/metrics.json",
+          "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json"
+        ]
+      },
+      "evidence_summary": "Stage-B p100 benefit -0.138081 C; joint-L4 p100 -0.006663 C; exact refit recipe absent",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A genuinely new physical variable with causal timing and supported-row coverage.",
+      "do_not_replay": [
+        "Exact surrogate v5, matched-budget fallback A/B, and tested external addons."
+      ],
+      "source_paths": [
+        "artifacts/p2_architecture_matched_stage_b_parser_correction_r1/gate_decision.json",
+        "artifacts/p2_joint_hydrographic_multitask_layer4_execution_r3/metrics.json",
+        "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F07",
+      "problem": "P2",
+      "name": "matched-budget A/B causal fallback",
+      "model_card_id": "p2-physical-surrogate-transfer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "160839a250d768058ba07b1c9e87e2ba7a0cd84b43a7fb0763331dc11d5a2138",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F07",
+        "name": "matched-budget A/B causal fallback",
+        "variants": [
+          "exact retrospective A",
+          "Round A",
+          "causal fallback B",
+          "Round B"
+        ],
+        "historical_label": "EXACT_AND_PUBLIC_FAILURE",
+        "historical_disposition": "STOP_A_STACK_AND_B_FALLBACK_CAUSAL_GATE_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json",
+          "artifacts/p2_public_layer_causal_residual_correction_v1/result.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "exact A benefit -0.038748 C; B supported rows 0 and fallback benefit -0.022857 C; official A/B -0.172435/-0.058836 C",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A genuinely new physical variable with causal timing and supported-row coverage.",
+      "do_not_replay": [
+        "Exact surrogate v5, matched-budget fallback A/B, and tested external addons."
+      ],
+      "source_paths": [
+        "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json",
+        "artifacts/p2_public_layer_causal_residual_correction_v1/result.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F08",
+      "problem": "P2",
+      "name": "authoritative surrogate v5 terminal",
+      "model_card_id": "p2-physical-surrogate-transfer",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "0047972a21e54e19d05cfadd37d16c77b2f71137384d3d1c13de69057bd439c2",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F08",
+        "name": "authoritative surrogate v5 terminal",
+        "variants": [
+          "v1-v4 QA revisions",
+          "v5 terminal active grid"
+        ],
+        "historical_label": "COMPLETE_NO_PROMOTION",
+        "historical_disposition": "TERMINAL_STOP_REGISTERED_V5_SETTINGS_NO_RERUN",
+        "sources": [
+          "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+          "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/terminal_receipt.json",
+          "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/postexecution_qa.json"
+        ]
+      },
+      "evidence_summary": "900/900 jobs and 45/45 cells QA PASS; p100 fallback benefit -0.024753 C and W=.50 stack -0.095301 C",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A genuinely new physical variable with causal timing and supported-row coverage.",
+      "do_not_replay": [
+        "Exact surrogate v5, matched-budget fallback A/B, and tested external addons."
+      ],
+      "source_paths": [
+        "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+        "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/terminal_receipt.json",
+        "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/postexecution_qa.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F09",
+      "problem": "P2",
+      "name": "Round D exact Public axis",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "d53fbdb26af04d72bf0288d50f02bddb4804902122eac21bd35654acb17add10",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F09",
+        "name": "Round D exact Public axis",
+        "variants": [
+          "global quadratic",
+          "L2-only",
+          "L4-only"
+        ],
+        "historical_label": "BLIND_OFFICIAL_BATCH_3_OF_3",
+        "historical_disposition": "KEEP_L4_CURRENT_PUBLIC_CHAMPION_AND_GLOBAL_SCORER_LINEAGE_GUARD",
+        "sources": [
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+          "artifacts/daily_submission_3x3_evidence_20260826_v1/analysis.json"
+        ]
+      },
+      "evidence_summary": "global predicted/observed 0.537237736/0.537238; official benefits global +0.003847, L2 -0.000832, L4 +0.004549 C",
+      "adjudication": "Official layer-axis probes produced reusable directional evidence.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+        "artifacts/daily_submission_3x3_evidence_20260826_v1/analysis.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F10",
+      "problem": "P2",
+      "name": "universal density penalty",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "8ca2c5a883f4a575cef69f54a0c9f8abcd479289c1d4f6903f8ca6c2c49c8622",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F10",
+        "name": "universal density penalty",
+        "variants": [
+          "first screen",
+          "disjoint-block confirmation v2",
+          "universal weight .10"
+        ],
+        "historical_label": "SCREEN_POSITIVE_CONFIRMATION_NEGATIVE",
+        "historical_disposition": "STOP_EXACT_UNIVERSAL_PENALTY_NO_FRESH_FUTILITY_CLAIM",
+        "sources": [
+          "artifacts/structural_challenger_20260827_v1/p2/result.json",
+          "artifacts/structural_challenger_20260827_v1/p2_confirmation_v2/result.json",
+          "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+        ]
+      },
+      "evidence_summary": "first screen benefit +0.002812 C; exposed confirmation -0.000678 C with legacy CI90 [-0.002019,+0.000747]",
+      "adjudication": "The first positive screen weakened to slight harm on exposed confirmation.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/structural_challenger_20260827_v1/p2/result.json",
+        "artifacts/structural_challenger_20260827_v1/p2_confirmation_v2/result.json",
+        "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F11",
+      "problem": "P2",
+      "name": "Round E U/E/F",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "e878f6e0b3a49f8eaece08ae5b0f71c8f3a25fa4dca3fdd5585a3fbc9f102a81",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F11",
+        "name": "Round E U/E/F",
+        "variants": [
+          "layerwise quadratic U",
+          "endpoint envelope E",
+          "PAVA plus envelope F"
+        ],
+        "historical_label": "FROZEN_READY_NOT_UPLOADED",
+        "historical_disposition": "ONE_EXPLOIT_PLUS_PHYSICAL_ABLATION_QUERY_NOT_THREE_CONFIRMATIONS",
+        "sources": [
+          "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json"
+        ]
+      },
+      "evidence_summary": "U predicted Public 0.535750480 C, predicted benefit +0.000785520 C vs current L4; upload 0",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F12",
+      "problem": "P2",
+      "name": "annual-cycle public anomaly transfer",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "f49616f687084d3128190df2f7023bc8d6e1f1fc6c3d060b90ac8fccdf8f1c44",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F12",
+        "name": "annual-cycle public anomaly transfer",
+        "variants": [
+          "direct annual-cycle anomaly transfer"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_DIRECT_ANNUAL_TRANSFER_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_annual_cycle_public_anomaly_transfer_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.53550567 C on 46965 eligible rows; late/full/fold gates failed",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_annual_cycle_public_anomaly_transfer_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F13",
+      "problem": "P2",
+      "name": "terminal vertical-offset transfer",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "8bdca6b055f146bc9fe0261501e1392c24924be6568b65dd4778a938b75c6263",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F13",
+        "name": "terminal vertical-offset transfer",
+        "variants": [
+          "terminal seven-day vertical offset transfer"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_TERMINAL_VERTICAL_OFFSET_TRANSFER_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_terminal_vertical_offset_transfer_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.05303207 C; all three folds worse",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_terminal_vertical_offset_transfer_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F14",
+      "problem": "P2",
+      "name": "public-profile median consensus",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "8c3c1aa600a19212a7a5941b001cfacbcadee9f97477c89d7864fa9e3674fc3c",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F14",
+        "name": "public-profile median consensus",
+        "variants": [
+          "public profile median consensus"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_PUBLIC_PROFILE_MEDIAN_CONSENSUS_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_public_profile_median_consensus_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.23215957 C; fold and layer instability",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_public_profile_median_consensus_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F15",
+      "problem": "P2",
+      "name": "OAS conditional profile",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "f9bbd7011248b1af52d0c4a0ac3d22ade6574b7b7c4dbbc56ff199034de0048a",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F15",
+        "name": "OAS conditional profile",
+        "variants": [
+          "OAS Gaussian conditional profile"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_OAS_GAUSSIAN_CONDITIONAL_PROFILE_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_oas_conditional_profile_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.46921949 C; all folds worse and slice guard failed",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_oas_conditional_profile_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F16",
+      "problem": "P2",
+      "name": "public day-sequence analog",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "28d29a3d6daab04c0ba17f0daaeaae453a170548bc1915b42584eaa1f3c573ff",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F16",
+        "name": "public day-sequence analog",
+        "variants": [
+          "public day-sequence analog"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_PUBLIC_DAY_SEQUENCE_ANALOG_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_public_day_sequence_analog_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +2.16461277 C; every fold and layer materially worse",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_public_day_sequence_analog_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F17",
+      "problem": "P2",
+      "name": "RFF public-state profile",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "43a268da68a42eee9fa792d8859440449de6252435e375bb916aedebd6793281",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F17",
+        "name": "RFF public-state profile",
+        "variants": [
+          "RFF public-state profile"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_BEFORE_EXECUTABLE_IMPLEMENTATION",
+        "historical_disposition": "STOP_EXACT_RFF_PUBLIC_STATE_PROFILE_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_rff_public_state_profile_v1_design_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.57258931 C; every fold and layer worse",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_rff_public_state_profile_v1_design_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P2-F18",
+      "problem": "P2",
+      "name": "prequential residual generation",
+      "model_card_id": "p2-profile-analog-prequential",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "7e07c4c399415711a90c6b08c38dbb9d7e42c88634092afe43fc7822431b543e",
+      "fingerprint": {
+        "problem": "P2",
+        "family_id": "P2-F18",
+        "name": "prequential residual generation",
+        "variants": [
+          "H1 low-rank profile residual",
+          "H2 layerwise Huber residual",
+          "H3 ExtraTrees profile residual"
+        ],
+        "historical_label": "FAIL_FAST_REJECTED_ALL_THREE_HYPOTHESES",
+        "historical_disposition": "STOP_THREE_EXACT_PREQUENTIAL_RESIDUAL_HYPOTHESES_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p2_prequential_residual_generation_v1_fail_fast.json"
+        ]
+      },
+      "evidence_summary": "p100 candidate-minus-reference +0.01946428/+0.02357576/+0.01966471 C; late/full/fold/slice gates failed",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new representation or target; parameter-only variants of the same transport are closed.",
+      "do_not_replay": [
+        "All seven listed exact profile/analog/RFF/prequential recipes."
+      ],
+      "source_paths": [
+        "artifacts/p2_prequential_residual_generation_v1_fail_fast.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F01",
+      "problem": "P3",
+      "name": "core router and persistence shrink",
+      "model_card_id": "p3-persistence-kma-calibration",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "66696c066cb56a4f43ab65c5398cec0945a5452f5749eb51128c2a1917a87f02",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F01",
+        "name": "core router and persistence shrink",
+        "variants": [
+          "tabular components",
+          "equal ensemble",
+          "lead routers",
+          "long-lead persistence shrink w=.20"
+        ],
+        "historical_label": "LOCAL_AND_ORIGINAL_PUBLIC_INCUMBENT",
+        "historical_disposition": "KEEP_REPRODUCIBLE_RISK_CONTROL_AND_RETIRED_LINEAGE_ANCHOR",
+        "sources": [
+          "artifacts/p3/long_persistence_shrink/metrics.json",
+          "artifacts/validation_system_audit_20260822/p3.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "local incumbent 0.78016092 m; benefit +0.00658137 m vs router; original Public 0.607071 m",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A preregistered new lead/station factor or an untouched calibration surface.",
+      "do_not_replay": [
+        "Positive-shrink A/B and exact local cross-fit KMA strategy.",
+        "Nearby-alpha sweeps after observing the official optimum."
+      ],
+      "source_paths": [
+        "artifacts/p3/long_persistence_shrink/metrics.json",
+        "artifacts/validation_system_audit_20260822/p3.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F02",
+      "problem": "P3",
+      "name": "corrected repeated-forward base",
+      "model_card_id": "p3-catboost-tabular",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "2773bb76d5a1e7fb4fffcf9da5a4589a885c9a7bf1b28a4dd152368180f8bc04",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F02",
+        "name": "corrected repeated-forward base",
+        "variants": [
+          "v1 invalid aborted",
+          "v2 exact181 CatBoost fixed router w=.20"
+        ],
+        "historical_label": "CANONICAL_LOCAL_BENCHMARK",
+        "historical_disposition": "KEEP_CANONICAL_LOCAL_BENCHMARK",
+        "sources": [
+          "artifacts/p3_corrected_repeated_forward_catboost_v2/metrics.json"
+        ]
+      },
+      "evidence_summary": "exact181 0.77910484 m; strong split and reproduction integrity but exposed labels",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A new feature target or untouched episode surface after full parameter compatibility validation.",
+      "do_not_replay": [
+        "Frozen challenger21 confirmation and incompatible Ordered/non-symmetric grid.",
+        "Selection score as confirmation evidence."
+      ],
+      "source_paths": [
+        "artifacts/p3_corrected_repeated_forward_catboost_v2/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F03",
+      "problem": "P3",
+      "name": "matched-budget positive shrink axis",
+      "model_card_id": "p3-persistence-kma-calibration",
+      "primary_status": "PROXY_EXPOSED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "3874d62719bf9ddb419ba973394565b65421a4f9616a8b615edc7654677d7b28",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F03",
+        "name": "matched-budget positive shrink axis",
+        "variants": [
+          "O=.20",
+          "A=.25",
+          "B=.225"
+        ],
+        "historical_label": "LOCAL_TINY_GAIN_PUBLIC_REVERSAL",
+        "historical_disposition": "STOP_POSITIVE_SHRINK_AXIS; RETAIN_O_A_LINEAGE_ONLY",
+        "sources": [
+          "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json",
+          "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+        ]
+      },
+      "evidence_summary": "local benefits A +0.00044396 and B +0.00027536 m; official benefits A -0.004609 and B -0.002275 m",
+      "adjudication": "Small local shrink gains reversed on the official surface.",
+      "reopen_trigger": "A preregistered new lead/station factor or an untouched calibration surface.",
+      "do_not_replay": [
+        "Positive-shrink A/B and exact local cross-fit KMA strategy.",
+        "Nearby-alpha sweeps after observing the official optimum."
+      ],
+      "source_paths": [
+        "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json",
+        "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260825_OFFICIAL_SCORE_RECONCILIATION.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F04",
+      "problem": "P3",
+      "name": "RevIN patch",
+      "model_card_id": "p3-neural-sequence-revin-ssl",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "7ae6614fe8d7a5d4b28c8603748ce52437c2bc94289cbc809c2cf158aead4c99",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F04",
+        "name": "RevIN patch",
+        "variants": [
+          "original exposed one-shot",
+          "sealed recovery181 w=.20"
+        ],
+        "historical_label": "FAIL",
+        "historical_disposition": "STOP_EXACT_PATCH_NO_FRESH_HARM_CLAIM",
+        "sources": [
+          "artifacts/p3_revin_patch_v1/recovery_181_sealed_blind/post_open/metrics.json",
+          "artifacts/structural_challenger_20260827_v1/p3_confirmation_surface_audit.json"
+        ]
+      },
+      "evidence_summary": "candidate benefit -0.00431369 m; legacy case and episode CIs both below zero",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A materially new architecture on a G0-clean, untouched episode surface.",
+      "do_not_replay": [
+        "All listed exact valid variants and masked-SSL confirmation."
+      ],
+      "source_paths": [
+        "artifacts/p3_revin_patch_v1/recovery_181_sealed_blind/post_open/metrics.json",
+        "artifacts/structural_challenger_20260827_v1/p3_confirmation_surface_audit.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F05",
+      "problem": "P3",
+      "name": "KMA external transfer",
+      "model_card_id": "p3-persistence-kma-calibration",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "07b1f72221bf3bcb391290d372f01625b548c9ac449ee0e2d91be9ea88f469d0",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F05",
+        "name": "KMA external transfer",
+        "variants": [
+          "direct pooling gate",
+          "source-prediction meta",
+          "calibrated long-lead blend",
+          "global deployment"
+        ],
+        "historical_label": "NO_GO_OR_WITHDRAWN",
+        "historical_disposition": "STOP_EXACT_GLOBAL_DEPLOYMENT; KMA_SOURCE_NOT_GLOBALLY_REJECTED",
+        "sources": [
+          "artifacts/p3_kma_domain_shift_gate_v1/result.json",
+          "artifacts/p3_kma_source_prediction_meta_v1/one_shot/result.json",
+          "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/result.json",
+          "artifacts/status/p3_kma_calibrated_longlead_deployment_v1.json"
+        ]
+      },
+      "evidence_summary": "domain AUC 0.996779; calibrated outer benefit +0.00252937 m with CI crossing zero; deployment -0.00062087 m",
+      "adjudication": "The exact global deployment is closed, while the broader KMA calibration axis later improved officially.",
+      "reopen_trigger": "A preregistered new lead/station factor or an untouched calibration surface.",
+      "do_not_replay": [
+        "Positive-shrink A/B and exact local cross-fit KMA strategy.",
+        "Nearby-alpha sweeps after observing the official optimum."
+      ],
+      "source_paths": [
+        "artifacts/p3_kma_domain_shift_gate_v1/result.json",
+        "artifacts/p3_kma_source_prediction_meta_v1/one_shot/result.json",
+        "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/result.json",
+        "artifacts/status/p3_kma_calibrated_longlead_deployment_v1.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F06",
+      "problem": "P3",
+      "name": "causal episode analog",
+      "model_card_id": "p3-analog-spectral-gp-lead",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "bedaa831f0d177870ff4610961d21228d1b40fd85c26dc4d36f8360ff1ae1e87",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F06",
+        "name": "causal episode analog",
+        "variants": [
+          "raw-shape v1",
+          "conditioned v2",
+          "inner predictive v3",
+          "outer v4"
+        ],
+        "historical_label": "INNER_PASS_OUTER_FAIL",
+        "historical_disposition": "STOP_EXACT_ANALOG_CHAIN",
+        "sources": [
+          "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot/result.json",
+          "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/result.json",
+          "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/result.json",
+          "artifacts/p3_causal_forcing_analog_outer_research_v4/outer_one_shot/result.json"
+        ]
+      },
+      "evidence_summary": "adaptive inner benefit +0.00592550 m; reused outer benefit -0.00327201 m and all folds worse",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "Multiple fresh independent episodes with a frozen mechanism; one episode is insufficient.",
+      "do_not_replay": [
+        "Exact analog chain and matched spectral RFF recipe."
+      ],
+      "source_paths": [
+        "artifacts/p3_episode_distinct_raw_shape_analog_v1/inner_one_shot/result.json",
+        "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/result.json",
+        "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot/result.json",
+        "artifacts/p3_causal_forcing_analog_outer_research_v4/outer_one_shot/result.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F07",
+      "problem": "P3",
+      "name": "causal spectral kernel",
+      "model_card_id": "p3-analog-spectral-gp-lead",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "INVALID_TECHNICAL"
+      ],
+      "fingerprint_sha256": "f23e7090260a6c1e4336d9ced1221b7faed50f8d1d15d4f02d34a5b1d545642c",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F07",
+        "name": "causal spectral kernel",
+        "variants": [
+          "initial reference-mismatch run",
+          "matched-budget exact-aligned RFF rerun"
+        ],
+        "historical_label": "FAIL_AFTER_VALID_RERUN",
+        "historical_disposition": "STOP_EXACT_SPECTRAL_RFF",
+        "sources": [
+          "artifacts/p3_causal_spectral_kernel_20260823_v1/metrics.json",
+          "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json"
+        ]
+      },
+      "evidence_summary": "valid matched rerun benefit -0.04278254 m; earlier mismatch result superseded",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "Multiple fresh independent episodes with a frozen mechanism; one episode is insufficient.",
+      "do_not_replay": [
+        "Exact analog chain and matched spectral RFF recipe."
+      ],
+      "source_paths": [
+        "artifacts/p3_causal_spectral_kernel_20260823_v1/metrics.json",
+        "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F08",
+      "problem": "P3",
+      "name": "other structural generations",
+      "model_card_id": "p3-neural-sequence-revin-ssl",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [
+        "INVALID_TECHNICAL"
+      ],
+      "fingerprint_sha256": "d67dbddb6fbdcf2a4346f5b2dd550a925a6f223cfaa61adf895b9c770e45884b",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F08",
+        "name": "other structural generations",
+        "variants": [
+          "event-balanced NLinear/DLinear",
+          "causal sequence",
+          "stable-energy state-space",
+          "dense72/NHiTS",
+          "Gen6 residual calibrator"
+        ],
+        "historical_label": "NO_GO_NOOP_OR_REFERENCE_MISMATCH",
+        "historical_disposition": "STOP_LISTED_EXACT_VALID_VARIANTS",
+        "sources": [
+          "artifacts/p3_event_balanced_trajectory_v1/metrics.json",
+          "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json",
+          "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/metrics.json",
+          "artifacts/p3_station_stable_energy_state_space_20260823_v1/metrics.json"
+        ]
+      },
+      "evidence_summary": "valid matched variants materially worse; Gen6 full exact no-op; mismatch-only subvariants inadmissible",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A materially new architecture on a G0-clean, untouched episode surface.",
+      "do_not_replay": [
+        "All listed exact valid variants and masked-SSL confirmation."
+      ],
+      "source_paths": [
+        "artifacts/p3_event_balanced_trajectory_v1/metrics.json",
+        "artifacts/p3_matched_budget_local_compare_20260825_v1/metrics.json",
+        "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/metrics.json",
+        "artifacts/p3_station_stable_energy_state_space_20260823_v1/metrics.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F09",
+      "problem": "P3",
+      "name": "lead-continuous",
+      "model_card_id": "p3-analog-spectral-gp-lead",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "4e1c2d00fc3815ac22b46cb0a1577c53eb73aaa5f74aa712c8d745620f1a300c",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F09",
+        "name": "lead-continuous",
+        "variants": [
+          "smooth lead and regime persistence axis"
+        ],
+        "historical_label": "FAVORABLE_EXPOSED_SCREEN",
+        "historical_disposition": "FRESH_CONFIRMATION_PRIORITY",
+        "sources": [
+          "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+          "artifacts/structural_challenger_20260827_v1/p3_confirmation_surface_audit.json",
+          "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+        ]
+      },
+      "evidence_summary": "active benefit +0.00418782 m; legacy IID anchor-day CI90 [-0.00158453,+0.01012909]; delta_gain 0.005 m",
+      "adjudication": "The exposed positive screen became worse on one fresh independent episode; n=1 remains inconclusive.",
+      "reopen_trigger": "Multiple fresh independent episodes with a frozen mechanism; one episode is insufficient.",
+      "do_not_replay": [
+        "Exact analog chain and matched spectral RFF recipe."
+      ],
+      "source_paths": [
+        "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+        "artifacts/structural_challenger_20260827_v1/p3_confirmation_surface_audit.json",
+        "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F10",
+      "problem": "P3",
+      "name": "Round D reverse Public axis",
+      "model_card_id": "p3-persistence-kma-calibration",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "87573ba07a47974cfdaa5182e97c8c0a6524cf8167e558d364d95645865530f0",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F10",
+        "name": "Round D reverse Public axis",
+        "variants": [
+          "global alpha -2",
+          "12h-only -2",
+          "18/24h-only -2"
+        ],
+        "historical_label": "BLIND_OFFICIAL_BATCH_3_OF_3",
+        "historical_disposition": "KEEP_GLOBAL_CURRENT_PUBLIC_CHAMPION_AND_PUBLIC_MECHANISM_EVIDENCE_ONLY",
+        "sources": [
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+          "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json"
+        ]
+      },
+      "evidence_summary": "official benefits global +0.007999, 12h +0.000390, 18/24h +0.007689 m; all local directions reversed",
+      "adjudication": "Official reverse-axis probes established a direction unavailable from local scores.",
+      "reopen_trigger": "A preregistered new lead/station factor or an untouched calibration surface.",
+      "do_not_replay": [
+        "Positive-shrink A/B and exact local cross-fit KMA strategy.",
+        "Nearby-alpha sweeps after observing the official optimum."
+      ],
+      "source_paths": [
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/OFFICIAL_RESULTS_20260826.json",
+        "artifacts/daily_submission_3x3_evidence_20260827_v2/analysis.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F11",
+      "problem": "P3",
+      "name": "Round E curvature and subset",
+      "model_card_id": "p3-persistence-kma-calibration",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c10c44954a246b6956f697154c9a2758a1ee0c371821df4b2e618e50c8d1b8a8",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F11",
+        "name": "Round E curvature and subset",
+        "variants": [
+          "long alpha -2",
+          "long alpha -4",
+          "18/24 alpha -4"
+        ],
+        "historical_label": "FROZEN_READY_NOT_UPLOADED",
+        "historical_disposition": "BLIND_FIXED_BATCH_ONLY_IF_STILL_AUTHORIZED_AND_QUOTA_CHECKED",
+        "sources": [
+          "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json",
+          "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+        ]
+      },
+      "evidence_summary": "one reverse-axis curvature/subset query; official scores absent and upload 0",
+      "adjudication": "Mapped from the exhaustive 2026-08-30 replay under the new taxonomy.",
+      "reopen_trigger": "A preregistered new lead/station factor or an untouched calibration surface.",
+      "do_not_replay": [
+        "Positive-shrink A/B and exact local cross-fit KMA strategy.",
+        "Nearby-alpha sweeps after observing the official optimum."
+      ],
+      "source_paths": [
+        "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260827_round_E_preregistered_P1x3_P2x3_P3x3/SET_MANIFEST.json",
+        "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json"
+      ]
+    },
+    {
+      "grain": "historical_family",
+      "record_id": "P3-F12",
+      "problem": "P3",
+      "name": "ERA5 context transfer",
+      "model_card_id": "p3-era5-context-transfer",
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "c6acef7a257c17391d5a109ce20dc56e60cec86a228a14201f766a737d81522a",
+      "fingerprint": {
+        "problem": "P3",
+        "family_id": "P3-F12",
+        "name": "ERA5 context transfer",
+        "variants": [
+          "fixed 286-feature source pretrain and local continuation"
+        ],
+        "historical_label": "INPUT_PREPARATION_ACTIVE",
+        "historical_disposition": "CONTINUE_FIXED_DOWNLOAD_THEN_PREFLIGHT_ONLY",
+        "sources": [
+          "configs/experiments/p3_era5_context_transfer_v1.json",
+          "artifacts/p3_era5_guarded_launch_20260825_v1/guard_evaluation.json",
+          "artifacts/promotion_retroaudit_20260827_v1/p3_era5_filename_process_receipt.json"
+        ]
+      },
+      "evidence_summary": "2026-08-27 03:29 KST metadata: raw 305/363, partial 0, final recovery process running; no efficacy score",
+      "adjudication": "The fixed one-shot reached model startup but failed on a missing CatBoost dependency before any fit.",
+      "reopen_trigger": "A new preregistered attempt with ML dependency preflight and a materially new transfer target.",
+      "do_not_replay": [
+        "The consumed dependency-failed one-shot lock.",
+        "The exact later ERA5 Hs-squared/source-gate solution shown worse than incumbent."
+      ],
+      "source_paths": [
+        "configs/experiments/p3_era5_context_transfer_v1.json",
+        "artifacts/p3_era5_guarded_launch_20260825_v1/guard_evaluation.json",
+        "artifacts/promotion_retroaudit_20260827_v1/p3_era5_filename_process_receipt.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "availability_aware_copula_v2",
+      "problem": "P2",
+      "name": "availability_aware_copula_v2",
+      "model_card_id": "p2-copula-probabilistic",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c6c98922745289f4a854a28d83e3c3b7d61162bb0b770c07294471ac42b3200f",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "availability_aware_copula_v2",
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY",
+        "benefit": -0.001990430450011793,
+        "benefit_ci90": [
+          -0.004967253376855786,
+          -0.0006617799475544305
+        ],
+        "latest_sources": [
+          "reports/p2_availability_aware_continuous_sparse_copula_20260830_v2/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.001990430450011793,
+        "benefit_ci90": [
+          -0.004967253376855786,
+          -0.0006617799475544305
+        ],
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY"
+      },
+      "adjudication": "The exact primary recipe and its interval were harmful.",
+      "reopen_trigger": "A materially different conditional target with external calibration; no same-proxy retuning.",
+      "do_not_replay": [
+        "Gaussian copula v2 exact frozen official recipe.",
+        "Availability-aware v2 exact primary recipe and incomplete v1 mapper."
+      ],
+      "source_paths": [
+        "reports/p2_availability_aware_continuous_sparse_copula_20260830_v2/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "block_inpaint",
+      "problem": "P1",
+      "name": "block_inpaint",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "12d91c31314affc6282fbdad6c472fcb0d0388dcf39201e58deed235f28bb13a",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "block_inpaint",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+        "benefit": 0.002591206095757803,
+        "benefit_ci90": [
+          -0.01566918281468185,
+          0.051219
+        ],
+        "latest_sources": [
+          "artifacts/p1_block_inpaint_v1/manifest.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.002591206095757803,
+        "benefit_ci90": [
+          -0.01566918281468185,
+          0.051219
+        ],
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "adjudication": "Positive pooled F1 was rejected by an unsupported worst-slice veto.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/p1_block_inpaint_v1/manifest.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "catboost_repaired_confirmation",
+      "problem": "P3",
+      "name": "catboost_repaired_confirmation",
+      "model_card_id": "p3-catboost-tabular",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "ef17aa029ec79519996010b67bd91c384bc704dcf49968436259d8bf3df15403",
+      "fingerprint": {
+        "problem": "P3",
+        "candidate": "catboost_repaired_confirmation",
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY",
+        "benefit": -0.007974130725359796,
+        "benefit_ci90": [
+          -0.013854034848595,
+          -0.0015388552106252453
+        ],
+        "latest_sources": [
+          "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.007974130725359796,
+        "benefit_ci90": [
+          -0.013854034848595,
+          -0.0015388552106252453
+        ],
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY"
+      },
+      "adjudication": "Selection improvement reversed to +0.007974131 m harm on repaired confirmation.",
+      "reopen_trigger": "A new feature target or untouched episode surface after full parameter compatibility validation.",
+      "do_not_replay": [
+        "Frozen challenger21 confirmation and incompatible Ordered/non-symmetric grid.",
+        "Selection score as confirmation evidence."
+      ],
+      "source_paths": [
+        "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "crossfit_rank1_v2",
+      "problem": "P2",
+      "name": "crossfit_rank1_v2",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "94d756377f358c5946211e146c289aebfc83afedecdd0fa5165b4617666f21cf",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "crossfit_rank1_v2",
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.0024538337165882496,
+        "benefit_ci90": [
+          0.0015699465453665516,
+          0.004330818825389526
+        ],
+        "latest_sources": [
+          "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/result.json",
+          "reports/official_information_probe_cycle_20260830_v1/p2-official-result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.0024538337165882496,
+        "benefit_ci90": [
+          0.0015699465453665516,
+          0.004330818825389526
+        ],
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "Positive cross-fit evidence and the later bin17 official probe support the factor axis.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/result.json",
+        "reports/official_information_probe_cycle_20260830_v1/p2-official-result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "dynamic_peer_reliability",
+      "problem": "P1",
+      "name": "dynamic_peer_reliability",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "3b12a5d3c8b620f192c91036d94c972ccde886b8fe79f74db4dac5579571765b",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "dynamic_peer_reliability",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+        "benefit": 0.004639779101666464,
+        "benefit_ci90": [
+          -0.001677,
+          0.011611
+        ],
+        "latest_sources": [
+          "artifacts/runs/20260813T205237+0900_strat_gate_fixed24h_59f6d5c6/manifest.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.004639779101666464,
+        "benefit_ci90": [
+          -0.001677,
+          0.011611
+        ],
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "adjudication": "Positive micro F1 with interval crossing zero was over-closed by the old gate.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "artifacts/runs/20260813T205237+0900_strat_gate_fixed24h_59f6d5c6/manifest.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "environment_balanced_replay",
+      "problem": "P1",
+      "name": "environment_balanced_replay",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "789b9cd436144792db04e4aeecf182f1d078b75d36c59e82eaa219cf5a5bbdfb",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "environment_balanced_replay",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY_LOW_PRIORITY",
+        "benefit": 4.26e-05,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "reports/p1_value_preflight_robust_screen_20260829_v1/report-source.md"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 4.26e-05,
+        "benefit_ci90": null,
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY_LOW_PRIORITY"
+      },
+      "adjudication": "Tiny positive signal is preserved as low-priority frozen-confirmation evidence.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "reports/p1_value_preflight_robust_screen_20260829_v1/report-source.md"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "event_balanced_supcon",
+      "problem": "P1",
+      "name": "event_balanced_supcon",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "2426f8114150dbb7302bd5f265ad5a4d270754c925189411bed606135624cdb5",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "event_balanced_supcon",
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY",
+        "benefit": -0.16487411020776765,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "artifacts/p1_event_balanced_supcon_f1_head_20260830_v1/aggregate.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.16487411020776765,
+        "benefit_ci90": null,
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY"
+      },
+      "adjudication": "The exact event-balanced SupCon objective was materially harmful.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "artifacts/p1_event_balanced_supcon_f1_head_20260830_v1/aggregate.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "gaussian_copula_v2",
+      "problem": "P2",
+      "name": "gaussian_copula_v2",
+      "model_card_id": "p2-copula-probabilistic",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "c7688fb779368913a65c2151a886f90d4a91239190188605c283f17625f47f7b",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "gaussian_copula_v2",
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.010616065033425048,
+        "benefit_ci90": [
+          0.007700262306877281,
+          0.01738439679930879
+        ],
+        "latest_sources": [
+          "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json",
+          "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.010616065033425048,
+        "benefit_ci90": [
+          0.007700262306877281,
+          0.01738439679930879
+        ],
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "A -0.010616 C proxy improvement reversed to +0.012050 C official harm.",
+      "reopen_trigger": "A materially different conditional target with external calibration; no same-proxy retuning.",
+      "do_not_replay": [
+        "Gaussian copula v2 exact frozen official recipe.",
+        "Availability-aware v2 exact primary recipe and incomplete v1 mapper."
+      ],
+      "source_paths": [
+        "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json",
+        "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "gors_depth_invariance",
+      "problem": "P1",
+      "name": "gors_depth_invariance",
+      "model_card_id": "p1-imputation-boundary-peer",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "de753685ea3f6d91a27f8abd758766389df854cd450fffb2e95f17e8a245d27a",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "gors_depth_invariance",
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY",
+        "benefit": 0.00268799,
+        "benefit_ci90": [
+          -0.00921025,
+          0.00355313
+        ],
+        "latest_sources": [
+          "reports/P1_GORS_DEPTH_INVARIANCE_2026-08-13.md"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.00268799,
+        "benefit_ci90": [
+          -0.00921025,
+          0.00355313
+        ],
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY"
+      },
+      "adjudication": "Mixed depth evidence remains inconclusive and is not a deployment candidate.",
+      "reopen_trigger": "New endpoint/peer mechanism plus fresh block confirmation; old recipes require exact frozen replay only.",
+      "do_not_replay": [
+        "Exact target-masked quantile, topology bridge, seeded boundary v2, and fixed24h peer recipes.",
+        "Worst-slice-only vetoes that were not calibrated to official value."
+      ],
+      "source_paths": [
+        "reports/P1_GORS_DEPTH_INVARIANCE_2026-08-13.md"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "group_dro_fixed_objective",
+      "problem": "P1",
+      "name": "group_dro_fixed_objective",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "af9888b7913072b9a3933525474b190e7807c7760d06751950d954c5acf095af",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "group_dro_fixed_objective",
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY",
+        "benefit": -0.013480538245885798,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "artifacts/p1_mstcn_group_dro_20260829_v2/aggregate.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.013480538245885798,
+        "benefit_ci90": null,
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY"
+      },
+      "adjudication": "The frozen robust objective was materially harmful.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "artifacts/p1_mstcn_group_dro_20260829_v2/aggregate.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "hierarchical_event_precision_addonly",
+      "problem": "P1",
+      "name": "hierarchical_event_precision_addonly",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "5098aea968f6e7db6befe28e3b352658a0cb0f0e530f144c45863abe94a8757c",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "hierarchical_event_precision_addonly",
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY",
+        "benefit": -0.0023805798050094973,
+        "benefit_ci90": [
+          -0.017810464928264918,
+          0.013951393933980668
+        ],
+        "latest_sources": [
+          "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.0023805798050094973,
+        "benefit_ci90": [
+          -0.017810464928264918,
+          0.013951393933980668
+        ],
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY"
+      },
+      "adjudication": "The add-only candidate remains inconclusive with an interval spanning zero.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "lead_continuous",
+      "problem": "P3",
+      "name": "lead_continuous",
+      "model_card_id": "p3-analog-spectral-gp-lead",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "bf81c2994ed888acc1206ba9d82b97d9692ab3ebb3984bc762308455ce1c57f4",
+      "fingerprint": {
+        "problem": "P3",
+        "candidate": "lead_continuous",
+        "prior_replay_state": "EXPLORATORY_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.004187821972187478,
+        "benefit_ci90": [
+          -0.00158453,
+          0.01012909
+        ],
+        "latest_sources": [
+          "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+          "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.004187821972187478,
+        "benefit_ci90": [
+          -0.00158453,
+          0.01012909
+        ],
+        "prior_replay_state": "EXPLORATORY_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "The exposed screen was positive, but one fresh episode was +0.022617090 m worse; one block is insufficient.",
+      "reopen_trigger": "Multiple fresh independent episodes with a frozen mechanism; one episode is insufficient.",
+      "do_not_replay": [
+        "Exact analog chain and matched spectral RFF recipe."
+      ],
+      "source_paths": [
+        "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+        "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "nested_pls",
+      "problem": "P2",
+      "name": "nested_pls",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "8908f82fd38926ada5a261ead24da84609ce4055bd0f77ed1abeb00c24f78563",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "nested_pls",
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.002041991611855032,
+        "benefit_ci90": [
+          0.0010516304896743154,
+          0.0038742386414534645
+        ],
+        "latest_sources": [
+          "artifacts/p2_nested_pls_capacity_grid_20260829_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.002041991611855032,
+        "benefit_ci90": [
+          0.0010516304896743154,
+          0.0038742386414534645
+        ],
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "The nested winner was positive, while the searched grid remains closed.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/p2_nested_pls_capacity_grid_20260829_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "segment_precision_router_core",
+      "problem": "P1",
+      "name": "segment_precision_router_core",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "6b2c45d7d3bb6dae1914c71621e5b485c697e484982c2741ae439a636aa7742a",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "segment_precision_router_core",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+        "benefit": 0.0009688594039944931,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "reports/p1_mstcn_segment_precision_router_retroaudit_20260829_v1/evidence.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.0009688594039944931,
+        "benefit_ci90": null,
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "adjudication": "Core router gain was hidden by a broader sparse-veto package.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "reports/p1_mstcn_segment_precision_router_retroaudit_20260829_v1/evidence.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "selection_matched_masked_ssl",
+      "problem": "P3",
+      "name": "selection_matched_masked_ssl",
+      "model_card_id": "p3-neural-sequence-revin-ssl",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "dd6c60f1d725e1ed8b49fdfdda471668b2f7fa7329f05c15736a392b4668d32d",
+      "fingerprint": {
+        "problem": "P3",
+        "candidate": "selection_matched_masked_ssl",
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY",
+        "benefit": -0.31415523848029037,
+        "benefit_ci90": [
+          -0.38878588237499895,
+          -0.2448493754044661
+        ],
+        "latest_sources": [
+          "artifacts/p3_selection_matched_masked_ssl_20260830_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.31415523848029037,
+        "benefit_ci90": [
+          -0.38878588237499895,
+          -0.2448493754044661
+        ],
+        "prior_replay_state": "PRIMARY_HARM_RESEARCH_ONLY"
+      },
+      "adjudication": "The exact masked-SSL candidate was materially harmful.",
+      "reopen_trigger": "A materially new architecture on a G0-clean, untouched episode surface.",
+      "do_not_replay": [
+        "All listed exact valid variants and masked-SSL confirmation."
+      ],
+      "source_paths": [
+        "artifacts/p3_selection_matched_masked_ssl_20260830_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "sobol_trial18_threshold08",
+      "problem": "P1",
+      "name": "sobol_trial18_threshold08",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "CHECKPOINT_PEAK",
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "ac4148750113e3febbc0f918b5058db075da49260c0a07e60da6f89569d6ae7f",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "sobol_trial18_threshold08",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+        "benefit": 0.0005656370384116149,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json",
+          "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.0005656370384116149,
+        "benefit_ci90": null,
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "adjudication": "The selected Q2 peak reversed to -0.011889120 F1 on sealed Q3/Q4 confirmation.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json",
+        "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "sparse_gp_abstention",
+      "problem": "P3",
+      "name": "sparse_gp_abstention",
+      "model_card_id": "p3-analog-spectral-gp-lead",
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "e9981b2cb2bda888fa9b020881372ca021ad48e846575ac71aa4ec1e6aa24fae",
+      "fingerprint": {
+        "problem": "P3",
+        "candidate": "sparse_gp_abstention",
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY",
+        "benefit": -0.0034750705164049434,
+        "benefit_ci90": [
+          -0.009929381222944561,
+          0.003149363373718584
+        ],
+        "latest_sources": [
+          "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": -0.0034750705164049434,
+        "benefit_ci90": [
+          -0.009929381222944561,
+          0.003149363373718584
+        ],
+        "prior_replay_state": "INCONCLUSIVE_RESEARCH_ONLY"
+      },
+      "adjudication": "The interval crosses zero; coverage behavior is reusable but efficacy is inconclusive.",
+      "reopen_trigger": "Multiple fresh independent episodes with a frozen mechanism; one episode is insufficient.",
+      "do_not_replay": [
+        "Exact analog chain and matched spectral RFF recipe."
+      ],
+      "source_paths": [
+        "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "state_conditioned_copula",
+      "problem": "P2",
+      "name": "state_conditioned_copula",
+      "model_card_id": "p2-copula-probabilistic",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "ecbe5b2d9632ece0a84801535b9c27d6c2ccd38de5d47143dc4bad8211cf8975",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "state_conditioned_copula",
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.0034591760934881144,
+        "benefit_ci90": [
+          0.0019229331946138068,
+          0.006529881874038945
+        ],
+        "latest_sources": [
+          "artifacts/p2_state_conditioned_copula_20260830_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.0034591760934881144,
+        "benefit_ci90": [
+          0.0019229331946138068,
+          0.006529881874038945
+        ],
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "Positive local challenger evidence remains research-only after same-family proxy failure.",
+      "reopen_trigger": "A materially different conditional target with external calibration; no same-proxy retuning.",
+      "do_not_replay": [
+        "Gaussian copula v2 exact frozen official recipe.",
+        "Availability-aware v2 exact primary recipe and incomplete v1 mapper."
+      ],
+      "source_paths": [
+        "artifacts/p2_state_conditioned_copula_20260830_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "supervised_rank1",
+      "problem": "P2",
+      "name": "supervised_rank1",
+      "model_card_id": "p2-oas-rank1-lowrank",
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "03e8f698fb4d6ee3be8052f84d700ce05070c6d45a55651264f42c02801343b2",
+      "fingerprint": {
+        "problem": "P2",
+        "candidate": "supervised_rank1",
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+        "benefit": 0.004798862410555937,
+        "benefit_ci90": [
+          0.003107124366859581,
+          0.008505912410134975
+        ],
+        "latest_sources": [
+          "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/result.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.004798862410555937,
+        "benefit_ci90": [
+          0.003107124366859581,
+          0.008505912410134975
+        ],
+        "prior_replay_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+      },
+      "adjudication": "Positive dependent evidence supports the rank-1 mechanism, not automatic deployment.",
+      "reopen_trigger": "A new frozen rank/bin factor with positive dependent-block evidence or a new outer surface.",
+      "do_not_replay": [
+        "Universal density penalty and already tested full nested-PLS grid.",
+        "Pooling bin17 and bin18 merely because they are adjacent."
+      ],
+      "source_paths": [
+        "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/result.json"
+      ]
+    },
+    {
+      "grain": "key_case",
+      "record_id": "window_phase_consistency",
+      "problem": "P1",
+      "name": "window_phase_consistency",
+      "model_card_id": "p1-temporal-neural",
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [],
+      "fingerprint_sha256": "0b41d61e0ce64ffed76fd563714e4c8ecaa1ae691d002dd77b59d1c61b8349b9",
+      "fingerprint": {
+        "problem": "P1",
+        "candidate": "window_phase_consistency",
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+        "benefit": 0.00024178220395010275,
+        "benefit_ci90": null,
+        "latest_sources": [
+          "reports/p1_window_phase_consistency_20260829_v1/aggregate.json"
+        ]
+      },
+      "evidence_summary": {
+        "benefit": 0.00024178220395010275,
+        "benefit_ci90": null,
+        "prior_replay_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "adjudication": "A small positive Q2 signal was rejected by the former fixed promotion floor.",
+      "reopen_trigger": "A materially new representation or objective with an untouched block surface and frozen checkpoint rule.",
+      "do_not_replay": [
+        "The exact 32-point Sobol search space or frozen trial18/threshold 0.8 confirmation.",
+        "Fixed Group-DRO and event-balanced SupCon objectives already shown harmful."
+      ],
+      "source_paths": [
+        "reports/p1_window_phase_consistency_20260829_v1/aggregate.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "early_tcn_patch_transformer_and_sequence_successors",
+      "problem": "P1",
+      "name": "early_tcn_patch_transformer_and_sequence_successors",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "3dd7c025647c587c80497f186dc93787e6274beccb25ef0c87ec2bff1ac28673",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "early_tcn_patch_transformer_and_sequence_successors",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "block_inpaint_target_masked_quantile_semimarkov_rules",
+      "problem": "P1",
+      "name": "block_inpaint_target_masked_quantile_semimarkov_rules",
+      "model_card_id": null,
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "4116df3163be57f106eef462e430f360ac16d461c690141d7d9392d45d1af679",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "block_inpaint_target_masked_quantile_semimarkov_rules",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "PARTIAL_REOPEN_BLOCK_INPAINT_ONLY"
+      },
+      "evidence_summary": "PARTIAL_REOPEN_BLOCK_INPAINT_ONLY",
+      "adjudication": "Only the named component may reopen; the rest remains exactly closed.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "iors_point_residual_round_a_rescue_synthetic_event_injection",
+      "problem": "P1",
+      "name": "iors_point_residual_round_a_rescue_synthetic_event_injection",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "1aeef4e9328f4d8234645a6ba689900d5829d61b4bed179ec6f80d04ae978ee1",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "iors_point_residual_round_a_rescue_synthetic_event_injection",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "union_topology_bridge_density_correction",
+      "problem": "P1",
+      "name": "union_topology_bridge_density_correction",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c7048c2e1bc4eaccb10bceae40568f591aaceb0a577347178caa54abcae2a768",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "union_topology_bridge_density_correction",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "seeded_boundary_peer_reliability_depth_invariance",
+      "problem": "P1",
+      "name": "seeded_boundary_peer_reliability_depth_invariance",
+      "model_card_id": null,
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "10c8a4d4b891845d5f226b8ae8cb4c5ddcbe5fcf15ef1570f519740bf7b2cdfc",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "seeded_boundary_peer_reliability_depth_invariance",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "PARTIAL_REOPEN_PEER_AND_DEPTH_INCONCLUSIVE"
+      },
+      "evidence_summary": "PARTIAL_REOPEN_PEER_AND_DEPTH_INCONCLUSIVE",
+      "adjudication": "Only the named component may reopen; the rest remains exactly closed.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "ts2vec_prototype_after_full_coverage_recovery",
+      "problem": "P1",
+      "name": "ts2vec_prototype_after_full_coverage_recovery",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "6c2fda4c95a28b3ae76c875173b58ffcf6bf1307b276bb6f451f5d6b032257df",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "ts2vec_prototype_after_full_coverage_recovery",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "exact_degradation_mask_transformer_v1",
+      "problem": "P1",
+      "name": "exact_degradation_mask_transformer_v1",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "c6fb4516674729511cd862f0edbb4f6a21ac31ee147cc9d0ad7b52e7bed343f9",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "exact_degradation_mask_transformer_v1",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "environment_balanced_replay_proxy",
+      "problem": "P1",
+      "name": "environment_balanced_replay_proxy",
+      "model_card_id": null,
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "10ad7657050ac48a27a73a8640003ba45f2bfa59f04612f2385ce03e49b572bf",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "environment_balanced_replay_proxy",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "REOPEN_FROZEN_CONFIRMATION_ONLY_LOW_PRIORITY"
+      },
+      "evidence_summary": "REOPEN_FROZEN_CONFIRMATION_ONLY_LOW_PRIORITY",
+      "adjudication": "Only the named component may reopen; the rest remains exactly closed.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "mstcn_asrf_global_threshold_add_only",
+      "problem": "P1",
+      "name": "mstcn_asrf_global_threshold_add_only",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "8e81cecf2737e09b9f5ed047a03a19687fef4a3f7dfc6595f80b32073718474b",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "mstcn_asrf_global_threshold_add_only",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "mstcn_sparse_bootstrap_lower_bound_veto",
+      "problem": "P1",
+      "name": "mstcn_sparse_bootstrap_lower_bound_veto",
+      "model_card_id": null,
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "6196a1c1fbfdb7232aacd0e64128f43d64eae6b7feaca4ebebd3a1e189f8b109",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "mstcn_sparse_bootstrap_lower_bound_veto",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "PARTIAL_REOPEN_SEGMENT_ROUTER_ONLY_OFFICIAL_SPARSE_VETO_REMAINS_HARM"
+      },
+      "evidence_summary": "PARTIAL_REOPEN_SEGMENT_ROUTER_ONLY_OFFICIAL_SPARSE_VETO_REMAINS_HARM",
+      "adjudication": "Only the named component may reopen; the rest remains exactly closed.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "window_phase_consistency",
+      "problem": "P1",
+      "name": "window_phase_consistency",
+      "model_card_id": null,
+      "primary_status": "OLD_GATE_REJECTED",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "af1f2a8f175178824c84c01ba54059c945501a6fec54fe0c5fa0fff80736b3bb",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "window_phase_consistency",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "REOPEN_FROZEN_CONFIRMATION_ONLY"
+      },
+      "evidence_summary": "REOPEN_FROZEN_CONFIRMATION_ONLY",
+      "adjudication": "Only the named component may reopen; the rest remains exactly closed.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "sealed_32_point_sobol_mstcn_space",
+      "problem": "P1",
+      "name": "sealed_32_point_sobol_mstcn_space",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "CHECKPOINT_PEAK",
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "e15fbd7554813cf4f9d876f5271b1a52b80e1c3bce296379c78b1572163804e9",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "sealed_32_point_sobol_mstcn_space",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "REOPEN_SELECTED_TRIAL18_CONFIRMATION_ONLY_SEARCH_SPACE_REMAINS_CLOSED"
+      },
+      "evidence_summary": "REOPEN_SELECTED_TRIAL18_CONFIRMATION_ONLY_SEARCH_SPACE_REMAINS_CLOSED",
+      "adjudication": "The space remains closed and its selected trial18 peak failed sealed confirmation.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "fixed_group_dro_mstcn_objective",
+      "problem": "P1",
+      "name": "fixed_group_dro_mstcn_objective",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "35740d4601bec4502a937d41fb409b4d77c68feeb0211f96cae4934c995a17d8",
+      "fingerprint": {
+        "problem": "P1",
+        "group": "fixed_group_dro_mstcn_objective",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "early_deep_gbm_addons",
+      "problem": "P2",
+      "name": "early_deep_gbm_addons",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "0ab54786b1d0e20b463de57c802f2f8f16da244c9eee014f1f592934143852bf",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "early_deep_gbm_addons",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "tested_external_physical_addons",
+      "problem": "P2",
+      "name": "tested_external_physical_addons",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "195df7c049a88d2a6cfb284212fcc61b7c5da62fa43bf12689c1f82d20815c28",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "tested_external_physical_addons",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "forward_surrogate_and_architecture_matched_refits",
+      "problem": "P2",
+      "name": "forward_surrogate_and_architecture_matched_refits",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "ccdc215be45c9b0ca4ff7e5079ba67261e89f51ece72bc060e9681d9fdaeb0a0",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "forward_surrogate_and_architecture_matched_refits",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "density_annual_offset_profile_analog_rff_recipes",
+      "problem": "P2",
+      "name": "density_annual_offset_profile_analog_rff_recipes",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "0194f66c31ece6474dc4d0c57d0e27e7756f95697cde669d9f250134bccc797d",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "density_annual_offset_profile_analog_rff_recipes",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "three_prequential_residual_hypotheses",
+      "problem": "P2",
+      "name": "three_prequential_residual_hypotheses",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "e59f14d300ff18a02e1bfee7e6e475aa759704daee2bb6c53d7bcc29b17d0b31",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "three_prequential_residual_hypotheses",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "sealed_dynamic_low_rank_and_gp_recipes",
+      "problem": "P2",
+      "name": "sealed_dynamic_low_rank_and_gp_recipes",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "0031567d3176f032719d56c9e3c8f5f206af6944a3a7a119e57af40474febf2b",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "sealed_dynamic_low_rank_and_gp_recipes",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "tested_supervised_rank1_and_heave_residual_recipes",
+      "problem": "P2",
+      "name": "tested_supervised_rank1_and_heave_residual_recipes",
+      "model_card_id": null,
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "8b37ccb7f5fd154a230cd7f2aded916260fc4a43cda00c4e65569617a9b74dfe",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "tested_supervised_rank1_and_heave_residual_recipes",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "PARTIAL_REOPEN_SUPERVISED_AND_CROSSFIT_RANK1"
+      },
+      "evidence_summary": "PARTIAL_REOPEN_SUPERVISED_AND_CROSSFIT_RANK1",
+      "adjudication": "Exact tested recipes are closed, while the rank-1 factor axis has positive evidence.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "outside_two_sided_boundary_bridge_contract",
+      "problem": "P2",
+      "name": "outside_two_sided_boundary_bridge_contract",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "dfe56b44af5c08242530ed63db641b963cd2b669e75acc68fe72d3db6f596fbc",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "outside_two_sided_boundary_bridge_contract",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "sealed_nested_pls_capacity_grid",
+      "problem": "P2",
+      "name": "sealed_nested_pls_capacity_grid",
+      "model_card_id": null,
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "316299c85698fe7f9f25cac805178425f5dd66567936ea393861a81493d35227",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "sealed_nested_pls_capacity_grid",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "REOPEN_WINNER_CONFIRMATION_ONLY_GRID_REMAINS_CLOSED"
+      },
+      "evidence_summary": "REOPEN_WINNER_CONFIRMATION_ONLY_GRID_REMAINS_CLOSED",
+      "adjudication": "The grid is closed; its nested winner is retained as positive mechanism evidence.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "seasonal_empirical_kendall_copula_alpha50_residual_strict_stability_recipe",
+      "problem": "P2",
+      "name": "seasonal_empirical_kendall_copula_alpha50_residual_strict_stability_recipe",
+      "model_card_id": null,
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [
+        "CLOSED_EXACT",
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "95bc86274e504bdac45cab50df846af4f96b6fe1a4612ddc90bc3484403af402",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "seasonal_empirical_kendall_copula_alpha50_residual_strict_stability_recipe",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "REOPEN_GAUSSIAN_AND_STATE_COPULA_CHALLENGERS"
+      },
+      "evidence_summary": "REOPEN_GAUSSIAN_AND_STATE_COPULA_CHALLENGERS",
+      "adjudication": "Gaussian v2 is closed after official reversal; different state-conditioned variants remain discovery-only.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "gaussian_copula_conditional_mean_v1_incomplete_profile_mapper",
+      "problem": "P2",
+      "name": "gaussian_copula_conditional_mean_v1_incomplete_profile_mapper",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "0f6cf9ffcaf7c45fb6e45b1a7e300c2c9660b6618321352af8c1abf277a17ad1",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "gaussian_copula_conditional_mean_v1_incomplete_profile_mapper",
+        "prior_state": "INVALID",
+        "replayed_state": "INVALID_NO_SCIENTIFIC_CONCLUSION"
+      },
+      "evidence_summary": "INVALID_NO_SCIENTIFIC_CONCLUSION",
+      "adjudication": "Technical invalidity yields no scientific model conclusion.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "copula_train_only_support_audit",
+      "problem": "P2",
+      "name": "copula_train_only_support_audit",
+      "model_card_id": null,
+      "primary_status": "DISCOVERY_ONLY",
+      "status_tags": [],
+      "fingerprint_sha256": "c233c34e4fe40697a2f042aafbe58b23e839abce1cb4c53f884fd639736d9a22",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "copula_train_only_support_audit",
+        "prior_state": "NOT_A_FAILURE",
+        "replayed_state": "NOT_A_FAILURE"
+      },
+      "evidence_summary": "NOT_A_FAILURE",
+      "adjudication": "Reference/audit group is retained and was never a failure.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "oas_rank1_family_as_a_whole",
+      "problem": "P2",
+      "name": "oas_rank1_family_as_a_whole",
+      "model_card_id": null,
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [],
+      "fingerprint_sha256": "203945aaeb86271b7eeae060200d91f005176aae9efd24446a5b41429d9d3522",
+      "fingerprint": {
+        "problem": "P2",
+        "group": "oas_rank1_family_as_a_whole",
+        "prior_state": "NOT_A_FAILURE",
+        "replayed_state": "NOT_A_FAILURE"
+      },
+      "evidence_summary": "NOT_A_FAILURE",
+      "adjudication": "The broader OAS/rank-1 family is not a failure and contains the positive bin17 axis.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "positive_shrink_revin_patch_causal_analog_spectral_rff",
+      "problem": "P3",
+      "name": "positive_shrink_revin_patch_causal_analog_spectral_rff",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "1cd11983cbef1bda05c5e7e994b355eb9fc7ac81f95893c507c6cfa475c4209e",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "positive_shrink_revin_patch_causal_analog_spectral_rff",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "valid_nlinear_sequence_dense72_and_gen6_variants",
+      "problem": "P3",
+      "name": "valid_nlinear_sequence_dense72_and_gen6_variants",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "9f2469c3f9e708e407cbbcc9c04eb94ed2b4cb6f979b4b0168c7ffa6deb37ba0",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "valid_nlinear_sequence_dense72_and_gen6_variants",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "timexer_style_direct_six_lead",
+      "problem": "P3",
+      "name": "timexer_style_direct_six_lead",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "d9c75f409772bfdec4b08047a5b7cc256260fc76cdc8dd01b4256991ec773ec4",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "timexer_style_direct_six_lead",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "current_era5_transfer_solution_gate_recipe",
+      "problem": "P3",
+      "name": "current_era5_transfer_solution_gate_recipe",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "da393b1f7e6c4424e062605d30c3e8e6a1088c803ba8c69b4cd5a0e9712003df",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "current_era5_transfer_solution_gate_recipe",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "predicted_future_wind_frozen_kma_mos_contract",
+      "problem": "P3",
+      "name": "predicted_future_wind_frozen_kma_mos_contract",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [],
+      "fingerprint_sha256": "08af1b10e84e251289a6143aff771f9ca460eb0a0ca9e4c2f22d846b264d407c",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "predicted_future_wind_frozen_kma_mos_contract",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "Exact scope remains closed; no broader-family futility claim.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "local_crossfit_kma_alpha_transport_strategy",
+      "problem": "P3",
+      "name": "local_crossfit_kma_alpha_transport_strategy",
+      "model_card_id": null,
+      "primary_status": "INFORMATION_POSITIVE",
+      "status_tags": [
+        "CLOSED_EXACT"
+      ],
+      "fingerprint_sha256": "8cee89825c823a0ae5781e972e97c6b63d014f59ccb6b4ff1d5b48eaaac57330",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "local_crossfit_kma_alpha_transport_strategy",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_LOCAL_STRATEGY_CLOSED_KMA_AXIS_NOT_CLOSED"
+      },
+      "evidence_summary": "EXACT_LOCAL_STRATEGY_CLOSED_KMA_AXIS_NOT_CLOSED",
+      "adjudication": "The exact local transport strategy is closed, but the official KMA axis is positive.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "catboost_valid_hpo_v2_frozen_challenger_21_confirmation",
+      "problem": "P3",
+      "name": "catboost_valid_hpo_v2_frozen_challenger_21_confirmation",
+      "model_card_id": null,
+      "primary_status": "CLOSED_EXACT",
+      "status_tags": [
+        "PROXY_EXPOSED"
+      ],
+      "fingerprint_sha256": "5e242a6500d09d155de66d41bac3c8508974a3e2d6a28cc9652d8d6140644603",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "catboost_valid_hpo_v2_frozen_challenger_21_confirmation",
+        "prior_state": "CLOSED_EXACT_GROUP",
+        "replayed_state": "EXACT_SCOPE_CLOSED_UNCHANGED"
+      },
+      "evidence_summary": "EXACT_SCOPE_CLOSED_UNCHANGED",
+      "adjudication": "The selected challenger reversed on valid confirmation.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "catboost_ordered_hpo_v1_incompatible_grid",
+      "problem": "P3",
+      "name": "catboost_ordered_hpo_v1_incompatible_grid",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "4850268b30b235967fea8cee2e1d96202943de16b0ad69cbde8b934329916219",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "catboost_ordered_hpo_v1_incompatible_grid",
+        "prior_state": "INVALID",
+        "replayed_state": "INVALID_NO_SCIENTIFIC_CONCLUSION"
+      },
+      "evidence_summary": "INVALID_NO_SCIENTIFIC_CONCLUSION",
+      "adjudication": "Technical invalidity yields no scientific model conclusion.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "canonical_group",
+      "record_id": "catboost_valid_hpo_v2_confirmation_schema_failure",
+      "problem": "P3",
+      "name": "catboost_valid_hpo_v2_confirmation_schema_failure",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "07b8557952db6547a88dcea32e4186c5960eaa47fe4aa4c996b015298385b44b",
+      "fingerprint": {
+        "problem": "P3",
+        "group": "catboost_valid_hpo_v2_confirmation_schema_failure",
+        "prior_state": "INVALID",
+        "replayed_state": "INVALID_NO_SCIENTIFIC_CONCLUSION"
+      },
+      "evidence_summary": "INVALID_NO_SCIENTIFIC_CONCLUSION",
+      "adjudication": "Technical invalidity yields no scientific model conclusion.",
+      "reopen_trigger": "Follow the named partial scope only; otherwise require a materially new recipe.",
+      "do_not_replay": [
+        "Do not replay the exact group under a renamed experiment ID."
+      ],
+      "source_paths": [
+        "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json"
+      ]
+    },
+    {
+      "grain": "workflow_exception",
+      "record_id": "P1-X01",
+      "problem": "P1",
+      "name": "P1-X01",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "b32d5186bee573189323d65c6adc4e45cc78180d1bc97c57ccaacb5b080d26ce",
+      "fingerprint": {
+        "problem": "P1",
+        "id": "P1-X01",
+        "old_state": "NO_SCIENTIFIC_RESULT",
+        "new_state": "INVALID_OR_NO_SCIENTIFIC_RESULT"
+      },
+      "evidence_summary": "NO_SCIENTIFIC_RESULT",
+      "adjudication": "No scientific performance conclusion is admissible.",
+      "reopen_trigger": "New preregistered attempt after the exact technical defect is preflighted.",
+      "do_not_replay": [
+        "Do not consume or overwrite the original failed attempt lock."
+      ],
+      "source_paths": [
+        "artifacts/p1_typed_factorial_semimarkov_v1/result.json",
+        "artifacts/p1_tetad_lite_direct_interval_set_v1/terminal_result.json",
+        "reports/p1_long_event_segment_proposal_rescore_v8_terminal_no_go_20260826.json"
+      ]
+    },
+    {
+      "grain": "workflow_exception",
+      "record_id": "P2-X01",
+      "problem": "P2",
+      "name": "P2-X01",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "749be845071c8e92f56b279b0cab0b165614b5dca2aab45de990b0361fe325ac",
+      "fingerprint": {
+        "problem": "P2",
+        "id": "P2-X01",
+        "old_state": "INVALID_TIME_RECONSTRUCTION",
+        "new_state": "INVALID_OR_NO_SCIENTIFIC_RESULT"
+      },
+      "evidence_summary": "INVALID_TIME_RECONSTRUCTION",
+      "adjudication": "No scientific performance conclusion is admissible.",
+      "reopen_trigger": "New preregistered attempt after the exact technical defect is preflighted.",
+      "do_not_replay": [
+        "Do not consume or overwrite the original failed attempt lock."
+      ],
+      "source_paths": [
+        "reports/p2_normalized_curvature_residual_lgbm_stage1_v1r7_postmortem_20260826.md"
+      ]
+    },
+    {
+      "grain": "workflow_exception",
+      "record_id": "P2-X02",
+      "problem": "P2",
+      "name": "P2-X02",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "89d0ffb1a17d2fbaf74b7db06e9dc93a5fd7b53bd1fb500d99d088aa455d8f15",
+      "fingerprint": {
+        "problem": "P2",
+        "id": "P2-X02",
+        "old_state": "INNER_WINDOW_UNIDENTIFIABLE",
+        "new_state": "INVALID_OR_NO_SCIENTIFIC_RESULT"
+      },
+      "evidence_summary": "INNER_WINDOW_UNIDENTIFIABLE",
+      "adjudication": "No scientific performance conclusion is admissible.",
+      "reopen_trigger": "New preregistered attempt after the exact technical defect is preflighted.",
+      "do_not_replay": [
+        "Do not consume or overwrite the original failed attempt lock."
+      ],
+      "source_paths": [
+        "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_terminal_blocked_20260826.json"
+      ]
+    },
+    {
+      "grain": "workflow_exception",
+      "record_id": "P2-X03",
+      "problem": "P2",
+      "name": "P2-X03",
+      "model_card_id": null,
+      "primary_status": "INVALID_TECHNICAL",
+      "status_tags": [],
+      "fingerprint_sha256": "932dae830ac29f9c5c0cdea7577db6da8799ba9fa650206e74a67b00c6793e8c",
+      "fingerprint": {
+        "problem": "P2",
+        "id": "P2-X03",
+        "old_state": "NO_ADMITTED_OUTER_SCORE",
+        "new_state": "INVALID_OR_NO_SCIENTIFIC_RESULT"
+      },
+      "evidence_summary": "NO_ADMITTED_OUTER_SCORE",
+      "adjudication": "No scientific performance conclusion is admissible.",
+      "reopen_trigger": "New preregistered attempt after the exact technical defect is preflighted.",
+      "do_not_replay": [
+        "Do not consume or overwrite the original failed attempt lock."
+      ],
+      "source_paths": [
+        "artifacts/status/p2_dynamic_sigmoid_profile_v1.json",
+        "artifacts/status/p2_dynamic_sigmoid_profile_v2_key_aligned.json"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_files": [
+      {
+        "path": "artifacts/promotion_retroaudit_20260827_v1/family_reclassification_ledger.json",
+        "sha256": "b4bb027873927e19ff10b04ffbd4d90fd1dcc617715bebabfb8433fc7c2cb8bd"
+      },
+      {
+        "path": "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json",
+        "sha256": "965b4152fb7c115d3b8f87be270304227b60a926a7e3607f73952b82587ce40e"
+      },
+      {
+        "path": "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+        "sha256": "5c7923baa61f79e9d186202b9ec762ea182aa43dea7c008427373392f6e616e0"
+      }
+    ],
+    "later_evidence_files": [
+      {
+        "path": "artifacts/p1_block_inpaint_v1/manifest.json",
+        "sha256": "1a2251a2000ed6dbdb975080085ba0f0722073a57d824abadbce0049476bc9c1"
+      },
+      {
+        "path": "artifacts/p1_event_balanced_supcon_f1_head_20260830_v1/aggregate.json",
+        "sha256": "7d0534a5f2397394d82558cc15cbfa009ea35a6eabab8fc53900b24e5a05cafa"
+      },
+      {
+        "path": "artifacts/p1_mstcn_group_dro_20260829_v2/aggregate.json",
+        "sha256": "b46a0c6f899d53721e3db86da7b3a267262a8a92eed950589cfe8e30700cb2ed"
+      },
+      {
+        "path": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json",
+        "sha256": "fb42fe28abd4590ac4c5affeacef4a497e792f647d54f88f93f91f743d4fcf98"
+      },
+      {
+        "path": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1/result.json",
+        "sha256": "562b6a298219a3e5f3bdbc969af35f242393916559fbaa9177e625d60a694090"
+      },
+      {
+        "path": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/result.json",
+        "sha256": "896204e79f2b1fae4793315bdc34252f813b17e764c18776a15f9f404ef7a949"
+      },
+      {
+        "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json",
+        "sha256": "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3"
+      },
+      {
+        "path": "artifacts/p2_nested_pls_capacity_grid_20260829_v1/result.json",
+        "sha256": "d08c79d5f6850cab07a510548061833f78dc026c49445442e2c24dcc12d76296"
+      },
+      {
+        "path": "artifacts/p2_state_conditioned_copula_20260830_v1/result.json",
+        "sha256": "493ed58d5e7893f7c9297f26fe992393fdd3498820b562e1f045a77e1e992e2f"
+      },
+      {
+        "path": "artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/result.json",
+        "sha256": "1c2a6df2034f20dab054392ad67dd0039240729412dddf6380918c52957563ca"
+      },
+      {
+        "path": "artifacts/p3_selection_matched_masked_ssl_20260830_v1/result.json",
+        "sha256": "b6373cf4a6b281096dda4dbf10caf8bc9bebd01b01883269e421379ae702f7f5"
+      },
+      {
+        "path": "artifacts/runs/20260813T205237+0900_strat_gate_fixed24h_59f6d5c6/manifest.json",
+        "sha256": "8f4479ff6276b3c6eba4ff123b13323b38220de0b0b74b3c729aab01b93ed85d"
+      },
+      {
+        "path": "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+        "sha256": "5343dfd5846f2ed21bfe1b1e033e9acebf03385e98d79bf9693486cb3ba5ee8c"
+      },
+      {
+        "path": "reports/P1_GORS_DEPTH_INVARIANCE_2026-08-13.md",
+        "sha256": "84ceb09eb44ff9e544a3b5b6d53076fb2ceff7a765e9ef7dd415e09d0f3f9ef8"
+      },
+      {
+        "path": "reports/official_information_probe_cycle_20260830_v1/p2-official-result.json",
+        "sha256": "742647f2f033c6ca4070485deef396140c39ba78a5309764358b3443c3f1d984"
+      },
+      {
+        "path": "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/result.json",
+        "sha256": "3836af402aab75bdd35041248beaba296f22d42282ae7f893cf8bd20a3d25dea"
+      },
+      {
+        "path": "reports/p1_mstcn_segment_precision_router_retroaudit_20260829_v1/evidence.json",
+        "sha256": "0bf8f472b641509e2eb086c6495a902894c7ca0790163d8469647541591a2c62"
+      },
+      {
+        "path": "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json",
+        "sha256": "1d6a594c532c86f45905962624cc663cdc2928b626d7727d00bcd777355c437d"
+      },
+      {
+        "path": "reports/p1_value_preflight_robust_screen_20260829_v1/report-source.md",
+        "sha256": "bc389643f01e146346dbf953993c4a464e197ac65a842e44860d0030438c4271"
+      },
+      {
+        "path": "reports/p1_window_phase_consistency_20260829_v1/aggregate.json",
+        "sha256": "dfc5e99a33d0b50497a063b0be02042a231cfaa1246f5841fcb57b8967e2822e"
+      },
+      {
+        "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v2/result.json",
+        "sha256": "541cc88af606888e4809c8f782747a48ef293793f8f7ec19fa11f98972d4241f"
+      },
+      {
+        "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json",
+        "sha256": "198e2162dfe44d65a06468530ea8aa5ecdb71dc7be498e60bb954d4b73fbc248"
+      },
+      {
+        "path": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json",
+        "sha256": "30fc5f38d27f39e5caf787c68f80f7e352880bd54ee34d056908c4f0c00bd4e1"
+      },
+      {
+        "path": "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/result.json",
+        "sha256": "1a85a1804cd2981e969ae4dfdb362afaf8b450e23a23153a7e8e23d236fe7596"
+      }
+    ],
+    "negative_ledger_policy": {
+      "closed_means": "Do not rerun the exact tested recipe, information axis, split and gate combination.",
+      "closed_does_not_mean": "The entire broad model class is impossible.",
+      "invalid_means": "No scientific performance conclusion; repair requires a new experiment id and contract test.",
+      "exposed_surface_cap": "RESEARCH_ONLY"
+    },
+    "raw_training_or_prediction_rows_read": 0,
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "model_fits": 0,
+    "csv_created": 0,
+    "uploads": 0
+  }
+}

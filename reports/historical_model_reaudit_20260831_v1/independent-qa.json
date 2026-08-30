@@ -1,0 +1,63 @@
+{
+  "schema_version": "historical_model_reaudit.independent_qa.v1",
+  "status": "PASS",
+  "checks": {
+    "family_count_48": true,
+    "family_split_17_19_12": true,
+    "canonical_group_count_35": true,
+    "key_case_count_20": true,
+    "workflow_exception_count_4": true,
+    "all_records_have_valid_primary_status": true,
+    "all_tags_valid": true,
+    "all_family_and_key_records_have_model_cards": true,
+    "all_fingerprints_unique_within_grain": true,
+    "trial18_later_evidence_overrides_reopen": true,
+    "gaussian_copula_official_reversal_recorded": true,
+    "lead_continuous_fresh_episode_not_overclosed": true,
+    "era5_dependency_failure_is_invalid_not_harm": true,
+    "no_model_fit": true,
+    "no_official_input_rows_read": true,
+    "no_csv_created": true,
+    "no_upload": true
+  },
+  "counts": {
+    "historical_family": 48,
+    "key_case": 20,
+    "canonical_group": 35,
+    "workflow_exception": 4
+  },
+  "status_counts_by_grain": {
+    "historical_family": {
+      "CLOSED_EXACT": 25,
+      "DISCOVERY_ONLY": 11,
+      "INFORMATION_POSITIVE": 6,
+      "INVALID_TECHNICAL": 1,
+      "OLD_GATE_REJECTED": 2,
+      "PROXY_EXPOSED": 3
+    },
+    "canonical_group": {
+      "CLOSED_EXACT": 21,
+      "DISCOVERY_ONLY": 2,
+      "INFORMATION_POSITIVE": 4,
+      "INVALID_TECHNICAL": 3,
+      "OLD_GATE_REJECTED": 5
+    },
+    "key_case": {
+      "CLOSED_EXACT": 7,
+      "DISCOVERY_ONLY": 4,
+      "INFORMATION_POSITIVE": 4,
+      "OLD_GATE_REJECTED": 5
+    },
+    "workflow_exception": {
+      "INVALID_TECHNICAL": 4
+    }
+  },
+  "candidate_ledger_sha256": "8e7f2fbe07c74d313ce3c652b6eeffdd4d5a7af1351b96d7fc984be987778f69",
+  "model_card_count": 14,
+  "policy_boundaries": {
+    "broad_model_classes_closed": false,
+    "exact_recipe_closure_only": true,
+    "overlapping_grains_not_summed": true,
+    "official_inputs_read": false
+  }
+}
