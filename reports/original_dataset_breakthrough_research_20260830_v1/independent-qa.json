@@ -1,0 +1,132 @@
+{
+  "current_code_hashes": {
+    "configs": {
+      "p1": "e1f1f350295010c7b54ef1d181e94311c1c52f2b3af69e5671c89112a96db622",
+      "p2": "d09211ecda23169b6c611043dde0cc8de9480e3ba618c090e719562a88caca65",
+      "p3": "945f9c552389a18f294581457805ee4defea7904a5cfd0574e515da858a4c6ba"
+    },
+    "dataset_audit": "a1760c96c2e483b795248020200ae1b711ae27b14789ef597df9e09ab2c9bb08",
+    "runners": {
+      "p1": "cba95fb7577c04485063a643f8520978cc998ccc1b2fb100c06856b3e5537cb2",
+      "p2": "09e0c23e33631fb52063b98db03d2a6d8ac9c39927261be58498b64075edf133",
+      "p3": "cc9bae8199226b90631691f4025bdc5cc6b1f5d5e3dd637038207957e21a58df"
+    },
+    "tests": {
+      "audit": "63d8309f1880b213d9dbf8b6a7f016239b616911c11917148705df1d7801de68",
+      "p1": "b8ab9e3e0c878907339169010528b55dfcccc10ba7e4e5924e1652ce15dc985b",
+      "p2": "908e01b65e98223b8fb87c8ee95ed28cb6469df99b07b31380c4b855a8a63f87",
+      "p3": "b9c85d63fe2b5a3c530da62db19e7d88561595d6bc9022438718d6cca9ecdc56"
+    }
+  },
+  "data_access": {
+    "baseline_rows_read": 0,
+    "csv_created": 0,
+    "hidden_or_answer_rows_read": 0,
+    "official_test_rows_read": 0,
+    "raw_training_rows_read_by_qa": 0,
+    "sample_rows_read": 0,
+    "score_rows_read": 0,
+    "submission_rows_read": 0,
+    "test_index_rows_read": 0,
+    "uploads": 0
+  },
+  "p1": {
+    "anchor_positive_rows_removed": 0,
+    "current_runner_postdates_receipt": true,
+    "current_runner_sha256": "cba95fb7577c04485063a643f8520978cc998ccc1b2fb100c06856b3e5537cb2",
+    "execution_runner_byte_sha256_available": false,
+    "post_run_hardening_scope": "exclusive receipt creation, exact rational concentration boundary, and strict boolean provenance checks; observed values are away from those boundaries, so the Q4 3<4 NO_GO verdict is invariant",
+    "q2_to_q3_pass": true,
+    "q4_minimum_events": 4,
+    "q4_precision_requirement_f1_over_2": 0.4571709475236574,
+    "q4_proposal_precision": 0.10245901639344263,
+    "q4_utility_positive_events": 3,
+    "receipt_sha256": "76a513f6b78a1ea94b6965c532524fc985feb25d4d51b02c147c5544e836d39a",
+    "recomputed_no_go": true,
+    "status": "NO_GO_ZERO_FIT_SUPPORT_PREFLIGHT",
+    "zero_execution_and_official_access": true
+  },
+  "p2": {
+    "checks_recomputed": {
+      "all_supported_cells_meet_block_gate": true,
+      "all_supported_cells_meet_day_gate": true,
+      "all_supported_cells_meet_profile_gate": true,
+      "passing_edges_gte_2": true,
+      "supported_cells_gte_2": true
+    },
+    "hard_deleted_profiles": 0,
+    "minimum_passing_edges": 2,
+    "passing_edge_count": 7,
+    "passing_edges": [
+      "temp_contrast_signed__residual_l2",
+      "temp_contrast_signed__residual_l3",
+      "temp_contrast_signed__residual_l4",
+      "psal_contrast_signed__residual_l4",
+      "thermal_change_24h_signed__residual_l4",
+      "residual_l2__residual_l4",
+      "residual_l3__residual_l4"
+    ],
+    "physical_extreme_profiles_preserved": 1752,
+    "receipt_sha256": "62fb0d97028fec1c299c333110625563149a76bb5187bbc623be6903af95cebd",
+    "sensor_suspect_profiles_diagnostic_only": 5885,
+    "status": "TRAIN_ONLY_ZERO_FIT_PREFLIGHT_PASS",
+    "supported_state_cells": 6,
+    "zero_execution_and_official_access": true
+  },
+  "p3": {
+    "applicable_window_counts": {
+      "2024_h2_storm": 41,
+      "2025_h1": 51,
+      "winter_transition": 65
+    },
+    "canonical_dataset_audit_match": true,
+    "canonical_global_by_station": {
+      "G-ORS": 86,
+      "I-ORS": 68,
+      "S-ORS": 89
+    },
+    "canonical_global_independent_count": 243,
+    "canonical_selection_matched_dense_count": 2131,
+    "overall_preflight_pass": true,
+    "payload_seal_match": true,
+    "receipt_sha256": "4552364ddbd21e0674c6e69afc74516d3845126de84ae8f8cc06b4c0a25b0914",
+    "recomputed_gates": {
+      "all_applicable_windows_gte_20": true,
+      "all_station_counts_gte_30": true,
+      "all_train_cutoffs_pass": true,
+      "applicable_windows_gte_2": true
+    },
+    "rows_deleted_or_masked": 0,
+    "status": "TRAIN_ONLY_ZERO_FIT_PREFLIGHT_PASS",
+    "storm_extreme_anchor_count_preserved": 3507,
+    "strict_t_minus_48h_finite_diagnostic": {
+      "dense_anchor_count": 2117,
+      "independent_78h_by_station": {
+        "G-ORS": 86,
+        "I-ORS": 68,
+        "S-ORS": 88
+      },
+      "independent_78h_count": 242,
+      "interpretation": "Diagnostic-only subset requiring finite Hs exactly at t-48h; the canonical pipeline requires 48h elapsed and supports masked missing history."
+    },
+    "zero_execution_and_official_access": true
+  },
+  "qa_read_surface": [
+    "artifacts/p1_heterogeneous_event_utility_preflight_20260830_v1/terminal_result.json",
+    "artifacts/p2_state_conditioned_copula_preflight_20260830_v1/result.json",
+    "artifacts/p3_selection_matched_cohort_preflight_20260830_v1/preflight.json",
+    "reports/original_dataset_breakthrough_research_20260830_v1/dataset-audit.json",
+    "configs/experiments/p1_heterogeneous_event_utility_preflight_20260830_v1.json",
+    "configs/experiments/p2_state_conditioned_copula_preflight_20260830_v1.json",
+    "configs/experiments/p3_selection_matched_cohort_preflight_20260830_v1.json",
+    "scripts/run_p1_heterogeneous_event_utility_preflight_20260830_v1.py",
+    "scripts/run_p2_state_conditioned_copula_preflight_20260830_v1.py",
+    "scripts/run_p3_selection_matched_cohort_preflight_20260830_v1.py",
+    "tests/test_audit_original_training_structure_20260830_v1.py",
+    "tests/test_p1_heterogeneous_event_utility_preflight_20260830_v1.py",
+    "tests/test_p2_state_conditioned_copula_preflight_20260830_v1.py",
+    "tests/test_p3_selection_matched_cohort_preflight_20260830_v1.py"
+  ],
+  "schema_version": "original_dataset_breakthrough_independent_qa.20260830.v1",
+  "status": "PASS_WITH_DISCLOSED_P1_POST_RUN_HARDENING"
+}

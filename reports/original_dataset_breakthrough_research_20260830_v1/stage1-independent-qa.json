@@ -1,0 +1,137 @@
+{
+  "conclusion": "No Stage-1 candidate passed its preregistered local promotion gate.",
+  "data_access": {
+    "baseline_rows_read": 0,
+    "checkpoint_files_read": 0,
+    "csv_created": 0,
+    "hidden_or_answer_rows_read": 0,
+    "official_context_rows_read": 0,
+    "official_test_rows_read": 0,
+    "prediction_rows_read": 0,
+    "query_support_rows_read": 0,
+    "raw_training_rows_read_by_qa": 0,
+    "sample_rows_read": 0,
+    "score_rows_read": 0,
+    "submission_rows_read": 0,
+    "test_index_rows_read": 0,
+    "uploads": 0
+  },
+  "p2": {
+    "access_csv_submission_upload_zero": true,
+    "bootstrap_ci90_c": [
+      -0.006529881874038945,
+      -0.0019229331946138068
+    ],
+    "classification": "HISTORICALLY_EXPOSED_RESEARCH_ONLY",
+    "config_sha256": "40b6f47ae0b3aced73c11458c2429a7c15f3bb56d83efcb31fb0743da48ea65b",
+    "decision": "NO_GO_STATE_CONDITIONED_COPULA_STAGE1",
+    "elapsed_seconds": 23.424383099976694,
+    "execution_runner_cryptographically_bound_in_receipt": false,
+    "failed_promotion_checks": [
+      "at_least_two_of_three_windows_improve",
+      "worst_season_regression_lte_0_003_c"
+    ],
+    "fit_counts": {
+      "inner_selection_fits": 0,
+      "outer_dependence_model_fits": 3,
+      "state_cell_correlation_estimations": 18
+    },
+    "hard_deleted_training_profiles": 0,
+    "one_shot_fail_closed_enforced_before_fits": false,
+    "one_shot_no_tuning_or_retry": true,
+    "one_shot_observed_from_receipt": true,
+    "pooled_candidate_rmse_c": 3.082327672170323,
+    "pooled_delta_candidate_minus_reference_c": -0.0034591760934881144,
+    "pooled_reference_rmse_c": 3.0857868482638113,
+    "provenance_disclosure": "The receipt records one observed execution with no tuning or retry, but the runner creates its exclusive result only after fitting and has no pre-fit attempt lock; the Stage-1 runner hash is therefore not bound into the receipt.",
+    "recomputed_promotion_checks": {
+      "at_least_two_of_three_windows_improve": false,
+      "correction_p99_lte_0_2_c": true,
+      "correction_rms_lte_0_075_c": true,
+      "no_layer_worse_by_more_than_0_001_c": true,
+      "paired_kst_day_bootstrap_ci90_upper_lt_0": true,
+      "pooled_delta_rmse_lt_0": true,
+      "worst_season_regression_lte_0_003_c": false
+    },
+    "result_sha256": "493ed58d5e7893f7c9297f26fe992393fdd3498820b562e1f045a77e1e992e2f",
+    "runner_sha256": "8f7e4dda07905136ccf13f736ead3f9dde6bea3f4ab5b993aad4b72d8ba4d183",
+    "season_deltas_c": {
+      "DJF": 0.0,
+      "JJA": 0.0031742402025252137,
+      "SON": -0.0053951927108024655
+    },
+    "test_sha256": "20706797d7819deee1d1a3c8ec8e63e9d2e978168d53bf03c4fe948e44e2e248",
+    "window_deltas_c": {
+      "2024_sep_oct": -0.006598154116172594,
+      "2025_jul_aug": 0.0031742402025252137,
+      "2025_nov_dec": 0.0
+    }
+  },
+  "p3": {
+    "access_csv_submission_upload_zero": true,
+    "attempt_lock_matches_result_one_shot_attempt": true,
+    "attempt_lock_sha256": "a053715f60c53abbf8f30e3991cee5bb7980aaf5a2224c2b246fb82c029c7ac5",
+    "candidate_rmse_m": 1.1253744014449683,
+    "config_sha256": "f907f9ce4d6946697a55383c0d2d675e28f60ad18934f968dff949efefee1f66",
+    "decision": "NO_GO_CLOSE_THIS_EXACT_RECIPE",
+    "elapsed_seconds": 37.78838949999772,
+    "encoder_optimizer_steps": 920,
+    "execution_implementation_hashes_match_current_files": true,
+    "failed_promotion_checks": [
+      "all_integrity_checks_pass",
+      "pooled_improvement_at_least_preregistered_margin",
+      "paired_case_ci90_upper_below_zero",
+      "minimum_improved_forward_windows",
+      "worst_lead_regression_within_cap"
+    ],
+    "fit_counts": {
+      "catboost_fits": 0,
+      "huber_head_fits": 3,
+      "masked_encoder_fits": 3,
+      "reference_router_fits": 2,
+      "total_fit_calls": 8
+    },
+    "integrity_failed_checks": [
+      "huber_convergence_warning_zero"
+    ],
+    "module_sha256": "9cd1456bc8978bf8e4896cc5d7a791506c8d20a2a0800ed6cb22c4519e9076f3",
+    "paired_case_bootstrap_ci90_m": [
+      0.2448493754044661,
+      0.38878588237499895
+    ],
+    "paired_incumbent_rmse_m": 0.8112191629646779,
+    "payload_seal_match": true,
+    "persistence_rmse_m": 0.8462599747112595,
+    "pooled_delta_candidate_minus_incumbent_m": 0.31415523848029037,
+    "recomputed_promotion_checks": {
+      "all_integrity_checks_pass": false,
+      "minimum_improved_forward_windows": false,
+      "paired_case_ci90_upper_below_zero": false,
+      "pooled_improvement_at_least_preregistered_margin": false,
+      "worst_lead_regression_within_cap": false
+    },
+    "result_sha256": "b6373cf4a6b281096dda4dbf10caf8bc9bebd01b01883269e421379ae702f7f5",
+    "runner_sha256": "f1d058531ba986339bda6dae071fafa2f0d54462dadfe00223881fd634080a39",
+    "sensor_or_extreme_rows_deleted_or_masked": 0,
+    "test_sha256": "2f2266c5bb2d62d1e38a5c39717fc036295d85669fd1efaa5c85c53d72b4de22",
+    "window_deltas_m": {
+      "2024_h2_storm": 0.380668696130982,
+      "2025_h1": 0.08955807271740956,
+      "winter_transition": 0.4297136940558256
+    }
+  },
+  "qa_read_surface": [
+    "artifacts/p2_state_conditioned_copula_20260830_v1/result.json",
+    "configs/experiments/p2_state_conditioned_copula_20260830_v1.json",
+    "scripts/run_p2_state_conditioned_copula_20260830_v1.py",
+    "tests/test_p2_state_conditioned_copula_20260830_v1.py",
+    "artifacts/p3_selection_matched_masked_ssl_20260830_v1/result.json",
+    "artifacts/p3_selection_matched_masked_ssl_20260830_v1.ATTEMPT_LOCK.json",
+    "configs/experiments/p3_selection_matched_masked_ssl_20260830_v1.json",
+    "scripts/run_p3_selection_matched_masked_ssl_20260830_v1.py",
+    "src/p3_wave/selection_matched_masked_ssl_20260830_v1.py",
+    "tests/test_p3_selection_matched_masked_ssl_20260830_v1.py"
+  ],
+  "schema_version": "original_dataset_breakthrough_stage1_independent_qa.20260830.v1",
+  "status": "PASS_BOTH_TERMINAL_NO_GO_WITH_P2_PROVENANCE_DISCLOSURE"
+}

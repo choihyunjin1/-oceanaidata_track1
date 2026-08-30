@@ -1,0 +1,446 @@
+{
+  "data_access": {
+    "baseline_rows_read": 0,
+    "csv_created": 0,
+    "hidden_label_rows_read": 0,
+    "opened_training_files": [
+      "P1/README.md",
+      "P1/train.csv",
+      "P2/README.md",
+      "P2/observations.csv",
+      "P3/README.md",
+      "P3/train_wave.csv",
+      "P3/train_atmos.csv"
+    ],
+    "sample_rows_read": 0,
+    "score_rows_read": 0,
+    "submission_rows_read": 0,
+    "test_index_rows_read": 0,
+    "test_rows_read": 0,
+    "uploads": 0
+  },
+  "p1": {
+    "binary_contiguous_event_count": 263,
+    "by_type": {
+      "drift": {
+        "duration_hours": {
+          "count": 32,
+          "median": 50.916666666666664,
+          "q10": 16.71666666666667,
+          "q90": 65.0
+        },
+        "events": 32,
+        "rows": 8575
+      },
+      "drift+offset": {
+        "duration_hours": {
+          "count": 1,
+          "median": 7.333333333333333,
+          "q10": 7.333333333333333,
+          "q90": 7.333333333333333
+        },
+        "events": 1,
+        "rows": 45
+      },
+      "flatline": {
+        "duration_hours": {
+          "count": 55,
+          "median": 14.166666666666666,
+          "q10": 2.8333333333333335,
+          "q90": 39.03333333333333
+        },
+        "events": 55,
+        "rows": 6030
+      },
+      "flatline+drift": {
+        "duration_hours": {
+          "count": 2,
+          "median": 12.333333333333334,
+          "q10": 4.866666666666667,
+          "q90": 19.8
+        },
+        "events": 2,
+        "rows": 150
+      },
+      "flatline+flatline": {
+        "duration_hours": {
+          "count": 1,
+          "median": 21.833333333333332,
+          "q10": 21.833333333333332,
+          "q90": 21.833333333333332
+        },
+        "events": 1,
+        "rows": 132
+      },
+      "flatline+spike": {
+        "duration_hours": {
+          "count": 2,
+          "median": 0.0,
+          "q10": 0.0,
+          "q90": 0.0
+        },
+        "events": 2,
+        "rows": 2
+      },
+      "noise": {
+        "duration_hours": {
+          "count": 53,
+          "median": 32.333333333333336,
+          "q10": 6.200000000000001,
+          "q90": 54.400000000000006
+        },
+        "events": 53,
+        "rows": 9442
+      },
+      "noise+drift": {
+        "duration_hours": {
+          "count": 1,
+          "median": 15.666666666666666,
+          "q10": 15.666666666666666,
+          "q90": 15.666666666666666
+        },
+        "events": 1,
+        "rows": 95
+      },
+      "noise+flatline": {
+        "duration_hours": {
+          "count": 1,
+          "median": 15.0,
+          "q10": 15.0,
+          "q90": 15.0
+        },
+        "events": 1,
+        "rows": 91
+      },
+      "noise+offset": {
+        "duration_hours": {
+          "count": 1,
+          "median": 4.5,
+          "q10": 4.5,
+          "q90": 4.5
+        },
+        "events": 1,
+        "rows": 28
+      },
+      "offset": {
+        "duration_hours": {
+          "count": 35,
+          "median": 30.5,
+          "q10": 9.966666666666669,
+          "q90": 59.2
+        },
+        "events": 35,
+        "rows": 7296
+      },
+      "offset+drift": {
+        "duration_hours": {
+          "count": 1,
+          "median": 10.333333333333334,
+          "q10": 10.333333333333334,
+          "q90": 10.333333333333334
+        },
+        "events": 1,
+        "rows": 63
+      },
+      "offset+flatline": {
+        "duration_hours": {
+          "count": 1,
+          "median": 5.833333333333333,
+          "q10": 5.833333333333333,
+          "q90": 5.833333333333333
+        },
+        "events": 1,
+        "rows": 36
+      },
+      "offset+offset": {
+        "duration_hours": {
+          "count": 1,
+          "median": 6.333333333333333,
+          "q10": 6.333333333333333,
+          "q90": 6.333333333333333
+        },
+        "events": 1,
+        "rows": 39
+      },
+      "spike": {
+        "duration_hours": {
+          "count": 101,
+          "median": 0.0,
+          "q10": 0.0,
+          "q90": 0.0
+        },
+        "events": 101,
+        "rows": 101
+      },
+      "spike+drift": {
+        "duration_hours": {
+          "count": 1,
+          "median": 0.0,
+          "q10": 0.0,
+          "q90": 0.0
+        },
+        "events": 1,
+        "rows": 1
+      }
+    },
+    "event_definition_note": "binary events split only on station/year/layer, 10-minute continuity, and label; typed events additionally split when anomaly_type changes",
+    "multi_type_binary_event_count": 12,
+    "positive_rate": 0.041361853777362345,
+    "positive_rows": 32126,
+    "rows": 776706,
+    "source": {
+      "bytes": 50584654,
+      "filename": "train.csv",
+      "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+      "sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2"
+    },
+    "typed_contiguous_event_count": 289
+  },
+  "p2": {
+    "candidate_support_note": "public T/S profile state plus 6/24/72-hour changes can be formed without opening query, test, sample, baseline, score, or submission files",
+    "complete_target_profile_timestamps": 54817,
+    "complete_temp_psal_all_layer_timestamps": 47216,
+    "complete_temp_psal_depth_all_layer_timestamps": 47215,
+    "finite_public_state_72h_count": 99756,
+    "finite_public_state_72h_fraction": 0.9476744186046512,
+    "layers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "public_layer_availability": {
+      "salinity_count": {
+        "0": 4045,
+        "1": 161,
+        "2": 2193,
+        "3": 36344,
+        "4": 41708,
+        "5": 20813
+      },
+      "temperature_count": {
+        "0": 3711,
+        "1": 500,
+        "2": 194,
+        "3": 37096,
+        "4": 39217,
+        "5": 24546
+      }
+    },
+    "public_state_timestamp_count": 105264,
+    "rows": 789408,
+    "source": {
+      "bytes": 49058719,
+      "filename": "observations.csv",
+      "readme_sha256": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "state_features": {
+      "public_psal_count": {
+        "count": 105264,
+        "median": 4.0,
+        "q10": 3.0,
+        "q90": 5.0
+      },
+      "public_psal_range": {
+        "count": 101219,
+        "median": 0.43799999999999883,
+        "q10": 0.09539999999999793,
+        "q90": 1.8114999999999988
+      },
+      "public_temp_count": {
+        "count": 105264,
+        "median": 4.0,
+        "q10": 3.0,
+        "q90": 5.0
+      },
+      "public_temp_range": {
+        "count": 101553,
+        "median": 4.613499999999998,
+        "q10": 0.019700000000000273,
+        "q90": 14.88598
+      },
+      "temp_mean_change_24h": {
+        "count": 101009,
+        "median": -0.0029333333333347866,
+        "q10": -0.6429999999999978,
+        "q90": 0.6548999999999999
+      },
+      "temp_mean_change_6h": {
+        "count": 101331,
+        "median": -0.0033799999999999386,
+        "q10": -0.8622499999999995,
+        "q90": 0.8846000000000007
+      },
+      "temp_mean_change_72h": {
+        "count": 100617,
+        "median": 0.0031666666666687604,
+        "q10": -0.9656800000000004,
+        "q90": 1.0215100000000024
+      },
+      "temp_range_change_24h": {
+        "count": 101009,
+        "median": -0.001200000000000756,
+        "q10": -0.7260200000000021,
+        "q90": 0.7354199999999982
+      },
+      "temp_range_change_6h": {
+        "count": 101331,
+        "median": 0.0,
+        "q10": -0.7792000000000012,
+        "q90": 0.7469999999999981
+      },
+      "temp_range_change_72h": {
+        "count": 100617,
+        "median": 0.0005999999999994898,
+        "q10": -1.2905000000000004,
+        "q90": 1.3693400000000016
+      }
+    }
+  },
+  "p3": {
+    "atmos_complete_fraction_by_column": {
+      "airt": 0.9788839995110622,
+      "caph": 0.9822760053783156,
+      "gust": 0.9798007578535631,
+      "relh": 0.8684757364625352,
+      "wdir": 0.9800834250091676,
+      "wspd": 0.9796785234078963
+    },
+    "canonical_dense_spacing_minutes": 60,
+    "canonical_elapsed_48h_high_state_anchor_count": 8121,
+    "official_leads_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "prior_audit_contract_correction": {
+      "correct_horizons_hours": [
+        3,
+        6,
+        9,
+        12,
+        18,
+        24
+      ],
+      "prior_horizon_vector_matches_official": false,
+      "prior_horizons_hours": [
+        12,
+        24,
+        36,
+        48,
+        60,
+        72
+      ]
+    },
+    "rows": {
+      "train_atmos": 130896,
+      "train_wave": 118152
+    },
+    "selection_matched_78h_by_station": {
+      "G-ORS": 86,
+      "I-ORS": 68,
+      "S-ORS": 89
+    },
+    "selection_matched_78h_independent_count": 243,
+    "selection_matched_current_hs": {
+      "count": 243,
+      "median": 1.62,
+      "q10": 1.52,
+      "q90": 2.0380000000000003
+    },
+    "selection_matched_dense_anchor_count": 2131,
+    "selection_matched_persistence_by_lead": {
+      "12": {
+        "future_change": {
+          "count": 243,
+          "median": -0.15000000000000013,
+          "q10": -0.8780000000000001,
+          "q90": 1.1300000000000001
+        },
+        "persistence_rmse": 0.8207717436315853
+      },
+      "18": {
+        "future_change": {
+          "count": 243,
+          "median": -0.30000000000000004,
+          "q10": -1.088,
+          "q90": 1.0300000000000005
+        },
+        "persistence_rmse": 0.8690188876891537
+      },
+      "24": {
+        "future_change": {
+          "count": 243,
+          "median": -0.43999999999999995,
+          "q10": -1.1759999999999997,
+          "q90": 0.858
+        },
+        "persistence_rmse": 0.9023161782860306
+      },
+      "3": {
+        "future_change": {
+          "count": 243,
+          "median": 0.04999999999999982,
+          "q10": -0.48799999999999993,
+          "q90": 0.7540000000000001
+        },
+        "persistence_rmse": 0.5406390061579204
+      },
+      "6": {
+        "future_change": {
+          "count": 243,
+          "median": -0.09000000000000008,
+          "q10": -0.726,
+          "q90": 0.9879999999999999
+        },
+        "persistence_rmse": 0.6993621432472645
+      },
+      "9": {
+        "future_change": {
+          "count": 243,
+          "median": -0.15999999999999992,
+          "q10": -0.7999999999999999,
+          "q90": 1.166000000000001
+        },
+        "persistence_rmse": 0.8025630239472832
+      }
+    },
+    "selection_matched_rise_12h": {
+      "count": 243,
+      "median": 0.8300000000000001,
+      "q10": 0.29000000000000004,
+      "q90": 1.29
+    },
+    "source": {
+      "readme_sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+      "train_atmos": {
+        "bytes": 8962353,
+        "sha256": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+      },
+      "train_wave": {
+        "bytes": 6132036,
+        "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+      }
+    },
+    "strict_complete_hs_lag48_and_six_lead_anchor_count": 33541,
+    "strict_hs_lag48_selection_diagnostic": {
+      "dense_anchor_count": 2117,
+      "independent_78h_by_station": {
+        "G-ORS": 86,
+        "I-ORS": 68,
+        "S-ORS": 88
+      },
+      "independent_78h_count": 242,
+      "interpretation": "Diagnostic-only subset requiring finite Hs exactly at t-48h; the canonical pipeline requires 48h elapsed and supports masked missing history."
+    }
+  },
+  "schema_version": "original_training_structure_reaudit.20260830.v1"
+}
