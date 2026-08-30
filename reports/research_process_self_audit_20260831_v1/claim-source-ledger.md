@@ -1,0 +1,18 @@
+# Claim-source ledger
+
+| ID | Claim | Type | Source | Confidence / limit |
+|---|---|---|---|---|
+| C01 | P1/P2/P3 exact closed groups are 13/10/7. | measured | `reports/negative_evidence_registry_20260830_v1/failure-ledger.json` | High; group count, not independent hypothesis count. |
+| C02 | P1 trial18 moved from Q2 `+0.000565637` to sealed confirmation `-0.011889120` ΔF1. | measured | `reports/parallel_hpo_cycle_20260829_v1/report-source.md`; `reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json` | High; different evaluation phases. |
+| C03 | P2 copula proxy `-0.010616065°C` reversed to Public `+0.012050°C` ΔRMSE. | measured | `reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json` | High for Public display; Private unknown. |
+| C04 | P3 CatBoost selection `-0.0228625m` reversed to confirmation `+0.0079741m`. | measured | `reports/p3_catboost_confirmation_contract_repair_20260830_v3/report-source.md` | High; 182 cases, all listed subgroups non-improved. |
+| C05 | P1 G 15-row addition has displayed Public marginal `+0.004519` F1; S 238-row marginal is displayed `0`. | measured | `reports/official_information_probe_cycle_20260830_v1/p1-official-result.json` | High at six-decimal display; not rowwise truth or exact equality. |
+| C06 | P2 bin17-only improved prior champion by `0.000015°C` and `0.000187` points. | measured | `reports/official_information_probe_cycle_20260830_v1/p2-official-result.json` | High for Public display; Private unknown. |
+| C07 | P3 KMA alpha .425 improved by `0.000029m` and `0.000473` points; all station contributions are positive in displayed MSE decomposition. | measured | `reports/p3_kma_uniform_0425_official_submission_20260830_v1/official-submission-receipt.json`; `reports/official_information_probe_cycle_20260830_v1/p3-official-result.json` | High for displayed Public arithmetic; Private unknown. |
+| C08 | The Gemini correction prompt was detailed but its output still repeated five material interpretation errors. | measured audit | `reports/p1_dual_research_breakthrough_20260829_v1/gemini-correction-prompt.md`; `reports/p1_dual_research_breakthrough_20260829_v1/gemini-audit.md` | High for that prompt/output pair; not a universal model-quality claim. |
+| C09 | Finite-sample model-selection criteria can themselves be overfit, causing selection bias comparable to algorithm differences. | literature | Cawley & Talbot 2010, JMLR | Primary source; general mechanism, not proof of exact local cause. |
+| C10 | Repeated adaptive leaderboard evaluation can overfit the leaderboard holdout. | literature | Blum & Hardt 2015, PMLR | Primary source; supports risk mechanism, not hidden-label access allegation. |
+| C11 | Random search can be more efficient than grid search when few hyperparameters matter. | literature | Bergstra & Bengio 2012, JMLR | Primary source; says nothing about transport to a new distribution. |
+| C12 | Sampling, initialization and HPO variation can materially change benchmark comparisons. | literature | Bouthillier et al. 2021, MLSys | Primary source; supports variance-aware confirmation. |
+| C13 | The main local bottleneck is validation/proxy governance, with prompt framing as a contributing cause. | diagnostic inference | C02-C04, C08-C12 | Medium-high; domain shift and selection noise cannot be separately quantified. |
+| C14 | Fixed three-point and simple positive-delta gates should be replaced by stage-specific evidence contracts. | recommendation | C02-C07, C09-C12 | Medium-high; exact harm margins still need problem-specific preregistration. |
