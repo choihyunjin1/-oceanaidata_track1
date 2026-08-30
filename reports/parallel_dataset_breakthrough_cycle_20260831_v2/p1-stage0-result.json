@@ -1,0 +1,118 @@
+{
+  "checks": {
+    "all_required_source_files_exist": true,
+    "csv_created_zero": true,
+    "hard_cell_headroom_present": true,
+    "model_fits_zero": true,
+    "official_test_sample_submission_hidden_rows_read_zero": true,
+    "offset_and_drift_headroom_present": true,
+    "segment_decoder_materially_distinct": true,
+    "uploads_zero": true,
+    "v6r2_actual_run_false": true,
+    "v6r2_model_fits_zero": true,
+    "v6r4_actual_run_false": true,
+    "v6r4_model_fits_zero": true
+  },
+  "decision": "READY_TO_PREREGISTER_RESEARCH_ONLY_NOT_READY_TO_FIT",
+  "execution_audit": {
+    "aggregate_json_files_read": 8,
+    "csv_created": 0,
+    "model_fits": 0,
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "prediction_rows_created": 0,
+    "raw_training_rows_read": 0,
+    "uploads": 0
+  },
+  "experiment_id": "p1_clean_state_capa_reopen_preflight_20260831_v1",
+  "leaderboard_headroom_snapshot": {
+    "inferred_problem_best_f1": 0.9500367,
+    "mapping_is_not_official": true,
+    "observed_at_kst": "2026-08-29T01:55:20+09:00",
+    "our_public_f1": 0.833548,
+    "planning_only_f1_gap": 0.1164887,
+    "point_gap": 3.096057
+  },
+  "lineage_evidence": {
+    "new_decoder": "joint_point_and_collective_penalized_segment_likelihood",
+    "old_decoder": "pointwise_logistic_plus_fixed_run_filter",
+    "old_representation": "robust_multiscale_cross_layer_offset_drift_unary",
+    "semantic_relation": "HIGH_REPRESENTATION_OVERLAP_MATERIALLY_DISTINCT_DECODER",
+    "v6r2_actual_run_performed": false,
+    "v6r2_model_fits": 0,
+    "v6r2_technical_p0_count": 2,
+    "v6r2_technical_p1_count": 3,
+    "v6r4_actual_run_performed": false,
+    "v6r4_model_fits": 0
+  },
+  "local_mechanism_headroom": {
+    "drift_recall": 0.646150352032705,
+    "hard_cell_test_share_proxy_sum": 0.24790694096833935,
+    "hard_cells": {
+      "I-ORS|1": {
+        "f1": 0.43277723258096173,
+        "test_share_proxy": 0.10038991544929028
+      },
+      "I-ORS|5": {
+        "f1": 0.6955128205128205,
+        "test_share_proxy": 0.11511676754767441
+      },
+      "S-ORS|2": {
+        "f1": 0.5063731170336037,
+        "test_share_proxy": 0.03240025797137464
+      }
+    },
+    "june_f1": 0.502852795739825,
+    "offset_recall": 0.6491542798564839
+  },
+  "official_champion_context": {
+    "hidden_truth_reads": 0,
+    "public_f1": 0.833548,
+    "status": "KEEP_EXISTING_CHAMPION_INFORMATION_GAINED"
+  },
+  "schema_version": "p1.clean_state_capa_reopen_preflight.result.v1",
+  "scientific_disposition": "REOPEN_UNEXECUTED_FAMILY",
+  "source_files": {
+    "config": {
+      "bytes": 2777,
+      "path": "configs/experiments/p1_clean_state_capa_reopen_preflight_20260831_v1.json",
+      "sha256": "6c9d278acada106ebba73872e9cdfca2507070adc7b2a9494853236b15e50733"
+    },
+    "historical_ledger": {
+      "bytes": 170234,
+      "path": "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json",
+      "sha256": "8e7f2fbe07c74d313ce3c652b6eeffdd4d5a7af1351b96d7fc984be987778f69"
+    },
+    "leaderboard": {
+      "bytes": 2037,
+      "path": "reports/leaderboard_headroom_double_research_20260829_v1/leaderboard_snapshot.json",
+      "sha256": "55b7c6c8e634391837e7ab104bb6d8f21737e6c9fcc06a56d5b59f0382a60ce2"
+    },
+    "official_probe": {
+      "bytes": 4452,
+      "path": "reports/official_information_probe_cycle_20260830_v1/independent-qa.json",
+      "sha256": "c7a9ff85b56d0e43d1bcf481511e23324a2cc960395c3107be83f2a97633fc9d"
+    },
+    "science_projection": {
+      "bytes": 9537,
+      "path": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r2_science_projection.json",
+      "sha256": "c8bc59c7dc78568fbf79a54a8dfdbfe799242d44cfa31d155b31000d4cafcaef"
+    },
+    "v6r2_disposition": {
+      "bytes": 6531,
+      "path": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_disposition/OWNER_STATIC_QA_NO_GO_20260823.json",
+      "sha256": "b1039693cfc5f19d62af8105f2a9eead3a74c4ddc05694b4e60b1cbf0ebcf56f"
+    },
+    "v6r4_config": {
+      "bytes": 13681,
+      "path": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r4.json",
+      "sha256": "62a5ea4e2be163c4f815beaed6f3fb877dbc3d6091f81148e9437de9a6c27d44"
+    },
+    "validation": {
+      "bytes": 32567,
+      "path": "artifacts/validation_system_audit_20260822/p1.json",
+      "sha256": "0752941c2d11d5e052307fd7eaf83d60c39f7e28768c06cc2da285814ed9cd40"
+    }
+  },
+  "stage1_authorized": false,
+  "why_not_stage1": "A unique executable decoder contract, frozen proposal fingerprint, and an independent QA receipt are still required. Existing exposed folds cap any later result at RESEARCH_ONLY until a fresh organizer-blind surface exists."
+}
