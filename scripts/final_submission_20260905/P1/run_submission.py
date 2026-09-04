@@ -1,61 +1,57 @@
-"""Standalone exact materializer for the frozen clean P1 final candidate."""
+"""Fail-closed P1 runner: verified trained checkpoints -> official CSV."""
 
 from __future__ import annotations
 
-import json
+import importlib.util
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from common import (
     ContractError,
     load_contract,
-    require_file,
-    sha256_file,
     verify_official_files,
+    verify_package_files,
     write_json,
 )
 
 KEYS = ["station", "year", "layer", "time"]
 
 
-def _read(path: Path) -> pd.DataFrame:
-    return pd.read_csv(path, dtype={"station": "string", "time": "string"})
+def _load_predictor(package: Path):
+    path = package / "04_predict" / "predict_submission.py"
+    spec = importlib.util.spec_from_file_location("p1_final_predictor", path)
+    if spec is None or spec.loader is None:
+        raise ContractError(f"cannot load P1 predictor: {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def preflight(data_dir: str | Path, package_dir: str | Path = ".") -> dict:
     package = Path(package_dir).resolve()
+    data = Path(data_dir).resolve()
     contract = load_contract(package)
-    official = verify_official_files(data_dir, contract)
-    anchor_path = require_file(
-        package / "assets" / "e150_anchor.csv",
-        contract["anchor_sha256"],
-        "P1 e150 anchor",
-    )
-    patch_path = require_file(
-        package / "assets" / "gi_spike2_patch.json",
-        contract["patch_sha256"],
-        "P1 GI spike2 patch",
-    )
-    test = _read(Path(data_dir) / "test.csv")
-    anchor = _read(anchor_path)
-    patch = json.loads(patch_path.read_text(encoding="utf-8"))
-    if list(anchor.columns) != contract["expected_columns"]:
-        raise ContractError("P1 anchor schema drift")
-    if len(anchor) != contract["expected_rows"] or len(test) != contract["expected_rows"]:
-        raise ContractError("P1 row-count drift")
-    if not test[KEYS].equals(anchor[KEYS]):
-        raise ContractError("P1 official-test and anchor key order differ")
-    if len(patch["rows"]) != 2:
-        raise ContractError("P1 patch must contain exactly two rows")
+    official = verify_official_files(data, contract)
+    models = verify_package_files(package, contract, "model_files")
+    derived = verify_package_files(package, contract, "derived_files")
+    decisions = verify_package_files(package, contract, "decision_files")
+    test = pd.read_csv(data / "test.csv", usecols=KEYS)
+    sample = pd.read_csv(data / "sample_submission.csv", usecols=KEYS)
+    if len(test) != contract["expected_rows"] or not test.equals(sample):
+        raise ContractError("P1 official schema/key/order contract failed")
+    if test.duplicated().any():
+        raise ContractError("P1 official keys are not unique")
     return {
-        "status": "PREFLIGHT_PASS",
+        "status": "PREFLIGHT_MODEL_CHAIN_PASS",
         "candidate_id": contract["candidate_id"],
-        "rows": len(anchor),
-        "columns": list(anchor.columns),
+        "rows": len(test),
+        "columns": contract["expected_columns"],
         "key_order_exact": True,
         "official_input_hashes_ok": True,
         "package_atomic": True,
+        "verified_model_files": len(models),
+        "verified_derived_files": len(derived),
+        "verified_decision_files": len(decisions),
         "official": official,
     }
 
@@ -63,52 +59,12 @@ def preflight(data_dir: str | Path, package_dir: str | Path = ".") -> dict:
 def materialize(
     data_dir: str | Path,
     package_dir: str | Path = ".",
-    output_path: str | Path = "outputs/P1_submission.csv",
+    output_path: str | Path = "05_answer/P1_submission.csv",
 ) -> dict:
     package = Path(package_dir).resolve()
-    contract = load_contract(package)
     preflight(data_dir, package)
-    anchor = _read(package / "assets" / "e150_anchor.csv")
-    patch = json.loads((package / "assets" / "gi_spike2_patch.json").read_text(encoding="utf-8"))
-    candidate = anchor.copy()
-    index = pd.MultiIndex.from_frame(candidate[KEYS])
-    if not index.is_unique:
-        raise ContractError("P1 anchor keys are not unique")
-    locations: list[int] = []
-    for row in patch["rows"]:
-        key = tuple(row[name] for name in KEYS)
-        location = index.get_indexer([key])[0]
-        if location < 0:
-            raise ContractError(f"P1 patch key missing: {key}")
-        locations.append(int(location))
-    if len(set(locations)) != 2 or not candidate.loc[locations, "label"].eq(0).all():
-        raise ContractError("P1 patch is not a two-row add-only change")
-    candidate.loc[locations, "label"] = 1
-    labels = pd.to_numeric(candidate["label"], errors="raise").to_numpy()
-    if not np.isin(labels, [0, 1]).all():
-        raise ContractError("P1 labels must be binary")
-    target = Path(output_path)
-    if not target.is_absolute():
-        target = package / target
-    target.parent.mkdir(parents=True, exist_ok=True)
-    candidate.to_csv(target, index=False, encoding="utf-8", lineterminator="\n")
-    actual = sha256_file(target)
-    if actual != contract["candidate_sha256"]:
-        raise ContractError(f"P1 final SHA drift: {actual}")
-    receipt = {
-        "status": "READY_EXACT_NOT_UPLOADED",
-        "candidate_id": contract["candidate_id"],
-        "rows": len(candidate),
-        "columns": list(candidate.columns),
-        "positive_rows": int(labels.sum()),
-        "changed_rows": 2,
-        "key_order_exact": True,
-        "sha256": actual,
-        "candidate_hash_exact": True,
-        "package_atomic": True,
-        "lineage": "organizer_distributed_data_only_scratch_models",
-    }
-    if receipt["positive_rows"] != contract["expected_positive_rows"]:
-        raise ContractError("P1 positive-row count drift")
-    write_json(package / "outputs" / "receipt.json", receipt)
+    receipt = _load_predictor(package).predict(data_dir, package, output_path)
+    if receipt["status"] != "READY_MODEL_INFERENCE_EXACT_NOT_UPLOADED":
+        raise ContractError("P1 predictor did not reach ready state")
+    write_json(package / "05_answer" / "receipt.json", receipt)
     return receipt

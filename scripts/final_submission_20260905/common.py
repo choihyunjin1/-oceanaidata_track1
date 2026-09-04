@@ -63,6 +63,26 @@ def verify_official_files(data_dir: str | Path, contract: dict[str, Any]) -> dic
     return {"data_dir": str(root), "sha256": checked}
 
 
+def verify_package_files(
+    package_dir: str | Path, contract: dict[str, Any], section: str
+) -> list[dict[str, Any]]:
+    """Verify every package-relative file declared in one contract section."""
+
+    root = Path(package_dir).resolve()
+    checked: list[dict[str, Any]] = []
+    for record in contract.get(section, []):
+        relative = Path(record["path"])
+        path = require_file(root / relative, record["sha256"], f"{section} {relative}")
+        checked.append(
+            {
+                "path": relative.as_posix(),
+                "bytes": path.stat().st_size,
+                "sha256": record["sha256"],
+            }
+        )
+    return checked
+
+
 def bounded_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     """Return metadata only; never expose prediction rows in notebook output."""
 
@@ -82,5 +102,10 @@ def bounded_receipt(payload: dict[str, Any]) -> dict[str, Any]:
         "package_atomic",
         "lineage",
         "caveat",
+        "checkpoint_files_loaded",
+        "training_fit_count",
+        "prediction_source",
+        "historical_champion_hash_exact",
+        "historical_champion_sha256",
     }
     return {key: value for key, value in payload.items() if key in allowed}

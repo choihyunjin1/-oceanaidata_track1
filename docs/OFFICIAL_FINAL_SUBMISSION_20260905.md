@@ -1,44 +1,66 @@
-# 공식 최종 제출 준비 — 2026-09-05
+# 공식 최종 제출 로컬 패키지 — 2026-09-05
 
 ## 결론
 
-P1, P2, P3는 서로 독립된 폴더와 Jupyter notebook으로 패키징한다. 각 notebook은 해당 문제의 운영진 배포 입력 해시를 확인한 뒤 정확한 frozen clean-lineage 후보를 만들고 schema, 행 수, 키 순서, finite/domain 규칙, SHA-256을 fail-closed로 검증한다. 한 문제의 실행은 다른 문제의 경로나 산출물을 읽거나 수정하지 않는다.
+각 문제를 `P1/`, `P2/`, `P3/`의 독립 실행 단위로 만들고, 내부를 운영진 데이터 → 학습 코드 → 저장 모델 → 모델 추론 답안 → 제출 양식 순서로 분리한다. 빌더가 과거 답안 CSV를 최종 예측 입력으로 복사하는 방식은 금지하며, `05_answer`는 반드시 `03_model` 가중치를 실제로 읽은 `04_predict`가 생성한다.
 
-로컬 산출 위치는 Git 비추적 영역인 `artifacts/official_final_submission_20260905/`이다. Git에는 재현 코드, notebook template, 계약, 테스트와 이 문서만 보존한다.
+P1과 P3는 규정 준수 계보 중 확인된 역사적 최고점 답안을 저장 모델 추론으로 byte-exact 재현한다. P2는 역사적 최고점 실행 당시 가중치를 저장하지 않았으므로 같은 v52 레시피를 세 seed로 새로 학습하고 그 모델 출력의 새 SHA를 고정한다. 따라서 P2의 `0.424019 C / 28.012945점`은 역사적 후보 근거이며, 새 model replay가 같은 공식 점수라고 주장하지 않는다.
 
-## 선택한 clean-lineage 후보
+로컬 완성본은 Git 비추적 영역인 `artifacts/official_final_submission_20260905/`에 생성한다. Git에는 빌더, 학습·추론 코드, notebook template, 계약, 테스트와 이 문서만 보존한다.
 
-| 문제 | 후보 | 공식 public 지표 | 문제 환산 점수 | 정확한 CSV SHA-256 |
-|---|---|---:|---:|---|
-| P1 | `P1_1_E150_PLUS_GI_SPIKE2` | F1 `0.833548` | `28.909341` | `57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687` |
-| P2 | `P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020` | RMSE `0.424019 C` | `28.012945` | `331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9` |
-| P3 | `P3_REFINED_PUBLIC_OPTIMUM_20260827` | RMSE `0.583892 m` | `24.066168` | `ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa` |
+## 선택 계보와 재현 수준
 
-P3의 더 높은 과거 공식 점수는 KMA/ERA5 외부자료 계보이므로 최종 재현 패키지에서 제외한다. 세 후보 모두 운영진 배포 데이터만 사용하고 사전학습 가중치를 사용하지 않은 scratch 계보다.
+| 문제 | 선택 계보 | 역사적 public 지표 / 점수 | 역사적 SHA-256 | 현재 모델 재현 |
+|---|---|---:|---|---|
+| P1 | `P1_1_E150_PLUS_GI_SPIKE2` | F1 `0.833548` / `28.909341` | `57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687` | byte-exact |
+| P2 | `P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020` | RMSE `0.424019 C` / `28.012945` | `331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9` | 동일 레시피 fresh 3-fit, 새 SHA |
+| P3 | `P3_REFINED_PUBLIC_OPTIMUM_20260827` | RMSE `0.583892 m` / `24.066168` | `ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa` | byte-exact |
 
-## 원자적 디렉터리 계약
+P3의 더 높은 과거 공식 점수는 KMA/ERA5 외부자료 계보라 제외한다. 세 패키지 모두 운영진 배포 데이터만 사용하며 관측자료 기반 사전학습 가중치는 사용하지 않는다.
 
-각 `P?/` 폴더는 다음을 자체 포함한다.
+## 문제별 원자적 폴더 계약
 
-- `P?_final_submission.ipynb`와 실행 완료본
-- `run_submission.py`, `common.py`, `contract.json`
-- 정확 재현에 필요한 package-local frozen inference/model assets
-- `outputs/P?_submission.csv`, `outputs/receipt.json`
-- 학습·추론 계보 검토용 `source_audit/`
-- 홈페이지 제목과 한 줄 요약이 적힌 `README.md`
+각 `P?/` 아래 구조는 동일하다.
 
-원본 배포 데이터는 재배포 금지이므로 포함하지 않는다. 실행자는 `P1_DATA_DIR`, `P2_DATA_DIR`, `P3_DATA_DIR` 중 해당 문제 하나만 지정한다.
+```text
+01_data/
+  organizer_dataset/     # 로컬 전용 운영진 배포 파일, Git/업로드 제외
+  INPUT_MANIFEST.json    # 파일명·크기·SHA-256
+02_train/
+  train_model.py         # scratch 학습 진입점
+  TRAIN.ipynb            # 학습 과정과 모델 manifest 검증
+03_model/
+  weights/               # train code가 생산한 저장 모델
+  MODEL_MANIFEST.json    # 데이터·seed·fit·trainer·weight 계보
+  training_provenance/   # 역사적 학습 receipt/manifest
+04_predict/
+  predict_submission.py  # 저장 모델을 실제 로드하는 추론
+  PREDICT.ipynb
+05_answer/
+  P?_submission.csv      # 모델 추론 산출물
+  receipt.json
+06_submission/
+  FORM.json              # 홈페이지 입력값과 답안 해시
+  FORMAT.md              # 정확한 CSV 양식
+07_source/               # 사용된 모듈·역사적 exact trainer/config
+RUN_TRAINING.ps1
+RUN_INFERENCE.ps1
+contract.json
+README.md
+```
 
-## 알려진 재현 경계
+패키지가 빠르게 만들어지는 이유는 P1/P3의 장시간 scratch 학습을 다시 수행하지 않고 과거 학습 당시 저장된 가중치와 provenance를 검증해 복사하기 때문이다. 결과 CSV를 복사하는 것은 아니다. P2는 해당 가중치가 없어 빌드 시 실제로 세 모델을 다시 학습한다. `RUN_TRAINING.ps1` 또는 `02_train/TRAIN.ipynb`의 명시적 toggle로 각 문제의 scratch 재학습 경로도 실행할 수 있으며 기존 certified weights를 덮어쓰지 않는다.
 
-- P1 exact mode는 scratch 3-seed MS-TCN e150의 frozen output에 등록된 GI spike 2행을 add-only로 적용한다. 약 631 MB인 선택적 checkpoint 세 개는 45 MB 조각으로 나누며, reassembly script와 전체/조각 SHA를 제공한다.
-- P2 원 실행은 scratch 3-fit을 약 74초에 완료했지만 checkpoint를 저장하지 않았다. 따라서 exact mode는 당시 배포된 ensemble output을 frozen asset으로 사용한다. 전체 v52 학습/materialization source와 근거는 함께 제공하며 이 한계를 숨기지 않는다.
-- P3 axis component는 동봉 checkpoint에서 byte-exact 재현된다. historical original component의 현재 saved-weight replay는 최대 `0.0048767 m` 차이가 있어, 정확한 deployed original component와 두 clean scratch-model bundle을 함께 제공한다.
+## 제출 CSV 양식
 
-## 홈페이지에서 확인한 형식
+- P1: `station, year, layer, time, label`, 정확히 `169011`행, `label`은 정수 `0/1`.
+- P2: `station, layer, time, temp`, 정확히 `26061`행, `temp`는 finite 실수(C).
+- P3: `case_id, station, lead_h, hs_pred`, 정확히 `1200`행, `lead_h`는 `3/6/9/12/18/24`, `hs_pred`는 finite 실수(m).
 
-2026-09-05 로그인된 모델 최종 제출 modal에서 제목은 필수이고, 한 줄 요약, 복수 결과 파일, 저장소 URL, 결과물 URL, 메모를 입력할 수 있다. 개별 파일 한도는 50 MB이다. 로컬 빌더는 모든 `upload/` 파일에 이 상한을 강제한다. 실제 최종 제출 버튼은 추가 답안 업로드를 잠그므로 이 준비 작업에서는 누르지 않는다.
+모든 키와 행 순서는 해당 문제의 `sample_submission.csv`와 같아야 하고 pandas index 열을 쓰지 않는다. 실제 홈페이지 제목, 한 줄 요약, 저장소 URL, 제출 대상 답안 SHA는 각 `06_submission/FORM.json`을 단일 근거로 사용한다.
 
-## 재빌드
+## 재빌드와 안전 경계
 
-`scripts/create_final_submission_notebooks_20260905.py`로 notebook template을 생성한 뒤 `scripts/build_official_final_submission_20260905.py`에 세 배포 데이터 폴더와 frozen component 경로를 명시한다. `--execute-notebooks`를 켜면 각각 새 Jupyter kernel에서 위에서 아래로 실행하고 bounded receipt만 남긴다.
+`scripts/create_final_submission_notebooks_20260905.py`로 notebook template을 생성한 뒤 `scripts/build_official_final_submission_20260905.py`에 세 배포 데이터 폴더와 검증된 모델 계보 경로를 전달한다. `--execute-notebooks`는 각 TRAIN notebook을 manifest-audit 모드로, 각 PREDICT notebook을 실제 모델 추론 모드로 별도 kernel에서 실행한다.
+
+원본 배포 데이터, 답안 CSV, 대형 가중치와 파생 cache는 Git에 커밋하지 않는다. 업로드 묶음에서도 원본 배포 데이터를 제외하고, 50 MB가 넘는 P1 자산은 SHA가 있는 조각으로 분할한다. 네트워크 업로드는 이 빌더가 수행하지 않는다.

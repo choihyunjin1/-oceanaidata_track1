@@ -1,8 +1,8 @@
-"""Standalone exact materializer for the frozen clean P2 final candidate."""
+"""Fail-closed P2 runner: freshly trained v52 checkpoints -> official CSV."""
 
 from __future__ import annotations
 
-import shutil
+import importlib.util
 from pathlib import Path
 
 import numpy as np
@@ -10,59 +10,58 @@ import pandas as pd
 from common import (
     ContractError,
     load_contract,
-    require_file,
-    sha256_file,
     verify_official_files,
+    verify_package_files,
     write_json,
 )
 
 KEYS = ["station", "layer", "time"]
 
 
-def _read(path: Path) -> pd.DataFrame:
-    return pd.read_csv(path, dtype={"station": "string", "time": "string"})
+def _load_predictor(package: Path):
+    path = package / "04_predict" / "predict_submission.py"
+    spec = importlib.util.spec_from_file_location("p2_final_predictor", path)
+    if spec is None or spec.loader is None:
+        raise ContractError(f"cannot load P2 predictor: {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def preflight(data_dir: str | Path, package_dir: str | Path = ".") -> dict:
     package = Path(package_dir).resolve()
+    data = Path(data_dir).resolve()
     contract = load_contract(package)
-    official = verify_official_files(data_dir, contract)
-    candidate_path = require_file(
-        package / "assets" / "frozen_v52_candidate.csv",
-        contract["candidate_sha256"],
-        "P2 frozen v52 candidate",
+    official = verify_official_files(data, contract)
+    models = verify_package_files(package, contract, "model_files")
+    decisions = verify_package_files(package, contract, "decision_files")
+    index = pd.read_csv(data / "test_index.csv", dtype={"station": "string", "time": "string"})
+    sample = pd.read_csv(
+        data / "sample_submission.csv",
+        usecols=KEYS,
+        dtype={"station": "string", "time": "string"},
     )
-    anchor_path = require_file(
-        package / "assets" / "bin17_anchor.csv",
-        contract["anchor_sha256"],
-        "P2 bin17 anchor",
+    anchor = pd.read_csv(
+        package / "03_model" / "decision_artifacts" / "bin17_anchor.csv",
+        dtype={"station": "string", "time": "string"},
     )
-    index = _read(Path(data_dir) / "test_index.csv")
-    sample_keys = _read(Path(data_dir) / "sample_submission.csv")[KEYS]
-    candidate = _read(candidate_path)
-    anchor = _read(anchor_path)
-    if list(candidate.columns) != contract["expected_columns"]:
-        raise ContractError("P2 candidate schema drift")
-    if not (len(index) == len(candidate) == len(anchor) == contract["expected_rows"]):
-        raise ContractError("P2 row-count drift")
-    if not index[KEYS].equals(candidate[KEYS]) or not index[KEYS].equals(anchor[KEYS]):
-        raise ContractError("P2 official-index/candidate/anchor key order differs")
-    if not index[KEYS].equals(sample_keys):
-        raise ContractError("P2 sample key order differs")
-    values = pd.to_numeric(candidate["temp"], errors="coerce").to_numpy(float)
-    anchor_values = pd.to_numeric(anchor["temp"], errors="coerce").to_numpy(float)
-    if not np.isfinite(values).all() or not np.isfinite(anchor_values).all():
-        raise ContractError("P2 candidate or anchor contains non-finite values")
-    if float(np.max(np.abs(values - anchor_values))) > 0.500000000001:
-        raise ContractError("P2 frozen 0.5 C action cap drift")
+    if not (len(index) == len(sample) == len(anchor) == contract["expected_rows"]):
+        raise ContractError("P2 row-count contract failed")
+    if not index[KEYS].equals(sample[KEYS]) or not index[KEYS].equals(anchor[KEYS]):
+        raise ContractError("P2 official/anchor schema-key-order contract failed")
+    values = pd.to_numeric(anchor["temp"], errors="coerce").to_numpy(float)
+    if not np.isfinite(values).all():
+        raise ContractError("P2 anchor contains non-finite values")
     return {
-        "status": "PREFLIGHT_PASS",
+        "status": "PREFLIGHT_MODEL_CHAIN_PASS",
         "candidate_id": contract["candidate_id"],
-        "rows": len(candidate),
-        "columns": list(candidate.columns),
+        "rows": len(index),
+        "columns": contract["expected_columns"],
         "key_order_exact": True,
         "official_input_hashes_ok": True,
         "package_atomic": True,
+        "verified_model_files": len(models),
+        "verified_decision_files": len(decisions),
         "official": official,
     }
 
@@ -70,35 +69,12 @@ def preflight(data_dir: str | Path, package_dir: str | Path = ".") -> dict:
 def materialize(
     data_dir: str | Path,
     package_dir: str | Path = ".",
-    output_path: str | Path = "outputs/P2_submission.csv",
+    output_path: str | Path = "05_answer/P2_submission.csv",
 ) -> dict:
     package = Path(package_dir).resolve()
-    contract = load_contract(package)
     preflight(data_dir, package)
-    source = package / "assets" / "frozen_v52_candidate.csv"
-    target = Path(output_path)
-    if not target.is_absolute():
-        target = package / target
-    target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source, target)
-    candidate = _read(target)
-    values = pd.to_numeric(candidate["temp"], errors="raise").to_numpy(float)
-    actual = sha256_file(target)
-    if actual != contract["candidate_sha256"]:
-        raise ContractError(f"P2 final SHA drift: {actual}")
-    receipt = {
-        "status": "READY_EXACT_NOT_UPLOADED",
-        "candidate_id": contract["candidate_id"],
-        "rows": len(candidate),
-        "columns": list(candidate.columns),
-        "minimum": float(values.min()),
-        "maximum": float(values.max()),
-        "key_order_exact": True,
-        "sha256": actual,
-        "candidate_hash_exact": True,
-        "package_atomic": True,
-        "lineage": "organizer_distributed_data_only_scratch_models",
-        "caveat": "Exact mode freezes the deployed scratch-ensemble output; full 3-fit retraining source is bundled for audit.",
-    }
-    write_json(package / "outputs" / "receipt.json", receipt)
+    receipt = _load_predictor(package).predict(data_dir, package, output_path)
+    if receipt["status"] != "READY_MODEL_INFERENCE_EXACT_NOT_UPLOADED":
+        raise ContractError("P2 predictor did not reach ready state")
+    write_json(package / "05_answer" / "receipt.json", receipt)
     return receipt
