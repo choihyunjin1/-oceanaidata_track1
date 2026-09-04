@@ -22,6 +22,11 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 6. Confirm the action does not mutate or redistribute source data.
 7. Stop and ask if any rule, data right, pretrained-weight provenance, or submission action is ambiguous.
 
+After this mandatory preflight, read `AI_HANDOFF.md` and
+`docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md` before inspecting final assets or
+using the competition portal. Machine-readable file choices and form values are
+in `configs/final_submission_portal_20260905.json`.
+
 ## Source-data boundary
 
 - Treat folders supplied through P1_DATA_DIR, P2_DATA_DIR, or P3_DATA_DIR as immutable, local-only input.
@@ -79,7 +84,7 @@ The current official interface allows up to three prediction uploads per problem
 
 ## Official milestone
 
-The 2026-08-07 and 2026-08-12 participant notices set problem release to 2026-08-13 and the final-model deadline to 2026-09-07. The current interface allows three prediction uploads per problem per day and locks later prediction uploads after final-model submission. The initial KIMST PDF's 2026-08-10 through 2026-09-04 schedule is retained only as superseded evidence. Re-check the participant UI immediately before any final action.
+The 2026-08-07 and 2026-08-12 participant notices set problem release to 2026-08-13 and the final-model deadline to 2026-09-07. A 2026-09-05 live public landing-page inspection instead displayed 2026-09-30 for preliminary completion/result submission, while the authenticated problem pages did not expose an exact cutoff time. Treat this conflict as unresolved: re-check the authenticated notice, quota, deadline, and final-model lock immediately before any final action. The interface inspected on 2026-09-05 allowed three prediction uploads per problem per day and warned that final-model submission locks later prediction uploads.
 
 ## Git safety
 

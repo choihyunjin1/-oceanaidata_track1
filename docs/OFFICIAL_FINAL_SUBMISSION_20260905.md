@@ -8,6 +8,8 @@ P1과 P3는 규정 준수 계보 중 확인된 역사적 최고점 답안을 저
 
 로컬 완성본은 Git 비추적 영역인 `artifacts/official_final_submission_20260905/`에 생성한다. Git에는 빌더, 학습·추론 코드, notebook template, 계약, 테스트와 이 문서만 보존한다.
 
+실제 포털에서 어떤 파일을 어느 문제에 선택하고 어떤 폼 값을 입력할지는 [공식 제출 실행서](OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)를 따른다. 다음 AI의 정찰 순서와 금지 경계는 루트 [AI_HANDOFF.md](../AI_HANDOFF.md), 기계 판독용 선택은 `configs/final_submission_portal_20260905.json`에 고정한다.
+
 ## 선택 계보와 재현 수준
 
 | 문제 | 선택 계보 | 역사적 public 지표 / 점수 | 역사적 SHA-256 | 현재 모델 재현 |
@@ -63,4 +65,4 @@ README.md
 
 `scripts/create_final_submission_notebooks_20260905.py`로 notebook template을 생성한 뒤 `scripts/build_official_final_submission_20260905.py`에 세 배포 데이터 폴더와 검증된 모델 계보 경로를 전달한다. `--execute-notebooks`는 각 TRAIN notebook을 manifest-audit 모드로, 각 PREDICT notebook을 실제 모델 추론 모드로 별도 kernel에서 실행한다.
 
-원본 배포 데이터, 답안 CSV, 대형 가중치와 파생 cache는 Git에 커밋하지 않는다. 업로드 묶음에서도 원본 배포 데이터를 제외하고, 50 MB가 넘는 P1 자산은 SHA가 있는 조각으로 분할한다. 네트워크 업로드는 이 빌더가 수행하지 않는다.
+원본 배포 데이터, 답안 CSV, 대형 가중치와 파생 cache는 Git에 커밋하지 않는다. 업로드 묶음에서도 원본 배포 데이터를 제외하고, 50 MB가 넘는 P1 자산은 SHA가 있는 조각으로 분할한다. P1/P2의 `07_source/src`는 실제 학습·추론 진입점의 dependency-closed allowlist만 포함하며, 과거 외부자료 연동 모듈은 감사용 Git 이력에만 남고 최종 ZIP에는 들어가지 않는다. P1 조각은 core ZIP에 포함된 `REASSEMBLE_UPLOAD.py`로 part/source SHA를 검증하며 복원한다. 네트워크 업로드는 이 빌더가 수행하지 않는다.

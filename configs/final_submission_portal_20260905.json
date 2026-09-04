@@ -1,0 +1,129 @@
+{
+  "schema_version": "ocean.final_submission.portal.20260905.v1",
+  "status": "LOCAL_GUIDE_ONLY_NOT_UPLOADED",
+  "snapshot": {
+    "observed_date_kst": "2026-09-05",
+    "authenticated_daily_remaining_display": {
+      "P1": "3/3",
+      "P2": "3/3",
+      "P3": "3/3"
+    },
+    "public_landing_page_displayed_preliminary_end": "2026-09-30",
+    "exact_deadline_time_verified": false,
+    "instruction": "Re-check authenticated notices, remaining quota, deadline, and lock warning immediately before acting."
+  },
+  "repository": {
+    "url": "https://github.com/choihyunjin1/-oceanaidata_track1",
+    "branch": "codex/p1-qc",
+    "package_built_from_commit": "48da22f1bbedbd575060b9a4b82681eaa6ce796c",
+    "local_package_root": "artifacts/official_final_submission_20260905",
+    "master_manifest": "artifacts/official_final_submission_20260905/MASTER_MANIFEST.json"
+  },
+  "safety": {
+    "organizer_distributed_data_only": true,
+    "external_observation_reanalysis_forecast_allowed": false,
+    "hidden_truth_access_allowed": false,
+    "pretrained_real_observation_weights_allowed": false,
+    "answer_upload_requires_exact_file_approval": true,
+    "final_model_submission_can_lock_future_answer_uploads": true,
+    "maximum_file_bytes": 50000000
+  },
+  "answer_upload": {
+    "browser_steps": [
+      "Open exact problem URL",
+      "Choose exactly one validated answer CSV",
+      "Verify selected filename",
+      "Click 제출하고 채점 exactly once",
+      "Verify the receipt in /app/submissions"
+    ],
+    "problems": {
+      "P1": {
+        "competition_problem": "OCN-01",
+        "url": "https://oceanaidata.org/app/problems/5",
+        "candidate_id": "P1_1_E150_PLUS_GI_SPIKE2",
+        "path": "artifacts/official_final_submission_20260905/P1/05_answer/P1_submission.csv",
+        "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+        "rows": 169011,
+        "columns": ["station", "year", "layer", "time", "label"],
+        "score_provenance": "official_public_score_of_this_exact_sha",
+        "official_metric": {"name": "F1", "value": 0.833548, "points": 28.909341}
+      },
+      "P2": {
+        "competition_problem": "OCN-02",
+        "url": "https://oceanaidata.org/app/problems/6",
+        "candidate_id": "P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020",
+        "score_priority_historical_answer": {
+          "path_binding": "P2_HISTORICAL_CHAMPION_CSV",
+          "private_archive_name": "20260901_P2_V52_SCORE_PRIORITY_READY_V1",
+          "filename": "P2_submission.csv",
+          "sha256": "331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9",
+          "score_provenance": "official_public_score_of_this_exact_sha",
+          "official_metric": {"name": "RMSE_C", "value": 0.424019, "points": 28.012945}
+        },
+        "reproducibility_model_replay": {
+          "path": "artifacts/official_final_submission_20260905/P2/05_answer/P2_submission.csv",
+          "sha256": "64f59fe7b28b3d60189e6fdef8ed00708da2f3c8066509f52395395d5a93f1ce",
+          "score_provenance": "unscored_fresh_same_recipe_three_fit_replay"
+        },
+        "rows": 26061,
+        "columns": ["station", "layer", "time", "temp"]
+      },
+      "P3": {
+        "competition_problem": "OCN-03",
+        "url": "https://oceanaidata.org/app/problems/7",
+        "candidate_id": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+        "path": "artifacts/official_final_submission_20260905/P3/05_answer/P3_submission.csv",
+        "sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+        "rows": 1200,
+        "columns": ["case_id", "station", "lead_h", "hs_pred"],
+        "score_provenance": "official_public_score_of_this_exact_sha",
+        "official_metric": {"name": "RMSE_m", "value": 0.583892, "points": 24.066168}
+      }
+    }
+  },
+  "final_model_upload": {
+    "button": "모델 최종 제출하기",
+    "submit_button": "모델 최종 제출",
+    "fields": [
+      "제출물 제목",
+      "한 줄 요약",
+      "결과물 파일 업로드",
+      "코드 저장소 URL",
+      "결과물 링크",
+      "비고"
+    ],
+    "record_may_be_created_before_all_files_finish_uploading": true,
+    "problems": {
+      "P1": {
+        "expected_file_count": 24,
+        "required_files": [
+          "P1_official_final_core.zip",
+          "P1_REASSEMBLY_MANIFEST.json"
+        ],
+        "required_glob": "P1_*.part??.zip",
+        "required_glob_count": 22,
+        "title": "P1 MS-TCN e150 + GI spike2 clean incumbent",
+        "one_line_summary": "배포 데이터만으로 scratch 학습한 3-seed MS-TCN e150 앙상블에 GI 고신뢰 spike 2행만 더한 공식 최고 clean 계보입니다.",
+        "notes": "운영진 배포 데이터만 사용한 scratch 학습 계보. 모델 가중치와 재현 코드를 동봉했습니다."
+      },
+      "P2": {
+        "expected_file_count": 1,
+        "required_files": ["P2_official_final_core.zip"],
+        "title": "P2 v52 third-moment input-gradient clean incumbent",
+        "one_line_summary": "공식 최고 clean 레시피를 배포 데이터만으로 새로 3-seed scratch 학습해 bin17 anchor와 80/20 혼합한 재현 패키지이며, 현재 replay는 별도 SHA입니다.",
+        "notes": "운영진 배포 데이터만 사용한 scratch 3-fit replay입니다. 역사적 공식 최고점은 별도 SHA의 답안에 귀속되며 현재 replay의 공식 점수라고 주장하지 않습니다."
+      },
+      "P3": {
+        "expected_file_count": 1,
+        "required_files": ["P3_official_final_core.zip"],
+        "title": "P3 clean refined long-lead optimum",
+        "one_line_summary": "배포 데이터만으로 scratch 학습한 두 고정 CatBoost 계보의 장기리드 축을 봉인된 alpha로 결합한 최고 clean 계보입니다.",
+        "notes": "운영진 배포 데이터만 사용한 scratch 학습 계보. 모델 가중치와 재현 코드를 동봉했습니다."
+      }
+    },
+    "common_form": {
+      "repository_url": "https://github.com/choihyunjin1/-oceanaidata_track1",
+      "result_url": ""
+    }
+  }
+}

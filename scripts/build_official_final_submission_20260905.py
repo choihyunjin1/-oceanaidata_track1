@@ -27,6 +27,23 @@ DEFAULT_OUT = ROOT / "artifacts" / "official_final_submission_20260905"
 MAX_UPLOAD = 50_000_000
 PART_BYTES = 45_000_000
 PROBLEMS = ("P1", "P2", "P3")
+PACKAGED_SOURCE_MODULES = {
+    # These are the complete import closures used by the authoritative
+    # 02_train/ and 04_predict/ entrypoints.  Historical external-data modules
+    # remain in Git as audit evidence, but must not enter the final package.
+    "P1": (
+        "__init__.py",
+        "ms_tcn_asrf.py",
+        "ms_tcn_asrf_data.py",
+    ),
+    "P2": (
+        "__init__.py",
+        "data.py",
+        "features.py",
+        "normalized_curvature_residual.py",
+        "submission.py",
+    ),
+}
 
 
 class BuildError(RuntimeError):
@@ -99,6 +116,17 @@ def copy_tree(
             "__pycache__", "*.pyc", ".pytest_cache", *extra_ignore_patterns
         ),
     )
+
+
+def copy_source_modules(problem: str, target: Path) -> None:
+    """Copy only the dependency-closed source surface used by a final package."""
+
+    names = PACKAGED_SOURCE_MODULES.get(problem)
+    if names is None:
+        raise BuildError(f"no packaged source allowlist for {problem}")
+    source = ROOT / "src" / {"P1": "p1_qc", "P2": "p2_restore"}[problem]
+    for name in names:
+        copy_file(source / name, target / name)
 
 
 def copy_relative(relative: str, destination_root: Path) -> Path:
@@ -331,7 +359,11 @@ def build_p1(args: argparse.Namespace, temporary: Path, master: dict[str, Any]) 
     )
     model_files.append(file_record(model_manifest, package))
 
-    copy_tree(ROOT / "src/p1_qc", package / "07_source/src/p1_qc")
+    copy_source_modules("P1", package / "07_source/src/p1_qc")
+    copy_file(
+        ROOT / "scripts/reassemble_p1_upload_20260905.py",
+        package / "REASSEMBLE_UPLOAD.py",
+    )
     for relative in (
         "scripts/run_p1_mstcn_e150_full_deployment_20260827_v1.py",
         "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
@@ -377,7 +409,7 @@ def build_p2(args: argparse.Namespace, temporary: Path, master: dict[str, Any]) 
     populate_official_data(package, "P2", args.p2_data_dir, base)
     anchor_target = copy_file(anchor, package / "03_model/decision_artifacts/bin17_anchor.csv")
 
-    copy_tree(ROOT / "src/p2_restore", package / "07_source/src/p2_restore")
+    copy_source_modules("P2", package / "07_source/src/p2_restore")
     p2_sources = (
         "scripts/run_p2_continuous_depth_permutation_invariant_set_encoder_20260901_v12.py",
         "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py",
@@ -584,6 +616,14 @@ def submission_form(problem: str, contract: dict[str, Any]) -> dict[str, Any]:
         ],
     }
     historical_exact = bool(contract.get("historical_champion_hash_exact", True))
+    notes = {
+        "P1": "운영진 배포 데이터만 사용한 scratch 학습 계보. 모델 가중치와 재현 코드를 동봉했습니다.",
+        "P2": (
+            "운영진 배포 데이터만 사용한 scratch 3-fit replay입니다. 역사적 공식 최고점은 "
+            "별도 SHA의 답안에 귀속되며 현재 replay의 공식 점수라고 주장하지 않습니다."
+        ),
+        "P3": "운영진 배포 데이터만 사용한 scratch 학습 계보. 모델 가중치와 재현 코드를 동봉했습니다.",
+    }
     return {
         "problem": problem,
         "candidate_id": contract["candidate_id"],
@@ -611,7 +651,7 @@ def submission_form(problem: str, contract: dict[str, Any]) -> dict[str, Any]:
             "one_line_summary": contract["summary"],
             "repository_url": "https://github.com/choihyunjin1/-oceanaidata_track1",
             "result_url": "",
-            "notes": "운영진 배포 데이터만 사용한 scratch 학습 계보. 모델 가중치와 재현 코드를 동봉했습니다.",
+            "notes": notes[problem],
         },
     }
 
@@ -642,7 +682,9 @@ def write_problem_docs(package: Path, problem: str) -> None:
         "P1": (
             "최종값은 세 MS-TCN 체크포인트의 실제 추론을 router anchor와 union한 뒤, "
             "등록된 GI spike 2행을 추가해 생성합니다. 학습 당시의 165-feature 파생 표면은 "
-            "원본 입력 해시에 묶인 로컬 전용 캐시입니다."
+            "원본 입력 해시에 묶인 로컬 전용 캐시입니다. 포털의 파일당 50 MB 제한 때문에 "
+            "가중치와 파생 표면은 별도 part ZIP으로 나뉘며, core ZIP의 "
+            "`REASSEMBLE_UPLOAD.py`가 manifest의 part/source SHA를 검증하며 복원합니다."
         ),
         "P2": (
             "빌드 과정에서 v52 세 seed를 실제로 새로 학습해 체크포인트를 저장했고, 최종값은 "
@@ -780,12 +822,22 @@ def split_binary(source: Path, target_dir: Path, logical_root: Path) -> dict[str
 
 def excluded_from_core(problem: str, relative: Path) -> bool:
     posix = relative.as_posix()
+    if posix.startswith("upload_parts/"):
+        return True
     if posix.startswith("01_data/organizer_dataset/") or posix == "01_data/LOCAL_DATA_PATH.txt":
         return True
     if problem == "P1" and (
         posix.startswith("01_data/derived/") or posix.startswith("03_model/weights/")
     ):
         return True
+    package_names = {"P1": "p1_qc", "P2": "p2_restore"}
+    package_name = package_names.get(problem)
+    if package_name is not None and relative.parts[:3] == (
+        "07_source",
+        "src",
+        package_name,
+    ):
+        return relative.name not in PACKAGED_SOURCE_MODULES[problem]
     return False
 
 
