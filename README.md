@@ -1,17 +1,18 @@
-# Ocean AI Data Track 1 - P1
+# Ocean AI Data Track 1 — P1 / P2 / P3
 
-종합해양과학기지의 10분 수온 시계열에서 합성 센서 이상을 탐지하는 재현 가능한 대회 프로젝트입니다. 판정 대상은 `temp`, 참고 변수는 `psal`과 `depth`, 공식 평가지표는 행 단위 binary F1입니다. 주최측 규칙 기반 기준값은 0.548255입니다.
+Ocean AI Data Track 1의 세 문제를 함께 다루는 통합 재현 저장소입니다. P1 수온 이상 탐지, P2 중간층 수온 복원, P3 유의파고 단기 예측의 학습·검증·후보 계보·최종 제출 절차를 문제별로 분리해 보존합니다.
 
 실험이나 제출 작업 전에는 최상위 [00_ORGANIZER_DATA_POLICY.md](00_ORGANIZER_DATA_POLICY.md)와 [00_MUST_READ_FIRST.md](00_MUST_READ_FIRST.md)를 처음부터 끝까지 읽어야 합니다. 2026-09-01 최신 공지에 따라 배포 데이터 밖의 관측·재분석·예보 자료와 실제 관측으로 사전학습된 가중치는 금지됩니다.
 
-## 현재 상태
+## 문제별 과제와 현재 최종 계보
 
-- 전용 Python 3.12.10 환경과 고정 의존성, RTX 5090 CUDA 13.0 smoke test가 준비되었습니다.
-- 데이터 audit, gap-safe 피처, rolling-origin CV, LightGBM/XGBoost/CatBoost, 규칙·후처리, fold-local 합성 augmentation, TCN/Transformer, masked-reconstruction SSL, 엄격한 제출 검증 구성요소가 구현되어 있습니다.
-- 주력은 배포된 전체 시계열을 사용하는 양방향 `offline` QC이며, 미래 문맥을 쓰지 않는 `causal` 모드는 실운영 가능성 비교용 ablation입니다.
-- 현재 가장 강한 검증 근거는 XGBoost의 세 rolling-origin outer fold 결과입니다. 딥러닝·SSL 구성요소는 승격 전 별도 screening과 동일 검증 절차를 거칩니다.
-- 원본 데이터, 캐시, 모델, OOF, 예측, 제출 CSV는 모두 Git에서 제외됩니다.
-- 정확한 후보 파일에 대한 사용자 승인 없이는 대회 사이트에 업로드하지 않습니다.
+| 문제 | 과제 | 공식 지표 | 현재 규정 준수 계보 | 공식 확인 결과 | 재현 상태 |
+|---|---|---|---|---:|---|
+| P1 / OCN-01 | 수온 이상 탐지 | binary F1 | `P1_1_E150_PLUS_GI_SPIKE2` | F1 `0.833548` · `28.909341점` | 저장 가중치 추론과 답안이 byte-exact |
+| P2 / OCN-02 | 중간층 수온 복원 | RMSE (℃) | `P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020` | RMSE `0.424019` · `28.012945점` | 역사적 채점 답안만 exact; 현재 3-fit replay는 별도 미채점 SHA |
+| P3 / OCN-03 | 유의파고 단기 예측 | RMSE (m) | `P3_REFINED_PUBLIC_OPTIMUM_20260827` | RMSE `0.583892` · `24.066168점` | 저장 가중치 추론과 답안이 byte-exact |
+
+공식 점수는 정확히 같은 답안 SHA에만 귀속합니다. 특히 P2 최종 재현 패키지가 새로 만든 3-fit replay는 역사적 최고 채점본과 다른 파일이므로 `0.424019`를 replay 점수로 주장하지 않습니다. 정확한 후보·SHA·제출 구분은 [AI 인수인계 가이드](AI_HANDOFF.md)와 [공식 제출 실행서](docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)를 따릅니다.
 
 ## 최종 제출과 다음 AI 인수인계
 
@@ -21,6 +22,21 @@
 - [공식 최종 패키지 설계](docs/OFFICIAL_FINAL_SUBMISSION_20260905.md): 학습 → 모델 → 추론 → 답안의 원자적 폴더 구조
 
 실제 모델·답안·업로드 ZIP은 Git 비추적 경로 `artifacts/official_final_submission_20260905/`에만 둡니다. GitHub push와 대회 제출은 별개이며, 최종 모델 지정은 이후 답안 업로드를 잠글 수 있으므로 실제 UI에서 다시 확인합니다.
+
+## P1 상세
+
+이하 모델링·검증 설명은 P1에 관한 상세 기록입니다. P2와 P3의 실행·제출 기준은 위 인수인계 가이드와 공식 제출 실행서, 그리고 각 문제별 must-read 문서에서 시작합니다.
+
+P1은 종합해양과학기지의 10분 수온 시계열에서 합성 센서 이상을 탐지합니다. 판정 대상은 `temp`, 참고 변수는 `psal`과 `depth`, 공식 평가지표는 행 단위 binary F1입니다. 주최측 규칙 기반 기준값은 0.548255입니다.
+
+### 현재 상태
+
+- 전용 Python 3.12.10 환경과 고정 의존성, RTX 5090 CUDA 13.0 smoke test가 준비되었습니다.
+- 데이터 audit, gap-safe 피처, rolling-origin CV, LightGBM/XGBoost/CatBoost, 규칙·후처리, fold-local 합성 augmentation, TCN/Transformer, masked-reconstruction SSL, 엄격한 제출 검증 구성요소가 구현되어 있습니다.
+- 주력은 배포된 전체 시계열을 사용하는 양방향 `offline` QC이며, 미래 문맥을 쓰지 않는 `causal` 모드는 실운영 가능성 비교용 ablation입니다.
+- 현재 가장 강한 검증 근거는 XGBoost의 세 rolling-origin outer fold 결과입니다. 딥러닝·SSL 구성요소는 승격 전 별도 screening과 동일 검증 절차를 거칩니다.
+- 원본 데이터, 캐시, 모델, OOF, 예측, 제출 CSV는 모두 Git에서 제외됩니다.
+- 정확한 후보 파일에 대한 사용자 승인 없이는 대회 사이트에 업로드하지 않습니다.
 
 학습 데이터는 776,706행(양성 32,126행, 4.1362%), test는 2026-01-01~06-30의 169,011행입니다.
 
@@ -51,7 +67,11 @@
 | 경로 | 역할 |
 |---|---|
 | `src/p1_qc` | 데이터, 피처, 모델, 검증, 제출 파이프라인 |
+| `src/p2_restore` | P2 수온 복원 학습·검증·추론 파이프라인 |
+| `src/p3_wave` | P3 파고 예측 학습·검증·추론 파이프라인 |
 | `configs/p1.toml` | seed, fold, 피처, 모델, 후처리 설정 |
+| `01_P2_MUST_READ_FIRST.md` | P2 문제·데이터·누출 방지·검증 계약 |
+| `02_P3_MUST_READ_FIRST.md` | P3 문제·데이터·누출 방지·검증 계약 |
 | `tests` | 단위·통합·CUDA·누출 방지 테스트 |
 | `scripts/bootstrap_env.ps1` | `.venv-p1` 생성, 고정 패키지·editable 설치, CUDA 검사 |
 | `scripts/smoke_cuda.py` | CUDA capability, `sm_120`, 행렬 연산·역전파 검사 |
