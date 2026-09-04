@@ -1,0 +1,111 @@
+{
+  "schema_version": "p2.domain_invariant_vertical_curvature.20260901.v9",
+  "experiment_id": "p2_domain_invariant_vertical_curvature_20260901_v9",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "scientific_scope": {
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reason": "All three historical validation surfaces, including the 61-day same-season block, have already been exposed.",
+    "question": "Can a dimensionless vertical-curvature model contribute a small transportable correction while preserving 80 percent of the sealed champion proxy?",
+    "predecessor_closed": "p2_group_balanced_raw_residual_20260901_v8r1",
+    "predecessor_failure_mode": "Raw-Celsius L2 and L1 residuals improved only the exposed Sep-Oct fold and regressed Jul-Aug and Nov-Dec.",
+    "orthogonal_changes": [
+      "dimensionless endpoint-range-normalized curvature target instead of raw-Celsius residual",
+      "linear robust Ridge instead of LightGBM L1 or L2",
+      "fixed champion-preserving blend instead of baseline replacement",
+      "second candidate removes training-only layer-month climatology before fitting"
+    ],
+    "excluded_families": [
+      "DINEOF_or_other_EOF_completion",
+      "Gaussian_process",
+      "CatBoost",
+      "soft_or_benefit_gate",
+      "PAVA_or_isotonic_candidate_postprocessing",
+      "rank_or_season_or_bin_search",
+      "raw_Celsius_absolute_residual_L1_or_L2"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "v7_report_result": "reports/p2_public_feature_benefit_gate_cycle_20260831_v7/result.json",
+    "v7_report_root_qa": "reports/p2_public_feature_benefit_gate_cycle_20260831_v7/independent-root-ready-qa.json",
+    "v7_official_receipt": "reports/parallel_public_transport_repair_cycle_20260831_v1/official-submission-receipt.json",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "registered_windows_kst": [
+      {
+        "id": "2024_may_jun",
+        "start_inclusive": "2024-05-01T00:00:00+09:00",
+        "end_exclusive": "2024-07-01T00:00:00+09:00"
+      },
+      {
+        "id": "2024_jul_to_aug24",
+        "start_inclusive": "2024-07-01T00:00:00+09:00",
+        "end_exclusive": "2024-08-25T00:00:00+09:00"
+      }
+    ],
+    "expected_rows": 45935,
+    "target": "dimensionless_target_minus_public_endpoint_linear_baseline_over_public_temperature_range",
+    "features": "fixed_55_public_only_shift_invariant_vertical_curvature_features",
+    "model": "sklearn_Ridge",
+    "ridge_alpha": 25.0,
+    "fit_intercept": true,
+    "fits_per_candidate": 3,
+    "target_winsor_mad_multiplier": 4.0,
+    "row_deletion": false,
+    "feature_scale_quantiles": [0.1, 0.9],
+    "feature_scaled_clip": 8.0,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_scale_fraction": 0.25,
+    "model_minus_champion_clip_absolute_C": 2.5
+  },
+  "candidates": [
+    {
+      "name": "P2_V9_GLOBAL_ROBUST_NCR_RIDGE_BLEND020",
+      "normalization": "global_robust_per_target_layer",
+      "run": "always"
+    },
+    {
+      "name": "P2_V9_LAYER_MONTH_ANOMALY_NCR_RIDGE_BLEND020",
+      "normalization": "training_only_layer_month_climatology_with_layer_fallback",
+      "run": "always"
+    }
+  ],
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed cross-fit bin17 champion proxy",
+    "bootstrap_unit": "fold x KST calendar day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "strict_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "calibrated_expected_points_gte": 0.01
+    }
+  },
+  "postprocess": "NONE",
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 2,
+    "maximum_fit_count": 6,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

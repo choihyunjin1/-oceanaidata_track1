@@ -1,0 +1,138 @@
+{
+  "schema_version": "p3.v5_extratrees_competition_adjudication.independent_qa.20260831.v7",
+  "experiment_id": "p3_v5_extratrees_competition_adjudication_20260831_v7",
+  "created_at_utc": "2026-08-31T08:41:57.725762+00:00",
+  "status": "PASS",
+  "check_count": 16,
+  "checks": [
+    {
+      "name": "runner_hash",
+      "pass": true,
+      "detail": "0f20a35a8cfa91fb98c20f46a827c507d3c3d9b0ac67c4abc9cea8bd92fcb2a4"
+    },
+    {
+      "name": "attempt_lock_hash",
+      "pass": true,
+      "detail": "a16c72823471a55f93433d135ff2aba12b77e433a28c86602747c93e2d9faf31"
+    },
+    {
+      "name": "v5_runner_hash",
+      "pass": true,
+      "detail": "d313566a46f2762b98b1e0007b03382f02568074325cf039bfd6803d6efb339b"
+    },
+    {
+      "name": "v5_result_hash",
+      "pass": true,
+      "detail": "89280f6309a2282185d7e0d2e30fdf0dbb65b2cfef1b23b471c911ea0dcd934a"
+    },
+    {
+      "name": "policy_hash",
+      "pass": true,
+      "detail": "2ab04a2550f660f0d5a178d3c64a23bb4341e6b12929188b4890738a49491e80"
+    },
+    {
+      "name": "submission_hash",
+      "pass": true,
+      "detail": "1bb1a90c149e566497f95fcb9d1bb1aa3895f4fef341afc6b30d6fe6710ca65d"
+    },
+    {
+      "name": "rows_and_schema",
+      "pass": true,
+      "detail": [
+        "case_id",
+        "station",
+        "lead_h",
+        "hs_pred"
+      ]
+    },
+    {
+      "name": "key_order",
+      "pass": true,
+      "detail": 1200
+    },
+    {
+      "name": "key_unique",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "finite_domain",
+      "pass": true,
+      "detail": [
+        0.7337519153102787,
+        4.163248643605462
+      ]
+    },
+    {
+      "name": "short_lead_exact_noop",
+      "pass": true,
+      "detail": 800
+    },
+    {
+      "name": "nonduplicate_and_changed_count",
+      "pass": true,
+      "detail": 400
+    },
+    {
+      "name": "scientific_inconclusive",
+      "pass": true,
+      "detail": {
+        "status": "SCIENTIFIC_INCONCLUSIVE_NOT_STRONG_CHALLENGER",
+        "reason": "The dependence-preserving 90% interval crosses zero.",
+        "delta_rmse_candidate_minus_champion_m": -0.0045585583346360314,
+        "ci90_low_m": -0.009923488077503873,
+        "ci90_high_m": 0.0007952167963225083,
+        "probability_improved": 0.9156
+      }
+    },
+    {
+      "name": "competition_expected_value",
+      "pass": true,
+      "detail": {
+        "status": "COMPETITION_EXPECTED_VALUE_PASS_READY_NOT_UPLOADED",
+        "policy_rule": "Near expiry, a valid nonduplicate candidate with positive expected action value or decision-changing information value may be probed even when local uncertainty crosses zero.",
+        "candidate_validity_policy": {
+          "hard": true,
+          "requirements": [
+            "exact lineage, comparator, metric, row, key and ordering contract",
+            "no target, temporal, event, episode or official-interface leakage",
+            "finite predictions and valid schema/domain",
+            "candidate, population and action table frozen before outcome access",
+            "no result-driven retry, mutation or threshold search"
+          ]
+        },
+        "central_projected_point_delta": 0.0723476897594759,
+        "conservative_projected_point_delta": -0.012620678260215509,
+        "optimistic_projected_point_delta": 0.15749308971395026,
+        "heuristic_probability_weighted_action_points": 0.06517635949861394,
+        "decision_changing_information_value": true,
+        "reason": "P3 has no strict internal PASS candidate; this exact frozen nonduplicate router has a favorable pooled point estimate, 5/6 diagnostic blocks, P(improve)=0.9156, and a material central planning gain. The Public query can resolve a known transport uncertainty.",
+        "transport_warning": "The bootstrap probability is historical, not an official improvement probability. Past P3 local-to-official direction reversals make both sign and magnitude uncertain."
+      }
+    },
+    {
+      "name": "exact_full_fit_once",
+      "pass": true,
+      "detail": [
+        1,
+        20261832
+      ]
+    },
+    {
+      "name": "hidden_and_upload_zero",
+      "pass": true,
+      "detail": {
+        "test_index_rows_read": 1200,
+        "base_prediction_rows_read": 1200,
+        "source_prediction_rows_read": 1200,
+        "champion_prediction_rows_read": 1200,
+        "official_test_feature_rows_read": 200,
+        "hidden_truth_rows_read": 0,
+        "uploads": 0
+      }
+    }
+  ],
+  "submission_sha256": "1bb1a90c149e566497f95fcb9d1bb1aa3895f4fef341afc6b30d6fe6710ca65d",
+  "hidden_truth_rows_read": 0,
+  "uploads": 0
+}

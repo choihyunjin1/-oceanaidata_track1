@@ -8,7 +8,7 @@
 
 ## 소스와 무결성
 
-- 원본 폴더: `C:\Users\cedis\PycharmProjects\PythonProject\데이터셋 원본\데이터셋_P1\P1_qc_anomaly`
+- 원본 폴더: `P1_DATA_DIR`이 가리키는 로컬 전용 폴더
 - ZIP SHA-256: `2a64050a22c1ea372d7ba826c87538a36d885367f3190ca1ec7414530c1bd042`
 - ZIP CRC 검사: 통과
 - ZIP 내 `train.csv`, `test.csv`, `sample_submission.csv`, `baseline_rule.csv`, `score.py`, `README.md`와 압축 해제본 SHA-256: 전부 일치

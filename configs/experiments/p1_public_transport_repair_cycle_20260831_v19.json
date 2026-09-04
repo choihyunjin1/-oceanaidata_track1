@@ -1,0 +1,85 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v19",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v19",
+  "candidate": {
+    "name": "P1_1_GORS_CAUSAL_ONE_STEP_RUN_EXTENSION",
+    "formula": "r_t OR (station=G-ORS AND r_t=0 AND r_t_minus_10m=1 within the same station-layer-year at exact 10-minute cadence)",
+    "reference_historical": "frozen raw E150 OOF prediction",
+    "reference_deployment": "current official champion e150 plus GI2",
+    "recursive_extension": false,
+    "learned_parameters": 0,
+    "station": "G-ORS",
+    "cadence_minutes": 10,
+    "span_rows": 1,
+    "add_only": true
+  },
+  "transport_family": {
+    "family_id": "P1_FIXED_ADD_ONLY_UNION",
+    "tier_id": "LOW_DOF_FIXED",
+    "representation_changed": false,
+    "routing_discontinuous": false,
+    "active_share_rule": "G-ORS only; one non-recursive trailing row per frozen reference-positive run",
+    "exact_comparator": "frozen E150 OOF historically and current official champion at deployment",
+    "local_lcb_raw_points": "reported separately; transport decision uses central expected points",
+    "selected_penalty_provenance_sha256": "1a1d2c96cbe6c2c69b753fb4a130eb092922cc46524286cabcc0f9fce150441f",
+    "transport_penalty_points": 0.005383691373120247
+  },
+  "decision_policy": {
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "transport_penalty_points": 0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "minimum_pooled_delta_f1_exclusive": 0.0,
+    "minimum_metric_improvement_equivalent_inclusive": 0.0005788103467134221,
+    "score_points_per_f1": 26.578120867377286,
+    "minimum_each_q3_q4_delta_f1": 0.0,
+    "bootstrap_probability_improved_minimum_inclusive": 0.8,
+    "bootstrap_ci90_low_exclusive": 0.0,
+    "anchor_removals_required": 0
+  },
+  "validation": {
+    "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+    "confirmatory_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_unit": "KST calendar day within confirmatory fold",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260929,
+    "deterministic_evaluation_passes": 1,
+    "outer_result_based_tuning": false,
+    "independent_confirmation_claimed": false
+  },
+  "safety": {
+    "maximum_changed_fraction": 0.005,
+    "maximum_additions_per_gors_kst_day": 5,
+    "maximum_additions_per_reference_run": 1,
+    "minimum_supported_gors_delta_f1": 0.0,
+    "other_stations_bit_exact": true,
+    "precision_lcb_quantile": 0.1,
+    "precision_lcb_strictly_above_reference_f1_divided_by_2": true
+  },
+  "fit_budget": {
+    "historical_model_fits": 0,
+    "deployment_model_fits": 0,
+    "maximum_model_fits": 0,
+    "deterministic_historical_scoring_passes": 1,
+    "maximum_materialized_candidates": 1
+  },
+  "official_support_prior": {
+    "source": "reports/official_information_probe_cycle_20260830_v1/p1-official-result.json",
+    "source_sha256": "642ac00a955ec98a48ba6b154cf862cffd8643b42ae8e9653b4eeb2d7713aea2",
+    "aggregate_fact": "Removing the exact frozen 15-row G-ORS e150 set reduced displayed Public F1 by 0.004519.",
+    "interpretation": "Directional support prior only; not row-level truth and not independent evidence for v19."
+  },
+  "duplicate_provenance": {
+    "nearest_experiment": "p1_public_transport_repair_cycle_20260831_v12",
+    "nearest_result_sha256": "c0b19aad7dc250e7c77f66e0fd2abc73affcb96c6ea57294f3637e35fd26c630",
+    "risk": "HIGH_SEMANTIC_REUSE",
+    "difference": "v12 applied the one-step rule globally; v19 freezes G-ORS support before scoring and keeps I-ORS/S-ORS bit-exact.",
+    "development_surface_disclosure": "The prior v12 G-ORS slice was observed; v19 is adaptive development confirmation, not fresh confirmation."
+  },
+  "official_policy": {
+    "read_only_after_strict_internal_pass": true,
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "maximum_submission_csvs": 1,
+    "current_champion_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687"
+  }
+}

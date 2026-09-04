@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "p3_era5_context_transfer_v1_transport_amendment_r2_2026-08-24",
+  "created_at_kst": "2026-08-24T01:15:00+09:00",
+  "classification": "POST_SMOKE_TRANSPORT_ONLY_AMENDMENT_R2_BEFORE_SOURCE_YEAR_ACCESS",
+  "trigger": {
+    "stage": "first_2014_G_ORS_half_year_request",
+    "observed_failure": "CDS HTTP 403 cost limit: the Jan-Jun request was too large",
+    "source_year_value_files_created": 0,
+    "official_costing_endpoint_checked": true,
+    "official_cost_limit": 121000,
+    "estimated_costs": {
+      "half_year": 521280,
+      "quarter_year": 259200,
+      "two_months": 169920,
+      "one_month": 89280
+    }
+  },
+  "information_available_before_amendment": {
+    "smoke_days": 1,
+    "smoke_stations": 3,
+    "selected_cells_frozen": true,
+    "minimum_smoke_dynamic_finite_fraction": 1.0,
+    "source_validation_metrics_seen": false,
+    "local_outer_metrics_seen": false,
+    "official_test_sample_or_submission_accessed": false
+  },
+  "change": {
+    "before": "2014-2022 Jan-Jun and Jul-Dec per station-year; 2023 Jan-Jun, Jul-Nov, Dec01-30, and Dec31 00-14 UTC; 66 requests total",
+    "after": "2014-2022 one request per calendar month; 2023 one request per month through November plus Dec01-30 and Dec31 00-14 UTC; 363 requests total",
+    "maximum_request_field_hours": 7440,
+    "maximum_official_estimated_request_cost": 89280,
+    "fixed_raw_download_workers": 4,
+    "receipt_order": "frozen request-plan order",
+    "derived_processing_and_combination": "sequential after raw retrieval",
+    "completed_raw_files_reused_after_transport_failure": true,
+    "transport_only": true
+  },
+  "invariants": {
+    "source": "ERA5 hourly data on single levels",
+    "stations_and_selected_cells": "unchanged from the preregistered smoke-selection rule",
+    "variables": "same frozen ten variables",
+    "union_start_utc": "2014-01-01T00:00:00+00:00",
+    "union_end_utc": "2023-12-31T14:00:00+00:00",
+    "station_time_union_exactly_contiguous": true,
+    "combined_expected_rows": 262917,
+    "features_model_targets_splits_gates_and_postprocess_changed": false,
+    "result_driven_tuning": false
+  },
+  "supersedes": {
+    "path": "configs/experiments/p3_era5_context_transfer_v1_transport_amendment_2026-08-24.json",
+    "sha256": "d64b992ca34820257dbc68a1c646d4ce644fcb9f59d719b558d95d3f6351bd7e"
+  },
+  "superseded_sha256": {
+    "era5_pretrain_data": "ee23a2b3d005a2d8727d14f8e6635cb514db933df81fae1885bce95ca0278bba",
+    "prepare_era5_runner": "0ffba044c96d86656cd4386e0d19201d1ed46a1e4b49fd4a54d5e688f61e4eff",
+    "era5_pretrain_data_tests": "16d5677f9e4de8ea600de525923c228d1eeb3c1c21d019737ad4e23075fd601d"
+  },
+  "amended_sha256": {
+    "era5_pretrain_data": "4b35297d5f0520300a5d2625ba4a9625beea169fbcd01d600b2e230e3ecb7273",
+    "prepare_era5_runner": "e963894a147994dc2bc6571b25db4c90c72a633ce3410d909271dbaae62ee28f",
+    "era5_pretrain_data_tests": "16ae5645f2408fcfe04e2cbe28e22b5b865c83c72b91a8ea02060c651c815cf6"
+  }
+}

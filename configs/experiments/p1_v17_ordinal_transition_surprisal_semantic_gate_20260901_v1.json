@@ -1,0 +1,17 @@
+{
+  "schema_version": "p1.v17_ordinal_transition_surprisal.semantic_gate.v1",
+  "experiment_id": "p1_v17_ordinal_transition_surprisal_semantic_gate_20260901_v1",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE",
+  "decision": "NO_GO_SEMANTIC_DUPLICATE",
+  "fits": 0,
+  "targets_read": 0,
+  "official_test_sample_submission_hidden_reads": 0,
+  "candidate_fingerprint": "prefix-fitted ordinal states, conditional transition probabilities, negative-log transition likelihood, add-only linear head",
+  "duplicate_of": {
+    "module": {"path": "src/p1_qc/causal_soft_symbolic.py", "sha256": "dec110408ac08cd64aebe390f96acd70fff1451f05d1fe6b08bb115b567271d9", "fingerprint": "causal trailing-normalized PAA, five soft symbols, unary memberships and all adjacent 5x5 transition products"},
+    "runner": {"path": "scripts/run_p1_public_transport_repair_cycle_20260831_v18.py", "sha256": "cf67c08152c977889baa4370b616d8b09dc5530c4335acfa40f67beddf0fcd0f", "fingerprint": "executed soft-symbolic transition features with a linear incumbent-negative add-only head"},
+    "config": {"path": "configs/experiments/p1_public_transport_repair_cycle_20260831_v18.json", "sha256": "637d86b9a2889d606b3133f9cea3feb0897c9f8cad71d9810a87d9aa734e39f5"}
+  },
+  "reason": "Transition surprisal is a monotone aggregation of the same adjacent symbol-transition sufficient statistics already exposed to the executed linear head. It does not create a new representation/action family; recurrence variants are additionally closed.",
+  "operations": {"lock_created": 0, "artifact_created": 0, "csv": 0, "uploads": 0, "retune": 0}
+}

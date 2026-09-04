@@ -1,0 +1,137 @@
+{
+  "schema_version": "p2.masked_token_virtual_adversarial_deepset.20260901.v42",
+  "experiment_id": "p2_masked_token_virtual_adversarial_deepset_20260901_v42",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_all_linear_weight_normalized_deepset_20260901_v41/result.json",
+    "required_status": "EXPLORATORY_NO_GO_WEIGHT_NORMALIZATION",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v23_result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json",
+    "v24_result": "reports/p2_sharpness_aware_domain_balanced_deepset_20260901_v24/result.json",
+    "v26_result": "reports/p2_layer_month_group_preserving_mixup_deepset_20260901_v26/result.json",
+    "v31_result": "reports/p2_within_layer_month_adversarial_deepset_20260901_v31/result.json",
+    "v40_result": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/result.json",
+    "v41_result": "reports/p2_all_linear_weight_normalized_deepset_20260901_v41/result.json",
+    "fingerprint": "reports/p2_all_linear_weight_normalized_deepset_20260901_v41/next-axis-fingerprint.md",
+    "fingerprint_sha256": "8a197ec78b12b06b390132b23615bd65ab62aaab083b941e1eb2f2e760352f10"
+  },
+  "primary_source": {
+    "citation": "Miyato, Maeda, Koyama, and Ishii, IEEE TPAMI 2019, Virtual Adversarial Training: A Regularization Method for Supervised and Semi-Supervised Learning",
+    "url": "https://doi.org/10.1109/TPAMI.2018.2858821",
+    "use": "label-free local adversarial input-direction motivation only; no P2 performance or regression transport claim"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_MASKED_OBSERVED_TOKEN_VIRTUAL_ADVERSARIAL_CONSISTENCY",
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v23": "v23 directly penalizes public-temperature output gradients; v42 matches predictions along one label-free worst local direction over observed temperature and salinity token values",
+      "v24": "v24 perturbs model parameters with SAM; v42 perturbs only eligible observed input values and never parameters",
+      "v26": "v26 mixes rows and labels; v42 mixes neither rows nor labels",
+      "v31": "v31 uses a calendar-month domain discriminator; v42 has no domain classifier or environment label",
+      "v40": "v40 uses random dropout views; v42 has no dropout and uses deterministic virtual adversarial input direction",
+      "v41": "v41 reparameterizes Linear weights; v42 restores exact v13 parameterization"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_beta_1.0_plus_masked_token_virtual_adversarial_fixed_variance_Gaussian_consistency",
+    "optimizer": "exact_v13_AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "virtual_adversarial_training": {
+      "eligible_token_channels": [0, 1],
+      "channel_meaning": ["normalized_observed_temperature", "normalized_observed_salinity"],
+      "presence_indicator_channels": [4, 5],
+      "token_mask_required": true,
+      "epsilon_normalized_L2_per_row": 0.05,
+      "finite_difference_xi": 0.000001,
+      "power_iterations": 1,
+      "coefficient": 1.0,
+      "direction_initialization": "deterministic_sine_of_observed_value_and_channel_no_layer_index",
+      "direction_objective": "0.5_weighted_prediction_difference_squared_divided_by_xi_squared",
+      "final_consistency": "0.5_times_coefficient_times_weighted_mean_squared_clean_stopgrad_minus_adversarial_prediction",
+      "fixed_variance_Gaussian_interpretation": true,
+      "perturb_masks": false,
+      "perturb_depth_or_nominal": false,
+      "perturb_presence_indicators": false,
+      "perturb_context_or_target_layer_one_hot": false,
+      "perturb_labels": false,
+      "inference_perturbation": false,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

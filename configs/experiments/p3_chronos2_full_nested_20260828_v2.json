@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_chronos2_full_nested_20260828_v2",
+  "status": "PREREGISTERED_CONTINUATION_BEFORE_OUTER_PREDICTION",
+  "parent_experiment": {
+    "path": "configs/experiments/p3_chronos2_transfer_20260828_v1.json",
+    "sha256": "4c8ef0ff5ad8eb1f5384540d07310529f7cb0e25625f32811c87a00425b1fc53"
+  },
+  "environment_preflight": {
+    "path": "artifacts/p3_chronos2_transfer_20260828_v1/environment_preflight.json",
+    "sha256": "045d0da7c9bff55a0d401368ac8a390934dab44365cc52baf7bf7815e70c73c0",
+    "required_status": "PASS"
+  },
+  "upstream": {
+    "repository_commit": "8589d1988e9676817548e9626738ff06b6ca6370",
+    "model_id": "amazon/chronos-2",
+    "model_revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "checkpoint_provenance_gate": "RESEARCH_GO_OFFICIAL_DEPLOYMENT_BLOCKED_PENDING_TRAINING_CORPUS_REVIEW"
+  },
+  "bindings": {
+    "train_sequences": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    }
+  },
+  "outer_validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "outer_truth_policy": "read only after all three fold prediction files and combined seal are durably written and hashed"
+  },
+  "inner_selection": {
+    "window_days": 60,
+    "gap_hours": 78,
+    "step_budgets": [1, 5, 20],
+    "metric": "pooled_six_lead_RMSE_m",
+    "tie_break": "fewest_steps",
+    "seed": 20260828,
+    "lora_config": "official_default_r8_alpha16",
+    "learning_rate": 0.00001,
+    "batch_size_series": 96,
+    "fit_max_cases_per_station": 256,
+    "dense_future_required": true
+  },
+  "outer_refit": {
+    "training_data": "entire outer train prefix subject to the same latest-256-complete-cases-per-station cap",
+    "steps": "inner-selected without outer truth",
+    "same_seed_lora_rank_learning_rate_batch_size": true
+  },
+  "evaluation": {
+    "comparators": ["same_case_persistence", "same_case_frozen_incumbent"],
+    "slices": ["fold", "station", "lead_h"],
+    "cluster_bootstrap": ["case", "UTC_anchor_day"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_ci": 0.90,
+    "bootstrap_seed": 20260828
+  },
+  "decision_gate": {
+    "research_go": "finite sealed predictions, all three folds complete, and pooled candidate RMSE below persistence",
+    "official_value_go": "pooled candidate RMSE below incumbent, at least two folds improve, and case-bootstrap CI90 upper delta below zero",
+    "provenance_gate_is_independent_and_must_pass_before_official_use": true
+  },
+  "prohibitions": {
+    "official_test_context_index_sample_submission_read": true,
+    "submission_creation_or_upload": true,
+    "old_era5_lock_config_model_or_artifact_mutation": true,
+    "post_outer_result_step_seed_rank_or_weight_tuning": true
+  },
+  "artifact_dir": "artifacts/p3_chronos2_full_nested_20260828_v2"
+}

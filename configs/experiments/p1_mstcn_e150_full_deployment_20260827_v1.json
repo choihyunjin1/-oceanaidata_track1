@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_mstcn_e150_full_deployment_20260827_v1",
+  "status": "AUTHORIZED_BUILD_AND_QA_NOT_UPLOAD",
+  "recipe": {
+    "width": 512,
+    "epoch": 150,
+    "threshold": 0.8,
+    "seeds": [20260827, 20260839, 20260863],
+    "source_schedule_horizon_epochs": 300,
+    "representation": "raw_three_seed_ensemble_mean"
+  },
+  "deployment": {
+    "training_population": "all supplied 2024-2025 P1 training rows",
+    "inference_population": "all supplied 2026 P1 test rows without labels",
+    "anchor": "current official-best Router submission",
+    "candidate_all": "Router OR decoded MS-TCN proposal at every station",
+    "candidate_gs": "Router OR decoded MS-TCN proposal only at G-ORS and S-ORS",
+    "allowed_gs_stations": ["G-ORS", "S-ORS"],
+    "anchor_positive_removals_allowed": 0,
+    "upload_authorized": false
+  },
+  "relative_inputs": {
+    "source_runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "source_config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "model": {
+      "path": "src/p1_qc/ms_tcn_asrf.py",
+      "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"
+    },
+    "data": {
+      "path": "src/p1_qc/ms_tcn_asrf_data.py",
+      "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"
+    },
+    "train_features": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "rows": 776706,
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"
+    },
+    "train_feature_metadata": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.json",
+      "sha256": "396386d48bf3588bd765d26d66625184a5af9a41312703ffbcfd58da9dbe0abd"
+    },
+    "train_targets": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "rows": 776706,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "test_features": {
+      "path": "artifacts/cache/test_offline_c2a3877bdecea937.parquet",
+      "rows": 169011,
+      "sha256": "9442ebcda96cd626185718e17a139f9649eb741c3126d97200fdf6dc9ba399c6"
+    },
+    "test_feature_metadata": {
+      "path": "artifacts/cache/test_offline_c2a3877bdecea937.json",
+      "sha256": "0cefaf5c5a5a898a0ae436b67993f5fa42f6f08050c9d20160dda5507178c10d"
+    }
+  },
+  "external_inputs": {
+    "test_csv": {
+      "resolver": "P1_DATA_DIR/test.csv",
+      "rows": 169011,
+      "sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387"
+    },
+    "sample_submission": {
+      "resolver": "P1_DATA_DIR/sample_submission.csv",
+      "rows": 169011,
+      "sha256": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4"
+    },
+    "current_router": {
+      "resolver": "--current-router",
+      "rows": 169011,
+      "sha256": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"
+    },
+    "third_candidate": {
+      "resolver": "--third-candidate",
+      "rows": 169011,
+      "sha256": "d249b382403281050fb71cb377508202d1af264a46d152b30c09ffa11c730372"
+    }
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1",
+    "delivery_set_name": "20260827_round_F_mstcn_e150_P1x3",
+    "candidate_directories": [
+      "P1_1_MSTCN_E150_ROUTER_UNION_ALL",
+      "P1_2_MSTCN_E150_ROUTER_UNION_GS_ONLY",
+      "P1_3_EXPLOIT_GI_NO_REMOVALS"
+    ]
+  },
+  "prohibitions": {
+    "read_test_labels": true,
+    "modify_source_data": true,
+    "upload": true,
+    "result_based_recipe_change": true
+  }
+}

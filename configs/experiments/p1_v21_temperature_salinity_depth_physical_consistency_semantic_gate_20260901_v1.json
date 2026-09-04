@@ -1,0 +1,18 @@
+{
+  "schema_version":"p1.v21_temperature_salinity_depth_physical_consistency.semantic_gate.v1",
+  "experiment_id":"p1_v21_temperature_salinity_depth_physical_consistency_semantic_gate_20260901_v1",
+  "status":"CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE",
+  "decision":"NO_GO_SEMANTIC_DUPLICATE",
+  "fits":0,"targets_read":0,"source_data_reads":0,"official_test_sample_submission_hidden_reads":0,
+  "candidate_fingerprint":"deterministic temperature-salinity-depth density/consistency transform, prefix residualization, supervised add-only row score",
+  "reason":"P1 already exposes raw/missing/difference/rolling psal and depth to supervised models, directly gates long offset/drift temperature evidence by contemporaneous salinity boundary evidence, and executed causal temp-psal signed path area. A fixed EOS/density transform introduces no new observation or intervention layer and P2 already contains the TEOS/profile mechanism family.",
+  "evidence":{
+    "src/p1_qc/ts_matched_filter.py":"28a2834b475e70f4a885ffe187bc23ea9eec64f69cfa7ddf80c27715a83d0a4c",
+    "src/p1_qc/features.py":"e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+    "src/p1_qc/causal_raw_features_v4r2.py":"65829d0cd1f90b0e8fc2d554ec895d6e3d7e0b8605a073e78a2f7b08e4999913",
+    "configs/experiments/p1_v7_causal_path_crossmoment_addonly_20260901_v1.json":"17c6e08570bcb02132f4a747acd64792aec30b43d377bcec0c73c0f2ecab14b1",
+    "src/p2_teos_analog.py":"982f7edfdd63d7f7052149a3206999f22ea9ed88f571b49c1cb68f43cb4309d5",
+    "configs/experiments/p2_teos_analog_v1.json":"5dd9de67e24c39ce60dc070cb20b34c885b3e61f302f7b2448881d59896272cd"
+  },
+  "operations":{"lock_created":0,"artifact_created":0,"csv":0,"uploads":0,"retune":0}
+}

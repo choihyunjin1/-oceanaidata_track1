@@ -1,0 +1,114 @@
+{
+  "schema_version": "p1.ts2vec_conditional_normal_prototype_rescue.preregistration.v1",
+  "experiment_id": "p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1",
+  "created_at_kst": "2026-08-28T15:30:00+09:00",
+  "local_execution_authorized_at_kst": "2026-08-28T11:50:14+09:00",
+  "status": "AUTHORIZED_LOCAL_IMPLEMENTATION_AND_SMOKE_FULL_GPU_WAITING_COORDINATOR",
+  "problem": "P1",
+  "claim_scope": "TS2Vec-style hierarchical contrastive encoder; not an exact reproduction of TS2Vec",
+  "hypothesis": "A label-free hierarchical contrastive encoder can create long-event proposals complementary to a frozen anchor without repeating masked-reconstruction or 83-bank ranking failures.",
+  "closed_families": [
+    "frozen_83_event_ranker_threshold_retuning",
+    "masked_reconstruction_tcn_replay",
+    "direct_interval_set_threshold_rescue"
+  ],
+  "immutable_inputs": {
+    "feature_cache": {"path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet", "bytes": 156272400, "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"},
+    "feature_key_sidecar": {"path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet", "bytes": 1818144, "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"},
+    "training_labels": {"path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet", "bytes": 6227554, "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"},
+    "frozen_truth_and_folds": {"path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet", "bytes": 2827164, "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"},
+    "q2_e150_anchor": {"path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz", "bytes": 7898, "sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1", "array": "anchor", "read_only_after_historical_gate": true}
+  },
+  "inputs": {
+    "allowed": ["pre_Q2_history", "frozen_Q2_e150_anchor_after_historical_gate", "train_labels_for_normal_reference_calibration_and_evaluation_only"],
+    "forbidden": ["Q2_truth_before_historical_gate", "Q3_Q4_truth", "official_test", "sample_submission", "submission_csv"]
+  },
+  "features": [
+    "temp_raw", "psal_raw", "depth_raw", "psal_missing", "depth_missing",
+    "temp_diff_1", "psal_diff_1", "depth_diff_1", "temp_median_resid_24h",
+    "temp_roll_std_24h", "temp_long_resid_7d", "temp_peer_residual"
+  ],
+  "representation": {
+    "family": "TS2Vec_style_hierarchical_contrastive",
+    "window_rows": 512,
+    "window_stride_rows": 256,
+    "gap_crossing_allowed": false,
+    "encoder_fit_stop_kst": "2024-09-15T00:00:00+09:00",
+    "labels_used_in_encoder_loss": false,
+    "hidden_width": 64,
+    "embedding_width": 64,
+    "dilations": [1, 2, 4, 8, 16],
+    "dropout": 0.1,
+    "mask_probability": 0.2,
+    "temperature": 0.2,
+    "contrastive_timestamp_cap": 128,
+    "batch_size": 64,
+    "max_epochs": 30,
+    "minimum_epochs": 5,
+    "patience": 5,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "seed": 20260828,
+    "checkpoint_rule": "minimum_heldout_label_free_hierarchical_contrastive_loss_subject_to_embedding_variance_gte_1e-4"
+  },
+  "split": {
+    "normal_reference_stop_kst": "2024-10-01T00:00:00+09:00",
+    "calibration": ["2024-10-01T00:00:00+09:00", "2024-12-15T23:59:59+09:00"],
+    "qualification": ["2025-01-01T00:00:00+09:00", "2025-03-16T23:59:59+09:00"],
+    "purge_days": 15
+  },
+  "scoring": {
+    "normal_model": "global_seasonal_harmonic_plus_station_layer_residual_prototype_with_global_shrinkage",
+    "cell_shrinkage_rows": 512,
+    "scale_floor": 0.001,
+    "normal_knn_k": 5,
+    "normal_knn_bank_per_cell": 512,
+    "distance_weights": {"prototype": 0.75, "train_normal_knn": 0.25},
+    "threshold": "finite_sample_calibration_normal_order_statistic",
+    "normal_tail_alpha": 0.001,
+    "positive_prevalence_targeting": false,
+    "spot_or_test_point_adjustment": false,
+    "minimum_component_rows": 19,
+    "bridge_rows": 2,
+    "candidate_composition": "frozen_anchor_OR_additions",
+    "anchor_deletions_allowed": false,
+    "historical_anchor_semantics": "zero_add_no_op; Q2 uses frozen e150 only after historical gate"
+  },
+  "historical_gate": {
+    "calibration_delta_f1_gt": 0.0,
+    "qualification_delta_f1_gt": 0.0,
+    "added_precision_gt_anchor_f1_fraction": 0.5,
+    "qualification_new_eligible_long_events_min": 2,
+    "direction_consistent_cells_min": 2,
+    "block_bootstrap_days": 7,
+    "block_bootstrap_replicates": 500,
+    "block_bootstrap_seed": 20260828,
+    "probability_delta_f1_gt_zero_min": 0.8,
+    "false_positive_per_day_cap": 0.25
+  },
+  "stop_conditions": [
+    "embedding_variance_collapse",
+    "finite_embedding_window_coverage_below_0_95",
+    "normal_calibration_false_positive_cap_failure",
+    "qualification_gate_failure"
+  ],
+  "execution_policy": {
+    "local_only_authorized": true,
+    "implementation_check_and_smoke_authorized": true,
+    "full_gpu_run_requires_coordinator_release_after_smoke": true,
+    "outer_Q2_once_only_after_historical_gate": true,
+    "result_based_window_epoch_threshold_rerun": false,
+    "official_upload_authorized": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1",
+    "smoke_directory": "artifacts/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1_smoke",
+    "persist_raw_values": false,
+    "persist_keys": false,
+    "persist_model": true
+  },
+  "primary_sources": [
+    "https://ojs.aaai.org/index.php/AAAI/article/view/20881",
+    "https://github.com/zhihanyue/ts2vec"
+  ]
+}

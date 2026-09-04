@@ -1,0 +1,35 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r5.execution.v1",
+  "created_at_kst": "2026-08-26T09:47:36.6271207+09:00",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r5",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "authorized": false,
+  "recovery_class": "USER_AUTHORIZED_INFRASTRUCTURE_RECOVERY_AFTER_V2R4_ZERO_MATERIALIZATION",
+  "design": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r5_design.json", "bytes": 16087, "sha256": "c044ae23d14f85c634d8145cbd8f85b004536e378277dc91dc00097dc78f7fe4"},
+  "predecessor_failure": {
+    "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4",
+    "claim_sha256": "003916cd1b062f97be39e85d422f954c25895519fecacbc9f4a7d8dbd53e2062",
+    "journal_sha256": "10f2efc207c3a5d768da630a8c89b9dfc92fb3b8bfee89ffede8f213bd817f69",
+    "terminal_failure": true,
+    "materialization_reserved": 0,
+    "materialization_completed": 0,
+    "scientific_results": 0
+  },
+  "integrity_adapter": {
+    "change_scope": "SPARSE_EXACT_KEY_GRID_MEMBERSHIP_ONLY",
+    "registered_exact_rows": 26273,
+    "unique_time_layer_keys": true,
+    "layers": [2, 3, 4],
+    "canonical_step_ns": 600000000000,
+    "full_continuous_presence_required": false,
+    "independent_observation_truth_equality": true,
+    "all_scientific_logic_changed": false
+  },
+  "portable_observations": {"root_environment": "P2_DATA_DIR", "relative_path": "observations.csv", "fallback_absolute_path": null, "bytes": 49058719, "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"},
+  "real_initialization_readiness": {"required_before_claim": true, "materialize_calls": 0, "score_calls": 0, "p100_accesses": 0},
+  "operation_ceiling": {"attempts": 1, "physical_fit_calls": 0, "inner_materializations": 18, "exact_materializations": 1, "conditional_p100_materializations": 3, "total_materialization_slots": 22, "result_driven_reruns": 0, "candidate_files": 0, "uploads": 0, "official_test_reads": 0, "sample_submission_reads": 0, "submission_candidate_reads": 0},
+  "snapshot_chain": {"design_execution_seal_authorization_QA_module": "SINGLE_HELD_BYTES", "post_verify_seal_path_hash_or_reopen": 0, "post_verify_module_path_reopen": 0},
+  "p100_gate": {"before_durable_exact_RESEARCH_GO": "LITERAL_METADATA_ONLY", "resolve_stat_open_hash_parse": 0},
+  "resource_ceiling": {"hard_wall_seconds": 7200, "maximum_process_tree_rss_bytes": 1610612736, "automatic_reruns": 0},
+  "execution_instruction": "DO_NOT_EXECUTE. Independent QA PASS and a separately pinned true authorization are required."
+}

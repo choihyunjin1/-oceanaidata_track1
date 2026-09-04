@@ -1,0 +1,79 @@
+{
+  "schema_version": "p1.experiment_value_registry.v1",
+  "duplicate_similarity_threshold": 0.67,
+  "minimum_score": 9,
+  "closed_experiments": [
+    {
+      "experiment_id": "p1_mstcn_partial_pooling_calibrator_shadow_20260829_v1",
+      "intervention_layer": "score_calibration",
+      "mechanisms": ["station_layer_intercept", "logit_calibration", "anchor_union"],
+      "outcome": "NO_GO_Q3_Q4_CONFIRMATION"
+    },
+    {
+      "experiment_id": "p1_mstcn_type_boundary_cascade_shadow_20260829_v1",
+      "intervention_layer": "refinement_architecture",
+      "mechanisms": ["raw_context_reentry", "type_boundary_cascade", "anchor_union"],
+      "outcome": "NO_GO_SINGLE_SEED_STRUCTURAL_SCREEN"
+    },
+    {
+      "experiment_id": "p1_mstcn_frozen_trust_adapter_shadow_20260829_v2",
+      "intervention_layer": "residual_adapter",
+      "mechanisms": ["frozen_backbone", "bounded_adapter", "anchor_union"],
+      "outcome": "NO_GO_SINGLE_SEED_STRUCTURAL_SCREEN"
+    },
+    {
+      "experiment_id": "p1_iors_external_point_residual_oof_v1",
+      "intervention_layer": "external_feature",
+      "mechanisms": ["iors_external_q50", "point_residual", "rolling_residual"],
+      "outcome": "NO_GO_POINT_RESIDUAL"
+    },
+    {
+      "experiment_id": "p1_e150_f1aware_long_event_cp_rescue_20260828_v1",
+      "intervention_layer": "postprocess_proposal",
+      "mechanisms": ["change_point", "long_event", "anchor_union"],
+      "outcome": "NO_GO_LOCAL_BLIND_GATE"
+    },
+    {
+      "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r6",
+      "intervention_layer": "postprocess_proposal",
+      "mechanisms": ["lightgbm_residual", "nonspike_long_event", "anchor_union"],
+      "outcome": "NO_GO_LOCAL_GATE"
+    },
+    {
+      "experiment_id": "p1_temporally_fused_rpca_offset_drift_anchor_union_20260828_v1",
+      "intervention_layer": "postprocess_proposal",
+      "mechanisms": ["rpca", "offset_drift", "anchor_union"],
+      "outcome": "NO_GO_EXACT_NO_OUTPUT"
+    },
+    {
+      "experiment_id": "p1_conditional_real_event_donor_20260828_v1",
+      "intervention_layer": "synthetic_augmentation",
+      "mechanisms": ["real_event_donor", "conditional_augmentation", "event_ranker"],
+      "outcome": "NO_GO_CALIBRATION"
+    },
+    {
+      "experiment_id": "p1_anomalybert_exact_degradation_mask_anchor_union_20260828_v1",
+      "intervention_layer": "representation_pretrain",
+      "mechanisms": ["masked_reconstruction", "synthetic_degradation", "anchor_union"],
+      "outcome": "NO_GO_SYNTHETIC_FIDELITY"
+    },
+    {
+      "experiment_id": "p1_target_masked_quantile_v1",
+      "intervention_layer": "reconstruction_score",
+      "mechanisms": ["target_masking", "quantile_reconstruction", "residual_threshold"],
+      "outcome": "NO_GO_OVERPREDICTION"
+    },
+    {
+      "experiment_id": "p1_block_inpaint_v1",
+      "intervention_layer": "reconstruction_score",
+      "mechanisms": ["block_inpainting", "masked_reconstruction", "residual_threshold"],
+      "outcome": "NO_GO_FP_GATE"
+    },
+    {
+      "experiment_id": "p1_checkpoint_consensus_retroaudit",
+      "intervention_layer": "checkpoint_ensemble",
+      "mechanisms": ["checkpoint_union", "checkpoint_majority", "checkpoint_intersection"],
+      "outcome": "NO_GO_E150_POOLED_BEST"
+    }
+  ]
+}

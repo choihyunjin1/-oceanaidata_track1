@@ -1,0 +1,137 @@
+{
+  "schema_version": "p2.pooled_context_cross_network_deepset.20260901.v47",
+  "experiment_id": "p2_pooled_context_cross_network_deepset_20260901_v47",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "negative_fingerprint": "reports/p2_hidden_activation_layer_normalized_deepset_20260901_v46/v47-negative-fingerprint.json",
+    "negative_fingerprint_sha256": "fbceddb1b1970d32ac3bc94f32bedeb4a33e1e9a58c60ba701202e213d0705c1",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v13_result_sha256": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+    "v15_result": "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/result.json",
+    "v15_result_sha256": "d453aa792e7b0732d0b0c5fae404af108cb5b941c28e8443def3eb38188ec26d",
+    "v16_result": "reports/p2_fixed_physical_depth_graph_message_passing_20260901_v16/result.json",
+    "v16_result_sha256": "58402b243d24b52319d796b0c0f504ca79b91888c27b80f3cc58e1c3aae0633c",
+    "v43_result": "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/result.json",
+    "v43_result_sha256": "2a825dd41e8df0481295566139b77f3a588e469cb344372877f1fcea5d5ab084",
+    "v45_result": "reports/p2_all_linear_dropconnect_deepset_20260901_v45/result.json",
+    "v45_result_sha256": "24f02df803b6da31df39d63c4cad8f6a2e9006c9c7ee0a36428877c7d1ac6441",
+    "v45c_result": "reports/p2_all_linear_dropconnect_stochastic_confirmation_20260901_v45c/result.json",
+    "v45c_result_sha256": "ebb92dade69992eb4a0c6c102eea13fa88c276ee77833d5a6fe6f17a3668c0d3",
+    "v46_result": "reports/p2_hidden_activation_layer_normalized_deepset_20260901_v46/result.json",
+    "v46_result_sha256": "c60f05ab2ad9082bd122af68e5fbc382359c606d94e74d6ef1badf5dfe037a96",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680"
+  },
+  "primary_source": {
+    "citation": "Wang, Fu, Fu, and Wang, Deep & Cross Network for Ad Click Predictions, ADKDD 2017",
+    "url": "https://doi.org/10.1145/3124749.3124754",
+    "use": "explicit bounded-degree feature-interaction motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_IDENTITY_INITIALIZED_POOLED_PROFILE_CONTEXT_CROSS_NETWORK",
+    "exact_execution_hits_before_preregistration": 0,
+    "semantic_execution_hits_before_preregistration": 0,
+    "result_adaptive_search": false,
+    "distinct_from": {
+      "v15": "token-token attention before pooling",
+      "v16": "physical-depth graph messages before pooling",
+      "v43": "target-layer FiLM inside token embeddings",
+      "v45_v45c": "train-only stochastic Linear-weight masks",
+      "v46": "per-example hidden-activation normalization"
+    }
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_five_Linear_DeepSets_plus_one_identity_initialized_pooled_profile_context_cross_layer",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "exact_v13_weighted_SmoothL1_beta_1.0",
+    "optimizer": "exact_v13_AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "cross_network": {
+      "input_width": 75,
+      "layer_count": 1,
+      "equation": "x1 = x0 * (x0 dot w) + b + x0",
+      "weight_initialization": 0.0,
+      "bias_initialization": 0.0,
+      "added_parameters": 150,
+      "expected_parameters": 5015,
+      "expected_parameter_tensors": 12,
+      "expected_buffers": 0,
+      "coefficient_or_depth_sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "extra_loss": false,
+    "normalization": false,
+    "dropout": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

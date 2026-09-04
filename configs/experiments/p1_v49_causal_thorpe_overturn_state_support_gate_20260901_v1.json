@@ -1,0 +1,102 @@
+{
+  "schema_version": "p1.v49_causal_thorpe_overturn_state_support_gate.v1",
+  "experiment_id": "p1_v49_causal_thorpe_overturn_state_support_gate_20260901_v1",
+  "status": "CLOSED_ZERO_FIT_SUPPORT_AND_RECONSTRUCTIBILITY_GATE",
+  "surface": "TARGET_FREE_TRAIN_PREFIX_ONLY",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "train_columns_read": ["station", "layer", "time", "temp", "psal", "depth"],
+    "target_columns_read": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "candidate": {
+    "name": "causal simultaneous-profile Thorpe overturn state",
+    "scientific_question": "Can density-profile reordering distinguish normal vertical mixing/stratification state from station-layer anomaly opportunity without using labels?",
+    "primary_source": {
+      "title": "Probability density of displacement and overturning length scales under diverse stratification",
+      "authors": "Lorke and Wuest",
+      "venue": "Journal of Geophysical Research: Oceans 107(C12), 2002",
+      "doi": "10.1029/2001JC001154",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2001JC001154",
+      "supported_claim": "Thorpe displacement is obtained by reordering a measured vertical profile to a stable monotonic profile; RMS displacement summarizes overturn scale.",
+      "claim_boundary": "The source studies resolved stratified profiles and turbulence. It does not validate sparse fixed P1 layers, station-layer anomaly precision, or transport."
+    },
+    "fixed_recipe_if_supported": {
+      "profile_key": ["station", "time"],
+      "profile_variables": ["temp", "psal", "depth"],
+      "minimum_finite_distinct_depths": 3,
+      "minimum_profiles_per_station": 10000,
+      "minimum_supported_stations": 2,
+      "features": ["thorpe_rms_displacement", "thorpe_max_abs_displacement", "displaced_layer_fraction", "stable_density_gradient_median"],
+      "past_only": true,
+      "outer_profile_statistics_in_fit": 0,
+      "seeds": [20260901, 20260917, 20260943],
+      "fits": 3,
+      "maximum_fits": 9,
+      "threshold_quantiles": [0.995, 0.9975, 0.999],
+      "sweep": 0,
+      "anchor_operation": "bitwise_or",
+      "anchor_removals": 0
+    }
+  },
+  "target_free_support": {
+    "fit_boundary": "2025-01-17T02:50:00+09:00",
+    "prefix_rows": 294278,
+    "finite_temp_psal_depth_rows": 291914,
+    "profile_times": 58725,
+    "profiles_ge2_levels": 56731,
+    "profiles_ge3_levels": 53319,
+    "profiles_ge4_levels": 31233,
+    "profiles_ge6_levels": 31072,
+    "profiles_ge3_distinct_depths": 53319,
+    "median_levels": 7.0,
+    "maximum_levels": 7,
+    "stations_with_ge3_level_profiles": 1,
+    "by_station": {
+      "G-ORS": {"profile_times": 1971, "profiles_ge3_levels": 0, "profiles_ge3_distinct_depths": 0, "maximum_levels": 1},
+      "I-ORS": {"profile_times": 2268, "profiles_ge3_levels": 0, "profiles_ge3_distinct_depths": 0, "maximum_levels": 2},
+      "S-ORS": {"profile_times": 54486, "profiles_ge3_levels": 53319, "profiles_ge3_distinct_depths": 53319, "maximum_levels": 7}
+    },
+    "target_columns_read": 0,
+    "gate": "FAIL_ONLY_ONE_STATION_HAS_RESOLVABLE_VERTICAL_PROFILES"
+  },
+  "semantic_reconstructibility_audit": {
+    "decision": "REJECT_ZERO_FIT",
+    "exact_duplicate": false,
+    "semantic_duplicate": true,
+    "physical_consistency": {
+      "path": "configs/experiments/p1_v21_temperature_salinity_depth_physical_consistency_semantic_gate_20260901_v1.json",
+      "sha256": "24dd0d4db213876f6f7215fd4d936358b91a5d28655b249837bbfe727b34302c",
+      "overlap": "v21 already determined that an EOS/density transform adds no observation beyond existing temp/psal/depth physical-consistency features and the P2 TEOS/profile family."
+    },
+    "stratification_peer_gate": {
+      "path": "src/p1_qc/stratification.py",
+      "sha256": "9a6b69b405754fdf87d765cb3e1c119a9ff83d4d82893c48fdbc2dadba08dd19",
+      "overlap": "Existing P1 code constructs label-blind simultaneous peer spread, gradient, and coherence features to distinguish mixed and stratified states."
+    },
+    "vertical_rank": {
+      "config_path": "configs/experiments/p1_public_transport_repair_cycle_20260831_v14.json",
+      "config_sha256": "6bc041cb5ae1216d860d9d26dd3333bf8ecbdbf177ca8087d63fe3471bc5fb0a",
+      "runner_path": "scripts/run_p1_public_transport_repair_cycle_20260831_v14.py",
+      "runner_sha256": "896e50d68258f3a22a533b326c88b537ddb76f50f3d42d3c0e5a627dbd055b63",
+      "overlap": "The executed vertical bracket/rank family already acts on layer ordering. Thorpe sorting is a physics-labeled rank displacement over the same simultaneous vertical order."
+    },
+    "scientific_limitation": "Temperature-only overturns can be salinity-compensated; a density implementation therefore inherits the already-closed EOS/TEOS family rather than defining a new observation axis."
+  },
+  "decision": {
+    "ready": false,
+    "reason": "The observable is structurally available only at S-ORS, the same station driving repeated identity collapse, and its density/rank ingredients are reconstructible from closed families.",
+    "terminal": "NO_GO_ZERO_FIT_SINGLE_STATION_PROFILE_SUPPORT_AND_SEMANTIC_RECONSTRUCTIBILITY"
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6"},
+    "auditability_amendment": {"path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json", "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"},
+    "add_only": true,
+    "maximum_fits": 9,
+    "anchor_removals": 0
+  },
+  "counters": {"fits": 0, "optimizer_steps": 0, "preflights": 0, "target_reads": 0, "actions": 0, "removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "next_research_gap": "The original schema lacks a cross-station vertical scientific-state observable: G-ORS is single-layer and I-ORS has at most two simultaneous finite levels. A future nonduplicate axis needs an independently observed cross-station state covariate or an organizer-authorized external physical driver; neither is present in the train-only schema."
+}

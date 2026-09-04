@@ -1,0 +1,42 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.execution_authorization.v2",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+  "authorized": false,
+  "design_sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6",
+  "trigger_resolution_sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9",
+  "seal_sha256": "088b4dc4a6208d6e14df1dfc35be1a83e0d73d563a071e0f7ac5627655adef87",
+  "bundle": {
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_design.json": {"bytes": 20025, "sha256": "942020959baf71b1b3ea44c0f358fada014f99e7c3c26b53575e1fe93c8f57f6"},
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json": {"bytes": 4373, "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9"},
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_execution.json": {"bytes": 2771, "sha256": "1ecb3bc700a0e831209f76fdaa335b7bc04f5df3b5af87712ccb3e7b50b9020f"},
+    "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2.py": {"bytes": 57517, "sha256": "ddb03c44d0ccf57370f6f63596a1b017439dffd97dbad64cac10abf5d74a7d72"},
+    "src/p2_restore/public_trajectory_dtw_v2.py": {"bytes": 67970, "sha256": "3c9d057b523553eaa367644d38b444df73ce26be989040eb914032d4ca903cc6"},
+    "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2.py": {"bytes": 29075, "sha256": "2f8723020ab69ccf3eb750a3dd76b9d5ee45b9801f887063c9a83f956402cef4"},
+    "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2_preexecution/preexecution_seal.json": {"bytes": 6655, "sha256": "088b4dc4a6208d6e14df1dfc35be1a83e0d73d563a071e0f7ac5627655adef87"}
+  },
+  "operation_ceiling": {
+    "attempts": 1,
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0
+  },
+  "independent_qa": {
+    "status": "PENDING",
+    "report_path": null,
+    "report_sha256": null
+  },
+  "blockers": [
+    "Independent QA has not approved the sealed v2 design amendment, trigger resolution, numerical module, runner, tests, source-access order, and failure semantics.",
+    "The NCR v1r7 predecessor produced no scientific result; the prospective frozen-exact trigger branch must be independently accepted without reinterpreting that failure.",
+    "No external authority has changed this template to AUTHORIZED_AFTER_INDEPENDENT_QA with a pinned QA report."
+  ]
+}

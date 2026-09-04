@@ -1,0 +1,646 @@
+{
+  "schema_version": "p2.domain_invariant_vertical_curvature.result.20260901.v9r1",
+  "experiment_id": "p2_domain_invariant_vertical_curvature_20260901_v9r1",
+  "status": "EXPLORATORY_NO_GO_BOTH_SEALED_CANDIDATES",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "runtime_seconds": 10.028821400002926,
+  "fit_count": 6,
+  "training_rows": 45935,
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "name": "P2_V9_GLOBAL_ROBUST_NCR_RIDGE_BLEND020",
+      "objective": "ridge_dimensionless_vertical_curvature",
+      "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+      "reference_rmse": 3.085714618974286,
+      "candidate_rmse": 3.0727435986335325,
+      "delta_rmse": -0.01297102034075337,
+      "by_fold": {
+        "2024_sep_oct": {
+          "rows": 26273,
+          "reference_rmse": 4.882135051908297,
+          "candidate_rmse": 4.845644804472945,
+          "delta_rmse": -0.0364902474353519
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "reference_rmse": 1.1857780665476285,
+          "candidate_rmse": 1.2379104422211267,
+          "delta_rmse": 0.052132375673498155
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "reference_rmse": 0.28073218471331673,
+          "candidate_rmse": 0.3177121133022224,
+          "delta_rmse": 0.03697992858890564
+        }
+      },
+      "by_layer": {
+        "2": {
+          "rows": 23298,
+          "reference_rmse": 0.977425784480094,
+          "candidate_rmse": 0.9832999736419569,
+          "delta_rmse": 0.005874189161862886
+        },
+        "3": {
+          "rows": 23280,
+          "reference_rmse": 1.614255614462584,
+          "candidate_rmse": 1.600999144115482,
+          "delta_rmse": -0.013256470347101867
+        },
+        "4": {
+          "rows": 23272,
+          "reference_rmse": 5.001566713966556,
+          "candidate_rmse": 4.980664159324611,
+          "delta_rmse": -0.02090255464194435
+        }
+      },
+      "by_fold_layer": {
+        "2024_sep_oct": {
+          "2": {
+            "rows": 8777,
+            "reference_rmse": 1.4655912558305686,
+            "candidate_rmse": 1.3691204729867703,
+            "delta_rmse": -0.09647078284379829
+          },
+          "3": {
+            "rows": 8774,
+            "reference_rmse": 2.411153774848093,
+            "candidate_rmse": 2.3319540520084554,
+            "delta_rmse": -0.0791997228396375
+          },
+          "4": {
+            "rows": 8722,
+            "reference_rmse": 7.986758349725424,
+            "candidate_rmse": 7.960661449316245,
+            "delta_rmse": -0.026096900409179113
+          }
+        },
+        "2025_jul_aug": {
+          "2": {
+            "rows": 8890,
+            "reference_rmse": 0.5930813808765173,
+            "candidate_rmse": 0.8082700191026948,
+            "delta_rmse": 0.2151886382261775
+          },
+          "3": {
+            "rows": 8875,
+            "reference_rmse": 1.02350668839,
+            "candidate_rmse": 1.1401746009108265,
+            "delta_rmse": 0.11666791252082653
+          },
+          "4": {
+            "rows": 8928,
+            "reference_rmse": 1.6769858971289795,
+            "candidate_rmse": 1.6244527400027673,
+            "delta_rmse": -0.052533157126212204
+          }
+        },
+        "2025_nov_dec": {
+          "2": {
+            "rows": 5631,
+            "reference_rmse": 0.2223371212774351,
+            "candidate_rmse": 0.2173834333862796,
+            "delta_rmse": -0.004953687891155495
+          },
+          "3": {
+            "rows": 5631,
+            "reference_rmse": 0.2518955116552082,
+            "candidate_rmse": 0.2733257899855066,
+            "delta_rmse": 0.021430278330298425
+          },
+          "4": {
+            "rows": 5622,
+            "reference_rmse": 0.35159372870754263,
+            "candidate_rmse": 0.42542726235640127,
+            "delta_rmse": 0.07383353364885864
+          }
+        }
+      },
+      "bootstrap": {
+        "unit": "fold_x_kst_date",
+        "groups": 163,
+        "replicates": 5000,
+        "mean_delta_rmse": -0.013600680043029877,
+        "ci90_low": -0.023143522742574217,
+        "ci90_high": -0.005600679273480044,
+        "probability_improved": 0.9964
+      },
+      "official_like_bootstrap": {
+        "unit": "kst_date",
+        "groups": 61,
+        "replicates": 5000,
+        "ci90_low": -0.059034441192734904,
+        "ci90_high": -0.026348303282335946,
+        "probability_improved": 1.0
+      },
+      "raw_expected_points_delta": 0.3306061548673424,
+      "transport_calibrated_expected_points_delta": 0.20892406325733626,
+      "candidate_change_rms_C": 0.24224946979974826,
+      "candidate_change_abs_max_C": 0.5000000000000018,
+      "gate_checks": {
+        "pooled_improves": true,
+        "minimum_two_folds_improve": false,
+        "official_like_fold_improves": true,
+        "all_layers_within_0_003C": false,
+        "pooled_ci90_high_below_zero": true,
+        "calibrated_expected_points_gte_0_01": true
+      },
+      "strict_exploratory_pass": false,
+      "normalization": "global_robust_per_target_layer",
+      "prediction_commitment": {
+        "name": "P2_V9_GLOBAL_ROBUST_NCR_RIDGE_BLEND020",
+        "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_domain_invariant_vertical_curvature_20260901_v9r1\\P2_V9_GLOBAL_ROBUST_NCR_RIDGE_BLEND020.npz",
+        "sha256": "bdfd28317810dde0e9ae8f5ea38a169891bd658bf0b7e8b111f630a5b6a37d3f",
+        "rows": 69850,
+        "fit_receipts": [
+          {
+            "layer": 2,
+            "rows_train": 15317,
+            "rows_query": 23298,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.27160872687409954,
+            "intercept": 0.10871891698111119,
+            "winsor": {
+              "median": 0.13914633370636148,
+              "mad": 0.09140967098046485,
+              "robust_sigma": 0.13552397819563716,
+              "lower": -0.40294957907618717,
+              "upper": 0.6812422464889101,
+              "rows": 15317,
+              "rows_deleted": 0,
+              "rows_clipped": 987
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61831,
+              "query_missing_cells_imputed": 53407,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "target_climatology": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "raw_model_minus_champion_rms_C": 2.5836002266974996,
+            "bounded_rows": 17747,
+            "final_change_rms_C": 0.24556416862257954
+          },
+          {
+            "layer": 3,
+            "rows_train": 15308,
+            "rows_query": 23280,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.4223966789037944,
+            "intercept": 0.1678627781070721,
+            "winsor": {
+              "median": 0.22870450514901314,
+              "mad": 0.15516210574139433,
+              "robust_sigma": 0.23004333797219123,
+              "lower": -0.6914688467397518,
+              "upper": 1.148877857037778,
+              "rows": 15308,
+              "rows_deleted": 0,
+              "rows_clipped": 536
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61796,
+              "query_missing_cells_imputed": 53420,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "target_climatology": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "raw_model_minus_champion_rms_C": 5.145354893591,
+            "bounded_rows": 18917,
+            "final_change_rms_C": 0.24637361350496872
+          },
+          {
+            "layer": 4,
+            "rows_train": 15310,
+            "rows_query": 23272,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.6489273301483022,
+            "intercept": 0.108391854802943,
+            "winsor": {
+              "median": 0.10359508408264223,
+              "mad": 0.31535342406034644,
+              "robust_sigma": 0.4675429865118696,
+              "lower": -1.766576861964836,
+              "upper": 1.9737670301301207,
+              "rows": 15310,
+              "rows_deleted": 0,
+              "rows_clipped": 463
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61797,
+              "query_missing_cells_imputed": 53181,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "target_climatology": {
+              "mode": "none",
+              "query_rows_using_layer_global_fallback": 0
+            },
+            "raw_model_minus_champion_rms_C": 6.076745849370475,
+            "bounded_rows": 16996,
+            "final_change_rms_C": 0.2346277888128449
+          }
+        ],
+        "metric_computed_at_commitment": false,
+        "truth_used_to_choose_action": false
+      }
+    },
+    {
+      "name": "P2_V9_LAYER_MONTH_ANOMALY_NCR_RIDGE_BLEND020",
+      "objective": "ridge_dimensionless_vertical_curvature",
+      "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+      "reference_rmse": 3.085714618974286,
+      "candidate_rmse": 3.0787776962651514,
+      "delta_rmse": -0.006936922709134485,
+      "by_fold": {
+        "2024_sep_oct": {
+          "rows": 26273,
+          "reference_rmse": 4.882135051908297,
+          "candidate_rmse": 4.843318374993506,
+          "delta_rmse": -0.038816676914791515
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "reference_rmse": 1.1857780665476285,
+          "candidate_rmse": 1.2852006206051407,
+          "delta_rmse": 0.09942255405751221
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "reference_rmse": 0.28073218471331673,
+          "candidate_rmse": 0.3177121133022224,
+          "delta_rmse": 0.03697992858890564
+        }
+      },
+      "by_layer": {
+        "2": {
+          "rows": 23298,
+          "reference_rmse": 0.977425784480094,
+          "candidate_rmse": 0.9834790944218277,
+          "delta_rmse": 0.006053309941733698
+        },
+        "3": {
+          "rows": 23280,
+          "reference_rmse": 1.614255614462584,
+          "candidate_rmse": 1.5980735518004157,
+          "delta_rmse": -0.01618206266216826
+        },
+        "4": {
+          "rows": 23272,
+          "reference_rmse": 5.001566713966556,
+          "candidate_rmse": 4.992738332167492,
+          "delta_rmse": -0.008828381799063756
+        }
+      },
+      "by_fold_layer": {
+        "2024_sep_oct": {
+          "2": {
+            "rows": 8777,
+            "reference_rmse": 1.4655912558305686,
+            "candidate_rmse": 1.373465360731824,
+            "delta_rmse": -0.09212589509874469
+          },
+          "3": {
+            "rows": 8774,
+            "reference_rmse": 2.411153774848093,
+            "candidate_rmse": 2.326372859713912,
+            "delta_rmse": -0.08478091513418073
+          },
+          "4": {
+            "rows": 8722,
+            "reference_rmse": 7.986758349725424,
+            "candidate_rmse": 7.9572856408019605,
+            "delta_rmse": -0.02947270892346321
+          }
+        },
+        "2025_jul_aug": {
+          "2": {
+            "rows": 8890,
+            "reference_rmse": 0.5930813808765173,
+            "candidate_rmse": 0.8015353457115937,
+            "delta_rmse": 0.2084539648350764
+          },
+          "3": {
+            "rows": 8875,
+            "reference_rmse": 1.02350668839,
+            "candidate_rmse": 1.1406801498476258,
+            "delta_rmse": 0.11717346145762586
+          },
+          "4": {
+            "rows": 8928,
+            "reference_rmse": 1.6769858971289795,
+            "candidate_rmse": 1.7335613000175991,
+            "delta_rmse": 0.05657540288861962
+          }
+        },
+        "2025_nov_dec": {
+          "2": {
+            "rows": 5631,
+            "reference_rmse": 0.2223371212774351,
+            "candidate_rmse": 0.2173834333862796,
+            "delta_rmse": -0.004953687891155495
+          },
+          "3": {
+            "rows": 5631,
+            "reference_rmse": 0.2518955116552082,
+            "candidate_rmse": 0.2733257899855066,
+            "delta_rmse": 0.021430278330298425
+          },
+          "4": {
+            "rows": 5622,
+            "reference_rmse": 0.35159372870754263,
+            "candidate_rmse": 0.42542726235640127,
+            "delta_rmse": 0.07383353364885864
+          }
+        }
+      },
+      "bootstrap": {
+        "unit": "fold_x_kst_date",
+        "groups": 163,
+        "replicates": 5000,
+        "mean_delta_rmse": -0.00702130023474881,
+        "ci90_low": -0.016550026445948628,
+        "ci90_high": 0.002575084725264745,
+        "probability_improved": 0.8982
+      },
+      "official_like_bootstrap": {
+        "unit": "kst_date",
+        "groups": 61,
+        "replicates": 5000,
+        "ci90_low": -0.0629803743639206,
+        "ci90_high": -0.02805052396843246,
+        "probability_improved": 1.0
+      },
+      "raw_expected_points_delta": 0.3519648218652017,
+      "transport_calibrated_expected_points_delta": 0.23028273025519558,
+      "candidate_change_rms_C": 0.2357049075353829,
+      "candidate_change_abs_max_C": 0.5000000000000018,
+      "gate_checks": {
+        "pooled_improves": true,
+        "minimum_two_folds_improve": false,
+        "official_like_fold_improves": true,
+        "all_layers_within_0_003C": false,
+        "pooled_ci90_high_below_zero": false,
+        "calibrated_expected_points_gte_0_01": true
+      },
+      "strict_exploratory_pass": false,
+      "normalization": "training_only_layer_month_climatology_with_layer_fallback",
+      "prediction_commitment": {
+        "name": "P2_V9_LAYER_MONTH_ANOMALY_NCR_RIDGE_BLEND020",
+        "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_domain_invariant_vertical_curvature_20260901_v9r1\\P2_V9_LAYER_MONTH_ANOMALY_NCR_RIDGE_BLEND020.npz",
+        "sha256": "f62cddc2f06b585e7713ab0ce29134ab0559d02e5910393113d71622d9b013f4",
+        "rows": 69850,
+        "fit_receipts": [
+          {
+            "layer": 2,
+            "rows_train": 15317,
+            "rows_query": 23298,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.2565693823679276,
+            "intercept": -0.026845847971266466,
+            "winsor": {
+              "median": 0.0,
+              "mad": 0.09161532885574714,
+              "robust_sigma": 0.1358288865615307,
+              "lower": -0.5433155462461228,
+              "upper": 0.5433155462461228,
+              "rows": 15317,
+              "rows_deleted": 0,
+              "rows_clipped": 968
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61831,
+              "query_missing_cells_imputed": 53407,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "available_training_months": [
+                5,
+                6,
+                7,
+                8
+              ],
+              "training_rows_by_month": {
+                "5": 3332,
+                "6": 4318,
+                "7": 4459,
+                "8": 3208
+              },
+              "query_rows_using_layer_global_fallback": 14408,
+              "mode": "training_only_layer_month"
+            },
+            "target_climatology": {
+              "training_month_medians": {
+                "5": 0.14659833682788104,
+                "6": 0.11393582087480472,
+                "7": 0.14889670886259346,
+                "8": 0.13675096639737838
+              },
+              "layer_global_fallback": 0.13914633370636148,
+              "query_rows_using_layer_global_fallback": 14408,
+              "mode": "training_only_layer_month"
+            },
+            "raw_model_minus_champion_rms_C": 2.326240289466344,
+            "bounded_rows": 16382,
+            "final_change_rms_C": 0.24105100457624076
+          },
+          {
+            "layer": 3,
+            "rows_train": 15308,
+            "rows_query": 23280,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.3809837322969618,
+            "intercept": -0.06029796681583303,
+            "winsor": {
+              "median": -2.7755575615628914e-17,
+              "mad": 0.15210742562458465,
+              "robust_sigma": 0.22551446923100918,
+              "lower": -0.9020578769240367,
+              "upper": 0.9020578769240367,
+              "rows": 15308,
+              "rows_deleted": 0,
+              "rows_clipped": 544
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61796,
+              "query_missing_cells_imputed": 53420,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "available_training_months": [
+                5,
+                6,
+                7,
+                8
+              ],
+              "training_rows_by_month": {
+                "5": 3324,
+                "6": 4318,
+                "7": 4452,
+                "8": 3214
+              },
+              "query_rows_using_layer_global_fallback": 14405,
+              "mode": "training_only_layer_month"
+            },
+            "target_climatology": {
+              "training_month_medians": {
+                "5": 0.25300140712927544,
+                "6": 0.16386318072188671,
+                "7": 0.27658098046695734,
+                "8": 0.20641377883005196
+              },
+              "layer_global_fallback": 0.22870450514901314,
+              "query_rows_using_layer_global_fallback": 14405,
+              "mode": "training_only_layer_month"
+            },
+            "raw_model_minus_champion_rms_C": 3.7743506537290843,
+            "bounded_rows": 19293,
+            "final_change_rms_C": 0.246927826437519
+          },
+          {
+            "layer": 4,
+            "rows_train": 15310,
+            "rows_query": 23272,
+            "ridge_alpha": 25.0,
+            "coefficient_l2": 0.6320599439557454,
+            "intercept": -0.031953051799504695,
+            "winsor": {
+              "median": 0.0,
+              "mad": 0.29577911356782516,
+              "robust_sigma": 0.43852211377565753,
+              "lower": -1.7540884551026301,
+              "upper": 1.7540884551026301,
+              "rows": 15310,
+              "rows_deleted": 0,
+              "rows_clipped": 523
+            },
+            "feature_scaling": {
+              "feature_count": 55,
+              "training_missing_cells_imputed": 61797,
+              "query_missing_cells_imputed": 53181,
+              "zero_or_tiny_scale_columns": 37,
+              "scaled_clip": 8.0
+            },
+            "feature_month_center": {
+              "available_training_months": [
+                5,
+                6,
+                7,
+                8
+              ],
+              "training_rows_by_month": {
+                "5": 3329,
+                "6": 4319,
+                "7": 4447,
+                "8": 3215
+              },
+              "query_rows_using_layer_global_fallback": 14344,
+              "mode": "training_only_layer_month"
+            },
+            "target_climatology": {
+              "training_month_medians": {
+                "5": 0.10631146187765934,
+                "6": 0.026517959880006964,
+                "7": 0.2643884635876608,
+                "8": 0.06812147643858169
+              },
+              "layer_global_fallback": 0.10359508408264223,
+              "query_rows_using_layer_global_fallback": 14344,
+              "mode": "training_only_layer_month"
+            },
+            "raw_model_minus_champion_rms_C": 5.472489190007368,
+            "bounded_rows": 15168,
+            "final_change_rms_C": 0.21814390314179255
+          }
+        ],
+        "metric_computed_at_commitment": false,
+        "truth_used_to_choose_action": false
+      }
+    }
+  ],
+  "v7_readiness_audit": {
+    "audit_scope": "REPORT_VALUES_PLUS_PACK_FILE_METADATA_ONLY_NO_CSV_VALUE_OR_HASH_REREAD",
+    "status": "REPORT_ATTESTED_READY_UNSUBMITTED_HIGH_TRANSPORT_RISK",
+    "checks": {
+      "v7_result_pass": true,
+      "root_ready_qa_pass": true,
+      "attested_rows_schema_key_order_finite": true,
+      "attested_hash_exact": true,
+      "pack_path_still_exists_metadata_only": true,
+      "upload_was_not_attempted": true,
+      "blocked_by_daily_limit": true,
+      "no_later_exact_family_submission_in_report_ledger": true
+    },
+    "candidate": "P2_V7_EXTRATREES_PUBLIC_BENEFIT_GATE",
+    "attested_csv_sha256": "c6f2a7e02ff3e5064ec653af0a52b117cbf8ae49d80e651a2a96276190f4f620",
+    "pack_metadata": {
+      "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_public_feature_benefit_gate_cycle_20260831_v7\\submission\\P2_V7_EXTRATREES_PUBLIC_BENEFIT_GATE\\P2_submission.csv",
+      "exists": true,
+      "bytes": 1286033,
+      "last_write_time_ns": 1788169661833088700
+    },
+    "internal_october_delta_rmse_C": -0.013071642838043296,
+    "internal_raw_expected_points_delta": 0.1354472678596296,
+    "transport_calibrated_expected_points_delta": 0.013765176249623437,
+    "current_champion": {
+      "rmse_C": 0.430194,
+      "points": 27.935464
+    },
+    "nominal_if_calibrated_delta_transported": {
+      "rmse_C": 0.42909695739138487,
+      "points": 27.949229176249624
+    },
+    "exact_family_refuted_by_later_official_result": false,
+    "why_not_refuted": "Later P2 official regressions were HGB absolute-profile and shallow residual families, not the exact ExtraTrees benefit-gate pack.",
+    "priority": "SECONDARY_INFORMATION_PROBE_NOT_PRIMARY",
+    "priority_reason": "The report-attested edge is only +0.013765 points after the then-known penalty, all validation is exposed, and later non-identical P2 families showed severe sign reversal on Public."
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_truth_free_scoring_rows_read": 69850,
+    "report_files_read_for_v7_audit": 4,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "existing_v7_submission_csv_value_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "298f053f791c7ee3f621e13cf41b50bfa417793b6c56388a73ffc4988faa21de",
+    "runner": "b6fcfff5bf174071826cfa6442d144fc887b7be126c9f487ec1541e4c7a5c689",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "normalized_curvature_module": "c5d88d9bbe90c4b2b03f135d434ed5f030b71732d50549aac17ced88516070a0",
+    "prior_metric_engine": "a849c6feecfc4579191988e71650edee0e84b833c540a009d07628c25bedb3b2"
+  }
+}

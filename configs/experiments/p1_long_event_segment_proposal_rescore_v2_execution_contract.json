@@ -1,0 +1,111 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.execution_contract.v2",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T08:12:00+09:00",
+  "status": "IMPLEMENTED_ZERO_FIT_NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "artifact_dir": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2",
+  "authorities": {
+    "scientific_design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1"
+    },
+    "operational_amendment_v2": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json",
+      "sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276"
+    },
+    "execution_closure_v3": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v3_execution_closure_amendment.json",
+      "sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99"
+    }
+  },
+  "legacy_verified_readiness": {
+    "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r6.json",
+    "config_sha256": "e447106eef3123f52b06a1577944f006ec9fd469c325069bda8b87cd37fbacc1",
+    "runner_path": "scripts/run_p1_round_b_nonspike_long_event_residual_v1r6.py",
+    "runner_sha256": "47528af803da0d582a17db41b03b189240a79f5735aac041cae7e331c0d9d94a",
+    "strict_preflight_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/strict_preflight_receipt.json",
+    "strict_preflight_sha256": "075fa781ccd1201ea3476e4219868eac583992f1860af28f0ab62b5c9c60f131",
+    "reuse_scope": "held source/cache/full-80-feature/key regeneration, runtime load, frozen Round-B p100 surface, truth alignment, left-censor checks, and process-tree supervisor only; no predecessor numerical residual model is executed"
+  },
+  "execution_module": {
+    "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v2.py",
+    "required_entrypoint": "run_authorized_screen"
+  },
+  "fixed_operation_graph": {
+    "inner_anchor_physical_fits": 9,
+    "inner_segment_physical_fits": 54,
+    "outer_segment_physical_fits": 9,
+    "maximum_lifetime_physical_fits": 72,
+    "inner_anchor_surface_materializations": 3,
+    "inner_context_surface_materializations": 9,
+    "outer_context_surface_materializations": 9,
+    "maximum_lifetime_scientific_materializations": 21,
+    "outer_scores": 1,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds": 21600,
+    "automatic_resume_or_rerun_count": 0,
+    "row_level_prediction_files": 0,
+    "candidate_files": 0,
+    "official_actions": 0
+  },
+  "authorization_contract": {
+    "stdlib_only_before_external_authorization": true,
+    "actual_authorization_digest_must_be_embedded_in_runner_and_supplied_by_environment": true,
+    "actual_authorization_must_pin": [
+      "execution contract hash",
+      "normalized runner hash",
+      "raw preexecution seal hash",
+      "raw independent QA report hash and PASS verdict",
+      "read-only preflight verification digest",
+      "zero prior claim, fit, materialization, score, and candidate state"
+    ],
+    "dependency_input_runtime_and_native_maps_are_runner_trust_roots_not_authorization_supplied": true,
+    "authorization_status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+    "numerical_execute_authorized": false,
+    "fit_authorized": false,
+    "scientific_materialization_authorized": false
+  },
+  "publication_contract": {
+    "single_attempt": true,
+    "execution_lock": "atomic O_CREAT|O_EXCL before any fit or scientific materialization",
+    "failure": "retain lock and publish one create-only terminal failure hash-chain record",
+    "success_order": [
+      "metrics.json",
+      "report_ko.md",
+      "result.json",
+      "manifest.json",
+      "attempt_journal/998_worker_terminal.json",
+      "attempt_journal/999_completed.json",
+      "flush files, journal directory, and artifact directory while lock exists",
+      "close lock handle",
+      "unlink execution.lock as final commit operation"
+    ],
+    "post_success_parent": "read-only manifest/hash/semantic verification only",
+    "preflight": "idempotent and read-only; stdout receipt only"
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "result_driven_parameter_changes": 0,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "operation_counters_at_contract_creation": {
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  }
+}

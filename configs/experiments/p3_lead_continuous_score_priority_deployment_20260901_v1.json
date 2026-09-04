@@ -1,0 +1,97 @@
+{
+  "schema_version": "p3.lead_continuous_score_priority_deployment.20260901.v1",
+  "experiment_id": "p3_lead_continuous_score_priority_deployment_20260901_v1",
+  "status": "SEALED_BEFORE_OFFICIAL_MATERIALIZATION",
+  "decision": {
+    "eligible_comparator": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+    "eligible_comparator_public_rmse_m": 0.583892,
+    "eligible_comparator_points": 24.066168,
+    "selection_metric": "active_prequential_delta_candidate_minus_incumbent_m",
+    "selection_metric_value_m": -0.004187821972187478,
+    "estimated_public_rmse_m": 0.5797041780278125,
+    "estimated_public_points": 24.1326348623929,
+    "estimated_point_gain_vs_clean_incumbent": 0.06646686239290145,
+    "translation_is_heuristic_not_official_score": true,
+    "upload_authorized_here": false
+  },
+  "frozen_candidate": {
+    "source_experiment": "p3_lead_continuous_challenger_20260827_v1",
+    "source_runner": "scripts/run_p3_lead_continuous_challenger_20260827_v1.py",
+    "source_runner_sha256": "50787bc3308623f57a76dfdf22246f85ff770e5f6df7688db2cc83f845e12dbf",
+    "source_metrics": "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+    "source_metrics_sha256": "5343dfd5846f2ed21bfe1b1e033e9acebf03385e98d79bf9693486cb3ba5ee8c",
+    "fresh_confirmation": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json",
+    "fresh_confirmation_sha256": "30fc5f38d27f39e5caf787c68f80f7e352880bd54ee34d056908c4f0c00bd4e1",
+    "full_history_model_state_sha256": "dab5e21d1e836c4f4991549240b10321629908d4077c370f02abea9469a20d2a",
+    "fit_count": 1,
+    "hyperparameter_search_count": 0,
+    "base_prediction": "eligible clean incumbent",
+    "axis_prediction": "organizer baseline_persistence.csv",
+    "application": "candidate = frozen_model(clean_incumbent, persistence, lead, four causal context summaries)",
+    "active_leads": [3, 6, 9, 12, 18, 24]
+  },
+  "stability_disclosure": {
+    "historical_overall_delta_rmse_m": -0.0031408040680385163,
+    "historical_active_delta_rmse_m": -0.004187821972187478,
+    "historical_active_leads_improved": 6,
+    "historical_active_leads_total": 6,
+    "historical_i_ors_delta_rmse_m": 0.002158216011739378,
+    "fresh_independent_cases": 1,
+    "fresh_delta_candidate_minus_incumbent_rmse_m": 0.022617090405150586,
+    "fresh_submission_readiness": "NOT_READY_INSUFFICIENT_FRESH_SUPPORT",
+    "candidate_policy": "score_priority_with_explicit_low_stability_disclosure"
+  },
+  "clean_inputs": {
+    "clean_incumbent_csv": {
+      "locator": "P3_CLEAN_INCUMBENT_CSV or archived local path",
+      "sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+      "bytes": 39822
+    },
+    "test_features": {
+      "path": "artifacts/p3/features_all20_v1/test_features.parquet",
+      "sha256": "004018935c155b0ab4fea18bdcfa2c99bdef265734c1ddcdd5ea5c2fee68312d",
+      "rows": 200
+    },
+    "oof": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+      "sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e",
+      "rows": 1086
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "official_distributed_files": {
+      "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+      "sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+      "baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110"
+    }
+  },
+  "lineage": {
+    "organizer_distributed_data_only": true,
+    "scratch_fit_only": true,
+    "internet_rows": 0,
+    "kiost_raw_rows": 0,
+    "external_observation_rows": 0,
+    "external_reanalysis_rows": 0,
+    "external_forecast_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "kma_era5_v21_v81_predictions_or_metrics_used": 0,
+    "hidden_truth_rows": 0
+  },
+  "output_contract": {
+    "rows": 1200,
+    "columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "lead_counts_each": 200,
+    "finite": true,
+    "range_m": [0.0, 30.0],
+    "key_order_exact_test_index": true,
+    "duplicate_keys": 0,
+    "must_differ_from_clean_incumbent_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+    "upload_count": 0
+  }
+}

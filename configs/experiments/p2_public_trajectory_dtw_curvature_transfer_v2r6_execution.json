@@ -1,0 +1,84 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r6.execution.v1",
+  "created_at_kst": "2026-08-26T10:44:00+09:00",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r6",
+  "status": "PRECLAIM_BLOCKED_NO_GO_INNER_WINDOW_UNIDENTIFIABLE",
+  "authorized": false,
+  "execution_permitted": false,
+  "recovery_class": "USER_DIRECTED_INFRASTRUCTURE_RECOVERY_AFTER_V2R5_ZERO_COMPLETED_ZERO_SCORED",
+  "design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_design.json",
+    "bytes": 14145,
+    "sha256": "dc8684950bf7466038270a33ab2f2c6425820433aa205790bd40c1d5e842004e"
+  },
+  "trigger_resolution": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_trigger_resolution.json",
+    "bytes": 3557,
+    "sha256": "3348f8bf10335a1da414fcbb8f04f7fb7e00ec798ff774bba63edbc13af73f87",
+    "terminal_status": "NO_GO_INNER_WINDOW_UNIDENTIFIABLE"
+  },
+  "diagnostics": {
+    "slot1_error_only": {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_slot1_error_only_diagnostic_20260826.json",
+      "bytes": 1599,
+      "sha256": "c091f5afb612015f2f8390462aa557117154f0468e8afbc7306699c5c80504d7"
+    },
+    "inner_identifiability": {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_inner_identifiability_certificate_20260826.json",
+      "bytes": 3802,
+      "sha256": "a84f09e87322b3561e8e7109515d576f27e73e3063ae846159876d045b54a864",
+      "all_three_identifiable": false,
+      "march_rows_after_mask": 0
+    }
+  },
+  "predecessor_failure": {
+    "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r5",
+    "claim_sha256": "00a8f84de695475eaec52ec691ab219448408c6dc90f5e9879ace71cc09c232f",
+    "journal_sha256": "710a4eb202467aca26b13c24f74aff71378a0c23cea0e1e890c5b07f0e8f2e4f",
+    "materialization_reserved": 1,
+    "materialization_failed": 1,
+    "materialization_completed": 0,
+    "scores": 0,
+    "physical_fit_calls": 0,
+    "p100_accesses": 0
+  },
+  "scientific_contract": {
+    "base_v1_design_sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+    "cells": ["d1_k3", "d1_k7", "d3_k3", "d3_k7", "d7_k3", "d7_k7"],
+    "inner_windows": ["inner_2024_mar", "inner_2024_may", "inner_2024_jul"],
+    "materialization_slots": 22,
+    "physical_fit_calls": 0,
+    "changed": false
+  },
+  "portable_observations": {
+    "root_environment": "P2_DATA_DIR",
+    "relative_path": "observations.csv",
+    "fallback_absolute_path": null,
+    "bytes": 49058719,
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "historical_exact_anchor": {
+    "relative_path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+    "bytes": 2477660,
+    "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"
+  },
+  "p100_contract": {
+    "state": "LITERAL_METADATA_ONLY_NEVER_RESOLVED_FOR_BLOCKED_V2R6",
+    "filesystem_accesses": 0
+  },
+  "operation_ceiling": {
+    "attempts": 0,
+    "worker_launches": 0,
+    "materializations": 0,
+    "scores": 0,
+    "physical_fit_calls": 0,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "p100_accesses": 0
+  },
+  "execution_instruction": "DO_NOT_AUTHORIZE_OR_EXECUTE. Read-only preflight must reproduce the frozen aggregate-only identifiability certificate and stop before claim."
+}

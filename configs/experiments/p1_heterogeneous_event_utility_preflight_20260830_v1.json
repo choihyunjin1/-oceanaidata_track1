@@ -1,0 +1,273 @@
+{
+  "schema_version": "p1.heterogeneous_event_utility_preflight.v1",
+  "experiment_id": "p1_heterogeneous_event_utility_preflight_20260830_v1",
+  "status": "PREREGISTERED_ZERO_FIT_TRAIN_OOF_SUPPORT_ONLY",
+  "purpose": "Audit whether a frozen heterogeneous OOF proposal bank has enough event-level positive utility support to justify a later separately authorized utility head. This experiment never fits a model and never creates predictions.",
+  "historical_surface": "All Q2/Q3/Q4 OOF folds are historically exposed. A support pass is research-only feasibility evidence and is not promotion evidence.",
+  "execution_contract": {
+    "model_fit_count": 0,
+    "threshold_search_count": 0,
+    "prediction_materialization_count": 0,
+    "allowed_interface": "registered_train_oof_artifacts_only",
+    "prefix_order": ["q2_to_q3", "q2_q3_to_q4"]
+  },
+  "key_columns": ["station", "year", "layer", "time"],
+  "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+  "immutable_inputs": {
+    "truth_oof": {
+      "role": "sealed_outer_oof_truth",
+      "artifact": {
+        "path": "artifacts/p1_full_improvement_cycle_20260822_v1/winner_oof.parquet",
+        "bytes": 699313,
+        "sha256": "5ec891818b6edbe9287fd083084a6b049cc21edf8220d577ed4c3ec9488e6350"
+      },
+      "receipt": {
+        "path": "artifacts/p1_full_improvement_cycle_20260822_v1/manifest.json",
+        "bytes": 3942,
+        "sha256": "08345c3350b5b28cca9b8fb9511cc555a3e9f870aa5f6362829a617782880438"
+      },
+      "required_columns": ["station", "year", "layer", "time", "fold", "label"]
+    },
+    "anchor_oof": {
+      "role": "current_router_oof_anchor",
+      "artifact": {
+        "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+        "bytes": 1071684,
+        "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+      },
+      "receipt": {
+        "path": "artifacts/p1_current_router_oof_anchor_v1/manifest.json",
+        "bytes": 1355,
+        "sha256": "93ca4aa771223defbe49d7138e349a14877df6b3146a20196b6fd785d7f28719"
+      },
+      "prediction_column": "current_router_prediction",
+      "required_receipt_status": "PASS_LABEL_FREE_RECONSTRUCTION",
+      "required_truth_columns_read": 0
+    },
+    "tabular_oof": {
+      "role": "matched_budget_frozen_family_predictions",
+      "artifact": {
+        "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/predictions.parquet",
+        "bytes": 941479,
+        "sha256": "23f9b59cc54a7502c87786280ef76319e64288a95a44f8c9ec37188a761033c5"
+      },
+      "receipt": {
+        "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/manifest.json",
+        "bytes": 3754,
+        "sha256": "bf3de77dc7794ab71734ef0bdf67cc36a86b8f8e75abb48d4e4564c3501f4e89"
+      }
+    }
+  },
+  "proposal_sources": [
+    {
+      "name": "offline_xgboost_default",
+      "kind": "parquet_column",
+      "input": "tabular_oof",
+      "column": "incumbent_offline_xgboost__default"
+    },
+    {
+      "name": "round_a_causal_default",
+      "kind": "parquet_column",
+      "input": "tabular_oof",
+      "column": "causal_event_rescue_ensemble__default"
+    },
+    {
+      "name": "round_b_event_day_default",
+      "kind": "parquet_column",
+      "input": "tabular_oof",
+      "column": "event_day_balanced_lightgbm__default"
+    },
+    {
+      "name": "mstcn_e125",
+      "kind": "fold_npz_candidate",
+      "folds": {
+        "2025_q2": {
+          "artifact": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+            "bytes": 173949505,
+            "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+          },
+          "receipt": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_receipt.json",
+            "bytes": 14102,
+            "sha256": "50483ac14ed6f7b60d28b937161f51043b3dd39f522909c087a5c00b5ac6df85"
+          },
+          "expected_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+          "selector": {
+            "kind": "width_epoch_threshold_grid",
+            "candidate_array": "candidate",
+            "widths_array": "widths",
+            "epochs_array": "epochs",
+            "thresholds_array": "thresholds",
+            "width": 512,
+            "epoch": 125,
+            "threshold": 0.9
+          }
+        },
+        "2025_q3": {
+          "artifact": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q3_confirmatory_blind.npz",
+            "bytes": 4596488,
+            "sha256": "afc1f10d0ee6bb3ab1896f8a579a074ec386c73639f08d778355894b7d7347a9"
+          },
+          "receipt": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q3_confirmatory_blind_receipt.json",
+            "bytes": 7013,
+            "sha256": "f498ef3aa4f340afbb569cd3d0cb5f62ebfde10ffcb6c4ada8eb92b76f52a711"
+          },
+          "expected_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+          "selector": {"kind": "direct", "candidate_array": "candidate"}
+        },
+        "2025_q4": {
+          "artifact": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q4_confirmatory_blind.npz",
+            "bytes": 2947750,
+            "sha256": "f04f3d4cb22e75a8ec69ebed1656b618231f9a04552dcb5332670a2594dc948a"
+          },
+          "receipt": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q4_confirmatory_blind_receipt.json",
+            "bytes": 7010,
+            "sha256": "ed416fcef57a49d25bbaec8ff29f38d17e688636c3464ebe28c6b57e9ceb87ed"
+          },
+          "expected_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+          "selector": {"kind": "direct", "candidate_array": "candidate"}
+        }
+      }
+    },
+    {
+      "name": "mstcn_e150",
+      "kind": "fold_npz_candidate",
+      "folds": {
+        "2025_q2": {
+          "artifact": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+            "bytes": 173949505,
+            "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+          },
+          "receipt": {
+            "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_receipt.json",
+            "bytes": 14102,
+            "sha256": "50483ac14ed6f7b60d28b937161f51043b3dd39f522909c087a5c00b5ac6df85"
+          },
+          "expected_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+          "selector": {
+            "kind": "width_epoch_threshold_grid",
+            "candidate_array": "candidate",
+            "widths_array": "widths",
+            "epochs_array": "epochs",
+            "thresholds_array": "thresholds",
+            "width": 512,
+            "epoch": 150,
+            "threshold": 0.8
+          }
+        },
+        "2025_q3": {
+          "artifact": {
+            "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+            "bytes": 22946468,
+            "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+          },
+          "receipt": {
+            "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve_receipt.json",
+            "bytes": 5856,
+            "sha256": "69bc50cf508d6b6061d0cf40e84e0d2825066dfaecfcad59006e9e0ccc7ba7f2"
+          },
+          "expected_experiment_id": "p1_mstcn_checkpoint_diagnostic_20260827_v2",
+          "selector": {
+            "kind": "epoch_indexed",
+            "candidate_array": "candidate",
+            "epochs_array": "epochs",
+            "epoch": 150
+          }
+        },
+        "2025_q4": {
+          "artifact": {
+            "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+            "bytes": 14747269,
+            "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+          },
+          "receipt": {
+            "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve_receipt.json",
+            "bytes": 5856,
+            "sha256": "f5ef758679f1afbed7008cb367d9a9789b3876e9673f580e68762328ceed7e91"
+          },
+          "expected_experiment_id": "p1_mstcn_checkpoint_diagnostic_20260827_v2",
+          "selector": {
+            "kind": "epoch_indexed",
+            "candidate_array": "candidate",
+            "epochs_array": "epochs",
+            "epoch": 150
+          }
+        }
+      }
+    }
+  ],
+  "prefixes": [
+    {
+      "name": "q2_to_q3",
+      "fit_folds": ["2025_q2"],
+      "calibration_folds": ["2025_q3"]
+    },
+    {
+      "name": "q2_q3_to_q4",
+      "fit_folds": ["2025_q2", "2025_q3"],
+      "calibration_folds": ["2025_q4"]
+    }
+  ],
+  "proposal_contract": {
+    "bank_rule": "current_router_prediction == 0 AND any frozen source prediction == 1",
+    "anchor_negative_only": true,
+    "anchor_union_immutable": true,
+    "event_group": ["fold", "station", "year", "layer"],
+    "contiguous_cadence_minutes": 10,
+    "utility": "(2 - anchor_f1) * added_tp - anchor_f1 * added_fp",
+    "utility_positive_if_strictly_above": 0.0,
+    "equivalent_event_precision_requirement": "event_precision > anchor_f1 / 2",
+    "merge_adjacent_sources_into_one_event": true,
+    "persist_raw_keys": false
+  },
+  "support_gates": {
+    "minimum_fit_utility_positive_events": 10,
+    "minimum_calibration_utility_positive_events": 4,
+    "minimum_fit_utility_positive_station_layer_cells": 3,
+    "maximum_fit_single_station_layer_utility_positive_share": 0.7,
+    "require_complete_oof_provenance": true,
+    "apply_to_every_prefix": true,
+    "kill_on_any_failure": true
+  },
+  "outlier_policy": {
+    "remove_label_1_rows_or_events": false,
+    "clip_or_remove_raw_temp_anomaly_signal": false,
+    "auxiliary_psal_depth_quality_role": "diagnostic_only_not_loaded_by_this_preflight",
+    "auxiliary_quality_may_change_support_or_gate": false,
+    "target_positive_rows_removed": 0
+  },
+  "outputs": {
+    "artifact_directory": "artifacts/p1_heterogeneous_event_utility_preflight_20260830_v1",
+    "terminal_receipt": "artifacts/p1_heterogeneous_event_utility_preflight_20260830_v1/terminal_result.json",
+    "append_only": true,
+    "allowed_file_extensions": [".json"],
+    "prediction_csv_count": 0
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_read": true,
+    "submission_read_or_creation": true,
+    "hidden_data_read": true,
+    "raw_training_data_read": true,
+    "model_fit_or_refit": true,
+    "threshold_or_hyperparameter_search": true,
+    "prediction_csv_creation": true,
+    "anchor_positive_removal": true,
+    "label_1_event_removal": true,
+    "raw_temp_clipping_or_removal": true,
+    "result_based_rerun_or_tuning": true,
+    "upload": true
+  },
+  "forbidden_path_tokens": [
+    "test",
+    "sample",
+    "submission",
+    "hidden"
+  ]
+}

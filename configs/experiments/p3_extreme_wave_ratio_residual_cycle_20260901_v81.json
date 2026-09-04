@@ -1,0 +1,68 @@
+{
+  "schema_version": "p3.extreme_wave_ratio_residual.config.v81",
+  "experiment_id": "p3_extreme_wave_ratio_residual_cycle_20260901_v81",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_HISTORICAL_EXTREME_WAVE_RATIO_GEOMETRY",
+    "novel_axis": "past-only Hmax/Hs normalized extreme-wave ratio distribution, displacement and trend over full and recent context",
+    "distinction": "v21 and the older atmosphere pilot use only the current Hmax/Hs scalar as a router diagnostic; v71 models an OLS equilibrium residual between Hs and Hmax; generic sequence encoders ingest raw Hs/Hmax. None stores the sealed historical ratio distribution, endpoint displacement, or ratio trend, so v81 is not reconstructible from their outputs and uses no prior predictions.",
+    "full_registry_boundary": "Distinct from v29-v80 recurrence, spectrum, decomposition, tail-of-increments, crossing, record, topology, causality, covariance, intrinsic-time, gust, and prior-output families.",
+    "repository_negative_fingerprint": "No executed P3 historical Hmax/Hs ratio-distribution residual contract was found.",
+    "posthoc_prior_cycle_adjustment": false,
+    "official_exclusion": "v64 and all prior/official results are excluded from features, gates, fitting and candidate selection",
+    "forbidden_reuse": ["v64/v78-v80 or earlier predictions/features", "official result or slices", "posthoc blends or routers"]
+  },
+  "encoder": {
+    "input": "past-only Hs and Hmax on the native context, linearly filled within the observed prefix and sampled on the fixed 20-minute grid",
+    "channels": ["hs", "hmax"],
+    "raw_column_indices": [0, 2],
+    "windows": {"full": [0, 145], "recent": [72, 145]},
+    "hs_floor_m": 0.1,
+    "ratio": "max(Hmax,0)/max(max(Hs,0),0.1)",
+    "statistics_per_window": ["mean", "standard_deviation", "median", "IQR", "q10", "q90", "last_minus_median", "OLS_slope_per_window_fraction"],
+    "feature_count": 16,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false,
+    "row_deletion": 0,
+    "support_gate": {"minimum_cases": 180, "minimum_positive_variance_features": 16, "minimum_nonzero_feature_share": 0.95, "target_used": false}
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_HRATIO16_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_HRATIO16_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Forristall, On the statistical distribution of wave heights in a storm, Journal of Geophysical Research 83(C5), 2353-2358 (1978)", "url": "https://doi.org/10.1029/JC083iC05p02353", "use": "normalization of high-wave behavior by significant wave height motivation only; no P3 performance claim"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

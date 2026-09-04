@@ -1,0 +1,72 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.completion_overlay.20260830.v2",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2",
+  "problem": "P2",
+  "status": "AUTHORIZED_COMPLETION_ONLY_LOCAL_MATERIALIZATION_AND_QA_NO_UPLOAD",
+  "overlay_scope": "PREATTEMPT_LOADER_CONTRACT_REPAIR_ONLY",
+  "base_attempt": {
+    "config": {
+      "path": "configs/experiments/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.json",
+      "sha256": "061e8667085278282d4a23d792ac04c90bef91dcbad3b32395ac00bbcfa6773f"
+    },
+    "runner": {
+      "path": "scripts/run_p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.py",
+      "sha256": "bec3a0b8a68dc201d59600e589bb7adba775892aa4f7522bfc4802d8845bee3a"
+    },
+    "scientific_module": {
+      "path": "src/p2_restore/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1.py",
+      "sha256": "70bd37bbba9b84032aa96e8ef89e0cc55385f7e285e9dcf09713ff6c7e6e50ba"
+    },
+    "failure_receipt": {
+      "path": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1/failure-receipt.json",
+      "sha256": "510f8dd90c3ef08961d7f0b84db9f7efc52461ca53e1e99e33742afec5d0c8d3"
+    }
+  },
+  "repair": {
+    "cause": "The v1 runner inserted REPO/src but not REPO before importing an unchanged module that imports the existing scripts package.",
+    "exact_change": "ADD_REPO_TO_SYS_PATH_BEFORE_UNCHANGED_V1_SCIENTIFIC_MODULE_IMPORT",
+    "loader_contract_lines_added": 1,
+    "performance_result_existed_before_repair": false,
+    "model_or_prediction_logic_changed": false,
+    "data_or_query_mapping_changed": false,
+    "gates_or_qa_changed": false
+  },
+  "frozen_scientific_invariants": {
+    "candidate": "P2-GAUSSIAN-COPULA-V2-EXACT-FROZEN",
+    "deployment_training_outer": "2025_nov_dec",
+    "training_block_count": 7,
+    "selected_shrinkage": 0.5,
+    "expected_refit_model_receipt_sha256": "446f70411d646fab4568a15080c09a374184e44bca669a5c954a34c25d867e7d",
+    "maximum_copula_fits": 1,
+    "inner_search_or_hpo": 0,
+    "correction_rms_cap_c": 0.075,
+    "correction_p99_cap_c": 0.2,
+    "incomplete_profile_behavior": "exact zero residual correction",
+    "profile_projection": "public endpoint envelope plus unit-weight isotonic projection"
+  },
+  "output_contract": {
+    "external_staging_directory_name": "20260830_P2_GAUSSIAN_COPULA_V2_FROZEN_READY_V2",
+    "submission_filename": "P2_submission.csv",
+    "report_directory": "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v2",
+    "research_only": true
+  },
+  "execution_policy": {
+    "maximum_executions": 1,
+    "maximum_copula_fits": 1,
+    "maximum_threads": 1,
+    "official_observations_test_index_sample_read_authorized": true,
+    "official_hidden_truth_read_allowed": false,
+    "score_py_read_allowed": false,
+    "baseline_read_allowed": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "upload_authorized_in_this_runner": false,
+    "commit": false,
+    "push": false
+  },
+  "decision_policy": {
+    "any_overlay_or_base_pin_mismatch": "INVALID_TECHNICAL_STOP_NO_RETRY_NO_CSV",
+    "candidate_hash_matches_prior_submission": "BLOCK_DUPLICATE_NO_UPLOAD",
+    "all_materialization_and_qa_checks_pass": "READY_NOT_UPLOADED_RESEARCH_ONLY"
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "schema_version": "p3_gen6_incumbent_preserving_residual_calibrator.r2_compatibility_verifier.v2",
+  "created_at_kst": "2026-08-23T12:24:00+09:00",
+  "status": "STATIC_OWNER_COMPLETE_AWAITING_FRESH_INDEPENDENT_QA_NO_RECEIPT",
+  "problem": "P3",
+  "identity": "P3_GEN6_INCUMBENT_PRESERVING_RESIDUAL_CALIBRATOR_R2_COMPATIBILITY_VERIFIER_V2",
+  "verifier_only": true,
+  "check_only_default": true,
+  "trusted_bootstrap": {
+    "path": "scripts/bootstrap_verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py",
+    "role": "NONCYCLIC_EXTERNALLY_PINNED_PRE_IMPORT_TRUST_ROOT",
+    "self_hash_embedded": false,
+    "independent_static_qa_required_before_attestation": true
+  },
+  "implementation_roles": {
+    "TRUSTED_BOOTSTRAP": "scripts/bootstrap_verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py",
+    "CONFIG": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v2.json",
+    "HELPER": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py",
+    "CLI": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py",
+    "TESTS": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py"
+  },
+  "authenticated_source_pins": {
+    "HELPER": {
+      "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py",
+      "bytes": 15462,
+      "sha256": "054c271e2ba0d8aac8fc8f4436884b491ab7c03a397fd10aae0e0478ddcd681b"
+    },
+    "CLI": {
+      "path": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v2.py",
+      "bytes": 1417,
+      "sha256": "39faf8b6f6d6a1acb043ed038cce396a85a4265be04678e8a9cdbc134980df13"
+    },
+    "TESTS": {
+      "path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v2.py",
+      "bytes": 12901,
+      "sha256": "a64f7e865422d2ace395e17a3717cca1ebec9fa35a57c06c477f0983f23abb67"
+    },
+    "R2_CONTRACT": {
+      "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_contract_r2.py",
+      "bytes": 73236,
+      "sha256": "24245a5ed9e47c335607560bb02185259984ffae70b18edb7e8afd57a4aafe51"
+    },
+    "V1_CONFIG": {
+      "path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v1.json",
+      "bytes": 12799,
+      "sha256": "6b92a6eb67adfb042958cb518633ead4e2c70ffb1e7de35eceafccd6c6e42d2a"
+    },
+    "V1_HELPER": {
+      "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py",
+      "bytes": 47746,
+      "sha256": "9749feb754815915a50bab2dcf6a6ed687159047874fcd9ad0cda376e9ea0375"
+    },
+    "V1_CLI": {
+      "path": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v1.py",
+      "bytes": 2546,
+      "sha256": "25a24339319b43da3d9f97b422ac07dd574bb27b10532d7cf983a21726b86912"
+    },
+    "V1_TESTS": {
+      "path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py",
+      "bytes": 12727,
+      "sha256": "20b343905ad4670bfa9b970880577216560edb8bdcf048f5f30e97b1f7bbc255"
+    },
+    "V1_OWNER_NO_GO": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v1_no_go/OWNER_STATIC_QA_NO_GO_20260823.json",
+      "bytes": 5814,
+      "sha256": "b721a6de42429754fb1b98062f54832848af92dcc58fbfb204bc5299c344b620"
+    },
+    "V1_TOMBSTONE": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v1_no_go/EXECUTION_TOMBSTONE.json",
+      "bytes": 3006,
+      "sha256": "380830f54ff7d0c2d78e4ad11592bf8180d7fd3d2a59118d93e5944980661783"
+    }
+  },
+  "canonical_paths": {
+    "compatibility_control": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v2_control",
+    "pre_execution_qa": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v2_control/pre_execution_qa.json",
+    "compatibility_receipt": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2_compatibility_verifier_v2_control/compatibility_receipt.json"
+  },
+  "lineage": {
+    "independent_review": {
+      "reviewer": "/root/meaningful_improvement_audit/p2_stageb_blind_review",
+      "independent_receipt_file_exists": false,
+      "independent_receipt_hash_exists": false,
+      "verdict": "NO-GO",
+      "p0_count": 0,
+      "p1_count": 1,
+      "finding_id": "COMPATIBILITY_IMPLEMENTATION_PIN_TRUST_CHAIN_NOT_ENFORCED"
+    },
+    "compatibility_v1_pins": {
+      "CONFIG": {
+        "path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2_compatibility_verifier_v1.json",
+        "bytes": 12799,
+        "sha256": "6b92a6eb67adfb042958cb518633ead4e2c70ffb1e7de35eceafccd6c6e42d2a"
+      },
+      "HELPER": {
+        "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py",
+        "bytes": 47746,
+        "sha256": "9749feb754815915a50bab2dcf6a6ed687159047874fcd9ad0cda376e9ea0375"
+      },
+      "CLI": {
+        "path": "scripts/verify_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_v1.py",
+        "bytes": 2546,
+        "sha256": "25a24339319b43da3d9f97b422ac07dd574bb27b10532d7cf983a21726b86912"
+      },
+      "TESTS": {
+        "path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_r2_compatibility_verifier_v1.py",
+        "bytes": 12727,
+        "sha256": "20b343905ad4670bfa9b970880577216560edb8bdcf048f5f30e97b1f7bbc255"
+      }
+    },
+    "frozen_r2_implementation_pins": {
+      "CONFIG": {
+        "path": "configs/experiments/p3_gen6_incumbent_preserving_residual_calibrator_v1r2.json",
+        "bytes": 16968,
+        "sha256": "77bcd142862795c1d5e8dbcc900c4bc728ce867ca018afc44ef6ff3038202f1f"
+      },
+      "CONTRACT": {
+        "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_contract_r2.py",
+        "bytes": 73236,
+        "sha256": "24245a5ed9e47c335607560bb02185259984ffae70b18edb7e8afd57a4aafe51"
+      },
+      "ENGINE": {
+        "path": "src/p3_wave/gen6_incumbent_preserving_residual_calibrator_execution_r2.py",
+        "bytes": 46244,
+        "sha256": "e272c48abe092445186602090f963142e1bf65b0fddcf407554f065e8e0b1bcf"
+      },
+      "RUNNER": {
+        "path": "scripts/run_p3_gen6_incumbent_preserving_residual_calibrator_v1r2.py",
+        "bytes": 10171,
+        "sha256": "6588a8b88a33367a354fffbbb8dfed89c7e8e74f6b762c9957afe92a35f151ef"
+      },
+      "TESTS": {
+        "path": "tests/test_p3_gen6_incumbent_preserving_residual_calibrator_v1r2.py",
+        "bytes": 15932,
+        "sha256": "cefcff2fd41fc095b82973758164ff08f66b10a79146a2b90cdcd484c42ae5b8"
+      }
+    },
+    "frozen_r2_control_pins": {
+      "PRE_EXECUTION_QA": {
+        "bytes": 9964,
+        "sha256": "01156d67271b18509ab4f56c69fec7d85c15b677a1b041e1b4b701fdde8ea052"
+      },
+      "AUTHORIZATION": {
+        "bytes": 9854,
+        "sha256": "1015c77ea3ed9f841686001445e28c605dd27e2d3fecfbfc12ce527419a4d7ba"
+      },
+      "ATTEMPT_LOCK": {
+        "bytes": 6081,
+        "sha256": "b209c36d1d649176c3108710e6d69200fd90b4c5de5b8604ef714fa4bf33d268"
+      },
+      "RUN_FAILURE_RECEIPT": {
+        "bytes": 470,
+        "sha256": "f17b14511da38aae4f192630dd3d8f7e77f8f36dd1ded2234fc83426b08b5a97"
+      },
+      "inventory": {
+        "directories": 0,
+        "files": 4,
+        "file_bytes": 26369,
+        "sha256": "4e2ec9dce471f066367482f93f4ac0ccd303e6e3a3af63b1ccd465caa12f5f5c"
+      }
+    },
+    "frozen_r2_output": {
+      "directories": 2,
+      "files": 14,
+      "file_bytes": 226494,
+      "inventory_sha256": "15c2fea4907b1e16215b2d76d24c5ad483fc5cac84d9872adb902c023a4332d5"
+    },
+    "central_v9_anchor": {
+      "path": "artifacts/meaningful_score_goal_v9/registry.jsonl",
+      "bytes": 15812,
+      "sha256": "232b6ed3133de11ee05150ec439efe05baa315bbb64ea0f319ffcbddd421b965",
+      "physical_event_lines": 3,
+      "global_head_seq": 5,
+      "head_event_sha256": "1b3e01be70c6f8ed2df04038deac3b3642804f70f9f17a238826c64d68090317",
+      "official_uploads": 0
+    }
+  },
+  "compatibility_contract": {
+    "only_scoped_adaptations": [
+      "replace_frozen_r2_verifier_prefix_expectation_with_four_source_consensus",
+      "admit_exact_pinned_historical_failure_receipt_to_the_r2_control_inventory"
+    ],
+    "adaptation_count": 2,
+    "corrected_science_prefix_fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "frozen_r2_erroneous_prefix_fractions": [
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "historical_failure_receipt": {
+      "bytes": 470,
+      "sha256": "f17b14511da38aae4f192630dd3d8f7e77f8f36dd1ded2234fc83426b08b5a97",
+      "exception_type": "R2ContractError",
+      "message": "sealed fold commitment identity differs",
+      "message_sha256": "d3e1c00aaadbcd5f2a62a00b1a9e16999ae6e3877ba91ce7484f27e5852b99b1",
+      "capability_revoked": true
+    },
+    "all_other_v1_and_r2_checks_reexecuted": true,
+    "independent_oof_bootstrap_gate_replay": true,
+    "bootstrap_replicates_per_point": 5000,
+    "bootstrap_points": 5,
+    "global_restore_guaranteed_by_finally": true,
+    "research_only_no_promotion": true
+  },
+  "expected_result": {
+    "status": "NO_LOCAL_CURVE_QUALIFICATION_RESEARCH_ONLY_STOPPED_BEFORE_TEST",
+    "gate_decision": "RESEARCH_ONLY",
+    "local_gate_passed": false,
+    "validation_cases": 181,
+    "prediction_rows": 5430,
+    "fit_count_observed_exact": 11,
+    "identity_cells": 14,
+    "bounded_correction_cells": 1,
+    "corrected_prefix_fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "historical_failure_message_sha256": "d3e1c00aaadbcd5f2a62a00b1a9e16999ae6e3877ba91ce7484f27e5852b99b1",
+    "prefix_0p70_delta_candidate_minus_incumbent_m": 0.019456413709285747,
+    "prefix_0p70_ci90_m": [
+      0.01268218647428121,
+      0.026528875926353498
+    ],
+    "official_promotion": false,
+    "candidate_generated": false,
+    "test_prediction_generated": false,
+    "registry_appended": false,
+    "uploads": 0
+  },
+  "r2_mutation_allowed": false,
+  "r2_rerun_or_resume_allowed": false,
+  "qa_receipt_or_compatibility_receipt_write_allowed": false,
+  "execution_authorization_or_attempt_lock_allowed": false,
+  "fit_prediction_source_truth_decode_or_experiment_scoring_allowed": false,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "registry_append_allowed": false,
+  "upload_allowed": false,
+  "static_counters": {
+    "independent_qa_receipts_created": 0,
+    "compatibility_receipts_created": 0,
+    "execution_authorizations_created": 0,
+    "attempt_locks_created": 0,
+    "model_fit_calls": 0,
+    "prediction_calls": 0,
+    "source_train_target_scalar_decodes": 0,
+    "experiment_score_calls": 0,
+    "candidate_files": 0,
+    "test_prediction_files": 0,
+    "registry_appends": 0,
+    "uploads": 0
+  }
+}

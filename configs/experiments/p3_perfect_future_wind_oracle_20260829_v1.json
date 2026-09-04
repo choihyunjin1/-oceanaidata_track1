@@ -1,0 +1,233 @@
+{
+  "experiment_id": "p3_perfect_future_wind_oracle_20260829_v1",
+  "purpose": "One-shot historical-only upper-bound test of whether actual future local wind-vector paths add enough independent information to frozen KMA residual correction at 18h and 24h.",
+  "base_commit": "de1392076f15e3d08b6ab361760950eba880ddad",
+  "research_contract": "reports/dual_engine_breakthrough_20260829_v1/report-source.md#p3--predicted-future-forcing이-유일하게-남은-정보축인-이유",
+  "data_boundary": {
+    "historical_train_only": true,
+    "allowed_source_file": "train_atmos.csv",
+    "forbidden_source_names": [
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv",
+      "score.py"
+    ],
+    "official_values_read_allowed": false,
+    "absolute_official_time_reconstruction_allowed": false,
+    "external_period_matching_allowed": false,
+    "csv_output_allowed": false,
+    "upload_allowed": false,
+    "source_mutation_allowed": false
+  },
+  "inputs": {
+    "kma_oof": {
+      "path": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet",
+      "sha256": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "champion_oof": {
+      "path": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/sealed_candidate_predictions.parquet",
+      "sha256": "f6d89264eca2e718bba348f3b5cb0041dfb38352a41a4fb35ed079c6067f6a56"
+    },
+    "validation_keys": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/validation_keys.parquet",
+      "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+    },
+    "features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "train_atmos": {
+      "environment_root": "P3_DATA_DIR",
+      "relative_path": "train_atmos.csv",
+      "sha256": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+    }
+  },
+  "surface": {
+    "expected_cases": 179,
+    "expected_rows": 1074,
+    "folds": [
+      "2024_h2_storm",
+      "winter_transition",
+      "2025_h1"
+    ],
+    "stations": [
+      "G-ORS",
+      "I-ORS",
+      "S-ORS"
+    ],
+    "leads_h": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "active_leads_h": [
+      18,
+      24
+    ],
+    "exact_no_op_leads_h": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "embargo_hours": 78,
+    "frozen_kma_prediction_column": "candidate_final",
+    "intersection": "exact inner join of KMA OOF, sealed champion OOF, and validation keys on fold/anchor_id/station"
+  },
+  "oracle": {
+    "response": "target_hs_minus_frozen_kma",
+    "pooling": "18h_and_24h_rows_in_one_ridge",
+    "ridge_alphas": [
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ],
+    "ridge_selection": "inner leave-one-fold-out on outer-train cases, control arm only; shared alpha for control and treatment; lowest alpha wins exact ties",
+    "clip_hs_m": [
+      0.0,
+      30.0
+    ],
+    "control_wave_features": [
+      "hs_current",
+      "hs_delta_3h",
+      "hs_delta_6h",
+      "hs_delta_12h",
+      "hs_delta_24h",
+      "hs_slope_3h",
+      "hs_slope_6h",
+      "hs_slope_12h",
+      "hs_slope_24h",
+      "hs_std_6h",
+      "hs_std_12h",
+      "hs_std_24h",
+      "tp_current",
+      "wave_energy_current",
+      "hmax_hs_ratio_current"
+    ],
+    "future_wind_features": [
+      "delta_u_3h",
+      "delta_v_3h",
+      "delta_u_6h",
+      "delta_v_6h",
+      "delta_u_9h",
+      "delta_v_9h",
+      "delta_u_12h",
+      "delta_v_12h",
+      "delta_u_18h",
+      "delta_v_18h",
+      "delta_u_24h",
+      "delta_v_24h"
+    ],
+    "wind_vector_convention": "meteorological from-direction: u=-speed*sin(direction), v=-speed*cos(direction)",
+    "missing_future_rule": "if current or a future u/v pair is not finite, its delta_u/delta_v is exact zero persistence; no interpolation and no missingness indicator",
+    "bootstrap": {
+      "unit": "whole six-lead case",
+      "replicates": 5000,
+      "seed": 20260829,
+      "ci": 0.9
+    },
+    "gate": {
+      "all_required": true,
+      "pooled_six_lead_delta_rmse_m_max": -0.006,
+      "paired_case_bootstrap_ci90_upper_strictly_below_m": 0.0,
+      "minimum_improved_folds": 2,
+      "minimum_improved_stations": 2,
+      "lead_18_delta_rmse_m_max": 0.0,
+      "lead_24_delta_rmse_m_max": 0.0,
+      "worst_station_by_lead_delta_rmse_m_max": 0.003
+    },
+    "failure_action": "close the entire predicted-future-wind plus MOS family"
+  },
+  "conditional_future_wind": {
+    "execute_only_if_oracle_gate_passes": true,
+    "model": "pooled multi-output standardized ridge from the fixed 48h context features to six delta-u/delta-v pairs",
+    "ridge_alphas": [
+      10.0,
+      100.0,
+      1000.0
+    ],
+    "ridge_selection": "inner leave-one-fold-out forcing loss only; wave target forbidden",
+    "context_features": [
+      "wspd_current",
+      "wspd_lag_3h",
+      "wspd_lag_6h",
+      "wspd_lag_12h",
+      "wspd_lag_24h",
+      "wspd_mean_6h",
+      "wspd_mean_12h",
+      "wspd_mean_24h",
+      "wspd_mean_48h",
+      "wspd_std_6h",
+      "wspd_std_12h",
+      "wspd_std_24h",
+      "wspd_std_48h",
+      "wspd_slope_6h",
+      "wspd_slope_12h",
+      "wspd_slope_24h",
+      "wspd_slope_48h",
+      "wdir_sin_current",
+      "wdir_cos_current",
+      "wdir_sin_lag_6h",
+      "wdir_cos_lag_6h",
+      "wdir_sin_lag_12h",
+      "wdir_cos_lag_12h",
+      "wdir_sin_lag_24h",
+      "wdir_cos_lag_24h"
+    ],
+    "gate": {
+      "all_required": true,
+      "pooled_18_24_wind_vector_mse_skill_min": 0.05,
+      "paired_case_bootstrap_ci90_lower_strictly_above": 0.0,
+      "minimum_positive_skill_folds": 2,
+      "minimum_positive_skill_stations": 2,
+      "worst_station_skill_min": -0.05
+    },
+    "bootstrap": {
+      "unit": "whole case over 18h and 24h vector components",
+      "replicates": 5000,
+      "seed": 20260830,
+      "ci": 0.9
+    }
+  },
+  "conditional_mos": {
+    "execute_only_if_oracle_and_future_wind_gates_pass": true,
+    "training_wind_features": "nested cross-fitted predictions inside each outer-train surface",
+    "ridge_regulation": "reuse the corresponding oracle control-only selected alpha",
+    "gate": {
+      "all_required": true,
+      "pooled_six_lead_delta_rmse_m_max": -0.003,
+      "paired_case_bootstrap_ci90_upper_strictly_below_m": 0.0,
+      "minimum_improved_folds": 2,
+      "minimum_improved_stations": 2,
+      "lead_18_delta_rmse_m_max": -1e-12,
+      "lead_24_delta_rmse_m_max": -1e-12,
+      "worst_station_by_lead_delta_rmse_m_max": 0.005
+    },
+    "bootstrap": {
+      "unit": "whole six-lead case",
+      "replicates": 5000,
+      "seed": 20260831,
+      "ci": 0.9
+    }
+  },
+  "one_shot": {
+    "attempt_lock": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/attempt.lock",
+    "oracle_predictions": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/oracle_blind_predictions.parquet",
+    "oracle_seal": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/oracle_blind_seal.json",
+    "wind_predictions": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/wind_blind_predictions.parquet",
+    "wind_seal": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/wind_blind_seal.json",
+    "mos_predictions": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/mos_blind_predictions.parquet",
+    "mos_seal": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/mos_blind_seal.json",
+    "result": "reports/p3_perfect_future_wind_oracle_20260829_v1/result.json",
+    "technical_failure_receipt": "artifacts/p3_perfect_future_wind_oracle_20260829_v1/one_shot/technical_failure.json"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.trust_firewall_amendment.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T09:17:48+09:00",
+  "status": "PROSPECTIVE_R5_TRUST_FIREWALL_NOT_AUTHORIZED",
+  "created_before_any_cycle1_fit_materialization_score_or_result": true,
+  "purpose": "Close only the r4 independent-QA authority, transition, snapshot, outer-label-firewall, and postcommit-recovery defects without changing the frozen scientific screen.",
+  "supersedes": {
+    "r4_preexecution_seal_sha256": "c00fc68ff68e5d3883bf892d05312c6962567b4b340f288c57e9dc2aab6dde68",
+    "r4_status": "IMMUTABLE_NO_GO_DO_NOT_AUTHORIZE_OR_EXECUTE",
+    "independent_qa_json": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v2_independent_preexecution_qa_20260826.json",
+      "bytes": 15792,
+      "sha256": "dafc3d9e0de112ee16bbc03c4b307dbbc7e7cee4db95a26f61db64dcf2cab103",
+      "verdict": "NO_GO",
+      "severity_counts": {
+        "P0": 2,
+        "P1": 3,
+        "P2": 1
+      }
+    },
+    "independent_qa_korean_report": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v2_independent_preexecution_qa_20260826_ko.md",
+      "bytes": 6846,
+      "sha256": "b70b748ebde3018ef5f4c182dc7e6eb1f2ea790c3b2ed81da9d4d146ff33732d"
+    }
+  },
+  "immutable_scientific_authorities": {
+    "design_sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+    "trigger_resolution_sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+    "operational_amendment_v2_sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+    "execution_closure_v3_sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99",
+    "execution_contract_sha256": "f64704a47751756cd88d9802eb6cf6ec160290af1f3112051ced91fa72b0febc",
+    "round_b_anchor_fits": 9,
+    "inner_segment_fits": 54,
+    "outer_segment_fits": 9,
+    "maximum_lifetime_physical_fits": 72,
+    "maximum_lifetime_scientific_materializations": 21,
+    "scientific_values_modified": false
+  },
+  "r5_required_closures": {
+    "acyclic_authority": "The immutable runner contains no actual authorization digest. A 64-lowercase-hex digest supplied only by P1_LONG_EVENT_SEGMENT_V2_AUTHORIZATION_SHA256 authenticates one held-open authorization byte sequence before parsing. The one-way lineage is runner -> seal -> independent QA -> authorization.",
+    "stable_readiness_digest": "The sealed scientific/readiness verification payload excludes authorization-file existence, authorization digest, and live authorization state. A separate live authorization inspection is never part of the pinned readiness digest.",
+    "single_held_authority_lineage": "Authorization, its pinned seal, independent QA, design, r5 amendment, and execution module are each read as one held byte snapshot, hashed before parsing/import, propagated into the private worker snapshot, and never accepted from a later unbound path reopen.",
+    "exact_worker_inventory": "The worker requires exact equality with the authorization-authenticated seal inventory and runner-owned executable pins. Self-declared extra, missing, or substituted files fail before any project or numerical import and before claim.",
+    "outer_label_firewall": "Before the all-fold outer prediction digest is journaled, only target-free frame, anchor, proposal, interval geometry, and candidate prediction bytes may be touched. Outer truth, anomaly_type, segment targets, precision, and every target-derived audit are first accessed inside terminal scoring after record_outer_freeze.",
+    "postcommit_recovery": "If supervision fails after the final lock unlink and before stdout receipt, the parent performs only the same read-only completed-terminal/result/manifest verification and returns a deterministic recovered-success receipt without writes or rerun."
+  },
+  "authorization": {
+    "implementation_allowed": true,
+    "numerical_execute_authorized": false,
+    "fit_authorized": false,
+    "scientific_materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_fresh_independent_qa_and_external_digest_bound_authorization": true
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "numerical_executes_before_fresh_qa": 0,
+    "claims_before_fresh_qa": 0,
+    "physical_fits_before_fresh_qa": 0,
+    "scientific_materializations_before_fresh_qa": 0,
+    "outer_scores_before_fresh_qa": 0
+  }
+}

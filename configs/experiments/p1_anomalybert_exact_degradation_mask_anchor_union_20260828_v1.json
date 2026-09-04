@@ -1,0 +1,180 @@
+{
+  "schema_version": "p1.anomalybert_exact_degradation_mask_anchor_union.preregistration.v1",
+  "experiment_id": "p1_anomalybert_exact_degradation_mask_anchor_union_20260828_v1",
+  "created_at_kst": "2026-08-28T22:10:00+09:00",
+  "local_execution_authorized_at_kst": "2026-08-28T22:00:00+09:00",
+  "status": "AUTHORIZED_LOCAL_BOUNDED_ONE_SHOT",
+  "problem": "P1",
+  "claim_scope": "AnomalyBERT-inspired exact degradation-mask Transformer; not an exact reproduction of AnomalyBERT",
+  "hypothesis": "Exact point-mask supervision from competition-aligned sensor degradations can recover long noise, offset, and drift rows missed by the frozen incumbent without deleting any incumbent positive.",
+  "immutable_inputs": {
+    "training_rows": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "q2_truth_and_keys": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+      "read_only_after_historical_gate": true,
+      "fold": "2025_q2"
+    },
+    "q2_frozen_anchor": {
+      "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz",
+      "bytes": 7898,
+      "sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1",
+      "array": "anchor",
+      "read_only_after_historical_gate": true
+    },
+    "q2_frozen_anchor_receipt": {
+      "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction_receipt.json",
+      "bytes": 954,
+      "sha256": "470b6269010a8436809eb3fd5451bdc356d3ad0e86db8c089d6675e5149b0409",
+      "read_only_after_historical_gate": true
+    }
+  },
+  "split": {
+    "fit_stop_exclusive_kst": "2024-09-15T00:00:00+09:00",
+    "synthetic_training_stop_exclusive_kst": "2024-08-01T00:00:00+09:00",
+    "synthetic_validation_start_kst": "2024-08-15T00:00:00+09:00",
+    "synthetic_validation_stop_exclusive_kst": "2024-09-15T00:00:00+09:00",
+    "calibration_start_kst": "2024-10-01T00:00:00+09:00",
+    "calibration_stop_exclusive_kst": "2024-12-16T00:00:00+09:00",
+    "qualification_start_kst": "2025-01-01T00:00:00+09:00",
+    "qualification_stop_exclusive_kst": "2025-03-17T00:00:00+09:00",
+    "q2_start_kst": "2025-04-01T00:00:00+09:00",
+    "purge_days": 15,
+    "historical_anchor_semantics": "byte_fixed_all_zero_no_add_no_op",
+    "q2_anchor_semantics": "frozen_e150_anchor_opened_only_after_all_historical_gates"
+  },
+  "input_features": [
+    "temp_cell_robust_z",
+    "psal_cell_robust_z",
+    "depth_cell_robust_z",
+    "psal_missing",
+    "depth_missing",
+    "temp_first_difference",
+    "temp_absolute_first_difference",
+    "day_sin",
+    "day_cos",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "windowing": {
+    "window_rows": 1024,
+    "training_stride_rows": 256,
+    "inference_stride_rows": 256,
+    "gap_crossing_allowed": false,
+    "short_segment_policy": "right_edge_pad_with_validity_mask",
+    "required_historical_coverage": 1.0
+  },
+  "synthetic": {
+    "families": ["spike", "noise", "flatline", "offset", "drift"],
+    "primary_long_gate_families": ["noise", "offset", "drift"],
+    "duration_rows": {
+      "spike": [1, 1],
+      "noise": [18, 353],
+      "flatline": [12, 283],
+      "offset": [48, 519],
+      "drift": [54, 519]
+    },
+    "standardized_amplitude": {
+      "spike": [2.0, 6.0],
+      "noise": [1.0, 3.0],
+      "flatline": [0.0, 0.0],
+      "offset": [1.25, 4.0],
+      "drift": [1.5, 4.5]
+    },
+    "clean_no_op_probability": 0.2,
+    "exact_corruption_mask": true,
+    "recipient_context": "same_station_layer_and_calendar_context_by_construction",
+    "result_based_generator_change": false
+  },
+  "model": {
+    "architecture": "patch_token_relative_position_transformer_with_row_skip_decoder",
+    "patch_rows": 8,
+    "d_model": 128,
+    "heads": 4,
+    "layers": 4,
+    "feedforward_width": 256,
+    "dropout": 0.1,
+    "direct_binary_mask_head": true,
+    "type_or_duration_inference_head": false,
+    "smoothing": false,
+    "point_adjustment": false,
+    "truth_fill": false
+  },
+  "training": {
+    "seed": 20260828,
+    "fit_count": 1,
+    "maximum_epochs": 30,
+    "maximum_optimizer_steps": 10000,
+    "minimum_epochs": 8,
+    "patience": 6,
+    "batch_size": 8,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "positive_weight": 8.0,
+    "dice_loss_weight": 0.5,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_rule": "maximum_fixed_threshold_synthetic_validation_macro_raw_f1_tie_earliest_epoch",
+    "fixed_synthetic_probability_threshold": 0.5,
+    "cpu_threads": 2,
+    "result_based_retry": false
+  },
+  "synthetic_fidelity_gate": {
+    "minimum_raw_f1_each_primary_family": 0.8,
+    "maximum_boundary_mae_rows_each_primary_family": 6.0,
+    "failure_action": "NO_GO_SYNTHETIC_FIDELITY"
+  },
+  "decoder": {
+    "calibration_threshold_grid": [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9],
+    "threshold_selection": "maximum_calibration_anchor_union_raw_f1_tie_higher_threshold",
+    "minimum_component_rows": 18,
+    "maximum_component_rows": 519,
+    "bridge_rows": 0,
+    "score_smoothing_rows": 0,
+    "point_adjustment": false,
+    "truth_fill": false,
+    "positive_prevalence_targeting": false,
+    "anchor_deletions_allowed": false
+  },
+  "historical_gate": {
+    "calibration_delta_f1_gt": 0.0,
+    "qualification_delta_f1_gt": 0.0,
+    "added_precision_gt_anchor_f1_fraction": 0.5,
+    "minimum_recovered_primary_long_events": 2,
+    "minimum_direction_consistent_cells": 2,
+    "maximum_false_positive_rows_per_day": 0.25,
+    "minimum_worst_cell_delta_f1": -0.01,
+    "bootstrap_block_days": 21,
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20260828,
+    "minimum_probability_delta_f1_gt_zero": 0.8
+  },
+  "execution_policy": {
+    "local_only_authorized": true,
+    "bounded_one_shot_authorized": true,
+    "q2_outer_once_only_after_all_historical_gates": true,
+    "q3_q4_read_allowed": false,
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "git_commit_or_push_authorized": false,
+    "result_based_retraining_or_retuning": false
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_anomalybert_exact_degradation_mask_anchor_union_20260828_v1",
+    "smoke_directory": "artifacts/p1_anomalybert_exact_degradation_mask_anchor_union_20260828_v1_smoke",
+    "persist_raw_values": false,
+    "persist_keys": false,
+    "persist_model": true,
+    "aggregate_only_report": "reports/p1_anomalybert_exact_degradation_mask_anchor_union_20260828_v1/aggregate_conclusion.md"
+  },
+  "primary_sources": [
+    "https://arxiv.org/abs/2305.04468",
+    "https://github.com/Jhryu30/AnomalyBERT",
+    "https://ojs.aaai.org/index.php/AAAI/article/view/20680"
+  ]
+}

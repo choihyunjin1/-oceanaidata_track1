@@ -1,0 +1,109 @@
+{
+  "experiment_id": "p2_v52_score_priority_third_moment_input_gradient_20260901_v1",
+  "status": "ZERO_OPERATION_PREFLIGHT_READY",
+  "method": {
+    "pooling": {
+      "descriptor": "masked_mean((element_embedding-masked_mean(element_embedding))^3)",
+      "moment_order": 3,
+      "embedding_width": 32,
+      "descriptor_width": 107,
+      "new_head_columns": 32,
+      "new_head_columns_initial_maximum_abs": 0.0,
+      "parameters": 5889,
+      "parameter_tensors": 10,
+      "buffers": 0,
+      "linear_count": 5,
+      "unchanged_parameter_maximum_abs_error_vs_v13": 0.0,
+      "initial_function_maximum_abs_error_vs_v13": 0.0,
+      "descriptor_forward_maximum_abs_error": 0.0,
+      "third_moment_manual_maximum_abs_error": 0.0,
+      "all_missing_third_moment_maximum_abs": 0.0,
+      "third_moment_nonconstant_range": 0.10693581402301788,
+      "learned_pooling_columns_change_function_maximum_abs": 0.00015806034207344055,
+      "batch_composition_maximum_abs_error": 3.725290298461914e-09,
+      "gradients_finite": true,
+      "new_head_column_gradient_finite_nonzero": true,
+      "normalization_count": 0,
+      "dropout_count": 0,
+      "attention_count": 0
+    },
+    "input_gradient": {
+      "penalty": 576.0,
+      "non_temperature_coefficient_invariance_error": 0.0,
+      "penalized_channel": 0,
+      "masked_tokens_excluded": true
+    },
+    "isolation": {
+      "permutation_maximum_abs_error": 7.450580596923828e-09,
+      "masked_or_future_token_maximum_abs_error": 0.0,
+      "repeat_maximum_abs_error": 0.0
+    }
+  },
+  "source_contract_guard": {
+    "required_keys": [
+      "environment_variable",
+      "only_source_filename",
+      "observations_sha256",
+      "scoring_frame",
+      "scoring_frame_sha256"
+    ],
+    "all_required_keys_present": true,
+    "only_source_filename": "observations.csv",
+    "direct_alias_matches": true,
+    "inherited_implementation_references": {
+      "environment_variable": true,
+      "only_source_filename": true,
+      "observations_sha256": true,
+      "scoring_frame": true,
+      "scoring_frame_sha256": true
+    },
+    "guard_runs_before_base_lock": true,
+    "synthetic_missing_key_cases": 5,
+    "synthetic_missing_key_rejections": [
+      "environment_variable",
+      "only_source_filename",
+      "observations_sha256",
+      "scoring_frame",
+      "scoring_frame_sha256"
+    ],
+    "synthetic_files_opened": 0,
+    "synthetic_data_rows_read": 0,
+    "synthetic_model_fits": 0
+  },
+  "lineage": {
+    "organizer_distributed_data_only": true,
+    "only_direct_source_filename": "observations.csv",
+    "truth_free_historical_scoring_frame": true,
+    "fresh_random_scratch_initialization": true,
+    "external_observation_rows": 0,
+    "external_reanalysis_rows": 0,
+    "external_forecast_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "official_test_index_rows": 0,
+    "sample_rows": 0,
+    "baseline_file_rows": 0,
+    "query_support_rows": 0,
+    "hidden_truth_rows": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "fold_cutoffs": {
+    "2024_sep_oct": "2024-08-25T00:00:00+09:00",
+    "2025_jul_aug": "2025-06-24T00:00:00+09:00",
+    "2025_nov_dec": "2025-10-25T00:00:00+09:00"
+  },
+  "candidate_count": 1,
+  "maximum_fit_count": 9,
+  "config_sha256": "874c65812c53b71230b4d4e8770f79469e284e9f3b266b4166ea9ab8d006f316",
+  "runner_sha256": "44697827b2ed481798309600e6e1e5e43529b9f64d6a3214e9b6cbd3d5c353f7",
+  "data_rows_read": 0,
+  "model_fits": 0,
+  "official_test_index_rows_read": 0,
+  "sample_rows_read": 0,
+  "baseline_file_rows_read": 0,
+  "query_support_rows_read": 0,
+  "hidden_rows_read": 0,
+  "submission_csv_created": 0,
+  "uploads": 0,
+  "preflight_sha256": "f452747fbd6244d643b9d77d85d6fe3a21ff57fd097d1840bf033b68e2cc1bb2"
+}

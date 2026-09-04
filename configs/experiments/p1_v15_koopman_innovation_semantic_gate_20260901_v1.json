@@ -1,0 +1,20 @@
+{
+  "schema_version": "p1.v15_koopman_innovation_semantic_gate.v1",
+  "experiment_id": "p1_v15_koopman_innovation_semantic_gate_20260901_v1",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE",
+  "proposed_recipe": "prefix-fit a low-rank linear evolution operator over fixed nonlinear observables and score causal one-step innovations with the v13 transport veto",
+  "semantic_decision": {
+    "exact_duplicate": false,
+    "semantic_duplicate": true,
+    "verdict": "CLOSE_ZERO_FIT_DO_NOT_IMPLEMENT_OR_EXECUTE",
+    "reason": "P1 v4 already preregistered a causal linear state-space next-step predictor with innovation residuals; asynchronous latent-state GP, temporally fused RPCA, and robust-subspace innovation families cover the same latent-dynamics/common-state residual intervention. Changing the observable lift to a Koopman label does not create a sufficiently independent scientific axis."
+  },
+  "negative_evidence": {
+    "configs/experiments/p1_v4_causal_masked_spatiotemporal_graph_preflight_20260901_v1.json": "d0b590e6ae4f368daf2b9b8952e18b40c0eb850153d1872d01cbb39acd2cf384",
+    "src/p1_qc/p1_async_latent_state_gp_subset_scan_anchor_union_20260828_v1.py": "7405156e013fe0e1384fe7a5ede71b540975d6d2f89dcecc958eb5251fea4146",
+    "src/p1_qc/temporally_fused_rpca.py": "ce13a07e4f7645d4f7eed599934740765b47c3bda79a424e955bd166dd2d954b",
+    "configs/experiments/p1_robust_subspace_block_conformal_feasibility_20260901_v1.json": "5621cfbe76fe4da4e20ae47ec575e0dfc27b180c4e5180e8dcd722c111d085bf",
+    "reports/p1_dual_research_breakthrough_20260829_v1/report-source.md": "3b27f2a33855aade9e2ccdda9561bafc32ee98c115739499dfc0456a7196269e"
+  },
+  "operations": {"fits": 0, "targets": 0, "official": 0, "hidden": 0, "test": 0, "sample": 0, "submission": 0, "csv": 0, "uploads": 0, "lock": 0, "artifact": 0, "retry_retune": 0}
+}

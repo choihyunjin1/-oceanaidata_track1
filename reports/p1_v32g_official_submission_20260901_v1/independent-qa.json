@@ -1,0 +1,131 @@
+{
+  "schema_version": "p1.v32g.official_submission_independent_qa.20260901.v1",
+  "status": "PASS",
+  "scope": "official public-score receipt and immutable v32g candidate metadata",
+  "candidate": {
+    "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_V32G_CATBOOST_UNION_SCORE_PRIORITY_READY_V1/P1_submission.csv",
+    "sha256_verified": "2f6b115dd706d42b8851685af4c2e4a065f111e2b51b8dee9bc6170396e5e279",
+    "rows_verified": 169011
+  },
+  "source_artifacts": {
+    "official_receipt_path": "reports/p1_v32g_official_submission_20260901_v1/official-submission-receipt.json",
+    "official_receipt_sha256": "86d18267cda4ae0f20f041ee1d16acbde2c313c37ae30e46d244cb5883ed0d97",
+    "report_path": "reports/p1_v32g_official_submission_20260901_v1/report-source.md",
+    "report_sha256": "9c8a256238b4c6ab8b246fdef3c2b0566e27dfab2cb2085d298dbc75de3a4e0a",
+    "deployment_result_path": "reports/p1_e150_catboost_precision_union_deployment_20260901_v32g1/result.json",
+    "deployment_result_sha256": "f39c8f818d07c7f424107b6ab916c6df92dd92e00a3c00b9251bd8ae62fd410a",
+    "pre_upload_qa_path": "reports/p1_e150_catboost_precision_union_deployment_20260901_v32g1/independent-deployment-qa.json",
+    "pre_upload_qa_sha256": "876928024d69eee05d4edc9def2d005409a327019a7e6b34af5a00af2cb38107"
+  },
+  "official_score_recalculation": {
+    "previous_champion_f1": 0.833548,
+    "previous_champion_points": 28.909341,
+    "v32g_f1": 0.832905,
+    "v32g_points": 28.892255,
+    "recalculated_delta_f1": -0.000643,
+    "recalculated_delta_points": -0.017086,
+    "receipt_delta_f1": -0.000643,
+    "receipt_delta_points": -0.017086,
+    "delta_arithmetic_matches": true,
+    "public_improved": false,
+    "retain_previous_champion": true
+  },
+  "internal_to_official_consistency": {
+    "internal_pooled_delta_f1": -0.00017298224936446172,
+    "official_delta_f1": -0.000643,
+    "direction_matches": true,
+    "official_regression_larger_than_internal_center": true,
+    "candidate_promoted": false
+  },
+  "submission_state": {
+    "competition_platform_upload_actions": 1,
+    "uploads_exactly_one": true,
+    "private_metric_available": false,
+    "observed_date_kst": "2026-09-01"
+  },
+  "policy_and_access": {
+    "organizer_distributed_data_only": true,
+    "scratch_training": true,
+    "external_data_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "internet_research_or_external_downloads": 0,
+    "kiost_original_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "prediction_values_printed_during_qa": 0
+  },
+  "checks": [
+    {
+      "name": "official_receipt_strict_json_no_duplicate_keys",
+      "pass": true
+    },
+    {
+      "name": "candidate_sha256_and_rows_match_frozen_pack",
+      "pass": true
+    },
+    {
+      "name": "deployment_result_hash_and_status_match",
+      "pass": true
+    },
+    {
+      "name": "pre_upload_independent_qa_hash_and_status_match",
+      "pass": true
+    },
+    {
+      "name": "official_f1_delta_recalculates_exactly_at_reported_precision",
+      "pass": true
+    },
+    {
+      "name": "official_points_delta_recalculates_exactly_at_reported_precision",
+      "pass": true
+    },
+    {
+      "name": "public_regression_and_previous_champion_retention_recorded",
+      "pass": true
+    },
+    {
+      "name": "internal_no_go_and_official_direction_agree",
+      "pass": true
+    },
+    {
+      "name": "official_result_is_below_internal_expected_center",
+      "pass": true
+    },
+    {
+      "name": "distributed_only_scratch_lineage_preserved",
+      "pass": true
+    },
+    {
+      "name": "external_pretrained_hidden_kiost_and_internet_access_zero",
+      "pass": true
+    },
+    {
+      "name": "competition_platform_upload_exactly_once",
+      "pass": true
+    },
+    {
+      "name": "focused_pytest_4_of_4_pass",
+      "pass": true
+    },
+    {
+      "name": "focused_ruff_pass",
+      "pass": true
+    },
+    {
+      "name": "new_report_files_diff_check_pass",
+      "pass": true
+    }
+  ],
+  "verification_execution": {
+    "focused_pytest": {
+      "status": "PASS",
+      "passed": 4,
+      "failed": 0
+    },
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "check_count": 15,
+  "pass_count": 15,
+  "failure_count": 0,
+  "decision": "KEEP_PREVIOUS_CHAMPION"
+}

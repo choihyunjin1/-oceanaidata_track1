@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_causal_forcing_analog_inner_predictive_v3",
+  "status": "authorized_C_inner_only_one_shot",
+  "objective": {
+    "metric": "pooled_six_lead_RMSE_meters_candidate_vs_fixed_inner_control",
+    "direction": "minimize",
+    "single_question": "Does the sealed v2 forcing-conditioned analog improve the fixed 591-feature CatBoost inner control when blended only at 12/18/24h with alpha 0.2?",
+    "model_or_feature_search_count": 0,
+    "alpha_or_threshold_search_count": 0
+  },
+  "adaptive_research_disclosure": {
+    "is_adaptive_research": true,
+    "same_inner_split_reused_from_v1_and_v2": true,
+    "independent_confirmation": false,
+    "sealed_v2_B_decision": "PASS_B_ADAPTIVE_INNER_ONLY_STOP",
+    "sealed_v2_B_conditioning_coverage": "19_of_57_B_eligible_cases",
+    "sealed_v2_B_driver": "G-ORS forcing availability and winter-transition improvement",
+    "known_instability": "2025_h1 v2 nearest MSE was 1.2032 percent worse than sealed v1",
+    "interpretation_if_C_passes": "adaptive inner predictive evidence only; outer remains separately authorized and unopened",
+    "interpretation_if_C_fails": "permanent stop for this exact candidate without retuning or rerun"
+  },
+  "sealed_v2_method": {
+    "history_points": 145,
+    "history_cadence_minutes": 20,
+    "history_center": "current_hs",
+    "history_scale": "raw_MAD_floor_0.1m",
+    "minimum_history_coverage": 0.95,
+    "same_station": true,
+    "episode_distinct": true,
+    "sakoe_chiba_radius_steps": 6,
+    "neighbor_count": 8,
+    "forcing_columns": [
+      "wind_input_proxy_mean_6h",
+      "wind_input_proxy_slope_6h",
+      "wind_wave_alignment_mean_6h",
+      "gust_excess_mean_6h",
+      "caph_slope_6h",
+      "tp_slope_6h"
+    ],
+    "forcing_scaling": "that_fold_that_station_complete_library_median_IQR",
+    "combined_distance": "sqrt(hs_DTW_squared_plus_forcing_RMS_squared)",
+    "missing_fallback": "exact_v1_unconditioned_retrieval",
+    "projection": "inverse_distance_six_lead_normalized_residual",
+    "distance_floor": 1e-6,
+    "reproduction_contract": {
+      "B_membership_keys_must_match": true,
+      "neighbor_anchor_and_episode_hashes_must_match": true,
+      "conditioning_and_fallback_must_match": true,
+      "nearest_distance_summary_atol": 1e-12,
+      "post_label_nearest_normalized_mse_atol": 1e-12
+    }
+  },
+  "fixed_inner_control_proxy": {
+    "purpose": "same_leakage_safe_frozen_like_control_used_by_v1_C_design",
+    "limitation": "The full frozen multi-output/router model cannot be fitted honestly inside this nested split without a separate nested reproduction, so the preregistered single CatBoost proxy is used only for this C inner gate.",
+    "base_feature_count": 591,
+    "input_columns": ["station", "lead_h", "current_hs_for_residual", "frozen_591_features"],
+    "target": "future_hs_minus_current_hs_residual",
+    "family": "CatBoostRegressor",
+    "iterations": 700,
+    "learning_rate": 0.035,
+    "depth": 6,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "random_seed": 20260817,
+    "loss_function": "RMSE",
+    "task_type": "CPU",
+    "thread_count": 8,
+    "allow_writing_files": false,
+    "categorical_columns": ["station", "lead_h"],
+    "sample_weight": "frozen_threshold_case_weights",
+    "persistence_shrink_active_leads": [12, 18, 24],
+    "persistence_shrink_weight": 0.2,
+    "model_fit_count": 3
+  },
+  "candidate": {
+    "evaluation_population": "all_61_same_inner_split_cases_x_6_leads_equals_366_rows",
+    "v2_B_eligible_cases": 57,
+    "history_ineligible_no_op_cases": 4,
+    "no_op_leads": [3, 6, 9],
+    "active_leads": [12, 18, 24],
+    "alpha": 0.2,
+    "formula": "candidate=control at 3/6/9; candidate=0.8*control+0.2*forcing_analog at 12/18/24 when analog applicable; otherwise exact control",
+    "prediction_clip_m": [0.0, 30.0]
+  },
+  "validation": {
+    "outer_windows_used_only_as_training_cutoffs": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "inner_validation_days": 45,
+    "inner_case_spacing_hours": 78,
+    "inner_episode_disjoint": true,
+    "same_split_v2_membership_contract": "57_B_keys_must_match_and_4_history_ineligible_cases_are_candidate_no_op",
+    "rolling_label_policy": {
+      "current_fold_validation_labels_forbidden_in_that_fold_fit": true,
+      "future_fold_validation_labels_forbidden_in_earlier_fold_fit": true,
+      "prior_fold_validation_labels_allowed_as_later_chronological_history": true,
+      "validation_labels_open_only_after_all_fold_blind_predictions_are_fsynced_and_hashed": true
+    },
+    "C_gate": {
+      "maximum_pooled_full_six_lead_delta_m": -0.005,
+      "minimum_strictly_improved_folds": 2,
+      "maximum_any_station_RMSE_degradation_m": 0.01,
+      "lead_18_must_not_degrade": true,
+      "lead_24_must_not_degrade": true,
+      "pass_action": "stop_before_outer_and_await_separate_authorization",
+      "failure_action": "permanent_stop_without_retuning_or_rerun"
+    },
+    "one_shot_no_rerun": true
+  },
+  "sealed_artifact_contract": {
+    "blind_case_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "history_eligible",
+      "conditioning_used",
+      "fallback_reason",
+      "query_mad_scale",
+      "neighbor_anchor_ids_sha256",
+      "neighbor_episode_ids_sha256",
+      "neighbor_distance_mean",
+      "neighbor_distance_max"
+    ],
+    "blind_prediction_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "query_mad_scale",
+      "analog_applicable",
+      "analog_prediction",
+      "control_single_prediction",
+      "control_final",
+      "candidate_final"
+    ],
+    "evaluated_prediction_additional_columns": [
+      "target_hs",
+      "control_squared_error",
+      "candidate_squared_error"
+    ],
+    "blind_predictions_fsync_before_validation_label_open": true,
+    "row_level_predictions_fsync_and_reload": true,
+    "metrics_independently_recomputed_from_row_level_predictions": true
+  },
+  "registered_inputs": {
+    "train_wave": {
+      "source_name": "train_wave.csv",
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "source_readme": {
+      "source_name": "README.md",
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1",
+      "expected_count": 591
+    },
+    "frozen_model_manifest": {
+      "path": "submissions/p3_frozen_catboost/manifest.json",
+      "sha256": "f260fa35b677ff65aa35ed34f386c9cef3cf53590727673e83245282afa6baa3"
+    },
+    "v2_config": {
+      "path": "configs/experiments/p3_causal_forcing_conditioned_episode_analog_v2.json",
+      "sha256": "dc365249d6823cbea4aec52daa617dad7626e6a456d84cfa86877b59a49f5bee"
+    },
+    "v2_helper": {
+      "path": "src/p3_wave/causal_forcing_analog.py",
+      "sha256": "9543ae4e2aa9551c8ef2a3e4ddeb0eb0cc8b83feaaee6094b1e9ea809ddedcfe"
+    },
+    "v2_runner": {
+      "path": "scripts/run_p3_causal_forcing_conditioned_episode_analog_v2.py",
+      "sha256": "d81cba284cdc73a10266b91adc47a198fa3cc8d4b86f4bd8978092644522d534"
+    },
+    "v2_tests": {
+      "path": "tests/test_p3_causal_forcing_conditioned_episode_analog_v2.py",
+      "sha256": "fe108fb959a97cf24c67f569bebe034046d9f0d3bf0cb54f197f3f323b8ce6c6"
+    },
+    "v2_dry_receipt": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/dry_run/receipt.json",
+      "sha256": "b72926b3765403b3f4d964f9e7d4539078d5c2633120f112c43a01475f7338df"
+    },
+    "v2_B_cases": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/b_precheck_cases.parquet",
+      "sha256": "c35033c83fb3eab8dac875cafb3174a622916676c9e7ec409f616c2a474dfb3a"
+    },
+    "v2_B_result": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/b_precheck.json",
+      "sha256": "4c4132359771dbe0f64e610b2894652ad9c066dc4ff4c96daba87a22f710acb2"
+    },
+    "v2_result": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/result.json",
+      "sha256": "e938df0e7f69372ae5a21b94671017ffe15c5d0894e3ab0d8a0dc80027eef3a4"
+    },
+    "v2_manifest": {
+      "path": "artifacts/p3_causal_forcing_conditioned_episode_analog_v2/B_one_shot/manifest.json",
+      "sha256": "139aeac5c45ee8fbc48ec3c074cdae88864d646b6fc8c0f37fe954c8adb438c4"
+    },
+    "v2_attempt_lock": {
+      "path": "artifacts/experiment_locks/p3_causal_forcing_conditioned_episode_analog_v2.B.attempt.lock",
+      "sha256": "9f96d7e7f86d912091d11baef1704d85a7a2c0c3850e8620c91ea14005cf9431"
+    },
+    "v1_analog_helper": {
+      "path": "src/p3_wave/episode_distinct_analog.py",
+      "sha256": "307dfbcfff7a1300ac8be27074a4c13255776e70e2cdbe8b909d0396d876e180"
+    },
+    "trajectory_helper": {
+      "path": "src/p3_trajectory.py",
+      "sha256": "3af6f4f2580cade66c23048a63b97c64e9bdadd7c1b794b45fc056d363109116"
+    },
+    "episode_split_helper": {
+      "path": "src/p3_wave/revin_patch.py",
+      "sha256": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3"
+    },
+    "weight_helper": {
+      "path": "src/p3_wave/models.py",
+      "sha256": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084"
+    }
+  },
+  "artifacts": {
+    "dry_run_directory": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/dry_run",
+    "C_output_directory": "artifacts/p3_causal_forcing_analog_inner_predictive_v3/C_one_shot",
+    "status_path": "artifacts/status/p3_causal_forcing_analog_inner_predictive_v3.json",
+    "attempt_lock": "artifacts/experiment_locks/p3_causal_forcing_analog_inner_predictive_v3.C.attempt.lock"
+  },
+  "execution": {
+    "allowed_modes": ["dry-run", "C-inner"],
+    "C_confirmation_token": "RUN_P3_CAUSAL_FORCING_ANALOG_V3_C_ONCE",
+    "expected_model_fit_count": 3,
+    "outer_designated_scoring_open_count": 0,
+    "test_context_read_count": 0,
+    "submission_write_count": 0
+  },
+  "prohibitions": {
+    "hyperparameter_feature_alpha_threshold_or_router_search": true,
+    "rerun_after_one_shot": true,
+    "open_outer_membership_or_182_outer_targets": true,
+    "outer_prediction_or_scoring": true,
+    "read_test_context_or_test_index": true,
+    "generate_or_modify_submission": true,
+    "upload": true,
+    "mutate_v1_v2_or_existing_frozen_artifacts": true
+  }
+}

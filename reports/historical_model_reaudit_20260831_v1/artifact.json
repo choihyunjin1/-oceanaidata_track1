@@ -1,0 +1,547 @@
+{
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "2026-08-31 모델별 과거 실험 전수 재감사",
+    "description": "48개 historical family를 최신 봉인 확인과 공식 정보로 재판정하고 14개 모델 계열 카드로 연결한 감사",
+    "generatedAt": "2026-08-31T18:00:00+09:00",
+    "sources": [
+      {
+        "id": "reaudit_ledger",
+        "label": "Exhaustive local historical re-audit ledger",
+        "path": "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json",
+        "query": {
+          "sql": "SELECT problem, primary_status, COUNT(*) AS family_count FROM historical_family_records GROUP BY problem, primary_status ORDER BY problem, primary_status",
+          "description": "Counts are deterministically generated from the 48-family local aggregate ledger; no raw or official input rows are queried.",
+          "language": "json",
+          "executed_at": "2026-08-31T18:00:00+09:00",
+          "filters": [
+            "grain = historical_family for the chart",
+            "later evidence through 2026-08-30",
+            "no hidden, test, sample, submission, raw, or prediction rows"
+          ],
+          "metric_definitions": [
+            "family_count counts only the 48 historical-family grain.",
+            "Primary status is exclusive; status_tags preserve overlapping facts such as checkpoint peak or proxy exposure."
+          ],
+          "tables_used": [
+            "artifacts/promotion_retroaudit_20260827_v1/family_reclassification_ledger.json",
+            "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json",
+            "reports/negative_evidence_registry_20260830_v1/failure-ledger.json"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "family_coverage",
+        "description": "Exhaustive historical-family denominator",
+        "dataset": "coverage",
+        "sourceId": "reaudit_ledger",
+        "metrics": [
+          {
+            "label": "Historical families",
+            "field": "historical_family",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "canonical_coverage",
+        "description": "Overlapping canonical-group cross-check",
+        "dataset": "coverage",
+        "sourceId": "reaudit_ledger",
+        "metrics": [
+          {
+            "label": "Canonical groups",
+            "field": "canonical_group",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "model_card_coverage",
+        "description": "Reusable model-family cards",
+        "dataset": "coverage",
+        "sourceId": "reaudit_ledger",
+        "metrics": [
+          {
+            "label": "Model cards",
+            "field": "model_cards",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "family_status_chart",
+        "title": "문제별 historical-family 주상태",
+        "subtitle": "정확 레시피 종료가 가장 많지만, 정보가치와 발견용 레코드도 별도로 보존됐다.",
+        "type": "bar",
+        "dataset": "family_status_counts",
+        "sourceId": "reaudit_ledger",
+        "encodings": {
+          "x": {
+            "field": "problem",
+            "type": "nominal",
+            "label": "문제"
+          },
+          "y": {
+            "field": "family_count",
+            "type": "quantitative",
+            "label": "family 수",
+            "format": "number"
+          },
+          "color": {
+            "field": "status",
+            "type": "nominal",
+            "label": "주상태"
+          },
+          "tooltip": [
+            {
+              "field": "problem",
+              "type": "nominal",
+              "label": "문제"
+            },
+            {
+              "field": "status",
+              "type": "nominal",
+              "label": "주상태"
+            },
+            {
+              "field": "family_count",
+              "type": "quantitative",
+              "label": "family 수"
+            }
+          ]
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "stacked"
+        },
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "key_case_table",
+        "title": "최신 근거로 재판정한 20개 key case",
+        "subtitle": "주상태와 중첩 태그를 함께 읽어야 하며, 정보가치는 제출 준비도와 다르다.",
+        "dataset": "key_cases",
+        "sourceId": "reaudit_ledger",
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "order",
+            "label": "순서",
+            "type": "number"
+          },
+          {
+            "field": "problem",
+            "label": "문제",
+            "type": "text"
+          },
+          {
+            "field": "candidate",
+            "label": "후보",
+            "type": "text"
+          },
+          {
+            "field": "primary_status",
+            "label": "주상태",
+            "type": "text"
+          },
+          {
+            "field": "tags",
+            "label": "중첩 태그",
+            "type": "text"
+          },
+          {
+            "field": "model_card",
+            "label": "모델 카드",
+            "type": "text"
+          },
+          {
+            "field": "adjudication",
+            "label": "최신 판정",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 2026-08-31 모델별 과거 실험 전수 재감사",
+        "layout": "full"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## 결론\n\n48개 historical family를 모두 다시 판정했다. 25개는 정확 레시피만 닫히고, 11개는 발견용, 6개는 정보가치 양성, 2개는 옛 gate 때문에 탈락, 3개는 프록시 수송 실패, 1개는 기술 무효다. trial18, P2 Gaussian copula, P3 CatBoost처럼 나중 근거가 생긴 후보는 과거 재개 판정을 그대로 두지 않고 최신 근거로 덮어썼다.",
+        "layout": "full"
+      },
+      {
+        "id": "coverage_strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "family_coverage",
+          "canonical_coverage",
+          "model_card_coverage"
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "status_heading",
+        "type": "markdown",
+        "body": "## 닫힌 것은 모델명이 아니라 정확 조합이다\n\n`CLOSED_EXACT`는 모델 계열 전체의 무가치가 아니라 레시피, split, feature, postprocess, gate 조합의 종료다. 35개 canonical group, 20개 key case, 4개 workflow exception은 48개 family와 겹치므로 합산하지 않는다.",
+        "sourceId": "reaudit_ledger",
+        "layout": "full"
+      },
+      {
+        "id": "status_chart",
+        "type": "chart",
+        "chartId": "family_status_chart",
+        "layout": "full"
+      },
+      {
+        "id": "key_heading",
+        "type": "markdown",
+        "body": "## 과거 재개 후보도 최신 결과로 다시 닫거나 낮췄다\n\nP1 trial18은 checkpoint peak를 보존하되 exact confirmation은 닫혔다. P2 Gaussian copula v2와 P3 CatBoost challenger는 선택 또는 프록시 부호가 다음 평가면에서 반전됐다. P3 lead-continuous는 신선한 episode가 1개뿐이라 harm 확정 대신 발견용으로 남겼다.",
+        "sourceId": "reaudit_ledger",
+        "layout": "full"
+      },
+      {
+        "id": "key_table",
+        "type": "table",
+        "tableId": "key_case_table",
+        "layout": "full"
+      },
+      {
+        "id": "reuse",
+        "type": "markdown",
+        "body": "## 재사용 단위는 14개 모델 카드다\n\n각 카드는 재사용 가능한 split, checkpoint, hash, smoke test, factor decomposition과 그대로 반복하지 않을 exact recipe, 그리고 재개 조건을 분리한다. 새 연구는 후보명을 먼저 이 카드와 대조해 exact/semantic 중복을 차단해야 한다.",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 한계\n\n이 감사는 저장된 집계 결과와 공식 receipt만 재판정했다. 새 학습, raw/prediction 행 읽기, 공식 test/sample/submission/hidden 값 읽기, CSV 생성, 업로드는 0이다. Public 방향성은 Private 성능 보장이 아니며 서로 다른 문제의 F1, C RMSE, m RMSE 크기를 직접 비교하지 않는다.",
+        "sourceId": "reaudit_ledger",
+        "layout": "full"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-31T18:00:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "coverage": [
+        {
+          "historical_family": 48,
+          "canonical_group": 35,
+          "key_case": 20,
+          "workflow_exception": 4,
+          "model_cards": 14
+        }
+      ],
+      "family_status_counts": [
+        {
+          "problem": "P1",
+          "status": "CLOSED_EXACT",
+          "family_count": 9
+        },
+        {
+          "problem": "P1",
+          "status": "INVALID_TECHNICAL",
+          "family_count": 0
+        },
+        {
+          "problem": "P1",
+          "status": "DISCOVERY_ONLY",
+          "family_count": 2
+        },
+        {
+          "problem": "P1",
+          "status": "OLD_GATE_REJECTED",
+          "family_count": 2
+        },
+        {
+          "problem": "P1",
+          "status": "CHECKPOINT_PEAK",
+          "family_count": 0
+        },
+        {
+          "problem": "P1",
+          "status": "INFORMATION_POSITIVE",
+          "family_count": 3
+        },
+        {
+          "problem": "P1",
+          "status": "PROXY_EXPOSED",
+          "family_count": 1
+        },
+        {
+          "problem": "P2",
+          "status": "CLOSED_EXACT",
+          "family_count": 13
+        },
+        {
+          "problem": "P2",
+          "status": "INVALID_TECHNICAL",
+          "family_count": 0
+        },
+        {
+          "problem": "P2",
+          "status": "DISCOVERY_ONLY",
+          "family_count": 4
+        },
+        {
+          "problem": "P2",
+          "status": "OLD_GATE_REJECTED",
+          "family_count": 0
+        },
+        {
+          "problem": "P2",
+          "status": "CHECKPOINT_PEAK",
+          "family_count": 0
+        },
+        {
+          "problem": "P2",
+          "status": "INFORMATION_POSITIVE",
+          "family_count": 1
+        },
+        {
+          "problem": "P2",
+          "status": "PROXY_EXPOSED",
+          "family_count": 1
+        },
+        {
+          "problem": "P3",
+          "status": "CLOSED_EXACT",
+          "family_count": 3
+        },
+        {
+          "problem": "P3",
+          "status": "INVALID_TECHNICAL",
+          "family_count": 1
+        },
+        {
+          "problem": "P3",
+          "status": "DISCOVERY_ONLY",
+          "family_count": 5
+        },
+        {
+          "problem": "P3",
+          "status": "OLD_GATE_REJECTED",
+          "family_count": 0
+        },
+        {
+          "problem": "P3",
+          "status": "CHECKPOINT_PEAK",
+          "family_count": 0
+        },
+        {
+          "problem": "P3",
+          "status": "INFORMATION_POSITIVE",
+          "family_count": 2
+        },
+        {
+          "problem": "P3",
+          "status": "PROXY_EXPOSED",
+          "family_count": 1
+        }
+      ],
+      "key_cases": [
+        {
+          "order": 1,
+          "problem": "P1",
+          "candidate": "block_inpaint",
+          "primary_status": "OLD_GATE_REJECTED",
+          "tags": "-",
+          "model_card": "p1-imputation-boundary-peer",
+          "adjudication": "Positive pooled F1 was rejected by an unsupported worst-slice veto."
+        },
+        {
+          "order": 2,
+          "problem": "P1",
+          "candidate": "dynamic_peer_reliability",
+          "primary_status": "OLD_GATE_REJECTED",
+          "tags": "-",
+          "model_card": "p1-imputation-boundary-peer",
+          "adjudication": "Positive micro F1 with interval crossing zero was over-closed by the old gate."
+        },
+        {
+          "order": 3,
+          "problem": "P1",
+          "candidate": "environment_balanced_replay",
+          "primary_status": "OLD_GATE_REJECTED",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "Tiny positive signal is preserved as low-priority frozen-confirmation evidence."
+        },
+        {
+          "order": 4,
+          "problem": "P1",
+          "candidate": "event_balanced_supcon",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "The exact event-balanced SupCon objective was materially harmful."
+        },
+        {
+          "order": 5,
+          "problem": "P1",
+          "candidate": "gors_depth_invariance",
+          "primary_status": "DISCOVERY_ONLY",
+          "tags": "-",
+          "model_card": "p1-imputation-boundary-peer",
+          "adjudication": "Mixed depth evidence remains inconclusive and is not a deployment candidate."
+        },
+        {
+          "order": 6,
+          "problem": "P1",
+          "candidate": "group_dro_fixed_objective",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "The frozen robust objective was materially harmful."
+        },
+        {
+          "order": 7,
+          "problem": "P1",
+          "candidate": "hierarchical_event_precision_addonly",
+          "primary_status": "DISCOVERY_ONLY",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "The add-only candidate remains inconclusive with an interval spanning zero."
+        },
+        {
+          "order": 8,
+          "problem": "P1",
+          "candidate": "segment_precision_router_core",
+          "primary_status": "OLD_GATE_REJECTED",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "Core router gain was hidden by a broader sparse-veto package."
+        },
+        {
+          "order": 9,
+          "problem": "P1",
+          "candidate": "sobol_trial18_threshold08",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "CHECKPOINT_PEAK, PROXY_EXPOSED",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "The selected Q2 peak reversed to -0.011889120 F1 on sealed Q3/Q4 confirmation."
+        },
+        {
+          "order": 10,
+          "problem": "P1",
+          "candidate": "window_phase_consistency",
+          "primary_status": "OLD_GATE_REJECTED",
+          "tags": "-",
+          "model_card": "p1-temporal-neural",
+          "adjudication": "A small positive Q2 signal was rejected by the former fixed promotion floor."
+        },
+        {
+          "order": 11,
+          "problem": "P2",
+          "candidate": "availability_aware_copula_v2",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "-",
+          "model_card": "p2-copula-probabilistic",
+          "adjudication": "The exact primary recipe and its interval were harmful."
+        },
+        {
+          "order": 12,
+          "problem": "P2",
+          "candidate": "crossfit_rank1_v2",
+          "primary_status": "INFORMATION_POSITIVE",
+          "tags": "-",
+          "model_card": "p2-oas-rank1-lowrank",
+          "adjudication": "Positive cross-fit evidence and the later bin17 official probe support the factor axis."
+        },
+        {
+          "order": 13,
+          "problem": "P2",
+          "candidate": "gaussian_copula_v2",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "PROXY_EXPOSED",
+          "model_card": "p2-copula-probabilistic",
+          "adjudication": "A -0.010616 C proxy improvement reversed to +0.012050 C official harm."
+        },
+        {
+          "order": 14,
+          "problem": "P2",
+          "candidate": "nested_pls",
+          "primary_status": "INFORMATION_POSITIVE",
+          "tags": "-",
+          "model_card": "p2-oas-rank1-lowrank",
+          "adjudication": "The nested winner was positive, while the searched grid remains closed."
+        },
+        {
+          "order": 15,
+          "problem": "P2",
+          "candidate": "state_conditioned_copula",
+          "primary_status": "INFORMATION_POSITIVE",
+          "tags": "-",
+          "model_card": "p2-copula-probabilistic",
+          "adjudication": "Positive local challenger evidence remains research-only after same-family proxy failure."
+        },
+        {
+          "order": 16,
+          "problem": "P2",
+          "candidate": "supervised_rank1",
+          "primary_status": "INFORMATION_POSITIVE",
+          "tags": "-",
+          "model_card": "p2-oas-rank1-lowrank",
+          "adjudication": "Positive dependent evidence supports the rank-1 mechanism, not automatic deployment."
+        },
+        {
+          "order": 17,
+          "problem": "P3",
+          "candidate": "catboost_repaired_confirmation",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "PROXY_EXPOSED",
+          "model_card": "p3-catboost-tabular",
+          "adjudication": "Selection improvement reversed to +0.007974131 m harm on repaired confirmation."
+        },
+        {
+          "order": 18,
+          "problem": "P3",
+          "candidate": "lead_continuous",
+          "primary_status": "DISCOVERY_ONLY",
+          "tags": "PROXY_EXPOSED",
+          "model_card": "p3-analog-spectral-gp-lead",
+          "adjudication": "The exposed screen was positive, but one fresh episode was +0.022617090 m worse; one block is insufficient."
+        },
+        {
+          "order": 19,
+          "problem": "P3",
+          "candidate": "selection_matched_masked_ssl",
+          "primary_status": "CLOSED_EXACT",
+          "tags": "-",
+          "model_card": "p3-neural-sequence-revin-ssl",
+          "adjudication": "The exact masked-SSL candidate was materially harmful."
+        },
+        {
+          "order": 20,
+          "problem": "P3",
+          "candidate": "sparse_gp_abstention",
+          "primary_status": "DISCOVERY_ONLY",
+          "tags": "-",
+          "model_card": "p3-analog-spectral-gp-lead",
+          "adjudication": "The interval crosses zero; coverage behavior is reusable but efficacy is inconclusive."
+        }
+      ]
+    }
+  }
+}

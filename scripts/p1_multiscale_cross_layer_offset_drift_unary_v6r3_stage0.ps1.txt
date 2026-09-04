@@ -1,0 +1,223 @@
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+# Fresh independent QA must authenticate these exact source bytes, encode them
+# as UTF-16LE, pin the exact EncodedCommand bytes, and launch the exact held
+# PowerShell distribution.  This reference source is never executed by path.
+if (
+    -not $env:P1_WORKSPACE_ROOT -or
+    -not [System.IO.Path]::IsPathFullyQualified($env:P1_WORKSPACE_ROOT)
+) {
+    throw 'P1_WORKSPACE_ROOT must be an externally supplied absolute path.'
+}
+if (
+    -not $env:P1_POWERSHELL_HOST -or
+    -not [System.IO.Path]::IsPathFullyQualified($env:P1_POWERSHELL_HOST) -or
+    [System.IO.Path]::GetFullPath([Environment]::ProcessPath).ToLowerInvariant() -ne
+        [System.IO.Path]::GetFullPath($env:P1_POWERSHELL_HOST).ToLowerInvariant()
+) {
+    throw 'Exact externally QA-held PowerShell host differs.'
+}
+if ($env:P1_LAUNCH_MODE -notin @('CheckOnly', 'Execute')) {
+    throw 'P1_LAUNCH_MODE must be exact CheckOnly or Execute.'
+}
+
+Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
+
+public static class P1Gen6r3Stage0Native {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct BY_HANDLE_FILE_INFORMATION {
+        public uint FileAttributes;
+        public System.Runtime.InteropServices.ComTypes.FILETIME CreationTime;
+        public System.Runtime.InteropServices.ComTypes.FILETIME LastAccessTime;
+        public System.Runtime.InteropServices.ComTypes.FILETIME LastWriteTime;
+        public uint VolumeSerialNumber;
+        public uint FileSizeHigh;
+        public uint FileSizeLow;
+        public uint NumberOfLinks;
+        public uint FileIndexHigh;
+        public uint FileIndexLow;
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern SafeFileHandle CreateFileW(
+        string fileName,
+        uint desiredAccess,
+        uint shareMode,
+        IntPtr securityAttributes,
+        uint creationDisposition,
+        uint flagsAndAttributes,
+        IntPtr templateFile
+    );
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool GetFileInformationByHandle(
+        SafeFileHandle handle,
+        out BY_HANDLE_FILE_INFORMATION information
+    );
+}
+'@
+
+$genericRead = [Convert]::ToUInt32('80000000', 16)
+$fileShareRead = [uint32]0x00000001
+$openExisting = [uint32]3
+$openReparsePoint = [uint32]0x00200000
+$reparseAttribute = [uint32]0x00000400
+
+function Assert-PlainAncestorChain([string]$Path) {
+    $item = Get-Item -LiteralPath $Path -Force
+    while ($null -ne $item) {
+        if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Reparse path is forbidden: $Path"
+        }
+        if ($null -ne $item.LinkType) {
+            throw "Linked path is forbidden: $Path"
+        }
+        if ($item -is [System.IO.DirectoryInfo]) {
+            $item = $item.Parent
+        }
+        else {
+            $item = $item.Directory
+        }
+    }
+}
+
+function Get-HandleInformation([Microsoft.Win32.SafeHandles.SafeFileHandle]$Handle) {
+    $information = New-Object P1Gen6r3Stage0Native+BY_HANDLE_FILE_INFORMATION
+    if (-not [P1Gen6r3Stage0Native]::GetFileInformationByHandle($Handle, [ref]$information)) {
+        throw [System.ComponentModel.Win32Exception]::new(
+            [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
+        )
+    }
+    return $information
+}
+
+function Get-HandleIdentity($Information) {
+    return @(
+        [uint64]$Information.VolumeSerialNumber,
+        (([uint64]$Information.FileIndexHigh -shl 32) -bor [uint64]$Information.FileIndexLow),
+        (([uint64]$Information.FileSizeHigh -shl 32) -bor [uint64]$Information.FileSizeLow),
+        [uint64]$Information.NumberOfLinks,
+        [uint64]$Information.FileAttributes
+    ) -join ':'
+}
+
+function Get-StreamSha256([System.IO.FileStream]$Stream) {
+    $Stream.Position = 0
+    $algorithm = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = [Convert]::ToHexString($algorithm.ComputeHash($Stream)).ToLowerInvariant()
+    }
+    finally {
+        $algorithm.Dispose()
+    }
+    $Stream.Position = 0
+    return $digest
+}
+
+$workspace = [System.IO.Path]::GetFullPath($env:P1_WORKSPACE_ROOT)
+$launcherPath = [System.IO.Path]::GetFullPath(
+    (Join-Path $workspace 'scripts/launch_p1_multiscale_cross_layer_offset_drift_unary_v6r3.ps1')
+)
+Assert-PlainAncestorChain $launcherPath
+$launcherHandle = [P1Gen6r3Stage0Native]::CreateFileW(
+    $launcherPath,
+    $genericRead,
+    $fileShareRead,
+    [IntPtr]::Zero,
+    $openExisting,
+    $openReparsePoint,
+    [IntPtr]::Zero
+)
+if ($launcherHandle.IsInvalid) {
+    throw [System.ComponentModel.Win32Exception]::new(
+        [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
+    )
+}
+$launcherStream = $null
+try {
+    $before = Get-HandleInformation $launcherHandle
+    if (
+        $before.NumberOfLinks -ne 1 -or
+        ($before.FileAttributes -band $reparseAttribute) -ne 0
+    ) {
+        throw 'Stage-1 launcher must be a single-link non-reparse regular file.'
+    }
+    $launcherStream = [System.IO.FileStream]::new(
+        $launcherHandle,
+        [System.IO.FileAccess]::Read,
+        1048576,
+        $false
+    )
+    $launcherSha256 = Get-StreamSha256 $launcherStream
+    if (
+        $launcherStream.Length -ne 16092 -or
+        $launcherSha256 -ne '4c5064e95ea22f19b7b2154dca4f86b38b91babc888ffdc1520178ad20868783'
+    ) {
+        throw 'Fresh-QA-pinned stage-1 launcher bytes differ.'
+    }
+    Assert-PlainAncestorChain $launcherPath
+    $after = Get-HandleInformation $launcherStream.SafeFileHandle
+    $identity = Get-HandleIdentity $before
+    if ((Get-HandleIdentity $after) -ne $identity) {
+        throw 'Stage-1 launcher identity changed during authentication.'
+    }
+    $launcherBytes = [byte[]]::new([int]$launcherStream.Length)
+    $offset = 0
+    while ($offset -lt $launcherBytes.Length) {
+        $read = $launcherStream.Read($launcherBytes, $offset, $launcherBytes.Length - $offset)
+        if ($read -le 0) {
+            throw 'Stage-1 launcher same-handle read ended early.'
+        }
+        $offset += $read
+    }
+    $launcherStream.Position = 0
+    $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
+    $launcherText = $strictUtf8.GetString($launcherBytes)
+
+    $global:P1_STAGE0_LAUNCHER_PATH = $launcherPath
+    $global:P1_STAGE0_LAUNCHER_STREAM = $launcherStream
+    $global:P1_STAGE0_LAUNCHER_IDENTITY = $identity
+    $global:P1_STAGE0_LAUNCHER_BYTES = [long]$launcherBytes.Length
+    $global:P1_STAGE0_LAUNCHER_SHA256 = $launcherSha256
+    $global:P1_STAGE1_CHILD_EXIT = 1
+
+    $authenticatedStage1 = [ScriptBlock]::Create($launcherText)
+    & $authenticatedStage1 -Mode $env:P1_LAUNCH_MODE
+    if ($global:P1_STAGE1_CHILD_EXIT -isnot [int]) {
+        throw 'Stage-1 child exit handoff differs.'
+    }
+    $childExit = [int]$global:P1_STAGE1_CHILD_EXIT
+}
+finally {
+    if ($null -ne $launcherStream) {
+        if ($launcherStream.CanRead) {
+            $finalInformation = Get-HandleInformation $launcherStream.SafeFileHandle
+            if (
+                (Get-HandleIdentity $finalInformation) -ne (Get-HandleIdentity $before) -or
+                (Get-StreamSha256 $launcherStream) -ne '4c5064e95ea22f19b7b2154dca4f86b38b91babc888ffdc1520178ad20868783'
+            ) {
+                throw 'Stage-1 launcher same-handle post-child rehash differs.'
+            }
+        }
+        $launcherStream.Dispose()
+    }
+    else {
+        $launcherHandle.Dispose()
+    }
+    foreach ($name in @(
+        'P1_STAGE0_LAUNCHER_PATH',
+        'P1_STAGE0_LAUNCHER_STREAM',
+        'P1_STAGE0_LAUNCHER_IDENTITY',
+        'P1_STAGE0_LAUNCHER_BYTES',
+        'P1_STAGE0_LAUNCHER_SHA256'
+    )) {
+        Remove-Variable -Scope Global -Name $name -ErrorAction SilentlyContinue
+    }
+}
+
+exit $childExit

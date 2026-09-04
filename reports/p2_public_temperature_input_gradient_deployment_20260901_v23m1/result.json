@@ -1,0 +1,97 @@
+{
+  "schema_version": "p2.public_temperature_input_gradient_deployment.terminal_amendment.20260901.v23m1",
+  "experiment_id": "p2_public_temperature_input_gradient_deployment_20260901_v23m1",
+  "status": "MATERIALIZED_READY_NOT_UPLOADED_POST_WRITE_QA_AMENDMENT",
+  "fit_count": 3,
+  "fit_count_evidence": "Original process reached candidate CSV write after completing the fixed three-seed loop; it then raised only on in-memory-vs-decimal-parser np.array_equal.",
+  "technical_event": {
+    "classification": "POST_WRITE_OVERSTRICT_FLOAT_BIT_EQUALITY_ASSERTION",
+    "exception": "ContractError: numeric CSV round-trip drift",
+    "scientific_training_completed": true,
+    "candidate_csv_written_before_exception": true,
+    "same_id_rerun": false,
+    "model_retrained_by_finalizer": false,
+    "candidate_csv_modified_by_finalizer": false,
+    "resolution": "Treat immutable decimal CSV as the deployment object and validate its schema, keys, finite domain, action cap, and hash independently."
+  },
+  "candidate": {
+    "name": "P2_V23_PUBLIC_TEMP_INPUT_GRADIENT_FULL_HISTORY_BLEND020",
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260901_P2_V23_INPUT_GRADIENT_READY_V1\\P2_submission.csv",
+    "sha256": "a6c62a8abf2ec70cad0b251e2006fb3e9aa2536d35be484fb6f0a4a0bbb34384",
+    "bytes": 1371041,
+    "rows": 26061,
+    "validation": {
+      "rows": 26061,
+      "minimum": 16.300995533476524,
+      "maximum": 29.08860347534796
+    },
+    "changed_rows_vs_anchor": 26061,
+    "active_share_vs_anchor": 1.0,
+    "abs_action_p50_C": 0.01447442897258,
+    "abs_action_p90_C": 0.055207226433562795,
+    "abs_action_p99_C": 0.137219714600471,
+    "abs_action_max_C": 0.5,
+    "action_rms_C": 0.03782906952466987,
+    "minimum_C": 16.300995533476524,
+    "maximum_C": 29.08860347534796
+  },
+  "anchor": {
+    "name": "P2_1_RANK1_BIN17_ONLY",
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1\\P2_1_RANK1_BIN17_ONLY\\P2_submission.csv",
+    "sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "public_rmse_C": 0.430194,
+    "public_points": 27.935464,
+    "modified": false
+  },
+  "internal_evidence": {
+    "historical_delta_rmse_C": -0.05189246657169555,
+    "canonical_nominal_expected_points_delta": 0.6511223381640603,
+    "canonical_transport_adjusted_expected_points_delta": 0.5294402465540541,
+    "prospective_fold_layer_non_harm_cells": 6,
+    "prospective_fold_layer_total_cells": 9,
+    "caveat": "Repeatedly exposed exploratory surface; the expected point translations are planning values, not official guarantees."
+  },
+  "submission_metadata": {
+    "title": "P2 v23 공개수온 입력기울기 규제 DeepSets",
+    "summary": "현재 공식 bin17 champion을 80% 보존하고, 고정된 v23 입력기울기 규제 DeepSets full-history 3-se드 예측을 20% 혼합한 사전고정 후보입니다."
+  },
+  "checks": {
+    "csv_exists": true,
+    "rows_26061": true,
+    "schema_exact": true,
+    "key_order_exact": true,
+    "duplicate_keys_zero": true,
+    "finite": true,
+    "submission_domain": true,
+    "action_cap_0_5C": true,
+    "anchor_unmodified_hash": true,
+    "test_hash": true,
+    "source_v23_hashes": true,
+    "no_retraining_in_finalizer": true,
+    "hidden_truth_access_zero": true,
+    "score_access_zero": true,
+    "sample_values_access_zero": true,
+    "upload_zero": true
+  },
+  "operation_counters": {
+    "official_test_index_rows_read": 26061,
+    "official_anchor_rows_read": 26061,
+    "hidden_truth_rows_read": 0,
+    "score_file_rows_read": 0,
+    "sample_submission_rows_read": 0,
+    "submission_csv_created": 1,
+    "uploads": 0,
+    "automatic_retries": 0,
+    "finalizer_model_fits": 0
+  },
+  "hashes": {
+    "config": "c07b509a9c3dfbd27c2d09a2972793428867ed2b26503f2d7e29a33efc58593d",
+    "original_runner": "d6009dc50dd9ddbbb360bbf6d260c208dfd3e7c6fc7408fa7ee67110a32ef0f3",
+    "finalizer": "c98b09d0bc46c1de98f38b73392f54a70cd1ede84e82642bc0d830c62cb9f436",
+    "attempt_lock": "410ebf340603d86a28911f405e81fa4b816e08c6ca4c735c7ece30880b15e752",
+    "test_index": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "anchor": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "candidate_csv": "a6c62a8abf2ec70cad0b251e2006fb3e9aa2536d35be484fb6f0a4a0bbb34384"
+  }
+}

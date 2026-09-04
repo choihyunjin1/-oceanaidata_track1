@@ -1,0 +1,91 @@
+{
+  "schema_version": "parallel_hpo_cycle.independent_qa.v1",
+  "cycle_id": "parallel_hpo_cycle_20260829_v1",
+  "base_commit": "8e0dc9ab22a713596425375985a6fe04f878e325",
+  "status": "PASS_WITH_P3_TECHNICAL_FAILURE",
+  "conclusion": {
+    "submission_candidate_promoted": false,
+    "p1": "NO_GO_PRECONFIRM",
+    "p2": "NO_GO_CLOSE_FAMILY",
+    "p3": "INVALID_TERMINAL_TECHNICAL_FAILURE"
+  },
+  "p1": {
+    "fits": 36,
+    "runtime_seconds": 26183.483,
+    "pooled_delta_f1": 0.000565637038412,
+    "pooled_gate_minimum": 0.003,
+    "q3_q4_started": false,
+    "independent_checks_passed": 28,
+    "aggregate_sha256": "fb42fe28abd4590ac4c5affeacef4a497e792f647d54f88f93f91f743d4fcf98",
+    "independent_qa_sha256": "437ee74d04bd468eac34305827ec99c1fd6fdd27b696a5b44a718052f7a8cc46"
+  },
+  "p2": {
+    "grid_points_per_outer": 243,
+    "outer_folds": 3,
+    "candidate_evaluations": 729,
+    "rotation_point_evaluations": 2187,
+    "pls_fits": 84,
+    "runtime_seconds": 1902.7451289,
+    "pooled_delta_rmse_c": -0.0020419916,
+    "result_sha256": "d08c79d5f6850cab07a510548061833f78dc026c49445442e2c24dcc12d76296",
+    "independent_qa_sha256": "680569fe0deb6420c0d8788b136232ef99a996d162fbb4ae78b3f0f2b1770992"
+  },
+  "p3": {
+    "sealed_challengers": 48,
+    "maximum_authorized_fits": 174,
+    "successful_fits": 74,
+    "failed_attempt_index": 75,
+    "failed_candidate": "challenger_37",
+    "failed_combination": "Ordered+Depthwise",
+    "scientific_gate_evaluated": false,
+    "result_or_aggregate_created": false,
+    "attempt_lock_sha256": "51327c0d724f679219b316c39c4749e450e031f8eb2c3507252c608b41ba9ec7",
+    "root_cause_verified_against_catboost_v1_2_10_source": true,
+    "provenance_limit": "terminal transcript was not preserved; fit count and exception provenance are sealed-grid/code-path reconstruction plus failure report"
+  },
+  "boundary_audit": {
+    "official_hidden_test_sample_submission_rows_read": 0,
+    "submission_csv_created": false,
+    "upload_performed": false,
+    "p1_checkpoint_files_created": 0,
+    "p3_os_level_file_or_network_audit_available": false,
+    "p3_evidence_type": "sealed receipt plus deterministic code-path inspection"
+  },
+  "quality_checks": {
+    "combined_focused_pytest_exit_code": 0,
+    "combined_focused_pytest_items_passed": 21,
+    "ruff_exit_code": 0,
+    "ruff_result": "All checks passed",
+    "p1_dedicated_artifact_qa": "28/28 PASS",
+    "p2_read_only_qa": "PASS",
+    "p3_dedicated_pytest": "7/7 PASS"
+  },
+  "research_artifacts": {
+    "report_source_sha256": "7f7155dc58cb4aa9df4e27c8c84ec93afc87c040ccf4c34da27650dac4d7b917",
+    "claim_source_ledger_sha256": "0f4fd91cf6c5c42c42ab9abcf1f901e3a27b999e8c8a3ad2b8813cff25422946",
+    "gap_matrix_sha256": "e058bc465424c6be07fccca94515423e9ce54dacca8953e07f46328d655205e1",
+    "next_cycle_research_sha256": "515ae5b4dd2f233dfd8dc6413e7a382a1c2955184225ed0f31598f31a43d553b"
+  },
+  "git_scope": {
+    "include": [
+      "configs/experiments/p1_mstcn_sobol_hpo_20260829_v1.json",
+      "configs/experiments/p2_nested_pls_capacity_grid_20260829_v1.json",
+      "configs/experiments/p3_catboost_ordered_hpo_20260829_v1*.json",
+      "scripts and src modules for the three experiments",
+      "focused tests",
+      "reports/p1_mstcn_sobol_hpo_20260829_v1",
+      "reports/p2_nested_pls_capacity_grid_20260829_v1",
+      "reports/p3_catboost_ordered_hpo_20260829_v1",
+      "reports/parallel_hpo_cycle_20260829_v1"
+    ],
+    "exclude": [
+      "artifacts/**",
+      "raw or derived data",
+      "official test/sample/submission files and values",
+      "predictions or NPZ files",
+      "model checkpoints",
+      "attempt locks",
+      "credentials, tokens, env files, caches and temporary files"
+    ]
+  }
+}

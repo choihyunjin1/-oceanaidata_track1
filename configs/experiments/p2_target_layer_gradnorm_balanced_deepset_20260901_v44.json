@@ -1,0 +1,132 @@
+{
+  "schema_version": "p2.target_layer_gradnorm_balanced_deepset.20260901.v44",
+  "experiment_id": "p2_target_layer_gradnorm_balanced_deepset_20260901_v44",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/result.json",
+    "required_status": "EXPLORATORY_NO_GO_TARGET_LAYER_FILM",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "fingerprint": "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/next-axis-fingerprint.md",
+    "fingerprint_sha256": "4d05173bdad3b83fbc8d93201f851e0f50c6f570f0711056a09c6b59379f476a",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v18_result": "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json",
+    "v28_result": "reports/p2_layer_task_gradient_surgery_deepset_20260901_v28/result.json",
+    "v36_result": "reports/p2_layer_month_fishr_gradient_variance_deepset_20260901_v36/result.json",
+    "v39_result": "reports/p2_target_layer_gradient_sign_unanimity_deepset_20260901_v39/result.json",
+    "v43_result": "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/result.json"
+  },
+  "primary_source": {
+    "citation": "Chen et al., ICML/PMLR 2018, GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks",
+    "url": "https://proceedings.mlr.press/v80/chen18a.html",
+    "use": "adaptive task-gradient magnitude balancing motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_TARGET_LAYER_GRADNORM_ADAPTIVE_LOSS_BALANCE",
+    "repository_execution_hits": 0,
+    "distinct_from": {
+      "v18": "Group-DRO maximizes a worst layer-month risk; v44 balances target-layer learning rates by aggregate shared gradient norms",
+      "v28": "PCGrad projects conflicting task-gradient vectors; v44 performs no projection",
+      "v36": "Fishr matches per-sample gradient variances across environments; v44 matches no gradient moments",
+      "v39": "sign unanimity masks parameter coordinates; v44 masks no coordinate",
+      "v43": "FiLM changes the representation; v44 restores exact v13 architecture and changes only task-loss weights"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "exact_v13_weighted_SmoothL1_with_target_layer_GradNorm",
+    "optimizer": "exact_v13_AdamW_plus_plain_SGD_task_weights",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "gradnorm": {
+      "tasks": [2, 3, 4],
+      "task_definition": "target_layer",
+      "initial_task_weights": [1.0, 1.0, 1.0],
+      "task_weight_sum": 3.0,
+      "task_weight_minimum": 0.001,
+      "asymmetry_alpha": 1.5,
+      "shared_parameter": "head.0.weight",
+      "task_weight_optimizer": "plain_SGD_no_momentum",
+      "task_weight_learning_rate": 0.025,
+      "missing_task_weight_update": "exact_noop",
+      "sampler_change": false,
+      "projection": false,
+      "coordinate_mask": false,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "extra_inference_parameters": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

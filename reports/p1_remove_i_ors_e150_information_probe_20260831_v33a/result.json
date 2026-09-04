@@ -1,0 +1,149 @@
+{
+  "action_seal": {
+    "candidate_sha256": "68f782c04748e85dc40997b52bcd32acb9ef60c290f826bcbbe0cf8851799a73",
+    "experiment_id": "p1_remove_i_ors_e150_information_probe_20260831_v33a",
+    "hidden_truth_reads": 0,
+    "official_reads": 0,
+    "raw_e150_sha256": "f3da6a56c8d894f685f3bca9c12505b48adca767f2af9733a785cd7d4be96ebf",
+    "receipts": [
+      {
+        "fold": "2025_q2",
+        "raw_e150_positives": 5399,
+        "rows": 133170,
+        "truth_reads_before_seal": 0
+      },
+      {
+        "fold": "2025_q3",
+        "raw_e150_positives": 5754,
+        "rows": 176738,
+        "truth_reads_before_seal": 0
+      },
+      {
+        "fold": "2025_q4",
+        "raw_e150_positives": 3991,
+        "rows": 111124,
+        "truth_reads_before_seal": 0
+      }
+    ],
+    "removal_sha256": "b284b270d178b943ff89b6f0840143cf3c29c76cbfbde9125d141e522d6bc093",
+    "removals": 374,
+    "rows": 421032,
+    "rule": {
+      "candidate": "raw E150 except I-ORS rows where incumbent=0 and raw_E150=1 are reset to 0",
+      "model_fits": 0,
+      "outer_result_based_tuning": false,
+      "preserve_incumbent_positives": true,
+      "reference": "raw E150 anchor-union bits",
+      "retries": 0,
+      "station": "I-ORS",
+      "threshold": null,
+      "top_k": null
+    },
+    "schema_version": "p1.remove_i_ors_e150.action_seal.v33a",
+    "sealed_npz_sha256": "e6a20bae4cf770810829a884aee8cbab0e38d5c4f6bed8f6a20ce16e629fd0a0",
+    "source_hashes": {
+      "2025_q2": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02",
+      "2025_q3": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f",
+      "2025_q4": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e",
+      "anchor": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "submission_csv_created": 0,
+    "truth_reads_before_action_seal": 0,
+    "uploads": 0
+  },
+  "candidate": {
+    "by_fold": {
+      "2025_q2": {
+        "candidate_f1": 0.86549929010885,
+        "delta_f1": -0.002176445799776605,
+        "reference_f1": 0.8676757359086266,
+        "removed_e150_additions": 204,
+        "removed_false_positives": 104,
+        "removed_true_positives": 100,
+        "rows": 133170
+      },
+      "2025_q3": {
+        "candidate_f1": 0.9188016356505049,
+        "delta_f1": 0.006613338391020074,
+        "reference_f1": 0.9121882972594848,
+        "removed_e150_additions": 168,
+        "removed_false_positives": 131,
+        "removed_true_positives": 37,
+        "rows": 176738
+      },
+      "2025_q4": {
+        "candidate_f1": 0.8991180379364504,
+        "delta_f1": 0.00021720450246076606,
+        "reference_f1": 0.8989008334339896,
+        "removed_e150_additions": 2,
+        "removed_false_positives": 2,
+        "removed_true_positives": 0,
+        "rows": 111124
+      }
+    },
+    "concentration": {
+      "day_max_share": 0.34705882352941175,
+      "station_layer_fold_max_share": 0.3588235294117647,
+      "station_layer_max_share": 0.36470588235294116,
+      "station_max_share": 1.0,
+      "unique_days": 10
+    },
+    "day_block_bootstrap": {
+      "blocks": 164,
+      "ci90_high": 0.010770463681585808,
+      "ci90_low": -0.001571470730051544,
+      "mean_delta_f1": 0.003955118402173286,
+      "probability_improved": 0.856,
+      "replicates": 5000
+    },
+    "fit_count": 0,
+    "information_value_positive": true,
+    "name": "P1_REMOVE_I_ORS_E150_INFORMATION_PROBE",
+    "official_materializer_preparation_allowed": true,
+    "pooled_all_q2_q3_q4": {
+      "candidate_f1": 0.8952473641524736,
+      "delta_f1": 0.0019495020415085662,
+      "reference_f1": 0.8932978621109651,
+      "removed_e150_additions": 374,
+      "removed_false_positives": 237,
+      "removed_true_positives": 137,
+      "rows": 421032
+    },
+    "pooled_primary_q3_q4": {
+      "candidate_f1": 0.9107601184600197,
+      "delta_f1": 0.0039563984404406005,
+      "reference_f1": 0.9068037200195791,
+      "removed_e150_additions": 170,
+      "removed_false_positives": 133,
+      "removed_true_positives": 37,
+      "rows": 287862
+    },
+    "raw_expected_points_delta": 0.10515363594953328,
+    "reference": "raw_E150",
+    "removed_false_positive_share_primary": 0.7823529411764706,
+    "removed_false_positives_primary": 133,
+    "removed_true_positives_primary": 37,
+    "scientific_interpretation": "This isolates the only unseparated I-ORS contribution in the official station factorial; it is not a promotion claim."
+  },
+  "experiment_id": "p1_remove_i_ors_e150_information_probe_20260831_v33a",
+  "fit_count": 0,
+  "hashes": {
+    "action_seal_sha256": "97433bf2d5bb3f017be710583613ddcbbe3fcadd768fdb50fd12e9c14ead3957",
+    "attempt_lock_sha256": "5b55173d47ccd1cc14befe079f53b8d504144f8dba0e2970930d6e9b197037f9",
+    "config_sha256": "935b85106cb6ca7de9579d6772b848822b602282bf5686424296b8eeec8eaaf5",
+    "runner_sha256": "db4f6ff33fc6a99b9e126cd0d1d54600cba634c074a201968be11be57ba94127",
+    "sealed_action_sha256": "e6a20bae4cf770810829a884aee8cbab0e38d5c4f6bed8f6a20ce16e629fd0a0"
+  },
+  "operations": {
+    "hidden_truth_reads": 0,
+    "official_reads": 0,
+    "retries": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "test_reads": 0,
+    "uploads": 0
+  },
+  "runtime_seconds": 10.777814100001706,
+  "schema_version": "p1.remove_i_ors_e150_information_probe.result.v33a",
+  "status": "INFORMATION_VALUE_POSITIVE"
+}

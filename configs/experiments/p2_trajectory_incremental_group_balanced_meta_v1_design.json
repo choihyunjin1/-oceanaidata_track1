@@ -1,0 +1,308 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.design.v1",
+  "experiment_id": "p2_trajectory_incremental_group_balanced_meta_20260826_v1",
+  "created_at_kst": "2026-08-26T06:02:44+09:00",
+  "problem": "P2",
+  "cycle_index": 2,
+  "problem_cycle_ceiling": 2,
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "design_only": true,
+  "pre_result_freeze": {
+    "frozen_before_current_p2_screen_result_review": true,
+    "frozen_before_cycle_1_result_exists": true,
+    "current_or_cycle_1_results_may_change_any_numeric_choice": false,
+    "numeric_choices_are_immutable_after_created_at_kst": true
+  },
+  "authorization_contract": {
+    "implementation_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_new_explicit_authorization": true,
+    "maximum_lifetime_executions_if_separately_authorized": 1,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "cycle_relation": {
+    "this_is_cycle": "P2_CYCLE_2_OF_EXACTLY_2_FINAL",
+    "cycle_1_design_path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+    "third_cycle_allowed": false,
+    "post_terminal_result_research_continuation_allowed": false,
+    "result_driven_substitute_cycle_allowed": false
+  },
+  "trigger_and_stop_contract": {
+    "required_cycle_1_experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v1",
+    "required_cycle_1_result_path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_20260826_v1/result.json",
+    "required_cycle_1_manifest_path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_20260826_v1/manifest.json",
+    "trigger": "Cycle 1 must have terminal RESEARCH_GO on both exact same-season and locked p100 surfaces, every slice and integrity gate must pass, and a future execution authorization must pin exact Cycle-1 result and manifest hashes before any materialization or fit.",
+    "ineligible_if": [
+      "Cycle 1 is incomplete",
+      "Cycle 1 exact same-season gate is RESEARCH_NO_GO",
+      "Cycle 1 locked-p100 gate is RESEARCH_NO_GO",
+      "Cycle 1 has an unevaluated required slice or gate",
+      "Cycle 1 has a hash, chronology, key, or leakage failure",
+      "Cycle 1 result or manifest hashes are unavailable"
+    ],
+    "terminal_policy": "After one authorized execution, stop P2 research regardless of pass or fail. A pass is only a local submission-worthiness finding; candidate creation and submission remain separate explicit actions.",
+    "cycle_1_values_may_change_grid_budget_splits_metrics_or_gates": false
+  },
+  "hypothesis": "The Cycle-1 trajectory signal is incremental rather than a standalone post-processing artifact if an identical raw-Celsius, hierarchically group-balanced meta learner with populated trajectory channels beats the same learner with those slots neutralized, under equal search budget and on both exact same-season and locked p100 transport surfaces.",
+  "immutable_aggregate_inputs": [
+    {
+      "path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json",
+      "bytes": 7350,
+      "sha256": "943ff9ac9723c36445a2a6af2112073799a4bf52185fde91d1e6e5bad9bdfb45",
+      "role": "score-headroom and transport-threshold planning evidence"
+    },
+    {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json",
+      "bytes": 11091,
+      "sha256": "3db8dae64f03b1c8a98873e2def80d5093c909a21687ed0799fe9cb61267ee30",
+      "role": "aggregate maturity-bias and exact comparator evidence"
+    },
+    {
+      "path": "artifacts/p2_matched_budget_local_compare_20260825_v1/manifest.json",
+      "bytes": 5802,
+      "sha256": "fc6db1f65a701da38df1ab1327904056678155fc5cbf7a80988dae564f59ce7e",
+      "role": "aggregate exact-surface integrity evidence"
+    },
+    {
+      "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json",
+      "bytes": 78560,
+      "sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc",
+      "role": "locked p100 aggregate transport surface"
+    },
+    {
+      "path": "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/manifest.json",
+      "bytes": 1821,
+      "sha256": "099a15480b33c039571a2bac41059b7e07dac5afe1c350c6b5bc8217e733d633",
+      "role": "locked p100 independent aggregate QA"
+    }
+  ],
+  "predecessor_contracts": [
+    {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r6.json",
+      "bytes": 22662,
+      "sha256": "6495a7ae21f490970884be775b82b5112bb9b8478dd9ab93aae88cf0b3cca97f"
+    },
+    {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+      "bytes": 15387,
+      "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+      "sha256_policy": "Re-verify this exact design SHA-256 in the future execution authorization; no design field may be edited to match results."
+    }
+  ],
+  "data_features_target_firewall": {
+    "allowed_data": "Historical labeled P2 training rows, frozen local prediction keys, and public-layer historical covariates only, after a future authorization pins their existing hashes.",
+    "common_base_feature_contract": "The exact qualifying anchor prediction plus the same public-only normalized-curvature-residual feature set; if NCR did not qualify, its public-only feature construction may be reused but no failed prediction is used as anchor.",
+    "common_base_feature_count": 55,
+    "trajectory_slot_count": 6,
+    "ordered_trajectory_slots": [
+      "Cycle-1 DTW temperature prediction",
+      "DTW prediction minus anchor",
+      "normalized DTW distance",
+      "public trajectory coverage",
+      "neighbor transferred-residual spread",
+      "median warp-path slope"
+    ],
+    "control_trajectory_slots": "prediction=anchor, disagreement=0, distance=0, coverage=0, spread=0, slope=0",
+    "challenger_trajectory_slots": "Populate all six slots from the single Cycle-1 cell locked before exact evaluation.",
+    "common_ordered_feature_count": 61,
+    "target": "raw degrees-Celsius residual truth_temperature minus frozen_anchor_temperature",
+    "normalized_or_profile_scale_target": false,
+    "query_target_temperature_or_salinity_as_feature": false,
+    "target_magnitude_or_target_profile_scale_as_weight": false,
+    "outer_or_p100_target_used_for_selection": false,
+    "official_evaluation_data_metadata_score_or_rank_used": false
+  },
+  "hierarchical_group_balance": {
+    "group_order": ["target_layer", "fixed_historical_window", "KST_day", "row"],
+    "weight_rule": "Assign total weight 1/3 to each target layer; within a layer assign equal total weight to every nonempty fixed historical window; within a layer-window assign equal total weight to every nonempty KST day; within a layer-window-day divide weight equally across finite rows; normalize all final row weights to arithmetic mean 1.",
+    "fixed_historical_windows": [
+      "2024-03-01 through 2024-03-31 KST pseudo-gap",
+      "2024-05-01 through 2024-05-31 KST pseudo-gap",
+      "2024-07-01 through 2024-07-31 KST pseudo-gap"
+    ],
+    "weight_may_use_target_value_or_error_magnitude": false,
+    "same_exact_weights_for_control_and_challenger": true
+  },
+  "leakage_safe_splits": {
+    "inner_meta_selection": "Three leave-one-fixed-window-out folds over the Cycle-1 March, May, and July pseudo-gaps. For each fold, train on two windows and validate on the third; all trajectory features retain Cycle-1 seven-day source separation.",
+    "exact_same_season_surface": {
+      "validation_start": "2024-09-01T00:00:00+09:00",
+      "validation_end_exclusive": "2024-11-01T00:00:00+09:00",
+      "aligned_rows": 26273,
+      "single_use_after_inner_lock": true
+    },
+    "locked_p100_surface": {
+      "rows": 78156,
+      "folds": 3,
+      "single_use_only_after_exact_RESEARCH_GO": true,
+      "each_fold_training_uses_only_its_strict_historical_prefix": true,
+      "may_not_select_cell_feature_weight_or_projection": true
+    },
+    "selection_rule": "Each arm selects one hyperparameter cell using leave-one-window-out layer-equal raw-Celsius RMSE only. Exact same-season and p100 labels are used once for terminal evaluation, never selection.",
+    "exact_ordered_key_alignment_required": true
+  },
+  "sealed_matched_search": {
+    "model_family": "lightgbm.LGBMRegressor",
+    "common_fixed_parameters": {
+      "objective": "regression_l2",
+      "deterministic": true,
+      "force_row_wise": true,
+      "n_jobs": 8,
+      "verbosity": -1
+    },
+    "cells": [
+      {"id": "r01", "n_estimators": 300, "learning_rate": 0.03, "num_leaves": 15, "max_depth": 5, "min_child_samples": 200, "subsample": 0.85, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0},
+      {"id": "r02", "n_estimators": 400, "learning_rate": 0.04, "num_leaves": 31, "max_depth": 7, "min_child_samples": 200, "subsample": 0.85, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0},
+      {"id": "r03", "n_estimators": 600, "learning_rate": 0.02, "num_leaves": 31, "max_depth": 7, "min_child_samples": 100, "subsample": 0.85, "colsample_bytree": 0.75, "reg_alpha": 0.5, "reg_lambda": 3.0},
+      {"id": "r04", "n_estimators": 300, "learning_rate": 0.05, "num_leaves": 63, "max_depth": 8, "min_child_samples": 250, "subsample": 0.75, "colsample_bytree": 0.85, "reg_alpha": 1.0, "reg_lambda": 5.0},
+      {"id": "r05", "n_estimators": 500, "learning_rate": 0.025, "num_leaves": 15, "max_depth": 5, "min_child_samples": 300, "subsample": 1.0, "colsample_bytree": 1.0, "reg_alpha": 0.0, "reg_lambda": 1.0},
+      {"id": "r06", "n_estimators": 450, "learning_rate": 0.035, "num_leaves": 31, "max_depth": 6, "min_child_samples": 400, "subsample": 0.85, "colsample_bytree": 1.0, "reg_alpha": 0.2, "reg_lambda": 5.0},
+      {"id": "r07", "n_estimators": 250, "learning_rate": 0.06, "num_leaves": 15, "max_depth": 4, "min_child_samples": 150, "subsample": 0.75, "colsample_bytree": 0.7, "reg_alpha": 1.0, "reg_lambda": 3.0},
+      {"id": "r08", "n_estimators": 700, "learning_rate": 0.015, "num_leaves": 63, "max_depth": 8, "min_child_samples": 200, "subsample": 1.0, "colsample_bytree": 0.75, "reg_alpha": 0.5, "reg_lambda": 1.0}
+    ],
+    "seeds": [20260823, 20260824, 20260825],
+    "same_cells_and_seeds_for_control_and_challenger": true,
+    "same_feature_slot_count": true,
+    "per_arm_inner_fit_calls": 72,
+    "per_arm_exact_fit_calls": 3,
+    "per_arm_locked_p100_fit_calls": 9,
+    "per_arm_maximum_physical_fit_calls": 84,
+    "total_maximum_physical_fit_calls": 168,
+    "cell_selection": "Minimize equal-weight mean leave-one-window-out layer RMSE; ties resolve by lower worst-window RMSE, then fewer trees, then lexical cell id.",
+    "early_stopping_or_extra_iterations": false,
+    "grid_expansion": false
+  },
+  "prediction_and_projection": {
+    "raw_prediction": "frozen_anchor_temperature plus meta_predicted_raw_celsius_residual",
+    "control_finalist": "Inner-selected best of frozen anchor cell zero and the eight retuned control cells.",
+    "challenger_finalist": "Inner-selected best of fixed Cycle-1 trajectory cell zero and the eight retuned challenger cells.",
+    "projection": "Use the byte-identical fixed public-endpoint monotone projection from Cycle 1 for both arms.",
+    "weak_trajectory_support": "Challenger trajectory slots are set to their registered neutral values; no alternative model or imputation is selected.",
+    "blend_gate_or_calibration_search": false
+  },
+  "fair_incumbent_control": {
+    "control_arm": "Common 55 public-only slots plus six neutral trajectory slots.",
+    "challenger_arm": "The same 61 ordered slots with the six Cycle-1 trajectory channels populated.",
+    "equal_model_family_and_capacity": true,
+    "equal_search_cells": true,
+    "equal_seeds": true,
+    "equal_split_keys": true,
+    "equal_hierarchical_weights": true,
+    "equal_fit_and_wall_clock_ceiling": true,
+    "equal_metric_projection_and_tie_breaks": true,
+    "outer_comparison": "selected_challenger_finalist minus selected_control_finalist",
+    "maturity_bias_claim_requires_exact_and_p100_gates": true
+  },
+  "evaluation": {
+    "primary_metric": "row-pooled RMSE in raw degrees Celsius",
+    "primary_delta": "selected_challenger_minus_selected_control; negative is improvement",
+    "paired_bootstrap": {
+      "unit": "KST day",
+      "replicates": 5000,
+      "seed": 20260826,
+      "confidence": 0.90
+    },
+    "secondary_metrics": [
+      "layer-equal RMSE",
+      "layer 2, 3, and 4 RMSE deltas",
+      "weekly RMSE deltas and p90 regression",
+      "seed-level exact and p100 deltas",
+      "fold, layer, season, distance, missingness, coverage, and support slices",
+      "control and challenger no-op rates",
+      "finite-value, feature-order, and exact key-alignment checks"
+    ]
+  },
+  "decision_gates": {
+    "RESEARCH_GO": {
+      "exact_same_season": {
+        "row_pooled_delta_rmse_c_lte": -0.060,
+        "paired_ci90_upper_c_lte": -0.040,
+        "each_layer_delta_rmse_c_lte": 0.003,
+        "layer4_delta_rmse_c_lt": 0.0,
+        "weekly_delta_rmse_c_p90_lte": 0.015,
+        "all_values_finite": true,
+        "exact_feature_order_and_key_alignment": true
+      },
+      "locked_p100": {
+        "row_pooled_delta_rmse_c_lt": 0.0,
+        "paired_ci90_upper_c_lt": 0.0,
+        "minimum_improving_folds_of_3": 2,
+        "minimum_improving_layers_of_3": 2,
+        "worst_fold_delta_rmse_c_lte": 0.010,
+        "worst_layer_delta_rmse_c_lte": 0.005,
+        "distance_missingness_coverage_support_fold_layer_and_season_slices_logged": true,
+        "no_p100_tuning_or_rerun": true
+      },
+      "all_hash_chronology_leakage_weight_and_feature_order_checks": true
+    },
+    "SUBMISSION_GO": {
+      "note": "Research-only decision label; no candidate or official action is authorized.",
+      "all_RESEARCH_GO_gates": true,
+      "exact_row_pooled_delta_rmse_c_lte": -0.0759,
+      "exact_paired_ci90_upper_c_lte": -0.050,
+      "locked_p100_row_pooled_delta_rmse_c_lte": -0.030,
+      "locked_p100_paired_ci90_upper_c_lt": 0.0,
+      "all_layer_deltas_lte": 0.0,
+      "all_seed_exact_deltas_lte": 0.0,
+      "independent_aggregate_QA": "PASS",
+      "exact_reproduction_from_pinned_inputs": true
+    },
+    "preferred_effect": {
+      "exact_row_pooled_delta_rmse_c_lte": -0.0759,
+      "approximate_planning_point_gain_gte": 0.9523
+    },
+    "stretch_effect": {
+      "exact_row_pooled_delta_rmse_c_lte": -0.093,
+      "approximate_planning_point_gain_gte": 1.1670
+    },
+    "failure_label": "RESEARCH_NO_GO_CLOSE_P2_TRAJECTORY_META_FAMILY_FINAL"
+  },
+  "resource_ceiling": {
+    "maximum_lifetime_physical_fit_calls": 168,
+    "maximum_fit_calls_per_arm": 84,
+    "maximum_feature_materializations_per_arm": 7,
+    "maximum_feature_materializations_total": 14,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds_per_arm": 43200,
+    "hard_wall_seconds_total": 86400,
+    "full_deployment_fits": 0,
+    "candidate_file_materializations": 0,
+    "automatic_resume_or_rerun_count": 0,
+    "result_driven_reruns": 0
+  },
+  "future_outputs_if_separately_authorized": {
+    "aggregate_only": true,
+    "allowed": ["result.json", "manifest.json", "report_ko.md"],
+    "row_level_predictions_persisted": false,
+    "candidate_csv_created": false
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "official_score_or_rank_used_for_selection": 0,
+    "post_result_tuning": 0,
+    "grid_expansion": 0,
+    "result_driven_reruns": 0,
+    "third_cycle": 0,
+    "P3_mutations_or_fits": 0
+  },
+  "P3_deprioritization": {
+    "current_observed_point_headroom": 0.374402,
+    "reason": "The observed P3 headroom cannot supply the requested 2-3 points. P2 matched-budget incremental validation therefore receives priority while the separately frozen P3 ERA5 experiment remains untouched.",
+    "P3_contract_changes_authorized": false
+  },
+  "limitations": [
+    "The three fixed meta-training windows provide limited regime diversity and can underrepresent rare hydrographic transitions.",
+    "Neutralized trajectory slots equalize feature count but do not make the information content of the two arms identical; that difference is the tested structure.",
+    "The exact same-season and locked p100 surfaces remain historical transport proxies rather than an official hidden holdout.",
+    "The fixed eight-cell budget may not match every historical incumbent tuning iteration, although both arms receive exactly the same new budget.",
+    "The inferred leaderboard point mapping is approximate and cannot guarantee official gain.",
+    "This final cycle terminates the P2 research branch regardless of outcome."
+  ]
+}

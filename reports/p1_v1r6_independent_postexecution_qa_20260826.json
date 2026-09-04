@@ -1,0 +1,177 @@
+{
+  "schema_version": "p1_v1r6.independent_postexecution_qa.v1",
+  "created_at_kst": "2026-08-26T07:20:12.3624912+09:00",
+  "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r6",
+  "attempt_id": "0f53db30b21e4bd19e9f9ae1d6e506d0",
+  "qa_mode": "independent_read_only_postexecution_recalculation",
+  "verdict": {
+    "artifact_and_execution_integrity": "PASS",
+    "scientific_decision": "NO_GO_LOCAL_GATE",
+    "research_promotion": "NO_GO",
+    "submission": "NO_GO",
+    "differs_from_canonical_result": false,
+    "reason": "The candidate prediction is exactly identical to the Round-B anchor on all 421032 local OOF rows and fails four preregistered improvement gates."
+  },
+  "safety_attestation": {
+    "official_test_path_accessed": false,
+    "official_sample_path_accessed": false,
+    "official_submission_path_accessed": false,
+    "candidate_submission_created": false,
+    "upload_performed": false,
+    "experiment_rerun": false,
+    "model_fit_performed_by_qa": false,
+    "sealed_experiment_artifacts_modified": false,
+    "row_level_output_emitted": false,
+    "local_frozen_truth_read_for_independent_scoring": true
+  },
+  "canonical_hashes": {
+    "config_sha256": "e447106eef3123f52b06a1577944f006ec9fd469c325069bda8b87cd37fbacc1",
+    "execution_authorization_sha256": "a765652661ec5b23be7ac52cb2e5588046c2cab79044ad6c731a14a5627ddc6e",
+    "preexecution_seal_sha256": "23dc978b1764bd5dd4d59e3560556209bc3cc5f506c0d8310fed7ec921b1ea18",
+    "frozen_local_truth_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "predictions_sha256": "953415097b2f43421cf40ffe98100f305e3fbd2ba1215656acc4d13bf2b8ec93",
+    "predictions_complete_sha256": "7f63f34fb7d17a3f0330c8fcef5bc0278a11f054fcaecbb5d45173e0dc8ef8d1",
+    "metrics_sha256": "5d0c6c6858cadf4283d32e6faf2974cc63a8e03a019492adc59d944219e40535",
+    "result_sha256": "9136acf5c1f7072e29a3ee7456795dd0c0ba8f1785f7a7d8a6aab4588aa8064c",
+    "manifest_sha256": "0d2c0434b7f6eb4053c6c3935e6b18f6333213f4230673f6885d2f98701e76bb",
+    "worker_terminal_998_sha256": "bd8f3c42db52b801d47e958004cd4495999be3cb8002b62a8dbf1fea64c236f2",
+    "parent_completed_999_sha256": "8412ce02f697a8d475a07955eb54499e79b9f0592f69d87a3e7462a929f387e4",
+    "prediction_parts": {
+      "2025_q2": "1f6d921d458982fda270b2adbaa8cd92932c4c57bf7214a2d52ea9dd099c7a69",
+      "2025_q3": "3fd714b69bc806de598e865bb9eda821259d74c7dc537217579eae94193a316a",
+      "2025_q4": "dbb64e1a095bc7dc973f40728042d7886c8c8ae151111ca179bd5a8e7da57ef9"
+    }
+  },
+  "execution_integrity": {
+    "manifest_records_verified_by_size_and_sha256": 39,
+    "journal_entries": 28,
+    "journal_hash_chain_valid": true,
+    "physical_fit_reservations": 9,
+    "physical_fits_completed": 9,
+    "failed_terminal_events": 0,
+    "worker_terminal_events": 1,
+    "parent_completed_events": 1,
+    "terminal_sequence": [
+      "998_worker_terminal.json:WORKER_SUCCESS_PARENT_QA_REQUIRED",
+      "999_completed.json:PARENT_INDEPENDENT_MANIFEST_QA_PASS"
+    ],
+    "execution_lock_absent": true,
+    "initialization_failed_absent": true,
+    "elapsed_seconds": 210.29537892341614,
+    "global_deadline_margin_seconds": 1531.0634002685547,
+    "left_censor_counts": {
+      "2025_q2": 0,
+      "2025_q3": 0,
+      "2025_q4": 0
+    }
+  },
+  "prediction_and_truth_binding": {
+    "rows": 421032,
+    "aggregate_equals_ordered_concatenation_of_three_parts": true,
+    "prediction_keys_unique": true,
+    "truth_keys_unique": true,
+    "prediction_truth_alignment": "one_to_one",
+    "candidate_anchor_different_rows": 0,
+    "rescued_rows": 0,
+    "all_three_seed_candidates_equal_seed_anchors": true,
+    "truth_receipt": {
+      "held_in_memory_truth_injections": 1,
+      "outer_scores": 1,
+      "sealed_resolver_intercepts": 1,
+      "truth_path_reopens": 0,
+      "status": "PASS_HELD_VERIFIED_TRUTH_IN_MEMORY"
+    }
+  },
+  "independently_recomputed_metrics": {
+    "full_saved_metrics_structure_reproduced_with_absolute_tolerance": 1e-15,
+    "pooled": {
+      "rows": 421032,
+      "positive_rows": 16055,
+      "tp": 12718,
+      "fp": 644,
+      "fn": 3337,
+      "tn": 404333,
+      "precision": 0.9518036222122437,
+      "recall": 0.7921519775770788,
+      "f1": 0.8646700887242071,
+      "f1_delta": 0.0,
+      "precision_delta": 0.0,
+      "recall_delta": 0.0
+    },
+    "paired_day_event_bootstrap": {
+      "replicates": 5000,
+      "blocks": 3089,
+      "positive_event_blocks": 141,
+      "normal_station_layer_kst_day_blocks": 2948,
+      "difference_ci90": [0.0, 0.0],
+      "difference_mean": 0.0,
+      "difference_median": 0.0,
+      "probability_improved": 0.0
+    },
+    "fold_f1_deltas": {
+      "2025_q2": 0.0,
+      "2025_q3": 0.0,
+      "2025_q4": 0.0
+    },
+    "station_f1_deltas": {
+      "G-ORS": 0.0,
+      "I-ORS": 0.0,
+      "S-ORS": 0.0
+    },
+    "equal_weight_station_fold_cells": 8,
+    "equal_weight_station_fold_f1_delta": 0.0,
+    "adequately_supported_cells": 7,
+    "adequately_supported_worst_cell_f1_delta": 0.0,
+    "seed_f1_deltas": {
+      "20260813": 0.0,
+      "20260829": 0.0,
+      "20260847": 0.0
+    },
+    "normal_fp_per_day_ratio": 1.0,
+    "spike": {
+      "rows": 61,
+      "baseline_recall": 0.8852459016393442,
+      "candidate_recall": 0.8852459016393442,
+      "recall_delta": 0.0
+    },
+    "structural": {
+      "removed_round_b_positive_rows": 0,
+      "rescued_rows": 0,
+      "new_disconnected_events": 0,
+      "new_singletons": 0
+    }
+  },
+  "gate_result": {
+    "passed": [
+      "nonnegative_fold_count",
+      "nonnegative_station_count",
+      "adequately_supported_worst_cell_f1_delta",
+      "all_seed_f1_deltas",
+      "precision_delta",
+      "normal_fp_per_day_ratio",
+      "spike_recall_delta",
+      "new_disconnected_events",
+      "new_singletons"
+    ],
+    "failed": {
+      "pooled_micro_f1_delta": {"actual": 0.0, "required": ">=0.003"},
+      "paired_bootstrap_ci90_lower": {"actual": 0.0, "required": ">0"},
+      "equal_weight_station_fold_f1_delta": {"actual": 0.0, "required": ">=0.0015"},
+      "recall_delta": {"actual": 0.0, "required": ">=0.008"}
+    },
+    "passed_all_gates": false
+  },
+  "promotion_policy": {
+    "research_threshold": "All preregistered gates must pass for GO_LOCAL_SCREEN_ONLY.",
+    "research_threshold_met": false,
+    "submission_threshold": "GO_LOCAL_SCREEN_ONLY would still not constitute submission authorization or an official-score guarantee.",
+    "submission_threshold_met": false,
+    "recommended_action": "Do not spend a leaderboard submission opportunity on v1r6. Retain it as a valid null-result receipt and redesign the rescue mechanism before any new preregistered experiment."
+  },
+  "findings": {
+    "P0": [],
+    "P1": [],
+    "P2": [],
+    "scientific_null_result": "The residual model produced no decoded rescue rows; therefore its final classifier behavior is exactly the anchor behavior."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "additional_model_fit_count": 0,
+  "candidate_submission_readiness": "NOT_READY",
+  "checks": {
+    "additional_model_fit_count_eq_0": true,
+    "all_original_blind_and_failure_bytes_unchanged": true,
+    "both_receipts_verified_phase_specifically_before_truth": true,
+    "evidence_state_arithmetic": true,
+    "historical_truth_store_open_count_eq_1": true,
+    "legacy_veto_unused": true,
+    "level_0_pass": true,
+    "metric_evaluation_count_eq_1": true,
+    "official_hidden_csv_upload_outlier_counters_zero": true,
+    "primary_delta_arithmetic": true,
+    "reprediction_count_eq_0": true,
+    "six_original_fits_valid": true
+  },
+  "csv_created": false,
+  "decision": "PASS",
+  "evidence_state": "PRIMARY_HARM_RESEARCH_ONLY",
+  "experiment_id": "p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2",
+  "historical_truth_metric_evaluation_count": 1,
+  "historical_truth_store_open_count": 1,
+  "official_test_sample_submission_hidden_rows_read": 0,
+  "original_fit_count": 6,
+  "primary": {
+    "candidate": {
+      "f1": 0.8949146000192995,
+      "fn": 1411,
+      "fp": 767,
+      "precision": 0.9236131859376556,
+      "recall": 0.8679457182966775,
+      "tp": 9274
+    },
+    "delta_f1": -0.01188912000027964,
+    "directional_margin": 0.0,
+    "incumbent": {
+      "f1": 0.9068037200195791,
+      "fn": 1422,
+      "fp": 482,
+      "precision": 0.9505387378142637,
+      "recall": 0.8669162377164249,
+      "tp": 9263
+    },
+    "metric": "pooled_q3_q4_row_level_binary_micro_f1",
+    "point_estimate_favorable": false,
+    "rows": 287862
+  },
+  "recovery_annotation": "original runner technical failure recovered by sealed-artifact independent evaluation",
+  "reprediction_count": 0,
+  "schema_version": "p1.mstcn_sobol_trial18_frozen_confirmation.sealed_eval.independent_qa.v2",
+  "uncertainty": {
+    "block_days": 21,
+    "ci90_lower": -0.02609953049674526,
+    "ci90_upper": -0.0019713774981613198,
+    "delta_f1_mean": -0.012308582970204228,
+    "method": "paired circular moving-block bootstrap over pooled Q3+Q4 whole KST-day cross-sections",
+    "pooled_unique_kst_calendar_days": 163,
+    "replicates": 10000,
+    "seed": 20260830,
+    "shared_kst_calendar_day_cross_sections_sampled_once": true,
+    "source_fold_shared_kst_calendar_days": 1
+  },
+  "upload_performed": false
+}

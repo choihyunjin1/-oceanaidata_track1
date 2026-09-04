@@ -1,0 +1,43 @@
+{
+  "schema_version": "next_action_meta_deep_research.qa.v1",
+  "as_of_kst": "2026-08-31",
+  "status": "PASS",
+  "base_commit": "d4edf3d1d877e3b0f1d17b4841a310b62e4bfdd1",
+  "decisions": {
+    "P1": "EXECUTE_INFORMATION_PREFLIGHT_ONLY",
+    "P2": "HOLD_NO_FRESH_SAME_SEASON_SURFACE",
+    "P3": "STOP_NO_CASE_TIME_LINKAGE"
+  },
+  "checks": {
+    "p1_latest_no_go_preserved": true,
+    "p1_same_penalty_retune_prohibited": true,
+    "p2_bin17_champion_preserved": true,
+    "p2_same_public_adaptation_prohibited": true,
+    "p3_kma_0425_lineage_preserved": true,
+    "p3_case_time_manifest_required": true,
+    "historical_family_ledger_count": 48,
+    "new_model_fits": 0,
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "prediction_rows_created": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "source_classes": {
+    "primary_or_peer_reviewed_research": 5,
+    "official_data_documentation": 2,
+    "local_evidence_reports": 3
+  },
+  "automation_cleanup": {
+    "deleted": [
+      "p3-era5",
+      "p1-p3-hpo-qa",
+      "p1-group-dro-p3-valid-hpo-qa"
+    ],
+    "all_were_paused_and_terminal": true
+  },
+  "limitations": [
+    "P1 calibration feasibility cannot establish addition precision without labels.",
+    "P2 and P3 blockers require new data contracts rather than more literature.",
+    "Public directional effects do not guarantee Private transport."
+  ]
+}

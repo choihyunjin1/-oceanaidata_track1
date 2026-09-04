@@ -1,0 +1,101 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v23-preflight",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v23",
+  "status": "NO_GO_PREFLIGHT_ONLY",
+  "candidate": "P1_2_HIST_GBDT_STABLE_TOPK_ADDONLY_AUDIT",
+  "research_question": "Can the only historically positive P1 HGB stack be converted into a prospective, deployable stable-rank top-k add-only rule without rerunning or retuning its exposed exact model and threshold?",
+  "lineage": {
+    "source_candidate": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+    "source_result": "artifacts/full_internal_submission_cycle_20260831_v3/p1_result.json",
+    "source_runner": "scripts/run_full_internal_submission_cycle_20260831_v2.py",
+    "internal_reference_f1": 0.9068037200195791,
+    "internal_candidate_f1": 0.9081847055949182,
+    "internal_delta_f1": 0.0013809855753390554,
+    "q3_delta_f1": 0.0,
+    "q4_delta_f1": 0.003432580085375281,
+    "q3_threshold": 1.0,
+    "q4_threshold": 0.7749999999999999,
+    "deployment_threshold": 0.8875,
+    "deployment_additions": 4,
+    "official_result": "TIE",
+    "official_score_delta": 0.0
+  },
+  "prohibitions": {
+    "exact_model_rerun": true,
+    "exact_threshold_rerun": true,
+    "outer_label_topk_selection": true,
+    "official_binary_output_as_score_proxy": true,
+    "posthoc_k_from_deployment_additions": true,
+    "historical_truth_execution": true,
+    "attempt_lock_creation": true
+  },
+  "prospective_rank_stability_contract": {
+    "status": "NOT_SEALED_MISSING_SCORE_LINEAGE",
+    "nested_outer_folds": [
+      {
+        "train_prefix": [
+          "2025_q2"
+        ],
+        "outer_fold": "2025_q3"
+      },
+      {
+        "train_prefix": [
+          "2025_q2",
+          "2025_q3"
+        ],
+        "outer_fold": "2025_q4"
+      }
+    ],
+    "environment_axes": [
+      "station_code",
+      "layer_code",
+      "chronological_time_block"
+    ],
+    "required_evidence": [
+      "keyed continuous prefix-model scores for every outer row",
+      "keyed continuous full-train scores for every deployment row or a bit-reproducible checkpoint plus exact feature hashes",
+      "prefix-only rank-stability tables by station layer and chronological time block",
+      "a top-k value chosen before outer labels and official outcomes are observed"
+    ],
+    "top_k": null,
+    "top_k_reason": "No prospective k was registered. Setting k=4 after observing four official additions and a Public tie would be post-hoc.",
+    "outer_labels_used_for_k": false,
+    "official_outcome_used_for_k": false,
+    "add_only": true,
+    "anchor_removals": 0
+  },
+  "observed_persistence": {
+    "continuous_oof_score_table": false,
+    "continuous_full_train_score_table": false,
+    "fitted_model_checkpoint": false,
+    "exact_feature_matrix_hash": false,
+    "only_aggregate_metrics_and_binary_output_hash_persisted": true,
+    "deployment_models_were_process_memory_only": true
+  },
+  "transport": {
+    "calibration_version": "PENDING_V3",
+    "penalty_points": "PENDING_V3",
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "raw_gate": "PENDING_V3",
+    "reason": "The P1-specific prospective calibration v3 was under independent audit when this no-go preflight was sealed; no penalty is consumed because the candidate cannot be constructed."
+  },
+  "decision": {
+    "status": "NO_GO_MISSING_CONTINUOUS_SCORE_LINEAGE_AND_POSTHOC_K",
+    "fit_count": 0,
+    "candidate_count": 0,
+    "submission_materialized": false,
+    "next_action": "Do not rerun the exposed HGB model. A future prospective cycle must persist continuous prefix and deployment scores plus a pre-registered k before any outer or official outcome is read."
+  },
+  "authorization": {
+    "preflight_only": true,
+    "historical_truth_reads": 0,
+    "historical_fits": 0,
+    "attempt_locks": 0,
+    "official_input_reads": 0,
+    "official_rows_read": 0,
+    "hidden_truth_reads": 0,
+    "submission_csv_reads": 0,
+    "submission_csv_writes": 0,
+    "uploads": 0
+  }
+}

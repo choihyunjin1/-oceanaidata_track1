@@ -1,0 +1,69 @@
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
+
+if (-not $env:P1_WORKSPACE_ROOT) {
+    throw 'P1_WORKSPACE_ROOT is required.'
+}
+$workspace = [System.IO.Path]::GetFullPath($env:P1_WORKSPACE_ROOT)
+$stage1Path = [System.IO.Path]::GetFullPath(
+    (Join-Path $workspace 'scripts/launch_p1_multiscale_cross_layer_offset_drift_unary_v6r4.ps1')
+)
+if ([System.IO.File]::GetAttributes($stage1Path).HasFlag([System.IO.FileAttributes]::ReparsePoint)) {
+    throw 'Gen6r4 stage1 reparse point rejected.'
+}
+
+$stage1Stream = [System.IO.FileStream]::new(
+    $stage1Path,
+    [System.IO.FileMode]::Open,
+    [System.IO.FileAccess]::Read,
+    [System.IO.FileShare]::Read,
+    131072,
+    [System.IO.FileOptions]::SequentialScan
+)
+try {
+    $stage1Bytes = [byte[]]::new([int]$stage1Stream.Length)
+    $offset = 0
+    while ($offset -lt $stage1Bytes.Length) {
+        $count = $stage1Stream.Read($stage1Bytes, $offset, $stage1Bytes.Length - $offset)
+        if ($count -le 0) { throw 'Gen6r4 stage1 read was truncated.' }
+        $offset += $count
+    }
+    $stage1Sha = [Convert]::ToHexString(
+        [System.Security.Cryptography.SHA256]::HashData($stage1Bytes)
+    ).ToLowerInvariant()
+    if ($stage1Bytes.Length -ne 13397 -or $stage1Sha -ne 'd09b148ab846628c9a8ebca4a20365d82fb329365b267777e40a026348ef47de') {
+        throw 'Gen6r4 stage1 pinned bytes differ.'
+    }
+    $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
+    $stage1Text = $strictUtf8.GetString($stage1Bytes)
+    $stage0Definition = [string]$MyInvocation.MyCommand.Definition
+    if (-not $stage0Definition) {
+        throw 'Inline EncodedCommand definition is unavailable.'
+    }
+    $stage0SourceBytes = [System.Text.Encoding]::UTF8.GetBytes($stage0Definition)
+    $stage0Utf16 = [System.Text.Encoding]::Unicode.GetBytes($stage0Definition)
+    $stage0Encoded = [Convert]::ToBase64String($stage0Utf16)
+    $global:P1_R4_STAGE0_SOURCE_SHA256 = [Convert]::ToHexString(
+        [System.Security.Cryptography.SHA256]::HashData($stage0SourceBytes)
+    ).ToLowerInvariant()
+    $global:P1_R4_STAGE0_ENCODED_SHA256 = [Convert]::ToHexString(
+        [System.Security.Cryptography.SHA256]::HashData(
+            [System.Text.Encoding]::ASCII.GetBytes($stage0Encoded)
+        )
+    ).ToLowerInvariant()
+    $global:P1_R4_STAGE1_PATH = $stage1Path
+    $global:P1_R4_STAGE1_STREAM = $stage1Stream
+    $global:P1_R4_STAGE1_BYTES = $stage1Bytes.Length
+    $global:P1_R4_STAGE1_SHA256 = $stage1Sha
+    & ([ScriptBlock]::Create($stage1Text)) @args
+}
+finally {
+    $stage1Stream.Position = 0
+    $exitSha = [Convert]::ToHexString(
+        [System.Security.Cryptography.SHA256]::Create().ComputeHash($stage1Stream)
+    ).ToLowerInvariant()
+    if ($exitSha -ne 'd09b148ab846628c9a8ebca4a20365d82fb329365b267777e40a026348ef47de') {
+        throw 'Gen6r4 stage1 same-handle exit rehash differs.'
+    }
+    $stage1Stream.Dispose()
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "p1.v3_subspace_supervised_semantic_gate.v1",
+  "experiment_id": "p1_v3_subspace_supervised_semantic_gate_20260901_v1",
+  "decision": "CLOSE_ZERO_FIT_SEMANTIC_DUPLICATE",
+  "proposed_recipe": "anchor-negative robust-subspace innovations scored by station/layer/quarter regularized logistic with inner precision LCB and add-only anchor union",
+  "semantic_predecessor": {
+    "config": {"path": "configs/experiments/p1_addonly_hierarchical_event_precision_lcb_20260830_v1.json", "sha256": "989a5d42878ff0062b57c2d76425da8d654161b9fd76150fcd8d9eb01c0692a2"},
+    "result": {"path": "reports/p1_addonly_hierarchical_event_precision_lcb_20260830_v1/result.json", "sha256": "3836af402aab75bdd35041248beaba296f22d42282ae7f893cf8bd20a3d25dea"},
+    "same_roles": ["anchor-negative event scoring", "regularized logistic partial pooling", "station and layer effects", "chronological prefix fit", "one-sided precision LCB", "anchor-preserving union"],
+    "observed_pooled_delta_f1": -0.0023805798050094973,
+    "observed_q3_delta_f1": 0.008106757504967366,
+    "observed_q4_delta_f1": -0.01749928236956111
+  },
+  "registry": {
+    "candidate_ledger": {"path": "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json", "sha256": "8e7f2fbe07c74d313ce3c652b6eeffdd4d5a7af1351b96d7fc984be987778f69"},
+    "report": {"path": "reports/historical_model_reaudit_20260831_v1/report-source.md", "sha256": "a7344dc7896abe240e614f74c8f539210bf53ccafdda784647401d91d6828473"}
+  },
+  "zero_fit_contract": {"model_fits": 0, "target_rows": 0, "official_test_sample_submission_hidden_reads": 0, "csv": 0, "uploads": 0, "retry_or_retune": 0},
+  "unused_graph_spatiotemporal_audit": {
+    "candidate": "causal_masked_spatiotemporal_graph_encoder",
+    "representation": "station-layer nodes; fixed contemporaneous cross-layer edges; causal temporal edges; prefix-only masked-next-step self-supervision; anomaly energy on anchor-negative rows",
+    "exact_repository_name_hits": 0,
+    "semantic_duplicate": false,
+    "distinction": "No MS-TCN convolution stack, Group-DRO objective, CatBoost tree head, Gaussian CAPA likelihood, long-event supervised rescore, or precision-LCB logistic router.",
+    "minimum_reopen_contract": ["new experiment id", "causal adjacency and mask fixed before labels", "inner-only energy threshold and addition budget", "maximum 9 fits", "Q2-Q4 outer exactly once", "anchor removals zero"],
+    "status": "AUDIT_ONLY_NOVEL_REPRESENTATION_REQUIRES_PREREGISTRATION"
+  }
+}

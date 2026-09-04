@@ -1,0 +1,33 @@
+{
+  "experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v2",
+  "classification": "COMPLETION_ONLY_PROFILE_SUPPORT_CONTRACT_REPAIR",
+  "base_config": {
+    "path": "configs/experiments/p2_gaussian_copula_conditional_mean_20260830_v1.json",
+    "sha256": "cdbf74f9f9f67c17f585905b2c28ed44a5dea77dc9b4abd7f42cce52827b405d"
+  },
+  "failed_attempt": {
+    "experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v1",
+    "classification": "INVALID_TERMINAL_TECHNICAL_FAILURE",
+    "performance_metrics_computed": false,
+    "prediction_files_written": 0,
+    "cause": "64 of 8779 first-fold historical timestamps have only two target-layer rows; the row mapper incorrectly required every timestamp to have all three target layers."
+  },
+  "repair_contract": {
+    "supported_complete_profiles": "unchanged copula prediction",
+    "incomplete_target_profiles": "exact zero residual correction",
+    "model_hyperparameters_changed": false,
+    "shrinkage_search_changed": false,
+    "outer_folds_changed": false,
+    "result_based_tuning": false
+  },
+  "execution_policy": {
+    "maximum_executions": 1,
+    "official_hidden_gap_values_read_allowed": false,
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "result_based_retry": false
+  },
+  "artifact_directory": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2",
+  "report_directory": "reports/p2_gaussian_copula_conditional_mean_20260830_v2"
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "P1_fixed24h_peer_coherence_v1",
+  "family_id": "dynamic_peer_reliability_gate",
+  "created_at_kst": "2026-08-13T20:30:00+09:00",
+  "status": "preregistered",
+  "hypothesis": {
+    "single_sentence": "A fixed 24-hour change-coherence view can help the frozen XGBoost distinguish trustworthy cross-layer evidence from normal stratification without changing any other component.",
+    "target_failure": "cross-layer false positives during normal stratification or internal-wave decoupling",
+    "exactly_one_change": {
+      "kind": "feature_bundle",
+      "name": "fixed_24h_offline_peer_coherence",
+      "feature_count": 4,
+      "features": [
+        "peer_change_corr_24h",
+        "peer_pair_coverage_24h",
+        "peer_trust_gate_24h",
+        "temp_abs_peer_residual_gated_24h"
+      ],
+      "fixed_parameters": {
+        "mode": "offline",
+        "window_hours": 24,
+        "min_period_fraction": 0.5
+      }
+    },
+    "forbidden_changes": [
+      "baseline_model",
+      "baseline_features",
+      "postprocessing",
+      "threshold_grid",
+      "calendar_or_station_rules",
+      "positive_rate_targeting",
+      "augmentation",
+      "ensemble"
+    ]
+  },
+  "baseline": {
+    "run_id": "20260813T153038+0900_cv_378a4e89",
+    "model": "xgboost",
+    "feature_mode": "offline",
+    "trees": 700,
+    "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "micro_f1": 0.8603708380408055,
+    "weighted_f1": 0.8133155525620019
+  },
+  "comparison": {
+    "arm_count": 2,
+    "arms": [
+      {
+        "id": "frozen_no_op",
+        "role": "frozen_comparator",
+        "change": "none"
+      },
+      {
+        "id": "fixed_24h_peer_coherence",
+        "role": "fixed_ablation",
+        "change": "fixed_24h_offline_peer_coherence"
+      }
+    ],
+    "fixed_gate_execution_count": 1,
+    "family_selection_allowed": false,
+    "additional_hyperparameters": [],
+    "adaptive_search_allowed": false
+  },
+  "inner_nuisance_selection": {
+    "scope": "inner_validation_only",
+    "folds": [
+      "2025_q2",
+      "2025_q3",
+      "2025_q4"
+    ],
+    "purpose": "per_arm_iteration_and_existing_postprocess_only",
+    "applies_independently_to_each_arm": true,
+    "selected_only": [
+      "model_iteration",
+      "existing_postprocess"
+    ],
+    "model_iteration_rule": "existing_backend_early_stopping",
+    "postprocess_metric": "row_micro_f1",
+    "fixed_gate_outer_execution_depends_on_inner_win": false,
+    "outer_labels_prohibited": true
+  },
+  "outer_evaluation": {
+    "folds": [
+      "2025_q2",
+      "2025_q3",
+      "2025_q4"
+    ],
+    "one_shot": true,
+    "max_family_outer_evaluations": 1,
+    "labels_used_for_selection": false,
+    "adaptive_exposure_acknowledged": true,
+    "role": "research diagnostic only; these outer labels were already exposed to prior model families",
+    "promotion_gate": {
+      "weighted_f1_min": 0.8183155525620019,
+      "weighted_f1_delta_min": 0.005,
+      "paired_bootstrap_90pct_lower_gt": 0.0,
+      "folds_non_degrading_min": 2,
+      "station_group_f1_drop_max": 0.01,
+      "normal_fp_day_relative_increase_lt": 0.1
+    }
+  },
+  "shadow_holdout": {
+    "available": false,
+    "reason": "no_rows_after_last_outer_end",
+    "train_max_time_kst": "2025-12-10T03:00:00+09:00",
+    "note": "No virgin tail split exists; inventing a new split after viewing prior outer results is prohibited."
+  },
+  "stress_tests": {
+    "required": [
+      "gors_depth_100pct_mask",
+      "sors_year_transfer"
+    ],
+    "maximum_f1_drop": 0.01
+  },
+  "stop_rules": {
+    "close_family_on_any_gate_failure": true,
+    "no_window_or_threshold_followup": true,
+    "no_outer_informed_erratum": true,
+    "label_blind_bug_errata_max_before_outer": 1,
+    "failure_action": "retain frozen XGBoost and close dynamic_peer_reliability_gate"
+  },
+  "authorization": {
+    "competition_upload": false,
+    "commit": false,
+    "push": false,
+    "external_observations": false
+  }
+}

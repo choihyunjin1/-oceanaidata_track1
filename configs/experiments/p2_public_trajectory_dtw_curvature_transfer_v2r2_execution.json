@@ -1,0 +1,61 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r2.execution.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r2",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "authorized": false,
+  "design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r2_design.json",
+    "bytes": 9993,
+    "sha256": "e90a866e69d01731704db878332c121a4f42a0258e61d8489afa9344fa8264a1"
+  },
+  "trigger_resolution": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json",
+    "bytes": 4373,
+    "sha256": "36c9a2943b14d56867784c5e1e91d2bee086eebb9247f90e14a11db6f4eaf9e9"
+  },
+  "operation_ceiling": {
+    "attempts": 1,
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0
+  },
+  "operational_repairs": {
+    "p100_binding": "explicit one-to-one canonical merge on fold, station, UTC-ns time, layer; no positional assignment",
+    "p100_pre_gate_access": "literal pin metadata only; path resolution, stat, open, hash, and parse are lazy after durable exact RESEARCH_GO",
+    "package_import": "load the sealed numerical module directly from its verified file path without executing p2_restore package __init__",
+    "windows_file_durability": "FlushFileBuffers on a read-write CreateFileW handle; never fsync a Windows read-only CRT descriptor",
+    "terminal_commit": "all verification and fsync precede durable ATTEMPT_COMMIT_READY; terminal-success hardlink is the last repository filesystem operation",
+    "independent_qa": "authorization must pin, parse, and lineage-check a PASS report included in its bundle"
+  },
+  "fixed_runtime": {
+    "hard_wall_seconds": 7200,
+    "maximum_process_tree_rss_bytes": 1610612736,
+    "maximum_working_array_bytes": 536870912,
+    "automatic_reruns": 0
+  },
+  "authorization_requirements": {
+    "external_authorization_file": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r2_execution_authorization.json",
+    "raw_authorization_sha256_environment_binding": "P2_TRAJECTORY_V2R2_EXECUTION_AUTHORIZATION_SHA256",
+    "independent_qa_report_fields": ["path", "bytes", "sha256", "verdict", "design_sha256", "seal_sha256"],
+    "independent_qa_verdict": "PASS",
+    "pending_template_authorized": false
+  },
+  "default_action": "READ_ONLY_PREFLIGHT_ONLY",
+  "prohibitions": {
+    "numerical_execute_before_authorization": true,
+    "p100_access_before_exact_RESEARCH_GO": true,
+    "official_test_sample_submission_candidate_access": true,
+    "candidate_or_submission_generation": true,
+    "upload": true,
+    "fit": true,
+    "result_driven_rerun_or_tuning": true
+  }
+}

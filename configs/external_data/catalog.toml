@@ -1,0 +1,154 @@
+[catalog]
+schema_version = "1.0"
+as_of_kst = "2026-08-24T00:42:08+09:00"
+policy = "public_external_data_allowed_with_attribution_rights_and_leakage_gate"
+
+[[source]]
+source_id = "i_ors_ctd_2014_2023"
+title = "I-ORS mooring observation data of temperature and salinity since 2014"
+source_kind = "observations"
+official_url = "https://sciwatch.kiost.ac.kr/handle/2020.kiost/46422"
+doi = "10.22808/DATA-2024-6"
+license_name = "CC BY 4.0"
+rights_state = "open_verified"
+eligible_problems = ["P1", "P2"]
+allowed_purposes = ["pretraining", "feature_design", "augmentation", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+09:00"
+priority = "P1_high_P2_fallback"
+value_accessed = true
+notes = "Official v1.1.1 ZIP was downloaded and audited in quarantine. P1 external-only profile reconstruction is promising; P2 remains a different-water-mass fallback only."
+
+[[source]]
+source_id = "i_ors_ocean_atmos_2004_2023"
+title = "Ieodo Ocean Research Station observations of oceanic and atmospheric variables"
+source_kind = "observations"
+official_url = "https://sciwatch.kiost.ac.kr/handle/2020.kiost/46771"
+doi = "10.22808/DATA-2025-2"
+license_name = "CC BY 4.0"
+rights_state = "open_verified"
+eligible_problems = ["P1", "P3"]
+allowed_purposes = ["pretraining", "feature_design", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+09:00"
+priority = "P1_low_P3_supporting"
+value_accessed = false
+notes = "Hourly temperature and atmosphere; no significant-wave-height target."
+
+[[source]]
+source_id = "s_ors_ctd_2015_2023"
+title = "S-ORS mooring observation data of temperature and salinity since 2015"
+source_kind = "observations"
+official_url = "https://sciwatch.kiost.ac.kr/handle/2020.kiost/46423"
+doi = "10.22808/DATA-2024-7"
+license_name = "No item-level open licence displayed"
+rights_state = "holder_permission_required"
+eligible_problems = ["P1", "P2"]
+allowed_purposes = ["pretraining", "feature_design", "augmentation", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+09:00"
+priority = "P2_high_P1_low"
+value_accessed = false
+notes = "Requires both organizer approval and separate KIOST rights-holder permission."
+
+[[source]]
+source_id = "kma_ocean_buoy_pre2024"
+title = "KMA ocean meteorological buoy and wave buoy observations"
+source_kind = "observations"
+official_url = "https://www.data.go.kr/data/15139440/openapi.do"
+doi = ""
+license_name = "Korea Open Government Licence Type 1"
+rights_state = "open_verified"
+eligible_problems = ["P3"]
+allowed_purposes = ["pretraining", "feature_design", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+09:00"
+priority = "P3_high"
+value_accessed = false
+notes = "Station and sensor domain differs from KORS; requires domain-shift audit."
+
+[[source]]
+source_id = "era5_pre2024"
+title = "ERA5 hourly data on single levels"
+source_kind = "reanalysis"
+official_url = "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview"
+doi = "10.24381/cds.adbb2d47"
+license_name = "CC BY"
+rights_state = "open_verified"
+eligible_problems = ["P3"]
+allowed_purposes = ["pretraining", "feature_design", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+09:00"
+priority = "P3_high_supporting"
+value_accessed = true
+notes = "Access authorized for the sealed pre-2024 P3 context-pretraining experiment only; never align evaluation-period reanalysis with anonymous P3 contexts."
+
+[[source]]
+source_id = "nasa_power_kors_meteorology"
+title = "NASA POWER hourly meteorological analysis-ready data at KORS coordinates"
+source_kind = "reanalysis_covariates"
+official_url = "https://power.larc.nasa.gov/docs/services/api/temporal/hourly/"
+doi = ""
+license_name = "NASA POWER free public data; source/version/access-date attribution requested"
+rights_state = "open_verified"
+eligible_problems = ["P1", "P2"]
+allowed_purposes = ["feature_design", "normalization", "fine_tuning"]
+max_observation_time = "2026-06-30T23:59:59+00:00"
+priority = "P2_high_P1_medium"
+value_accessed = true
+notes = "Use meteorological covariates only. Do not request or derive hidden KORS target temperatures. NASA POWER hourly meteorology is based on MERRA-2/NRT analysis at coarse spatial resolution."
+
+[[source]]
+source_id = "noaa_ww3_hindcast_pre2019"
+title = "NOAA WAVEWATCH III production hindcast archive"
+source_kind = "reanalysis"
+official_url = "https://polar.ncep.noaa.gov/waves/download.shtml"
+doi = ""
+license_name = "Terms review pending"
+rights_state = "review_required"
+eligible_problems = ["P3"]
+allowed_purposes = ["pretraining", "feature_design"]
+max_observation_time = "2018-12-31T23:59:59+00:00"
+priority = "P3_medium"
+value_accessed = false
+notes = "Archive is public but intended use and attribution terms must be recorded first."
+
+[[source]]
+source_id = "argo_gdac_pre2024"
+title = "Argo Global Data Assembly Centre profiles"
+source_kind = "observations"
+official_url = "https://argo.ucsd.edu/data/data-from-gdacs/"
+doi = "monthly snapshot DOI required"
+license_name = "Open data; citation required"
+rights_state = "review_required"
+eligible_problems = ["P2"]
+allowed_purposes = ["pretraining", "feature_design"]
+max_observation_time = "2023-12-31T23:59:59+00:00"
+priority = "P2_low"
+value_accessed = false
+notes = "Large domain mismatch with shallow fixed-mooring Yellow Sea profiles."
+
+[[source]]
+source_id = "moment_pretrained"
+title = "MOMENT pretrained time-series foundation model"
+source_kind = "model_weights"
+official_url = "https://github.com/moment-timeseries-foundation-model/moment"
+doi = "ICML 2024"
+license_name = "MIT"
+rights_state = "training_provenance_review_required"
+eligible_problems = ["P1", "P2", "P3"]
+allowed_purposes = ["pretraining", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+00:00"
+priority = "challenger_only"
+value_accessed = false
+notes = "Checkpoint remains blocked until organizer permits external weights and provenance is audited."
+
+[[source]]
+source_id = "chronos_pretrained"
+title = "Amazon Chronos pretrained forecasting models"
+source_kind = "model_weights"
+official_url = "https://github.com/amazon-science/chronos-forecasting"
+doi = "TMLR 2024"
+license_name = "Apache-2.0"
+rights_state = "training_provenance_review_required"
+eligible_problems = ["P3"]
+allowed_purposes = ["pretraining", "fine_tuning"]
+max_observation_time = "2023-12-31T23:59:59+00:00"
+priority = "challenger_only"
+value_accessed = false
+notes = "Checkpoint remains blocked until organizer permits external weights and provenance is audited."

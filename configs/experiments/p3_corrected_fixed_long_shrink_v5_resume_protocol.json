@@ -1,0 +1,42 @@
+{
+  "experiment_id": "p3_corrected_fixed_long_shrink_v5_full_refit",
+  "status": "SAME_ATTEMPT_LOAD_ONLY_RESUME_AFTER_POST_FIT_GUARD_FAILURE",
+  "original_config": "configs/experiments/p3_corrected_fixed_long_shrink_v5_full_refit.json",
+  "original_config_sha256": "c0855fdbed825ccc93b3340a0f6e5a5f19a8fbac58df9c503b6984241b1e7fc8",
+  "attempt_lock": "artifacts/p3_corrected_fixed_long_shrink_v5_full_refit.ATTEMPT_LOCK.json",
+  "attempt_lock_sha256": "49a264391dfa95f7cfe2a14332a4e11a21654b4eb96d7883e85d7ddb9a5bb616",
+  "preserved_stage": "tmp/p3_corrected_shrink_v5_refit_8o788k5g",
+  "failure": {
+    "phase": "post_fit_first_saved_model_inference",
+    "exception": "RuntimeError: saved full base models do not reproduce incumbent inference",
+    "cause": "an unnecessary 1e-12 equality guard compared a newly refitted GPU model to the prior full model",
+    "model_fit_completed_before_failure": true,
+    "candidate_created_before_failure": false,
+    "test_feature_cache_reads_before_failure": 1,
+    "test_index_reads_before_failure": 1,
+    "test_context_reads_before_failure": 0,
+    "test_target_or_hidden_label_reads_before_failure": 0
+  },
+  "preserved_fresh_model_sha256": {
+    "single.cbm": "ee32813e5b1867b272dc7b0b2c15cb285af14a733574b777ffb35c051b2a525e",
+    "multi.cbm": "dbb0c3497f16c1fb684857c1e7e4389d3e4532ab62f05d28c00c61784c590313",
+    "router.joblib": "897caa8e357b58db59f3ce8746a01fa85750f9379fc56d8ea00986cf5fed4bca",
+    "calibrator.joblib": "ff0ef734d1bd7dbdf0e0365be7c70d9465c31140a9baf7f03d8e3263b0270df9",
+    "feature_columns.json": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a"
+  },
+  "resume_contract": {
+    "new_attempt": false,
+    "refit_count_during_resume": 0,
+    "load_preserved_models_only": true,
+    "winner_structure_changed": false,
+    "persistence_weight": 0.25,
+    "active_leads": [12, 18, 24],
+    "corrected_oof_gate_changed": false,
+    "remove_only_prior_model_prediction_equality_guard": true,
+    "require_two_fresh_saved_model_inferences_byte_identical": true,
+    "require_candidate_schema_key_order_finite_range_validation": true,
+    "require_source_cache_winner_current_hashes_unchanged": true,
+    "output": "artifacts/p3_corrected_fixed_long_shrink_v5_full_refit",
+    "upload": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "p2.public_temperature_input_gradient_deployment.20260901.v23m1",
+  "experiment_id": "p2_public_temperature_input_gradient_deployment_20260901_v23m1",
+  "status": "PREREGISTERED_APPROVED_NOT_EXECUTED",
+  "authorization": "USER_APPROVED_BEST_SO_FAR_OFFICIAL_SUBMISSION_PACK_20260901",
+  "frozen_candidate": {
+    "source_experiment_id": "p2_public_temperature_input_gradient_regularized_deepset_20260901_v23",
+    "config": "configs/experiments/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23.json",
+    "config_sha256": "c404dc56bc504b2c49282f9691b6f9196e0760b1a92526b61de599b9fe10f16e",
+    "runner": "scripts/run_p2_public_temperature_input_gradient_regularized_deepset_20260901_v23.py",
+    "runner_sha256": "9c91a5f40ca2de8e41f17f3c567325ad3b572d5ff8d402c22744142b60bf2053",
+    "result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json",
+    "result_sha256": "ddecf11bfde6ceb6cb0c814e5069bd0e8c96ee2b079020a1e2e468e84754e64b",
+    "independent_qa": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/independent-qa.json",
+    "independent_qa_sha256": "27c6ccdf437bfd8c9f69ce82e79f7d667c69ab1c2e3d317870f9130f0501f1d3",
+    "required_status": "EXPLORATORY_SAFETY_PASS_REQUIRES_FRESH_CONFIRMATION",
+    "required_qa_status": "PASS",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "objective": "weighted_SmoothL1_beta_1.0_plus_public_temperature_input_gradient_L2",
+    "input_gradient_coefficient": 0.01,
+    "input_gradient_token_channel": 0,
+    "seeds": [20260901, 20260902, 20260903],
+    "epochs": 60,
+    "blend": {"anchor_weight": 0.8, "model_weight": 0.2},
+    "model_minus_anchor_clip_C": 2.5,
+    "maximum_action_C": 0.5,
+    "fit_count": 3,
+    "tuning": 0,
+    "automatic_retry_count": 0
+  },
+  "data_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp_sha256": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "anchor_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1/P2_1_RANK1_BIN17_ONLY/P2_submission.csv",
+    "anchor_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "anchor_public_rmse_C": 0.430194,
+    "anchor_public_points": 27.935464,
+    "hidden_truth_allowed": false,
+    "score_file_allowed": false,
+    "sample_submission_values_allowed": false
+  },
+  "training_contract": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "training_end": "all_finite_target_rows_in_observations",
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "row_deletion": false,
+    "outer_result_tuning": false
+  },
+  "output": {
+    "directory": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P2_V23_INPUT_GRADIENT_READY_V1",
+    "filename": "P2_submission.csv",
+    "expected_rows": 26061,
+    "title": "P2 v23 공개수온 입력기울기 규제 DeepSets",
+    "summary": "현재 공식 bin17 champion을 80% 보존하고, 고정된 v23 입력기울기 규제 DeepSets full-history 3-se드 예측을 20% 혼합한 사전고정 후보입니다.",
+    "upload_count": 0
+  }
+}

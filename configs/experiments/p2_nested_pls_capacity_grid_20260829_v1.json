@@ -1,0 +1,117 @@
+{
+  "experiment_id": "p2_nested_pls_capacity_grid_20260829_v1",
+  "status": "PREREGISTERED_ONE_SHOT_LOCAL_ONLY",
+  "preregistered_at": "2026-08-29T17:30:00+09:00",
+  "question": "Can leakage-safe nested selection of supervised PLS capacity improve the frozen alpha50 plus bins-17/18 correction without changing its anchor, projector, or support surface?",
+  "comparator": "FROZEN_ALPHA50_PROXY",
+  "comparator_disclosure": "The official alpha50 lineage has no exact historical OOF. Every outer fold is sealed, but all three historical outer blocks have been exposed by earlier research and are not fresh confirmation data.",
+  "source_observations": {
+    "filename": "observations.csv",
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "immutable_inputs": {
+    "alpha50_proxy": {
+      "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+      "bytes": 6077707,
+      "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+    },
+    "strongest_common_oof": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"
+    }
+  },
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "folds": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug"]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun"]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun", "2025_jul_aug"]
+    }
+  },
+  "reference": {
+    "alpha": 0.5,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "change_hours": [6, 24, 72]
+  },
+  "capacity_grid": {
+    "rank": [1, 2, 3],
+    "spline_ridge": [0.0001, 0.001, 0.01],
+    "leverage_quantile": [0.95, 0.975, 0.99],
+    "rms_cap_c": [0.025, 0.05, 0.075],
+    "strength": [0.5, 0.75, 1.0]
+  },
+  "nested_selection": {
+    "time_groups": 3,
+    "rotations": [[0, 1, 2], [1, 2, 0], [2, 0, 1]],
+    "rotation_columns": ["held_label_late", "correction_fit", "reference_support"],
+    "minimum_group_profiles": 100,
+    "enabled_season_bins": [17, 18],
+    "correction_p99_cap_c": 0.2,
+    "selection_metric": "inner pooled row RMSE after projection",
+    "eligibility": {
+      "pooled_delta_lt_c": 0.0,
+      "maximum_worst_group_regression_c": 0.003,
+      "maximum_layer_regression_c": 0.003
+    },
+    "tie_break": ["eligible_first", "candidate_rmse", "lower_rank", "ridge_nearest_1e-3", "quantile_nearest_0.975", "cap_nearest_0.05", "strength_nearest_0.75", "point_id"]
+  },
+  "gate": {
+    "pooled_delta_rmse_max_c": -0.002,
+    "2024_sep_oct_delta_rmse_max_c": -0.002,
+    "minimum_improved_folds": 2,
+    "maximum_worst_fold_regression_c": 0.0,
+    "maximum_layer_regression_c": 0.0,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260829,
+    "bootstrap_upper_quantile": 0.95,
+    "bootstrap_upper_max_c": 0.0,
+    "maximum_absolute_axis_cosine": 0.3,
+    "maximum_correction_p99_c": 0.2,
+    "maximum_correction_rms_c": 0.075
+  },
+  "resource_contract": {
+    "logical_cpus_available": 8,
+    "maximum_total_threads": 4,
+    "joblib_processes": 1,
+    "blas_threads": 4,
+    "expected_grid_points_per_outer": 243,
+    "expected_candidate_evaluations": 729,
+    "expected_rotation_point_evaluations": 2187,
+    "expected_inner_pls_fits": 81,
+    "expected_outer_pls_fits": 3,
+    "expected_total_pls_fits": 84
+  },
+  "execution_policy": {
+    "official_hidden_gap_values_read_allowed": false,
+    "official_test_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "result_based_retry": false,
+    "maximum_executions": 1
+  },
+  "artifact_directory": "artifacts/p2_nested_pls_capacity_grid_20260829_v1",
+  "report_directory": "reports/p2_nested_pls_capacity_grid_20260829_v1"
+}

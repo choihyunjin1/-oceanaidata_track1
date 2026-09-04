@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_chronos2_transfer_20260828_v1",
+  "status": "PREREGISTERED_BEFORE_CHRONOS_LOCAL_SCORING",
+  "created_at_kst": "2026-08-28T15:30:00+09:00",
+  "problem": "P3",
+  "objective": "Evaluate a structurally distinct Chronos-2 trajectory forecaster on train-only chronological windows before any official-test access.",
+  "upstream": {
+    "repository": "https://github.com/amazon-science/chronos-forecasting",
+    "commit_sha": "8589d1988e9676817548e9626738ff06b6ca6370",
+    "model_id": "amazon/chronos-2",
+    "model_revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "model_license": "apache-2.0",
+    "checkpoint_provenance_status": "RESEARCH_ONLY_PENDING_OFFICIAL_DEPLOYMENT_REVIEW"
+  },
+  "bindings": {
+    "train_sequences": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "train_station": {
+      "path": "artifacts/p3/sequences_all20_v1/train_station.npy",
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_incumbent_oof": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet"
+  },
+  "forecast_contract": {
+    "native_grid_minutes": 20,
+    "context_steps": 145,
+    "prediction_steps": 72,
+    "lead_hours": [3, 6, 9, 12, 18, 24],
+    "lead_zero_based_indices": [8, 17, 26, 35, 53, 71],
+    "target": "hs",
+    "past_covariates": [
+      "tp", "hmax", "wvdir_sin", "wvdir_cos", "wspd", "gust",
+      "wdir_sin", "wdir_cos", "airt", "relh", "caph"
+    ],
+    "point_forecast": "median_quantile",
+    "clip_m": [0.0, 30.0]
+  },
+  "validation": {
+    "outer_windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "zero_shot_scope": "all three outer validation windows",
+    "lora_smoke_scope": "first outer fold only; its last 60 train-prefix days are inner validation",
+    "lora_fit_max_cases_per_station": 256,
+    "lora_step_budgets": [1, 5, 20],
+    "lora_learning_rate": 0.00001,
+    "lora_batch_size_series": 96,
+    "seed": 20260828
+  },
+  "environment_gate": {
+    "python": "3.12.*",
+    "cuda_required": true,
+    "lora_signature_required": true,
+    "peft_required": true,
+    "full_finetune_fallback_forbidden": true,
+    "synthetic_gpu_prediction_required": true,
+    "synthetic_one_step_lora_required": true
+  },
+  "research_gate": {
+    "finite_predictions_required": true,
+    "minimum_rms_distance_from_incumbent_m": 0.03,
+    "maximum_zero_shot_regression_vs_persistence_m": 0.10,
+    "lora_best_checkpoint_must_be_recorded": true,
+    "on_pass": "GO_TO_FULL_NESTED_RESEARCH_ONLY",
+    "on_fail": "NO_GO_WITHOUT_OFFICIAL_TEST_INFERENCE"
+  },
+  "prohibitions": {
+    "test_context_read": true,
+    "test_index_read": true,
+    "sample_or_submission_read_or_write": true,
+    "anonymous_timestamp_reconstruction": true,
+    "official_upload": true,
+    "old_era5_lock_or_artifact_mutation": true
+  },
+  "artifact_dir": "artifacts/p3_chronos2_transfer_20260828_v1"
+}

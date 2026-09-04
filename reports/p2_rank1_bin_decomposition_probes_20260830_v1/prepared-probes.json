@@ -1,0 +1,75 @@
+{
+  "schema_version": "p2.rank1_bin_decomposition_probes.prepared.20260830.v1",
+  "experiment_id": "p2_rank1_bin_decomposition_probes_20260830_v1",
+  "status": "FROZEN_READY_NOT_UPLOADED",
+  "config_sha256": "27e4d525fbfbf359c7e16463b630a5d60893a75ae95a66a37a02bbbe8f22e215",
+  "source_hashes": {
+    "test_index": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "alpha50": "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+    "champion": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f"
+  },
+  "candidates": [
+    {
+      "priority": 1,
+      "name": "P2_1_RANK1_BIN17_ONLY",
+      "enabled_bins": [
+        17
+      ],
+      "title": "P2 rank-1 계절 bin17 단독 분해",
+      "summary": "현재 공식 champion의 계절 rank-1 보정 중 14일 bin17만 유지하고 bin18은 alpha50 no-op로 되돌려 두 bin의 공식 순효과를 분리합니다.",
+      "rows": 26061,
+      "sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+      "bytes": 1274193,
+      "changed_rows_vs_champion": 762,
+      "rms_change_vs_champion_c": 0.018519203853164124,
+      "changed_rows_vs_alpha50": 2464,
+      "rms_change_vs_alpha50_c": 0.023160521722981074,
+      "minimum_c": 16.314603650986466,
+      "maximum_c": 29.096716136024497,
+      "triangle_rmse_upper_bound_c": 0.44872820385316414,
+      "triangle_downside_vs_champion_c": 0.018519203853164124,
+      "exact_platform_hash_duplicate": false,
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1\\P2_1_RANK1_BIN17_ONLY\\P2_submission.csv"
+    },
+    {
+      "priority": 2,
+      "name": "P2_2_RANK1_BIN18_ONLY",
+      "enabled_bins": [
+        18
+      ],
+      "title": "P2 rank-1 계절 bin18 단독 분해",
+      "summary": "현재 공식 champion의 계절 rank-1 보정 중 14일 bin18만 유지하고 bin17은 alpha50 no-op로 되돌려 두 bin의 공식 순효과를 분리합니다.",
+      "rows": 26061,
+      "sha256": "0d213e97b9435862bbc892ac358afdc99b0a8834740915720f96bd420761d557",
+      "bytes": 1273944,
+      "changed_rows_vs_champion": 2464,
+      "rms_change_vs_champion_c": 0.023160521722981074,
+      "changed_rows_vs_alpha50": 762,
+      "rms_change_vs_alpha50_c": 0.018519203853164124,
+      "minimum_c": 16.314603650986466,
+      "maximum_c": 29.069810723383377,
+      "triangle_rmse_upper_bound_c": 0.45336952172298106,
+      "triangle_downside_vs_champion_c": 0.023160521722981074,
+      "exact_platform_hash_duplicate": false,
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1\\P2_2_RANK1_BIN18_ONLY\\P2_submission.csv"
+    }
+  ],
+  "qa": {
+    "both_frozen_before_new_score": true,
+    "schema_key_order_finite_domain": true,
+    "platform_duplicate_denylist_count": 15,
+    "candidate_hashes_distinct": true,
+    "source_correction_outside_bins_17_18": 0
+  },
+  "information_question": "Which predeclared 14-day season bin carries the official rank-1 champion gain? The two disjoint candidates exactly decompose the champion correction.",
+  "execution": {
+    "model_fits": 0,
+    "hpo": 0,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  }
+}

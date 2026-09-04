@@ -1,0 +1,28 @@
+{
+  "experiment_id": "p1_e150_catboost_precision_union_20260831_v32g",
+  "deadline_kst": "2026-08-31T22:30:00+09:00",
+  "inputs": {
+    "catboost_oof": "artifacts/p1_ordered_catboost_eventday_20260831_v32a/historical_oof.parquet",
+    "catboost_oof_sha256": "7f3db0fbe9cb8348a15526764b9c62a220add38a0064132b08f30e7ba8f9fe19"
+  },
+  "candidate": {
+    "operation": "e150_or_catboost",
+    "catboost_probability_threshold": 0.8,
+    "remove_e150_positives": false
+  },
+  "validation": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 3207,
+    "maximum_changed_fraction": 0.005,
+    "minimum_addition_precision_lcb90_over_reference_f1_half": true
+  },
+  "maximum_runtime_seconds": 600,
+  "official_access": {
+    "test_rows": 0,
+    "sample_rows": 0,
+    "submission_rows": 0,
+    "hidden_label_rows": 0,
+    "uploads": 0
+  }
+}

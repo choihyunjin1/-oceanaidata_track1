@@ -1,0 +1,736 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0050443174338547945,
+          -0.0005860250059521288
+        ],
+        "median_m": -0.0026632924819104398,
+        "probability_improve": 0.9838,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.005797230479418047,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.002379914801451277,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.004727094702716039,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.002749516781123673,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0023519714713927664,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.003633660305232378,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.004724356216945264,
+          -0.0008891172396356501
+        ],
+        "median_m": -0.002731217335609659,
+        "probability_improve": 0.9944,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.247909993688122,
+        "raw_gain": 0.044310993688120415,
+        "transport_adjusted_gain": -0.005275060404168516,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0023514320398133615,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006022154150942205,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.002713576634588377,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0005622251951039603,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.0009694559716278972,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.003017353900341302,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.0065206288944411606,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.001561241665000268,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0036514657496170555,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.002737150846006564,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.005867296834355051,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.001737380880217243,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.778399531605781,
+        "delta_candidate_minus_uniform": -0.0027919930859510167,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0023630238082632538,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0062791181385863926,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.00048795251068178835,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.001154261546690516,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0055782491456143335,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.001836470648776567,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -0.00023868248898184508,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0016282700827215946,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.002848542011668842,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.007385615920988076,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.009783054094443577,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.006080407567554791,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0036510648079465247,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0024672869124412466,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.006993611990905757,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.0005249406941438828,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.003576981505576282,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0010649447393834555,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.0011894691794683832,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0007954543708276196,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -1.0917525383735693e-07,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.004727094702716039,
+      "worst_lead_delta_m": -0.0005622251951039603,
+      "worst_reference_tail_block_delta_m": 0.0065206288944411606,
+      "worst_station_lead_delta_m": 0.0011894691794683832
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0039005672649098542,
+          -0.0002716605556971783
+        ],
+        "median_m": -0.0020846001885344023,
+        "probability_improve": 0.973,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0033124699232459642,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.002643587528472491,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005436783805474632,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0029081304307517764,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0022017751860098356,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.003187453833508491,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.003579581020780087,
+          -0.0006364308679162044
+        ],
+        "median_m": -0.0020815887209059136,
+        "probability_improve": 0.9896,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.237274099725514,
+        "raw_gain": 0.033675099725513635,
+        "transport_adjusted_gain": -0.015910954366775296,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0018314735612698918,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0049144330542267856,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0027078519418900493,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.00020608623098183898,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0003003319914833824,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0022098745993325286,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.006812774902097307,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003762394669195035,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006305778845230425,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0017904687711171041,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.00404396037449517,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0008754520862441773,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7790696890528361,
+        "delta_candidate_minus_uniform": -0.002121835638895897,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0012714480165315623,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.004718688352242317,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0009057426646893463,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.0007548651905058268,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0037025249792989046,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0012209868455189676,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00010578365179003679,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -4.449757094815432e-05,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.0009867829115906002,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.00506871980310486,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.008340322791919985,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.0054794874281027806,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0017589626086564891,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0009732937373946315,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005215735180357006,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.00025948463763247887,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.003552256895298811,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0021228677420394026,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.0005203128877290242,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0016512276225687517,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0007431046002892572,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005436783805474632,
+      "worst_lead_delta_m": 0.0003003319914833824,
+      "worst_reference_tail_block_delta_m": 0.006812774902097307,
+      "worst_station_lead_delta_m": 0.0016512276225687517
+    }
+  ],
+  "created_at_utc": "2026-08-31T23:41:25.946244+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "PASS_CANDIDATE_AVAILABLE",
+  "duplication_audit": {
+    "distinction": "v53 aggregates realized power versus bipower jump share without temporal ordering, v43 encodes the marginal increment ECF, v60 uses extreme order spacing, and v38 measures cross-channel quantile-hit dependence. v63 measures same-channel conditional-variance persistence through fixed |increment| and squared-increment autocorrelations.",
+    "forbidden_reuse": [
+      "v42 official result or slices",
+      "v42-v62 predictions/features",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed temporal autocorrelation of absolute and squared normalized physical-path increments",
+    "official_v42_exclusion": "the aggregate official v42 sign reversal is transport-risk context only and is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_VOLATILITY_CLUSTERING_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.701966699998593,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_volatility_clustering_residual_cycle_20260901_v63",
+  "feature_receipt": {
+    "columns": 64,
+    "finite": true,
+    "matrix_sha256": "c0c20cf2d03675c4a7b13ffcc805b1a35fbf62495d1d7e0f27cc016999a8b363",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.1533996889605149,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.058428840172162426,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.19589942467644156,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07546876555503818,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.19376279727745613,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07535744651041572,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.19847378964546308,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07247010361860917,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.201635927900805,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0728198229344408,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_VOLACF64_RIDGE512_ADD10",
+      "coefficient_l2": 0.18287079311690388,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_VOLACF64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06523368768304418,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Engle, Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation, Econometrica 50(4), 987-1007 (1982)",
+      "url": "https://doi.org/10.2307/1912773",
+      "use": "conditional-variance persistence motivation only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "5955ea9d5697b59a1ad8bfccfe4204e17eacdf5a7174053f0981763ca9dafdfe",
+    "evaluation_arrays_sha256": "3e0dad74a5f39a32025818cc79c3b5f26f01a158a2432eeee4417674c3e21559",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "99e8c6a9679973a7cdbc2738453c7b4be614898ea976594edafb94508009385f",
+    "runner_sha256": "e9299a1070697fdbe508365375c25a8d58524fdc0f0b90977f0dc3af83675844"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.volatility_clustering_residual.result.v63",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "p2.diagonal_bilinear_profile_pooling.negative_fingerprint.20260901.v48",
+  "candidate_experiment_id": "p2_diagonal_bilinear_profile_pooling_deepset_20260901_v48",
+  "created_before_preregistration": true,
+  "scope": "repository P2 configs, runners, reports, and tests; artifacts/submissions/raw data excluded",
+  "searches": {
+    "bilinear pooling": 0,
+    "second[-_ ]moment pooling": 0,
+    "outer[-_ ]product pooling": 0,
+    "Gram pooling": 0,
+    "diagonal second moment": 0,
+    "masked second moment": 0
+  },
+  "exact_execution_hit_count": 0,
+  "semantic_execution_hit_count": 0,
+  "selected_axis": {
+    "classification": "NEW_P2_MASKED_DIAGONAL_BILINEAR_PROFILE_POOLING",
+    "single_change": "append the masked mean of element-embedding self-products to the exact v13 masked mean, masked maximum, and context before the unchanged head",
+    "historical_support": "v13 executed all three prefix-purged folds; every selected scoring row has a finite public-token mask and the diagonal self-product is finite with zero for absent support; training rows are 45935, 119667, and 149384",
+    "identity_initialization": "the new 32 head columns are exactly zero and the original 75 head columns are copied, so the initial function equals v13",
+    "no_new_data": true,
+    "no_result_adaptive_choice": true
+  },
+  "distinctions": {
+    "v15": "self-attention mixes pairs of tokens before pooling; v48 has no attention and aggregates only each token embedding's diagonal self-product",
+    "v16": "physical-depth graph messaging uses depth edges and neighbor messages; v48 has no graph, adjacency, or depth kernel",
+    "v20": "CORAL aligns full centered latent covariance across calendar-month environments as a loss; v48 uses an uncentered diagonal second moment as a predictive profile descriptor and adds no alignment loss",
+    "v45_v45c": "DropConnect masks Linear weights during training; v48 is deterministic and changes only the pooled profile statistic",
+    "v46": "LayerNorm normalizes hidden activations per example; v48 performs no normalization",
+    "v47": "CrossNet creates explicit interactions among already pooled mean/max/context coordinates; v48 computes a token-level orderless second-order statistic before pooling and has no cross layer"
+  },
+  "primary_source": {
+    "citation": "Lin, RoyChowdhury, and Maji, Bilinear CNN Models for Fine-Grained Visual Recognition, ICCV 2015",
+    "url": "https://openaccess.thecvf.com/content_iccv_2015/html/Lin_Bilinear_CNN_Models_ICCV_2015_paper.html",
+    "claim": "outer-product features pooled across locations form an orderless second-order descriptor",
+    "use": "representation motivation only; no P2 performance transfer"
+  },
+  "evidence": {
+    "v13_result": {
+      "path": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+      "sha256": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4"
+    },
+    "v15_result": {
+      "path": "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/result.json",
+      "sha256": "d453aa792e7b0732d0b0c5fae404af108cb5b941c28e8443def3eb38188ec26d"
+    },
+    "v16_result": {
+      "path": "reports/p2_fixed_physical_depth_graph_message_passing_20260901_v16/result.json",
+      "sha256": "58402b243d24b52319d796b0c0f504ca79b91888c27b80f3cc58e1c3aae0633c"
+    },
+    "v20_result": {
+      "path": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json",
+      "sha256": "877cb5995f6c10767ab4340a79463fd5d2e537c3b347218d438fec48e21e60a0"
+    },
+    "v45_result": {
+      "path": "reports/p2_all_linear_dropconnect_deepset_20260901_v45/result.json",
+      "sha256": "24f02df803b6da31df39d63c4cad8f6a2e9006c9c7ee0a36428877c7d1ac6441"
+    },
+    "v45c_result": {
+      "path": "reports/p2_all_linear_dropconnect_stochastic_confirmation_20260901_v45c/result.json",
+      "sha256": "ebb92dade69992eb4a0c6c102eea13fa88c276ee77833d5a6fe6f17a3668c0d3"
+    },
+    "v46_result": {
+      "path": "reports/p2_hidden_activation_layer_normalized_deepset_20260901_v46/result.json",
+      "sha256": "c60f05ab2ad9082bd122af68e5fbc382359c606d94e74d6ef1badf5dfe037a96"
+    },
+    "v47_result": {
+      "path": "reports/p2_pooled_context_cross_network_deepset_20260901_v47/result.json",
+      "sha256": "8b30b2b03302e6b2a58e9b7e0a83ad2fb58f4bfbc8062365553016308865daef"
+    },
+    "prospective_gate_amendment": {
+      "path": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+      "sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680"
+    }
+  },
+  "operation_counters": {
+    "data_rows_read_for_fingerprint": 0,
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

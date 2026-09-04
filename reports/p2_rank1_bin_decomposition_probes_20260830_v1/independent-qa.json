@@ -1,0 +1,77 @@
+{
+  "schema_version": "p2.rank1_bin_decomposition_probes.independent_qa.20260830.v1",
+  "experiment_id": "p2_rank1_bin_decomposition_probes_20260830_v1",
+  "performed_at_kst": "2026-08-30T22:35:00+09:00",
+  "status": "PASS_FROZEN_READY_NOT_UPLOADED",
+  "static_preflight": {
+    "ruff": "PASS",
+    "runner_help_import": "PASS",
+    "output_absent_before_execution": true,
+    "exactly_once_materialization_exit_code": 0
+  },
+  "hashes": {
+    "config_sha256": "27e4d525fbfbf359c7e16463b630a5d60893a75ae95a66a37a02bbbe8f22e215",
+    "runner_sha256": "bbc7f842a8374cbb2f85aecf3c0822895f9171da27c405659cf284b059310b56",
+    "prepared_manifest_sha256": "fb49547ade7e5f2f49fb3682334db57101d8bb547371c0938a82a3aecb472dab"
+  },
+  "contract": {
+    "rows": 26061,
+    "columns_exact": [
+      "station",
+      "layer",
+      "time",
+      "temp"
+    ],
+    "keys_and_order_match_test_index": true,
+    "keys_and_order_match_sample_submission": true,
+    "finite": true,
+    "temperature_domain_c": [
+      -5.0,
+      45.0
+    ],
+    "domain_pass": true,
+    "prior_platform_hash_denylist_count": 15,
+    "candidate_hashes_distinct": true
+  },
+  "candidates": [
+    {
+      "priority": 1,
+      "name": "P2_1_RANK1_BIN17_ONLY",
+      "sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+      "bytes": 1274193,
+      "changed_rows_vs_champion_at_1e_12": 762,
+      "rms_change_vs_champion_c": 0.018519203853164107,
+      "changed_rows_vs_alpha50_at_1e_12": 2464,
+      "rms_change_vs_alpha50_c": 0.023160521722981095,
+      "max_abs_source_composition_error_c": 3.552713678800501e-15,
+      "prior_platform_hash_duplicate": false
+    },
+    {
+      "priority": 2,
+      "name": "P2_2_RANK1_BIN18_ONLY",
+      "sha256": "0d213e97b9435862bbc892ac358afdc99b0a8834740915720f96bd420761d557",
+      "bytes": 1273944,
+      "changed_rows_vs_champion_at_1e_12": 2464,
+      "rms_change_vs_champion_c": 0.02316052172298106,
+      "changed_rows_vs_alpha50_at_1e_12": 762,
+      "rms_change_vs_alpha50_c": 0.01851920385316415,
+      "max_abs_source_composition_error_c": 3.552713678800501e-15,
+      "prior_platform_hash_duplicate": false
+    }
+  ],
+  "decomposition_identity": {
+    "formula": "bin17_only + bin18_only - alpha50 == champion",
+    "max_abs_error_c": 7.105427357601002e-15,
+    "tolerance_c": 1e-12,
+    "pass": true
+  },
+  "access_and_mutation_receipt": {
+    "test_index_reads_total": 2,
+    "sample_submission_reads_total": 2,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  }
+}

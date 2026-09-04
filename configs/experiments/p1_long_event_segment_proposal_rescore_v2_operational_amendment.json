@@ -1,0 +1,221 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.operational_amendment.v2",
+  "amendment_id": "p1_long_event_segment_proposal_rescore_20260826_v1_operational_v2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T07:42:00+09:00",
+  "status": "PROSPECTIVE_OPERATIONAL_COMPLETION_NOT_AUTHORIZED",
+  "prospective": true,
+  "created_before_cycle1_fit_or_materialization": true,
+  "reason": "An independent metadata-only scan of nonofficial P1 prediction/OOF Parquet artifacts found no frozen Round-B anchor surface covering any 2024 inner window. The original scientific design remains immutable; this amendment adds only the minimum preregistered-family anchor fits required to make its three inner windows executable.",
+  "scientific_authorities": {
+    "design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "bytes": 14389,
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+      "modified": false
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "bytes": 8884,
+      "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+      "resolved_anchor_branch": "FROZEN_ROUND_B"
+    }
+  },
+  "absence_evidence": {
+    "observation": "No nonofficial artifacts/p1*/** prediction or OOF Parquet metadata surface has timestamps covering 2024; the frozen Round-B OOF begins at 2025-04-01T00:00:00+09:00.",
+    "existing_outer_truth_oof": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+      "rows": 421032,
+      "first_time_kst": "2025-04-01T00:00:00+09:00",
+      "last_time_kst": "2025-12-10T03:00:00+09:00"
+    },
+    "official_test_sample_submission_or_candidate_paths_scanned": 0,
+    "result_values_used_to_choose_anchor_parameters": 0
+  },
+  "round_b_anchor_lineage": {
+    "family": "event_day_balanced_binary_lgbm",
+    "source_config": {
+      "path": "configs/p1_meaningful_learning_curve_generation_v1.json",
+      "bytes": 7576,
+      "sha256": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7"
+    },
+    "source_runner": {
+      "path": "scripts/run_p1_meaningful_learning_curve_generation_v1.py",
+      "bytes": 66646,
+      "sha256": "c22896fb17a5ece10831759631b9f7414cb9564ca80af2d1a4f3272fdeed6b9a",
+      "required_symbols": ["_event_day_weight", "_lgb_parameters", "_fit_candidate"]
+    },
+    "base_project_config": {
+      "path": "configs/p1.toml",
+      "bytes": 1798,
+      "sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947"
+    },
+    "feature_cache": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+      "rows": 776706,
+      "columns": 80,
+      "full_ordered_value_binding_receipt": {
+        "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r6/strict_preflight_receipt.json",
+        "sha256": "075fa781ccd1201ea3476e4219868eac583992f1860af28f0ab62b5c9c60f131",
+        "required_status": "PASS_REGENERATED_ALL_MODEL_INPUT_FEATURES_EXACT_ORDERED"
+      }
+    },
+    "encoder": "p1_qc.pipeline.TabularEncoder fit independently on each strict training prefix",
+    "target": "binary historical P1 label",
+    "sample_weight": "exact _event_day_weight: positive rows inverse-sqrt connected-event length and normal rows inverse-sqrt station-layer KST-day size, each side mean-normalized, positive side scaled by sqrt(Nneg/Npos)",
+    "model": "lightgbm.LGBMClassifier",
+    "fixed_parameters": {
+      "n_estimators": 700,
+      "learning_rate": 0.035,
+      "num_leaves": 63,
+      "max_depth": -1,
+      "min_child_samples": 60,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "objective": "binary",
+      "n_jobs": 8,
+      "verbosity": -1,
+      "deterministic": true,
+      "force_row_wise": true,
+      "feature_fraction_seed": "fit_seed",
+      "bagging_seed": "fit_seed",
+      "data_random_seed": "fit_seed",
+      "extra_seed": "fit_seed",
+      "random_state": "fit_seed"
+    },
+    "registered_seeds": [20260813, 20260829, 20260847],
+    "fit_seed_rule": "use the three original registered seeds unchanged in every inner window",
+    "probability_rule": "mean of the three seed probabilities",
+    "postprocess": {
+      "source": "the already frozen deployment_postprocess in the Round-B source config, used identically for all three new historical inner windows because no fold-specific 2024 surface exists",
+      "high_threshold": 0.2,
+      "low_threshold": 0.1,
+      "close_gap_rows": 0,
+      "minimum_positive_run": 12,
+      "plateau_detector": "p1_qc.rules.detect_plateaus",
+      "singleton_spike_detector": "p1_qc.rules.detect_singleton_spikes",
+      "implementation": "p1_qc.pipeline.apply_postprocess"
+    },
+    "historical_reproduction_evidence": {
+      "predictions_complete": {
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/predictions_complete.json",
+        "sha256": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb"
+      },
+      "learning_curve_evidence": {
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/learning_curve_evidence.json",
+        "sha256": "46fbfa6f8bdbfdb6f57d35f796bfe2cc4abda86989f65c7a5dd528d9e9e8d8c7",
+        "selected_hypothesis": "event_day_balanced_binary_lgbm",
+        "full_fraction_f1": 0.8646700887242071,
+        "exact_three_registered_seeds": true,
+        "sealed_config_and_implementation_verified": true
+      },
+      "outer_p100_parts": [
+        {
+          "fold": "2025_q2",
+          "parquet_sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626",
+          "audit_sha256": "3cba6e1c8b8e071f361866428fef242c86bd9521a0a4184c958c9cc0ff79d7f1"
+        },
+        {
+          "fold": "2025_q3",
+          "parquet_sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369",
+          "audit_sha256": "6e8f55ce41a2c1a43c4f3a59f3123a776a43cc9aa58d7d565a95ba8da921a36a"
+        },
+        {
+          "fold": "2025_q4",
+          "parquet_sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3",
+          "audit_sha256": "bd0d548a2086133b723d4d3958cbcca55ec5f0551db1e58ea711f51694a1322b"
+        }
+      ]
+    }
+  },
+  "inner_anchor_fits": {
+    "windows": [
+      {
+        "id": "inner_2024_jul_aug",
+        "ordinal": 0,
+        "fit_end_inclusive": "2024-05-24T23:50:00+09:00",
+        "validation_start": "2024-07-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-08-31T23:50:00+09:00",
+        "fit_seeds": [20260813, 20260829, 20260847]
+      },
+      {
+        "id": "inner_2024_oct_nov",
+        "ordinal": 1,
+        "fit_end_inclusive": "2024-08-24T23:50:00+09:00",
+        "validation_start": "2024-10-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-11-30T23:50:00+09:00",
+        "fit_seeds": [20260813, 20260829, 20260847]
+      },
+      {
+        "id": "inner_2025_jan_feb",
+        "ordinal": 2,
+        "fit_end_inclusive": "2024-11-23T23:50:00+09:00",
+        "validation_start": "2025-01-08T00:00:00+09:00",
+        "validation_end_inclusive": "2025-03-01T23:50:00+09:00",
+        "fit_seeds": [20260813, 20260829, 20260847]
+      }
+    ],
+    "strict_prefix_only": true,
+    "minimum_purge_days": 7,
+    "target_fold_labels_used_before_prediction": false,
+    "base_fits_per_window": 3,
+    "base_physical_fit_calls": 9,
+    "shared_by_all_six_structure_cells": true,
+    "inner_anchor_parameters_selected_from_cycle1_results": false,
+    "row_level_predictions_persisted": false
+  },
+  "amended_resource_accounting": {
+    "inner_round_b_anchor_physical_fit_calls": 9,
+    "inner_segment_physical_fit_calls": 54,
+    "outer_segment_physical_fit_calls": 9,
+    "maximum_lifetime_physical_fit_calls": 72,
+    "feature_or_proposal_materializations": {
+      "inner_anchor_surfaces": 3,
+      "inner_segment_context_bank_surfaces": 9,
+      "outer_segment_context_bank_surfaces": 9,
+      "maximum_lifetime": 21
+    },
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds": 21600,
+    "automatic_resume_or_rerun_count": 0,
+    "result_driven_reruns": 0,
+    "candidate_file_materializations": 0,
+    "full_deployment_fits": 0
+  },
+  "unchanged_scientific_contract": {
+    "hypothesis": true,
+    "three_context_banks": true,
+    "two_decoders": true,
+    "three_segment_seeds": true,
+    "three_threshold_candidates": true,
+    "minimum_interval_rows_19": true,
+    "inner_and_outer_windows": true,
+    "target_and_feature_firewall": true,
+    "cell_and_threshold_selection": true,
+    "RESEARCH_SUBMISSION_preferred_and_stretch_gates": true,
+    "outer_one_shot": true,
+    "cycle2_eligibility": true
+  },
+  "authorization": {
+    "implementation_package_allowed": true,
+    "numerical_execute_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_independent_qa_and_new_explicit_execution_authorization": true
+  },
+  "fail_closed_if": [
+    "any pinned Round-B config, runner, feature-cache, code, evidence, or p100 audit hash differs",
+    "the exact 80-feature cache binding and source row-key binding do not pass before claim",
+    "a training prefix includes a timestamp later than its fixed fit_end or violates the seven-day purge",
+    "an inner anchor fit differs from the frozen event-day weight, parameters, seed rule, probability averaging, detectors, or deployment postprocess",
+    "the nine anchor fits are not shared across all six structure cells",
+    "the lifetime ledger could exceed 9 anchor plus 54 inner segment plus 9 outer segment fits",
+    "any original scientific choice changes"
+  ]
+}

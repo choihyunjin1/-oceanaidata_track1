@@ -1,0 +1,19 @@
+{
+  "schema_version": "p1.causal_cif_lite32.20260831.v32b",
+  "experiment_id": "p1_causal_cif_lite32_20260831_v32b",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_CAUSAL_CIF_LITE32",
+  "window": {"rows": 36, "minutes": 360, "intervals": 32, "sobol_seed": 20260932, "sobol_power": 5, "minimum_interval_rows": 3},
+  "channels": ["temp_robust_z_causal36", "temp_diff_1", "temp_peer_residual", "depth_diff_1", "missing_or_gap"],
+  "summaries": ["median", "iqr", "mean", "std", "slope", "min", "max", "last_minus_first"],
+  "feature_count": 1280,
+  "model": {"class": "sklearn.ensemble.ExtraTreesClassifier", "n_estimators": 192, "max_depth": 10, "min_samples_leaf": 20, "max_features": "sqrt", "class_weight": "balanced_subsample", "bootstrap": false, "n_jobs": 6, "random_state": 20260932},
+  "outlier": {"validation_deletion": 0, "train_weight": "min(1,4/(1+robust_distance))", "robust_distance": "max absolute prefix-median/MAD z over current five channels", "clip": [-12, 12]},
+  "inner_selector": {"split": "last chronological 25 percent", "objective": "maximum add-only union F1", "constraints": ["positive additions", "precision>inner anchor F1/2", "changed<=.005"], "tie": "higher threshold then fewer additions", "outer_labels_before_seal": 0},
+  "validation": {"fits": [{"train_folds": ["2025_q2"], "outer": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "outer": "2025_q4"}], "maximum_fits": 2, "bootstrap_replicates": 5000, "bootstrap_seed": 20260932},
+  "transport": {"calibration_version": "v3", "family_id": "P1_CAUSAL_INTERVAL_FOREST", "tier_id": "SMOOTH_LEARNED_PROFILE", "transport_penalty_points": 0.005383691373120247},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.015383691373120248, "minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.005383691373120247, "score_points_per_f1": 26.578120867377286, "bootstrap_probability_improved_minimum_inclusive": 0.8},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_changed_fraction_any_kst_day": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "minimum_each_supported_station_layer_delta_f1": 0.0},
+  "resource_caps": {"maximum_estimated_wall_seconds": 2400, "maximum_rss_bytes": 6442450944, "feature_batch_rows": 4096},
+  "authorization": {"historical_execution": true, "attempt_lock": true, "official_reads": 0, "hidden_truth_reads": 0, "submission_csv_created": 0, "uploads": 0}
+}

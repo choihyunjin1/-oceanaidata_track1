@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_revin_patch_v1",
+  "status": "prepared_pending_root_approval",
+  "objective": "Test one event-balanced, casewise robust-RevIN, two-stream patch residual expert without changing the frozen P3 incumbent.",
+  "seed": 20260821,
+  "data_contract": {
+    "context_hours": 48,
+    "context_rows_10m": 289,
+    "wave_rows_20m": 145,
+    "atmos_rows_10m": 289,
+    "official_leads_h": [3, 6, 9, 12, 18, 24],
+    "anchor_minimum_hs_m": 1.5,
+    "same_case_only": true,
+    "cross_case_context": false,
+    "absolute_test_time_recovery": false,
+    "future_weather": false
+  },
+  "architecture": {
+    "name": "two_stream_robust_revin_patch_transformer",
+    "wave_native_grid_minutes": 20,
+    "atmos_native_grid_minutes": 10,
+    "wave_patch_hours": 2,
+    "wave_stride_hours": 1,
+    "atmos_patch_hours": 2,
+    "atmos_stride_hours": 1,
+    "wave_patch_steps": 6,
+    "wave_stride_steps": 3,
+    "atmos_patch_steps": 12,
+    "atmos_stride_steps": 6,
+    "wave_patch_count": 47,
+    "atmos_patch_count": 47,
+    "d_model": 64,
+    "encoder_layers": 2,
+    "attention_heads": 4,
+    "feedforward_dim": 128,
+    "dropout": 0.1,
+    "robust_scale_floor": 0.05,
+    "hs_transform": "current-hs anchored delta divided by casewise robust scale",
+    "continuous_transform": "casewise median and MAD RevIN",
+    "direction_transform": "sin_cos_plus_observation_mask",
+    "head": "six official future-hs-minus-current-hs residuals",
+    "dense_72_step_auxiliary": false,
+    "external_pretrained_weights": false
+  },
+  "sampling": {
+    "anchor_grid_minutes": 20,
+    "storm_episode_definition": "station-local contiguous 20-minute anchors with current hs >= 1.5m",
+    "anchor_weight": "1/sqrt(outer-train episode size)",
+    "normalize_weight_mean_to_one": true
+  },
+  "loss": {
+    "name": "event_weighted_official_lead_mse",
+    "target": "official_6lead_future_hs_minus_current_hs",
+    "official_lead_weight": 1.0,
+    "dense_path_auxiliary_weight": 0.0
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0002,
+    "batch_size": 256,
+    "maximum_epochs": 50,
+    "patience": 8,
+    "precision": "bf16_amp_on_cuda",
+    "gradient_clip_norm": 1.0,
+    "fixed_seeds": [20260821, 20260822, 20260823],
+    "hyperparameter_search": false
+  },
+  "blend": {
+    "incumbent": "frozen long-lead component-loss router plus persistence shrink",
+    "protected_exact_incumbent_leads_h": [3, 6, 9],
+    "active_leads_h": [12, 18, 24],
+    "patch_model_weight": 0.2,
+    "incumbent_weight_on_active_leads": 0.8
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "split_unit": "station_storm_episode_and_78h_case",
+    "case_gap_hours": 78,
+    "embargo_hours": 78,
+    "inner_validation_days": 45,
+    "inner_epoch_selection": "last outer-train 45d, episode-disjoint, 78h embargo; outer labels forbidden",
+    "phase_shift_lattice_allowed": false,
+    "blind_contract": "Write and hash all outer predictions before attaching any outer validation target.",
+    "bootstrap_unit": "independent case",
+    "bootstrap_replicates": 5000
+  },
+  "gate": {
+    "incumbent_local_rmse": 0.7801609198910191,
+    "maximum_candidate_rmse": 0.7701609198910191,
+    "paired_case_bootstrap_ci90_upper_below_zero": true,
+    "lead_18_non_degrading": true,
+    "lead_24_non_degrading": true,
+    "maximum_station_rmse_degradation": 0.01
+  },
+  "execution": {
+    "runner_mode_now": "dry-run",
+    "dry_run_only_until_root_approval": true,
+    "future_full_authorization_token": "ROOT_APPROVED_P3_REVIN_PATCH_V1",
+    "outer_validation_labels_may_open_now": false,
+    "checkpoint_may_be_written_now": false,
+    "hyperparameter_search": false,
+    "estimated_full_gpu_runtime_minutes": [45, 90],
+    "estimated_peak_vram_gb": [1.5, 3.0]
+  },
+  "frozen_inputs": {
+    "catboost_single_model": {
+      "path": "submissions/p3_frozen_catboost/model.cbm",
+      "sha256": "b39b3b4955b1272bf9c8de4dfef56880befb7f7959e07ecc69054bff7902b3ae"
+    },
+    "catboost_multi_model": {
+      "path": "submissions/p3_frozen_catboost/model_multi.cbm",
+      "sha256": "b7772654cff2dc7ef641ddfde940b3def1f75c72711e61db37f56d3e07aee8c3"
+    },
+    "catboost_feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1"
+    },
+    "loss_router": {
+      "path": "submissions/p3_lead_long_loss_router/router.joblib",
+      "sha256": "28ee70f2092565872446e089f6d169428af1a4686a572d3f5f1e1deeaaf78117"
+    },
+    "router_submission": {
+      "path": "submissions/p3_lead_long_loss_router/submission.csv",
+      "sha256": "6a6012c711d3b3022102caf33829dfc8c73893bc2e97218e48bbd27bcdeaf289"
+    },
+    "incumbent_submission": {
+      "path": "submissions/p3_long_persistence_shrink/submission.csv",
+      "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+    },
+    "incumbent_oof": {
+      "path": "artifacts/p3/long_persistence_shrink/oof.parquet",
+      "sha256": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+    },
+    "incumbent_metrics": {
+      "path": "artifacts/p3/long_persistence_shrink/metrics.json",
+      "sha256": "41ed5676fc993fc6debefd271f74f28be69340bb4b7a5621ab5d83322a81c46e"
+    },
+    "anchor_metadata_cache": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    }
+  },
+  "source_sha256": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110"
+  },
+  "status_path": "artifacts/status/p3_revin_patch_v1.json",
+  "prohibitions": {
+    "future_test_values": true,
+    "external_observations": true,
+    "submission_write_or_upload": true,
+    "frozen_artifact_mutation": true,
+    "phase_shift_lattice": true,
+    "checkpoint_before_root_approval": true
+  }
+}

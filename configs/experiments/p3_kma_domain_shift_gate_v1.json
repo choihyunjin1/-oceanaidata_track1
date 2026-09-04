@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "P3_kma_domain_shift_gate_v1",
+  "seed": 20260821,
+  "inputs": {
+    "external_parquet": "external_data/p3_kma_buoy_pre2024/kma_buoy_pre2024.parquet",
+    "external_manifest": "external_data/p3_kma_buoy_pre2024/manifest.json",
+    "allowed_p3_train_files": [
+      "train_wave.csv",
+      "train_atmos.csv"
+    ],
+    "forbidden_p3_files": [
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv",
+      "answer.csv"
+    ],
+    "maximum_external_time_kst": "2023-12-31T23:59:59+09:00"
+  },
+  "representation": {
+    "grid_minutes": 30,
+    "history_windows_hours": [3, 6, 12, 24, 48],
+    "minimum_history_hours": 48,
+    "rolling_minimum_fraction": 0.5,
+    "maximum_rows_per_station_year": 2048,
+    "scalar_variables": [
+      "hs",
+      "tp",
+      "hmax",
+      "wspd",
+      "gust",
+      "caph",
+      "airt",
+      "relh"
+    ],
+    "direction_variables": [
+      "wvdir",
+      "wdir"
+    ],
+    "peak_recency_variables": [
+      "hs",
+      "wspd",
+      "gust"
+    ],
+    "resample_policy": "causal_last_closed_right_label_right",
+    "stationwise_normalization": "fold_train_median_iqr_then_median_impute",
+    "iqr_floor": 1e-06,
+    "normalized_clip": 20.0
+    ,
+    "ratio_denominator_floors": {
+      "hs": 0.05,
+      "wspd": 0.1,
+      "tp_squared": 0.25
+    }
+  },
+  "classifier": {
+    "family": "HistGradientBoostingClassifier",
+    "n_splits": 5,
+    "learning_rate": 0.05,
+    "max_iter": 120,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 40,
+    "l2_regularization": 1.0,
+    "max_bins": 63,
+    "max_features": 0.5,
+    "class_balance": "inverse_frequency_train_fold"
+  },
+  "gate": {
+    "full_ablation_max_auc": 0.65,
+    "pretrain_only_max_auc": 0.8,
+    "density_probability_clip": 0.001,
+    "density_ratio_clip": 100.0,
+    "auc_above_pretrain_only_max": "no_go_source_concat_or_full_finetune"
+  },
+  "output": {
+    "directory": "artifacts/p3_kma_domain_shift_gate_v1",
+    "result_file": "result.json"
+  },
+  "prohibitions": {
+    "read_test_context": false,
+    "read_hidden_labels": false,
+    "read_frozen_models_oof_or_submissions": false,
+    "train_forecast_model": false,
+    "write_submission": false
+  }
+}

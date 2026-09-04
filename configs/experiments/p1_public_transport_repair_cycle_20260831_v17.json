@@ -1,0 +1,80 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v17-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v17",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_CAUSAL_MINIROCKET_LITE512_LINEAR_ADDONLY",
+  "design": "Causal MiniRocket-lite PPV representation with a fixed linear add-only head.",
+  "transport_family": {
+    "family_id": "P1_MINIROCKET_SMOOTH_LINEAR_RESIDUAL",
+    "tier_id": "SMOOTH_LEARNED_PROFILE",
+    "representation_changed": true,
+    "routing_discontinuous": false,
+    "transport_penalty_points": 0.12168209161000616
+  },
+  "representation": {
+    "feature_count": 512,
+    "window_minutes": 1440,
+    "sampling_minutes": 15,
+    "window_length": 97,
+    "kernel_length": 9,
+    "kernel_bank": "all 84 permutations with three +2 and six -1 entries",
+    "channels": {"robust_signal": 384, "observed_mask": 128},
+    "dilations": [1, 2, 4, 8],
+    "padding": "alternating valid/same by deterministic feature index",
+    "biases": "label-free deterministic prefix-only quantiles",
+    "seed": 20260831,
+    "maximum_interpolation_gap_minutes": 120,
+    "normalization": "causal trailing-72h median/MAD, scale floor 1e-4, clip [-12,12]",
+    "window_centering": false
+  },
+  "model": {
+    "training_population": "incumbent_negative_only",
+    "classifier": "sklearn LogisticRegression",
+    "penalty": "l2",
+    "C": 0.1,
+    "solver": "lbfgs",
+    "max_iter": 500,
+    "tol": 1e-8,
+    "class_weight": null,
+    "probability_threshold_inclusive": 0.99,
+    "decoder": "incumbent OR proposal",
+    "retuning": false
+  },
+  "validation": {
+    "nested_fits": [
+      {"train_folds": ["2025_q2"], "validation_fold": "2025_q3"},
+      {"train_folds": ["2025_q2", "2025_q3"], "validation_fold": "2025_q4"}
+    ],
+    "maximum_pipeline_fits": 2,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260923,
+    "outer_result_based_tuning": false
+  },
+  "decision_policy": {
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "minimum_raw_expected_point_delta_inclusive": 0.13168209161000616,
+    "transport_penalty_points": 0.12168209161000616,
+    "score_points_per_f1": 26.578120867377286,
+    "bootstrap_probability_improved_minimum_inclusive": 0.8,
+    "minimum_each_q3_q4_delta_f1": 0.0,
+    "anchor_removals_required": 0,
+    "maximum_changed_fraction_any_day": 0.005,
+    "maximum_addition_concentration_station_layer_quarter": 0.5
+  },
+  "safety": {
+    "maximum_changed_fraction": 0.005,
+    "maximum_changed_fraction_any_kst_day": 0.005,
+    "maximum_addition_concentration_any_station_layer_quarter": 0.5,
+    "minimum_each_supported_station_layer_delta_f1": 0.0
+  },
+  "resource_caps": {"wall_seconds": 5400, "rss_bytes": 17179869184, "vram_bytes": 8589934592},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "authorization": {
+    "synthetic_preflight": true,
+    "historical_execution": true,
+    "attempt_lock_creation": true,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "uploads": 0
+  }
+}

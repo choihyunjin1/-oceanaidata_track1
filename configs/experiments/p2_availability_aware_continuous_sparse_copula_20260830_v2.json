@@ -1,0 +1,91 @@
+{
+  "schema_version": "p2.availability_aware_continuous_sparse_copula.preregistered_overlay.20260830.v2",
+  "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v2",
+  "classification": "RESEARCH_ONLY_EXPOSED_HISTORICAL_SURFACE",
+  "question": "Does the unchanged v1 scientific recipe complete once its absolute-temperature guard correctly preserves pre-existing frozen-reference extrema as exact no-ops?",
+  "base_experiment": {
+    "experiment_id": "p2_availability_aware_continuous_sparse_copula_20260830_v1",
+    "config_path": "configs/experiments/p2_availability_aware_continuous_sparse_copula_20260830_v1.json",
+    "config_bytes": 11259,
+    "config_sha256": "c0b6419ab83380ee56f33e64ae31f205b58ff65fef45227e80153a57281a24a0",
+    "config_canonical_sha256": "e501fc89433061c13ef05b8157a6e1a9186dd0aee7841a7f538eb4bfae55bc41",
+    "core_path": "src/p2_restore/p2_availability_aware_continuous_sparse_copula_20260830_v1.py",
+    "core_bytes": 46208,
+    "core_sha256": "fdfb34ffe93dabd8dcc85e2a8dd27ddd5c5a7356b1e19824147513c4ab27d6a2"
+  },
+  "sealed_failure_evidence": {
+    "failure_receipt": {
+      "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/failure-receipt.json",
+      "bytes": 5179,
+      "sha256": "8a511b151bad037965fd1d93ef38e8b69ca25fbde0688e8a07f72ff90abe922a"
+    },
+    "guard_diagnostic": {
+      "path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v1/guard-diagnostic.json",
+      "bytes": 3828,
+      "sha256": "fb7924636a2f06a04b35e20e9c0bdb9b938bb542f8da8a8669efc858a20088b7"
+    },
+    "guard_diagnostic_script": {
+      "path": "scripts/diagnose_p2_availability_aware_continuous_sparse_copula_20260830_v1_guard.py",
+      "bytes": 11557,
+      "sha256": "2b048557c023f40dc5bc4b58cb131719a3a9b24d9841a13064717463dceb85cf"
+    },
+    "diagnostic_claim": "The failed fold had finite candidates, bounded corrections, zero newly out-of-domain candidates, and only unchanged inactive candidates whose frozen references were already outside the absolute domain. No performance metric, interval, or decision was computed."
+  },
+  "technical_overlay": {
+    "changed_component": "post_prediction_physical_domain_guard_only",
+    "old_guard": "reject if any finite candidate is below -5C or above 45C, including an unchanged frozen-reference extreme",
+    "new_guard": {
+      "finite_candidate_required": true,
+      "absolute_domain_c": [
+        -5.0,
+        45.0
+      ],
+      "newly_out_of_domain_candidate_count_must_equal": 0,
+      "preexisting_out_of_domain_reference_must_be_exact_unchanged": true,
+      "active_out_of_domain_candidate_count_must_equal": 0,
+      "inactive_rows_must_equal_reference_exactly": true
+    },
+    "prediction_values_changed_by_overlay": false,
+    "model_changed": false,
+    "seven_edges_changed": false,
+    "continuous_state_changed": false,
+    "missing_or_ood_noop_changed": false,
+    "correction_bound_changed": false,
+    "outer_splits_changed": false,
+    "primary_metric_or_interval_changed": false,
+    "diagnostic_veto_policy_changed": false,
+    "outlier_policy_changed": false
+  },
+  "inherited_scientific_contract": {
+    "stage0_exposed_edges": 7,
+    "continuous_state_features": 3,
+    "structural_correction_bound_c": [
+      -0.2,
+      0.2
+    ],
+    "outer_dependence_model_fits": 3,
+    "inner_selection_fits": 0,
+    "hpo_trials": 0,
+    "primary_rows": 69850,
+    "primary_metric": "pooled_all_69850_row_rmse_c",
+    "paired_interval": "within_window_circular_moving_block_bootstrap_7_KST_days_5000_replicates_90pct",
+    "tail_or_cvar_role": "DIAGNOSTIC_SENSITIVITY_ONLY_NOT_A_PROMOTION_GATE",
+    "window_season_layer_support_correction_role": "DIAGNOSTIC_ONLY_NO_HARD_VETO",
+    "hard_deleted_training_profiles": 0
+  },
+  "execution_policy": {
+    "real_training_execution_authorized": true,
+    "maximum_executions": 1,
+    "result_based_tuning": false,
+    "result_based_retry": false,
+    "technical_failure_retry": false,
+    "v1_reexecution_allowed": false,
+    "official_interface_reads_allowed": false,
+    "query_support_reads_allowed": false,
+    "csv_output_allowed": false,
+    "submission_generation_allowed": false,
+    "upload_allowed": false,
+    "aggregate_json_only": true
+  },
+  "artifact_path": "reports/p2_availability_aware_continuous_sparse_copula_20260830_v2/result.json"
+}

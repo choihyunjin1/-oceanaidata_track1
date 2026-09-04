@@ -1,0 +1,223 @@
+{
+  "schema_version": "p3.selection_matched_sparse_gp_abstention.preregistration.20260830.v1",
+  "status": "PREREGISTERED_EXPOSED_RESEARCH_ONLY_ONE_SHOT",
+  "experiment_id": "p3_selection_matched_sparse_gp_abstention_20260830_v1",
+  "governing_policy": {
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65",
+    "required_status": "GOVERNING_FUTURE_RESEARCH_POLICY_NO_OFFICIAL_ACTION"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p3_selection_matched_sparse_gp_abstention_20260830_v1.json",
+    "runner": "scripts/run_p3_selection_matched_sparse_gp_abstention_20260830_v1.py",
+    "implementation": "src/p3_wave/p3_selection_matched_sparse_gp_abstention_20260830_v1.py",
+    "focused_tests": "tests/test_p3_selection_matched_sparse_gp_abstention_20260830_v1.py",
+    "qa_runner": "scripts/qa_p3_selection_matched_sparse_gp_abstention_20260830_v1.py",
+    "result": "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/result.json",
+    "attempt_lock": "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/ATTEMPT_LOCK.json",
+    "failure_receipt": "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/FAILED.json",
+    "qa_result": "reports/p3_selection_matched_sparse_gp_abstention_20260830_v1/independent-qa.json"
+  },
+  "data_boundary": {
+    "explicit_p3_dir_required": true,
+    "allowed_source_basenames": [
+      "README.md",
+      "train_wave.csv",
+      "train_atmos.csv"
+    ],
+    "load_p3_data_allowed": false,
+    "directory_listing_allowed": false,
+    "environment_fallback_allowed": false,
+    "official_test_context_index_sample_baseline_score_submission_hidden_reads": 0,
+    "csv_output_count": 0,
+    "upload_count": 0,
+    "raw_prediction_rows_persisted": 0
+  },
+  "expected_source_sha256": {
+    "README.md": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "stage0_authorization": {
+    "experiment_id": "p3_selection_matched_cohort_preflight_20260830_v1",
+    "receipt": "artifacts/p3_selection_matched_cohort_preflight_20260830_v1/preflight.json",
+    "receipt_sha256": "4552364ddbd21e0674c6e69afc74516d3845126de84ae8f8cc06b4c0a25b0914",
+    "required_status": "PREFLIGHT_COMPLETE_ZERO_FIT",
+    "required_overall_preflight_pass": true,
+    "canonical_anchor_count": 8121,
+    "selection_matched_dense_count": 2131,
+    "validation_union_independent_count": 157,
+    "validation_counts_by_window": {
+      "2024_h2_storm": 41,
+      "winter_transition": 65,
+      "2025_h1": 51
+    }
+  },
+  "cohort_contract": {
+    "canonical_grid_minutes": 10,
+    "canonical_dense_anchor_minutes": 60,
+    "history_hours": 48,
+    "history_rows_including_anchor": 289,
+    "official_leads_hours": [3, 6, 9, 12, 18, 24],
+    "current_hs_min_inclusive_m": 1.5,
+    "current_hs_max_exclusive_m": 2.2,
+    "rise_lookback_hours": 12,
+    "rise_min_exclusive_m": 0.2,
+    "station_global_validation_gap_hours": 78,
+    "train_cutoff_hours_before_window_start": 78,
+    "training_surface": "all selection-matched dense 60-minute anchors strictly before each fold cutoff",
+    "validation_surface": "one station-global chronological greedy 78-hour pass over the union of the three frozen windows"
+  },
+  "forward_windows": [
+    {
+      "name": "2024_h2_storm",
+      "validation_start_utc": "2024-07-01T09:00:00+09:00",
+      "validation_end_utc": "2024-11-01T09:00:00+09:00",
+      "expected_dense_train_count": 740,
+      "expected_validation_count": 41
+    },
+    {
+      "name": "winter_transition",
+      "validation_start_utc": "2024-11-01T09:00:00+09:00",
+      "validation_end_utc": "2025-03-01T09:00:00+09:00",
+      "expected_dense_train_count": 1135,
+      "expected_validation_count": 65
+    },
+    {
+      "name": "2025_h1",
+      "validation_start_utc": "2025-03-01T09:00:00+09:00",
+      "validation_end_utc": "2025-06-25T09:00:00+09:00",
+      "expected_dense_train_count": 1737,
+      "expected_validation_count": 51
+    }
+  ],
+  "candidate_recipe": {
+    "family": "fixed_bayesian_random_fourier_multi_lead_residual_mean",
+    "interpretation": "A numerically bounded sparse-GP analogue trained once per outer fold on past-only selection-matched features; it predicts six persistence residual means jointly and abstains to the exact incumbent when the correction mean interval includes zero or the case is train-fold OOD.",
+    "feature_source": "the frozen 591 past-only corrected-CatBoost feature columns plus train-fold station one-hot columns",
+    "target": "six future Hs changes relative to current Hs",
+    "random_feature_count": 64,
+    "kernel": "RBF random Fourier features with weight scale 1/sqrt(input_dimension)",
+    "fold_seeds": [20260830, 20260831, 20260832],
+    "ridge_precision": 25.0,
+    "posterior_mean_interval": 0.9,
+    "posterior_mean_z": 1.6448536269514722,
+    "maximum_absolute_correction_m": 0.1,
+    "robust_feature_clip_abs": 8.0,
+    "ood_train_quantile": 0.995,
+    "ood_minimum_radius": 1.0,
+    "hyperparameter_search_count": 0,
+    "candidate_fit_count_per_fold": 1,
+    "candidate_total_fit_count": 3,
+    "outlier_hard_deletion_count": 0,
+    "sensor_flags_used_for_membership_or_weighting": false
+  },
+  "paired_incumbent_reference": {
+    "name": "saved_corrected_catboost_components_plus_fixed_prequential_router_and_long_lead_shrink",
+    "catboost_refit_count": 0,
+    "fixed_router_fit_count": 2,
+    "router": {
+      "name": "smooth_medium",
+      "alpha": 10.0,
+      "temperature_multiplier": 2.0,
+      "strength": 0.5,
+      "active_leads_hours": [12, 18, 24],
+      "hyperparameter_search": false
+    },
+    "long_lead_persistence_shrink": {
+      "weight": 0.2,
+      "active_leads_hours": [12, 18, 24]
+    },
+    "feature_columns": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/feature_columns.json",
+      "sha256": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+      "expected_count": 591
+    },
+    "fold_model_sha256": {
+      "2024_h2_storm": {
+        "single.cbm": "7769e26aa348b9591ea047982ce103bb4b145f926af158b80f375487988969d6",
+        "multi.cbm": "689243f173c81226bb0269d112b66f0803aaebbad31fa2e1a0c0bad35c396d3f"
+      },
+      "winter_transition": {
+        "single.cbm": "1fa845ae18f4f461712e9512f78116e946af348fa26b2ea5f0e4c923b10d2630",
+        "multi.cbm": "c572cd2717a17aa1fd64ee7818334763664f131edd9302f33ec928ab991c102f"
+      },
+      "2025_h1": {
+        "single.cbm": "d94669e42fe6fc295c42aebc1a5d0dfb468200100c13d53cbc33ec6233def631",
+        "multi.cbm": "9b01bfa0909d5cf5be5da8e140837dd7065606870437c8349f153be2fbb5508d"
+      }
+    }
+  },
+  "dependency_sha256": {
+    "stage0_runner": {
+      "path": "scripts/run_p3_selection_matched_cohort_preflight_20260830_v1.py",
+      "sha256": "cc9bae8199226b90631691f4025bdc5cc6b1f5d5e3dd637038207957e21a58df"
+    },
+    "stage0_config": {
+      "path": "configs/experiments/p3_selection_matched_cohort_preflight_20260830_v1.json",
+      "sha256": "945f9c552389a18f294581457805ee4defea7904a5cfd0574e515da858a4c6ba"
+    },
+    "history_and_reference_helpers": {
+      "path": "src/p3_wave/selection_matched_masked_ssl_20260830_v1.py",
+      "sha256": "9cd1456bc8978bf8e4896cc5d7a791506c8d20a2a0800ed6cb22c4519e9076f3"
+    }
+  },
+  "uncertainty": {
+    "primary_unit": "storm episode where available, otherwise contiguous anchor-day block with all six leads intact",
+    "episode_id_column": null,
+    "fallback_method": "forward-window-stratified circular moving-block bootstrap over unique UTC anchor days",
+    "fallback_block_length_anchor_days": 3,
+    "replicates": 5000,
+    "seed": 20260830,
+    "central_interval": 0.9,
+    "benefit_definition": "paired_incumbent_RMSE_minus_candidate_RMSE"
+  },
+  "decision_policy": {
+    "exposed_surface": true,
+    "primary_metric": "pooled all-row six-lead Hs RMSE_m",
+    "strong_challenger": "benefit point > 0 and central-90-percent lower bound > 0",
+    "exploratory_challenger": "benefit point > 0 and interval includes zero",
+    "primary_harm": "benefit point < 0 and central-90-percent upper bound < 0, or decisive degradation without a valid interval",
+    "inconclusive": "all other valid primary outcomes",
+    "fatal_hard_gates_only": true,
+    "transport_diagnostics_only": ["forward_window", "station", "lead"],
+    "legacy_minimum_0_01m_applied": false,
+    "legacy_two_of_three_windows_applied": false,
+    "legacy_worst_lead_0_02m_cap_applied": false,
+    "nonfatal_numerical_warnings_are_not_performance_vetoes": true,
+    "official_action_authorized": false
+  },
+  "execution_contract": {
+    "maximum_executions": 1,
+    "pre_fit_attempt_lock_required": true,
+    "result_based_tuning": false,
+    "result_based_retry": false,
+    "technical_failure_auto_retry": false,
+    "candidate_fit_count": 3,
+    "candidate_hyperparameter_search_count": 0,
+    "reference_router_fit_count": 2,
+    "catboost_fit_count": 0,
+    "aggregate_json_only": true,
+    "raw_predictions_persisted": 0,
+    "csv_output_count": 0,
+    "upload_count": 0,
+    "outlier_hard_deletion_count": 0,
+    "maximum_wall_seconds": 1200,
+    "cpu_threads": 8
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "official_context_read": true,
+    "test_index_read": true,
+    "sample_submission_read": true,
+    "baseline_read": true,
+    "score_read": true,
+    "submission_read_or_write": true,
+    "hidden_or_answer_read": true,
+    "csv_write": true,
+    "upload": true,
+    "result_driven_retry_or_tuning": true,
+    "old_file_mutation": true,
+    "outlier_or_storm_row_deletion": true
+  }
+}

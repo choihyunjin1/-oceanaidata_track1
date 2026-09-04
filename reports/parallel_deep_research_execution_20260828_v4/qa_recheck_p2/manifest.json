@@ -1,0 +1,64 @@
+{
+  "schema_version": "p2.public_heave_tangent_incumbent.manifest.20260828.v1",
+  "experiment_id": "p2_public_heave_tangent_incumbent_20260828_v1",
+  "decision": "FAIL_GATE_STOP_NO_CSV_NO_RESEARCH_LOOP",
+  "sources": {
+    "configs/experiments/p2_public_heave_tangent_incumbent_20260828_v1.json": "3ebbd658272a5cfa6f7da4be50cb64038e45b95ce67420aafda0e365f0c5e7ff",
+    "src/p2_restore/p2_public_heave_tangent_incumbent_20260828_v1.py": "a4a1cfd2936b2c8cb188f49bebd65d69f0a9bb1a1f1c1732e8ddfb2aac75bdf7",
+    "scripts/run_p2_public_heave_tangent_incumbent_20260828_v1.py": "b624816c5f28dd176bf130917db958e3e1e946b6c3afd819e96a52da32a7f014",
+    "scripts/qa_p2_public_heave_tangent_incumbent_20260828_v1.py": "b9be654604c77cdc8e56a3a335fa457a715be2751aed303ff63add8644598914",
+    "tests/test_p2_public_heave_tangent_incumbent_20260828_v1.py": "4a86a29e25251bbf52548976ceb32bd04f4e893899670764de7ed7a387866795"
+  },
+  "inputs": {
+    "config": {
+      "path": "configs/experiments/p2_public_heave_tangent_incumbent_20260828_v1.json",
+      "sha256": "3ebbd658272a5cfa6f7da4be50cb64038e45b95ce67420aafda0e365f0c5e7ff"
+    },
+    "observations": {
+      "logical_path": "P2_DATA_DIR/observations.csv",
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "comparator": {
+      "priority_index": 0,
+      "name": "p2_extrapolated_soft_gate_v2",
+      "kind": "parquet",
+      "validation_label": "STRONGEST_REPRODUCIBLE_COMMON_OOF_INCUMBENT",
+      "freshness": "adaptive historically exposed OOF; no fresh holdout claim",
+      "downgraded": false,
+      "input_hashes": {
+        "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"
+      }
+    }
+  },
+  "outputs": {
+    "prediction_commitment": {
+      "path": "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/prediction_commitment.json",
+      "sha256": "36623df7a4b0d5eb7eeb665371394a684133f307d728cb40cb86e9886b3b5f19"
+    },
+    "predictions": {
+      "2024_sep_oct": {
+        "path": "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/predictions/p2_public_heave_tangent_incumbent_20260828_v1_2024_sep_oct.npz",
+        "rows": 26273,
+        "bytes": 317913,
+        "sha256": "225f952831801f72abfd68ae7e45b7e65e9dd4cfbd353242ae8c8d2f5636e2f6"
+      },
+      "2025_jul_aug": {
+        "path": "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/predictions/p2_public_heave_tangent_incumbent_20260828_v1_2025_jul_aug.npz",
+        "rows": 26693,
+        "bytes": 439735,
+        "sha256": "62cda74b8535a57b02beaf083fdbbf4bcdd4ddae9268b47ccb4b7057cb88bafa"
+      },
+      "2025_nov_dec": {
+        "path": "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/predictions/p2_public_heave_tangent_incumbent_20260828_v1_2025_nov_dec.npz",
+        "rows": 16884,
+        "bytes": 277813,
+        "sha256": "f2420caa7ce42affe4dcd2ce4e833fa35be9df25b9e226d3f3d5a7cc67e5ddaa"
+      }
+    },
+    "result": {
+      "path": "artifacts/p2_public_heave_tangent_incumbent_20260828_v1/result.json",
+      "sha256": "f9626d17833a01f0ae2095eb0eaf2a9c055a16659ac31bc002c589413af52400"
+    },
+    "candidate_csv": null
+  }
+}

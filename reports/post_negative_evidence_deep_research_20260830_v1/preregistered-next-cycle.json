@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-30",
+  "base_commit": "54a0a7ab98b58abc13d6b7c99b84a9f2089259a6",
+  "authorization": "DESIGN_ONLY_NOT_EXECUTION_AUTHORIZATION",
+  "official_access": {
+    "test_rows_read": 0,
+    "sample_rows_read": 0,
+    "submission_rows_read": 0,
+    "hidden_label_rows_read": 0,
+    "csv_created": 0,
+    "uploads": 0
+  },
+  "priority_order": [
+    "p3_catboost_confirmation_contract_repair_20260830_v3",
+    "p2_gaussian_copula_conditional_mean_20260830_v1",
+    "p1_event_balanced_supcon_f1_head_20260830_v1"
+  ],
+  "experiments": [
+    {
+      "id": "p3_catboost_confirmation_contract_repair_20260830_v3",
+      "classification": "COMPLETION_ONLY_REPAIR",
+      "frozen_candidate": "challenger_21",
+      "selection_search_rerun": false,
+      "preflight": [
+        "end_to_end_confirmation_schema_fixture",
+        "required_columns_exact_order_dtype_finite",
+        "pair_key_uniqueness_and_row_count",
+        "selection_confirmation_schema_hash_equal"
+      ],
+      "max_historical_fits": 6,
+      "promotion_gate": [
+        "all_three_confirmation_windows_improve",
+        "pooled_delta_rmse_lt_0",
+        "all_existing_slice_and_stability_guards_pass",
+        "config_schema_lineage_hashes_match"
+      ],
+      "kill_gate": "any_preflight_or_confirmation_gate_failure"
+    },
+    {
+      "id": "p2_gaussian_copula_conditional_mean_20260830_v1",
+      "classification": "ONE_SHOT_CLOSE_FAMILY_NONLINEAR_PILOT",
+      "baseline": "FROZEN_INCUMBENT_LINEAGE",
+      "outer_folds": 3,
+      "wide_hpo": false,
+      "preflight": [
+        "train_only_complete_profile_support",
+        "finite_monotone_marginal_transforms",
+        "covariance_psd_and_condition_number_guard",
+        "baseline_lineage_hash_match"
+      ],
+      "promotion_gate": [
+        "pooled_delta_rmse_lt_0",
+        "at_least_two_of_three_folds_improve",
+        "no_target_layer_worse_by_more_than_0_001_celsius",
+        "paired_bootstrap_upper_lt_0_or_stricter_existing_gate"
+      ],
+      "kill_gate": "any_structural_gate_or_scientific_promotion_gate_failure"
+    },
+    {
+      "id": "p1_event_balanced_supcon_f1_head_20260830_v1",
+      "classification": "LOW_FIDELITY_RESEARCH_SCREEN",
+      "initial_seeds": 1,
+      "initial_epochs_min": 20,
+      "initial_epochs_max": 30,
+      "synthetic_anomaly_generation": false,
+      "preflight": [
+        "event_disjoint_chronological_split",
+        "real_event_type_and_station_layer_season_support",
+        "anchor_decoder_immutable"
+      ],
+      "promotion_gate": [
+        "all_windows_delta_f1_gt_0",
+        "anomaly_type_macro_f1_improves",
+        "proposal_precision_gt_half_incumbent_f1_each_window",
+        "anchor_removal_eq_0",
+        "changed_row_station_share_lte_0_8"
+      ],
+      "kill_gate": "any_screen_gate_failure",
+      "three_seed_confirmation_requires_separate_authorization": true
+    }
+  ]
+}

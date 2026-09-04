@@ -1,0 +1,107 @@
+{
+  "schema_version": "metric_aligned_gate_replay.20260830.v1",
+  "status": "PASS_ZERO_FIT_AGGREGATE_ONLY_RECLASSIFICATION",
+  "conclusion": "P2 has two high-value exposed-surface challengers that legacy conjunctive slice/stability vetoes incorrectly collapsed into NO_GO. P1 and both P3 candidates remain primary-metric harms regardless of gate recalibration.",
+  "candidates": {
+    "P1_event_balanced_supcon": {
+      "benefit_f1": -0.16487411020776765,
+      "benefit_ci": null,
+      "old_decision": "NO_GO_LOW_FIDELITY_SCREEN",
+      "new_state": "PRIMARY_HARM_RESEARCH_ONLY",
+      "decisive_without_interval_basis": "Pooled F1 falls by 0.164874 and every frozen window plus the anomaly-type macro metric degrades.",
+      "decision_changed": false,
+      "transport_risk": "ALL_THREE_WINDOWS_AND_TYPE_MACRO_DEGRADE",
+      "next_action": "CLOSE_EXACT_RECIPE"
+    },
+    "P2_gaussian_copula_conditional_mean": {
+      "benefit_c": 0.010616065033425048,
+      "benefit_ci90_c": [
+        0.007700262306877281,
+        0.01738439679930879
+      ],
+      "old_decision": "NO_GO_CLOSE_EXACT_COPULA_AXIS",
+      "new_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+      "decision_changed": true,
+      "transport_risk": "HIGH_2025_NOV_DEC_REGRESSION_AND_INNER_INSTABILITY",
+      "next_action": "KEEP_AS_LOCKED_HIGH_VALUE_CHALLENGER; DO_NOT_CALL_CONFIRMED"
+    },
+    "P2_state_conditioned_copula": {
+      "benefit_c": 0.0034591760934881144,
+      "benefit_ci90_c": [
+        0.0019229331946138068,
+        0.006529881874038945
+      ],
+      "old_decision": "NO_GO_STATE_CONDITIONED_COPULA_STAGE1",
+      "new_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY",
+      "decision_changed": true,
+      "transport_risk": "JJA_REGRESSION_SMALL_RELATIVE_TO_POOLED_BENEFIT",
+      "next_action": "KEEP_AS_LOCKED_HIGH_VALUE_CHALLENGER; DO_NOT_CALL_CONFIRMED"
+    },
+    "P3_catboost_confirmation": {
+      "benefit_m": -0.007974130725359796,
+      "benefit_ci90_m": [
+        -0.013854034848595,
+        -0.0015388552106252453
+      ],
+      "old_decision": "CONFIRMATION_GATE_FAIL_HPO_CLOSED",
+      "new_state": "PRIMARY_HARM_RESEARCH_ONLY",
+      "decision_changed": false,
+      "transport_risk": "ALL_FOLDS_STATIONS_AND_LEADS_DEGRADE",
+      "next_action": "CLOSE_EXACT_RECIPE"
+    },
+    "P3_selection_matched_masked_ssl": {
+      "benefit_m": -0.31415523848029037,
+      "benefit_ci90_m": [
+        -0.38878588237499895,
+        -0.2448493754044661
+      ],
+      "old_decision": "NO_GO_CLOSE_THIS_EXACT_RECIPE",
+      "new_state": "PRIMARY_HARM_RESEARCH_ONLY",
+      "decision_changed": false,
+      "transport_risk": "ALL_WINDOWS_STATIONS_AND_LEADS_DEGRADE",
+      "next_action": "CLOSE_EXACT_RECIPE"
+    }
+  },
+  "summary": {
+    "reclassified_legacy_no_go_to_high_value_challenger": 2,
+    "primary_harm_conclusions_unchanged": 3,
+    "model_fits": 0,
+    "prediction_rows_read": 0,
+    "raw_training_rows_read": 0,
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "csv_created": 0,
+    "uploads": 0
+  },
+  "provenance": {
+    "policy": {
+      "path": "configs\\goals\\metric_aligned_gate_recalibration_20260830_v1.json",
+      "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65"
+    },
+    "inputs": {
+      "p1_supcon": {
+        "path": "artifacts\\p1_event_balanced_supcon_f1_head_20260830_v1\\aggregate.json",
+        "sha256": "7d0534a5f2397394d82558cc15cbfa009ea35a6eabab8fc53900b24e5a05cafa"
+      },
+      "p2_gaussian_copula": {
+        "path": "artifacts\\p2_gaussian_copula_conditional_mean_20260830_v2\\result.json",
+        "sha256": "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3"
+      },
+      "p2_state_copula": {
+        "path": "artifacts\\p2_state_conditioned_copula_20260830_v1\\result.json",
+        "sha256": "493ed58d5e7893f7c9297f26fe992393fdd3498820b562e1f045a77e1e992e2f"
+      },
+      "p3_catboost_confirmation": {
+        "path": "artifacts\\p3_catboost_confirmation_contract_repair_20260830_v3\\one_shot\\result.json",
+        "sha256": "1c2a6df2034f20dab054392ad67dd0039240729412dddf6380918c52957563ca"
+      },
+      "p3_masked_ssl": {
+        "path": "artifacts\\p3_selection_matched_masked_ssl_20260830_v1\\result.json",
+        "sha256": "b6373cf4a6b281096dda4dbf10caf8bc9bebd01b01883269e421379ae702f7f5"
+      }
+    },
+    "runner": {
+      "path": "scripts\\audit_metric_aligned_gates_20260830_v1.py",
+      "sha256": "48a65479e7e8b3e63eb061f33880da03a6e301833f7a08922b87bd7a436353d6"
+    }
+  }
+}

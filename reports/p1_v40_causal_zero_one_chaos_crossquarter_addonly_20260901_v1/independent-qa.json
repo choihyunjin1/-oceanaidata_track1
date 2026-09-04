@@ -1,0 +1,69 @@
+{
+  "schema_version": "p1.v40_causal_zero_one_chaos.independent_qa.v1",
+  "experiment_id": "p1_v40_causal_zero_one_chaos_crossquarter_addonly_20260901_v1",
+  "verdict": "PASS",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "commands": [
+    ".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p1_v40_causal_zero_one_chaos_crossquarter_addonly_20260901_v1.py -q",
+    ".\\.venv-p1\\Scripts\\python.exe -m ruff check scripts/run_p1_v40_causal_zero_one_chaos_crossquarter_addonly_20260901_v1.py tests/test_p1_v40_causal_zero_one_chaos_crossquarter_addonly_20260901_v1.py",
+    ".\\.venv-p1\\Scripts\\python.exe scripts/run_p1_v40_causal_zero_one_chaos_crossquarter_addonly_20260901_v1.py --data-dir C:\\Users\\cedis\\Downloads\\데이터셋_P1\\P1_qc_anomaly --qa"
+  ],
+  "checks": {
+    "focused_pytest_6_of_6": true,
+    "ruff": true,
+    "postterminal_lifecycle_17_checks": true,
+    "preflights_byte_identical": true,
+    "preflight_output_bytes": 4356,
+    "preflight_output_sha256": "c168645ed638194ad86d840932802e05a4f5e1d2289bf897ed3174853f7f7d98",
+    "real_feature_support": true,
+    "zero_one_synthetic_guards": true,
+    "fits_within_budget": true,
+    "v28_guard": true,
+    "v33_bundle_before_target": true,
+    "q2_q3_target_zero": true,
+    "q4_unopened": true,
+    "add_only_removal_zero": true,
+    "access_zero": true
+  },
+  "counters": {
+    "fits": 3,
+    "transport_target_windows_read": 0,
+    "q4_target_reads": 0,
+    "q4_actions": 0,
+    "anchor_removals": 0,
+    "official": 0,
+    "csv": 0,
+    "uploads": 0
+  },
+  "best_pooled_inner": {
+    "quantile": 0.999,
+    "threshold": 0.7331852912902832,
+    "proposals": 57,
+    "true_positives": 54,
+    "precision": 0.9473684210526315,
+    "wilson90_lcb": 0.8754197892940535,
+    "gate_failure": "only one distinct station-layer identity and station supplied supported environments"
+  },
+  "metrics": {
+    "raw_f1_delta": 0.0,
+    "nominal_points": 0.0,
+    "transport_adjusted_points": 0.0,
+    "official_champion_expected_score": 0.833548,
+    "official_champion_points": 28.909341,
+    "incremental_expected_official_points": 0.0,
+    "outer_ci": null
+  },
+  "hashes": {
+    "result": "cd27632196b6845241c8b78851562755ddad808a5ca6ab0f787b1cbef3e86e11",
+    "config": "0d866630d002fbca66cdbd151e541a03c91a7a9f138aa29a44758ae1e5ff618b",
+    "runner": "379670596c473eb56025d99be538528dcd8dc6bfd238cf5cbdda6606dbb0463b",
+    "test": "e593169e7e2aa4c68daad4089da0c4faf8a3bc9f60d239a15688d08d60c9238a",
+    "lock": "7bc2dc4c06ae86168d9546f8a3897f697ef9ce9e163cb85e20c43e99053d672b",
+    "completion": "82dc6b02fe64d283ad38ef91d40f2b496f25b2110456b674b628b4300f8fbc9a",
+    "preflight_receipt": "8e89127789412fd4310bf0ec0189bf47c863e8407d86bb579f6a3a71de8dbbc5",
+    "pre_q2_seal": "fd71ee50fb6243f1f9987c1af00493258c00054e495704779a1a4f7afe4e4221",
+    "auditability_manifest": "b21cdda5a94eb8030df77ef2e4954714b062cc6bbbbdce3f5a7fa5caf348e04f",
+    "auditability_bundle": "1f65c1a7d7f9c568325fceb8651ba8d043be8ff18f4b1f307e064093452cb0b2"
+  }
+}

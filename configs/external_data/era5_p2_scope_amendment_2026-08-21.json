@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "era5_p2_scope_amendment_2026-08-21",
+  "status": "active_internal_reconciliation",
+  "issued_at_kst": "2026-08-21T23:20:00+09:00",
+  "append_only_contract": {
+    "append_only": true,
+    "in_place_edit_forbidden": true,
+    "supersession_requires_new_amendment_id": true
+  },
+  "scope": {
+    "source_id": "era5_pre2024",
+    "problem": "P2",
+    "purposes": [
+      "feature_design",
+      "fine_tuning"
+    ],
+    "effective_observation_cutoff_kst": "2025-12-31T23:59:59+09:00",
+    "retrieval_generation_id": "p2_era5_full_retrieval_v1",
+    "allowed_variables": [
+      "10m_u_component_of_wind",
+      "10m_v_component_of_wind",
+      "eastward_turbulent_surface_stress",
+      "northward_turbulent_surface_stress",
+      "surface_net_solar_radiation",
+      "surface_net_thermal_radiation",
+      "surface_latent_heat_flux",
+      "surface_sensible_heat_flux",
+      "land_sea_mask"
+    ]
+  },
+  "bindings": {
+    "catalog": {
+      "path": "configs/external_data/catalog.toml",
+      "sha256": "08645af1c6238fff256d60580f99154ac89070d655bff5e70ca11925c1cb52a8"
+    },
+    "official_permission_receipt": {
+      "path": "configs/external_data/official_faq_permission.json",
+      "sha256": "f4d2ea55461a8af2c1cf1ed1a1642224a93349a414dfa0af7b254606b7f64f62"
+    },
+    "official_permission_evidence": {
+      "path": "configs/external_data/official_faq_external_data_2026-08-21.json",
+      "sha256": "41e762264c667baf401f60bef104110d3dd1bc668ab209c4e635b46b0a924be9"
+    },
+    "retrieval_manifest": {
+      "path": "artifacts/p2_era5_full_retrieval_v1/manifest.json",
+      "sha256": "17591180646a762cfa9a309cf0cc934c8109879c17d10084055133e9aa4f5bee"
+    },
+    "retrieval_parquet": {
+      "path": "external_data/quarantine/era5_cds_sors_p2_oof_exact17_v1/era5_sors_3x3_p2_oof_exact17.parquet",
+      "sha256": "9e84c704e85d77796dbd554986f376d77e838b96de28fd08ad8ab6191560a7a0",
+      "bytes": 1668285,
+      "rows": 44100,
+      "unique_hours": 4900,
+      "grid_points": 9,
+      "chunk_count": 17,
+      "observed_start_kst": "2024-08-25T00:00:00+09:00",
+      "observed_end_kst": "2025-12-17T03:00:00+09:00"
+    }
+  },
+  "legacy_conflict": {
+    "catalog_source_id": "era5_pre2024",
+    "catalog_eligible_problems": [
+      "P3"
+    ],
+    "catalog_max_observation_time": "2023-12-31T23:59:59+09:00",
+    "reconciled_fields": [
+      "eligible_problems",
+      "max_observation_time"
+    ],
+    "permission_receipt_scope_note_is_legacy_narrative": true
+  },
+  "precedence_contract": {
+    "mode": "scoped_override",
+    "rule": "official FAQ evidence, then this narrower amendment, then the unchanged legacy catalog default",
+    "limited_to_this_P2_ERA5_generation": true,
+    "overrides_only_legacy_problem_and_cutoff": true,
+    "global_catalog_semantics_unchanged": true,
+    "other_sources_problems_generations_unchanged": true
+  },
+  "safety_contract": {
+    "research_ablation_only": true,
+    "public_meteorology_covariates_only": true,
+    "attribution_required": true,
+    "hidden_target_temperature_or_salinity_access_authorized": false,
+    "competition_source_data_access_authorized": false,
+    "frozen_oof_value_access_authorized_by_this_amendment": false,
+    "model_execution_authorized_by_this_amendment": false,
+    "submission_creation_authorized": false,
+    "submission_upload_authorized": false,
+    "runner_must_validate_before_external_values": true,
+    "external_off_ablation_required_for_promotion": true
+  },
+  "attribution": {
+    "doi": "10.24381/cds.adbb2d47",
+    "licence": "Copernicus licence; attribution required",
+    "text": "Contains modified Copernicus Climate Change Service information; neither the European Commission nor ECMWF is responsible for downstream use."
+  }
+}

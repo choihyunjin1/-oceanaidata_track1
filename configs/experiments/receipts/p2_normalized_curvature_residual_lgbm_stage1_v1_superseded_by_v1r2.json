@@ -1,0 +1,60 @@
+{
+  "schema_version": "p2_experiment_supersession_receipt.v1",
+  "receipt_id": "p2_ncr_lgbm_stage1_v1_superseded_by_v1r2_20260826",
+  "status": "APPEND_ONLY_SUPERSESSION_RECEIPT",
+  "effective_date_kst": "2026-08-26",
+  "append_only": true,
+  "superseded": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1",
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1.json",
+      "bytes": 10007,
+      "sha256": "074ab4b55cb1a0efa8fdeec631d72070b2362352e20cf2d4eb07cc0d139e2206"
+    },
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1.py",
+      "bytes": 21508,
+      "sha256_raw": "562b63ab6f641003161dc1311398d896ac5c095ae657f4e0676d8a1e779a6c6a"
+    },
+    "module": {
+      "path": "src/p2_restore/normalized_curvature_residual.py",
+      "bytes": 27025,
+      "sha256": "c5d88d9bbe90c4b2b03f135d434ed5f030b71732d50549aac17ced88516070a0"
+    },
+    "test": {
+      "path": "tests/test_p2_normalized_curvature_residual.py",
+      "bytes": 8867,
+      "sha256": "9f838b500747fca3e5bdf25d149c0bb9978a0069a510035f0ecad11777eb216a"
+    },
+    "numerical_stage1_fit_calls_observed": 0,
+    "final_artifact_directory_observed": false,
+    "execution_authorized_after_receipt": false
+  },
+  "superseding": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r2",
+    "config_path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r2.json",
+    "runner_path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r2.py"
+  },
+  "unchanged_scientific_contract": [
+    "NCR_LGBM normalized-curvature target and decode mathematics",
+    "public-profile feature construction",
+    "LightGBM parameters",
+    "seeds 20260823, 20260824, and 20260825",
+    "exactly three physical fit slots",
+    "Stage 1 split, metrics, bootstrap, and decision gates"
+  ],
+  "supersession_reasons": [
+    "v1 had no stable exclusive execution claim outside the final artifact namespace",
+    "v1 could not prove a hard-crash-safe lifetime ceiling of three physical fit calls",
+    "v1 lacked a parent-enforced 1800-second numerical worker wall clock",
+    "v1 did not bind parsed observations and incumbent parquet values to the exact bytes hashed through the same held read",
+    "v1 did not pin the expanded numerical runtime and LightGBM native-library fingerprint"
+  ],
+  "external_actions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0
+  }
+}

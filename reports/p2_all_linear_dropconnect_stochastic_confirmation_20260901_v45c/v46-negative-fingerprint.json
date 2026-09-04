@@ -1,0 +1,62 @@
+{
+  "schema_version": "p2.hidden_activation_layernorm.negative_fingerprint.20260901.v46",
+  "proposed_experiment_id": "p2_hidden_activation_layer_normalized_deepset_20260901_v46",
+  "status": "DISTINCT_READY_FOR_PREREGISTRATION",
+  "audit_scope": [
+    "scripts/*p2*.py",
+    "configs/experiments/p2_*.json",
+    "reports/p2_*/*"
+  ],
+  "exact_execution_patterns": [
+    "nn.LayerNorm(",
+    "torch.nn.LayerNorm(",
+    "LayerNorm("
+  ],
+  "exclusions": [
+    "reports/p2_all_linear_dropconnect_deepset_20260901_v45/next-axis-fingerprint.md"
+  ],
+  "exact_execution_hit_count": 0,
+  "semantic_distinctions": {
+    "v20_coral": "aligns latent covariance across calendar-month domains; no per-example activation normalization",
+    "v27_spectral_norm": "constrains weight operator norm; no activation normalization",
+    "v37_cmd": "aligns latent moments across domains; no per-example activation normalization",
+    "v40_dropout_consistency": "masks activations stochastically and matches two predictions; no normalization",
+    "v41_weight_norm": "reparameterizes weight magnitude and direction; no activation normalization",
+    "v45_v45c_dropconnect": "masks weights during training; evaluation uses raw weights; no activation normalization"
+  },
+  "primary_source": {
+    "citation": "Ba, Kiros, and Hinton, Layer Normalization, 2016",
+    "url": "https://arxiv.org/abs/1607.06450",
+    "supported_claim": "normalization uses hidden units within one training case rather than batch statistics",
+    "p2_performance_claim": false
+  },
+  "sealed_single_intervention": {
+    "base": "exact_v13_five_Linear_DeepSets",
+    "module": "torch.nn.LayerNorm",
+    "count": 4,
+    "normalized_shape": 32,
+    "eps": 0.00001,
+    "elementwise_affine": true,
+    "placement": "after_each_of_four_hidden_Linear_layers_before_ReLU",
+    "initial_weight": 1.0,
+    "initial_bias": 0.0,
+    "expected_parameters": 5121,
+    "expected_parameter_tensors": 18,
+    "expected_buffers": 0,
+    "sweep": false
+  },
+  "prohibited": [
+    "BatchNorm",
+    "RMSNorm",
+    "placement_variants",
+    "epsilon_or_affine_sweep",
+    "seed_trio_selection",
+    "v45_v45c_ensemble",
+    "router",
+    "row_deletion",
+    "official_feedback_selection"
+  ],
+  "official_test_sample_hidden_query_rows_read": 0,
+  "submission_csv_created": 0,
+  "uploads": 0
+}

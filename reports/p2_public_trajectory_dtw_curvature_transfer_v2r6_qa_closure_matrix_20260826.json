@@ -1,0 +1,134 @@
+{
+  "schema_version": "p2_dtw_v2r6.qa_closure_matrix.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r6",
+  "created_at_kst": "2026-08-26T10:49:00+09:00",
+  "status": "READY_FOR_SEAL_AS_PRECLAIM_BLOCKED_PACKAGE",
+  "design": {
+    "bytes": 14145,
+    "sha256": "dc8684950bf7466038270a33ab2f2c6425820433aa205790bd40c1d5e842004e"
+  },
+  "trigger_resolution": {
+    "bytes": 3557,
+    "sha256": "3348f8bf10335a1da414fcbb8f04f7fb7e00ec798ff774bba63edbc13af73f87"
+  },
+  "findings": [
+    {
+      "id": "V2R6-01",
+      "severity": "P0",
+      "finding": "v2r5 constructor-only readiness did not exercise the first registered materialization surface, so an empty March score frame consumed a claim.",
+      "root_cause": "March has 4,464 keys in each target layer but zero finite target-temperature truth keys in layers 2, 3, and 4.",
+      "closure": "A held-byte aggregate-only finite-mask certificate now runs before any claim and deterministically resolves to NO_GO_INNER_WINDOW_UNIDENTIFIABLE.",
+      "tests": [
+        "test_synthetic_all_nan_march_truth_is_preclaim_no_go",
+        "test_frozen_runtime_certificate_verifies_and_forces_stop",
+        "test_real_pinned_runtime_certificate_stops_before_claim"
+      ]
+    },
+    {
+      "id": "V2R6-02",
+      "severity": "P0",
+      "finding": "Dropping or replacing March after observing the missing truth would change the preregistered 18-cell selection.",
+      "closure": "The prospective trigger resolution forbids replacement, dropping, reweighting, or scoring the empty window as no-op and permanently blocks v2r6 execution.",
+      "tests": [
+        "test_prospective_design_and_trigger_resolution_are_frozen",
+        "test_execution_contract_is_permanently_preclaim_blocked",
+        "test_scientific_contract_is_unchanged_six_cells_twenty_two_slots"
+      ]
+    },
+    {
+      "id": "V2R6-03",
+      "severity": "P1",
+      "finding": "v2r5 retained only a worker stderr hash, losing the exception type, message, phase, and frames.",
+      "closure": "v2r6 supplies a bounded sanitized value-free error envelope with create-only durable publication and held-byte parent binding for future separately preregistered workers; v2r6 itself launches none.",
+      "tests": [
+        "test_error_envelope_is_sanitized_bounded_and_value_free",
+        "test_error_envelope_chain_and_frames_are_capped",
+        "test_error_envelope_mutations_fail_closed",
+        "test_windows_safe_error_receipt_publication_and_binding",
+        "test_error_receipt_hash_swap_is_rejected"
+      ]
+    },
+    {
+      "id": "V2R6-04",
+      "severity": "P1",
+      "finding": "Windows os.open text mode translates LF to CRLF and breaks canonical receipt identity even when fsync succeeds.",
+      "closure": "Receipt and barrier descriptors include O_BINARY on Windows; the actual Windows publication and roundtrip identity test passes.",
+      "tests": [
+        "test_windows_safe_error_receipt_publication_and_binding",
+        "test_error_receipt_publication_is_create_only",
+        "test_error_receipt_link_failure_leaves_no_destination"
+      ]
+    },
+    {
+      "id": "V2R6-05",
+      "severity": "P1",
+      "finding": "A blocked successor must not leave an executable claim/worker/materialization path.",
+      "closure": "The runner has no claim acquisition, worker launch, internal worker, materializer execution, scorer execution, or aggregate publication function. The execute flag only replays preflight and raises.",
+      "tests": [
+        "test_runner_has_no_claim_or_worker_launch_implementation",
+        "test_execute_flag_fails_closed_without_control_write",
+        "test_actual_v2r6_control_namespace_is_clean",
+        "test_no_result_candidate_or_submission_artifact_is_created"
+      ]
+    },
+    {
+      "id": "V2R6-06",
+      "severity": "P1",
+      "finding": "The blocked result must not be bypassable by changing an authorization flag.",
+      "closure": "Authorization is permanently false, semantically tied to the frozen design and seal, and any true swap is rejected.",
+      "tests": [
+        "test_seal_bundle_and_permanent_false_authorization",
+        "test_authorization_swap_to_true_is_rejected"
+      ]
+    },
+    {
+      "id": "V2R6-07",
+      "severity": "P1",
+      "finding": "Readiness must not resolve or inspect p100 or official/candidate paths.",
+      "closure": "The blocked runner contains no p100 literal path, reports p100 filesystem accesses zero, resolves only P2_DATA_DIR/observations.csv and the historical exact anchor, and produces no candidate or upload.",
+      "tests": [
+        "test_static_sources_never_embed_personal_data_path_or_p100_literal",
+        "test_real_pinned_runtime_certificate_stops_before_claim",
+        "test_read_only_preflight_is_idempotent_and_operation_zero"
+      ]
+    }
+  ],
+  "preseal_evidence": {
+    "focused_tests": "29 passed, 4 seal-dependent deselected",
+    "ruff": "All checks passed",
+    "real_diagnostic_attempts": 1,
+    "real_diagnostic_prediction_values_consumed": 0,
+    "real_diagnostic_metrics": 0,
+    "materializations_persisted": 0,
+    "scores": 0,
+    "physical_fit_calls": 0,
+    "p100_accesses": 0,
+    "v2r6_claims": 0,
+    "v2r6_worker_launches": 0
+  },
+  "implementation": {
+    "module": {
+      "path": "src/p2_restore/public_trajectory_dtw_v2r6.py",
+      "bytes": 15820,
+      "sha256": "8c507a385ab2846ed27698366cbc96c8454aa0fd6821a27c90287932c06b5145"
+    },
+    "runner": {
+      "path": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r6.py",
+      "bytes": 25788,
+      "sha256": "8794ab18ba3bb21aca69916edff5228dfb930f561c925f98f7c1160f3d3fefbb"
+    },
+    "tests": {
+      "path": "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r6.py",
+      "bytes": 20827,
+      "sha256": "afabd9701ad67bb916745998c9ef698f4861e4a6442d5721b58edb5f4c3d67c4",
+      "collected": 33
+    }
+  },
+  "terminal_resolution": {
+    "status": "NO_GO_INNER_WINDOW_UNIDENTIFIABLE",
+    "claim_permitted": false,
+    "authorization_permitted": false,
+    "rerun_permitted": false,
+    "next": "Only a separately preregistered Cycle2 may proceed."
+  }
+}

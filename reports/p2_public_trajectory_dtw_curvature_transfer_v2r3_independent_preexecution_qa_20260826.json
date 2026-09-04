@@ -1,0 +1,270 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r3.independent_preexecution_qa.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r3",
+  "generated_at_kst": "2026-08-26T08:56:00+09:00",
+  "audit_mode": "INDEPENDENT_ZERO_FIT_STATIC_AND_SYNTHETIC_TEST_ONLY",
+  "verdict": "NO_GO",
+  "decision": "NO_GO_P1_SEAL_AUTHORIZATION_SNAPSHOT_SPLIT",
+  "design_sha256": "27e67f5fb9bd0a99033bd256f43f16e85fa7924374bc5d30845cdbacfbad3bc9",
+  "seal_sha256": "465f70e613bb7040d724b7c548937a0bbec7ff6f81a95945d2fdb654d5cf9078",
+  "severity_counts": {
+    "P0": 0,
+    "P1": 1,
+    "P2": 0
+  },
+  "authorization_must_remain_false": true,
+  "audited_files": [
+    {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r3_design.json",
+      "bytes": 8877,
+      "sha256": "27e67f5fb9bd0a99033bd256f43f16e85fa7924374bc5d30845cdbacfbad3bc9"
+    },
+    {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r3_execution.json",
+      "bytes": 2139,
+      "sha256": "00dc486bace0147f6c2d754059df74bd613dcfd385f8bb353f60ab0840afe8f0"
+    },
+    {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r3_execution_authorization.json",
+      "bytes": 3046,
+      "sha256": "edf0c278335c5a31549b53e04e988ef0e8e886b252429bd48c2825c8d204e2cd"
+    },
+    {
+      "path": "src/p2_restore/public_trajectory_dtw_v2r3.py",
+      "bytes": 75528,
+      "sha256": "e1dd834d2c3ac4a33143e4e6fbb0803f518ed08245e09ae5c9e4b0a77c094028"
+    },
+    {
+      "path": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py",
+      "bytes": 74367,
+      "sha256": "e4a690a057b3b307a7a00bbd85267f0b6998beb04c74361ce6d44f973efbb6b2"
+    },
+    {
+      "path": "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r3.py",
+      "bytes": 56378,
+      "sha256": "1d1c8b9a18f328aeef88a47d34e0af09917c9c4f7f16cc736a38b4c5d1d84b76"
+    },
+    {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r3_qa_closure_matrix_20260826.json",
+      "bytes": 7489,
+      "sha256": "c5557d25879f9410599bbf204d360233c6b4a8caa965545518ca941eeb3fa42b"
+    },
+    {
+      "path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2r3_preexecution/preexecution_seal.json",
+      "bytes": 8264,
+      "sha256": "465f70e613bb7040d724b7c548937a0bbec7ff6f81a95945d2fdb654d5cf9078"
+    },
+    {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2_independent_preexecution_qa_20260826.json",
+      "bytes": 11977,
+      "sha256": "eb4ab772197c723511c0b3dffaffd51e76d07fa120e131a60576b37acc68410a"
+    },
+    {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r2_independent_preexecution_qa_20260826.json",
+      "bytes": 10889,
+      "sha256": "5c754f4dfaa99a97a9084563db3a343c42cd7127da4de7c1c8e58181791fb340"
+    }
+  ],
+  "prospective_contract": {
+    "scientific_module_diff_from_v2r2": "DOCSTRING_AND_TRAILING_NEWLINES_ONLY",
+    "six_cells": [
+      "d1_k3",
+      "d1_k7",
+      "d3_k3",
+      "d3_k7",
+      "d7_k3",
+      "d7_k7"
+    ],
+    "inner_windows": [
+      "2024-03",
+      "2024-05",
+      "2024-07"
+    ],
+    "exact_rows": 26273,
+    "p100_rows": 78156,
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "attempts": 1,
+    "automatic_reruns": 0,
+    "result_driven_reruns_or_tuning": 0,
+    "status": "SCIENTIFIC_AND_BUDGET_CONTRACT_PRESERVED"
+  },
+  "previous_nine_findings": [
+    {
+      "finding_id": "V2-P0-01",
+      "status": "CLOSED",
+      "evidence": "The 78,156-row adversarial randomized test reproduces 52,104 legacy positional mismatches and verifies permutation-invariant one-to-one canonical binding on fold, station, UTC-ns time, and layer."
+    },
+    {
+      "finding_id": "V2-P0-02",
+      "status": "CLOSED",
+      "evidence": "Synthetic publication on the actual Windows host uses the production CreateFileW/FlushFileBuffers path, reaches terminal SUCCESS, and leaves the terminal hardlink as the last repository I/O inside publication."
+    },
+    {
+      "finding_id": "V2-P1-01",
+      "status": "CORE_FIX_CLOSED_BUT_NEW_CROSS_SEAL_TOCTOU_FOUND_SEPARATELY",
+      "evidence": "Missing or wrong QA bytes, SHA-256, verdict, design lineage, and seal lineage are rejected. Authorization and QA JSON are parsed from their held verified byte snapshots. The new finding concerns the independently reopened seal path, not the QA receipt snapshot itself."
+    },
+    {
+      "finding_id": "V2-P1-02",
+      "status": "CLOSED",
+      "evidence": "The numerical module is read once, hash-verified, compiled, and executed from the same held bytes without package initialization. The design and seal share exactly 13 transitive pins and predecessor terminal semantics are independently checked."
+    },
+    {
+      "finding_id": "V2-P1-03",
+      "status": "CLOSED",
+      "evidence": "P100 remains literal relative metadata until one durable exact slot-19 RESEARCH_GO; resolve, stat, open, hash, and parse are zero before that gate."
+    },
+    {
+      "finding_id": "V2-P1-04",
+      "status": "CLOSED",
+      "evidence": "Result and manifest verification, durability barriers, accounting, durable commit-ready event, terminal bytes, and terminal hash all precede the terminal-success hardlink; injected faults fail closed."
+    },
+    {
+      "finding_id": "V2-P2-01",
+      "status": "CLOSED",
+      "evidence": "prediction_day_start, trajectory_start, and trajectory_end remain explicit and the unchanged seven-day embargo is measured from trajectory_start."
+    },
+    {
+      "finding_id": "V2R2-P1-NEW-01",
+      "status": "CLOSED",
+      "evidence": "Observations resolve only as P2_DATA_DIR/observations.csv from an absolute environment root, with exact parent and basename, no enumeration or fallback, official-token and symlink-escape guards, and unchanged 49,058,719-byte content pin. No personal absolute path remains in v2r3 static sources or seal."
+    },
+    {
+      "finding_id": "V2R2-P1-NEW-02",
+      "status": "CLOSED",
+      "evidence": "Aware Asia/Seoul clock values and pinned filesystem mtimes verify design <= implementation <= tests <= seal <= preflight, with zero future timestamps. The actual seal declaration and filesystem mtime are ordered."
+    }
+  ],
+  "new_findings": [
+    {
+      "finding_id": "V2R3-P1-NEW-01",
+      "severity": "P1",
+      "title": "Validated seal snapshot is not bound to authorization, QA, claim, and publication lineage",
+      "locations": [
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:183",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:185",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:426",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:428",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:578",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:636",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:646",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:767",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1211",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1404",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1478",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1500",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1501",
+        "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py:1512"
+      ],
+      "evidence": "The worker first parses and semantically validates seal A through _verify_seal(). _authorization_state() then independently reopens and hashes SEAL_PATH for the authorization seal hash and both QA lineage checks. It does not bind those checks to the exact seal bytes already validated. The worker later loads the numerical module using the stale in-memory seal A pin. Design verification similarly hashes DESIGN_PATH and then reopens it for JSON parsing.",
+      "adversarial_sequence": [
+        "Present valid seal A and its static files while _verify_seal() validates and returns the parsed A object.",
+        "Replace the path with seal B and an authorization plus QA receipt pinned to B before _authorization_state(). B itself is not semantically revalidated in that call.",
+        "Restore the module bytes pinned by A before _load_sealed_numerical_module(seal_A).",
+        "Authorization and QA lineage now refer to B while the numerical module and historical-source contract are selected by A."
+      ],
+      "impact": "A concurrent replace/toggle can separate the independently approved seal identity from the seal that controls actual worker inputs and module loading. This is an authorization-lineage bypass even though the authorization file, QA report, and module each individually use held snapshots.",
+      "required_fix": [
+        "Read the design and seal exactly once each into held byte snapshots; verify their expected digest and parse from those same bytes.",
+        "Return the validated seal digest together with the parsed seal from _verify_seal().",
+        "Pass that digest into _authorization_state and compare authorization.seal_sha256, QA pin seal_sha256, and parsed QA report seal_sha256 only to that value; do not reopen or hash SEAL_PATH there.",
+        "Thread the identical validated seal digest into preflight output, the permanent claim, worker launch/validation, result manifest, and terminal publication. Remove all post-verification _sha256(SEAL_PATH) calls.",
+        "Apply the same held-snapshot rule to design and execution JSON where a digest check is followed by a path reopen.",
+        "Add a synthetic adversarial test that swaps seal-path bytes between _verify_seal and authorization and proves fail-closed rejection before claim, materialization, or score.",
+        "Create a new prospective successor version and fresh truthful seal; do not mutate or authorize v2r3."
+      ]
+    }
+  ],
+  "verification": {
+    "pytest_with_command_scoped_p2_data_dir": {
+      "command": "P2_DATA_DIR=<source-root> .venv-p1/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r3.py",
+      "result": "PASS_WITH_ONE_PLATFORM_SKIP",
+      "tests_collected": 63,
+      "tests_passed": 62,
+      "tests_skipped": 1,
+      "tests_failed": 0,
+      "skip_reason": "The current Windows account does not permit the synthetic symlink creation used by one escape test; direct parent, basename, official-token, and exact-pin guards passed."
+    },
+    "ruff": {
+      "command": ".venv-p1/Scripts/ruff.exe check src/p2_restore/public_trajectory_dtw_v2r3.py scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r3.py tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r3.py",
+      "result": "PASS"
+    },
+    "portable_observations": {
+      "result": "PASS",
+      "unset_environment": "FAIL_CLOSED",
+      "absolute_command_scoped_environment": "PASS",
+      "relative_path": "observations.csv",
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "parsed_values_read_by_independent_qa": false
+    },
+    "default_preflight_twice": {
+      "result": "PASS",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "stdout_byte_identical": true,
+      "stdout_sha256_both_calls": "5cc555e233fc16254c86ffb865fcd9c8593114a064c24814a2e02b9449d63c8f",
+      "tracked_bytes_hashes_and_mtimes_identical": true,
+      "control_state_identical": true,
+      "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+      "read_only": true,
+      "authorized": false,
+      "all_operation_counters_zero": true,
+      "p100_filesystem_accesses": 0
+    },
+    "actual_windows_synthetic_publication": {
+      "result": "PASS",
+      "temporary_namespace_only": true,
+      "production_windows_flush_path_used": true,
+      "terminal_state": "SUCCESS",
+      "terminal_link_last_inside_publication": true,
+      "post_terminal_repository_io": 0
+    },
+    "chronology": {
+      "result": "PASS",
+      "timezone": "Asia/Seoul",
+      "future_timestamp_count": 0,
+      "filesystem_mtime_order_nondecreasing": true,
+      "seal_declared_at_kst": "2026-08-26T08:42:59.884803+09:00",
+      "seal_filesystem_mtime_kst": "2026-08-26T08:43:23.6125509+09:00"
+    },
+    "transitive_lineage": {
+      "result": "PASS",
+      "exact_transitive_pin_count": 13,
+      "semantic_predecessor_terminal_event": "ATTEMPT_TERMINAL_FAILED",
+      "scientific_predecessor_result_consumed": false
+    },
+    "namespace": {
+      "result": "CLEAN",
+      "claim_exists": false,
+      "journal_exists": false,
+      "oob_terminal_exists": false,
+      "final_exists": false,
+      "staging_count": 0
+    }
+  },
+  "safety_accounting": {
+    "physical_fit_calls": 0,
+    "numerical_materializations": 0,
+    "actual_p100_resolve_stat_open_hash_parse": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "actual_experiment_namespace_mutations": 0,
+    "synthetic_test_mutations": "pytest temporary directories only"
+  },
+  "release_conditions": [
+    "Supersede v2r3 without mutating it and close V2R3-P1-NEW-01 with one end-to-end held seal identity.",
+    "Keep authorization false until a new independent QA report returns PASS against the exact successor design and held seal digest.",
+    "Repeat the 63-test suite, Ruff, command-scoped portable-source preflight twice, chronology, namespace, p100-firewall, authorization, crash, and publication checks.",
+    "Do not execute numerical materialization, access actual p100, or access official test/sample/submission/candidate paths during repair or re-QA."
+  ]
+}

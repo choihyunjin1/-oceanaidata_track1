@@ -1,0 +1,739 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.003760803739106777,
+          -0.00011821191139656412
+        ],
+        "median_m": -0.002041145910830988,
+        "probability_improve": 0.9582,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0014901722509244042,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0014256675792750917,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0054170145947958215,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0054146610541520035,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0015019664636169994,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.004841188634830296,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0035318944594990463,
+          -0.0005891236519340201
+        ],
+        "median_m": -0.0020963917001963206,
+        "probability_improve": 0.9888,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.236673743701072,
+        "raw_gain": 0.03307474370107012,
+        "transport_adjusted_gain": -0.01651131039121881,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.001817866536838797,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.004075494438464,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0034948681977279294,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.004016888390173223,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.002666476389134087,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.001308497835399991,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_MSE48_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.006265380286724076,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": 7.065256852312185e-05,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00913572700982379,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004068254562070495,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.007208563971520587,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0034537521098592094,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7791075169084052,
+        "delta_candidate_minus_uniform": -0.0020840077833268467,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.000985107581313538,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0036596274787698,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.001903624505938395,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.00015158515388757898,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.002495827757319602,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.002548531953023292,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -0.0014513445786999979,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0010527340964869847,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0008317600253102686,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.003402117864206522,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.006413274178151407,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.006133972026008738,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0024519236390326826,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0014170668828648036,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.004049167983173452,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.002088890114908093,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.003959323256382041,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0024666265971690082,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.007796187450228365,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.00513378376603757,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0007063788330946563,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0054170145947958215,
+      "worst_lead_delta_m": 0.002666476389134087,
+      "worst_reference_tail_block_delta_m": 0.00913572700982379,
+      "worst_station_lead_delta_m": 0.00513378376603757
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0037541150994415463,
+          -0.00019429375469648391
+        ],
+        "median_m": -0.0020822118159150027,
+        "probability_improve": 0.9624,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001653762182803109,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0017480632190980394,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006154750301969547,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.005103205037221614,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0021646452508814473,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.004611442017529943,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.003495728738518844,
+          -0.0006492789942909856
+        ],
+        "median_m": -0.0020674205766013087,
+        "probability_improve": 0.99,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.236921863076883,
+        "raw_gain": 0.033322863076882744,
+        "transport_adjusted_gain": -0.016263191015406187,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0019032320047976947,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.00428724435625949,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0033860148933821943,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.003055195225545204,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0022878959012812006,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0015707430128298894,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_MSE48_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.0069085678504309245,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0020768395268265794,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.009745359680160659,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0036223044566153773,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.004800493306176712,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.003012289049620809,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7790918831452214,
+        "delta_candidate_minus_uniform": -0.0020996415465106555,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0006694602284905704,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0036683556000620676,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0022381821090771137,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.00027247053398637977,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0024627599389764887,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0017809570225815197,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -0.0005133915428372493,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0013547105996829512,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0009425213990319481,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0032213107858646284,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.006879708116737437,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.005727912671407043,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0024520432704648876,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0012466362823588817,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.004047724001601138,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0023550329132111525,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.004236094033371773,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0032467959071120767,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.006149255032817935,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.003999829681661793,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0014796839510877735,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.006154750301969547,
+      "worst_lead_delta_m": 0.0022878959012812006,
+      "worst_reference_tail_block_delta_m": 0.009745359680160659,
+      "worst_station_lead_delta_m": 0.003999829681661793
+    }
+  ],
+  "created_at_utc": "2026-08-31T21:33:27.626919+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "PASS_CANDIDATE_AVAILABLE",
+  "duplication_audit": {
+    "distinction": "v29 uses ordinal word frequencies and fixed-radius recurrence geometry, v33 uses detrended cross-channel covariance, and v38 uses directional tail-hit dependence. v39 instead coarse-grains each channel at fixed scales and measures amplitude-sensitive conditional template-match complexity without cross-channel directionality, spectral energy, graph topology, or prior predictions.",
+    "novel_axis": "finite-sample multiscale sample entropy and template-match probabilities of historical physical paths",
+    "posthoc_prior_cycle_adjustment": false,
+    "rejected_axes": {
+      "permutation_entropy": "semantic duplicate of v29 ordinal-pattern distribution",
+      "v35_v38_ensemble_or_router": "forbidden post-hoc reuse"
+    },
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_MULTISCALE_COMPLEXITY_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 1.8137558000016725,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_multiscale_sample_entropy_residual_cycle_20260901_v39",
+  "feature_receipt": {
+    "columns": 48,
+    "finite": true,
+    "matrix_sha256": "7cf0dc7db1e98f55132007df3c73a22fd54e2ddd5e6301185ab7bc5ae0cccdd0",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.11727558773504497,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0413534683255803,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.11873702768374744,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.049819269186245456,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.10973232135345135,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.04321239270076803,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.09628482373788551,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.04678400109295947,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.14235731613836677,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.050482303130876476,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_MSE48_RIDGE512_ADD10",
+      "coefficient_l2": 0.09777533681829265,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_MSE48_RIDGE2048_ADD10",
+      "coefficient_l2": 0.038257658315169106,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Richman and Moorman, Physiological time-series analysis using approximate entropy and sample entropy, AJP Heart 278 H2039-H2049 (2000)",
+      "url": "https://doi.org/10.1152/ajpheart.2000.278.6.H2039",
+      "use": "sample-entropy mechanism and short noisy series motivation only; not performance evidence"
+    },
+    {
+      "citation": "Costa, Goldberger, and Peng, Multiscale Entropy Analysis of Complex Physiologic Time Series, Physical Review Letters 89, 068102 (2002)",
+      "url": "https://doi.org/10.1103/PhysRevLett.89.068102",
+      "use": "fixed coarse-graining across scales as representation motivation only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "41736400b2e18616a21b4bfdede86816fbe97b47d7ba14e28f0d54b577c7760a",
+    "evaluation_arrays_sha256": "0ce71a06072f0eeb9bf24e884c81a963292bbdb9eee11b502eb709382aa765e5",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "94b0cc32894c4d115c2b72c5d4ae6ce669561ef86197ab206ee9fdcf8e6b0326",
+    "runner_sha256": "58c38a4b79f4ef16c7cd0054d49be7cf6939a3bc6dfa97a1d0fa106fcf4f26e3"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.multiscale_sample_entropy_residual.result.v39",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

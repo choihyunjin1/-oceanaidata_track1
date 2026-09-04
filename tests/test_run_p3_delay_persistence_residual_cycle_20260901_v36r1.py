@@ -1,0 +1,113 @@
+from __future__ import annotations
+
+import importlib.util
+from pathlib import Path
+
+import numpy as np
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+RUNNER = ROOT / "scripts/run_p3_delay_persistence_residual_cycle_20260901_v36r1.py"
+SPEC = importlib.util.spec_from_file_location("p3_v36r1", RUNNER)
+assert SPEC and SPEC.loader
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+
+
+def sample_sequence() -> np.ndarray:
+    rng = np.random.default_rng(20260901)
+    values = rng.normal(size=(289, 10))
+    values[:, 3] = np.linspace(0.0, 359.0, 289)
+    values[:, 6] = np.linspace(359.0, 0.0, 289)
+    return values
+
+
+def test_constant_cloud_preserves_exact_zero_edges() -> None:
+    values = np.ones(145, dtype=np.float64)
+    lifetimes = MODULE.persistence_lifetimes(values, 2)
+    assert lifetimes.shape == (140,)
+    assert np.count_nonzero(lifetimes) == 0
+
+
+def test_benign_data_agrees_with_original_adapter() -> None:
+    rng = np.random.default_rng(20260901)
+    values = rng.normal(size=145)
+    assert np.allclose(
+        MODULE.persistence_lifetimes(values, 6),
+        MODULE.v36.persistence_lifetimes(values, 6),
+        atol=1e-12,
+        rtol=0.0,
+    )
+
+
+def test_feature_shape_finite_and_deterministic() -> None:
+    sequence = sample_sequence()
+    first = MODULE.delay_persistence_features(sequence)
+    second = MODULE.delay_persistence_features(sequence)
+    assert first.shape == (72,)
+    assert np.array_equal(first, second)
+    assert np.isfinite(first).all()
+
+
+def test_future_perturbation_invariance() -> None:
+    history = sample_sequence()
+    first = np.vstack([history, np.zeros((11, 10))])
+    second = first.copy()
+    second[289:] = 1e9
+    assert np.array_equal(
+        MODULE.delay_persistence_features(first[:289]),
+        MODULE.delay_persistence_features(second[:289]),
+    )
+
+
+def test_science_neutral_recovery_contract() -> None:
+    config = MODULE.load_config()
+    recovery = config["recovery"]
+    assert recovery["science_changes"] == 0
+    assert recovery["numerical_adapter_changes"] == 1
+    assert recovery["source_fit_count"] == recovery["source_outer_scores_exposed"] == 0
+    assert not recovery["same_id_restart"]
+    assert config["encoder"]["channels"] == ["hs", "tp", "hmax", "wspd"]
+    assert config["encoder"]["fixed_delays_rows"] == [2, 6, 12]
+    assert config["encoder"]["embedding_dimension"] == 3
+    assert config["encoder"]["feature_count"] == 72
+    assert config["validation"]["maximum_total_fits"] == 12
+    assert all(value == 0 for value in config["official_policy"].values())
+
+
+def test_fold_purge_and_exact_fit_budget(monkeypatch: pytest.MonkeyPatch) -> None:
+    cases, targets, reference, _ = MODULE.v36.v32.v23.case_surface()
+    calls: list[str] = []
+
+    def fake_fit_predict(features, residual, train, valid, spec):
+        calls.append(spec.name)
+        return np.zeros((int(valid.sum()), 6)), {
+            "candidate": spec.name,
+            "row_deletion": 0,
+        }
+
+    monkeypatch.setattr(MODULE.v36.v32.v26, "fit_predict", fake_fit_predict)
+    original = MODULE.v36.v32.v28.SPECS
+    MODULE.v36.v32.v28.SPECS = MODULE.SPECS
+    try:
+        _, receipts = MODULE.v36.v32.v28.crossfit(
+            cases, np.zeros((len(cases), 72)), targets, reference
+        )
+    finally:
+        MODULE.v36.v32.v28.SPECS = original
+    assert len(calls) == len(receipts) == 12
+
+
+def test_preflight_or_consumed_namespace() -> None:
+    if MODULE.ARTIFACT.exists() or MODULE.LOCK.exists():
+        with pytest.raises(MODULE.ContractError, match="consumed"):
+            MODULE.preflight_payload()
+    else:
+        value = MODULE.preflight_payload()
+        assert value["status"] == "READY_EXACTLY_ONCE_SCIENCE_NEUTRAL_RECOVERY"
+        assert value["synthetic"]["feature_count"] == 72
+        assert value["synthetic"]["finite"]
+        assert value["synthetic"]["recovery"]["science_changes"] == 0
+        assert value["synthetic"]["recovery"]["numerical_adapter_changes"] == 1
+        assert value["maximum_model_fits"] == 12
+        assert value["official_access"] == 0

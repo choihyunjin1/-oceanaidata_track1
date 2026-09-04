@@ -1,0 +1,61 @@
+{
+  "experiment_id": "p1_ordered_catboost_causal_calibrated_20260831_v32f",
+  "purpose": "Repair v32a under-recall using prefix-only 45-day calibration; outer labels never select the threshold.",
+  "seed": 20260831,
+  "deadline_kst": "2026-08-31T23:00:00+09:00",
+  "maximum_runtime_seconds": 1200,
+  "official_access_budget": {
+    "test_csv": 0,
+    "sample_submission_csv": 0,
+    "submission_csv": 0,
+    "hidden_labels": 0,
+    "upload": 0
+  },
+  "inputs": {
+    "train_csv_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "feature_cache": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+    "feature_cache_sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+    "tabular_reference_oof": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "tabular_reference_oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+  },
+  "model": {
+    "family": "CatBoostClassifier",
+    "boosting_type": "Ordered",
+    "iterations": 240,
+    "learning_rate": 0.06,
+    "depth": 7,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "bootstrap_type": "Bernoulli",
+    "subsample": 0.85,
+    "rsm": 0.8,
+    "thread_count": 8,
+    "sample_weight": "inverse_sqrt_positive_event_and_normal_station_layer_day"
+  },
+  "calibration": {
+    "trailing_days": 45,
+    "internal_feature_purge_days": 14,
+    "threshold_grid_start": 0.05,
+    "threshold_grid_end": 0.95,
+    "threshold_grid_step": 0.01,
+    "objective": "binary_row_f1",
+    "tie_break": "closest_to_0.5_then_lower"
+  },
+  "validation": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "outer_purge_days": 7,
+    "bootstrap_replicates": 1000,
+    "bootstrap_ci": 0.9,
+    "primary_reference": "frozen historical tabular OOF",
+    "secondary_reference": "frozen E150 raw historical OOF on Q3/Q4 only"
+  },
+  "promotion_gate": {
+    "all_q2_q3_q4_delta_f1_vs_tabular_nonnegative": true,
+    "pooled_delta_f1_vs_tabular_positive": true,
+    "pooled_bootstrap_ci90_low_vs_tabular_positive": true,
+    "q3_q4_delta_f1_vs_e150_positive": true,
+    "q3_q4_bootstrap_ci90_low_vs_e150_positive": true,
+    "runtime_at_most_seconds": 1200,
+    "official_accesses_equal_zero": true
+  }
+}

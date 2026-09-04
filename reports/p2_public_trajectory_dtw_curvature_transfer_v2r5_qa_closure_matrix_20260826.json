@@ -1,0 +1,108 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r5.qa_closure_matrix.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r5",
+  "created_at_kst": "2026-08-26T10:00:00.3820413+09:00",
+  "status": "IMPLEMENTED_ZERO_FIT_PENDING_NEW_INDEPENDENT_QA",
+  "prospective_design": {"path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r5_design.json", "bytes": 16087, "sha256": "c044ae23d14f85c634d8145cbd8f85b004536e378277dc91dc00097dc78f7fe4", "frozen_before_v2r5_code_fit_materialization_or_result": true},
+  "metadata_diagnosis": {"path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r5_exact_key_metadata_20260826.json", "bytes": 3963, "sha256": "a450a642987e6c940519b7b5767da22ebcf63f5ef69b66fe8425486d31de7909", "frozen_before_design": true},
+  "v2r4_failure_lineage": {
+    "claim": {"path": "artifacts/_p2_trajectory_claims/p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4.claim.json", "bytes": 561, "sha256": "003916cd1b062f97be39e85d422f954c25895519fecacbc9f4a7d8dbd53e2062"},
+    "journal": {"path": "artifacts/_p2_trajectory_attempt_journals/p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4.ndjson", "bytes": 2485, "sha256": "10f2efc207c3a5d768da630a8c89b9dfc92fb3b8bfee89ffede8f213bd817f69"},
+    "terminal": "TERMINAL_FAILURE_NO_RERUN",
+    "materialization_reserved": 0,
+    "materialization_completed": 0,
+    "physical_fit_calls": 0,
+    "scientific_result_available": false
+  },
+  "closure_count": 5,
+  "closures": [
+    {
+      "finding_id": "V2R4-INFRA-INIT-01",
+      "severity": "P0_INFRASTRUCTURE",
+      "status": "CLOSED_PROSPECTIVELY",
+      "root_cause": "The exact integrity adapter rejected legitimate missing observed-truth keys by requiring every adjacent observed timestamp to be ten minutes apart.",
+      "repair": "Validate unique (time,layer), registered rows/layers/bounds/61 KST days, UTC-ns roundtrip, and membership of every present timestamp on the frozen ten-minute grid. Permit and report missing union/per-layer keys and noncontinuous observed adjacency.",
+      "tests": ["test_sparse_multilayer_exact_keys_allow_missing_presence_but_require_grid", "test_exact_sep_oct_time_contract_is_61_kst_days_and_roundtrips"]
+    },
+    {
+      "finding_id": "V2R4-INFRA-INIT-02",
+      "severity": "P0_PREVENTION",
+      "status": "CLOSED_WITH_REAL_PINNED_READINESS",
+      "root_cause": "The sealed preexecution suite did not construct HistoricalTrajectoryMaterializer from the real pinned historical observations and exact anchor.",
+      "repair": "A real pinned constructor-only readiness check now verifies 789408 observation rows, 69850 full anchor rows, 26273 exact rows, independent truth equality, and the frozen sparse-key certificate without materialization, scoring, or p100 access.",
+      "tests": ["test_real_pinned_exact_anchor_initializes_without_materialization_or_p100", "test_real_initialization_readiness_precedes_claim_acquisition"]
+    },
+    {
+      "finding_id": "V2R4-FAILURE-LINEAGE-01",
+      "severity": "P1",
+      "status": "CLOSED_FAIL_CLOSED",
+      "repair": "The v2r4 authorized attempt, claim, journal, exact three-event sequence, terminal status, and zero materialization/fit/scientific accounting are transitive pins and semantic trigger checks.",
+      "tests": ["test_v2r4_qa_and_zero_materialization_failure_lineage_are_pinned", "test_seal_transitive_inventory_is_exact_and_fail_closed"]
+    },
+    {
+      "finding_id": "V2R5-SCOPE-01",
+      "severity": "P1",
+      "status": "CLOSED_ADAPTER_ONLY",
+      "repair": "AST comparison proves every v2r4 numerical definition outside exact_time_contract, exact_sparse_key_contract, and verify_anchor_against_observations is unchanged; cells, splits, gates, embargo, fallback, and 22-slot graph remain exact.",
+      "tests": ["test_v2r5_numerical_module_diff_is_integrity_adapter_only", "test_v2r5_active_namespace_has_no_stale_v2r4_binding", "test_exactly_six_cells_and_fixed_materialization_graph", "test_continuous_block_and_seven_day_source_embargo"]
+    },
+    {
+      "finding_id": "V2R4-P2-DOC-01",
+      "severity": "P2",
+      "status": "CLOSED_IN_SUCCESSOR_DOCUMENTATION",
+      "repair": "This successor closure matrix references only exact current v2r5 test function names; the immutable v2r4 matrix remains untouched.",
+      "tests": ["test_authorization_verifies_real_qa_receipt_and_snapshot_lineage", "test_authorization_uses_one_snapshot_even_if_auth_path_swaps", "test_authorized_worker_compiles_retained_module_without_path_reopen", "test_module_compilation_ignores_path_mutation_after_seal_snapshot"]
+    }
+  ],
+  "frozen_real_metadata": {
+    "exact_rows": 26273,
+    "unique_time_layer_keys": 26273,
+    "duplicate_time_layer_keys": 0,
+    "unique_timestamps": 8779,
+    "full_grid_timestamps": 8784,
+    "missing_union_timestamps": 5,
+    "gap_intervals": 2,
+    "off_grid_timestamps": 0,
+    "layer_rows": {"2": 8777, "3": 8774, "4": 8722},
+    "layer_missing_from_full_grid": {"2": 7, "3": 10, "4": 62},
+    "kst_days": 61,
+    "minimum_kst": "2024-09-01T00:00:00+09:00",
+    "maximum_kst": "2024-10-31T23:50:00+09:00"
+  },
+  "scientific_contract": {
+    "changed_from_v2r4": false,
+    "cells": ["d1_k3", "d1_k7", "d3_k3", "d3_k7", "d7_k3", "d7_k7"],
+    "inner_windows": ["2024-03", "2024-05", "2024-07"],
+    "exact_rows": 26273,
+    "p100_rows": 78156,
+    "source_embargo_full_days": 7,
+    "materialization_slots": 22,
+    "physical_fit_calls": 0,
+    "result_driven_reruns": 0,
+    "exact_RESEARCH_GO": {"delta_rmse_c_lte": -0.060, "ci90_upper_c_lte": -0.040, "each_layer_delta_lte": 0.003, "layer4_delta_lt": 0.0, "weekly_p90_lte": 0.015},
+    "p100_RESEARCH_GO": {"delta_rmse_c_lt": 0.0, "ci90_upper_c_lt": 0.0, "minimum_improving_folds": 2, "minimum_improving_layers": 2, "worst_fold_lte": 0.010, "worst_layer_lte": 0.005}
+  },
+  "verification": {
+    "preseal_pytest": {"result": "PASS", "tests_passed": 66, "tests_skipped": 1, "tests_deselected_seal_dependent": 4, "skip_reason": "Windows account did not permit synthetic symlink creation; exact resolver parent/basename and official-token guards remain directly tested."},
+    "real_pinned_constructor_test": "PASS",
+    "ruff": {"result": "PASS", "files": ["src/p2_restore/public_trajectory_dtw_v2r5.py", "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r5.py", "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r5.py"]},
+    "full_sealed_pytest": "PENDING_SEAL_CREATION",
+    "default_preflight_twice": "PENDING_SEAL_AND_FALSE_AUTHORIZATION"
+  },
+  "safety_accounting": {
+    "v2r5_claims": 0,
+    "physical_fit_calls": 0,
+    "numerical_materializations": 0,
+    "scores": 0,
+    "actual_p100_resolve_stat_open_hash_parse": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "actual_v2r5_experiment_namespace_mutations": 0,
+    "synthetic_test_mutations": "pytest temporary directories only"
+  },
+  "authorization": false,
+  "execution_instruction": "DO_NOT_EXECUTE. Keep authorization false until a new independent QA PASS is pinned to this exact v2r5 design and seal."
+}

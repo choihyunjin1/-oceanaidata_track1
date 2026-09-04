@@ -1,0 +1,9 @@
+# P1 v59 preregistration and negative fingerprint
+
+Decision before any target-bearing execution: `PREREGISTERED_EXACTLY_ONCE_EXPLORATORY`.
+
+The single frozen hypothesis is causal functional trajectory rank-depth. Each station-layer row receives an 18-row trailing temperature curve, corresponding to the organizer-documented three-hour lower duration of non-spike noise at ten-minute cadence. A deterministic 32-curve library is selected at evenly spaced valid endpoints from the pre-Q2 organizer-train prefix. The representation contains modified band depth and directional outlyingness magnitude/shape coordinates. The only learned head is initialized and trained from scratch on organizer-distributed training data.
+
+The repository-wide negative fingerprint found no implementation or experiment named modified band depth, functional data depth, directional outlyingness, functional boxplot, outliergram, magnitude-shape plot, curve depth, trajectory depth, or band inclusion. The sealed config distinguishes the mechanism from v14 dictionary discord, v16 persistence, v34 DFA, v42 Half-Space mass, v43 random-interval CIF, and the old scalar-probability ECDF transport rule.
+
+Execution is prohibited unless all of the following occur in order: focused pytest and Ruff pass; two independently invoked preflights return byte-identical `READY_ZERO_OPERATION`; the support receipt proves at least eight station-layer identities, at least two stations, at least 50% supported rows, 32 prefix reference curves per supported identity, and nonconstant functional features; only then may the fresh exactly-once lock be consumed. Q2/Q3 thresholds, vetoes, Q4 opening rule, model budget, and anchor-union decoder are unchanged. Official/test/sample/submission/hidden values, external observations, external-derived lineages, pretrained weights, CSV creation, and upload remain zero.

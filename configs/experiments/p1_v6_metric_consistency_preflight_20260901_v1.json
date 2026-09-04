@@ -1,0 +1,49 @@
+{
+  "schema_version": "p1.v6_metric_consistency_preflight.v1",
+  "experiment_id": "p1_v6_metric_consistency_preflight_20260901_v1",
+  "status": "PREREGISTERED_ZERO_FIT_GATES",
+  "primary_source": {
+    "title": "Thresholding Classifiers to Maximize F1 Score",
+    "authors": "Lipton, Elkan, Narayanaswamy",
+    "year": 2014,
+    "url": "https://arxiv.org/abs/1402.1892",
+    "claim": "For calibrated conditional probabilities the F1-optimal threshold is F-star divided by two."
+  },
+  "add_only_derivation": {
+    "anchor": "F=2T/(2T+P+N)",
+    "after_a_true_b_false_additions": "Fprime=2(T+a)/(2T+P+N+a+b)",
+    "strict_improvement_iff": "a/(a+b)>T/(2T+P+N)=F/2"
+  },
+  "rocket_semantic_audit": {
+    "decision": "CLOSE_ZERO_FIT_SEMANTIC_DUPLICATE",
+    "proposed": "fixed causal dilated convolution PPV/max plus sparse linear add-only head",
+    "duplicate": "P1 v17 causal MiniRocket-lite fixed convolution PPV representation plus linear add-only head; v32i closes remaining ten-minute representation probes",
+    "evidence": {
+      "src/p1_qc/causal_minirocket_lite.py": "b03bf681aa243cd7aa4399b4c053c8b3a6916e0acefa55a306427c60533e3fa1",
+      "configs/experiments/p1_public_transport_repair_cycle_20260831_v17.json": "c14772a3094eae27a5d984e50e962b96caa35df0c7008d72e4f1679e1b70eb7b",
+      "scripts/run_p1_public_transport_repair_cycle_20260831_v17.py": "651c5aa61e15c26086231dc9d584aac692eaba7b271fdbfd3c884fd0a5ad2704",
+      "reports/p1_last_orthogonal_probe_20260831_v32i/report-source.md": "e440450d766f19b649230ee9acd0b0e2bf8f2b6f4a2985f365955016353c3565"
+    }
+  },
+  "metric_reassessment": {
+    "surface": "EXPLORATORY_REUSED_SURFACE",
+    "v5r1_outer_exposed": true,
+    "v5r1_result_use_for_threshold_selection": 0,
+    "v5r1_result": {"path": "artifacts/p1_v5_within_station_vertical_causal_graph_20260901_v1r1/result.json", "sha256": "4a88d30c31e14b3e96caa84f8f49ee07285a2c40074a47426374da2fba7d3647"},
+    "frozen_graph_seed_quantile_budget": true,
+    "desired_gate": "inner incumbent F1 divided by two plus preregistered safety margin, with Wilson90 LCB strictly above it",
+    "safety_margin": 0.02,
+    "blocker": "The authenticated champion OOF begins 2025-04-01, after the Q2 inner interval ending 2025-03-24; v5r1 seals contain outer scores only and no inner incumbent predictions.",
+    "authenticated_oof": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/oof/event_day_balanced_binary_lgbm_p100.parquet", "sha256": "a7d3d893916e470ba16ed4a7410dfa8aeda0fcc62350cddd8b75cb46038dbc73", "minimum_time": "2025-04-01T00:00:00+09:00"},
+    "q2_inner_end": "2025-03-24T23:50:00+09:00",
+    "scientific_decision": "CLOSE_ZERO_FIT_MISSING_AUTHENTICATED_Q2_INNER_ANCHOR",
+    "new_graph_fits_authorized": 0,
+    "sealed_prediction_rethreshold_authorized": 0
+  },
+  "operations": {"fits": 0, "outer_targets": 0, "official": 0, "csv": 0, "uploads": 0, "retry_or_retune": 0},
+  "next_axis": {
+    "name": "causal_multiscale_wavelet_scattering_add_only",
+    "status": "AUDIT_ONLY_REQUIRES_NEW_ID",
+    "distinction": "deterministic analytic wavelet modulus cascades and scale-energy ratios, not random MiniRocket kernels, learned TCN/graph weights, Fourier amplitudes, TS2Vec, or CAPA"
+  }
+}

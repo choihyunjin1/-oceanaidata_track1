@@ -1,0 +1,269 @@
+{
+  "schema_version": "p2.gaussian_copula.frozen_deployability_preflight.20260830.v3",
+  "experiment_id": "p2_gaussian_copula_frozen_deployability_preflight_20260830_v3",
+  "problem": "P2",
+  "mode": "ZERO_FIT_HASH_LEDGER_DEPLOYABILITY_PREFLIGHT",
+  "conclusion_scope": "Local integrity and recorded-submission duplication only; this does not inspect official rows or prove current platform quota or platform-wide duplicate state.",
+  "frozen_candidate": {
+    "experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v2",
+    "base_experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v1",
+    "comparator": "FROZEN_ALPHA50_PROXY",
+    "comparator_is_exact_official_incumbent_oof": false,
+    "historical_surface_exposed": true,
+    "research_only": true,
+    "local_confirmation_rerun_authorized": false,
+    "reason_no_local_rerun": "The v2 completion-only overlay consumed its single execution and the exact historical surface is closed to rerun or retuning.",
+    "recipe_summary": {
+      "margins": "seasonal empirical CDF / nonparanormal transform",
+      "dependence": "ordinary Kendall tau mapped to latent Gaussian correlation",
+      "shrinkage_candidates": [0.1, 0.3, 0.5],
+      "gauss_hermite_points": 15,
+      "inner_groups": 3,
+      "outer_historical_blocks": [
+        "2024_sep_oct",
+        "2025_jul_aug",
+        "2025_nov_dec"
+      ],
+      "v2_only_repair": "Incomplete target-layer profile times receive exact zero correction; complete-profile predictions and all scientific choices are unchanged."
+    },
+    "forbidden_changes": [
+      "shrinkage change",
+      "window or fold change",
+      "margin or dependence change",
+      "feature or edge change",
+      "grid reopening",
+      "result-based retry or tuning"
+    ]
+  },
+  "expected_historical_result": {
+    "rows": 69850,
+    "reference_rmse_c": 3.0857868482638113,
+    "candidate_rmse_c": 3.0751707832303863,
+    "delta_rmse_c": -0.010616065033425048,
+    "bootstrap_unit": "KST calendar day",
+    "bootstrap_days": 163,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260830,
+    "bootstrap_ci90_low_delta_c": -0.01738439679930879,
+    "bootstrap_ci90_high_delta_c": -0.007700262306877281,
+    "inner_fits": 27,
+    "outer_fits": 3,
+    "total_fits": 30,
+    "reclassified_state": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+  },
+  "pinned_files": [
+    {
+      "role": "base_config",
+      "path": "configs/experiments/p2_gaussian_copula_conditional_mean_20260830_v1.json",
+      "sha256": "cdbf74f9f9f67c17f585905b2c28ed44a5dea77dc9b4abd7f42cce52827b405d",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "overlay_config",
+      "path": "configs/experiments/p2_gaussian_copula_conditional_mean_20260830_v2.json",
+      "sha256": "ff3fd20ac95fa571c15e4ed842ae2c54c704e2914405677ab572e1beb167ef06",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "v1_attempt_lock",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v1/attempt.lock.json",
+      "sha256": "3c464e773abec05be9c27c1d4d3f0e00f2d630390ace1eac31ff96b5de99685a",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "v2_attempt_lock",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/attempt.lock.json",
+      "sha256": "21e6f5b915b78821fb5f12e6f06cb87a3887c92e41d83bb712bf1b36b6bb2fe2",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "historical_result",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json",
+      "sha256": "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "prediction_commitment",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/prediction_commitment.json",
+      "sha256": "a21a267c267d4aecc33be52c1c442e89d6c8fe792665bda6a8b75ad8abc0720a",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "historical_independent_qa",
+      "path": "reports/p2_gaussian_copula_conditional_mean_20260830_v2/independent-qa.json",
+      "sha256": "f140063ab07cda95a26d560d28dd5bbadfc2c5670008e00fb95bc88db6661f84",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "gate_replay",
+      "path": "reports/gate_recalibration_research_20260830_v1/gate-replay.json",
+      "sha256": "879efa4dc60dc5b7a88ccee7db7aabcd5d2380ac835637bfdc77d4c1cdb6ce59",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "failure_replay",
+      "path": "reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json",
+      "sha256": "965b4152fb7c115d3b8f87be270304227b60a926a7e3607f73952b82587ce40e",
+      "inspection": "json_aggregate"
+    },
+    {
+      "role": "v1_failure_report",
+      "path": "reports/p2_gaussian_copula_conditional_mean_20260830_v1/failure-report.md",
+      "sha256": "b7a2025a2b9a3e9bd67166be79a4c4c9c97eb19dcec0b57004509c74933b1e75",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "v2_report",
+      "path": "reports/p2_gaussian_copula_conditional_mean_20260830_v2/report-source.md",
+      "sha256": "e25d451fe33f96a89d6e06971d985191b843c597d8448b2c6a0c80f2a21afaf6",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "v2_include_exclude_manifest",
+      "path": "reports/p2_gaussian_copula_conditional_mean_20260830_v2/include-exclude-manifest.md",
+      "sha256": "18b33c394c2ac1d5825e81e8e8d01096d2bc4af678d526e61269cb8522195d9c",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_model_module_snapshot",
+      "path": "src/p2_restore/gaussian_copula_conditional_mean.py",
+      "sha256": "512af8aa5127beb75fea4ecc8149b0854d70dfe075e06d38eef6afe70c4bdb03",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_v1_runner_snapshot",
+      "path": "scripts/run_p2_gaussian_copula_conditional_mean_20260830_v1.py",
+      "sha256": "72d0f51ae23f756a2f856fac10f53bd0956c66112b87ef6a0e797a4b40d3d785",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_v2_runner_snapshot",
+      "path": "scripts/run_p2_gaussian_copula_conditional_mean_20260830_v2.py",
+      "sha256": "7312f7350d36c93778569b0688945cf5c7dfe3967035d1698cf256296f5883b4",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_v2_qa_runner_snapshot",
+      "path": "scripts/qa_p2_gaussian_copula_conditional_mean_20260830_v2.py",
+      "sha256": "8fbff284baddeb6cf2f1971e8a454b786b82abbe455e7466ad7ada70b837c333",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_v1_tests_snapshot",
+      "path": "tests/test_p2_gaussian_copula_conditional_mean_20260830_v1.py",
+      "sha256": "521d3715d9e48847871799858f5f64312fa03045a8f5b4dddc891a275bcabed3",
+      "inspection": "hash_only"
+    },
+    {
+      "role": "current_v2_tests_snapshot",
+      "path": "tests/test_p2_gaussian_copula_conditional_mean_20260830_v2.py",
+      "sha256": "b9a90271dd36b8afd957672673cb2f56f97b53528bac64fdfd98ff4084d6a9bf",
+      "inspection": "hash_only"
+    }
+  ],
+  "historical_prediction_artifacts": [
+    {
+      "block": "2024_sep_oct",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/predictions/2024_sep_oct.npz",
+      "committed_rows": 26273,
+      "committed_bytes": 455617,
+      "committed_sha256": "59f8d7c906023817aca3af7b8126b3152a7495d562b3585fac19ec24b7b96f7a"
+    },
+    {
+      "block": "2025_jul_aug",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/predictions/2025_jul_aug.npz",
+      "committed_rows": 26693,
+      "committed_bytes": 728142,
+      "committed_sha256": "5bf34ae25418ef1d2df5ea4a07990a2a73419c73234d98aec0940b5e0dc57a7d"
+    },
+    {
+      "block": "2025_nov_dec",
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/predictions/2025_nov_dec.npz",
+      "committed_rows": 16884,
+      "committed_bytes": 509987,
+      "committed_sha256": "e9d192b4bea8680841e2821cfc4b0aa0f25df21b43460e7e312bd143b049e131"
+    }
+  ],
+  "claim_checks": [
+    {"source_role": "base_config", "json_path": ["experiment_id"], "equals": "p2_gaussian_copula_conditional_mean_20260830_v1"},
+    {"source_role": "base_config", "json_path": ["comparator"], "equals": "FROZEN_ALPHA50_PROXY"},
+    {"source_role": "overlay_config", "json_path": ["experiment_id"], "equals": "p2_gaussian_copula_conditional_mean_20260830_v2"},
+    {"source_role": "overlay_config", "json_path": ["repair_contract", "incomplete_target_profiles"], "equals": "exact zero residual correction"},
+    {"source_role": "v1_attempt_lock", "json_path": ["maximum_executions"], "equals": 1},
+    {"source_role": "v2_attempt_lock", "json_path": ["maximum_executions"], "equals": 1},
+    {"source_role": "historical_result", "json_path": ["experiment_id"], "equals": "p2_gaussian_copula_conditional_mean_20260830_v2"},
+    {"source_role": "historical_result", "json_path": ["comparator"], "equals": "FROZEN_ALPHA50_PROXY"},
+    {"source_role": "historical_result", "json_path": ["metrics", "aggregate", "rows"], "equals": 69850},
+    {"source_role": "historical_result", "json_path": ["metrics", "aggregate", "delta_rmse"], "equals": -0.010616065033425048},
+    {"source_role": "historical_result", "json_path": ["bootstrap", "ci90_high"], "equals": -0.007700262306877281},
+    {"source_role": "historical_result", "json_path": ["fit_counts", "total_copula_fits"], "equals": 30},
+    {"source_role": "historical_result", "json_path": ["official_hidden_test_sample_submission_rows_read"], "equals": 0},
+    {"source_role": "historical_result", "json_path": ["submission_csv_count"], "equals": 0},
+    {"source_role": "historical_result", "json_path": ["upload_count"], "equals": 0},
+    {"source_role": "prediction_commitment", "json_path": ["official_rows_read"], "equals": 0},
+    {"source_role": "historical_independent_qa", "json_path": ["qa_status"], "equals": "PASS"},
+    {"source_role": "historical_independent_qa", "json_path": ["hashes", "result"], "equals": "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3"},
+    {"source_role": "gate_replay", "json_path": ["candidates", "P2_gaussian_copula_conditional_mean", "new_state"], "equals": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"}
+  ],
+  "official_submission_duplicate_audit": {
+    "scope": "Pinned local aggregate receipts only through the latest stored 2026-08-28 P2 submission record.",
+    "ledgers": [
+      {
+        "path": "reports/deadline_submission_results_20260828_v1/official-results.md",
+        "sha256": "d268aaca88906ff5151cd02f3434b21117982bc6bd8fe81915098ef2052df41a"
+      },
+      {
+        "path": "reports/p2_oas_alpha50_deployment_20260828_v13/official_score_receipt.json",
+        "sha256": "f35b363d5043f9a7f136a4e8ac171d6028aea62e358ebcf3867e2a27ecb9b805"
+      },
+      {
+        "path": "reports/p2_submit_p1_p3_deep_research_20260828_v1/official_score_receipt.json",
+        "sha256": "80394fbadeb95bb6acf41f923848daf15f06f7a447674ff8947096e11bf6c4e8"
+      }
+    ],
+    "candidate_tokens": [
+      "p2_gaussian_copula_conditional_mean_20260830_v2",
+      "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3",
+      "a21a267c267d4aecc33be52c1c442e89d6c8fe792665bda6a8b75ad8abc0720a",
+      "59f8d7c906023817aca3af7b8126b3152a7495d562b3585fac19ec24b7b96f7a",
+      "5bf34ae25418ef1d2df5ea4a07990a2a73419c73234d98aec0940b5e0dc57a7d",
+      "e9d192b4bea8680841e2821cfc4b0aa0f25df21b43460e7e312bd143b049e131"
+    ]
+  },
+  "deployability": {
+    "official_target_rows": 26061,
+    "official_prediction_artifact": null,
+    "official_prediction_artifact_materialized": false,
+    "current_platform_duplicate_state_verified": false,
+    "current_daily_quota_verified": false,
+    "historical_code_hashes_were_sealed_at_v2_execution": false,
+    "historical_code_hash_limitation": "The v2 result and QA pin configs, locks, commitments and predictions, but do not attribute source/runner byte hashes to execution time; v3 records only their current hashes.",
+    "required_before_probe": [
+      "Explicit authorization to access official inputs and materialize one 26061-row candidate without retuning",
+      "Independent schema and candidate hash receipt without reading target truth",
+      "Authenticated current quota check",
+      "Authenticated platform duplicate check",
+      "Exact filename approval before upload"
+    ]
+  },
+  "execution_policy": {
+    "maximum_executions": 1,
+    "maximum_model_fits": 0,
+    "maximum_threads": 1,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "read_training_rows": false,
+    "read_prediction_rows": false,
+    "read_official_test_index_sample_baseline_score_query_rows": false,
+    "create_csv": false,
+    "upload": false,
+    "commit": false,
+    "push": false
+  },
+  "predeclared_decision": {
+    "integrity_failure": "INVALID_PREFLIGHT_STOP_NO_RETRY",
+    "recorded_duplicate": "BLOCKED_RECORDED_OFFICIAL_DUPLICATE",
+    "integrity_pass_without_official_artifact_or_live_platform_checks": "PREFLIGHT_INTEGRITY_PASS_DEPLOYMENT_BLOCKED",
+    "probe_ready_only_if_all_required_before_probe_are_later_satisfied": "READY_FOR_EXPLICITLY_AUTHORIZED_SINGLE_OFFICIAL_PROBE"
+  }
+}

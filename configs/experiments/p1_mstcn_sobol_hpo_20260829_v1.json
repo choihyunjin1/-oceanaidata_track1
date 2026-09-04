@@ -1,0 +1,166 @@
+{
+  "schema_version": "p1.mstcn_sobol_hpo.v1",
+  "experiment_id": "p1_mstcn_sobol_hpo_20260829_v1",
+  "status": "PREREGISTERED_LOCAL_HISTORICAL_ONLY",
+  "purpose": "One fixed full-fidelity scrambled-Sobol search over previously unsearched MS-TCN++ optimization and regularization axes, with Q2-only selection and a single sealed Q3/Q4 confirmation.",
+  "source_experiment_id": "p1_incumbent_preserving_mstcn_asrf_v2",
+  "source_pins": {
+    "runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "bytes": 162708,
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "bytes": 25120,
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "model": {
+      "path": "src/p1_qc/ms_tcn_asrf.py",
+      "bytes": 23220,
+      "sha256": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f"
+    },
+    "data": {
+      "path": "src/p1_qc/ms_tcn_asrf_data.py",
+      "bytes": 30025,
+      "sha256": "cf5dc2dbbb3ecf05c489b661f5427ff225caaf28af5fb44d292e3289c7bb9adf"
+    },
+    "incumbent_q2_grid": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "bytes": 173949505,
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "incumbent_q2_receipt": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_receipt.json",
+      "bytes": 14102,
+      "sha256": "50483ac14ed6f7b60d28b937161f51043b3dd39f522909c087a5c00b5ac6df85"
+    },
+    "incumbent_q3_curve": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+      "bytes": 22946468,
+      "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+    },
+    "incumbent_q3_receipt": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve_receipt.json",
+      "bytes": 5856,
+      "sha256": "69bc50cf508d6b6061d0cf40e84e0d2825066dfaecfcad59006e9e0ccc7ba7f2"
+    },
+    "incumbent_q4_curve": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+      "bytes": 14747269,
+      "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+    },
+    "incumbent_q4_receipt": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve_receipt.json",
+      "bytes": 5856,
+      "sha256": "f5ef758679f1afbed7008cb367d9a9789b3876e9673f580e68762328ceed7e91"
+    }
+  },
+  "fixed_backbone": {
+    "window_rows": 2048,
+    "stride_rows": 512,
+    "generator_layers": 10,
+    "dual_dilations": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
+    "refinement_stages": 3,
+    "refinement_layers_per_stage": 10,
+    "kernel_size": 3,
+    "normalization": "none",
+    "anchor_union": true
+  },
+  "sobol_design": {
+    "implementation": "scipy.stats.qmc.Sobol",
+    "dimensions": 8,
+    "scramble": true,
+    "seed": 20260829,
+    "random_base2_m": 5,
+    "point_count": 32,
+    "mapping": {
+      "width": [256, 512],
+      "batch_size_by_width": {"256": 128, "512": 64},
+      "dropout_linear": [0.05, 0.30],
+      "learning_rate_log": [0.0001, 0.0008],
+      "weight_decay_log": [0.000001, 0.001],
+      "row_soft_dice_weight_log": [0.5, 2.0],
+      "temporal_smoothing_weight_linear": [0.05, 0.30],
+      "tied_boundary_type_weight_linear": [0.10, 0.40],
+      "stage_weight_templates": [
+        [0.25, 0.25, 0.5, 1.0],
+        [0.125, 0.25, 0.5, 1.0],
+        [1.0, 1.0, 1.0, 1.0]
+      ]
+    },
+    "seal_before_first_fit": true,
+    "result_adaptive_points_allowed": false
+  },
+  "training_contract": {
+    "discovery_seed": 20260827,
+    "additional_seeds": [20260839, 20260863],
+    "stop_epoch": 150,
+    "source_schedule_horizon_epochs": 300,
+    "threshold_grid": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "optimizer": "AdamW",
+    "row_bce_weight": 1.0,
+    "gradient_clip_norm": 1.0,
+    "precision": "bf16 mixed precision",
+    "top_k_for_three_seed_q2": 2,
+    "torch_cpu_threads_max": 2,
+    "torch_interop_threads": 1
+  },
+  "selection_contract": {
+    "surface": "2025_q2 historical only",
+    "incumbent_control": {
+      "width": 512,
+      "epoch": 150,
+      "threshold": 0.8,
+      "representation": "raw_three_seed_ensemble_mean"
+    },
+    "discovery_rank": [
+      "larger minimum monthly delta-F1 versus frozen incumbent e150",
+      "larger pooled delta-F1 versus frozen incumbent e150",
+      "smaller width",
+      "higher threshold",
+      "lower trial index"
+    ],
+    "q2_months_kst": ["2025-04", "2025-05", "2025-06"],
+    "preconfirm_gate": {
+      "all_monthly_delta_f1_strictly_positive": true,
+      "pooled_delta_f1_min": 0.003,
+      "anchor_positive_removed_rows": 0
+    }
+  },
+  "confirmation_contract": {
+    "winner_count": 1,
+    "phases": ["q3", "q4"],
+    "fresh_fit_all_three_seeds": true,
+    "seal_both_phase_predictions_before_any_phase_truth_metric": true,
+    "pass_if": {
+      "q3_delta_f1_strictly_positive": true,
+      "q4_delta_f1_strictly_positive": true,
+      "pooled_delta_f1_strictly_positive": true,
+      "anchor_positive_removed_rows": 0
+    },
+    "claim_scope": "retrospective historical transport only; not fresh generalization"
+  },
+  "output_contract": {
+    "artifact_directory": "artifacts/p1_mstcn_sobol_hpo_20260829_v1",
+    "attempt_lock": "artifacts/p1_mstcn_sobol_hpo_20260829_v1.ATTEMPT_LOCK.json",
+    "aggregate_json": "artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json",
+    "report": "reports/p1_mstcn_sobol_hpo_20260829_v1/report-source.md",
+    "automatic_retry": false,
+    "result_based_grid_or_rerun": false,
+    "checkpoint_storage": "none; discovery and confirmation state dicts are not persisted"
+  },
+  "prohibitions": {
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_read_or_creation": true,
+    "csv_creation": true,
+    "upload": true,
+    "q3_or_q4_used_for_selection": true,
+    "q3_metric_before_both_phase_seals": true,
+    "result_based_grid_extension": true,
+    "result_based_rerun": true,
+    "source_data_mutation": true,
+    "other_problem_files_modified": true
+  }
+}

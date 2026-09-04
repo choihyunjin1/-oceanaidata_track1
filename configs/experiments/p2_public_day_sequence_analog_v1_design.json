@@ -1,0 +1,84 @@
+{
+  "schema_version": "p2_public_day_sequence_analog.design.v1",
+  "experiment_id": "p2_public_day_sequence_analog_v1",
+  "generation": 2,
+  "created_at_kst": "2026-08-23T07:38:00+09:00",
+  "status": "PREREGISTERED_DESIGN_ONLY_NOT_EXECUTABLE",
+  "problem": "P2",
+  "metric": "integrated_RMSE_degC",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "created_before_first_hypothesis_fit_prediction_or_score": true,
+  "score_derived_tuning": false,
+  "hypothesis": {
+    "id": "H2_PUBLIC_DAY_SEQUENCE_ANALOG",
+    "family": "DAILY_TRAJECTORY_MATCHED_PROFILE_TRANSFER",
+    "description": "Match each withheld KST day to historical prefix days using the full public temperature/salinity trajectory compressed into six fixed four-hour bins, then transfer the median hidden profile at the identical KST minute. This tests sequence-state recurrence rather than the failed pointwise analog manifold."
+  },
+  "model": {
+    "public_layers": [1, 5, 6, 7],
+    "public_variables": ["temp", "psal"],
+    "kst_day_bins": [
+      "00:00-03:59", "04:00-07:59", "08:00-11:59",
+      "12:00-15:59", "16:00-19:59", "20:00-23:59"
+    ],
+    "daily_public_features": "mean of each of eight public channels inside each fixed four-hour bin, yielding 48 values",
+    "bin_minimum_finite_samples": 12,
+    "missing_features": "fit-prefix median imputation plus one binary missing indicator per feature, yielding 96 distance coordinates",
+    "robust_scaling": "fit-prefix median and IQR/1.349 per coordinate; fall back to standard deviation then one",
+    "distance": "unweighted Euclidean distance after robust scaling and clip to [-12,12]",
+    "nearest_historical_days": 5,
+    "minimum_historical_days": 30,
+    "prediction": "median target temperature over the five matched historical days at the identical KST minute and target layer, retaining only jointly finite target temp+psal values",
+    "minimum_available_neighbor_targets": 3,
+    "fallback": "sealed Stage-A prediction_mean when day representation or target analog support is insufficient",
+    "postprocess": "pinned public-endpoint isotonic profile projection then CSV float roundtrip",
+    "learned_parameters_per_cell": "prefix feature medians/scales and exact neighbor index only",
+    "hyperparameter_searches": 0,
+    "outer_validation_label_or_metric_used_for_fit_route_or_tuning": false
+  },
+  "curve_protocol": {
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "folds": [
+      "outer_2024_sep_oct",
+      "outer_2025_may_jun",
+      "outer_2025_jul_aug"
+    ],
+    "deterministic_index_fits": 15,
+    "deterministic_seed_slots": [20260823, 20260824, 20260825],
+    "seed_slots_must_be_byte_identical": true,
+    "bootstrap_unit": "KST_day",
+    "bootstrap_replicates": 5000,
+    "all_15_blind_parts_committed_before_truth_attachment": true
+  },
+  "gates": {
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_reference_rmse_c_at_most": -0.03,
+    "minimum_improved_outer_folds": 2,
+    "maximum_layer_or_2024_sep_oct_regression_c": 0.0075
+  },
+  "lineage_disclosure": {
+    "distinct_from_failed_rank2_point_analog": "one neighbor search per complete public day over a 24-hour trajectory, followed by same-minute robust target transfer; no per-timestamp Gaussian projection or local rank-2 affine profile",
+    "failed_family_weight_alpha_threshold_tuning": false,
+    "future_target_values_used": false,
+    "public_values_within_query_day": "offline public covariates only; no hidden target scalar"
+  },
+  "reference_pins": {
+    "stage_a_manifest": "bb21341f94b866be7e2d6dc0e0f0b78b9c84a1898d4844ff75637f95798f21c6",
+    "stage_a_seal": "315e52da6b7f4ab7bf3a1970301b4391b9f31611da6187667760ed0d3a501ba2",
+    "reference_oof_040": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626",
+    "reference_oof_055": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168",
+    "reference_oof_070": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf",
+    "reference_oof_085": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8",
+    "reference_oof_100": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "frozen_incumbent_csv": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+  },
+  "execution_policy": {
+    "design_is_not_execution_authorization": true,
+    "aggregate_fail_fast_before_executable_implementation": true,
+    "full_static_and_independent_qa_required_if_fail_fast_passes": true,
+    "candidate_test_upload_counts": 0,
+    "automatic_upload_allowed": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "p2.supported_layer_change_coherence.deployment_preflight.20260901.v11m1",
+  "experiment_id": "p2_supported_layer_change_coherence_deployment_preflight_20260901_v11m1",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "internal_pass_contract": {
+    "experiment_id": "p2_supported_layer_change_coherence_20260901_v11r1",
+    "result_path": "reports/p2_supported_layer_change_coherence_20260901_v11r1/result.json",
+    "result_sha256": "51f0dd9f8ffc913d2fed827334cdbfdb196ca3b310fd176b1ecdf791ff966379",
+    "required_status": "EXPLORATORY_PASS_REQUIRES_FRESH_CONFIRMATION",
+    "action_sha256": "35590fa25320e660cc2b846fd02b22324f183aba93836b831ce7bcd71cae59ca",
+    "science_config_sha256": "572cd04b5d4ef2e647f9581762c5db556d27aeb99facfdfa323527f083f69610",
+    "science_runner_sha256": "ebfb2d402663b031fd4d9e6bce581b2701121fecbc70e5fb13caa20f06018a64"
+  },
+  "source_contract": {
+    "p2_data_environment": "P2_DATA_DIR",
+    "observations_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_filename": "test_index.csv",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "champion_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1/P2_1_RANK1_BIN17_ONLY/P2_submission.csv",
+    "champion_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "expected_rows": 26061,
+    "key_columns": ["station", "layer", "time"],
+    "submission_columns": ["station", "layer", "time", "temp"],
+    "hidden_truth_allowed": false,
+    "score_file_allowed": false,
+    "upload_allowed": false
+  },
+  "exact_action": {
+    "science_candidate": "P2_V11_HUBER6_SUPPORTED_LAYER_CHANGE_COHERENCE",
+    "public_layers": [1, 5, 6, 7],
+    "minimum_available_public_layers": 3,
+    "huber_cutoff": 6.0,
+    "minimum_influence_weight": 0.5,
+    "formula": "endpoint_baseline + weight * (exact_bin17_champion - endpoint_baseline)",
+    "endpoint_baseline": "nearest_public_temperature_linear_interpolation_at_target_nominal_depth_using_public_nominal_depths",
+    "profile_projection": "must_already_satisfy_public_layer1_layer5_envelope_and_order_projection_exact_noop",
+    "label_or_performance_tuning": false
+  },
+  "deployment_guards": {
+    "schema_key_order_finite": true,
+    "active_share_lte": 0.5,
+    "absolute_action_p99_C_lte": 0.5,
+    "absolute_action_max_C_lte": 2.5,
+    "public_range_invariant": true,
+    "profile_projection_exact_noop_atol_C": 1e-12,
+    "on_pass": "MATERIALIZE_EXACT_CSV_PACK_UPLOAD_ZERO",
+    "on_fail": "NO_CSV"
+  },
+  "operation_limits": {
+    "model_fits": 0,
+    "candidate_count": 1,
+    "result_adaptive_tuning": false,
+    "automatic_retry_count": 0,
+    "hidden_truth_rows_read": 0,
+    "score_file_rows_read": 0,
+    "uploads": 0
+  }
+}

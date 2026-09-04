@@ -1,0 +1,139 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.terminal_zero_operation_no_go.v8",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "date_kst": "2026-08-26",
+  "status": "FINAL_PRECLAIM_NO_GO_STOP_RULE_R8",
+  "decision": "NO_GO_DO_NOT_AUTHORIZE",
+  "reason": "The final real-process adversarial probe found that true-parent verification is not operationally valid in the sealed r8 runner. The user-defined stop rule prohibits an r9 repair in this cycle.",
+  "stop_rule": {
+    "r8_is_last_infrastructure_repair_attempt": true,
+    "r9_permitted_in_current_cycle": false,
+    "document_and_stop_on_structural_p0_or_p1": true,
+    "triggered": true
+  },
+  "immutable_inputs": {
+    "r8_amendment": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v8_isolated_python_parent_capability_amendment.json",
+      "bytes": 9896,
+      "sha256": "003672cac416b5a691357ef108c0401b5bfb9661d4daa3adbe3c6efce68f4b61"
+    },
+    "execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v8.py",
+      "bytes": 3075,
+      "sha256": "9060b7cf265173977b828c6132dcd18dba84740e50b04c4076d4e88438a96efd"
+    },
+    "runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v8.py",
+      "bytes": 112547,
+      "sha256": "dd88bc294100140cac512dd28182b26009e2eee42db0bf2c3b31909fd110e6cd"
+    },
+    "sealed_tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v8.py",
+      "bytes": 12710,
+      "sha256": "53b41934393bb929cffc97b35a71740a7a02f0d138cd206679565d8d4f49932e"
+    },
+    "post_seal_adversarial_tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v8_adversarial.py",
+      "bytes": 7179,
+      "sha256": "a1b00d0608414a4830d04d4a0568d5bc5680fcbc2b870b788d41315a640c6432",
+      "seal_status": "NOT_IN_R8_SEAL_CREATED_AFTER_SEAL_FOR_FINAL_REAL_PROCESS_RED_TEAM"
+    },
+    "false_authorization_template": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v8_execution_authorization_template.json",
+      "bytes": 3187,
+      "sha256": "390c55c8dfd30c15b9a0032659534450e92c60b0869b0a501a10c4ea341e7b55",
+      "authorized": false
+    },
+    "preexecution_seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8/preexecution_seal.json",
+      "bytes": 9520106,
+      "sha256": "5d9f8a4c910501f0e028a073d10c5325fa4de9c569d4640fc36e9ed000e59d4d"
+    },
+    "r7_independent_no_go": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v7_independent_preexecution_qa_20260826.json",
+      "bytes": 9059,
+      "sha256": "066d51a32a16175a1e0fb5829ff44d6699ea398901d38a1fbbd92e51a20fe6ff"
+    }
+  },
+  "sealed_validation": {
+    "py_compile": "PASS",
+    "ruff": "PASS",
+    "pytest": {
+      "collected": 88,
+      "passed": 87,
+      "skipped": 1,
+      "failed": 0,
+      "skip_reason": "Pre-existing Windows symlink privilege unavailable."
+    },
+    "post_seal_preflight": {
+      "runs": 2,
+      "both_exit_zero": true,
+      "byte_identical": true,
+      "stdout_bytes": 1462,
+      "stdout_sha256": "100d7cc4cff10ad7ffaf7b4e2646b0ab69e949a776843c085268927a12f53201",
+      "semantic_verification_sha256": "74ed8efc98a12c0845eebae6cd377b98d8d5626d9bf5d87e36132fbaea924cd8"
+    },
+    "inventory_bindings": {
+      "isolated_python_home": {
+        "files": 4044,
+        "sha256": "7175111b8264591c03da3ee4e92971c18081713e192e35b64f97f77b4b0debd8"
+      },
+      "third_party_runtime_and_tzdata": {
+        "files": 10745,
+        "sha256": "b3f99a8bb5d5bd5491ea90ba7f022a76f0421fa549f56ebe5eb6f3223f409d26"
+      },
+      "private_snapshot": {
+        "files": 63,
+        "sha256": "31f25eab45a77dbc8be3f7b16459c69814b1b8e1874a46a846241c5104eeb4c2"
+      },
+      "exact_security_provider": {
+        "files": 1,
+        "sha256": "a459d6a4702a2121fc7686a1a95c3ba2e1f095caa4bce23bde3ce12598e89929"
+      }
+    }
+  },
+  "final_real_process_red_team": {
+    "tests": 8,
+    "passed": 6,
+    "failed": 2,
+    "blocking_findings": [
+      {
+        "id": "P0_R8_TRUE_PARENT_API_NOT_OPERATIONAL",
+        "severity": "P0",
+        "summary": "The NtQueryInformationProcess call inside _actual_os_parent_pid fails even for a normal process.",
+        "likely_cause": "The sealed runner does not declare the ctypes argtypes and restype required for the Windows API call.",
+        "impact": "The worker cannot establish the true OS parent identity, so the hidden-worker authorization boundary is not trustworthy and an authorized one-shot may fail before science."
+      },
+      {
+        "id": "P2_R8_COPIED_INTERPRETER_MAP_PROBE_UNRESOLVED",
+        "severity": "P2",
+        "summary": "The copied-interpreter initial-map probe failed; the test-side ctypes declaration may be defective, but the ambiguity is unresolved and cannot support authorization."
+      }
+    ]
+  },
+  "frozen_science_contract": {
+    "physical_fit_calls": 72,
+    "scientific_materializations": 21,
+    "outer_scores": 1,
+    "model_feature_window_gate_postprocess_changes": 0,
+    "scientific_cycle_consumed": false
+  },
+  "independent_zero_state_check": {
+    "canonical_namespace": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8",
+    "namespace_contents": [
+      "preexecution_seal.json"
+    ],
+    "actual_authorization": 0,
+    "claim": 0,
+    "lock": 0,
+    "result": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "active_scientific_processes": 0
+  },
+  "terminal_policy": "No r8 authorization and no r9 successor in this research cycle. Preserve the package as negative infrastructure evidence and transfer the scientific question to a documented Deep Research phase."
+}

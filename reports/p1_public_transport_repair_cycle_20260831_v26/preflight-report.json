@@ -1,0 +1,138 @@
+{
+  "access": {
+    "aggregate_result_reads": 1,
+    "attempt_locks": 0,
+    "hidden_truth_reads": 0,
+    "historical_fits": 0,
+    "historical_truth_reads": 0,
+    "official_reads": 0,
+    "sealed_probability_reads": 2,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "checks": {
+    "diagnostic_labels_zero": true,
+    "no_retrospective_rescore": true,
+    "official_hidden_lock_zero": true,
+    "q3_absolute_threshold_budget_explosion": true,
+    "q3_q4_upper_tail_scale_drift": true,
+    "q4_absolute_threshold_action_collapse": true,
+    "rank_selector_synthetic_pass": true
+  },
+  "decision": "PRESEALED_FOR_PROSPECTIVE_TWO_FIT_EXECUTION",
+  "fit_count": 0,
+  "hashes": {
+    "calibration_v3_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10",
+    "config_sha256": "2b8a8013a699187b63667ff53a59e14be5e741641bcaf17b5cbf897b9998b20d",
+    "runner_sha256": "5ceb32f069d6b52dde2026c0d91396fb4c492b0b422096c3cdbf8926befb28c8",
+    "v16_prediction_sha256": "0bba4fca1bde3ec78287601d3105f66843a816958725de59b7590aa70ed66817",
+    "v24_prediction_sha256": "904e863c5abba52e4815c02e5ce1e4584f53a4845cd4e34170bf2cfbd0ae21d7"
+  },
+  "probability_drift_diagnostic": {
+    "read_contract": {
+      "labels_read": 0,
+      "retrospective_candidate_rescored": false,
+      "sealed_probability_arrays_only": true,
+      "v24_aggregate_receipts_only": true
+    },
+    "v16": {
+      "2025_q2": {
+        "rows": 133170,
+        "score_quantiles": null,
+        "scored_anchor_negative_rows": 0
+      },
+      "2025_q3": {
+        "rows": 176738,
+        "score_quantiles": {
+          "max": 0.9997822609928142,
+          "p50": 1.439466125834711e-05,
+          "p90": 0.00018784589093899425,
+          "p99": 0.015427655775567005,
+          "p999": 0.6958037524983555
+        },
+        "scored_anchor_negative_rows": 171423
+      },
+      "2025_q4": {
+        "rows": 111124,
+        "score_quantiles": {
+          "max": 4.988000429751069e-06,
+          "p50": 4.486437431204322e-06,
+          "p90": 4.530473334340995e-06,
+          "p99": 4.628014161807587e-06,
+          "p999": 4.76227080840153e-06
+        },
+        "scored_anchor_negative_rows": 107275
+      }
+    },
+    "v24": {
+      "2025_q2": {
+        "rows": 133170,
+        "score_quantiles": null,
+        "scored_anchor_negative_rows": 0
+      },
+      "2025_q3": {
+        "absolute_threshold": 0.2657745296548592,
+        "inner_action_fraction_lower_bound": 0.0021135781383432965,
+        "inner_additions": 99,
+        "inner_calibration_rows": 46840,
+        "outer_action_fraction": 0.031186013545440226,
+        "outer_additions": 5346,
+        "rows": 176738,
+        "score_quantiles": {
+          "max": 0.9999999418750878,
+          "p50": 7.645172714500894e-05,
+          "p90": 0.018255079874794248,
+          "p99": 0.8362143298515675,
+          "p999": 0.999257645751555
+        },
+        "scored_anchor_negative_rows": 171423
+      },
+      "2025_q4": {
+        "absolute_threshold": 0.011186131630154271,
+        "inner_action_fraction_lower_bound": 0.0009696562245465241,
+        "inner_additions": 75,
+        "inner_calibration_rows": 77347,
+        "outer_action_fraction": 0.0002610114192495922,
+        "outer_additions": 28,
+        "rows": 111124,
+        "score_quantiles": {
+          "max": 0.06259241794951742,
+          "p50": 3.150788690298143e-05,
+          "p90": 6.536505372995405e-05,
+          "p99": 0.0004599556569145382,
+          "p999": 0.004800218381912684
+        },
+        "scored_anchor_negative_rows": 107275
+      }
+    }
+  },
+  "runtime_seconds": 0.03334449999965727,
+  "schema_version": "p1.v26.synthetic-preflight.1",
+  "status": "PASS",
+  "synthetic_rank_selector": {
+    "checks": {
+      "authorization_consistent": true,
+      "changed_cap": true,
+      "fraction_floor_exact": true,
+      "minimum_action_count_one": true,
+      "monotone_scale_invariant": true,
+      "outer_selector_has_no_label_argument": true,
+      "positive_inner_delta": true,
+      "precision_gate": true,
+      "two_new_fits": true
+    },
+    "outer_selected_count": 2,
+    "selected": {
+      "candidate_f1": 1.0,
+      "changed_fraction": 0.001,
+      "fraction_denominator": 950,
+      "fraction_numerator": 1,
+      "inner_delta_f1": 0.00990099009900991,
+      "negative_count": 950,
+      "precision": 1.0,
+      "reference_f1": 0.9900990099009901,
+      "selected_count": 1
+    },
+    "status": "PASS"
+  }
+}

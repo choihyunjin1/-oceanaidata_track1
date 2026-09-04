@@ -1,0 +1,82 @@
+{
+  "experiment_id": "p3_target_mix_density_reweighted_catboost_v1",
+  "created_at_kst": "2026-08-25T17:40:30+09:00",
+  "status": "PREREGISTERED_USER_AUTHORIZED_LOCAL_EXECUTION_NOT_UPLOAD_AUTHORIZATION",
+  "problem": "P3_wave_forecast",
+  "base_config": "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json",
+  "output": "artifacts/p3_target_mix_density_reweighted_catboost_v1",
+  "attempt_lock": "artifacts/p3_target_mix_density_reweighted_catboost_v1.ATTEMPT_LOCK.json",
+  "domain": {
+    "unit": "forecast_case",
+    "numeric_features_source": "p3_wave.loss_router.OBSERVED_FEATURES",
+    "numeric_feature_count": 17,
+    "categorical_features": ["station"],
+    "forbidden_features": ["anchor_time", "year", "month", "target_hs", "truth", "label", "incumbent_loss", "official_score"],
+    "classifier": {
+      "type": "LogisticRegression",
+      "C": 0.05,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "tol": 0.0001,
+      "class_weight": null,
+      "random_state": 20260816
+    },
+    "cross_fit": {
+      "type": "StratifiedGroupKFold",
+      "n_splits": 5,
+      "shuffle": true,
+      "random_state": 20260816,
+      "source_group": "station|episode_id",
+      "target_group": "target|case_id"
+    },
+    "probability_clip": [0.000001, 0.999999],
+    "ratio_clip": [0.1, 8.0],
+    "prior_correction": "Ns_train/Nt_train_per_domain_fold",
+    "combined_weight": "threshold_case_weight_times_ratio_then_mean_one"
+  },
+  "label_free_hard_gate": {
+    "oof_coverage": 1.0,
+    "group_overlap": 0,
+    "ratio_ess_fraction_min": 0.25,
+    "combined_ess_fraction_min": 0.25,
+    "station_combined_ess_fraction_min": 0.2,
+    "domain_oof_auc_strictly_below": 0.98,
+    "on_fail": "NO_GO_DENSITY_THEN_FIXED_22P5_LONG_SHRINK_FALLBACK"
+  },
+  "local_candidate_gate": {
+    "matched_incumbent_oof": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+    "matched_incumbent_rows": 1086,
+    "matched_incumbent_cases": 181,
+    "matched_incumbent_rmse_m": 0.7791048399763751,
+    "minimum_rmse_improvement_m": 0.005,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260822,
+    "ci90_upper_below_zero": true,
+    "minimum_improved_folds": 2,
+    "maximum_station_degradation_m": 0.01,
+    "lead_18_24_nonworsening": true
+  },
+  "fallback": {
+    "id": "P3_FIXED_LONG_SHRINK_22P5_V1",
+    "active_leads": [12, 18, 24],
+    "persistence_weight": 0.225,
+    "construction": "exact_midpoint_of_frozen_20pct_and_25pct_candidates_on_long_leads",
+    "current_csv": "output/2026-08-20/ready/P3_submission.csv",
+    "current_sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "round_a_csv": "artifacts/p3_corrected_fixed_long_shrink_v4/candidate/submission.csv",
+    "round_a_sha256": "607f7cd4ed2c126d5aa4eb6d8130a651ac465a0c88b4e74c112d585c3421d708"
+  },
+  "official_promotion_gate": {
+    "local_rmse_improvement_m": 0.028792,
+    "public_rmse_strictly_below": 0.607071,
+    "requires_same_direction": true
+  },
+  "isolation": {
+    "era5_feature_count": 286,
+    "era5_paths_may_be_read_or_imported": false,
+    "external_data_quarantine_may_be_read_or_written": false,
+    "absolute_test_timestamp_recovery": false,
+    "hidden_target_access": false,
+    "upload": false
+  }
+}

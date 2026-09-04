@@ -1,0 +1,292 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.design.v1",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-08-26T06:02:44+09:00",
+  "problem": "P1",
+  "cycle_index": 1,
+  "problem_cycle_ceiling": 2,
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "design_only": true,
+  "pre_result_freeze": {
+    "frozen_before_current_screen_result_review": true,
+    "current_screen_experiment_id": "p1_round_b_nonspike_long_event_residual_v1r4",
+    "current_screen_result_values_may_change_any_numeric_choice": false,
+    "current_screen_result_values_may_only_select_the_anchor_branch": true,
+    "numeric_choices_are_immutable_after_created_at_kst": true
+  },
+  "authorization_contract": {
+    "implementation_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_new_explicit_authorization": true,
+    "maximum_lifetime_executions_if_separately_authorized": 1,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "cycle_relation": {
+    "this_is_cycle": "P1_CYCLE_1_OF_EXACTLY_2",
+    "cycle_2_design_path": "configs/experiments/p1_long_event_matched_budget_retune_v1_design.json",
+    "cycle_2_is_eligible_only_after": "This cycle reaches terminal RESEARCH_GO with all integrity gates passing.",
+    "cycle_2_is_prohibited_after": [
+      "terminal RESEARCH_NO_GO",
+      "scientific gate failure",
+      "unevaluated required gate",
+      "integrity or leakage failure"
+    ],
+    "third_cycle_allowed": false,
+    "result_driven_substitute_cycle_allowed": false
+  },
+  "trigger_and_stop_contract": {
+    "required_predecessor_config": {
+      "path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4.json",
+      "bytes": 12869,
+      "sha256": "3d1ff35478928d063cfcbad888d149e28ccaed00f5b11e00433da3cd02d78d6c"
+    },
+    "terminal_predecessor_result_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r4/result.json",
+    "terminal_predecessor_manifest_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r4/manifest.json",
+    "trigger": "Both predecessor files must exist, their hashes must be pinned in a future execution authorization, the manifest must attest a terminal scientific result, and every original v1r4 gate must be evaluated.",
+    "anchor_if_predecessor_original_gate_passes": "frozen p1_round_b_nonspike_long_event_residual_v1r4 predictions",
+    "anchor_if_predecessor_original_gate_fails_scientifically": "frozen event_day_balanced_lightgbm Round-B predictions",
+    "blocked_if": [
+      "predecessor is incomplete",
+      "predecessor ended in infrastructure failure without a scientific decision",
+      "predecessor result or manifest hash cannot be pinned",
+      "source, key, chronology, or leakage integrity check fails"
+    ],
+    "blocked_policy": "Stop before feature materialization or fit. Infrastructure recovery, if any, requires a separate authorization and cannot alter this design.",
+    "terminal_research_no_go_policy": "Stop this structural family and prohibit P1 cycle 2.",
+    "terminal_research_go_policy": "Permit only a separately authorized execution of the preregistered P1 cycle 2; do not submit from this design.",
+    "predecessor_values_may_change_thresholds_features_splits_or_budget": false
+  },
+  "hypothesis": "Target-free long-interval proposals followed by a segment-level rescue classifier can recover offset/drift interiors and boundaries that the row classifier misses, including disconnected long intervals only when both boundaries are supported, while preserving the frozen anchor's existing positives, plateaus, singleton spikes, and short events.",
+  "immutable_aggregate_inputs": [
+    {
+      "path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json",
+      "bytes": 7350,
+      "sha256": "943ff9ac9723c36445a2a6af2112073799a4bf52185fde91d1e6e5bad9bdfb45",
+      "role": "score-headroom and transport-threshold planning evidence"
+    },
+    {
+      "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/result.json",
+      "bytes": 2384,
+      "sha256": "8df952acf1de4d86d129a9e1bf9ce1faa9c5450c7140c3a6db5eba65a809388b",
+      "role": "frozen matched-budget aggregate comparator evidence"
+    },
+    {
+      "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/manifest_final.json",
+      "bytes": 1689,
+      "sha256": "3b54388dc1bca47e95b5218aaec81c2b45f1db8cd42248995b1a605258ea78f1",
+      "role": "aggregate comparator integrity evidence"
+    },
+    {
+      "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/result.json",
+      "bytes": 4150,
+      "sha256": "0f00b798fe8297bc84b21e639e50c389b1315d6162ca84ebdfec32d91bdf8fe2",
+      "role": "aggregate long-event error concentration evidence"
+    },
+    {
+      "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/classification.json",
+      "bytes": 3015,
+      "sha256": "c78a5ec358426e97f8583f914ff4cf460950f1461949e46a04a3fb83518a5a55",
+      "role": "aggregate event-type evidence"
+    }
+  ],
+  "data_features_target_firewall": {
+    "allowed_data": "Historical labeled P1 training rows and frozen local prediction keys only, after a future authorization pins their existing hashes.",
+    "proposal_generation_is_target_free": true,
+    "proposal_unit": "contiguous station-layer interval",
+    "minimum_new_interval_rows": 19,
+    "segment_target": "For training only, target=1 iff at least 80% of a proposed interval's rows are positive and it overlaps a single connected non-spike positive event of at least 19 rows; otherwise target=0.",
+    "scored_prediction_rule": "The candidate may only change anchor-negative rows inside accepted rescue intervals from 0 to 1. It may never clear an anchor-positive row.",
+    "event_type_is_not_a_feature": true,
+    "label_or_future_value_in_feature": false
+  },
+  "feature_contract": {
+    "context_banks_hours": [
+      [24, 72],
+      [48, 168],
+      [24, 72, 168]
+    ],
+    "target_free_proposal_channels": [
+      "anchor low-probability islands",
+      "leave-center-out rolling median and MAD",
+      "two-sided CUSUM",
+      "robust pre/interior/post level contrast",
+      "robust slope and curvature",
+      "interior variance ratio",
+      "return-to-baseline evidence",
+      "station/layer/meteorological-season/depth regime",
+      "missingness masks"
+    ],
+    "peer_contract": "Dynamic causal peer-detrended channels are allowed for stations I and S; station G uses the predeclared univariate fallback. Peer features at time t may use only observations at or before t for the corresponding causal side.",
+    "decoder_modes": [
+      "CONNECTED_ONLY",
+      "DUAL_BOUNDARY_DISCONNECTED_ALLOWED"
+    ],
+    "disconnected_rule": "A disconnected interval is eligible only when independently computed start- and end-boundary scores both exceed the selected segment threshold and the full interval has at least 19 rows.",
+    "forbidden_features": [
+      "label",
+      "derived error type",
+      "future rows beyond the declared causal side",
+      "outer validation labels during selection",
+      "official score or rank",
+      "official evaluation data or metadata"
+    ]
+  },
+  "leakage_safe_splits": {
+    "timezone": "Asia/Seoul",
+    "inner_structure_windows": [
+      {
+        "id": "inner_2024_jul_aug",
+        "fit_end_inclusive": "2024-05-24T23:50:00+09:00",
+        "validation_start": "2024-07-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-08-31T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2024_oct_nov",
+        "fit_end_inclusive": "2024-08-24T23:50:00+09:00",
+        "validation_start": "2024-10-08T00:00:00+09:00",
+        "validation_end_inclusive": "2024-11-30T23:50:00+09:00"
+      },
+      {
+        "id": "inner_2025_jan_feb",
+        "fit_end_inclusive": "2024-11-23T23:50:00+09:00",
+        "validation_start": "2025-01-08T00:00:00+09:00",
+        "validation_end_inclusive": "2025-03-01T23:50:00+09:00"
+      }
+    ],
+    "outer_locked_windows": [
+      "2025_q2 frozen Round-B ordered validation keys",
+      "2025_q3 frozen Round-B ordered validation keys",
+      "2025_q4 frozen Round-B ordered validation keys"
+    ],
+    "outer_training_rule": "For each outer window, training must be a strict chronological prefix ending no later than seven full days before its first validation key.",
+    "selection_rule": "Choose one structure cell using inner windows only. Outer labels may be used once for the terminal locked evaluation and never for selection or rerun.",
+    "key_alignment": "Exact ordered station-layer-timestamp equality is required between anchor, candidate, and truth before scoring."
+  },
+  "fixed_structure_search": {
+    "structure_cells": 6,
+    "construction": "three context banks crossed with two decoder modes",
+    "seeds": [20260826, 20260843, 20260871],
+    "segment_probability_threshold_candidates": [0.75, 0.85, 0.92],
+    "threshold_selection": "Within each structure cell, choose the lowest candidate threshold whose pooled inner accepted-interval precision is at least 0.80; if none qualify, that cell is ineligible.",
+    "cell_selection": "Among eligible cells choose the largest equal-weight mean inner-window F1 delta; ties resolve by higher worst-window delta, then fewer added rows, then lexical cell id.",
+    "hyperparameter_search": false,
+    "configuration_changes_after_any_inner_or_outer_result": false,
+    "inner_configuration_seed_cells": 18,
+    "inner_physical_fit_calls": 54,
+    "outer_locked_physical_fit_calls": 9,
+    "maximum_lifetime_physical_fit_calls": 63
+  },
+  "evaluation": {
+    "comparator": "The frozen anchor selected solely by the predecessor branch.",
+    "primary_metric": "pooled row-level binary micro F1",
+    "primary_delta": "candidate_minus_anchor; positive is improvement",
+    "paired_bootstrap": {
+      "unit": "positive connected event or normal station-layer KST day",
+      "replicates": 5000,
+      "seed": 20260826,
+      "confidence": 0.90
+    },
+    "secondary_metrics": [
+      "fold F1 delta",
+      "station F1 delta",
+      "equal-weight supported station-by-fold F1 delta",
+      "precision, recall, TP, FP, FN",
+      "offset and drift recall",
+      "at-least-48-hour event recall",
+      "noise recall",
+      "spike and flatline exact-label preservation",
+      "false positives per station-layer KST day",
+      "accepted disconnected-interval precision",
+      "seed-level F1 delta"
+    ]
+  },
+  "decision_gates": {
+    "RESEARCH_GO": {
+      "pooled_f1_delta_gte": 0.0161,
+      "paired_ci90_lower_gte": 0.007,
+      "minimum_improving_outer_folds_of_3": 2,
+      "minimum_improving_stations_of_3": 2,
+      "equal_weight_supported_station_by_fold_f1_delta_gte": 0.008,
+      "q3_f1_delta_gte": 0.0,
+      "station_g_f1_delta_gte": 0.0,
+      "noise_recall_delta_gte": -0.005,
+      "offset_plus_drift_recall_delta_gte_any_of": [0.05],
+      "at_least_48h_event_recall_delta_gte_alternative": 0.10,
+      "long_event_recall_gate_logic": "offset_plus_drift_recall_delta >= 0.05 OR at_least_48h_event_recall_delta >= 0.10",
+      "spike_predictions_exactly_preserved": true,
+      "flatline_predictions_exactly_preserved": true,
+      "false_positives_per_day_ratio_lte": 1.05,
+      "disconnected_interval_precision_gte": 0.75,
+      "minimum_added_interval_rows_gte": 19,
+      "all_hash_chronology_leakage_and_key_checks": true
+    },
+    "SUBMISSION_GO": {
+      "note": "Research-only decision label; this design creates no candidate and authorizes no submission.",
+      "all_RESEARCH_GO_gates": true,
+      "pooled_f1_delta_gte": 0.0255,
+      "paired_ci90_lower_gte": 0.012,
+      "all_seed_f1_deltas_gte": 0.0,
+      "independent_aggregate_QA": "PASS",
+      "exact_reproduction_from_pinned_inputs": true
+    },
+    "preferred_effect": {
+      "pooled_f1_delta_gte": 0.0255,
+      "approximate_planning_point_gain_gte": 0.6778
+    },
+    "stretch_effect": {
+      "pooled_f1_delta_gte": 0.055,
+      "approximate_planning_point_gain_gte": 1.4619
+    },
+    "failure_label": "RESEARCH_NO_GO_CLOSE_P1_LONG_EVENT_SEGMENT_FAMILY"
+  },
+  "fair_incumbent_control": {
+    "cycle_1_scope": "Frozen-anchor structural screen; no incumbent retuning is claimed here.",
+    "same_ordered_validation_keys": true,
+    "same_truth_and_metric_implementation": true,
+    "anchor_positives_are_immutable": true,
+    "matched_budget_confirmation_reserved_for_cycle_2": true,
+    "no_claim_of_submission_superiority_before_cycle_2": true
+  },
+  "resource_ceiling": {
+    "maximum_feature_or_proposal_materializations": 21,
+    "maximum_lifetime_physical_fit_calls": 63,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds": 14400,
+    "full_deployment_fits": 0,
+    "candidate_file_materializations": 0,
+    "result_driven_reruns": 0
+  },
+  "future_outputs_if_separately_authorized": {
+    "aggregate_only": true,
+    "allowed": ["result.json", "manifest.json", "report_ko.md"],
+    "row_level_predictions_persisted": false,
+    "candidate_csv_created": false
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "official_score_or_rank_used_for_selection": 0,
+    "post_result_tuning": 0,
+    "result_driven_reruns": 0,
+    "third_cycle": 0,
+    "P3_mutations_or_fits": 0
+  },
+  "P3_deprioritization": {
+    "current_observed_point_headroom": 0.374402,
+    "reason": "The combined 2-3 point objective cannot be met by the observed P3 headroom alone. Scarce fit and analysis budget is therefore assigned to P1 and P2 while the separately frozen P3 ERA5 experiment remains untouched.",
+    "P3_contract_changes_authorized": false
+  },
+  "limitations": [
+    "There is no new untouched P1 labeled holdout; the outer surface is a frozen historical transport proxy.",
+    "Segment proposals can amplify persistent sensor-regime false positives even with boundary guards.",
+    "Event taxonomy is used only for evaluation and target definition, not as an available deployment feature.",
+    "The leaderboard point mapping is inferred from a small number of observed scores and is planning evidence, not a guarantee.",
+    "Passing local gates is neither candidate-generation nor upload authorization."
+  ]
+}

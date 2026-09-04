@@ -1,0 +1,420 @@
+{
+  "schema_version": "p3_hierarchical_residual_basis.gen5r2_dense72.r1",
+  "experiment_id": "p3_hierarchical_residual_basis_dense72_r1",
+  "created_at_kst": "2026-08-23T00:00:00+09:00",
+  "status": "PREREGISTERED_APPEND_ONLY_STATIC_ONLY_NO_FIT_NO_TEST_NO_UPLOAD",
+  "problem": "P3",
+  "hypothesis": "hierarchical_residual_basis_nhits_dense72_masked_supervision",
+  "comparison_mode": "STRUCTURE_MATCHED_FRESH_REFIT_PENDING_OFFICIAL_PAIRED_AB",
+  "exact_official_incumbent_comparison": false,
+  "local_numeric_curve_qualification_allowed": true,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json",
+    "output": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1",
+    "control": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1_control",
+    "pre_execution_qa": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1_control/pre_execution_qa.json",
+    "authorization": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1_control/authorization.json",
+    "attempt_lock": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1_control/attempt.lock",
+    "run_failure_receipt": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r1_control/run_failure_receipt.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "gen1_artifact": "artifacts/p3_meaningful_learning_curve_20260823_v1",
+    "gen4_artifact": "artifacts/p3_station_stable_energy_state_space_20260823_v1",
+    "v5_ledger": "artifacts/meaningful_score_goal_v5/registry.jsonl"
+  },
+  "canonical_workspace_identity": {
+    "root_st_dev": 8372226647648079724,
+    "root_st_ino": 844424930439257,
+    "git_config_sha256": "8630fd27025aabe4e750d901f3766d8da9ea2a379221e7dc31bc27a857ee10e7",
+    "origin_url": "https://github.com/choihyunjin1/-oceanaidata_track1.git",
+    "personal_absolute_path_stored": false
+  },
+  "runtime_environment": {
+    "python_implementation": "CPython",
+    "python_version": "3.12.10",
+    "requirements_lock_sha256": "a1aa280b03af38c1920a8a171da1fdb568b8310edf3bfea66fd8ab2f71c470ba",
+    "requirements_lock_line_count": 83,
+    "noneditable_freeze_sha256": "cfe46bea056591d9f551f22828056857875ba1ae9d4ce31c20e9a29f3eff8acf",
+    "allowed_editable_distribution": "-e git+https://github.com/choihyunjin1/-oceanaidata_track1.git@eb29ea194aabce58f1c024d106da70ce5a075d45#egg=p1_qc",
+    "installed_noneditable_distributions_must_exactly_match_lock": true
+  },
+  "failed_v1_lineage": {
+    "status": "STATIC_NO_GO_NEVER_FIT",
+    "reason": [
+      "compact matrix was referenced but absent from preflight",
+      "transitive executable dependency closure was incomplete",
+      "workspace-copy execution could re-anchor to the copied runner",
+      "optimizer supervised only the six official slices despite a dense72 claim"
+    ],
+    "files": {
+      "config": {
+        "path": "configs/experiments/p3_hierarchical_residual_basis_v1.json",
+        "sha256": "628ff908d6c8885b8461f46846d3029408c4b83df56ca95e35a2dbdb90f3b981",
+        "bytes": 13016
+      },
+      "module": {
+        "path": "src/p3_wave/hierarchical_residual_basis.py",
+        "sha256": "857a319dc586b68c10d8b3037b23b4b725e5a3b6f29d0198bc9c266d06fa99fa",
+        "bytes": 36107
+      },
+      "runner": {
+        "path": "scripts/run_p3_hierarchical_residual_basis_v1.py",
+        "sha256": "555cc7c0791c1dccaee301255ea3e2ad1ce699ce43c29aefd165827fc94b6ac2",
+        "bytes": 45432
+      },
+      "module_tests": {
+        "path": "tests/test_p3_hierarchical_residual_basis.py",
+        "sha256": "873e08f2fa0fc2fc14f1b5a14be3d952ecee90b01905205c954732c1048765e0",
+        "bytes": 10526
+      },
+      "runner_tests": {
+        "path": "tests/test_p3_hierarchical_residual_basis_runner.py",
+        "sha256": "2997e54af15604ad3de95af993da93b54a1c2e7a524a832929174b3a2f5c15fc",
+        "bytes": 9422
+      }
+    },
+    "attempt_lock_created": false,
+    "fit_count": 0,
+    "prediction_count": 0,
+    "score_count": 0,
+    "test_prediction_count": 0,
+    "upload_count": 0
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p3_hierarchical_residual_basis_dense72_r1.json",
+    "TARGET_ACCESSOR": "src/p3_wave/dense72_targets_r1.py",
+    "MODEL": "src/p3_wave/hierarchical_residual_basis_dense72_r1.py",
+    "GUARD": "src/p3_wave/hierarchical_residual_basis_dense72_contract_r1.py",
+    "ENGINE": "src/p3_wave/hierarchical_residual_basis_dense72_execution_r1.py",
+    "RUNNER": "scripts/run_p3_hierarchical_residual_basis_dense72_r1.py",
+    "MODEL_TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_r1.py",
+    "RUNNER_TESTS": "tests/test_p3_hierarchical_residual_basis_dense72_runner_r1.py",
+    "P3_PACKAGE": "src/p3_wave/__init__.py",
+    "P3_DATA": "src/p3_wave/data.py",
+    "P3_FEATURES": "src/p3_wave/features.py",
+    "P3_CAUSAL_FORCING_ANALOG": "src/p3_wave/causal_forcing_analog.py",
+    "P3_EPISODE_DISTINCT_ANALOG": "src/p3_wave/episode_distinct_analog.py",
+    "P3_CAUSAL_FORCING_SEQUENCE": "src/p3_wave/causal_forcing_sequence.py",
+    "P3_REVIN_PATCH": "src/p3_wave/revin_patch.py",
+    "P3_MODELS": "src/p3_wave/models.py",
+    "P3_CORRECTED_SPLIT": "src/p3_wave/corrected_repeated_forward.py",
+    "P3_LOSS_ROUTER": "src/p3_wave/loss_router.py",
+    "P3_MEANINGFUL_CURVE": "src/p3_wave/meaningful_learning_curve.py",
+    "P3_PERSISTENCE_SHRINK": "src/p3_wave/persistence_shrink.py",
+    "P3_ONE_SHOT_GUARD": "src/p3_wave/one_shot_guard.py",
+    "P3_VALIDATION": "src/p3_wave/validation.py",
+    "FAILED_V1_MODEL": "src/p3_wave/hierarchical_residual_basis.py",
+    "OCEAN_GOAL_PACKAGE": "src/ocean_goal/__init__.py",
+    "OCEAN_GOAL_V2": "src/ocean_goal/meaningful_score.py",
+    "OCEAN_GOAL_V3": "src/ocean_goal/meaningful_score_v3.py",
+    "OCEAN_LEDGER_V5": "src/ocean_goal/meaningful_score_ledger_v5.py",
+    "GOAL_V2_CONFIG": "configs/goals/meaningful_score_maximization_v2.json",
+    "GOAL_V3_CONFIG": "configs/goals/meaningful_score_maximization_v3.json",
+    "LEDGER_V5_CONFIG": "configs/goals/meaningful_score_ledger_v5.json",
+    "FAILED_V1_CONFIG": "configs/experiments/p3_hierarchical_residual_basis_v1.json",
+    "FAILED_V1_RUNNER": "scripts/run_p3_hierarchical_residual_basis_v1.py",
+    "FAILED_V1_MODEL_TESTS": "tests/test_p3_hierarchical_residual_basis.py",
+    "FAILED_V1_RUNNER_TESTS": "tests/test_p3_hierarchical_residual_basis_runner.py",
+    "ENVIRONMENT_LOCK": "requirements-lock.txt"
+  },
+  "frozen_transitive_sha256": {
+    "src/p3_wave/dense72_targets_r1.py": "8ed817fc7517287a12fb502897d8b89104159b6256b554f8eb6e62ddb6744a69",
+    "src/p3_wave/hierarchical_residual_basis_dense72_r1.py": "e850642592d599ebfc8e48ca9e3054548be553f8d0aa22918f409d0b2797ca55",
+    "src/p3_wave/hierarchical_residual_basis_dense72_execution_r1.py": "9061827eb3c77fc17796740999aa9dd722c082638e5e9470b4c6277265826b17",
+    "tests/test_p3_hierarchical_residual_basis_dense72_r1.py": "9bede4a288068d21b8379a68705568ddf55bdf4a2c0e48b9f201fa7595fd124f",
+    "tests/test_p3_hierarchical_residual_basis_dense72_runner_r1.py": "5db4c47becde3ae5961cd109c22b8fc2b68cc2d17fac4fe7c1a61ef7c171f2be",
+    "src/p3_wave/__init__.py": "5259579e0cb5cc66a8416c1631efb8b7342df69f4d0c624f31a353e473cd6bb1",
+    "src/p3_wave/data.py": "cdbbbe8e8e03f91b81dd6074a3e3b75ca21092fda86e53fc9d15b16ae47d0432",
+    "src/p3_wave/features.py": "c7c2d8f1e6301d57899ee807e97bfd4c28575d2f40ea97801122e29c1701fdb2",
+    "src/p3_wave/causal_forcing_analog.py": "9543ae4e2aa9551c8ef2a3e4ddeb0eb0cc8b83feaaee6094b1e9ea809ddedcfe",
+    "src/p3_wave/episode_distinct_analog.py": "307dfbcfff7a1300ac8be27074a4c13255776e70e2cdbe8b909d0396d876e180",
+    "src/p3_wave/causal_forcing_sequence.py": "88713d6c804219960c309bc064580a78116e849e1a01858ceb2f8d0a8cfac0d5",
+    "src/p3_wave/revin_patch.py": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/corrected_repeated_forward.py": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "src/p3_wave/loss_router.py": "2e357a9f428cdf52d2f3e38b364ebd6a156571067435d1c75622313976219000",
+    "src/p3_wave/meaningful_learning_curve.py": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "src/p3_wave/persistence_shrink.py": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "src/p3_wave/one_shot_guard.py": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/hierarchical_residual_basis.py": "857a319dc586b68c10d8b3037b23b4b725e5a3b6f29d0198bc9c266d06fa99fa",
+    "src/ocean_goal/__init__.py": "a7a4f8f969d1425d5573d7ea7ff0f3253f9c17f19a7b377ee70f31334b013bf7",
+    "src/ocean_goal/meaningful_score.py": "69b9dc1168a47e0d1b1a50e5590c3d2f0966f2885f0f92730d4c38c4ea92800c",
+    "src/ocean_goal/meaningful_score_v3.py": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "src/ocean_goal/meaningful_score_ledger_v5.py": "aaf54e6cafac0cc01af7f3265af42a7a80e2738a4d5a682070bd47b41e4b0053",
+    "configs/goals/meaningful_score_maximization_v2.json": "8fc6b03aba3b88b07b954030759f351644513490f7a9c030b7d7f1b950023549",
+    "configs/goals/meaningful_score_maximization_v3.json": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "configs/goals/meaningful_score_ledger_v5.json": "6c61e71016d3c4cf9b8a34e818ca865b7246e3b02ad2cb22348dd2a6e71d6b35",
+    "configs/experiments/p3_hierarchical_residual_basis_v1.json": "628ff908d6c8885b8461f46846d3029408c4b83df56ca95e35a2dbdb90f3b981",
+    "scripts/run_p3_hierarchical_residual_basis_v1.py": "555cc7c0791c1dccaee301255ea3e2ad1ce699ce43c29aefd165827fc94b6ac2",
+    "tests/test_p3_hierarchical_residual_basis.py": "873e08f2fa0fc2fc14f1b5a14be3d952ecee90b01905205c954732c1048765e0",
+    "tests/test_p3_hierarchical_residual_basis_runner.py": "2997e54af15604ad3de95af993da93b54a1c2e7a524a832929174b3a2f5c15fc",
+    "requirements-lock.txt": "a1aa280b03af38c1920a8a171da1fdb568b8310edf3bfea66fd8ab2f71c470ba"
+  },
+  "input_pins": {
+    "source/train_wave.csv": {
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+      "bytes": 6132036
+    },
+    "source/train_atmos.csv": {
+      "sha256": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+      "bytes": 8962353
+    },
+    "source/test_context.parquet": {
+      "sha256": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+      "bytes": 1116900
+    },
+    "source/test_index.csv": {
+      "sha256": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+      "bytes": 17423
+    },
+    "source/sample_submission.csv": {
+      "sha256": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+      "bytes": 22231
+    },
+    "source/baseline_persistence.csv": {
+      "sha256": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+      "bytes": 23323
+    },
+    "source/README.md": {
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+      "bytes": 3037
+    },
+    "compact_cache/manifest.json": {
+      "sha256": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+      "bytes": 1602
+    },
+    "compact_cache/train_features.parquet": {
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+      "bytes": 106288494
+    },
+    "compact_cache/train_anchors.parquet": {
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "bytes": 461964
+    },
+    "sequence_cache/manifest.json": {
+      "sha256": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+      "bytes": 923
+    },
+    "sequence_cache/train_values.npy": {
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "bytes": 281601728
+    },
+    "sequence_cache/train_station.npy": {
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "bytes": 195008
+    },
+    "gen1/metrics.json": {
+      "sha256": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+      "bytes": 65655
+    },
+    "gen1/learning_curve_oof.parquet": {
+      "sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+      "bytes": 215998
+    },
+    "gen1/manifest.json": {
+      "sha256": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+      "bytes": 23277
+    },
+    "gen1/learning_curve_evidence.json": {
+      "sha256": "497fc3ec756cc6ceb7eff7f9c658afe27f49e8ab441f07b1dad2cfdbf3193325",
+      "bytes": 4871
+    },
+    "gen1/independent_qa.json": {
+      "sha256": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+      "bytes": 5489
+    },
+    "gen4/metrics.json": {
+      "sha256": "f5b60e5fe2ea919d6d3fe51c5efac04485f48c6951e3a3f57a9a2e32fcea6a2e",
+      "bytes": 49714
+    },
+    "gen4/learning_curve_evidence.json": {
+      "sha256": "f0c76e0703ed7389845d4ab727a44713b8ea1f8a8b9703b7981703973e6c5382",
+      "bytes": 5380
+    },
+    "gen4/manifest.json": {
+      "sha256": "854a87bd21f9824bb969ba79b9af0032ebd24d6489184e0a8fddd953292bf3a0",
+      "bytes": 13367
+    },
+    "gen4/validation_keys.parquet": {
+      "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+      "bytes": 4147
+    },
+    "v5/registry.jsonl": {
+      "sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+      "bytes": 29320
+    },
+    "frozen/current_submission.csv": {
+      "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+      "bytes": 39822
+    },
+    "frozen/current_manifest.json": {
+      "sha256": "886637d3f7c92437a6ac40f0aee496d67b44f5913acf75a1502abb566e3c62fd",
+      "bytes": 1026
+    },
+    "current/ready_submission.csv": {
+      "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+      "bytes": 39822
+    }
+  },
+  "central_ledger_anchor": {
+    "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v5",
+    "ledger_sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+    "ledger_bytes": 29320,
+    "event_count": 9,
+    "head_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066",
+    "official_uploads_through_anchor": 0
+  },
+  "gen4_failure_diagnosis": {
+    "aggregate_only": true,
+    "prefix_deltas_candidate_minus_incumbent_m": [-0.0025356908031760605, -0.010028683070663624, -0.017955417385993044, 0.011800480928665702, 0.04281365149503025],
+    "full_delta_candidate_minus_incumbent_m": 0.04281365149503025,
+    "full_ci90_m": [0.015614564021500021, 0.07126510628717048]
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "fold_execution_order": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "fold_major_commit_before_later_fold_target_release": true,
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "seed_replicates": [20260816, 20260817, 20260818],
+    "bootstrap_unit": "whole_complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260823
+  },
+  "compact_preflight": {
+    "source_rows": 24360,
+    "source_columns": 1277,
+    "selected_rows": 24360,
+    "selected_columns": 591,
+    "surface": "compact_feature_columns_fixed_v1",
+    "load_and_validate_before_attempt_lock": true,
+    "target_columns_selected": 0
+  },
+  "dense72_supervision": {
+    "source": "train_wave.csv_train_only_selective_scalar_accessor",
+    "steps": 72,
+    "cadence_minutes": 20,
+    "official_indices_zero_based": [8, 17, 26, 35, 53, 71],
+    "complete_cases": 23527,
+    "incomplete_cases": 833,
+    "missing_scalars": 1505,
+    "official_six_missing_scalars": 0,
+    "missing_loss_rule": "masked_out_no_imputation_no_loss",
+    "validation_scalar_decode_before_fold_commit": 0,
+    "preflight_scalar_decode_count": 0,
+    "dense_target_array_materialized_for_all_cases": false
+  },
+  "model": {
+    "class": "HierarchicalResidualBasisForecaster",
+    "raw_context_steps": 289,
+    "prepared_context_steps": 144,
+    "prepared_channels": 24,
+    "stack_pooling_factors": [12, 4, 1],
+    "blocks_per_stack": 2,
+    "hidden_width": 192,
+    "conditioning_width": 128,
+    "dropout": 0.1,
+    "forecast_steps": 72,
+    "forecast_knot_counts": [6, 18, 72],
+    "optimizer_target_surface": "all_available_dense72_train_only_steps",
+    "expected_trainable_parameter_count": 4125120,
+    "hyperparameter_search": false,
+    "expected_actual_fit_cells": 45,
+    "expected_optimizer_steps": 10260
+  },
+  "training": {
+    "epochs": 12,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "device": "cuda",
+    "precision": "bfloat16_autocast_float32_optimizer",
+    "early_stopping": false,
+    "warm_start_across_prefix_seed_or_fold": false
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_gen1_comparator": true,
+    "new_router_or_blend": false
+  },
+  "comparator": {
+    "source": "sealed_gen1_same_prefix_same_fold_fresh_refit_structure_prediction_mean",
+    "fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_historical_frozen_oof": false,
+    "comparison_label": "STRUCTURE_MATCHED_FRESH_REFIT_PENDING_OFFICIAL_PAIRED_AB",
+    "may_support_local_numeric_qualification": true,
+    "may_support_official_promotion_without_paired_ab": false
+  },
+  "gate": {
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "on_local_pass": "seal_curve_as_locally_qualified_pending_separate_full_fit_and_official_paired_ab",
+    "on_local_fail": "seal_research_result_stop_before_test_reads",
+    "official_promotion_from_this_stage": false
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "static_preflight_before_qa_authorization_or_lock": true,
+    "compact_and_dense72_availability_validated_before_lock": true,
+    "actual_curve_requires_independent_static_qa": true,
+    "actual_curve_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "engine_imported_after_attempt_lock": true,
+    "canonical_capability_required_for_engine_and_curve": true,
+    "fold_major_blind_commitment_before_target_release": true,
+    "all_45_blind_predictions_committed_before_truth_attachment": true,
+    "output_and_commitments_use_o_excl_semantics": true,
+    "post_lock_exception_writes_aggregate_only_o_excl_failure_receipt": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "candidate_or_test_prediction_allowed": false,
+    "full_fit_allowed_in_current_stage": false,
+    "frozen_or_submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p3_hierarchical_residual_basis.gen5r2_dense72.pre_execution_qa.r1",
+    "decision": "GO_AUTHORIZE_P3_GEN5R2_DENSE72_R1",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_all_implementation_roles": true,
+    "must_pin_static_preflight_sha256": true
+  },
+  "authorization_contract": {
+    "schema_version": "p3_hierarchical_residual_basis.gen5r2_dense72.authorization.r1",
+    "authorization_phrase_prefix": "AUTHORIZE_P3_GEN5R2_DENSE72_R1:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "curve_execution_authorized": true,
+    "full_fit_or_candidate_authorized": false,
+    "test_prediction_authorized": false,
+    "upload_authorized": false
+  },
+  "resource_estimate": {
+    "actual_fit_cells": 45,
+    "optimizer_steps": 10260,
+    "device": "cuda_bfloat16",
+    "anonymous_test_value_reads": 0,
+    "uploads": 0
+  }
+}

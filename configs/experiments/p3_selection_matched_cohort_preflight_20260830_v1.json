@@ -1,0 +1,202 @@
+{
+  "schema_version": "p3.selection_matched_cohort_preflight.preregistration.v1",
+  "experiment_id": "p3_selection_matched_cohort_preflight_20260830_v1",
+  "created_at_kst": "2026-08-30T00:00:00+09:00",
+  "purpose": "Sealed zero-fit train-only support audit for the corrected P3 selection-matched historical cohort.",
+  "implementation": {
+    "runner": "scripts/run_p3_selection_matched_cohort_preflight_20260830_v1.py",
+    "focused_tests": "tests/test_p3_selection_matched_cohort_preflight_20260830_v1.py",
+    "default_output": "artifacts/p3_selection_matched_cohort_preflight_20260830_v1/preflight.json"
+  },
+  "data_boundary": {
+    "explicit_p3_dir_required": true,
+    "environment_or_repository_search_allowed": false,
+    "allowed_source_basenames": [
+      "README.md",
+      "train_wave.csv",
+      "train_atmos.csv"
+    ],
+    "forbidden_source_basenames": [
+      "score.py",
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv"
+    ],
+    "forbidden_name_tokens": [
+      "test",
+      "sample",
+      "baseline",
+      "submission",
+      "hidden",
+      "answer",
+      "score"
+    ],
+    "load_p3_data_allowed": false,
+    "raw_rows_in_receipt_allowed": false,
+    "source_mutation_allowed": false
+  },
+  "source_contract": {
+    "stations": [
+      "G-ORS",
+      "I-ORS",
+      "S-ORS"
+    ],
+    "train_wave": {
+      "rows": 118152,
+      "columns": [
+        "station",
+        "time",
+        "hs",
+        "tp",
+        "hmax",
+        "wvdir"
+      ],
+      "rows_by_station": {
+        "G-ORS": 39384,
+        "I-ORS": 39384,
+        "S-ORS": 39384
+      },
+      "native_cadence_minutes_by_station": {
+        "G-ORS": 20,
+        "I-ORS": 20,
+        "S-ORS": 20
+      }
+    },
+    "train_atmos": {
+      "rows": 130896,
+      "columns": [
+        "station",
+        "time",
+        "wspd",
+        "gust",
+        "wdir",
+        "airt",
+        "relh",
+        "caph"
+      ],
+      "rows_by_station": {
+        "G-ORS": 78768,
+        "I-ORS": 26064,
+        "S-ORS": 26064
+      },
+      "native_cadence_minutes_by_station": {
+        "G-ORS": 10,
+        "I-ORS": 10,
+        "S-ORS": 10
+      }
+    }
+  },
+  "cohort_contract": {
+    "canonical_grid_minutes": 10,
+    "canonical_dense_anchor_minutes": 60,
+    "wave_cadence_minutes": 20,
+    "history_hours": 48,
+    "official_leads_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "current_hs_min_inclusive_m": 1.5,
+    "current_hs_max_exclusive_m": 2.2,
+    "rise_lookback_hours": 12,
+    "rise_min_exclusive_m": 0.2,
+    "station_global_gap_hours": 78,
+    "canonical_reference": {
+      "grid": "p3_wave.data.build_training_grid",
+      "anchors": "p3_wave.data.build_anchor_table",
+      "load_p3_data_invoked": false
+    }
+  },
+  "forward_windows": [
+    {
+      "name": "2024_h2_storm",
+      "validation_start_utc": "2024-07-01T00:00:00+00:00",
+      "validation_end_utc": "2024-11-01T00:00:00+00:00",
+      "train_cutoff_hours_before_start": 78
+    },
+    {
+      "name": "winter_transition",
+      "validation_start_utc": "2024-11-01T00:00:00+00:00",
+      "validation_end_utc": "2025-03-01T00:00:00+00:00",
+      "train_cutoff_hours_before_start": 78
+    },
+    {
+      "name": "2025_h1",
+      "validation_start_utc": "2025-03-01T00:00:00+00:00",
+      "validation_end_utc": "2025-06-25T00:00:00+00:00",
+      "train_cutoff_hours_before_start": 78
+    }
+  ],
+  "support_gates": {
+    "minimum_global_independent_cases_per_station": 30,
+    "minimum_independent_cases_per_complete_historical_window": 20,
+    "minimum_scientifically_applicable_complete_windows": 2,
+    "incomplete_historical_window_status": "NOT_APPLICABLE_INCOMPLETE_WINDOW",
+    "failed_support_status": "FAIL_SUPPORT",
+    "passed_support_status": "PASS_SUPPORT"
+  },
+  "sensor_error_flags": {
+    "aggregate_only": true,
+    "delete_or_mask_rows": false,
+    "use_flags_for_cohort_membership": false,
+    "negative_hs": true,
+    "negative_period": true,
+    "direction_bounds_inclusive_degrees": [
+      0.0,
+      360.0
+    ],
+    "relative_humidity_bounds_inclusive_percent": [
+      0.0,
+      100.0
+    ],
+    "duplicate_station_time_keys": true,
+    "jump_return": {
+      "cadence_minutes": 20,
+      "robust_sigma_multiplier": 8.0,
+      "absolute_jump_floor_m": 1.0,
+      "return_tolerance_sigma_multiplier": 2.0,
+      "absolute_return_tolerance_floor_m": 0.2
+    },
+    "extreme_storm_policy": "Preserve every source and canonical anchor row; Hs >= 2.2 m is outside the diagnostic matched cohort but is never treated as a sensor error or deleted."
+  },
+  "execution_contract": {
+    "model_fit_count": 0,
+    "prediction_row_count": 0,
+    "official_row_count": 0,
+    "csv_output_count": 0,
+    "submission_or_upload_allowed": false,
+    "aggregate_json_receipt_only": true
+  },
+  "prior_audit_correction": {
+    "invalid_prior_horizons_hours": [
+      12,
+      24,
+      36,
+      48,
+      60,
+      72
+    ],
+    "invalid_prior_count_scope": "The old 78-hour counts were computed on all Hs >= 1.5 anchors before the Hs < 2.2 and rise12 > 0.2 selection filter.",
+    "corrected_horizons_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ]
+  },
+  "closed_family_boundary": {
+    "hierarchical_residual_basis_dense72": {
+      "status": "CLOSED_EXACT_45_FIT_FAMILY",
+      "evidence": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/learning_curve_evidence.json",
+      "full_delta_m": 0.067295,
+      "all_three_folds_worse": true,
+      "interpretation": "This cohort preflight does not reopen N-HiTS-style hierarchical residual basis training. It only tests support for a narrower Hs/rise selection-matched historical objective before any distinct future model is authorized."
+    }
+  }
+}

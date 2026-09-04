@@ -1,0 +1,63 @@
+{
+  "schema_version": "p1.v12_causal_kernel_mmd_shift_addonly.v1",
+  "result_schema_version": "p1.v12_causal_kernel_mmd_shift.result.v1",
+  "experiment_id": "p1_v12_causal_kernel_mmd_shift_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "A Kernel Two-Sample Test",
+    "authors": "Gretton et al.",
+    "venue": "JMLR 2012",
+    "url": "https://www.jmlr.org/papers/v13/gretton12a.html",
+    "claim_boundary": "MMD compares distributions through RKHS mean embeddings. v12 uses fixed RBF landmark mean embeddings as a causal finite approximation; it is not the paper's hypothesis-test calibration and makes no source-derived P1 performance claim."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "repository_search": "No executed P1 MMD, kernel two-sample, or kernel mean-embedding implementation was found; only generic distribution-shift prose existed.",
+    "clean_state_capa": "CAPA optimizes penalized point/collective likelihoods for marginal constant mean, variance, or regression-coefficient shifts and outputs segments. v12 produces rowwise recent-vs-prefix nonlinear distribution embeddings without segment optimization or CAPA penalties.",
+    "v9_dependence_change": "v9 compares synchronized cross-layer covariance, precision, and partial correlation to a prefix baseline. v12 is within station-layer and compares full marginal distributions through RBF kernel means, including changes beyond first two moments.",
+    "dependence_null": "The label-free dependence audit calibrated block maxima/proposal shares from clean-state/concurrence signals. v12 has no empirical-null proposal calibration or cross-layer concurrence.",
+    "v11_scattering": "v11 measures temporal multiscale wavelet energy. v12 ignores frequency decomposition and measures distributional embedding displacement.",
+    "cross_problem_transfer": "No P2/P3 result, metric, window, bandwidth, threshold, or hyperparameter was read or transferred.",
+    "evidence": {
+      "configs/experiments/p1_clean_state_capa_falsification_20260831_v1.json": "d0c37fa180530eecab4a4c91a219eade10fef347ac1cb71a386705fd88db3eef",
+      "scripts/run_p1_clean_state_capa_falsification_20260831_v1.py": "283a6503f8fe05b3937d744d9cc8719dd50d8391c28316e725211d5266cac940",
+      "configs/experiments/p1_v9_conditional_dependence_change_addonly_20260901_v1.json": "6822dba1593c217e3d934141641cce90408efdd03b5f2a9b8ee2c4622be2c58b",
+      "scripts/run_p1_v9_conditional_dependence_change_addonly_20260901_v1.py": "7aec0d98147178e905d63c65c4ec42de038cee50fe70d2a622b52ca617c12625",
+      "configs/experiments/p1_dependence_aware_empirical_null_feasibility_20260901_v1.json": "7e7cd8f7662961bea2091e83384945ea0f62b16bf7948e1a930ae503c29f2df7",
+      "scripts/run_p1_v11_causal_wavelet_scattering_addonly_20260901_v1.py": "70c363e28d32bf388da8b51ce201b8cb7b9244a8edf65de3e6b1262b103ceb86"
+    }
+  },
+  "representation": {
+    "sequence_unit": "station_x_layer",
+    "recent_window_rows": 96,
+    "minimum_prefix_rows": 192,
+    "prefix_landmark_quantiles": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95],
+    "rbf_bandwidths_prefix_scale": [0.5, 1.0, 2.0],
+    "embedding_summaries_per_bandwidth": ["rms", "mean_absolute", "maximum_absolute"],
+    "insufficient_prefix_group_policy": "zero_all_features_for_that_fold",
+    "features": ["mmd_rms_bw05", "mmd_meanabs_bw05", "mmd_maxabs_bw05", "mmd_rms_bw10", "mmd_meanabs_bw10", "mmd_maxabs_bw10", "mmd_rms_bw20", "mmd_meanabs_bw20", "mmd_maxabs_bw20"],
+    "past_only": true,
+    "future_interpolation": 0,
+    "subsequence_normalization": 0
+  },
+  "representation_support_gate": {"minimum_nonzero_feature_share": 0.5, "minimum_feature_variance": 0.000001, "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_KERNEL_MMD_SUPPORT"},
+  "model": {"kind": "L2 SGD logistic", "alpha": 0.0001, "epochs": 20, "positive_class_weight": 12.0, "seeds": [20260901, 20260917, 20260943], "fits": 9, "sweep": 0},
+  "selection": {"inner_train_fraction": 0.85, "threshold_quantiles": [0.995, 0.9975, 0.999], "maximum_addition_share": 0.0025, "minimum_additions": 25, "wilson90_lcb_minimum": 0.55, "outer_tuning": 0},
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "p1.v46_independent_qa.v1",
+  "experiment_id": "p1_v46_causal_spectral_decoupling_crossquarter_addonly_20260901_v1",
+  "verdict": "PASS",
+  "phase": "POST_TERMINAL_IMMUTABLE_REVALIDATION",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "checks": {"semantic_duplicate_false": true, "target_free_conditioning_pass": true, "preflights_byte_identical": true, "focused_pytest_6_of_6": true, "ruff_pass": true, "postterminal_lifecycle_20_checks": true, "three_fits_within_maximum_nine": true, "spectral_penalty_active_all_fits": true, "weight_decay_zero": true, "v28_guard_unchanged": true, "v33_bundle_before_target": true, "pre_q2_chosen_threshold_null": true, "q2_q3_q4_target_reads_zero": true, "q4_unopened": true, "anchor_removals_zero": true, "raw_f1_and_points_no_action_zero": true, "hashes_recomputed": true, "official_test_sample_submission_hidden_zero": true, "csv_submission_upload_zero": true, "family_frozen_no_retune": true},
+  "conditioning": {"prefix_rows": 294278, "feature_count": 8, "minimum_covariance_eigenvalue": 0.0007345089720999911, "maximum_covariance_eigenvalue": 3.864570737325229, "condition_number": 5261.434351545446, "initial_logit_variances": [0.01475620549172163, 0.045026764273643494, 0.019082780927419662], "target_columns_read": 0},
+  "best_candidates": [
+    {"quantile": 0.999, "count": 57, "true": 56, "precision": 0.9824561403508771, "wilson90_lcb": 0.9251111737489122, "gate_failure": "only S-ORS/L5 chronological half 2 supported"},
+    {"quantile": 0.9975, "count": 141, "true": 132, "precision": 0.9361702127659575, "wilson90_lcb": 0.8934265613119775, "gate_failure": "only S-ORS/L5 supplied supported environments"},
+    {"quantile": 0.995, "count": 281, "true": 238, "precision": 0.8469750889679716, "wilson90_lcb": 0.8083539752229706, "gate_failure": "supported G-ORS/L1 had zero true positives"}
+  ],
+  "counters": {"fits": 3, "optimizer_steps_per_fit": 144, "transport_target_windows_read": 0, "q4_target_reads": 0, "q4_actions": 0, "anchor_removals": 0, "official": 0, "test": 0, "sample_submission": 0, "hidden": 0, "csv": 0, "submissions": 0, "uploads": 0},
+  "metrics": {"raw_f1_delta": 0.0, "nominal_points": 0.0, "transport_adjusted_points": 0.0, "performance_window_opened": false},
+  "runtime_seconds": 5.6560000000026776,
+  "hashes": {
+    "result": "f3612222da3afa66db9d5cd0aed8c5f8f1eb8cbaf713b7bbce6960598f776822",
+    "report": "7ed9779e71d924d94ee39fd04ab16e4b85618546d00a34ea90dcfd00ffd3b49f",
+    "preflight_artifact": "a290ddd7db4c478bb4ee7da18b0812a1202210a15b4453fc3126b78319ac55db",
+    "two_preflight_stdout": "df00047188d4a21c5407a9934c08d6d432c4416493a51c629b96fbfefc520f07",
+    "config": "0ea4ecb3d0ea801d9ccd73c8f7b026e7412ea063bad07f0b3830051e9bd3f37c",
+    "runner": "23f30b5d005010964952120646ab49377976263efd81f5eeb8aa011f003338b9",
+    "test": "6b82fd1427edf5048caf524af730828e22cdd13523dd7744563c5ea21aa4d80a",
+    "lock": "6eaf36a92c3cce03379dd2f8250ac239e716e4a81c92d4e9cdd720f80b732c9e",
+    "completion": "9cb5a987f61ebf4e9a54441143368660f5a84ff3a9c5c272007519a381762cf1",
+    "auditability_bundle": "dcf0062328ba8e50e6683a545f6fe649fc91fb23aa9d183083c3326ba9e9c56c",
+    "auditability_manifest": "e5d316a38a675749899f9ef31d00a9b79eeac145e8f6b04c9a3e59f330df8f64",
+    "cross_quarter_guard": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "auditability_amendment": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"
+  }
+}

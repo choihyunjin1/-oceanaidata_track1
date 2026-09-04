@@ -1,0 +1,82 @@
+{
+  "schema_version": "p3.nlinear_station_ridge_residual.v1",
+  "experiment_id": "p3_nlinear_station_ridge_residual_20260828_v1",
+  "status": "PREREGISTERED_SINGLE_BOUNDED_ATTEMPT",
+  "claim": "NLinear/DLinear-inspired past-only multi-resolution station ridge; not an exact reproduction of either paper",
+  "bindings": {
+    "train_sequences": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "bytes": 281601728,
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "train_station": {
+      "path": "artifacts/p3/sequences_all20_v1/train_station.npy",
+      "bytes": 195008,
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "bytes": 461964,
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    }
+  },
+  "outer_validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "membership": "exact prefix_fraction_1p0 frozen incumbent cases"
+  },
+  "inner_selection": {
+    "window_days": 60,
+    "gap_hours": 78,
+    "ridge_alphas": [1.0, 10.0, 100.0, 1000.0],
+    "select": "minimum standalone six-lead RMSE; tie larger alpha"
+  },
+  "features": {
+    "hourly_history_rows": 49,
+    "lag_hours": [1, 2, 3, 6, 9, 12, 18, 24, 36, 48],
+    "summary_hours": [3, 6, 12, 24, 48],
+    "nlinear_last_value_deltas": true,
+    "missing_fraction_and_trailing_age": true,
+    "future_covariates": false,
+    "absolute_time": false
+  },
+  "model": {
+    "family": "station-specific standardized multi-output ridge",
+    "target": "six future hs values minus current hs",
+    "prediction_clip_m": [0.0, 30.0]
+  },
+  "blend": {
+    "protected_leads_h": [3, 6, 9],
+    "active_leads_h": [12, 18, 24],
+    "incumbent_weight": 0.8,
+    "challenger_weight": 0.2
+  },
+  "evaluation": {
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "gate": {
+      "pooled_delta_below_zero": true,
+      "minimum_improved_folds": 2,
+      "minimum_probability_improved": 0.6,
+      "maximum_station_degradation_m": 0.01,
+      "maximum_long_lead_degradation_m": 0.01
+    }
+  },
+  "artifact_dir": "artifacts/p3_nlinear_station_ridge_residual_20260828_v1",
+  "prohibitions": {
+    "official_test_read_before_gate": true,
+    "sample_submission_read_before_gate": true,
+    "candidate_generation_before_gate": true,
+    "upload": true,
+    "post_result_alpha_feature_or_blend_tuning": true,
+    "git_commit_or_push": true
+  }
+}

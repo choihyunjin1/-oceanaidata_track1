@@ -1,0 +1,70 @@
+{
+  "schema_version": "p3.nonlinear_recurrence_ordinal_residual.config.v29",
+  "experiment_id": "p3_nonlinear_recurrence_ordinal_residual_cycle_20260901_v29",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_NONLINEAR_RECURRENCE_TOPOLOGY_AXIS",
+    "novel_axis": "case-local ordinal-pattern distributions and recurrence-plot topology over each past-only physical channel",
+    "distinction": "GP/RBF-RFF, analog, state-space, low-rank covariance, path signatures, ROCKET, wavelet modulus and cross-wavelet phase do not encode fixed ordinal word frequencies plus diagonal/vertical recurrence topology.",
+    "rejected_axes": {
+      "physics_informed_multi_output_gp": "semantic duplicate of executed 591-feature RBF-RFF sparse-GP posterior mean/abstention and existing kernel/analog families",
+      "regime_independent_residual_covariance_only": "without a new observed conditioning signal, covariance changes uncertainty but cannot change the squared-error-optimal point mean; low-rank joint output maps were already closed in v22"
+    },
+    "posthoc_v27_or_v28_adjustment": false
+  },
+  "topology_encoder": {
+    "context_rows": 289,
+    "transformed_channels": 12,
+    "ordinal_embedding_dimension": 3,
+    "ordinal_delays": [1, 2, 4, 8],
+    "ordinal_patterns_per_delay": 6,
+    "ordinal_feature_count": 288,
+    "recurrence_downsample": 4,
+    "recurrence_threshold_robust_z": 0.25,
+    "recurrence_metrics": ["recurrence_rate", "determinism", "laminarity", "trapping_time_over_n", "max_diagonal_over_n", "diagonal_length_entropy"],
+    "recurrence_feature_count": 72,
+    "feature_count": 360,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_RQA360_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_RQA360_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Bandt and Pompe, Permutation Entropy: A Natural Complexity Measure for Time Series", "url": "https://doi.org/10.1103/PhysRevLett.88.174102"},
+    {"citation": "Marwan, Romano, Thiel, and Kurths, Recurrence Plots for the Analysis of Complex Systems", "url": "https://doi.org/10.1016/j.physrep.2006.11.001"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

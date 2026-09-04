@@ -1,0 +1,122 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.qa_adjudication.20260830.v3",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3",
+  "qa_status": "PASS",
+  "status_detail": "PASS_QA_FLOAT_ROUNDTRIP_ADJUDICATED",
+  "chronology": {
+    "original_qa_preserved": true,
+    "original_qa_status": "FAIL",
+    "original_qa_sha256": "bcb62831b01a1e6ed02b7afb8917c01231006da0c36ab4aabb5b78487253d1be",
+    "result_sha256": "1788893add5d009993f32d9089ce9a20942182106cd7dc1ae553d488d70e51a5",
+    "candidate_or_model_rerun": false
+  },
+  "basis": {
+    "absolute_tolerance_c": 1e-12,
+    "predeclared_contract": "The original QA already declared <=1e-12 for exact-no-op and PAVA checks; applying the same tolerance to CSV IEEE-754 decimal round-trip comparisons is a QA correction, not a model relaxation.",
+    "original_false_checks_exact": [
+      "difference_receipts",
+      "incomplete_profile_exact_noop",
+      "strict_schema_key_order_finite_domain"
+    ],
+    "all_other_original_checks_true": true
+  },
+  "adjudicated_checks": {
+    "strict_schema_key_order_finite_domain": true,
+    "incomplete_profile_exact_noop": true,
+    "difference_receipts": true
+  },
+  "operands": {
+    "validation": {
+      "rows_equal": true,
+      "numeric_absolute_gaps_c": {
+        "minimum": 0.0,
+        "maximum": 3.552713678800501e-15
+      }
+    },
+    "incomplete_profile": {
+      "recomputed_max_abs_correction_c": 3.552713678800501e-15,
+      "stored_to_recomputed_gap_c": 3.552713678800501e-15
+    },
+    "difference_receipts": {
+      "vs_alpha50": {
+        "changed_rows_equal": true,
+        "numeric_absolute_gaps_c": {
+          "rms_c": 4.163336342344337e-17,
+          "p99_abs_c": 1.429412144204889e-15,
+          "maximum_abs_c": 0.0
+        },
+        "maximum_numeric_absolute_gap_c": 1.429412144204889e-15,
+        "pass_at_1e_12": true
+      },
+      "vs_current_official_incumbent": {
+        "changed_rows_equal": true,
+        "numeric_absolute_gaps_c": {
+          "rms_c": 6.245004513516506e-17,
+          "p99_abs_c": 2.1371793224034263e-15,
+          "maximum_abs_c": 0.0
+        },
+        "maximum_numeric_absolute_gap_c": 2.1371793224034263e-15,
+        "pass_at_1e_12": true
+      },
+      "vs_official_base_u": {
+        "changed_rows_equal": true,
+        "numeric_absolute_gaps_c": {
+          "rms_c": 2.7755575615628914e-17,
+          "p99_abs_c": 0.0,
+          "maximum_abs_c": 0.0
+        },
+        "maximum_numeric_absolute_gap_c": 2.7755575615628914e-17,
+        "pass_at_1e_12": true
+      }
+    }
+  },
+  "candidate": {
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260830_P2_GAUSSIAN_COPULA_V2_FROZEN_READY_V3\\P2_submission.csv",
+    "bytes": 1353537,
+    "sha256": "f498c6e1d7e22d11d5571b971454f0e375247fc2ff5ae3387bfcb4186460c4a3",
+    "rows": 26061,
+    "minimum_c": 16.288607567121904,
+    "maximum_c": 29.153435096789455,
+    "duplicate_qa": {
+      "candidate_sha256": "f498c6e1d7e22d11d5571b971454f0e375247fc2ff5ae3387bfcb4186460c4a3",
+      "known_prior_submission_hash_count": 6,
+      "exact_hash_duplicate": false,
+      "status": "PASS_NO_EXACT_HASH_DUPLICATE",
+      "recent_official_history": [
+        {
+          "public_rmse_c": 0.432244,
+          "observed_time_kst": "2026-08-29T22:20:00+09:00",
+          "candidate_role": "rank1_axis_alpha_2",
+          "submission_sha256": "7d06cf01c67541ec77d4e6af7afefca710774bda50f33155573c382d440672d9",
+          "mapping_basis": "local pack manifest plus live UI chronology"
+        },
+        {
+          "public_rmse_c": 0.430253,
+          "observed_time_kst": "2026-08-29T22:51:00+09:00",
+          "candidate_role": "layerwise_oof_shrunk",
+          "submission_sha256": "dbcef773a9bbff62c66b2b6a0bca1b9279eb664209ff1560c2dc02e83855b019",
+          "mapping_basis": "inference from local pack manifest and paired live UI results"
+        },
+        {
+          "public_rmse_c": 0.430209,
+          "observed_time_kst": "2026-08-29T22:51:00+09:00",
+          "candidate_role": "official_mse_vertex_a083419",
+          "submission_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+          "mapping_basis": "inference from preregistered 0.430208734 prediction and paired live UI results"
+        }
+      ],
+      "current_best_public_rmse_c": 0.430209,
+      "current_best_points": 27.935277,
+      "remaining_p2_submissions_today_at_last_ui_check": 3,
+      "semantic_mapping_limitation": "The live UI exposes scores and timestamps, not file hashes. The two 22:51 file-to-score mappings are evidence-backed inferences, so exact byte duplicate QA is strong while platform semantic duplicate proof remains limited."
+    }
+  },
+  "execution_receipt": {
+    "aggregate_json_inputs_only": true,
+    "official_input_rows_read": 0,
+    "model_fits": 0,
+    "candidate_csv_rewrites": 0,
+    "uploads": 0
+  },
+  "completed_at_kst": "2026-08-30T21:32:49.240615+09:00"
+}

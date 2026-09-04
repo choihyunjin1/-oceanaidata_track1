@@ -1,0 +1,115 @@
+{
+  "schema_version": "p2.layer_month_risk_variance_rex.20260901.v19",
+  "experiment_id": "p2_layer_month_risk_variance_rex_20260901_v19",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "predecessor": "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json",
+    "predecessor_sha256": "db25e23ad56d9f9bc3eba283cd31d706e2f0569dbdb516f919eaafed55c7ca70",
+    "required_status": "EXPLORATORY_SAFETY_PASS_REQUIRES_FRESH_CONFIRMATION",
+    "independent_qa": "reports/p2_regularized_layer_month_group_dro_20260901_v18/independent-qa.json",
+    "independent_qa_sha256": "09eb3fbece87681989d4e7ced0dc85af0437263a07d49dd200239a7fa64d504b"
+  },
+  "research_basis": [
+    {
+      "title": "Out-of-Distribution Generalization via Risk Extrapolation (REx)",
+      "publisher": "ICML/PMLR 2021",
+      "url": "https://proceedings.mlr.press/v139/krueger21a.html",
+      "use": "motivation for one fixed variance-of-environment-risks penalty only; no P2 performance transfer"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_P2_LAYER_MONTH_RISK_VARIANCE_REX_OBJECTIVE",
+    "reason": "Repository-wide audit found no executed P2 V-REx or environment-risk-variance objective. v13 uses static equal group mass; v18 uses an exponentiated minimax adversary. v19 instead minimizes mean layer-month SmoothL1 plus a fixed population variance penalty over layer-month risks in every stochastic batch. Architecture, inputs, prefix/purge, seeds, epochs, blend, and action cap remain v13-exact.",
+    "evidence_paths": [
+      "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+      "scripts/run_p2_regularized_layer_month_group_dro_20260901_v18.py",
+      "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json",
+      "reports/p2_regularized_layer_month_group_dro_20260901_v18/independent-qa.json"
+    ],
+    "forbidden_interpretations": [
+      "Group-DRO eta retune",
+      "V-REx coefficient sweep",
+      "regularization sweep",
+      "environment definition sweep",
+      "blend sweep",
+      "month router",
+      "posthoc ensemble"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "loss": "SmoothL1_beta_1.0",
+    "environment_definition": "target_layer_x_calendar_month",
+    "within_environment_weighting": "equal_KST_day_then_equal_row",
+    "objective": "batch_mean_environment_risk_plus_population_variance_penalty",
+    "risk_variance_coefficient": 10.0,
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

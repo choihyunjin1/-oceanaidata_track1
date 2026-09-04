@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p2_dynamic_sigmoid_profile_v1",
+  "status": "preregistered_precheck_only",
+  "research_only": true,
+  "upload_allowed": false,
+  "submission_created": false,
+  "external_values_used": false,
+  "adaptive_after_prior_outer_exposure": true,
+  "fresh_holdout_claimed": false,
+  "objective": {
+    "metric": "rmse_celsius",
+    "direction": "minimize",
+    "single_structural_change": "public_conditioned_dynamic_four_parameter_sigmoid_profile",
+    "hypothesis": "A public-conditioned time-varying sigmoid profile can recover thermocline curvature left unresolved by PCHIP, EOF, unconstrained depth-query networks, and endpoint projection."
+  },
+  "problem_contract": {
+    "station": "S-ORS",
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "target_nominal_depth_m": {"2": 7.04, "3": 9.44, "4": 14.74},
+    "simultaneous_mask_variables": ["temp", "psal"],
+    "target_psal_used": false,
+    "depth_policy": "finite_positive_actual_else_nominal",
+    "hidden_interval_kst": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_values_read": false,
+    "test_index_values_read": false,
+    "outer_truth_scoring_allowed": false,
+    "submission_generation_allowed": false
+  },
+  "validation": {
+    "purge_days": 7,
+    "blocks": {
+      "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+      "2025_jul_aug_61d": ["2025-07-02T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+      "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+    },
+    "all_blocks_exact_days": 61,
+    "middle_block_trim": "2025-07-01 excluded before scoring so control and challenger use identical exact-61-day keys",
+    "fold_local_current_target_mask_required": true,
+    "fold_local_preprocessing_only": true,
+    "global_zero_target_exposure_claimed": false,
+    "selection_policy": "Gates 1-4 run once. Gate 5 runs only when every outer fold passes gates 1-4. No outer prediction or outer truth score is produced in this generation."
+  },
+  "sigmoid": {
+    "formula": "temperature=b+a*expit((center-depth)/width)",
+    "center_bounds_m": [4.0, 49.5],
+    "width_bounds_m": [0.5, 25.0],
+    "minimum_full_profile_points": 6,
+    "minimum_public_points": 4,
+    "minimum_public_depth_span_m": 30.0,
+    "profile_fit_stride_minutes": 120,
+    "deterministic_start_center_fractions": [0.25, 0.5, 0.75],
+    "deterministic_start_width_m": [2.0, 6.0, 14.0],
+    "least_squares_max_nfev": 80,
+    "least_squares_ftol": 1e-8,
+    "least_squares_xtol": 1e-8,
+    "least_squares_gtol": 1e-8,
+    "boundary_fraction": 0.01,
+    "finite_difference_center_step_m": 0.02,
+    "finite_difference_log_width_step": 0.002
+  },
+  "public_features": {
+    "temperature_and_salinity_layers": [1, 5, 6, 7, 8],
+    "adjacent_gradient_pairs": [[1, 5], [5, 6], [6, 7], [7, 8]],
+    "trajectory_signals": ["temp_1_minus_5", "public_temp_range"],
+    "causal_change_hours": [6, 24, 72, 168],
+    "harmonics": ["annual", "m2_12.42h"],
+    "gap_policy": "exact_timestamp_lookup_else_missing",
+    "ridge_alpha": 1.0,
+    "minimum_ridge_rows": 200,
+    "minimum_feature_coverage": 0.05,
+    "parameter_training_filter": {
+      "minimum_abs_amplitude_c": 0.2,
+      "minimum_r2": 0.9,
+      "maximum_scaled_jacobian_condition": 10000.0,
+      "maximum_multistart_target_spread_c": 0.05,
+      "exclude_boundary_saturated": true
+    }
+  },
+  "gates": {
+    "gate_1_public_support": {"minimum_share": 0.8},
+    "gate_2_multistart_stability": {
+      "minimum_stratified_profiles": 200,
+      "maximum_p95_target_spread_c": 0.05
+    },
+    "gate_3_full_profile_fit": {
+      "minimum_r2": 0.9,
+      "minimum_share_at_or_above_r2": 0.7,
+      "maximum_boundary_saturation_share": 0.2
+    },
+    "gate_4_public_observability": {
+      "maximum_profiled_jacobian_condition": 10000.0,
+      "minimum_observable_share_of_stratified_supported": 0.5,
+      "minimum_stratified_supported_times": 100
+    },
+    "gate_5_inner_predictive": {
+      "minimum_pooled_improvement_c": 0.003,
+      "maximum_each_inner_block_delta_rmse_c": 0.0,
+      "maximum_worst_layer_delta_rmse_c": 0.005,
+      "alpha_bounds": [0.0, 1.0],
+      "same_alpha_all_layers": true,
+      "failure_policy": "exact_incumbent_no_op"
+    }
+  },
+  "incumbent": {
+    "name": "P2_EXTRAPOLATED_SOFT_GATE_V2_OOF",
+    "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+    "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+    "columns_allowed": ["time", "layer", "prediction"],
+    "truth_column_read": false
+  },
+  "provenance": {
+    "primary_literature": [
+      {
+        "doi": "10.5194/os-19-887-2023",
+        "role": "ocean sigmoid thermocline profile and fit-validity limitations"
+      },
+      {
+        "doi": "10.1002/lom3.10316",
+        "role": "four-parameter sigmoidal vertical-gradient model with temporal autocorrelation"
+      }
+    ]
+  },
+  "outputs": {
+    "status_path": "artifacts/status/p2_dynamic_sigmoid_profile_v1.json",
+    "aggregate_only": true,
+    "outer_predictions_created": false,
+    "submission_created": false
+  }
+}

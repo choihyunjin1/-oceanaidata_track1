@@ -1,0 +1,120 @@
+{
+  "schema_version": "p2.fixed_student_t_robust_deepset.20260901.v21",
+  "experiment_id": "p2_fixed_student_t_robust_deepset_20260901_v21",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "predecessor": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json",
+    "predecessor_sha256": "877cb5995f6c10767ab4340a79463fd5d2e537c3b347218d438fec48e21e60a0",
+    "required_status": "EXPLORATORY_SAFETY_PASS_REQUIRES_FRESH_CONFIRMATION",
+    "independent_qa": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/independent-qa.json",
+    "independent_qa_sha256": "5037c532389f72213816a6339c74ada13e5e0e9ae5a7ad6a8a1fbe8b4856b630"
+  },
+  "research_basis": [
+    {
+      "title": "Robust Neural Network Regression for Offline and Online Learning",
+      "authors": "Briegel and Tresp",
+      "publisher": "NeurIPS 1999",
+      "url": "https://papers.neurips.cc/paper_files/paper/1999/hash/db29450c3f5e97f97846693611f98c15-Abstract.html",
+      "use": "motivation for a fixed heavy-tailed regression likelihood only; no P2 performance transfer"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_P2_FIXED_STUDENT_T_ROBUST_REGRESSION_OBJECTIVE",
+    "reason": "Repository-wide P2 audit found no executed neural Student-t likelihood or fixed-degree-of-freedom heavy-tailed regression objective. v10 was a zero-fit label-free action shrink based on public first differences; v13 uses fixed-beta SmoothL1; v18/v19 optimize environment risks; v20 aligns label-free latent covariance. v21 keeps the v13 model and sampling contract but replaces SmoothL1 with one fixed Student-t location likelihood, downweighting extreme residual influence without deleting rows.",
+    "evidence_paths": [
+      "configs/experiments/p2_public_sensor_influence_shrink_20260901_v10.json",
+      "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+      "scripts/run_p2_regularized_layer_month_group_dro_20260901_v18.py",
+      "scripts/run_p2_layer_month_risk_variance_rex_20260901_v19.py",
+      "scripts/run_p2_layer_conditioned_month_covariance_alignment_20260901_v20.py",
+      "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json"
+    ],
+    "forbidden_interpretations": [
+      "degrees-of-freedom learning or sweep",
+      "scale learning or sweep",
+      "outlier row deletion",
+      "residual threshold selection",
+      "architecture or regularization sweep",
+      "blend sweep",
+      "month router",
+      "posthoc ensemble"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "environment_definition": "target_layer_x_calendar_month",
+    "within_environment_weighting": "equal_KST_day_then_equal_row",
+    "objective": "fixed_homoscedastic_student_t_location_negative_log_likelihood",
+    "student_t_degrees_of_freedom": 4.0,
+    "student_t_normalized_scale": 1.0,
+    "loss_formula_without_constant": "0.5_times_nu_plus_1_times_log1p_squared_residual_over_nu_scale_squared",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

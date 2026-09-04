@@ -1,0 +1,98 @@
+{
+  "schema_version": "p2.v12_source_regime_coverage_audit.result.20260901.v12a",
+  "experiment_id": "p2_v12_source_regime_coverage_audit_20260901_v12a",
+  "status": "DOMAIN_BALANCED_PREFIX_SAFE_V13_AUTHORIZED",
+  "model_fits": 0,
+  "v12_training_rows": 45935,
+  "v12_training_calendar_months": [
+    5,
+    6,
+    7,
+    8
+  ],
+  "folds_with_absent_training_months": 2,
+  "folds_with_prior_same_month_support": 2,
+  "folds": {
+    "2024_sep_oct": {
+      "calendar_months": [
+        9,
+        10
+      ],
+      "months_absent_from_v12_training": [
+        9,
+        10
+      ],
+      "prefix_cutoff_kst": "2024-08-25T00:00:00+09:00",
+      "prefix_rows": 45935,
+      "prior_same_calendar_month_rows": 0,
+      "current_v12_training_distance": {
+        "rows": 26273,
+        "robust_distance_p50": 4.6875902380626355,
+        "robust_distance_p90": 4.9253890892107215,
+        "robust_distance_p99": 5.043719182057169,
+        "outside_training_1_99_envelope_share": 1.0
+      }
+    },
+    "2025_jul_aug": {
+      "calendar_months": [
+        7,
+        8
+      ],
+      "months_absent_from_v12_training": [],
+      "prefix_cutoff_kst": "2025-06-24T00:00:00+09:00",
+      "prefix_rows": 119667,
+      "prior_same_calendar_month_rows": 26018,
+      "current_v12_training_distance": {
+        "rows": 26693,
+        "robust_distance_p50": 4.5421011350610705,
+        "robust_distance_p90": 4.584102706409354,
+        "robust_distance_p99": 5.0242425463955405,
+        "outside_training_1_99_envelope_share": 1.0
+      }
+    },
+    "2025_nov_dec": {
+      "calendar_months": [
+        11,
+        12
+      ],
+      "months_absent_from_v12_training": [
+        11,
+        12
+      ],
+      "prefix_cutoff_kst": "2025-10-25T00:00:00+09:00",
+      "prefix_rows": 149384,
+      "prior_same_calendar_month_rows": 18093,
+      "current_v12_training_distance": {
+        "rows": 16884,
+        "robust_distance_p50": 5.052430608882815,
+        "robust_distance_p90": 5.18573028229342,
+        "robust_distance_p99": 5.251954064957214,
+        "outside_training_1_99_envelope_share": 1.0
+      }
+    }
+  },
+  "authorization_gate": {
+    "minimum_two_folds_have_absent_training_months": true,
+    "minimum_two_folds_have_prior_same_month_support": true
+  },
+  "prohibitions": {
+    "posthoc_nov_dec_router": true,
+    "gate_lowering": true,
+    "threshold_search": true
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "0a5cb77b8b1635552cc32a227b22697e104b650d9e648d6f9eb459c6a4eb2210",
+    "runner": "f1384071ec977c5922da179ed157d97637f1de05a44ee805b2de26ee22e3083b",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc"
+  }
+}

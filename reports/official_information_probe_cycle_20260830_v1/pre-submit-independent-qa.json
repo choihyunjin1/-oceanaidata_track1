@@ -1,0 +1,71 @@
+{
+  "schema_version": "official_information_probe_cycle.pre_submit_independent_qa.20260830.v1",
+  "checked_at_kst": "2026-08-30T22:38:09+09:00",
+  "status": "PASS_READY_NOT_UPLOADED",
+  "official_ui": {
+    "p1_remaining": 3,
+    "p2_remaining": 2,
+    "p3_remaining": 2,
+    "final_model_button_must_not_be_clicked": true
+  },
+  "p1": {
+    "candidates": 3,
+    "rows_each": 169011,
+    "columns": ["station", "year", "layer", "time", "label"],
+    "hashes": [
+      "59d862b62b24a03c637f58a676d9dc99186f148a6f710f9d0cd3f162f6ca2ce8",
+      "9f5e8ca7a19d17b317e969fb152f2cc77f50fb5d1cc53757de200b68be720983",
+      "e6a54b0aaf6bf6227362a2706447e4c09bfe80c8510248c2206f204f1ad5c042"
+    ],
+    "independent_recheck": {
+      "key_order_errors": 0,
+      "non_binary_labels": 0,
+      "changed_rows": [15, 238, 253],
+      "changed_stations": ["G-ORS", "S-ORS", "G-ORS,S-ORS"],
+      "all_changes_are_positive_to_negative_removals": true
+    }
+  },
+  "p2": {
+    "candidates": 2,
+    "rows_each": 26061,
+    "columns": ["station", "layer", "time", "temp"],
+    "hashes": [
+      "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+      "0d213e97b9435862bbc892ac358afdc99b0a8834740915720f96bd420761d557"
+    ],
+    "independent_recheck": {
+      "key_order_errors": 0,
+      "composition_errors": 0,
+      "changed_rows_vs_champion": [762, 2464],
+      "finite": true,
+      "range_c": [16.314603650986466, 29.096716136024497]
+    }
+  },
+  "p3": {
+    "candidates": 2,
+    "rows_each": 1200,
+    "columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "hashes": [
+      "a5a16ba207ed1cccf16383e1de7b932417666917b0eb2b9c54a00fdb7ab67351",
+      "868d18d7a2d62d49b6d97712e686db7a55bbb16e38cea2659584a0c397275f4f"
+    ],
+    "independent_recheck": {
+      "key_order_errors": 0,
+      "changed_rows": [120, 140],
+      "changed_stations": ["S-ORS", "I-ORS"],
+      "changed_leads": [18, 24],
+      "finite": true,
+      "range_m": [0.5868057074994321, 4.163248643605462]
+    }
+  },
+  "set_checks": {
+    "all_candidates_frozen_before_new_score": true,
+    "candidate_hashes_pairwise_distinct": true,
+    "known_prior_platform_hash_matches": 0,
+    "model_fits": 0,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "adaptive_retuning_after_score": false
+  }
+}

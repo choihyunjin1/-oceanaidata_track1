@@ -1,0 +1,174 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "2026-08-31 연구 프로세스 자기감사",
+    "description": "P1/P2/P3의 반복 실패가 프롬프트 문제인지 검증 구조 문제인지 분리한 기술 감사",
+    "generatedAt": "2026-08-31T12:00:00+09:00",
+    "sources": [
+      {
+        "id": "local_evidence",
+        "label": "Repository experiment and official probe ledgers through 2026-08-30",
+        "path": "reports/research_process_self_audit_20260831_v1/claim-source-ledger.md",
+        "query": {
+          "sql": "WITH reviewed(row_kind, problem, phase, improvement_sign, native_delta, closed_groups) AS (VALUES ('closed','P1',NULL,NULL,NULL,13),('closed','P2',NULL,NULL,NULL,10),('closed','P3',NULL,NULL,NULL,7),('phase','P1','selection',1,'+0.000565637 F1',NULL),('phase','P1','confirmation',-1,'-0.011889120 F1',NULL),('phase','P2','proxy',1,'-0.010616065 C RMSE',NULL),('phase','P2','official',-1,'+0.012050 C RMSE',NULL),('phase','P3','selection',1,'-0.0228625 m RMSE',NULL),('phase','P3','confirmation',-1,'+0.0079741 m RMSE',NULL)) SELECT * FROM reviewed ORDER BY row_kind, problem, phase",
+          "description": "Exact metrics transcribed from frozen local result, independent QA and official receipt artifacts listed in the claim-source ledger.",
+          "language": "json+markdown",
+          "executed_at": "2026-08-31T12:00:00+09:00",
+          "filters": [
+            "Only evidence recorded through 2026-08-30",
+            "No Private results",
+            "No hidden labels or official test/sample values"
+          ],
+          "metric_definitions": [
+            "improvement_sign is +1 when a candidate improved its phase-specific comparator on the native metric and -1 when it worsened it.",
+            "closed_groups counts exact closed recipe, information-axis, split and gate combinations; it does not count broad model families."
+          ],
+          "tables_used": [
+            "reports/negative_evidence_registry_20260830_v1/failure-ledger.json",
+            "reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json",
+            "reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json",
+            "reports/p3_catboost_confirmation_contract_repair_20260830_v3/report-source.md",
+            "reports/official_information_probe_cycle_20260830_v1"
+          ]
+        }
+      },
+      {
+        "id": "primary_literature",
+        "label": "Primary model-selection and benchmark-variance literature",
+        "href": "https://www.jmlr.org/papers/v11/cawley10a.html",
+        "query": {
+          "description": "Primary papers listed in the report source section.",
+          "language": "literature review",
+          "executed_at": "2026-08-31T12:00:00+09:00",
+          "tables_used": [
+            "Cawley and Talbot 2010 JMLR",
+            "Blum and Hardt 2015 PMLR",
+            "Bergstra and Bengio 2012 JMLR",
+            "Bouthillier et al. 2021 MLSys"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "p1_closed",
+        "description": "P1 exact closed experiment groups",
+        "dataset": "closed_counts",
+        "filter": {"problem": "P1"},
+        "sourceId": "local_evidence",
+        "metrics": [{"label": "P1 exact closed", "field": "closed_groups", "format": "number"}]
+      },
+      {
+        "id": "p2_closed",
+        "description": "P2 exact closed experiment groups",
+        "dataset": "closed_counts",
+        "filter": {"problem": "P2"},
+        "sourceId": "local_evidence",
+        "metrics": [{"label": "P2 exact closed", "field": "closed_groups", "format": "number"}]
+      },
+      {
+        "id": "p3_closed",
+        "description": "P3 exact closed experiment groups",
+        "dataset": "closed_counts",
+        "filter": {"problem": "P3"},
+        "sourceId": "local_evidence",
+        "metrics": [{"label": "P3 exact closed", "field": "closed_groups", "format": "number"}]
+      }
+    ],
+    "charts": [
+      {
+        "id": "phase_direction_chart",
+        "title": "후보 평가 단계별 개선 방향",
+        "subtitle": "세 문제 모두 선택 또는 로컬 프록시의 양수가 다음 독립 단계에서 음수로 반전됐다.",
+        "type": "bar",
+        "dataset": "phase_direction",
+        "sourceId": "local_evidence",
+        "encodings": {
+          "x": {"field": "problem_phase", "type": "nominal", "label": "문제와 단계"},
+          "y": {"field": "improvement_sign", "type": "quantitative", "label": "개선 방향", "format": "number"},
+          "tooltip": [
+            {"field": "problem", "type": "nominal", "label": "문제"},
+            {"field": "phase", "type": "nominal", "label": "단계"},
+            {"field": "native_delta", "type": "text", "label": "원 단위 delta"},
+            {"field": "evidence_file", "type": "text", "label": "증거"}
+          ]
+        },
+        "yAxisTitle": "+1 개선 / -1 악화",
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "evidence_table",
+        "title": "핵심 수송 및 공식 탐침 결과",
+        "subtitle": "서로 다른 단위는 직접 크기 비교하지 않고 방향과 원 단위를 함께 보존한다.",
+        "dataset": "evidence_rows",
+        "sourceId": "local_evidence",
+        "defaultSort": {"field": "order", "direction": "asc"},
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {"field": "order", "label": "순서", "type": "number"},
+          {"field": "problem", "label": "문제", "type": "text"},
+          {"field": "candidate", "label": "후보/탐침", "type": "text"},
+          {"field": "earlier", "label": "선택/기준", "type": "text"},
+          {"field": "later", "label": "확인/공식", "type": "text"},
+          {"field": "interpretation", "label": "판정", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# 2026-08-31 연구 프로세스 자기감사", "layout": "full"},
+      {"id": "executive_summary", "type": "markdown", "body": "## Executive Summary / 기술 요약\n\n주원인은 프롬프트 문장 품질보다 재사용된 선택면과 공식 분포 사이의 수송 실패다. 상세한 교정 프롬프트도 의미상 중복과 수치·인과 오류를 막지 못했다. 다음 사이클은 새 방법 발명보다 후보 지문 중복, 식별 가능성, contract smoke, 미사용 confirmation을 먼저 통과시키고 `NO_NEW_EXPERIMENT`를 정상 결론으로 허용해야 한다.", "layout": "full"},
+      {"id": "closed_summary", "type": "metric-strip", "cardIds": ["p1_closed", "p2_closed", "p3_closed"], "layout": "full"},
+      {"id": "reversal_heading", "type": "markdown", "body": "## 세 문제 모두 선택 이득이 다음 단계에서 반전됐다\n\n차트는 단위가 다른 F1, °C RMSE, m RMSE의 크기를 섞지 않고 각 단계의 개선 방향만 표시한다. 정확한 delta는 뒤 표에 보존했다.", "sourceId": "local_evidence", "layout": "full"},
+      {"id": "reversal_chart", "type": "chart", "chartId": "phase_direction_chart", "layout": "full"},
+      {"id": "evidence_heading", "type": "markdown", "body": "## 실제 공식 이득은 저차원 분해에서 나왔다\n\nP1 station addition, P2 season-bin, P3 KMA station/lead 축처럼 이미 동결된 변형을 직교 분해한 공식 탐침이 작지만 재현 가능한 Public 정보를 만들었다. 이는 Private 개선 보장이 아니라 다음 가설을 좁히는 정보다.", "sourceId": "local_evidence", "layout": "full"},
+      {"id": "evidence_detail", "type": "table", "tableId": "evidence_table", "layout": "full"},
+      {"id": "diagnosis", "type": "markdown", "body": "## 프롬프트는 기여 요인이지만 근본 원인은 아니다\n\n교정 프롬프트는 metric, 실패 목록, stop rule, 예상 점수 금지까지 포함했지만 외부 연구 결과는 이미 실패한 cascade, 파일 수준 A/B의 행 수준 확대해석, metric 혼동을 반복했다. 문헌상 유한 표본의 모델 선택 기준과 적응적 리더보드는 자체 과적합될 수 있고, benchmark는 sampling·initialization·HPO 변동을 함께 고려해야 한다.", "layout": "full"},
+      {"id": "method", "type": "markdown", "body": "## 감사 범위와 방법\n\n2026-08-30까지의 frozen result, independent QA, official receipt, negative-evidence ledger를 대조했다. 사실, 진단 추론, 권고를 분리했고 Public 표시값의 정밀도 한계를 보존했다. 새 학습, 공식 입력 값 읽기, CSV 생성, 업로드는 수행하지 않았다.", "sourceId": "local_evidence", "layout": "full"},
+      {"id": "limitations", "type": "markdown", "body": "## 한계와 불확실성\n\nPrivate 결과는 알 수 없다. 각 부호 역전에서 선택편향, sampling noise, 실제 domain shift의 몫을 분리할 새 표본도 없다. 따라서 `validation 구조가 병목`이라는 진단은 강한 패턴 기반 추론이며 개별 원인의 인과 분해가 아니다.", "layout": "full"},
+      {"id": "next_steps", "type": "markdown", "body": "## 다음 사이클은 반증 우선으로 운영한다\n\n1. 문제 계약과 후보 지문을 먼저 고정한다.\n2. exact와 semantic 중복을 자동 감사한다.\n3. 현재 데이터에서 null과 구분 가능한지 확인한다.\n4. synthetic/dry-run contract smoke를 먼저 한다.\n5. 가장 작은 반증 뒤 미사용 confirmation으로 이동한다.\n6. PERFORMANCE, INFORMATION, INFRASTRUCTURE lane을 분리한다.\n7. 같은 proxy class에서 부호 역전이 두 번이면 새 모델이 아니라 validation 설계를 교체한다.", "layout": "full"},
+      {"id": "further_questions", "type": "markdown", "body": "## 열린 질문\n\n새 untouched time block을 어떻게 확보할 것인가? P1 G 15행, P2 bin17, P3 KMA 축을 train-only 특성으로 설명할 수 있는가? 외부 연구의 품질은 아이디어 수가 아니라 source fidelity, closed-fingerprint overlap rate, untouched-confirmation 생존율로 측정할 수 있는가?", "layout": "full"}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-31T12:00:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "closed_counts": [
+        {"problem": "P1", "closed_groups": 13},
+        {"problem": "P2", "closed_groups": 10},
+        {"problem": "P3", "closed_groups": 7}
+      ],
+      "phase_direction": [
+        {"problem_phase": "P1 선택", "problem": "P1", "phase": "Sobol Q2 selection", "improvement_sign": 1, "native_delta": "+0.000565637 F1", "metric": "row F1", "comparison": "trial18 - control", "evidence_file": "parallel_hpo_cycle_20260829_v1/report-source.md"},
+        {"problem_phase": "P1 확인", "problem": "P1", "phase": "sealed Q3/Q4 confirmation", "improvement_sign": -1, "native_delta": "-0.011889120 F1", "metric": "row F1", "comparison": "trial18 - control", "evidence_file": "p1...sealed_eval/independent-qa.json"},
+        {"problem_phase": "P2 프록시", "problem": "P2", "phase": "historical proxy", "improvement_sign": 1, "native_delta": "-0.010616065 C RMSE", "metric": "RMSE C", "comparison": "copula - proxy comparator", "evidence_file": "p2...official-submission-receipt.json"},
+        {"problem_phase": "P2 공식", "problem": "P2", "phase": "Public", "improvement_sign": -1, "native_delta": "+0.012050 C RMSE", "metric": "RMSE C", "comparison": "copula - champion", "evidence_file": "p2...official-submission-receipt.json"},
+        {"problem_phase": "P3 선택", "problem": "P3", "phase": "CatBoost selection", "improvement_sign": 1, "native_delta": "-0.0228625 m RMSE", "metric": "RMSE m", "comparison": "challenger21 - control", "evidence_file": "p3...contract_repair/report-source.md"},
+        {"problem_phase": "P3 확인", "problem": "P3", "phase": "182-case confirmation", "improvement_sign": -1, "native_delta": "+0.0079741 m RMSE", "metric": "RMSE m", "comparison": "challenger21 - control", "evidence_file": "p3...contract_repair/report-source.md"}
+      ],
+      "evidence_rows": [
+        {"order": 1, "problem": "P1", "candidate": "Sobol trial18", "earlier": "Q2 ΔF1 +0.000565637", "later": "sealed ΔF1 -0.011889120", "interpretation": "selection-to-confirmation reversal"},
+        {"order": 2, "problem": "P2", "candidate": "Gaussian copula v2", "earlier": "proxy ΔRMSE -0.010616065 C", "later": "Public ΔRMSE +0.012050 C", "interpretation": "proxy transfer failure"},
+        {"order": 3, "problem": "P3", "candidate": "CatBoost challenger21", "earlier": "selection ΔRMSE -0.0228625 m", "later": "confirmation ΔRMSE +0.0079741 m", "interpretation": "all-subgroup confirmation failure"},
+        {"order": 4, "problem": "P1", "candidate": "G-ORS 15-row frozen addition", "earlier": "champion vs remove-G", "later": "displayed Public ΔF1 +0.004519", "interpretation": "information-positive; not rowwise truth"},
+        {"order": 5, "problem": "P2", "candidate": "rank1 bin17-only", "earlier": "prior champion", "later": "Public ΔRMSE -0.000015 C", "interpretation": "new Public champion; Private unknown"},
+        {"order": 6, "problem": "P3", "candidate": "uniform KMA alpha .425", "earlier": "prior champion", "later": "Public ΔRMSE -0.000029 m", "interpretation": "small same-axis Public gain"}
+      ]
+    }
+  },
+  "sources": [
+    {"id": "local_evidence", "label": "Local evidence ledger", "path": "reports/research_process_self_audit_20260831_v1/claim-source-ledger.md"},
+    {"id": "primary_literature", "label": "Primary literature", "href": "https://www.jmlr.org/papers/v11/cawley10a.html"}
+  ],
+  "package_info": {
+    "source_commit": "aeea3e0c4def1185af06541d5092973e5fd46e64",
+    "report_version": "research_process_self_audit_20260831_v1"
+  }
+}

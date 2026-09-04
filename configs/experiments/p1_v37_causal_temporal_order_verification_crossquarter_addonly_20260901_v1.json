@@ -1,0 +1,43 @@
+{
+  "schema_version": "p1.v37_causal_temporal_order_verification_crossquarter_addonly.v1",
+  "result_schema_version": "p1.v37_causal_temporal_order_verification_crossquarter.result.v1",
+  "experiment_id": "p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE_WITH_NEW_Q4_ONLY_OUTER",
+  "source": {"readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd", "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2", "allowed_files": ["README.md", "train.csv"], "official_test_sample_submission_hidden_reads": 0},
+  "primary_source": {"title": "Shuffle and Learn: Unsupervised Learning using Temporal Order Verification", "authors": "Misra, Zitnick, and Hebert", "venue": "ECCV 2016", "url": "https://publications.ri.cmu.edu/shuffle-and-learn-unsupervise-1", "arxiv": "https://arxiv.org/abs/1603.08561", "claim_boundary": "The source motivates semantic-label-free representation learning by verifying whether observations are in correct temporal order. v37 is a small causal scalar-series adaptation with a frozen reverse-order negative construction; the source makes no P1 or anomaly-detection performance claim."},
+  "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6", "prospective_only": true, "validity_status": "CONSERVATIVE_SAFETY_VETO_RETAINED_AFTER_V35_TRUE_NEGATIVE"},
+  "auditability_amendment": {"path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json", "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128", "preserve_all_pre_q2_threshold_q2_label_blind_actions": true},
+  "semantic_audit": {
+    "decision": "NOVEL_P1_OBJECTIVE_PROCEED_ONCE", "exact_duplicate": false, "semantic_duplicate": false,
+    "objective_fingerprint": "prefix-only exact-cadence lag sequences; binary chronological-versus-fixed-reverse pretext; frozen 8-unit encoder; supervised linear add-only head",
+    "repository_search": "No executed P1 temporal-order verification, shuffle-and-learn, arrow-of-time, or learned ordered-versus-reversed pretext objective was found.",
+    "lz_candidate_rejection": "Causal Lempel-Ziv was rejected before v37 because P3 v57 already executes forward phrase complexity and reverse-minus-forward phrase complexity; no LZ fit was run for P1.",
+    "ts2vec": "TS2Vec learns augmented-context agreement and acts by normal-prototype distance. v37 has no contrastive instance pairs and no prototype-distance action.",
+    "barlow": "v26 matches cross-view correlations to the identity. v37 instead uses a binary temporal-order pretext label and never optimizes cross-correlation.",
+    "ordinal_recurrence": "Ordinal, recurrence, and dictionary families use fixed summaries. v37 learns encoder weights from ordered versus reversed prefix sequences and acts through a separately trained frozen-encoder head.",
+    "masked_reconstruction": "Masked reconstruction predicts corrupted input values. v37 reconstructs nothing and predicts only sequence order.",
+    "evidence": {
+      "src/p1_qc/ts2vec_conditional_normal_prototype.py": "54ad846a64796542dc015c1d62d26429e6b101405869febb0ae0e283025e412d",
+      "scripts/run_p1_v26_causal_barlow_redundancy_reduction_addonly_20260901_v1.py": "9f76ab16a06c3107eb10c3935e425165b7436c67d093595ade24184a643556e2",
+      "scripts/run_p3_lz_rank_complexity_residual_cycle_20260901_v57.py": "d1bf8e637be6dc5f0f20f4e9badd4a467c634abf4c1ed5ded62c0dee5d96fc43",
+      "configs/experiments/p1_v17_ordinal_transition_surprisal_semantic_gate_20260901_v1.json": "b8ccc7ce70f6b7921814a942cd84e7309bc31bcbbc50dfcf05b847087d8af997",
+      "configs/experiments/p1_v14_causal_prefix_dictionary_discord_addonly_20260901_v1.json": "69d6020a38a3f5f6b80700f46cac004ba75e92a283144e97b8829393c2766644",
+      "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+      "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"
+    }
+  },
+  "representation": {"kind": "causal_exact_cadence_temporal_order_sequence", "lag_rows": [0, 1, 2, 3, 6, 12, 24, 36], "negative_permutation": [7, 6, 5, 4, 3, 2, 1, 0], "features": ["lag0", "lag1", "lag2", "lag3", "lag6", "lag12", "lag24", "lag36", "full_sequence_support"], "prefix_robust_normalization": true, "past_only": true, "future_interpolation": 0, "subsequence_normalization": 0},
+  "representation_support_gate": {"minimum_nonzero_feature_share": 0.5, "minimum_feature_variance": 0.000001, "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_TEMPORAL_ORDER_SUPPORT"},
+  "model": {"kind": "temporal_order_verification_frozen_encoder_linear_head", "hidden_units": 8, "pretext_epochs": 6, "head_epochs": 6, "weight_decay": 0.0001, "learning_rate": 0.002, "positive_class_weight": 3.0, "maximum_sample_rows_per_fit": 80000, "negative_to_positive_sample_ratio": 3, "batch_rows": 4096, "seeds": [20260901, 20260917, 20260943], "fits": 3, "maximum_fits": 9, "sweep": 0, "pretext_semantic_labels": 0, "pretext_outer_rows": 0, "inference": "deterministic_sigmoid"},
+  "selection": {"inner_train_fraction": 0.85, "threshold_quantiles": [0.995, 0.9975, 0.999], "threshold_choice": "highest_quantile_passing_pre_q2_calibration_gate_then_highest_wilson90_lcb", "maximum_addition_share": 0.0025, "minimum_additions": 25, "wilson90_lcb_minimum": 0.55, "precision_strictly_gt": 0.55, "environment": {"minimum_proposals_per_supported_environment": 10, "minimum_supported_environments": 2, "require_both_chronological_halves": true, "minimum_distinct_station_layer_identities": 2, "minimum_distinct_stations": 2, "minimum_environment_precision_strictly_gt": 0.55, "reject_if_any_supported_environment_true_positives_eq": 0}, "candidate_threshold_fixed_before_q2": true, "q2_q3_threshold_selection": 0, "q2_q3_refits": 0, "q4_open_only_after_q2_q3_pass": true, "outer_tuning": 0},
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"role": "transport_veto_1", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"role": "transport_veto_2", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"role": "single_unused_performance_window", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"q4_delta_gt": 0, "q4_ci90_lower_gte": 0, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "transport_fail": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED", "performance_fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits_maximum": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

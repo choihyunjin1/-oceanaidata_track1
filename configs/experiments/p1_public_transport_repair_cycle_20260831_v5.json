@@ -1,0 +1,77 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v5",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v5",
+  "decision_policy": {
+    "comparator": "P1 current Public champion F1 0.833548 / 28.909341 points",
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "worst_observed_public_transport_residual_points": -0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "score_points_per_f1": 26.578120867377286,
+    "worst_forward_block_delta_f1_minimum": -0.00025,
+    "bootstrap_probability_improved_minimum": 0.8,
+    "bootstrap_ci90_low_minimum": -0.00025,
+    "seed_delta_f1_minimum": 0.0,
+    "anchor_removals_required": 0
+  },
+  "validation": {
+    "outer_forward_tests": [
+      {"train_folds": ["2025_q2"], "test_fold": "2025_q3"},
+      {"train_folds": ["2025_q2", "2025_q3"], "test_fold": "2025_q4"}
+    ],
+    "inner_calibration_days": 21,
+    "purge_hours": 24,
+    "training_day_subsample_fraction": 0.8,
+    "seeds": [20260831, 20260847, 20260863],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260907
+  },
+  "transport_scope": {
+    "deployment_station": "G-ORS",
+    "deployment_layer": 1,
+    "anchor_prediction_required": 0,
+    "minimum_source_probability": 0.01,
+    "add_only": true,
+    "model_features_exclude_station_layer_calendar": true
+  },
+  "threshold_selection": {
+    "score_grid": [0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6, 0.625, 0.65, 0.675, 0.7, 0.725, 0.75, 0.775, 0.8, 0.825, 0.85, 0.875, 0.9, 0.925, 0.95],
+    "minimum_calibration_additions": 5,
+    "minimum_calibration_precision": 0.55,
+    "selection_target": "max anchor-union F1 on the strictly later inner calibration block, using all stations at layer 1"
+  },
+  "candidates": [
+    {
+      "name": "P1_1_GORS_TRANSPORT_LOGIT_LCB",
+      "family": "logistic",
+      "C": 0.2,
+      "class_weight": "balanced",
+      "max_iter": 1000
+    },
+    {
+      "name": "P1_2_GORS_TRANSPORT_HGB_LCB",
+      "family": "hist_gradient_boosting",
+      "learning_rate": 0.05,
+      "max_iter": 180,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 80,
+      "l2_regularization": 10.0
+    },
+    {
+      "name": "P1_3_GORS_TRANSPORT_CONSENSUS_LCB",
+      "family": "seed-aligned logical AND of candidate 1 and 2",
+      "additional_fits": 0
+    }
+  ],
+  "fit_budget": {
+    "historical_maximum": 12,
+    "deployment_model_maximum": 6,
+    "shared_official_feature_source_maximum": 2,
+    "total_maximum": 20
+  },
+  "official_policy": {
+    "read_official_covariates_only_after_full_internal_pass": true,
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "maximum_materialized_candidates": 3
+  }
+}

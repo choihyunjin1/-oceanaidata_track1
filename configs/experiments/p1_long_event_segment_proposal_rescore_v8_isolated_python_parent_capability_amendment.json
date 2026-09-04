@@ -1,0 +1,156 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.infrastructure_amendment.v8",
+  "amendment_id": "p1_long_event_segment_proposal_rescore_v8_isolated_python_parent_capability_20260826",
+  "problem": "P1",
+  "created_at_kst": "2026-08-26T12:56:05.5658890+09:00",
+  "status": "PROSPECTIVE_INFRASTRUCTURE_FIX_ONLY_NOT_IMPLEMENTED_NOT_AUTHORIZED",
+  "purpose": "Close every r7 independent-QA P0/P1/P2 finding without changing the prospectively frozen Cycle-1 science or consuming its one physical attempt.",
+  "created_before_r8_scientific_execution": {
+    "actual_authorization_files": 0,
+    "canonical_claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_actions": 0
+  },
+  "supersession": {
+    "r7_status": "IMMUTABLE_NO_GO_DO_NOT_AUTHORIZE_OR_EXECUTE",
+    "r7_amendment": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v7_full_runtime_replay_firewall_amendment.json",
+      "bytes": 11170,
+      "sha256": "71563c954a5c529044d82c63af0e44ddf313dcc55b787c784afd153fc14434ff"
+    },
+    "r7_runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v7.py",
+      "bytes": 123579,
+      "sha256": "0f481298beabe9f1a16fdf47320ba107159db6fd91aa40d7a0f18007a5b23b6a"
+    },
+    "r7_execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v7.py",
+      "bytes": 3292,
+      "sha256": "9f532581bfda500f4bdf1f923ad602c16965ccb39a4ab6157c3f88c3af88c061"
+    },
+    "r7_tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v7.py",
+      "bytes": 13801,
+      "sha256": "728e11a81db8a34a38c4c91a7f6c5d4d3b05243befa426c154cb6559225494b0"
+    },
+    "r7_preexecution_seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v7/preexecution_seal.json",
+      "bytes": 7877005,
+      "sha256": "4763719879ecd677a5be8193050efe1334def50dd44c289d0adb80e22e263776"
+    },
+    "r7_independent_qa": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v7_independent_preexecution_qa_20260826.json",
+      "bytes": 9059,
+      "sha256": "066d51a32a16175a1e0fb5829ff44d6699ea398901d38a1fbbd92e51a20fe6ff",
+      "finding_counts": {"P0": 3, "P1": 2, "P2": 2},
+      "verdict": "NO_GO"
+    }
+  },
+  "immutable_scientific_contract": {
+    "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+    "design_sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+    "trigger_resolution_sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+    "operational_amendment_v2_sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276",
+    "execution_closure_v3_sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99",
+    "trust_firewall_v5_sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563",
+    "bootstrap_target_firewall_v6_sha256": "16d726d217dc2b0d03264ce99eeacd796c8e34017901e02b29bcc76d479846f6",
+    "counts": {
+      "inner_anchor_physical_fits": 9,
+      "inner_segment_physical_fits": 54,
+      "outer_segment_physical_fits": 9,
+      "maximum_lifetime_physical_fits": 72,
+      "scientific_materializations": 21,
+      "outer_scores": 1
+    },
+    "unchanged": [
+      "models",
+      "features",
+      "inner_and_outer_windows",
+      "round_b_and_segment_seeds",
+      "postprocess",
+      "selection_rule",
+      "decision_gates",
+      "target_cutoffs",
+      "OOS_shelf_and_support_contract",
+      "outer_target_firewall"
+    ]
+  },
+  "r7_finding_closures": {
+    "canonical_live_self_authorization": {
+      "worker_fixed_paths": [
+        "configs/experiments/p1_long_event_segment_proposal_rescore_v8_execution_authorization.json",
+        "reports/p1_long_event_segment_proposal_rescore_v8_independent_preexecution_qa_20260826.json",
+        "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8/preexecution_seal.json",
+        "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8/canonical_launch.claim"
+      ],
+      "rule": "The worker opens each canonical live file itself with a retained Windows read handle denying write/delete, validates exact path and FileId, parses the exact held bytes, and compares their digests to the authenticated parent pipe frame. Private snapshot copies and the transport manifest are never authority.",
+      "parent_capability": "The parent passes an inherited anonymous one-way pipe, a real parent-process handle, and the already-open canonical claim handle. A random 32-byte capability is transmitted only through the pipe; its raw bytes never appear in CLI, environment, claim, manifest, journal, stdout, stderr, or a filesystem file.",
+      "true_parent": "The worker must prove the OS-reported inherited parent PID equals the process-handle PID and claim parent PID, and that creation FILETIME and image identity match. Direct worker entry, a copied worker, an unrelated live PID, and PID reuse fail before any namespace mutation or science."
+    },
+    "fully_isolated_python_home": {
+      "rule": "The parent builds an execution-only Python home by byte-copying the sealed base python executable, every root Python and VC runtime DLL, complete stdlib and DLLs/native/resource closure, and no live site-packages. The existing isolated 12-distribution plus tzdata runtime is attached only after the copied interpreter has authenticated it.",
+      "launch": "The worker is launched by the copied python.exe with exactly -I -S -B; PYTHONHOME, PYTHONPATH, PYTHONUSERBASE and startup hooks are removed. No live PythonHome/Lib or user-writable pre-authorization project code may execute.",
+      "required_vc_runtime": {
+        "VCRUNTIME140.dll": {
+          "bytes": 120400,
+          "sha256": "052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4"
+        },
+        "vcruntime140_1.dll_if_present": {
+          "bytes": 49776,
+          "sha256": "6a99bc0128e0c7d6cbbf615fcc26909565e17d4ca3451b97f8987f9c6acbc6c8"
+        }
+      },
+      "initial_map_rule": "Before any project/numerical import, enumerate the worker memory map and require every non-system executable, DLL, and PYD—including VC runtime—to be in the held isolated Python-home/runtime inventories."
+    },
+    "bootstrap_time_firewall": {
+      "rule": "Before isolated tzdata activation only integer epoch-nanosecond, monotonic-clock, ASCII/UTF-8 wire, hashing, held-handle, process-identity and exact-tree operations are allowed. ZoneInfo, KST conversion and local-time formatting are forbidden until verified tzdata is active."
+    },
+    "worker_lifetime_holds_and_directory_freeze": {
+      "rule": "The worker itself opens and retains every private snapshot, isolated Python-home, isolated third-party runtime, live training source, authority and claim file for its full lifetime. Parent holds are additional evidence, not a substitute.",
+      "directory_rule": "Every destination directory participating in module or native resolution is held with write/delete-denying Windows directory handles and protected by exact-tree checkpoints/import guards until all implicit native dependencies are loaded. A real concurrent file-insertion probe must be denied before authorization."
+    },
+    "freshness_nonce_and_supervision": {
+      "execute_start": "Capture parent execute-start epoch_ns and monotonic_ns at the first statement of execute_parent, before authorization or inventory work.",
+      "deadline": "Claim created_epoch_ns equals execute-start epoch_ns; deadline-created is exactly 21600 seconds. Both parent and worker enforce created<=now<deadline, a maximum 300-second launch age, and a monotonic 21600-second ceiling that copy time cannot extend.",
+      "nonce": "Exactly 64 lowercase hexadecimal characters encoding 32 random bytes; any malformed or previously claimed nonce is rejected. Any existing full or partial canonical claim permanently blocks replay."
+    }
+  },
+  "authority_and_transport": {
+    "manifest_role": "TRANSPORT_RECEIPT_NEVER_AUTHORITY",
+    "strict_json": "UTF8_STRICT_DUPLICATE_KEYS_REJECT_NONFINITE_REJECT_EXACT_SCHEMA",
+    "canonical_project_root": "C:/Users/cedis/PycharmProjects/PythonProject",
+    "canonical_artifact_relative_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v8",
+    "single_attempt_namespace": "P1_CYCLE1_SEGMENT_RESCORE_CANONICAL_V8_ONE_SHOT",
+    "authorization_may_be_true_only_after_fresh_independent_QA_PASS": true
+  },
+  "required_zero_operation_tests": [
+    "direct hidden worker fails canonical self-authorization before namespace mutation",
+    "copied hidden worker fails canonical self-authorization before namespace mutation",
+    "absent canonical actual authorization fails before namespace mutation",
+    "unrelated live parent and PID-reuse identities fail",
+    "future or stale creation timestamps fail and exact 21600-second span is enforced",
+    "malformed or reused launch nonce fails",
+    "copied Python home starts exact -I -S -B and resolves Asia/Seoul only after sealed tzdata activation",
+    "initial native map includes exact sealed VC runtime",
+    "concurrent directory insertion during implicit DLL loading is denied",
+    "every unauthorized path leaves the canonical namespace byte-for-byte unchanged",
+    "all inherited r6 and r7 scientific and target-firewall tests remain passing"
+  ],
+  "prohibitions": {
+    "actual_authorization_creation": 0,
+    "canonical_claim_creation": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "P3_reads_mutations_or_fits": 0,
+    "scientific_changes": 0
+  }
+}

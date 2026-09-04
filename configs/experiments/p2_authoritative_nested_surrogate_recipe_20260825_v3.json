@@ -1,0 +1,128 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_recipe.v3",
+  "experiment_id": "p2_authoritative_nested_surrogate_recipe_20260825_v3",
+  "created_at_kst": "2026-08-25T22:48:00+09:00",
+  "status": "SEALED_DATA_EXECUTABLE_REPAIR_NO_FIT_AUTHORIZATION",
+  "problem": "P2",
+  "research_only": true,
+  "training_authorized": false,
+  "submission_generation_authorized": false,
+  "base_recipe": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v1.json",
+    "sha256": "8b442b31ec1b2af8d1f356d728cc83aa94636c34528e26adad48ff268f2ce2b2"
+  },
+  "supersedes": {
+    "execution_contract": "p2_authoritative_nested_surrogate_execution_20260825_v2",
+    "status": "SUPERSEDED_TERMINAL_PREFIT_FAILURE_NEVER_RESUME_IN_V2_NAMESPACE",
+    "failure": "the v2 fraction denominator included public-only timestamps before supervised target labels existed",
+    "v2_preexecution_seal_sha256": "1d00be8c4dcec0ec120024b68f1527f29e50c80b5131a6afdf5f738b56aae673",
+    "terminal_receipt_sha256": "6b7ea718ab80c7379da70303ef62c973d92c396ee0c18795c809b7395535d01a",
+    "label_support_audit_sha256": "da8add0b3af691d772254658f924060299ac42ee1b56aef1e1c1516e20ffa5d6",
+    "v2_actual_model_fits": 0,
+    "v2_actual_predictions": 0,
+    "v2_actual_scores": 0
+  },
+  "authoritative_nested_surrogate_recipe": {
+    "identity": "P2_AUTHORITATIVE_NESTED_CAUSAL_SURROGATE_V3",
+    "claim": "repaired authoritative train-only local surrogate comparator; never the exact official incumbent",
+    "base_architecture": {
+      "architecture_or_feature_role_changes_allowed": 0,
+      "revision_from_v1": "none"
+    },
+    "outer_fold_contract": {
+      "folds_unchanged_from_base_recipe": true,
+      "embargo_days": 7,
+      "eligible_training_rule": "supervised_common_ledger_time_kst < validation_start_kst - 7 days",
+      "future_or_validation_complement_labels_allowed": false
+    },
+    "chronological_prefix_contract": {
+      "fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+      "unit": "unique supervised-eligible common-ledger timestamp",
+      "ordering": "ascending",
+      "count_rule": "ceil(fraction * eligible_supervised_common_ledger_timestamp_count)",
+      "tie_rule": "include every target layer at the selected timestamp",
+      "population_rule": "oldest supervised-common timestamps through selected cutoff inclusive",
+      "supervised_common_ledger_id": "P2_TARGET_234_TEMP_PSAL_ROUTER_DEEP_COMMON_V3",
+      "target_layers_required_together": [2, 3, 4],
+      "finite_target_columns_required_together": ["temp", "psal"],
+      "deep_and_router_executability_required": true,
+      "public_only_timestamps_in_fraction_denominator": false,
+      "mask_rule": "only registered common-ledger train and validation labels are visible; all other target TEMP/PSAL labels are unavailable"
+    },
+    "nested_component_oof_contract": {
+      "inner_fold_count": 3,
+      "construction": "split each supervised-ledger prefix into four deterministic contiguous equal-count blocks using floor(j*N/4); for j=1..3 train on earlier common-ledger labels strictly before the seven-day embargo and validate on block j",
+      "component_oof_population": "the exact common router/deep validation key ledger concatenated across three inner folds",
+      "router_and_deep_ordered_validation_keys_must_match": true,
+      "outer_validation_labels_available_to_inner_pipeline": false,
+      "stack_and_gate_semantics_unchanged": true
+    },
+    "deep_public_context_contract": {
+      "inner_training_context": "all continuous public-covariate timestamps through the last registered training label",
+      "inner_validation_context": "all continuous public-covariate timestamps spanning the registered validation block",
+      "train_validation_segments_separated_by_embargo": true,
+      "full_prefix_context": "all continuous public-covariate timestamps through the ledger-derived cutoff",
+      "supervised_mask": "target mask intersects only the registered common-ledger train or validation times",
+      "nonregistered_target_values_replaced_by_nan": true,
+      "public_covariate_continuity_preserved": true
+    },
+    "semantic_preflight_contract": {
+      "must_run_before_lock_partial_or_model_fit": true,
+      "scope_count": 45,
+      "full_prefix_scope_count": 15,
+      "checks": [
+        "per-layer router train and validation support",
+        "per-layer deep train and validation support",
+        "exact deep supervised chunks with minimum 24 target values",
+        "exact router mixed and stratified state partitions",
+        "router/deep ordered validation key equality",
+        "three-layer OOF/meta support",
+        "unchanged outer evaluation population"
+      ],
+      "required_actual_model_fits": 0,
+      "required_predictions": 0,
+      "required_scores": 0,
+      "receipt_sha256_must_be_pinned_by_preexecution_seal": true
+    },
+    "complete_pipeline_seed_contract": {
+      "seeds": [20260823, 20260824, 20260825],
+      "child_seed_rule_unchanged": true
+    },
+    "epoch_and_meta_contract": {
+      "unchanged_from_base_recipe": true
+    },
+    "postprocess_contract": {
+      "unchanged_from_base_recipe": true
+    }
+  },
+  "immutability_receipt": {
+    "outer_validation_windows_changed": false,
+    "prefix_fractions_changed": false,
+    "complete_pipeline_seeds_changed": false,
+    "model_components_changed": false,
+    "model_hyperparameters_changed": false,
+    "postprocess_changed": false,
+    "metrics_changed": false,
+    "only_split_population_and_deep_context_masking_repaired": true
+  },
+  "execution_gates": {
+    "semantic_preflight_may_run": true,
+    "new_training_may_start": false,
+    "separate_exact_command_authorization_required": true,
+    "result_based_rerun_or_tuning_allowed": false
+  },
+  "resource_and_external_action_contract": {
+    "new_model_fits": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "p3_era5_process_mutations": 0
+  },
+  "output": {
+    "directory": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v3",
+    "append_only": true,
+    "prediction_files_written": false
+  }
+}

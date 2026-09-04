@@ -1,0 +1,54 @@
+{
+  "schema_version": "p3.kma_annual_harmonic_shrink.config.v16",
+  "experiment_id": "p3_kma_annual_harmonic_shrink_cycle_20260831_v16",
+  "status": "SEALED_LAUNCH_READY_NOT_EXECUTED",
+  "candidate": {
+    "name": "P3_1_KMA_ANNUAL_HARMONIC_SMOOTH_SHRINK",
+    "family_id": "P3_KMA_CONTINUOUS_ENERGY_ANNUAL_HARMONIC_SHRINK",
+    "tier_id": "LOW_DOF_FIXED",
+    "representation_changed": false,
+    "routing_discontinuous": false,
+    "base_policy": "v14b alpha18=.20; alpha24=.20+.40*78h_prefix_ECDF_energy",
+    "formula": "uniform0425 + clip(1+c*sin(t)+d*cos(t),0,1)*(base_policy-uniform0425)",
+    "t": "2*pi*KST_day_of_year/365.25",
+    "ridge_tau": 0.1,
+    "prior": [0.0, 0.0],
+    "grid_or_search": false,
+    "station_branching": false,
+    "hard_router": false
+  },
+  "abstention": {
+    "phase_coverage_days_min": 180,
+    "condition_number_max": 10000,
+    "action_on_failure": "theta=(0,0), exact v14b smooth policy"
+  },
+  "validation": {
+    "blocks": 6,
+    "purge_hours": 78,
+    "prefix_ridge_solves": 6,
+    "model_fits": 0,
+    "bootstrap_replicates": 5000
+  },
+  "gate": {
+    "pooled_rmse_improves": true,
+    "minimum_improved_bimonth_blocks": 4,
+    "episode_ci90_upper_below_zero": true,
+    "block_station_ci90_upper_below_zero": true,
+    "worst_station_lead_delta_rmse_m_max": 0.01,
+    "changed_rows_share_max": 0.3333333333333333,
+    "selected_transport_penalty_points": 0.04958605409228893,
+    "minimum_raw_lcb_points": 0.05958605409228893,
+    "minimum_calibrated_lcb_points": 0.01
+  },
+  "provenance": {
+    "family_calibration_sha256": "1a1d2c96cbe6c2c69b753fb4a130eb092922cc46524286cabcc0f9fce150441f",
+    "duplication_audit": "NON_DUPLICATE",
+    "result_based_tuning_or_retry": false
+  },
+  "official_policy": {
+    "official_inputs_before_pass": 0,
+    "hidden_truth_rows": 0,
+    "upload_attempts": 0,
+    "materialize_only_if_all_gates_pass": true
+  }
+}

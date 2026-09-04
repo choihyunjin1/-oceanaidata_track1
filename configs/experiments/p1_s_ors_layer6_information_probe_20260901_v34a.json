@@ -1,0 +1,85 @@
+{
+  "schema_version": "p1.s_ors_layer6_information_probe.20260901.v34a",
+  "experiment_id": "p1_s_ors_layer6_information_probe_20260901_v34a",
+  "candidate": "P1_REMOVE_S_ORS_LAYER6_E150_INFORMATION_PROBE",
+  "scientific_question": "The full 238-row S-ORS E150 component is officially neutral at display resolution. Does the historically weakest and transport-unstable S-ORS layer 6 subset explain that cancellation?",
+  "selection_freeze": {
+    "official_parent_fact": "Removing all 238 S-ORS E150 additions changed displayed Public F1 by 0.000000 in both G contexts.",
+    "historical_rule": "Remove the single S-ORS layer with the lowest pooled marginal precision among supported layers; the frozen v33c receipt identifies layer 6 at 0.5645371577574967.",
+    "selected_station": "S-ORS",
+    "selected_layer": 6,
+    "threshold": null,
+    "top_k": null,
+    "model_fits": 0,
+    "retries": 0
+  },
+  "historical_sources": {
+    "anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "truth": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "raw_seal": {
+      "path": "artifacts/p1_nested_s_layer_ablation_20260831_v33c/raw-seal.npz",
+      "sha256": "950bd0fc85a8115563054ac5f9ed010a61735eeed9d83175e9bf8bde54a31058"
+    },
+    "v33c_result": {
+      "path": "reports/p1_nested_s_layer_ablation_20260831_v33c/result.json",
+      "sha256": "f9114b144f5d5b4db58db15b6359183544649bce540784bbaa55124ff705ec18"
+    },
+    "official_factorial_receipt": {
+      "path": "reports/official_information_probe_cycle_20260830_v1/p1-official-result.json",
+      "sha256": "642ac00a955ec98a48ba6b154cf862cffd8643b42ae8e9653b4eeb2d7713aea2"
+    }
+  },
+  "validation": {
+    "diagnostic_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "primary_outer_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260941,
+    "strict_performance_gate": {
+      "pooled_q3_q4_delta_strictly_positive": true,
+      "q3_nonnegative": true,
+      "q4_nonnegative": true,
+      "ci90_low_strictly_positive": true
+    },
+    "information_probe_policy": "A strict performance failure may still be packaged only as an explicitly labeled official decomposition probe because the parent S component is officially net-neutral and two daily submissions remained before this action."
+  },
+  "score": {
+    "points_per_f1": 26.578120867377286,
+    "champion_public_f1": 0.833548,
+    "champion_points": 28.909341,
+    "claim": "Development estimate only; no expected-improvement guarantee."
+  },
+  "official_materializer": {
+    "champion": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_DEADLINE_INFORMATION_PROBES_READY/P1_1_E150_PLUS_GI_SPIKE2/P1_submission.csv",
+      "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687"
+    },
+    "e150": {
+      "path": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1/P1_MSTCN_E150_ROUTER_UNION_ALL.csv",
+      "sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b"
+    },
+    "anchor": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/P1_1_EXPLOIT_DISAGREEMENT_ROUTER/P1_submission.csv",
+      "sha256": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"
+    },
+    "expected_rows": 169011,
+    "expected_removed_rows": 107,
+    "expected_positive_rows": 6289,
+    "output": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_S_ORS_LAYER6_INFO_PROBE_READY_V34A/P1_1_REMOVE_S_ORS_LAYER6_E150/P1_submission.csv",
+    "title": "P1 S-ORS layer6 E150 split probe",
+    "summary": "Champion의 anchor/G/I/GI2와 S의 다른 layer는 보존하고 S-ORS layer 6 E150 addition 107행만 제거한 공식 분해 probe"
+  },
+  "authorization": {
+    "historical_truth_reads_after_action_seal": true,
+    "official_candidate_reads_after_internal_terminal": true,
+    "hidden_truth_reads": 0,
+    "sample_reads": 0,
+    "uploads_before_action_confirmation": 0,
+    "automatic_retries": 0
+  }
+}

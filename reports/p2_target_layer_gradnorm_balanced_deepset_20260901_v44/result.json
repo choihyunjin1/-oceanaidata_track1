@@ -1,0 +1,1308 @@
+{
+  "schema_version": "p2.target_layer_gradnorm_balanced_deepset.result.20260901.v44",
+  "experiment_id": "p2_target_layer_gradnorm_balanced_deepset_20260901_v44",
+  "status": "EXPLORATORY_NO_GO_TARGET_LAYER_GRADNORM",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "runtime_seconds": 178.41556700000365,
+  "fit_count": 9,
+  "permutation_invariance": {
+    "public_layer_permutation": [
+      4,
+      2,
+      0,
+      3,
+      1
+    ],
+    "maximum_abs_error": 1.4901161193847656e-08
+  },
+  "training": {
+    "row_deletion": 0,
+    "folds": {
+      "2024_sep_oct": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2024-08-25T00:00:00+09:00",
+        "training_rows": 45935,
+        "training_calendar_months": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month05": {
+              "rows": 3332,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer2:month06": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month07": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month08": {
+              "rows": 3208,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month05": {
+              "rows": 3324,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month06": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month07": {
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month08": {
+              "rows": 3214,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            },
+            "layer4:month05": {
+              "rows": 3329,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month06": {
+              "rows": 4319,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month07": {
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer4:month08": {
+              "rows": 3215,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            }
+          },
+          "group_count": 12,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.8575082138590202,
+          "normalized_max": 8.860918209876543,
+          "gradnorm_task_labels": [
+            2,
+            3,
+            4
+          ]
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.14987764763013628,
+            "loss_last": 0.0824494550909871,
+            "optimizer_steps": 720,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 720,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 266,
+              "3": 267,
+              "4": 267
+            },
+            "initial_task_losses": [
+              0.10310515761375427,
+              0.16599887609481812,
+              0.2416083961725235
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              0.9347123503684998,
+              0.7202121019363403,
+              1.3450754880905151
+            ],
+            "task_weight_sum": 2.9999999403953552,
+            "task_weight_min_seen": 0.6722691655158997,
+            "task_weight_max_seen": 1.4271916151046753,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "0fb18abe1d3c38c3efded828916b4d9d7ea53b90485246c4b3152dd8f7b8c372",
+            "gradnorm_objective_mean": 0.07695951015468583,
+            "shared_gradient_norm_min": 0.004819298163056374,
+            "shared_gradient_norm_max": 0.8943555951118469,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.12104072969363054,
+            "loss_last": 0.08204322339815472,
+            "optimizer_steps": 720,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 720,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 266,
+              "3": 265,
+              "4": 256
+            },
+            "initial_task_losses": [
+              0.05846960470080376,
+              0.09536906331777573,
+              0.25657781958580017
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.5027344226837158,
+              0.9007769823074341,
+              0.5964887738227844
+            ],
+            "task_weight_sum": 3.0000001788139343,
+            "task_weight_min_seen": 0.5455347299575806,
+            "task_weight_max_seen": 1.5201950073242188,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "688deabaa9483430e242bd3f2ed19add8471657d35a2d1db35d0f2f5f66ca762",
+            "gradnorm_objective_mean": 0.06936559586514097,
+            "shared_gradient_norm_min": 0.004005027934908867,
+            "shared_gradient_norm_max": 0.3465085029602051,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.10825553143608706,
+            "loss_last": 0.0844896938562713,
+            "optimizer_steps": 720,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 720,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 262,
+              "3": 241,
+              "4": 254
+            },
+            "initial_task_losses": [
+              0.040203262120485306,
+              0.062468405812978745,
+              0.1975906491279602
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.4751371145248413,
+              1.040147304534912,
+              0.48471567034721375
+            ],
+            "task_weight_sum": 3.000000089406967,
+            "task_weight_min_seen": 0.46900907158851624,
+            "task_weight_max_seen": 1.4802296161651611,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "026ec95d661b7d41686e5b03b57da5736e64d469afd4b1d6069a2fcf3cb3b007",
+            "gradnorm_objective_mean": 0.08297225847167687,
+            "shared_gradient_norm_min": 0.005171582568436861,
+            "shared_gradient_norm_max": 0.4187576174736023,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      },
+      "2025_jul_aug": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-06-24T00:00:00+09:00",
+        "training_rows": 119667,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "rows": 7627,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month07": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month08": {
+              "rows": 4216,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month09": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "rows": 7626,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month07": {
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "rows": 4221,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month09": {
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "rows": 7628,
+              "days": 53,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "rows": 4223,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 0.9999999999999999,
+          "normalized_min": 0.5699731367169639,
+          "normalized_max": 11.080277777777777,
+          "gradnorm_task_labels": [
+            2,
+            3,
+            4
+          ]
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.07363202592170304,
+            "loss_last": 0.03863641732810213,
+            "optimizer_steps": 1800,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 1800,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 260,
+              "3": 266,
+              "4": 264
+            },
+            "initial_task_losses": [
+              0.07170227915048599,
+              0.10336358845233917,
+              0.1816702038049698
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.057129979133606,
+              0.9089650511741638,
+              1.0339051485061646
+            ],
+            "task_weight_sum": 3.0000001788139343,
+            "task_weight_min_seen": 0.863967776298523,
+            "task_weight_max_seen": 1.154602289199829,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "cb8d9c5de5f1ce369fc6c45ed85813bcc15ee45792e4da3cf94b82c45a0e5057",
+            "gradnorm_objective_mean": 0.03844757467120265,
+            "shared_gradient_norm_min": 0.003954311367124319,
+            "shared_gradient_norm_max": 0.3525007665157318,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.06108559772917211,
+            "loss_last": 0.03898999773163556,
+            "optimizer_steps": 1800,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 1800,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 255,
+              "3": 265,
+              "4": 252
+            },
+            "initial_task_losses": [
+              0.038892969489097595,
+              0.06654105335474014,
+              0.1273992508649826
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.4711419343948364,
+              0.7413146495819092,
+              0.7875435948371887
+            ],
+            "task_weight_sum": 3.0000001788139343,
+            "task_weight_min_seen": 0.7114567756652832,
+            "task_weight_max_seen": 1.5029114484786987,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "08cba16a2926cd7dac5897ffb451b603e0b62ac84c466cd81c54f4a5dddaeaec",
+            "gradnorm_objective_mean": 0.042491200866125935,
+            "shared_gradient_norm_min": 0.00544316042214632,
+            "shared_gradient_norm_max": 0.34199443459510803,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.0571802401905869,
+            "loss_last": 0.0389068845404538,
+            "optimizer_steps": 1800,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 1800,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 263,
+              "3": 262,
+              "4": 253
+            },
+            "initial_task_losses": [
+              0.025644926354289055,
+              0.04501032456755638,
+              0.10354260355234146
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.4235763549804688,
+              0.9308703541755676,
+              0.6455534100532532
+            ],
+            "task_weight_sum": 3.0000001192092896,
+            "task_weight_min_seen": 0.6046956777572632,
+            "task_weight_max_seen": 1.4905521869659424,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "65d5378d618338fe42c5d12bf110e6a98b5d67cb5893bdfc36a2b5f939622adc",
+            "gradnorm_objective_mean": 0.05258574562587051,
+            "shared_gradient_norm_min": 0.005504675675183535,
+            "shared_gradient_norm_max": 0.27433106303215027,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      },
+      "2025_nov_dec": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-10-25T00:00:00+09:00",
+        "training_rows": 149384,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "rows": 8635,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month07": {
+              "rows": 8904,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month08": {
+              "rows": 8661,
+              "days": 62,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month09": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "rows": 8634,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month07": {
+              "rows": 8901,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "rows": 8647,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month09": {
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "rows": 8636,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "rows": 8911,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "rows": 8687,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.6197066241869109,
+          "normalized_max": 13.831851851851852,
+          "gradnorm_task_labels": [
+            2,
+            3,
+            4
+          ]
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.057814149130583116,
+            "loss_last": 0.028127540533654242,
+            "optimizer_steps": 2220,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 2220,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 606,
+              "3": 609,
+              "4": 604
+            },
+            "initial_task_losses": [
+              0.06584492325782776,
+              0.09549632668495178,
+              0.1311768889427185
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              0.9992455840110779,
+              0.8075208067893982,
+              1.1932334899902344
+            ],
+            "task_weight_sum": 2.9999998807907104,
+            "task_weight_min_seen": 0.7788876891136169,
+            "task_weight_max_seen": 1.3111344575881958,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "fcc203dff37f0cbd3b01b45cde69063388bb0ccc1df8c01184f082ad9eb5b741",
+            "gradnorm_objective_mean": 0.028471680588785325,
+            "shared_gradient_norm_min": 0.003779000835493207,
+            "shared_gradient_norm_max": 0.24867382645606995,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.047263240671840866,
+            "loss_last": 0.028046384968292478,
+            "optimizer_steps": 2220,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 2220,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 576,
+              "3": 595,
+              "4": 595
+            },
+            "initial_task_losses": [
+              0.028922969475388527,
+              0.053709421306848526,
+              0.10317395627498627
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.538030743598938,
+              0.7930669188499451,
+              0.6689023971557617
+            ],
+            "task_weight_sum": 3.0000000596046448,
+            "task_weight_min_seen": 0.6664738655090332,
+            "task_weight_max_seen": 1.5400913953781128,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "b78f86756094177f520581f3fef86bd709e5962b094c9e287e5c5e758f2288a5",
+            "gradnorm_objective_mean": 0.029499507115247684,
+            "shared_gradient_norm_min": 0.006253116764128208,
+            "shared_gradient_norm_max": 0.17050234973430634,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "parameter_tensors": 10,
+            "loss_first": 0.04301987333098507,
+            "loss_last": 0.028621166835362373,
+            "optimizer_steps": 2220,
+            "task_labels": [
+              2,
+              3,
+              4
+            ],
+            "shared_parameter": "head.0.weight",
+            "shared_parameter_shape": [
+              32,
+              75
+            ],
+            "gradnorm_alpha": 1.5,
+            "task_weight_learning_rate": 0.025,
+            "task_weight_updates": 2220,
+            "missing_task_batches": 0,
+            "task_support_min": {
+              "2": 592,
+              "3": 595,
+              "4": 592
+            },
+            "initial_task_losses": [
+              0.01817478984594345,
+              0.04417920112609863,
+              0.07898800075054169
+            ],
+            "initial_task_weights": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "final_task_weights": [
+              1.8119661808013916,
+              0.6127173900604248,
+              0.5753166079521179
+            ],
+            "task_weight_sum": 3.0000001788139343,
+            "task_weight_min_seen": 0.5474963784217834,
+            "task_weight_max_seen": 1.8290469646453857,
+            "initial_task_weight_sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+            "final_task_weight_sha256": "ba7e37496f4dbc58af5786ba8f4601ddc8b8d430ef43ea2d855a9662d376bb31",
+            "gradnorm_objective_mean": 0.03477921671976612,
+            "shared_gradient_norm_min": 0.00522493664175272,
+            "shared_gradient_norm_max": 0.15980499982833862,
+            "gradient_projection": 0,
+            "coordinate_mask": 0,
+            "extra_inference_parameters": 0,
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      }
+    },
+    "objective": "exact_v13_weighted_SmoothL1_with_target_layer_GradNorm",
+    "optimizer": "exact_v13_AdamW_plus_plain_SGD_task_weights",
+    "gradnorm": {
+      "tasks": [
+        2,
+        3,
+        4
+      ],
+      "task_definition": "target_layer",
+      "initial_task_weights": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "task_weight_sum": 3.0,
+      "task_weight_minimum": 0.001,
+      "asymmetry_alpha": 1.5,
+      "shared_parameter": "head.0.weight",
+      "task_weight_optimizer": "plain_SGD_no_momentum",
+      "task_weight_learning_rate": 0.025,
+      "missing_task_weight_update": "exact_noop",
+      "sampler_change": false,
+      "projection": false,
+      "coordinate_mask": false,
+      "sweep": false
+    },
+    "input_perturbation": 0,
+    "data_augmentation": 0,
+    "extra_inference_parameters": 0
+  },
+  "candidate": {
+    "name": "P2_V44_TARGET_LAYER_GRADNORM_BALANCED_DEEPSET_BLEND020",
+    "objective": "weighted_SmoothL1_beta_1.0",
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reference_rmse": 3.085714618974286,
+    "candidate_rmse": 3.036073311206899,
+    "delta_rmse": -0.049641307767386955,
+    "by_fold": {
+      "2024_sep_oct": {
+        "rows": 26273,
+        "reference_rmse": 4.882135051908297,
+        "candidate_rmse": 4.802051031714709,
+        "delta_rmse": -0.0800840201935884
+      },
+      "2025_jul_aug": {
+        "rows": 26693,
+        "reference_rmse": 1.1857780665476285,
+        "candidate_rmse": 1.1741314670263099,
+        "delta_rmse": -0.011646599521318635
+      },
+      "2025_nov_dec": {
+        "rows": 16884,
+        "reference_rmse": 0.28073218471331673,
+        "candidate_rmse": 0.2680705062188317,
+        "delta_rmse": -0.012661678494485018
+      }
+    },
+    "by_layer": {
+      "2": {
+        "rows": 23298,
+        "reference_rmse": 0.977425784480094,
+        "candidate_rmse": 0.8563715438293752,
+        "delta_rmse": -0.12105424065071879
+      },
+      "3": {
+        "rows": 23280,
+        "reference_rmse": 1.614255614462584,
+        "candidate_rmse": 1.5182217983426702,
+        "delta_rmse": -0.09603381611991368
+      },
+      "4": {
+        "rows": 23272,
+        "reference_rmse": 5.001566713966556,
+        "candidate_rmse": 4.96253050973695,
+        "delta_rmse": -0.039036204229605964
+      }
+    },
+    "by_fold_layer": {
+      "2024_sep_oct": {
+        "2": {
+          "rows": 8777,
+          "reference_rmse": 1.4655912558305686,
+          "candidate_rmse": 1.2311681481952728,
+          "delta_rmse": -0.23442310763529584
+        },
+        "3": {
+          "rows": 8774,
+          "reference_rmse": 2.411153774848093,
+          "candidate_rmse": 2.231053380492654,
+          "delta_rmse": -0.1801003943554389
+        },
+        "4": {
+          "rows": 8722,
+          "reference_rmse": 7.986758349725424,
+          "candidate_rmse": 7.9328031659857094,
+          "delta_rmse": -0.05395518373971431
+        }
+      },
+      "2025_jul_aug": {
+        "2": {
+          "rows": 8890,
+          "reference_rmse": 0.5930813808765173,
+          "candidate_rmse": 0.6369050529447976,
+          "delta_rmse": 0.043823672068280306
+        },
+        "3": {
+          "rows": 8875,
+          "reference_rmse": 1.02350668839,
+          "candidate_rmse": 1.0467930037674147,
+          "delta_rmse": 0.023286315377414768
+        },
+        "4": {
+          "rows": 8928,
+          "reference_rmse": 1.6769858971289795,
+          "candidate_rmse": 1.6212681828209017,
+          "delta_rmse": -0.055717714308077815
+        }
+      },
+      "2025_nov_dec": {
+        "2": {
+          "rows": 5631,
+          "reference_rmse": 0.2223371212774351,
+          "candidate_rmse": 0.1767610573917092,
+          "delta_rmse": -0.04557606388572591
+        },
+        "3": {
+          "rows": 5631,
+          "reference_rmse": 0.2518955116552082,
+          "candidate_rmse": 0.21565299704554014,
+          "delta_rmse": -0.03624251460966804
+        },
+        "4": {
+          "rows": 5622,
+          "reference_rmse": 0.35159372870754263,
+          "candidate_rmse": 0.371403170887011,
+          "delta_rmse": 0.019809442179468395
+        }
+      }
+    },
+    "bootstrap": {
+      "unit": "fold_x_kst_date",
+      "groups": 163,
+      "replicates": 5000,
+      "mean_delta_rmse": -0.05340658848177185,
+      "ci90_low": -0.07999078819534826,
+      "ci90_high": -0.036198449375700555,
+      "probability_improved": 1.0
+    },
+    "official_like_bootstrap": {
+      "unit": "kst_date",
+      "groups": 61,
+      "replicates": 5000,
+      "ci90_low": -0.13089253736768933,
+      "ci90_high": -0.05825052328552917,
+      "probability_improved": 1.0
+    },
+    "raw_expected_points_delta": 0.7309002525164514,
+    "transport_calibrated_expected_points_delta": 0.6092181609064452,
+    "candidate_change_rms_C": 0.19805343482470728,
+    "candidate_change_abs_max_C": 0.5000000000000018,
+    "gate_checks": {
+      "pooled_improves": true,
+      "minimum_two_folds_improve": true,
+      "official_like_fold_improves": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "calibrated_expected_points_gte_0_01": true
+    },
+    "strict_exploratory_pass": true,
+    "by_month": {
+      "2024-09": {
+        "rows": 12934,
+        "reference_rmse": 2.2787351769737767,
+        "candidate_rmse": 1.9996621255912301,
+        "delta_rmse": -0.27907305138254657
+      },
+      "2024-10": {
+        "rows": 13339,
+        "reference_rmse": 6.473934093544442,
+        "candidate_rmse": 6.445308860761483,
+        "delta_rmse": -0.02862523278295903
+      },
+      "2025-07": {
+        "rows": 13358,
+        "reference_rmse": 1.3894354530721664,
+        "candidate_rmse": 1.378494088209112,
+        "delta_rmse": -0.010941364863054526
+      },
+      "2025-08": {
+        "rows": 13335,
+        "reference_rmse": 0.9384581958535501,
+        "candidate_rmse": 0.925215488040073,
+        "delta_rmse": -0.013242707813477028
+      },
+      "2025-11": {
+        "rows": 12951,
+        "reference_rmse": 0.29628626798459773,
+        "candidate_rmse": 0.2898702502816901,
+        "delta_rmse": -0.006416017702907617
+      },
+      "2025-12": {
+        "rows": 3933,
+        "reference_rmse": 0.22193861634935502,
+        "candidate_rmse": 0.1783543983815869,
+        "delta_rmse": -0.043584217967768124
+      }
+    },
+    "action_geometry": {
+      "active_rows_gt_1e_12": 69850,
+      "active_share_gt_1e_12": 1.0,
+      "abs_action_p50_C": 0.08194695568745125,
+      "abs_action_p90_C": 0.4133791044000826,
+      "abs_action_p95_C": 0.5,
+      "abs_action_p99_C": 0.5,
+      "abs_action_p999_C": 0.5,
+      "abs_action_max_C": 0.5000000000000018,
+      "action_rms_C": 0.19805343482470728,
+      "sse_gain_top_0_1pct_share": 0.01188895884770496,
+      "sse_gain_top_1pct_share": 0.124514432838679
+    },
+    "canonical_nominal_pooled_points_delta": 0.6228758530559594,
+    "canonical_transport_adjusted_pooled_points_delta": 0.5011937614459532,
+    "legacy_engine_score_translation": {
+      "raw_expected_points_delta": 0.7309002525164514,
+      "transport_calibrated_expected_points_delta": 0.6092181609064452,
+      "meaning": "official-like Sep-Oct day-bootstrap CI90-high translation"
+    },
+    "prediction_commitment": {
+      "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_target_layer_gradnorm_balanced_deepset_20260901_v44\\P2_V44_TARGET_LAYER_GRADNORM_BALANCED_DEEPSET_BLEND020.npz",
+      "sha256": "bbb8a471a5851fb53386960c2f1cc43eab25070854a1a0865bad498585ee7ced",
+      "rows": 69850,
+      "metric_computed_at_commitment": false
+    },
+    "safety_gate_checks": {
+      "all_three_folds_non_harm": true,
+      "all_six_months_within_0_003C": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "canonical_transport_points_gte_0_01": true
+    },
+    "safety_pass": false,
+    "legacy_safety_pass_without_v26a_amendment": true,
+    "prospective_fold_layer_gate": {
+      "source": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+      "source_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+      "non_harm_cells": 6,
+      "total_cells": 9,
+      "non_harm_coverage": 0.6666666666666666,
+      "maximum_cell_delta_rmse_C": 0.043823672068280306,
+      "checks": {
+        "minimum_eight_of_nine_non_harm": false,
+        "all_cells_within_plus_0_003C": false
+      },
+      "pass": false
+    },
+    "safety_pass_with_v26a_amendment": false
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "6700d0f5bf8a32c97af3bc12369c06158cb706823ada5875c475295484b83d9d",
+    "runner": "806df29e3ee41943703ee79f4fb0ffc47f5b98833f290f581c78133e9787f27e",
+    "v12_runner": "1c027fc0d753273ce62e362a7505afb0ef16fb34daa18f78fb315d83941d60ae",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "prediction_npz": "bbb8a471a5851fb53386960c2f1cc43eab25070854a1a0865bad498585ee7ced",
+    "v13_runner": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+    "prospective_gate_amendment": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "fingerprint": "4d05173bdad3b83fbc8d93201f851e0f50c6f570f0711056a09c6b59379f476a"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_TARGET_LAYER_GRADNORM_ADAPTIVE_LOSS_BALANCE",
+    "repository_execution_hits": 0,
+    "v18_group_dro_distinguished": true,
+    "v28_pcgrad_distinguished": true,
+    "v36_fishr_distinguished": true,
+    "v39_sign_mask_distinguished": true,
+    "v43_film_distinguished": true,
+    "official_v23_feedback_used_for_selection": false,
+    "evidence_sha256": {
+      "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/result.json": "2a825dd41e8df0481295566139b77f3a588e469cb344372877f1fcea5d5ab084",
+      "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+      "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/next-axis-fingerprint.md": "4d05173bdad3b83fbc8d93201f851e0f50c6f570f0711056a09c6b59379f476a",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+      "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json": "db25e23ad56d9f9bc3eba283cd31d706e2f0569dbdb516f919eaafed55c7ca70",
+      "reports/p2_layer_task_gradient_surgery_deepset_20260901_v28/result.json": "3674571d4912e288e25d3508fbe5a3b880764f1eb33341b871f267d81b8887d9",
+      "reports/p2_layer_month_fishr_gradient_variance_deepset_20260901_v36/result.json": "cabb73eb3b15051a4cd0d3d00c26ab53bc0301d6cbca1234d82460487d39954f",
+      "reports/p2_target_layer_gradient_sign_unanimity_deepset_20260901_v39/result.json": "7e8678dd6d6f9e6b6d85c2a726e38f971bd880837b8fe61d1690df6d97b044ce"
+    }
+  },
+  "gradnorm_contract": {
+    "tasks": [
+      2,
+      3,
+      4
+    ],
+    "shared_parameter": "head.0.weight",
+    "alpha": 1.5,
+    "task_weight_learning_rate": 0.025,
+    "task_weight_minimum": 0.001,
+    "target_sum": 3.0,
+    "equal_fixed_point_maximum_abs_error": 5.960464477539063e-08,
+    "equal_gradient_maximum_abs": 1.5811387300491333,
+    "equal_gradient_norms": [
+      1.5811388492584229,
+      1.5811388492584229,
+      1.5811388492584229
+    ],
+    "unequal_update_maximum_abs": 0.14687490463256836,
+    "unequal_gradient_norms": [
+      1.5811388492584229,
+      3.1622776985168457,
+      6.324555397033691
+    ],
+    "updated_weights": [
+      1.0534090995788574,
+      1.0934659242630005,
+      0.8531250953674316
+    ],
+    "updated_weight_sum": 3.0,
+    "updated_weight_minimum": 0.8531250953674316,
+    "gradnorm_autograd_populated_model_or_weight_grad": false,
+    "model_loss_task_weight_gradient_absent": true,
+    "missing_task_update_exact_noop": true,
+    "finite": true
+  },
+  "architecture_isolation": {
+    "model_class": "VerticalDeepSet",
+    "parameters": 4865,
+    "parameter_tensors": 10,
+    "state_identical_initial_function_maximum_abs_error": 0.0,
+    "masked_or_future_token_maximum_abs_error": 0.0,
+    "permutation_maximum_abs_error": 3.725290298461914e-09,
+    "extra_inference_parameters": 0
+  },
+  "comparison_to_preserved_candidates": {
+    "use": "ledger_only_no_posthoc_selection_router_or_ensemble",
+    "official_v23_feedback_used_for_selection": false,
+    "v13_delta_rmse": -0.050854574991828105,
+    "v18_delta_rmse": -0.05073986974009825,
+    "v28_delta_rmse": -0.050893586898622,
+    "v36_delta_rmse": -0.050436335006336375,
+    "v39_delta_rmse": -0.04866630742936673,
+    "v43_delta_rmse": -0.05019938778180899
+  }
+}

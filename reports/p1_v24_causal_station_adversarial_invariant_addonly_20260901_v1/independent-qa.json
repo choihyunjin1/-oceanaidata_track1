@@ -1,0 +1,55 @@
+{
+  "schema_version": "p1.v24.independent_qa.v1",
+  "experiment_id": "p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1",
+  "verdict": "PASS",
+  "phase": "POST_TERMINAL_IMMUTABLE_REVALIDATION",
+  "checks": {
+    "focused_pytest_4_of_4": true,
+    "ruff_pass": true,
+    "two_real_preflights_byte_identical": true,
+    "preflight_zero_operation": true,
+    "terminal_result": true,
+    "exactly_nine_fits": true,
+    "outer_rows_in_training_zero": true,
+    "outer_domain_rows_in_training_zero": true,
+    "outer_target_reads_before_seals_zero": true,
+    "anchor_removals_zero": true,
+    "official_test_sample_submission_hidden_reads_zero": true,
+    "csv_upload_zero": true,
+    "config_runner_completion_lock_hashes_match": true,
+    "all_seal_hashes_match": true
+  },
+  "preflight": {
+    "sha256": "0cb2f41737a3bde90970712a75d562b61907103459aecebe5e014c98c3ff8fd7",
+    "byte_identical": true,
+    "representation_support_share": 1.0
+  },
+  "canonical": {
+    "decision": "NO_GO_EXPLORATORY_ONLY",
+    "incumbent_f1": 0.8604836038423319,
+    "candidate_f1": 0.8511237795688356,
+    "delta_f1": -0.009359824273496353,
+    "tp": 12989,
+    "fp": 1478,
+    "fn": 3066,
+    "additions": 332,
+    "addition_true_positives": 0,
+    "addition_precision": 0.0,
+    "anchor_removals": 0,
+    "ci90": [-0.013291383894181812, -0.006278461619619525],
+    "nominal_points": -0.24878779970885603,
+    "transport_adjusted_points": -0.07463633991265681,
+    "long_event_interior_recall": 0.8107135718568859,
+    "long_event_boundary_recall": 0.779835390946502,
+    "fits": 9,
+    "runtime_seconds": 21.718999999997322
+  },
+  "hashes": {
+    "config": "6ca2904c09084ada7d7a49893e14399c8bc3a2f81f67de52db186e3032098392",
+    "runner": "186f26fc9c7edea1eea01e78a485c10719ed19a0823f5ec74d79a2406f32fc6a",
+    "completion": "721d4ef070567fe69a3fa7dcfdfd9eeed3bdea3998c0b1daf9275e5d608c33c0",
+    "lock": "0cdab480f6a671da79dfb78c8fb9411e16d49f3466ddaa6c6c9ca8b2d695d10f",
+    "result": "9915b48421f5e8b3d70e9c100286ede5a45c219cc3b5665c7dd3d7fd9974be36"
+  },
+  "access": {"official": 0, "test": 0, "sample_submission": 0, "hidden": 0, "csv": 0, "uploads": 0}
+}

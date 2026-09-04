@@ -1,0 +1,62 @@
+{
+  "schema_version": "p3.fixed_simplex_stacking.config.v25",
+  "experiment_id": "p3_fixed_simplex_stacking_cycle_20260901_v25",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "public_rmse_m": 0.575233,
+    "public_points": 24.203599,
+    "policy": "exact uniform alpha 0.425 comparator"
+  },
+  "duplication_audit": {
+    "revin_style_joint_residual": "STOP_SEMANTIC_DUPLICATE",
+    "revin_evidence": "src/p3_wave/revin_patch.py already performs casewise robust level/scale removal and hs_scale de-normalization; its sealed recovery worsened RMSE by 0.00431369m",
+    "equal_weight_ensemble_precedent": "artifacts/p3/final_ensemble_validation contains a fixed 50:50 single/multi CatBoost ensemble",
+    "selected_axis": "outer-train-only exact simplex least-squares stacking of a fixed heterogeneous base set, shrunk toward the exact official champion",
+    "semantic_verdict": "NON_DUPLICATE_ARCHITECTURE_AXIS",
+    "distinction": "no P3 implementation fits non-negative sum-to-one heterogeneous base weights inside each purged outer training fold; prior alpha searches vary one KMA axis and prior ensemble is fixed equal-weight"
+  },
+  "stacking": {
+    "base_order": ["uniform_0p425", "catboost_single", "catboost_multi", "persistence", "kma_calibrated_source"],
+    "base_set_locked_before_scoring": true,
+    "fit": "enumerate all non-empty active sets; solve equality-constrained least squares with weights summing to one; retain non-negative solutions; deterministic minimum train SSE then lexicographic active-set tie break",
+    "intercept": false,
+    "negative_weights": false,
+    "target_winsor": null,
+    "row_deletion": 0,
+    "candidates": [
+      {"name": "P3_1_FIXED_SIMPLEX_SHRINK10", "champion_residual_weight": 0.10},
+      {"name": "P3_2_FIXED_SIMPLEX_SHRINK20", "champion_residual_weight": 0.20}
+    ],
+    "outer_result_weight_changes": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "simplex_fits": 6,
+    "derived_candidate_count": 2,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "gate": "delta RMSE below zero, at least 4/6 blocks improve, episode and block-station CI90 upper below zero, worst station-lead <=0.01m",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "fixed_transport_penalty_points": 0.04958605409228893
+  },
+  "inputs": {
+    "artifacts/p3/final_ensemble_validation/oof.parquet": "4ca2b0227ddcf010100899b7bd91bc5370cc5b1fb74998fc85545d5ac94b69ca",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

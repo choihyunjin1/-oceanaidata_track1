@@ -1,0 +1,83 @@
+{
+  "completed_at_utc": "2026-08-28T22:52:11.888271+00:00",
+  "experiment_id": "p1_window_phase_consistency_20260829_v1",
+  "official_interface_reads": 0,
+  "paired_view_training_run_count": 0,
+  "paired_view_training_started": false,
+  "prediction_csv_created": false,
+  "q2_preflight": {
+    "anchor": {
+      "f1": 0.7922755741127349,
+      "fn": 1575,
+      "fp": 415,
+      "precision": 0.9014251781472684,
+      "recall": 0.7067039106145251,
+      "tp": 3795
+    },
+    "blind_receipt": {
+      "path": "q2_alternate_tiling_blind_receipt.json",
+      "score_sha256": "0b47c2fb93576984ee30f50bf4301b0e42aca149158e5a0ed7884c25ebab0b9d",
+      "sha256": "8e312f1b37b6484750f9a3a423f1c5164a3261b957056bb63c60d87f7cd1d2e1"
+    },
+    "fixed_average_anchor_union_delta_f1": 0.07564194399984181,
+    "fixed_average_candidate": {
+      "f1": 0.8679175181125767,
+      "fn": 698,
+      "fp": 724,
+      "precision": 0.865826538176427,
+      "recall": 0.8700186219739292,
+      "tp": 4672
+    },
+    "gate_checks": {
+      "default_replay_bitwise_identical": true,
+      "fixed_average_anchor_union_delta_f1": true,
+      "proposal_xor_rows": false,
+      "q99_absolute_probability_difference": false
+    },
+    "proposal_xor_rows": 29,
+    "q99_absolute_probability_difference": 0.0037284570280462503,
+    "replay_identity": {
+      "boundary_probability_bitwise_equal": true,
+      "decoder_probability_bitwise_equal": true,
+      "proposal_bitwise_equal": true
+    },
+    "replay_receipts": [
+      {
+        "epochs": 150,
+        "history": {
+          "bytes": 98829,
+          "path": "q2_replay_seed_20260827_history.json",
+          "sha256": "a2495a925512e8096ae0778af10c6581e7c6c4583a33b7457e49e2ea4b5ac286"
+        },
+        "optimizer_steps": 1950,
+        "seed": 20260827
+      },
+      {
+        "epochs": 150,
+        "history": {
+          "bytes": 98830,
+          "path": "q2_replay_seed_20260839_history.json",
+          "sha256": "ba8418957b78aa41e94cac454d39912446771f763e49f560824d9a0a8390264b"
+        },
+        "optimizer_steps": 1950,
+        "seed": 20260839
+      },
+      {
+        "epochs": 150,
+        "history": {
+          "bytes": 98880,
+          "path": "q2_replay_seed_20260863_history.json",
+          "sha256": "04d8eedb264b06d9a9184d11a40772170d78bc65191e98f6c73038db68c6200e"
+        },
+        "optimizer_steps": 1950,
+        "seed": 20260863
+      }
+    ],
+    "result": "FAIL",
+    "schema_version": "p1.window_phase_consistency.q2_metrics.v1"
+  },
+  "schema_version": "p1.window_phase_consistency.aggregate.v1",
+  "started_at_utc": "2026-08-28T21:56:44.686477+00:00",
+  "status": "NO_GO_Q2_PREFLIGHT",
+  "upload_performed": false
+}

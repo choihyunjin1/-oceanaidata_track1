@@ -1,0 +1,16 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v27",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v27",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_PREFIX_ECDF_BASE_PEER_MIN_CONSENSUS",
+  "lineage": {"v25_oracle_audit": "DESIGN_EVIDENCE_ONLY", "distinct_from_v25": "no EM prevalence or odds correction", "retuning": false},
+  "score": {"inputs": ["probability_base", "probability_peer"], "transform": "train-prefix empirical CDF, right-continuous", "combine": "minimum rank", "fallback": "global only", "no_em": true, "no_top_k": true, "no_router": true},
+  "inner_selector": {"split": "first75 fit ECDF last25 calibration by global chronological prefix", "threshold_candidates": "all finite inner scores plus positive infinity", "objective": "maximum actual add-only union F1", "hard_gates": ["inner delta F1 > 0", "central marginal precision > inner anchor F1/2", "changed fraction <=0.005", "positive additions"], "tie_break": "higher threshold then fewer additions", "outer_labels_used": false},
+  "validation": {"pipeline_fits": [{"train_folds": ["2025_q2"], "outer": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "outer": "2025_q4"}], "maximum_pipeline_fits": 2, "bootstrap_replicates": 5000, "bootstrap_seed": 20260927, "outer_gates": ["Q3 Q4 nonnegative", "dependent bootstrap CI90 low >0", "slice gates unchanged", "raw>=0.015383691373120248", "calibrated>=0.01"]},
+  "transport": {"calibration_version": "v3", "calibration_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10", "family_id": "P1_PREFIX_ECDF_TWO_VIEW_CONSENSUS", "tier_id": "FIXED_ADD_ONLY_UNION", "penalty_points": 0.005383691373120247},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.015383691373120248, "minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.005383691373120247, "score_points_per_f1": 26.578120867377286, "bootstrap_probability_improved_minimum_inclusive": 0.8},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_changed_fraction_any_kst_day": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "minimum_each_supported_station_layer_delta_f1": 0.0},
+  "resource_caps": {"wall_seconds": 600, "rss_bytes": 4294967296, "vram_bytes": 0},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "authorization": {"synthetic_preflight": true, "historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "uploads": 0}
+}

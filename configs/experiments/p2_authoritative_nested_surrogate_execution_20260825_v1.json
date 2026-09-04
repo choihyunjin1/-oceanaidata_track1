@@ -1,0 +1,317 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_execution.v1",
+  "experiment_id": "p2_authoritative_nested_surrogate_execution_20260825_v1",
+  "created_at_kst": "2026-08-25T20:36:40+09:00",
+  "status": "SEALED_EXECUTION_READY_DRY_RUN_NO_ACTUAL_FIT",
+  "problem": "P2",
+  "research_only": true,
+  "claim": "authoritative nested causal surrogate; never the exact official incumbent",
+  "permissions": {
+    "actual_45_cell_fit_authorized": false,
+    "official_test_access_authorized": false,
+    "sample_submission_access_authorized": false,
+    "submission_candidate_access_authorized": false,
+    "public_score_selection_authorized": false,
+    "submission_generation_authorized": false,
+    "upload_authorized": false,
+    "p3_process_mutation_authorized": false
+  },
+  "parent_contract": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_recipe_20260825_v1.json",
+    "sha256": "8b442b31ec1b2af8d1f356d728cc83aa94636c34528e26adad48ff268f2ce2b2",
+    "contract_seal_path": "artifacts/p2_authoritative_nested_surrogate_recipe_20260825_v1/contract_seal.json",
+    "contract_seal_sha256": "7686c20002f5f7503c60f056950bfb69918588425841f96c9880025ad59dd27a",
+    "decisive_recon_preregistration_path": "artifacts/decisive_local_recon_20260825_v1/preregistration.json",
+    "decisive_recon_preregistration_sha256": "6ead6ca745a0c204f04377c2510a2206b61fe6ccf976963fdb7a7cccc070b073",
+    "common_protocol_path": "artifacts/matched_budget_local_compare_20260825/common_protocol.json",
+    "common_protocol_sha256": "a92ba760a764d8f6759fa5ad281efe35139ddbc7f956654c76c7143fe573e2c8"
+  },
+  "completed_conformance": {
+    "config_path": "configs/experiments/p2_authoritative_nested_surrogate_conformance_20260825_v1.json",
+    "config_sha256": "7f84b707bf7059e947a9145f7df4fbbab762739db1b1e7d2d95feaede14a28b9",
+    "manifest_path": "artifacts/p2_authoritative_nested_surrogate_conformance_20260825_v1/manifest.json",
+    "manifest_sha256": "4e658af14fdf1e6e36a65a9ad0791cb813035f58ddbee1d9656e72cf9b674b53",
+    "qa_path": "artifacts/p2_authoritative_nested_surrogate_conformance_20260825_v1/qa.json",
+    "qa_sha256": "d88963146275351b4dc65c57f9d7976aafc9f01f72e7d00b09c0cf51c3423a69",
+    "limitations_superseded_here": [
+      "single-base-LightGBM router placeholder",
+      "historical train_fold 1e-6 best-state threshold",
+      "incomplete actual-run source pin surface"
+    ]
+  },
+  "source_pins": {
+    "src/p2_restore/data.py": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9",
+    "src/p2_restore/deep_data.py": "aab7b89d47715f3b6e3c3543ef39cb5d450974e3a415370d364c3f5c875ec95c",
+    "src/p2_restore/deep_models.py": "0cb418fe54f0feedc378c6eb3723338384364dc5322279958181df54d338fca5",
+    "src/p2_restore/deep_training.py": "d1fd74e62bee2f483256afac479b3777da0e285417aab7f1d65df6664a178139",
+    "src/p2_restore/features.py": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7",
+    "src/p2_restore/final_inference.py": "60e54f5c67cabe777497b81a2eb29356733d279edfe7254d72b2bc0cfd64fe7b",
+    "src/p2_restore/max_rounds.py": "8e8d297d4dc6201c5906fb2f132e5c1b2a0937a9fc6ae96435f3fce93d2160ee",
+    "src/p2_restore/model.py": "5a1b4af4f7092e490741f576b1bf7595ff7e2f38a0d1d3605db9c865b5c20020",
+    "src/p2_restore/research.py": "84716e1e8836a1f6ffaee74309aff317b53e6bc3e5bfb264d0df554ca474ca02",
+    "src/p2_restore/score_optimization.py": "04eed1f3f508304edef1cdab4ae6a440646dacb28035f7abcf1ac3dd6a711ba4",
+    "src/p2_restore/state_conditional.py": "076b2bb152d7f1687db49f568f5f912a823106acd6108583d0542690795ea361",
+    "src/p2_restore/regime_gate.py": "d0e384ce7d442a0091a2ac2081df899b7acf78a291bf3a1b311b99b0d3709b45",
+    "src/p2_restore/profile_projection.py": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6",
+    "src/p2_restore/public_layer_causal_residual.py": "70f72c3abe3cb359985b6202072094e0625a9899498fee8743ba2f58ec9a4392",
+    "src/p2_restore/dynamic_sigmoid_profile.py": "aa5b8ae8358c88c9a1c0fdd29ff872e9862e5e7564ac5acfd41211d0baf8f4f5",
+    "src/p2_restore/matched_budget_compare.py": "74eacad13f095372fc8ca9fcf78bf2fd8d275f99862c161ce5078182f68aa437",
+    "src/p2_restore/architecture_matched_stage_a_execution_v2.py": "0dad7be0c7110ebae327866201be3e7a2ca09113d432c86c1d9bef58ce892912",
+    "src/p2_restore/authoritative_nested_surrogate_conformance.py": "8279910070d8fc714238046a5d49807473a5bda7227cc8d7e36ebd6dfe5d38b4"
+  },
+  "hyperparameter_evidence_pins": {
+    "configs/experiments/p2_deep_model_tournament_v1.json": "156609aff3ff6de9d616791796ac67785c88e2cd1f6a7a026a0c43b8aeaf6038",
+    "artifacts/p2_deep_model_tournament_v1/result.json": "0d5a270e53cb6bda9c6c212cd297feee93920d535a2737075b15bc6456da544d",
+    "configs/experiments/p2_deep_finalists_v1.json": "4cab045f9d01a2d7e88c0332f8cbd2b9938d2fedb1fc192d74532cd255795fbf",
+    "artifacts/p2_deep_finalists_v1/result.json": "6e8324908234f3071078e4846393de30776a422e6b6cea6d62a5f1953be2c8ac",
+    "configs/experiments/p2_max_round_convergence_v1.json": "cfac7a1d155f4ee35d2e839b310e4d6b86e5b2e747cd6e7f58e15c18b4b31dc9",
+    "configs/experiments/p2_public_state_soft_gate_v1.json": "83f8118d9136e06a435d9ecf93d73c2628d19261d6de4fc5d5b692acbef63893",
+    "configs/experiments/p2_matched_budget_local_compare_20260825_v1.json": "7723ce7b640da9d9eed499e046b1aa26e8a264c89047eb762dfa64c3753323bc"
+  },
+  "data_contract": {
+    "allowed_filename": "observations.csv",
+    "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "bytes": 49058719,
+    "dry_run_columns": ["station", "layer", "time"],
+    "dry_run_value_columns": [],
+    "forbidden_filenames_or_roles": ["test", "sample_submission", "submission", "candidate"]
+  },
+  "component_hyperparameters": {
+    "router_400": {
+      "architecture": "MaxRoundRouterModel(base,phase,mixed,stratified)",
+      "feature_counts": {"base": 41, "lean": 61, "phase": 81},
+      "layer_arms": {"2": "phase", "3": "phase", "4": "state"},
+      "state_quantiles": [0.4, 0.6],
+      "state_seed_offsets": [101, 202],
+      "phase_base_blend": 0.5,
+      "state_base_blend": 0.5,
+      "estimator": {
+        "objective": "regression_l2",
+        "n_estimators": 400,
+        "learning_rate": 0.04,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 200,
+        "subsample": 0.85,
+        "colsample_bytree": 0.85,
+        "reg_alpha": 0.2,
+        "reg_lambda": 1.0,
+        "n_jobs": 4,
+        "verbosity": -1,
+        "deterministic": true,
+        "force_row_wise": true
+      }
+    },
+    "deep": {
+      "depth_query_bitcn": {
+        "learning_rate": 0.001,
+        "weight_decay": 0.001,
+        "max_epochs": 300,
+        "patience": 30,
+        "chunk_length": 512,
+        "chunk_stride": 384,
+        "batch_size": 12,
+        "evaluation_interval": 2,
+        "diffusion_samples": 1,
+        "input_channels": 43,
+        "output_channels": 3,
+        "parameter_count": 4181249
+      },
+      "moment_units_scratch": {
+        "learning_rate": 0.0003,
+        "weight_decay": 0.001,
+        "max_epochs": 250,
+        "patience": 25,
+        "chunk_length": 512,
+        "chunk_stride": 384,
+        "batch_size": 12,
+        "evaluation_interval": 2,
+        "diffusion_samples": 1,
+        "input_channels": 43,
+        "output_channels": 3,
+        "parameter_count": 5015553
+      },
+      "lsti_style": {
+        "learning_rate": 0.001,
+        "weight_decay": 0.001,
+        "max_epochs": 300,
+        "patience": 30,
+        "chunk_length": 512,
+        "chunk_stride": 384,
+        "batch_size": 12,
+        "evaluation_interval": 2,
+        "diffusion_samples": 1,
+        "input_channels": 43,
+        "output_channels": 3,
+        "parameter_count": 734785
+      },
+      "timemixerpp_style": {
+        "learning_rate": 0.001,
+        "weight_decay": 0.001,
+        "max_epochs": 300,
+        "patience": 30,
+        "chunk_length": 512,
+        "chunk_stride": 384,
+        "batch_size": 12,
+        "evaluation_interval": 2,
+        "diffusion_samples": 1,
+        "input_channels": 43,
+        "output_channels": 3,
+        "parameter_count": 2512705
+      },
+      "optimizer": "AdamW",
+      "scheduler": "CosineAnnealingLR_eta_min_0.05x_lr",
+      "automatic_mixed_precision": "BF16",
+      "gradient_clip_norm": 1.0,
+      "inner_checkpoint_metric": "row_pooled_rmse_c",
+      "inner_checkpoint_rule": "exact minimum RMSE; exact tie chooses earliest epoch",
+      "full_prefix_epoch_rule": "middle integer of exactly three inner best epochs",
+      "checkpoint_required_keys": [
+        "config",
+        "epochs",
+        "input_center",
+        "input_scale",
+        "model",
+        "residual_center",
+        "residual_scale",
+        "state_dict"
+      ]
+    }
+  },
+  "meta_refit": {
+    "scope": "fresh per outer-fold prefix and complete-pipeline seed",
+    "oof_source": "concatenated predictions from exactly three registered inner folds",
+    "stack": "per-layer scipy NNLS then sum normalization; uniform if all zero",
+    "gate_features": [
+      "surface_temp",
+      "deep_temp",
+      "surface_salinity",
+      "deep_salinity",
+      "temp_gradient",
+      "salinity_gradient",
+      "mixed_depth",
+      "sin_doy",
+      "cos_doy",
+      "trend_years"
+    ],
+    "gate_regularization": 10.0,
+    "frozen_parameter_reuse_allowed": false
+  },
+  "postprocess": {
+    "sequence": [
+      "csv_float_roundtrip_router",
+      "per-layer_stack",
+      "profile_projection",
+      "public-state_gate",
+      "route_gate_only_layers_2_4",
+      "profile_projection",
+      "fixed_layer_extrapolation",
+      "final_profile_projection",
+      "csv_float_roundtrip_final"
+    ],
+    "layer_extrapolation_factors": {"2": 10.0, "3": 0.0, "4": 2.0},
+    "same_for_all_seeds_cells_and_families": true
+  },
+  "family_views": {
+    "ordered_settings": [
+      "INCUMBENT_NOOP",
+      "STACK_W0500",
+      "STACK_W0625",
+      "STACK_W0750",
+      "CAUSAL_RESIDUAL_SCALE025",
+      "FALLBACK_BLEND50_A0625",
+      "CAUSAL_ON_FALLBACK"
+    ],
+    "causal_residual_contract": {
+      "public_layers": [1, 5, 6, 7, 8],
+      "jointly_masked_columns": ["temp", "psal"],
+      "rolling_hours": 24,
+      "cadence_minutes": 10,
+      "minimum_samples": 72,
+      "residual_clip_c": 0.5,
+      "minimum_anchors": 4,
+      "required_anchors": [1, 5],
+      "ridge_slope_lambda": 10.0,
+      "depth_scale_m": 50.0,
+      "correction_scale": 0.25,
+      "correction_clip_c": 0.125,
+      "maximum_anchor_span_c": 0.5,
+      "coherent_sign_required": true,
+      "nonzero_epsilon": 1e-12
+    }
+  },
+  "metrics": {
+    "primary": "fold_equal_layer_equal_rmse_c",
+    "secondary": [
+      "fixed_historical_row_weighted_rmse_c",
+      "by_fold_rmse_c",
+      "by_layer_rmse_c"
+    ],
+    "expected_evaluation_rows_per_fraction": 78156,
+    "same_ordered_key_truth_digest_across_fractions_required": true,
+    "bootstrap": {
+      "unit": "KST calendar day sampled within outer fold with shared draws",
+      "replicates": 5000,
+      "interval": 0.9,
+      "seed": 20260825
+    }
+  },
+  "execution_graph": {
+    "outer_prefix_cells": 15,
+    "complete_pipeline_seeds": 3,
+    "seeded_cells": 45,
+    "top_level_component_jobs": 900,
+    "top_level_jobs_derivation": "45 seeded cells x 5 components x (3 inner + 1 full)",
+    "underlying_deep_fits": 720,
+    "underlying_lightgbm_fits": 720,
+    "underlying_base_estimator_fits": 1440,
+    "meta_optimizations": 405,
+    "meta_optimization_derivation": "45 cells x (3 NNLS + 3 simplex priors + 3 gate L-BFGS optimizations)",
+    "all_component_jobs_serial_within_one_process": true
+  },
+  "checkpoint_resume": {
+    "exclusive_process_lock": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v1/execution.lock",
+    "job_identity": "outer-fold + prefix + complete-seed + inner-or-full + component",
+    "completion_commit": "unique partial directory, fsync payloads, write manifest, atomic rename",
+    "reuse_gate": "complete manifest plus exact contract hash, file hash and byte-size verification",
+    "incomplete_partial_policy": "preserve for audit and never treat as complete",
+    "overwrite_allowed": false,
+    "cross_contract_reuse_allowed": false
+  },
+  "runtime_policy": {
+    "logical_cpu_threads": 4,
+    "single_gpu": true,
+    "cuda_visible_devices": "0",
+    "deep_jobs_parallel": 1,
+    "router_estimators_parallel": 1,
+    "unrelated_p3_process_mutation": false
+  },
+  "resource_estimate": {
+    "status": "PLANNING_RANGE_NOT_AN_ACTUAL_45_CELL_BENCHMARK",
+    "single_rtx5090_wall_hours_low": 4.0,
+    "single_rtx5090_wall_hours_high": 8.0,
+    "gpu_peak_memory_gib_low": 8,
+    "gpu_peak_memory_gib_high": 12,
+    "host_ram_gib_low": 16,
+    "host_ram_gib_high": 32,
+    "peak_storage_gib_low": 12,
+    "peak_storage_gib_high": 18,
+    "retained_storage_gib_low": 6,
+    "retained_storage_gib_high": 10,
+    "basis": {
+      "historical_20_checkpoint_elapsed_seconds": 272.0385468000022,
+      "mechanical_720_deep_projection_hours": 2.720385468000022,
+      "historical_12_lgbm_5000_round_elapsed_seconds": 336.21905759999936,
+      "mechanical_180_router_400_round_projection_hours": 0.4482920768,
+      "remaining_allowance": "meta optimizers, prediction, checkpoint I/O, population-dependent epoch variance, and concurrent P3 headroom"
+    }
+  },
+  "exact_command": "$env:OMP_NUM_THREADS='4'; $env:MKL_NUM_THREADS='4'; $env:OPENBLAS_NUM_THREADS='4'; $env:NUMEXPR_NUM_THREADS='4'; $env:CUDA_VISIBLE_DEVICES='0'; .\\.venv-p1\\Scripts\\python.exe scripts\\run_p2_authoritative_nested_surrogate_45cell_v1.py --execute --data-dir \"$env:P2_DATA_DIR\" --preexecution-seal \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v1\\preexecution_seal.json\" --authorization \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v1\\EXECUTION_AUTHORIZATION.json\"",
+  "output": {
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v1",
+    "actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v1",
+    "append_only": true,
+    "readiness_prediction_files_written": false,
+    "readiness_model_checkpoints_written": false
+  }
+}

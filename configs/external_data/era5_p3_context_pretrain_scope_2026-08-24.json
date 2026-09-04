@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "scope_id": "era5_p3_context_pretrain_scope_2026-08-24",
+  "status": "PREREGISTERED_ANALYTICS_WITH_POST_SMOKE_TRANSPORT_AMENDMENT_R2",
+  "issued_at_kst": "2026-08-24T00:16:50.2355186+09:00",
+  "source": {
+    "source_id": "era5_pre2024",
+    "dataset": "ERA5 hourly data on single levels",
+    "dataset_id": "reanalysis-era5-single-levels",
+    "official_url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview",
+    "doi": "10.24381/cds.adbb2d47",
+    "licence": "Copernicus licence; attribution required",
+    "attribution": "Contains modified Copernicus Climate Change Service information; neither the European Commission nor ECMWF is responsible for downstream use."
+  },
+  "bindings": {
+    "catalog": {
+      "path": "configs/external_data/catalog.toml",
+      "sha256": "96c0a7d7d820741cb8699b9bd4d896e4d9b263bc1de6aa4f8607d7f836d01d5c"
+    },
+    "official_permission_receipt": {
+      "path": "configs/external_data/official_faq_permission.json",
+      "sha256": "f4d2ea55461a8af2c1cf1ed1a1642224a93349a414dfa0af7b254606b7f64f62"
+    },
+    "official_permission_evidence": {
+      "path": "configs/external_data/official_faq_external_data_2026-08-21.json",
+      "sha256": "41e762264c667baf401f60bef104110d3dd1bc668ab209c4e635b46b0a924be9"
+    },
+    "transport_amendment": {
+      "path": "configs/experiments/p3_era5_context_transfer_v1_transport_amendment_r2_2026-08-24.json",
+      "sha256": "0fa8f2b1642976157ce6827dc2215430926e7eb27030e8846b321294c710cf48"
+    }
+  },
+  "problem": "P3",
+  "allowed_purposes": [
+    "pretraining",
+    "feature_design",
+    "fine_tuning"
+  ],
+  "time_contract": {
+    "requested_start_utc": "2014-01-01T00:00:00+00:00",
+    "maximum_value_time_utc": "2023-12-31T14:00:00+00:00",
+    "maximum_value_time_kst": "2023-12-31T23:00:00+09:00",
+    "last_eligible_anchor_utc": "2023-12-30T14:00:00+00:00",
+    "forbidden_from_utc": "2023-12-31T15:00:00+00:00",
+    "reason": "The organizer permission receipt fixes the P3 external-data cutoff at 2023-12-31 23:59:59 KST; 24-hour targets must also remain before that cutoff."
+  },
+  "stations": [
+    {
+      "station": "G-ORS",
+      "latitude_wgs84": 33.9428,
+      "longitude_wgs84": 124.5919,
+      "coordinate_source": "KIOST KORS station introduction"
+    },
+    {
+      "station": "I-ORS",
+      "latitude_wgs84": 32.1228,
+      "longitude_wgs84": 125.1822,
+      "coordinate_source": "KIOST KORS station introduction"
+    },
+    {
+      "station": "S-ORS",
+      "latitude_wgs84": 37.4231,
+      "longitude_wgs84": 124.738,
+      "coordinate_source": "KIOST KORS station introduction"
+    }
+  ],
+  "selection_contract": {
+    "smoke_date_utc": "2023-12-30",
+    "smoke_grid": "fixed 3x3 ERA5 0.25-degree grid around the mathematical nearest point",
+    "selected_cell_rule": "minimum great-circle distance among cells with mean land-sea mask <= 0.5 and at least 90% finite values for every requested dynamic field; ties use latitude then longitude ascending",
+    "selected_cells_frozen_after_smoke": true,
+    "production_request": "one selected cell per station; 2014-2022 use one request per calendar month; 2023 uses one request per month through November plus Dec 1-30 and Dec 31 00-14 UTC; the 363-request union is exactly the original contiguous approved time range; raw retrieval uses exactly four workers",
+    "post_smoke_cell_reselection_forbidden": true
+  },
+  "variables": [
+    "significant_height_of_combined_wind_waves_and_swell",
+    "mean_wave_period",
+    "maximum_individual_wave_height",
+    "mean_wave_direction",
+    "10m_u_component_of_wind",
+    "10m_v_component_of_wind",
+    "mean_sea_level_pressure",
+    "2m_temperature",
+    "2m_dewpoint_temperature",
+    "land_sea_mask"
+  ],
+  "transformation_contract": {
+    "hs": "significant_height_of_combined_wind_waves_and_swell in m",
+    "tp": "mean_wave_period in s",
+    "hmax": "maximum_individual_wave_height in m",
+    "wvdir": "mean_wave_direction in degrees true",
+    "wspd": "sqrt(u10^2 + v10^2) in m/s",
+    "wdir": "meteorological direction from which wind blows, derived from u10 and v10",
+    "airt": "2m_temperature minus 273.15 in degree C",
+    "relh": "relative humidity derived from 2m temperature and dewpoint using the fixed Magnus formula",
+    "caph": "mean_sea_level_pressure divided by 100 in hPa",
+    "native_hourly_values": "never interpolated into future times",
+    "absolute_time_as_model_feature": false,
+    "station_identity_as_model_feature": false
+  },
+  "storage": {
+    "quarantine_root": "external_data/quarantine/era5_p3_context_pretrain_v1",
+    "raw_and_derived_values_outside_git": true,
+    "manifest_required": true,
+    "required_manifest_fields": [
+      "source URL",
+      "DOI",
+      "licence and attribution",
+      "request payload",
+      "retrieval timestamp",
+      "file size and SHA256",
+      "observed time range",
+      "selected grid coordinates",
+      "transformation log",
+      "leakage classification"
+    ]
+  },
+  "safety": {
+    "research_only": true,
+    "anonymous_test_absolute_time_reconstruction": false,
+    "evaluation_period_external_alignment": false,
+    "test_context_read": false,
+    "test_index_read": false,
+    "submission_creation": false,
+    "submission_upload": false,
+    "download_requires_explicit_execute_flag": true,
+    "fail_closed_on_cutoff_or_provenance_error": true
+  }
+}

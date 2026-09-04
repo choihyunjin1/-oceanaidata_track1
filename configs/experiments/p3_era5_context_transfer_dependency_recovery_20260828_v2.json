@@ -1,0 +1,42 @@
+{
+  "schema_version": "p3_era5_context_transfer_dependency_recovery.v2",
+  "experiment_id": "p3_era5_context_transfer_dependency_recovery_20260828_v2",
+  "status": "PREREGISTERED_DEPENDENCY_ONLY_RECOVERY_BEFORE_FIT",
+  "created_at_kst": "2026-08-28",
+  "research_only": true,
+  "base_experiment": {
+    "path": "configs/experiments/p3_era5_context_transfer_v1.json",
+    "sha256": "79792f1a3d6b4c0dd15884fd6e3eed122c224a8c3318149b95dbfc3b2fac1ff9"
+  },
+  "permitted_overrides_exactly": {
+    "experiment_id": "p3_era5_context_transfer_dependency_recovery_20260828_v2",
+    "artifact_dir": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2"
+  },
+  "scientific_contract": {
+    "feature_count": 286,
+    "feature_names_and_order": "unchanged_from_base",
+    "source_local_split": "unchanged_from_base",
+    "model_and_parameters": "unchanged_from_base",
+    "postprocess": "unchanged_from_base",
+    "decision_gates": "unchanged_from_base",
+    "matched_local_only_control": "unchanged_from_base",
+    "result_driven_tuning_or_retry": false
+  },
+  "required_environment": {
+    "python": "3.12.10",
+    "catboost": "1.2.10",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.1",
+    "device": "CPU",
+    "prelock_smoke": "two-tree fit, deepcopy, two-tree init_model continuation, finite predictions"
+  },
+  "execution_policy": {
+    "new_attempt_lock_only_after_environment_and_base_contract_pass": true,
+    "one_shot": true,
+    "old_v1_output_or_lock_mutation_forbidden": true,
+    "official_test_sample_submission_access_forbidden": true,
+    "submission_or_upload_forbidden": true
+  }
+}

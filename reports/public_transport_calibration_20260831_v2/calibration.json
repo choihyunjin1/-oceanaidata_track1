@@ -1,0 +1,167 @@
+{
+  "schema_version": "public_transport_calibration.20260831.v2",
+  "status": "FAMILY_AWARE_GUARDRAIL_READY",
+  "minimum_calibrated_expected_points_delta": 0.01,
+  "method": "Pre-registered hierarchical empirical guardrail. Use the worst adverse official residual from an exact intervention family; otherwise use the worst residual in a pre-registered complexity tier; otherwise use the global worst residual. This is not a confidence interval.",
+  "precedence": [
+    "exact_family",
+    "pre_registered_complexity_tier",
+    "global_unknown_or_compound_fallback"
+  ],
+  "observed_pairs": [
+    {
+      "problem": "P1",
+      "candidate": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+      "expected_central_points_delta": 0.005383691373120247,
+      "actual_points_delta": 0.0,
+      "transport_residual": -0.005383691373120247,
+      "family_id": "P1_FIXED_ADD_ONLY_UNION",
+      "tier_id": "LOW_DOF_FIXED",
+      "adverse_penalty_points": 0.005383691373120247
+    },
+    {
+      "problem": "P2",
+      "candidate": "P2_2_HGB_ABSOLUTE_PROFILE",
+      "expected_central_points_delta": 0.02709932699261711,
+      "actual_points_delta": -0.016789,
+      "transport_residual": -0.043888326992617105,
+      "family_id": "P2_HGB_ABSOLUTE_PROFILE",
+      "tier_id": "SMOOTH_LEARNED_PROFILE",
+      "adverse_penalty_points": 0.043888326992617105
+    },
+    {
+      "problem": "P2",
+      "candidate": "P2_1_PUBLIC_PROFILE_RESIDUAL_SHALLOW",
+      "expected_central_points_delta": 0.017918091610006164,
+      "actual_points_delta": -0.103764,
+      "transport_residual": -0.12168209161000616,
+      "family_id": "P2_SHALLOW_RESIDUAL_PROFILE",
+      "tier_id": "SMOOTH_LEARNED_PROFILE",
+      "adverse_penalty_points": 0.12168209161000616
+    },
+    {
+      "problem": "P2",
+      "candidate": "P2_3_BIN17_DROP_LAYER4",
+      "expected_central_points_delta": 0.00038919342202228824,
+      "actual_points_delta": -0.007601,
+      "transport_residual": -0.007990193422022288,
+      "family_id": "P2_FIXED_DROP_LAYER4",
+      "tier_id": "LOW_DOF_FIXED",
+      "adverse_penalty_points": 0.007990193422022288
+    },
+    {
+      "problem": "P3",
+      "candidate": "P3_2_EXTRATREES_HARD_PHYSICAL_ROUTER",
+      "expected_central_points_delta": 0.0723476897594759,
+      "actual_points_delta": -0.249558,
+      "transport_residual": -0.3219056897594759,
+      "family_id": "P3_EXTRATREES_HARD_ROUTER",
+      "tier_id": "HARD_CONDITIONAL_ROUTER",
+      "adverse_penalty_points": 0.3219056897594759
+    },
+    {
+      "problem": "P3",
+      "candidate": "P3_2_KMA_A18_0200_A24_0425",
+      "expected_central_points_delta": 0.028057054092288935,
+      "actual_points_delta": -0.021529,
+      "transport_residual": -0.04958605409228893,
+      "family_id": "P3_FIXED_KMA_LONGLEAD_FACTOR",
+      "tier_id": "LOW_DOF_FIXED",
+      "adverse_penalty_points": 0.04958605409228893
+    }
+  ],
+  "family_gates": {
+    "P1_FIXED_ADD_ONLY_UNION": {
+      "transport_penalty_points": 0.005383691373120247,
+      "minimum_raw_expected_points_delta": 0.015383691373120248
+    },
+    "P2_FIXED_DROP_LAYER4": {
+      "transport_penalty_points": 0.007990193422022288,
+      "minimum_raw_expected_points_delta": 0.017990193422022287
+    },
+    "P2_HGB_ABSOLUTE_PROFILE": {
+      "transport_penalty_points": 0.043888326992617105,
+      "minimum_raw_expected_points_delta": 0.05388832699261711
+    },
+    "P2_SHALLOW_RESIDUAL_PROFILE": {
+      "transport_penalty_points": 0.12168209161000616,
+      "minimum_raw_expected_points_delta": 0.13168209161000616
+    },
+    "P3_EXTRATREES_HARD_ROUTER": {
+      "transport_penalty_points": 0.3219056897594759,
+      "minimum_raw_expected_points_delta": 0.33190568975947593
+    },
+    "P3_FIXED_KMA_LONGLEAD_FACTOR": {
+      "transport_penalty_points": 0.04958605409228893,
+      "minimum_raw_expected_points_delta": 0.05958605409228893
+    }
+  },
+  "tier_gates": {
+    "HARD_CONDITIONAL_ROUTER": {
+      "transport_penalty_points": 0.3219056897594759,
+      "minimum_raw_expected_points_delta": 0.33190568975947593
+    },
+    "LOW_DOF_FIXED": {
+      "transport_penalty_points": 0.04958605409228893,
+      "minimum_raw_expected_points_delta": 0.05958605409228893
+    },
+    "SMOOTH_LEARNED_PROFILE": {
+      "transport_penalty_points": 0.12168209161000616,
+      "minimum_raw_expected_points_delta": 0.13168209161000616
+    },
+    "UNKNOWN_OR_COMPOUND": {
+      "transport_penalty_points": 0.3219056897594759,
+      "minimum_raw_expected_points_delta": 0.33190568975947593
+    }
+  },
+  "global_fallback": {
+    "transport_penalty_points": 0.3219056897594759,
+    "minimum_raw_expected_points_delta": 0.33190568975947593
+  },
+  "metric_equivalent_examples": {
+    "P1_FIXED_ADD_ONLY_UNION": {
+      "problem": "P1",
+      "metric_improvement_equivalent": 0.0005788103467134221
+    },
+    "P2_FIXED_DROP_LAYER4": {
+      "problem": "P2",
+      "metric_improvement_equivalent": 0.001433763604859468
+    },
+    "P3_FIXED_KMA_LONGLEAD_FACTOR": {
+      "problem": "P3",
+      "metric_improvement_equivalent": 0.003754459947698609
+    },
+    "P3_UNSEEN_LOW_DOF_FIXED": {
+      "problem": "P3",
+      "metric_improvement_equivalent": 0.003754459947698609
+    }
+  },
+  "policy": {
+    "retroactive_reclassification_forbidden": true,
+    "effective_for_newly_registered_experiments_only": true,
+    "public_score_as_row_or_event_label_forbidden": true,
+    "candidate_family_must_be_registered_before_internal_results": true,
+    "representation_and_router_both_changed_uses_global_fallback": true,
+    "same_family_adverse_residual_updates_by_max_only": true,
+    "minimum_three_same_family_pairs_before_any_future_relaxation_review": 3,
+    "inclusive_pass_rule": "raw_expected_points_delta - selected_transport_penalty_points >= 0.01"
+  },
+  "required_registration_fields": [
+    "family_id",
+    "tier_id",
+    "representation_changed",
+    "routing_discontinuous",
+    "active_share_rule",
+    "exact_comparator",
+    "local_lcb_raw_points",
+    "selected_penalty_provenance_sha256"
+  ],
+  "validation_invariants": {
+    "strictly_time_ordered_validation": true,
+    "group_or_episode_blocking_required": true,
+    "nested_selection_or_frozen_candidate_required": true,
+    "official_public_score_not_used_as_training_label": true,
+    "candidates_per_problem_min": 1,
+    "candidates_per_problem_max": 3
+  }
+}

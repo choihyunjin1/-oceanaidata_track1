@@ -1,0 +1,48 @@
+{
+  "schema_version": "p2.v13_fresh_authenticated_surface_audit.20260901.v13c",
+  "experiment_id": "p2_v13_fresh_authenticated_surface_audit_20260901_v13c",
+  "status": "PREREGISTERED_ZERO_FIT_NOT_EXECUTED",
+  "decision": "HOLD_NO_FRESH_AUTHENTICATED_SURFACE",
+  "candidate_commitment": {
+    "result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "result_sha256": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+    "independent_qa": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/independent-qa.json",
+    "independent_qa_sha256": "f3d8ca4ec596b935422bb7108815a58f9537f4a13a9d1cb66d75058270074956"
+  },
+  "freshness_authority": {
+    "report": "reports/next_action_meta_deep_research_20260831_v1/report-source.md",
+    "report_sha256": "b35472b5712e0644854579a753635430d2762b2bb1514006b8a89ce378deb2a1",
+    "gap_matrix": "reports/next_action_meta_deep_research_20260831_v1/gap-matrix.md",
+    "gap_matrix_sha256": "86bcfdc1e81e6334935db1c4d2e6dd20e2060de0094c56b5b95783de7bd98b04",
+    "independent_qa": "reports/next_action_meta_deep_research_20260831_v1/independent-qa.json",
+    "independent_qa_sha256": "f943331a6965e09ae10d2b8385a941cf42837993e4764fa630b73bde08c69d61",
+    "required_decision": "HOLD_NO_FRESH_SAME_SEASON_SURFACE"
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "existing_exposed_scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "existing_exposed_scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "fresh_authenticated_scoring_frames": [],
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "freshness_rule": {
+    "raw_label_presence_is_not_freshness": true,
+    "requires_blind_seal_before_candidate_development": true,
+    "requires_authenticated_comparator_predictions": true,
+    "requires_same_season_contiguous_61_day_surface": true,
+    "forbid_repartitioning_existing_observations_after_v13_result": true
+  },
+  "operation_limits": {
+    "model_fits": 0,
+    "candidate_predictions": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

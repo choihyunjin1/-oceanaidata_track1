@@ -1,0 +1,175 @@
+{
+  "schema_version": "meaningful_score_goal.v3",
+  "goal_id": "ocean_ai_three_problem_meaningful_score_v3",
+  "status": "STATIC_IMPLEMENTATION_PRE_OFFICIAL_SCORING_NO_UPLOAD",
+  "supersedes": {
+    "contract": "configs/goals/meaningful_score_maximization_v2.json",
+    "contract_sha256": "8fc6b03aba3b88b07b954030759f351644513490f7a9c030b7d7f1b950023549",
+    "ledger": "artifacts/meaningful_score_goal_v2/registry.jsonl",
+    "ledger_bytes": 7222,
+    "ledger_sha256": "1decc63e63a3ac5a732035402cb00f8750e1afb64c835f17d8f972a6526fb233",
+    "ledger_event_count": 5,
+    "ledger_head_event_sha256": "19f8395ee85976275ce65f430a13db51eb3a3d21dcd224d17a0ac0cae6c00f70",
+    "reason": "add a P2-only non-exact architecture-matched time-safe research comparator without weakening the exact P1/P3 protocol"
+  },
+  "initial_state": {
+    "status": "WAITING_OFFICIAL_WINDOW_RESEARCH_ACTIVE",
+    "official_uploads": 0,
+    "meaningful_promotions": {"P1": false, "P2": false, "P3": false},
+    "predecessor_must_be_immutable_after_genesis": true,
+    "genesis_must_be_exclusive": true,
+    "all_later_events_require_valid_genesis": true
+  },
+  "canonical_paths": {
+    "contract": "configs/goals/meaningful_score_maximization_v3.json",
+    "ledger": "artifacts/meaningful_score_goal_v3/registry.jsonl",
+    "pre_init_qa": "artifacts/meaningful_score_goal_v3/pre_init_qa.json"
+  },
+  "comparison_modes": {
+    "EXACT_OFFICIAL_PREFIX_REFIT": {
+      "allowed_problems": ["P1", "P2", "P3"],
+      "exact_official_incumbent_comparison": true,
+      "curve_can_be_labeled_curve_qualified": true
+    },
+    "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE": {
+      "allowed_problems": ["P2"],
+      "exact_official_incumbent_comparison": false,
+      "training_recipe_origin": "NEW_PREREGISTERED_TIME_SAFE_RECIPE",
+      "curve_can_be_labeled_curve_qualified": false,
+      "local_decision_if_pass": "ARCHITECTURE_MATCHED_CURVE_QUALIFIED_PENDING_OFFICIAL_PAIRED_AB",
+      "requires_deployed_inference_graph_sha_pins": true,
+      "requires_nested_chronological_component_oof": true,
+      "requires_prefix_local_epoch_selection": true,
+      "requires_three_complete_pipeline_seeds": true,
+      "requires_reference_100_percent_oof_sealed_before_challenger_scoring": true,
+      "curve_alone_can_promote": false
+    }
+  },
+  "official_kpi": {
+    "formula": "P1_points + P2_points + P3_points",
+    "problem_weights": {"P1": 30, "P2": 35, "P3": 35},
+    "reverify_in_authenticated_ui_before_scoring": true,
+    "rank_is_not_a_success_kpi": true
+  },
+  "learning_curve": {
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "late_fractions": [0.7, 0.85, 1.0],
+    "fixed_stochastic_seed_count": 3,
+    "paired_cluster_bootstrap_replicates": 5000,
+    "confidence_level": 0.9,
+    "minimum_improved_outer_folds": 2,
+    "outer_fold_count": 3,
+    "full_fraction_must_exclude_zero": true,
+    "minimum_other_late_fraction_excluding_zero": 1
+  },
+  "problems": {
+    "P1": {
+      "metric": "binary_micro_F1",
+      "direction": "higher",
+      "absolute_effect_threshold": 0.02,
+      "maximum_critical_slice_regression": 0.005,
+      "bootstrap_cluster": "event_or_normal_day_by_station_layer",
+      "required_critical_slices": ["G-ORS", "I-ORS", "S-ORS"],
+      "allowed_comparison_modes": ["EXACT_OFFICIAL_PREFIX_REFIT"],
+      "immutable_baseline": {
+        "path": "output/2026-08-20/ready/P1_submission.csv",
+        "sha256": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3"
+      },
+      "historical_research_only": {
+        "path": "artifacts/p1_full_improvement_cycle_20260822_v1/candidate/P1_IMPROVED_ENSEMBLE_V1.csv",
+        "sha256": "8c0f4627b8da2af1c8362233e6a563e1033dd7119db126d6097272a0cc37bd6e"
+      }
+    },
+    "P2": {
+      "metric": "integrated_RMSE_degC",
+      "direction": "lower",
+      "absolute_effect_threshold": 0.03,
+      "maximum_critical_slice_regression": 0.0075,
+      "bootstrap_cluster": "KST_day",
+      "required_critical_slices": ["layer_2", "layer_3", "layer_4", "2024_sep_oct"],
+      "allowed_comparison_modes": [
+        "EXACT_OFFICIAL_PREFIX_REFIT",
+        "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE"
+      ],
+      "immutable_baseline": {
+        "path": "output/2026-08-20/ready/P2_submission.csv",
+        "sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+      },
+      "historical_research_only": {
+        "path": "artifacts/p2_conservative_stack_improvement_v1/candidate/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+        "sha256": "3960660b1e4076c88efdb927a50073aa2d8f1435bc1c7d6f2f40885aea2f2350"
+      }
+    },
+    "P3": {
+      "metric": "significant_wave_height_RMSE_m",
+      "direction": "lower",
+      "absolute_effect_threshold": 0.03,
+      "maximum_critical_slice_regression": 0.0075,
+      "bootstrap_cluster": "whole_case",
+      "required_critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+      "allowed_comparison_modes": ["EXACT_OFFICIAL_PREFIX_REFIT"],
+      "immutable_baseline": {
+        "path": "output/2026-08-20/ready/P3_submission.csv",
+        "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+      },
+      "historical_research_only": {
+        "path": "artifacts/p3_corrected_fixed_long_shrink_v5_full_refit/candidate/submission.csv",
+        "sha256": "6f9d10e6efeb7e884629d1595d7c76afdc10ac1d89f7738e5e66f4d613c9786f"
+      }
+    }
+  },
+  "official_scoring": {
+    "window_status": "VERIFIED_CLOSED_PRE_START",
+    "confirmed_scoring_start_kst_date": "2026-08-25",
+    "safe_final_model_deadline_kst_date": "2026-09-07",
+    "daily_upload_limit_team_wide": 3,
+    "reserve_one_daily_slot": true,
+    "same_scoring_version_and_split_required": true,
+    "public_only_is_provisional": true,
+    "final_model_designation_locks_later_uploads": true,
+    "current_official_submission_count": 0,
+    "authenticated_ui_observation": {
+      "path": "artifacts/meaningful_score_goal_v2/official_ui_observation_20260823.json",
+      "sha256": "b2aaf91646b2166fe224fdef64e4c69afa01e33f2f06f71f25a6b35155ba8ecc"
+    }
+  },
+  "official_paired_ab": {
+    "architecture_matched_mode_problem": "P2",
+    "baseline_must_be_actual_immutable_csv": true,
+    "baseline_must_be_scored_before_challenger": true,
+    "same_scoring_version_and_split_required": true,
+    "distinct_official_receipt_ids_required": true,
+    "minimum_raw_improvement_degC": 0.03,
+    "local_curve_alone_never_sufficient": true
+  },
+  "promotion": {
+    "score_incumbent_updates_on_any_strict_official_point_gain": true,
+    "meaningful_incumbent_requires_curve_gate": true,
+    "meaningful_incumbent_requires_official_raw_effect_threshold": true,
+    "architecture_matched_local_qualification_requires_official_paired_ab": true,
+    "all_three_problems_must_be_meaningfully_promoted": true,
+    "total_only_compensation_is_forbidden": true
+  },
+  "prohibitions": {
+    "automatic_upload": true,
+    "upload_without_exact_user_approval": true,
+    "score_derived_threshold_weight_seed_feature_tuning": true,
+    "test_label_or_hidden_target_recovery": true,
+    "absolute_test_timestamp_recovery": true,
+    "frozen_or_source_mutation": true,
+    "complete_on_local_point_estimate": true,
+    "label_architecture_matched_as_exact_official_incumbent": true,
+    "architecture_matched_mode_for_p1_or_p3": true
+  },
+  "evidence": {
+    "meaningful_improvement_audit": {
+      "path": "artifacts/full_improvement_cycle_20260822/meaningful_improvement_audit.json",
+      "sha256": "cb5f60227cb7d7dfe8adca63ca5c300b82689ee00f5c1a5f5de146b7b9039427"
+    },
+    "p2_exact_incumbent_prefix_refit_audit": {
+      "path": "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+      "sha256": "8484b73deeb508f1471e0c0baf7f0cad9a92fbcd8d2a569e94ab22b0b11727ae",
+      "verdict": "NOT_CURRENTLY_REPRODUCIBLE_AS_EXACT_SAME_PREFIX_FOLD_TRAIN_ONLY_INCUMBENT"
+    }
+  }
+}

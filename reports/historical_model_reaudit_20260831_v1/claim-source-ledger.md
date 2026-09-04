@@ -1,0 +1,16 @@
+# Claim-source ledger
+
+| ID | Claim | Type | Source | Confidence / boundary |
+|---|---|---|---|---|
+| C01 | Historical-family denominator is 48: P1 17, P2 19, P3 12. | measured | `artifacts/promotion_retroaudit_20260827_v1/family_reclassification_ledger.json`; `reports/tolerance_recalibration_and_failure_replay_20260830_v2/failure-replay.json` | High; canonical/key/workflow grains overlap and are not added. |
+| C02 | The 35 canonical groups encode exact closure/invalid scopes, not 35 additional unique experiments. | measured | `reports/negative_evidence_registry_20260830_v1/failure-ledger.json` | High. |
+| C03 | P1 trial18 moved from Q2 `+0.000565637` to sealed Q3/Q4 `-0.011889120` ΔF1. | measured | `artifacts/p1_mstcn_sobol_hpo_20260829_v1/aggregate.json`; `reports/p1_mstcn_sobol_trial18_frozen_confirmation_sealed_eval_20260830_v2/independent-qa.json` | High; different phases, exact candidate frozen. |
+| C04 | P2 Gaussian copula proxy `-0.010616065°C` reversed to Public `+0.012050°C` ΔRMSE. | measured | `artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json`; `reports/p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3/official-submission-receipt.json` | High for Public display; Private unknown. |
+| C05 | P3 CatBoost selection `-0.0228625m` reversed to repaired confirmation `+0.0079741m` ΔRMSE. | measured | `artifacts/p3_catboost_confirmation_contract_repair_20260830_v3/one_shot/result.json`; `reports/p3_catboost_confirmation_contract_repair_20260830_v3/report-source.md` | High; exact frozen challenger. |
+| C06 | P3 lead-continuous fresh episode was `+0.022617090m` worse but had one independent block. | measured | `reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json` | High for that case; insufficient to prove population harm. |
+| C07 | P1 G 15-row addition has displayed Public marginal `+0.004519` F1 and S marginal displayed `0`. | measured | `reports/official_information_probe_cycle_20260830_v1/p1-official-result.json` | High at display precision; not rowwise truth. |
+| C08 | P2 bin17-only improved by `0.000015°C` and `0.000187` points. | measured | `reports/official_information_probe_cycle_20260830_v1/p2-official-result.json` | High for Public display; Private unknown. |
+| C09 | P3 KMA alpha 0.425 improved by `0.000029m` and `0.000473` points. | measured | `reports/p3_kma_uniform_0425_official_submission_20260830_v1/official-submission-receipt.json` | High for Public display; Private unknown. |
+| C10 | P3 fixed ERA5 one-shot failed before fit because CatBoost was missing. | measured | `reports/HACKATHON_HANDOFF_2026-08-28.md`; `reports/p3_era5_context_transfer_terminal_20260828.json` | High; technical invalidity, not efficacy failure. |
+| C11 | Exact closure does not imply broad model-family futility. | policy | `reports/negative_evidence_registry_20260830_v1/failure-ledger.json`; `reports/historical_model_reaudit_20260831_v1/status-taxonomy.md` | Governing interpretation rule. |
+| C12 | New run performed no fit, official input read, CSV, or upload. | QA | `reports/historical_model_reaudit_20260831_v1/independent-qa.json`; `scripts/build_historical_model_reaudit_20260831_v1.py` | Deterministic local aggregate audit. |

@@ -1,0 +1,293 @@
+{
+  "schema_version": "p2_architecture_matched_stage_a_execution.v2",
+  "experiment_id": "p2_architecture_matched_stage_a_execution_v2",
+  "created_at_kst": "2026-08-23T03:19:29+09:00",
+  "status": "STATIC_IMPLEMENTATION_AWAITING_INDEPENDENT_QA_AND_AUTHORIZATION",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "explicitly_not_exact_official_incumbent": true,
+  "local_qualification_only": true,
+  "official_promotion_allowed": false,
+  "research_only": true,
+  "upload_allowed": false,
+  "official_submission_count": 0,
+  "preregistration": {
+    "generation_id": "P2_ARCHITECTURE_MATCHED_STAGE_A_EXECUTION_V2",
+    "created_before_first_fit": true,
+    "score_derived_tuning": false,
+    "challenger_hypothesis_count": 0,
+    "challenger_import_fit_or_score_count": 0
+  },
+  "predecessor_pins": {
+    "stage_a_design_v1": {
+      "path": "configs/experiments/p2_architecture_matched_time_safe_baseline_v1.json",
+      "sha256": "0f03001e8890683ad2721b15de3609cefed868c44cb835a9a47c8ca62b01369b"
+    },
+    "central_v4_ledger_contract": {
+      "path": "configs/goals/meaningful_score_ledger_v4.json",
+      "sha256": "2f8ed835b9cb15f0dcfc6809f8417b1162a86b7aa84e3193e36f9169d609e4e4"
+    }
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p2_architecture_matched_stage_a_execution_v2.json",
+    "output": "artifacts/p2_architecture_matched_reference_v2",
+    "control": "artifacts/p2_architecture_matched_reference_v2_control",
+    "pre_execution_qa": "artifacts/p2_architecture_matched_reference_v2_control/pre_execution_qa.json",
+    "authorization": "artifacts/p2_architecture_matched_reference_v2_control/authorization.json",
+    "attempt_lock": "artifacts/p2_architecture_matched_reference_v2_control/attempt.lock"
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "check_only_must_not_import_training_or_prediction_modules": true,
+    "actual_run_requires_independent_qa_receipt": true,
+    "actual_run_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "execution_engine_imported_after_attempt_lock": true,
+    "output_directory_created_with_o_excl_semantics": true,
+    "all_materialized_files_created_o_excl": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "frozen_mutation_allowed": false,
+    "submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "runtime_contract": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "lightgbm": "4.7.0",
+    "torch": "2.13.0+cu130",
+    "torch_cuda": "13.0",
+    "cuda_available": true,
+    "gpu_name_contains": "NVIDIA GeForce RTX 5090",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true
+  },
+  "architecture_reference": {
+    "identity": "P2_EXTRAPOLATED_SOFT_GATE_V2_INFERENCE_DAG",
+    "match_scope": "ARCHITECTURE_AND_FEATURE_ROLE_MATCHED_NEW_TIME_SAFE_TRAINING_LINEAGE",
+    "not_a_claim_of": "EXACT_OFFICIAL_INCUMBENT_PREFIX_REFIT",
+    "contributors_in_order": [
+      "router_400",
+      "depth_query_bitcn",
+      "lsti_style",
+      "timemixerpp_style",
+      "moment_units_scratch"
+    ],
+    "nodes_in_order": [
+      "public_layer_router_400",
+      "depth_query_bitcn",
+      "lsti_style",
+      "timemixerpp_style",
+      "moment_units_scratch",
+      "layer_specific_nonnegative_sum_to_one_stack",
+      "public_endpoint_profile_projection",
+      "public_state_soft_gate",
+      "route_gate_only_to_layers_2_and_4",
+      "profile_projection_after_route",
+      "fixed_layer_extrapolation_10_0_2",
+      "final_public_endpoint_profile_projection",
+      "csv_float_roundtrip"
+    ],
+    "router_layer_arms": {"2": "phase", "3": "phase", "4": "state"},
+    "gate_route_layers": [2, 4],
+    "layer_extrapolation_factors": {"2": 10.0, "3": 0.0, "4": 2.0},
+    "existing_source_pins": {
+      "src/p2_restore/final_inference.py": "60e54f5c67cabe777497b81a2eb29356733d279edfe7254d72b2bc0cfd64fe7b",
+      "src/p2_restore/data.py": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9",
+      "src/p2_restore/features.py": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7",
+      "src/p2_restore/research.py": "84716e1e8836a1f6ffaee74309aff317b53e6bc3e5bfb264d0df554ca474ca02",
+      "src/p2_restore/state_conditional.py": "076b2bb152d7f1687db49f568f5f912a823106acd6108583d0542690795ea361",
+      "src/p2_restore/score_optimization.py": "04eed1f3f508304edef1cdab4ae6a440646dacb28035f7abcf1ac3dd6a711ba4",
+      "src/p2_restore/deep_data.py": "aab7b89d47715f3b6e3c3543ef39cb5d450974e3a415370d364c3f5c875ec95c",
+      "src/p2_restore/deep_models.py": "0cb418fe54f0feedc378c6eb3723338384364dc5322279958181df54d338fca5",
+      "src/p2_restore/deep_training.py": "d1fd74e62bee2f483256afac479b3777da0e285417aab7f1d65df6664a178139",
+      "src/p2_restore/regime_gate.py": "d0e384ce7d442a0091a2ac2081df899b7acf78a291bf3a1b311b99b0d3709b45",
+      "src/p2_restore/profile_projection.py": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"
+    }
+  },
+  "training_recipe": {
+    "recipe_id": "P2_ARCHITECTURE_MATCHED_NESTED_CHRONOLOGICAL_EXECUTABLE_V2",
+    "complete_pipeline_seed_ids": [20260823, 20260824, 20260825],
+    "derived_seed_rule": "uint31_from_sha256(base_seed|outer_fold|prefix_token|inner_split_or_outer|component_or_router)",
+    "seed_aggregation": "PREDICTION_MEAN_THEN_METRIC",
+    "outer_folds": [
+      {"name": "outer_2024_sep_oct", "start_kst": "2024-09-01T00:00:00+09:00", "stop_kst": "2024-11-01T00:00:00+09:00"},
+      {"name": "outer_2025_may_jun", "start_kst": "2025-05-01T00:00:00+09:00", "stop_kst": "2025-07-01T00:00:00+09:00"},
+      {"name": "outer_2025_jul_aug", "start_kst": "2025-07-01T00:00:00+09:00", "stop_kst": "2025-09-01T00:00:00+09:00"}
+    ],
+    "embargo_days": 7,
+    "outer_eligible_rule": "jointly_observed_target_timestamp_strictly_before_outer_start_minus_7_KST_days",
+    "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_count_rounding": "ceil(N_times*fraction)",
+    "prefix_unit": "chronologically_ordered_unique_UTC_timestamps_keep_complete_timestamp_groups",
+    "inner_oof": {
+      "splitter": "EXPANDING_CHRONOLOGICAL",
+      "validation_fraction_edges": [0.55, 0.7, 0.85, 1.0],
+      "edge_index_rounding": "floor(N_prefix_times*edge)",
+      "validation_blocks": [[0.55, 0.7], [0.7, 0.85], [0.85, 1.0]],
+      "train_rule": "prefix_timestamps_strictly_before_inner_validation_start_minus_7_KST_days",
+      "meta_fit_rows": "union_of_three_inner_validation_blocks_only",
+      "future_or_outer_target_labels_allowed": false
+    },
+    "epoch_selection": {
+      "calibration_fraction": 0.15,
+      "calibration_count_rounding": "ceil(N_inner_train_times*0.15)",
+      "calibration_rule": "terminal_calibration_times_from_inner_train_candidates",
+      "optimization_rule": "timestamps_strictly_before_calibration_start_minus_7_KST_days",
+      "epoch_grid": [12, 20, 28, 36, 44, 52],
+      "selection_metric": "official_layer_count_weighted_RMSE_degC_on_joint_calibration_rows",
+      "tie_break": "lowest_epoch",
+      "inner_oof_prediction": "selected_optimization_only_checkpoint_predicts_inner_validation",
+      "outer_prefix_epoch": "middle_order_statistic_of_three_selected_inner_epochs",
+      "outer_prefix_refit": "all_prefix_joint_labels_for_fixed_selected_epoch"
+    },
+    "deep_training": {
+      "device": "cuda_required",
+      "optimizer": "AdamW",
+      "scheduler": "CosineAnnealingLR_eta_min_0.05_learning_rate",
+      "gradient_clip_norm": 1.0,
+      "autocast": "cuda_bfloat16",
+      "chunk_length": 512,
+      "chunk_stride": 384,
+      "batch_size": 12,
+      "minimum_supervised_values_per_chunk": 24,
+      "diffusion_samples": 1,
+      "components": {
+        "depth_query_bitcn": {"learning_rate": 0.001, "weight_decay": 0.001},
+        "lsti_style": {"learning_rate": 0.001, "weight_decay": 0.001},
+        "timemixerpp_style": {"learning_rate": 0.001, "weight_decay": 0.001},
+        "moment_units_scratch": {"learning_rate": 0.0003, "weight_decay": 0.001}
+      }
+    },
+    "router_training": {
+      "base_arm": "fit_model_400_rounds_fixed_defaults",
+      "phase_arm": "fit_model_400_rounds_fixed_defaults_on_public_m2_harmonics",
+      "state_arm": "fit_state_conditional_lean_400_rounds_fixed_defaults",
+      "layer_arms": {"2": "phase", "3": "phase", "4": "state"},
+      "fit_scope": "same_inner_train_or_outer_prefix_joint_rows_only"
+    },
+    "meta_training": {
+      "contributors_in_order": ["router_400", "depth_query_bitcn", "lsti_style", "timemixerpp_style", "moment_units_scratch"],
+      "stack": "layer_specific_nonnegative_sum_to_one_SLSQP",
+      "gate": "public_state_soft_gate",
+      "gate_regularization": 10.0,
+      "fit_scope": "prefix_inner_component_OOF_only",
+      "frozen_stack_or_gate_reuse_allowed": false
+    },
+    "joint_target_mask": {
+      "columns": ["temp", "psal"],
+      "layers": [2, 3, 4],
+      "applied_before_normalizer_feature_fit_router_fit_deep_fit_meta_fit_and_metric": true,
+      "target_layer_values_in_model_inputs": false
+    },
+    "metric": {
+      "name": "sqrt(mean_over_outer_folds_of_official_layer_count_weighted_MSE)",
+      "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+      "computed_after_three_seed_prediction_mean": true
+    },
+    "postprocess": {
+      "steps": [
+        "router_csv_float_roundtrip",
+        "layer_simplex_stack",
+        "stack_csv_float_roundtrip",
+        "public_endpoint_profile_projection",
+        "base_csv_float_roundtrip",
+        "public_state_soft_gate",
+        "gate_csv_float_roundtrip",
+        "route_layers_2_and_4",
+        "profile_projection",
+        "fixed_layer_extrapolation_10_0_2",
+        "final_profile_projection",
+        "final_csv_float_roundtrip"
+      ]
+    }
+  },
+  "stage_a_reference_contract": {
+    "generate_all_five_prefix_oof_before_any_challenger_import_fit_or_score": true,
+    "reference_100_percent_oof_must_be_sealed_before_challenger_scoring": true,
+    "row_predictions_may_contain_targets": false,
+    "reference_oof_columns": ["fold", "station", "layer", "time", "seed_20260823", "seed_20260824", "seed_20260825", "prediction_mean"],
+    "artifacts": {
+      "architecture_manifest": "architecture_manifest.json",
+      "training_recipe": "training_recipe.json",
+      "reference_oof_040": "reference_oof_040.csv",
+      "reference_oof_055": "reference_oof_055.csv",
+      "reference_oof_070": "reference_oof_070.csv",
+      "reference_oof_085": "reference_oof_085.csv",
+      "reference_oof_100": "reference_oof_100.csv",
+      "reference_curve_metrics": "reference_curve_metrics.json",
+      "training_receipt": "training_receipt.json",
+      "manifest": "manifest.json",
+      "seal": "seal.json"
+    },
+    "seal_invariants": {
+      "complete": true,
+      "all_five_prefixes_sealed": true,
+      "challenger_import_fit_or_score_count_before_seal": 0,
+      "exact_official_incumbent_comparison": false,
+      "upload_count": 0
+    }
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p2_architecture_matched_stage_a_execution.pre_execution_qa.v2",
+    "decision": "GO_AUTHORIZE_P2_STAGE_A_EXECUTION_V2",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_exact_roles": ["CONFIG", "GUARD", "ENGINE", "RUNNER", "TESTS"]
+  },
+  "authorization_contract": {
+    "schema_version": "p2_architecture_matched_stage_a_execution.authorization.v2",
+    "authorization_phrase_prefix": "AUTHORIZE_P2_STAGE_A_EXECUTION_V2:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "execution_authorized": true,
+    "upload_allowed": false
+  },
+  "official_promotion_contract": {
+    "actual_immutable_incumbent_csv": {
+      "path": "output/2026-08-20/ready/P2_submission.csv",
+      "sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+    },
+    "stage_a_architecture_matched_curve_can_promote": false,
+    "requires_distinct_official_paired_ab_receipts": true,
+    "requires_same_official_scoring_version_and_split": true,
+    "minimum_raw_integrated_rmse_improvement_c": 0.03,
+    "explicit_user_approval_required_for_each_upload": true,
+    "team_wide_daily_upload_limit": 3,
+    "official_uploads_now": 0
+  },
+  "data_contract": {
+    "check_only_access": "HEADERS_AND_STATION_LAYER_TIME_KEYS_ONLY",
+    "observations_header": ["station", "year", "layer", "time", "temp", "psal", "depth", "nominal_depth"],
+    "test_index_header": ["station", "layer", "time", "nominal_depth"],
+    "sample_submission_header": ["station", "layer", "time", "temp"],
+    "canonical_test_rows": 26061,
+    "canonical_station_layer_time_key_sha256": "600fc19da0f15c6c7979932f057807e59e01962c5ec65ad38ca908f18a295439",
+    "source_pins": {
+      "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+      "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+      "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+      "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+      "score.py": "218165bebd45f6f8e0db06d3e8d0039144f121a4d56e84fa5a67ae13146ce82a"
+    },
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_temp_and_psal_jointly_masked": true
+  },
+  "resource_estimate": {
+    "outer_prefix_cells": 15,
+    "complete_pipeline_seeds": 3,
+    "deep_training_jobs": 720,
+    "router_training_jobs": 180,
+    "expected_single_RTX_5090_gpu_hours_range": [8, 16],
+    "expected_wall_hours_range": [9, 20],
+    "expected_peak_gpu_memory_gib_range": [8, 20],
+    "expected_append_only_disk_gib_range": [1, 5],
+    "estimate_is_static_only": true
+  }
+}

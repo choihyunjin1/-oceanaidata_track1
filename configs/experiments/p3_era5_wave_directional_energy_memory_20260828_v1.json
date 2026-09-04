@@ -1,0 +1,120 @@
+{
+  "schema_version": "p3.era5_wave_directional_energy_memory.v1",
+  "experiment_id": "p3_era5_wave_directional_energy_memory_20260828_v1",
+  "status": "PREREGISTERED_ONE_SHOT_LOCAL_ONLY_EXECUTION_APPROVED_2026-08-28",
+  "research_only": true,
+  "base_contract": {
+    "path": "configs/experiments/p3_era5_context_transfer_v1.json",
+    "sha256": "79792f1a3d6b4c0dd15884fd6e3eed122c224a8c3318149b95dbfc3b2fac1ff9",
+    "frozen_feature_count": 286,
+    "source_train_years": [2014, 2015, 2016, 2017, 2018, 2019, 2020],
+    "source_held_years": [2021, 2022, 2023],
+    "source_station_gap_hours": 78
+  },
+  "immutable_inputs": {
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "raw_contexts": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "bytes": 281601728,
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "station_codes": {
+      "path": "artifacts/p3/sequences_all20_v1/train_station.npy",
+      "bytes": 195008,
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"
+    }
+  },
+  "source_train_wave": {
+    "filename": "train_wave.csv",
+    "bytes": 6132036,
+    "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+  },
+  "directional_features": {
+    "value_count": 10,
+    "mask_count": 10,
+    "total_enriched_feature_count": 306,
+    "windows_hours": [6, 12, 24, 48],
+    "minimum_hourly_coverage_fraction": 0.8,
+    "uses_only_past_hs_and_wave_direction": true,
+    "absolute_direction_used": false,
+    "station_or_absolute_time_used": false,
+    "interpretation": "temporal directional-memory proxy, not a directional spectrum or spread"
+  },
+  "model": {
+    "source_pretrain": {
+      "loss_function": "RMSE",
+      "iterations": 600,
+      "depth": 8,
+      "learning_rate": 0.04,
+      "l2_leaf_reg": 8.0,
+      "random_seed": 20260824,
+      "thread_count": -1,
+      "allow_writing_files": false,
+      "verbose": false
+    },
+    "local_continuation": {
+      "loss_function": "RMSE",
+      "iterations": 250,
+      "depth": 8,
+      "learning_rate": 0.03,
+      "l2_leaf_reg": 12.0,
+      "random_seed": 20260824,
+      "thread_count": -1,
+      "allow_writing_files": false,
+      "verbose": false,
+      "sample_weight": "exp(-0.45*max(current_hs-1.5,0))"
+    },
+    "maximum_fits": 4,
+    "base_postprocess": {
+      "persistence_weight": 0.2,
+      "active_leads_h": [12, 18, 24]
+    },
+    "candidate_increment": {
+      "weight": 0.2,
+      "active_leads_h": [18, 24],
+      "protected_leads_h": [3, 6, 9, 12]
+    }
+  },
+  "validation": {
+    "source_gate_first": {
+      "pooled_delta_below_m": 0.0,
+      "bootstrap_replicates": 5000,
+      "bootstrap_seed": 20260824,
+      "bootstrap_ci90_upper_below_m": 0.0,
+      "all_three_held_years_non_degrading": true,
+      "maximum_year_station_or_lead_regression_m": 0.0075,
+      "minimum_directional_value_coverage": 0.99
+    },
+    "fresh_shadow": {
+      "windows": [["2024_q1_fresh_shadow", "2024-02-01", "2024-05-01"]],
+      "gap_hours": 78,
+      "footprint_hours": 72,
+      "minimum_cases": 36,
+      "minimum_cases_per_station": 10,
+      "active_leads_h": [18, 24],
+      "pooled_delta_at_most_m": -0.005,
+      "bootstrap_replicates": 5000,
+      "bootstrap_seed": 20260824,
+      "bootstrap_ci90_upper_below_m": 0.0,
+      "all_stations_non_degrading": true,
+      "both_active_leads_improve": true,
+      "maximum_station_lead_regression_m": 0.005
+    }
+  },
+  "execution_policy": {
+    "local_train_and_pre2024_era5_only": true,
+    "maximum_executions": 1,
+    "result_based_retry_or_tuning": false,
+    "official_test_context_index_sample_submission_access_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "upload_allowed": false
+  },
+  "artifact_directory": "artifacts/p3_era5_wave_directional_energy_memory_20260828_v1"
+}

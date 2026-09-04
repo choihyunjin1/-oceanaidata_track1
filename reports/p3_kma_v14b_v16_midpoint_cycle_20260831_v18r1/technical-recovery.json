@@ -1,0 +1,38 @@
+{
+  "schema_version": "p3.midpoint_split_recovery.receipt.v18r1",
+  "status": "APPROVED_SPLIT_RECOVERY_PREFLIGHT_PASS",
+  "root_cause": "Champion key columns used pandas StringDtype while the post-merge frame used object dtype. Key values and order were identical, energy had zero missing rows, but DataFrame.equals is dtype-sensitive.",
+  "source": {
+    "experiment_id": "p3_kma_v14b_v16_midpoint_cycle_20260831_v18",
+    "runner_sha256": "268b7e71f75b61efa5dab75c17376b12be6a2eb26c55158b218ce246d5808cad",
+    "config_sha256": "441a1fc102c28e51fb31979196ae83d2d9ca35bfc4d87f48f6742592ba75a406",
+    "lock_sha256": "90f653fdeee3e2c399d921a1442a4faf2ff09b845ada8d9869585d9b1adb073d",
+    "stderr_sha256": "85b4c0d2f4f688d342fb63faeb8584592f03d0d26eba2f5cfb3b98eb3d4982e1"
+  },
+  "recovery": {
+    "evaluation_runner_sha256": "faa63b77ef4f38b259bcb746063c9141427e6b45eb66d3a0d7f7829aa8c20fdd",
+    "evaluation_config_sha256": "55276df5392d2569073e73deda55e23d6733a9ff338e918fb2ce00886647cb93",
+    "qa_runner_sha256": "a22d4108d65545edc10de822301a89116cec1670a2badf843d64fa1e15a761d0",
+    "materializer_sha256": "9f9b4a00e35be76436dd666cf5a77298a67fa4affb3a1357e996d9b4335199d4",
+    "allowed_materializer_change": "replace dtype-sensitive DataFrame.equals with dtype-independent np.array_equal over key values in existing order",
+    "candidate_weight_theta_prediction_and_gates_changed": false
+  },
+  "official_access_before_recovery_execution": {
+    "official_test_index_rows_read": 3600,
+    "official_test_context_rows_read": 600,
+    "official_feature_rows_read": 600,
+    "official_component_prediction_rows_read": 10800,
+    "hidden_truth_rows_read": 0,
+    "uploads": 0
+  },
+  "preflight": {
+    "py_compile": "PASS",
+    "ruff": "PASS",
+    "focused_pytest": "3 PASS",
+    "dtype_mismatch_passes": true,
+    "key_perturbation_fails": true,
+    "order_perturbation_fails": true,
+    "evaluation_artifact_before_execute": false,
+    "materializer_artifact_before_execute": false
+  }
+}

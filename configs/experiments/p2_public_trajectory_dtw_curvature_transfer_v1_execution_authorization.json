@@ -1,0 +1,48 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.execution_authorization.v1",
+  "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v1",
+  "authorized": false,
+  "design_sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+  "seal_sha256": "9c8e61eaf5cf087af95d0a176e89749111a3fadeffd4e18b72fc93c2561a8370",
+  "bundle": {
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json": {
+      "bytes": 15387,
+      "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb"
+    },
+    "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v1.py": {
+      "bytes": 40542,
+      "sha256": "89783aa7b719cc4232ec573768f159e32be275ddbb426c1853cb35be093c35bd"
+    },
+    "src/p2_restore/public_trajectory_dtw.py": {
+      "bytes": 49413,
+      "sha256": "0497ed5d477cd6319a5ae8ced5bbecd9d137a50248594de41843b382306d18e1"
+    },
+    "tests/test_p2_public_trajectory_dtw_curvature_transfer_v1.py": {
+      "bytes": 18298,
+      "sha256": "53bba00bafb23774d17649c0a2ce0015827a2b7c558cf9d8eced2ad04a0196b1"
+    },
+    "artifacts/p2_public_trajectory_dtw_curvature_transfer_v1_preexecution/preexecution_seal.json": {
+      "bytes": 5546,
+      "sha256": "9c8e61eaf5cf087af95d0a176e89749111a3fadeffd4e18b72fc93c2561a8370"
+    }
+  },
+  "operation_ceiling": {
+    "attempts": 1,
+    "physical_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "conditional_p100_materializations": 3,
+    "total_materialization_slots": 22,
+    "result_driven_reruns": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0
+  },
+  "blockers": [
+    "Independent QA has not yet approved the sealed runner, numerical module, tests, source pins, and failure semantics.",
+    "The immutable design blocks numerical materialization after an infrastructure-only predecessor outcome without a scientific decision; separate authority must resolve that trigger without result-driven changes."
+  ]
+}

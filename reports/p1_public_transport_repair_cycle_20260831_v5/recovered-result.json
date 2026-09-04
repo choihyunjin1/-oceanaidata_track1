@@ -1,0 +1,477 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v5",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v5",
+  "status": "SCIENTIFIC_NO_PASS_TECHNICAL_RECEIPT_RECOVERED",
+  "runtime_seconds": 53.15506169999571,
+  "decision_policy": {
+    "comparator": "P1 current Public champion F1 0.833548 / 28.909341 points",
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "worst_observed_public_transport_residual_points": -0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "score_points_per_f1": 26.578120867377287,
+    "worst_forward_block_delta_f1_minimum": -0.00025,
+    "bootstrap_probability_improved_minimum": 0.8,
+    "bootstrap_ci90_low_minimum": -0.00025,
+    "seed_delta_f1_minimum": 0.0,
+    "anchor_removals_required": 0
+  },
+  "validation_contract": {
+    "outer_forward_tests": [
+      {
+        "train_folds": [
+          "2025_q2"
+        ],
+        "test_fold": "2025_q3"
+      },
+      {
+        "train_folds": [
+          "2025_q2",
+          "2025_q3"
+        ],
+        "test_fold": "2025_q4"
+      }
+    ],
+    "inner_calibration_days": 21,
+    "purge_hours": 24,
+    "training_day_subsample_fraction": 0.8,
+    "seeds": [
+      20260831,
+      20260847,
+      20260863
+    ],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260907
+  },
+  "transport_scope": {
+    "deployment_station": "G-ORS",
+    "deployment_layer": 1,
+    "anchor_prediction_required": 0,
+    "minimum_source_probability": 0.01,
+    "add_only": true,
+    "model_features_exclude_station_layer_calendar": true
+  },
+  "candidate_count": 3,
+  "pass_count": 0,
+  "prior_tie_disposition": "EXCLUDED_FROM_PASS_COUNT",
+  "candidates": [
+    {
+      "name": "P1_1_GORS_TRANSPORT_LOGIT_LCB",
+      "past_only": true,
+      "add_only": true,
+      "forward_test_rows": 287862,
+      "additions": 0,
+      "true_positive_additions": 0,
+      "false_positive_additions": 0,
+      "anchor_removals": 0,
+      "reference_f1": 0.9068037200195791,
+      "candidate_f1": 0.9068037200195791,
+      "delta_f1": 0.0,
+      "raw_expected_points_delta": 0.0,
+      "worst_observed_transport_residual_points": -0.005383691373120247,
+      "calibrated_conservative_expected_points_delta": -0.005383691373120247,
+      "thresholds": {
+        "2025_q3": {
+          "threshold": 1.000001,
+          "reference_f1": 0.8120603015075377,
+          "candidate_f1": 0.8120603015075377,
+          "delta_f1": 0.0,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "precision": null,
+          "status": "NO_ELIGIBLE_THRESHOLD",
+          "inner_split": {
+            "fit_end_exclusive": "2025-06-08T14:50:00+00:00",
+            "calibration_start_inclusive": "2025-06-09T14:50:00+00:00",
+            "outer_train_end": "2025-06-30T14:50:00+00:00"
+          },
+          "outer_train_folds": [
+            "2025_q2"
+          ],
+          "outer_test_fold": "2025_q3",
+          "outer_test_target_eligible_rows": 138
+        },
+        "2025_q4": {
+          "threshold": 1.000001,
+          "reference_f1": 0.9353293413173652,
+          "candidate_f1": 0.9353293413173652,
+          "delta_f1": 0.0,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "precision": null,
+          "status": "NO_ELIGIBLE_THRESHOLD",
+          "inner_split": {
+            "fit_end_exclusive": "2025-09-09T10:40:00+00:00",
+            "calibration_start_inclusive": "2025-09-10T10:40:00+00:00",
+            "outer_train_end": "2025-10-01T10:40:00+00:00"
+          },
+          "outer_train_folds": [
+            "2025_q2",
+            "2025_q3"
+          ],
+          "outer_test_fold": "2025_q4",
+          "outer_test_target_eligible_rows": 0
+        }
+      },
+      "seed_delta_f1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "by_fold": {
+        "2025_q3": {
+          "rows": 176738,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.9121882972594848,
+          "candidate_f1": 0.9121882972594848,
+          "delta_f1": 0.0
+        },
+        "2025_q4": {
+          "rows": 111124,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.8989008334339896,
+          "candidate_f1": 0.8989008334339896,
+          "delta_f1": 0.0
+        }
+      },
+      "day_block_bootstrap": {
+        "method": "KST calendar-day block bootstrap over fold-day blocks",
+        "blocks": 164,
+        "replicates": 2000,
+        "mean_delta_f1": 0.0,
+        "ci90_low": 0.0,
+        "ci90_high": 0.0,
+        "probability_improved": 0.0
+      },
+      "gates": {
+        "positive_additions": false,
+        "anchor_removals_zero": true,
+        "raw_expected_points_delta_at_least_calibrated_floor": false,
+        "calibrated_expected_points_delta_at_least_0_01": false,
+        "worst_forward_block_noncatastrophic": true,
+        "bootstrap_probability_stable": false,
+        "bootstrap_lower_bound_noncatastrophic": true,
+        "all_seed_deltas_nonnegative": true
+      },
+      "strict_internal_pass": false
+    },
+    {
+      "name": "P1_2_GORS_TRANSPORT_HGB_LCB",
+      "past_only": true,
+      "add_only": true,
+      "forward_test_rows": 287862,
+      "additions": 0,
+      "true_positive_additions": 0,
+      "false_positive_additions": 0,
+      "anchor_removals": 0,
+      "reference_f1": 0.9068037200195791,
+      "candidate_f1": 0.9068037200195791,
+      "delta_f1": 0.0,
+      "raw_expected_points_delta": 0.0,
+      "worst_observed_transport_residual_points": -0.005383691373120247,
+      "calibrated_conservative_expected_points_delta": -0.005383691373120247,
+      "thresholds": {
+        "2025_q3": {
+          "threshold": 1.000001,
+          "reference_f1": 0.8120603015075377,
+          "candidate_f1": 0.8120603015075377,
+          "delta_f1": 0.0,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "precision": null,
+          "status": "NO_ELIGIBLE_THRESHOLD",
+          "inner_split": {
+            "fit_end_exclusive": "2025-06-08T14:50:00+00:00",
+            "calibration_start_inclusive": "2025-06-09T14:50:00+00:00",
+            "outer_train_end": "2025-06-30T14:50:00+00:00"
+          },
+          "outer_train_folds": [
+            "2025_q2"
+          ],
+          "outer_test_fold": "2025_q3",
+          "outer_test_target_eligible_rows": 138
+        },
+        "2025_q4": {
+          "threshold": 0.625,
+          "reference_f1": 0.9353293413173652,
+          "candidate_f1": 0.9623188405797102,
+          "delta_f1": 0.02698949926234495,
+          "additions": 55,
+          "true_positive_additions": 49,
+          "false_positive_additions": 6,
+          "precision": 0.8909090909090909,
+          "status": "SELECTED_ON_INNER_FUTURE_BLOCK",
+          "inner_split": {
+            "fit_end_exclusive": "2025-09-09T10:40:00+00:00",
+            "calibration_start_inclusive": "2025-09-10T10:40:00+00:00",
+            "outer_train_end": "2025-10-01T10:40:00+00:00"
+          },
+          "outer_train_folds": [
+            "2025_q2",
+            "2025_q3"
+          ],
+          "outer_test_fold": "2025_q4",
+          "outer_test_target_eligible_rows": 0
+        }
+      },
+      "seed_delta_f1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "by_fold": {
+        "2025_q3": {
+          "rows": 176738,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.9121882972594848,
+          "candidate_f1": 0.9121882972594848,
+          "delta_f1": 0.0
+        },
+        "2025_q4": {
+          "rows": 111124,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.8989008334339896,
+          "candidate_f1": 0.8989008334339896,
+          "delta_f1": 0.0
+        }
+      },
+      "day_block_bootstrap": {
+        "method": "KST calendar-day block bootstrap over fold-day blocks",
+        "blocks": 164,
+        "replicates": 2000,
+        "mean_delta_f1": 0.0,
+        "ci90_low": 0.0,
+        "ci90_high": 0.0,
+        "probability_improved": 0.0
+      },
+      "gates": {
+        "positive_additions": false,
+        "anchor_removals_zero": true,
+        "raw_expected_points_delta_at_least_calibrated_floor": false,
+        "calibrated_expected_points_delta_at_least_0_01": false,
+        "worst_forward_block_noncatastrophic": true,
+        "bootstrap_probability_stable": false,
+        "bootstrap_lower_bound_noncatastrophic": true,
+        "all_seed_deltas_nonnegative": true
+      },
+      "strict_internal_pass": false
+    },
+    {
+      "name": "P1_3_GORS_TRANSPORT_CONSENSUS_LCB",
+      "past_only": true,
+      "add_only": true,
+      "forward_test_rows": 287862,
+      "additions": 0,
+      "true_positive_additions": 0,
+      "false_positive_additions": 0,
+      "anchor_removals": 0,
+      "reference_f1": 0.9068037200195791,
+      "candidate_f1": 0.9068037200195791,
+      "delta_f1": 0.0,
+      "raw_expected_points_delta": 0.0,
+      "worst_observed_transport_residual_points": -0.005383691373120247,
+      "calibrated_conservative_expected_points_delta": -0.005383691373120247,
+      "thresholds": {
+        "component_thresholds": {
+          "logistic": {
+            "2025_q3": {
+              "threshold": 1.000001,
+              "reference_f1": 0.8120603015075377,
+              "candidate_f1": 0.8120603015075377,
+              "delta_f1": 0.0,
+              "additions": 0,
+              "true_positive_additions": 0,
+              "false_positive_additions": 0,
+              "precision": null,
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "inner_split": {
+                "fit_end_exclusive": "2025-06-08T14:50:00+00:00",
+                "calibration_start_inclusive": "2025-06-09T14:50:00+00:00",
+                "outer_train_end": "2025-06-30T14:50:00+00:00"
+              },
+              "outer_train_folds": [
+                "2025_q2"
+              ],
+              "outer_test_fold": "2025_q3",
+              "outer_test_target_eligible_rows": 138
+            },
+            "2025_q4": {
+              "threshold": 1.000001,
+              "reference_f1": 0.9353293413173652,
+              "candidate_f1": 0.9353293413173652,
+              "delta_f1": 0.0,
+              "additions": 0,
+              "true_positive_additions": 0,
+              "false_positive_additions": 0,
+              "precision": null,
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "inner_split": {
+                "fit_end_exclusive": "2025-09-09T10:40:00+00:00",
+                "calibration_start_inclusive": "2025-09-10T10:40:00+00:00",
+                "outer_train_end": "2025-10-01T10:40:00+00:00"
+              },
+              "outer_train_folds": [
+                "2025_q2",
+                "2025_q3"
+              ],
+              "outer_test_fold": "2025_q4",
+              "outer_test_target_eligible_rows": 0
+            }
+          },
+          "hist_gradient_boosting": {
+            "2025_q3": {
+              "threshold": 1.000001,
+              "reference_f1": 0.8120603015075377,
+              "candidate_f1": 0.8120603015075377,
+              "delta_f1": 0.0,
+              "additions": 0,
+              "true_positive_additions": 0,
+              "false_positive_additions": 0,
+              "precision": null,
+              "status": "NO_ELIGIBLE_THRESHOLD",
+              "inner_split": {
+                "fit_end_exclusive": "2025-06-08T14:50:00+00:00",
+                "calibration_start_inclusive": "2025-06-09T14:50:00+00:00",
+                "outer_train_end": "2025-06-30T14:50:00+00:00"
+              },
+              "outer_train_folds": [
+                "2025_q2"
+              ],
+              "outer_test_fold": "2025_q3",
+              "outer_test_target_eligible_rows": 138
+            },
+            "2025_q4": {
+              "threshold": 0.625,
+              "reference_f1": 0.9353293413173652,
+              "candidate_f1": 0.9623188405797102,
+              "delta_f1": 0.02698949926234495,
+              "additions": 55,
+              "true_positive_additions": 49,
+              "false_positive_additions": 6,
+              "precision": 0.8909090909090909,
+              "status": "SELECTED_ON_INNER_FUTURE_BLOCK",
+              "inner_split": {
+                "fit_end_exclusive": "2025-09-09T10:40:00+00:00",
+                "calibration_start_inclusive": "2025-09-10T10:40:00+00:00",
+                "outer_train_end": "2025-10-01T10:40:00+00:00"
+              },
+              "outer_train_folds": [
+                "2025_q2",
+                "2025_q3"
+              ],
+              "outer_test_fold": "2025_q4",
+              "outer_test_target_eligible_rows": 0
+            }
+          }
+        }
+      },
+      "seed_delta_f1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "by_fold": {
+        "2025_q3": {
+          "rows": 176738,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.9121882972594848,
+          "candidate_f1": 0.9121882972594848,
+          "delta_f1": 0.0
+        },
+        "2025_q4": {
+          "rows": 111124,
+          "additions": 0,
+          "true_positive_additions": 0,
+          "false_positive_additions": 0,
+          "anchor_removals": 0,
+          "reference_f1": 0.8989008334339896,
+          "candidate_f1": 0.8989008334339896,
+          "delta_f1": 0.0
+        }
+      },
+      "day_block_bootstrap": {
+        "method": "KST calendar-day block bootstrap over fold-day blocks",
+        "blocks": 164,
+        "replicates": 2000,
+        "mean_delta_f1": 0.0,
+        "ci90_low": 0.0,
+        "ci90_high": 0.0,
+        "probability_improved": 0.0
+      },
+      "gates": {
+        "positive_additions": false,
+        "anchor_removals_zero": true,
+        "raw_expected_points_delta_at_least_calibrated_floor": false,
+        "calibrated_expected_points_delta_at_least_0_01": false,
+        "worst_forward_block_noncatastrophic": true,
+        "bootstrap_probability_stable": false,
+        "bootstrap_lower_bound_noncatastrophic": true,
+        "all_seed_deltas_nonnegative": true
+      },
+      "strict_internal_pass": false
+    }
+  ],
+  "outputs": [],
+  "historical_fit_count": 12,
+  "deployment_fit_count": 0,
+  "fit_count": 12,
+  "hashes": {
+    "config_sha256": "c449405dee89fcef2f84d18d2fb5143f014a02d2f90efae8dee82fff1e93abf2",
+    "runner_sha256": "d8ec8d71f355c86cd528a404bf981b4d022b2e39745cbf15b0ff2a02d3d135d1",
+    "root_calibration_sha256": "860112c99f71db491a03ccfd92ec1d657f16cac4f0bcf1d89ff6e8d8c81ff24d",
+    "authoritative_official_results_sha256": "650ddb36e61b2478d826735a3280db5c65180a59941be864ef69b77628a0ec29",
+    "prior_v4_result_sha256": "ea017798a01dfd59d29db6493e296c835a1a54d7f5765c0dcae5968baf676058"
+  },
+  "operations": {
+    "official_covariate_reads": 0,
+    "paths": [],
+    "hidden_truth_reads": 0,
+    "uploads": 0
+  },
+  "source_provenance": [
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\reports\\parallel_internal_pass_registry_20260831_v1\\official-submission-results-20260831.json",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\reports\\public_transport_calibration_20260831_v1\\calibration.json",
+    "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p1_parallel_candidate_cycle_20260831_v4\\result.json",
+    "historical P1 Q2/Q3/Q4 OOF only before internal PASS"
+  ],
+  "independent_qa": {
+    "status": "PASS",
+    "checks": {
+      "failure_is_terminal_json_serialization_only": true,
+      "three_candidates_recovered": true,
+      "all_12_historical_fits_completed": true,
+      "pass_count_zero": true,
+      "all_candidate_deltas_zero": true,
+      "all_calibrated_deltas_below_gate": true,
+      "outputs_zero": true,
+      "official_covariate_reads_zero": true,
+      "hidden_truth_reads_zero": true,
+      "uploads_zero": true,
+      "prior_tie_excluded": true
+    }
+  },
+  "recovery": {
+    "fits_rerun": 0,
+    "official_rows_reread": 0,
+    "source_partial_result_sha256": "d4210e65bf29d6ef12bad489c3fad5e26f71a0fdbd8815578e5b6216b08e6bee",
+    "terminal_failure_sha256": "63299077195b34f3acfb6793e7136572645e855ac76c25c2e4e8ccb5c762eebc",
+    "reason": "final JSON writer encountered numpy.bool_; all result fields before independent_qa were complete"
+  }
+}

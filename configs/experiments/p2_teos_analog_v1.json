@@ -1,0 +1,81 @@
+{
+  "experiment_id": "p2_teos_analog_v1",
+  "status": "preregistered_local_one_shot",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_after_prior_outer_exposure": true,
+  "fresh_holdout_claimed": false,
+  "external_values_used": false,
+  "hypothesis": "A fixed equation-of-state state proxy and multi-horizon public-layer trajectory can retrieve physically similar outer-train profiles whose locally linear residual transfer improves the frozen physical projection.",
+  "frozen_inputs": {
+    "physical_oof": {
+      "path": "artifacts/p2_physical_profile_projection_v1/oof.parquet",
+      "sha256": "adffb86b43ae69ad3f11863263fe3679cc0195053b46c1ec57a307d2c54eb7cc",
+      "prediction_column": "prediction"
+    },
+    "deep_oof": {
+      "path": "artifacts/p2_deep_finalists_v1/stacked_oof.parquet",
+      "sha256": "76f52261259112d03289226c23712e27a17a17f9320c8565c96a662c1093be8d"
+    }
+  },
+  "validation": {
+    "blocks": {
+      "2024_sep_oct": ["2024-09-01", "2024-11-01"],
+      "2025_jul_aug": ["2025-07-01", "2025-09-01"],
+      "2025_nov_dec": ["2025-11-01", "2026-01-01"]
+    },
+    "simultaneous_mask_layers": [2, 3, 4],
+    "simultaneous_mask_variables": ["temp", "psal"],
+    "official_target_mask_duration_days": 61,
+    "honest_block_masks_cover_full_block": true,
+    "outer_train_only": true,
+    "purge_days": 7,
+    "metric": "pooled row-level RMSE in Celsius"
+  },
+  "physical_proxy": {
+    "name": "fixed linear equation-of-state density-anomaly proxy",
+    "warning": "This is an explicitly simplified UNESCO/linear-EOS-style proxy, not UNESCO-1983 polynomial density, TEOS-10 density, sigma0, or N-squared.",
+    "rho0_kg_m3": 1025.0,
+    "reference_temp_c": 15.0,
+    "reference_psal": 35.0,
+    "thermal_expansion_per_c": 0.0002,
+    "haline_contraction_per_psal": 0.00076,
+    "public_layers": [1, 5, 6, 7, 8],
+    "trajectory_horizons_minutes": [360, 1440, 10080]
+  },
+  "analog": {
+    "neighbors": 128,
+    "pca_components": 12,
+    "local_linear_ridge": 2.0,
+    "blend": 0.35,
+    "max_normalized_neighbor_distance": 3.0,
+    "min_effective_neighbors": 32.0,
+    "max_query_missing_fraction": 0.45,
+    "minimum_feature_coverage": 0.2,
+    "residual_clip_quantiles": [0.005, 0.995],
+    "batch_size": 512,
+    "n_jobs": 8,
+    "seed": 20260821,
+    "selection_policy": "All values fixed once before the honest-block run; no grid, dev-block selection, or post-score adjustment."
+  },
+  "bootstrap": {
+    "unit": "KST calendar day",
+    "replicates": 2000,
+    "seed": 20260821,
+    "ci": 0.9
+  },
+  "gate": {
+    "candidate_rmse_max": 0.769418,
+    "required_delta_rmse_max": -0.005,
+    "bootstrap_ci90_high_max": 0.0,
+    "layer4_delta_rmse_max": 0.005,
+    "weekly_delta_rmse_p90_max": 0.02,
+    "weekly_delta_rmse_worst_max": 0.05,
+    "weekly_degraded_share_max": 0.4
+  },
+  "outputs": {
+    "directory": "artifacts/p2_teos_analog_v1",
+    "status": "artifacts/status/p2_teos_analog_v1.json",
+    "submission_created": false
+  }
+}

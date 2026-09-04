@@ -1,0 +1,17 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v20-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v20",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_ROBUST_STUDENT_T_CLASS_LLR_ADDONLY",
+  "design": "Supervised robust class-conditional Student-t likelihood ratio with chronological inner-prefix threshold calibration.",
+  "transport_family": {"family_id": "P1_STUDENT_T_GENERATIVE_SMOOTH_RESIDUAL", "tier_id": "SMOOTH_LEARNED_PROFILE", "representation_changed": false, "routing_discontinuous": false, "transport_penalty_points": 0.12168209161000616},
+  "features": {"names": ["abs_temp_robust_z_6h", "abs_temp_robust_z_24h", "abs_temp_robust_z_72h", "temp_abs_median_resid_6h", "temp_abs_median_resid_24h", "temp_abs_median_resid_72h", "temp_abs_peer_residual", "has_gap_before", "gap_minutes", "depth_raw"], "past_only": true, "validation_row_deletion": false},
+  "model": {"distribution": "independent Student-t location-scale", "degrees_of_freedom": 4.0, "location": "class median", "scale": "1.4826 class MAD + pooled prefix floor", "scale_floor_quantile": 0.1, "prior": "inner-fit empirical class prior with Jeffreys 0.5 smoothing", "missing_term": "omit dimension", "training_population": "incumbent-negative only", "decoder": "incumbent OR proposal", "retuning": false},
+  "inner_calibration": {"split": "last chronological 25 percent of each training prefix by global time", "fit_fraction": 0.75, "threshold_candidates": "all finite inner-calibration scores plus positive infinity", "objective": "maximum add-only F1 on inner calibration", "constraints": ["positive additions", "Wilson90 precision lower > inner incumbent F1/2", "changed fraction <=0.005"], "tie_break": "highest threshold then fewest additions", "outer_labels_used": false},
+  "validation": {"pipeline_fits": [{"train_folds": ["2025_q2"], "outer": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "outer": "2025_q4"}], "maximum_pipeline_fits": 2, "bootstrap_replicates": 5000, "bootstrap_seed": 20260924, "outer_result_based_tuning": false},
+  "decision_policy": {"minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.12168209161000616, "minimum_raw_expected_point_delta_inclusive": 0.13168209161000616, "score_points_per_f1": 26.578120867377286, "minimum_each_q3_q4_delta_f1": 0.0, "bootstrap_probability_improved_minimum_inclusive": 0.8, "anchor_removals_required": 0},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_changed_fraction_any_kst_day": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "minimum_each_supported_station_layer_delta_f1": 0.0},
+  "resource_caps": {"wall_seconds": 900, "rss_bytes": 4294967296, "vram_bytes": 0},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "authorization": {"synthetic_preflight": true, "historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "uploads": 0}
+}

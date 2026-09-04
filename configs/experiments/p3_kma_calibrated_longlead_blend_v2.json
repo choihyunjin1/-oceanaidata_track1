@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_kma_calibrated_longlead_blend_v2",
+  "status": "prepared_dry_run_only",
+  "created_at_kst": "2026-08-21T00:00:00+09:00",
+  "objective": {
+    "metric": "pooled_six_lead_rmse_meters",
+    "direction": "minimize",
+    "single_hypothesis": "The sealed KMA source residual contains useful 18h and 24h dynamics but needs target-only affine calibration and a small blend into the exact incumbent.",
+    "evidence_scope": "v1_inner_only_no_outer_truth",
+    "v1_raw_source_minus_persistence_rmse_m": -0.12607220025543442,
+    "v1_raw_source_residual_pearson": 0.524425139931922,
+    "v1_calibration_intercept_m": -0.14006654212057668,
+    "v1_calibration_scale": 1.5474631198331934,
+    "outer_truth_opened_in_v1": false
+  },
+  "source_reuse": {
+    "fit_new_source_model": false,
+    "source_model": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_model.cbm",
+      "sha256": "63d34f6499e4978853551023f21ac1ccc34a2d16ee5c682c53dcb46a63c62bd4"
+    },
+    "source_meta_predictions": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_meta_predictions.parquet",
+      "sha256": "5ab567d6508b1f5596aaee2ee2dfd7bd47e52e5ad2675248f14a42311cf426f0",
+      "expected_rows": 20952,
+      "expected_columns": 7
+    },
+    "source_meta_seal": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/source_meta_seal.json",
+      "sha256": "c13db148c25f38a7833e2f0d7074b0a7016272ff7c2d9d51a19d53506b9fe71c"
+    }
+  },
+  "v1_provenance": {
+    "config": {
+      "path": "configs/experiments/p3_kma_source_prediction_meta_v1.json",
+      "sha256": "48d22ac08c80e240b981f3c609b61444911c86b2b9d5ad5ea71322f3e5ee9e1c"
+    },
+    "helper": {
+      "path": "src/p3_wave/kma_source_meta.py",
+      "sha256": "05cf494a963724464150868a6f4774acea5755250737bb28a98a7312972acd44"
+    },
+    "runner": {
+      "path": "scripts/run_p3_kma_source_prediction_meta_v1.py",
+      "sha256": "d14601d4f9edb73c72d204949c22d407a21427fbaf9f98f6e066172a7b72e499"
+    },
+    "tests": {
+      "path": "tests/test_p3_kma_source_prediction_meta_v1.py",
+      "sha256": "58d1f629f2d9baf4f309472b62850392d8e0d715469f010bdd267d3986752c34"
+    },
+    "one_shot_result": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/result.json",
+      "sha256": "e1b1eed9568cc0879a866ca2fbb3954b4437bd3140174c4bb72a683a22edd0c5",
+      "required_decision": "NO_GO_HIGH_AUC_INNER_NO_INCREMENTAL_SIGNAL",
+      "required_outer_scoring_open_count": 0
+    },
+    "diagnostic_generator": {
+      "path": "scripts/diagnose_p3_kma_source_meta_inner_v1.py",
+      "sha256": "327777f216ec16f1374f78b1f77c172c1fe6b3eec415f1e82a32cf04734e2f92"
+    },
+    "inner_diagnostics": {
+      "path": "artifacts/p3_kma_source_prediction_meta_v1/diagnostics/inner_source_meta_diagnostics.json",
+      "sha256": "321d1b8cc7a99789ba5bed838b4a26da00db306f46ea48f45d998140e2122100",
+      "required_outer_truth_opened": false
+    }
+  },
+  "calibrator": {
+    "family": "Ridge",
+    "active_leads": [18, 24],
+    "target": "future_hs_minus_current_hs_residual",
+    "predictor": "sealed_kma_prediction_minus_current_hs_residual",
+    "design_columns": ["source_residual", "station_G-ORS", "station_I-ORS", "station_S-ORS"],
+    "global_slope": true,
+    "station_one_hot_intercepts": true,
+    "fit_intercept": false,
+    "ridge_alpha": 10.0,
+    "solver": "cholesky",
+    "standardize": false,
+    "hyperparameter_grid_size": 0,
+    "period_features": 0,
+    "missingness_features": 0,
+    "fit_scope_for_inner_selection": "each_outer_folds_inner_fit_only",
+    "fit_scope_for_outer_prediction": "that_outer_folds_full_outer_train_only"
+  },
+  "blend": {
+    "active_leads": [18, 24],
+    "no_op_leads": [3, 6, 9, 12],
+    "formula": "candidate=(1-alpha)*control_final+alpha*calibrated_source",
+    "alpha_grid": [0.0, 0.1, 0.2, 0.3, 0.4],
+    "alpha_shared_between_18h_and_24h": true,
+    "alpha_selected_separately_inside_each_outer_fold": true,
+    "selection_metric": "full_six_lead_inner_calibration_rmse",
+    "tie_break": "smallest_alpha",
+    "fold_alpha_zero_is_an_honest_no_op_and_is_allowed": true,
+    "deployment_alpha": "median_of_three_inner_selected_fold_alphas",
+    "outer_research_uses_each_folds_own_inner_selected_alpha": true,
+    "router_or_weight_retuning": false
+  },
+  "inner_control_proxy": {
+    "purpose": "honest_frozen_like_control_final_for_alpha_selection_only",
+    "limitation": "exact frozen router OOF exists only on outer rows; applying the full-trained router to inner calibration would leak labels, so inner selection uses a preregistered nested single-model proxy while outer promotion uses exact incumbent prediction",
+    "base_feature_count": 591,
+    "family": "CatBoostRegressor",
+    "target": "future_hs_minus_current_hs_residual",
+    "iterations": 700,
+    "learning_rate": 0.035,
+    "depth": 6,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "random_seed": 20260817,
+    "loss_function": "RMSE",
+    "task_type": "CPU",
+    "thread_count": 8,
+    "allow_writing_files": false,
+    "categorical_columns": ["station", "lead_h"],
+    "sample_weight": "frozen_threshold_case_weights",
+    "persistence_shrink_active_leads": [12, 18, 24],
+    "persistence_shrink_weight": 0.2,
+    "model_or_iteration_search": 0
+  },
+  "validation": {
+    "outer_membership": "frozen_incumbent_oof_keys_only",
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "inner_validation_days": 45,
+    "inner_membership": "outer_train_only_episode_disjoint_78h",
+    "inner_gate": {
+      "minimum_pooled_full_six_lead_delta_m_exclusive": 0.0,
+      "minimum_strictly_improved_folds": 2,
+      "alpha_zero_fold_allowed": true,
+      "failure_action": "stop_before_outer_prediction_and_designated_scoring_read"
+    },
+    "rolling_origin_label_scope": {
+      "current_fold_validation_targets_excluded_from_that_fold_training_inner_fit_and_inner_calibration": true,
+      "earlier_fold_validation_targets_allowed_only_as_later_fold_training_history": true,
+      "future_fold_validation_targets_forbidden_from_earlier_fold_training": true,
+      "global_process_level_zero_outer_target_exposure_before_blind_seal_claimed": false,
+      "designated_scoring_read_occurs_after_global_blind_seal": true
+    },
+    "bootstrap_unit": "independent_case_fold_anchor_id",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260821,
+    "one_shot_no_rerun": true
+  },
+  "outer_candidate": {
+    "base": "exact_frozen_incumbent_prediction_column",
+    "active_leads": [18, 24],
+    "no_op_leads": [3, 6, 9, 12],
+    "calibrator_fit": "refit_fixed_ridge_on_that_folds_full_outer_train",
+    "blend_alpha": "that_folds_inner_selected_alpha",
+    "exact_incumbent_reference_column": "prediction",
+    "expected_exact_incumbent_rmse": 0.7801609198910191,
+    "prediction_contract": "each_fold_prediction_excludes_that_folds_validation_targets_and_global_blind_predictions_are_fsynced_hashed_and_reloaded_before_designated_scoring_read"
+  },
+  "promotion_gate": {
+    "applies_to": "candidate_final_vs_exact_incumbent_prediction_only",
+    "minimum_pooled_rmse_improvement_meters": 0.01,
+    "paired_case_bootstrap_ci90_upper_below_zero": true,
+    "minimum_improved_outer_folds": 2,
+    "maximum_any_station_rmse_degradation_meters": 0.01,
+    "maximum_any_lead_rmse_degradation_meters": 0.015,
+    "lead_18_must_not_degrade": true,
+    "lead_24_must_not_degrade": true
+  },
+  "sealed_row_level_artifacts": {
+    "inner_predictions_include_truth": true,
+    "inner_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "target_hs",
+      "source_prediction",
+      "calibrated_source",
+      "control_single_prediction",
+      "control_final",
+      "selected_alpha",
+      "candidate_final"
+    ],
+    "inner_ridge_coefficients": true,
+    "inner_alpha_grid_scores": true,
+    "outer_ridge_coefficients": true,
+    "outer_blind_predictions_exclude_truth": true,
+    "outer_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "current_hs",
+      "incumbent_final",
+      "source_prediction",
+      "calibrated_source",
+      "selected_alpha",
+      "candidate_final"
+    ]
+  },
+  "frozen_inputs": {
+    "feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1",
+      "expected_count": 591
+    },
+    "frozen_model_manifest": {
+      "path": "submissions/p3_frozen_catboost/manifest.json",
+      "sha256": "f260fa35b677ff65aa35ed34f386c9cef3cf53590727673e83245282afa6baa3"
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "anchor_metadata_and_target_vault": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "incumbent_oof": {
+      "path": "artifacts/p3/long_persistence_shrink/oof.parquet",
+      "sha256": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "expected_rows": 1092,
+      "expected_cases": 182
+    }
+  },
+  "p3_sources": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "artifacts": {
+    "output_directory": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot",
+    "dry_run_receipt": "artifacts/p3_kma_calibrated_longlead_blend_v2/dry_run/receipt.json",
+    "status_path": "artifacts/status/p3_kma_calibrated_longlead_blend_v2.json",
+    "authorization_amendment": "artifacts/p3_kma_calibrated_longlead_blend_v2/authorization_amendment.json",
+    "global_attempt_lock": "artifacts/experiment_locks/p3_kma_calibrated_longlead_blend_v2.attempt.lock",
+    "canonical_outer_lock": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/OUTER_TRUTH.lock",
+    "global_outer_lock": "artifacts/experiment_locks/p3_kma_calibrated_longlead_blend_v2.outer.lock",
+    "global_ledger": "artifacts/experiment_locks/p3_outer_truth_ledger.jsonl"
+  },
+  "execution": {
+    "allowed_mode_now": "dry-run",
+    "actual_authorized": false,
+    "actual_authorization_mechanism": "separate_O_EXCL_amendment_bound_to_exact_dry_receipt_and_implementation_SHA",
+    "future_actual_authorization_token": "ROOT_APPROVED_P3_KMA_CALIBRATED_LONGLEAD_BLEND_V2",
+    "model_fit_count_in_dry_run": 0,
+    "target_read_count_in_dry_run": 0,
+    "outer_truth_read_count_in_dry_run": 0,
+    "test_context_read_count": 0,
+    "estimated_actual_runtime_minutes": [20, 45]
+  },
+  "prohibitions": {
+    "new_source_model_fit": true,
+    "direct_source_target_row_concatenation": true,
+    "period_or_missingness_features": true,
+    "absolute_calendar_or_external_station_feature": true,
+    "test_context_or_test_index_read": true,
+    "test_timestamp_reconstruction": true,
+    "outer_membership_regeneration": true,
+    "current_or_future_fold_validation_target_in_that_fold_training_or_inner_selection": true,
+    "alpha_or_ridge_hyperparameter_search_beyond_preregistered_grid": true,
+    "router_or_incumbent_weight_reselection": true,
+    "submission_write_or_upload": true,
+    "v1_or_frozen_artifact_mutation": true
+  }
+}

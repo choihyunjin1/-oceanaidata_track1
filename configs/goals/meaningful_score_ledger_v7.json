@@ -1,0 +1,189 @@
+{
+  "schema_version": "meaningful_score_ledger.v7",
+  "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v7",
+  "created_at_kst": "2026-08-23T06:28:00+09:00",
+  "status": "STATIC_IMPLEMENTATION_ONLY_NOT_INITIALIZED",
+  "revision": {
+    "kind": "APPEND_ONLY_P2_ARCHITECTURE_POLICY_CLOSURE",
+    "supersedes_static_v6_without_mutation": true,
+    "reason": "v6 closed the curve-result path but delegated architecture-matched official-score and upload-readiness paths to v5, allowing a later local-qualification proof to bypass the research-only policy.",
+    "standard_event_types_only": true,
+    "p1_p3_exact_payloads_delegate_bit_for_bit_to_v5": true,
+    "p2_exact_payloads_delegate_bit_for_bit_to_v5": true
+  },
+  "p2_architecture_matched_policy": {
+    "curve_result": {
+      "delegate_to_v6_compatibility_replay": true,
+      "decision": "RESEARCH_ONLY",
+      "passed": false,
+      "official_promotion": false,
+      "preserve_local_qualification": true
+    },
+    "official_score_result": {
+      "numeric_and_operational_evaluation": "V3_PAIRED_AB_REPLAY",
+      "score_incumbent_policy": "ALLOW_GENERAL_PAIRED_OFFICIAL_SCORE_RECORD_ONLY",
+      "score_incumbent_updates_may_reflect_v3_operational_checks": true,
+      "score_incumbent_update_is_not_meaningful_promotion": true,
+      "decision": "RESEARCH_ONLY_PAIRED_AB_PENDING",
+      "meaningful_incumbent_updates": false,
+      "official_promotion": false,
+      "goal_problem_milestone_complete": false
+    },
+    "upload_readiness": {
+      "status": "FAIL_CLOSED_RESEARCH_ONLY_P2_ARCHITECTURE_MATCHED",
+      "upload_ready": false,
+      "upload_performed": false,
+      "no_v3_readiness_delegation": true,
+      "immutable_baseline_anchor_and_nonarchitecture_routes_delegate_to_v5": true
+    }
+  },
+  "scoring_contract": {
+    "path": "configs/goals/meaningful_score_maximization_v3.json",
+    "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "bytes": 7922
+  },
+  "scoring_evaluator": {
+    "path": "src/ocean_goal/meaningful_score_v3.py",
+    "sha256": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "bytes": 33680
+  },
+  "predecessor_ledger": {
+    "path": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+    "bytes": 29320,
+    "event_count": 9,
+    "head_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066"
+  },
+  "superseded_v6_implementation": {
+    "V6_CONTRACT": {
+      "path": "configs/goals/meaningful_score_ledger_v6.json",
+      "sha256": "a0aa5b04d57cc74552b58f94f6eb79c078ce48722e7351f21f3007f0ca8264f8",
+      "bytes": 6560
+    },
+    "V6_EVALUATOR": {
+      "path": "src/ocean_goal/meaningful_score_ledger_v6.py",
+      "sha256": "2162695cb178aec1f639a66d9f07b9156977d4154cafc0449d281836ce7146b3",
+      "bytes": 36256
+    },
+    "V6_CLI": {
+      "path": "scripts/run_meaningful_score_ledger_v6.py",
+      "sha256": "2f5065db2e4300afa53375973cb09869623cb9b4fd15cedac890d9e7be392620",
+      "bytes": 7766
+    },
+    "V6_TESTS": {
+      "path": "tests/test_meaningful_score_ledger_v6.py",
+      "sha256": "f0872cf214060d1185c7cbb8caeac82c10205ff4f3df4c3752f43570bd768d5a",
+      "bytes": 13921
+    }
+  },
+  "p2_stage_a_v3_lineage": {
+    "CONFIG": {
+      "path": "configs/experiments/p2_architecture_matched_stage_a_execution_v3.json",
+      "sha256": "482a646fc36c7639befbd1cea8fde91b358d54e931dad8e82cbb36026c98c649",
+      "bytes": 5883
+    },
+    "MANIFEST": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/manifest.json",
+      "sha256": "bb21341f94b866be7e2d6dc0e0f0b78b9c84a1898d4844ff75637f95798f21c6",
+      "bytes": 5058
+    },
+    "SEAL": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/seal.json",
+      "sha256": "315e52da6b7f4ab7bf3a1970301b4391b9f31611da6187667760ed0d3a501ba2",
+      "bytes": 1298
+    },
+    "ARCHITECTURE_MANIFEST": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/architecture_manifest.json",
+      "sha256": "0486bd6aaca94bbe9bc2e7b8a49aeba9144d5d38b86f695f18d917a90b7fc791",
+      "bytes": 1979
+    },
+    "TRAINING_RECIPE": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/training_recipe.json",
+      "sha256": "fb01f8017a6af4fbaec1d9a27bc15972f80153012b6fcff91f2f877d61e1b3e1",
+      "bytes": 3961
+    },
+    "TRAINING_RECEIPT": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/training_receipt.json",
+      "sha256": "13111faaf7c622740f3afb5dba7e53a98c67e75493ade69ff3eae00bed13364b",
+      "bytes": 174623
+    },
+    "CURVE_METRICS": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_curve_metrics.json",
+      "sha256": "950657e015ce31ecc2045f359ef02b4c99ab0d20a7ee917088a1c8b785491ef7",
+      "bytes": 2365
+    },
+    "OOF_040": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_040.csv",
+      "sha256": "8042676cda285a92e01c286a871ef11d323a672836d1e597cd5aa749fb85e626",
+      "bytes": 9689175
+    },
+    "OOF_055": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_055.csv",
+      "sha256": "870d57779a1c5ab66ac78bc8525baa55ba33a7b10544b00e87837f4e50335168",
+      "bytes": 9725466
+    },
+    "OOF_070": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_070.csv",
+      "sha256": "58a62e0c1944eccfcc9bb909747f647ce11b6267346be1f91071fc37bd0fbaaf",
+      "bytes": 9776617
+    },
+    "OOF_085": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_085.csv",
+      "sha256": "1bacd0972bae51a50f9f7e04dfd5ba2d36c798427048b6195f9ca196a1196fe8",
+      "bytes": 9832417
+    },
+    "OOF_100": {
+      "path": "artifacts/p2_architecture_matched_reference_v3/reference_oof_100.csv",
+      "sha256": "4d663b40a4053bff9d5fcbe5cdc6aaa58b58d75aefbc1a9a0010420e0672bb06",
+      "bytes": 9826903
+    }
+  },
+  "canonical_paths": {
+    "ledger": "artifacts/meaningful_score_goal_v7/registry.jsonl",
+    "pre_init_qa": "artifacts/meaningful_score_goal_v7/pre_init_qa.json"
+  },
+  "event_protocol": {
+    "genesis_event_type": "GOAL_INITIALIZED",
+    "later_event_types": [
+      "CURVE_RESULT",
+      "OFFICIAL_SCORE_RESULT",
+      "UPLOAD_READINESS",
+      "GOAL_COMPLETION"
+    ],
+    "unknown_event_types_forbidden": true,
+    "payload_must_deep_equal_recomputed_payload": true,
+    "evidence_must_be_workspace_relative_sha256_and_size_pinned": true,
+    "replay_every_event_on_every_validation": true,
+    "replay_before_append_lock_or_write": true,
+    "append_lock": "O_EXCL_ADJACENT_LOCK",
+    "genesis_creation": "O_EXCL",
+    "all_os_open_calls_use_o_binary": true,
+    "all_os_write_calls_use_robust_write_loop": true,
+    "canonical_line_ending": "LF_ONLY"
+  },
+  "initial_state": {
+    "status": "WAITING_OFFICIAL_WINDOW_RESEARCH_ACTIVE",
+    "inherited_v5_event_count": 9,
+    "official_uploads": 0,
+    "score_promotions": {"P1": false, "P2": false, "P3": false},
+    "meaningful_promotions": {"P1": false, "P2": false, "P3": false},
+    "execution_counts": {
+      "stage_a_fit": 0,
+      "stage_a_prediction": 0,
+      "stage_b_fit": 0,
+      "stage_b_prediction": 0,
+      "upload": 0
+    }
+  },
+  "prohibitions": {
+    "automatic_upload": true,
+    "initialize_without_independent_qa": true,
+    "mutate_v3_v5_or_v6_pinned_files": true,
+    "initialize_superseded_v6": true,
+    "append_unreplayed_payload": true,
+    "append_unknown_event_type": true,
+    "fit_or_predict_during_ledger_operations": true,
+    "architecture_matched_p2_meaningful_promotion": true,
+    "architecture_matched_p2_upload_readiness": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "cycle_id": "parallel_robust_repair_cycle_20260829_v2",
+  "generated_at_kst": "2026-08-29T23:48:00+09:00",
+  "overall_status": "PASS_WITH_P3_TERMINAL_TECHNICAL_FAILURE",
+  "p1": {
+    "experiment_id": "p1_mstcn_group_dro_20260829_v2",
+    "status": "NO_GO_Q2",
+    "historical_fit_count": 3,
+    "runtime_seconds": 3241.4941975999973,
+    "q2_gate_pass": false,
+    "q3_q4_training_started": false,
+    "anchor_positive_removed_rows": 0,
+    "official_interface_rows_read": 0,
+    "csv_created": false,
+    "upload_performed": false,
+    "terminal_q2_matches_q2_gate_artifact": true,
+    "hashes": {
+      "config_sha256": "d5668f056d378ecd7698ed314ab7db7b82f140fe60e550ee879a59f2a4eb0c95",
+      "terminal_result_sha256": "b46a0c6f899d53721e3db86da7b3a267262a8a92eed950589cfe8e30700cb2ed",
+      "q2_gate_sha256": "ffbcf339c2344f504606bbd8b097c2d59e67e23ee6e43db4948885abec3e4357"
+    }
+  },
+  "p2": {
+    "experiment_id": "p2_copula_support_audit_20260829_v1",
+    "status": "TRAIN_ONLY_SUPPORT_PASS_QUERY_AUDIT_NOT_AUTHORIZED",
+    "independent_recalculation_matches_saved_report": true,
+    "independent_recalculation_seconds": 3.1080979999969713,
+    "source_rows": 789408,
+    "complete_historical_timestamps": 47216,
+    "minimum_unique_values_per_season_layer_coordinate": 2353,
+    "duplicate_station_layer_time_rows": 0,
+    "nonfinite_rank_gaussian_values": 0,
+    "model_fit_count": 0,
+    "official_input_rows_read": 0,
+    "csv_output_count": 0,
+    "upload_count": 0,
+    "query_dependent_checks_executed": false,
+    "hashes": {
+      "config_sha256": "5be3f382cf072f78e46b412e7e37a784ff0c8ae7a21196544081174a65c21be1",
+      "source_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "saved_audit_sha256": "e5d000ba5d52c78d79a9149646a8b67777813e864fe245eb6d7e1607a77a839e"
+    }
+  },
+  "p3": {
+    "experiment_id": "p3_catboost_valid_hpo_20260829_v2",
+    "status": "INVALID_TERMINAL_TECHNICAL_FAILURE",
+    "synthetic_smoke_fit_count": 37,
+    "selection_fit_count": 138,
+    "confirmation_fit_count_completed_before_failure": 1,
+    "historical_fit_count_total": 139,
+    "completed_model_fit_count_including_smoke": 176,
+    "terminal_runtime_seconds_approx": 25871.4119301,
+    "selected_candidate_id": "challenger_21",
+    "selection_gate_pass": true,
+    "control_rmse_m": 0.619296633047251,
+    "challenger_rmse_m": 0.5964341345562468,
+    "delta_rmse_m": -0.02286249849100419,
+    "attempt_lock_consumed": true,
+    "result_json_exists": false,
+    "confirmation_seal_exists": false,
+    "official_rows_read": 0,
+    "csv_files_written": 0,
+    "upload_count": 0,
+    "root_cause": {
+      "exception": "KeyError",
+      "missing_columns": [
+        "current_hs",
+        "single_prediction"
+      ],
+      "failing_engine_line": 809,
+      "contract_evidence": "read_frozen_router_components returns PAIR_KEYS plus ROUTER_COLUMNS, which intentionally excludes both missing columns"
+    },
+    "hashes": {
+      "config_sha256": "9ef8193fd8e3a94dcad4f041440f0e63b72034badcf04e6171593f7bc0f49512",
+      "grid_sha256": "422d7996e79ef8dab4169d597fa71ed0d9ac84f14c01b8a4ad1dfbe54c1fb10c",
+      "selection_aggregate_sha256": "cc9451f3fe6c1138daba947e902b000e0ca371d861d0abc823b47f7a39fc3fb4",
+      "stderr_sha256": "bb8b2f8a5e17281a84ac356e8eb1d62b6074242ef38d617084919d7972c8c572"
+    }
+  },
+  "verification": {
+    "focused_pytest_passed": 10,
+    "focused_pytest_failed": 0,
+    "ruff_pass": true,
+    "robust_repair_experiment_official_access_rows": 0,
+    "robust_repair_experiment_csv_files_written": 0,
+    "robust_repair_experiment_uploads": 0,
+    "git_commit_performed": false,
+    "git_push_performed": false
+  }
+}

@@ -1,0 +1,503 @@
+{
+  "schema_version": "p1_multiscale_cross_layer_offset_drift_unary.v6r2.execution_contract.v1",
+  "created_at_kst": "2026-08-23T13:33:00+09:00",
+  "problem": "P1",
+  "generation": "p1_multiscale_cross_layer_offset_drift_unary_v6r2",
+  "stage": "STATIC_OWNER_IMPLEMENTATION_AWAITING_FRESH_INDEPENDENT_QA",
+  "actual_execution_authorized": false,
+  "scientific_identity": "robust_multiscale_cross_layer_offset_drift_unary",
+  "science_projection": {
+    "path": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r2_science_projection.json",
+    "bytes": 9537,
+    "sha256": "c8bc59c7dc78568fbf79a54a8dfdbfe799242d44cfa31d155b31000d4cafcaef"
+  },
+  "append_only_lineage": {
+    "superseded_v6": {
+      "CONFIG": {
+        "path": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6.json",
+        "bytes": 21120,
+        "sha256": "132dd95a91687d47212ff4af653a9b2d2b3264705dce0821aaa2be73c4933838"
+      },
+      "HELPER": {
+        "path": "src/p1_qc/multiscale_cross_layer_offset_drift.py",
+        "bytes": 37082,
+        "sha256": "434bce024437d5dea77a4827bfdde95f0726659f901993fd4c033df82ab605d8"
+      },
+      "RUNNER": {
+        "path": "scripts/run_p1_multiscale_cross_layer_offset_drift_unary_v6.py",
+        "bytes": 26293,
+        "sha256": "cbaf1ec413d449dff00a1ab5b3e93935ecaab21e41e6e24cb8db664b1b8d3a33"
+      },
+      "TESTS": {
+        "path": "tests/test_run_p1_multiscale_cross_layer_offset_drift_unary_v6.py",
+        "bytes": 14137,
+        "sha256": "323e06c2c588db1bea20f2d1d58849d12384e2d58b0f7d4192587508f63998b3"
+      }
+    },
+    "owner_no_go": {
+      "path": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6_disposition/OWNER_STATIC_QA_NO_GO_20260823.json",
+      "bytes": 3129,
+      "sha256": "268b2d80f84fa4f249e61e95726640756556ac51af663903b7e9c91281c596b7"
+    },
+    "execution_tombstone": {
+      "path": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6_disposition/EXECUTION_TOMBSTONE.json",
+      "bytes": 1749,
+      "sha256": "ec7e6f040a544ec5c3ad57ba84617a9cbb2e77c4ec42ed119c4255f77f8bf1d9"
+    },
+    "v6_execution_permanently_forbidden": true,
+    "v6_files_must_remain_byte_exact": true
+  },
+  "implementation_roles": {
+    "BOOTSTRAP": "scripts/bootstrap_p1_multiscale_cross_layer_offset_drift_unary_v6r2.py",
+    "CONFIG": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r2.json",
+    "SCIENCE_PROJECTION": "configs/experiments/p1_multiscale_cross_layer_offset_drift_unary_v6r2_science_projection.json",
+    "SCIENCE": "src/p1_qc/multiscale_cross_layer_offset_drift_v6r2.py",
+    "CONTRACT": "src/p1_qc/multiscale_cross_layer_offset_drift_contract_v6r2.py",
+    "ENGINE": "src/p1_qc/multiscale_cross_layer_offset_drift_execution_v6r2.py",
+    "RUNNER": "scripts/run_p1_multiscale_cross_layer_offset_drift_unary_v6r2.py",
+    "TESTS": "tests/test_run_p1_multiscale_cross_layer_offset_drift_unary_v6r2.py"
+  },
+  "noncyclic_trust_contract": {
+    "canonical_entrypoint_role": "BOOTSTRAP",
+    "fresh_independent_qa_must_pin_bootstrap": true,
+    "bootstrap_owner_declared_pin_map_roles": [
+      "CONFIG",
+      "SCIENCE_PROJECTION",
+      "SCIENCE",
+      "CONTRACT",
+      "ENGINE",
+      "RUNNER",
+      "TESTS"
+    ],
+    "all_role_buffers_authenticated_before_compile_or_import": true,
+    "authenticated_buffer_compile_exec_only": true,
+    "source_loader_or_pyc_execution_forbidden": true,
+    "single_buffer_duplicate_key_and_nonfinite_rejecting_json_parse": true,
+    "before_and_after_read_device_inode_size_time_identity": true,
+    "full_ancestor_reparse_rejection": true,
+    "nlink_exactly_one": true,
+    "same_workspace_device_required": true,
+    "sys_dont_write_bytecode": true,
+    "canonical_interpreter_flags": [
+      "-I",
+      "-S",
+      "-B"
+    ],
+    "canonical_absent_pycache_prefix": "artifacts/p1_v6r2_forbidden_pycache",
+    "earliest_audit_hook_after_builtin_sys_only": true,
+    "stdlib_source_executed_from_authenticated_buffers": true,
+    "numerical_wheel_record_members_authenticated_before_import": true,
+    "native_numerical_handles_retained_through_process": true,
+    "execution_mode_requires_qa_and_authorization_before_engine_load": true,
+    "check_only_may_not_load_engine": true
+  },
+  "runtime_trust_contract": {
+    "interpreter": {
+      "path": ".venv-p1/Scripts/python.exe",
+      "bytes": 274424,
+      "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"
+    },
+    "pyvenv_config": {
+      "path": ".venv-p1/pyvenv.cfg",
+      "bytes": 339,
+      "sha256": "d1fb970854073922d49959ae01539088550613e316cb67f9fac858f586361174"
+    },
+    "base_prefix_source": "observed_sys_base_prefix_never_personal_path_literal",
+    "base_runtime_files": {
+      "python312.dll": {
+        "bytes": 6945272,
+        "sha256": "9a0e3435aaa680d868150f87ab3e388ad2eebc22f87e036155c7b4eda8cd2120"
+      },
+      "python3.dll": {
+        "bytes": 70376,
+        "sha256": "fb975a606e7fbf74f64260e3f60c3490b4f74a183c0926fd6ed1ac4c52ac7b1c"
+      },
+      "vcruntime140.dll": {
+        "bytes": 120400,
+        "sha256": "052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4"
+      }
+    },
+    "stdlib_snapshots": {
+      "Lib": {
+        "files": 2397,
+        "bytes": 43971009,
+        "sha256": "81c5fbf6d2e0d268b9f8b2193a778e22393d9b8d4cded3dc7743eee659a3e519"
+      },
+      "DLLs": {
+        "files": 42,
+        "bytes": 15330590,
+        "sha256": "f552f359861f2ce695d3c8e28af427c02571455e2b85e73bddf716fdf19b3500"
+      }
+    },
+    "distribution_records": {
+      "joblib": {
+        "path": ".venv-p1/Lib/site-packages/joblib-1.5.3.dist-info/RECORD",
+        "bytes": 18933,
+        "sha256": "efce4d32af613f56006d66133a1c038922e6f4b2206459686c77a52343e88b4e"
+      },
+      "narwhals": {
+        "path": ".venv-p1/Lib/site-packages/narwhals-2.24.0.dist-info/RECORD",
+        "bytes": 23282,
+        "sha256": "8bfbfcd69a78d0de565d4d955d0587920363e30a03c95ff33a182a2ac0b6a088"
+      },
+      "numpy": {
+        "path": ".venv-p1/Lib/site-packages/numpy-2.3.5.dist-info/RECORD",
+        "bytes": 110571,
+        "sha256": "28e9a4fcb2fa550a51a5c6f6639c2a5d3aed11407aded2cb8981747eb9640ca9"
+      },
+      "pandas": {
+        "path": ".venv-p1/Lib/site-packages/pandas-3.0.1.dist-info/RECORD",
+        "bytes": 249268,
+        "sha256": "98e530a3a2f22b4865b342652b94846b0d75b4aa7590f7a53ba6aea322e0d0e2"
+      },
+      "psutil": {
+        "path": ".venv-p1/Lib/site-packages/psutil-7.2.2.dist-info/RECORD",
+        "bytes": 1875,
+        "sha256": "55fd2f55e72c18fd0017a0a033af4661d0227e339c5d772a40a29375e6f740d7"
+      },
+      "pyarrow": {
+        "path": ".venv-p1/Lib/site-packages/pyarrow-25.0.1.dist-info/RECORD",
+        "bytes": 78570,
+        "sha256": "1eddf4fb72b1b071868dc02d6fc8242125d98c6557ae6af8f783b1c84ef6a797"
+      },
+      "python-dateutil": {
+        "path": ".venv-p1/Lib/site-packages/python_dateutil-2.9.0.post0.dist-info/RECORD",
+        "bytes": 3125,
+        "sha256": "0c26b4b1542dbd1ebd8d2babdd501aed583d6ada9595517f936f00fe4ff9d254"
+      },
+      "scikit-learn": {
+        "path": ".venv-p1/Lib/site-packages/scikit_learn-1.9.0.dist-info/RECORD",
+        "bytes": 151140,
+        "sha256": "641dc828354fda88576c8c34bc13c7991bf66a13fa9be1a8496f0dd2a687c0f9"
+      },
+      "scipy": {
+        "path": ".venv-p1/Lib/site-packages/scipy-1.18.0.dist-info/RECORD",
+        "bytes": 211030,
+        "sha256": "61107cec4e3c47006ac4d28012680573adeef02d32a6472084dd96092543f579"
+      },
+      "six": {
+        "path": ".venv-p1/Lib/site-packages/six-1.17.0.dist-info/RECORD",
+        "bytes": 561,
+        "sha256": "d834e846ba51c0e7371968d0b5a0cdebdaa2f9ea2f0447a40b594fa96ca5d89f"
+      },
+      "threadpoolctl": {
+        "path": ".venv-p1/Lib/site-packages/threadpoolctl-3.6.0.dist-info/RECORD",
+        "bytes": 640,
+        "sha256": "110920dc9e6b4942c485d23e80de9a826bbfd80acbc19e6c16324152905e766d"
+      },
+      "tzdata": {
+        "path": ".venv-p1/Lib/site-packages/tzdata-2026.3.dist-info/RECORD",
+        "bytes": 56831,
+        "sha256": "4e88bcacd1b80a7aff99638129717f504c6225c887a28f4ba0e193783f03c30e"
+      }
+    },
+    "third_party_import_enabled_only_after_qa_authorization_and_record_verification": true,
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "bytecode_loader_present": false,
+    "source_loader_uses_authenticated_buffers": true
+  },
+  "environment_contract": {
+    "workspace_variable": "P1_WORKSPACE_ROOT",
+    "data_variable": "P1_DATA_DIR",
+    "absolute_paths_required": true,
+    "fallback_forbidden": true,
+    "workspace_and_data_reparse_forbidden": true,
+    "data_source_read_only": true
+  },
+  "source_pins": {
+    "README.md": {
+      "path": "README.md",
+      "bytes": 1586,
+      "sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd"
+    },
+    "train.csv": {
+      "path": "train.csv",
+      "bytes": 50584654,
+      "sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2"
+    },
+    "test.csv": {
+      "path": "test.csv",
+      "bytes": 10353810,
+      "sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387"
+    },
+    "sample_submission.csv": {
+      "path": "sample_submission.csv",
+      "bytes": 7267517,
+      "sha256": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4"
+    }
+  },
+  "incumbent_binding": {
+    "identity": "immutable_exact_official_prefix_refits_from_p1_meaningful_learning_curve_generation_v1",
+    "predictions_complete": {
+      "path": "artifacts/p1_meaningful_learning_curve_generation_v1/predictions_complete.json",
+      "bytes": 5825,
+      "sha256": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb"
+    },
+    "manifest": {
+      "path": "artifacts/p1_meaningful_learning_curve_generation_v1/manifest.json",
+      "bytes": 12099,
+      "sha256": "6ccec6e43d6d0fe1f5ab7e45de97ace6196c84bc959c2b8af402ae1b41b2c721"
+    },
+    "fold_scope_audit": {
+      "path": "artifacts/p1_meaningful_learning_curve_generation_v1/fold_scope_audit.json",
+      "bytes": 1951,
+      "sha256": "a9e145dc63788191908e61a71f74a52556240cb7bfec60618391f465cae0273f"
+    },
+    "full_fraction_oof_keys": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "part_count": 15,
+    "part_order": "fold_major_then_fraction",
+    "part_parquet_hashes_and_audit_hashes_bound_by_predictions_complete": true,
+    "required_columns": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "row_position",
+      "fold",
+      "fraction",
+      "baseline_probability",
+      "baseline_prediction"
+    ],
+    "probability_dtype": "float32",
+    "prediction_dtype": "int8",
+    "exact_dtype_shape_key_order_and_bytes_required": true,
+    "prefix_positions_sha256_required_from_each_part_audit": true
+  },
+  "inner_incumbent_binding": {
+    "identity": "byte-pinned Gen5r6 official-incumbent three-block teacher probabilities with the same exact prefix IDs and fixed fold postprocess",
+    "gen5r6_config": {
+      "path": "configs/experiments/p1_incumbent_rule_distillation_neural_residual_v5r6.json",
+      "bytes": 21097,
+      "sha256": "f2f1ccbb0b8ca3f7a1018cd7698d2a30313d29473b6fbe11becc5aec1161c5d8"
+    },
+    "gen5r6_manifest": {
+      "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/manifest.json",
+      "bytes": 111915,
+      "sha256": "bf43ea0aeb5fdf9099ae333ca9d48d09a765d085fab5622343a256ad4083d9ee"
+    },
+    "gen5r6_split_audit": {
+      "path": "artifacts/p1_incumbent_rule_distillation_neural_residual_v5r6/split_audit.json",
+      "bytes": 15140,
+      "sha256": "0c7022c4cc501b2fea3f1e6d7636b122029c206f889643dac4f5afe19f57b343"
+    },
+    "teacher_probability_seed_order": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "teacher_probability_dtype": "float32",
+    "teacher_probability_files": 135,
+    "all_teacher_probability_file_bytes_and_hashes_bound_by_gen5r6_manifest": true,
+    "probability_aggregation": "column_stack_in_seed_order_then_float32_mean",
+    "inner_split": "first unique-time quarter warmup followed by three expanding chronological prediction blocks with seven-day purge",
+    "inner_prediction_ids_must_equal_gen5r6_teacher_receipts": true,
+    "fixed_fold_postprocess_source": "p1_incumbent_rule_distillation_neural_residual_v5_science_projection",
+    "frozen_reference_source_pins": {
+      "science_projection": {
+        "path": "configs/experiments/p1_incumbent_rule_distillation_neural_residual_v5_science_projection.json",
+        "bytes": 9589,
+        "sha256": "1b571ee9b755b1e0ff791bfd72adc47b22d7ae571f34affbf2bccfcab4eaa72b"
+      },
+      "pipeline": {
+        "path": "src/p1_qc/pipeline.py",
+        "bytes": 27779,
+        "sha256": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669"
+      },
+      "postprocess": {
+        "path": "src/p1_qc/postprocess.py",
+        "bytes": 12125,
+        "sha256": "2066d8a45c71cdd1b77365a2334c16efb075c7e6d8feb7808d76aaef22cb5bf5"
+      },
+      "rules": {
+        "path": "src/p1_qc/rules.py",
+        "bytes": 12159,
+        "sha256": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c"
+      }
+    },
+    "fixed_postprocess_golden": {
+      "fixture_sha256": "c79c62b2a11d4d8942ddd824815fb7588dd64597c27a0b97f56fc15e14e3c882",
+      "2025_q2": "e0b888ec76897d91beef59ffca652fb910c28c57be391ac485ca71307b729e66",
+      "2025_q3": "8366e4de39a6897417bfe2f60fcabf45f428c50c03fd2c62702600e0854be723",
+      "2025_q4": "9e38cc5f1c0259d10db9a1d7565147fd37519c31a66cd556bdf63b8c24b011e1"
+    },
+    "no_incumbent_refit_calls": true
+  },
+  "split_and_dependency_contract": {
+    "stable_key_order": [
+      "station",
+      "year",
+      "layer",
+      "time"
+    ],
+    "row_position_dtype": "int64",
+    "unique_key_and_row_position_required": true,
+    "monotone_station_layer_time_required": true,
+    "gap_break_minutes": 30,
+    "maximum_centered_dependency_rows": 576,
+    "purge_rows": 1008,
+    "purge_days": 7,
+    "exact_ten_minute_cadence_or_time_distance_proof_required": true,
+    "train_dependency_closure_must_not_intersect_holdout_ids": true,
+    "baseline_geometry_target_scaler_and_unary_train_id_sha_must_match": true,
+    "holdout_input_only_context_allowed": true,
+    "holdout_target_access_before_commitment_forbidden": true
+  },
+  "selective_target_contract": {
+    "opaque_csv_byte_span_index": true,
+    "target_fields_decoded_while_indexing": 0,
+    "inner_train_target_release_only": true,
+    "inner_holdout_release_after_corresponding_o_excl_commitment": true,
+    "outer_prefix_target_release_only": true,
+    "active_outer_release_after_five_cell_fold_commitments": true,
+    "aggregate_release_after_predictions_complete": true,
+    "target_release_is_one_shot_audited": true,
+    "mixed_or_uncommitted_scoring_forbidden": true
+  },
+  "commitment_contract": {
+    "order": "fold_major; for each of 15 cells commit 3 inner blocks then its outer cell, commit each fold after its five cells, then predictions_complete",
+    "inner_count": 45,
+    "outer_cell_count": 15,
+    "fold_count": 3,
+    "predictions_complete_count": 1,
+    "write_mode": "O_EXCL_with_full_write_fsync_and_postwrite_pin",
+    "hash_chain_genesis": "p1_v6r2_blind_commitment_genesis",
+    "candidate_and_exact_incumbent_bindings_required": true
+  },
+  "execution_document_contract": {
+    "qa_receipt_schema": "p1_multiscale_cross_layer_offset_drift_unary.v6r2.independent_qa.v1",
+    "qa_verdict": "GO",
+    "qa_p0_count": 0,
+    "qa_p1_count": 0,
+    "qa_must_pin_bootstrap_and_every_owner_role": true,
+    "qa_must_bind_v6_disposition_v9_source_incumbent_and_resource_contracts": true,
+    "authorization_schema": "p1_multiscale_cross_layer_offset_drift_unary.v6r2.execution_authorization.v1",
+    "authorization_phrase": "AUTHORIZE_P1_MULTISCALE_CROSS_LAYER_OFFSET_DRIFT_V6R2_ONE_SHOT_RESEARCH_CURVE_ONLY",
+    "authorization_must_bind_exact_qa_receipt": true,
+    "test_prediction_allowed": false,
+    "candidate_creation_allowed": false,
+    "ledger_append_allowed": false,
+    "upload_allowed": false,
+    "attempt_lock_after_revalidation_only": true,
+    "opaque_prelock_and_postlock_capabilities": true,
+    "direct_call_forgery_stale_and_replay_rejected": true,
+    "one_shot_no_resume": true
+  },
+  "canonical_paths": {
+    "control": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_control",
+    "independent_qa": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_control/pre_execution_qa.json",
+    "execution_authorization": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_control/execution_authorization.json",
+    "attempt_lock": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_control/attempt.lock",
+    "output": "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2",
+    "status": "artifacts/status/p1_multiscale_cross_layer_offset_drift_unary_v6r2.json",
+    "candidate": "submissions/p1_multiscale_cross_layer_offset_drift_unary_v6r2.csv"
+  },
+  "output_contract": {
+    "curve_stage_allowed_top_level_files": [
+      "split_audit.json",
+      "selective_target_audit.json",
+      "resource_audit.json",
+      "metrics.json",
+      "learning_curve_evidence.json",
+      "result.json",
+      "manifest.json",
+      "manifest.sha256"
+    ],
+    "allowed_directories": [
+      "blind_commitments",
+      "inner_predictions",
+      "models",
+      "prediction_parts"
+    ],
+    "inner_commitment_names": "inner_01.json through inner_45.json",
+    "cell_commitment_names": "cell_01.json through cell_15.json",
+    "fold_commitment_names": [
+      "fold_2025_q2.json",
+      "fold_2025_q3.json",
+      "fold_2025_q4.json"
+    ],
+    "completion_name": "predictions_complete.json",
+    "inner_model_names": "inner_01.json through inner_45.json",
+    "outer_model_names": "cell_01.json through cell_15.json",
+    "inner_prediction_names": "inner_01.bin through inner_45.bin",
+    "outer_prediction_names": "cell_01.bin through cell_15.bin",
+    "exact_file_creation_order": "for each fold and cell: three repetitions of inner model, inner prediction, inner commitment; then outer model, outer prediction, cell commitment; then fold commitment; finally predictions_complete, audits, metrics/evidence/result/resource, manifest and sidecar",
+    "exact_curve_output_file_count": 192,
+    "manifest_exact_inventory_and_sha_required": true,
+    "post_reload_inference_byte_equality_required": true,
+    "candidate_test_prediction_registry_and_upload_outputs_allowed": false,
+    "extra_missing_link_reparse_or_hardlink_entry_fails": true
+  },
+  "metric_contract": {
+    "binary_metric": "micro_f1",
+    "paired_candidate_minus_incumbent": true,
+    "offset_and_drift_recall": true,
+    "spike_union_with_six_row_same_segment_flank": true,
+    "worst_of_exact_16_station_layers": true,
+    "missing_binary_class_type_or_station_layer_fails_closed": true,
+    "normal_fp_relative_increase_denominator": "max(1_incumbent_false_positive_rows)",
+    "bootstrap_replicates_per_point": 5000,
+    "bootstrap_confidence": 0.9,
+    "final_gate_implemented_in_science_helper": true,
+    "spike_delta_floor": 0.0,
+    "worst_station_layer_delta_floor": 0.0
+  },
+  "resource_ceiling": {
+    "curve_cells": 15,
+    "seeds": 1,
+    "inner_blocks_per_cell": 3,
+    "maximum_label_free_baseline_fit_calls": 60,
+    "maximum_supervised_unary_fit_calls": 60,
+    "maximum_top_level_fit_calls": 120,
+    "maximum_station_layer_seasonal_subfits": 960,
+    "maximum_adjacent_graph_edge_estimations": 780,
+    "maximum_seasonal_irls_steps": 7680,
+    "maximum_unary_lbfgs_iterations": 3840,
+    "maximum_total_iterative_steps": 11520,
+    "maximum_wall_clock_seconds": 21600,
+    "maximum_peak_rss_bytes": 8589934592,
+    "maximum_vram_bytes": 0,
+    "maximum_threads": 8,
+    "maximum_artifact_disk_bytes": 1073741824,
+    "maximum_files_written": 192,
+    "gpu_allowed": false
+  },
+  "v9_binding": {
+    "path": "artifacts/meaningful_score_goal_v9/registry.jsonl",
+    "bytes": 15812,
+    "sha256": "232b6ed3133de11ee05150ec439efe05baa315bbb64ea0f319ffcbddd421b965",
+    "head_seq": 5,
+    "head_event_sha256": "1b3e01be70c6f8ed2df04038deac3b3642804f70f9f17a238826c64d68090317",
+    "semantic_upload_count": 0,
+    "append_allowed_at_curve_stage": false
+  },
+  "static_prohibitions": {
+    "independent_qa_receipt_create": false,
+    "execution_authorization_create": false,
+    "attempt_lock_create": false,
+    "model_fit": false,
+    "prediction": false,
+    "target_decode": false,
+    "score": false,
+    "output_create": false,
+    "test_value_read": false,
+    "candidate_create": false,
+    "ledger_append": false,
+    "upload": false
+  },
+  "static_expected_absence": [
+    "artifacts/p1_v6r2_forbidden_pycache",
+    "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2_control",
+    "artifacts/p1_multiscale_cross_layer_offset_drift_unary_v6r2",
+    "artifacts/status/p1_multiscale_cross_layer_offset_drift_unary_v6r2.json",
+    "submissions/p1_multiscale_cross_layer_offset_drift_unary_v6r2.csv"
+  ]
+}

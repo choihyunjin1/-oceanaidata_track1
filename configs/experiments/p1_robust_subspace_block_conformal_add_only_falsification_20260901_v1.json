@@ -1,0 +1,14 @@
+{
+  "schema_version": "p1.robust_subspace_block_conformal_add_only.v1",
+  "experiment_id": "p1_robust_subspace_block_conformal_add_only_falsification_20260901_v1",
+  "audit": {"path": "artifacts/p1_robust_subspace_block_conformal_feasibility_20260901_v1/result.json", "sha256": "09843761d5a7e15fd82984735938966f2e65ea5949d5e4f92073d1a46d6aceb0", "required_decision": "ROBUST_SUBSPACE_CONFORMAL_FEASIBLE_RESEARCH_ONLY"},
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "frozen_rule": {"prefix_fit_fraction": 0.85, "block_length_rows": 144, "e_value": "0.5/sqrt(p)", "e_bh_q": 0.01, "minimum_concurrent_layers": 2, "minimum_run_rows": 12, "proposal_share_ceiling": 0.01, "anchor_operation": "bitwise_or_no_removal", "label_tuning": 0},
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "addition_precision_gt_anchor_f1_divided_by": 2, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_RESEARCH_ONLY", "fail": "NO_GO_RESEARCH_ONLY"},
+  "operations": {"exactly_once": true, "maximum_fits": 3, "supervised_fits": 0, "anchor_removals": 0, "official_reads": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

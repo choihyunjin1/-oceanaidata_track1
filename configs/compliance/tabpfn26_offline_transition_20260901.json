@@ -1,0 +1,80 @@
+{
+  "schema_version": "ocean.tabpfn26.offline_transition.contract.v1",
+  "model_name": "TabPFN-2.6",
+  "model_version": "v2.6",
+  "python_package": {"name": "tabpfn", "version": "8.5.0"},
+  "organizer_policy": {
+    "highest_precedence": true,
+    "distributed_competition_data_only": true,
+    "synthetic_only_pretrained_exception_used": true,
+    "external_observation_reanalysis_forecast_rows": 0,
+    "hidden_truth_rows": 0
+  },
+  "official_provenance": {
+    "model_card": "https://huggingface.co/Prior-Labs/tabpfn_2_6",
+    "access_instructions": "https://docs.priorlabs.ai/how-to-access-gated-models",
+    "source_repository": "https://github.com/PriorLabs/TabPFN",
+    "pretraining_character": "purely synthetic tabular tasks",
+    "intended_max_samples": 50000,
+    "intended_max_features": 2000
+  },
+  "license": {
+    "user_must_accept_directly": true,
+    "agent_may_not_accept_on_user_behalf": true,
+    "platform": "https://platform.priorlabs.ai",
+    "local_receipt_env": "TABPFN26_LICENSE_RECEIPT_PATH"
+  },
+  "weights": {
+    "classifier": {
+      "repository": "Prior-Labs/tabpfn_2_6",
+      "filename": "tabpfn-v2.6-classifier-v2.6_default.ckpt",
+      "bytes": 43044699,
+      "sha256": "0578fa56f97e11024e31735aaec2c4e7332584b7730242fbaf6c0bbd0299206a",
+      "path_env": "TABPFN26_CLASSIFIER_PATH"
+    },
+    "regressor": {
+      "repository": "Prior-Labs/tabpfn_2_6",
+      "filename": "tabpfn-v2.6-regressor-v2.6_default.ckpt",
+      "bytes": 51576286,
+      "sha256": "c855169116d79d2c957a29107ffc04464555f39aec0eef90c90390f2c2b2008b",
+      "path_env": "TABPFN26_REGRESSOR_PATH"
+    },
+    "bundled_for_reproduction": true,
+    "local_offline_load_only": true,
+    "automatic_download": false
+  },
+  "frozen_model_defaults": {
+    "n_estimators": 8,
+    "device": "cuda",
+    "fit_mode": "fit_preprocessors",
+    "memory_saving_mode": "auto",
+    "ignore_pretraining_limits": false
+  },
+  "p1": {
+    "features": 165,
+    "grouping": "station_x_layer",
+    "training_cap_per_model": 49000,
+    "sampling": "keep_all_positive_then_sha256_rank_negative",
+    "threshold": 0.5,
+    "postprocess": "frozen_anchor_union",
+    "screen": "Q2 pooled delta F1 > 0",
+    "confirmation": "Q3 and Q4, no threshold tuning"
+  },
+  "p3": {
+    "features": 591,
+    "grouping": "six_lead_specific_residual_regressors",
+    "target": "target_hs_minus_current_hs",
+    "clean_fallback_weight": 0.75,
+    "tabpfn_weight": 0.25,
+    "promotion": "pooled RMSE strictly below clean fallback"
+  },
+  "prohibitions": [
+    "official test read before historical confirmation",
+    "sample submission read before explicit materialization approval",
+    "automatic checkpoint download",
+    "credential persistence",
+    "external-data descendant use",
+    "same-fold threshold or blend tuning",
+    "result-based retry"
+  ]
+}

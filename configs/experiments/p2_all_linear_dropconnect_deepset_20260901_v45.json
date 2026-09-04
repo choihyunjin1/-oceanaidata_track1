@@ -1,0 +1,132 @@
+{
+  "schema_version": "p2.all_linear_dropconnect_deepset.20260901.v45",
+  "experiment_id": "p2_all_linear_dropconnect_deepset_20260901_v45",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_target_layer_gradnorm_balanced_deepset_20260901_v44/result.json",
+    "required_status": "EXPLORATORY_NO_GO_TARGET_LAYER_GRADNORM",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "fingerprint": "reports/p2_target_layer_gradnorm_balanced_deepset_20260901_v44/next-axis-fingerprint.md",
+    "fingerprint_sha256": "fb1d141b757131b4bf6ce119d4588ea1f474bdf1a69f92622e0c1089ded7c773",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v24_result": "reports/p2_sharpness_aware_domain_balanced_deepset_20260901_v24/result.json",
+    "v27_technical_receipt": "reports/p2_spectral_normalized_domain_balanced_deepset_20260901_v27/technical-failure.json",
+    "v40_result": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/result.json",
+    "v41_result": "reports/p2_all_linear_weight_normalized_deepset_20260901_v41/result.json",
+    "v43_result": "reports/p2_target_layer_film_conditioned_deepset_20260901_v43/result.json",
+    "v44_result": "reports/p2_target_layer_gradnorm_balanced_deepset_20260901_v44/result.json"
+  },
+  "primary_source": {
+    "citation": "Wan et al., ICML/PMLR 2013, Regularization of Neural Networks using DropConnect",
+    "url": "https://proceedings.mlr.press/v28/wan13.html",
+    "use": "train-time random weight masking motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_ALL_LINEAR_TRAIN_ONLY_DROPCONNECT",
+    "repository_execution_hits": 0,
+    "distinct_from": {
+      "v24": "SAM uses a loss-gradient parameter perturbation and second loss; v45 uses data-independent binary weight masks and one loss",
+      "v27": "spectral normalization constrains operator norm with power iteration; v45 estimates no norm and owns no parametrization buffer",
+      "v40": "R-Drop masks activations and matches two predictions; v45 masks weights in one supervised pass and has no consistency loss",
+      "v41": "WeightNorm deterministically reparameterizes weights; v45 retains raw parameters with transient train-only masks",
+      "v43_v44": "FiLM changes representation and GradNorm changes task weights; v45 restores exact v13 loss and unconditional inference"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_with_train_only_DropConnect_on_all_five_Linear_weights",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "exact_v13_weighted_SmoothL1_beta_1.0",
+    "optimizer": "exact_v13_AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "dropconnect": {
+      "drop_probability": 0.1,
+      "keep_probability": 0.9,
+      "inverted_training_scale": true,
+      "masked_module": "all_five_Linear_weight_matrices",
+      "linear_module_count": 5,
+      "bias_masked": false,
+      "activation_dropout": false,
+      "prediction_consistency": false,
+      "monte_carlo_inference": false,
+      "ensemble_or_model_aggregation": false,
+      "evaluation_uses_raw_weight_once": true,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "extra_loss": false,
+    "extra_parameters": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

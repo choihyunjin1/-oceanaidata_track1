@@ -1,0 +1,201 @@
+{
+  "schema_version": "p3.champion_orthogonal_prediction_basis.audit.20260828.v1",
+  "status": "NO_GO_NO_OFFICIAL_CANDIDATE",
+  "completed_at_kst": "2026-08-28T19:58:55.609294+09:00",
+  "historical_rows": 1086,
+  "historical_cases": 181,
+  "champion_rmse": 0.807598121863096,
+  "alpha": -10.21743189862218,
+  "blend_weight": 0.25,
+  "bootstrap": {
+    "seed": 20260828,
+    "replicates": 5000,
+    "cluster": "case"
+  },
+  "results": {
+    "ERA5": {
+      "path": "artifacts\\p3_champion_lineage_matched_energy_residual_replay_20260828_v1\\sealed_candidate_predictions.parquet",
+      "path_sha256": "f6d89264eca2e718bba348f3b5cb0041dfb38352a41a4fb35ed079c6067f6a56",
+      "prediction_column": "transfer_prediction",
+      "supported_cases": 181,
+      "supported_rows": 362,
+      "raw_blend_delta_rmse": -0.012296352327991089,
+      "prediction_only_beta": 10.01971601840895,
+      "orthogonality_cosine": 2.4012548978081346e-16,
+      "orthogonal_blend_delta_rmse": -0.003330668358590305,
+      "orthogonal_blend_ci90": [
+        -0.00587410873499602,
+        -0.0009093932680549293
+      ],
+      "orthogonal_delta_by_fold": {
+        "2024_h2_storm": -0.008608408219618724,
+        "2025_h1": -0.005194720731482083,
+        "winter_transition": 0.0010596411722322285
+      },
+      "orthogonal_delta_by_station": {
+        "G-ORS": -0.007279148044924799,
+        "I-ORS": -0.0016627299274085683,
+        "S-ORS": -0.0009939964607412755
+      },
+      "orthogonal_delta_by_lead": {
+        "3": 0.0,
+        "6": 0.0,
+        "9": 0.0,
+        "12": 0.0,
+        "18": -0.008114062279338308,
+        "24": -0.009268017313318944
+      },
+      "promotion_gate": {
+        "support_at_least_95_percent": true,
+        "ci90_upper_below_zero": true,
+        "all_groups_nonworse": false,
+        "pooled_delta_at_most_minus_0_003": true
+      },
+      "promotion_pass": false
+    },
+    "KMA": {
+      "path": "artifacts\\p3_kma_calibrated_longlead_blend_v2\\one_shot\\blind_predictions.parquet",
+      "path_sha256": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+      "prediction_column": "calibrated_source",
+      "supported_cases": 179,
+      "supported_rows": 358,
+      "raw_blend_delta_rmse": -0.008934384567717557,
+      "prediction_only_beta": 8.605827449108318,
+      "orthogonality_cosine": 7.239172669121929e-17,
+      "orthogonal_blend_delta_rmse": -0.0010946114622304437,
+      "orthogonal_blend_ci90": [
+        -0.005480720515255166,
+        0.003352806046814312
+      ],
+      "orthogonal_delta_by_fold": {
+        "2024_h2_storm": -0.009218571277211374,
+        "2025_h1": -0.009971134071229737,
+        "winter_transition": 0.009772598813291844
+      },
+      "orthogonal_delta_by_station": {
+        "G-ORS": -0.009411792262158936,
+        "I-ORS": -0.0009546344635421589,
+        "S-ORS": 0.006474621803279845
+      },
+      "orthogonal_delta_by_lead": {
+        "3": 0.0,
+        "6": 0.0,
+        "9": 0.0,
+        "12": 0.0,
+        "18": -0.0006915386948240787,
+        "24": -0.005090816649520602
+      },
+      "promotion_gate": {
+        "support_at_least_95_percent": true,
+        "ci90_upper_below_zero": false,
+        "all_groups_nonworse": false,
+        "pooled_delta_at_most_minus_0_003": false
+      },
+      "promotion_pass": false
+    },
+    "energy_state_space": {
+      "path": "artifacts\\p3_station_stable_energy_state_space_20260823_v1\\oof\\learning_curve_oof.parquet",
+      "path_sha256": "e232b5e17723b7edf03b654fc832195e767b283b6dd01355a86050f8d9553997",
+      "prediction_column": "challenger_prediction",
+      "supported_cases": 181,
+      "supported_rows": 362,
+      "raw_blend_delta_rmse": -0.01487182586499558,
+      "prediction_only_beta": 15.81227589097004,
+      "orthogonality_cosine": -5.795368347539309e-17,
+      "orthogonal_blend_delta_rmse": -0.0016447565696224853,
+      "orthogonal_blend_ci90": [
+        -0.00483928174736562,
+        0.0018211618272079187
+      ],
+      "orthogonal_delta_by_fold": {
+        "2024_h2_storm": 0.0021724696435366786,
+        "2025_h1": 0.0018542707804012348,
+        "winter_transition": -0.006370555882165507
+      },
+      "orthogonal_delta_by_station": {
+        "G-ORS": -0.0010268930636293527,
+        "I-ORS": -0.008268727914758744,
+        "S-ORS": 0.002917679013267893
+      },
+      "orthogonal_delta_by_lead": {
+        "3": 0.0,
+        "6": 0.0,
+        "9": 0.0,
+        "12": 0.0,
+        "18": -0.004090142796762342,
+        "24": -0.004478608650367311
+      },
+      "promotion_gate": {
+        "support_at_least_95_percent": true,
+        "ci90_upper_below_zero": false,
+        "all_groups_nonworse": false,
+        "pooled_delta_at_most_minus_0_003": false
+      },
+      "promotion_pass": false
+    },
+    "sequence_checkpoint": {
+      "path": "artifacts\\p3_causal_forcing_sequence_checkpoint_nested_20260827_v2\\oof\\learning_curve_oof.parquet",
+      "path_sha256": "1240f7f28eaad479d6e622d88d6160722410d61076fac933d475784c0479de5b",
+      "prediction_column": "checkpoint_nested_prediction",
+      "supported_cases": 181,
+      "supported_rows": 362,
+      "raw_blend_delta_rmse": -0.011993337749615751,
+      "prediction_only_beta": 12.312561455308767,
+      "orthogonality_cosine": -4.494411989740686e-16,
+      "orthogonal_blend_delta_rmse": -0.001278174499240503,
+      "orthogonal_blend_ci90": [
+        -0.00439574649982648,
+        0.0017845959925466902
+      ],
+      "orthogonal_delta_by_fold": {
+        "2024_h2_storm": -0.003369832788910232,
+        "2025_h1": -0.005798448521471822,
+        "winter_transition": 0.0030919754602272143
+      },
+      "orthogonal_delta_by_station": {
+        "G-ORS": -0.0016931735832431682,
+        "I-ORS": -0.0023666651393843274,
+        "S-ORS": -5.133017626501868e-05
+      },
+      "orthogonal_delta_by_lead": {
+        "3": 0.0,
+        "6": 0.0,
+        "9": 0.0,
+        "12": 0.0,
+        "18": -0.0009672277952138542,
+        "24": -0.005779933869821119
+      },
+      "promotion_gate": {
+        "support_at_least_95_percent": true,
+        "ci90_upper_below_zero": false,
+        "all_groups_nonworse": false,
+        "pooled_delta_at_most_minus_0_003": false
+      },
+      "promotion_pass": false
+    }
+  },
+  "direction_correlations": {
+    "ERA5__KMA": 0.8379343943939488,
+    "ERA5__energy_state_space": 0.5368432672292742,
+    "ERA5__sequence_checkpoint": 0.6682420988742597,
+    "KMA__energy_state_space": 0.5039163136588866,
+    "KMA__sequence_checkpoint": 0.5260031094721189,
+    "energy_state_space__sequence_checkpoint": 0.5685363349933942
+  },
+  "decision": {
+    "promoted": [],
+    "official_candidate_created": false,
+    "upload_performed": false,
+    "same_family_veto": "ERA5 is also vetoed because its family failed the official probe."
+  },
+  "input_hashes": {
+    "canonical": "f6d89264eca2e718bba348f3b5cb0041dfb38352a41a4fb35ed079c6067f6a56",
+    "truth": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e"
+  },
+  "leakage_contract": {
+    "official_test_read": false,
+    "official_sample_or_submission_read": false,
+    "hidden_answer_read": false,
+    "historical_oof_truth_used_for_evaluation_only": true
+  }
+}

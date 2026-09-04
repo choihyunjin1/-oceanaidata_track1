@@ -1,0 +1,63 @@
+{
+  "schema_version": "p3.clean_incumbent.20260901.v1",
+  "status": "ACTIVE_CLEAN_INCUMBENT",
+  "policy": {
+    "path": "00_ORGANIZER_DATA_POLICY.md",
+    "rule": "organizer_distributed_data_only"
+  },
+  "candidate": {
+    "id": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+    "submitted_at_kst": "2026-08-27T23:36:30+09:00",
+    "csv_filename": "P3_submission.csv",
+    "csv_bytes": 39822,
+    "csv_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+    "official_public_rmse_m": 0.583892,
+    "official_points": 24.066168,
+    "private_metric": "PENDING_COMPETITION_CLOSE"
+  },
+  "construction": {
+    "builder": "scripts/build_p3_refined_public_optimum_20260827.py",
+    "builder_sha256_reaudited_20260901": "505f8e4f1bd6ae63e873c3b706887fcdd34ec0ff512abe426367c9398bc14301",
+    "formula": "O + alpha*(A-O) on leads 12/18/24; exact O on leads 3/6/9",
+    "alpha": -10.21743189862218,
+    "original_component": {
+      "path": "output/2026-08-20/ready/P3_submission.csv",
+      "csv_sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+    },
+    "axis_component": {
+      "path": "artifacts/p3_corrected_fixed_long_shrink_v4/candidate/submission.csv",
+      "csv_sha256": "607f7cd4ed2c126d5aa4eb6d8130a651ac465a0c88b4e74c112d585c3421d708",
+      "config": "configs/experiments/p3_corrected_fixed_long_shrink_v4.json",
+      "config_sha256": "6d20e321086aef44f98f3fff1506ead7637b63136c4bff937faf91b0b8c7b1a8"
+    }
+  },
+  "lineage": {
+    "organizer_distributed_data_only": true,
+    "models_trained_from_scratch": true,
+    "external_observation_rows": 0,
+    "external_reanalysis_rows": 0,
+    "external_forecast_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "hidden_truth_rows_read": 0,
+    "forbidden_lineages_referenced": []
+  },
+  "cutoff_evidence": {
+    "first_external_official_submission": {
+      "id": "P3 Champion-matched ERA5 Hs2 Residual",
+      "submitted_at_kst": "2026-08-28T13:57:12.5353041+09:00",
+      "receipt": "reports/approved_parallel_execution_20260828_v9/p3_official_submission_receipt_20260828.json"
+    },
+    "higher_clean_official_candidate_found": false
+  },
+  "local_locator": {
+    "environment_variable": "P3_CLEAN_INCUMBENT_CSV",
+    "expected_manifest_filename": "MANIFEST.json",
+    "do_not_copy_csv_into_git": true
+  },
+  "prohibitions": {
+    "use_kma_era5_chronos_or_descendants": true,
+    "replace_incumbent_without_clean_lineage_qa": true,
+    "commit_submission_csv": true,
+    "upload_without_exact_user_approval": true
+  }
+}

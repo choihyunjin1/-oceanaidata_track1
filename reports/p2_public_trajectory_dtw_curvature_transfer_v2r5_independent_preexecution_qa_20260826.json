@@ -1,0 +1,228 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r5.independent_preexecution_qa.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r5",
+  "verdict": "PASS",
+  "design_sha256": "c044ae23d14f85c634d8145cbd8f85b004536e378277dc91dc00097dc78f7fe4",
+  "seal_sha256": "3f335f8766e9f5f79f1475a6328ee165aef3c9895b04e86910a7fca0f6c63919",
+  "severity_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 1
+  },
+  "blocking_finding_count": 0,
+  "decision": {
+    "preexecution_qa": "PASS",
+    "authorization_effect": "NONE_UNTIL_THIS_REPORT_IS_EXTERNALLY_HASHED_AND_PINNED",
+    "authorization_may_be_reissued": true,
+    "execution_performed_by_qa": false,
+    "claim_created_by_qa": false,
+    "materialization_or_scoring_performed_by_qa": false
+  },
+  "audited_bundle": {
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r5_design.json": {
+      "bytes": 16087,
+      "sha256": "c044ae23d14f85c634d8145cbd8f85b004536e378277dc91dc00097dc78f7fe4",
+      "status": "PASS"
+    },
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r5_execution.json": {
+      "bytes": 2606,
+      "sha256": "32484a1118eda01d900d87f687b05766585d42cbd7c5c6c02621e28f94aa4e8e",
+      "status": "PASS"
+    },
+    "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r5_execution_authorization.json": {
+      "bytes": 3386,
+      "sha256": "932ac241d8eb1457fa72f6290f21f969e46814b4ffabf71b0e489c37ad0fd06b",
+      "authorized": false,
+      "status": "PASS_FAIL_CLOSED_TEMPLATE"
+    },
+    "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2r5_preexecution/preexecution_seal.json": {
+      "bytes": 10928,
+      "sha256": "3f335f8766e9f5f79f1475a6328ee165aef3c9895b04e86910a7fca0f6c63919",
+      "status": "PASS"
+    },
+    "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r5.py": {
+      "bytes": 87994,
+      "sha256": "167c730b30c49362ff0aa7bfab3c3ca1256770269d6e66dcbb377823b50d3dbb",
+      "status": "PASS"
+    },
+    "src/p2_restore/public_trajectory_dtw_v2r5.py": {
+      "bytes": 78348,
+      "sha256": "e523d15d6113fdd4861826786be38fef97a68f0ef5732321c196bd67acf1f05f",
+      "status": "PASS"
+    },
+    "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r5.py": {
+      "bytes": 70786,
+      "sha256": "6a322ca611ba1e15c0de7d4b41bd26b7abdbe6a90ac3ff93566839389da983ac",
+      "status": "PASS"
+    },
+    "reports/p2_public_trajectory_dtw_curvature_transfer_v2r5_qa_closure_matrix_20260826.json": {
+      "bytes": 7175,
+      "sha256": "185a143c1fb3dedbd40b12b2cde245dfba1ce0242c4e465e9f330c0824eb738e",
+      "status": "PASS"
+    }
+  },
+  "scientific_scope_audit": {
+    "v2r4_numerical_module_sha256": "30420967708fc4e2d4e4419ccba6c1bf2299212d4c4047379a52bf8d48180ac4",
+    "comparison_methods": [
+      "direct unified diff",
+      "top-level AST comparison excluding only the registered adapter definitions",
+      "focused invariant tests"
+    ],
+    "only_changed_or_added_numerical_definitions": [
+      "exact_time_contract",
+      "exact_sparse_key_contract",
+      "verify_anchor_against_observations"
+    ],
+    "permitted_change": "Replace continuous-presence rejection with canonical-grid membership plus explicit sparse (time,layer) integrity diagnostics, then invoke that exact sparse-key contract after independent truth reconstruction.",
+    "all_other_v2r4_numerical_ast_equal": true,
+    "cells": [
+      "d1_k3",
+      "d1_k7",
+      "d3_k3",
+      "d3_k7",
+      "d7_k3",
+      "d7_k7"
+    ],
+    "inner_windows": [
+      "inner_2024_mar",
+      "inner_2024_may",
+      "inner_2024_jul"
+    ],
+    "source_embargo_full_days": 7,
+    "materialization_graph": {
+      "inner": 18,
+      "exact": 1,
+      "conditional_p100": 3,
+      "total_slots": 22
+    },
+    "physical_fit_calls": 0,
+    "ast_detected_fit_like_calls": 0,
+    "exact_gate": {
+      "delta_rmse_c_lte": -0.06,
+      "ci90_upper_c_lte": -0.04,
+      "each_layer_delta_lte": 0.003,
+      "layer4_delta_lt": 0.0,
+      "weekly_p90_lte": 0.015
+    },
+    "p100_gate": {
+      "delta_rmse_c_lt": 0.0,
+      "ci90_upper_c_lt": 0.0,
+      "minimum_improving_folds": 2,
+      "minimum_improving_layers": 2,
+      "worst_fold_lte": 0.01,
+      "worst_layer_lte": 0.005
+    },
+    "status": "PASS_SCIENTIFIC_CONTRACT_UNCHANGED"
+  },
+  "real_initialization_readiness": {
+    "status": "PASS_BEFORE_CLAIM",
+    "observations_rows": 789408,
+    "full_exact_anchor_rows": 69850,
+    "registered_exact_rows": 26273,
+    "unique_time_layer_keys": 26273,
+    "duplicate_time_layer_keys": 0,
+    "unique_timestamps": 8779,
+    "full_grid_timestamps": 8784,
+    "missing_union_timestamps": 5,
+    "gap_intervals": 2,
+    "off_grid_timestamps": 0,
+    "layer_rows": {
+      "2": 8777,
+      "3": 8774,
+      "4": 8722
+    },
+    "layer_missing_from_full_grid": {
+      "2": 7,
+      "3": 10,
+      "4": 62
+    },
+    "minimum_kst": "2024-09-01T00:00:00+09:00",
+    "maximum_kst": "2024-10-31T23:50:00+09:00",
+    "kst_days": 61,
+    "timestamp_unit": "ns",
+    "timestamp_roundtrip_identity": true,
+    "nat_count": 0,
+    "anchor_truth_equal_independent_observations": true,
+    "materialize_calls": 0,
+    "score_calls": 0,
+    "physical_fit_calls": 0,
+    "actual_p100_anchor_accesses": 0
+  },
+  "trust_and_execution_firewall": {
+    "sealed_transitive_static_inputs": {
+      "expected": 22,
+      "verified": 22,
+      "mismatches": 0,
+      "design_seal_inventory_identical": true
+    },
+    "held_byte_snapshot_for_design_execution_seal_module_and_authorization": "PASS",
+    "authorization_one_snapshot_hash_and_parse": "PASS",
+    "independent_qa_required_fields_enforced": "PASS",
+    "cross_seal_path_toggle_binding": "PASS",
+    "module_compiled_from_retained_sealed_bytes": "PASS",
+    "active_v2r5_namespace_clean": true,
+    "permanent_single_attempt_claim": "PASS_NOT_ACQUIRED",
+    "atomic_create_only_publication_and_terminal_last_contract": "PASS",
+    "journal_materialization_accounting": "PASS_22_SLOTS_ZERO_FITS",
+    "p100_before_durable_exact_research_go": "LITERAL_METADATA_ONLY_NO_RESOLVE_STAT_OPEN_HASH_OR_PARQUET_PARSE",
+    "official_test_sample_submission_candidate_access": 0,
+    "candidate_files_created": 0,
+    "uploads": 0,
+    "P3_mutations": 0
+  },
+  "verification_runs": {
+    "focused_pytest": {
+      "command_class": "command-scoped P2_DATA_DIR; sealed v2r5 test file only",
+      "result": "PASS",
+      "passed": 70,
+      "skipped": 1,
+      "duration_seconds": 42.02
+    },
+    "ruff": {
+      "result": "PASS",
+      "files": 3
+    },
+    "default_preflight_twice": {
+      "result": "PASS_IDENTICAL",
+      "normalized_sha256_first": "0e740bcd85ec2315659fb05ad5505311f599aea978f5395cae8547891c977893",
+      "normalized_sha256_second": "0e740bcd85ec2315659fb05ad5505311f599aea978f5395cae8547891c977893",
+      "status": "NOT_AUTHORIZED_PENDING_INDEPENDENT_QA",
+      "authorized": false,
+      "claim_exists": false,
+      "journal_exists": false,
+      "final_exists": false,
+      "staging_count": 0,
+      "attempts": 0,
+      "materializations": 0,
+      "scores": 0,
+      "physical_fit_calls": 0
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "V2R5-QA-P2-01",
+      "severity": "P2",
+      "blocking": false,
+      "title": "Synthetic symlink-escape test skipped on this Windows account",
+      "evidence": "The account cannot create a synthetic symlink. Static resolver inspection proves resolved candidate.parent must equal resolved P2_DATA_DIR, and the real P2_DATA_DIR plus observations.csv both have null LinkType/Target.",
+      "impact": "No effect on the pinned real execution path; retain as an environment-coverage limitation."
+    }
+  ],
+  "authorization_report_pin_contract": {
+    "required_exact_fields": [
+      "path",
+      "bytes",
+      "sha256",
+      "verdict",
+      "design_sha256",
+      "seal_sha256"
+    ],
+    "required_report_top_level_values": {
+      "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r5",
+      "verdict": "PASS",
+      "design_sha256": "c044ae23d14f85c634d8145cbd8f85b004536e378277dc91dc00097dc78f7fe4",
+      "seal_sha256": "3f335f8766e9f5f79f1475a6328ee165aef3c9895b04e86910a7fca0f6c63919"
+    }
+  },
+  "final_instruction": "PASS permits a separate external authorization update pinned to this exact report. This QA did not authorize or execute the experiment."
+}

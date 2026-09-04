@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "source_id": "i_ors_ctd_2014_2023",
+  "title": "I-ORS mooring observation data of temperature and salinity since 2014",
+  "publisher": "Korea Institute of Ocean Science & Technology (KIOST)",
+  "station": "I-ORS",
+  "record_url": "https://sciwatch.kiost.ac.kr/handle/2020.kiost/46422",
+  "doi": "10.22808/DATA-2024-6",
+  "doi_url": "https://doi.org/10.22808/DATA-2024-6",
+  "version": "1.1.1",
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "required_archive_attribute": "CC-BY-4.0"
+  },
+  "archive": {
+    "url": "https://sciwatch.kiost.ac.kr/bitstream/2020.kiost/46422/5/ver1.1.1.zip",
+    "filename": "ver1.1.1.zip",
+    "size_bytes": 34994931,
+    "sha256": "c6a0ffaf6367c5a6555d6fe3e7fd5354797538ba52872d96569b3b5c4010f964",
+    "member_count": 10,
+    "uncompressed_size_bytes": 181958831,
+    "member_pattern": "OS_I-ORS_(2014|2015|2016|2017|2018|2019|2020|2021|2022|2023)_D_ocean_CTD.nc"
+  },
+  "coverage": {
+    "raw_start_utc": "2014-01-01T00:00:00+00:00",
+    "raw_end_utc": "2023-12-31T23:50:00+00:00",
+    "hard_cutoff_kst": "2023-12-31T23:50:00+09:00",
+    "hard_cutoff_utc": "2023-12-31T14:50:00+00:00",
+    "cadence_minutes": 10,
+    "years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+  },
+  "variables": {
+    "time": "TIME",
+    "temperature_prefix": "TEMP",
+    "salinity_prefix": "PSAL",
+    "depth_prefix": "DEPTH",
+    "qc_suffix": "_QC",
+    "accepted_qc": 1,
+    "time_units": "days since 1950-01-01T00:00:00Z"
+  },
+  "verification": {
+    "checked_at_kst": "2026-08-21T00:00:00+09:00",
+    "record_page_required_markers": [
+      "10.22808/DATA-2024-6",
+      "CC BY 4.0",
+      "ver1.1.1"
+    ],
+    "archive_required_global_attributes": {
+      "platform_code_contains": "I-ORS",
+      "citation_contains": "10.22808/DATA-2024-6",
+      "license_contains": "CC-BY-4.0",
+      "conventions_contains": "OceanSITES"
+    }
+  },
+  "safety": {
+    "local_storage": "external_data/quarantine/i_ors_ctd_2014_2023/v1.1.1/ver1.1.1.zip",
+    "raw_archive_git_ignored": true,
+    "competition_labels_used": false,
+    "competition_outer_validation_used": false,
+    "post_cutoff_rows_must_be_dropped": true
+  }
+}

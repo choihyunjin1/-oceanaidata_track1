@@ -1,0 +1,100 @@
+{
+  "experiment_id": "p2_public_transport_repair_cycle_20260831_v5",
+  "status": "COMPLETE_NO_PASS",
+  "candidate_count": 2,
+  "fit_count": 12,
+  "runtime_seconds": 3.213618600006157,
+  "official_test_index_rows_read": 0,
+  "hidden_truth_rows_read": 0,
+  "upload_count": 0,
+  "submission_count": 0,
+  "candidates": [
+    {
+      "name": "P2_V5_GLOBAL_HUBER_ROUTER",
+      "scope": "global",
+      "pooled_delta_rmse": 0.0027315330942268012,
+      "outer_tests": {
+        "2024_oct_nested": {
+          "rows": 13339,
+          "reference_rmse": 6.473934093544442,
+          "candidate_rmse": 6.467167111537069,
+          "delta_rmse": -0.006766982007373024
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "reference_rmse": 1.1857780665476285,
+          "candidate_rmse": 1.212120968350133,
+          "delta_rmse": 0.026342901802504537
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "reference_rmse": 0.28073218471331673,
+          "candidate_rmse": 0.32839810690968213,
+          "delta_rmse": 0.047665922196365396
+        }
+      },
+      "official_like_layer_delta_rmse": {
+        "2": -0.013534802513106903,
+        "3": -0.016038342982122256,
+        "4": -0.007836854782427238
+      },
+      "official_like_bootstrap_ci90_high_delta_rmse": -0.004726303072551597,
+      "raw_expected_points_delta": 0.05930343479086672,
+      "transport_penalty_points": 0.12168209161000616,
+      "calibrated_expected_points_delta": -0.06237865681913944,
+      "gate_checks": {
+        "calibrated_expected_points_gte_0_01": false,
+        "minimum_two_outer_tests_improve": false,
+        "official_like_nested_improves": true,
+        "worst_outer_delta_lte_0_002": false,
+        "all_official_like_layers_improve": true
+      },
+      "pass": false,
+      "prediction_sha256": "fa7de805c6e7b8fae44a16101b3eb5b747af31c7758c67f468bd78a01251c7e2"
+    },
+    {
+      "name": "P2_V5_LAYER_HUBER_ROUTER",
+      "scope": "layer",
+      "pooled_delta_rmse": 0.0016655211238485457,
+      "outer_tests": {
+        "2024_oct_nested": {
+          "rows": 13339,
+          "reference_rmse": 6.473934093544442,
+          "candidate_rmse": 6.467501208515042,
+          "delta_rmse": -0.006432885029400204
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "reference_rmse": 1.1857780665476285,
+          "candidate_rmse": 1.2125260531538076,
+          "delta_rmse": 0.026747986606179053
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "reference_rmse": 0.28073218471331673,
+          "candidate_rmse": 0.28207785139451874,
+          "delta_rmse": 0.0013456666812020068
+        }
+      },
+      "official_like_layer_delta_rmse": {
+        "2": -0.021486453253234172,
+        "3": -0.013324426112141907,
+        "4": -0.007445037409560484
+      },
+      "official_like_bootstrap_ci90_high_delta_rmse": -0.004164189751884484,
+      "raw_expected_points_delta": 0.05225030041807185,
+      "transport_penalty_points": 0.12168209161000616,
+      "calibrated_expected_points_delta": -0.06943179119193432,
+      "gate_checks": {
+        "calibrated_expected_points_gte_0_01": false,
+        "minimum_two_outer_tests_improve": false,
+        "official_like_nested_improves": true,
+        "worst_outer_delta_lte_0_002": false,
+        "all_official_like_layers_improve": true
+      },
+      "pass": false,
+      "prediction_sha256": "d65d6b9ef456369c2e6286b7157868d9594ac2d018b13fa021bf6c4aacee3ff5"
+    }
+  ],
+  "runner_sha256": "26b67ccc461397de18b03b2c29c218964d2595780c2bf7d3f0fd8c075a394b88"
+}

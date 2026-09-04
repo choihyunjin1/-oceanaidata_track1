@@ -1,0 +1,57 @@
+{
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 0,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "decision": "STOP_SUPPORT_GATE_ZERO_FIT",
+  "duplication_audit": {
+    "distinction": "v38 uses lagged directional hit cross-correlations, v46 uses triplet full-distribution O-information, and v51 uses correlation-matrix SPD drift. v58 uses same-time empirical marginal ranks and normalized pairwise joint tail-hit probabilities, with no lag, entropy, covariance geometry, or prior predictions.",
+    "forbidden_reuse": [
+      "v42 official result or slices",
+      "v42-v57 predictions/features",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed contemporaneous empirical lower/upper/cross-tail copula geometry over physical channel pairs",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_CONTEMPORANEOUS_EMPIRICAL_TAIL_COPULA_AXIS"
+  },
+  "experiment_id": "p3_empirical_tail_copula_residual_cycle_20260901_v58",
+  "fit_count": 0,
+  "primary_sources": [
+    {
+      "citation": "Schmidt and Stadtmuller, Non-parametric Estimation of Tail Dependence, Scandinavian Journal of Statistics 33(2), 307-335 (2006)",
+      "url": "https://doi.org/10.1111/j.1467-9469.2005.00483.x",
+      "use": "empirical tail-copula mechanism only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "a67a036817b4d83dac3246d44558a5926c131e562ec9abae6c2aec8d74dbbe23",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "7fe76b6021e0802a42f180fb0e41c213b4a1c54e93c6beb4bc737eb0e91ef4b2",
+    "runner_sha256": "5968966cb4d29f1084921e13986a0bb5555f99a5b9f3a63dd546d94a8462cc55"
+  },
+  "schema_version": "p3.empirical_tail_copula_residual.result.v58",
+  "status": "COMPLETE",
+  "support_receipt": {
+    "columns": 60,
+    "finite": true,
+    "matrix_sha256": "f5df98c6b1bf7a6300d7f2940a4df7133b0de99e01f014f8e922a1bb163c2c77",
+    "nonzero_share": 0.48653846153846153,
+    "passed": false,
+    "positive_variance_features": 56,
+    "rows": 182,
+    "target_used": false
+  }
+}

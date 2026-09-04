@@ -1,0 +1,79 @@
+{
+  "schema_version": "p1.nested_s_layer_ablation.20260831.v33c",
+  "experiment_id": "p1_nested_s_layer_ablation_20260831_v33c",
+  "candidate": "P1_NESTED_CAUSAL_S_LAYER_ABLATION",
+  "scientific_question": "Can the officially neutral aggregate S-ORS E150 contribution be decomposed into harmful and useful layers without using the evaluated outer-fold labels?",
+  "historical_sources": {
+    "anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "truth": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "2025_q2": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "2025_q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+      "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+    },
+    "2025_q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+      "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+    }
+  },
+  "selector": {
+    "station": "S-ORS",
+    "minimum_layer_support": 10,
+    "marginal_precision_rule": "strictly_less_than_prefix_incumbent_f1_divided_by_2",
+    "q2_action": "abstain",
+    "q3_prefix_folds": ["2025_q2"],
+    "q4_prefix_folds": ["2025_q2", "2025_q3"],
+    "deployment_prefix_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "candidate_reference": "raw_E150",
+    "remove_only_incumbent_negative_raw_e150_additions": true,
+    "preserve_anchor_g_i_gi2": true,
+    "outer_result_based_reselection": false,
+    "grid_size": 0,
+    "model_fits": 0,
+    "retries": 0
+  },
+  "validation": {
+    "folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "primary_outer_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260935
+  },
+  "score": {
+    "points_per_f1": 26.578120867377286
+  },
+  "gate": {
+    "each_q3_q4_delta_f1_minimum": 0.0,
+    "pooled_all_delta_f1_strictly_positive": true,
+    "pooled_q3_q4_delta_f1_strictly_positive": true,
+    "bootstrap_ci90_low_strictly_positive": true,
+    "anchor_removals_maximum": 0
+  },
+  "official_materializer": {
+    "expected_rows": 169011,
+    "source_sha256": {
+      "champion": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+      "e150": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b",
+      "anchor": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"
+    },
+    "title": "P1 E150 nested S-layer ablation",
+    "summary": "Q2-Q4 historical prefix에서 낮은 marginal precision으로 봉인된 S-ORS layer의 E150 addition만 제거하고 anchor/G/I/GI2를 보존합니다."
+  },
+  "authorization": {
+    "historical_truth_reads_after_raw_seal": true,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "test_reads": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

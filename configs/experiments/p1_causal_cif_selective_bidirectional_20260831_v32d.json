@@ -1,0 +1,71 @@
+{
+  "schema_version": "p1.causal_cif_selective_bidirectional.20260831.v32d",
+  "experiment_id": "p1_causal_cif_selective_bidirectional_20260831_v32d",
+  "status": "EXACTLY_ONCE_METRIC_ONLY_AUTHORIZED",
+  "candidate": "P1_1_CAUSAL_CIF_SELECTIVE_BIDIRECTIONAL",
+  "source": {
+    "config": {
+      "path": "configs/experiments/p1_causal_cif_lite32_20260831_v32b.json",
+      "sha256": "03964dec841166fa76de7b9bd2e55db33a1b9e1b6f65f5965e9936b6bc9ff5b7"
+    },
+    "runner": {
+      "path": "scripts/run_p1_causal_cif_lite32_20260831_v32b.py",
+      "sha256": "dce445a1c896e837eb8df2e6ce7817e65d0fad4b4712f84a7a93167c64b25762"
+    },
+    "result": {
+      "path": "artifacts/p1_causal_cif_lite32_20260831_v32b/result.json",
+      "sha256": "649f9d40d4c2a0db0d8decb7aba5e00a3db59a35ff09ce0d36ecac608660a5a2"
+    },
+    "predictions": {
+      "path": "artifacts/p1_causal_cif_lite32_20260831_v32b/sealed_predictions.npz",
+      "sha256": "205bb44d80aa237f914608d2f05426b662f49932022889d302887f6f7131c0a6"
+    },
+    "anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    }
+  },
+  "decoder": {
+    "probability_threshold_inclusive": 0.5,
+    "maximum_changed_fraction_per_fold": 0.005,
+    "ranking": "absolute_probability_margin_descending",
+    "tie_keys": ["station", "year", "layer", "time"],
+    "action": "replace_incumbent_with_thresholded_source_prediction_on_selected_disagreements",
+    "outer_result_based_retry_or_retuning": false
+  },
+  "validation": {
+    "outer_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260932,
+    "model_fits": 0
+  },
+  "decision_policy": {
+    "score_points_per_f1": 26.578120867377286,
+    "transport_penalty_points": 0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "bootstrap_probability_improved_minimum_inclusive": 0.8,
+    "minimum_each_outer_fold_delta_f1_inclusive": 0.0,
+    "pooled_delta_f1_strictly_above": 0.0,
+    "bootstrap_ci90_low_strictly_above": 0.0,
+    "incumbent_true_positive_removals_required": 0,
+    "addition_precision_strictly_above_incumbent_f1_divided_by_two": true
+  },
+  "safety": {
+    "maximum_changed_fraction_overall": 0.005,
+    "maximum_changed_fraction_per_fold": 0.005,
+    "maximum_change_concentration_any_station_layer_quarter": 0.5
+  },
+  "authorization": {
+    "exactly_once": true,
+    "metric_only": true,
+    "model_fits": 0,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "test_reads": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "retries": 0
+  }
+}

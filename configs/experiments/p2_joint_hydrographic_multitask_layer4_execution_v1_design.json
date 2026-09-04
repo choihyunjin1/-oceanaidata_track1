@@ -1,0 +1,113 @@
+{
+  "schema_version": "p2_joint_hydrographic_multitask_layer4.execution_design.v1",
+  "created_at_kst": "2026-08-23T08:40:00+09:00",
+  "status": "DESIGN_ONLY_NOT_EXECUTABLE_NOT_PREREGISTERED",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "local_curve_qualification_only": true,
+  "official_promotion_allowed": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "scientific_surface": {
+    "design": {
+      "path": "configs/experiments/p2_joint_hydrographic_multitask_layer4_v2_design.json",
+      "sha256": "7c8fd3de7300995e73a3baeafd2af7a3c5cf33cb9cc93d636cb4ce1b13bd74f2",
+      "bytes": 13377
+    },
+    "pure_model": {
+      "path": "src/p2_restore/joint_hydrographic_multitask.py",
+      "sha256": "8d667256fe37e5b6bf72e09f233efd17b514b40dae1597a047c0c343a344a314",
+      "bytes": 18491
+    },
+    "pure_model_tests": {
+      "path": "tests/test_p2_joint_hydrographic_multitask.py",
+      "sha256": "695bd872965377692799b659a40459c12771ca7ae3efdf5c8f38015eb234d2ca",
+      "bytes": 5760
+    },
+    "static_preflight": {
+      "path": "artifacts/p2_joint_hydrographic_multitask_layer4_v2_static_preflight.json",
+      "sha256": "25ed914813b10478caabe63e89adaf744dec0d436d10a43df58e643e7e830cf6",
+      "bytes": 4330
+    },
+    "scientific_changes_from_design": 0
+  },
+  "required_execution_order": [
+    "fresh canonical static preflight with full transitive source, environment, input, Stage-A, design, and prefix pins",
+    "independent P0=0/P1=0 QA receipt created with O_EXCL binary full-write",
+    "separate curve-only authorization created with O_EXCL binary full-write",
+    "fresh preflight and QA/authorization reload",
+    "canonical persistent attempt lock created with O_EXCL and deep-verified",
+    "single-use opaque capability minted only after consumed-lock verification",
+    "outer_2024_sep_oct: 5 fractions x 3 seeds fit and blind-predict, then O_EXCL fold commitment",
+    "verify outer_2024_sep_oct commitment before any of its target scalars may enter later-fold training",
+    "outer_2025_may_jun: 5 fractions x 3 seeds fit and blind-predict, then O_EXCL fold commitment",
+    "verify outer_2025_may_jun commitment before any of its target scalars may enter later-fold training",
+    "outer_2025_jul_aug: 5 fractions x 3 seeds fit and blind-predict, then O_EXCL fold commitment",
+    "O_EXCL final prediction commitment binding all 45 cells and all three fold commitments",
+    "only now decode metric truth, recompute Stage-A reference, score, bootstrap 5000 KST-day replicates, and seal research evidence",
+    "recheck every implementation, environment, input, Stage-A, prefix, QA, authorization, lock, and commitment pin before final manifest"
+  ],
+  "blindness_and_capability_invariants": {
+    "active_fold_target_temp_psal_scalar_decode_before_fold_commit": 0,
+    "anomaly_or_hidden_target_proxy_reads": 0,
+    "raw_source_bytes_before_commit": "integrity hashing and station/layer/time routing only",
+    "earlier_fold_target_decode_for_later_training_requires_verified_earlier_fold_commitment": true,
+    "all_prediction_arrays_and_model_bundles_use_bytesio_then_o_excl_o_binary_robust_write_loop": true,
+    "parquet_or_csv_exists_then_write_is_forbidden": true,
+    "caller_supplied_qa_authorization_or_lock_hashes_are_ignored": true,
+    "direct_curve_or_fit_call_without_live_post_lock_capability_is_rejected": true,
+    "capability_replay_or_arbitrary_stage_is_rejected": true,
+    "candidate_test_prediction_and_upload_flags_are_false_in_config_qa_authorization_lock_receipts_manifest_and_seal": true
+  },
+  "curve_contract": {
+    "fold_major_cells": 45,
+    "fractions": [0.40, 0.55, 0.70, 0.85, 1.00],
+    "seeds": [20260823, 20260824, 20260825],
+    "epochs_per_fit": 28,
+    "total_optimizer_steps": 6132,
+    "optimizer_step_formula": "sum over 15 fold-prefix cells of 3 seeds x 28 epochs x ceil(training_chunks/12)",
+    "prefix_timestamp_arrays_byte_equal_to_stage_a": true,
+    "public_covariate_context_scope": "Match sealed Stage-A: the full fold-blind public-layer surface may provide context, while every target-layer temperature and salinity outside the active training prefix remains loss-masked and active-fold validation target scalars remain undecoded until commitment.",
+    "layer2_and_layer3_prediction_bytes_equal_to_matching_stage_a_seed_columns": true,
+    "only_layer4_temperature_is_replaced": true,
+    "three_seed_prediction_mean_then_metric": true,
+    "paired_kst_day_bootstrap_replicates": 5000,
+    "full_delta_challenger_minus_reference_at_most_c": -0.03,
+    "late_70_85_100_all_negative": true,
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "outer_folds_improved_at_least": 2,
+    "maximum_layer_or_same_season_regression_c": 0.0075,
+    "historical_frozen_reference_exact": false,
+    "local_pass_can_create_test_candidate": false,
+    "official_paired_ab_and_user_approval_required_after_local_pass": true
+  },
+  "required_output_allowlist": {
+    "per_cell": ["model bundle", "blind prediction array", "cell receipt"],
+    "per_fold": ["fold commitment"],
+    "aggregate": [
+      "prediction commitment",
+      "learning curve OOF",
+      "metrics",
+      "bootstrap receipt",
+      "learning curve evidence",
+      "gate decision",
+      "training receipt",
+      "manifest",
+      "manifest sidecar",
+      "seal"
+    ],
+    "candidate_or_submission_files": 0
+  },
+  "static_counters": {
+    "actual_model_fits": 0,
+    "actual_predictions": 0,
+    "scores": 0,
+    "qa_receipts": 0,
+    "authorizations": 0,
+    "attempt_locks": 0,
+    "candidate_predictions": 0,
+    "test_predictions": 0,
+    "uploads": 0
+  }
+}

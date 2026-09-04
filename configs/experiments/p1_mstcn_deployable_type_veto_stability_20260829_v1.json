@@ -1,0 +1,66 @@
+{
+  "schema_version": "p1.mstcn_deployable_type_veto_stability.v1",
+  "experiment_id": "p1_mstcn_deployable_type_veto_stability_20260829_v1",
+  "problem": "P1",
+  "role": "retrospective stability and deployment-parity audit only",
+  "hypothesis": "MSTCN-only row, boundary, and type posterior features can conservatively veto harmful added segments without requiring an unavailable incumbent probability feature.",
+  "training_fold": "2025_q3",
+  "evaluation_fold": "2025_q4",
+  "feature_contract": {
+    "exclude_incumbent_probability": true,
+    "numeric": [
+      "log_length",
+      "row_mean",
+      "row_min",
+      "row_max",
+      "row_q10",
+      "row_median",
+      "row_q90",
+      "row_std",
+      "boundary_start_mean",
+      "boundary_start_max",
+      "boundary_end_mean",
+      "boundary_end_max",
+      "type_spike_mean",
+      "type_noise_mean",
+      "type_flatline_mean",
+      "type_offset_mean",
+      "type_drift_mean",
+      "type_entropy_mean"
+    ],
+    "categorical": ["station", "layer"]
+  },
+  "models": {
+    "beneficial_classifier": {
+      "family": "standardized balanced logistic regression",
+      "C": 1.0,
+      "solver": "liblinear",
+      "maximum_iterations": 2000,
+      "acceptance_probability": 0.5
+    },
+    "marginal_utility_regressor": {
+      "family": "standardized ridge regression",
+      "alpha": 10.0,
+      "acceptance_utility": 0.0
+    },
+    "consensus": "accept only when both classifier and utility regressor accept"
+  },
+  "validation": {
+    "q3": "leave-one-truth-event-group-out",
+    "q4": "fit all Q3 segments once and evaluate Q4 once",
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20260829,
+    "bootstrap_unit": "truth-event group or unique zero-precision segment"
+  },
+  "diagnostic_gate": {
+    "q3_consensus_nonnegative_vs_incumbent": true,
+    "q4_consensus_exact_incumbent_fallback": true,
+    "q4_consensus_improves_raw_e150": true,
+    "q4_max_consensus_bootstrap_acceptance_frequency": 0.1,
+    "no_official_test_or_submission_access": true
+  },
+  "official_test_reads_allowed": 0,
+  "submission_creation_allowed": false,
+  "upload_allowed": false,
+  "result_driven_reruns_allowed": false
+}

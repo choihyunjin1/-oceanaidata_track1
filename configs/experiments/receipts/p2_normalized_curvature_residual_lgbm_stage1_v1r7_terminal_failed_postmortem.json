@@ -1,0 +1,221 @@
+{
+  "schema_version": "p2_experiment_terminal_failure_postmortem_receipt.v1",
+  "receipt_id": "p2_ncr_lgbm_stage1_v1r7_terminal_failed_postmortem_20260826",
+  "status": "TERMINAL_INFRASTRUCTURE_FAILURE_ROOT_CAUSE_CONFIRMED",
+  "effective_date_kst": "2026-08-26",
+  "append_only": true,
+  "experiment": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7",
+    "disposition": "FAILED_AFTER_ALL_THREE_FITS_NO_SCIENTIFIC_DECISION",
+    "execution_authorized_after_receipt": false,
+    "automatic_or_manual_rerun_forbidden": true,
+    "internal_worker_reentry_forbidden": true,
+    "claim_journal_and_incident_files_must_not_be_deleted_or_modified": true
+  },
+  "incident_evidence": {
+    "claim": {
+      "path": "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.claim.json",
+      "bytes": 1910,
+      "sha256": "22b739c869cb1e57b3f68fe5ef19bfa480db9530af20692f2d047ed16d4624d3",
+      "schema_version": "p2_ncr_stage1_execution_claim.v1r7",
+      "contract_sha256": "5be45ad6198f55e39d3f2a32a70e4784345a75a4fcdcd9f88c9124591621209c",
+      "bundle_sha256": "e8c1c8d5537ac547c6daff16aa0690439a4f2f17797ca97a4624561a2d003452",
+      "attempt_token_sha256": "8a11fd7ea91e792f85d65d271cf1a3a5d4e83f96e203a983b252a520e201589d",
+      "parent_pid": 24036,
+      "permanent_no_rerun_claim": true
+    },
+    "journal": {
+      "path": "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.ndjson",
+      "bytes": 5820,
+      "sha256": "ab250c745ca104d4b3439d3c51bdb1283c5723a72bf6becc59711ae900ebb38d",
+      "event_count": 11,
+      "event_order": [
+        "ATTEMPT_CLAIMED",
+        "PARENT_LAUNCHING_SINGLE_WORKER",
+        "WORKER_STARTED",
+        "FIT_SLOT_RESERVED",
+        "FIT_SLOT_COMPLETED",
+        "FIT_SLOT_RESERVED",
+        "FIT_SLOT_COMPLETED",
+        "FIT_SLOT_RESERVED",
+        "FIT_SLOT_COMPLETED",
+        "WORKER_FAILED",
+        "ATTEMPT_TERMINAL_FAILED"
+      ],
+      "fit_slots": [
+        {
+          "slot": 1,
+          "seed": 20260823,
+          "reserved": 1,
+          "completed": 1,
+          "elapsed_seconds": 0.39099999994505197
+        },
+        {
+          "slot": 2,
+          "seed": 20260824,
+          "reserved": 1,
+          "completed": 1,
+          "elapsed_seconds": 0.4059999999590218
+        },
+        {
+          "slot": 3,
+          "seed": 20260825,
+          "reserved": 1,
+          "completed": 1,
+          "elapsed_seconds": 0.40700000000651926
+        }
+      ],
+      "worker_failure": {
+        "phase": "ALL_FITS_COMPLETED_BUILDING_RESULT",
+        "error_type": "ValueError",
+        "physical_reserved_count": 3,
+        "physical_completed_count": 3
+      },
+      "terminal_failure": {
+        "phase": "CHECKING_WORKER_RETURN_CODE",
+        "reason": "WORKER_NONZERO_EXIT",
+        "worker_returncode": 1,
+        "journal_prefix_bytes": 4826,
+        "journal_prefix_sha256": "d6aaef587068b36512a3d4a381be7e9c37692bebf8694cc2ffb85422048e8817",
+        "worker_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worker_stderr_sha256": "dff94f558e5dad473dd65a0bfc1dc98a1cf08c4317dab77f244afb7eb70fa0ce"
+      }
+    },
+    "observed_absence_after_terminal_failure": {
+      "worker_process_running": false,
+      "parent_process_running": false,
+      "final_artifact_directory_exists": false,
+      "staging_directory_count": 0,
+      "journal_init_failure_receipt_exists": false,
+      "postpublish_failure_receipt_exists": false,
+      "worker_stdout_bytes": 0,
+      "persisted_models": 0,
+      "persisted_predictions": 0,
+      "persisted_aggregate_metrics": 0
+    }
+  },
+  "root_cause": {
+    "classification": "TIMESTAMP_INTEGER_UNIT_LOSS_IN_EXACT_ALIGNMENT_RECONSTRUCTION",
+    "exact_exception": "ValueError: paired day bootstrap requires at least two KST days",
+    "source_location": "src/p2_restore/normalized_curvature_residual.py:554",
+    "defect_location": "src/p2_restore/normalized_curvature_residual.py:439-476",
+    "mechanism": "Under pinned pandas 3.0.1, the exact OOF time column is datetime64[us, UTC]. astype('int64') therefore emits microseconds. align_exact_incumbent names those integers _time_ns and later passes them to pd.to_datetime without an explicit unit, which interprets them as nanoseconds. The correct 61-day 2024 September-October interval is compressed by 1000 into one Asia/Seoul calendar day near 1970.",
+    "zero_fit_reproduction": {
+      "input": "The hash-pinned observations and exact-incumbent OOF bytes; challenger prediction set equal to incumbent so no model fit or model output is used.",
+      "raw_exact_oof_time_dtype": "datetime64[us, UTC]",
+      "raw_exact_oof_min_utc": "2024-08-31 15:00:00+00:00",
+      "raw_exact_oof_max_utc": "2024-10-31 14:50:00+00:00",
+      "raw_exact_oof_kst_days": 61,
+      "aligned_time_min_utc": "1970-01-20 23:11:56.400000+00:00",
+      "aligned_time_max_utc": "1970-01-21 00:39:46.200000+00:00",
+      "aligned_unique_timestamps": 8779,
+      "aligned_nat_count": 0,
+      "aligned_kst_days": 1,
+      "observed_exception": "ValueError: paired day bootstrap requires at least two KST days"
+    },
+    "traceback_hash_reconstruction": {
+      "method": "A deterministic zero-fit synthetic call chain used the sealed runner and module filenames and exact failing frame lines, then raised the reproduced exception through the same worker frames. No incident file, model, or prediction was opened or modified.",
+      "frames": [
+        "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py:2966",
+        "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py:2904",
+        "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py:1686",
+        "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py:2895",
+        "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py:1926",
+        "src/p2_restore/normalized_curvature_residual.py:554"
+      ],
+      "reconstructed_stderr_sha256": "dff94f558e5dad473dd65a0bfc1dc98a1cf08c4317dab77f244afb7eb70fa0ce",
+      "recorded_stderr_sha256": "dff94f558e5dad473dd65a0bfc1dc98a1cf08c4317dab77f244afb7eb70fa0ce",
+      "exact_match": true
+    },
+    "confidence": "CONFIRMED",
+    "numerical_or_scientific_failure": false
+  },
+  "static_integrity_after_incident": {
+    "contract_matches_claim": true,
+    "bundle_matches_claim": true,
+    "contract_sha256": "5be45ad6198f55e39d3f2a32a70e4784345a75a4fcdcd9f88c9124591621209c",
+    "bundle_sha256": "e8c1c8d5537ac547c6daff16aa0690439a4f2f17797ca97a4624561a2d003452",
+    "files": {
+      "config": {
+        "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r7.json",
+        "bytes": 26038,
+        "sha256": "5be45ad6198f55e39d3f2a32a70e4784345a75a4fcdcd9f88c9124591621209c"
+      },
+      "runner": {
+        "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r7.py",
+        "bytes": 121073,
+        "sha256_raw": "ff8b4adaba4a68903b513a6b42695f055389cab813c4b446e27d457625eb33ac",
+        "sha256_config_literal_normalized": "6341fc87ebc66eeab1e1b1bb1eacfec91cd8dcd47a28d9ad407d97111030737c"
+      },
+      "normalized_curvature_module": {
+        "path": "src/p2_restore/normalized_curvature_residual.py",
+        "bytes": 27025,
+        "sha256": "c5d88d9bbe90c4b2b03f135d434ed5f030b71732d50549aac17ced88516070a0"
+      },
+      "training_feature_builder": {
+        "path": "src/p2_restore/features.py",
+        "bytes": 6929,
+        "sha256": "b23e19ec55120f6144e693f9da24ba78b85b6191c55de1a2889b0d26fd8d8ee7"
+      },
+      "feature_data_dependency": {
+        "path": "src/p2_restore/data.py",
+        "bytes": 3588,
+        "sha256": "e4d3644e3609575b3cea22f027d0f8a7f5a7f0ff403200bd7f0c190f3de679d9"
+      },
+      "package_initializer": {
+        "path": "src/p2_restore/__init__.py",
+        "bytes": 339,
+        "sha256": "16e6d31ff2b1f860344efaaefceeee8bf7b1380d44d41424d8a3ab6ec94f4e4f"
+      }
+    },
+    "relevant_runtime": {
+      "python": "3.12.10",
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "pyarrow": "25.0.1",
+      "lightgbm": "4.7.0"
+    }
+  },
+  "recoverability": {
+    "aggregate_metrics_recoverable_without_refit": false,
+    "candidate_predictions_recoverable_without_refit": false,
+    "reason": "All three fitted model objects and decoded seed predictions existed only in worker memory. The exception occurred before WORKER_COMPLETED, stdout JSON, staging, or final publication. Reconstructing the candidate requires another physical fit and would violate the permanent claim and three-fit lifetime ceiling.",
+    "scientific_gate_status": "UNEVALUATED",
+    "forbidden_inference": "Do not classify NCR as scientific GO or NO_GO from this incident."
+  },
+  "conditional_next_action": {
+    "current_state": "BLOCKED_PENDING_A_NEW_EXPLICIT_ZERO_FIT_SUPERSESSION_AND_AUTHORIZATION",
+    "preferred_family": "P2_PUBLIC_TRAJECTORY_DTW_CURVATURE_TRANSFER_CYCLE1",
+    "existing_design": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+      "bytes": 15387,
+      "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb"
+    },
+    "why_conditional": "The existing design correctly blocks on an infrastructure-failed predecessor and therefore is not executable as written. It also uses zero model fits and is scientifically orthogonal to NCR, so a new successor may be considered without rerunning NCR.",
+    "zero_fit_successor_requirements_before_any_materialization": [
+      "Create a new experiment ID and preserve the existing DTW design and v1r7 incident files byte-for-byte.",
+      "Pin this receipt, the v1r7 claim and journal hashes, and the sealed exact-incumbent aggregate/OOF hashes; select the frozen exact incumbent as anchor without imputing an NCR result.",
+      "Change only the predecessor/anchor branch needed to acknowledge the terminal infrastructure failure. Preserve the trajectory algorithm, six cells, three inner windows, maximum 22 materializations, metrics, gates, search budget, and all prohibitions exactly.",
+      "Hash-pin the new config, runner, modules, immutable inputs, runtime/native dependencies, Git dirty state, and explicit timestamp units before any data parse.",
+      "Add a no-fit timestamp round-trip regression: raw and aligned exact-surface times must remain 2024-08-31 15:00 through 2024-10-31 14:50 UTC, contain 61 KST days, and match key timestamps exactly. Integer datetime conversion without an explicit unit is fail-closed.",
+      "Add focused no-fit tests for chronology, key uniqueness, source-before-query, six-cell freeze, exact anchor branch, bootstrap day count, output allow-list, claim/journal exact-once behavior, timeout, and official-path firewall.",
+      "Run tests, lint, strict preflight, and independent QA only. At this preparation stage claim, journal, materialization, fit, result, candidate, and upload counts must all remain zero.",
+      "Require a new explicit user authorization before the one allowed aggregate-only DTW execution; no result-driven rerun or support/grid expansion is allowed."
+    ],
+    "alternative_family": {
+      "path": "configs/experiments/p2_public_group_balanced_celsius_residual_v1_design.json",
+      "bytes": 15998,
+      "sha256": "e0970dc00f02eebb6fa6530ce3571635775137a81ab08c5d61785bb906f6f138",
+      "status": "NOT_CURRENTLY_TRIGGERED_AND_REQUIRES_THREE_NEW_FITS",
+      "note": "Its raw-Celsius objective remains scientifically relevant, but the existing trigger expects a terminal NCR scientific result or a stored normalized-versus-Celsius mismatch. Neither exists. It must not be silently activated from this infrastructure incident."
+    }
+  },
+  "external_actions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "numerical_refits_during_postmortem": 0
+  }
+}

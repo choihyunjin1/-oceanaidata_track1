@@ -1,115 +1,73 @@
-"""Validate a P1 submission without access to hidden labels.
-
-This mirrors the strict input checks in the supplied score.py and adds a
-reproducibility summary. It never edits the submission or source dataset.
-"""
+"""Strictly validate a P1 submission without hidden labels."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
+import json
+import os
+from collections.abc import Mapping
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
+from p1_qc.submission import SubmissionValidationError, validate_submission
 
-
-KEY = ["station", "year", "layer", "time"]
-REQUIRED = KEY + ["label"]
-ALLOWED_ORDERS = [REQUIRED, REQUIRED + ["anomaly_type"]]
-DEFAULT_TEST = (
-    Path(__file__).resolve().parents[1]
-    / "데이터셋 원본"
-    / "데이터셋_P1"
-    / "P1_qc_anomaly"
-    / "test.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+P1_REQUIRED_FILES = (
+    "train.csv",
+    "test.csv",
+    "sample_submission.csv",
+    "baseline_rule.csv",
+    "README.md",
 )
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+def default_test_path(
+    *,
+    env: Mapping[str, str] | None = None,
+    search_root: Path = PROJECT_ROOT,
+) -> Path:
+    """Resolve test.csv from P1_DATA_DIR or one complete local P1 file set."""
 
+    environment = os.environ if env is None else env
+    configured = environment.get("P1_DATA_DIR")
+    if configured:
+        candidate = Path(configured).expanduser().resolve()
+        missing = [name for name in P1_REQUIRED_FILES if not (candidate / name).is_file()]
+        if missing:
+            raise FileNotFoundError(f"P1_DATA_DIR is missing {missing}: {candidate}")
+        return candidate / "test.csv"
 
-def fail(message: str) -> None:
-    raise SystemExit(f"FAIL: {message}")
-
-
-def validate(submission_path: Path, test_path: Path) -> None:
-    if not submission_path.is_file():
-        fail(f"submission not found: {submission_path}")
-    if not test_path.is_file():
-        fail(f"test file not found: {test_path}")
-
-    submission = pd.read_csv(submission_path)
-    test = pd.read_csv(test_path)
-
-    if list(submission.columns) not in ALLOWED_ORDERS:
-        fail(
-            f"column names/order are {list(submission.columns)}; "
-            f"allowed orders are {ALLOWED_ORDERS}"
+    candidates = {
+        path.parent.resolve()
+        for path in search_root.rglob("train.csv")
+        if all((path.parent / name).is_file() for name in P1_REQUIRED_FILES)
+    }
+    if len(candidates) != 1:
+        raise FileNotFoundError(
+            "set P1_DATA_DIR or --test; repository fallback requires exactly one "
+            f"complete P1 file set, found {len(candidates)}"
         )
-    if list(test.columns) != KEY + ["temp", "psal", "depth"]:
-        fail(f"unexpected test schema: {list(test.columns)}")
-    if len(submission) != len(test):
-        fail(f"row count is {len(submission):,}; expected {len(test):,}")
-    if submission[KEY].isna().any().any():
-        fail("submission keys contain missing values")
-    duplicate_count = int(submission.duplicated(KEY).sum())
-    if duplicate_count:
-        fail(f"submission contains {duplicate_count:,} duplicate keys")
-    if test.duplicated(KEY).any():
-        fail("source test keys are not unique")
-
-    try:
-        merged = test[KEY].merge(
-            submission[REQUIRED],
-            on=KEY,
-            how="outer",
-            indicator=True,
-            validate="one_to_one",
-        )
-    except Exception as exc:
-        fail(f"key validation failed: {exc}")
-    mismatch_count = int(merged["_merge"].ne("both").sum())
-    if mismatch_count:
-        fail(f"key set differs from test by {mismatch_count:,} rows")
-
-    numeric_label = pd.to_numeric(merged["label"], errors="coerce")
-    values = numeric_label.to_numpy(dtype=float, na_value=np.nan)
-    if numeric_label.isna().any() or not np.isfinite(values).all():
-        fail("label must contain finite numeric values only")
-    if not numeric_label.isin([0, 1]).all():
-        invalid_preview = numeric_label[~numeric_label.isin([0, 1])].head().tolist()
-        fail(f"label must be binary integer 0/1; examples: {invalid_preview}")
-
-    order_matches = submission[KEY].equals(test[KEY])
-    positive_count = int(numeric_label.sum())
-    positive_rate = positive_count / len(submission)
-    print("PASS: P1 submission structure is valid")
-    print(f"path={submission_path.resolve()}")
-    print(f"rows={len(submission):,}")
-    print(f"positive={positive_count:,} ({positive_rate:.6%})")
-    print(f"test_order_match={order_matches}")
-    print(f"bytes={submission_path.stat().st_size:,}")
-    print(f"sha256={sha256(submission_path)}")
+    return next(iter(candidates)) / "test.csv"
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("submission", type=Path, help="candidate submission CSV")
-    parser.add_argument(
-        "--test",
-        type=Path,
-        default=DEFAULT_TEST,
-        help=f"test CSV (default: {DEFAULT_TEST})",
-    )
-    return parser.parse_args()
+    parser.add_argument("submission", type=Path)
+    parser.add_argument("--test", type=Path)
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    try:
+        test_path = args.test.expanduser().resolve() if args.test else default_test_path()
+        report = validate_submission(args.submission, test_path)
+    except (SubmissionValidationError, FileNotFoundError) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+    print("PASS: P1 submission structure is valid")
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+    return 0
 
 
 if __name__ == "__main__":
-    args = parse_args()
-    validate(args.submission, args.test)
+    raise SystemExit(main())

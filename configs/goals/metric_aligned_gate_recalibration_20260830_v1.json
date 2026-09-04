@@ -1,0 +1,102 @@
+{
+  "schema_version": "metric_aligned_gate_recalibration.20260830.v1",
+  "status": "GOVERNING_FUTURE_RESEARCH_POLICY_NO_OFFICIAL_ACTION",
+  "purpose": "Replace unsupported fixed tolerances and conjunctive slice vetoes with a hierarchy aligned to each problem's official pooled metric, while preserving every historical gate for audit.",
+  "supersedes_for_future_interpretation_only": [
+    "configs/goals/meaningful_score_maximization_v3.json numeric effect and critical-slice thresholds",
+    "artifacts/promotion_gate_deep_research_20260827_v1/promotion_gate_v1.json provisional numeric deltas",
+    "experiment-specific minimum-improved-window and worst-slice hard vetoes that lack an official-mixture or safety justification"
+  ],
+  "non_retroactivity": {
+    "historical_configs_and_results_are_immutable": true,
+    "historical_one_shot_attempts_are_not_reopened": true,
+    "reclassification_changes_interpretation_only": true
+  },
+  "decision_hierarchy": {
+    "level_0_hard_validity": [
+      "metric, truth, keys, rows, ordering, comparator and prediction lineage match",
+      "no target, temporal, episode or official-interface leakage",
+      "finite predictions inside the problem's physical/schema domain",
+      "predeclared candidate and evaluation population",
+      "no result-driven retry or mutation"
+    ],
+    "level_1_primary_utility": {
+      "P1": "pooled row-level binary micro-F1; benefit = candidate - incumbent",
+      "P2": "pooled all-row temperature RMSE in Celsius; benefit = incumbent - candidate",
+      "P3": "pooled all-row six-lead significant-wave-height RMSE in meters; benefit = incumbent - candidate"
+    },
+    "level_2_uncertainty": "Use paired dependence-preserving resampling on the predeclared independent unit. A favorable point estimate with a favorable one-sided interval is strong challenger evidence; a favorable point with an interval crossing zero remains exploratory; a clearly unfavorable interval is primary-harm evidence.",
+    "level_3_transport_diagnostics": "Window, season, station, layer, lead and anomaly-type results are reported as transport-risk diagnostics. They are not automatic vetoes unless the official mixture or a genuine safety/operational objective makes that slice a predeclared hard requirement.",
+    "level_4_competition_action": "With expiring daily quota, a valid and non-duplicate challenger may be official-probe eligible when its primary point estimate is favorable and the result can change a predeclared next action. This never converts exposed local evidence into fresh confirmation."
+  },
+  "unsupported_fixed_threshold_policy": {
+    "cross_problem_raw_metric_thresholds": "forbidden",
+    "fixed_slice_caps_without_cost_or_official_mixture_basis": "diagnostic_only",
+    "minimum_improved_window_counts": "diagnostic_only",
+    "all_inner_or_all_outer_groups_must_improve": "diagnostic_only",
+    "permitted_numeric_margin_sources": [
+      "known official score transformation and display/replay resolution",
+      "pre-result repeatability or seed-noise study on an unexposed calibration surface",
+      "explicit user-defined operational cost or safety loss",
+      "formal equivalence or noninferiority design fixed before candidate outcomes"
+    ],
+    "when_no_permitted_margin_is_available": "Do not invent one. Rank by the exact primary metric, report uncertainty and transport risk, and use CHALLENGER or INCONCLUSIVE states rather than a false precise pass/fail."
+  },
+  "evidence_states_for_exposed_surfaces": {
+    "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY": "Primary point estimate is favorable and the paired interval is wholly favorable; no fresh-confirmation claim.",
+    "EXPLORATORY_CHALLENGER_RESEARCH_ONLY": "Primary point estimate is favorable but the paired interval includes zero or is unavailable.",
+    "PRIMARY_HARM_RESEARCH_ONLY": "Primary point estimate is unfavorable and the paired interval is wholly unfavorable, or the degradation is decisive even without a valid interval.",
+    "INCONCLUSIVE_RESEARCH_ONLY": "Direction or uncertainty does not resolve the primary comparison.",
+    "QA_BLOCKED": "Level-0 validity failed; performance values are not admitted as evidence."
+  },
+  "problem_units": {
+    "P1": {
+      "paired_unit": "joint KST-day block preserving station-layer observations and complete events",
+      "slice_roles": ["station", "layer", "quarter", "anomaly_type"],
+      "special_note": "The proposal precision > incumbent F1/2 identity is an exact algebraic condition for a pure add-positive union and remains objective-aligned; arbitrary event-count or all-window requirements do not."
+    },
+    "P2": {
+      "paired_unit": "contiguous KST-day block preserving layers 2-4 together",
+      "slice_roles": ["historical_window", "season", "layer"],
+      "special_note": "Repository policy 01_P2_MUST_READ_FIRST states that pooled official-RMSE proxy is primary and small block regressions are risk diagnostics rather than automatic vetoes."
+    },
+    "P3": {
+      "paired_unit": "storm episode where available, otherwise contiguous anchor-day block with all six leads intact",
+      "slice_roles": ["forward_window", "station", "lead"],
+      "special_note": "The legacy 0.01m minimum, 2-of-3 window rule and 0.02m worst-lead cap have no established official-score or decision-cost calibration and are diagnostic for future cycles."
+    }
+  },
+  "official_and_data_boundary": {
+    "official_test_sample_submission_or_hidden_values_read": false,
+    "official_upload_authorized": false,
+    "outlier_hard_deletion_authorized": false,
+    "outlier_flags": "diagnostic_or_robust_loss_only_unless_a_separately_validated_sensor_error_rule_is_preregistered",
+    "result_based_gate_relaxation": false
+  },
+  "primary_sources": [
+    {
+      "claim": "Selection criteria can overfit when repeatedly optimized.",
+      "url": "https://jmlr.org/papers/v11/cawley10a.html"
+    },
+    {
+      "claim": "Predictive accuracy comparisons should be based on paired loss differentials and their dependence.",
+      "url": "https://doi.org/10.1080/07350015.1995.10524599"
+    },
+    {
+      "claim": "Strictly proper evaluation requires the score to match the target predictive decision.",
+      "url": "https://doi.org/10.1198/016214506000001437"
+    },
+    {
+      "claim": "Equivalence and noninferiority margins must be specified as formal hypotheses, not invented after observing a result.",
+      "url": "https://doi.org/10.1007/BF01068419"
+    },
+    {
+      "claim": "Stationary bootstrap supports inference for dependent time series.",
+      "url": "https://doi.org/10.1080/01621459.1994.10476870"
+    },
+    {
+      "claim": "Worst-group optimization changes the target objective and should be used only when group robustness is intended.",
+      "url": "https://arxiv.org/abs/1911.08731"
+    }
+  ]
+}

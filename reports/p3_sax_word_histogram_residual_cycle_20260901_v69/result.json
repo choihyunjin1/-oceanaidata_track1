@@ -1,0 +1,737 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.003070203328929494,
+          0.0003213543343889962
+        ],
+        "median_m": -0.0015161508427618542,
+        "probability_improve": 0.9162,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0007436522627813913,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0023237791816034248,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005845721572711571,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0037406604012060196,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0017270925096884993,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0032947702601725526,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0029006371448570653,
+          -4.402667752358941e-05
+        ],
+        "median_m": -0.0015282273765794274,
+        "probability_improve": 0.953,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.227674450253478,
+        "raw_gain": 0.024075450253476467,
+        "transport_adjusted_gain": -0.025510603838812464,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0006141452488972465,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0033744869869311023,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0023125449308668555,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0017150869333852903,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0015382715186056384,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.002060188602393098,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.007726310595331687,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003886841145772424,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.011347958377410206,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0018868306316656147,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.005197792691819081,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0013387355842735538,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.779674553731388,
+        "delta_candidate_minus_uniform": -0.0015169709603439774,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0002601527424810346,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.003499623398158236,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0016531408746669474,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0015152996216108994,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0010465996227749796,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.00016325991574606125,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00013744207182175838,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.00047658810289152864,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0007293864540632855,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0022638307345171915,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.006691033926180201,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004777400037059842,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.003068515389797022,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0006085611726247553,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.004286220472408564,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0012341173438339403,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0032934696656806706,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.002958079539572833,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0027451208764834867,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.003245788193443122,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0024080907263579476,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005845721572711571,
+      "worst_lead_delta_m": 0.0015382715186056384,
+      "worst_reference_tail_block_delta_m": 0.011347958377410206,
+      "worst_station_lead_delta_m": 0.003245788193443122
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0030157529748737364,
+          0.00017372602116733093
+        ],
+        "median_m": -0.001572890244921188,
+        "probability_improve": 0.9328,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0012029004957904155,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0022315340722104393,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006301566565710015,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.003317324658324794,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0018957275477884394,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.003405060610621402,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0028842848816061917,
+          -0.00017107505229623155
+        ],
+        "median_m": -0.0015325989492945835,
+        "probability_improve": 0.9652,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.228139786822076,
+        "raw_gain": 0.024540786822074674,
+        "transport_adjusted_gain": -0.025045267270214257,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0009105911094471342,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0037864909057320206,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0024496633405086676,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0009486584538822562,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0014884946790382214,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.001815138122115867,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.007218165320339254,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004486678707046221,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.009915347798253649,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0017538247397361761,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.003522652417178418,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0010990918661180071,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7796452333218457,
+        "delta_candidate_minus_uniform": -0.0015462913698863767,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00013059362221623516,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.00326587701418124,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0015473213772287941,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.00045846122652393184,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0018160772941560044,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0003490913560053599,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00023190057773181394,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0009528394385649452,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0005875988222722173,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.002397056005163156,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.00684891831279133,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004540532094095884,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0018380330248933818,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0008236270451580374,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0038400482010126913,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0009774708338052829,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0035212501318280243,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0029983790185990067,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0015854615058653598,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0025323543783976055,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.002027003372060965,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.006301566565710015,
+      "worst_lead_delta_m": 0.0014884946790382214,
+      "worst_reference_tail_block_delta_m": 0.009915347798253649,
+      "worst_station_lead_delta_m": 0.0025323543783976055
+    }
+  ],
+  "created_at_utc": "2026-09-01T01:42:01.090793+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_SAX_WORD_CANDIDATES",
+  "duplication_audit": {
+    "cross_problem_adjacency": "P1 v18 used soft five-state PAA adjacent transitions. v69 discloses that adjacency but is P3-new and uses hard Gaussian SAX symbols with length-3 word composition rather than soft adjacent products.",
+    "distinction": "v57 reports rank-tertile LZ76 compressibility but not which local words occur; v29 uses recurrence and ordinal geometry; v26 uses convolution PPV/max. v69 retains a fixed histogram over explicit amplitude-quantized local words without recurrence distances, random kernels, or compression parsing.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "hard amplitude-quantized local length-3 word composition over fixed PAA blocks",
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_FIXED_SAX_LOCAL_WORD_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.6430837999942014,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_sax_word_histogram_residual_cycle_20260901_v69",
+  "feature_receipt": {
+    "columns": 1000,
+    "finite": true,
+    "matrix_sha256": "5b467b7762811164b53baf8520bbe0b4df620bfdc2014057b5e5081c317f7702",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.13640317442136413,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.04136888796216984,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.12365377430037218,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.038446170829387026,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.12794931933700876,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.04197512972102777,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.14133950587219818,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.047099120047482554,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.1352454639486709,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0408668399218739,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_SAXWORD1000_RIDGE512_ADD10",
+      "coefficient_l2": 0.1168903258782587,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_SAXWORD1000_RIDGE2048_ADD10",
+      "coefficient_l2": 0.03674891715900383,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Lin, Keogh, Wei and Lonardi, Experiencing SAX: a novel symbolic representation of time series, Data Mining and Knowledge Discovery 15, 107-144 (2007)",
+      "url": "https://doi.org/10.1007/s10618-007-0064-z",
+      "use": "symbolic dimensionality-reduction motivation only; no P3 performance claim"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "a71b396c20f76055615c3cec285c87ba9069d564160a4d796857415a2df01119",
+    "evaluation_arrays_sha256": "9241fee6b82d7a9302935f9c76d9b882be655ead98945f532e5756e96c50f403",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "5310316b8fc7ac6ce04dcfea5d4550be63b77527b6b89c5806fefe5e6e54809c",
+    "runner_sha256": "04937587ff4eca1933bd5c438c7d51f0275f21897b63e38b3f0eec4830d4c9b1"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.sax_word_histogram_residual.result.v69",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

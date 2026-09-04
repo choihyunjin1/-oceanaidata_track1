@@ -1,0 +1,31 @@
+{
+  "experiment_id": "p2_extrapolated_soft_gate_v1",
+  "status": "authorized_local_adaptive_score_optimization",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_after_outer_exposure": true,
+  "fresh_holdout_claimed": false,
+  "base": "p2_physical_profile_projection_v1",
+  "raw_expert": "p2_public_state_soft_gate_v1 raw_lambda10 cross-fitted prediction",
+  "layer_route": {
+    "2": "raw_expert",
+    "3": "base",
+    "4": "raw_expert"
+  },
+  "operations": [
+    "project routed profile to public layer-1/layer-5 envelope and order",
+    "extrapolate from base toward routed projection with fixed factor 2.0",
+    "project the extrapolated profile again"
+  ],
+  "factor_scout": {
+    "grid": "0.0 to 4.0 inclusive by 0.25",
+    "selected": 2.0,
+    "selection_scope": "all exposed local OOF",
+    "official_score_claimed": false
+  },
+  "external_values": false,
+  "submission": {
+    "path": "submissions/p2/P2_EXTRAPOLATED_SOFT_GATE_V1.csv",
+    "upload": false
+  }
+}

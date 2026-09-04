@@ -1,0 +1,91 @@
+{
+  "schema_version": "oceanaidata.next_cycle_breakthrough_preflight.config.v1",
+  "experiment_id": "next_cycle_breakthrough_preflight_20260831_v1",
+  "created_at_kst": "2026-08-31",
+  "purpose": "Fail fast before another adaptive fit by checking whether P1, P2, or P3 has a genuinely new information surface and a non-duplicated mechanism.",
+  "inputs": {
+    "p1_validation_audit": {
+      "path": "artifacts/validation_system_audit_20260822/p1.json",
+      "bytes": 32567,
+      "sha256": "0752941c2d11d5e052307fd7eaf83d60c39f7e28768c06cc2da285814ed9cd40"
+    },
+    "p2_validation_audit": {
+      "path": "artifacts/validation_system_audit_20260822/p2.json",
+      "bytes": 30698,
+      "sha256": "ea09df2b874248ddc7466406da1908d137d9025b126a5de43482317e11b30b17"
+    },
+    "p3_validation_audit": {
+      "path": "artifacts/validation_system_audit_20260822/p3.json",
+      "bytes": 65307,
+      "sha256": "4e2f2a74612621f5659c9fd5e9c4996ed8322d2f6cd1a19104f620490568b12b"
+    },
+    "promotion_gap_matrix": {
+      "path": "artifacts/promotion_retroaudit_20260827_v1/gap_matrix.json",
+      "bytes": 7820,
+      "sha256": "461ec47911462de917c8bc61e5d0be8b00d399edb13d02b48384b3fbdd846f81"
+    },
+    "p2_official_result": {
+      "path": "reports/official_information_probe_cycle_20260830_v1/p2-official-result.json",
+      "bytes": 6461,
+      "sha256": "742647f2f033c6ca4070485deef396140c39ba78a5309764358b3443c3f1d984"
+    },
+    "p3_official_result": {
+      "path": "reports/official_information_probe_cycle_20260830_v1/p3-official-result.json",
+      "bytes": 4896,
+      "sha256": "948b50af724d6136fe267656253e322f113211e9a8990c75348d02dcd0f41d54"
+    },
+    "p3_era5_official_receipt": {
+      "path": "reports/approved_parallel_execution_20260828_v9/p3_official_submission_receipt_20260828.json",
+      "bytes": 912,
+      "sha256": "a04799d36261d945adf4baa78779181262b201966cfc210625ba18560eeaccd3"
+    },
+    "historical_candidate_ledger": {
+      "path": "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json",
+      "bytes": 170234,
+      "sha256": "8e7f2fbe07c74d313ce3c652b6eeffdd4d5a7af1351b96d7fc984be987778f69"
+    }
+  },
+  "gates": {
+    "fresh_surface_required_for_new_performance_claim": true,
+    "same_public_feedback_cannot_select_another_candidate": true,
+    "closed_exact_axis_cannot_be_repeated": true,
+    "new_fit_requires_new_mechanism_and_new_information": true
+  },
+  "outlier_policy": {
+    "automatic_target_or_extreme_removal": "PROHIBITED",
+    "allowed": "Only immutable training-only sensor-QC rules fixed before labels or scores are inspected.",
+    "reason": "P1 anomalies and P3 storms may be the target signal; post-result removal would change the estimand and add another adaptive degree of freedom."
+  },
+  "literature": [
+    {
+      "id": "cawley-talbot-2010",
+      "title": "On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation",
+      "url": "https://www.jmlr.org/papers/v11/cawley10a.html",
+      "use": "Repeated optimization of a noisy model-selection criterion can overfit the criterion itself."
+    },
+    {
+      "id": "bergmeir-benitez-2012",
+      "title": "On the use of cross-validation for time series predictor evaluation",
+      "url": "https://doi.org/10.1016/j.ins.2011.12.028",
+      "use": "Time-ordered or blocked evaluation is needed to preserve the forecasting problem."
+    },
+    {
+      "id": "tatbul-et-al-2018",
+      "title": "Precision and Recall for Time Series",
+      "url": "https://papers.nips.cc/paper_files/paper/2018/hash/8f468c873a32bb0619eaeb2050ba45d1-Abstract.html",
+      "use": "Range anomalies require event/range-aware evaluation rather than point-only shortcuts."
+    },
+    {
+      "id": "beckers-rixen-2003",
+      "title": "EOF calculations and data filling from incomplete oceanographic datasets",
+      "url": "https://doi.org/10.1175/1520-0426(2003)020%3C1839:ECADFF%3E2.0.CO;2",
+      "use": "Low-rank ocean reconstruction requires cross-validated rank and reconstruction error, not adjacent-bin extrapolation."
+    },
+    {
+      "id": "ellenson-et-al-2020",
+      "title": "An application of a machine learning algorithm to determine and describe error patterns within wave model output",
+      "url": "https://doi.org/10.1016/j.coastaleng.2019.103595",
+      "use": "Wave residual correction is plausible when wave-state and wind covariates expose stable error structure."
+    }
+  ]
+}

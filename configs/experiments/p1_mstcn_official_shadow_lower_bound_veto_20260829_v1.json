@@ -1,0 +1,35 @@
+{
+  "schema_version": "p1.mstcn_official_shadow_lower_bound_veto.v1",
+  "experiment_id": "p1_mstcn_official_shadow_lower_bound_veto_20260829_v1",
+  "problem": "P1",
+  "role": "label-free official-test shadow audit after the historical lower-bound gate passed",
+  "hypothesis": "A Q3+Q4 truth-event-group bootstrap lower-bound veto can remove unstable e150-only additions while preserving the exact official champion anchor and GI rows.",
+  "historical_training_folds": [
+    "2025_q3",
+    "2025_q4"
+  ],
+  "bootstrap_replicates": 1000,
+  "acceptance_frequency": 0.9,
+  "seed": 20260829,
+  "deployment_contract": {
+    "e150_added_rows_expected": 333,
+    "official_champion_gi_only_rows_expected": 2,
+    "official_rows_expected": 169011,
+    "preserve_all_anchor_positive_rows": true,
+    "preserve_all_official_champion_gi_only_rows": true,
+    "write_candidate_csv": false,
+    "upload": false
+  },
+  "shadow_promotion_gate": {
+    "historical_lower_bound_gate_passed": true,
+    "accept_at_least_one_e150_segment": true,
+    "all_accepted_segments_meet_frequency": true,
+    "accepted_segments_use_known_categories": true,
+    "accepted_segments_all_numeric_within_historical_minmax": true,
+    "anchor_rows_removed": 0,
+    "gi_only_rows_removed": 0,
+    "no_submission_files_created": true,
+    "no_uploads": true
+  },
+  "claim_limit": "Label-free deployment relevance evidence only. A pass does not estimate official F1 and does not authorize CSV creation or upload."
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0-draft",
+  "experiment_id": "P1_sors_l5_regime_invariance_v1",
+  "family_id": "sors_l5_deployment_regime_invariance",
+  "created_at_kst": "2026-08-13T22:20:00+09:00",
+  "status": "implementation_only_outer_no_go",
+  "outer_decision": "no_go_due_experiment_budget",
+  "input_contract": {
+    "config_sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test_sha256": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387"
+  },
+  "hypothesis": {
+    "single_sentence": "Giving S-ORS layer 5 the same fixed depth-regime category during fold training and validation may avoid the documented unseen-category deployment routing while preserving its observed numeric depth.",
+    "source_fact": "S-ORS layer 5 has observed numeric depth in 2026 but its depth_regime is outside the frozen training vocabulary.",
+    "exactly_one_change": {
+      "kind": "deterministic_categorical_value_transform_before_encoder_fit",
+      "station": "S-ORS",
+      "layer": 5,
+      "column": "depth_regime",
+      "value": "S-ORS|deployment_unknown|l5",
+      "apply_to": [
+        "fold_train",
+        "fold_validation",
+        "full_train",
+        "test"
+      ],
+      "mask_inputs": [
+        "station",
+        "layer"
+      ],
+      "uses_labels": false,
+      "numeric_depth_unchanged": true,
+      "non_target_rows_bitwise_unchanged": true,
+      "category_map_fit": "fold_train_only"
+    },
+    "forbidden_changes": [
+      "numeric_depth_features",
+      "non_sors_layer5_rows",
+      "feature_columns",
+      "xgboost_parameters",
+      "iteration_counts",
+      "postprocess",
+      "thresholds",
+      "augmentation",
+      "ensemble",
+      "external_observations"
+    ]
+  },
+  "baseline": {
+    "run_id": "20260813T153038+0900_cv_378a4e89",
+    "backend": "xgboost",
+    "feature_mode": "offline",
+    "oof_sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "micro_f1": 0.8603708380408055,
+    "test_share_weighted_f1": 0.8133155525620019,
+    "fold_iteration_counts": [
+      700,
+      700,
+      700
+    ],
+    "reuse_exact_fold_postprocess": true,
+    "inner_reselection": false
+  },
+  "comparison": {
+    "a": {
+      "id": "A_natural_train_validation_sors_l5_unseen",
+      "training": "original natural depth_regime",
+      "validation": "S-ORS layer 5 depth_regime encoded as -1 only",
+      "expected_test_share_weighted_f1": 0.8108519636011662,
+      "expected_sors_layer5_f1": 0.927536231884058
+    },
+    "b": {
+      "id": "B_fold_symmetric_known_fallback",
+      "training": "fixed fallback on S-ORS layer 5",
+      "validation": "same fixed fallback on S-ORS layer 5",
+      "model": "frozen XGBoost seeds and parameters, exactly 700 trees",
+      "postprocess": "exact frozen per-fold values"
+    },
+    "additional_hyperparameters": [],
+    "adaptive_search_allowed": false,
+    "inner_reselection_allowed": false,
+    "non_target_encoded_inputs_bitwise_equal_before_fit": true,
+    "outer_execution_authorized": false
+  },
+  "outer_budget_audit": {
+    "no_virgin_holdout_remains": true,
+    "fold_positive_support": {
+      "2025_q2": 238,
+      "2025_q3": 4,
+      "2025_q4": 270
+    },
+    "recoverable_test_share_weighted_f1_upper_bound": 0.002463588960835761,
+    "promotion_delta_required": 0.005,
+    "upper_bound_meets_promotion_gate": false,
+    "interpretation": "Even perfect recovery of the already-observed validation-only routing loss cannot meet the fixed promotion delta, and all outer folds have prior exposure. No outer run is permitted."
+  },
+  "authorization": {
+    "implementation": true,
+    "unit_tests": true,
+    "outer_cv": false,
+    "competition_upload": false,
+    "commit": false,
+    "push": false,
+    "external_observations": false
+  }
+}

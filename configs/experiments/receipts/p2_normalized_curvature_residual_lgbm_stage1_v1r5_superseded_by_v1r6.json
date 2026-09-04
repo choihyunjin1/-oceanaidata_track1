@@ -1,0 +1,46 @@
+{
+  "schema_version": "p2_ncr_zero_fit_supersession_receipt.v1r6",
+  "created_at_kst": "2026-08-26T00:00:00+09:00",
+  "superseded_experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r5",
+  "successor_experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r6",
+  "disposition": "SUPERSEDED_INDEPENDENT_QA_NO_GO_NEVER_EXECUTE",
+  "numerical_execution_count": 0,
+  "physical_fit_calls": 0,
+  "official_test_reads": 0,
+  "sample_submission_reads": 0,
+  "submission_candidate_reads": 0,
+  "uploads": 0,
+  "v1r5_clean_namespace_at_supersession": {
+    "claim_exists": false,
+    "journal_exists": false,
+    "final_exists": false,
+    "staging_count": 0
+  },
+  "pinned_v1r5_files": {
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r5.json",
+      "bytes": 22660,
+      "sha256": "4c2da1ae3dc82e7a0f205cf263ee8524f28912b6a0e5419299778aa856103f48"
+    },
+    "runner": {
+      "path": "scripts/run_p2_normalized_curvature_residual_stage1_v1r5.py",
+      "bytes": 77441,
+      "sha256": "88484adff2a8d8b03fe6fbfa64c576453d90a08f5dd00ca6bfa0caa4ad2af087",
+      "normalized_sha256": "0db3fa1ee4775bef7622984baddaac20f0e7730d00bfb11952d70b9024872b15"
+    },
+    "test": {
+      "path": "tests/test_p2_normalized_curvature_residual_stage1_v1r5.py",
+      "bytes": 29673,
+      "sha256": "885962b75ab6f7c85d93d2a366f77275957b63d8ae2ec20105e43d719cbd0be1"
+    }
+  },
+  "qa_blockers_fixed_only_in_v1r6": [
+    "claim creation could precede journal creation failure without a durable exact-once terminal record",
+    "valid final publication followed by terminal journal append failure was ambiguous",
+    "timeout terminated only the direct worker rather than the full process tree",
+    "os.replace could overwrite a concurrently created final namespace"
+  ],
+  "numerical_contract_change": false,
+  "automatic_rerun_allowed": false,
+  "authorization": "Only v1r6 may be considered after independent QA; v1r5 execution is permanently forbidden."
+}

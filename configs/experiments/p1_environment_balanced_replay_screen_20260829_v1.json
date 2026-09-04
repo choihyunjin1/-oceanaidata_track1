@@ -1,0 +1,109 @@
+{
+  "schema_version": "p1.experiment_proposal.v1",
+  "experiment_id": "p1_environment_balanced_replay_screen_20260829_v1",
+  "problem": "P1",
+  "status": "PREREGISTERED_LOCAL_SHADOW_NOT_SUBMISSION_AUTHORIZED",
+  "intervention_layer": "training_objective",
+  "mechanisms": [
+    "station_layer_environment_balance",
+    "positive_window_replay",
+    "worst_environment_proxy"
+  ],
+  "hypothesis": "Balancing positive-bearing training windows across station-layer environments before a very small e150 warm-start update can reveal whether full worst-group training has transport value without paying for a complete retrain.",
+  "evidence": {
+    "primary_sources": [
+      "https://proceedings.mlr.press/v237/awasthi24a.html",
+      "https://www.jmlr.org/papers/v18/16-558.html",
+      "https://proceedings.mlr.press/v115/wu20a.html",
+      "https://proceedings.mlr.press/v202/he23b.html"
+    ],
+    "counterevidence": [
+      "https://arxiv.org/abs/2010.05761"
+    ]
+  },
+  "evaluation": {
+    "primary_metric": "binary_row_f1",
+    "selection_windows": ["2025_q2"],
+    "confirmation_windows": ["2025_q3", "2025_q4"],
+    "required_station_slices": ["G-ORS", "I-ORS", "S-ORS"],
+    "retrospective_confirmation": true,
+    "claim_limit": "Low-fidelity retrospective screen only; not a fresh confirmation and not an official score claim.",
+    "performance_gate": {
+      "pooled_delta_f1_min": 0.0,
+      "each_phase_delta_f1_min": 0.0,
+      "anchor_positive_removed_rows": 0
+    },
+    "information_gate": {
+      "zero_step_max_abs_difference": 0.000001,
+      "new_pathways_must_change": true,
+      "nonfinite_count": 0
+    }
+  },
+  "budget": {
+    "low_fidelity_epochs": 10,
+    "full_fidelity_epochs": 0,
+    "positive_windows_per_station_layer": 24,
+    "negative_windows_per_station_layer": 12,
+    "stop_conditions": [
+      "q3_delta_f1_le_0",
+      "q4_delta_f1_le_0",
+      "pooled_delta_f1_le_0",
+      "any_station_receives_ge_80_percent_of_additions"
+    ]
+  },
+  "training": {
+    "warm_start": "exact single-seed e150 state for each historical phase",
+    "width": 512,
+    "seed": 20260827,
+    "learning_rate": 0.00001,
+    "weight_decay": 0.0001,
+    "positive_weight": 4.0,
+    "warmup_epochs": 1,
+    "gradient_clip_norm": 1.0,
+    "decoder_high_threshold": 0.8,
+    "anchor_preserving_union": true
+  },
+  "phases": ["q3", "q4"],
+  "fixed_seed": 20260827,
+  "baseline_epoch": 150,
+  "width": 512,
+  "fine_tune": {
+    "epochs": 10,
+    "learning_rate": 0.00001,
+    "minimum_learning_rate": 0.000003,
+    "warmup_epochs": 1,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "positive_weight": 4.0
+  },
+  "decoder": {
+    "high_threshold": 0.8,
+    "minimum_added_segment_rows": 19,
+    "boundary_peak_snap_radius_rows": 12,
+    "anchor_union": true,
+    "tuning_after_truth_read": false
+  },
+  "warm_start_checkpoints": {
+    "q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_width_512_seed_20260827_epoch_150_state.pt",
+      "sha256": "4f1e69f753fa2caacd9617e96a2e72b8fa32f4834ac890289b2ecf61239856a5"
+    },
+    "q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_width_512_seed_20260827_epoch_150_state.pt",
+      "sha256": "7201479a6fe903dd877f90d2a972224fdc17cf0807bc73035abcfdb04b8aa7da"
+    }
+  },
+  "operation_boundaries": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_csv_creation": false,
+    "upload": false,
+    "q3_q4_results_may_not_change_this_run": true
+  },
+  "scope": {
+    "official_test_labels": false,
+    "official_test_rows_read": 0,
+    "submission_created": false,
+    "upload_performed": false
+  }
+}

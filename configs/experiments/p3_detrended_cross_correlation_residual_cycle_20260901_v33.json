@@ -1,0 +1,90 @@
+{
+  "schema_version": "p3.detrended_cross_correlation_residual.config.v33",
+  "experiment_id": "p3_detrended_cross_correlation_residual_cycle_20260901_v33",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "public_rmse_m": 0.575233,
+    "public_points": 24.203599,
+    "policy": "exact uniform alpha 0.425 comparator"
+  },
+  "duplication_audit": {
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_DETRENDED_CROSS_SCALE_COVARIANCE_AXIS",
+    "novel_axis": "case-local scale-dependent detrended cross-correlation between current wave height and eleven physical state channels",
+    "distinction": "Cross-wavelet phase represents local phase alignment, transfer entropy represents directed symbolic information, scattering represents wavelet-modulus moments, and spectral models represent marginal frequency content. DCCA represents symmetric power-law cross-covariance after local polynomial trend removal.",
+    "rejected_axes": {
+      "univariate_multifractal_dfa": "semantic proximity to the closed wavelet/scattering and global spectral lineages",
+      "dcca_router": "posthoc routing on the exposed surface is forbidden"
+    },
+    "posthoc_prior_cycle_adjustment": false
+  },
+  "encoder": {
+    "context_rows": 289,
+    "transformed_channels": 12,
+    "reference_channel": 0,
+    "paired_channels": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "fixed_scales": [12, 24, 48, 96],
+    "detrend_order": 1,
+    "statistics_per_pair": ["rho_scale12", "rho_scale24", "rho_scale48", "rho_scale96", "log_abs_cross_fluctuation_slope", "cross_sign_consistency"],
+    "feature_count": 66,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_DCCA66_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_DCCA66_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {
+      "worst_block_delta_m_lte": 0.015,
+      "worst_lead_delta_m_lte": 0.010,
+      "worst_station_lead_delta_m_lte": 0.010,
+      "reference_tail_quantile_within_block": 0.80,
+      "worst_reference_tail_block_delta_m_lte": 0.015
+    },
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "fixed_transport_penalty_points": 0.04958605409228893
+  },
+  "primary_sources": [
+    {
+      "citation": "Podobnik and Stanley, Detrended Cross-Correlation Analysis: A New Method for Analyzing Two Nonstationary Time Series, Physical Review Letters 100, 084102 (2008)",
+      "url": "https://doi.org/10.1103/PhysRevLett.100.084102"
+    }
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

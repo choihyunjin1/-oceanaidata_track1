@@ -1,0 +1,95 @@
+{
+  "schema_version": "p1.ncad_synthetic_long_event.v1",
+  "experiment_id": "p1_ncad_synthetic_long_event_20260828_v1",
+  "status": "PREREGISTERED_SINGLE_BOUNDED_ATTEMPT",
+  "claim": "NCAD-inspired contextual outlier exposure; not an exact reproduction of NCAD",
+  "historical_surface": "2025_q2 is historically exposed and provides directional evidence only",
+  "source_config": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+  "anchor_generator": {
+    "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz",
+    "sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1",
+    "anchor_array": "anchor"
+  },
+  "features": [
+    "temp_raw", "psal_raw", "depth_raw", "psal_missing", "depth_missing",
+    "has_gap_before", "day_sin", "day_cos", "hour_sin", "hour_cos",
+    "temp_diff_1", "temp_abs_diff_1", "temp_backward_acceleration",
+    "psal_diff_1", "psal_abs_diff_1", "depth_diff_1", "depth_abs_diff_1",
+    "temp_median_resid_3h", "temp_abs_median_resid_3h", "temp_roll_std_3h",
+    "diff_roll_std_3h", "temp_robust_z_3h",
+    "temp_median_resid_12h", "temp_abs_median_resid_12h", "temp_roll_std_12h",
+    "diff_roll_std_12h", "temp_robust_z_12h",
+    "temp_median_resid_24h", "temp_abs_median_resid_24h", "temp_roll_std_24h",
+    "diff_roll_std_24h", "temp_robust_z_24h",
+    "temp_median_resid_72h", "temp_abs_median_resid_72h", "temp_roll_std_72h",
+    "diff_roll_std_72h", "temp_robust_z_72h",
+    "peer_count", "peer_available", "temp_peer_residual", "temp_abs_peer_residual",
+    "station_layer_temp_std", "temp_long_resid_7d", "peer_detrended_resid_7d",
+    "peer_abs_detrended_resid_7d", "reference_resid_7d",
+    "reference_abs_resid_7d", "reference_slope_1h_7d"
+  ],
+  "split": {
+    "outer": [0.5, 0.75],
+    "outer_purge_days": 15,
+    "fit_fraction_of_development": 0.7,
+    "inner_purge_days": 3,
+    "fold": "2025_q2"
+  },
+  "windowing": {
+    "rows": 288,
+    "training_stride_rows": 72,
+    "inference_stride_rows": 36,
+    "minimum_component_rows": 19,
+    "bridge_rows": 2
+  },
+  "synthetic": {
+    "probability_on_normal_window": 0.7,
+    "event_min_rows": 19,
+    "event_max_rows": 96,
+    "families": ["offset", "drift", "noise", "flatline", "coe"]
+  },
+  "model": {
+    "width": 64,
+    "dilations": [1, 2, 4, 8, 16, 32],
+    "dropout": 0.1
+  },
+  "training": {
+    "seed": 20260828,
+    "maximum_epochs": 60,
+    "minimum_epochs": 8,
+    "patience": 10,
+    "batch_size": 64,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.0002,
+    "positive_weight": 8.0,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_metric": "inner anchor-preserving union F1",
+    "result_based_retry": false
+  },
+  "threshold": {
+    "inner_score_quantiles": [0.9, 0.93, 0.95, 0.97, 0.98, 0.985, 0.99, 0.9925, 0.995, 0.9975, 0.999],
+    "added_precision_floor": 0.45,
+    "select": "maximum inner union F1; tie higher threshold"
+  },
+  "calibration_safety": {
+    "minimum_delta_f1": -0.001,
+    "maximum_added_fp": 4,
+    "failure_action": "NO_GO_CALIBRATION_SAFETY"
+  },
+  "qualification_gate": {
+    "delta_f1_strictly_above": 0.0,
+    "added_precision_strictly_above_anchor_f1_over_2": true,
+    "minimum_added_tp": 19,
+    "anchor_positive_removed_rows_eq": 0
+  },
+  "artifact_dir": "artifacts/p1_ncad_synthetic_long_event_20260828_v1",
+  "prohibitions": {
+    "q3_q4_read": true,
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_generation": true,
+    "upload": true,
+    "post_result_hyperparameter_changes": true,
+    "git_commit_or_push": true
+  }
+}

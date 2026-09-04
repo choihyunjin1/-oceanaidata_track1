@@ -1,0 +1,736 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.002937661473729086,
+          0.0003435209782348628
+        ],
+        "median_m": -0.0013216786937856884,
+        "probability_improve": 0.9086,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001617566925772862,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0014311935074096116,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0056391424786031985,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0018482156468618838,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": 0.0012212331099653584,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.005061662374750364,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0028653423785353627,
+          0.00017680814305027776
+        ],
+        "median_m": -0.0013532458527907298,
+        "probability_improve": 0.9254,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.22513632138165,
+        "raw_gain": 0.021537321381649557,
+        "transport_adjusted_gain": -0.028048732710639374,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 4,
+      "lead": {
+        "12": {
+          "delta_rmse_m": 0.00043318121558522105,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0034488103184131536,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.001114564603777124,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.001373473415630766,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0010252661327896373,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.003273007885230106,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_VMD72_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.012586413491754156,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0032543174721300083,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.011817768042369559,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0024092255914216487,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": 0.0031783743978427426,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.00235087123916633,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7798344787899699,
+        "delta_candidate_minus_uniform": -0.0013570459017621106,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0008203671703439497,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0030581608470487964,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0020922238757276057,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0011465575427440644,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.00015660548131724017,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.0014734023869489299,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0005881136616427973,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0018928770684187857,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0003216735163903417,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0014862971738398567,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.008268757709243735,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.00311536356366493,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0012786797424961804,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.001297731336407093,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.004262038299275406,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.0013213770342878073,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0032304359025980833,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0022208840417307085,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0035045843837984147,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 9.281428952989668e-05,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.005312569934184608,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0056391424786031985,
+      "worst_lead_delta_m": 0.0010252661327896373,
+      "worst_reference_tail_block_delta_m": 0.012586413491754156,
+      "worst_station_lead_delta_m": 0.0018928770684187857
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0029189602270065173,
+          5.1493826557893615e-06
+        ],
+        "median_m": -0.0015460400361276272,
+        "probability_improve": 0.9498,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0016212849992052192,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0019994531464553322,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0059470916618443725,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0029666212827023086,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0011138531793873918,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0036687683680516336,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0028593975960616914,
+          -0.00015923989352573665
+        ],
+        "median_m": -0.0015295824362466792,
+        "probability_improve": 0.968,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.22820846427109,
+        "raw_gain": 0.02460946427109096,
+        "transport_adjusted_gain": -0.02497658982119797,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0005874116953442643,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.003880333838350958,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.001961725996307506,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0006373040530992524,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0011873628246968915,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.002587593040989211,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_VMD72_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.010057328449643133,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004248162213801754,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.010234582898113853,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0029039155246948223,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0007242168499809187,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0013606151427443258,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7796409060218495,
+        "delta_candidate_minus_uniform": -0.0015506186698824864,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0001016058624608851,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.00298642447310582,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0018062319814537986,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.00027741227653765854,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.00155641553777075,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.00010822512061559042,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00020783015224346002,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0011780064960487113,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.00018075010688667348,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.002104210415362129,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.007553469252569167,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.0037198040248143105,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0006301644512033411,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0011914080816257666,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.003688877411705427,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.00017039509480609727,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.003517720008863745,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0027295636772524112,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0015306960493952637,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0012254381014618065,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.003605608809067351,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0059470916618443725,
+      "worst_lead_delta_m": 0.0011873628246968915,
+      "worst_reference_tail_block_delta_m": 0.010234582898113853,
+      "worst_station_lead_delta_m": 0.0012254381014618065
+    }
+  ],
+  "created_at_utc": "2026-08-31T22:31:11.947098+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_VARIATIONAL_MODE_CANDIDATES",
+  "duplication_audit": {
+    "distinction": "v35 recursively subtracts extrema-envelope EMD modes and then measures Hilbert quantities. v52 jointly updates a fixed three-mode normalized variational Wiener partition in frequency space. Wavelets/scattering use predetermined scale filters rather than data-derived simultaneous band centers. No prior output is reused.",
+    "forbidden_reuse": [
+      "v35 predictions/features/modes",
+      "v42-v51 predictions/features",
+      "prior ensembles or routers"
+    ],
+    "novel_axis": "fixed simultaneous variational narrow-band decomposition of each historical signal",
+    "posthoc_prior_cycle_adjustment": false,
+    "prior_mention_note": "VMD appeared only as an unexecuted literature direction in an old P3 report; no P3 VMD fit or result exists.",
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_JOINT_VARIATIONAL_NARROWBAND_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 1.6866315999941435,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_variational_mode_residual_cycle_20260901_v52",
+  "feature_receipt": {
+    "columns": 72,
+    "finite": true,
+    "matrix_sha256": "caba85f2c2486b5f02e1f04e85a71bd057f88e5c7b7a85004f21008e1f0827db",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.1647673617115697,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0653805551453871,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.17509564576570308,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06856044079158125,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.17456499343025422,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06681589751890075,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19264369382243257,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07699086509290647,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.18919127809859063,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07168164485128407,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_VMD72_RIDGE512_ADD10",
+      "coefficient_l2": 0.15722209749007474,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_VMD72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.058255003853590885,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Dragomiretskiy and Zosso, Variational Mode Decomposition, IEEE Transactions on Signal Processing 62(3), 531-544 (2014)",
+      "url": "https://doi.org/10.1109/TSP.2013.2288675",
+      "use": "simultaneous variational narrow-band decomposition mechanism only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "b21322f67ebb8ee7c26b901d3bc33b7d0cf76f898b28e614db329e116174cd9c",
+    "evaluation_arrays_sha256": "63408a01b771fbe8cbb54bdf09ee8f17ef2612fb4fc611be3cae1b51f09784b0",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "ea3849a52e8a1423d90a1535d561f290080121f8ecaac09be237e3804e74f7de",
+    "runner_sha256": "6e0df4d489cc0aa2002f329d0b7f22f38d42c64626d55ef21912ce22514aee96"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.variational_mode_residual.result.v52",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

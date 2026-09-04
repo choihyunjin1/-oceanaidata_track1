@@ -1,0 +1,53 @@
+{
+  "schema_version": "p3.multiscale_wavelet_scattering_residual.config.v27",
+  "experiment_id": "p3_multiscale_wavelet_scattering_residual_cycle_20260901_v27",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_FIXED_SCATTERING_AXIS",
+    "novel_axis": "fixed dyadic Haar wavelet modulus and second-order adjacent-scale scattering moments over the past 48h",
+    "distinction": "Causal spectral uses global Fourier/random-frequency amplitudes; path-signature uses ordered iterated integrals; ROCKET uses random local kernels and PPV/max. v27 uses deterministic multiscale wavelet modulus cascades and invariant moments with no learned encoder.",
+    "closed_families_unchanged": ["TCN/TimeXer/PatchTST", "causal spectral", "path signature", "ROCKET", "NLinear", "routers and stacking", "KMA alpha grids"]
+  },
+  "scattering": {
+    "context_rows": 289,
+    "transformed_channels": ["hs", "tp", "hmax", "wvdir_sin", "wvdir_cos", "wspd", "gust", "wdir_sin", "wdir_cos", "airt", "relh", "caph"],
+    "wavelet": "fixed first-difference Haar at dyadic lags",
+    "scales": [1, 2, 4, 8, 16, 32],
+    "first_order_moments": ["mean_abs", "std_abs", "max_abs"],
+    "second_order_pairs": [[1,2],[2,4],[4,8],[8,16],[16,32]],
+    "second_order_moments": ["mean_modulus_difference", "std_modulus_difference"],
+    "feature_count": 336,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_SCATTER336_RIDGE256_ADD10", "ridge_alpha": 256.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_SCATTER336_RIDGE1024_ADD10", "ridge_alpha": 1024.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {"surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases", "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"], "purge_hours": 78, "fits_per_candidate": 6, "maximum_total_fits": 12, "bootstrap_replicates": 5000, "gate": "delta RMSE below zero, at least 4/6 blocks improve, episode and block-station CI90 upper below zero, worst station-lead <=0.01m", "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"},
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Bruna and Mallat, Invariant Scattering Convolution Networks", "url": "https://arxiv.org/abs/1112.1120"},
+    {"citation": "Anden, Lostanlen, and Mallat, Joint Time-Frequency Scattering", "url": "https://arxiv.org/abs/1807.08869"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

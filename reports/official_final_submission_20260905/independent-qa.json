@@ -1,0 +1,63 @@
+{
+  "schema_version": "ocean.official_final_submission.qa.20260905.v2",
+  "status": "PASS_LOCAL_MODEL_CHAIN_NOT_UPLOADED",
+  "scope": [
+    "three isolated data-to-training-to-model-to-answer packages",
+    "six independently executed Jupyter notebooks",
+    "official input SHA-256 contracts",
+    "model-driven output schema, rows, key order, finite and domain checks",
+    "historical champion hash comparison without score overclaim",
+    "P1 split-checkpoint streaming reassembly hashes",
+    "all upload files <= 50000000 bytes and ZIP integrity",
+    "absence of redistributed organizer source data and common credential files"
+  ],
+  "official_hidden_truth_rows_read": 0,
+  "external_observation_reanalysis_forecast_rows": 0,
+  "pretrained_weight_files_loaded": 0,
+  "uploads": 0,
+  "focused_pytest": {
+    "passed": 5,
+    "failed": 0
+  },
+  "ruff": "PASS",
+  "notebooks": {
+    "P1": {
+      "training_notebook_executed": true,
+      "training_mode": "certified_training_output_hash_and_provenance_audit",
+      "prediction_notebook_executed": true,
+      "error_outputs": 0,
+      "answer_rows": 169011,
+      "answer_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+      "historical_champion_hash_exact": true
+    },
+    "P2": {
+      "fresh_scratch_fits_during_build": 3,
+      "training_notebook_executed": true,
+      "training_mode": "fresh_three_fit_model_manifest_audit",
+      "prediction_notebook_executed": true,
+      "error_outputs": 0,
+      "answer_rows": 26061,
+      "answer_sha256": "64f59fe7b28b3d60189e6fdef8ed00708da2f3c8066509f52395395d5a93f1ce",
+      "historical_champion_sha256": "331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9",
+      "historical_champion_hash_exact": false,
+      "historical_score_claimed_for_current_answer": false
+    },
+    "P3": {
+      "training_notebook_executed": true,
+      "training_mode": "two_certified_scratch_chain_hash_and_provenance_audit",
+      "prediction_notebook_executed": true,
+      "error_outputs": 0,
+      "answer_rows": 1200,
+      "answer_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+      "historical_champion_hash_exact": true
+    }
+  },
+  "forbidden_source_data_files_in_uploads": 0,
+  "local_data_path_files_in_uploads": 0,
+  "common_credential_file_hits_in_uploads": 0,
+  "upload_file_count": 26,
+  "upload_files_over_50000000_bytes": 0,
+  "zip_integrity_failures": 0,
+  "p1_checkpoint_reassembly_hashes_exact": 3,
+  "note": "P1 and P3 reproduce the exact clean historical champion answers from saved scratch-trained models. P2 is a fresh same-recipe model replay and its historical score is reference-only. No package was uploaded."
+}

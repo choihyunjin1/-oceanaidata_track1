@@ -1,0 +1,25 @@
+{
+  "schema_version": "p1.v18r1.technical-recovery-receipt.1",
+  "status": "AUTHORIZED_PREFLIGHT_PENDING",
+  "base_experiment_id": "p1_public_transport_repair_cycle_20260831_v18",
+  "recovery_experiment_id": "p1_public_transport_repair_cycle_20260831_v18r1",
+  "failure_phase": "historical source timestamp normalization before feature generation",
+  "failure_type": "PANDAS_DATETIME_RESOLUTION_CONTRACT",
+  "root_cause": "pandas preserved datetime64[us, UTC], while the original helper divided its integer view by the nanosecond-per-minute constant",
+  "source_key_duplicates": 0,
+  "minimum_source_cadence_seconds_checked": 600.0,
+  "original_fit_count": 0,
+  "original_metric_rows": 0,
+  "original_official_reads": 0,
+  "original_hidden_truth_reads": 0,
+  "original_submission_csv_created": 0,
+  "original_uploads": 0,
+  "only_authorized_change": "pd.to_datetime(values, utc=True).to_numpy(dtype='datetime64[ns]').astype('int64') // 60000000000",
+  "method_feature_model_threshold_gate_hashes_unchanged": true,
+  "hash_chain": {
+    "base_method_config_sha256": "637d86b9a2889d606b3133f9cea3feb0897c9f8cad71d9810a87d9aa734e39f5",
+    "original_runner_sha256": "cf67c08152c977889baa4370b616d8b09dc5530c4335acfa40f67beddf0fcd0f",
+    "original_attempt_lock_sha256": "752542c2deb60801fb8ce2e57d3b86208ac52c3b3d06e6c6c7a6e9f5c818ff3e",
+    "original_terminal_failure_sha256": "9b51918540a79147a85edbd9030246bc4e0d65cc5a25d253dba6cee499556492"
+  }
+}

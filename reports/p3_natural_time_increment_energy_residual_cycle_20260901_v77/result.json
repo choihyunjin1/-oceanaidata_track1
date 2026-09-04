@@ -1,0 +1,742 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.002315435719771297,
+          0.0010380340085512087
+        ],
+        "median_m": -0.0007532216776552914,
+        "probability_improve": 0.7642,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0007915443148417411,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0010197232344588691,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00839728425895736,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0024622888435335,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0020430541957118242,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0026628024721540022,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.002299885174701788,
+          0.000891585528945349
+        ],
+        "median_m": -0.0007594141541367172,
+        "probability_improve": 0.7808,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.215439858928043,
+        "raw_gain": 0.011840858928043268,
+        "transport_adjusted_gain": -0.03774519516424566,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.00039436286953875577,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.003256772751818904,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.001758370575469903,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": 0.0006138188439720471,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0021394827844297692,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.000665074202689464,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.006884121654659903,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0017224444144060547,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.01374390350696486,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.001451076030345444,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0003439186915552561,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.002057055869381763,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7804454435613583,
+        "delta_candidate_minus_uniform": -0.0007460811303737769,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00023310017538913375,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.002116287150783047,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.00016065043979440752,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.0004586638633337081,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.001623210034531919,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0009515599307142741,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00036372682539109746,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0017544732030277954,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0006663678449675414,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0016933959964688938,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.005781537876499709,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.0036336857382041066,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.0008928981137942271,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.001069573160439763,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0020231773966506994,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.0006897878570731875,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0030477889923374857,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.001160368628549846,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.0006867904376685052,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0034079247567944115,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0005696473218345099,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.00839728425895736,
+      "worst_lead_delta_m": 0.0021394827844297692,
+      "worst_reference_tail_block_delta_m": 0.01374390350696486,
+      "worst_station_lead_delta_m": 0.0034079247567944115
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.002629941321097501,
+          0.0005691733655021686
+        ],
+        "median_m": -0.0011650291611564612,
+        "probability_improve": 0.8726,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001022170372508291,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0016539016775192206,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.007265597992127115,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.002915837631692564,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.002054578445151445,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.002883648642540204,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.002535342285674258,
+          0.0003222040033356467
+        ],
+        "median_m": -0.0011146593593456822,
+        "probability_improve": 0.8972,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.221777878914267,
+        "raw_gain": 0.018178878914266523,
+        "transport_adjusted_gain": -0.03140717517802241,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.000799241141552498,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.003642520210747069,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.002221848313693431,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": 0.00022482716461202923,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0017419516063957863,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0010393187400010717,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.007094650200962005,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003386590158424907,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.010832669490790758,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.001535854996262298,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.001781124914273735,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0009413864265278571,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7800460910190816,
+        "delta_candidate_minus_uniform": -0.0011454336726504089,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00029177360307353073,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.002660535899869587,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0007718418975573016,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.0002976223191204497,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0018663092368013112,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0008145861945610955,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.00016385299586163526,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0014988176940379239,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0006593700313393125,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0022577976375670605,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.00645889935711641,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004036843840221516,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.00023142983043578091,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0008328258957022161,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.002771129850588583,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.00010417948745911065,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0033602746658479843,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0022771772816306823,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.00028446073740973077,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.002746922676059249,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0009279029722814025,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.007265597992127115,
+      "worst_lead_delta_m": 0.0017419516063957863,
+      "worst_reference_tail_block_delta_m": 0.010832669490790758,
+      "worst_station_lead_delta_m": 0.002746922676059249
+    }
+  ],
+  "created_at_utc": "2026-09-01T05:41:44.837404+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_NATURAL_TIME_CANDIDATES",
+  "duplication_audit": {
+    "distinction": "v37 encodes horizontal-visibility graph topology, v39 sample entropy encodes template recurrence, v53 realized variation encodes jump magnitude, v57 LZ and v69 SAX encode symbolic complexity, and v66 encodes record events. v77 instead assigns squared-increment energy to normalized event order and measures natural-time variance, entropy, reversed entropy and their causal-order difference. It is not a spectrum, pole, codifference, pairwise-causality estimator, or reuse of prior outputs.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "past-only natural-time ordering of normalized increment energy",
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "repository_negative_fingerprint": "No executed P3 natural-time, kappa1, natural-time entropy, S_rev, or increment-energy event-order feature contract was found.",
+    "semantic_verdict": "NON_DUPLICATE_P3_NATURAL_TIME_INCREMENT_ENERGY_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.47545179999724496,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_natural_time_increment_energy_residual_cycle_20260901_v77",
+  "feature_receipt": {
+    "columns": 32,
+    "finite": true,
+    "matrix_sha256": "c3e726e69e9de0e510cb257ba959fb11ee5848baa0b579f0d20257e9ef24c668",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.08838970112587807,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.03235102760341311,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.12052111888371894,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0497936897327235,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.13035035400529396,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.05054892614851769,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.12037683298541203,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.043115384840436866,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.10696898781093711,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.03882042155364189,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_NATTIME32_RIDGE512_ADD10",
+      "coefficient_l2": 0.12200581957964642,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_NATTIME32_RIDGE2048_ADD10",
+      "coefficient_l2": 0.042563643481635695,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Varotsos, Sarlis, Skordas, and Lazaridou, Entropy in the natural time domain, Physical Review E 70, 011106 (2004)",
+      "url": "https://doi.org/10.1103/PhysRevE.70.011106",
+      "use": "natural-time entropy motivation only; no P3 performance claim"
+    },
+    {
+      "citation": "Varotsos, Sarlis, Skordas, and Lazaridou, Entropy of seismic electric signals: Analysis in natural time under time reversal, Physical Review E 73, 031114 (2006)",
+      "url": "https://doi.org/10.1103/PhysRevE.73.031114",
+      "use": "time-reversal entropy motivation only; no ocean-forecast performance claim"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "48cf75615475627fa02da1ea4e0e5abc36396eb9655b28d496b7ffa4900aa881",
+    "evaluation_arrays_sha256": "8f750d7d16cdd44125f6d40d7a8b49f28a9f8a7633a5b60e251a14636c149b8f",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "4d50f60b4ce425026d9a9e15475878038d97efad93890c1b09d31086e3ef9cfd",
+    "runner_sha256": "f4932fae25b04021493dd29db5c966a2b859ba71481263236bddaf3fb60edd04"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.natural_time_increment_energy_residual.result.v77",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

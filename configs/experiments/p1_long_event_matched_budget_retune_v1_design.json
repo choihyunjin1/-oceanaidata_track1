@@ -1,0 +1,263 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.design.v1",
+  "experiment_id": "p1_long_event_matched_budget_retune_20260826_v1",
+  "created_at_kst": "2026-08-26T06:02:44+09:00",
+  "problem": "P1",
+  "cycle_index": 2,
+  "problem_cycle_ceiling": 2,
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "design_only": true,
+  "pre_result_freeze": {
+    "frozen_before_current_p1_screen_result_review": true,
+    "frozen_before_cycle_1_result_exists": true,
+    "current_or_cycle_1_results_may_change_any_numeric_choice": false,
+    "numeric_choices_are_immutable_after_created_at_kst": true
+  },
+  "authorization_contract": {
+    "implementation_authorized": false,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_new_explicit_authorization": true,
+    "maximum_lifetime_executions_if_separately_authorized": 1,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "cycle_relation": {
+    "this_is_cycle": "P1_CYCLE_2_OF_EXACTLY_2_FINAL",
+    "cycle_1_design_path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+    "third_cycle_allowed": false,
+    "post_terminal_result_research_continuation_allowed": false,
+    "result_driven_substitute_cycle_allowed": false
+  },
+  "trigger_and_stop_contract": {
+    "required_cycle_1_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+    "required_cycle_1_result_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/result.json",
+    "required_cycle_1_manifest_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/manifest.json",
+    "trigger": "Cycle 1 must have a terminal RESEARCH_GO, all integrity gates must pass, and a future execution authorization must pin the exact Cycle-1 result and manifest hashes before any materialization or fit.",
+    "ineligible_if": [
+      "Cycle 1 is incomplete",
+      "Cycle 1 is RESEARCH_NO_GO",
+      "Cycle 1 has an unevaluated gate",
+      "Cycle 1 has a hash, chronology, key, or leakage failure",
+      "Cycle 1 result or manifest hashes are unavailable"
+    ],
+    "terminal_policy": "After one authorized execution, stop P1 research regardless of pass or fail. A pass is only a local submission-worthiness finding; candidate creation and submission remain separate explicit actions.",
+    "cycle_1_values_may_change_grid_budget_splits_metrics_or_gates": false
+  },
+  "hypothesis": "The long-event segment structure has genuine incremental value, rather than merely receiving less tuning than the mature incumbent, if it retains a transport-sized F1 advantage after the incumbent and challenger receive the same sealed search cells, seeds, historical selection windows, outer folds, compute ceiling, metric, and stopping rules.",
+  "immutable_aggregate_inputs": [
+    {
+      "path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json",
+      "bytes": 7350,
+      "sha256": "943ff9ac9723c36445a2a6af2112073799a4bf52185fde91d1e6e5bad9bdfb45",
+      "role": "score-headroom and transport-threshold planning evidence"
+    },
+    {
+      "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/result.json",
+      "bytes": 2384,
+      "sha256": "8df952acf1de4d86d129a9e1bf9ce1faa9c5450c7140c3a6db5eba65a809388b",
+      "role": "aggregate maturity-bias evidence"
+    },
+    {
+      "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/manifest_final.json",
+      "bytes": 1689,
+      "sha256": "3b54388dc1bca47e95b5218aaec81c2b45f1db8cd42248995b1a605258ea78f1",
+      "role": "aggregate comparator integrity evidence"
+    },
+    {
+      "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/result.json",
+      "bytes": 4150,
+      "sha256": "0f00b798fe8297bc84b21e639e50c389b1315d6162ca84ebdfec32d91bdf8fe2",
+      "role": "aggregate long-event error evidence"
+    },
+    {
+      "path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/classification.json",
+      "bytes": 3015,
+      "sha256": "c78a5ec358426e97f8583f914ff4cf460950f1461949e46a04a3fb83518a5a55",
+      "role": "aggregate event-type evidence"
+    }
+  ],
+  "predecessor_contracts": [
+    {
+      "path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4.json",
+      "bytes": 12869,
+      "sha256": "3d1ff35478928d063cfcbad888d149e28ccaed00f5b11e00433da3cd02d78d6c"
+    },
+    {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "bytes": 14389,
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+      "sha256_policy": "Re-verify this exact design SHA-256 in the future execution authorization; no design field may be edited to match results."
+    }
+  ],
+  "data_features_target_firewall": {
+    "allowed_data": "Historical labeled P1 training rows and frozen local prediction keys only, after a future authorization pins their existing hashes.",
+    "control_features": "The exact qualifying anchor feature set plus neutral zero values and support=0 for every challenger-only segment channel.",
+    "challenger_features": "The same ordered feature slots, with Cycle-1 long-event proposal, boundary, context, support, and segment-score channels populated exactly as locked by Cycle 1.",
+    "target": "binary P1 label; the segment target and anchor-preserving rescue rule are byte-for-byte the Cycle-1 contract",
+    "common_feature_count_required": true,
+    "common_column_order_required": true,
+    "outer_validation_target_used_for_selection": false,
+    "official_evaluation_data_metadata_score_or_rank_used": false,
+    "future_or_center_leakage": false,
+    "anchor_positive_rows_may_be_cleared": false
+  },
+  "leakage_safe_splits": {
+    "inner_selection_windows": "Byte-identical three chronological inner windows in P1 Cycle 1.",
+    "outer_locked_windows": "Byte-identical 2025_q2, 2025_q3, and 2025_q4 ordered validation keys in P1 Cycle 1.",
+    "purge_and_prefix_rule": "Byte-identical Cycle-1 strict training prefix with at least seven full days between fit end and validation start.",
+    "selection_rule": "Each arm independently selects one finalist using inner windows only, including its frozen no-retune baseline as cell zero. The two selected finalists are then scored exactly once on the locked outer windows.",
+    "outer_labels_may_trigger_rerun_or_new_cell": false,
+    "exact_key_alignment_required": true
+  },
+  "sealed_matched_search": {
+    "model_family": "lightgbm.LGBMClassifier",
+    "common_fixed_parameters": {
+      "objective": "binary",
+      "deterministic": true,
+      "force_row_wise": true,
+      "n_jobs": 8,
+      "verbosity": -1
+    },
+    "cells": [
+      {"id": "c01", "n_estimators": 1000, "learning_rate": 0.02, "num_leaves": 31, "min_child_samples": 40, "subsample": 0.85, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0},
+      {"id": "c02", "n_estimators": 700, "learning_rate": 0.035, "num_leaves": 63, "min_child_samples": 60, "subsample": 0.85, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0},
+      {"id": "c03", "n_estimators": 500, "learning_rate": 0.05, "num_leaves": 31, "min_child_samples": 60, "subsample": 0.75, "colsample_bytree": 1.0, "reg_alpha": 0.0, "reg_lambda": 0.5},
+      {"id": "c04", "n_estimators": 900, "learning_rate": 0.025, "num_leaves": 63, "min_child_samples": 40, "subsample": 1.0, "colsample_bytree": 0.7, "reg_alpha": 1.0, "reg_lambda": 5.0},
+      {"id": "c05", "n_estimators": 650, "learning_rate": 0.04, "num_leaves": 127, "min_child_samples": 80, "subsample": 0.75, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 5.0},
+      {"id": "c06", "n_estimators": 800, "learning_rate": 0.03, "num_leaves": 31, "min_child_samples": 20, "subsample": 1.0, "colsample_bytree": 1.0, "reg_alpha": 0.0, "reg_lambda": 1.0},
+      {"id": "c07", "n_estimators": 550, "learning_rate": 0.045, "num_leaves": 63, "min_child_samples": 20, "subsample": 0.85, "colsample_bytree": 0.7, "reg_alpha": 1.0, "reg_lambda": 0.5},
+      {"id": "c08", "n_estimators": 1000, "learning_rate": 0.02, "num_leaves": 127, "min_child_samples": 60, "subsample": 0.85, "colsample_bytree": 1.0, "reg_alpha": 0.2, "reg_lambda": 1.0}
+    ],
+    "seeds": [20260826, 20260843, 20260871],
+    "same_cells_and_seeds_for_control_and_challenger": true,
+    "cycle_1_structure_context_decoder_and_threshold_are_frozen": true,
+    "per_arm_inner_fit_calls": 72,
+    "per_arm_outer_locked_fit_calls": 9,
+    "per_arm_maximum_physical_fit_calls": 81,
+    "total_maximum_physical_fit_calls": 162,
+    "finalist_selection": "Maximize equal-weight mean inner-window F1 subject to all Cycle-1 safety gates that are evaluable on inner windows; ties resolve by higher worst-window delta, then lower total tree count, then lexical cell id.",
+    "early_stopping_or_extra_iterations": false,
+    "grid_expansion": false
+  },
+  "fair_incumbent_control": {
+    "control_arm": "Qualifying frozen anchor structure with challenger-only slots neutralized.",
+    "challenger_arm": "Cycle-1 qualifying segment structure with the same ordered slots populated.",
+    "control_finalist": "Inner-selected best of frozen anchor cell zero and the eight retuned control cells.",
+    "challenger_finalist": "Inner-selected best of frozen Cycle-1 challenger cell zero and the eight retuned challenger cells.",
+    "equal_search_cells": true,
+    "equal_seeds": true,
+    "equal_split_keys": true,
+    "equal_fit_and_wall_clock_ceiling": true,
+    "equal_metric_and_tie_breaks": true,
+    "equal_feature_slot_count": true,
+    "outer_comparison": "selected challenger finalist minus selected control finalist",
+    "maturity_bias_claim_requires_outer_gate": true
+  },
+  "evaluation": {
+    "primary_metric": "pooled row-level binary micro F1",
+    "primary_delta": "selected_challenger_minus_selected_control; positive is improvement",
+    "paired_bootstrap": {
+      "unit": "positive connected event or normal station-layer KST day",
+      "replicates": 5000,
+      "seed": 20260826,
+      "confidence": 0.90
+    },
+    "secondary_metrics": [
+      "fold and station F1 deltas",
+      "equal-weight supported station-by-fold F1 delta",
+      "seed-level deltas",
+      "precision, recall, TP, FP, FN",
+      "offset, drift, and at-least-48-hour event recall",
+      "noise recall",
+      "spike and flatline preservation",
+      "false positives per station-layer KST day",
+      "accepted disconnected-interval precision"
+    ]
+  },
+  "decision_gates": {
+    "RESEARCH_GO": {
+      "pooled_f1_delta_gte": 0.0161,
+      "paired_ci90_lower_gte": 0.007,
+      "minimum_improving_outer_folds_of_3": 2,
+      "minimum_improving_stations_of_3": 2,
+      "equal_weight_supported_station_by_fold_f1_delta_gte": 0.008,
+      "q3_f1_delta_gte": 0.0,
+      "station_g_f1_delta_gte": 0.0,
+      "noise_recall_delta_gte": -0.005,
+      "offset_plus_drift_recall_delta_gte_any_of": [0.05],
+      "at_least_48h_event_recall_delta_gte_alternative": 0.10,
+      "long_event_recall_gate_logic": "offset_plus_drift_recall_delta >= 0.05 OR at_least_48h_event_recall_delta >= 0.10",
+      "spike_predictions_exactly_preserved": true,
+      "flatline_predictions_exactly_preserved": true,
+      "false_positives_per_day_ratio_lte": 1.05,
+      "disconnected_interval_precision_gte": 0.75,
+      "minimum_added_interval_rows_gte": 19,
+      "all_hash_chronology_leakage_and_key_checks": true
+    },
+    "SUBMISSION_GO": {
+      "note": "Research-only decision label; no candidate or official action is authorized.",
+      "all_RESEARCH_GO_gates": true,
+      "pooled_f1_delta_gte": 0.0255,
+      "paired_ci90_lower_gte": 0.012,
+      "all_seed_f1_deltas_gte": 0.0,
+      "worst_seed_f1_delta_gte": -0.002,
+      "independent_aggregate_QA": "PASS",
+      "exact_reproduction_from_pinned_inputs": true
+    },
+    "preferred_effect": {
+      "pooled_f1_delta_gte": 0.0255,
+      "approximate_planning_point_gain_gte": 0.6778
+    },
+    "stretch_effect": {
+      "pooled_f1_delta_gte": 0.055,
+      "approximate_planning_point_gain_gte": 1.4619
+    },
+    "failure_label": "RESEARCH_NO_GO_CLOSE_P1_LONG_EVENT_FAMILY_FINAL"
+  },
+  "resource_ceiling": {
+    "maximum_lifetime_physical_fit_calls": 162,
+    "maximum_fit_calls_per_arm": 81,
+    "maximum_feature_materializations_per_arm": 6,
+    "maximum_feature_materializations_total": 12,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds_per_arm": 43200,
+    "hard_wall_seconds_total": 86400,
+    "full_deployment_fits": 0,
+    "candidate_file_materializations": 0,
+    "automatic_resume_or_rerun_count": 0,
+    "result_driven_reruns": 0
+  },
+  "future_outputs_if_separately_authorized": {
+    "aggregate_only": true,
+    "allowed": ["result.json", "manifest.json", "report_ko.md"],
+    "row_level_predictions_persisted": false,
+    "candidate_csv_created": false
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "official_score_or_rank_used_for_selection": 0,
+    "post_result_tuning": 0,
+    "grid_expansion": 0,
+    "result_driven_reruns": 0,
+    "third_cycle": 0,
+    "P3_mutations_or_fits": 0
+  },
+  "P3_deprioritization": {
+    "current_observed_point_headroom": 0.374402,
+    "reason": "The observed P3 headroom is too small to supply the requested 2-3 points. P1 matched-budget validation therefore receives priority while the separately frozen P3 ERA5 experiment is not touched.",
+    "P3_contract_changes_authorized": false
+  },
+  "limitations": [
+    "The fixed eight-cell search may not reproduce the full historical tuning depth of every incumbent lineage, but it is exactly matched between arms.",
+    "There is no fresh untouched P1 labeled holdout; outer results remain a historical transport proxy.",
+    "Inner selection can favor a historical regime that differs from the official hidden regime.",
+    "The inferred point mapping is approximate and cannot guarantee leaderboard gain.",
+    "This final cycle terminates the P1 research branch regardless of outcome."
+  ]
+}

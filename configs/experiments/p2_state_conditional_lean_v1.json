@@ -1,0 +1,81 @@
+{
+  "experiment_id": "p2_state_conditional_lean_v1",
+  "created_at_kst": "2026-08-16T11:15:00+09:00",
+  "status": "authorized_one_shot",
+  "research_only": true,
+  "upload_allowed": false,
+  "hypothesis": "A lean M2 residual model trained as overlapping mixed and stratified experts, with a training-only public layer-1 versus layer-5 temperature-contrast gate, improves the frozen Blend50 without seasonal regressions.",
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036"
+  },
+  "frozen_reference": {
+    "result_path": "artifacts/p2_method_scout/result.json",
+    "result_sha256": "e56ae49c178e988862c0d226e405703ad8537915fdce7a53454892bcdce44a9e",
+    "submission_path": "submissions/p2/P2_RESEARCH_BLEND50.csv",
+    "submission_sha256": "4de5027a1ac99fbb58a63da17d96ee3ce1c60204a8d284845da2f33466a977b7"
+  },
+  "feature_contract": {
+    "base_arm": "V0 public-layer curvature residual features",
+    "lean_arm": "exactly 20 public-temperature 6-hour and 12.42-hour M2 delta features",
+    "state_signal": "abs(temp_1_minus_5)",
+    "state_signal_uses_only_public_layers": true,
+    "target_layer_temp_or_psal_used": false,
+    "external_values_used": false,
+    "parameter_search": false
+  },
+  "expert_contract": {
+    "quantile_low": 0.4,
+    "quantile_high": 0.6,
+    "quantiles_fit_scope": "fold training rows only",
+    "mixed_expert_rows": "finite contrast <= training q60 plus missing-contrast training rows",
+    "stratified_expert_rows": "finite contrast >= training q40 plus missing-contrast training rows",
+    "central_overlap_fraction": 0.2,
+    "prediction_gate": "clip((contrast-q40)/(q60-q40), 0, 1)",
+    "missing_prediction_gate": 0.5,
+    "final_blend": "0.5 * frozen V0 arm + 0.5 * state-conditioned lean arm",
+    "lightgbm_parameters": {
+      "objective": "regression_l2",
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "deterministic": true,
+      "force_row_wise": true
+    }
+  },
+  "validation_contract": {
+    "blocks": [
+      "2024_may_jun",
+      "2024_jul_aug",
+      "2024_sep_oct",
+      "2024_nov_dec",
+      "2025_mar_apr",
+      "2025_may_jun",
+      "2025_jul_aug",
+      "2025_nov_dec"
+    ],
+    "all_blocks_previously_exposed": true,
+    "one_shot": true,
+    "bootstrap_unit": "KST day",
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260816
+  },
+  "promotion_gates": {
+    "aggregate_delta_rmse_lte": -0.005,
+    "bootstrap_ci90_high_lt": 0.0,
+    "minimum_improved_blocks": 6,
+    "maximum_block_regression": 0.02,
+    "maximum_layer_regression": 0.01,
+    "same_season_2024_sep_oct_max_regression": 0.005,
+    "pre_gap_2025_jul_aug_max_regression": 0.005,
+    "post_gap_2025_nov_dec_max_regression": 0.005
+  },
+  "stop_rule": "If any promotion gate fails, reject and close this exact state-conditioned expert family without changing quantiles, overlap, blend weight, state signal, model parameters, or validation blocks."
+}

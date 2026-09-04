@@ -1,0 +1,153 @@
+{
+  "schema_version": "p1.conditional_real_event_donor.v1",
+  "experiment_id": "p1_conditional_real_event_donor_20260828_v1",
+  "status": "PREREGISTERED_SINGLE_BOUNDED_ATTEMPT",
+  "claim": "CutAddPaste/CAROTS-inspired feature-space transplant using real pre-Q2 long-event donors; not an exact reproduction of either method",
+  "historical_surface": "Only pre-Q2 history can fit or calibrate the model; historically exposed Q2 is a sealed outer directional surface",
+  "immutable_inputs": {
+    "feature_cache": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "bytes": 156272400,
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912"
+    },
+    "feature_key_sidecar": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet",
+      "bytes": 1818144,
+      "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100"
+    },
+    "training_labels": {
+      "path": "artifacts/cache/io_benchmark/parquet/train.zstd.parquet",
+      "bytes": 6227554,
+      "sha256": "1115e5d939220f2e0ca03f8cda6ffa4f680ad27b5e3c3308a2b0752a54fbe9d0"
+    },
+    "frozen_truth_and_folds": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "bytes": 2827164,
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "q2_anchor": {
+      "path": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction.npz",
+      "bytes": 7898,
+      "sha256": "4692898df39c886b968a9e626629293605754768df5910e4506be4781dbc7fa1",
+      "receipt": "artifacts/p1_direct_interval_set_torch_nested_20260828_v1/q2_blind_prediction_receipt.json",
+      "array": "anchor"
+    }
+  },
+  "split": {
+    "training_end_exclusive_utc": "2024-09-16T00:00:00+00:00",
+    "calibration_start_utc": "2024-10-01T00:00:00+00:00",
+    "calibration_end_exclusive_utc": "2025-03-16T15:00:00+00:00",
+    "q2_fold": "2025_q2",
+    "boundary_purge_days": 15,
+    "same_fold_windows_cross_boundaries": false
+  },
+  "event": {
+    "eligible_types": ["offset", "drift", "noise"],
+    "minimum_rows": 19,
+    "iou_match_threshold": 0.3
+  },
+  "support_preflight": {
+    "minimum_train_donor_events": 10,
+    "minimum_train_station_layer_cells": 3,
+    "maximum_train_single_cell_share": 0.7,
+    "minimum_calibration_truth_events": 4,
+    "minimum_calibration_truth_cells": 2,
+    "failure_action": "NO_GO_SUPPORT"
+  },
+  "features": {
+    "station_and_layer_ids_as_model_features": false,
+    "numeric_sources": [
+      "temp_diff_1",
+      "temp_abs_diff_1",
+      "temp_backward_acceleration",
+      "temp_center_curvature",
+      "temp_median_resid_24h",
+      "temp_abs_median_resid_24h",
+      "temp_roll_std_24h",
+      "diff_roll_std_24h",
+      "temp_robust_z_24h",
+      "temp_long_resid_7d",
+      "peer_available",
+      "temp_peer_residual",
+      "temp_abs_peer_residual",
+      "peer_detrended_resid_7d",
+      "peer_abs_detrended_resid_7d",
+      "reference_resid_7d",
+      "reference_abs_resid_7d",
+      "reference_slope_1h_7d",
+      "psal_diff_1",
+      "depth_diff_1",
+      "day_sin",
+      "day_cos"
+    ],
+    "recipient_preserved_sources": [
+      "peer_available",
+      "psal_diff_1",
+      "depth_diff_1",
+      "day_sin",
+      "day_cos"
+    ],
+    "bounded_future_support_days_max": 7
+  },
+  "synthetic": {
+    "same_station_layer": true,
+    "same_calendar_quarter": true,
+    "normal_row_budget_fraction": 0.0025,
+    "synthetic_positive_weight_share_cap": 0.25,
+    "real_donor_reuse": "deterministic round-robin after seed shuffle",
+    "families_inherited_from_real_donor": ["offset", "drift", "noise"]
+  },
+  "model": {
+    "family": "sklearn HistGradientBoostingClassifier",
+    "max_depth": 3,
+    "max_iter": 100,
+    "learning_rate": 0.05,
+    "l2_regularization": 1.0,
+    "negative_to_real_positive_row_ratio": 3.0,
+    "random_state": 20260828,
+    "fit_count": 1,
+    "threshold": 0.5,
+    "threshold_search": false,
+    "grid_search": false,
+    "result_based_retry": false
+  },
+  "decoder": {
+    "score_smoothing_rows": 19,
+    "minimum_component_rows": 19,
+    "bridge_rows": 2
+  },
+  "calibration_gate": {
+    "minimum_matched_proposals": 4,
+    "minimum_matched_station_layer_cells": 2,
+    "minimum_real_event_recall": 0.8,
+    "minimum_row_precision": 0.45,
+    "failure_action": "NO_GO_CALIBRATION"
+  },
+  "q2_outer_gate": {
+    "delta_f1_strictly_above": 0.0,
+    "added_precision_strictly_above_anchor_f1_over_2": true,
+    "normal_fp_per_day_relative_lte": 1.05,
+    "minimum_newly_recovered_long_events": 2,
+    "block_bootstrap_replicates": 500,
+    "block_days": 3,
+    "block_bootstrap_seed": 20260828,
+    "ci90_lower_gte": -0.001,
+    "exact_no_op_arm": true
+  },
+  "artifacts": {
+    "directory": "artifacts/p1_conditional_real_event_donor_20260828_v1",
+    "append_only": true,
+    "persist_raw_values": false,
+    "persist_keys": false,
+    "persist_model": false
+  },
+  "prohibitions": {
+    "q3_q4_read": true,
+    "official_test_read": true,
+    "sample_submission_read": true,
+    "submission_generation": true,
+    "upload": true,
+    "post_result_tuning_or_retry": true,
+    "git_commit_or_push": true
+  }
+}

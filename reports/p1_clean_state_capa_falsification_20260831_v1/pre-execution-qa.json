@@ -1,0 +1,46 @@
+{
+  "schema_version": "p1.clean_state_capa.pre_execution_qa.v1",
+  "experiment_id": "p1_clean_state_capa_falsification_20260831_v1",
+  "status": "PASS_READY_EXACTLY_ONCE_RESEARCH_ONLY",
+  "checks": {
+    "authorization_frozen_exactly_once": true,
+    "result_based_retry_or_retune_zero": true,
+    "synthetic_offset_and_drift_recovery_pass": true,
+    "isolated_point_not_promoted": true,
+    "weighted_interval_nonoverlap_pass": true,
+    "incumbent_union_no_deletions_pass": true,
+    "all_predictions_sealed_before_target_open": true,
+    "historical_key_order_and_prefix_receipts_match": true,
+    "pooled_validation_positions_unique": true,
+    "q2_unsupported_groups_abstain_without_future_state": true,
+    "official_test_sample_submission_access_zero": true,
+    "submission_csv_and_upload_zero": true,
+    "focused_pytest_9_pass": true,
+    "ruff_pass": true,
+    "git_diff_check_pass": true,
+    "attempt_lock_absent_before_execution": true,
+    "artifact_namespace_absent_before_execution": true
+  },
+  "historical_structure": {
+    "historical_input_rows": 776706,
+    "pooled_validation_rows": 421032,
+    "q2_unsupported_station_layer_groups": 5,
+    "q2_unsupported_policy": "zero_signal_abstention_no_additions",
+    "q3_unsupported_station_layer_groups": 0,
+    "q4_unsupported_station_layer_groups": 0,
+    "target_columns_read": 0
+  },
+  "hashes": {
+    "config_sha256": "d0c37fa180530eecab4a4c91a219eade10fef347ac1cb71a386705fd88db3eef",
+    "runner_sha256": "283a6503f8fe05b3937d744d9cc8719dd50d8391c28316e725211d5266cac940",
+    "module_sha256": "9d963b067133af8da82fae6154849db1d6604d8bc09cb37dfc3c8d3e2ef7f693",
+    "test_sha256": "aa09bf961a896a59809faace439af53b249069025e1dbee91135dc5f2df57c90",
+    "train_csv_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2"
+  },
+  "execution_scope": {
+    "top_level_clean_state_fits_maximum": 3,
+    "supervised_model_fits": 0,
+    "official_submission_authorized": false,
+    "automatic_retry_authorized": false
+  }
+}

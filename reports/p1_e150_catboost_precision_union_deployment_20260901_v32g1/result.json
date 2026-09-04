@@ -1,0 +1,108 @@
+{
+  "data_policy": {
+    "external_forecast_allowed": false,
+    "external_observation_allowed": false,
+    "external_reanalysis_allowed": false,
+    "hidden_truth_allowed": false,
+    "internet_data_allowed": false,
+    "kiost_original_data_allowed": false,
+    "official_aggregate_score_for_model_selection": false,
+    "official_test_covariates_allowed_after_user_approval": true,
+    "organizer_distributed_data_only": true,
+    "real_observation_pretrained_weights_allowed": false,
+    "scratch_training_only": true,
+    "upload_allowed": false
+  },
+  "deployment_fit": {
+    "family": "CatBoostClassifier",
+    "fit_rows": 776706,
+    "independent_positive_fraction": 0.026530817520753088,
+    "independent_positive_rows": 4484,
+    "iterations": 240,
+    "official_labels_read": 0,
+    "scratch_full_history_fit": 1,
+    "threshold": 0.8
+  },
+  "experiment_id": "p1_e150_catboost_precision_union_deployment_20260901_v32g1",
+  "fit_count": 1,
+  "hashes": {
+    "base_model_config_sha256": "43e4b20467316cc0d7a2e4135a74fd53d47e5364f43f0f38517a7b4dd637949e",
+    "base_model_runner_sha256": "d83e7f697fb0b07ed73a3093fc489ff9ff6470cc66d2f121a589e3a454872615",
+    "deployment_config_sha256": "beb5be1c342c9cbed7f51f15385b0b214e070e9aba999405cab91fb38ce2f87a",
+    "lock_sha256": "97cd5043fa022630dca6cb12d92ff938a92fa0b1a7b5dce100f88b158adb21c4",
+    "materializer_sha256": "2d456f420d5013715930a22064b5013d8f29a89f9dd0fee0a42ec4874c551834",
+    "output_sha256": "2f6b115dd706d42b8851685af4c2e4a065f111e2b51b8dee9bc6170396e5e279",
+    "source_config_sha256": "bed5499c56daa68f280bc1f1c3a2700a6771626c24cd2dec4b16e8f6c017504c",
+    "source_qa_sha256": "c03b449be6081e5351a0bf6549c25fe0cf8eec284156531f1bd36a9bc5025ff1",
+    "source_result_sha256": "d6bcc13d0995637a91cecaa9092922485b1d4e15ac0b814255ae127a515afc78",
+    "source_runner_sha256": "6399838d953cb2dd0fcd499c11ccd0e9b9247ec962d98ed4487ff8ab324d78de"
+  },
+  "internal_evidence": {
+    "delta_f1": -0.00017298224936446172,
+    "expected_points_center": 28.902994021168197,
+    "expected_points_ci90": [
+      28.891794399564443,
+      28.91217975162548
+    ],
+    "historical_additions": 15,
+    "historical_false_positive_additions": 11,
+    "historical_true_positive_additions": 4,
+    "q3_q4_delta_f1": -0.0002388046492630691,
+    "status": "NO_GO_INTERNAL_GATE"
+  },
+  "operations": {
+    "automatic_retries": 0,
+    "external_forecast_rows_read": 0,
+    "external_observation_rows_read": 0,
+    "external_reanalysis_rows_read": 0,
+    "hidden_truth_reads": 0,
+    "internet_rows_read": 0,
+    "kiost_original_rows_read": 0,
+    "official_aggregate_score_reads_for_selection": 0,
+    "official_champion_prediction_rows_read": 169011,
+    "official_test_covariate_rows_read": 169011,
+    "organizer_train_rows_read": 776706,
+    "real_observation_pretrained_weight_files_loaded": 0,
+    "submission_csv_created": 1,
+    "tuning": 0,
+    "uploads": 0
+  },
+  "output": {
+    "additions_vs_champion": 23,
+    "anchor_removals": 0,
+    "bytes": 6929481,
+    "checks": {
+      "duplicate_rows_zero": true,
+      "key_order_exact": true,
+      "keys_unique": true,
+      "label_binary": true,
+      "label_finite": true,
+      "label_integer": true,
+      "rows_169011": true,
+      "schema_exact": true
+    },
+    "current_champion_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+    "deployability_checks": {
+      "anchor_removals_zero": true,
+      "binary_nonconstant": true,
+      "changed_fraction_within_frozen_limit": true,
+      "output_hash_differs_from_current_champion": true,
+      "positive_additions": true,
+      "positive_fraction_within_historical_multiplier": true
+    },
+    "maximum_kst_day_addition_fraction_unlabeled": 0.003161222339304531,
+    "negative_rows": 162592,
+    "path": "C:\\Users\\cedis\\Downloads\\\ud574\uc591 \ud574\ucee4\ud1a4 \uc81c\ucd9c\uc6a9\\20260901_P1_V32G_CATBOOST_UNION_SCORE_PRIORITY_READY_V1\\P1_submission.csv",
+    "positive_fraction": 0.03797977646425381,
+    "positive_rows": 6419,
+    "rows": 169011,
+    "sha256": "2f6b115dd706d42b8851685af4c2e4a065f111e2b51b8dee9bc6170396e5e279"
+  },
+  "runtime_seconds": 120.5073816999793,
+  "schema_version": "p1.v32g_score_priority_deployment.result.20260901.v1",
+  "status": "MATERIALIZED_READY_NOT_UPLOADED_EXPLICIT_INTERNAL_NO_GO",
+  "submission_metadata": {
+    "summary": "\ubc30\ud3ec \ub370\uc774\ud130\ub9cc\uc73c\ub85c scratch \ud559\uc2b5\ud55c \uace0\uc815 Ordered-CatBoost p>=0.8 add-only \ud6c4\ubcf4\uc785\ub2c8\ub2e4. \ub0b4\ubd80 \uc911\uc2ec\uac12\uc740 \ud604 \ucc54\ud53c\uc5b8\ubcf4\ub2e4 -0.0063\uc810\uc774\ub098 CI90 \uc0c1\ub2e8\uc740 +0.0028\uc810\uc73c\ub85c, \ube44\uc911\ubcf5 \uc815\ubcf4\uac00\uce58\ub97c \ud655\uc778\ud558\ub294 \uace0\uc815 probe\uc785\ub2c8\ub2e4.",
+    "title": "P1 v32g E150-CatBoost precision union probe"
+  }
+}

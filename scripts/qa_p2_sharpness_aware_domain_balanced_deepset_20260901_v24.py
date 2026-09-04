@@ -1,0 +1,271 @@
+"""Independent QA for the sealed P2 v24 vanilla-SAM run."""
+
+from __future__ import annotations
+
+import json
+import os
+import sys
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+for item in (ROOT / "scripts", ROOT / "src"):
+    if str(item) not in sys.path:
+        sys.path.insert(0, str(item))
+
+import run_p2_sharpness_aware_domain_balanced_deepset_20260901_v24 as runner  # noqa: E402
+
+from p2_restore.features import build_training_features  # noqa: E402
+from p2_restore.normalized_curvature_residual import (  # noqa: E402
+    build_normalized_curvature_design,
+)
+
+
+def close(left: float, right: float, tolerance: float = 1e-10) -> bool:
+    return bool(abs(float(left) - float(right)) <= tolerance)
+
+
+def metric_tree_close(left: Any, right: Any) -> bool:
+    if isinstance(left, dict):
+        return isinstance(right, dict) and set(left) == set(right) and all(
+            metric_tree_close(left[key], right[key]) for key in left
+        )
+    if isinstance(left, list):
+        return isinstance(right, list) and len(left) == len(right) and all(
+            metric_tree_close(a, b) for a, b in zip(left, right, strict=True)
+        )
+    if isinstance(left, (float, int)) and isinstance(right, (float, int)):
+        return close(left, right)
+    return left == right
+
+
+def main() -> None:
+    result_path = runner.REPORT / "result.json"
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    config = json.loads(runner.CONFIG.read_text(encoding="utf-8"))
+    prediction_path = runner.ARTIFACT / f"{runner.PREDICTION_NAME}.npz"
+    prediction = np.load(prediction_path, allow_pickle=False)
+    time_ns = prediction["time_ns"].astype(np.int64)
+    layer = prediction["layer"].astype(int)
+    fold = prediction["fold"].astype(str)
+    reference = prediction["reference"].astype(float)
+    candidate = prediction["candidate"].astype(float)
+
+    data_dir = os.environ.get("P2_DATA_DIR")
+    if not data_dir:
+        raise RuntimeError("P2_DATA_DIR is required")
+    observations_path = Path(data_dir).resolve() / "observations.csv"
+    observations = pd.read_csv(
+        observations_path, dtype={"station": "string", "time": "string"}
+    )
+    observations["time"] = pd.to_datetime(observations["time"], utc=True)
+    design = build_normalized_curvature_design(build_training_features(observations).frame)
+    design_index = pd.MultiIndex.from_arrays(
+        [
+            runner.v12.metric_engine.canonical_time_ns(design.keys["time"]),
+            design.keys["layer"],
+        ]
+    )
+    positions = design_index.get_indexer(pd.MultiIndex.from_arrays([time_ns, layer]))
+    if np.any(positions < 0):
+        raise RuntimeError("independent truth alignment failed")
+    truth = design.truth[positions]
+    time = pd.to_datetime(time_ns, unit="ns", utc=True)
+    blind = pd.DataFrame({"time": time, "layer": layer, "fold": fold})
+    blind["kst_date"] = blind["time"].dt.tz_convert("Asia/Seoul").dt.date
+    spec = runner.v12.metric_engine.CandidateSpec(
+        name=runner.PREDICTION_NAME,
+        objective=config["training"]["objective"],
+        conditional=False,
+    )
+    recomputed = runner.v12.metric_engine.evaluate_candidate(
+        spec, blind, truth, reference, candidate, config
+    )
+    recomputed["by_month"] = runner.v12.by_month_metrics(
+        blind, truth, reference, candidate
+    )
+    recomputed["action_geometry"] = runner.v12.action_geometry(
+        truth, reference, candidate
+    )
+    slope = float(config["evaluation"]["points_per_rmse_C"])
+    penalty = float(config["evaluation"]["transport_penalty_points"])
+    delta = float(recomputed["delta_rmse"])
+    nominal = -delta * slope
+    transport = nominal - penalty
+    record = result["candidate"]
+
+    prefix_ok = True
+    group_mass_ok = True
+    fit_receipts_ok = True
+    radius_ok = True
+    for fold_name, receipt in result["training"]["folds"].items():
+        expected = pd.Timestamp(config["training"]["fold_starts_kst"][fold_name])
+        expected -= pd.Timedelta(days=int(config["training"]["embargo_days"]))
+        prefix_ok &= pd.Timestamp(receipt["training_cutoff_exclusive_kst"]) == expected
+        masses = [
+            value["raw_weight_sum"]
+            for value in receipt["weight_receipt"]["groups"].values()
+        ]
+        group_mass_ok &= bool(np.max(masses) - np.min(masses) <= 1e-12)
+        for fit in receipt["fit_receipts"]:
+            values = [
+                fit["loss_first"],
+                fit["loss_last"],
+                fit["sam_second_loss_first"],
+                fit["sam_second_loss_last"],
+                fit["global_gradient_norm_first"],
+                fit["global_gradient_norm_last"],
+                fit["perturbation_radius_first"],
+                fit["perturbation_radius_last"],
+            ]
+            fit_receipts_ok &= bool(np.isfinite(values).all())
+            fit_receipts_ok &= fit["epochs"] == 60
+            fit_receipts_ok &= fit["sam_rho"] == 0.05
+            fit_receipts_ok &= fit["adaptive_asam"] is False
+            fit_receipts_ok &= fit["parameter_restore_before_adamw_step"] is True
+            fit_receipts_ok &= fit["row_deletion"] == 0
+            fit_receipts_ok &= fit["loss_finite"] is True
+            radius_ok &= abs(float(fit["perturbation_radius_first"]) - 0.05) <= 2e-6
+            radius_ok &= abs(float(fit["perturbation_radius_last"]) - 0.05) <= 2e-6
+
+    official_names = (
+        "official_test_index_rows_read",
+        "sample_rows_read",
+        "baseline_file_rows_read",
+        "score_file_rows_read",
+        "query_support_rows_read",
+        "hidden_truth_rows_read",
+        "submission_csv_created",
+        "uploads",
+    )
+    counters = result["operation_counters"]
+    semantic = result["semantic_audit"]
+    sam_contract = runner._sam_contract_receipt()
+    checks = {
+        "terminal": result["status"].startswith("EXPLORATORY_"),
+        "exactly_nine_fits": result["fit_count"] == 9,
+        "new_parameter_neighborhood_axis": semantic["classification"]
+        == "NEW_P2_PARAMETER_NEIGHBORHOOD_SHARPNESS_AWARE_OPTIMIZER_GEOMETRY",
+        "repo_exact_execution_hits_zero": semantic[
+            "repository_p2_exact_execution_hits"
+        ]
+        == 0,
+        "semantic_distinctions_all_true": all(
+            semantic[name]
+            for name in (
+                "v23_input_gradient_distinguished",
+                "v18_worst_group_distinguished",
+                "v19_risk_variance_distinguished",
+                "adamw_weight_decay_distinguished",
+            )
+        ),
+        "fixed_vanilla_sam": (
+            result["training"]["optimizer_geometry"]["name"] == "vanilla_SAM"
+            and result["training"]["optimizer_geometry"]["rho"] == 0.05
+            and result["training"]["optimizer_geometry"]["adaptive_asam"] is False
+            and result["training"]["optimizer_geometry"]["rho_sweep"] is False
+        ),
+        "sam_global_radius": abs(
+            sam_contract["actual_parameter_perturbation_l2_norm"] - 0.05
+        )
+        <= 1e-6,
+        "sam_parameter_restore_exact": sam_contract["parameter_restore_bit_exact"],
+        "sam_second_loss_finite": sam_contract["second_loss_finite"],
+        "sam_zero_gradient_noop": sam_contract["zero_gradient_exact_noop"],
+        "masked_future_isolation": runner._masked_token_isolation_receipt()[
+            "maximum_abs_error"
+        ]
+        <= 1e-6,
+        "fit_receipts_valid": fit_receipts_ok,
+        "fit_perturbation_radius": radius_ok,
+        "prediction_rows": len(candidate) == record["prediction_commitment"]["rows"],
+        "prediction_hash": runner.v12.sha256_file(prediction_path)
+        == record["prediction_commitment"]["sha256"],
+        "config_hash": runner.v12.sha256_file(runner.CONFIG)
+        == result["hashes"]["config"],
+        "runner_hash": runner.v12.sha256_file(runner.RUNNER)
+        == result["hashes"]["runner"],
+        "v13_runner_hash": runner.v12.sha256_file(runner._V13_RUNNER)
+        == result["hashes"]["v13_runner"],
+        "reference_rmse": close(recomputed["reference_rmse"], record["reference_rmse"]),
+        "candidate_rmse": close(recomputed["candidate_rmse"], record["candidate_rmse"]),
+        "delta_rmse": close(delta, record["delta_rmse"]),
+        "canonical_nominal": close(
+            nominal, record["canonical_nominal_pooled_points_delta"]
+        ),
+        "canonical_transport": close(
+            transport, record["canonical_transport_adjusted_pooled_points_delta"]
+        ),
+        "fold_metrics": metric_tree_close(recomputed["by_fold"], record["by_fold"]),
+        "month_metrics": metric_tree_close(recomputed["by_month"], record["by_month"]),
+        "layer_metrics": metric_tree_close(recomputed["by_layer"], record["by_layer"]),
+        "fold_layer_metrics": metric_tree_close(
+            recomputed["by_fold_layer"], record["by_fold_layer"]
+        ),
+        "bootstrap_ci": metric_tree_close(
+            recomputed["bootstrap"], record["bootstrap"]
+        ),
+        "official_like_bootstrap": metric_tree_close(
+            recomputed["official_like_bootstrap"], record["official_like_bootstrap"]
+        ),
+        "action_geometry": metric_tree_close(
+            recomputed["action_geometry"], record["action_geometry"]
+        ),
+        "prefix_cutoffs": prefix_ok,
+        "equal_environment_mass": group_mass_ok,
+        "permutation_invariance": result["permutation_invariance"][
+            "maximum_abs_error"
+        ]
+        <= 1e-6,
+        "action_bound": float(np.max(np.abs(candidate - reference))) <= 0.5 + 1e-12,
+        "row_deletion_zero": result["training"]["row_deletion"] == 0,
+        "official_access_zero": all(int(counters[name]) == 0 for name in official_names),
+    }
+    checks = {name: bool(value) for name, value in checks.items()}
+    qa = {
+        "schema_version": "p2.sharpness_aware_domain_balanced_deepset.independent_qa.20260901.v24",
+        "experiment_id": runner.EXPERIMENT_ID,
+        "status": "PASS" if all(checks.values()) else "FAIL",
+        "checks": checks,
+        "passed": int(sum(checks.values())),
+        "total": len(checks),
+        "recomputed": {
+            "rows": len(candidate),
+            "reference_rmse": recomputed["reference_rmse"],
+            "candidate_rmse": recomputed["candidate_rmse"],
+            "delta_rmse": delta,
+            "canonical_nominal_points": nominal,
+            "canonical_transport_adjusted_points": transport,
+            "by_fold": recomputed["by_fold"],
+            "by_month": recomputed["by_month"],
+            "by_layer": recomputed["by_layer"],
+            "bootstrap": recomputed["bootstrap"],
+            "abs_action_p99_C": float(np.quantile(np.abs(candidate - reference), 0.99)),
+            "abs_action_max_C": float(np.max(np.abs(candidate - reference))),
+        },
+        "access": {
+            "observations_rows_read": len(observations),
+            "official_test_index_rows_read": 0,
+            "hidden_truth_rows_read": 0,
+            "submission_csv_created": 0,
+            "uploads": 0,
+        },
+        "hashes": {
+            "result": runner.v12.sha256_file(result_path),
+            "prediction_npz": runner.v12.sha256_file(prediction_path),
+            "config": runner.v12.sha256_file(runner.CONFIG),
+            "runner": runner.v12.sha256_file(runner.RUNNER),
+            "v13_runner": runner.v12.sha256_file(runner._V13_RUNNER),
+        },
+    }
+    runner.v12.atomic_json(runner.REPORT / "independent-qa.json", qa)
+    print(json.dumps(qa, ensure_ascii=False, indent=2, allow_nan=False))
+    if qa["status"] != "PASS":
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

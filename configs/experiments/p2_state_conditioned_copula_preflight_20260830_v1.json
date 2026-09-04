@@ -1,0 +1,121 @@
+{
+  "experiment_id": "p2_state_conditioned_copula_preflight_20260830_v1",
+  "status": "PREREGISTERED_TRAIN_ONLY_ZERO_FIT_PREFLIGHT",
+  "question": "Does a one-state-axis, low-DF covariate-dependent Gaussian copula have repeated chronological support before any model is fit?",
+  "source_contract": {
+    "explicit_cli_argument": "--p2-dir",
+    "allowed_basenames": ["observations.csv", "README.md"],
+    "forbidden_basenames": [
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_interp.csv",
+      "score.py"
+    ],
+    "forbidden_name_fragments": ["test_index", "sample", "baseline", "score", "submission"],
+    "directory_listing_allowed": false,
+    "environment_fallback_allowed": false
+  },
+  "observation_schema": [
+    "station",
+    "year",
+    "layer",
+    "time",
+    "temp",
+    "psal",
+    "depth",
+    "nominal_depth"
+  ],
+  "public_layers": [1, 5, 6, 7, 8],
+  "target_layers": [2, 3, 4],
+  "target_nominal_depth_m": {"2": 7.04, "3": 9.44, "4": 14.74},
+  "chronological_blocks": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "state_definition": {
+    "thermal_coordinate": "abs_temp_layer1_minus_layer5",
+    "dynamic_coordinate": "absolute_24h_change_of_thermal_coordinate",
+    "thermal_quantiles": [0.3333333333333333, 0.6666666666666666],
+    "dynamic_quantile": 0.5,
+    "thermal_labels": ["low", "middle", "high"],
+    "dynamic_labels": ["steady", "active"],
+    "lag_hours": 24,
+    "degrees_of_freedom": 2,
+    "thresholds_fit_on_training_only": true
+  },
+  "overlap_policy": {
+    "supported_state_cell_definition": "profiles_gte_500_and_kst_days_gte_30_and_chronological_blocks_gte_2",
+    "minimum_supported_state_cells_for_tau_span": 2,
+    "unsupported_state_cell_action": "EXACT_NO_DEPENDENCE_ADJUSTMENT",
+    "support_gate_applied_before_heterogeneity_test": true
+  },
+  "heterogeneity_policy": {
+    "comparison_unit": "same_supported_state_cell_pair_across_blocks",
+    "require_pooled_absolute_tau_difference_gte_gate": true,
+    "require_block_absolute_tau_difference_gte_gate": true,
+    "require_block_direction_to_match_pooled_direction": true
+  },
+  "scientific_estimand_contract": {
+    "state_cutpoints": "global_training_only_empirical_thermal_tertiles_and_dynamic_median_shared_across_blocks",
+    "state_cutpoints_are_model_parameters": false,
+    "dependence_estimand": "ordinary_unweighted_kendall_tau_b_on_all_finite_eligible_profiles",
+    "gaussian_latent_mapping": "sin_pi_over_2_times_kendall_tau",
+    "outlier_flags_and_weights": "aggregate_diagnostic_only",
+    "diagnostic_weights_enter_state_cutpoints": false,
+    "diagnostic_weights_enter_support_counts": false,
+    "diagnostic_weights_enter_kendall_tau": false,
+    "physical_extrema_remain_in_estimand": true
+  },
+  "dependence_edges": [
+    ["temp_contrast_signed", "residual_l2"],
+    ["temp_contrast_signed", "residual_l3"],
+    ["temp_contrast_signed", "residual_l4"],
+    ["psal_contrast_signed", "residual_l2"],
+    ["psal_contrast_signed", "residual_l3"],
+    ["psal_contrast_signed", "residual_l4"],
+    ["thermal_change_24h_signed", "residual_l2"],
+    ["thermal_change_24h_signed", "residual_l3"],
+    ["thermal_change_24h_signed", "residual_l4"],
+    ["residual_l2", "residual_l3"],
+    ["residual_l2", "residual_l4"],
+    ["residual_l3", "residual_l4"]
+  ],
+  "gates": {
+    "minimum_kendall_tau_span": 0.1,
+    "minimum_profiles_per_state_cell": 500,
+    "minimum_kst_days_per_state_cell": 30,
+    "minimum_chronological_blocks_per_state_cell": 2,
+    "minimum_heterogeneous_blocks_per_edge": 2,
+    "minimum_pairs_for_block_cell_tau": 30,
+    "minimum_passing_edges": 2
+  },
+  "outlier_diagnostic": {
+    "policy": "AGGREGATE_FLAG_AND_DIAGNOSTIC_WEIGHT_ONLY_NEVER_DELETE",
+    "temporal_neighbor_max_gap_minutes": 20,
+    "temporal_isolated_robust_z": 8.0,
+    "physical_extreme_lower_quantile": 0.005,
+    "physical_extreme_upper_quantile": 0.995,
+    "sensor_suspect_profile_weight": 0.25,
+    "ordinary_and_preserved_physical_extreme_weight": 1.0,
+    "sensor_suspect_definition": "exactly_one_layer_has_an_isolated_temperature_spike",
+    "physical_extrema_are_never_hard_deleted": true,
+    "threshold_tuning_allowed": false
+  },
+  "execution_policy": {
+    "model_fit_count": 0,
+    "official_input_rows_read": 0,
+    "csv_output_count": 0,
+    "submission_generation_allowed": false,
+    "upload_allowed": false,
+    "aggregate_json_only": true,
+    "real_data_execution_authorized": true,
+    "result_based_retry": false,
+    "maximum_executions": 1
+  }
+}

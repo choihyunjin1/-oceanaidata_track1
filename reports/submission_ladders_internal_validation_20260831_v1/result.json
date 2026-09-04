@@ -1,0 +1,758 @@
+{
+  "schema_version": "submission_ladders.internal_validation.20260831.v1",
+  "experiment_id": "submission_ladders_internal_validation_20260831_v1",
+  "status": "COMPLETE_INTERNAL_TEST_BEFORE_OFFICIAL",
+  "policy": {
+    "internal_test_required_for_every_submission": true,
+    "strict_pass_rule": "pooled improvement, no worse primary fold, paired bootstrap P(improve)>=0.8",
+    "official_probe_after_internal_pass_only": true,
+    "official_score_used_for_transport_calibration_not_hidden_tuning": true
+  },
+  "problems": {
+    "P1": {
+      "comparator": "E150_OOF_PROXY",
+      "comparator_disclosure": "Historical raw e150 OOF is the closest available comparator. The deployed official champion additionally contains two official-only GI rows, so this is not an exact champion OOF reconstruction.",
+      "quality": {
+        "rows": 421032,
+        "unique_keys": true,
+        "truth_mismatch_rows": 0,
+        "folds": [
+          "2025_q2",
+          "2025_q3",
+          "2025_q4"
+        ]
+      },
+      "candidates": {
+        "P1_1_PEER_HIGHCONF_UNION": {
+          "reference": {
+            "tp": 13935,
+            "fp": 1209,
+            "fn": 2120,
+            "precision": 0.9201664025356577,
+            "recall": 0.8679539084397384,
+            "f1": 0.8932978621109651
+          },
+          "candidate": {
+            "tp": 13944,
+            "fp": 1225,
+            "fn": 2111,
+            "precision": 0.9192431933548685,
+            "recall": 0.868514481469947,
+            "f1": 0.8931591083781706
+          },
+          "delta_f1": -0.00013875373279448322,
+          "rows": 421032,
+          "by_fold": {
+            "2025_q2": {
+              "rows": 133170,
+              "reference_f1": 0.8676757359086266,
+              "candidate_f1": 0.8671367600668027,
+              "delta_f1": -0.00053897584182383
+            },
+            "2025_q3": {
+              "rows": 176738,
+              "reference_f1": 0.9121882972594848,
+              "candidate_f1": 0.9126788357178096,
+              "delta_f1": 0.0004905384583248074
+            },
+            "2025_q4": {
+              "rows": 111124,
+              "reference_f1": 0.8989008334339896,
+              "candidate_f1": 0.8983582810236601,
+              "delta_f1": -0.0005425524103295221
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 16316,
+              "reference_f1": 0.8513368983957219,
+              "candidate_f1": 0.8513368983957219,
+              "delta_f1": 0.0
+            },
+            "I-ORS": {
+              "rows": 165553,
+              "reference_f1": 0.8532513181019332,
+              "candidate_f1": 0.8536542515811666,
+              "delta_f1": 0.0004029334792333694
+            },
+            "S-ORS": {
+              "rows": 239163,
+              "reference_f1": 0.9230597804891637,
+              "candidate_f1": 0.9225375626043406,
+              "delta_f1": -0.0005222178848230952
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x station x layer x KST calendar day",
+            "groups": 2995,
+            "replicates": 5000,
+            "mean_delta_f1": -0.00013268729174390392,
+            "ci90_low": -0.0006191455315745498,
+            "ci90_high": 0.00032212889105766047,
+            "probability_improved": 0.324
+          },
+          "decision": "INTERNAL_NO_GO"
+        },
+        "P1_2_PEER_FULL_UNION": {
+          "reference": {
+            "tp": 13935,
+            "fp": 1209,
+            "fn": 2120,
+            "precision": 0.9201664025356577,
+            "recall": 0.8679539084397384,
+            "f1": 0.8932978621109651
+          },
+          "candidate": {
+            "tp": 13990,
+            "fp": 1457,
+            "fn": 2065,
+            "precision": 0.9056774778274098,
+            "recall": 0.8713796325132358,
+            "f1": 0.8881975747571583
+          },
+          "delta_f1": -0.005100287353806743,
+          "rows": 421032,
+          "by_fold": {
+            "2025_q2": {
+              "rows": 133170,
+              "reference_f1": 0.8676757359086266,
+              "candidate_f1": 0.8525038766760923,
+              "delta_f1": -0.01517185923253428
+            },
+            "2025_q3": {
+              "rows": 176738,
+              "reference_f1": 0.9121882972594848,
+              "candidate_f1": 0.9149406467458043,
+              "delta_f1": 0.0027523494863195275
+            },
+            "2025_q4": {
+              "rows": 111124,
+              "reference_f1": 0.8989008334339896,
+              "candidate_f1": 0.8959634790965881,
+              "delta_f1": -0.0029373543374014988
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 16316,
+              "reference_f1": 0.8513368983957219,
+              "candidate_f1": 0.8525641025641025,
+              "delta_f1": 0.0012272041683806245
+            },
+            "I-ORS": {
+              "rows": 165553,
+              "reference_f1": 0.8532513181019332,
+              "candidate_f1": 0.8557903041991759,
+              "delta_f1": 0.002538986097242679
+            },
+            "S-ORS": {
+              "rows": 239163,
+              "reference_f1": 0.9230597804891637,
+              "candidate_f1": 0.9121439938539209,
+              "delta_f1": -0.010915786635242841
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x station x layer x KST calendar day",
+            "groups": 2995,
+            "replicates": 5000,
+            "mean_delta_f1": -0.005037873952929753,
+            "ci90_low": -0.009212694820507539,
+            "ci90_high": -0.0010853371093804407,
+            "probability_improved": 0.0158
+          },
+          "decision": "INTERNAL_NO_GO"
+        },
+        "P1_3_PEER_STANDALONE": {
+          "reference": {
+            "tp": 13935,
+            "fp": 1209,
+            "fn": 2120,
+            "precision": 0.9201664025356577,
+            "recall": 0.8679539084397384,
+            "f1": 0.8932978621109651
+          },
+          "candidate": {
+            "tp": 12932,
+            "fp": 768,
+            "fn": 3123,
+            "precision": 0.9439416058394161,
+            "recall": 0.8054811585175957,
+            "f1": 0.8692320618383464
+          },
+          "delta_f1": -0.02406580027261862,
+          "rows": 421032,
+          "by_fold": {
+            "2025_q2": {
+              "rows": 133170,
+              "reference_f1": 0.8676757359086266,
+              "candidate_f1": 0.7864028411973617,
+              "delta_f1": -0.08127289471126486
+            },
+            "2025_q3": {
+              "rows": 176738,
+              "reference_f1": 0.9121882972594848,
+              "candidate_f1": 0.9090448013524937,
+              "delta_f1": -0.003143495906991145
+            },
+            "2025_q4": {
+              "rows": 111124,
+              "reference_f1": 0.8989008334339896,
+              "candidate_f1": 0.9120198265179678,
+              "delta_f1": 0.013118993083978125
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 16316,
+              "reference_f1": 0.8513368983957219,
+              "candidate_f1": 0.8387799564270153,
+              "delta_f1": -0.012556941968706603
+            },
+            "I-ORS": {
+              "rows": 165553,
+              "reference_f1": 0.8532513181019332,
+              "candidate_f1": 0.8430419227593798,
+              "delta_f1": -0.010209395342553385
+            },
+            "S-ORS": {
+              "rows": 239163,
+              "reference_f1": 0.9230597804891637,
+              "candidate_f1": 0.8892936890351393,
+              "delta_f1": -0.03376609145402443
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x station x layer x KST calendar day",
+            "groups": 2995,
+            "replicates": 5000,
+            "mean_delta_f1": -0.02398099310641264,
+            "ci90_low": -0.04585227344289242,
+            "ci90_high": -0.003807650725051587,
+            "probability_improved": 0.0226
+          },
+          "decision": "INTERNAL_NO_GO"
+        }
+      }
+    },
+    "P2": {
+      "comparator": "CROSSFIT_BIN17_CHAMPION_PROXY",
+      "comparator_disclosure": "The exact full-fit official bin17 correction has no historical OOF lineage. The closest sealed three-way cross-fit rank-1 correction is restricted to bin17 and label-blind endpoint/PAVA projection is reapplied.",
+      "quality": {
+        "rows": 69850,
+        "prediction_key_duplicates": 0,
+        "truth_join_missing_rows": 0,
+        "join_multiplier": 1.0,
+        "stations": [
+          "S-ORS"
+        ],
+        "active_bin17_rows": 5585,
+        "pava": {
+          "internal_champion_active_rows": 0,
+          "P2_1_BIN17_DROP_LAYER2_active_rows": 185,
+          "P2_2_BIN17_DROP_LAYER3_active_rows": 214,
+          "P2_3_BIN17_DROP_LAYER4_active_rows": 297
+        }
+      },
+      "candidates": {
+        "P2_1_BIN17_DROP_LAYER2": {
+          "reference_rmse": 3.085714618974286,
+          "candidate_rmse": 3.0857566763478124,
+          "delta_rmse": 4.2057373526471764e-05,
+          "rows": 69850,
+          "by_fold": {
+            "2024_sep_oct": {
+              "rows": 26273,
+              "reference_rmse": 4.882135051908297,
+              "candidate_rmse": 4.882204550685097,
+              "delta_rmse": 6.94987768001809e-05
+            },
+            "2025_jul_aug": {
+              "rows": 26693,
+              "reference_rmse": 1.1857780665476285,
+              "candidate_rmse": 1.185782819262235,
+              "delta_rmse": 4.752714606537367e-06
+            },
+            "2025_nov_dec": {
+              "rows": 16884,
+              "reference_rmse": 0.28073218471331673,
+              "candidate_rmse": 0.28073218471331673,
+              "delta_rmse": 0.0
+            }
+          },
+          "by_layer": {
+            "2": {
+              "rows": 23298,
+              "reference_rmse": 0.977425784480094,
+              "candidate_rmse": 0.9778041508729635,
+              "delta_rmse": 0.00037836639286947804
+            },
+            "3": {
+              "rows": 23280,
+              "reference_rmse": 1.614255614462584,
+              "candidate_rmse": 1.614267465491824,
+              "delta_rmse": 1.1851029240173006e-05
+            },
+            "4": {
+              "rows": 23272,
+              "reference_rmse": 5.001566713966556,
+              "candidate_rmse": 5.001566729215926,
+              "delta_rmse": 1.524937065511267e-08
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x kst_date",
+            "groups": 163,
+            "replicates": 5000,
+            "mean_delta_rmse": 4.540523519388073e-05,
+            "ci90_low": 1.0834855969132916e-05,
+            "ci90_high": 9.725896198742312e-05,
+            "probability_improved": 0.0
+          },
+          "decision": "INTERNAL_NO_GO",
+          "disabled_rows": 1862,
+          "pava_active_rows": 185
+        },
+        "P2_2_BIN17_DROP_LAYER3": {
+          "reference_rmse": 3.085714618974286,
+          "candidate_rmse": 3.085773144739738,
+          "delta_rmse": 5.852576545217758e-05,
+          "rows": 69850,
+          "by_fold": {
+            "2024_sep_oct": {
+              "rows": 26273,
+              "reference_rmse": 4.882135051908297,
+              "candidate_rmse": 4.882228314163425,
+              "delta_rmse": 9.326225512751307e-05
+            },
+            "2025_jul_aug": {
+              "rows": 26693,
+              "reference_rmse": 1.1857780665476285,
+              "candidate_rmse": 1.1857986618896166,
+              "delta_rmse": 2.0595341988061122e-05
+            },
+            "2025_nov_dec": {
+              "rows": 16884,
+              "reference_rmse": 0.28073218471331673,
+              "candidate_rmse": 0.28073218471331673,
+              "delta_rmse": 0.0
+            }
+          },
+          "by_layer": {
+            "2": {
+              "rows": 23298,
+              "reference_rmse": 0.977425784480094,
+              "candidate_rmse": 0.9774255983457394,
+              "delta_rmse": -1.861343545961347e-07
+            },
+            "3": {
+              "rows": 23280,
+              "reference_rmse": 1.614255614462584,
+              "candidate_rmse": 1.6145912927061634,
+              "delta_rmse": 0.00033567824357949583
+            },
+            "4": {
+              "rows": 23272,
+              "reference_rmse": 5.001566713966556,
+              "candidate_rmse": 5.00156673784474,
+              "delta_rmse": 2.3878184762793353e-08
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x kst_date",
+            "groups": 163,
+            "replicates": 5000,
+            "mean_delta_rmse": 6.37356199228575e-05,
+            "ci90_low": 2.0273828756045555e-05,
+            "ci90_high": 0.00012769990460717028,
+            "probability_improved": 0.0002
+          },
+          "decision": "INTERNAL_NO_GO",
+          "disabled_rows": 1854,
+          "pava_active_rows": 214
+        },
+        "P2_3_BIN17_DROP_LAYER4": {
+          "reference_rmse": 3.085714618974286,
+          "candidate_rmse": 3.08568376504119,
+          "delta_rmse": -3.085393309598672e-05,
+          "rows": 69850,
+          "by_fold": {
+            "2024_sep_oct": {
+              "rows": 26273,
+              "reference_rmse": 4.882135051908297,
+              "candidate_rmse": 4.882094548831275,
+              "delta_rmse": -4.050307702208045e-05
+            },
+            "2025_jul_aug": {
+              "rows": 26693,
+              "reference_rmse": 1.1857780665476285,
+              "candidate_rmse": 1.1857321002647887,
+              "delta_rmse": -4.596628283981552e-05
+            },
+            "2025_nov_dec": {
+              "rows": 16884,
+              "reference_rmse": 0.28073218471331673,
+              "candidate_rmse": 0.28073218471331673,
+              "delta_rmse": 0.0
+            }
+          },
+          "by_layer": {
+            "2": {
+              "rows": 23298,
+              "reference_rmse": 0.977425784480094,
+              "candidate_rmse": 0.9774256294781295,
+              "delta_rmse": -1.550019644858125e-07
+            },
+            "3": {
+              "rows": 23280,
+              "reference_rmse": 1.614255614462584,
+              "candidate_rmse": 1.6142569153646766,
+              "delta_rmse": 1.3009020927157167e-06
+            },
+            "4": {
+              "rows": 23272,
+              "reference_rmse": 5.001566713966556,
+              "candidate_rmse": 5.001509190459705,
+              "delta_rmse": -5.752350685028773e-05
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x kst_date",
+            "groups": 163,
+            "replicates": 5000,
+            "mean_delta_rmse": -3.3786878045352434e-05,
+            "ci90_low": -7.010155739830548e-05,
+            "ci90_high": -7.40742028291219e-06,
+            "probability_improved": 0.9884
+          },
+          "decision": "INTERNAL_PASS_STRICT",
+          "disabled_rows": 1869,
+          "pava_active_rows": 297
+        }
+      }
+    },
+    "P3": {
+      "comparator": "UNIFORM_ALPHA_0.425_OOF_PROXY",
+      "comparator_disclosure": "The official uniform alpha=.425 is evaluated on the frozen KMA OOF correction axis. Public and local transport have previously disagreed by station, so local pass is necessary evidence but not a guarantee of Public improvement.",
+      "quality": {
+        "rows": 1092,
+        "cases": 182,
+        "duplicate_pair_keys": 0,
+        "lead_counts": {
+          "3": 182,
+          "6": 182,
+          "9": 182,
+          "12": 182,
+          "18": 182,
+          "24": 182
+        }
+      },
+      "candidates": {
+        "P3_1_KMA_A18_0425_A24_0600": {
+          "reference_rmse": 0.781191524691732,
+          "candidate_rmse": 0.782767661924066,
+          "delta_rmse": 0.0015761372323339629,
+          "rows": 1092,
+          "by_fold": {
+            "2024_h2_storm": {
+              "rows": 294,
+              "reference_rmse": 0.7167963137719183,
+              "candidate_rmse": 0.7168302585786512,
+              "delta_rmse": 3.394480673291067e-05
+            },
+            "2025_h1": {
+              "rows": 318,
+              "reference_rmse": 0.812902441758359,
+              "candidate_rmse": 0.8126437221050546,
+              "delta_rmse": -0.0002587196533043734
+            },
+            "winter_transition": {
+              "rows": 480,
+              "reference_rmse": 0.7974048151255765,
+              "candidate_rmse": 0.8010687619727903,
+              "delta_rmse": 0.003663946847213828
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7203542585817899,
+              "candidate_rmse": 0.7196483461255259,
+              "delta_rmse": -0.0007059124562640573
+            },
+            "I-ORS": {
+              "rows": 276,
+              "reference_rmse": 0.8873170770632796,
+              "candidate_rmse": 0.8879284377305798,
+              "delta_rmse": 0.0006113606673002758
+            },
+            "S-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7627755545090779,
+              "candidate_rmse": 0.7672720617542679,
+              "delta_rmse": 0.004496507245190018
+            }
+          },
+          "by_lead_h": {
+            "3": {
+              "rows": 182,
+              "reference_rmse": 0.5837152244593223,
+              "candidate_rmse": 0.5837152244593223,
+              "delta_rmse": 0.0
+            },
+            "6": {
+              "rows": 182,
+              "reference_rmse": 0.6664687867959159,
+              "candidate_rmse": 0.6664687867959159,
+              "delta_rmse": 0.0
+            },
+            "9": {
+              "rows": 182,
+              "reference_rmse": 0.7816693044629683,
+              "candidate_rmse": 0.7816693044629683,
+              "delta_rmse": 0.0
+            },
+            "12": {
+              "rows": 182,
+              "reference_rmse": 0.8587034693865928,
+              "candidate_rmse": 0.8587034693865928,
+              "delta_rmse": 0.0
+            },
+            "18": {
+              "rows": 182,
+              "reference_rmse": 0.9067636106288464,
+              "candidate_rmse": 0.9067636106288464,
+              "delta_rmse": 0.0
+            },
+            "24": {
+              "rows": 182,
+              "reference_rmse": 0.840272745616259,
+              "candidate_rmse": 0.8490278987458196,
+              "delta_rmse": 0.008755153129560656
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x anchor_id",
+            "groups": 182,
+            "replicates": 5000,
+            "mean_delta_rmse": 0.001570152046042746,
+            "ci90_low": -1.8804684652789874e-05,
+            "ci90_high": 0.003191393470547511,
+            "probability_improved": 0.0518
+          },
+          "decision": "INTERNAL_NO_GO",
+          "alpha_18": 0.425,
+          "alpha_24": 0.6
+        },
+        "P3_2_KMA_A18_0200_A24_0425": {
+          "reference_rmse": 0.781191524691732,
+          "candidate_rmse": 0.7794236767036075,
+          "delta_rmse": -0.0017678479881245712,
+          "rows": 1092,
+          "by_fold": {
+            "2024_h2_storm": {
+              "rows": 294,
+              "reference_rmse": 0.7167963137719183,
+              "candidate_rmse": 0.7168041163647547,
+              "delta_rmse": 7.802592836392286e-06
+            },
+            "2025_h1": {
+              "rows": 318,
+              "reference_rmse": 0.812902441758359,
+              "candidate_rmse": 0.8142221678153352,
+              "delta_rmse": 0.001319726056976167
+            },
+            "winter_transition": {
+              "rows": 480,
+              "reference_rmse": 0.7974048151255765,
+              "candidate_rmse": 0.7925581341162505,
+              "delta_rmse": -0.004846681009325948
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7203542585817899,
+              "candidate_rmse": 0.7219188303513803,
+              "delta_rmse": 0.0015645717695903505
+            },
+            "I-ORS": {
+              "rows": 276,
+              "reference_rmse": 0.8873170770632796,
+              "candidate_rmse": 0.8855754637689504,
+              "delta_rmse": -0.0017416132943292029
+            },
+            "S-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7627755545090779,
+              "candidate_rmse": 0.7578090420792435,
+              "delta_rmse": -0.004966512429834369
+            }
+          },
+          "by_lead_h": {
+            "3": {
+              "rows": 182,
+              "reference_rmse": 0.5837152244593223,
+              "candidate_rmse": 0.5837152244593223,
+              "delta_rmse": 0.0
+            },
+            "6": {
+              "rows": 182,
+              "reference_rmse": 0.6664687867959159,
+              "candidate_rmse": 0.6664687867959159,
+              "delta_rmse": 0.0
+            },
+            "9": {
+              "rows": 182,
+              "reference_rmse": 0.7816693044629683,
+              "candidate_rmse": 0.7816693044629683,
+              "delta_rmse": 0.0
+            },
+            "12": {
+              "rows": 182,
+              "reference_rmse": 0.8587034693865928,
+              "candidate_rmse": 0.8587034693865928,
+              "delta_rmse": 0.0
+            },
+            "18": {
+              "rows": 182,
+              "reference_rmse": 0.9067636106288464,
+              "candidate_rmse": 0.897589362067378,
+              "delta_rmse": -0.009174248561468312
+            },
+            "24": {
+              "rows": 182,
+              "reference_rmse": 0.840272745616259,
+              "candidate_rmse": 0.840272745616259,
+              "delta_rmse": 0.0
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x anchor_id",
+            "groups": 182,
+            "replicates": 5000,
+            "mean_delta_rmse": -0.0017710993077435205,
+            "ci90_low": -0.0036746975828414186,
+            "ci90_high": 0.00018404460481127337,
+            "probability_improved": 0.932
+          },
+          "decision": "INTERNAL_SIGNAL_ONLY_UNSTABLE",
+          "alpha_18": 0.2,
+          "alpha_24": 0.425
+        },
+        "P3_3_KMA_A18_0200_A24_0600": {
+          "reference_rmse": 0.781191524691732,
+          "candidate_rmse": 0.7810033816252306,
+          "delta_rmse": -0.00018814306650138946,
+          "rows": 1092,
+          "by_fold": {
+            "2024_h2_storm": {
+              "rows": 294,
+              "reference_rmse": 0.7167963137719183,
+              "candidate_rmse": 0.7168380608020074,
+              "delta_rmse": 4.174703008907876e-05
+            },
+            "2025_h1": {
+              "rows": 318,
+              "reference_rmse": 0.812902441758359,
+              "candidate_rmse": 0.8139638676390731,
+              "delta_rmse": 0.0010614258807141175
+            },
+            "winter_transition": {
+              "rows": 480,
+              "reference_rmse": 0.7974048151255765,
+              "candidate_rmse": 0.7962443834508327,
+              "delta_rmse": -0.0011604316747437782
+            }
+          },
+          "by_station": {
+            "G-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7203542585817899,
+              "candidate_rmse": 0.7212144492730228,
+              "delta_rmse": 0.0008601906912328872
+            },
+            "I-ORS": {
+              "rows": 276,
+              "reference_rmse": 0.8873170770632796,
+              "candidate_rmse": 0.8861880259358834,
+              "delta_rmse": -0.0011290511273961412
+            },
+            "S-ORS": {
+              "rows": 408,
+              "reference_rmse": 0.7627755545090779,
+              "candidate_rmse": 0.7623348440475973,
+              "delta_rmse": -0.0004407104614805313
+            }
+          },
+          "by_lead_h": {
+            "3": {
+              "rows": 182,
+              "reference_rmse": 0.5837152244593223,
+              "candidate_rmse": 0.5837152244593223,
+              "delta_rmse": 0.0
+            },
+            "6": {
+              "rows": 182,
+              "reference_rmse": 0.6664687867959159,
+              "candidate_rmse": 0.6664687867959159,
+              "delta_rmse": 0.0
+            },
+            "9": {
+              "rows": 182,
+              "reference_rmse": 0.7816693044629683,
+              "candidate_rmse": 0.7816693044629683,
+              "delta_rmse": 0.0
+            },
+            "12": {
+              "rows": 182,
+              "reference_rmse": 0.8587034693865928,
+              "candidate_rmse": 0.8587034693865928,
+              "delta_rmse": 0.0
+            },
+            "18": {
+              "rows": 182,
+              "reference_rmse": 0.9067636106288464,
+              "candidate_rmse": 0.897589362067378,
+              "delta_rmse": -0.009174248561468312
+            },
+            "24": {
+              "rows": 182,
+              "reference_rmse": 0.840272745616259,
+              "candidate_rmse": 0.8490278987458196,
+              "delta_rmse": 0.008755153129560656
+            }
+          },
+          "bootstrap": {
+            "unit": "fold x anchor_id",
+            "groups": 182,
+            "replicates": 5000,
+            "mean_delta_rmse": -0.00019625637594505882,
+            "ci90_low": -0.0013427217509444144,
+            "ci90_high": 0.0009679863270299075,
+            "probability_improved": 0.613
+          },
+          "decision": "INTERNAL_SIGNAL_ONLY_UNSTABLE",
+          "alpha_18": 0.2,
+          "alpha_24": 0.6
+        }
+      }
+    }
+  },
+  "source_hashes": {
+    "p1_base_oof": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "p1_peer_oof": "c4969f4d67271bf28f346c011cf6c0c6a586875d41ae835c5f9e8c9b2fe13079",
+    "p1_anchor": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536",
+    "p2_oof": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "p2_observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "p3_blind": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "p3_evaluated": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "operation_counters": {
+    "historical_truth_rows_read": 491974,
+    "official_hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "new_model_fits": 0
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "p2.masked_logmeanexp_profile_pooling.negative_fingerprint.20260901.v49",
+  "candidate_experiment_id": "p2_masked_logmeanexp_profile_pooling_deepset_20260901_v49",
+  "created_at_kst": "2026-09-01T17:36:37+09:00",
+  "created_before_preregistration": true,
+  "scope": "repository P2 configs, runners, reports, and tests; artifacts, submissions, and raw data excluded",
+  "searches": {
+    "logmeanexp pooling": 0,
+    "log-sum-exp profile pooling": 0,
+    "masked logmeanexp": 0,
+    "smooth maximum pooling": 0,
+    "temperature-fixed softmax pooling": 0,
+    "masked_logmeanexp_profile_pooling": 0
+  },
+  "exact_execution_hit_count": 0,
+  "semantic_execution_hit_count": 0,
+  "selected_axis": {
+    "classification": "NEW_P2_MASKED_FIXED_TEMPERATURE_LOGMEANEXP_PROFILE_POOLING",
+    "single_change": "append a masked temperature-1 log-mean-exp of the 32 element-embedding coordinates to the exact v13 masked mean, masked maximum, and context before the unchanged head",
+    "historical_support": "v13 executed all three prefix-purged folds; every selected scoring row uses the finite organizer-distributed public-token mask and the fixed log-mean-exp descriptor has an exact zero fallback when support is absent; training rows are 45935, 119667, and 149384",
+    "identity_initialization": "the new 32 head columns are exactly zero and the original 75 head columns are copied, so the initial function equals v13",
+    "temperature": 1.0,
+    "temperature_or_pooling_sweep": false,
+    "no_new_data": true,
+    "scratch_weights_only": true,
+    "no_result_adaptive_choice": true
+  },
+  "distinctions": {
+    "v15": "v15 learns token-token self-attention before pooling; v49 has no attention and uses one fixed coordinatewise symmetric log-mean-exp statistic",
+    "v16": "v16 passes physical-depth graph messages; v49 has no graph, adjacency, depth kernel, or message passing",
+    "v20": "v20 aligns centered latent covariances across months as a loss; v49 adds no alignment or auxiliary loss",
+    "v43": "v43 applies target-layer FiLM inside token embeddings; v49 does not condition the element encoder on target layer",
+    "v45_v45c": "v45 and v45c stochastically mask Linear weights during training; v49 is deterministic and changes only the pooled descriptor",
+    "v46": "v46 applies LayerNorm to hidden activations; v49 has no normalization",
+    "v47": "v47 learns CrossNet interactions among already pooled coordinates; v49 has no cross layer",
+    "v48": "v48 pools the uncentered diagonal second moment mean(z^2); v49 instead pools log(mean(exp(z))) at one fixed temperature and contains no products or bilinear statistic"
+  },
+  "primary_source": {
+    "citation": "Zaheer et al., Deep Sets, NeurIPS 2017",
+    "url": "https://papers.nips.cc/paper/6931-deep-sets",
+    "claim": "symmetric aggregation provides a permutation-invariant representation of a set",
+    "use": "representation motivation only; no P2 performance or hyperparameter transfer"
+  },
+  "operation_counters": {
+    "data_rows_read_for_fingerprint": 0,
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

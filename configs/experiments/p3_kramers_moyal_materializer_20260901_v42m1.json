@@ -1,0 +1,61 @@
+{
+  "schema_version": "p3.kramers_moyal.materializer.config.v42m1",
+  "experiment_id": "p3_kramers_moyal_materializer_20260901_v42m1",
+  "status": "PREREGISTERED_BEFORE_OFFICIAL_READ",
+  "candidate": {
+    "name": "P3_1_KM80_RIDGE512_ADD10",
+    "science_experiment_id": "p3_kramers_moyal_residual_cycle_20260901_v42",
+    "ridge_alpha": 512.0,
+    "additive_residual_weight": 0.10,
+    "reference": "exact uniform KMA alpha 0.425 champion",
+    "full_fit_policy": "all 182 eligible complete historical cases; no validation-row exclusion in deployment fit",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0
+  },
+  "internal_contract": {
+    "result_path": "artifacts/p3_kramers_moyal_residual_cycle_20260901_v42/result.json",
+    "result_sha256": "c88536e1f964d76645db95350ce6b04d46f92d949c3bd603a9c82f295abb7028",
+    "qa_path": "reports/p3_kramers_moyal_residual_cycle_20260901_v42/independent-qa.json",
+    "qa_sha256": "c371c284c8f81697a091e3ec40bc86837963fbdc3718a3846b84c903232e2785",
+    "required_science_decision": "PASS_CANDIDATE_AVAILABLE",
+    "required_candidate_decision": "PASS_STABLE",
+    "required_qa_decision": "PASS"
+  },
+  "source_contract": {
+    "environment": "P3_DATA_DIR",
+    "test_context_filename": "test_context.parquet",
+    "test_index_filename": "test_index.csv",
+    "sample_filename": "sample_submission.csv",
+    "test_context_sha256": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "test_index_sha256": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "sample_sha256": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "champion_path": "submissions/p3_20260830_uniform_kma_0425_v1/P3_submission.csv",
+    "champion_sha256": "144f5e1740a338df881b5076b8d0a8764630c5836982a6ff4326e93c2e24219e",
+    "key_columns": ["case_id", "station", "lead_h"],
+    "submission_columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "context_columns": ["case_id", "station", "step_minute", "hs", "tp", "hmax", "wvdir", "wspd", "gust", "wdir", "airt", "relh", "caph"],
+    "expected_context_rows": 57800,
+    "expected_cases": 200,
+    "expected_submission_rows": 1200
+  },
+  "deployment_guards": {
+    "absolute_action_p99_m_lte": 0.12,
+    "absolute_action_max_m_lte": 0.20,
+    "action_rms_m_lte": 0.05,
+    "maximum_station_action_p99_m_lte": 0.15,
+    "maximum_lead_action_p99_m_lte": 0.15,
+    "prediction_min_m_gte": 0.0,
+    "prediction_max_m_lte": 30.0,
+    "required_station_set": ["G-ORS", "I-ORS", "S-ORS"],
+    "required_lead_set": [3, 6, 9, 12, 18, 24],
+    "row_deletion": 0
+  },
+  "operation_limits": {
+    "hidden_truth_rows": 0,
+    "score_file_rows": 0,
+    "uploads": 0,
+    "result_adaptive_tuning": false,
+    "posthoc_routing": false,
+    "csv_on_guard_fail": 0
+  }
+}

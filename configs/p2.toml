@@ -1,0 +1,23 @@
+[project]
+seed = 20260816
+threads = 8
+data_env = "P2_DATA_DIR"
+
+[model]
+backend = "lightgbm"
+objective = "residual_to_nearest_public_depth_interpolation"
+n_estimators = 400
+learning_rate = 0.04
+num_leaves = 31
+max_depth = 7
+min_child_samples = 200
+
+[validation]
+primary_metric = "rmse"
+blocks = ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"]
+
+[submission]
+columns = ["station", "layer", "time", "temp"]
+rows = 26061
+minimum_temp = -5.0
+maximum_temp = 45.0

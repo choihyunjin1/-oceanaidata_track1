@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "P2_external_depth_query_v1",
+  "created_at_kst": "2026-08-17T00:00:00+09:00",
+  "status": "ready_for_open_source_preflight",
+  "execution_authorized": true,
+  "objective": {
+    "problem": "P2",
+    "metric": "rmse_celsius",
+    "direction": "minimize",
+    "hypothesis": "Pre-2024 vertical-profile pretraining followed by local fine-tuning can improve thermocline curvature reconstruction beyond a model trained only on the two distributed years.",
+    "single_structural_change": "continuous_depth_query_pretraining"
+  },
+  "external_preflight": {
+    "required": true,
+    "validator": "scripts/validate_external_preflight.py",
+    "catalog": "configs/external_data/catalog.toml",
+    "organizer_approval_required": false,
+    "competition_permission_receipt": "configs/external_data/official_faq_permission.json",
+    "primary_source": "s_ors_ctd_2015_2023",
+    "primary_source_rights_holder_permission_required": true,
+    "fallback_source": "i_ors_ctd_2014_2023",
+    "maximum_observation_time_kst": "2023-12-31T23:59:59+09:00",
+    "forbidden_period": "2024-01-01 onward",
+    "forbidden_target": "S-ORS 2025-09-01 through 2025-10-31 layers 2, 3, and 4",
+    "timestamp_intersection_with_distributed_2024_2025": 0,
+    "raw_values_accessed": false
+  },
+  "model": {
+    "family": "continuous_depth_query_neural_field",
+    "inputs": [
+      "public temperature profile",
+      "public salinity profile",
+      "depth",
+      "seasonal phase",
+      "semidiurnal tidal phase"
+    ],
+    "query": "temperature_at_requested_depth",
+    "pretraining_task": "mask one or more observed depths and reconstruct them",
+    "fine_tuning_task": "exact three-layer two-month mask curriculum matching P2",
+    "local_baseline_and_postprocessing": "frozen until the external-only pretraining ablation passes"
+  },
+  "validation": {
+    "external_stage": "leave-one-year-out September-October reconstruction within each eligible source",
+    "local_stage": "existing P2 honest seasonal and masked-block validation, evaluated once",
+    "selection_scope": "external training years and local inner folds only",
+    "test_index_or_hidden_labels_used_for_selection": false,
+    "domain_shift_checks": [
+      "depth support",
+      "profile observation coverage",
+      "temperature distribution KS",
+      "domain classifier AUC",
+      "missingness-pattern match"
+    ]
+  },
+  "promotion_gates": {
+    "minimum_local_rmse_improvement_celsius": 0.01,
+    "all_three_target_layers_must_not_degrade": true,
+    "maximum_single_layer_rmse_degradation_celsius": 0.0,
+    "external_validation_must_improve_in_two_or_more_years": true,
+    "external_training_values_must_remain_outside_git": true
+  },
+  "stop_conditions": [
+    "official FAQ permission evidence is missing or invalid",
+    "KIOST rights-holder permission for S-ORS is absent",
+    "any observation exceeds the approved pre-2024 cutoff",
+    "external data can be matched to the hidden P2 target interval",
+    "domain-shift checks fail",
+    "local RMSE gate fails"
+  ],
+  "execution": {
+    "downloaded": false,
+    "trained": false,
+    "evaluated": false,
+    "submitted": false
+  }
+}

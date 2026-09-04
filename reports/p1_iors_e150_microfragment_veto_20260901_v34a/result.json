@@ -1,0 +1,111 @@
+{
+  "by_fold": {
+    "2025_q2": {
+      "candidate_f1": 0.8678369090740224,
+      "delta_f1": 0.00016117316539587812,
+      "reference_f1": 0.8676757359086266,
+      "removed_false_positive": 2,
+      "removed_rows": 2,
+      "removed_true_positive": 0,
+      "removed_true_positive_share": 0.0,
+      "rows": 133170
+    },
+    "2025_q3": {
+      "candidate_f1": 0.9125205930807249,
+      "delta_f1": 0.0003322958212400584,
+      "reference_f1": 0.9121882972594848,
+      "removed_false_positive": 8,
+      "removed_rows": 11,
+      "removed_true_positive": 3,
+      "removed_true_positive_share": 0.2727272727272727,
+      "rows": 176738
+    },
+    "2025_q4": {
+      "candidate_f1": 0.8991180379364504,
+      "delta_f1": 0.00021720450246076606,
+      "reference_f1": 0.8989008334339896,
+      "removed_false_positive": 2,
+      "removed_rows": 2,
+      "removed_true_positive": 0,
+      "removed_true_positive_share": 0.0,
+      "rows": 111124
+    }
+  },
+  "day_block_bootstrap": {
+    "blocks": 164,
+    "ci90_high": 0.0005977602461300691,
+    "ci90_low": -2.6270901728187024e-05,
+    "mean_delta_f1": 0.0002849038171423558,
+    "probability_improved": 0.936,
+    "replicates": 5000
+  },
+  "expected_points_delta": 0.007535195188000193,
+  "experiment_id": "p1_iors_e150_microfragment_veto_20260901_v34a",
+  "fit_count": 0,
+  "gates": {
+    "anchor_removals_zero": true,
+    "primary_day_block_ci90_low_nonnegative": false,
+    "primary_delta_f1_strictly_positive": true,
+    "primary_removed_rows_at_least": true,
+    "q3_delta_f1_nonnegative": true,
+    "q4_delta_f1_nonnegative": true,
+    "removed_true_positive_share_strictly_below_reference_f1_half": true
+  },
+  "hashes": {
+    "action_seal": "884b11f3efc458730adece1da1cd435f69d83b9e167fc3e650421a0e383539ec",
+    "config": "59c2172f5edebaef16da55d38d7bd39d006904d4347ede8296d1eec054b565bc",
+    "recovery_qa": "143d682c63ec62d5c7a6224796564b5a134a2f881814137f69adb0a4e7b0cc0c",
+    "sealed_action": "713791ed6a030088283d7ac10e88c65ac584e55cf8fc6f31c3890bbe3ce041db"
+  },
+  "internal_pass": false,
+  "official_materializer_execute_allowed": false,
+  "official_metric_geometry": {
+    "assumed_metric": "pooled binary micro-F1",
+    "feasible_removed_true_positive_counts_at_six_decimal_rounding": [],
+    "interpretation": "Aggregate v33a score and 80-row 1->0 diff cannot jointly arise from pooled binary micro-F1; no row-level I-ORS TP inversion is identifiable until reconciled.",
+    "maximum_possible_drop_if_all_80_removed_rows_are_true_positive": 0.00857166166476667,
+    "metric_geometry_consistent": false,
+    "observed_drop": 0.010752999999999902,
+    "observed_to_maximum_ratio": 1.254482551988665
+  },
+  "operations": {
+    "hidden_truth_reads": 0,
+    "official_reads": 0,
+    "retries": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "test_reads": 0,
+    "uploads": 0
+  },
+  "pooled_primary_q3_q4": {
+    "candidate_f1": 0.9070872312288779,
+    "delta_f1": 0.00028351120929881457,
+    "reference_f1": 0.9068037200195791,
+    "removed_false_positive": 10,
+    "removed_rows": 13,
+    "removed_true_positive": 3,
+    "removed_true_positive_share": 0.23076923076923078,
+    "rows": 287862
+  },
+  "recovery": {
+    "action_rebuilt": false,
+    "candidate_reselected": false,
+    "kind": "independent_metric_replay_of_preexisting_sealed_action",
+    "sealed_action_sha256": "713791ed6a030088283d7ac10e88c65ac584e55cf8fc6f31c3890bbe3ce041db",
+    "technical_failure": {
+      "error": "'difference_ci90'",
+      "error_type": "KeyError",
+      "experiment_id": "p1_iors_e150_microfragment_veto_20260901_v34a",
+      "hidden_truth_reads": 0,
+      "official_reads": 0,
+      "status": "TERMINAL_TECHNICAL_FAILURE",
+      "submission_csv_created": 0,
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\scripts\\run_p1_iors_e150_microfragment_veto_20260901_v34a.py\", line 323, in main\n    result = execute()\n             ^^^^^^^^^\n  File \"C:\\Users\\cedis\\PycharmProjects\\PythonProject\\scripts\\run_p1_iors_e150_microfragment_veto_20260901_v34a.py\", line 280, in execute\n    \"primary_day_block_ci90_low_nonnegative\": bootstrap[\"difference_ci90\"][0] >= 0.0,\n                                              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^\nKeyError: 'difference_ci90'\n",
+      "uploads": 0
+    },
+    "threshold_changed": false
+  },
+  "runtime_seconds": 9.738377099987702,
+  "schema_version": "p1.iors_e150_microfragment_veto.recovered_result.v34a",
+  "status": "TERMINAL_NO_GO"
+}

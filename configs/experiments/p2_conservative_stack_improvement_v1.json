@@ -1,0 +1,135 @@
+{
+  "schema_version": "p2_conservative_stack_improvement.v1",
+  "experiment_id": "p2_conservative_stack_improvement_v1",
+  "created_at_kst": "2026-08-22T23:50:00+09:00",
+  "status": "authorized_local_improvement_cycle",
+  "research_only": true,
+  "upload_allowed": false,
+  "adaptive_research": true,
+  "fresh_holdout_claimed": false,
+  "purpose": "Complete one append-only P2 improvement cycle by conservatively stacking the corrected public-layer LightGBM candidate with the official interpolation baseline, refitting every corrected inner/outer model and the full-training model, and sealing a reproducible 26,061-row candidate only if the fixed winner guards pass.",
+  "predecessor": {
+    "experiment_id": "p2_corrected_repeated_forward_v2",
+    "manifest_sha256": "fbc9dbbfd5fdbe644faa94a42c498d82b20fe2e4b0a8577c4c8a113d0e6b76f1",
+    "metrics_sha256": "f76f0fb5dcbb6084dcd414578826d89f97aa545569c4510091fb1e6819e38eef",
+    "inner_oof_sha256": "7620d900d3230fad59b46bd36e9ea53ea0d8b380e9dc2f16e4355ac0d95f1951",
+    "outer_oof_sha256": "90fe743f871857f3957d737ccbfd3255718da104cdd422750d7d5f6cadb87120",
+    "candidate_sha256": "d58ce75f76a54e9448e80505684a45c78e8cc7c5ad7c8fc51470012e81a4008a",
+    "final_model_sha256": "d7f115f9feb8ecaefce037cc471dcb0b5a72ed4a00da3dce4b47df89c75656ce",
+    "outer_primary_rmse_c": 1.1158878559665548,
+    "inner_primary_rmse_c": 1.463073002167726,
+    "inner_baseline_rmse_c": 1.3010466211260292,
+    "frozen_submission_sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf"
+  },
+  "source_contract": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886"
+  },
+  "base_model": {
+    "family": "fixed_public_layer_lightgbm_residual_blend50_with_physical_projection",
+    "base_arm_weight": 0.5,
+    "lean_arm_weight": 0.5,
+    "target_layer_inputs": [],
+    "public_input_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "model_parameters": {
+      "objective": "regression_l2",
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "deterministic": true,
+      "force_row_wise": true
+    },
+    "fold_seed_base": 20260822,
+    "full_train_seed": 20270822,
+    "checkpoint_selection": "none_fixed_400_rounds"
+  },
+  "stack": {
+    "formula": "official_interpolation + candidate_weight * (corrected_projected_prediction - official_interpolation)",
+    "branches": [
+      {"id": "STACK_W0500", "candidate_weight": 0.5},
+      {"id": "STACK_W0625", "candidate_weight": 0.625},
+      {"id": "STACK_W0750", "candidate_weight": 0.75}
+    ],
+    "branch_order_fixed": true,
+    "maximum_branches": 3,
+    "winner_selection": "minimum corrected outer fold-equal official-layer-weighted RMSE among branches passing every guard",
+    "selection_tie_break": "earlier branch order",
+    "interpretation": "The branch screen is adaptive research based on already-exposed predecessor residual complementarity; it is not a fresh-holdout claim. All three weights are frozen before this generation's model fitting and OOF materialization."
+  },
+  "winner_guards": {
+    "outer_primary_strictly_below_predecessor": true,
+    "minimum_outer_fold_improvements_vs_predecessor": 2,
+    "maximum_outer_fold_regression_vs_predecessor_c": 0.15,
+    "inner_excess_over_baseline_strictly_below_predecessor": true,
+    "inner_outer_directionality_gap_strictly_below_predecessor_c": 0.3052413810416968,
+    "candidate_rows": 26061,
+    "hidden_target_temperature_values_accessed": 0,
+    "hidden_target_salinity_values_accessed": 0
+  },
+  "masking": {
+    "jointly_null_columns": ["temp", "psal"],
+    "jointly_null_layers": [2, 3, 4],
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_non_null_allowed": false
+  },
+  "validation": {
+    "timezone": "Asia/Seoul",
+    "embargo_days": 7,
+    "primary_metric": "sqrt(mean over outer folds of official-layer-weighted MSE)",
+    "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+    "minimum_inner_target_coverage": 0.96,
+    "minimum_outer_target_coverage": 0.96,
+    "bootstrap": {
+      "unit": "KST calendar day within fold",
+      "replicates": 2000,
+      "interval": 0.9,
+      "seed": 20260822
+    },
+    "folds": [
+      {
+        "name": "outer_2024_sep_oct",
+        "outer": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+        "inner": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+        "same_season_priority": true
+      },
+      {
+        "name": "outer_2025_may_jun",
+        "outer": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+        "inner": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+        "same_season_priority": false
+      },
+      {
+        "name": "outer_2025_jul_aug",
+        "outer": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+        "inner": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+        "same_season_priority": false
+      }
+    ]
+  },
+  "final_training": {
+    "population": "all finite legally distributed target temperatures outside the hidden null window with finite public-layer interpolation support",
+    "underlying_model_refit_required": true,
+    "stored_stack_model_required": true,
+    "saved_model_reinference_required": true
+  },
+  "output_contract": {
+    "append_only": true,
+    "default_directory": "artifacts/p2_conservative_stack_improvement_v1",
+    "attempt_lock": "artifacts/p2_conservative_stack_improvement_v1_control/attempt.lock",
+    "candidate_relative_path": "candidate/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+    "reproduction_relative_path": "reproduction/P2_CONSERVATIVE_STACK_IMPROVEMENT_V1.csv",
+    "current_frozen_submission_mutation_allowed": false,
+    "test_rows": 26061,
+    "columns": ["station", "layer", "time", "temp"]
+  }
+}

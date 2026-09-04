@@ -1,0 +1,70 @@
+{
+  "schema_version": "p1.v11_causal_wavelet_scattering_addonly.v1",
+  "result_schema_version": "p1.v11_causal_wavelet_scattering.result.v1",
+  "experiment_id": "p1_v11_causal_wavelet_scattering_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Invariant Scattering Convolution Networks",
+    "authors": "Bruna and Mallat",
+    "year": 2012,
+    "url": "https://arxiv.org/abs/1112.1120",
+    "claim_boundary": "Wavelet modulus cascades provide multiscale deformation-stable representations. v11 uses a small fixed causal Haar-modulus approximation for P1 and makes no performance or reproduction claim from the source."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "v6_authority": "The terminal v6 metric audit explicitly recorded causal multiscale wavelet scattering as an unused next axis requiring a new ID.",
+    "multiscale_haar_v6": "v6 uses fixed level/slope/curvature and one-stage absolute Haar residual summaries. v11 uses causal first-order modulus at seven dyadic scales, second-order modulus cascades at five ordered scale pairs, and cross-scale energy persistence.",
+    "minirocket": "MiniRocket uses many fixed dilated convolution kernels followed by PPV/max summaries and a linear head. v11 has analytic Haar filters and explicit modulus cascades, with no random kernels or PPV features.",
+    "soft_symbolic": "Soft-symbolic PAA encodes block memberships and adjacent transition frequencies. v11 retains continuous wavelet-modulus energy and modulation across scales.",
+    "tcn": "MS-TCN learns temporal convolutions end to end. Every v11 filter, scale, averaging horizon, and model setting is fixed before metrics.",
+    "v7_path": "v7 integrates signed cross-channel path area. v11 is univariate within station-layer and measures multiscale temporal energy/modulation.",
+    "v10_recurrence": "v10 measures repeated dynamical states and laminar trapping. v11 measures causal wavelet energy and energy modulation, with no state-distance recurrence.",
+    "cross_problem_transfer": "No P2/P3 result, metric, threshold, scale list, window, or hyperparameter was read or transferred.",
+    "evidence": {
+      "configs/experiments/p1_v6_metric_consistency_preflight_20260901_v1.json": "2273a923df644b7098a12dec66edf3af4965b9bf8bdd1cd519eca6f00d58bb1d",
+      "src/p1_qc/multiscale_cross_layer_offset_drift.py": "434bce024437d5dea77a4827bfdde95f0726659f901993fd4c033df82ab605d8",
+      "src/p1_qc/causal_minirocket_lite.py": "b03bf681aa243cd7aa4399b4c053c8b3a6916e0acefa55a306427c60533e3fa1",
+      "src/p1_qc/causal_soft_symbolic.py": "dec110408ac08cd64aebe390f96acd70fff1451f05d1fe6b08bb115b567271d9",
+      "src/p1_qc/temporal_event_tcn.py": "667c1894f8fc4fc74351e0a2089dd5bab666f4a39bbe6dd193844007331fe746",
+      "scripts/run_p1_v7_causal_path_crossmoment_addonly_20260901_v1.py": "89b6e7320f8c5e18eaa122f1f7bc2fb4f711bd42b344b0476cf553e14a871025",
+      "scripts/run_p1_v10_causal_recurrence_laminar_state_addonly_20260901_v1.py": "f8edf02cefbffa75d28a94376d0842f351add0dfd75aba8e1c9664d5cd7035a2"
+    }
+  },
+  "representation": {
+    "sequence_unit": "station_x_layer",
+    "first_order_scales_rows": [1, 2, 4, 8, 16, 32, 64],
+    "second_order_scale_pairs_rows": [[1, 4], [2, 8], [4, 16], [8, 32], [16, 64]],
+    "modulus_average_rows": 12,
+    "energy_persistence_rows": 96,
+    "minimum_prefix_rows": 96,
+    "insufficient_prefix_group_policy": "zero_all_features_for_that_fold",
+    "features": ["s1_1", "s1_2", "s1_4", "s1_8", "s1_16", "s1_32", "s1_64", "s2_1_4", "s2_2_8", "s2_4_16", "s2_8_32", "s2_16_64", "long_short_energy_ratio", "energy_persistence"],
+    "past_only": true,
+    "future_interpolation": 0,
+    "subsequence_normalization": 0
+  },
+  "representation_support_gate": {
+    "minimum_nonzero_feature_share": 0.5,
+    "minimum_feature_variance": 0.000001,
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_SCATTERING_SUPPORT"
+  },
+  "model": {"kind": "L2 SGD logistic", "alpha": 0.0001, "epochs": 20, "positive_class_weight": 12.0, "seeds": [20260901, 20260917, 20260943], "fits": 9, "sweep": 0},
+  "selection": {"inner_train_fraction": 0.85, "threshold_quantiles": [0.995, 0.9975, 0.999], "maximum_addition_share": 0.0025, "minimum_additions": 25, "wilson90_lcb_minimum": 0.55, "outer_tuning": 0},
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

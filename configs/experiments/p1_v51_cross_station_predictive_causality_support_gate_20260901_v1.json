@@ -1,0 +1,118 @@
+{
+  "schema_version": "p1.v51_cross_station_predictive_causality_support_gate.v1",
+  "experiment_id": "p1_v51_cross_station_predictive_causality_support_gate_20260901_v1",
+  "status": "NO_GO_ZERO_FIT_CROSS_STATION_PREDICTIVE_INFORMATION_UNSTABLE_AND_REPOSITORY_OVERLAP",
+  "surface": "TRAIN_ONLY_TARGET_FREE_SUPPORT_AND_SEMANTIC_AUDIT",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "columns_read": ["station", "layer", "time", "temp"],
+    "target_columns_read": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_sources": [
+    {
+      "title": "Investigating Causal Relations by Econometric Models and Cross-spectral Methods",
+      "authors": "C. W. J. Granger",
+      "venue": "Econometrica 37(3), 424-438 (1969)",
+      "doi": "10.2307/1912791",
+      "url": "https://doi.org/10.2307/1912791",
+      "claim_boundary": "Motivates comparing restricted and remote-history-augmented prediction. It does not establish structural causality, P1 anomaly precision, or cross-station transport."
+    },
+    {
+      "title": "Cross-Sensor Quality Assurance for Marine Observatories",
+      "authors": "Diamant et al.",
+      "venue": "Remote Sensing 12(21), 3470 (2020)",
+      "doi": "10.3390/rs12213470",
+      "url": "https://doi.org/10.3390/rs12213470",
+      "claim_boundary": "Motivates validation against related datasets that reflect the same phenomenon. It does not show that geographically separate P1 stations are related sensors or that this recipe improves P1."
+    }
+  ],
+  "candidate_sealed_before_target_access": {
+    "name": "causal cross-station layer-1 restricted-versus-unrestricted predictive residual",
+    "station_anchor_layer": "1",
+    "cadence_minutes": 10,
+    "lags_rows": [1, 6, 36],
+    "restricted_predictors": "own station layer-1 history at fixed lags",
+    "unrestricted_predictors": "restricted predictors plus both other stations' layer-1 histories at the same fixed lags",
+    "ridge_alpha": 10.0,
+    "fit_boundary_utc": "2025-01-16T17:50:00+00:00",
+    "target_free_validation_cutoff_utc": "2025-03-24T14:50:00+00:00",
+    "feature_candidates": ["restricted_residual", "unrestricted_residual", "absolute_residual_reduction", "remote_history_increment"],
+    "past_only": true,
+    "future_interpolation": 0,
+    "fits_if_ready": 3,
+    "maximum_fits": 9,
+    "seeds": [20260901, 20260917, 20260943],
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "sweep": 0,
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0
+  },
+  "target_free_support_gate": {
+    "minimum_exact_common_layer1_rows_before_cutoff": 5000,
+    "minimum_restricted_fit_rows_per_station": 1000,
+    "minimum_validation_rows_per_station": 5000,
+    "minimum_stations_with_positive_overall_increment_mse_gain": 2,
+    "require_positive_increment_mse_gain_in_both_chronological_halves": true,
+    "require_strict_majority_positive_daily_mse_gain": true,
+    "minimum_supported_stations": 2,
+    "rationale": "A remote-history observable must add stable label-free prediction information, not merely seasonal level correlation or a pooled average driven by fewer than half of days."
+  },
+  "target_free_support": {
+    "layer1_rows": {"G-ORS": 26503, "I-ORS": 39153, "S-ORS": 101241},
+    "exact_pair_overlap_rows": {"G-ORS__I-ORS": 24125, "G-ORS__S-ORS": 26470, "I-ORS__S-ORS": 39049},
+    "exact_three_station_rows_before_cutoff": 9842,
+    "pre_q2_validation_days": 61,
+    "level_predictive_gain": {
+      "G-ORS": {"fit_rows": 1831, "validation_rows": 7581, "relative_mse_gain": -0.39703857253695707, "half_gains": [-0.21475517039749867, -0.4940183055258777], "positive_days": 8},
+      "I-ORS": {"fit_rows": 1834, "validation_rows": 7593, "relative_mse_gain": -0.16130122222216456, "half_gains": [-0.1565456904786639, -0.16922564816813168], "positive_days": 16},
+      "S-ORS": {"fit_rows": 1834, "validation_rows": 7593, "relative_mse_gain": -0.343882923182522, "half_gains": [-0.4263495592594909, -0.2784764695253534], "positive_days": 16}
+    },
+    "increment_predictive_gain": {
+      "G-ORS": {"fit_rows": 1827, "validation_rows": 7567, "restricted_mse": 0.01228293021270574, "unrestricted_mse": 0.012338241065671872, "relative_mse_gain": -0.004503066614260992, "half_gains": [-0.003725340178757572, -0.005021327336114381], "positive_days": 23, "median_daily_mse_gain": -0.000025216087264352632},
+      "I-ORS": {"fit_rows": 1830, "validation_rows": 7578, "restricted_mse": 0.006337623496596666, "unrestricted_mse": 0.006332628594605295, "relative_mse_gain": 0.0007881348574987331, "half_gains": [0.0006904151131063187, 0.0009435620240840572], "positive_days": 29, "median_daily_mse_gain": -0.000002426259458799657},
+      "S-ORS": {"fit_rows": 1830, "validation_rows": 7578, "restricted_mse": 0.0024333073771197157, "unrestricted_mse": 0.0024272676842786857, "relative_mse_gain": 0.0024820920274277567, "half_gains": [0.002204550880342868, 0.002652832083753265], "positive_days": 30, "median_daily_mse_gain": -0.00000006009225242620139}
+    },
+    "stations_with_positive_overall_increment_gain": 2,
+    "stations_with_strict_majority_positive_days": 0,
+    "support_gate": "FAIL_NO_STATION_HAS_POSITIVE_REMOTE_INFORMATION_ON_A_STRICT_MAJORITY_OF_PRE_Q2_DAYS"
+  },
+  "repository_negative_fingerprint": {
+    "exact_p1_implementation": false,
+    "repository_wide_semantic_duplicate": true,
+    "p1_cross_station_peer_residual": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v1_independent_preexecution_qa_20260826.json",
+      "sha256": "3bae4d1a5c65f934f46b34e7ac729cca75de046520c9b3d4fcdfc8617ee3ed0c",
+      "relation": "Earlier P1 code subtracted contemporaneous other-station values and independent QA rejected that geographic peer residual as unrelated-regime contamination. v51 would use lagged predictive residuals, but it still relies on the same unestablished cross-station relatedness premise."
+    },
+    "p1_conditional_dependence_change": {
+      "path": "configs/experiments/p1_v9_conditional_dependence_change_addonly_20260901_v1.json",
+      "sha256": "6822dba1593c217e3d934141641cce90408efdd03b5f2a9b8ee2c4622be2c58b",
+      "relation": "v9 changes within-series covariance and precision over time; it is not the same estimator, but closes dependence-change threshold retuning."
+    },
+    "p3_pairwise_predictive_causality": {
+      "path": "configs/experiments/p3_pairwise_predictive_causality_residual_cycle_20260901_v73.json",
+      "sha256": "6ab385c4995797864b5eff6f41cbfd9ba6b3491e21c3401f2dbdececa97107b1",
+      "relation": "The repository already contains the same restricted-versus-unrestricted lagged regression and Granger predictive-causality representation. P1 changes variables and decoder, not the mathematical mechanism."
+    },
+    "horizontal_graph": "Not used: no station adjacency or propagation graph is asserted.",
+    "dynamic_factor": "Not used: prefix subspace/common-mode estimation would repeat the closed robust-subspace and state-space lineages."
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6"},
+    "auditability_amendment": {"path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json", "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"},
+    "add_only": true,
+    "anchor_removals": 0,
+    "maximum_fits": 9,
+    "result_based_threshold_or_gate_changes": 0
+  },
+  "decision": {
+    "ready": false,
+    "terminal": "NO_GO_ZERO_FIT_CROSS_STATION_PREDICTIVE_INFORMATION_UNSTABLE_AND_REPOSITORY_OVERLAP",
+    "reason": "Timestamp occupancy passes, but stable label-free remote predictive information does not: no station improves on a strict majority of pre-Q2 days. The same predictive-causality mechanism also already exists repository-wide, and the related-station premise was previously rejected in P1 QA.",
+    "next_research_gap": "A genuinely non-reconstructible, contemporaneous physical driver shared across at least two P1 stations, or a fresh independent labeled transport window, is required before another cross-station action mechanism is identifiable."
+  },
+  "operations": {"runner_created": 0, "preflights": 0, "locks": 0, "fits": 0, "optimizer_steps": 0, "target_reads": 0, "actions": 0, "removals": 0, "official": 0, "test": 0, "sample_submission": 0, "submission": 0, "hidden": 0, "csv": 0, "uploads": 0}
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "p3.joint_reduced_rank_residual.audit_result.v22",
+  "experiment_id": "p3_joint_reduced_rank_residual_cycle_20260901_v22",
+  "status": "STOP_DUPLICATE_OR_NO_DATA",
+  "decision": "STOP_SEMANTIC_DUPLICATE",
+  "reason": "The case-by-six-lead data contract exists, but constraining the coefficient rank and adding fixed target winsor/Huber robustness does not create a semantically new information axis beyond the already executed causal multi-output residual Ridge and causal spectral multi-output residual kernel families.",
+  "exact_duplicate": false,
+  "semantic_duplicate": true,
+  "data_contract": {
+    "historical_rows": 1092,
+    "complete_cases": 182,
+    "leads_per_case": [3, 6, 9, 12, 18, 24],
+    "all_cases_complete": true,
+    "duplicate_pair_keys": 0,
+    "nonfinite_values": 0,
+    "bimonth_blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "uniform_alpha_0p425_reference_finite": true
+  },
+  "overlap_evidence": [
+    {
+      "family": "p3_nlinear_station_ridge_residual_20260828_v1",
+      "overlap": "past-only multiresolution features, station-conditioned standardized linear model, joint six-lead target, residual/delta prediction, chronological purged outer validation",
+      "result": "TERMINAL_NO_GO; candidate minus incumbent RMSE +0.005902259 m"
+    },
+    {
+      "family": "p3_causal_spectral_kernel",
+      "overlap": "past-only causal features, train-fold robust scaling, closed-form multi-output Ridge coefficient matrix, joint six-lead residual target",
+      "result": "exact multi-output residual-regression mechanism already implemented and evaluated in the closed spectral family"
+    },
+    {
+      "family": "p3_timexer_direct_multilead",
+      "overlap": "station-aware causal 48-hour encoder with one joint six-output residual head",
+      "result": "TERMINAL_LOCAL_NO_GO; candidate minus incumbent RMSE +0.098487624 m"
+    }
+  ],
+  "novel_parts_that_do_not_clear_semantic_gate": [
+    "rank-one or rank-two coefficient truncation",
+    "fixed target winsorization or Huber weighting",
+    "uniform alpha 0.425 instead of the older incumbent as comparator"
+  ],
+  "execution": {
+    "preregistered_candidates": 0,
+    "model_fits": 0,
+    "prediction_rows_created": 0,
+    "outer_scores_computed": 0,
+    "result_based_tuning": false
+  },
+  "score": {
+    "candidate_rmse_m": null,
+    "delta_vs_uniform_m": null,
+    "nominal_expected_points": null,
+    "defensible_statement": "No candidate score exists because the semantic duplication gate stopped execution. Exact no-op remains the known Public champion at RMSE 0.575233 m and 24.203599 points; this is not a forecast for an unexecuted reduced-rank challenger."
+  },
+  "next_information_axis_proposal": {
+    "name": "causal continuous-path interaction encoder",
+    "outline": "Represent each 48-hour multivariate observed path, structural masks, and station code with bounded order-2 path-signature or Neural-CDE features, then predict only a conservative residual from the exact uniform comparator.",
+    "why_potentially_distinct": "It targets ordered cross-channel path interactions and irregular-observation geometry rather than another coefficient-rank, alpha, per-row tree, analog, Fourier-amplitude, or discrete joint-output ablation.",
+    "required_before_execution": "A separate exact and semantic duplication audit against TCN/TimeXer/masked-SSL/state-space implementations, followed by one frozen architecture and no outer-result tuning."
+  },
+  "data_access": {
+    "historical_target_rows": 1092,
+    "official_test_rows": 0,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "hidden_truth_rows": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  },
+  "evidence_sha256": {
+    "configs/experiments/p3_nlinear_station_ridge_residual_20260828_v1.json": "7a440b9f01ca37424eda1eed0a09ba32b2c687fc03326c9e85198b49c029a44b",
+    "artifacts/p3_nlinear_station_ridge_residual_20260828_v1/result.json": "f40d71853971035c9c4c7ff4aaf581585e0658a8b9cd848c2f354126243bb276",
+    "src/p3_wave/nlinear_ridge_residual.py": "2f4e40d3e95b3d78d15c6c7eacd974c6cac7e1aa182f83882ecb304e83938df4",
+    "src/p3_wave/causal_spectral_kernel.py": "d7586f27dc6b46e615ecf44cf477ba16ccbcf73c462ce850c3977502a3ad8144",
+    "src/p3_wave/timexer_direct_multilead.py": "3896505aa3c731ac3f2fc9f4facf5df582be74b8af18960098c5117aca787bc8",
+    "artifacts/p3_uniform_selective_robust_fallback_cycle_20260901_v21/result.json": "3abeb7b1fb48f51dbc5c944638d136a15582b94c23eebe36cd5dfd203296960a",
+    "scripts/run_p3_parallel_candidate_cycle_20260831_v4.py": "d7b7f66b9cd3130b1e483bebeea177314f049e7031f0933c44efcdd7398fbc5f"
+  }
+}

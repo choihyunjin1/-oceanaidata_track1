@@ -1,0 +1,27 @@
+{
+  "schema_version": "p3_target_shift_retroaudit.decision.20260828.v11",
+  "status": "NO_GO_CLOSE_WIND_RESIDUAL_DIRECTION",
+  "official_submission_created": false,
+  "official_upload_performed": false,
+  "decision": "Do not use observed-covariate importance weighting as a P3 promotion gate and do not continue the same Hs2 or ERA5 residual family.",
+  "executed_experiment": "Atmosphere-complete champion-residual predictability pilot using past-only 12h and 18/24h observed-wind lag features with small regularized direct residual models.",
+  "fixed_stop_rule": "Strict outer-fold case-bootstrap CI90 upper was not below zero; no candidate CSV was created and the direction is closed.",
+  "next_resource_allocation": "Prioritize deep-research-grounded P1 and P2 structural experiments. Reopen P3 only with information independent of the current past-summary feature family.",
+  "key_evidence": {
+    "source_rising_fraction": 0.8287292817679558,
+    "target_rising_fraction": 0.815,
+    "wave_state_domain_auc": 0.5624309392265193,
+    "full_feature_domain_auc": 0.7260773480662983,
+    "complete_wind_source_cases": 126,
+    "all_source_cases": 181,
+    "official_hs2_delta_rmse_m": 0.001846,
+    "official_hs2_delta_points": -0.029302,
+    "wave_state_weighted_hs2_delta_rmse_m": -0.016285662352530816,
+    "complete_wind_weighted_hs2_delta_rmse_m": -0.01113212333282032,
+    "residual_pilot_complete_cases": 124,
+    "best_residual_pilot_model": "ridge_wind_only",
+    "best_residual_pilot_delta_rmse_m": 0.008173280953336914,
+    "best_residual_pilot_ci90": [-0.0010248023207412697, 0.018174686478148225],
+    "residual_pilot_gate_pass_count": 0
+  }
+}

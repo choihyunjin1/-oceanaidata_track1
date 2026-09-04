@@ -1,0 +1,337 @@
+{
+  "schema_version": "final_goal_mode_synthesis.v1",
+  "generated_at_kst": "2026-08-25T15:43:03+09:00",
+  "title": "Ocean AI P1–P3 최종 종합 — ERA5 결과 제외",
+  "status": "COMPLETE__SHARE_WITH_CAVEATS__NO_SUBMISSION_ACTION",
+  "scope": {
+    "question": "지금까지의 P1·P2·P3 개선 시도는 무엇을 실제로 달성했고, 무엇을 달성하지 못했으며, 다음 결정은 무엇인가?",
+    "included": [
+      "동결 incumbent와 주요 후보의 aggregate 검증 결과",
+      "full-improvement-cycle의 5개 승격 기준 감사",
+      "문제별 정확히 3회 historical pseudo-test 관점 확인",
+      "KMA 등 완료된 외생 데이터 실험과 ERA5 봉인 프로토콜 상태",
+      "검증 재사용·도메인 이동·식별 가능성에 대한 한계"
+    ],
+    "excluded": [
+      "진행 중인 ERA5 context-transfer의 미완료 성능 결과",
+      "공식 P3 test·sample·submission 파일의 열람",
+      "submission 생성 또는 업로드",
+      "hidden leaderboard 성능 추정"
+    ]
+  },
+  "bottom_line": {
+    "decision": "현재 P1·P2·P3 incumbent를 유지한다. 진행 중인 P3 ERA5 one-shot을 제외한 기존 튜닝·router·residual 가설군은 종료한다.",
+    "confirmed_incremental_improvements": "0/3 problems in the full-improvement-cycle",
+    "feasible_confirmation_passes": "0/9 historical repeats",
+    "viewpoint_assessment": "SUPPORTED_WITH_CAVEATS",
+    "interpretation": "문제 전체의 모델 용량 부족보다, 반복 노출된 검증면과 예측 시점에 관측 가능한 regime 정보 부족이 현재 병목이라는 증거가 더 강하다.",
+    "era5_treatment": "ERA5는 실패가 아니라 미완료이다. 봉인된 source gate와 정확히 3개 local-window gate를 결과 기반 재튜닝 없이 한 번만 평가해야 한다."
+  },
+  "decision_framework": {
+    "rule": "비교 가능성, 실질 효과, 허용 가능한 불확실성, fresh 또는 honest nested 평가, fold·slice 안정성의 5개 조건을 모두 충족해야 승격한다.",
+    "directions": {
+      "P1": "F1이 높을수록 좋으며 delta = candidate - comparator",
+      "P2": "RMSE ℃가 낮을수록 좋으며 delta = candidate - comparator",
+      "P3": "RMSE m가 낮을수록 좋으며 delta = candidate - comparator"
+    },
+    "materiality": {
+      "P1": "+0.005 F1",
+      "P2": "-0.012101 ℃",
+      "P3": "-0.028792 m"
+    }
+  },
+  "early_progress": [
+    {
+      "problem": "P1",
+      "comparison": "동결 XGBoost 대 이전 LightGBM",
+      "comparator": "weighted F1 0.768804369",
+      "candidate": "weighted F1 0.813315553",
+      "delta": "+0.044511184 F1",
+      "ci90": "[+0.019929, +0.070360]",
+      "assessment": "초기 기준 모델 교체는 의미 있는 로컬 진전"
+    },
+    {
+      "problem": "P2",
+      "comparison": "extrapolated soft gate v2 대 physical projection",
+      "comparator": "RMSE 0.774417932 ℃",
+      "candidate": "RMSE 0.768367457 ℃",
+      "delta": "-0.006050475 ℃",
+      "ci90": "[-0.009975, -0.002307] nominal",
+      "assessment": "로컬 개선 신호이나 adaptive outer reuse와 exact time-safe 재현 실패로 confirmatory 아님"
+    },
+    {
+      "problem": "P3",
+      "comparison": "불변 local incumbent",
+      "comparator": "20% long-lead persistence shrink",
+      "candidate": "RMSE 0.780160920 m; 182 cases / 1,092 rows",
+      "delta": "not a new promotion",
+      "ci90": "not applicable",
+      "assessment": "현 연구 기준점 유지"
+    }
+  ],
+  "cycle_audit": [
+    {
+      "problem": "P1",
+      "metric": "micro F1",
+      "comparator": 0.8603708380408055,
+      "candidate": 0.8609416445623342,
+      "delta": 0.0005708065215287439,
+      "ci90": "[-0.001001, +0.001985]",
+      "materiality_gate": "+0.005 F1",
+      "criteria_passed": 1,
+      "criteria_total": 5,
+      "verdict": "FAIL — research only",
+      "primary_reason": "효과가 작고 CI가 0을 포함하며 개선이 한 fold에 집중"
+    },
+    {
+      "problem": "P2",
+      "metric": "fold-equal layer-weighted RMSE ℃",
+      "comparator": 1.1158878559665548,
+      "candidate": 1.042512377552349,
+      "delta": -0.07337547841420577,
+      "ci90": "[-0.101691, -0.044689] nominal",
+      "materiality_gate": "-0.012101 ℃",
+      "criteria_passed": 2,
+      "criteria_total": 5,
+      "verdict": "FAIL — research only",
+      "primary_reason": "동일 outer에서 branch를 선택했고 same-season fold가 +0.077036 ℃ 악화"
+    },
+    {
+      "problem": "P3",
+      "metric": "wave-height RMSE m",
+      "comparator": 0.7791048399763751,
+      "candidate": 0.7786608799293823,
+      "delta": -0.00044396004699287506,
+      "ci90": "[-0.002048, +0.001116]",
+      "materiality_gate": "-0.028792 m",
+      "criteria_passed": 1,
+      "criteria_total": 5,
+      "verdict": "FAIL — research only",
+      "primary_reason": "효과가 gate의 1.54%이고 CI가 0을 포함하며 노출된 surface를 재사용"
+    }
+  ],
+  "confirmation_pass_counts": [
+    {
+      "problem": "P1",
+      "evidence_type": "실행 가능",
+      "pass_count": 0,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "F1 ↑",
+      "threshold": "ΔF1 ≥ +0.010",
+      "pooled_delta": -0.005691759157904985,
+      "pooled_ci90": "[-0.021012, +0.004945]",
+      "diagnostic": "합성 주입 family의 label-aware ceiling도 0/3"
+    },
+    {
+      "problem": "P1",
+      "evidence_type": "사후 상한",
+      "pass_count": 0,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "F1 ↑",
+      "threshold": "ΔF1 ≥ +0.010",
+      "pooled_delta": null,
+      "pooled_ci90": "not pooled",
+      "diagnostic": "held-label 사용 비배포 상한"
+    },
+    {
+      "problem": "P2",
+      "evidence_type": "실행 가능",
+      "pass_count": 0,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "RMSE ℃ ↓",
+      "threshold": "ΔRMSE ≤ -0.030 ℃",
+      "pooled_delta": 0.01687896857416349,
+      "pooled_ci90": "[+0.013250, +0.020464] sensitivity only",
+      "diagnostic": "strict public-time router"
+    },
+    {
+      "problem": "P2",
+      "evidence_type": "사후 상한",
+      "pass_count": 3,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "RMSE ℃ ↓",
+      "threshold": "ΔRMSE ≤ -0.030 ℃",
+      "pooled_delta": -0.12293382224594085,
+      "pooled_ci90": "[-0.148074, -0.097015] sensitivity only",
+      "diagnostic": "truth-aware block mixture; 비배포"
+    },
+    {
+      "problem": "P3",
+      "evidence_type": "실행 가능",
+      "pass_count": 0,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "RMSE m ↓",
+      "threshold": "ΔRMSE ≤ -0.030 m",
+      "pooled_delta": 0.0011914829698140839,
+      "pooled_ci90": "[-0.003743, +0.006282]",
+      "diagnostic": "past-only analog/router"
+    },
+    {
+      "problem": "P3",
+      "evidence_type": "사후 상한",
+      "pass_count": 3,
+      "required_passes": 2,
+      "total_repeats": 3,
+      "metric": "RMSE m ↓",
+      "threshold": "ΔRMSE ≤ -0.030 m",
+      "pooled_delta": -0.22885024634727524,
+      "pooled_ci90": "[-0.255841, -0.202947]",
+      "diagnostic": "expanded trajectory retrieval + continuous blend; 비배포"
+    }
+  ],
+  "problem_state": [
+    {
+      "problem": "P1",
+      "current_reference": "동결 XGBoost: micro F1 0.860370838; weighted F1 0.813315553",
+      "what_worked": "초기 LightGBM 대비 weighted F1 +0.044511, CI90 전부 양수",
+      "what_failed": "peer·boundary·event·inpainting·typed-duration·TCN·masked pretrain·외부 IORS·합성 주입",
+      "diagnosis": "검증면 재사용과 큰 domain shift; 현재 cached rule/peer family의 상한 부족",
+      "decision": "동결 incumbent 유지; 새 라벨 구조 또는 새 관측 신호 없이는 이 family 종료"
+    },
+    {
+      "problem": "P2",
+      "current_reference": "extrapolated soft gate v2 local RMSE 0.768367457 ℃; research-only caveat",
+      "what_worked": "conservative stack는 노출된 local outer에서 Δ -0.073375 ℃의 강한 탐색 신호",
+      "what_failed": "exact time-safe 재현, parser correction, joint hydro, DINEOF, boundary reconstruction, strict router",
+      "diagnosis": "보완 신호는 존재하지만 공개 시점 정보만으로 어느 regime에 쓸지 식별하지 못함",
+      "decision": "현재 후보를 동결하되 일반화 개선으로 주장하지 않음; fresh holdout 또는 외생 proxy 전까지 종료"
+    },
+    {
+      "problem": "P3",
+      "current_reference": "공식 불변 local incumbent 0.780160920 m; 182 cases / 1,092 rows",
+      "what_worked": "truth-aware expanded oracle은 큰 상한을 보였고 외생 forcing 가설을 만들었음",
+      "what_failed": "fixed splice·hierarchical residual·causal sequence/spectral/state-space·forcing analog·KMA transfer",
+      "diagnosis": "과거 48시간만으로 storm/regime을 고르는 정보가 부족; KMA source shift가 극심",
+      "decision": "incumbent 유지; 완료 전 ERA5는 별도 봉인 one-shot으로만 판정"
+    }
+  ],
+  "p3_external_evidence": [
+    {
+      "experiment": "KMA source/local domain audit",
+      "result": "AUC 0.996779; effective source sample 55.09 / 65,536",
+      "interpretation": "직접 concat·full fine-tune·pretrain-only를 정당화하기 어려운 극심한 shift",
+      "decision": "NO-GO"
+    },
+    {
+      "experiment": "KMA source meta",
+      "result": "inner Δ +0.009352 m; 1/3 folds",
+      "interpretation": "평균적으로 악화",
+      "decision": "NO-GO"
+    },
+    {
+      "experiment": "KMA calibrated blend",
+      "result": "outer Δ -0.002529 m; CI90 [-0.008046, +0.002911]",
+      "interpretation": "작고 불확실하며 exact gate 실패",
+      "decision": "철회; 제출 금지"
+    },
+    {
+      "experiment": "ERA5 context-transfer v1",
+      "result": "미완료; 2026-08-25 15:50 KST metadata 관찰 기준 raw/yearly 178/363, partial 0, downloader active",
+      "interpretation": "286개 past-only feature, source gate 후 사전 등록 3 local windows를 한 번만 평가",
+      "decision": "PENDING — 본 보고서 성능 결론에서 제외"
+    }
+  ],
+  "timeline": [
+    {
+      "stage": 1,
+      "phase": "초기 기준선 구축",
+      "outcome": "P1 XGBoost의 유의한 local 개선과 P2·P3 동결 기준점 확보",
+      "scientific_status": "P1은 강한 초기 증거; P2·P3는 각 프로토콜 caveat 유지"
+    },
+    {
+      "stage": 2,
+      "phase": "다수의 residual·rule·sequence·inpainting 탐색",
+      "outcome": "일부 local point gain과 다수의 명확한 음성 결과",
+      "scientific_status": "검증면 반복 노출이 누적"
+    },
+    {
+      "stage": 3,
+      "phase": "검증 시스템 감사",
+      "outcome": "P1 outer 노출 ≥13회/10 families, P2 ≥18 generations, virgin local tail 부재 등을 확인",
+      "scientific_status": "작은 개선의 confirmatory 해석을 중단"
+    },
+    {
+      "stage": 4,
+      "phase": "full-improvement-cycle",
+      "outcome": "세 문제 모두 point estimate는 좋아졌으나 5개 승격 조건의 엄격한 결합은 0/3",
+      "scientific_status": "전부 research-only"
+    },
+    {
+      "stage": 5,
+      "phase": "관점 전환 3회 확인",
+      "outcome": "실행 가능 후보 0/9; P2·P3 truth-aware oracle만 3/3",
+      "scientific_status": "정보·식별 병목 가설 지지, 단 historical pseudo-test caveat"
+    },
+    {
+      "stage": 6,
+      "phase": "외생 forcing 검증",
+      "outcome": "KMA는 극심한 domain shift로 실패; ERA5는 봉인 다운로드·preflight 진행 중",
+      "scientific_status": "ERA5 결과는 아직 없음"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": 1,
+      "action": "P1·P2·P3의 현 기준점을 동결하고 같은 검증면에서의 미세 튜닝을 중단한다.",
+      "reason": "재사용된 surface에서의 작은 개선은 일반화 증거가 되지 못한다."
+    },
+    {
+      "priority": 2,
+      "action": "P3 ERA5는 봉인된 protocol 그대로 source gate와 정확히 3개 local historical window를 한 번만 실행한다.",
+      "reason": "현재 남은 유일한 새 정보 가설이며 결과 기반 재튜닝은 해석을 다시 훼손한다."
+    },
+    {
+      "priority": 3,
+      "action": "ERA5가 실패하면 P3 외생 pretraining family를 종료한다.",
+      "reason": "KMA 실패와 함께 외생 transfer 관점에 대한 두 번째 독립적인 반증이 된다."
+    },
+    {
+      "priority": 4,
+      "action": "P1·P2는 genuinely fresh holdout 또는 예측 시점에 관측 가능한 새 causal proxy가 있을 때만 재개한다.",
+      "reason": "현재 oracle gap은 용량보다 선택 정보를 요구한다."
+    },
+    {
+      "priority": 5,
+      "action": "다음 실험 전에 ledger를 원자료·seal·hash와 동기화하고 promotion rule을 다시 고정한다.",
+      "reason": "최근 P2·P3 결과가 기존 ledger에 완전하게 반영되지 않아 추적성이 약하다."
+    }
+  ],
+  "validation": {
+    "assessment": "SHARE_WITH_CAVEATS",
+    "full_cycle_source_status": "COMPLETE; confirmed meaningful generalization improvements 0/3",
+    "perspective_confirmation_replay": "PASS_ALL_AUTHORITATIVE_RESULTS",
+    "authoritative_p2_confirmation": "artifacts/perspective_confirmation_20260823/p2_strict/result.json",
+    "rejected_result": "artifacts/perspective_confirmation_20260823/p2/result.json — parameter-level outer leakage",
+    "official_test_reads_in_this_synthesis": 0,
+    "submission_files_created": 0,
+    "uploads": 0
+  },
+  "caveats": [
+    "대부분의 수치는 official hidden test가 아니라 historical train/OOF pseudo-test이다.",
+    "3회 확인은 단순 seed 반복보다 강하지만 완전히 독립적인 신규 실험은 아니다.",
+    "P2 3개 phase는 row occurrence 61.79%가 중복되어 pooled CI는 일정 민감도 요약에 가깝다.",
+    "P1·P3 일부 upstream cache의 과거 생성 과정까지 official test 비접촉이었다고 주장하지 않는다.",
+    "P2는 서로 다른 validation surface의 RMSE를 직접 비교하면 안 된다.",
+    "P3의 0.780160920 m 불변 incumbent와 0.779948722 m ERA5 내부 comparator는 사례 수와 평가면이 달라 구분해야 한다.",
+    "ERA5 미완료 상태는 성공도 실패도 아니며 본 보고서의 0/3 결론에 포함하지 않았다.",
+    "본 결과는 모든 모델 또는 모든 router가 불가능하다는 증명이 아니라 현재 고정 구현·정보 집합의 종료 판정이다."
+  ],
+  "source_files": [
+    "reports/P1_MODEL_SELECTION_2026-08-13.md",
+    "artifacts/validation_system_audit_20260822/p1.json",
+    "artifacts/full_improvement_cycle_20260822/meaningful_improvement_audit.json",
+    "artifacts/perspective_confirmation_20260823/synthesis.json",
+    "artifacts/perspective_confirmation_20260823/validation.json",
+    "artifacts/p2_extrapolated_soft_gate_v2/result.json",
+    "artifacts/p2_exact_incumbent_prefix_refit_audit_20260823/audit.json",
+    "reports/generated/p3_long_persistence_shrink_2026-08-17/artifact.json",
+    "artifacts/p3_corrected_fixed_long_shrink_v4/metrics.json",
+    "configs/goals/meaningful_score_ledger_v9.json",
+    "configs/experiments/p3_era5_context_transfer_v1.json"
+  ]
+}

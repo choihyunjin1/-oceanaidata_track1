@@ -1,0 +1,107 @@
+{
+  "schema_version": "p1.v55_hawkes_event_hazard_research_frontier_audit.v1",
+  "experiment_id": "p1_v55_hawkes_event_hazard_research_frontier_audit_20260901_v1",
+  "status": "NO_GO_ZERO_FIT_RESEARCH_FRONTIER_EVENT_HAZARD_NOT_IDENTIFIABLE",
+  "surface": "READ_ONLY_PRIMARY_SOURCE_REPOSITORY_SEMANTIC_AND_DEPLOYMENT_SUPPORT_AUDIT",
+  "purpose": "Audit exactly one remaining train-only temporal mechanism without forcing another threshold, loss, interval-summary, or representation variant after v53 and v54 closed fresh-window and overlooked-candidate routes.",
+  "single_mechanism": {
+    "name": "causal station-layer exponential Hawkes anomaly-onset hazard",
+    "scientific_fingerprint": "For each station-layer, represent anomaly onsets as events and update a causal exponentially decayed sum of prior event impulses; use the resulting conditional-intensity state only on anchor-negative rows.",
+    "candidate_count": 1,
+    "fit_budget_if_ready": 3,
+    "maximum_fits_if_ready": 9,
+    "result_based_retune_or_kernel_sweep": 0,
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0
+  },
+  "primary_source": {
+    "title": "Spectra of Some Self-Exciting and Mutually Exciting Point Processes",
+    "author": "Alan G. Hawkes",
+    "journal": "Biometrika 58(1), 83-90",
+    "date": "1971-04",
+    "doi": "10.1093/biomet/58.1.83",
+    "url": "https://academic.oup.com/biomet/article-abstract/58/1/83/224809",
+    "claim_boundary": "The source establishes the self-/mutually-exciting point-process mechanism. It does not establish P1 anomaly clustering, deployment observability, anomaly-detection benefit, or a competition score."
+  },
+  "repository_negative_fingerprint": {
+    "exact_hawkes_term_or_implementation_hits": 0,
+    "exact_duplicate": false,
+    "semantic_duplicate_or_reconstructible_substitute": true,
+    "anchor_history_features": {
+      "config_path": "configs/experiments/p1_public_transport_repair_cycle_20260831_v11.json",
+      "config_sha256": "81276846d120fd8718f4eaf71e386604c732b6dde5752fb3c5bf12200fd87f0a",
+      "runner_path": "scripts/run_p1_parallel_candidate_cycle_20260831_v4.py",
+      "runner_sha256": "7c527bdb8c64f9918e9017c7b2a32b3e9b18705170db8275a02fada2c83c2141",
+      "overlap": "Existing causal features already encode time since the most recent anchor, signal run length, and lagged/rolling anchor probabilities. Replacing their finite memory with one exponential impulse sum changes the memory kernel, not the observable information source."
+    },
+    "event_duration_and_decoder_family": {
+      "typed_duration_path": "src/p1_qc/typed_duration_semimarkov.py",
+      "typed_duration_sha256": "2966815f2a265b39aee72432b322c60afbaa174ffbd937eec0c84ddb87d67387",
+      "typed_factorial_path": "src/p1_qc/typed_factorial_semimarkov.py",
+      "typed_factorial_sha256": "90077f73563035e34a5ce26590d8947a5239c6834141799ea25d02778f528e64",
+      "overlap": "These closed families already act on event timing, duration, and legal state transitions; a Hawkes hazard would add only another event-history decoder without a new measured state."
+    },
+    "recurrence_and_return_time_family": {
+      "recurrence_path": "configs/experiments/p1_v10_causal_recurrence_laminar_state_addonly_20260901_v1.json",
+      "recurrence_sha256": "327eed88b9ff9b4e7514dd3ff1e6cf06c964369886f5e903c99b2bb8f8a804a0",
+      "return_time_path": "configs/experiments/p1_v19_local_extrema_return_time_semantic_gate_20260901_v1.json",
+      "return_time_sha256": "6e955a72c4590bf0a8a01989cbb85b9254dcb03050cbad646f0ad583b4d314bd",
+      "overlap": "Recurrence, laminar duration, extrema return time, and event proposals have already closed temporal recurrence/action geometry."
+    },
+    "negative_registry": {
+      "path": "reports/negative_evidence_registry_20260830_v1/report-source.md",
+      "sha256": "e7da6193f96ae883b3069b6fc12a0edf42acee9ed3689f13ab6eb774c2daacdb"
+    }
+  },
+  "deployment_support_preflight": {
+    "true_anomaly_onset_history": {
+      "available_during_train": true,
+      "available_during_unlabeled_deployment": false,
+      "causal_feature_authorized": false,
+      "reason": "Ground-truth anomaly onsets are the prediction target and cannot be consumed as a causal covariate when scoring an unlabeled deployment stream."
+    },
+    "anchor_onset_substitute": {
+      "available_during_deployment": true,
+      "new_information_beyond_closed_families": false,
+      "reason": "It is a deterministic memory-kernel transform of the same frozen anchor history already exposed through since-anchor, run-length, lagged probabilities, and event decoders."
+    },
+    "support_gate": "FAIL_NO_DEPLOYMENT_OBSERVABLE_AND_ORTHOGONAL_EVENT_STREAM",
+    "target_rows_read": 0,
+    "train_rows_read": 0
+  },
+  "frontier_evidence": {
+    "fresh_window_audit": {
+      "path": "configs/experiments/p1_v53_fresh_historical_transport_window_availability_audit_20260901_v1.json",
+      "sha256": "0ed55d486a7e710e13a103693eaf28898e5fc0c1d9d14d830bf306ca7df5bd9e",
+      "finding": "no fresh eligible historical station-quarter"
+    },
+    "candidate_registry_audit": {
+      "path": "configs/experiments/p1_v54_historical_promotable_candidate_registry_audit_20260901_v1.json",
+      "sha256": "e4b84168645073b76552235c525d24301eae18d6cd901b90e8cd485c6e95eddb",
+      "finding": "no overlooked promotable nonduplicate P1 candidate"
+    }
+  },
+  "decision": {
+    "semantic_preflight": "FAIL_RECONSTRUCTIBLE_ANCHOR_HISTORY_VARIANT",
+    "deployment_support_preflight": "FAIL_TARGET_EVENT_HISTORY_UNAVAILABLE",
+    "ready": false,
+    "terminal": "NO_GO_ZERO_FIT_RESEARCH_FRONTIER_EVENT_HAZARD_NOT_IDENTIFIABLE",
+    "reason": "The scientifically distinct Hawkes event stream would require past ground-truth anomaly onsets that do not exist at deployment. The only observable substitute is frozen anchor history, which repeats closed event-memory and recurrence information rather than adding a new state variable.",
+    "minimum_new_evidence": "A competition-allowed deployment-time event or maintenance stream independent of the predicted anomaly label, with authenticated timestamps and train/deployment coverage, or a genuinely fresh labeled chronological holdout paired with a new non-reconstructible observable."
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "executable_preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "historical_target_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

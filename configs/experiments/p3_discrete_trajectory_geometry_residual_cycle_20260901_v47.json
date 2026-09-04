@@ -1,0 +1,68 @@
+{
+  "schema_version": "p3.discrete_trajectory_geometry_residual.config.v47",
+  "experiment_id": "p3_discrete_trajectory_geometry_residual_cycle_20260901_v47",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_DISCRETE_3D_TRAJECTORY_GEOMETRY_AXIS",
+    "novel_axis": "fixed speed, Menger-curvature, discrete torsion and straightness summaries of three-channel historical trajectories",
+    "distinction": "v23 path signatures integrate ordered coordinate products, v29 recurrence uses fixed-radius neighborhood topology, v36 uses all-threshold persistence, v37 uses scalar visibility graphs, and v44 uses pairwise dependence. v47 directly measures local bending and twisting of a sampled 3D physical-state curve.",
+    "posthoc_prior_cycle_adjustment": false,
+    "forbidden_reuse": ["v42-v46 predictions/features", "prior candidate ensembles or routers"]
+  },
+  "encoder": {
+    "input": "transformed channels at fixed 20-minute subsampling from the past-only 48h context",
+    "context_rows": 145,
+    "trajectories": [
+      {"name": "wave_core", "channels": [0, 1, 2]},
+      {"name": "wind_force", "channels": [0, 5, 6]},
+      {"name": "wave_wind", "channels": [0, 1, 5]},
+      {"name": "atmosphere", "channels": [0, 10, 11]}
+    ],
+    "windows_rows": [145, 73],
+    "statistics": ["log1p_mean_segment_length", "log1p_sd_segment_length", "mean_turning_angle", "p90_turning_angle", "log1p_mean_menger_curvature", "log1p_p90_menger_curvature", "mean_abs_discrete_torsion_angle", "sd_discrete_torsion_angle", "endpoint_straightness"],
+    "curvature_clip": 100.0,
+    "feature_count": 72,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false,
+    "support_gate": {"minimum_nonzero_share": 0.60, "minimum_positive_variance_features": 64, "target_used": false}
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_GEOM72_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_GEOM72_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Muller and Vaxman, Discrete curvature and torsion from cross-ratios, Annali di Matematica Pura ed Applicata 200, 1935-1960 (2021)", "url": "https://doi.org/10.1007/s10231-021-01065-x", "use": "discrete curvature/torsion mechanism only; not performance evidence"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

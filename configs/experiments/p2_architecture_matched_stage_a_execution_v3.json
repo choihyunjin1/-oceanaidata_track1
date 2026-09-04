@@ -1,0 +1,135 @@
+{
+  "schema_version": "p2_architecture_matched_stage_a_execution.v3",
+  "experiment_id": "p2_architecture_matched_stage_a_execution_v3",
+  "created_at_kst": "2026-08-23T04:32:00+09:00",
+  "status": "STATIC_IMPLEMENTATION_AWAITING_INDEPENDENT_QA_AND_AUTHORIZATION",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "explicitly_not_exact_official_incumbent": true,
+  "local_qualification_only": true,
+  "official_promotion_allowed": false,
+  "research_only": true,
+  "upload_allowed": false,
+  "official_submission_count": 0,
+  "preregistration": {
+    "generation_id": "P2_ARCHITECTURE_MATCHED_STAGE_A_EXECUTION_V3",
+    "created_before_first_fit": true,
+    "score_derived_tuning": false,
+    "challenger_hypothesis_count": 0,
+    "challenger_import_fit_or_score_count": 0
+  },
+  "immutable_v2_implementation_pins": {
+    "CONFIG": {
+      "path": "configs/experiments/p2_architecture_matched_stage_a_execution_v2.json",
+      "sha256": "cfdd5432d6513d69c63307068dd15ddd0d347ffea175769a523fd613b1083386",
+      "bytes": 14042
+    },
+    "GUARD": {
+      "path": "src/p2_restore/architecture_matched_stage_a_contract_v2.py",
+      "sha256": "bf136e07d72610b6f4699c926a3187698ad766e9ed1da43753762a1b664c6fe3",
+      "bytes": 36162
+    },
+    "ENGINE": {
+      "path": "src/p2_restore/architecture_matched_stage_a_execution_v2.py",
+      "sha256": "0dad7be0c7110ebae327866201be3e7a2ca09113d432c86c1d9bef58ce892912",
+      "bytes": 50831
+    },
+    "RUNNER": {
+      "path": "scripts/run_p2_architecture_matched_reference_v2.py",
+      "sha256": "ae0b59855300c8668dde454f00477148eaf4a0291f78af3408b059e3139e620f",
+      "bytes": 4780
+    },
+    "TESTS": {
+      "path": "tests/test_p2_architecture_matched_stage_a_execution_v2.py",
+      "sha256": "27c73f18f8fe55173bf6e1edfcd79cd038ebdac8e8f18175a7783ccc4db4e817",
+      "bytes": 10434
+    }
+  },
+  "additional_runtime_source_pins": {
+    "MODEL_MODULE": {
+      "path": "src/p2_restore/model.py",
+      "sha256": "5a1b4af4f7092e490741f576b1bf7595ff7e2f38a0d1d3605db9c865b5c20020",
+      "bytes": 3342
+    },
+    "PACKAGE_INIT": {
+      "path": "src/p2_restore/__init__.py",
+      "sha256": "16e6d31ff2b1f860344efaaefceeee8bf7b1380d44d41424d8a3ab6ec94f4e4f",
+      "bytes": 339
+    }
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p2_architecture_matched_stage_a_execution_v3.json",
+    "GUARD": "src/p2_restore/architecture_matched_stage_a_contract_v3.py",
+    "ENGINE": "src/p2_restore/architecture_matched_stage_a_execution_v3.py",
+    "RUNNER": "scripts/run_p2_architecture_matched_reference_v3.py",
+    "TESTS": "tests/test_p2_architecture_matched_stage_a_execution_v3.py"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p2_architecture_matched_stage_a_execution_v3.json",
+    "output": "artifacts/p2_architecture_matched_reference_v3",
+    "control": "artifacts/p2_architecture_matched_reference_v3_control",
+    "pre_execution_qa": "artifacts/p2_architecture_matched_reference_v3_control/pre_execution_qa.json",
+    "authorization": "artifacts/p2_architecture_matched_reference_v3_control/authorization.json",
+    "attempt_lock": "artifacts/p2_architecture_matched_reference_v3_control/attempt.lock"
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "check_only_preflight_runs_in_isolated_child": true,
+    "check_only_parent_must_not_import_engine_or_numerical_training_modules": true,
+    "child_import_accounting_must_be_truthful": true,
+    "direct_engine_entry_must_ignore_caller_preflight_and_rerun_canonical_preflight": true,
+    "direct_engine_entry_rechecks_runtime_in_current_process": true,
+    "all_architecture_deployed_source_runtime_pins_before_output_or_fit": true,
+    "actual_run_requires_independent_qa_receipt": true,
+    "actual_run_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "execution_engine_imported_after_attempt_lock": true,
+    "output_directory_created_with_o_excl_semantics": true,
+    "all_materialized_files_created_o_excl": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "frozen_mutation_allowed": false,
+    "submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "compiled_recipe": {
+    "base": "FULL_DEEP_EQUAL_V2_RECIPE_AND_ARCHITECTURE",
+    "base_config_sha256": "cfdd5432d6513d69c63307068dd15ddd0d347ffea175769a523fd613b1083386",
+    "override_scope": [
+      "identity_and_schema_labels",
+      "canonical_v3_output_and_control_paths",
+      "v3_qa_authorization_and_seal_schemas",
+      "additional_model_and_package_source_pins",
+      "fresh_preflight_and_runtime_guards"
+    ],
+    "training_or_metric_change_from_v2": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p2_architecture_matched_stage_a_execution.pre_execution_qa.v3",
+    "decision": "GO_AUTHORIZE_P2_STAGE_A_EXECUTION_V3",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_exact_roles": ["CONFIG", "GUARD", "ENGINE", "RUNNER", "TESTS"]
+  },
+  "authorization_contract": {
+    "schema_version": "p2_architecture_matched_stage_a_execution.authorization.v3",
+    "authorization_phrase_prefix": "AUTHORIZE_P2_STAGE_A_EXECUTION_V3:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "execution_authorized": true,
+    "upload_allowed": false
+  },
+  "resource_estimate": {
+    "outer_prefix_cells": 15,
+    "complete_pipeline_seeds": 3,
+    "deep_training_jobs": 720,
+    "router_training_jobs": 180,
+    "expected_single_RTX_5090_gpu_hours_range": [8, 16],
+    "expected_wall_hours_range": [9, 20],
+    "expected_peak_gpu_memory_gib_range": [8, 20],
+    "expected_append_only_disk_gib_range": [1, 5],
+    "estimate_is_static_only": true
+  }
+}

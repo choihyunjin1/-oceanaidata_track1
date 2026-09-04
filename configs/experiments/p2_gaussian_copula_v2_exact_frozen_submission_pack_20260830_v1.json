@@ -1,0 +1,162 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.20260830.v1",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v1",
+  "problem": "P2",
+  "status": "AUTHORIZED_LOCAL_MATERIALIZATION_AND_QA_NO_UPLOAD",
+  "candidate": "P2-GAUSSIAN-COPULA-V2-EXACT-FROZEN",
+  "title": "P2 Gaussian copula v2 고정 조건부 평균 v1",
+  "one_line_summary": "공식 OAS50 기준에 계절 empirical-margin·Kendall Gaussian copula의 동결 조건부 잔차를 적용하고 incomplete profile은 exact no-op, endpoint/PAVA 투영했습니다.",
+  "lineage": {
+    "base_config": {
+      "path": "configs/experiments/p2_gaussian_copula_conditional_mean_20260830_v1.json",
+      "sha256": "cdbf74f9f9f67c17f585905b2c28ed44a5dea77dc9b4abd7f42cce52827b405d"
+    },
+    "completion_overlay": {
+      "path": "configs/experiments/p2_gaussian_copula_conditional_mean_20260830_v2.json",
+      "sha256": "ff3fd20ac95fa571c15e4ed842ae2c54c704e2914405677ab572e1beb167ef06"
+    },
+    "historical_result": {
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/result.json",
+      "sha256": "79894391b72ccf2d4aab65eeef5361b2658505dd0fba7adffa1fcaf3f6103de3"
+    },
+    "prediction_commitment": {
+      "path": "artifacts/p2_gaussian_copula_conditional_mean_20260830_v2/prediction_commitment.json",
+      "sha256": "a21a267c267d4aecc33be52c1c442e89d6c8fe792665bda6a8b75ad8abc0720a"
+    },
+    "independent_qa": {
+      "path": "reports/p2_gaussian_copula_conditional_mean_20260830_v2/independent-qa.json",
+      "sha256": "f140063ab07cda95a26d560d28dd5bbadfc2c5670008e00fb95bc88db6661f84"
+    },
+    "training_anchor": {
+      "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+      "bytes": 6077707,
+      "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+    },
+    "source_snapshots": {
+      "src/p2_restore/gaussian_copula_conditional_mean.py": "512af8aa5127beb75fea4ecc8149b0854d70dfe075e06d38eef6afe70c4bdb03",
+      "scripts/run_p2_gaussian_copula_conditional_mean_20260830_v1.py": "72d0f51ae23f756a2f856fac10f53bd0956c66112b87ef6a0e797a4b40d3d785",
+      "scripts/run_p2_gaussian_copula_conditional_mean_20260830_v2.py": "7312f7350d36c93778569b0688945cf5c7dfe3967035d1698cf256296f5883b4",
+      "scripts/run_p2_alpha50_supervised_rank1_functional_residual_20260828_v1.py": "41794412f1c8c143a1162e05fd55d7751a31d340f60ad2b4aa178897b0b8987d",
+      "src/p2_restore/depth_registered_cmfpca.py": "84b3fb73c90f3444eac184deeeb88c8a5811699b566033c54b021d1b9d039422",
+      "src/p2_restore/p2_alpha40_quasiperiodic_gp_residual_20260828_v1.py": "0342ab7314b8cb800c06aecba36434b1b318322f2c98d6592df2ad875ef432c6",
+      "src/p2_restore/profile_projection.py": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6",
+      "src/p2_restore/submission.py": "ac04940e1643d3ca6d933b39f74be03cfee953464aec5ab76d8329903dc4dcc7"
+    }
+  },
+  "frozen_recipe": {
+    "comparator": "FROZEN_ALPHA50_PROXY",
+    "comparator_disclosure": "Historical OOF used a frozen alpha50 proxy because the official incumbent has no exact historical OOF. Deployment maps current_blend50 to the pinned official base-U vector and reference to the pinned official alpha50 vector.",
+    "deployment_training_outer": "2025_nov_dec",
+    "training_blocks": [
+      "2024_may_jun",
+      "2024_jul_aug",
+      "2024_sep_oct",
+      "2024_nov_dec",
+      "2025_mar_apr",
+      "2025_may_jun",
+      "2025_jul_aug"
+    ],
+    "train_stop": "2025-11-01T00:00:00+09:00",
+    "selected_shrinkage": 0.5,
+    "selected_shrinkage_records_sha256": "d7ba1de95d8a097abe050f9c39b60efbd0c83a0990f8cf46bda471ee538b1594",
+    "expected_refit_model_receipt_sha256": "446f70411d646fab4568a15080c09a374184e44bca669a5c954a34c25d867e7d",
+    "expected_training_profiles": 49636,
+    "margins": "meteorological-season empirical CDF with global fallback",
+    "dependence": "ordinary Kendall tau mapped to latent Gaussian correlation",
+    "quadrature_order": 15,
+    "correction_rms_cap_c": 0.075,
+    "correction_p99_cap_c": 0.2,
+    "incomplete_profile_behavior": "exact zero residual correction",
+    "profile_projection": "public endpoint envelope plus unit-weight isotonic projection",
+    "inner_search_or_hpo": 0,
+    "result_based_change": false
+  },
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "official_base_u_sha256": "13181dff0e749a1ea6dac7327b4ea34b8a7efd57a2f57170ba0d206f919cf592",
+    "official_alpha50_reference_sha256": "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+    "current_official_incumbent_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f"
+  },
+  "submission_contract": {
+    "required_rows": 26061,
+    "required_columns": ["station", "layer", "time", "temp"],
+    "layer_rows": {"2": 8713, "3": 8712, "4": 8636},
+    "unique_times": 8717,
+    "complete_three_layer_times": 8630,
+    "partial_two_layer_times": 84,
+    "partial_one_layer_times": 3,
+    "temperature_range_c": [-5.0, 45.0],
+    "encoding": "utf-8",
+    "index": false,
+    "output_filename": "P2_submission.csv",
+    "csv_must_be_outside_repo_reports_and_artifacts": true
+  },
+  "historical_evidence": {
+    "rows": 69850,
+    "pooled_delta_rmse_c": -0.010616065033425048,
+    "kst_day_ci90_delta_c": [-0.01738439679930879, -0.007700262306877281],
+    "fold_deltas_c": {
+      "2024_sep_oct": -0.016482232235103922,
+      "2025_jul_aug": -0.010981559227513538,
+      "2025_nov_dec": 0.034266729269219365
+    },
+    "classification": "HIGH_VALUE_CHALLENGER_RESEARCH_ONLY"
+  },
+  "official_history_and_duplicate_denylist": {
+    "live_ui_observed_at_kst": "2026-08-30T21:14:00+09:00",
+    "remaining_p2_submissions_today": 3,
+    "current_best_public_rmse_c": 0.430209,
+    "current_best_points": 27.935277,
+    "recent_20260829": [
+      {
+        "public_rmse_c": 0.432244,
+        "observed_time_kst": "2026-08-29T22:20:00+09:00",
+        "candidate_role": "rank1_axis_alpha_2",
+        "submission_sha256": "7d06cf01c67541ec77d4e6af7afefca710774bda50f33155573c382d440672d9",
+        "mapping_basis": "local pack manifest plus live UI chronology"
+      },
+      {
+        "public_rmse_c": 0.430253,
+        "observed_time_kst": "2026-08-29T22:51:00+09:00",
+        "candidate_role": "layerwise_oof_shrunk",
+        "submission_sha256": "dbcef773a9bbff62c66b2b6a0bca1b9279eb664209ff1560c2dc02e83855b019",
+        "mapping_basis": "inference from local pack manifest and paired live UI results"
+      },
+      {
+        "public_rmse_c": 0.430209,
+        "observed_time_kst": "2026-08-29T22:51:00+09:00",
+        "candidate_role": "official_mse_vertex_a083419",
+        "submission_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+        "mapping_basis": "inference from preregistered 0.430208734 prediction and paired live UI results"
+      }
+    ],
+    "older_submitted_sha256": [
+      "6e28ddb8d78c0969e5104d7efbe28e1762f51e80d759fceb86cdef52baa29b96",
+      "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+      "665485e1b47705cf03ae3537ffe31ebc47c309408428d9c3847fd973ffca94f1"
+    ],
+    "semantic_mapping_limitation": "The live UI exposes scores and timestamps, not file hashes. The two 22:51 file-to-score mappings are evidence-backed inferences, so exact byte duplicate QA is strong while platform semantic duplicate proof remains limited."
+  },
+  "execution_policy": {
+    "maximum_executions": 1,
+    "maximum_copula_fits": 1,
+    "maximum_threads": 1,
+    "official_observations_test_index_sample_read_authorized": true,
+    "official_hidden_truth_read_allowed": false,
+    "score_py_read_allowed": false,
+    "baseline_read_allowed": false,
+    "result_based_retry": false,
+    "result_based_tuning": false,
+    "upload_authorized_in_this_runner": false,
+    "commit": false,
+    "push": false
+  },
+  "decision_policy": {
+    "any_pin_or_refit_receipt_mismatch": "INVALID_TECHNICAL_STOP_NO_RETRY_NO_CSV",
+    "candidate_hash_matches_prior_submission": "BLOCK_DUPLICATE_NO_UPLOAD",
+    "all_materialization_and_qa_checks_pass": "READY_NOT_UPLOADED_RESEARCH_ONLY",
+    "official_probe_value": "High directional information value because the frozen local pooled interval is favorable and the axis differs from the recent rank-1 probes; no guaranteed Public improvement because the comparator is a proxy and one historical fold regressed."
+  }
+}

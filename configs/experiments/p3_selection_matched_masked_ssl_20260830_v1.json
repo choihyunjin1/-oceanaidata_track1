@@ -1,0 +1,348 @@
+{
+  "schema_version": "p3.selection_matched_masked_ssl.preregistration.v1",
+  "experiment_id": "p3_selection_matched_masked_ssl_20260830_v1",
+  "created_at_kst": "2026-08-30T00:00:00+09:00",
+  "status": "PREREGISTERED_TRAIN_ONLY_ONE_SHOT_NO_OFFICIAL_INFERENCE",
+  "purpose": "Test whether a fold-local masked 48-hour history representation plus one frozen robust shared residual head improves the corrected P3 champion framework on the Stage-0 selection-matched historical surface.",
+  "canonical_paths": {
+    "config": "configs/experiments/p3_selection_matched_masked_ssl_20260830_v1.json",
+    "runner": "scripts/run_p3_selection_matched_masked_ssl_20260830_v1.py",
+    "implementation": "src/p3_wave/selection_matched_masked_ssl_20260830_v1.py",
+    "focused_tests": "tests/test_p3_selection_matched_masked_ssl_20260830_v1.py",
+    "output": "artifacts/p3_selection_matched_masked_ssl_20260830_v1",
+    "attempt_lock": "artifacts/p3_selection_matched_masked_ssl_20260830_v1.ATTEMPT_LOCK.json",
+    "failure_receipt": "artifacts/p3_selection_matched_masked_ssl_20260830_v1.FAILED.json"
+  },
+  "data_boundary": {
+    "explicit_p3_dir_required": true,
+    "environment_or_repository_search_allowed": false,
+    "allowed_source_basenames": [
+      "README.md",
+      "train_wave.csv",
+      "train_atmos.csv"
+    ],
+    "forbidden_source_basenames": [
+      "score.py",
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv"
+    ],
+    "forbidden_name_tokens": [
+      "test",
+      "sample",
+      "baseline",
+      "submission",
+      "hidden",
+      "answer",
+      "score"
+    ],
+    "load_p3_data_allowed": false,
+    "official_or_context_value_reads": 0,
+    "csv_output_count": 0,
+    "upload_attempt_count": 0,
+    "source_mutation_allowed": false,
+    "aggregate_json_only": true
+  },
+  "stage0_authorization": {
+    "experiment_id": "p3_selection_matched_cohort_preflight_20260830_v1",
+    "receipt": "artifacts/p3_selection_matched_cohort_preflight_20260830_v1/preflight.json",
+    "receipt_sha256": "4552364ddbd21e0674c6e69afc74516d3845126de84ae8f8cc06b4c0a25b0914",
+    "required_status": "PREFLIGHT_COMPLETE_ZERO_FIT",
+    "required_overall_preflight_pass": true,
+    "canonical_anchor_count": 8121,
+    "selection_matched_dense_count": 2131,
+    "selection_matched_global_independent_count": 243,
+    "validation_union_independent_count": 157,
+    "validation_counts_by_window": {
+      "2024_h2_storm": 41,
+      "winter_transition": 65,
+      "2025_h1": 51
+    }
+  },
+  "expected_source_sha256": {
+    "README.md": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "cohort_contract": {
+    "canonical_grid_minutes": 10,
+    "canonical_dense_anchor_minutes": 60,
+    "history_hours": 48,
+    "history_rows_including_anchor": 289,
+    "official_leads_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "current_hs_min_inclusive_m": 1.5,
+    "current_hs_max_exclusive_m": 2.2,
+    "rise_lookback_hours": 12,
+    "rise_min_exclusive_m": 0.2,
+    "station_global_validation_gap_hours": 78,
+    "train_cutoff_hours_before_window_start": 78,
+    "training_surface": "all selection-matched dense 60-minute anchors strictly before each fold cutoff",
+    "validation_surface": "one station-global chronological greedy 78-hour pass over the union of the three frozen windows"
+  },
+  "forward_windows": [
+    {
+      "name": "2024_h2_storm",
+      "validation_start_utc": "2024-07-01T00:00:00+00:00",
+      "validation_end_utc": "2024-11-01T00:00:00+00:00",
+      "expected_dense_train_count": 740,
+      "expected_validation_count": 41
+    },
+    {
+      "name": "winter_transition",
+      "validation_start_utc": "2024-11-01T00:00:00+00:00",
+      "validation_end_utc": "2025-03-01T00:00:00+00:00",
+      "expected_dense_train_count": 1135,
+      "expected_validation_count": 65
+    },
+    {
+      "name": "2025_h1",
+      "validation_start_utc": "2025-03-01T00:00:00+00:00",
+      "validation_end_utc": "2025-06-25T00:00:00+00:00",
+      "expected_dense_train_count": 1737,
+      "expected_validation_count": 51
+    }
+  ],
+  "representation": {
+    "family": "fold_local_masked_tcn_autoencoder_reused_fixed_recipe",
+    "reused_module": "src/p1_qc/models_ssl.py",
+    "reused_module_sha256": "4c1c4ed44353bd3df5d956438a7b2dadada9a04e8c8e7b6b0b11ae1914d58170",
+    "distinct_from_closed_dense72": "Reconstructs masked observed 48-hour input history without target supervision, then freezes the encoder; it is not the N-HiTS-style hierarchical forecast-basis model and never optimizes dense future targets.",
+    "raw_history_columns": [
+      "hs",
+      "tp",
+      "hmax",
+      "wvdir",
+      "wspd",
+      "gust",
+      "wdir",
+      "airt",
+      "relh",
+      "caph"
+    ],
+    "value_channels": [
+      "hs",
+      "tp",
+      "hmax",
+      "wspd",
+      "gust",
+      "airt",
+      "relh",
+      "caph",
+      "wvdir_sin",
+      "wvdir_cos",
+      "wdir_sin",
+      "wdir_cos"
+    ],
+    "input_channels": 24,
+    "normalization": {
+      "fit_scope": "fold training histories only",
+      "method": "per-channel median and IQR",
+      "zero_iqr_fallback": 1.0,
+      "normalized_clip_abs": 50.0,
+      "missing_fill_after_scaling": 0.0,
+      "append_observation_mask_channels": true,
+      "rows_removed": 0
+    },
+    "model": {
+      "channels": [
+        16,
+        24,
+        24
+      ],
+      "kernel_size": 3,
+      "dropout": 0.0,
+      "causal": false,
+      "embedding_aggregation": [
+        "mean",
+        "standard_deviation",
+        "last_timestep"
+      ],
+      "aggregated_embedding_dimension": 72
+    },
+    "masked_training": {
+      "window_steps": 289,
+      "stride_steps": 289,
+      "mask_fraction": 0.25,
+      "mask_block_steps": 36,
+      "batch_size": 32,
+      "maximum_epochs": 8,
+      "patience": 3,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "use_bfloat16": false,
+      "deterministic": true,
+      "outer_validation_histories_used_for_ssl_fit_or_early_stop": false,
+      "early_stop_surface": "deterministically remasked fold-training histories only",
+      "fold_seeds": [
+        20260830,
+        20260831,
+        20260832
+      ]
+    },
+    "freeze_before_supervised_head": true
+  },
+  "robust_residual_head": {
+    "family": "sklearn.linear_model.HuberRegressor",
+    "one_shared_head_per_fold": true,
+    "target": "target_hs_minus_current_hs",
+    "features": "frozen 72-dimensional representation plus current_hs, rise12, fixed station one-hot, fixed lead one-hot",
+    "design_normalization": "fold-train median/IQR with zero-IQR fallback 1.0",
+    "epsilon": 1.35,
+    "alpha": 0.01,
+    "max_iter": 500,
+    "tol": 0.0001,
+    "fit_intercept": true,
+    "prediction_clip_m": [
+      0.0,
+      30.0
+    ],
+    "hyperparameter_search": false
+  },
+  "paired_incumbent_reference": {
+    "name": "saved_corrected_catboost_components_plus_fixed_prequential_router_and_long_lead_shrink",
+    "interpretation": "Same 157 historical anchors; six saved fold CatBoost models are inference-only. The fixed smooth-medium router is fit only on completed selection-matched folds, then the frozen 0.20 persistence shrink is applied at 12/18/24h.",
+    "catboost_refit_count": 0,
+    "fixed_router_fit_count": 2,
+    "router": {
+      "name": "smooth_medium",
+      "alpha": 10.0,
+      "temperature_multiplier": 2.0,
+      "strength": 0.5,
+      "active_leads_hours": [
+        12,
+        18,
+        24
+      ],
+      "hyperparameter_search": false
+    },
+    "long_lead_persistence_shrink": {
+      "weight": 0.2,
+      "active_leads_hours": [
+        12,
+        18,
+        24
+      ]
+    },
+    "feature_columns": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/feature_columns.json",
+      "sha256": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+      "expected_count": 591
+    },
+    "fold_model_sha256": {
+      "2024_h2_storm": {
+        "single.cbm": "7769e26aa348b9591ea047982ce103bb4b145f926af158b80f375487988969d6",
+        "multi.cbm": "689243f173c81226bb0269d112b66f0803aaebbad31fa2e1a0c0bad35c396d3f"
+      },
+      "winter_transition": {
+        "single.cbm": "1fa845ae18f4f461712e9512f78116e946af348fa26b2ea5f0e4c923b10d2630",
+        "multi.cbm": "c572cd2717a17aa1fd64ee7818334763664f131edd9302f33ec928ab991c102f"
+      },
+      "2025_h1": {
+        "single.cbm": "d94669e42fe6fc295c42aebc1a5d0dfb468200100c13d53cbc33ec6233def631",
+        "multi.cbm": "9b01bfa0909d5cf5be5da8e140837dd7065606870437c8349f153be2fbb5508d"
+      }
+    },
+    "historical_metrics": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/metrics.json",
+      "sha256": "2c797e6169b7af27d343edb31fae5acfd4ce704149c63b732480fe33692c22e6",
+      "original_surface_cases": 181,
+      "original_surface_rmse_m": 0.7791048399763751,
+      "not_a_paired_score_for_this_experiment": true
+    }
+  },
+  "sensor_and_extreme_policy": {
+    "source_or_canonical_rows_deleted": 0,
+    "sensor_flags_used_for_membership_or_weighting": false,
+    "sensor_flags_diagnostic_only": true,
+    "negative_or_nonphysical_values_are_not_row_deletion_rules": true,
+    "high_wave_and_rapid_rise_rows_deleted": 0,
+    "high_wave_anchor_note": "Hs >= 2.2 m anchors are outside the preregistered selection-matched anchor cohort, but remain in source/grid/history and are never labelled sensor error or deleted.",
+    "robustness_intervention": "train-fold-only median/IQR scaling plus Huber loss; no outlier trimming"
+  },
+  "fit_and_runtime_budget": {
+    "masked_encoder_fits": 3,
+    "huber_head_fits": 3,
+    "reference_router_fits": 2,
+    "catboost_fits": 0,
+    "total_fit_calls": 8,
+    "maximum_encoder_optimizer_steps": 920,
+    "gpu_count_required": 1,
+    "cpu_threads": 8,
+    "wall_clock_budget_seconds": 1200,
+    "technical_failure_policy": "consume attempt, write exclusive failure JSON if possible, never retry automatically"
+  },
+  "evaluation": {
+    "metric": "pooled six-lead row RMSE_m",
+    "report_slices": [
+      "overall",
+      "forward_window",
+      "station",
+      "lead"
+    ],
+    "paired_case_bootstrap": {
+      "unit": "complete six-lead anchor case",
+      "replicates": 5000,
+      "seed": 20260830,
+      "interval": 0.9
+    },
+    "promotion_gate": {
+      "minimum_pooled_improvement_vs_paired_incumbent_m": 0.01,
+      "paired_delta_ci90_upper_below_zero": true,
+      "minimum_improved_forward_windows": 2,
+      "maximum_worst_lead_regression_m": 0.02,
+      "all_integrity_checks": true
+    },
+    "on_pass": "RESEARCH_PROMOTION_CANDIDATE_ONLY_NO_OFFICIAL_INFERENCE",
+    "on_fail": "NO_GO_CLOSE_THIS_EXACT_RECIPE"
+  },
+  "closed_family_boundary": {
+    "hierarchical_residual_basis_dense72": {
+      "status": "CLOSED_EXACT_45_FIT_FAMILY",
+      "evidence": "artifacts/p3_hierarchical_residual_basis_dense72_20260823_r4/learning_curve_evidence.json",
+      "evidence_sha256": "0ee58d63460dd989331a776f705b078f125f033c34fca777f5b630ebbd4bdedd",
+      "full_delta_candidate_minus_incumbent_m": 0.067295,
+      "all_three_folds_worse": true,
+      "reopened": false
+    },
+    "generic_nhits_reopened": false,
+    "confirmed_catboost_reopened": false,
+    "era5_context_transfer_reopened": false
+  },
+  "prohibitions": {
+    "result_based_tuning_or_retry": true,
+    "generic_nhits_or_dense72_rerun": true,
+    "catboost_training": true,
+    "official_test_sample_baseline_score_submission_or_context_read": true,
+    "csv_or_submission_creation": true,
+    "upload": true,
+    "git_command": true,
+    "sensor_or_extreme_row_deletion": true,
+    "raw_prediction_persistence": true
+  },
+  "literature_basis": [
+    {
+      "title": "A Transformer-based Framework for Multivariate Time Series Representation Learning",
+      "authors": "Zerveas et al.",
+      "venue_year": "KDD 2021",
+      "url": "https://doi.org/10.1145/3447548.3467401",
+      "claim": "Masked reconstruction can learn multivariate time-series representations without forecast labels.",
+      "limitation": "The paper does not validate this exact coastal-wave cohort or this reused TCN encoder."
+    },
+    {
+      "title": "Robust Estimation of a Location Parameter",
+      "authors": "Peter J. Huber",
+      "venue_year": "Annals of Mathematical Statistics 1964",
+      "url": "https://doi.org/10.1214/aoms/1177703732",
+      "claim": "Huber loss bounds the influence of large residuals without deleting observations.",
+      "limitation": "Robust loss does not distinguish true storm extremes from sensor faults by itself."
+    }
+  ]
+}

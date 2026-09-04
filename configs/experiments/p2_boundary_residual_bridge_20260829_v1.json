@@ -1,0 +1,94 @@
+{
+  "schema_version": "p2.boundary_residual_bridge.preregistration.v1",
+  "experiment_id": "p2_boundary_residual_bridge_20260829_v1",
+  "status": "PREREGISTERED_FAIL_CLOSED_LOCAL_ONLY",
+  "preregistered_at": "2026-08-29T00:00:00+09:00",
+  "baseline_commit": "de1392076f15e3d08b6ab361760950eba880ddad",
+  "decision_question": "Can every frozen 61-day historical block obtain two target-observed 72-hour outside flanks without touching the official hidden target interval?",
+  "contract_source": {
+    "path": "reports/dual_engine_breakthrough_20260829_v1/report-source.md",
+    "bytes": 10327,
+    "sha256": "279f2df6aaffd35d6d887832f76f7b982db71a7193b5a91ce7abd720c4e35940"
+  },
+  "frozen_anchor": {
+    "experiment_id": "p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2",
+    "config": {
+      "path": "configs/experiments/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2.json",
+      "bytes": 5403,
+      "sha256": "2de91c9f821cdd13b5626474156a37b9a8cde50db74d30934b6b70435e49b829"
+    },
+    "result": {
+      "path": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/result.json",
+      "bytes": 3233,
+      "sha256": "896204e79f2b1fae4793315bdc34252f813b17e764c18776a15f9f404ef7a949"
+    },
+    "commitment": {
+      "path": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/prediction_commitment.json",
+      "bytes": 10123,
+      "sha256": "53c3c0df1b959993f7f233ba92172a653822e08514154d6fc45095bd6834927f"
+    }
+  },
+  "historical_blocks": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00"
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00"
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00"
+    }
+  },
+  "official_hidden_target_interval": {
+    "start": "2025-09-01T00:00:00+09:00",
+    "stop": "2025-11-01T00:00:00+09:00",
+    "target_layers": [2, 3, 4],
+    "target_variables": ["temp", "psal"]
+  },
+  "bridge": {
+    "flank_hours": 72,
+    "left_residual": "median(target_temp - sealed_frozen_anchor_temp) over the outside left flank",
+    "right_residual": "median(target_temp - sealed_frozen_anchor_temp) over the outside right flank",
+    "interpolation": "cubic_smoothstep_3u2_minus_2u3",
+    "projector_applications": 1,
+    "window_grid_size": 0,
+    "taper_grid_size": 0,
+    "cap_grid_size": 0,
+    "blend_grid_size": 0,
+    "missing_flank_action": "NO_GO_CONTRACT_LEAKAGE_CLOSE_FAMILY"
+  },
+  "gate": {
+    "pooled_delta_rmse_max_c": -0.002,
+    "2024_sep_oct_delta_rmse_max_c": -0.0015,
+    "minimum_improved_blocks": 2,
+    "maximum_worst_block_regression_c": 0.0005,
+    "maximum_layer_regression_c": 0.001,
+    "bootstrap_unit": "KST calendar day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260829,
+    "bootstrap_ci90_upper_max_c": 0.0,
+    "maximum_absolute_axis_cosine": 0.3,
+    "maximum_correction_p99_c": 0.15
+  },
+  "execution_policy": {
+    "official_hidden_target_read_allowed": false,
+    "official_test_index_read_allowed": false,
+    "official_sample_submission_read_allowed": false,
+    "submission_csv_generation_allowed": false,
+    "official_upload_authorized": false,
+    "prediction_or_model_artifact_generation_allowed": false,
+    "result_based_retry": false,
+    "maximum_executions": 1,
+    "contract_reinterpretation_allowed": false,
+    "internal_block_flanks_allowed": false
+  },
+  "output": {
+    "directory": "reports/p2_boundary_residual_bridge_20260829_v1",
+    "result": "result.json",
+    "independent_qa": "independent-qa.json",
+    "report": "report-source.md"
+  }
+}

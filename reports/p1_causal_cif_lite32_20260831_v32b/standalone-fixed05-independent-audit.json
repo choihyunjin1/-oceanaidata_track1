@@ -1,0 +1,59 @@
+{
+  "analysis_status": "DIAGNOSTIC_NO_PROMOTION_AUTHORITY",
+  "prediction_source": "artifacts/p1_causal_cif_lite32_20260831_v32b/sealed_predictions.npz",
+  "prediction_sha256": "205bb44d80aa237f914608d2f05426b662f49932022889d302887f6f7131c0a6",
+  "threshold": 0.5,
+  "threshold_note": "Fixed post-seal diagnostic because both preregistered inner selectors abstained; no fit or threshold selection was performed.",
+  "by_fold": {
+    "2025_q3": {
+      "rows": 176738,
+      "predicted_positives": 68064,
+      "f1": 0.06470501336269993,
+      "precision": 0.03539315937940762,
+      "recall": 0.3765827731749257,
+      "anchor_f1": 0.8949795081967213,
+      "delta_f1": -0.8302744948340214
+    },
+    "2025_q4": {
+      "rows": 111124,
+      "predicted_positives": 9039,
+      "f1": 0.31935169205372554,
+      "precision": 0.23542427259652615,
+      "recall": 0.4962686567164179,
+      "anchor_f1": 0.9143418950473148,
+      "delta_f1": -0.5949902029935892
+    }
+  },
+  "pooled": {
+    "rows": 287862,
+    "predicted_positives": 77103,
+    "f1": 0.10336264637535882,
+    "precision": 0.0588433653684033,
+    "recall": 0.4246139447824052,
+    "anchor_f1": 0.9029170235276336,
+    "delta_f1": -0.7995543771522747
+  },
+  "paired_kst_day_bootstrap": {
+    "blocks": 163,
+    "replicates": 5000,
+    "seed": 20260932,
+    "ci90_low": -0.8360575141426464,
+    "ci90_high": -0.7639216209669109,
+    "mean_delta_f1": -0.7996264935668879,
+    "probability_improved": 0.0
+  },
+  "replacement_contract": {
+    "q3_delta_strictly_positive": false,
+    "q4_delta_strictly_positive": false,
+    "bootstrap_ci90_low_strictly_positive": false,
+    "pass": false
+  },
+  "operations": {
+    "additional_fits": 0,
+    "threshold_retunes": 0,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

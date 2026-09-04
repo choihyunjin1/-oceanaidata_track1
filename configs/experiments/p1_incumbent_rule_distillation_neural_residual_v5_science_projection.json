@@ -1,0 +1,283 @@
+{
+  "allowed_keys": [
+    "problem",
+    "metric",
+    "direction",
+    "comparison_mode",
+    "hypotheses",
+    "prefix_fractions",
+    "seeds",
+    "prefix_protocol",
+    "comparator",
+    "inner_cross_fit",
+    "features",
+    "model",
+    "training",
+    "train_only_no_op_gate",
+    "fixed_fold_postprocess",
+    "bootstrap",
+    "pass_gates",
+    "on_pass",
+    "on_no_pass",
+    "prohibitions"
+  ],
+  "schema_version": "p1_gen5_scientific_allowlist_projection.v1",
+  "science": {
+    "bootstrap": {
+      "cluster": "event_or_normal_day_by_station_layer",
+      "confidence_level": 0.9,
+      "replicates": 5000,
+      "seed": 20260823
+    },
+    "comparator": {
+      "id": "official_immutable_incumbent_prefix_refit",
+      "incumbent_fresh_refit_each_prefix": true,
+      "prediction_parts_directory": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts",
+      "predictions_complete_sha256": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb",
+      "reference_seed_full_prediction_exact_to_frozen_oof": true,
+      "same_fold_keys_metric_postprocess": true,
+      "source": "sealed Gen1 exact same-prefix same-fold three-seed fresh refits",
+      "surrogate_only": false
+    },
+    "comparison_mode": "EXACT_OFFICIAL_PREFIX_REFIT",
+    "direction": "higher",
+    "features": {
+      "cadence_minutes": 10,
+      "future_raw_value_perturbation_invariant": true,
+      "mode": "nine_raw_backward_only_causal_features_for_residual_plus_prefix_local_offline_teacher_features",
+      "raw_prefix_rebuilt_before_every_outer_cell": true,
+      "residual_context": "current_and_past_exact_cadence_rows_only_future_half_zero_masked",
+      "residual_scaler": "fit_only_on_residual_training_OOF_rows",
+      "selected_numeric_columns": [
+        "temp_raw",
+        "psal_raw",
+        "depth_raw",
+        "psal_missing",
+        "depth_missing",
+        "has_gap_before",
+        "temp_diff_1",
+        "temp_abs_diff_1",
+        "temp_backward_acceleration"
+      ],
+      "target_columns_forbidden": [
+        "label",
+        "anomaly_type"
+      ]
+    },
+    "fixed_fold_postprocess": {
+      "2025_q2": {
+        "close_gap_rows": 0,
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "minimum_positive_run": 12
+      },
+      "2025_q3": {
+        "close_gap_rows": 0,
+        "high_threshold": 0.2,
+        "low_threshold": 0.1,
+        "minimum_positive_run": 12
+      },
+      "2025_q4": {
+        "close_gap_rows": 6,
+        "high_threshold": 0.15,
+        "low_threshold": 0.075,
+        "minimum_positive_run": 6
+      }
+    },
+    "hypotheses": [
+      {
+        "id": "incumbent_rule_distillation_with_out_of_fold_neural_residual",
+        "order": 1,
+        "score_derived_tuning": false,
+        "structure": "exact incumbent identity base plus three-block inner cross-fitted incumbent teacher, a causal station-layer TCN bounded to plus or minus 0.5 logit, and a fixed held-out train-only no-op gate",
+        "why_structurally_distinct": "identity-preserving error correction rather than replacement learning or threshold, class-weight, seed, feature, or postprocess variation"
+      }
+    ],
+    "inner_cross_fit": {
+      "cutoff_target_reads": 0,
+      "expected_curve_teacher_fits": 135,
+      "first_quarter_warmup": true,
+      "outer_validation_rows_forbidden": true,
+      "prediction_blocks": [
+        [
+          0.25,
+          0.5
+        ],
+        [
+          0.5,
+          0.75
+        ],
+        [
+          0.75,
+          1.0
+        ]
+      ],
+      "purge_days": 7,
+      "raw_rows_outside_outer_prefix_read_for_teacher_features": 0,
+      "split_count": 3,
+      "teacher_encoder_fit_on_teacher_train_rows_only": true,
+      "teacher_feature_mode": "offline_features_rebuilt_from_exact_outer_prefix_raw_rows_only",
+      "teacher_fit_rows_disjoint_from_prediction_rows": true,
+      "teacher_fits_per_outer_cell": 9,
+      "teacher_structure": "official immutable incumbent XGBoost parameters and three registered seeds",
+      "timestamp_boundaries": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "within_outer_prefix_unlabeled_centered_context_disclosed": true
+    },
+    "metric": "binary_micro_F1",
+    "model": {
+      "auxiliary_head": "incumbent_mean_logit_distillation_training_only",
+      "auxiliary_probability_use_at_inference": false,
+      "candidate_seed_logit": "incumbent_seed_logit + 0.5*tanh(raw_residual_logit)",
+      "class": "IncumbentResidualTCN",
+      "dilations": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "dropout": 0.1,
+      "group_embedding_width": 12,
+      "identity_features": [
+        "incumbent_seed_logit",
+        "incumbent_three_seed_mean_logit",
+        "incumbent_three_seed_probability_standard_deviation",
+        "incumbent_fixed_postprocess_decision"
+      ],
+      "kernel_size": 3,
+      "maximum_absolute_logit_correction": 0.5,
+      "norm_groups": 8,
+      "probability_clip": [
+        1e-06,
+        0.999999
+      ],
+      "receptive_field_rows": 31,
+      "width": 32
+    },
+    "on_no_pass": {
+      "candidate_creation": false,
+      "exactly_one_next_structural_diagnosis": "station_layer_hierarchical_incumbent_residual_with_depth_conditioned_error_heads",
+      "preserve_all_curve_models_predictions_and_metrics": true,
+      "test_value_reads": 0,
+      "upload": false
+    },
+    "on_pass": {
+      "candidate_creation": false,
+      "full_fit_models": true,
+      "test_value_reads": 0,
+      "upload": false
+    },
+    "pass_gates": {
+      "all_leakage_checks": true,
+      "all_reproducibility_checks": true,
+      "full_fraction_ci90_lower_gt": 0.0,
+      "full_fraction_delta_at_least": 0.02,
+      "late_fractions_all_delta_gt": 0.0,
+      "maximum_worst_station_f1_regression": 0.005,
+      "minimum_improved_outer_folds": 2,
+      "minimum_other_late_ci90_lower_gt_count": 1,
+      "required_station_slices": [
+        "G-ORS",
+        "I-ORS",
+        "S-ORS"
+      ]
+    },
+    "prefix_fractions": [
+      0.4,
+      0.55,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "prefix_protocol": {
+      "current_run_fold_selector_target_reads": 0,
+      "current_run_selector_columns": [
+        "time",
+        "row_position"
+      ],
+      "current_run_selector_target_reads": 0,
+      "exact_incumbent_prefix_row_count_and_sha_required": true,
+      "expected_historical_boundary_retreat_cells": 4,
+      "historical_cutoff_training_label_read_disclosed_literally": true,
+      "historical_event_safe_cutoffs_were_label_derived": true,
+      "selector": "sealed_gen1_adjusted_cutoff_timestamp_and_row_position_only"
+    },
+    "problem": "P1",
+    "prohibitions": {
+      "adaptive_threshold_weight_seed_or_feature_tuning": true,
+      "aggregate_scoring_before_all_prediction_parts_sealed": true,
+      "auxiliary_head_probability_use": true,
+      "outer_validation_target_use_for_inner_gate": true,
+      "raw_context_after_prediction_timestamp": true,
+      "rerun_after_attempt_lock": true,
+      "runtime_prefix_selector_label_access": true,
+      "source_cache_current_or_frozen_mutation": true,
+      "submission_creation": true,
+      "teacher_prediction_on_row_fitted_with_same_row_label": true,
+      "test_value_reads": true,
+      "upload": true,
+      "validation_target_use_before_prediction_seal": true
+    },
+    "seeds": [
+      20260813,
+      20260829,
+      20260847
+    ],
+    "train_only_no_op_gate": {
+      "apply_residual_if_all": {
+        "improved_station_count_at_least": 2,
+        "micro_f1_delta_at_least": 0.002,
+        "worst_station_f1_delta_at_least": -0.005
+      },
+      "failed_gate_postprocessed_prediction_identity": "np.array_equal",
+      "failed_gate_probability_identity": "np.array_equal",
+      "fit_blocks": [
+        1,
+        2
+      ],
+      "full_fit_gate_application_rule": "residual_must_pass_under_all_three_fixed_fold_postprocess_mappings",
+      "full_fit_identity_decision_reference": "2025_q4_fixed_postprocess",
+      "gate_prediction_sealed_before_gate_label_read": true,
+      "gate_threshold_or_weight_tuning": false,
+      "held_out_gate_block": 3,
+      "missing_binary_class_in_gate_block": "NO_OP_EXACT_INCUMBENT",
+      "missing_required_station_in_gate_block": "NO_OP_EXACT_INCUMBENT",
+      "otherwise": "NO_OP_EXACT_INCUMBENT",
+      "outer_validation_metrics_available_to_gate": false
+    },
+    "training": {
+      "batch_size": 8192,
+      "checkpoint_selection": false,
+      "class_weight_search": false,
+      "distillation_loss": "SmoothL1_auxiliary_head_to_inner_OOF_incumbent_mean_logit",
+      "early_stopping": false,
+      "expected_curve_fit_cells": 225,
+      "expected_curve_optimizer_steps": 10800,
+      "full_fit_only_if_curve_passes": true,
+      "gradient_clip_norm": 1.0,
+      "identity_regularizer": "mean_squared_bounded_residual",
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "distillation": 1.0,
+        "identity_regularizer": 0.05,
+        "main": 1.0
+      },
+      "main_loss": "dense_natural_BCEWithLogits_on_incumbent_offset_plus_bounded_residual",
+      "maximum_full_fit_fits_on_pass": 18,
+      "optimizer": "AdamW",
+      "optimizer_steps_per_residual_fit": 120,
+      "outer_score_selection": false,
+      "phase_balanced_resampling": false,
+      "residual_gate_fits": 45,
+      "residual_refits": 45,
+      "threshold_search": false,
+      "weight_decay": 0.0001
+    }
+  },
+  "source_config_sha256": "da7427dcfa58daff7d9825653c34296aeb6c4d0648d0d2295715c5e8c0179396",
+  "source_generation": "p1_incumbent_rule_distillation_neural_residual_v5"
+}

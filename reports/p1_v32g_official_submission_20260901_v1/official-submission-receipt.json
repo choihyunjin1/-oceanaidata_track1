@@ -1,0 +1,85 @@
+{
+  "schema_version": "p1.v32g.official_submission_receipt.20260901.v1",
+  "status": "SUBMITTED_SCORED_PUBLIC_REGRESSION_KEEP_CHAMPION",
+  "recorded_at_kst": "2026-09-01T19:45:32+09:00",
+  "problem": "OCN-01",
+  "candidate": {
+    "id": "P1_V32G_E150_CATBOOST_PRECISION_UNION",
+    "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_V32G_CATBOOST_UNION_SCORE_PRIORITY_READY_V1/P1_submission.csv",
+    "sha256": "2f6b115dd706d42b8851685af4c2e4a065f111e2b51b8dee9bc6170396e5e279",
+    "rows": 169011,
+    "positive_rows": 6419,
+    "additions_vs_champion": 23,
+    "removals_vs_champion": 0
+  },
+  "deployment_receipt": {
+    "path": "reports/p1_e150_catboost_precision_union_deployment_20260901_v32g1/result.json",
+    "sha256": "f39c8f818d07c7f424107b6ab916c6df92dd92e00a3c00b9251bd8ae62fd410a",
+    "status": "MATERIALIZED_READY_NOT_UPLOADED_EXPLICIT_INTERNAL_NO_GO",
+    "fit_count": 1
+  },
+  "pre_upload_independent_qa": {
+    "path": "reports/p1_e150_catboost_precision_union_deployment_20260901_v32g1/independent-deployment-qa.json",
+    "sha256": "876928024d69eee05d4edc9def2d005409a327019a7e6b34af5a00af2cb38107",
+    "status": "PASS_UPLOAD_INTEGRITY_EXPLICIT_INTERNAL_NO_GO",
+    "checks": "PASS_42_OF_42"
+  },
+  "previous_champion": {
+    "id": "P1_1_E150_PLUS_GI_SPIKE2",
+    "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+    "public_f1": 0.833548,
+    "public_points": 28.909341
+  },
+  "public_result": {
+    "f1": 0.832905,
+    "points": 28.892255,
+    "status": "scoring_complete"
+  },
+  "actual_delta_vs_previous_champion": {
+    "f1": -0.000643,
+    "points": -0.017086
+  },
+  "pre_submit_internal_evidence": {
+    "pooled_delta_f1": -0.00017298224936446172,
+    "q3_q4_delta_f1": -0.0002388046492630691,
+    "expected_points_center": 28.902994021168197,
+    "expected_points_ci90": [
+      28.891794399564443,
+      28.91217975162548
+    ],
+    "internal_status": "NO_GO_INTERNAL_GATE",
+    "probe_basis": "user_authorized_information_value_only"
+  },
+  "official_vs_internal": {
+    "official_delta_f1": -0.000643,
+    "internal_pooled_delta_f1": -0.00017298224936446172,
+    "official_minus_internal_delta_f1": -0.00047001775063553828,
+    "official_points": 28.892255,
+    "internal_expected_points_center": 28.902994021168197,
+    "official_minus_internal_expected_points": -0.010739021168197
+  },
+  "decision": {
+    "public_improved": false,
+    "new_public_champion": false,
+    "retain_previous_champion": true,
+    "candidate_promoted": false,
+    "private_metric_available": false,
+    "interpretation": "The explicit internal NO_GO direction was confirmed by a small public regression; the 23-row CatBoost union is not retained."
+  },
+  "lineage_and_access": {
+    "organizer_distributed_data_only": true,
+    "scratch_training": true,
+    "external_data_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "internet_research_or_external_downloads": 0,
+    "kiost_original_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "competition_platform_upload_actions": 1,
+    "uploads_exactly_one": true
+  },
+  "source_of_official_result": {
+    "type": "coordinator_observed_competition_platform_result",
+    "internet_search_performed_for_receipt": false,
+    "hidden_truth_available": false
+  }
+}

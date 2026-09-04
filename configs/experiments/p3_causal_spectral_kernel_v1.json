@@ -1,0 +1,207 @@
+{
+  "experiment_id": "p3_causal_spectral_kernel_v1",
+  "status": "PREREGISTERED_APPEND_ONLY_ONE_SHOT_RESEARCH_NOT_UPLOAD_AUTHORIZATION",
+  "problem": "P3",
+  "target": "significant_wave_height_hs",
+  "metric": "pooled_row_RMSE_m",
+  "created_before_first_fit": true,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_causal_spectral_kernel_v1.json",
+    "goal_contract": "configs/goals/meaningful_score_maximization_v3.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "gen1_artifact": "artifacts/p3_meaningful_learning_curve_20260823_v1",
+    "gen2_artifact": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1",
+    "v5_ledger": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "output": "artifacts/p3_causal_spectral_kernel_20260823_v1",
+    "attempt_lock": "artifacts/p3_causal_spectral_kernel_20260823_v1.ATTEMPT_LOCK.json",
+    "execution_claim": "artifacts/p3_causal_spectral_kernel_20260823_v1.EXECUTION_CLAIM.json"
+  },
+  "implementation_sha256": {
+    "gen2_runner": "c0225908cf514c6507d679f743e8274ab4b4bdf315e32827ca9ec4a63498f77a",
+    "gen2_config": "f9b7b0eb76ca0d152a0e87f4eb4fc30b3d2a1cc929e6697cd1324cd9a59e84ca",
+    "spectral_kernel_module": "d7586f27dc6b46e615ecf44cf477ba16ccbcf73c462ce850c3977502a3ad8144",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "learning_curve_module": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "persistence_shrink_module": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "one_shot_guard_module": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5",
+    "goal_contract": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "goal_evaluator": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "v5_ledger_contract": "6c61e71016d3c4cf9b8a34e818ca865b7246e3b02ad2cb22348dd2a6e71d6b35",
+    "v5_ledger_evaluator": "aaf54e6cafac0cc01af7f3265af42a7a80e2738a4d5a682070bd47b41e4b0053"
+  },
+  "reference_evidence_sha256": {
+    "gen1_metrics": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1_learning_curve_oof": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1_manifest": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1_independent_qa": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "gen2_metrics": "adab38a1244b532e4e47cb4308f6a8d8c2a61cb0495b716db171f224537eba21",
+    "gen2_learning_curve_evidence": "7303993fbff3a301a1779ae29ea0fc7288f332d6a7b96276edf06ca01ee6c7ac",
+    "gen2_manifest": "204c36727e3f033e1650985ee2d0cbefe9aac75e0494cd70d61eaa685cf0de2e",
+    "gen2_validation_keys": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+  },
+  "central_ledger_anchor": {
+    "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v5",
+    "gen2_event_seq": 4,
+    "gen2_event_sha256": "f5f05762dc14932a25772b18fd844fd03d9b02632719f386e7eeb8452673b1ce",
+    "gen2_evidence_sha256": "7303993fbff3a301a1779ae29ea0fc7288f332d6a7b96276edf06ca01ee6c7ac",
+    "gen2_decision": "RESEARCH_ONLY",
+    "official_uploads_through_anchor": 0
+  },
+  "gen2_failure_diagnosis": {
+    "aggregate_only": true,
+    "full_delta_candidate_minus_incumbent_m": 0.03785402015984651,
+    "full_ci90_m": [0.01409769856877904, 0.06144745214959834],
+    "all_five_prefix_point_estimates_worse": true,
+    "fold_delta_m": {
+      "2024_h2_storm": 0.07888362195658527,
+      "winter_transition": 0.043898748087905504,
+      "2025_h1": -0.005833270208253638
+    },
+    "critical_slice_delta_m": {
+      "G-ORS": 0.041203317099020365,
+      "I-ORS": -0.002368025835532639,
+      "S-ORS": 0.06568566110273177,
+      "winter": 0.043898748087905504,
+      "lead_12": 0.028206015656477512,
+      "lead_18": 0.03628452516888947,
+      "lead_24": 0.013161886416867219
+    },
+    "interpretation": "shared pooled neural temporal representation is structurally miscalibrated for 2024-H2 storm and G/S regimes; worsening persists across data fractions, so Gen3 changes estimator family rather than capacity, epochs, shrink, or routing"
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "storm_threshold_hs_m": 1.5,
+    "raw_wave_episode_contiguous_minutes": 20,
+    "episode_reuse_within_validation": false,
+    "same_episode_train_validation": false,
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_rule": "earliest_global_chronological_prefix_of_each_already_safe_outer_train_set",
+    "bootstrap_unit": "whole_complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260823
+  },
+  "hypotheses": [
+    {
+      "id": "causal_multiresolution_spectral_rff_kernel",
+      "structure": "fixed past-only 6/12/24/48h robust summaries plus low-frequency spectra, train-only robust scaling and median-distance bandwidth, 64 paired sine/cosine frequencies (128 random Fourier features), and one closed-form weighted multi-output ridge solve",
+      "structurally_distinct_from": [
+        "CatBoost scalar or multi-output trees",
+        "TCN or recurrent neural sequence encoder",
+        "analog retrieval",
+        "shrink alpha or router weight adjustment"
+      ],
+      "selection_or_weight_search": false,
+      "score_derived_tuning": false,
+      "prior_exposure_note": "preregistered only after sealed Gen2 aggregate failure and changes the estimator family"
+    }
+  ],
+  "features": {
+    "source": "train-only raw 48h sequence cache",
+    "raw_columns": ["hs", "tp", "hmax", "wvdir", "wspd", "gust", "wdir", "airt", "relh", "caph"],
+    "wave_native_rows_20m": 145,
+    "atmos_native_rows_10m": 289,
+    "windows_hours": [6, 12, 24, 48],
+    "statistics": ["mean", "std", "min", "max", "slope_span", "delta", "finite_fraction"],
+    "spectral_harmonics": 8,
+    "direction_encoding": "sine_cosine_before_summary",
+    "station_encoding": "fixed_three_way_one_hot",
+    "feature_count": 435,
+    "missing_value_rule": "finite-only statistics_and_case_median_fill_for_delta_and_spectrum",
+    "scaler": "prefix_fold_train_only_componentwise_median_iqr",
+    "standardized_clip": 8.0
+  },
+  "model": {
+    "class": "CausalSpectralRandomFourierKernelRidge",
+    "random_feature_count": 128,
+    "frequency_pair_count": 64,
+    "frequency_distribution": "Normal(0,1/sqrt(train_only_median_squared_distance))",
+    "kernel_bandwidth_rule": "median positive pairwise squared distance on 256 deterministic evenly spaced prefix-train rows only",
+    "paired_basis": "cosine_and_sine_for_each_frequency_no_random_phase",
+    "ridge_penalty": 1.0,
+    "intercept_penalty": 1e-10,
+    "solver": "float64_closed_form_linear_solve",
+    "multi_output_leads_h": [3, 6, 9, 12, 18, 24],
+    "seed_replicates": [20260816, 20260817, 20260818],
+    "seed_reducer": "arithmetic_mean_prediction_within_fold_prefix",
+    "residual_target": "target_hs_minus_current_hs",
+    "case_weight": "same_fixed_current_hs_threshold_weight_as_comparator_generation",
+    "hyperparameter_search": false,
+    "expected_fit_cells": 45,
+    "expected_closed_form_solves": 45
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_gen1_comparator": true,
+    "new_router_or_blend": false
+  },
+  "comparator": {
+    "source": "sealed Gen1 fresh-refit exact-current structure at every prefix and seed, aggregated by prediction mean",
+    "source_oof_path": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "source_oof_sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_historical_frozen_oof": false,
+    "fail_closed_surrogate_only_if_false": true
+  },
+  "gate": {
+    "baseline": "same_prefix_same_fold_sealed_gen1_exact_current_structure_prediction_mean",
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "all_split_leakage_and_reproducibility_checks": true,
+    "on_pass": "full_train_three_seed_mean_then_same_case_only_200_test_inference_and_byte_reproduction",
+    "on_no_pass": "seal_results_stop_before_test_reads"
+  },
+  "expected_sha256": {
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "source/test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "source/test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "source/sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "source/baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "compact_cache/manifest.json": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+    "compact_cache/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "compact_cache/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "sequence_cache/manifest.json": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+    "sequence_cache/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "sequence_cache/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "gen1/metrics.json": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1/learning_curve_oof.parquet": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1/manifest.json": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1/independent_qa.json": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "frozen/current_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "frozen/current_manifest.json": "886637d3f7c92437a6ac40f0aee496d67b44f5913acf75a1502abb566e3c62fd",
+    "current/ready_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_causal_spectral_kernel_20260823_v1",
+    "candidate_relative_path": "candidate/P3_CAUSAL_SPECTRAL_KERNEL_V1.csv",
+    "reproduced_candidate_relative_path": "candidate/P3_CAUSAL_SPECTRAL_KERNEL_V1_REPRODUCED.csv",
+    "uploaded": false
+  },
+  "prohibitions": {
+    "hyperparameter_search": true,
+    "shrink_alpha_or_weight_micro_tuning": true,
+    "absolute_test_timestamp_recovery": true,
+    "test_target_or_hidden_label_access": true,
+    "current_or_frozen_submission_mutation": true,
+    "submission_upload": true,
+    "config_copy_or_arbitrary_output": true,
+    "rerun_after_attempt_lock": true,
+    "candidate_path_traversal_or_overwrite": true
+  }
+}

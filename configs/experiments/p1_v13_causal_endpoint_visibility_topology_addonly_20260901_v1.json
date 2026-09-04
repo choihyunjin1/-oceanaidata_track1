@@ -1,0 +1,57 @@
+{
+  "schema_version": "p1.v13_causal_endpoint_visibility_topology_addonly.v1",
+  "result_schema_version": "p1.v13_causal_endpoint_visibility_topology.result.v1",
+  "experiment_id": "p1_v13_causal_endpoint_visibility_topology_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {"readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd", "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2", "allowed_files": ["README.md", "train.csv"], "official_test_sample_submission_hidden_reads": 0},
+  "primary_source": {"title": "Horizontal visibility graphs: exact results for random time series", "authors": "Luque et al.", "venue": "Physical Review E 2009", "url": "https://arxiv.org/abs/0809.1906", "claim_boundary": "Horizontal visibility maps temporal order geometry to a graph. v13 uses only fixed causal endpoint visibility summaries, not the paper's full asymptotic analysis and makes no P1 performance claim."},
+  "semantic_audit": {
+    "decision": "NOVEL_P1_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "repository_search": "No P1 horizontal/natural visibility graph, endpoint visibility, degree-distribution, or visibility-motif implementation was found.",
+    "station_graphs": "v4/v5 graph families require physical station/layer node adjacency and learned message passing. v13 has no station or cross-layer edge; its graph vertices are past samples within one station-layer and edges are fixed by horizontal visibility.",
+    "v10_recurrence": "v10 connects values by metric state recurrence and lag distance. v13 connects temporally ordered samples only when intervening values lie below both endpoints; no recurrence radius or state-distance edge exists.",
+    "minirocket_symbolic": "MiniRocket applies dilated kernels/PPV and soft-symbolic encodes PAA transitions. Endpoint visibility is invariant to positive affine value transforms and summarizes order-obstruction topology rather than convolutions or quantized transitions.",
+    "run_duration": "Plateau and duration families count equal-value or labeled-state runs. v13 measures endpoint graph degree/span/entropy for arbitrary continuous paths and has no event decoder.",
+    "cross_problem_transfer": "No P2/P3 result, metric, window, threshold, or hyperparameter was read or transferred.",
+    "evidence": {
+      "configs/experiments/p1_v4_causal_masked_spatiotemporal_graph_preflight_20260901_v1.json": "d0b590e6ae4f368daf2b9b8952e18b40c0eb850153d1872d01cbb39acd2cf384",
+      "configs/experiments/p1_v5_within_station_vertical_causal_graph_20260901_v1r1.json": "37213a0a4b5301a592e5d7fae111352bfd48ca48a4866ec6d4ccc73e8e4fd46e",
+      "scripts/run_p1_v10_causal_recurrence_laminar_state_addonly_20260901_v1.py": "f8edf02cefbffa75d28a94376d0842f351add0dfd75aba8e1c9664d5cd7035a2",
+      "src/p1_qc/causal_minirocket_lite.py": "b03bf681aa243cd7aa4399b4c053c8b3a6916e0acefa55a306427c60533e3fa1",
+      "src/p1_qc/causal_soft_symbolic.py": "dec110408ac08cd64aebe390f96acd70fff1451f05d1fe6b08bb115b567271d9",
+      "scripts/run_p1_v12_causal_kernel_mmd_shift_addonly_20260901_v1.py": "5ca89224ba3c5163263c0a00f50b0d121877e8700413316201f91ccc175995b3"
+    }
+  },
+  "representation": {"sequence_unit": "station_x_layer", "visibility_window_rows": 96, "minimum_prefix_rows": 96, "persistence_rows": 12, "directions": ["upper", "lower"], "per_direction_features": ["degree", "maximum_span", "mean_span", "span_entropy", "degree_persistence"], "features": ["upper_degree", "upper_max_span", "upper_mean_span", "upper_span_entropy", "upper_degree_persistence", "lower_degree", "lower_max_span", "lower_mean_span", "lower_span_entropy", "lower_degree_persistence"], "insufficient_prefix_group_policy": "zero_all_features_for_that_fold", "past_only": true, "future_interpolation": 0, "subsequence_normalization": 0},
+  "representation_support_gate": {"minimum_nonzero_feature_share": 0.5, "minimum_feature_variance": 0.000001, "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_VISIBILITY_SUPPORT"},
+  "model": {"kind": "L2 SGD logistic", "alpha": 0.0001, "epochs": 20, "positive_class_weight": 12.0, "seeds": [20260901, 20260917, 20260943], "fits": 9, "sweep": 0},
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "maximum_addition_share": 0.0025,
+    "minimum_additions": 25,
+    "wilson90_lcb_minimum": 0.55,
+    "outer_tuning": 0,
+    "transport_stability": {
+      "environment": "station_x_layer_x_chronological_half",
+      "chronological_halves": 2,
+      "minimum_proposals_per_supported_environment": 10,
+      "minimum_supported_environments": 2,
+      "require_both_chronological_halves": true,
+      "minimum_environment_precision_strictly_gt": 0.55,
+      "reject_if_any_supported_environment_true_positives_eq": 0,
+      "passing_threshold_tie_break": "highest_quantile_then_highest_precision_lcb"
+    }
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "ocean_hackathon.prospective_exactly_two_cycle_contingency_amendment.v1",
+  "amendment_id": "p1_cycle1_exactly_two_cycle_contingency_20260826_v1",
+  "problem": "P1",
+  "created_at_kst": "2026-08-26T07:29:17.5923721+09:00",
+  "status": "PROSPECTIVE_DESIGN_ONLY_NOT_IMPLEMENTED_NOT_AUTHORIZED",
+  "scope": {
+    "supersedes_only": "The Cycle-1 cycle_relation rule that scientific RESEARCH_NO_GO prohibits every Cycle-2 experiment.",
+    "new_rule": "Exactly one final Cycle-2 branch is selected by the already defined terminal Cycle-1 scientific label: retain the existing matched-budget confirmation after RESEARCH_GO; use the fixed orthogonal station-season robust branch after scientific RESEARCH_NO_GO.",
+    "does_not_modify_existing_files": true,
+    "cycle1_hypothesis_search_splits_budget_or_gates_changed": false,
+    "integrity_failure_incomplete_or_unevaluated_cycle1_still_prohibits_cycle2": true,
+    "third_cycle_allowed": false,
+    "result_driven_substitute_or_reconfiguration_allowed": false
+  },
+  "created_before_cycle1_result_evidence": {
+    "observed_at_kst": "2026-08-26T07:29:17.5923721+09:00",
+    "cycle1_result_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/result.json",
+    "cycle1_result_existed": false,
+    "cycle1_manifest_path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v1/manifest.json",
+    "cycle1_manifest_existed": false,
+    "cycle1_numeric_result_consumed": false,
+    "official_score_or_rank_consumed_for_branch_design": false
+  },
+  "frozen_cycle1_binding": {
+    "design": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "bytes": 14389,
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json",
+      "bytes": 8884,
+      "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1",
+      "required_anchor_branch": "FROZEN_ROUND_B"
+    },
+    "preserved_section_canonical_sha256": {
+      "hypothesis": "70320723ed308a07d8ed8e64037acb27288f59ad9266e5a785daabe8d75b9f71",
+      "feature_contract": "5131e088cca32e9f7f6a8f34830ed67fe3af8003d191eabdd4e4f0aada84b054",
+      "leakage_safe_splits": "8df811ca4bb3e8acc0469f237303b0f2f683ae4692ea39417c008166a035f4fd",
+      "fixed_structure_search": "e359ec76a150d3dbf5cfb8c3f324feec7d6ae69fed469f92f9fefe4514386b74",
+      "decision_gates": "39c6dea1a5234f6c372cca385995d37693f825379ce4e72e1cb7fb2467061696",
+      "resource_ceiling": "df797d0ce1999d3308cd72d3325791e9a6c011f34df9bab0bcee045563ec3964"
+    },
+    "verification_rule": "Before any Cycle-1 or Cycle-2 authorization, recompute every listed raw and canonical hash; fail closed on any mismatch."
+  },
+  "exactly_one_cycle2_router": {
+    "cycle1_terminal_RESEARCH_GO": {
+      "branch": "EXISTING_MATCHED_BUDGET_CONFIRMATION",
+      "design_path": "configs/experiments/p1_long_event_matched_budget_retune_v1_design.json",
+      "design_bytes": 14132,
+      "design_sha256": "9bb73f9baf7ffe8f7e53437b7dc614f924729397a5aae84be244ceb6eb056d62",
+      "numeric_changes_allowed": false
+    },
+    "cycle1_terminal_RESEARCH_NO_GO": {
+      "branch": "ORTHOGONAL_STATION_SEASON_ROBUST_OBJECTIVE",
+      "design_embedded_below": true,
+      "numeric_changes_allowed_after_cycle1_result": false
+    },
+    "all_other_cycle1_states": "STOP_NO_CYCLE2",
+    "branch_exclusivity": "Exactly one branch may ever claim a Cycle-2 namespace. Either branch is P1_CYCLE_2_OF_EXACTLY_2_FINAL and terminates P1 research regardless of outcome."
+  },
+  "orthogonal_failure_branch_cycle2": {
+    "experiment_id": "p1_round_b_station_season_robust_group_objective_cycle2_20260826_v1",
+    "family": "FIXED_STATION_X_METEOROLOGICAL_SEASON_RISK_REWEIGHTING",
+    "orthogonality": "Cycle 1 changes event representation and decoder decisions. This branch changes only training-risk allocation across station-season groups while retaining the exact Round-B features, model family, outer keys, seeds, and postprocess.",
+    "historical_seed_design": {
+      "path": "configs/experiments/p1_round_b_station_season_robust_group_objective_v1_design.json",
+      "bytes": 12788,
+      "sha256": "f49f33620f821c33baa0392d12157d2a80753c631af05560b47153b507455b16",
+      "method_bundle_canonical_sha256": "25ad33b49fa152073f1817afc47db6bc8a7989ebe4bd426dcd362eeebb73ec66",
+      "status_at_freeze": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+      "result_namespace_existed_at_freeze": false
+    },
+    "hypothesis": "A fixed equal mixture of Round-B event/day risk and equal station-season group risk can correct the frozen anchor's q3 and G/station-fold transport imbalance without relying on long-event proposal quality or target-density information.",
+    "historical_rationale": {
+      "tradeoff_result": {"path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/result.json", "bytes": 4150, "sha256": "0f00b798fe8297bc84b21e639e50c389b1315d6162ca84ebdfec32d91bdf8fe2"},
+      "classification": {"path": "artifacts/p1_round_b_tradeoff_diagnostic_20260825_v1/classification.json", "bytes": 3015, "sha256": "c78a5ec358426e97f8583f914ff4cf460950f1461949e46a04a3fb83518a5a55"},
+      "frozen_facts": ["Round-B pooled F1 delta versus incumbent was positive but 4 of 7 adequately supported station-fold cells were negative.", "q3 and station G were preregistered transport weaknesses.", "No completed artifact exists for this fixed station-season robust family."],
+      "closed_families_not_repeated": ["long-event residual/segment proposal", "peer/boundary/event inpainting", "TCN or masked pretraining", "target covariate density ratio"]
+    },
+    "fixed_features_and_surface": {
+      "feature_cache_path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "feature_cache_bytes": 156272400,
+      "feature_cache_sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+      "ordered_feature_columns": 80,
+      "feature_add_remove_recompute_reorder_or_select": false,
+      "outer_folds": ["2025_q2", "2025_q3", "2025_q4"],
+      "split_rule": "Use the byte-identical Round-B p100 chronological training prefixes, validation keys, purge, embargo, and gap segmentation.",
+      "seeds": [20260813, 20260829, 20260847],
+      "postprocess": "Use the exact frozen per-fold Round-B postprocess from /frozen_surface/fixed_fold_postprocess in the pinned historical seed design."
+    },
+    "fixed_model_and_objective": {
+      "family": "lightgbm.LGBMClassifier",
+      "parameters": {"n_estimators": 700, "learning_rate": 0.035, "num_leaves": 63, "max_depth": -1, "min_child_samples": 60, "subsample": 0.85, "subsample_freq": 1, "colsample_bytree": 0.85, "reg_alpha": 0.2, "reg_lambda": 1.0, "n_jobs": 8, "deterministic": true, "force_row_wise": true, "verbosity": -1},
+      "group_key": ["station", "meteorological_season"],
+      "season_map": {"DJF": [12, 1, 2], "MAM": [3, 4, 5], "JJA": [6, 7, 8], "SON": [9, 10, 11]},
+      "single_lambda": 0.5,
+      "objective": "R=(1-lambda)*Round-B-event-day-weighted empirical logloss + lambda*equal-mean station-season-group Round-B-weighted logloss, lambda=0.5.",
+      "search": {"configurations": 1, "lambda_values": [0.5], "threshold_grid": 0, "hyperparameter_grid": 0, "selection": "NONE"}
+    },
+    "single_use_evaluation": {
+      "comparator": "Frozen Round-B predictions on the same 421032 ordered local OOF rows.",
+      "paired_bootstrap": {"unit": "positive connected event or normal station-layer KST day", "timezone": "Asia/Seoul", "replicates": 5000, "seed": 20260826, "confidence": 0.90},
+      "result_use": "One terminal aggregate evaluation; no selection, tuning, or rerun."
+    },
+    "fixed_meaningful_gates": {
+      "pooled_f1_delta_gte": 0.0255,
+      "paired_ci90_lower_gte": 0.012,
+      "minimum_improving_folds_of_3": 2,
+      "minimum_improving_stations_of_3": 2,
+      "equal_weight_supported_station_season_f1_delta_gte": 0.008,
+      "q3_f1_delta_gte": 0.0,
+      "station_g_f1_delta_gte": 0.0,
+      "all_seed_f1_deltas_gte": 0.0,
+      "precision_delta_gte": -0.002,
+      "recall_delta_gte": 0.008,
+      "noise_recall_delta_gte": -0.005,
+      "offset_plus_drift_recall_delta_gte_any_of": [0.05],
+      "at_least_48h_event_recall_delta_gte_alternative": 0.10,
+      "long_event_recall_gate_logic": "offset_plus_drift_recall_delta >= 0.05 OR at_least_48h_event_recall_delta >= 0.10",
+      "normal_fp_per_day_ratio_lte": 1.05,
+      "spike_predictions_exactly_preserved": true,
+      "flatline_predictions_exactly_preserved": true,
+      "independent_aggregate_QA": "PASS",
+      "exact_reproduction_from_pinned_inputs": true,
+      "all_hash_key_chronology_feature_and_leakage_checks": true,
+      "interpretation": "At least the frozen Cycle-1 SUBMISSION_GO effect thresholds; pass remains local-only and is not submission authorization."
+    },
+    "resource_budget": {"maximum_lifetime_physical_fit_calls": 9, "maximum_parallel_workers": 3, "hard_wall_seconds": 1800, "automatic_resume_or_rerun_count": 0, "full_deployment_fits": 0, "candidate_files": 0}
+  },
+  "authorization_and_outputs": {
+    "implementation_authorized": false,
+    "fit_or_materialization_authorized": false,
+    "requires_future_independent_QA_and_explicit_authorization": true,
+    "aggregate_only_files": ["result.json", "manifest.json", "report_ko.md"],
+    "row_predictions_persisted": false
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "official_score_or_rank_used_for_selection": 0,
+    "P3_reads_mutations_or_fits": 0,
+    "post_result_tuning": 0,
+    "result_driven_reruns": 0,
+    "third_cycle": 0
+  }
+}

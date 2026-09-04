@@ -1,0 +1,87 @@
+{
+  "schema_version": "p1.v9_conditional_dependence_change_addonly.v1",
+  "experiment_id": "p1_v9_conditional_dependence_change_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Unsupervised Change Point Detection in Multivariate Time Series",
+    "authors": "Wu, Gundimeda, Mou, and Quinn",
+    "venue": "AISTATS 2024, PMLR 238",
+    "url": "https://proceedings.mlr.press/v238/wu24g.html",
+    "claim_boundary": "The paper motivates multivariate conditional-distribution changes that can be invisible in marginal distributions. This P1 recipe is a simplified prefix covariance/precision-change representation, not a reproduction of the paper's clustering or MDL algorithm and carries no paper-derived performance claim."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "dependence_null": "The prior audit calibrated block maxima of abs(clean_state_decoder_signal) and cross-layer concurrence. It did not estimate joint covariance, precision, partial correlation, or their changes.",
+    "clean_state_capa": "CAPA uses marginal clean-state segment likelihood changes, not a joint conditional-dependence representation.",
+    "e150_cp": "e150 scores pre-existing long-event proposals with duration and marginal residual summaries; it does not estimate cross-layer precision changes.",
+    "long_event_rescore": "The rescore family classifies frozen event proposals. v9 is a rowwise prefix-fitted dependence-change representation with no proposal rescore.",
+    "evidence": {
+      "configs/experiments/p1_dependence_aware_empirical_null_feasibility_20260901_v1.json": "7e7cd8f7662961bea2091e83384945ea0f62b16bf7948e1a930ae503c29f2df7",
+      "artifacts/p1_dependence_aware_empirical_null_feasibility_20260901_v1/result.json": "13d7767e564c95cffb5b1548cbc91d04979be99273143cd9ce324fa925392e48",
+      "src/p1_qc/clean_state_capa.py": "9d963b067133af8da82fae6154849db1d6604d8bc09cb37dfc3c8d3e2ef7f693",
+      "src/p1_qc/change_points.py": "99aed99428070104033053be885d42d2da7f61de35434fbd9867ad58bb569ae7",
+      "artifacts/p1_e150_f1aware_long_event_cp_rescue_20260828_v1/frozen_selection.json": "0d38cdf43887921d26ae6ff68587bf99d957b9ee93774063135bfff0dfeaea51",
+      "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"
+    }
+  },
+  "representation": {
+    "sequence_unit": "station_synchronized_layers",
+    "signal": "temperature_only_cross_layer_dependence",
+    "prefix_statistics": ["layer_mean", "layer_scale", "baseline_covariance", "ridge_precision", "partial_correlation"],
+    "causal_recent_estimator": "exponentially_weighted_covariance",
+    "ewm_half_life_rows": 72,
+    "ridge": 0.25,
+    "features": ["covariance_change_frobenius", "precision_change_frobenius", "partial_correlation_change_frobenius", "node_precision_change_l1", "node_partial_correlation_change_l1"],
+    "past_only": true,
+    "future_interpolation": 0,
+    "horizontal_physical_graph_assumed": 0
+  },
+  "representation_support_gate": {
+    "minimum_multilayer_stations": 2,
+    "minimum_nonzero_feature_share": 0.05,
+    "minimum_feature_variance": 0.000001,
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_DEPENDENCE_CHANGE_SUPPORT"
+  },
+  "model": {
+    "kind": "L2 SGD logistic over dependence-change features only",
+    "alpha": 0.0001,
+    "epochs": 20,
+    "positive_class_weight": 12.0,
+    "seeds": [20260901, 20260917, 20260943],
+    "fits": 9,
+    "sweep": 0
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "maximum_addition_share": 0.0025,
+    "minimum_additions": 25,
+    "wilson90_lcb_minimum": 0.55,
+    "outer_tuning": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {
+    "pooled_delta_gt": 0,
+    "ci90_lower_gte": 0,
+    "all_folds_nonnegative": true,
+    "bootstrap_replicates": 2000,
+    "seed": 20260901,
+    "pass": "POSITIVE_EXPLORATORY_ONLY",
+    "fail": "NO_GO_EXPLORATORY_ONLY"
+  },
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

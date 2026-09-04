@@ -1,0 +1,111 @@
+{
+  "schema_version": "p1.v44_causal_fishr_gradient_variance_crossquarter_addonly.v1",
+  "result_schema_version": "p1.v44_causal_fishr_gradient_variance_crossquarter.result.v1",
+  "experiment_id": "p1_v44_causal_fishr_gradient_variance_crossquarter_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE_WITH_NEW_Q4_ONLY_OUTER",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Fishr: Invariant Gradient Variances for Out-of-Distribution Generalization",
+    "authors": "Rame, Dancette, and Cord",
+    "venue": "ICML 2022, PMLR 162",
+    "url": "https://proceedings.mlr.press/v162/rame22a.html",
+    "claim_boundary": "The source motivates matching domain-level variances of per-sample loss gradients. v44 is a small fixed P1 falsification using station-layer-calendar-quarter source environments and an unchanged add-only decoder; it does not claim Fishr guarantees or P1 performance from the paper."
+  },
+  "cross_quarter_guard": {
+    "path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json",
+    "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "prospective_only": true,
+    "validity_status": "CONSERVATIVE_SAFETY_VETO_RETAINED_AFTER_V35_TRUE_NEGATIVE"
+  },
+  "auditability_amendment": {
+    "path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json",
+    "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128",
+    "preserve_all_pre_q2_threshold_q2_label_blind_actions": true
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_OBJECTIVE_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "objective_fingerprint": "fixed causal state; station-layer-quarter source environments; match per-environment variance of last-layer per-sample BCE gradients; unchanged add-only transport veto",
+    "repository_search": "No Fishr, invariant gradient variance, or environment gradient-covariance matching execution exists in P1, P2, or P3.",
+    "p1_station_adversary": "v24 removes station-predictive information with gradient reversal. v44 keeps station identity out of inference and aligns supervised loss-gradient variance across station-layer-quarter environments; there is no domain classifier or adversary.",
+    "group_dro": "Closed P1 Group-DRO reweights high-loss environments through a minimax risk objective. v44 uses ordinary pooled weighted BCE plus a fixed variance-of-gradients penalty and does not upweight worst loss.",
+    "coral": "P2 CORAL aligns latent activation covariances by layer and month. v44 aligns label-conditioned loss-gradient variances, not feature covariance, and changes no representation statistics.",
+    "irm_vrex": "IRMv1 penalizes sensitivity to a scalar classifier and V-REx penalizes mean risk variance. v44 matches the vector variance of per-sample last-layer gradients; no scalar optimality penalty or environment mean-risk variance is used.",
+    "partial_pooling_density_ratio": "No group-specific thresholds, random effects, density ratio, importance weights, or score calibration are fitted.",
+    "evidence": {
+      "configs/experiments/p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1.json": "6ca2904c09084ada7d7a49893e14399c8bc3a2f81f67de52db186e3032098392",
+      "configs/experiments/p1_mstcn_group_dro_20260829_v2.json": "d5668f056d378ecd7698ed314ab7db7b82f140fe60e550ee879a59f2a4eb0c95",
+      "configs/experiments/p2_layer_conditioned_month_covariance_alignment_20260901_v20.json": "1b5d488e257cc87cde55e79a17acddd5dba65a98e1209e70e145dd7eb1c3a6cc",
+      "configs/experiments/p2_irmv1_layer_month_invariant_deepset_20260901_v30.json": "69ca33f1603a6bef4ad1edae99c3048fb749bdbba68081c2157d93384c3cca5b",
+      "reports/p1_dual_research_breakthrough_20260829_v1/report-source.md": "3b27f2a33855aade9e2ccdda9561bafc32ee98c115739499dfc0456a7196269e"
+    }
+  },
+  "representation": {
+    "kind": "fixed_prefix_robust_causal_temperature_state_with_penalty_only_environment_bits",
+    "features": ["current", "lag1", "lag6", "lag36", "difference1", "absolute_difference1", "backward_acceleration", "gap_support"],
+    "lag_rows": [1, 6, 36],
+    "scientific_feature_count": 8,
+    "environment_bits": {"stations": ["G-ORS", "I-ORS", "S-ORS"], "layers": [1, 2, 3, 4, 5, 6, 7, 8], "calendar_quarters": [1, 2, 3, 4], "used_as_predictors": false},
+    "past_only": true,
+    "future_interpolation": 0,
+    "subsequence_normalization": 0
+  },
+  "representation_support_gate": {
+    "minimum_nonzero_feature_share": 0.5,
+    "minimum_feature_variance": 0.000001,
+    "minimum_source_environments": 20,
+    "minimum_rows_per_source_environment": 100,
+    "minimum_stations": 3,
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_STATION_LAYER_PERIOD_SUPPORT"
+  },
+  "model": {
+    "kind": "8-unit_tanh_weighted_bce_plus_fishr_gradient_variance",
+    "hidden_units": 8,
+    "fishr_coefficient": 1.0,
+    "minimum_environment_rows_per_batch": 16,
+    "environment_definition": "station_x_layer_x_calendar_quarter",
+    "weight_decay": 0.0001,
+    "epochs": 12,
+    "learning_rate": 0.002,
+    "positive_class_weight": 3.0,
+    "maximum_sample_rows_per_fit": 80000,
+    "negative_to_positive_sample_ratio": 3,
+    "batch_rows": 4096,
+    "seeds": [20260901, 20260917, 20260943],
+    "fits": 3,
+    "maximum_fits": 9,
+    "sweep": 0,
+    "inference": "environment_blind_deterministic_sigmoid"
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "threshold_choice": "highest_quantile_passing_pre_q2_calibration_gate_then_highest_wilson90_lcb",
+    "maximum_addition_share": 0.0025,
+    "minimum_additions": 25,
+    "wilson90_lcb_minimum": 0.55,
+    "precision_strictly_gt": 0.55,
+    "environment": {"minimum_proposals_per_supported_environment": 10, "minimum_supported_environments": 2, "require_both_chronological_halves": true, "minimum_distinct_station_layer_identities": 2, "minimum_distinct_stations": 2, "minimum_environment_precision_strictly_gt": 0.55, "reject_if_any_supported_environment_true_positives_eq": 0},
+    "candidate_threshold_fixed_before_q2": true,
+    "q2_q3_threshold_selection": 0,
+    "q2_q3_refits": 0,
+    "q4_open_only_after_q2_q3_pass": true,
+    "outer_tuning": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"role": "transport_veto_1", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"role": "transport_veto_2", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"role": "single_unused_performance_window", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"q4_delta_gt": 0, "q4_ci90_lower_gte": 0, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "transport_fail": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED", "performance_fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits_maximum": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

@@ -1,0 +1,254 @@
+{
+  "experiment_id": "p2_state_conditioned_copula_20260830_v1",
+  "status": "PREREGISTERED_ONE_SHOT_TRAIN_ONLY_HISTORICAL_EXPERIMENT",
+  "question": "Does a sparse low-DF Gaussian-rank dependence adjustment conditioned on public endpoint T/S state improve the frozen alpha50 historical proxy without rerunning the closed seasonal copula recipe?",
+  "classification": "HISTORICALLY_EXPOSED_RESEARCH_ONLY",
+  "comparator": "FROZEN_ALPHA50_HISTORICAL_PROXY",
+  "comparator_disclosure": "The alpha50 proxy, all three historical windows, and the seven Stage-0 edges are historically exposed; any pass is research-only and authorizes no official deployment.",
+  "source_contract": {
+    "explicit_cli_argument": "--p2-dir",
+    "allowed_basenames": ["observations.csv", "README.md"],
+    "forbidden_name_fragments": [
+      "test_index",
+      "sample",
+      "baseline",
+      "score",
+      "submission",
+      "query_support"
+    ],
+    "directory_listing_allowed": false,
+    "environment_fallback_allowed": false,
+    "observations": {
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+    },
+    "readme": {
+      "bytes": 1616,
+      "sha256": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886"
+    },
+    "observation_schema": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "temp",
+      "psal",
+      "depth",
+      "nominal_depth"
+    ]
+  },
+  "immutable_training_inputs": {
+    "stage0_result": {
+      "path": "artifacts/p2_state_conditioned_copula_preflight_20260830_v1/result.json",
+      "bytes": 342070,
+      "sha256": "62fb0d97028fec1c299c333110625563149a76bb5187bbc623be6903af95cebd"
+    },
+    "alpha50_oof_anchor": {
+      "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+      "bytes": 6077707,
+      "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+    }
+  },
+  "code_lineage": {
+    "scripts/run_p2_alpha50_supervised_rank1_functional_residual_20260828_v1.py": {
+      "bytes": 21421,
+      "sha256": "41794412f1c8c143a1162e05fd55d7751a31d340f60ad2b4aa178897b0b8987d"
+    },
+    "scripts/run_p2_state_conditioned_copula_preflight_20260830_v1.py": {
+      "bytes": 33476,
+      "sha256": "09e0c23e33631fb52063b98db03d2a6d8ac9c39927261be58498b64075edf133"
+    },
+    "src/p2_restore/depth_registered_cmfpca.py": {
+      "bytes": 20532,
+      "sha256": "84b3fb73c90f3444eac184deeeb88c8a5811699b566033c54b021d1b9d039422"
+    },
+    "src/p2_restore/profile_projection.py": {
+      "bytes": 9097,
+      "sha256": "fb1615ea1b0b67aad8a35daaef416eaff3dcd9d5b9cd498e3631c5b0b88d74e6"
+    },
+    "src/p2_restore/p2_alpha40_quasiperiodic_gp_residual_20260828_v1.py": {
+      "bytes": 16747,
+      "sha256": "0342ab7314b8cb800c06aecba36434b1b318322f2c98d6592df2ad875ef432c6"
+    }
+  },
+  "closed_family_exclusion": {
+    "closed_experiment_id": "p2_gaussian_copula_conditional_mean_20260830_v2",
+    "seasonal_empirical_residual_margins": false,
+    "shrinkage_grid_or_selection": false,
+    "inner_model_selection": false,
+    "gauss_hermite_quadrature": false,
+    "prior_copula_predictions_reused": false,
+    "exact_closed_recipe_rerun": false
+  },
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "frozen_historical_windows": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00",
+      "training_blocks": ["2024_may_jun", "2024_jul_aug"]
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00",
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun"
+      ]
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00",
+      "training_blocks": [
+        "2024_may_jun",
+        "2024_jul_aug",
+        "2024_sep_oct",
+        "2024_nov_dec",
+        "2025_mar_apr",
+        "2025_may_jun",
+        "2025_jul_aug"
+      ]
+    }
+  },
+  "reference": {
+    "alpha": 0.5,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_season_rows": 100,
+    "fallback_nearest_complete_rows": 1000,
+    "spline_ridge": 0.001,
+    "change_hours": [6, 24, 72]
+  },
+  "state": {
+    "public_endpoint_layers": [1, 5],
+    "thermal_coordinate": "abs_temp_layer1_minus_layer5",
+    "dynamic_coordinate": "absolute_24h_change_of_thermal_coordinate",
+    "thermal_quantiles": [0.3333333333333333, 0.6666666666666666],
+    "dynamic_quantile": 0.5,
+    "thermal_labels": ["low", "middle", "high"],
+    "dynamic_labels": ["steady", "active"],
+    "lag_hours": 24,
+    "degrees_of_freedom": 2,
+    "threshold_scope": "outer_training_profiles_only_shared_across_that_outer_fold",
+    "minimum_profiles_per_cell": 500,
+    "minimum_kst_days_per_cell": 30,
+    "minimum_training_blocks_per_cell": 2,
+    "unsupported_cell_action": "EXACT_ZERO_DEPENDENCE_CORRECTION",
+    "model_guard_failure_action": "EXACT_ZERO_DEPENDENCE_CORRECTION",
+    "ood_lower_quantile": 0.005,
+    "ood_upper_quantile": 0.995,
+    "ood_action": "EXACT_ZERO_DEPENDENCE_CORRECTION"
+  },
+  "dependence": {
+    "conditioners": [
+      "temp_contrast_signed",
+      "psal_contrast_signed",
+      "thermal_change_24h_signed"
+    ],
+    "responses": ["residual_l2", "residual_l3", "residual_l4"],
+    "stage0_exposed_edges": [
+      "temp_contrast_signed__residual_l2",
+      "temp_contrast_signed__residual_l3",
+      "temp_contrast_signed__residual_l4",
+      "psal_contrast_signed__residual_l4",
+      "thermal_change_24h_signed__residual_l4",
+      "residual_l2__residual_l4",
+      "residual_l3__residual_l4"
+    ],
+    "actionable_conditioner_response_edges": [
+      "temp_contrast_signed__residual_l2",
+      "temp_contrast_signed__residual_l3",
+      "temp_contrast_signed__residual_l4",
+      "psal_contrast_signed__residual_l4",
+      "thermal_change_24h_signed__residual_l4"
+    ],
+    "response_response_structure_edges": [
+      "residual_l2__residual_l4",
+      "residual_l3__residual_l4"
+    ],
+    "conditioner_conditioner_correlations_are_nuisance": true,
+    "unlisted_target_linked_edges_fixed_to_zero": true,
+    "rank_statistic": "ordinary_unweighted_kendall_tau_b",
+    "latent_mapping": "sin_pi_over_2_times_tau",
+    "diagonal_shrinkage": 0.8,
+    "shrinkage_selected_or_tuned": false,
+    "nearest_psd_projection_allowed": false,
+    "minimum_eigenvalue": 1e-08,
+    "maximum_condition_number": 1000000.0,
+    "response_scale": "training_cell_iqr_divided_by_1_3489795003921634",
+    "minimum_response_scale_c": 1e-06,
+    "maximum_absolute_latent_mean": 1.0,
+    "intercept_or_marginal_location_adjustment": false
+  },
+  "correction_caps": {
+    "maximum_rms_c": 0.075,
+    "maximum_p99_absolute_c": 0.2
+  },
+  "outlier_diagnostic": {
+    "policy": "AGGREGATE_FLAG_AND_DIAGNOSTIC_WEIGHT_ONLY_NEVER_DELETE",
+    "temporal_neighbor_max_gap_minutes": 20,
+    "temporal_isolated_robust_z": 8.0,
+    "physical_extreme_lower_quantile": 0.005,
+    "physical_extreme_upper_quantile": 0.995,
+    "sensor_suspect_profile_weight": 0.25,
+    "ordinary_and_preserved_physical_extreme_weight": 1.0,
+    "sensor_suspect_definition": "exactly_one_layer_has_an_isolated_temperature_spike",
+    "physical_extrema_are_never_hard_deleted": true,
+    "threshold_tuning_allowed": false,
+    "weights_enter_state_thresholds": false,
+    "weights_enter_support_counts": false,
+    "weights_enter_dependence_fit": false,
+    "weights_enter_metrics": false
+  },
+  "season_definition": {
+    "DJF": [12, 1, 2],
+    "MAM": [3, 4, 5],
+    "JJA": [6, 7, 8],
+    "SON": [9, 10, 11]
+  },
+  "promotion_gate": {
+    "pooled_delta_rmse_max_c": 0.0,
+    "minimum_improved_windows": 2,
+    "maximum_layer_regression_c": 0.001,
+    "maximum_worst_season_regression_c": 0.003,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260830,
+    "bootstrap_ci90_upper_max_c": 0.0,
+    "maximum_correction_rms_c": 0.075,
+    "maximum_correction_p99_c": 0.2
+  },
+  "resource_contract": {
+    "maximum_total_threads": 4,
+    "blas_threads": 4,
+    "outer_dependence_model_fits": 3,
+    "inner_selection_fits": 0,
+    "maximum_state_cell_correlation_estimations": 18,
+    "maximum_wall_seconds": 180.0
+  },
+  "execution_policy": {
+    "real_training_execution_authorized": true,
+    "maximum_executions": 1,
+    "result_based_tuning": false,
+    "result_based_retry": false,
+    "technical_failure_retry": false,
+    "official_interface_reads_allowed": false,
+    "query_support_reads_allowed": false,
+    "csv_output_allowed": false,
+    "submission_generation_allowed": false,
+    "upload_allowed": false,
+    "aggregate_json_only": true
+  },
+  "artifact_path": "artifacts/p2_state_conditioned_copula_20260830_v1/result.json"
+}

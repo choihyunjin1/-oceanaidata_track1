@@ -1,0 +1,63 @@
+{
+  "schema_version": "p1.v21.postrun-independent-qa.1",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v21",
+  "status": "PASS",
+  "scientific_decision": "NO_GO_SAFE_ABSTENTION",
+  "checks": {
+    "terminal_result_exists": true,
+    "exactly_two_model_fits": true,
+    "candidate_rows_421032": true,
+    "candidate_bit_exact_anchor": true,
+    "recomputed_additions_zero": true,
+    "recomputed_anchor_removals_zero": true,
+    "corrected_probability_finite": true,
+    "q3_outer_labels_read_before_prediction_seal_zero": true,
+    "q4_outer_labels_read_before_prediction_seal_zero": true,
+    "official_reads_zero": true,
+    "hidden_truth_reads_zero": true,
+    "submission_csv_zero": true,
+    "uploads_zero": true,
+    "no_retry_or_retune": true,
+    "py_compile_pass": true,
+    "ruff_pass": true,
+    "focused_pytest_5_of_5_pass": true
+  },
+  "metrics": {
+    "fit_count": 2,
+    "runtime_seconds": 33.77479889999813,
+    "q3_additions": 0,
+    "q4_additions": 0,
+    "pooled_delta_f1": 0.0,
+    "raw_expected_points_delta": 0.0,
+    "transport_penalty_points": 0.12168209161000616,
+    "calibrated_conservative_expected_points_delta": -0.12168209161000616,
+    "bootstrap_probability_improved": 0.0,
+    "bootstrap_ci90": [0.0, 0.0]
+  },
+  "nested_calibration": [
+    {
+      "outer": "2025_q3",
+      "propensity": 0.05,
+      "threshold": "Infinity",
+      "inner_additions": 0,
+      "outer_additions": 0
+    },
+    {
+      "outer": "2025_q4",
+      "propensity": 0.2564582473044007,
+      "threshold": "Infinity",
+      "inner_additions": 0,
+      "outer_additions": 0
+    }
+  ],
+  "hashes": {
+    "config_sha256": "105b0ce39b0fe51f156460edd5c83e5fa36cb16fdd6cceee9b40f415dd015827",
+    "source_sha256": "bd1e9a0154e109efba700fc8ba1aa39f1023a0e828493f0cdef2ef1c4e3b3a6a",
+    "runner_sha256": "bf08a4a190b43b956f80d9a9d3333f4cb3954d4cc5143f9c22198f7c24d45196",
+    "lock_sha256": "d1c5b44a020ff922086110dc0b67487e6317319fed52c4308e300ec753a2e992",
+    "result_sha256": "7c9c856e69a09805426ab07ed3beacdb318dbd1ffa406b26a344223723ba023b",
+    "prediction_sha256": "652d00ccb848805f9be4b5e5f41a9aac7b9d4c45c0d0a041b663daac505584a0",
+    "stderr_sha256": "fd19e821645b0aefebb0da869d623ac2c2d928392ddd1a5d85ece8e7c5e7b770"
+  },
+  "warning": "One fixed lbfgs fit reached max_iter=500. The one-shot was not retried or retuned; deterministic sealed predictions were finite and the terminal decision was safe abstention, so this does not create a promotion claim."
+}

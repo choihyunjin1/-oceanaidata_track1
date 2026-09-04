@@ -1,0 +1,136 @@
+{
+  "schema_version": "p2.v52.official_submission_independent_qa.20260901.v1",
+  "status": "PASS",
+  "scope": "official public-score receipt and immutable candidate metadata",
+  "problem": "OCN-02",
+  "candidate": {
+    "id": "P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020",
+    "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P2_V52_SCORE_PRIORITY_READY_V1/P2_submission.csv",
+    "sha256_verified": "331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9",
+    "bytes_verified": 1370969,
+    "rows_verified": 26061
+  },
+  "source_artifacts": {
+    "official_receipt_path": "reports/p2_v52_official_submission_20260901_v1/official-submission-receipt.json",
+    "official_receipt_sha256": "74cb521cffe273e579a8f52475725e1347e1c5ffef6f5f70cf32b3e55340bdb8",
+    "report_path": "reports/p2_v52_official_submission_20260901_v1/report-source.md",
+    "report_sha256": "da7a3964a75b2d5babcbf70838be8c1a1d6d3b1f32c098bfdbada2c1b0ba3e8f",
+    "deployment_result_path": "reports/p2_v52_score_priority_deployment_20260901_v1/result.json",
+    "deployment_result_sha256": "8b505088215f5114eb31b0963c70c01566f5ad061082f13815effad208701af8",
+    "deployment_status": "MATERIALIZED_READY_NOT_UPLOADED",
+    "deployment_fit_count": 3
+  },
+  "official_score_recalculation": {
+    "previous_v23_rmse_C": 0.424976,
+    "previous_v23_points": 28.000939,
+    "v52_rmse_C": 0.424019,
+    "v52_points": 28.012945,
+    "recalculated_delta_rmse_C": -0.000957,
+    "recalculated_delta_points": 0.012006,
+    "receipt_delta_rmse_C": -0.000957,
+    "receipt_delta_points": 0.012006,
+    "delta_arithmetic_matches": true,
+    "public_improved": true,
+    "new_public_champion": true
+  },
+  "internal_to_official_consistency": {
+    "internal_margin_vs_v23_rmse_C": -0.0007591467204575159,
+    "official_margin_vs_v23_rmse_C": -0.000957,
+    "direction_matches": true,
+    "internal_transport_points_margin_vs_v23": 0.009525417084403687,
+    "official_points_margin_vs_v23": 0.012006,
+    "points_direction_matches": true,
+    "stability_upgrade_claimed": false
+  },
+  "submission_state": {
+    "competition_platform_upload_actions": 1,
+    "uploads_exactly_one": true,
+    "remaining_daily_submissions_after_submit": 1,
+    "daily_submission_limit": 3,
+    "observed_date_kst": "2026-09-01"
+  },
+  "policy_and_access": {
+    "organizer_distributed_data_only": true,
+    "scratch_training": true,
+    "external_data_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "internet_research_or_external_downloads": 0,
+    "raw_source_rows_reopened_during_receipt": 0,
+    "hidden_truth_rows_read": 0,
+    "prediction_values_printed_during_qa": 0
+  },
+  "checks": [
+    {
+      "name": "official_receipt_strict_json_no_duplicate_keys",
+      "pass": true
+    },
+    {
+      "name": "candidate_sha256_bytes_rows_match_frozen_pack",
+      "pass": true
+    },
+    {
+      "name": "deployment_receipt_hash_status_and_fit_count_match",
+      "pass": true
+    },
+    {
+      "name": "official_rmse_delta_recalculates_exactly_at_reported_precision",
+      "pass": true
+    },
+    {
+      "name": "official_points_delta_recalculates_exactly_at_reported_precision",
+      "pass": true
+    },
+    {
+      "name": "v52_is_new_public_champion_over_v23",
+      "pass": true
+    },
+    {
+      "name": "internal_and_official_v23_margin_directions_agree",
+      "pass": true
+    },
+    {
+      "name": "remaining_daily_submission_count_recorded_as_1_of_3",
+      "pass": true
+    },
+    {
+      "name": "distributed_only_scratch_lineage_preserved",
+      "pass": true
+    },
+    {
+      "name": "external_pretrained_hidden_raw_and_internet_research_access_zero",
+      "pass": true
+    },
+    {
+      "name": "competition_platform_upload_exactly_once",
+      "pass": true
+    },
+    {
+      "name": "no_stability_upgrade_claim_from_score_priority_candidate",
+      "pass": true
+    },
+    {
+      "name": "focused_pytest_14_of_14_pass",
+      "pass": true
+    },
+    {
+      "name": "focused_ruff_pass",
+      "pass": true
+    },
+    {
+      "name": "new_report_files_diff_check_pass",
+      "pass": true
+    }
+  ],
+  "verification_execution": {
+    "focused_pytest": {
+      "status": "PASS",
+      "passed": 14,
+      "failed": 0
+    },
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "check_count": 15,
+  "pass_count": 15,
+  "failure_count": 0
+}

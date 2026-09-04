@@ -1,0 +1,144 @@
+{
+  "schema_version": "p3.inner_lcb_router.independent_qa.20260831.v6",
+  "experiment_id": "p3_inner_lcb_router_cycle_20260831_v6",
+  "created_at_utc": "2026-08-31T08:38:44.274236+00:00",
+  "status": "PASS",
+  "check_count": 8,
+  "checks": [
+    {
+      "name": "runner_hash",
+      "pass": true,
+      "detail": "77ed97e80b15b163b4b5c4c25b38f6141895230941154e60ee0baed7e631c8bb"
+    },
+    {
+      "name": "attempt_lock_hash",
+      "pass": true,
+      "detail": "4a1f183361a2f3a86022e0c9aa6502c2d97859629f86a51d621798f982f0fc5d"
+    },
+    {
+      "name": "oof_hash",
+      "pass": true,
+      "detail": "e08470587fcff15d0f626bf49ac31dbe214ea56c49ba6ac7fcbe1725ebf20b2e"
+    },
+    {
+      "name": "oof_grain",
+      "pass": true,
+      "detail": 364
+    },
+    {
+      "name": "metrics::P3_1_EXTRATREES_LEAD_GAIN_LCB",
+      "pass": true,
+      "detail": {
+        "delta_rmse": -0.00037561008154030073,
+        "ci90": [
+          -0.007900965201033016,
+          0.0071680958657183835
+        ],
+        "gates": {
+          "validity_hard_pass": true,
+          "pooled_rmse_improves": true,
+          "episode_bootstrap_ci90_upper_below_zero": false
+        }
+      }
+    },
+    {
+      "name": "metrics::P3_2_CATBOOST_HUBER_LEAD_GAIN_LCB",
+      "pass": true,
+      "detail": {
+        "delta_rmse": -0.0019934449342638993,
+        "ci90": [
+          -0.00945132328349339,
+          0.005538121237847602
+        ],
+        "gates": {
+          "validity_hard_pass": true,
+          "pooled_rmse_improves": true,
+          "episode_bootstrap_ci90_upper_below_zero": false
+        }
+      }
+    },
+    {
+      "name": "metrics::P3_3_CONSENSUS_LEAD_GAIN_LCB",
+      "pass": true,
+      "detail": {
+        "delta_rmse": -0.0011856834125613114,
+        "ci90": [
+          -0.008683932937453958,
+          0.006278771435190374
+        ],
+        "gates": {
+          "validity_hard_pass": true,
+          "pooled_rmse_improves": true,
+          "episode_bootstrap_ci90_upper_below_zero": false
+        }
+      }
+    },
+    {
+      "name": "official_hidden_upload_zero",
+      "pass": true,
+      "detail": {
+        "test_index_rows_read": 0,
+        "official_test_feature_rows_read": 0,
+        "official_prediction_rows_read": 0,
+        "hidden_truth_rows_read": 0,
+        "uploads": 0
+      }
+    }
+  ],
+  "recomputed_candidates": [
+    {
+      "name": "P3_1_EXTRATREES_LEAD_GAIN_LCB",
+      "delta_rmse": -0.00037561008154030073,
+      "bootstrap": {
+        "unit": "station_contiguous_episode_gap_gt_78h",
+        "episode_count": 133,
+        "replicates": 5000,
+        "mean_delta_rmse": -0.00042459929577509767,
+        "ci90_low": -0.007900965201033016,
+        "ci90_high": 0.0071680958657183835,
+        "probability_improved": 0.5368
+      },
+      "governing_gates": {
+        "validity_hard_pass": true,
+        "pooled_rmse_improves": true,
+        "episode_bootstrap_ci90_upper_below_zero": false
+      }
+    },
+    {
+      "name": "P3_2_CATBOOST_HUBER_LEAD_GAIN_LCB",
+      "delta_rmse": -0.0019934449342638993,
+      "bootstrap": {
+        "unit": "station_contiguous_episode_gap_gt_78h",
+        "episode_count": 133,
+        "replicates": 5000,
+        "mean_delta_rmse": -0.002024205997671074,
+        "ci90_low": -0.00945132328349339,
+        "ci90_high": 0.005538121237847602,
+        "probability_improved": 0.676
+      },
+      "governing_gates": {
+        "validity_hard_pass": true,
+        "pooled_rmse_improves": true,
+        "episode_bootstrap_ci90_upper_below_zero": false
+      }
+    },
+    {
+      "name": "P3_3_CONSENSUS_LEAD_GAIN_LCB",
+      "delta_rmse": -0.0011856834125613114,
+      "bootstrap": {
+        "unit": "station_contiguous_episode_gap_gt_78h",
+        "episode_count": 133,
+        "replicates": 5000,
+        "mean_delta_rmse": -0.0012214804128805189,
+        "ci90_low": -0.008683932937453958,
+        "ci90_high": 0.006278771435190374,
+        "probability_improved": 0.606
+      },
+      "governing_gates": {
+        "validity_hard_pass": true,
+        "pooled_rmse_improves": true,
+        "episode_bootstrap_ci90_upper_below_zero": false
+      }
+    }
+  ]
+}

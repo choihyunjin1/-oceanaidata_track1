@@ -1,0 +1,263 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "P1 학술 문헌 기반 점수 향상 정찰",
+    "description": "현재 OOF 실패 구조를 1차 학술 문헌과 연결해 다음 실험의 우선순위와 누출 방지 계약을 정리한 기술 보고서",
+    "generatedAt": "2026-08-13T08:50:00Z",
+    "cards": [
+      {
+        "id": "xgb_f1",
+        "description": "공식 test가 아닌 세 outer holdout의 로컬 OOF micro F1",
+        "dataset": "headline_metrics",
+        "sourceId": "headline_metrics_sql",
+        "metrics": [
+          {"label": "XGBoost local OOF F1", "field": "xgb_f1"}
+        ]
+      },
+      {
+        "id": "slow_fn_share",
+        "description": "XGBoost FN 중 offset/drift signature가 차지하는 비율",
+        "dataset": "headline_metrics",
+        "sourceId": "headline_metrics_sql",
+        "metrics": [
+          {"label": "Offset/drift FN share", "field": "slow_fn_share", "format": "percent"}
+        ]
+      },
+      {
+        "id": "long_fn_share",
+        "description": "XGBoost FN 중 48시간 이상 true event에 속한 비율",
+        "dataset": "headline_metrics",
+        "sourceId": "headline_metrics_sql",
+        "metrics": [
+          {"label": "48h+ event FN share", "field": "long_fn_share", "format": "percent"}
+        ]
+      },
+      {
+        "id": "long_recall",
+        "description": "48시간 이상 true event의 row recall",
+        "dataset": "headline_metrics",
+        "sourceId": "headline_metrics_sql",
+        "metrics": [
+          {"label": "48h+ row recall", "field": "long_recall", "format": "percent"}
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "type_recall_chart",
+        "title": "XGBoost 유형별 로컬 OOF recall",
+        "subtitle": "flatline과 noise는 강하지만 offset과 drift가 가장 큰 남은 병목이다.",
+        "headerMarkdown": "복합 라벨은 유형 membership에 중복 집계하며, 아래 값은 **공식 test 점수**가 아니다.",
+        "type": "bar",
+        "dataset": "type_recall",
+        "sourceId": "type_recall_sql",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {"field": "anomaly_type", "type": "nominal", "label": "Anomaly type"},
+          "y": {"field": "recall", "type": "quantitative", "label": "Recall"},
+          "tooltip": [
+            {"field": "priority", "type": "nominal", "label": "Research priority"},
+            {"field": "recommended_method", "type": "nominal", "label": "Recommended method"},
+            {"field": "interpretation", "type": "nominal", "label": "Interpretation"}
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "experiment_table",
+        "title": "동결할 다음 실험 순서",
+        "subtitle": "예상 효과는 측정값이나 리더보드 점수 예측이 아니라 문헌 적합성과 오류량에 따른 자원 배분 등급이다.",
+        "dataset": "experiments",
+        "sourceId": "experiments_sql",
+        "defaultSort": {"field": "rank", "direction": "asc"},
+        "columns": [
+          {"field": "rank", "label": "Rank", "type": "number"},
+          {"field": "experiment", "label": "Experiment", "type": "text"},
+          {"field": "target", "label": "Failure target", "type": "text"},
+          {"field": "expected_effect", "label": "Expected effect", "type": "text"},
+          {"field": "cost", "label": "Cost", "type": "text"},
+          {"field": "main_risk", "label": "Main risk", "type": "text"},
+          {"field": "stop_gate", "label": "Stop gate", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "failure_recon",
+        "label": "P1 OOF failure reconnaissance",
+        "path": "reports/P1_FAILURE_RECON_2026-08-13.md",
+        "query": {
+          "description": "SHA-verified aggregate-only analysis of six aligned outer OOF prediction sets.",
+          "filters": ["Three purged rolling-origin outer folds", "No external observations", "Research-only outer diagnostics"],
+          "metric_definitions": {
+            "micro_f1": "2TP / (2TP + FP + FN)",
+            "slow_fn_share": "FN rows with offset/drift-family exact signature divided by all XGBoost FN rows",
+            "long_fn_share": "XGBoost FN rows in true events lasting at least 48 hours divided by all XGBoost FN rows"
+          }
+        }
+      },
+      {
+        "id": "academic_scout",
+        "label": "P1 academic methods scout source notes",
+        "path": "reports/P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md",
+        "query": {
+          "description": "Primary-source literature synthesis mapped to the verified local P1 failure structure.",
+          "filters": ["Primary papers and official proceedings", "No external observation values", "No pretrained external weights"],
+          "metric_definitions": {
+            "expected_effect": "Qualitative prioritization only; not an estimated leaderboard uplift",
+            "promotion": "Existing nested-CV and bootstrap promotion gates remain unchanged"
+          }
+        }
+      },
+      {
+        "id": "headline_metrics_sql",
+        "label": "Verified local OOF headline metrics",
+        "path": "reports/P1_FAILURE_RECON_2026-08-13.md",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT '0.860371' AS xgb_f1, 0.927 AS slow_fn_share, 0.770 AS long_fn_share, 0.6315 AS long_recall",
+          "description": "Materializes the four reviewed aggregate OOF headline values from the failure reconnaissance.",
+          "tables_used": [],
+          "filters": ["Three purged rolling-origin outer folds", "Research-only outer diagnostics"],
+          "metric_definitions": {
+            "xgb_f1": "2TP / (2TP + FP + FN)",
+            "slow_fn_share": "Offset/drift-family FN divided by all XGBoost FN",
+            "long_fn_share": "FN in 48h+ true events divided by all XGBoost FN",
+            "long_recall": "Detected rows divided by all positive rows in 48h+ true events"
+          }
+        }
+      },
+      {
+        "id": "type_recall_sql",
+        "label": "Verified XGBoost type-recall aggregates",
+        "path": "reports/P1_FAILURE_RECON_2026-08-13.md",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 'spike' AS anomaly_type, 0.8197 AS recall, 'P2 preserve' AS priority, 'singleton expert' AS recommended_method, 'Small row opportunity; never smooth away' AS interpretation UNION ALL SELECT 'noise', 0.9355, 'P2 maintain', 'variance CAPA', 'Largely solved; protect precision' UNION ALL SELECT 'flatline', 0.9997, 'P0 fixed override', 'plateau rule', 'Already solved' UNION ALL SELECT 'offset', 0.6492, 'P0 improve', 'epidemic PELT + backcast', 'Major long-event blind spot' UNION ALL SELECT 'drift', 0.6462, 'P0 improve', 'CPOP slope + backcast', 'Major long-event blind spot'",
+          "description": "Materializes reviewed aggregate type-membership recall and the report's qualitative research mapping.",
+          "tables_used": [],
+          "filters": ["XGBoost predictions", "Composite labels counted by membership"],
+          "metric_definitions": {"recall": "True positive membership rows divided by all positive membership rows"}
+        }
+      },
+      {
+        "id": "experiments_sql",
+        "label": "Academic-method experiment priority synthesis",
+        "path": "reports/P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md",
+        "query": {
+          "engine": "sqlite",
+          "sql": "SELECT 1 AS rank, 'Frozen XGB seed + paired CAPA/epidemic PELT' AS experiment, 'Long offset/drift boundaries' AS target, 'High' AS expected_effect, 'Low–medium' AS cost, 'Normal seasonal changes become CPs' AS main_risk, 'Inner weighted F1 < +0.005 or FP/day +10%' AS stop_gate UNION ALL SELECT 2, 'Candidate-only forecast/backcast residual', 'Weak interiors and type separation', 'High', 'Medium', 'Baseline absorbs candidate', 'No slow-recall gain or uncertainty cannot reject FP' UNION ALL SELECT 3, 'CPOP slope bank + mean/variance CP bank', 'Drift onset/offset', 'High', 'Medium', 'Penalty overfit', 'No 48h+ recall gain or worst group drops >0.01' UNION ALL SELECT 4, 'Inner-only segment classifier + semi-Markov decoder', 'Candidate acceptance and row projection', 'High', 'Medium', 'Event-level leakage', 'No improvement in all inner blocks or CI lower bound <= 0' UNION ALL SELECT 5, 'Stratification-aware peer/CAPA-CC gate', 'Normal high-variability FP', 'Medium', 'Medium', 'Thermocline treated as anomaly', 'Year-transfer degrades or normal FPR +10%' UNION ALL SELECT 6, 'catch22 then MiniRocket/Hydra proposal features', 'Residual composite shapes', 'Medium/uncertain', 'Medium', 'Window normalization removes offset', 'Gain < +0.002 over simple interval statistics' UNION ALL SELECT 7, 'Conservative deep-score residual gate', 'Selective TCN slow recall', 'Medium/high-risk', 'Medium', 'Mimics outer oracle', 'Degrades 2 of 3 inner blocks'",
+          "description": "Materializes the reviewed qualitative experiment ranking and its predeclared stop gates.",
+          "tables_used": [],
+          "filters": ["Primary-source literature", "Verified local failure structure", "No external observation values"],
+          "metric_definitions": {"expected_effect": "Qualitative resource-prioritization class, not predicted score uplift"}
+        }
+      },
+      {"id": "capa", "label": "CAPA paper", "href": "https://doi.org/10.1002/sam.11586"},
+      {"id": "cpop", "label": "CPOP paper", "href": "https://doi.org/10.18637/jss.v109.i07"},
+      {"id": "pyhydroqc", "label": "pyhydroqc aquatic sensor paper", "href": "https://doi.org/10.1016/j.envsoft.2022.105364"},
+      {"id": "iors_qc", "label": "I-ORS temperature QC evaluation", "href": "https://doi.org/10.4217/OPR.2021.43.4.229"},
+      {"id": "semi_markov", "label": "Semi-Markov CRF paper", "href": "https://proceedings.neurips.cc/paper_files/paper/2004/hash/eb06b9db06012a7a4179b8f3cb5384d3-Abstract.html"},
+      {"id": "cross_sensor", "label": "Cross-sensor marine QA paper", "href": "https://doi.org/10.3390/rs12213470"}
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# P1 학술 문헌 기반 점수 향상 정찰"
+      },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n현재 가장 유력한 돌파구는 행별 threshold를 낮추는 것이 아니라 **XGBoost가 이미 잡은 내부 seed를 시작·종료 경계까지 완성하는 duration-aware interval model**이다. CAPA/epidemic PELT로 offset·noise 구간을, CPOP으로 drift slope change를 제안하고, 후보 중앙을 가린 양방향 forecast/backcast residual로 정상 궤적과 비교한 뒤 작은 segment classifier와 semi-Markov decoder로 행에 투영한다. 이어도 현장 연구가 보여준 정상 10분 7.3°C 급변 때문에 raw rate-of-change나 고정 peer threshold는 피하고 mixed/stratified gate를 적용한다."
+      },
+      {"id": "headline_metrics", "type": "metric-strip", "cardIds": ["xgb_f1", "slow_fn_share", "long_fn_share", "long_recall"]},
+      {
+        "id": "key_findings",
+        "type": "markdown",
+        "sourceId": "failure_recon",
+        "body": "## Key Findings and Evidence\n\n- XGBoost FN 3,109행 중 92.7%가 offset/drift 계열이고 77.0%가 48시간 이상 이벤트에 속한다.\n- 48시간 이상 이벤트 17개 중 14개는 일부 행을 이미 탐지했지만 row recall은 63.15%다. 이는 신규 event discovery보다 boundary completion을 우선할 근거다.\n- TCN은 slow anomaly recall을 보완했지만 FP 5,789행으로 단독 모델 승격에 실패했다. deep score는 후보 구간 특징이나 보수적 gate로만 재사용한다.\n- 6월 S-ORS FP 집중은 물리 gate 연구의 단서이지 월 고정 규칙을 만들 근거가 아니다."
+      },
+      {"id": "recall_chart", "type": "chart", "chartId": "type_recall_chart"},
+      {
+        "id": "literature_mapping",
+        "type": "markdown",
+        "body": "## Literature-to-Experiment Mapping\n\n**CAPA/epidemic PELT**는 point와 finite collective anomaly를 분리하고 paired boundary를 찾는 근거다. **Semi-Markov decoding**은 row 대신 variable-length segment에 label과 duration feature를 주는 근거다. **pyhydroqc**는 후보를 가린 앞·뒤 정상 문맥의 forecast/backcast를 혼합하는 직접적인 aquatic-sensor 선례다. **CPOP**는 drift를 1차 차분의 평균 변화로만 찾으면 위치 정보가 손실될 수 있음을 보여준다. **I-ORS 현장 연구**는 내부조석·관성파가 만든 정상 급변 때문에 계절·성층 상태별 gate가 필수임을 뒷받침한다. 문헌의 원래 성능 수치는 P1 점수 예측으로 전이하지 않는다."
+      },
+      {"id": "experiment_table_block", "type": "table", "tableId": "experiment_table"},
+      {
+        "id": "scope_methods",
+        "type": "markdown",
+        "body": "## Scope, Data, Metrics, and Methodology\n\n분석 population은 세 outer fold의 합집합 421,032행이며, 공식 key와 label 정렬을 검증한 aggregate OOF만 사용했다. 외부 관측값과 외부 pretrained weight는 0건이다. 주지표는 공식 식과 같은 row-level micro F1이며 test-share weighted F1, 48h+ row recall, event hit, 시작·종료 MAE, 정상 1일당 FP를 함께 본다. 모든 candidate penalty, duration cost, context length, classifier threshold는 outer train 내부의 과거 blocked inner split에서만 선택한다."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and Robustness\n\n로컬 OOF는 hidden test의 공식 결과가 아니다. P1은 정상 관측에 합성 이상을 주입한 교육용 데이터이므로 실제 현장 QC 논문의 score를 직접 옮길 수 없다. outer subgroup과 월별 오류는 사후 진단이어서 규칙 조건으로 사용하면 누출이다. CAPA/PELT/CPOP와 backcast는 offline 미래 문맥을 사용하므로 causal 결과와 분리한다. peer 효과는 station과 교락되어 있고 G-ORS에는 no-peer fallback이 필수다."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended Next Steps\n\n1. frozen XGBoost seed 주변에 CAPA mean/variance와 CPOP-lite slope proposal을 구현한다.\n2. segment classifier 없이 boundary coverage, 계산시간, inner row F1 순증분을 먼저 측정한다.\n3. R1이 통과할 때만 candidate-only forecast/backcast residual을 추가한다.\n4. 그 뒤에만 inner-only segment classifier와 semi-Markov decoder를 결합한다.\n5. plateau hard override와 spike singleton 보존을 모든 단계의 회귀시험으로 고정한다."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further Questions\n\n- 운영진이 전체 test 시계열을 쓰는 양방향 offline QC를 명시적으로 허용하는가?\n- `anomaly_type`이 심사 참고에서 어느 정도 중요하며 binary F1과 별도 trade-off가 있는가?\n- 최종 모델 패키지에 별도 change-point 의존성 또는 R runtime을 포함할 수 있는가?\n- 9월 7일 최종 모델 지정과 예측 업로드 잠금의 정확한 시각·순서는 무엇인가?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-13T08:50:00Z",
+    "status": "ready",
+    "datasets": {
+      "headline_metrics": [
+        {"xgb_f1": "0.860371", "slow_fn_share": 0.927, "long_fn_share": 0.770, "long_recall": 0.6315}
+      ],
+      "type_recall": [
+        {"anomaly_type": "spike", "recall": 0.8197, "priority": "P2 preserve", "recommended_method": "singleton expert", "interpretation": "Small row opportunity; never smooth away"},
+        {"anomaly_type": "noise", "recall": 0.9355, "priority": "P2 maintain", "recommended_method": "variance CAPA", "interpretation": "Largely solved; protect precision"},
+        {"anomaly_type": "flatline", "recall": 0.9997, "priority": "P0 fixed override", "recommended_method": "plateau rule", "interpretation": "Already solved"},
+        {"anomaly_type": "offset", "recall": 0.6492, "priority": "P0 improve", "recommended_method": "epidemic PELT + backcast", "interpretation": "Major long-event blind spot"},
+        {"anomaly_type": "drift", "recall": 0.6462, "priority": "P0 improve", "recommended_method": "CPOP slope + backcast", "interpretation": "Major long-event blind spot"}
+      ],
+      "experiments": [
+        {"rank": 1, "experiment": "Frozen XGB seed + paired CAPA/epidemic PELT", "target": "Long offset/drift boundaries", "expected_effect": "High", "cost": "Low–medium", "main_risk": "Normal seasonal changes become CPs", "stop_gate": "Inner weighted F1 < +0.005 or FP/day +10%"},
+        {"rank": 2, "experiment": "Candidate-only forecast/backcast residual", "target": "Weak interiors and type separation", "expected_effect": "High", "cost": "Medium", "main_risk": "Baseline absorbs candidate", "stop_gate": "No slow-recall gain or uncertainty cannot reject FP"},
+        {"rank": 3, "experiment": "CPOP slope bank + mean/variance CP bank", "target": "Drift onset/offset", "expected_effect": "High", "cost": "Medium", "main_risk": "Penalty overfit", "stop_gate": "No 48h+ recall gain or worst group drops >0.01"},
+        {"rank": 4, "experiment": "Inner-only segment classifier + semi-Markov decoder", "target": "Candidate acceptance and row projection", "expected_effect": "High", "cost": "Medium", "main_risk": "Event-level leakage", "stop_gate": "No improvement in all inner blocks or CI lower bound <= 0"},
+        {"rank": 5, "experiment": "Stratification-aware peer/CAPA-CC gate", "target": "Normal high-variability FP", "expected_effect": "Medium", "cost": "Medium", "main_risk": "Thermocline treated as anomaly", "stop_gate": "Year-transfer degrades or normal FPR +10%"},
+        {"rank": 6, "experiment": "catch22 then MiniRocket/Hydra proposal features", "target": "Residual composite shapes", "expected_effect": "Medium/uncertain", "cost": "Medium", "main_risk": "Window normalization removes offset", "stop_gate": "Gain < +0.002 over simple interval statistics"},
+        {"rank": 7, "experiment": "Conservative deep-score residual gate", "target": "Selective TCN slow recall", "expected_effect": "Medium/high-risk", "cost": "Medium", "main_risk": "Mimics outer oracle", "stop_gate": "Degrades 2 of 3 inner blocks"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "failure_recon",
+      "path": "reports/P1_FAILURE_RECON_2026-08-13.md",
+      "query": {
+        "description": "Aggregate-only, SHA-verified outer OOF failure analysis",
+        "executed_at": "2026-08-13T08:05:00Z"
+      }
+    },
+    {
+      "id": "academic_scout",
+      "path": "reports/P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md",
+      "query": {
+        "description": "Primary-source literature synthesis and P1 experiment mapping",
+        "executed_at": "2026-08-13T08:50:00Z"
+      }
+    },
+    {"id": "capa", "href": "https://doi.org/10.1002/sam.11586"},
+    {"id": "cpop", "href": "https://doi.org/10.18637/jss.v109.i07"},
+    {"id": "pyhydroqc", "href": "https://doi.org/10.1016/j.envsoft.2022.105364"},
+    {"id": "iors_qc", "href": "https://doi.org/10.4217/OPR.2021.43.4.229"},
+    {"id": "semi_markov", "href": "https://proceedings.neurips.cc/paper_files/paper/2004/hash/eb06b9db06012a7a4179b8f3cb5384d3-Abstract.html"},
+    {"id": "cross_sensor", "href": "https://doi.org/10.3390/rs12213470"}
+  ]
+}

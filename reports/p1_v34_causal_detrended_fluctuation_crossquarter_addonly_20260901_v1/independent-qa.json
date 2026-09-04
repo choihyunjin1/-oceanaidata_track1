@@ -1,0 +1,62 @@
+{
+  "experiment_id": "p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1",
+  "phase": "POST_TERMINAL_IMMUTABLE_REVALIDATION",
+  "verdict": "PASS",
+  "terminal": {
+    "decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+    "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+    "fits": 3,
+    "runtime_seconds": 8.64100000000326,
+    "transport_target_windows_read": 0,
+    "q4_target_reads": 0,
+    "q4_actions": 0,
+    "anchor_removals": 0,
+    "nominal_points": 0.0,
+    "transport_adjusted_points": 0.0
+  },
+  "preflight": {
+    "runs": 2,
+    "byte_identical": true,
+    "bytes": 4559,
+    "sha256": "e19c0cd6a53a2e14eb4b66cd3dbb3a9c6746daa417de594b291c436f503f66fe",
+    "zero_operation": true,
+    "synthetic_guards_pass": true
+  },
+  "focused_validation": {
+    "pytest": "6 passed",
+    "ruff": "All checks passed",
+    "preexecution_qa": "PASS",
+    "postterminal_qa": "PASS"
+  },
+  "auditability": {
+    "all_fixed_threshold_actions_present": true,
+    "rows": 133170,
+    "candidate_count": 3,
+    "label_blind_action_counts": [332, 332, 332],
+    "q2_target_reads_before_seal": 0,
+    "q3_q4_target_reads": 0,
+    "manifest_sha256": "752e43942f7bc1e2cb9a1cca0f015f5f3b790913b961d5ba52d1ce132264b8c7",
+    "bundle_sha256": "4d60a778195377c6c6da1274ff79357881ef2816845089cf720c2905ac0a4c7a",
+    "model_state_hashes": [
+      "63c4abce01d4064a2d23a8fbd8912d4fc77bb392174fb08e276ba6eb49e03ab1",
+      "3fce95f353d90ffa0cc78a4e62989c95005a3df1893e9a8e3c832644342a06d7",
+      "9f9500c1635a8d14f9227bc7eaba26fe2c4f02545875d8d7703f8ce5f7eb7865"
+    ]
+  },
+  "access": {
+    "official_test_sample_submission_hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "3feca51dc74b0d8223e33a3156a22ea04bfc847412161227156923c363b67107",
+    "runner": "a04bcee6504ee68e1cfc3fc55728ed9d0228e7a5f8589f9b04e8e5be3f30fe47",
+    "focused_test": "b8f1c24516bc40e0cb376c034b6345ae77d7a236c4a4e92286d424db0dbe60f5",
+    "preflight_receipt": "18f2c1a9316f955e1f672f1107836ef8728b3995878a2352fdafa1f8c46081e5",
+    "threshold_seal": "014ede37bef1d31dc19fbe3b3c446ef25d31161b359f069234f63f95768fba3e",
+    "completion": "0515f5b8ec77409ea44fd9c2e168cec70bb95387d64577d4e81a804e49f486c1",
+    "lock": "d32b1021bbb71c278a6c4a756ecdba74935ca214e617e20340e2b71fa145c41c",
+    "result": "efd57f065ed09703013655eec1c3c72b0faaa58eea0aecaba463988ca7aa409d"
+  },
+  "technical_preparation_note": "The first nonauthoritative command selected .venv, where pytest and Ruff were absent. It ran no science and created no lock or artifact. Authoritative validation used .venv-p1."
+}

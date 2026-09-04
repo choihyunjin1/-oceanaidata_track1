@@ -1,0 +1,16 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v22-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v22",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_STUDENT_T_CENTRAL_INNER_F1_ADDONLY",
+  "lineage": {"score_model": "v20r1 exact Student-t score", "v20r1_status_unchanged": "NO_PASS", "policy_change": "replace inner Wilson90 LCB hard gate with central marginal precision and positive inner union delta", "outer_evidence_adaptive_warning": true},
+  "features": {"names": ["abs_temp_robust_z_6h", "abs_temp_robust_z_24h", "abs_temp_robust_z_72h", "temp_abs_median_resid_6h", "temp_abs_median_resid_24h", "temp_abs_median_resid_72h", "temp_abs_peer_residual", "has_gap_before", "gap_minutes", "depth_raw"], "past_only": true},
+  "model": {"distribution": "independent Student-t location-scale", "degrees_of_freedom": 4.0, "location": "class median", "scale": "1.4826 class MAD plus pooled prefix floor", "prior": "Jeffreys 0.5 smoothing", "training_population": "incumbent-negative", "retuning": false},
+  "inner_selector": {"split": "first75 fit last25 calibration by global chronological prefix", "threshold_candidates": "all finite inner scores plus positive infinity", "objective": "maximum actual add-only union F1", "hard_gates": ["inner delta F1 > 0", "central marginal precision > inner anchor F1/2", "changed fraction <=0.005", "positive additions"], "wilson_lcb_gate": false, "tie_break": "higher threshold then fewer additions", "outer_labels_used": false},
+  "validation": {"pipeline_fits": [{"train_folds": ["2025_q2"], "outer": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "outer": "2025_q4"}], "maximum_pipeline_fits": 2, "outer_gates": ["Q3 and Q4 delta nonnegative", "dependent day bootstrap CI90 low >0", "bootstrap P(improve)>=0.8", "slice gates unchanged", "central raw points >=0.131682092", "calibrated points >=0.01"]},
+  "transport_family": {"family_id": "P1_STUDENT_T_GENERATIVE_SMOOTH_RESIDUAL", "tier_id": "SMOOTH_LEARNED_PROFILE", "transport_penalty_points": 0.12168209161000616},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.13168209161000616, "minimum_calibrated_expected_point_delta_inclusive": 0.01},
+  "resource_caps": {"wall_seconds": 900, "rss_bytes": 4294967296, "vram_bytes": 0},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "authorization": {"synthetic_preflight": true, "historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "uploads": 0}
+}

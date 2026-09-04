@@ -1,0 +1,115 @@
+{
+  "schema_version": "p1.v53_fresh_historical_transport_window_availability_audit.v1",
+  "experiment_id": "p1_v53_fresh_historical_transport_window_availability_audit_20260901_v1",
+  "status": "NO_FRESH_HISTORICAL_TRANSPORT_WINDOW",
+  "surface": "TRAIN_CHRONOLOGY_AND_METADATA_ONLY",
+  "purpose": "Determine whether one sufficiently supported station-quarter label window remains genuinely unexposed to P1 model, threshold, gate, or candidate-outcome selection. This audit cannot choose, fit, score, rescue, or promote a candidate.",
+  "freshness_definition_sealed_before_inventory": {
+    "unit": "complete KST calendar quarter intersected with the distributed train chronology",
+    "requirements": [
+      "the complete candidate evaluation quarter is strictly after a nonempty causal model-fit and selection prefix",
+      "no label in the quarter has previously informed architecture, feature, model, checkpoint, threshold, gate, candidate comparison, or audit outcome",
+      "the quarter contains observations from at least two distinct stations and at least two supported station-layer identities",
+      "the window can be opened once without reusing a Q2, Q3, Q4, inner-validation, or calibration truth surface"
+    ],
+    "partial_subquarter_carving_after_exposure": false,
+    "reason": "Carving a new cell, month, or residual week from an already inspected quarter would make freshness depend on the accumulated research history and would not provide an independent transport outcome."
+  },
+  "source": {
+    "data_dir_env": "P1_DATA_DIR",
+    "allowed_files": ["README.md", "train.csv"],
+    "columns_read": ["station", "layer", "time", "label"],
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "train_min_kst": "2024-01-01T09:00:00+09:00",
+    "train_max_kst": "2025-12-10T03:00:00+09:00",
+    "train_label_aggregate_reads": 1,
+    "raw_rows_or_values_materialized_in_report": 0,
+    "candidate_evaluation_target_reads": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "station_quarter_inventory": [
+    {"period": "2024Q1", "rows": 39043, "positives": 1509, "stations": 1, "station_layer_cells": 3, "cells_with_positive": 3, "freshness": "INELIGIBLE", "reason": "single-station support and no earlier distributed train prefix"},
+    {"period": "2024Q2", "rows": 69070, "positives": 2701, "stations": 1, "station_layer_cells": 7, "cells_with_positive": 6, "freshness": "INELIGIBLE", "reason": "single-station support; this period is part of historical fitting prefixes"},
+    {"period": "2024Q3", "rows": 91187, "positives": 3088, "stations": 1, "station_layer_cells": 7, "cells_with_positive": 6, "freshness": "EXPOSED_AND_INELIGIBLE", "reason": "single-station support and Jul-Aug labels were an inner structure-selection window"},
+    {"period": "2024Q4", "rows": 81451, "positives": 4232, "stations": 1, "station_layer_cells": 7, "cells_with_positive": 7, "freshness": "EXPOSED_AND_INELIGIBLE", "reason": "single-station support and Oct-Nov labels were an inner structure-selection window"},
+    {"period": "2025Q1", "rows": 74923, "positives": 4541, "stations": 3, "station_layer_cells": 8, "cells_with_positive": 6, "freshness": "EXPOSED", "reason": "Jan-Feb labels were an inner structure-selection window; the quarter is also the canonical pre-Q2 fit/calibration surface"},
+    {"period": "2025Q2", "rows": 133170, "positives": 5370, "stations": 3, "station_layer_cells": 16, "cells_with_positive": 16, "freshness": "GLOBALLY_EXPOSED", "reason": "canonical outer selection and repeated candidate/audit outcome surface"},
+    {"period": "2025Q3", "rows": 176619, "positives": 6278, "stations": 3, "station_layer_cells": 16, "cells_with_positive": 14, "freshness": "GLOBALLY_EXPOSED", "reason": "canonical outer confirmation and repeated candidate outcome surface"},
+    {"period": "2025Q4", "rows": 111243, "positives": 4407, "stations": 3, "station_layer_cells": 16, "cells_with_positive": 15, "freshness": "GLOBALLY_EXPOSED", "reason": "canonical outer performance and repeated candidate outcome surface"}
+  ],
+  "exposure_ledger": {
+    "canonical_outer": {
+      "path": "configs/p1.toml",
+      "sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+      "windows": ["2025Q2", "2025Q3", "2025Q4"]
+    },
+    "canonical_inner_selection": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json",
+      "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563",
+      "windows": ["2024-07-08/2024-08-31", "2024-10-08/2024-11-30", "2025-01-08/2025-03-01"]
+    },
+    "q2_q3_q4_metrics_and_predictions": {
+      "result_path": "artifacts/p1_meaningful_learning_curve_generation_v1/result.json",
+      "result_sha256": "0b0f9ea0826f6bc642c5473325f358c9c6ba82e966c5d0f586c309d80c21f394",
+      "manifest_path": "artifacts/p1_meaningful_learning_curve_generation_v1/manifest.json",
+      "manifest_sha256": "6ccec6e43d6d0fe1f5ab7e45de97ace6196c84bc959c2b8af402ae1b41b2c721",
+      "evidence": "metrics and prediction parts exist for all three 2025 outer quarters and five learning-curve fractions"
+    },
+    "global_exposure_receipt": {
+      "path": "configs/experiments/p1_mstcn_sobol_trial18_frozen_confirmation_20260830_v3.json",
+      "sha256": "5a4336b38b1377f2a54ee7f4d8c3ec4966ed6ced8e5347e7d7a1363abf1c2b68",
+      "evidence": "explicitly records that Q3/Q4 historical truth surfaces were already globally exposed"
+    },
+    "prior_research_ledger": {
+      "path": "reports/deep_research_breakthrough_20260826/report-source.md",
+      "sha256": "0dcd37eaa5f9fb117bcace8486607d90e37ecc5ed2ab1cdb3718ed2535edada1",
+      "evidence": "explicitly classifies P1 Q2/Q3/Q4 as hypothesis-exposed surfaces"
+    },
+    "v33_bundle_registry": {
+      "amendment_path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json",
+      "amendment_sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128",
+      "complete_q2_manifests": 11,
+      "all_q2_rows": 133170,
+      "all_q2_target_reads_before_seal": 0,
+      "meaning": "These label-blind Q2 bundles improve later auditability but do not create a fresh labeled window. v35 and v52 subsequently opened two distinct fixed Q2 masks on the same Q2 truth surface."
+    }
+  },
+  "decision": {
+    "ready": false,
+    "terminal": "NO_FRESH_HISTORICAL_TRANSPORT_WINDOW",
+    "fresh_eligible_station_quarters": 0,
+    "candidate_selected": false,
+    "sealed_future_candidate_split_written": false,
+    "reason": "All multi-station quarters are already exposed; all earlier quarters have only one station, and the earliest quarters cannot be later-than-fit causal transport windows. No existing label can be relabeled as fresh by changing cells or gates.",
+    "minimum_new_evidence": "A newly acquired, competition-allowed labeled chronological block strictly after 2025-12-10, covering at least two stations and two supported station-layer identities, whose labels remain sealed until one fully preregistered candidate, threshold, and action budget are frozen. Alternatively, an organizer-designated never-opened labeled holdout with an authenticated exposure ledger would suffice."
+  },
+  "prohibitions": {
+    "candidate_selection": true,
+    "candidate_fit_or_refit": true,
+    "threshold_or_gate_change": true,
+    "past_result_reinterpretation": true,
+    "partial_window_freshness_claim": true,
+    "q3_q4_or_official_open": true,
+    "csv_or_upload": true
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "runner_created": 0,
+    "preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "candidate_evaluation_target_reads": 0,
+    "new_q2_reads": 0,
+    "new_q3_reads": 0,
+    "new_q4_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

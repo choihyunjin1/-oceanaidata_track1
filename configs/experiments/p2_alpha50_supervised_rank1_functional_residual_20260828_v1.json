@@ -1,0 +1,29 @@
+{
+  "experiment_id": "p2_alpha50_supervised_rank1_functional_residual_20260828_v1",
+  "status": "PREREGISTERED",
+  "comparator_disclosure": "Official alpha50 has no exact historical OOF lineage; evaluation uses a frozen forward alpha50 proxy and is reported as INCUMBENT_PROXY_VALIDATION.",
+  "immutable_inputs": {
+    "alpha50_proxy": {"path": "artifacts/p2_state_conditional_lean_v1/oof.parquet", "bytes": 6077707, "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"},
+    "strongest_common_oof": {"path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet", "bytes": 2477660, "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"}
+  },
+  "source_observations": {"filename": "observations.csv", "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"},
+  "block_bounds": {
+    "2024_may_jun": ["2024-05-01T00:00:00+09:00", "2024-07-01T00:00:00+09:00"],
+    "2024_jul_aug": ["2024-07-01T00:00:00+09:00", "2024-09-01T00:00:00+09:00"],
+    "2024_sep_oct": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+    "2024_nov_dec": ["2024-11-01T00:00:00+09:00", "2025-01-01T00:00:00+09:00"],
+    "2025_mar_apr": ["2025-03-01T00:00:00+09:00", "2025-05-01T00:00:00+09:00"],
+    "2025_may_jun": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+    "2025_jul_aug": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+    "2025_nov_dec": ["2025-11-01T00:00:00+09:00", "2026-01-01T00:00:00+09:00"]
+  },
+  "folds": {
+    "2024_sep_oct": {"start": "2024-09-01T00:00:00+09:00", "stop": "2024-11-01T00:00:00+09:00", "training_blocks": ["2024_may_jun", "2024_jul_aug"]},
+    "2025_jul_aug": {"start": "2025-07-01T00:00:00+09:00", "stop": "2025-09-01T00:00:00+09:00", "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun"]},
+    "2025_nov_dec": {"start": "2025-11-01T00:00:00+09:00", "stop": "2026-01-01T00:00:00+09:00", "training_blocks": ["2024_may_jun", "2024_jul_aug", "2024_sep_oct", "2024_nov_dec", "2025_mar_apr", "2025_may_jun", "2025_jul_aug"]}
+  },
+  "model": {"reference_alpha": 0.50, "season_bin_days": 14, "season_window_days": 60.0, "minimum_season_rows": 100, "fallback_nearest_complete_rows": 1000, "spline_ridge": 0.001, "change_hours": [6, 24, 72], "pls_components": 1, "pls_scale": true, "pls_max_iter": 500, "pls_tolerance": 1e-6, "leverage_quantile": 0.975, "correction_rms_cap_c": 0.05, "correction_absolute_cap_c": 0.20},
+  "gate": {"pooled_delta_rmse_max_c": -0.005, "bootstrap_replicates": 5000, "bootstrap_seed": 20260828, "bootstrap_ci90_upper_max_c": 0.0, "2024_sep_oct_delta_rmse_max_c": -0.003, "minimum_improved_folds": 2, "maximum_worst_fold_regression_c": 0.003, "maximum_layer_regression_c": 0.003, "minimum_active_share": 0.10, "maximum_active_share": 0.70, "minimum_correction_rms_c": 0.01, "maximum_correction_rms_c": 0.05, "maximum_correction_p99_c": 0.20, "maximum_absolute_axis_cosine": 0.30, "minimum_axis_orthogonal_share": 0.70},
+  "execution_policy": {"official_test_sample_submission_read_allowed": false, "submission_csv_generation_allowed": false, "official_upload_authorized": false, "result_based_retry": false, "maximum_executions": 1},
+  "artifact_directory": "artifacts/p2_alpha50_supervised_rank1_functional_residual_20260828_v1"
+}

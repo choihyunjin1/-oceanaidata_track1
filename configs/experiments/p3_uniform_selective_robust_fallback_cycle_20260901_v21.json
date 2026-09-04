@@ -1,0 +1,61 @@
+{
+  "schema_version": "p3.uniform_selective_robust_fallback.config.v21",
+  "experiment_id": "p3_uniform_selective_robust_fallback_cycle_20260901_v21",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "public_rmse_m": 0.575233,
+    "public_points": 24.203599,
+    "policy": "bit-exact default on every row outside the fixed sparse gate"
+  },
+  "gate": {
+    "active_leads": [18, 24],
+    "component_spread": "max(base, uniform_0425, persistence) - min(base, uniform_0425, persistence)",
+    "physical_diagnostics": ["abs(hs_current - train_median_hs_current)", "hs_std_24h", "hmax_hs_ratio_current"],
+    "input_outlier_rule": "each physical diagnostic train-fold winsorized at q01/q99 before rank calculation; no row deletion",
+    "fixed_rule": "component_spread train ECDF rank >=0.90 AND max physical diagnostic train ECDF rank >=0.90",
+    "threshold_search": false,
+    "target_rows_used_to_fit_gate": 0
+  },
+  "candidates": [
+    {
+      "name": "P3_1_EXTREME_DISAGREEMENT_PERSISTENCE_QUARTER_FALLBACK",
+      "action": "on gated rows prediction = 0.75*uniform_0425 + 0.25*persistence; otherwise exact uniform_0425",
+      "fit_count": 0
+    },
+    {
+      "name": "P3_2_EXTREME_DISAGREEMENT_THREE_COMPONENT_MEDIAN",
+      "action": "on gated rows prediction = median(base, uniform_0425, persistence); otherwise exact uniform_0425",
+      "fit_count": 0
+    }
+  ],
+  "validation": {
+    "surface": "six frozen bimonth outer blocks",
+    "purge_hours": 78,
+    "feature_only_quantile_fits_per_candidate": 6,
+    "bootstrap_replicates": 5000,
+    "surface_claim": "EXPLORATORY_ONLY on repeatedly exposed 182 historical cases; no Public transport guarantee"
+  },
+  "decision": {
+    "stable": "delta RMSE vs uniform <0; >=4/6 blocks; episode and block-station CI90 upper <0; worst station-lead <=0.01m",
+    "high_risk_preserve": "delta RMSE vs uniform <=-0.005m and worst station-lead <=0.02m",
+    "no_result_based_retry": true
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "fixed_transport_penalty_points": 0.04958605409228893
+  },
+  "duplication_audit": {
+    "excluded": ["alpha micro-grid", "station ablation", "wave-power or wind-support router", "GBDT/Huber/Ridge residual", "ERA5", "target-fit physical expert selector", "robust target retrain"],
+    "novel_axis": "target-free sparse robust fallback using persistence as a third independent component and training-only physical-extreme diagnostics",
+    "verdict": "NON_DUPLICATE"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

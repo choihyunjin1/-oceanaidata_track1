@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_tsmixer_observed_residual_20260828_v1",
+  "status": "PREREGISTERED_BEFORE_ANY_FIT_OR_OUTER_TARGET_READ",
+  "bindings": {
+    "train_sequences": {
+      "path": "artifacts/p3/sequences_all20_v1/train_values.npy",
+      "sha256": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8"
+    },
+    "train_station": {
+      "path": "artifacts/p3/sequences_all20_v1/train_station.npy",
+      "sha256": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61"
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "frozen_incumbent_oof": {
+      "path": "artifacts/p3_gen6_incumbent_preserving_residual_calibrator_20260823_v1r2/oof.parquet",
+      "sha256": "78287d03413d5fb2d17642276847ef453a7d2b5daaafaf5dabe0d4b5b367d7c6"
+    },
+    "official_incumbent_submission_read_only_after_information_go": {
+      "path": "submissions/p3_long_persistence_shrink/submission.csv",
+      "sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+    }
+  },
+  "official_source_sha256_read_only_after_information_go": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465"
+  },
+  "input_contract": {
+    "context_hours": 48,
+    "native_rows_10min": 289,
+    "hourly_rows_inclusive": 49,
+    "hourly_sampling_stride_native_rows": 6,
+    "observed_channels": [
+      "hs",
+      "tp",
+      "hmax",
+      "wspd",
+      "gust",
+      "caph",
+      "airt",
+      "relh",
+      "wvdir_sin",
+      "wvdir_cos",
+      "wdir_sin",
+      "wdir_cos"
+    ],
+    "append_missing_mask_per_channel": true,
+    "append_relative_time": true,
+    "future_weather": false,
+    "absolute_time_feature": false,
+    "cross_case_context": false
+  },
+  "architecture": {
+    "name": "ObservedResidualTSMixer",
+    "width": 64,
+    "blocks": 4,
+    "time_hidden": 128,
+    "feature_hidden": 128,
+    "dropout": 0.1,
+    "station_embedding": 8,
+    "output": "six_lead_future_hs_minus_current_hs"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0002,
+    "batch_size": 256,
+    "maximum_epochs": 80,
+    "patience": 10,
+    "minimum_inner_improvement_m": 0.0001,
+    "precision": "bf16_amp_on_cuda",
+    "gradient_clip_norm": 1.0,
+    "seeds": [20260828, 20260829, 20260830],
+    "loss": "uniform_six_lead_mse",
+    "result_based_hyperparameter_changes": false
+  },
+  "outer_validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "membership": "exact prefix_fraction_1p0 frozen incumbent cases",
+    "outer_truth_policy": "read exactly once only after all fold-seed and final blended predictions are durably written and hashed"
+  },
+  "inner_selection": {
+    "window_days": 60,
+    "gap_hours": 78,
+    "metric": "pooled_six_lead_RMSE_m",
+    "select": "best epoch per fold and seed",
+    "outer_refit": "same seed on entire outer prefix for selected epoch"
+  },
+  "blend": {
+    "protected_incumbent_leads_h": [3, 6, 9],
+    "active_leads_h": [12, 18, 24],
+    "incumbent_weight": 0.8,
+    "tsmixer_weight": 0.2
+  },
+  "evaluation": {
+    "comparators": ["same_case_incumbent", "same_case_persistence", "standalone_tsmixer"],
+    "slices": ["fold", "station", "lead_h"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "performance_gate": {
+      "maximum_pooled_delta_m": -0.01,
+      "minimum_improved_folds": 2,
+      "case_bootstrap_ci90_upper_below_zero": true,
+      "lead_18_and_24_non_degrading": true,
+      "maximum_station_degradation_m": 0.01
+    },
+    "official_information_gate": {
+      "pooled_delta_below_zero": true,
+      "minimum_improved_folds": 2,
+      "minimum_probability_improved": 0.8,
+      "minimum_prediction_novelty_rms_m": 0.03,
+      "maximum_station_degradation_m": 0.01,
+      "maximum_critical_lead_degradation_m": 0.01
+    },
+    "stop": {
+      "pooled_not_better_than_incumbent": true,
+      "fewer_than_two_folds_improved": true,
+      "maximum_critical_lead_degradation_m": 0.01,
+      "maximum_seed_rmse_spread_m": 0.02,
+      "maximum_single_seed_seconds": 1200,
+      "maximum_total_seconds": 10800
+    }
+  },
+  "final_fit_if_and_only_if_official_information_go": {
+    "epoch_per_seed": "median of that seed's three outer selected epochs",
+    "training_rows": "all eligible train anchors",
+    "ensemble": "arithmetic mean of three seeds",
+    "official_case_rule": "same anonymous case only; relative step_minute only",
+    "candidate_creation": true,
+    "upload": false
+  },
+  "prohibitions": {
+    "mutate_old_deep_revin_chronos_or_era5_lock": true,
+    "official_context_index_sample_read_before_information_go": true,
+    "anonymous_absolute_time_reconstruction": true,
+    "future_weather_or_external_target_alignment": true,
+    "post_result_architecture_seed_epoch_or_blend_tuning": true,
+    "submission_upload": true,
+    "git_commit_or_push": true
+  },
+  "artifact_dir": "artifacts/p3_tsmixer_observed_residual_20260828_v1"
+}

@@ -1,0 +1,173 @@
+{
+  "aggregate_official_probe_evidence": {
+    "20260828_p1_probe_count": 3,
+    "20260828_public_f1_values": [
+      0.833548,
+      0.833548,
+      0.833333
+    ],
+    "20260828_public_point_values": [
+      28.909341,
+      28.909341,
+      28.903643
+    ],
+    "20260831_p1_probe": {
+      "candidate": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+      "expected_central_points_delta": 0.005383691373120247,
+      "internal_delta_f1": 0.0013809855753390554,
+      "official_points_delta_vs_best": 0.0,
+      "outcome": "TIE_BEST"
+    },
+    "methodological_use": "Aggregate probes calibrate overall historical-to-Public transport risk. They contain no evidence that a universal per-day cap or every-slice nonregression veto predicts Public F1.",
+    "official_rows_read": 0
+  },
+  "checks": {
+    "aggregate_public_probes_present_without_row_access": true,
+    "anchor_removal_zero_retained": true,
+    "anomaly_type_not_ranked_preserved": true,
+    "daily_and_slice_checks_not_hard": true,
+    "diagnostics_cannot_reverse_hard_pass": true,
+    "former_daily_cap_has_integer_discontinuity": true,
+    "future_only_and_v28_retro_pass_forbidden": true,
+    "governing_policy_primary_metric_pooled": true,
+    "governing_policy_slices_diagnostic_by_default": true,
+    "minimum_plus_0_01_calibrated_retained": true,
+    "model_official_hidden_csv_upload_zero": true,
+    "no_v28_outcome_specific_thresholds_in_policy": true,
+    "official_contract_binary_f1_preserved": true,
+    "only_two_gate_roles_changed": true,
+    "other_v28_gates_held_constant": true,
+    "pooled_dependent_bootstrap_retained": true,
+    "station_layer_support_is_heterogeneous": true,
+    "tolerance_policy_transport_hard_only_when_justified": true,
+    "train_only_rows_match": true,
+    "v28_original_state_unchanged": true,
+    "v3_transport_raw_gate_retained": true
+  },
+  "conclusion": "BOTH_EXTRA_V28_GATES_OVERSTRICT_AS_HARD_VETOES_PROSPECTIVELY_DIAGNOSTIC_ONLY",
+  "hashes": {
+    "anchor_sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536",
+    "calibration_v3_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10",
+    "official_aggregate_ledger_sha256": "650ddb36e61b2478d826735a3280db5c65180a59941be864ef69b77628a0ec29",
+    "policy_sha256": "11776104ad02f7d17a84580d3ebb3fb43a948d10a03267e07d535b85e1c5604b",
+    "runner_sha256": "6b70bc678e80043ec06d493927f112d9c1b24b5c1ca68e9f3cbc0d1ac513fc23",
+    "v28_result_sha256": "4b6c9103828ec5eeddd475006b6164cbd4f0c31545362207803d61414c55ea9a"
+  },
+  "operations": {
+    "aggregate_official_probe_ledgers_read": 2,
+    "hidden_truth_rows_read": 0,
+    "historical_train_rows_read": 421032,
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "policy_id": "p1_prospective_transport_gate_20260831_v4",
+  "prospective_decision": {
+    "maximum_changed_fraction_any_kst_day": "DIAGNOSTIC_WARNING_ONLY",
+    "minimum_each_supported_station_layer_delta_f1": "DIAGNOSTIC_WARNING_ONLY",
+    "v28_original_decision": "NO_GO_SAFETY_GATES",
+    "v28_retroactive_reclassification": false
+  },
+  "schema_version": "p1.prospective_transport_gate.v4.independent_qa.1",
+  "status": "PASS",
+  "train_only_distribution": {
+    "former_daily_0_005_cap_integer_audit": {
+      "conclusion": "A fixed per-day percentage cap is denominator-sensitive and discontinuous; it is not a calibrated proxy for pooled F1 or transport loss.",
+      "days_forcing_zero_integer_actions": 1,
+      "integer_action_cap_quantiles": {
+        "p00": 0.0,
+        "p10": 5.0,
+        "p100": 10.0,
+        "p25": 7.0,
+        "p50": 8.0,
+        "p75": 10.0,
+        "p90": 10.0
+      },
+      "maximum_day_rows": 2160,
+      "minimum_day_rows": 133,
+      "minimum_nonzero_changed_fraction": 0.007518796992481203,
+      "threshold": 0.005
+    },
+    "full_surface": {
+      "anchor_positive_rate": 0.0317648064755173,
+      "fold_rows": {
+        "2025_q2": 133170,
+        "2025_q3": 176738,
+        "2025_q4": 111124
+      },
+      "rows": 421032,
+      "truth_positive_rate": 0.03813249349218112
+    },
+    "privacy": {
+      "aggregate_only": true,
+      "hidden_truth_rows_read": 0,
+      "official_rows_read": 0,
+      "row_values_persisted": 0
+    },
+    "q3_q4_evaluation_surface": {
+      "anchor_positive_rate": 0.03183469857084297,
+      "day_anchor_positive_rate_quantiles": {
+        "p00": 0.0,
+        "p10": 0.0,
+        "p100": 0.2767857142857143,
+        "p25": 0.0,
+        "p50": 0.003719200371920037,
+        "p75": 0.05903788834916246,
+        "p90": 0.0986477415435972
+      },
+      "day_row_count_quantiles": {
+        "p00": 133.0,
+        "p10": 1007.2,
+        "p100": 2160.0,
+        "p25": 1581.5,
+        "p50": 1728.0,
+        "p75": 2151.0,
+        "p90": 2157.0
+      },
+      "day_truth_positive_rate_quantiles": {
+        "p00": 0.0,
+        "p10": 0.0,
+        "p100": 0.2698412698412698,
+        "p25": 0.0,
+        "p50": 0.007424593967517401,
+        "p75": 0.06947861728540158,
+        "p90": 0.11088044485634851
+      },
+      "rows": 287862,
+      "station_layer_cells": 16,
+      "station_layer_positive_rate_max_to_min_ratio": 14.176168275787067,
+      "station_layer_row_count_quantiles": {
+        "p00": 7334.0,
+        "p10": 12039.5,
+        "p100": 23279.0,
+        "p25": 14542.75,
+        "p50": 19910.5,
+        "p75": 20753.75,
+        "p90": 23197.5
+      },
+      "station_layer_truth_positive_count_quantiles": {
+        "p00": 146.0,
+        "p10": 237.5,
+        "p100": 1476.0,
+        "p25": 464.25,
+        "p50": 667.5,
+        "p75": 832.75,
+        "p90": 983.0
+      },
+      "station_layer_truth_positive_rate_quantiles": {
+        "p00": 0.007331893737759253,
+        "p10": 0.01900618032174372,
+        "p100": 0.10393815940666458,
+        "p25": 0.026401946834016362,
+        "p50": 0.03745021931998414,
+        "p75": 0.04131422276014551,
+        "p90": 0.06196261694210872
+      },
+      "truth_positive_rate": 0.03711848038296128,
+      "unique_kst_days": 163
+    },
+    "schema_version": "p1.prospective_transport_gate.v4.train_distribution.1",
+    "scope": "historical train-only Q2-Q4 surface; gate diagnostics use Q3-Q4 evaluation folds"
+  }
+}

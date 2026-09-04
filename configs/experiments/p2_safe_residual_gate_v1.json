@@ -1,0 +1,28 @@
+{
+  "experiment_id": "p2_safe_residual_gate_v1",
+  "status": "authorized_adaptive_local_test",
+  "research_only": true,
+  "upload_allowed": false,
+  "fresh_holdout_claimed": false,
+  "baseline": "frozen P2_DEEP_STACK_V1",
+  "raw_gate": {
+    "feature_contract": "p2_public_state_soft_gate_v1",
+    "regularization": 10.0,
+    "selection_note": "Fixed after exposed failure diagnosis; result is adaptive research, not virgin validation."
+  },
+  "safety_calibrator": {
+    "states": ["low", "transition", "high", "missing"],
+    "state_thresholds": "fold-train q33/q67 of abs_t1_t5",
+    "day_weighting": "equal total weight per KST day",
+    "closed_form_alpha": "clip(-sum(w*e*a)/sum(w*a^2), 0, 1)",
+    "min_days_per_block": 7,
+    "min_support_blocks": 2,
+    "sign_consistency": "beneficial derivative at exact no-op in every supporting block",
+    "correction_cap": "fold-train 95th percentile of absolute shrunken correction",
+    "fallback": "exact frozen deep prediction"
+  },
+  "outputs": {
+    "directory": "artifacts/p2_safe_residual_gate_v1",
+    "submission": "submissions/p2/P2_SAFE_RESIDUAL_GATE_V1.csv"
+  }
+}

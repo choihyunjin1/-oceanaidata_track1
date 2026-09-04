@@ -1,0 +1,153 @@
+{
+  "action_seal": {
+    "action_sha256": "7fe1b4a80aeb03492f161219d083cf7d300bbce0435fcff3700c991680309abc",
+    "candidate_sha256": "cf940fb05d1047ba0ace6f63bc99fc7ef95b946377a3d76f4ce72a42fada902f",
+    "changes": 1438,
+    "experiment_id": "p1_causal_cif_selective_bidirectional_20260831_v32d",
+    "hidden_truth_reads": 0,
+    "npz_sha256": "d2c6f49241bf5a6caeddf0a3bbff9962dc54c5c2a2ba3c590108ce0d5e52831d",
+    "official_reads": 0,
+    "receipts": [
+      {
+        "budget": 883,
+        "eligible_disagreements": 68817,
+        "fold": "2025_q3",
+        "rows": 176738,
+        "selected_changes": 883,
+        "selected_fraction": 0.004996095915988639,
+        "threshold": 0.5,
+        "truth_reads_before_selection": 0
+      },
+      {
+        "budget": 555,
+        "eligible_disagreements": 8794,
+        "fold": "2025_q4",
+        "rows": 111124,
+        "selected_changes": 555,
+        "selected_fraction": 0.0049944206472049245,
+        "threshold": 0.5,
+        "truth_reads_before_selection": 0
+      }
+    ],
+    "rows": 421032,
+    "rule": {
+      "action": "replace_incumbent_with_thresholded_source_prediction_on_selected_disagreements",
+      "maximum_changed_fraction_per_fold": 0.005,
+      "outer_result_based_retry_or_retuning": false,
+      "probability_threshold_inclusive": 0.5,
+      "ranking": "absolute_probability_margin_descending",
+      "tie_keys": [
+        "station",
+        "year",
+        "layer",
+        "time"
+      ]
+    },
+    "sample_reads": 0,
+    "schema_version": "p1.causal_cif_selective_bidirectional.action_seal.v32d",
+    "source_anchor_sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536",
+    "source_prediction_sha256": "205bb44d80aa237f914608d2f05426b662f49932022889d302887f6f7131c0a6",
+    "submission_csv_created": 0,
+    "test_reads": 0,
+    "truth_reads_before_action_seal": 0,
+    "uploads": 0
+  },
+  "candidate": {
+    "additions": 901,
+    "additions_precision": 0.0,
+    "anchor_f1_divided_by_two": 0.4514585117638168,
+    "by_fold": {
+      "2025_q3": {
+        "additions": 883,
+        "candidate_f1": 0.8322350138944026,
+        "changed_fraction": 0.004996095915988639,
+        "changes": 883,
+        "delta_f1": -0.06274449430231877,
+        "false_positive_additions": 883,
+        "incumbent_false_positive_removals": 0,
+        "incumbent_true_positive_removals": 0,
+        "reference_f1": 0.8949795081967213,
+        "removals": 0,
+        "rows": 176738,
+        "true_positive_additions": 0
+      },
+      "2025_q4": {
+        "additions": 18,
+        "candidate_f1": 0.8372276187975847,
+        "changed_fraction": 0.0049944206472049245,
+        "changes": 555,
+        "delta_f1": -0.07711427624973011,
+        "false_positive_additions": 18,
+        "incumbent_false_positive_removals": 6,
+        "incumbent_true_positive_removals": 531,
+        "reference_f1": 0.9143418950473148,
+        "removals": 537,
+        "rows": 111124,
+        "true_positive_additions": 0
+      }
+    },
+    "calibrated_conservative_expected_points_delta": -1.8339681328080168,
+    "candidate_f1": 0.8341166575965963,
+    "changed_fraction": 0.0049954492083012,
+    "changes": 1438,
+    "day_block_bootstrap": {
+      "blocks": 164,
+      "ci90_high": -0.04768758779701016,
+      "ci90_low": -0.09410861785445938,
+      "mean_delta_f1": -0.06913072552589562,
+      "probability_improved": 0.0,
+      "replicates": 5000
+    },
+    "delta_f1": -0.06880036593103733,
+    "false_positive_additions": 901,
+    "fit_count": 0,
+    "gates": {
+      "addition_precision_above_incumbent_f1_half": false,
+      "bootstrap_probability_improved_at_least_0_8": false,
+      "calibrated_expected_points_at_least_0_01": false,
+      "change_concentration_at_most_0_5": true,
+      "day_block_ci90_low_positive": false,
+      "incumbent_true_positive_removals_zero": false,
+      "overall_changed_fraction_at_most_0_005": true,
+      "pooled_delta_f1_positive": false,
+      "positive_additions": true,
+      "positive_changes": true,
+      "q3_q4_each_nonnegative": false,
+      "raw_expected_points_at_least_0_015383691": false,
+      "top_fraction_per_fold_contract": true
+    },
+    "incumbent_false_positive_removals": 6,
+    "incumbent_true_positive_removals": 531,
+    "maximum_change_concentration_station_layer_quarter": 0.26564673157162727,
+    "maximum_kst_day_changed_fraction": 0.06001263423878711,
+    "name": "P1_1_CAUSAL_CIF_SELECTIVE_BIDIRECTIONAL",
+    "raw_expected_points_delta": -1.8285844414348966,
+    "reference_f1": 0.9029170235276336,
+    "removals": 537,
+    "strict_internal_pass": false,
+    "transport_penalty_points": 0.005383691373120247,
+    "true_positive_additions": 0
+  },
+  "experiment_id": "p1_causal_cif_selective_bidirectional_20260831_v32d",
+  "fit_count": 0,
+  "hashes": {
+    "action_seal_sha256": "52fa1e917a5d0d2d1e1010f1618a272df3104d7d5d6cd307588241adbb00bedb",
+    "attempt_lock_sha256": "5c9050b25b47a5144929cb89bb8a36f620bfbafbad32d42e96280393533391ff",
+    "config_sha256": "1f5710df2281208a4fd47fb7b9f2f0db725b961fb727d6341d3e18ead1b722bd",
+    "runner_sha256": "0a3d967b39480c35ec833a32cc7d5e81c451cacbdd1b1efb0087c5a6dbf62fb4",
+    "sealed_action_mask_sha256": "d2c6f49241bf5a6caeddf0a3bbff9962dc54c5c2a2ba3c590108ce0d5e52831d"
+  },
+  "operations": {
+    "hidden_truth_reads": 0,
+    "official_reads": 0,
+    "retries": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "test_reads": 0,
+    "uploads": 0
+  },
+  "pass_count": 0,
+  "runtime_seconds": 11.005504199994903,
+  "schema_version": "p1.causal_cif_selective_bidirectional.result.v32d",
+  "status": "NO_GO"
+}

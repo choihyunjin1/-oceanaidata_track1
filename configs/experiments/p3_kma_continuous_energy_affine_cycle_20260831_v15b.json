@@ -1,0 +1,50 @@
+{
+  "schema_version": "p3.kma_continuous_energy_affine.config.v15b",
+  "experiment_id": "p3_kma_continuous_energy_affine_cycle_20260831_v15b",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "candidate": {
+    "name": "P3_1_PREFIX_RIDGE_CONTINUOUS_ENERGY_AFFINE",
+    "family_id": "LOW_DOF_FIXED_CONTINUOUS_KMA",
+    "tier_id": "LOW_DOF_FIXED",
+    "representation_changed": false,
+    "routing_discontinuous": false,
+    "alpha_18": 0.2,
+    "alpha_24_formula": "a + b * (u - 0.5)",
+    "u": "78h-purged train-prefix ECDF(wave_energy_current)",
+    "theta_prior": [0.2, 0.4],
+    "theta_prior_scales": [0.2, 0.4],
+    "regularization": "closed_form_Bayesian_ridge_with_first_outer_feature_only_sigma0_and_feature_moments",
+    "grid_or_search": false,
+    "station_branching": false,
+    "short_leads": "bit_exact_comparator"
+  },
+  "validation": {
+    "blocks": 6,
+    "purge_hours": 78,
+    "calibration_fits": 12,
+    "model_fits": 0,
+    "bootstrap_replicates": 5000
+  },
+  "gate": {
+    "pooled_rmse_improves": true,
+    "minimum_improved_bimonth_blocks": 4,
+    "episode_ci90_upper_below_zero": true,
+    "block_station_ci90_upper_below_zero": true,
+    "worst_station_lead_delta_rmse_m_max": 0.01,
+    "changed_rows_share_max": 0.3333333333333333,
+    "selected_transport_penalty_points": 0.04958605409228893,
+    "minimum_raw_lcb_points": 0.05958605409228893,
+    "minimum_calibrated_lcb_points": 0.01
+  },
+  "provenance": {
+    "family_calibration_sha256": "1a1d2c96cbe6c2c69b753fb4a130eb092922cc46524286cabcc0f9fce150441f",
+    "cancelled_station_shrink": "p3_kma_station_shrink_cycle_20260831_v15",
+    "result_based_tuning_or_retry": false
+  },
+  "official_policy": {
+    "official_inputs_before_pass": 0,
+    "hidden_truth_rows": 0,
+    "upload_attempts": 0,
+    "materialize_only_if_all_gates_pass": true
+  }
+}

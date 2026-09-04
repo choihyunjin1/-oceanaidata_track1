@@ -1,0 +1,166 @@
+{
+  "schema_version": "p1_matched_budget_local_compare.v1",
+  "experiment_id": "p1_matched_budget_local_compare_20260825_v1",
+  "problem": "P1",
+  "artifact_dir": "artifacts/p1_matched_budget_local_compare_20260825_v1",
+  "objective": "Separate model-family structure effects from tuning-maturity effects on one exact local OOF surface without reading official test inputs or official feedback.",
+  "policy": {
+    "official_public_scores_used_for_selection": false,
+    "leaderboard_points_used_for_selection": false,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "submission_files_generated": 0,
+    "uploads": 0,
+    "source_mutations": 0,
+    "frozen_or_package_mutations": 0,
+    "new_model_fits": 0,
+    "result_driven_grid_changes": 0,
+    "result_driven_reruns": 0
+  },
+  "common_protocol": {
+    "path": "artifacts/matched_budget_local_compare_20260825/common_protocol.json",
+    "sha256": "a92ba760a764d8f6759fa5ad281efe35139ddbc7f956654c76c7143fe573e2c8"
+  },
+  "inputs": {
+    "incumbent_oof": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "causal_oof": {
+      "path": "artifacts/runs/20260813T145038+0900_cv_95b55b7f/oof.parquet",
+      "sha256": "454f8b386e4e9bf68d6f126c3bdf11308e77396bf71bdf0a0f24d91b8fe50389"
+    },
+    "historical_round_a_oof": {
+      "path": "artifacts/p1_full_improvement_cycle_20260822_v1/winner_oof.parquet",
+      "sha256": "5ec891818b6edbe9287fd083084a6b049cc21edf8220d577ed4c3ec9488e6350"
+    },
+    "full_prefix_parts": [
+      {
+        "fold": "2025_q2",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet",
+        "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"
+      },
+      {
+        "fold": "2025_q3",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet",
+        "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"
+      },
+      {
+        "fold": "2025_q4",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet",
+        "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"
+      }
+    ]
+  },
+  "surface": {
+    "key_columns": ["station", "year", "layer", "time"],
+    "expected_rows": 421032,
+    "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+    "seeds": [20260813, 20260829, 20260847],
+    "probability_ensemble": "unweighted arithmetic mean of the same three registered seed probabilities",
+    "target_label_rule": "labels are opened only from the already sealed incumbent OOF after every grid and gate is sealed",
+    "causal_seed_caveat": "Round A has three seed-specific incumbent components but one previously sealed causal component because no comparable additional causal-seed OOF was retained; no new fit is permitted."
+  },
+  "families": {
+    "incumbent_offline_xgboost": {
+      "order": 1,
+      "structure": "80-feature offline XGBoost refit at full prefix",
+      "probability_prefix": "baseline",
+      "default_setting": "historical_fold_schedule",
+      "settings": [
+        {
+          "id": "historical_fold_schedule",
+          "profiles": {
+            "2025_q2": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q3": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q4": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 6, "minimum_positive_run": 6}
+          }
+        },
+        {
+          "id": "balanced_all",
+          "profiles": {
+            "2025_q2": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q3": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q4": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12}
+          }
+        },
+        {
+          "id": "recall_all",
+          "profiles": {
+            "2025_q2": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q3": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12},
+            "2025_q4": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12}
+          }
+        }
+      ]
+    },
+    "causal_event_rescue_ensemble": {
+      "order": 2,
+      "structure": "offline incumbent plus complete-event rescue from the strictly causal LightGBM OOF",
+      "default_setting": "medium_rescue",
+      "incumbent_base_profile_source": "incumbent_offline_xgboost.historical_fold_schedule",
+      "causal_prediction_column": "prediction",
+      "settings": [
+        {"id": "medium_rescue", "causal_floor": 0.75, "incumbent_floor": 0.15},
+        {"id": "strict_rescue", "causal_floor": 0.85, "incumbent_floor": 0.15},
+        {"id": "permissive_rescue", "causal_floor": 0.65, "incumbent_floor": 0.1}
+      ]
+    },
+    "event_day_balanced_lightgbm": {
+      "order": 3,
+      "structure": "80-feature offline LightGBM with inverse-sqrt positive-event and normal-day balancing",
+      "probability_prefix": "event_day_balanced_binary_lgbm",
+      "default_setting": "historical_fold_schedule",
+      "settings_from_family": "incumbent_offline_xgboost"
+    }
+  },
+  "matched_tuning": {
+    "settings_per_family": 3,
+    "seed_count_per_family": 3,
+    "default_prediction": "apply the preregistered default setting independently in each fold",
+    "walk_forward_prediction": {
+      "2025_q2": "default setting because no earlier outer fold exists",
+      "2025_q3": "select the highest pooled F1 setting on 2025_q2 only",
+      "2025_q4": "select the highest pooled F1 setting on 2025_q2 plus 2025_q3",
+      "selection_probability": "mean of three registered seed probabilities",
+      "tie_break": "smallest preregistered setting order"
+    },
+    "oracle_upper_bound": "single highest pooled OOF F1 setting across all three folds; diagnostic only and never promotable",
+    "tuning_gain": "walk_forward_tuned_F1 minus default_F1",
+    "optimistic_tuning_headroom": "oracle_upper_bound_F1 minus default_F1"
+  },
+  "metrics": {
+    "primary": "binary micro F1",
+    "required_slices": ["outer_fold", "station"],
+    "normal_false_positive": "false-positive rows per normal station-layer KST day and incidence",
+    "bootstrap": {
+      "unit": "KST calendar day",
+      "timezone": "Asia/Seoul",
+      "replicates": 5000,
+      "seed": 20260825,
+      "confidence": 0.9
+    }
+  },
+  "interpretation_gates": {
+    "competitive_default_absolute_f1_gap_at_most": 0.005,
+    "material_gap_closure_fraction_at_least": 0.5,
+    "robust_local_win": {
+      "pooled_delta_gt": 0.0,
+      "paired_day_ci90_lower_gt": 0.0,
+      "minimum_nonnegative_fold_count": 2,
+      "maximum_worst_station_f1_regression": 0.01,
+      "maximum_relative_normal_fp_per_day_increase": 0.1
+    },
+    "maturity_bias_supported": "challenger default is competitive and matched walk-forward tuning closes at least half of its default gap to the matched incumbent, or yields a robust local win",
+    "promotion_authorized": false
+  },
+  "prohibitions": {
+    "read_paths_containing": ["test", "sample_submission", "submission", "era5"],
+    "new_training": true,
+    "candidate_generation": true,
+    "external_actions": true,
+    "grid_change_after_seal": true,
+    "result_based_rerun": true
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "p3.cross_quantilogram_residual.config.v38",
+  "experiment_id": "p3_cross_quantilogram_residual_cycle_20260901_v38",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "public_rmse_m": 0.575233,
+    "public_points": 24.203599,
+    "policy": "exact uniform alpha 0.425 comparator"
+  },
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_DIRECTIONAL_TAIL_HIT_AXIS",
+    "novel_axis": "directional cross-quantilogram dependence between fixed upper/lower quantile-hit processes of historical wave and wind paths",
+    "distinction": "v30 estimates conditional-bin transfer entropy I(Xpast;Ynow|Ypast) from symbolic states. v38 instead forms centered Bernoulli quantile-hit processes at fixed marginal tails and computes their normalized directional lag correlation. It contains no conditional entropy, adaptive bin, result-selected quantile, or prior-cycle prediction.",
+    "rejected_axes": {
+      "conditional_cross_quantilogram": "not used because fitting conditional quantiles would add a model/HPO layer",
+      "v35_v37_ensemble_or_router": "forbidden post-hoc reuse"
+    },
+    "posthoc_prior_cycle_adjustment": false
+  },
+  "encoder": {
+    "input": "historical hs, tp, hmax, and wind-speed paths at fixed 20-minute subsampling from the past-only 48h context",
+    "context_rows": 145,
+    "pairs": [["hs","tp"],["hs","hmax"],["hs","wspd"]],
+    "upper_quantiles": [0.8, 0.9],
+    "lower_quantiles": [0.2, 0.1],
+    "lags_rows": [0, 6, 18],
+    "directions": ["first_to_second", "second_to_first"],
+    "hit_process": "upper 1{x>q}-[1-tau], lower 1{x<=q}-tau; each cross moment divided by root mean-square product with deterministic zero-denominator return 0",
+    "feature_count": 72,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_XQ72_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_XQ72_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {
+      "worst_block_delta_m_lte": 0.015,
+      "worst_lead_delta_m_lte": 0.010,
+      "worst_station_lead_delta_m_lte": 0.010,
+      "reference_tail_quantile_within_block": 0.80,
+      "worst_reference_tail_block_delta_m_lte": 0.015
+    },
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "fixed_transport_penalty_points": 0.04958605409228893
+  },
+  "primary_sources": [
+    {
+      "citation": "Han, Linton, Oka, and Whang, The cross-quantilogram: Measuring quantile dependence and testing directional predictability between time series, Journal of Econometrics 193, 251-270 (2016)",
+      "url": "https://doi.org/10.1016/j.jeconom.2016.03.001",
+      "use": "quantile-hit directional dependence mechanism only; not performance evidence"
+    }
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

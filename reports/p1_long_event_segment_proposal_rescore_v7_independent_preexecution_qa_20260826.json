@@ -1,0 +1,174 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.independent_preexecution_qa.v7",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v7",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "audit_date_kst": "2026-08-26",
+  "audit_scope": "Independent zero-operation preexecution review of the append-only r7 full-runtime and replay firewall package.",
+  "verdict": "NO_GO",
+  "authorization_permitted": false,
+  "severity": {
+    "P0": 3,
+    "P1": 2,
+    "P2": 2
+  },
+  "audited_inputs": {
+    "r7_amendment": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v7_full_runtime_replay_firewall_amendment.json",
+      "bytes": 11170,
+      "sha256": "71563c954a5c529044d82c63af0e44ddf313dcc55b787c784afd153fc14434ff"
+    },
+    "runner": {
+      "path": "scripts/run_p1_long_event_segment_proposal_rescore_v7.py",
+      "bytes": 123579,
+      "sha256": "0f481298beabe9f1a16fdf47320ba107159db6fd91aa40d7a0f18007a5b23b6a"
+    },
+    "execution_module": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v7.py",
+      "bytes": 3292,
+      "sha256": "9f532581bfda500f4bdf1f923ad602c16965ccb39a4ab6157c3f88c3af88c061"
+    },
+    "focused_tests": {
+      "path": "tests/test_run_p1_long_event_segment_proposal_rescore_v7.py",
+      "bytes": 13801,
+      "sha256": "728e11a81db8a34a38c4c91a7f6c5d4d3b05243befa426c154cb6559225494b0"
+    },
+    "false_authorization_template": {
+      "path": "configs/experiments/p1_long_event_segment_proposal_rescore_v7_execution_authorization_template.json",
+      "bytes": 2258,
+      "sha256": "d2d735a156be8ac56742d945abb031c552c62e69f1e1870ab7c3d2b44d848da8"
+    },
+    "preexecution_seal": {
+      "path": "artifacts/p1_long_event_segment_proposal_rescore_20260826_v2_infrastructure_v7/preexecution_seal.json",
+      "bytes": 7877005,
+      "sha256": "4763719879ecd677a5be8193050efe1334def50dd44c289d0adb80e22e263776"
+    },
+    "r6_independent_qa": {
+      "path": "reports/p1_long_event_segment_proposal_rescore_v6_independent_preexecution_qa_20260826.json",
+      "bytes": 16921,
+      "sha256": "932662de49fd1bdfcd7a546bdeb2a88732dd36e9db54e849354fbdd5c34e2c08"
+    }
+  },
+  "verified_good_evidence": {
+    "all_supplied_size_and_sha256_pins_match": true,
+    "runtime_inventory_binding": {
+      "canonical_bytes": 5774072,
+      "sha256": "b3f99a8bb5d5bd5491ea90ba7f022a76f0421fa549f56ebe5eb6f3223f409d26",
+      "distribution_record_files": 10745,
+      "exact_cli_exclusions": 2,
+      "host_files": 42,
+      "pyc_files": 3871,
+      "tzdata_owned_files": 656
+    },
+    "snapshot_inventory_binding": {
+      "canonical_bytes": 8891,
+      "sha256": "aa47a00a586d14cab5be4d9e2901f4adf270781df65b1eaf58f825fb7f5d775d",
+      "files": 58
+    },
+    "focused_r6_r7_tests": {
+      "collected": 62,
+      "passed": 61,
+      "skipped": 1,
+      "skip_reason": "Windows symlink creation privilege unavailable; this does not override the blocking findings."
+    },
+    "ruff": "PASS",
+    "dual_readonly_preflight": {
+      "runs": 2,
+      "both_exit_zero": true,
+      "byte_identical_stdout": true,
+      "readonly_preflight_verification_sha256": "00ccf42c6c7aa9004bfdd2384f75361782c0ba97c59f82a2beda18fbf300f8e6"
+    },
+    "frozen_science_unchanged": {
+      "maximum_lifetime_physical_fits": 72,
+      "scientific_materializations": 21,
+      "outer_scores": 1,
+      "model_feature_window_gate_or_postprocess_changes": 0,
+      "target_firewall_intact": true
+    },
+    "normal_parent_hold_graph": {
+      "source_files_held_through_worker_termination": true,
+      "private_snapshot_destination_files_held": 61,
+      "destination_breakdown": "58 static plus authorization, seal, and QA",
+      "unique_file_ids": true,
+      "source_destination_hardlinks": 0
+    }
+  },
+  "blocking_findings": [
+    {
+      "id": "P0_R7_HIDDEN_WORKER_SELF_AUTHORIZATION",
+      "severity": "P0",
+      "summary": "The hidden worker can trust caller-authored private manifest, seal, PASS-QA, and authorized bytes without opening canonical live authorities or proving a true parent-child capability chain.",
+      "evidence": "The worker accepts copied runner, snapshot, and runtime roots plus caller-supplied digests. It does not retain canonical live authorization, QA, seal, and claim handles. A live PID is accepted without OS parent proof, and a caller can manually create a matching canonical claim.",
+      "required_closure": "Require fixed-path canonical live authority and claim handles, true OS parent PID and creation-time proof, and an inherited anonymous capability pipe or process handle whose 32-byte secret is never transported in CLI, environment, or manifest."
+    },
+    {
+      "id": "P0_R7_PRE_RUNTIME_TZDATA_FAILURE",
+      "severity": "P0",
+      "summary": "The worker calls ZoneInfo for Asia/Seoul before the isolated tzdata runtime is activated.",
+      "evidence": "The exact -I -S -B interpreter has an empty TZPATH and raises ZoneInfoNotFoundError. The canonical claim is created before worker startup, so the authorized one-shot would be consumed with zero fits.",
+      "required_closure": "Use epoch-nanosecond and bootstrap-safe operations only until the verified isolated runtime and tzdata are active; defer all KST formatting."
+    },
+    {
+      "id": "P0_R7_INCOMPLETE_BOOTSTRAP_NATIVE_CLOSURE",
+      "severity": "P0",
+      "summary": "Live Python stdlib and an unsealed VC runtime execute before authentication.",
+      "evidence": {
+        "unsealed_loaded_file": "C:/Users/cedis/AppData/Local/Programs/Python/Python312/VCRUNTIME140.dll",
+        "bytes": 120400,
+        "sha256": "052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4",
+        "additional_scope": "PythonHome/Lib and root-level vcruntime140_1.dll are not covered by the r7 host inventory."
+      },
+      "required_closure": "Launch from a fully isolated sealed Python home containing the executable, Python DLLs, complete stdlib, root VC runtimes, native dependency closure, and tzdata, or use an independently pinned native bootstrap. No live user-writable pre-auth code may execute."
+    },
+    {
+      "id": "P1_R7_DESTINATION_DIRECTORY_INSERTION",
+      "severity": "P1",
+      "summary": "Destination files are held but destination directories are not mutation-frozen during native loading.",
+      "evidence": "An undeclared dependent DLL can be inserted and execute before the next tree or memory-map verification.",
+      "required_closure": "Hold or ACL-freeze destination directories throughout native loading and add a real insertion adversarial test."
+    },
+    {
+      "id": "P1_R7_FORGEABLE_FRESHNESS_AND_PARENT",
+      "severity": "P1",
+      "summary": "Manifest freshness, nonce, and parent identity are forgeable.",
+      "evidence": "There is no created<=now check, maximum launch age, exact nonce format and entropy check, nonce-reuse check, or true OS parent-child validation. A future created/deadline pair can extend the wall clock.",
+      "required_closure": "Capture execute-start at entry; enforce created<=now<deadline, a short maximum launch age, exactly 21600 seconds, monotonic supervision, and exactly 64 lowercase hex characters encoding a 32-byte nonce."
+    },
+    {
+      "id": "P2_R7_DEADLINE_CAPTURE_ORDER",
+      "severity": "P2",
+      "summary": "created_ns is captured after the full runtime copy rather than at parent execute entry.",
+      "required_closure": "Capture the authoritative start timestamp before copy and verification."
+    },
+    {
+      "id": "P2_R7_NEGATIVE_TEST_DEPTH",
+      "severity": "P2",
+      "summary": "Several required copied-root, replay, nonce, deadline, and insertion checks are source-string assertions rather than end-to-end tests.",
+      "required_closure": "Add zero-fit end-to-end bootstrap and worker tests for every listed adversarial path and prove namespace byte-for-byte immutability."
+    }
+  ],
+  "required_r8_zero_fit_tests": [
+    "copied-worker self-authorization",
+    "absent canonical authorization",
+    "unrelated or PID-reused parent",
+    "future and stale timestamps",
+    "malformed and reused nonce",
+    "exact -I -S -B tzdata bootstrap",
+    "complete initial memory-map closure including VC runtime",
+    "destination-directory insertion during implicit DLL loading",
+    "namespace byte-for-byte immutability for every unauthorized path"
+  ],
+  "zero_operation_receipt": {
+    "actual_authorization_created": 0,
+    "claims": 0,
+    "physical_fits": 0,
+    "scientific_materializations": 0,
+    "outer_scores": 0,
+    "candidate_files": 0,
+    "official_test_sample_submission_or_candidate_reads": 0,
+    "P3_reads_or_mutations": 0,
+    "artifact_namespace_contents": [
+      "preexecution_seal.json"
+    ]
+  },
+  "terminal_instruction": "Do not create or use an r7 actual authorization. Any successor must be append-only, close every listed finding before claim, preserve the frozen 72-fit/21-materialization science, and undergo a fresh independent preexecution QA."
+}

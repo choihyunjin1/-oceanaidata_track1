@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "status": "approved",
+  "received_at": "2026-08-21T16:30:00+09:00",
+  "organizer_channel": "official public FAQ API, id=9",
+  "evidence_file": "configs/external_data/official_faq_external_data_2026-08-21.json",
+  "evidence_sha256": "41e762264c667baf401f60bef104110d3dd1bc668ab209c4e635b46b0a924be9",
+  "allowed_sources": [
+    "i_ors_ctd_2014_2023",
+    "i_ors_ocean_atmos_2004_2023",
+    "kma_ocean_buoy_pre2024",
+    "era5_pre2024",
+    "nasa_power_kors_meteorology"
+  ],
+  "allowed_problems": ["P1", "P2", "P3"],
+  "allowed_purposes": [
+    "pretraining",
+    "feature_design",
+    "normalization",
+    "augmentation",
+    "fine_tuning"
+  ],
+  "cutoff_by_problem": {
+    "P1": "2026-06-30T23:59:59+00:00",
+    "P2": "2025-12-31T23:59:59+09:00",
+    "P3": "2023-12-31T23:59:59+09:00"
+  },
+  "rights_evidence": {},
+  "scope_note": "The organizer permits public external data with source attribution. This receipt whitelists only sources whose public-use rights were independently verified and imposes a conservative pre-2024 cutoff for the first experiments."
+}

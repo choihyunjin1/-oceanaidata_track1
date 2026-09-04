@@ -1,0 +1,174 @@
+{
+  "schema_version": "p1_station_layer_temporal_convolution_event.v2",
+  "experiment_id": "p1_station_layer_temporal_convolution_event_v2",
+  "status": "PREREGISTERED_APPEND_ONLY_ONE_SHOT_TRAIN_ONLY",
+  "problem": "P1",
+  "metric": "binary_micro_F1",
+  "direction": "higher",
+  "canonical_paths": {
+    "config": "configs/experiments/p1_station_layer_temporal_convolution_event_v2.json",
+    "base_config": "configs/p1.toml",
+    "goal_contract": "configs/goals/meaningful_score_maximization_v2.json",
+    "feature_cache": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+    "feature_metadata": "artifacts/cache/train_offline_e9fe1eb46cb7431f.json",
+    "gen1_artifact": "artifacts/p1_meaningful_learning_curve_generation_v1",
+    "frozen_oof": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+    "artifact": "artifacts/p1_station_layer_temporal_convolution_event_v2",
+    "attempt_lock": "artifacts/p1_station_layer_temporal_convolution_event_v2.ATTEMPT_LOCK.json"
+  },
+  "implementation_sha256": {
+    "temporal_event_module": "667c1894f8fc4fc74351e0a2089dd5bab666f4a39bbe6dd193844007331fe746",
+    "gen1_runner": "c22896fb17a5ece10831759631b9f7414cb9564ca80af2d1a4f3272fdeed6b9a",
+    "base_config": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947",
+    "pipeline": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669",
+    "validation": "7794d8c2c69fd35f93272088fecf9b80be553581351c0dbf6c5211b11df8ada6",
+    "goal_contract": "8fc6b03aba3b88b07b954030759f351644513490f7a9c030b7d7f1b950023549",
+    "goal_evaluator": "69b9dc1168a47e0d1b1a50e5590c3d2f0966f2885f0f92730d4c38c4ea92800c"
+  },
+  "immutable_inputs": {
+    "train.csv": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "test.csv": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+    "sample_submission.csv": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4",
+    "output/2026-08-20/ready/P1_submission.csv": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3",
+    "submissions/frozen/P1_FROZEN_READY_TO_UPLOAD_28243fda.csv": "28243fda9bc56e25a698366823dfab3198cda21bfaec04f30fda6a899eaf0cd3",
+    "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+    "artifacts/cache/train_offline_e9fe1eb46cb7431f.json": "396386d48bf3588bd765d26d66625184a5af9a41312703ffbcfd58da9dbe0abd",
+    "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "artifacts/p1_meaningful_learning_curve_generation_v1/predictions_complete.json": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb",
+    "artifacts/p1_meaningful_learning_curve_generation_v1/learning_curve_evidence.json": "46fbfa6f8bdbfdb6f57d35f796bfe2cc4abda86989f65c7a5dd528d9e9e8d8c7",
+    "artifacts/p1_meaningful_learning_curve_generation_v1/manifest.json": "6ccec6e43d6d0fe1f5ab7e45de97ace6196c84bc959c2b8af402ae1b41b2c721",
+    "configs/goals/meaningful_score_maximization_v2.json": "8fc6b03aba3b88b07b954030759f351644513490f7a9c030b7d7f1b950023549",
+    "src/ocean_goal/meaningful_score.py": "69b9dc1168a47e0d1b1a50e5590c3d2f0966f2885f0f92730d4c38c4ea92800c"
+  },
+  "hypotheses": [
+    {
+      "id": "station_layer_centered_tcn_phase_heads",
+      "order": 1,
+      "structure": "one station-layer-conditioned centered depthwise temporal convolutional encoder with an exact 31-row receptive field and disjoint onset/interior/offset event heads",
+      "why_structurally_distinct": "learns local waveform and physical event-boundary state rather than changing a tree threshold, sample weight, station router, seed, or decoder",
+      "score_derived_tuning": false
+    }
+  ],
+  "prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+  "seeds": [20260813, 20260829, 20260847],
+  "comparator": {
+    "id": "official_immutable_incumbent_prefix_refit",
+    "source": "sealed Gen1 exact same-prefix same-fold three-seed fresh refits",
+    "prediction_parts_directory": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts",
+    "predictions_complete_sha256": "ffe1641dced823ca7427718f867a69acaa378bffa96913df86ca766d03cf25eb",
+    "incumbent_fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_frozen_oof": true,
+    "same_fold_keys_metric_postprocess": true,
+    "surrogate_only": false
+  },
+  "features": {
+    "mode": "offline_unlabeled_batch_context",
+    "target_columns_forbidden": ["label", "anomaly_type"],
+    "selected_numeric_columns": [
+      "temp_raw",
+      "psal_raw",
+      "depth_raw",
+      "psal_missing",
+      "depth_missing",
+      "has_gap_before",
+      "temp_diff_1",
+      "temp_abs_diff_1",
+      "temp_backward_acceleration",
+      "temp_diff_next",
+      "temp_center_curvature",
+      "plateau_elapsed",
+      "plateau_full_length",
+      "temp_median_resid_3h",
+      "temp_robust_z_3h",
+      "temp_median_resid_12h",
+      "temp_robust_z_12h",
+      "temp_median_resid_48h",
+      "temp_robust_z_48h",
+      "temp_peer_residual",
+      "peer_abs_detrended_resid_7d",
+      "reference_abs_resid_7d"
+    ],
+    "scaler": "exact_prefix_train_only_componentwise_median_iqr_plus_finite_mask",
+    "unlabeled_centered_context_allowed": true,
+    "cadence_minutes": 10
+  },
+  "model": {
+    "class": "StationLayerTemporalEventModel",
+    "width": 32,
+    "group_embedding_width": 16,
+    "dilations": [1, 2, 4, 8],
+    "kernel_size": 3,
+    "receptive_field_rows": 31,
+    "receptive_field_span_minutes": 300,
+    "dropout": 0.1,
+    "norm_groups": 8,
+    "heads": ["onset", "interior", "offset"],
+    "implicit_reference_class": "normal",
+    "phase_definition": "multirow positive event first row onset, last row offset, all middle rows interior; singleton event interior",
+    "probability_rule": "prior-corrected softmax sum of onset/interior/offset",
+    "prediction_clip": [0.0, 1.0]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "optimizer_steps_per_cell": 120,
+    "batch_size": 1024,
+    "learning_rate": 0.0007,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "sampling_priors": {"normal": 0.5, "onset": 0.166015625, "interior": 0.166015625, "offset": 0.16796875},
+    "natural_prior_correction": true,
+    "warm_start_between_cells": false,
+    "early_stopping": false,
+    "checkpoint_or_validation_selection": false,
+    "hyperparameter_search": false,
+    "expected_curve_fit_cells": 45,
+    "expected_curve_optimizer_steps": 5400,
+    "full_fit_only_if_curve_passes": true,
+    "expected_full_fit_cells_on_pass": 3
+  },
+  "fixed_fold_postprocess": {
+    "2025_q2": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 0, "minimum_positive_run": 12},
+    "2025_q3": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+    "2025_q4": {"high_threshold": 0.15, "low_threshold": 0.075, "close_gap_rows": 6, "minimum_positive_run": 6}
+  },
+  "bootstrap": {
+    "replicates": 5000,
+    "seed": 20260823,
+    "confidence_level": 0.9,
+    "cluster": "event_or_normal_day_by_station_layer"
+  },
+  "pass_gates": {
+    "late_fractions_all_delta_gt": 0.0,
+    "full_fraction_delta_at_least": 0.02,
+    "full_fraction_ci90_lower_gt": 0.0,
+    "minimum_other_late_ci90_lower_gt_count": 1,
+    "minimum_improved_outer_folds": 2,
+    "maximum_worst_station_f1_regression": 0.005,
+    "required_station_slices": ["G-ORS", "I-ORS", "S-ORS"],
+    "all_leakage_checks": true,
+    "all_reproducibility_checks": true
+  },
+  "on_pass": {
+    "full_fit_three_seed_models": true,
+    "test_value_reads": 0,
+    "candidate_creation": false,
+    "upload": false
+  },
+  "on_no_pass": {
+    "preserve_all_curve_models_predictions_and_metrics": true,
+    "test_value_reads": 0,
+    "candidate_creation": false,
+    "upload": false,
+    "exactly_one_next_structural_diagnosis": "self_supervised_masked_sequence_pretraining_then_phase_head_finetune"
+  },
+  "prohibitions": {
+    "adaptive_threshold_weight_seed_or_feature_tuning": true,
+    "validation_target_use_before_prediction_seal": true,
+    "aggregate_scoring_before_all_prediction_parts_sealed": true,
+    "test_value_reads": true,
+    "submission_creation": true,
+    "upload": true,
+    "source_cache_current_or_frozen_mutation": true,
+    "rerun_after_attempt_lock": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "p1.v53_fresh_historical_transport_window_availability_audit.independent_qa.v1",
+  "experiment_id": "p1_v53_fresh_historical_transport_window_availability_audit_20260901_v1",
+  "status": "NO_FRESH_HISTORICAL_TRANSPORT_WINDOW",
+  "verdict": "PASS",
+  "checks": {
+    "config_parses": true,
+    "freshness_definition_precedes_inventory_and_forbids_partial_carving": true,
+    "train_chronology_aggregates_recomputed": true,
+    "all_2024_quarters_single_station": true,
+    "all_multi_station_quarters_exposed": true,
+    "canonical_q2_q3_q4_membership_pinned": true,
+    "inner_2024q3_2024q4_2025q1_exposure_pinned": true,
+    "v33_registry_11_manifests_recomputed": true,
+    "v33_registry_all_q2_rows_133170": true,
+    "v33_registry_all_pretarget_reads_zero": true,
+    "all_19_source_and_registry_hash_checks_pass": true,
+    "candidate_selection_zero": true,
+    "runner_preflight_lock_fit_optimizer_zero": true,
+    "candidate_evaluation_target_reads_zero": true,
+    "new_q2_q3_q4_reads_zero": true,
+    "v52_immutable": true,
+    "v28_v33_not_relaxed_or_reinterpreted": true,
+    "focused_pytest_7_of_7": true,
+    "ruff_pass": true,
+    "official_test_sample_submission_hidden_csv_upload_zero": true
+  },
+  "hashes": {
+    "config": "0ed55d486a7e710e13a103693eaf28898e5fc0c1d9d14d830bf306ca7df5bd9e",
+    "focused_test": "e0f5b269d25f1566b16fc89087353d4fec2751ed62029233752294bf06ca8449",
+    "report": "72ce2e79035fd27bd673fe6764ad2788a14a6a3ffeea948094b3eda95ad59048",
+    "evidence_manifest": "1c7dedc12d5c49cdd98eef3763a903a877c1bf8972c74aa9941347f1ef3b4151"
+  },
+  "inventory_receipt": {
+    "train_periods": 8,
+    "fresh_eligible_station_quarters": 0,
+    "v33_q2_manifest_count": 11,
+    "v33_distinct_bundle_count": 10,
+    "train_label_aggregate_reads": 1,
+    "raw_rows_or_values_reported": 0
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "runner_created": 0,
+    "preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "candidate_evaluation_target_reads": 0,
+    "new_q2_reads": 0,
+    "new_q3_reads": 0,
+    "new_q4_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  },
+  "minimum_new_evidence": "One newly acquired post-2025-12-10 labeled chronological block with at least two stations and two supported station-layer identities, labels sealed until one candidate/threshold/budget is frozen; or an organizer-authenticated never-opened labeled holdout."
+}

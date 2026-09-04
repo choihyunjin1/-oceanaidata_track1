@@ -1,0 +1,68 @@
+{
+  "schema_version": "p1.tabpfn26.structural_transition.contract.v1",
+  "experiment_id": "p1_tabpfn26_structural_transition_20260901_v1",
+  "status": "READY_PENDING_USER_LICENSE_AND_LOCAL_WEIGHTS",
+  "problem": "P1_qc_anomaly",
+  "organizer_policy": {
+    "distributed_data_only": true,
+    "synthetic_only_pretrained_exception_used": true,
+    "external_observation_rows": 0,
+    "hidden_truth_rows": 0
+  },
+  "pinned_inputs": {
+    "base_runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "base_config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "tabpfn_contract": {
+      "path": "configs/compliance/tabpfn26_offline_transition_20260901.json",
+      "sha256": "42101b02ec14d370fc17ab16f9154046d8aab52c96611a1c3b6185db30b81eb4"
+    },
+    "tabpfn_adapter": {
+      "path": "src/ocean_tabpfn26/offline.py",
+      "sha256": "30e5c7f096dedbf1d9cbe94daf321c3ac09cce69ae9071ffa093def73eb7ef8e"
+    }
+  },
+  "features": {
+    "surface": "frozen 165-column split-local robust encoded past-only surface",
+    "expected_count": 165,
+    "grouping": ["station", "layer_category"],
+    "outlier_hard_deletion": false
+  },
+  "model": {
+    "family": "TabPFN-2.6 classifier",
+    "package_version": "8.5.0",
+    "n_estimators": 8,
+    "training_cap_per_cell": 49000,
+    "sampling": "retain every positive then SHA256-rank negatives",
+    "threshold": 0.5,
+    "candidate": "frozen_current_router_anchor OR tabpfn_probability_gte_0.5",
+    "maximum_cell_fits": 48
+  },
+  "protocol": {
+    "screen": "2025_q2",
+    "screen_pass": "pooled candidate F1 strictly greater than anchor F1",
+    "confirmation": ["2025_q3", "2025_q4"],
+    "confirmation_pass": "pooled Q3+Q4 candidate F1 strictly greater than anchor F1",
+    "both_confirmation_predictions_sealed_before_truth": true,
+    "threshold_tuning": false,
+    "result_based_retry": false
+  },
+  "output": {
+    "directory": "artifacts/p1_tabpfn26_structural_transition_20260901_v1",
+    "attempt_lock": "artifacts/p1_tabpfn26_structural_transition_20260901_v1.ATTEMPT_LOCK.json",
+    "submission_csv": null,
+    "checkpoint_copy": null
+  },
+  "official_access_budget": {
+    "test_rows": 0,
+    "sample_submission_rows": 0,
+    "submission_csv_rows_created": 0,
+    "uploads": 0,
+    "hidden_truth_rows": 0
+  }
+}

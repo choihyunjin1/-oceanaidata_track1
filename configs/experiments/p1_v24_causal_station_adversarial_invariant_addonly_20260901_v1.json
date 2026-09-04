@@ -1,0 +1,102 @@
+{
+  "schema_version": "p1.v24_causal_station_adversarial_invariant_addonly.v1",
+  "result_schema_version": "p1.v24_causal_station_adversarial_invariant.result.v1",
+  "experiment_id": "p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Domain-Adversarial Training of Neural Networks",
+    "authors": "Ganin et al.",
+    "venue": "JMLR 17(59), 2016",
+    "url": "https://www.jmlr.org/papers/v17/15-239.html",
+    "claim_boundary": "Gradient reversal can jointly promote task discrimination and domain-indiscriminate representations. v24 uses station as a prefix-only nuisance environment; it is a domain-generalization screen, not the paper's labeled-source/unlabeled-target adaptation setting, and the source makes no P1 performance claim."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "objective_fingerprint": "prefix-only anomaly BCE plus gradient-reversed station classifier; no outer-domain rows; shared 8-unit encoder; add-only transport-veto decoder",
+    "repository_search": "No executed P1 gradient-reversal/domain-adversarial nuisance-invariance objective was found.",
+    "group_dro": "Closed P1 Group-DRO changes environment loss weights to optimize worst-group risk. v24 instead adversarially removes station-predictive information from a shared representation and keeps ordinary anomaly risk.",
+    "supcon": "SupCon contracts same-class embeddings and used an MS-TCN plus soft-F1/top-k head. v24 has no contrastive pairs, event-balanced sampler, soft-F1, MS-TCN, or learned top-k rate.",
+    "p2_coral": "P2 CORAL matches latent second-order covariance across months within a layer. v24 uses a station classifier with gradient reversal, has no covariance penalty, and borrows no P2 result or hyperparameter.",
+    "ranking_and_calibration": "v24 has no pairwise ranking loss, score recalibration, partial pooling, or threshold learning beyond the frozen inner quantiles and safety veto.",
+    "evidence": {
+      "src/p1_qc/causal_raw_features_v4r2.py": "65829d0cd1f90b0e8fc2d554ec895d6e3d7e0b8605a073e78a2f7b08e4999913",
+      "scripts/run_p1_mstcn_group_dro_20260829_v2.py": "bd821ae460879c55ab18fce181ef73a1c6f036c62985fe7bb5e49e1b7c7bbf3f",
+      "src/p1_qc/event_balanced_supcon_f1.py": "41547be1efb88eef4741d2388d46ed8ac98518efd43e96228e5d37980ff8ad0f",
+      "scripts/run_p2_layer_conditioned_month_covariance_alignment_20260901_v20.py": "2fb61f2f882afe7f4b608164d3bd19bdb7d7bd1ead1c19bf1555c7d690586e25",
+      "reports/parallel_deep_research_20260828_v1/report-source.md": "78934860723095f1a8f1b3f8baa2c2636a9cc731a6778092f7d6add7ec1e1f56"
+    }
+  },
+  "representation": {
+    "kind": "fixed_prefix_robust_causal_temperature_basis_plus_station_nuisance_id",
+    "task_inputs": ["prefix-robust current temperature", "exact-10-minute backward difference", "temperature missing flag", "cadence-gap flag"],
+    "nuisance_only_input": "prefix-known station one-hot",
+    "psal_depth_inputs": 0,
+    "event_shape_recurrence_reservoir_physics_inputs": 0,
+    "encoder_hidden_units": 8,
+    "activation": "tanh",
+    "past_only": true,
+    "future_interpolation": 0,
+    "subsequence_normalization": 0
+  },
+  "representation_support_gate": {
+    "minimum_nonzero_feature_share": 0.99,
+    "minimum_feature_variance": 0.000001,
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_CAUSAL_RAW_SUPPORT"
+  },
+  "objective": {
+    "kind": "anomaly_BCE_plus_gradient_reversed_station_cross_entropy",
+    "domain_adversarial_coefficient": 0.1,
+    "maximum_sample_rows_per_fit": 80000,
+    "negative_to_positive_sample_ratio": 3,
+    "batch_rows": 4096,
+    "outer_rows_in_training": 0,
+    "outer_domain_rows_in_training": 0,
+    "outer_driven_tuning": 0
+  },
+  "model": {
+    "kind": "8-unit tanh station-adversarial encoder plus anomaly head",
+    "alpha": 0.0001,
+    "epochs": 12,
+    "learning_rate": 0.002,
+    "positive_class_weight": 3.0,
+    "seeds": [20260901, 20260917, 20260943],
+    "fits": 9,
+    "sweep": 0
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "maximum_addition_share": 0.0025,
+    "minimum_additions": 25,
+    "wilson90_lcb_minimum": 0.55,
+    "outer_tuning": 0,
+    "transport_stability": {
+      "environment": "station_x_layer_x_chronological_half",
+      "chronological_halves": 2,
+      "minimum_proposals_per_supported_environment": 10,
+      "minimum_supported_environments": 2,
+      "require_both_chronological_halves": true,
+      "minimum_environment_precision_strictly_gt": 0.55,
+      "reject_if_any_supported_environment_true_positives_eq": 0,
+      "passing_threshold_tie_break": "highest_quantile_then_highest_precision_lcb"
+    }
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

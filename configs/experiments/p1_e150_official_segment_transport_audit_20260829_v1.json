@@ -1,0 +1,27 @@
+{
+  "schema_version": "p1.e150_official_segment_transport_audit.v1",
+  "experiment_id": "p1_e150_official_segment_transport_audit_20260829_v1",
+  "problem": "P1",
+  "purpose": "Aggregate-only audit of which e150 addition families the failed sparse veto removed",
+  "bootstrap_replicates": 1000,
+  "acceptance_frequency_thresholds": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "fixed_candidate_families": [
+    "full_e150_plus_gi2",
+    "sparse_lower_bound",
+    "all_I_plus_sparse_GS",
+    "all_I_G_plus_sparse_S",
+    "all_I_S_plus_sparse_G",
+    "all_I_plus_GS_frequency_025",
+    "all_I_plus_GS_frequency_050",
+    "all_I_plus_GS_frequency_075"
+  ],
+  "official_truth_values_read": 0,
+  "candidate_csv_creation": false,
+  "upload": false
+}

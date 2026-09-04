@@ -1,0 +1,112 @@
+{
+  "schema_version": "p2.public_sensor_influence_shrink.20260901.v10",
+  "experiment_id": "p2_public_sensor_influence_shrink_20260901_v10",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_ALL_THREE_HISTORICAL_FOLDS_EXPOSED",
+  "scientific_question": "Does a fixed label-free public-temperature influence rule prevent the sealed champion correction from amplifying isolated sensor inconsistencies?",
+  "semantic_fingerprint": "public_temp_exact10min_first_difference__training_only_layer_robust_z__huber6__shrink_champion_correction_toward_endpoint_baseline__floor050__no_fit_no_row_deletion",
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "negative_registry_audit": {
+    "evidence_paths": [
+      "reports/negative_evidence_registry_20260830_v1/report-source.md",
+      "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-copula-probabilistic.md",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-deep-gbm-stack.md",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-oas-rank1-lowrank.md",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-physical-surrogate-transfer.md",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-profile-analog-prequential.md",
+      "reports/p2_public_support_abstention_cycle_20260831_v6/report-source.md",
+      "reports/p2_public_feature_benefit_gate_cycle_20260831_v7/report-source.md",
+      "reports/p2_group_balanced_raw_residual_20260901_v8r1/report-source.md",
+      "reports/p2_domain_invariant_vertical_curvature_20260901_v9r1/report-source.md"
+    ],
+    "closed_or_excluded": [
+      "DINEOF_EOF_completion",
+      "PLS_or_rank_capacity_search",
+      "Gaussian_copula_exact_recipe",
+      "Gaussian_process_or_state_space",
+      "CatBoost_or_GBM_residual",
+      "PAVA_or_isotonic",
+      "learned_soft_gate_or_benefit_gate",
+      "raw_Celsius_L1_L2_residual",
+      "normalized_vertical_curvature_Ridge",
+      "heave_or_depth_residual",
+      "row_deletion_or_truth_selected_outlier_filter"
+    ],
+    "nonduplicate_reason": "The action is a deterministic label-free sensitivity of the already sealed correction to exact-10-minute public-temperature first-difference influence. It neither learns a gate nor predicts a residual, and it leaves normal rows bit-exact to the champion."
+  },
+  "training_only_influence": {
+    "registered_windows_kst": [
+      {
+        "id": "2024_may_jun",
+        "start_inclusive": "2024-05-01T00:00:00+09:00",
+        "end_exclusive": "2024-07-01T00:00:00+09:00"
+      },
+      {
+        "id": "2024_jul_to_aug24",
+        "start_inclusive": "2024-07-01T00:00:00+09:00",
+        "end_exclusive": "2024-08-25T00:00:00+09:00"
+      }
+    ],
+    "public_layers": [1, 5, 6, 7, 8],
+    "signal": "signed_temperature_first_difference_only_when_previous_observation_is_exactly_10_minutes_earlier",
+    "center": "training_only_per_public_layer_median",
+    "scale": "training_only_per_public_layer_1.4826_MAD_with_0.01C_floor",
+    "minimum_available_public_layers": 2,
+    "huber_cutoff_robust_z": 6.0,
+    "minimum_influence_weight": 0.5,
+    "row_deletion": false,
+    "target_truth_used_for_action": false
+  },
+  "candidate": {
+    "name": "P2_V10_HUBER6_PUBLIC_TEMP_DIFF_INFLUENCE_SHRINK",
+    "formula": "endpoint_baseline + weight * (sealed_champion - endpoint_baseline)",
+    "normal_row_identity": "weight=1 gives bit-exact sealed champion",
+    "active_weight": "max(0.5, 6 / max_public_layer_robust_z)",
+    "candidate_count": 1,
+    "model_fit_count": 0
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed cross-fit bin17 champion proxy",
+    "bootstrap_unit": "fold_x_KST_calendar_day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "current_champion_rmse_C": 0.430194,
+    "current_champion_points": 27.935464,
+    "strict_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "active_slice_delta_rmse_lt": 0.0,
+      "minimum_active_rows": 30,
+      "transport_adjusted_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "automatic_retry_count": 0,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "v7_ready_pack_policy": "READ_ONLY_PRIORITY_AUDIT_ONLY_NO_VALUE_READ_NO_MATERIALIZE_NO_UPLOAD"
+}

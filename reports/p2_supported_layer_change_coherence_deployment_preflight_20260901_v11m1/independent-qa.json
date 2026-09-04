@@ -1,0 +1,93 @@
+{
+  "experiment_id": "p2_supported_layer_change_coherence_deployment_preflight_20260901_v11m1",
+  "status": "PASS",
+  "checks": {
+    "action_hash": true,
+    "formula": true,
+    "inactive_exact": true,
+    "finite": true,
+    "guard_decision_consistent": true,
+    "access_zero": true,
+    "no_csv_on_fail": true
+  },
+  "geometry": {
+    "rows": 26061,
+    "active_rows": 15067,
+    "active_share": 0.5781435862016039,
+    "absolute_action_C": {
+      "p50": 0.010752272727273748,
+      "p90": 0.3954349021470698,
+      "p95": 0.6270404291380416,
+      "p99": 1.1965787325181874,
+      "p999": 1.503786128990411,
+      "max": 2.034811603191244,
+      "rms": 0.26407761853880213
+    },
+    "candidate_range_C": [
+      15.14536399042127,
+      29.069954257481484
+    ],
+    "champion_range_C": [
+      16.314603650986466,
+      29.096716136024497
+    ],
+    "endpoint_baseline": {
+      "rows": 26061,
+      "finite": true,
+      "minimum_C": 13.546840909090907,
+      "maximum_C": 31.960976555455364
+    },
+    "profile_projection": {
+      "eligible_rows": 18357,
+      "active_rows": 0,
+      "max_abs_delta_C": 0.0
+    },
+    "influence": {
+      "signal": "maximum_absolute_deviation_of_training_standardized_signed_exact10min_layer_changes_from_simultaneous_cross_layer_median",
+      "public_layers": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "minimum_available_public_layers": 3,
+      "per_layer_training_stats": {
+        "1": {
+          "training_exact10min_differences": 16211,
+          "median_signed_difference_C": -0.0005999999999986017,
+          "mad_C": 0.07730000000000103,
+          "robust_scale_C": 0.11460498000000152
+        },
+        "5": {
+          "training_exact10min_differences": 16161,
+          "median_signed_difference_C": 0.0017999999999993577,
+          "mad_C": 0.36499999999999844,
+          "robust_scale_C": 0.5411489999999977
+        },
+        "6": {
+          "training_exact10min_differences": 15159,
+          "median_signed_difference_C": 0.0023999999999997357,
+          "mad_C": 0.12980000000000125,
+          "robust_scale_C": 0.19244148000000183
+        },
+        "7": {
+          "training_exact10min_differences": 16221,
+          "median_signed_difference_C": -0.00019999999999953388,
+          "mad_C": 0.009199999999999875,
+          "robust_scale_C": 0.013639919999999814
+        }
+      },
+      "query_rows": 26061,
+      "query_rows_minimum_layers_available": 25865,
+      "active_rows": 15067,
+      "active_share": 0.5781435862016039,
+      "weight_min": 0.5,
+      "weight_mean": 0.7472310258070174,
+      "rows_deleted": 0,
+      "target_truth_used": false,
+      "technical_recovery": "explicit_to_numpy_copy_true"
+    },
+    "finite_anomaly_score_rows": 25865
+  },
+  "hidden_score_upload_access": 0
+}

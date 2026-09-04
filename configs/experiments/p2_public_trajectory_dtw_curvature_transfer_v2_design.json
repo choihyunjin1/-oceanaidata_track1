@@ -1,0 +1,239 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.design.v2",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+  "created_at_kst": "2026-08-26T07:20:24+09:00",
+  "problem": "P2",
+  "cycle_index": 1,
+  "problem_cycle_ceiling": 2,
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "design_only": true,
+  "amendment_lineage": {
+    "base_design_path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+    "base_design_bytes": 15387,
+    "base_design_sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+    "base_design_mutated": false,
+    "amendment_scope": "Operational completeness, chronology correction, exact truth verification, lazy p100 access, computed slice integrity, and crash-safe execution only.",
+    "scientific_hypothesis_changed": false,
+    "six_cell_search_changed": false,
+    "validation_surfaces_changed": false,
+    "numeric_decision_gates_changed": false,
+    "frozen_before_v2_code_fit_or_result": true,
+    "v2_fit_calls_at_freeze": 0,
+    "v2_materializations_at_freeze": 0
+  },
+  "trigger_resolution": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2_trigger_resolution.json",
+    "required_state": "independent QA PASS plus separately sealed external authorization",
+    "branch": "FROZEN_EXACT_INCUMBENT_ONLY",
+    "ncr_v1r7_state": "UNEVALUATED_INFRASTRUCTURE_FAILURE_AFTER_THREE_COMPLETED_FITS_NO_VALID_METRICS",
+    "ncr_scientific_result_assumed": false,
+    "fail_closed_if_unverified": true
+  },
+  "authorization_contract": {
+    "implementation_authorized": true,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "requires_new_external_authorization": true,
+    "maximum_lifetime_numerical_attempts_if_authorized": 1,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "cycle_relation": {
+    "this_is_cycle": "P2_CYCLE_1_OF_EXACTLY_2",
+    "cycle_2_design_path": "configs/experiments/p2_trajectory_incremental_group_balanced_meta_v1_design.json",
+    "cycle_2_eligible_only_after": "This cycle reaches terminal RESEARCH_GO on exact same-season and locked p100 with every integrity and slice gate passing.",
+    "cycle_2_prohibited_after": [
+      "exact same-season RESEARCH_NO_GO",
+      "locked p100 RESEARCH_NO_GO",
+      "unevaluated required gate",
+      "integrity, chronology, truth, or leakage failure"
+    ],
+    "third_cycle_allowed": false,
+    "result_driven_substitute_cycle_allowed": false
+  },
+  "hypothesis": "A whole-trajectory match of public-layer temperature and salinity can identify historical vertical-curvature regimes that pointwise analogs miss. Transferring only the historical target-layer residual from contemporaneous public-depth interpolation, rather than absolute target temperature, can achieve transport-sized improvement while failing closed to the frozen anchor when trajectory support is weak.",
+  "immutable_aggregate_inputs": [
+    {"path": "reports/leaderboard_gap_research_20260826_v1/research_snapshot.json", "bytes": 7350, "sha256": "943ff9ac9723c36445a2a6af2112073799a4bf52185fde91d1e6e5bad9bdfb45", "role": "planning evidence"},
+    {"path": "artifacts/p2_matched_budget_local_compare_20260825_v1/comparison.json", "bytes": 11091, "sha256": "3db8dae64f03b1c8a98873e2def80d5093c909a21687ed0799fe9cb61267ee30", "role": "aggregate exact comparator evidence"},
+    {"path": "artifacts/p2_matched_budget_local_compare_20260825_v1/manifest.json", "bytes": 5802, "sha256": "fc6db1f65a701da38df1ab1327904056678155fc5cbf7a80988dae564f59ce7e", "role": "aggregate exact integrity evidence"},
+    {"path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/result.json", "bytes": 78560, "sha256": "049d2a8279b4567787dcad562972440a2d135d4f4215f4ebd59478b072131cdc", "role": "locked p100 aggregate transport evidence"},
+    {"path": "artifacts/p2_authoritative_nested_surrogate_postexecution_qa_20260825_v5/manifest.json", "bytes": 1821, "sha256": "099a15480b33c039571a2bac41059b7e07dac5afe1c350c6b5bc8217e733d633", "role": "locked p100 aggregate QA"}
+  ],
+  "sealed_numerical_inputs": {
+    "historical_observations": {
+      "path": "C:/Users/cedis/Downloads/p2/데이터셋_P2/P2_profile_restore/observations.csv",
+      "bytes": 49058719,
+      "sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "access": "Only inside a separately authorized worker through a held-byte handle."
+    },
+    "exact_anchor": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "access": "Hash and parse only inside a separately authorized worker before exact scoring."
+    },
+    "locked_p100_anchor": {
+      "path": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v5/evaluated_oof_100.parquet",
+      "bytes": 8095900,
+      "sha256": "e83090138df39d1af42e6eb622262b8f87814281754b8f2df090232cc5628526",
+      "access": "DEFERRED: neither hash nor parse until exact RESEARCH_GO is durably recorded."
+    }
+  },
+  "data_features_target_firewall": {
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "query_features": ["public-layer temperature", "public-layer salinity", "public-layer missingness masks", "6-hour public-layer deltas", "24-hour public-layer deltas", "M2 sine", "M2 cosine", "M2 amplitude", "M2 phase"],
+    "training_target": "Historical truth temperature minus contemporaneous piecewise-linear public-depth temperature interpolation.",
+    "source_residual_must_be_strictly_historical": true,
+    "query_target_temperature_or_salinity_as_feature": false,
+    "target_layer_query_metadata_beyond_layer_id_and_depth": false,
+    "source_prefix_only_scaling": "Robust median and IQR are computed only from each eligible historical source prefix; query rows never update scaling.",
+    "joint_pseudo_gap_mask": "Temperature and salinity for target layers 2, 3, and 4 are jointly hidden before any feature, scaling, prefilter, trajectory, or residual construction.",
+    "official_evaluation_data_metadata_score_or_rank_used": false
+  },
+  "operational_numeric_amendment": {
+    "raw_grid_minutes": 10,
+    "comparison_grid_minutes": 60,
+    "comparison_grid_aggregation": "For each UTC-ns hour [h,h+60m), take the channel median of finite raw 10-minute values; missingness is one minus finite/raw expected count; label at h. No interpolation across hours.",
+    "context_hourly_rows": {"1_day": 24, "3_day": 72, "7_day": 168},
+    "query_unit": "One KST calendar day at a time. For query day D, query_start is D 00:00 KST and the public trajectory is [query_start-context_days, query_start). The transferred daily residual template is applied only to target timestamps in [D 00:00,D+1 00:00).",
+    "source_end_grid": "KST midnight daily grid, exclusive source endpoint. A source trajectory is [source_end-context_days,source_end).",
+    "source_end_grid_step_hours": 24,
+    "prefilter_k": 16,
+    "prefilter": "Compute source-prefix-robust-scaled per-channel median, IQR, first-last slope, coverage, and missingness summaries; rank squared Euclidean distance; ties by source_end UTC-ns; run constrained DTW only on first 16.",
+    "operational_rationale": "An hourly trajectory retains the registered 1/3/7-day shape and 6h/24h dynamics while bounding the 12-hour DTW corridor. Sixteen prefilter candidates are at least twice k=7, preventing the prefilter from defining support too narrowly. Daily source ends avoid an unregistered dense endpoint search and make chronology auditable.",
+    "timezone_and_integer_time": "Parse timezone-aware values, convert to UTC, explicitly convert to datetime64[ns], use DatetimeIndex.as_unit('ns').asi8, and reconstruct only with pd.to_datetime(value,unit='ns',utc=True).",
+    "source_embargo": {
+      "minimum_full_days": 7,
+      "required_formula": "source_end <= query_start - 7 days for every considered and selected source trajectory",
+      "comparison_against_query_window_end_forbidden": true,
+      "candidate_level_assertion_required": true,
+      "selected_neighbor_level_assertion_required": true
+    },
+    "sakoe_chiba_corridor_hours": 12,
+    "path_slope_source_steps_per_query_step_min": 0.5,
+    "path_slope_source_steps_per_query_step_max": 2.0,
+    "maximum_prefilter_candidates_per_query": 16,
+    "maximum_dtw_matrix_cells_per_pair": 400000,
+    "maximum_working_array_bytes": 536870912
+  },
+  "trajectory_algorithm": {
+    "method": "constrained multichannel dynamic time warping",
+    "context_days": [1, 3, 7],
+    "neighbor_counts": [3, 7],
+    "deterministic_cells": 6,
+    "distance_channel_weights": {"public_temperature_level": 1.0, "public_salinity_level": 0.5, "6h_and_24h_deltas": 0.5, "missingness_masks": 0.25, "M2_channels": 0.25},
+    "neighbor_weight": "1/(1+normalized_dtw_distance)",
+    "residual_aggregation": "weighted median at each aligned target-layer timestamp",
+    "historical_residual_clip_quantiles": [0.01, 0.99],
+    "minimum_public_coverage": 0.70,
+    "maximum_normalized_dtw_distance": 3.0,
+    "minimum_finite_neighbor_target_count": 3,
+    "weak_support_policy": "Return the exact anchor prediction bit-for-bit with correction zero.",
+    "endpoint_missing_policy": "If public L1 or L5 is missing or nonfinite at a target timestamp, return the exact anchor prediction bit-for-bit with correction zero for that target timestamp.",
+    "projection": "Append fixed finite public endpoints L1 and L5 to candidate L2-L4 and project the five values onto the endpoint-determined monotone direction while keeping endpoints fixed; equal endpoints project to the constant endpoint.",
+    "blend_or_projection_search": false,
+    "fitted_model": false
+  },
+  "leakage_safe_splits": {
+    "timezone": "Asia/Seoul",
+    "inner_joint_target_mask_windows": [
+      {"id": "inner_2024_mar", "validation_start": "2024-03-01T00:00:00+09:00", "validation_end_exclusive": "2024-04-01T00:00:00+09:00", "legacy_window_source_end_lte": "2024-02-22T23:50:00+09:00", "effective_candidate_rule": "For each query day, source_end <= query_start - 7 days."},
+      {"id": "inner_2024_may", "validation_start": "2024-05-01T00:00:00+09:00", "validation_end_exclusive": "2024-06-01T00:00:00+09:00", "legacy_window_source_end_lte": "2024-04-23T23:50:00+09:00", "effective_candidate_rule": "For each query day, source_end <= query_start - 7 days."},
+      {"id": "inner_2024_jul", "validation_start": "2024-07-01T00:00:00+09:00", "validation_end_exclusive": "2024-08-01T00:00:00+09:00", "legacy_window_source_end_lte": "2024-06-23T23:50:00+09:00", "effective_candidate_rule": "For each query day, source_end <= query_start - 7 days."}
+    ],
+    "exact_same_season_surface": {"validation_start": "2024-09-01T00:00:00+09:00", "validation_end_exclusive": "2024-11-01T00:00:00+09:00", "aligned_rows": 26273, "kst_days": 61, "single_use_after_inner_lock": true},
+    "locked_p100_surface": {"rows": 78156, "folds": ["outer_2024_sep_oct", "outer_2025_may_jun", "outer_2025_jul_aug"], "single_use_only_after_exact_RESEARCH_GO": true, "may_not_select_cell_or_support_rule": true, "hash_and_parse_deferred_until_exact_gate": true},
+    "selection_rule": "Select one of six cells using only joint temperature/salinity pseudo-gaps in 2024 March, May, and July; exact and p100 labels never select a cell.",
+    "exact_key_alignment_required": true
+  },
+  "fixed_search_and_budget": {
+    "cells": [
+      {"id": "d1_k3", "context_days": 1, "neighbors": 3},
+      {"id": "d1_k7", "context_days": 1, "neighbors": 7},
+      {"id": "d3_k3", "context_days": 3, "neighbors": 3},
+      {"id": "d3_k7", "context_days": 3, "neighbors": 7},
+      {"id": "d7_k3", "context_days": 7, "neighbors": 3},
+      {"id": "d7_k7", "context_days": 7, "neighbors": 7}
+    ],
+    "selection": "Minimize equal-weight mean inner-window, equal-weight layer RMSE; ties by lower worst-window RMSE, shorter context, fewer neighbors.",
+    "model_fit_calls": 0,
+    "inner_materializations": 18,
+    "exact_materializations": 1,
+    "maximum_locked_p100_fold_materializations": 3,
+    "maximum_total_materializations": 22,
+    "grid_or_support_expansion": false,
+    "result_driven_rerun": false
+  },
+  "truth_and_key_verification": {
+    "exact_observation_truth_independent": true,
+    "procedure": "Independently build sorted (UTC-ns time,layer,truth) keys from held historical observations for 2024-09-01 through 2024-10-31 KST and layers 2-4; verify anchor keys and anchor truth against this frame before candidate scoring; then verify candidate keys against the independently verified frame.",
+    "anchor_truth_must_match_observation_truth": true,
+    "candidate_truth_column_used": false,
+    "row_count": 26273,
+    "time_contract": {"minimum_kst": "2024-09-01T00:00:00+09:00", "maximum_kst": "2024-10-31T23:50:00+09:00", "kst_days": 61, "raw_step_minutes": 10, "utc_ns_roundtrip": true, "nat_count": 0},
+    "bootstrap_minimum_distinct_kst_days": 2,
+    "duplicate_or_missing_key_policy": "Fail closed before scoring."
+  },
+  "evaluation": {
+    "comparator": "Frozen exact incumbent selected by the independently approved trigger resolution.",
+    "primary_metric": "row-pooled RMSE in raw degrees Celsius",
+    "primary_delta": "candidate minus anchor; negative is improvement",
+    "paired_bootstrap": {"unit": "KST day", "replicates": 5000, "seed": 20260826, "confidence": 0.90},
+    "secondary_metrics": ["layer-equal RMSE", "layer deltas", "weekly deltas and p90 regression", "support and exact no-op rates", "DTW distance deciles", "public missingness deciles", "trajectory coverage deciles", "fold", "layer", "season", "distance-by-layer", "finite values", "exact key alignment"]
+  },
+  "locked_p100_slice_contract": {
+    "lazy_access": "P100 path is not opened, stat-hashed, byte-hashed, or parsed until the exact RESEARCH_GO event is durably journaled.",
+    "required_computed_slices": ["fold", "layer", "season", "DTW-distance decile", "public-missingness decile", "trajectory-coverage decile", "DTW-distance-decile by layer"],
+    "binning": "Decile edges are computed from finite supported rows on the entire locked p100 surface using deterministic linear quantiles; repeated edges collapse deterministically and are reported. No bin or threshold is selected from performance.",
+    "derived_not_hardcoded": true,
+    "integrity": "For every partitioning slice family, row counts plus explicit nonfinite/unsupported buckets equal 78156; all metric values on nonempty finite buckets are derived from row-level verified keys and truth; fold and layer gate values are computed from those aggregates.",
+    "required_slices_logged_gate": "True only when the slice validator derives complete inventories, population identities, finite metrics, and digest lineage; it may never be assigned as a literal constant.",
+    "performance_thresholds_added": false
+  },
+  "decision_gates": {
+    "RESEARCH_GO": {
+      "exact_same_season": {"row_pooled_delta_rmse_c_lte": -0.060, "paired_ci90_upper_c_lte": -0.040, "each_layer_delta_rmse_c_lte": 0.003, "layer4_delta_rmse_c_lt": 0.0, "weekly_delta_rmse_c_p90_lte": 0.015, "all_values_finite": true, "weak_support_exact_anchor_fallback": true, "exact_key_alignment": true},
+      "locked_p100": {"row_pooled_delta_rmse_c_lt": 0.0, "paired_ci90_upper_c_lt": 0.0, "minimum_improving_folds_of_3": 2, "minimum_improving_layers_of_3": 2, "worst_fold_delta_rmse_c_lte": 0.010, "worst_layer_delta_rmse_c_lte": 0.005, "distance_missingness_coverage_fold_layer_and_season_slices_logged": true, "no_p100_tuning_or_rerun": true}
+    },
+    "SUBMISSION_GO": {"research_only_label": true, "all_RESEARCH_GO_gates": true, "exact_row_pooled_delta_rmse_c_lte": -0.0759, "exact_paired_ci90_upper_c_lte": -0.050, "locked_p100_row_pooled_delta_rmse_c_lte": -0.030, "locked_p100_paired_ci90_upper_c_lt": 0.0, "all_layer_deltas_lte": 0.0, "independent_aggregate_QA": "PASS", "exact_reproduction_from_pinned_inputs": true},
+    "preferred_effect": {"exact_row_pooled_delta_rmse_c_lte": -0.0759, "approximate_planning_point_gain_gte": 0.9523},
+    "stretch_effect": {"exact_row_pooled_delta_rmse_c_lte": -0.093, "approximate_planning_point_gain_gte": 1.1670},
+    "failure_label": "RESEARCH_NO_GO_CLOSE_P2_TRAJECTORY_TRANSFER_FAMILY"
+  },
+  "fair_incumbent_control": {
+    "anchor_prediction_is_frozen": true,
+    "same_exact_and_p100_keys": true,
+    "same_independently_verified_truth_metric_and_projection": true,
+    "candidate_exact_no_op_on_weak_support_or_missing_endpoint": true,
+    "no_model_fit_advantage": true,
+    "matched_incremental_model_confirmation_reserved_for_cycle_2": true
+  },
+  "exact_once_and_failure_contract": {
+    "single_permanent_claim": "create-only file, fully flushed, file-fsynced, then parent directory fsynced before work",
+    "journal": "append-only NDJSON; each record flushed and file-fsynced; parent directory fsynced after creation",
+    "atomic_result_build": "write unique create-only temporary file in staging, flush and fsync it, atomically replace a staging name, then fsync the staging directory",
+    "publication": "create-only hardlinks into a new final directory; verify byte identity; publish exactly one terminal marker last; fsync each file and final directory",
+    "terminal_exclusivity": "Exactly one terminal state across durable journal terminal, validated OOB terminal, and final terminal marker. Any conflict fails closed without overwriting either record.",
+    "oob": "Create-only OOB receipt with experiment/attempt/design/authorization identity, complete observed inventory with bytes and hashes, sanitized error provenance, file fsync and directory fsync; re-read and verify identity plus inventory.",
+    "error_provenance": "Sanitized exception type, defining module, message SHA-256, traceback SHA-256, and frame module/function names; no local variables, raw data, or secrets.",
+    "windows_process_tree": "Enumerate root and all descendants before termination; terminate the full tree; enumerate again and verify root plus every captured descendant absent; store only PID inventory and aggregate proof.",
+    "resume_or_rerun": false
+  },
+  "resource_ceiling": {
+    "maximum_model_fit_calls": 0,
+    "maximum_total_materializations": 22,
+    "maximum_parallel_workers": 3,
+    "hard_wall_seconds": 7200,
+    "maximum_process_tree_rss_bytes": 1610612736,
+    "maximum_working_array_bytes": 536870912,
+    "full_deployment_fits": 0,
+    "candidate_file_materializations": 0,
+    "automatic_resume_or_rerun_count": 0
+  },
+  "future_outputs_if_separately_authorized": {"aggregate_only": true, "allowed": ["result.json", "manifest.json", "report_ko.md", "terminal.json"], "row_level_predictions_persisted": false, "candidate_csv_created": false},
+  "prohibitions": {"official_test_reads": 0, "sample_submission_reads": 0, "submission_candidate_reads": 0, "submission_files_generated": 0, "uploads": 0, "official_score_or_rank_used_for_selection": 0, "post_result_tuning": 0, "grid_or_support_expansion": 0, "result_driven_reruns": 0, "third_cycle": 0, "P3_mutations_or_fits": 0},
+  "P3_deprioritization": {"current_observed_point_headroom": 0.374402, "reason": "P3 headroom alone cannot produce the requested 2-3 points; preserve its separate frozen experiment and prioritize P2.", "P3_contract_changes_authorized": false},
+  "limitations": ["The exact surface is one 2024 September-October regime.", "DTW can match coincidental public-layer shapes without target-layer hysteresis.", "Hourly aggregation can discard sub-hour structure.", "Daily source endpoints can miss useful intraday analogs but are frozen to prevent implicit search.", "The monotone endpoint projection can oversmooth inversions.", "The locked p100 surface is a local proxy, not an official-score oracle.", "Passing gates does not authorize candidate generation or upload."]
+}

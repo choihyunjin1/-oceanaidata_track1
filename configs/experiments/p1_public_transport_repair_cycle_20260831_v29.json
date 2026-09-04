@@ -1,0 +1,18 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v29-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v29",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_INNER_GROUP_DAY_GUARDED_LABEL_SHIFT_EM",
+  "lineage": {"v28_result": "CLOSED_UNCHANGED", "v28_model_and_em_parameters": "bit-exact", "result_rescoring": false, "retuning": false},
+  "model": {"inputs": ["probability_base", "probability_peer", "e150_probability"], "classifier": "sklearn_LogisticRegression", "C": 0.1, "solver": "lbfgs", "max_iter": 500, "tol": 1e-8, "fit_fraction": 0.75, "model_fits_per_outer": 1},
+  "em": {"maximum_iterations": 200, "tolerance": 1e-10, "epsilon": 1e-6, "source_prevalence": "inner anchor-negative truth prevalence", "outer_labels": 0},
+  "inner_selector": {"split": "last chronological 25 percent", "base_threshold": "v28 exact add-only F1 selector", "group_keys": ["station", "layer"], "minimum_proposed_additions_per_group": 20, "group_gates": ["marginal precision > whole-inner anchor F1/2", "within-group candidate delta F1 >= 0"], "outer_labels_used": false},
+  "outer_day_guard": {"timezone": "Asia/Seoul", "maximum_changed_fraction_per_day": 0.005, "ranking": "label-free adjusted probability descending", "tie_break": "stable original row index ascending", "minimum_slots": 0},
+  "validation": {"nested_fits": [{"train_folds": ["2025_q2"], "validation_fold": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "validation_fold": "2025_q4"}], "maximum_model_fits": 2, "bootstrap_replicates": 5000, "bootstrap_seed": 20260929},
+  "transport": {"calibration_version": "v3", "calibration_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10", "family_id": "P1_GROUP_DAY_GUARDED_LABEL_SHIFT_EM", "tier_id": "SMOOTH_LEARNED_PROFILE", "transport_penalty_points": 0.005383691373120247},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.015383691373120248, "minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.005383691373120247, "score_points_per_f1": 26.578120867377286, "minimum_each_q3_q4_delta_f1": 0.0, "bootstrap_ci90_low_strictly_above_f1": 0.0, "anchor_removals_required": 0},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_changed_fraction_any_kst_day": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "minimum_each_supported_station_layer_delta_f1": 0.0},
+  "fit_budget": {"historical_model_fits": 2, "maximum": 2, "searches": 0, "retries": 0},
+  "resource_caps": {"wall_seconds": 900, "rss_bytes": 4294967296, "vram_bytes": 0},
+  "authorization": {"synthetic_preflight": true, "historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "submission_csv_created": 0, "uploads": 0}
+}

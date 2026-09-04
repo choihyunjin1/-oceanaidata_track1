@@ -1,0 +1,246 @@
+{
+  "schema_version": "p3.lead_continuous_fresh_episode_confirmation.preregistration.20260830.v3",
+  "status": "PREREGISTERED_EXACTLY_ONCE_FRESH_SINGLE_EPISODE",
+  "experiment_id": "p3_lead_continuous_fresh_episode_confirmation_20260830_v3",
+  "created_at_kst": "2026-08-30T18:44:00+09:00",
+  "governing_policy": {
+    "path": "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json",
+    "sha256": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65",
+    "required_status": "GOVERNING_FUTURE_RESEARCH_POLICY_NO_OFFICIAL_ACTION"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p3_lead_continuous_fresh_episode_confirmation_20260830_v3.json",
+    "runner": "scripts/run_p3_lead_continuous_fresh_episode_confirmation_20260830_v3.py",
+    "implementation": "src/p3_wave/p3_lead_continuous_fresh_episode_confirmation_20260830_v3.py",
+    "focused_tests": "tests/test_p3_lead_continuous_fresh_episode_confirmation_20260830_v3.py",
+    "qa_runner": "scripts/qa_p3_lead_continuous_fresh_episode_confirmation_20260830_v3.py",
+    "output_dir": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3",
+    "attempt_lock": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/ATTEMPT_LOCK.json",
+    "blind_seal": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/blind_prediction_seal.json",
+    "result": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/result.json",
+    "failure": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/FAILED.json",
+    "qa_result": "reports/p3_lead_continuous_fresh_episode_confirmation_20260830_v3/independent-qa.json"
+  },
+  "data_boundary": {
+    "explicit_p3_dir_required": true,
+    "allowed_source_basenames": [
+      "README.md",
+      "train_wave.csv",
+      "train_atmos.csv"
+    ],
+    "load_p3_data_allowed": false,
+    "directory_listing_allowed": false,
+    "environment_fallback_allowed": false,
+    "official_test_context_index_sample_baseline_score_submission_hidden_reads": 0,
+    "csv_output_count": 0,
+    "raw_prediction_rows_persisted": 0,
+    "upload_count": 0
+  },
+  "expected_source_sha256": {
+    "README.md": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "fresh_surface": {
+    "metadata_audit_completed_before_target_value_access": true,
+    "historical_three_window_fresh_case_count": 0,
+    "window_name": "post_h1_fresh_episode",
+    "start_utc_inclusive": "2025-06-25T00:00:00+00:00",
+    "end_utc_exclusive": "2025-07-01T00:00:00+00:00",
+    "same_station_exposure_separation_hours": 78,
+    "station_global_internal_spacing_hours": 78,
+    "expected_canonical_window_anchor_count": 5,
+    "expected_fresh_dense_count": 5,
+    "expected_fresh_independent_case_count": 1,
+    "expected_fresh_by_station": {
+      "S-ORS": 1
+    },
+    "selection_columns": [
+      "anchor_id",
+      "station",
+      "anchor_time"
+    ],
+    "target_values_used_to_choose_surface": 0,
+    "candidate_or_incumbent_values_used_to_choose_surface": 0,
+    "claim_limit": "This is one genuinely time-disjoint historical episode, not a representative multi-episode confirmation surface. Any point direction remains inconclusive without a dependence interval."
+  },
+  "exposure_registry": {
+    "all20_anchor_map": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "legacy_anchor_map": {
+      "path": "artifacts/p3/features_v1/train_anchors.parquet",
+      "sha256": "d7cb6fc7ae3fb4dd3e792d2eb1d97adbc1ce8ddda3d78e6a093f2fa59f7205ea"
+    },
+    "surfaces": [
+      {
+        "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet",
+        "anchor_map": "all20",
+        "sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e"
+      },
+      {
+        "path": "artifacts/p3/final_ensemble_validation/oof.parquet",
+        "anchor_map": "all20",
+        "sha256": "4ca2b0227ddcf010100899b7bd91bc5370cc5b1fb74998fc85545d5ac94b69ca"
+      },
+      {
+        "path": "artifacts/p3_event_balanced_trajectory_v1/blind_predictions.parquet",
+        "anchor_map": "all20",
+        "sha256": "56f0b87fe83d4066363bf58ec92d75cd06284cf307e1d148c30b8bfb8f0c7ec1"
+      },
+      {
+        "path": "artifacts/p3_revin_patch_v1/recovery_181_sealed_blind/pre_open/intersection_keys.parquet",
+        "anchor_map": "all20",
+        "sha256": "7822a95e2d93e0a084979a90acf21fea44cef44ed60a805ba56979f981a40a6f"
+      },
+      {
+        "path": "artifacts/p3/initial_tournament/oof.parquet",
+        "anchor_map": "legacy",
+        "sha256": "561d668953454ac9e0c933859117abe38012d9b3aefb122764a88b7bae288691"
+      }
+    ],
+    "selection_matched_surface_reconstructed_from_stage0": true,
+    "selection_matched_validation_case_count": 157,
+    "prior_surface_audit": {
+      "path": "artifacts/structural_challenger_20260827_v1/p3_confirmation_surface_audit.json",
+      "sha256": "ee4b55a2c437ab76a257149833272ecef5c4a33da4dcb2d032d4fa88815e651d"
+    }
+  },
+  "canonical_builder": {
+    "stage0_runner": {
+      "path": "scripts/run_p3_selection_matched_cohort_preflight_20260830_v1.py",
+      "sha256": "cc9bae8199226b90631691f4025bdc5cc6b1f5d5e3dd637038207957e21a58df"
+    },
+    "stage0_config": {
+      "path": "configs/experiments/p3_selection_matched_cohort_preflight_20260830_v1.json",
+      "sha256": "945f9c552389a18f294581457805ee4defea7904a5cfd0574e515da858a4c6ba"
+    },
+    "expected_canonical_anchor_count": 8121,
+    "canonical_grid_minutes": 10,
+    "canonical_dense_anchor_minutes": 60,
+    "history_hours": 48,
+    "official_leads_hours": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ]
+  },
+  "candidate_recipe": {
+    "family": "exact_continuous_lead_regime_persistence_axis_ridge",
+    "source_runner": {
+      "path": "scripts/run_p3_lead_continuous_challenger_20260827_v1.py",
+      "sha256": "50787bc3308623f57a76dfdf22246f85ff770e5f6df7688db2cc83f845e12dbf"
+    },
+    "source_metrics": {
+      "path": "artifacts/structural_challenger_20260827_v1/p3/metrics.json",
+      "sha256": "5343dfd5846f2ed21bfe1b1e033e9acebf03385e98d79bf9693486cb3ba5ee8c"
+    },
+    "history_surface": "all 181 completed corrected-v2 OOF cases, chronologically earlier and at least 78h separated from the fresh episode",
+    "basis": [
+      "lead_linear",
+      "lead_quadratic",
+      "lead_x_wave_trend",
+      "lead_x_wave_volatility",
+      "lead_x_wind_trend",
+      "lead_x_pressure_fall"
+    ],
+    "regime_features": [
+      "hs_delta_3h",
+      "hs_std_6h",
+      "wspd_delta_3h",
+      "caph_delta_6h"
+    ],
+    "ridge_alpha": 16.0,
+    "robust_z_clip": 3.0,
+    "weight_bounds": [
+      -0.25,
+      0.5
+    ],
+    "maximum_absolute_correction_m": 0.15,
+    "prediction_domain_m": [
+      0.0,
+      30.0
+    ],
+    "candidate_fit_count": 1,
+    "hyperparameter_search_count": 0,
+    "result_based_tuning": false,
+    "outlier_hard_deletion_count": 0
+  },
+  "paired_incumbent": {
+    "family": "saved_corrected_v2_2025_h1_components_plus_saved_full_oof_router_and_fixed_long_lead_shrink",
+    "feature_columns": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/feature_columns.json",
+      "sha256": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+      "expected_count": 591
+    },
+    "single_model": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/models/folds/2025_h1/single.cbm",
+      "sha256": "d94669e42fe6fc295c42aebc1a5d0dfb468200100c13d53cbc33ec6233def631"
+    },
+    "multi_model": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/models/folds/2025_h1/multi.cbm",
+      "sha256": "9b01bfa0909d5cf5be5da8e140837dd7065606870437c8349f153be2fbb5508d"
+    },
+    "router_model": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/models/full/router.joblib",
+      "sha256": "897caa8e357b58db59f3ce8746a01fa85750f9379fc56d8ea00986cf5fed4bca"
+    },
+    "router_active_leads_hours": [
+      12,
+      18,
+      24
+    ],
+    "long_lead_persistence_shrink_weight": 0.2,
+    "catboost_fit_count": 0,
+    "router_fit_count": 0
+  },
+  "blinding": {
+    "prediction_functions_receive_target_columns": false,
+    "blind_prediction_hash_written_before_metric_evaluation": true,
+    "raw_predictions_persisted": 0,
+    "target_values_used_for_candidate_or_reference_fit": 0,
+    "six_leads_kept_intact": true
+  },
+  "uncertainty": {
+    "primary_unit": "fresh storm episode where available, otherwise contiguous anchor-day block with all six leads intact",
+    "available_independent_blocks_expected": 1,
+    "minimum_independent_blocks_for_interval": 2,
+    "when_insufficient": "Do not emit a degenerate bootstrap CI; report point RMSE and terminal INCONCLUSIVE_INSUFFICIENT_DEPENDENCE_UNITS.",
+    "legacy_row_or_anchor_iid_bootstrap_allowed": false
+  },
+  "decision_policy": {
+    "primary_metric": "paired pooled six-lead Hs RMSE_m",
+    "fatal_hard_gates_only": [
+      "schema, key, comparator and prediction lineage",
+      "freshness and temporal separation",
+      "target blinding and no official-interface access",
+      "finite predictions in [0,30]m",
+      "exactly-once/no-result-driven-retry contract"
+    ],
+    "legacy_minimum_0_01m_applied": false,
+    "legacy_minimum_0_005m_applied": false,
+    "legacy_two_of_three_windows_applied": false,
+    "legacy_worst_lead_cap_applied": false,
+    "insufficient_block_state": "INCONCLUSIVE_FRESH_SINGLE_EPISODE_INSUFFICIENT_DEPENDENCE_UNITS",
+    "submission_readiness_if_expected_support_observed": "NOT_READY_INSUFFICIENT_FRESH_SUPPORT",
+    "official_action_authorized": false
+  },
+  "execution_contract": {
+    "maximum_executions": 1,
+    "attempt_lock_before_training_target_access": true,
+    "technical_failure_auto_retry": false,
+    "result_based_retry": false,
+    "candidate_fit_count": 1,
+    "catboost_fit_count": 0,
+    "router_fit_count": 0,
+    "hyperparameter_search_count": 0,
+    "cpu_threads": 2,
+    "aggregate_json_only": true,
+    "csv_output_count": 0,
+    "upload_count": 0
+  }
+}

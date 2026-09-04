@@ -1,0 +1,86 @@
+{
+  "schema_version": "parallel_deep_research_execution.claim_ledger.20260828.v3",
+  "created_at_kst": "2026-08-28",
+  "claims": [
+    {
+      "id": "P1_LOCAL_001",
+      "claim": "Conditional real-event donors repaired pre-fit support but failed calibration quality.",
+      "evidence": "artifacts/p1_conditional_real_event_donor_20260828_v1/result.json",
+      "sha256": "b32fc6df07b30d315d1d3b09add4455686660ea69ba3b10134ac7f4e0a8c58f4",
+      "confidence": "high",
+      "limitation": "Historical surface; not official evidence."
+    },
+    {
+      "id": "P1_LIT_001",
+      "claim": "Causality-preserving and causality-disturbing augmentation is a documented multivariate anomaly-detection strategy.",
+      "source": "https://proceedings.mlr.press/v267/kim25aa.html",
+      "source_type": "peer_reviewed_primary",
+      "confidence": "high",
+      "limitation": "Not the same label regime or metric as P1."
+    },
+    {
+      "id": "P1_LIT_002",
+      "claim": "Time-aware MIL is designed to localize sparse temporal patterns from weak supervision.",
+      "source": "https://proceedings.mlr.press/v235/chen24af.html",
+      "source_type": "peer_reviewed_primary",
+      "confidence": "high",
+      "limitation": "Classification localization does not guarantee interval F1."
+    },
+    {
+      "id": "P2_LOCAL_001",
+      "claim": "The current quasi-periodic residual pilot was statistically positive in sign but operationally a near no-op and failed effect/fold gates.",
+      "evidence": "artifacts/p2_alpha40_quasiperiodic_gp_residual_20260828_v1/result.json",
+      "sha256": "c04755750357b8613f7372f98840ba8f8df365173af46524b4be339ee362da2e",
+      "confidence": "high",
+      "limitation": "Architecture-fresh commitment on historically exposed folds."
+    },
+    {
+      "id": "P2_LIT_001",
+      "claim": "GPR has been used for joint depth-level temperature and salinity anomaly reconstruction and provides uncertainty.",
+      "source": "https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2023.1121334/full",
+      "source_type": "peer_reviewed_primary",
+      "confidence": "high",
+      "limitation": "Different basin, sampling system, and target."
+    },
+    {
+      "id": "P2_LIT_002",
+      "claim": "Internal tides can be represented as density-surface vertical displacements with a two-mode approximation.",
+      "source": "https://os.copernicus.org/articles/20/945/2024/",
+      "source_type": "peer_reviewed_primary",
+      "confidence": "high",
+      "limitation": "Deep glider/steric-height result is not a P2 effect-size estimate."
+    },
+    {
+      "id": "P3_LOCAL_001",
+      "claim": "ERA5 pretraining beat persistence on source data and beat a matched local-only CatBoost control after continuation, but did not beat the incumbent.",
+      "evidence": "artifacts/p3_era5_context_transfer_dependency_recovery_20260828_v2/result.json",
+      "sha256": "ac92a530d230ea29c475e0b03acb7e16d577633b64401632cebb46fa4e0bbd2f",
+      "confidence": "high",
+      "limitation": "Local historical evidence only; domain AUC is near one."
+    },
+    {
+      "id": "P3_DOC_001",
+      "claim": "ERA5 atmospheric HRES is about 31 km and wave data use a different approximately 0.36 degree grid.",
+      "source": "https://confluence.ecmwf.int/pages/viewpage.action?pageId=177484060",
+      "source_type": "official_documentation",
+      "confidence": "high",
+      "limitation": "Documentation does not quantify buoy-site transfer error."
+    },
+    {
+      "id": "P3_DOC_002",
+      "claim": "CatBoost GPU training is nondeterministic due to floating-point summation order.",
+      "source": "https://catboost.ai/docs/en/features/training-on-gpu",
+      "source_type": "official_documentation",
+      "confidence": "high",
+      "limitation": "CPU determinism still depends on the frozen environment and seed."
+    },
+    {
+      "id": "P3_LIT_001",
+      "claim": "TimeXer explicitly separates endogenous patches and exogenous variables through self- and cross-attention.",
+      "source": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/0113ef4642264adc2e6924a3cbbdf532-Abstract-Conference.html",
+      "source_type": "peer_reviewed_primary",
+      "confidence": "high",
+      "limitation": "Benchmark evidence is not wave-transfer proof."
+    }
+  ]
+}

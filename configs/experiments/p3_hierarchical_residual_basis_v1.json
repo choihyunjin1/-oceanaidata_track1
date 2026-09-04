@@ -1,0 +1,234 @@
+{
+  "experiment_id": "p3_hierarchical_residual_basis_v1",
+  "status": "PREREGISTERED_APPEND_ONLY_ONE_SHOT_RESEARCH_NOT_UPLOAD_AUTHORIZATION",
+  "problem": "P3",
+  "target": "significant_wave_height_hs",
+  "metric": "pooled_row_RMSE_m",
+  "created_before_first_fit": true,
+  "canonical_paths": {
+    "config": "configs/experiments/p3_hierarchical_residual_basis_v1.json",
+    "goal_contract": "configs/goals/meaningful_score_maximization_v3.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "gen1_artifact": "artifacts/p3_meaningful_learning_curve_20260823_v1",
+    "gen4_artifact": "artifacts/p3_station_stable_energy_state_space_20260823_v1",
+    "v5_ledger": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "output": "artifacts/p3_hierarchical_residual_basis_20260823_v1",
+    "attempt_lock": "artifacts/p3_hierarchical_residual_basis_20260823_v1.ATTEMPT_LOCK.json",
+    "execution_claim": "artifacts/p3_hierarchical_residual_basis_20260823_v1.EXECUTION_CLAIM.json"
+  },
+  "implementation_sha256": {
+    "gen4_runner": "8169183b0e61ee57b05fdb85033a17c908971e8e908d13999bb7c83fd28e424f",
+    "gen4_config": "2d2df3d2b566f795fe005368e7294ff0d9493e84c8c17cc813ff076d24b4fd03",
+    "hierarchical_residual_basis_module": "857a319dc586b68c10d8b3037b23b4b725e5a3b6f29d0198bc9c266d06fa99fa",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "learning_curve_module": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "persistence_shrink_module": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "one_shot_guard_module": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5",
+    "goal_contract": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "goal_evaluator": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "v5_ledger_contract": "6c61e71016d3c4cf9b8a34e818ca865b7246e3b02ad2cb22348dd2a6e71d6b35",
+    "v5_ledger_evaluator": "aaf54e6cafac0cc01af7f3265af42a7a80e2738a4d5a682070bd47b41e4b0053"
+  },
+  "reference_evidence_sha256": {
+    "gen1_metrics": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1_learning_curve_oof": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1_manifest": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1_independent_qa": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "gen4_metrics": "f5b60e5fe2ea919d6d3fe51c5efac04485f48c6951e3a3f57a9a2e32fcea6a2e",
+    "gen4_learning_curve_evidence": "f0c76e0703ed7389845d4ab727a44713b8ea1f8a8b9703b7981703973e6c5382",
+    "gen4_manifest": "854a87bd21f9824bb969ba79b9af0032ebd24d6489184e0a8fddd953292bf3a0",
+    "gen4_validation_keys": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+  },
+  "reference_attestations": {
+    "gen4_independent_post_run_qa": "message-only GO P0=0 P1=0; 15 bundles and blind predictions, 5430 OOF rows, five 5000-replicate bootstraps, implementation and immutable inputs independently reproduced; no receipt file invented"
+  },
+  "central_ledger_anchor": {
+    "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v5",
+    "ledger_sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+    "ledger_bytes": 29320,
+    "event_count": 9,
+    "head_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066",
+    "gen4_event_seq": 9,
+    "gen4_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066",
+    "gen4_evidence_sha256": "f0c76e0703ed7389845d4ab727a44713b8ea1f8a8b9703b7981703973e6c5382",
+    "gen4_decision": "RESEARCH_ONLY",
+    "official_uploads_through_anchor": 0
+  },
+  "gen4_failure_diagnosis": {
+    "aggregate_only": true,
+    "prefix_deltas_candidate_minus_incumbent_m": [-0.0025356908031760605, -0.010028683070663624, -0.017955417385993044, 0.011800480928665702, 0.04281365149503025],
+    "full_delta_candidate_minus_incumbent_m": 0.04281365149503025,
+    "full_ci90_m": [0.015614564021500021, 0.07126510628717048],
+    "fold_delta_m": {
+      "2024_h2_storm": 0.09053949641633541,
+      "2025_h1": 0.0854559113195903,
+      "winter_transition": -0.01787575144076592
+    },
+    "critical_slice_delta_m": {
+      "G-ORS": 0.017575157839247568,
+      "I-ORS": 0.01711875427785914,
+      "S-ORS": 0.08583846036327791,
+      "winter": -0.01787575144076592,
+      "lead_12": 0.016614616266701243,
+      "lead_18": 0.026623473105682582,
+      "lead_24": 0.044068585623344925
+    },
+    "interpretation": "Gen4 has nominal early-prefix gains whose CI90 intervals all include zero, then reverses at 85 and 100 percent; the only confirmed result is full-data degradation concentrated in storm and H1 folds, S-ORS, and long leads. Gen5 tests a fixed hierarchical direct-forecast capacity/data-scaling hypothesis rather than tuning a shrink, alpha, seed, or router weight."
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "storm_threshold_hs_m": 1.5,
+    "raw_wave_episode_contiguous_minutes": 20,
+    "episode_reuse_within_validation": false,
+    "same_episode_train_validation": false,
+    "training_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_rule": "earliest_global_chronological_prefix_of_each_already_safe_outer_train_set",
+    "bootstrap_unit": "whole_complete_six_lead_case",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260823
+  },
+  "hypotheses": [
+    {
+      "id": "hierarchical_residual_basis_nhits",
+      "structure": "case-local past-only 144-step 24-channel context; three 12/4/1 pooled residual stacks with two blocks each; hierarchical backcast residualization and 6/18/72 forecast-knot interpolation; one direct 72-step residual path conditioned on fixed train-only static features and station",
+      "structurally_distinct_from": [
+        "CatBoost scalar or multi-output trees",
+        "TCN GRU recurrent or convolutional sequence encoder",
+        "spectral random-feature kernel regression",
+        "linear state-space open-loop transition rollout",
+        "NLinear direct multi-horizon regression",
+        "analog retrieval",
+        "shrink alpha or router weight adjustment"
+      ],
+      "selection_or_weight_search": false,
+      "score_derived_tuning": false,
+      "prior_exposure_note": "preregistered only after sealed Gen4 aggregate failure; architecture and optimizer constants were fixed before any Gen5 fit and were not selected on Gen5 validation scores"
+    }
+  ],
+  "hierarchical_basis": {
+    "source": "case-local train sequence cache with no anonymous-test value reads",
+    "raw_context_steps": 289,
+    "raw_cadence_minutes": 10,
+    "prepared_context_steps": 144,
+    "prepared_cadence_minutes": 20,
+    "prepared_channels": 24,
+    "pooling_factors": [12, 4, 1],
+    "blocks_per_stack": 2,
+    "forecast_knot_counts": [6, 18, 72],
+    "forecast_steps": 72,
+    "official_target_indices_zero_based": [8, 17, 26, 35, 53, 71],
+    "optimizer_target_surface": "six physically sliced official lead deltas only",
+    "dense_future_label_builder": false,
+    "static_scaler": "exact_prefix_fold_train_only_componentwise_median_iqr_plus_finite_mask",
+    "missing_value_rule": "train-scaler-centered zero plus explicit finite mask"
+  },
+  "model": {
+    "class": "HierarchicalResidualBasisForecaster",
+    "raw_context_steps": 289,
+    "prepared_context_steps": 144,
+    "prepared_channels": 24,
+    "stack_pooling_factors": [12, 4, 1],
+    "blocks_per_stack": 2,
+    "hidden_width": 192,
+    "conditioning_width": 128,
+    "dropout": 0.1,
+    "forecast_steps": 72,
+    "forecast_knot_counts": [6, 18, 72],
+    "official_target_indices_zero_based": [8, 17, 26, 35, 53, 71],
+    "seed_replicates": [20260816, 20260817, 20260818],
+    "expected_trainable_parameter_count": 4125120,
+    "hyperparameter_search": false,
+    "expected_actual_fit_cells": 45,
+    "expected_optimizer_steps": 10260
+  },
+  "training": {
+    "epochs": 12,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "device": "cuda",
+    "precision": "bfloat16_autocast_float32_optimizer",
+    "early_stopping": false,
+    "warm_start_across_prefix_seed_or_fold": false,
+    "expected_actual_fit_cells": 45,
+    "expected_optimizer_steps": 10260
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_gen1_comparator": true,
+    "new_router_or_blend": false
+  },
+  "comparator": {
+    "source": "sealed Gen1 fresh-refit exact-current structure at every prefix and seed, aggregated by prediction mean",
+    "source_oof_path": "artifacts/p3_meaningful_learning_curve_20260823_v1/oof/learning_curve_oof.parquet",
+    "source_oof_sha256": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "fresh_refit_each_prefix": true,
+    "reference_seed_full_prediction_exact_to_historical_frozen_oof": false,
+    "fail_closed_surrogate_only_if_false": true
+  },
+  "gate": {
+    "baseline": "same_prefix_same_fold_sealed_gen1_exact_current_structure_prediction_mean",
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_upper_below_zero": true,
+    "full_delta_candidate_minus_incumbent_m_at_most": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_critical_slice_regression_m": 0.0075,
+    "critical_slices": ["G-ORS", "I-ORS", "S-ORS", "winter", "lead_12", "lead_18", "lead_24"],
+    "all_split_leakage_and_reproducibility_checks": true,
+    "on_pass": "full_train_then_same_case_only_200_test_inference_and_byte_reproduction",
+    "on_no_pass": "seal_results_stop_before_test_reads",
+    "current_generation_fail_close": "inherited exact-reference mismatch makes every result research-only and forbids candidate or test inference"
+  },
+  "expected_sha256": {
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "source/test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+    "source/test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+    "source/sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "source/baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "compact_cache/manifest.json": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+    "compact_cache/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "compact_cache/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "sequence_cache/manifest.json": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+    "sequence_cache/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "sequence_cache/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "gen1/metrics.json": "41f1383cdf30a2ff28b3325008b6257c19e4e72297b2acd06e8dba305f2090c1",
+    "gen1/learning_curve_oof.parquet": "178f0e7b65268ea2de3ce09365c2e459f604b3489e35e9c8e44d92f12980e404",
+    "gen1/manifest.json": "e665c1480df18450d302a26c1aa7485e04e9525c6ad9f8e3d078648eb8386bb6",
+    "gen1/independent_qa.json": "a811d7c2f96348b68810359d0ad357ea6ba3d335a263bd95025e79c38896af98",
+    "frozen/current_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "frozen/current_manifest.json": "886637d3f7c92437a6ac40f0aee496d67b44f5913acf75a1502abb566e3c62fd",
+    "current/ready_submission.csv": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7"
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_hierarchical_residual_basis_20260823_v1",
+    "candidate_relative_path": "candidate/P3_HIERARCHICAL_RESIDUAL_BASIS_V1.csv",
+    "reproduced_candidate_relative_path": "candidate/P3_HIERARCHICAL_RESIDUAL_BASIS_V1_REPRODUCED.csv",
+    "uploaded": false
+  },
+  "prohibitions": {
+    "hyperparameter_search": true,
+    "shrink_alpha_or_weight_micro_tuning": true,
+    "dense_future_label_builder": true,
+    "absolute_test_timestamp_recovery": true,
+    "test_target_or_hidden_label_access": true,
+    "current_or_frozen_submission_mutation": true,
+    "submission_upload": true,
+    "config_copy_or_arbitrary_output": true,
+    "rerun_after_attempt_lock": true,
+    "candidate_path_traversal_or_overwrite": true
+  }
+}

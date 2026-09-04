@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0-permanent-no-go",
+  "experiment_id": "P1_ring_residual_inner_only_v1",
+  "family_id": "ring_residual_96_168h",
+  "created_at_kst": "2026-08-13T22:10:00+09:00",
+  "audit_decision": "permanent_no_go",
+  "scope": {
+    "maximum_time": "2025-03-24T23:50:00+09:00",
+    "targets_after_scope_visible": false
+  },
+  "features": [
+    "temp_ring_past_resid_96_168h",
+    "temp_ring_future_resid_96_168h",
+    "temp_ring_consensus_resid_96_168h",
+    "temp_ring_flank_disagreement_96_168h"
+  ],
+  "arms": [
+    "frozen_features",
+    "frozen_plus_4_ring"
+  ],
+  "inner_blocks": [
+    {
+      "name": "I1",
+      "ordinal": 0,
+      "train_end": "2024-06-23T14:50:00+00:00",
+      "validation_start": "2024-06-30T15:00:00+00:00",
+      "validation_end_exclusive": "2024-08-31T15:00:00+00:00",
+      "purge_days_minimum": 7,
+      "dependency_embargo_minimum_minutes": 10090,
+      "role": "development"
+    },
+    {
+      "name": "I2",
+      "ordinal": 1,
+      "train_end": "2024-09-23T14:50:00+00:00",
+      "validation_start": "2024-09-30T15:00:00+00:00",
+      "validation_end_exclusive": "2024-11-30T15:00:00+00:00",
+      "purge_days_minimum": 7,
+      "dependency_embargo_minimum_minutes": 10090,
+      "role": "development"
+    },
+    {
+      "name": "I3",
+      "ordinal": 2,
+      "train_end": "2024-12-23T14:50:00+00:00",
+      "validation_start": "2024-12-31T15:00:00+00:00",
+      "validation_end_exclusive": "2025-02-28T15:00:00+00:00",
+      "purge_days_minimum": 7,
+      "dependency_embargo_minimum_minutes": 10090,
+      "role": "locked_confirmation"
+    }
+  ],
+  "model_contract": {
+    "backend": "xgboost",
+    "n_estimators": 700,
+    "base_seed": 20260813,
+    "block_seed_rule": "base_seed+block_ordinal",
+    "hyperparameter_search": false,
+    "early_stopping": false
+  },
+  "postprocess": {
+    "high_threshold": 0.2,
+    "low_threshold": 0.1,
+    "close_gap_rows": 0,
+    "minimum_positive_run": 12
+  },
+  "synthetic_stress": {
+    "enabled_for_model_selection": false,
+    "types": ["offset", "drift"],
+    "durations_hours_by_type": {
+      "offset": [8, 24, 48, 86],
+      "drift": [9, 24, 48, 86]
+    },
+    "signs": [-1, 1],
+    "mad_amplitudes": [2, 4],
+    "seed": 20260813,
+    "source": "normal_contiguous_fold_fit_blocks",
+    "separation": "remove every stress source row and its +/-168h context from model fitting",
+    "feature_order": "inject into raw temp before rebuilding every feature",
+    "copy_policy": "independent pristine frame copy per scenario"
+  },
+  "coverage_contract": {
+    "cadence_minutes": 10,
+    "segment_boundaries_strict": true,
+    "exclusion_hours_each_side": 96,
+    "flank_hours": [96, 168],
+    "nominal_rows_per_flank": 432,
+    "min_rows_per_flank": 216,
+    "require_both_flanks": true,
+    "test_both_flank_coverage_upper_bound": 0.056286277224559346,
+    "test_any_flank_coverage_upper_bound": 0.294341788404305,
+    "zero_both_coverage_groups": 7,
+    "total_test_groups": 15,
+    "eligible_long_segments": 11,
+    "total_test_segments": 929,
+    "failure_if_both_coverage_lt": 0.85,
+    "failure_if_any_group_both_coverage_lt": 0.75
+  },
+  "coverage_provenance": {
+    "kind": "reproduced_corrected_label_blind_test_metadata_audit",
+    "artifact_path": "artifacts/ring_coverage_audit_20260813/result.json",
+    "artifact_sha256": "156588e92ccd64966aa8e9057dd4c4587a491e911c2bc19ea9944915a8f51f9e",
+    "evidence_pending_reproduction": false,
+    "corrected": true,
+    "supersedes_buggy_both_coverage_fraction": 0.030980232055901686,
+    "note": "Corrected by independent segment-position calculation and reproduced with the fixed sibling feature API."
+  },
+  "validity_caveats": {
+    "individual_86_5h_is_not_composite_union_upper_bound": true,
+    "offline_future_dependency_hours": 168,
+    "minimum_honest_boundary_gap": "168h10m",
+    "inner_blocks_claimed_virgin": false
+  },
+  "stop_reasons": [
+    "low_test_coverage",
+    "internal_wave_contamination_uncontrolled",
+    "composite_duration_assumption_not_guaranteed_by_problem_contract",
+    "offline_future_context_requires_explicit_contract",
+    "validation_covariate_context_must_not_use_validation_labels",
+    "synthetic_signal_must_be_injected_before_feature_generation"
+  ],
+  "execution_gates": {
+    "outer_labels_allowed": false,
+    "outer_oof_allowed": false,
+    "model_fit_allowed": false,
+    "official_submission_allowed": false,
+    "parameter_search_allowed": false,
+    "coverage_audit_allowed": true
+  },
+  "authorization": {
+    "execution": false,
+    "commit": false,
+    "push": false,
+    "competition_upload": false
+  }
+}

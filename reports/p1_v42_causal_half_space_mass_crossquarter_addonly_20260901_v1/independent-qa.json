@@ -1,0 +1,17 @@
+{
+  "schema_version": "p1.v42_causal_half_space_mass.independent_qa.v1",
+  "experiment_id": "p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1",
+  "verdict": "PASS",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "commands": [
+    ".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1.py -q",
+    ".\\.venv-p1\\Scripts\\python.exe -m ruff check scripts/run_p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1.py tests/test_p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1.py",
+    ".\\.venv-p1\\Scripts\\python.exe scripts/run_p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1.py --data-dir C:\\Users\\cedis\\Downloads\\데이터셋_P1\\P1_qc_anomaly --qa"
+  ],
+  "checks": {"focused_pytest_6_of_6": true, "ruff": true, "postterminal_lifecycle_17_checks": true, "preflights_byte_identical": true, "preflight_output_bytes": 4585, "preflight_output_sha256": "fcac4dfc27e38c5e6c08a465555f9d0a621c0c2004e8a309dae8c0409dc80d5c", "target_free_real_support": true, "half_space_synthetic_guards": true, "fits_within_budget": true, "v28_guard": true, "v33_bundle_before_target": true, "q2_q3_target_zero": true, "q4_unopened": true, "add_only_removal_zero": true, "access_zero": true},
+  "counters": {"fits": 3, "transport_target_windows_read": 0, "q4_target_reads": 0, "q4_actions": 0, "anchor_removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "best_pooled_inner": {"quantile": 0.9975, "threshold": 0.8885411024093628, "proposals": 141, "true_positives": 105, "precision": 0.7446808510638298, "wilson90_lcb": 0.6800674017520596, "distinct_station_layer_identities": 3, "distinct_stations": 3, "gate_failure": "supported G-ORS/L1 environment had zero true positives"},
+  "metrics": {"raw_f1_delta": 0.0, "nominal_points": 0.0, "transport_adjusted_points": 0.0, "official_champion_expected_score": 0.833548, "official_champion_points": 28.909341, "incremental_expected_official_points": 0.0, "outer_ci": null},
+  "hashes": {"result": "67091d062544f643064ad7153b7e44c49c291bc208bbc9b9cb7c36cc977d8810", "config": "6c112d7aa382f4477a5fd9960c41f0fdcfd1f29091fef4166ffe58dd510e0e45", "runner": "c567f9597ba3b0f27f304888a0c894bbe13d1a06dedd7406b92ff4ed1fbcda32", "test": "85c5cc1cd9fe743b665f51a3379db14f44f792862fb621b95b3ef55de026a7a2", "lock": "c5d263478973eeba6bb1c1e8f8e89d3faa70b7590ff6dacc4862b742c185f587", "completion": "7d68e8a5fd16d2b2b3c225498878cfc43634c06326e7db320f9047e597c027df", "preflight_receipt": "c2ebc2a88e76eb22fd190e2718305227d174613c1ef3535582c61c896e5ed6d9", "pre_q2_seal": "85c8288632ba5bd64518ee562c3f4d6599cef22d87127674097482e7dfd584a0", "auditability_manifest": "15fc02ed9f38562ba18b2d5a264515250ee2ee5b8ead4a189756c4803c8d90ed", "auditability_bundle": "54152a539bd786975b385ebd1a7035a7b405eb08186581674c42e3c0fbffaffd"}
+}

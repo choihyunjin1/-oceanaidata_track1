@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "report_id": "p3_kma_deep_research_20260829_v1",
+  "status": "SHARE_WITH_CAVEATS",
+  "validated_at_kst": "2026-08-29",
+  "controlling_commit": "9e46d152905d6f387808ac20e53f762b6d87c700",
+  "checks": {
+    "result_json_loaded": true,
+    "data_contract_rows_1092": true,
+    "data_contract_cases_182": true,
+    "six_leads_per_case": true,
+    "official_test_context_read": false,
+    "hidden_target_read": false,
+    "new_model_fit_count": 0,
+    "alpha_grid_matches_code": true,
+    "active_leads_only_18_24": true,
+    "short_leads_exact_no_op": true,
+    "all_14_crossfit_strategies_worse": true,
+    "best_crossfit_delta_rmse": 0.006176516589515679,
+    "best_crossfit_ci90_lower": 0.0011617209675571791,
+    "best_crossfit_ci90_upper": 0.011439801740419791,
+    "fold_minimax_ci_crosses_zero": true,
+    "public_gain_alpha0_to_alpha0p4": 0.008629999999999916,
+    "quadratic_optimum_alpha": 0.4248650474988351,
+    "predicted_gain_alpha0p4_to_alpha0p425": 0.000029882806522607552,
+    "notebook_nbformat_valid": true,
+    "notebook_code_cells_executed": 10,
+    "notebook_error_outputs": 0,
+    "submission_or_upload_performed": false
+  },
+  "caveats": [
+    "Official Public has only three aggregate points and does not identify lead effects separately.",
+    "Public score rounding and Public-to-Private shift limit the precision of the quadratic optimum.",
+    "The aggregate OOF artifact has no timestamp column, so neighboring-case dependence is not fully audited.",
+    "Same-row exhaustive optima are exploratory and must not be treated as independent validation."
+  ]
+}

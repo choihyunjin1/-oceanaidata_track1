@@ -1,0 +1,23 @@
+{
+  "schema_version": "p3.duplication_audit.v19",
+  "experiment_id": "p3_kma_continuous_wave_power_factor_cycle_20260831_v19",
+  "status": "NON_DUPLICATE_LAUNCH_ELIGIBLE",
+  "audited_before_result": true,
+  "candidate_formula": "wave_power=hs_current^2*tp_current; alpha18=.20; alpha24=.20+.40*prefix_ECDF(wave_power)",
+  "distinctions": {
+    "v14b": "v14b ranks hs_current^2 only",
+    "v17": "v17 ranks log1p(hs_current/tp_current^2)",
+    "constant_alpha_surfaces": "v19 is continuous in a train-prefix physical proxy rather than a fixed alpha",
+    "v16_v18": "v19 has no absolute-time or harmonic dependency and is deployable from official features"
+  },
+  "closed_alternatives": [
+    "constant alpha or constant correction scale",
+    "station-specific shrink",
+    "hs_current^2 ECDF duplicate of v14b",
+    "half-q v14b midpoint"
+  ],
+  "search_or_grid": false,
+  "official_rows_read": 0,
+  "hidden_truth_rows_read": 0,
+  "uploads": 0
+}

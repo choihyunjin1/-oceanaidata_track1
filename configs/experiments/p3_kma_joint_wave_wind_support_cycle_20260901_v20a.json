@@ -1,0 +1,54 @@
+{
+  "schema_version": "p3.kma_joint_wave_wind_support.config.v20a",
+  "experiment_id": "p3_kma_joint_wave_wind_support_cycle_20260901_v20a",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "candidate": {
+    "name": "P3_1_V19_JOINT_WAVE_WIND_SUPPORT",
+    "reference": "p3_kma_continuous_wave_power_factor_cycle_20260831_v19",
+    "orthogonal_change": "Replace the 24h wave-power-only ECDF rank by a fixed geometric mean of wave-power rank and train-only wind-support ECDF rank",
+    "wind_support": "log1p(max(wind_input_proxy_current,0)) * max(wind_wave_alignment_current,0)",
+    "alpha_24h": "0.20 + 0.40 * sqrt(wave_power_rank * wind_support_rank)",
+    "other_leads": "bit-exact frozen v19",
+    "feature_only_fits": 6,
+    "target_fits": 0,
+    "grid_or_search": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "six frozen bimonth outer blocks",
+    "purge_hours": 78,
+    "bootstrap_replicates": 5000,
+    "surface_claim": "one allowed non-duplicate adjustment on an exposed 182-case development surface; not independent confirmation or Public transport"
+  },
+  "decision": {
+    "stable_candidate": {
+      "delta_rmse_vs_v19_strictly_negative": true,
+      "minimum_improved_bimonth_blocks_vs_v19": 4,
+      "episode_ci90_upper_vs_v19_below_zero": true,
+      "block_station_ci90_upper_vs_v19_below_zero": true,
+      "worst_station_lead_delta_vs_v19_max_m": 0.01
+    },
+    "preserve_high_risk_candidate": {
+      "delta_rmse_vs_v19_max_m": -0.002,
+      "delta_rmse_vs_uniform_max_m": -0.005,
+      "worst_station_lead_delta_vs_v19_max_m": 0.02
+    }
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "current_official_champion_points_receipt": 24.203599
+  },
+  "duplication_audit": {
+    "v20_failure": "target-fit wind-work residual axis worsened v19 in 5/6 blocks",
+    "nonduplicate_reason": "v20a is target-free joint physical support ranking at 24h only; it neither reuses v20 coefficients nor searches alpha",
+    "verdict": "NON_DUPLICATE_FINAL_ADJUSTMENT"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

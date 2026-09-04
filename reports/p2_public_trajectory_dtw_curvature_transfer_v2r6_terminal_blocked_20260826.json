@@ -1,0 +1,155 @@
+{
+  "schema_version": "p2_dtw_v2r6.terminal_blocked_report.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r6",
+  "created_at_kst": "2026-08-26T10:58:57.8732473+09:00",
+  "status": "FINAL_PRECLAIM_NO_GO_INNER_WINDOW_UNIDENTIFIABLE",
+  "outcome": "DO_NOT_AUTHORIZE_OR_EXECUTE",
+  "root_cause": {
+    "classification": "FROZEN_EVALUATION_WINDOW_SCIENTIFIC_NON_IDENTIFIABILITY",
+    "registered_window": "inner_2024_mar",
+    "time_keys": 4464,
+    "target_layers": [2, 3, 4],
+    "finite_truth_rows_by_layer": {
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "finite_anchor_rows_by_layer": {
+      "2": 4454,
+      "3": 4454,
+      "4": 4454
+    },
+    "finite_truth_and_anchor_rows_by_layer": {
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "rows_after_required_mask": 0,
+    "consequence": "The required 3-window by 6-cell inner selection cannot be completed. Replacing, dropping, reweighting, or scoring March as a no-op after observing this certificate is forbidden."
+  },
+  "v2r5_failure_lineage": {
+    "claim_sha256": "00a8f84de695475eaec52ec691ab219448408c6dc90f5e9879ace71cc09c232f",
+    "journal_sha256": "710a4eb202467aca26b13c24f74aff71378a0c23cea0e1e890c5b07f0e8f2e4f",
+    "materialization_reserved": 1,
+    "materialization_failed": 1,
+    "materialization_completed": 0,
+    "scores": 0,
+    "physical_fit_calls": 0,
+    "p100_accesses": 0
+  },
+  "v2r6_accounting": {
+    "real_error_only_diagnostic_attempts": 1,
+    "diagnostic_materializer_return_payload_inspected": false,
+    "prediction_values_consumed": 0,
+    "claims": 0,
+    "journals": 0,
+    "workers": 0,
+    "materializations": 0,
+    "scores": 0,
+    "physical_fit_calls": 0,
+    "p100_accesses": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0
+  },
+  "scientific_contract": {
+    "base_v1_design_sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+    "cells": ["d1_k3", "d1_k7", "d3_k3", "d3_k7", "d7_k3", "d7_k7"],
+    "inner_windows": ["inner_2024_mar", "inner_2024_may", "inner_2024_jul"],
+    "materialization_slots": 22,
+    "changed": false
+  },
+  "sealed_package": {
+    "design": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_design.json",
+      "bytes": 14145,
+      "sha256": "dc8684950bf7466038270a33ab2f2c6425820433aa205790bd40c1d5e842004e"
+    },
+    "trigger_resolution": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_trigger_resolution.json",
+      "bytes": 3557,
+      "sha256": "3348f8bf10335a1da414fcbb8f04f7fb7e00ec798ff774bba63edbc13af73f87"
+    },
+    "execution_contract": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_execution.json",
+      "bytes": 3480,
+      "sha256": "3a2c03c84143c8cf5e395241605f3506efbc00e3d60841a4b05099eb054bd70d"
+    },
+    "module": {
+      "path": "src/p2_restore/public_trajectory_dtw_v2r6.py",
+      "bytes": 15820,
+      "sha256": "8c507a385ab2846ed27698366cbc96c8454aa0fd6821a27c90287932c06b5145"
+    },
+    "runner": {
+      "path": "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r6.py",
+      "bytes": 25788,
+      "sha256": "8794ab18ba3bb21aca69916edff5228dfb930f561c925f98f7c1160f3d3fefbb"
+    },
+    "tests": {
+      "path": "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r6.py",
+      "bytes": 20827,
+      "sha256": "afabd9701ad67bb916745998c9ef698f4861e4a6442d5721b58edb5f4c3d67c4"
+    },
+    "seal": {
+      "path": "artifacts/p2_public_trajectory_dtw_curvature_transfer_v2r6_preexecution/preexecution_seal.json",
+      "bytes": 4284,
+      "sha256": "e7fb27f1cf4cee8f531f8fcf56d4238d786288c2a5ac3260cff9f179b682b3d6"
+    },
+    "permanent_false_authorization": {
+      "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_execution_authorization.json",
+      "bytes": 1577,
+      "sha256": "e1435e15861f391be2b2b20eea5311f422b75218e34f5db9d3b83c868872b555",
+      "authorized": false,
+      "execution_permitted": false
+    },
+    "slot1_diagnostic": {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_slot1_error_only_diagnostic_20260826.json",
+      "bytes": 1599,
+      "sha256": "c091f5afb612015f2f8390462aa557117154f0468e8afbc7306699c5c80504d7"
+    },
+    "identifiability_certificate": {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_inner_identifiability_certificate_20260826.json",
+      "bytes": 3802,
+      "sha256": "a84f09e87322b3561e8e7109515d576f27e73e3063ae846159876d045b54a864"
+    },
+    "qa_closure_matrix": {
+      "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r6_qa_closure_matrix_20260826.json",
+      "bytes": 6152,
+      "sha256": "982931d674025c1484e13afb87a8b32e50f6c43b572ebfcd39bdf57e1be04e1b"
+    }
+  },
+  "verification": {
+    "focused_tests": {
+      "collected": 33,
+      "passed": 33,
+      "failed": 0
+    },
+    "ruff": "PASS_ALL_CHECKS",
+    "read_only_preflight": {
+      "runs": 2,
+      "exit_codes": [0, 0],
+      "outputs_identical": true,
+      "output_sha256": "094e41f154b2742d1ad9cd14010349ceec2ec9bdac5a1d133c44094d18ee4cfd",
+      "status": "NO_GO_INNER_WINDOW_UNIDENTIFIABLE",
+      "control_namespace_clean": true,
+      "tracked_mtimes_unchanged": true
+    }
+  },
+  "control_namespace": {
+    "claim_exists": false,
+    "journal_exists": false,
+    "terminal_failure_marker_exists": false,
+    "worker_error_receipt_exists": false,
+    "final_artifact_directory_exists": false,
+    "staging_directory_exists": false
+  },
+  "next_route": {
+    "existing_cycle2_design": "configs/experiments/p2_trajectory_incremental_group_balanced_meta_v1_design.json",
+    "existing_cycle2_status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+    "existing_cycle2_trigger_satisfied": false,
+    "reason": "The existing Cycle-2 contract requires Cycle-1 RESEARCH_GO on exact and locked-p100 surfaces; v2r6 terminates before scoring with scientific non-identifiability.",
+    "legal_action": "Do not execute the existing Cycle-2 design under this trigger. Any alternative must be separately prospectively preregistered without changing choices from v2r6 result values."
+  }
+}

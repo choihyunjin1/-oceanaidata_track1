@@ -1,0 +1,110 @@
+{
+  "schema_version": "p2.group_balanced_raw_residual.20260901.v8r1",
+  "experiment_id": "p2_group_balanced_raw_residual_20260901_v8r1",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "contract_repair": {
+    "predecessor": "p2_group_balanced_raw_residual_20260901_v8",
+    "predecessor_status": "INVALID_ZERO_FIT_DATETIME_UNIT_CONTRACT",
+    "only_change": "canonicalize every datetime key to UTC datetime64[ns] and compare explicit nanosecond integers",
+    "candidate_feature_split_seed_gate_fallback_changed": false
+  },
+  "scientific_scope": {
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reason": "All three historical validation surfaces, including the 61-day same-season block, have been exposed by earlier research.",
+    "orthogonal_axis": "raw-Celsius interpolation residual learned with a layer x registered-window x KST-day equal-risk objective",
+    "excluded_families": [
+      "DINEOF_or_other_EOF_completion",
+      "Gaussian_process",
+      "CatBoost",
+      "soft_or_benefit_gate",
+      "PAVA_or_isotonic_postprocessing",
+      "rank_or_season_or_bin_search"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "target": "target_temperature_minus_nearest_public_depth_linear_baseline_C",
+    "features": "fixed_55_public_only_shift_invariant_features",
+    "registered_windows_kst": [
+      {
+        "id": "2024_may_jun",
+        "start_inclusive": "2024-05-01T00:00:00+09:00",
+        "end_exclusive": "2024-07-01T00:00:00+09:00"
+      },
+      {
+        "id": "2024_jul_to_aug24",
+        "start_inclusive": "2024-07-01T00:00:00+09:00",
+        "end_exclusive": "2024-08-25T00:00:00+09:00"
+      }
+    ],
+    "expected_rows": 45935,
+    "weighting": "equal layer x registered-window risk; equal KST-day risk within each group; equal row risk within day",
+    "seeds": [20260823, 20260824, 20260825],
+    "common_lightgbm": {
+      "n_estimators": 400,
+      "learning_rate": 0.04,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 200,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "n_jobs": 6,
+      "verbosity": -1,
+      "deterministic": true,
+      "force_row_wise": true
+    }
+  },
+  "candidates": [
+    {
+      "name": "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL",
+      "objective": "regression_l2",
+      "run": "always"
+    },
+    {
+      "name": "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL",
+      "objective": "regression_l1",
+      "run": "only_if_primary_strict_gate_fails",
+      "rationale": "Predeclared robust-loss adjustment; no row deletion and no holdout-derived parameter change."
+    }
+  ],
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed cross-fit bin17 champion proxy",
+    "bootstrap_unit": "fold x KST calendar day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "strict_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "calibrated_expected_points_gte": 0.01
+    }
+  },
+  "postprocess": "NONE",
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_fit_count": 6,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

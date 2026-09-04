@@ -1,0 +1,115 @@
+{
+  "schema_version": "p2.gaussian_copula_v2.exact_frozen_submission_pack.qa.20260830.v3",
+  "experiment_id": "p2_gaussian_copula_v2_exact_frozen_submission_pack_20260830_v3",
+  "qa_status": "FAIL",
+  "checks": {
+    "overlay_hash": true,
+    "base_scientific_config_hash": true,
+    "overlay_pins_and_scope": true,
+    "attempt_one_of_one": true,
+    "attempt_hashes": true,
+    "input_superset_exact": true,
+    "nominal_depth_preserved_qa_only": true,
+    "sample_and_candidate_exact_output_schema": true,
+    "candidate_hash": true,
+    "candidate_bytes": true,
+    "candidate_external_to_repo": true,
+    "query_contract": true,
+    "strict_schema_key_order_finite_domain": false,
+    "sample_key_order": true,
+    "incomplete_profile_exact_noop": false,
+    "profile_projection_idempotent": true,
+    "difference_receipts": false,
+    "model_receipt_exact_historical_match": true,
+    "one_fit_zero_search": true,
+    "no_exact_prior_submission_hash": true,
+    "recent_live_history_included": true,
+    "note_title_summary_hash": true,
+    "hidden_truth_score_baseline_upload_zero": true
+  },
+  "candidate": {
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260830_P2_GAUSSIAN_COPULA_V2_FROZEN_READY_V3\\P2_submission.csv",
+    "bytes": 1353537,
+    "sha256": "f498c6e1d7e22d11d5571b971454f0e375247fc2ff5ae3387bfcb4186460c4a3",
+    "validation": {
+      "rows": 26061,
+      "minimum": 16.288607567121904,
+      "maximum": 29.153435096789455
+    },
+    "layer_rows": {
+      "2": 8713,
+      "3": 8712,
+      "4": 8636
+    },
+    "partial_profile_noop_max_abs_c": 3.552713678800501e-15,
+    "pava_idempotence_max_abs_c": 0.0,
+    "differences": {
+      "vs_alpha50": {
+        "changed_rows": 24767,
+        "rms_c": 0.039090349130885896,
+        "p99_abs_c": 0.12065382923836553,
+        "maximum_abs_c": 0.1999999999999993
+      },
+      "vs_current_official_incumbent": {
+        "changed_rows": 24775,
+        "rms_c": 0.05289482971601095,
+        "p99_abs_c": 0.22805749896730504,
+        "maximum_abs_c": 0.287202097198346
+      },
+      "vs_official_base_u": {
+        "changed_rows": 26061,
+        "rms_c": 0.20067692247809923,
+        "p99_abs_c": 0.6554997518890135,
+        "maximum_abs_c": 3.598634481616001
+      }
+    }
+  },
+  "duplicate_qa": {
+    "candidate_sha256": "f498c6e1d7e22d11d5571b971454f0e375247fc2ff5ae3387bfcb4186460c4a3",
+    "known_prior_submission_hash_count": 6,
+    "exact_hash_duplicate": false,
+    "status": "PASS_NO_EXACT_HASH_DUPLICATE",
+    "recent_official_history": [
+      {
+        "public_rmse_c": 0.432244,
+        "observed_time_kst": "2026-08-29T22:20:00+09:00",
+        "candidate_role": "rank1_axis_alpha_2",
+        "submission_sha256": "7d06cf01c67541ec77d4e6af7afefca710774bda50f33155573c382d440672d9",
+        "mapping_basis": "local pack manifest plus live UI chronology"
+      },
+      {
+        "public_rmse_c": 0.430253,
+        "observed_time_kst": "2026-08-29T22:51:00+09:00",
+        "candidate_role": "layerwise_oof_shrunk",
+        "submission_sha256": "dbcef773a9bbff62c66b2b6a0bca1b9279eb664209ff1560c2dc02e83855b019",
+        "mapping_basis": "inference from local pack manifest and paired live UI results"
+      },
+      {
+        "public_rmse_c": 0.430209,
+        "observed_time_kst": "2026-08-29T22:51:00+09:00",
+        "candidate_role": "official_mse_vertex_a083419",
+        "submission_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+        "mapping_basis": "inference from preregistered 0.430208734 prediction and paired live UI results"
+      }
+    ],
+    "current_best_public_rmse_c": 0.430209,
+    "current_best_points": 27.935277,
+    "remaining_p2_submissions_today_at_last_ui_check": 3,
+    "semantic_mapping_limitation": "The live UI exposes scores and timestamps, not file hashes. The two 22:51 file-to-score mappings are evidence-backed inferences, so exact byte duplicate QA is strong while platform semantic duplicate proof remains limited."
+  },
+  "hashes": {
+    "overlay_config": "211f56522e2254a7eaee14553995e01650fd0cfec4657cff6aff635c22d747df",
+    "base_scientific_config": "061e8667085278282d4a23d792ac04c90bef91dcbad3b32395ac00bbcfa6773f",
+    "attempt_lock": "faf4ae49678914e19e8ad00d105d7e4cc8d52987aed530c0fde29f7ffa0a8f91",
+    "result": "1788893add5d009993f32d9089ce9a20942182106cd7dc1ae553d488d70e51a5"
+  },
+  "independent_execution_receipt": {
+    "model_fits": 0,
+    "hidden_truth_rows_read": 0,
+    "score_py_reads": 0,
+    "baseline_reads": 0,
+    "csv_created": 0,
+    "uploads": 0
+  },
+  "completed_at_kst": "2026-08-30T21:31:07.020913+09:00"
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "p3_era5_context_transfer_v1_transport_amendment_2026-08-24",
+  "created_at_kst": "2026-08-24T01:02:32.0601327+09:00",
+  "classification": "POST_SMOKE_TRANSPORT_ONLY_AMENDMENT_BEFORE_SOURCE_YEAR_ACCESS",
+  "trigger": {
+    "stage": "first_2014_G_ORS_year_request",
+    "observed_failure": "CDS HTTP 403 cost limit: the 12-month request was too large",
+    "identical_runner_attempts_failed": 2,
+    "same_request_diagnostic_confirmed_cost_limit": true,
+    "source_year_value_files_created": 0
+  },
+  "information_available_before_amendment": {
+    "smoke_days": 1,
+    "smoke_stations": 3,
+    "selected_cells_frozen": true,
+    "minimum_smoke_dynamic_finite_fraction": 1.0,
+    "source_validation_metrics_seen": false,
+    "local_outer_metrics_seen": false,
+    "official_test_sample_or_submission_accessed": false
+  },
+  "change": {
+    "before": "2014-2022 one 12-month request per station-year; 2023 three cutoff-safe requests; 36 requests total",
+    "after": "2014-2022 Jan-Jun and Jul-Dec per station-year; 2023 Jan-Jun, Jul-Nov, Dec01-30, and Dec31 00-14 UTC; 66 requests total",
+    "maximum_request_field_hours": 44160,
+    "transport_only": true
+  },
+  "invariants": {
+    "source": "ERA5 hourly data on single levels",
+    "stations_and_selected_cells": "unchanged from the preregistered smoke-selection rule",
+    "variables": "same frozen ten variables",
+    "union_start_utc": "2014-01-01T00:00:00+00:00",
+    "union_end_utc": "2023-12-31T14:00:00+00:00",
+    "station_time_union_exactly_contiguous": true,
+    "combined_expected_rows": 262917,
+    "features_model_targets_splits_gates_and_postprocess_changed": false,
+    "result_driven_tuning": false
+  },
+  "superseded_sha256": {
+    "preaccess_seal": "f8dbda1983f94ff13bd5746f5dff15c25271093dcbb598926e4178bfa0870bbe",
+    "external_scope": "49a0a47bcec9b55a37a35bc06481af58b8e0565eee499b805ca32bdcf1799bc4",
+    "experiment_config": "7cafea9fba2dd7c7320db9c67d16622224337bb3eb23dc21036e52c6ff3eb2df",
+    "era5_pretrain_data": "08cd50fdb37fdae734d12c5dd2c349eccc751ef9641f3ed137f6fa86e7099b21",
+    "era5_pretrain_data_tests": "d818e5f1f20e0277fb9a5625e0f47300698e850074bed768ccf9fd7cd69a5691"
+  },
+  "amended_sha256": {
+    "era5_pretrain_data": "ee23a2b3d005a2d8727d14f8e6635cb514db933df81fae1885bce95ca0278bba",
+    "era5_pretrain_data_tests": "16d5677f9e4de8ea600de525923c228d1eeb3c1c21d019737ad4e23075fd601d"
+  }
+}

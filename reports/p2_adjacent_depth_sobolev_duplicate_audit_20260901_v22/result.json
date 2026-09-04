@@ -1,0 +1,58 @@
+{
+  "schema_version": "p2.adjacent_depth_sobolev_duplicate_audit.result.20260901.v22",
+  "experiment_id": "p2_adjacent_depth_sobolev_duplicate_audit_20260901_v22",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE_EXECUTED_ADJACENT_DEPTH_DERIVATIVE_LOSS",
+  "decision": "NO_EXECUTION_SEMANTIC_DUPLICATE",
+  "finding": {
+    "proposed_scientific_question": "Does a fixed adjacent-target-depth finite-difference loss improve the frozen value-loss model?",
+    "prior_scientific_question": "Does a fixed adjacent-target-depth finite-difference loss improve a matched continuous-depth value-loss model?",
+    "scientific_axis_identical": true,
+    "architecture_identity_required_for_duplicate": false,
+    "old_implementation": {
+      "prediction_difference": "prediction[:, :, 1:, :] - prediction[:, :, :-1, :]",
+      "target_difference": "targets[:, :, 1:, :] - targets[:, :, :-1, :]",
+      "loss": "mean squared error between adjacent-depth prediction and target differences",
+      "fixed_vertical_difference_weight": 0.25
+    },
+    "old_terminal_evidence": {
+      "decision": "INCONCLUSIVE",
+      "pooled_control_rmse_c": 1.018070483865826,
+      "pooled_physics_rmse_c": 1.0152588181251236,
+      "physics_minus_control_rmse_c": -0.0028116657407024626,
+      "paired_day_ci90_c": [
+        -0.00448251708544029,
+        -0.0012131153507475845
+      ],
+      "worst_block_delta_c": 0.004511587174846898,
+      "worst_layer_delta_c": 0.0007100972624156654
+    }
+  },
+  "closure": {
+    "model_fits": 0,
+    "candidate_predictions": 0,
+    "runner_created": false,
+    "attempt_lock_created": false,
+    "candidate_artifacts_created": false,
+    "result_driven_weight_search_allowed": false,
+    "result_driven_architecture_relabel_allowed": false,
+    "next_action": "AUDIT_A_GENUINELY_ORTHOGONAL_V23_AXIS"
+  },
+  "operation_counters": {
+    "observations_rows_read": 0,
+    "historical_label_rows_read": 0,
+    "model_fits": 0,
+    "candidate_predictions": 0,
+    "attempt_locks_created": 0,
+    "candidate_artifacts_created": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "30207ba37ac286a34d470446a15f3692b737d650388df7d26c3b8a2591bcb3a1",
+    "duplicate_source_module": "8edfdd89dcfff3bda181a319ca538646ef86cabb5713be88eabbcd5165363011",
+    "duplicate_runner": "18155bb95e681bb1f702574fa7721815d47ff3422e941b1700ff1889281d4142",
+    "duplicate_terminal_result": "aca355e9cc5ab6df5d9e04d0a7aeb61ecb785f0adcc21534a5d892064217954e"
+  }
+}

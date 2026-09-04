@@ -1,0 +1,119 @@
+{
+  "schema_version": "p2_public_trajectory_dtw.v2r4.qa_closure_matrix.v1",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2r4",
+  "created_at_kst": "2026-08-26T09:20:45.3355568+09:00",
+  "status": "IMPLEMENTED_ZERO_FIT_PENDING_NEW_INDEPENDENT_QA",
+  "prospective_design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r4_design.json",
+    "bytes": 10734,
+    "sha256": "9863a283f8be657f93f710a19e88754a6ea7fcfbf7dfa51329c8c1ea848ecae5",
+    "frozen_before_v2r4_code_fit_materialization_or_result": true
+  },
+  "superseded_v2r3_independent_qa": {
+    "path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r3_independent_preexecution_qa_20260826.json",
+    "bytes": 13963,
+    "sha256": "4adf0778a69817fd01d758e34852e8194522dc3459a0cce35136c1f3487c2c4d",
+    "markdown_path": "reports/p2_public_trajectory_dtw_curvature_transfer_v2r3_independent_preexecution_qa_20260826.md",
+    "markdown_bytes": 6011,
+    "markdown_sha256": "5c32943f0789991758941e87fdb59b70282aa8d5002ccabb797ebddbcbd80743",
+    "verdict": "NO_GO",
+    "severity_counts": {"P0": 0, "P1": 1, "P2": 0},
+    "previous_nine_findings_closed": true
+  },
+  "closure_count": 10,
+  "closures": [
+    {
+      "finding_id": "V2-P0-01",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "P100 fold/station/time/layer/truth/incumbent/candidate values bind through one canonical-key merge before ordering.",
+      "tests": ["test_p100_78156_row_canonical_binding_is_order_invariant_and_adversarial"]
+    },
+    {
+      "finding_id": "V2-P0-02",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "Windows publication uses a Windows-safe durability primitive and terminal success remains the last create-only filesystem operation.",
+      "tests": ["test_real_windows_publication_reaches_terminal_and_terminal_link_is_last_io"]
+    },
+    {
+      "finding_id": "V2-P1-01",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "Authorization and independent-QA bytes are each captured once; hash, parse, verdict, design, and seal lineage use those exact snapshots.",
+      "tests": ["test_authorization_verifies_real_qa_receipt_and_lineage", "test_authorization_accepts_only_a_pinned_real_pass_receipt", "test_authorization_bytes_swap_after_capture_cannot_change_decision"]
+    },
+    {
+      "finding_id": "V2-P1-02",
+      "status": "CLOSED_AND_HARDENED",
+      "repair": "The numerical module is compiled and executed only from the bytes retained during seal verification; MODULE_PATH is never reopened.",
+      "tests": ["test_v2r4_numerical_module_diff_is_docstring_version_only", "test_authorized_worker_loads_one_held_module_snapshot_without_package_init", "test_module_compilation_uses_captured_bytes_after_path_mutation", "test_seal_transitive_inventory_is_exact_and_fail_closed"]
+    },
+    {
+      "finding_id": "V2-P1-03",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "P100 remains literal metadata until exactly one durable exact RESEARCH_GO; pre-gate resolve/stat/open/hash/parse are zero.",
+      "tests": ["test_pre_exact_source_readiness_never_verifies_p100"]
+    },
+    {
+      "finding_id": "V2-P1-04",
+      "status": "CLOSED_AND_HARDENED",
+      "repair": "Commit-ready, manifest, result, and terminal receipts carry the same held seal digest; terminal-last and fault paths fail closed.",
+      "tests": ["test_real_windows_publication_reaches_terminal_and_terminal_link_is_last_io", "test_publication_faults_fail_closed_before_terminal_success", "test_terminal_success_failure_conflict_is_rejected", "test_terminal_success_cannot_cross_bind_a_different_seal"]
+    },
+    {
+      "finding_id": "V2-P2-01",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "Prediction day, query start, and source end remain distinct; the unchanged seven-full-day embargo is measured before query start.",
+      "tests": ["test_continuous_block_and_seven_day_source_embargo"]
+    },
+    {
+      "finding_id": "V2R2-P1-NEW-01",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "P2_DATA_DIR plus exact observations.csv provides portable deterministic resolution with no personal absolute fallback and with official-path firewall enforcement.",
+      "tests": ["test_portable_observations_resolver_requires_env_and_exact_relative", "test_portable_observations_resolver_rejects_official_token_root", "test_portable_observations_resolver_rejects_symlink_escape_if_supported", "test_no_personal_absolute_observations_path_in_v2r4_static_sources"]
+    },
+    {
+      "finding_id": "V2R2-P1-NEW-02",
+      "status": "CLOSED_REGRESSION_PRESERVED",
+      "repair": "All chronology uses an aware Asia/Seoul clock, actual filesystem mtime_ns pins, no future value, and nondecreasing design-to-preflight order.",
+      "tests": ["test_actual_kst_clock_and_synthetic_filesystem_chronology_fail_closed", "test_read_only_preflight_is_exactly_idempotent_and_mtime_preserving"]
+    },
+    {
+      "finding_id": "V2R3-P1-NEW-01",
+      "status": "CLOSED_WITH_END_TO_END_SINGLE_SNAPSHOT_LINEAGE",
+      "root_cause": "v2r3 verified seal bytes A but authorization independently reopened and hashed SEAL_PATH, permitting a path switch to bytes B between those operations.",
+      "repair": "_verify_seal returns the parsed seal, digest, and immutable retained snapshot. That exact digest and snapshot bind authorization, QA, claim, launch, worker, result, manifest, commit-ready, and terminal. Design, execution, seal, authorization, QA, and module each use one held byte capture for verification plus parse/compile. There is no subsequent SEAL_PATH hash/reopen or MODULE_PATH reopen.",
+      "tests": ["test_design_and_execution_parse_their_one_captured_snapshot", "test_authorization_bytes_swap_after_capture_cannot_change_decision", "test_authorization_code_never_hashes_then_reopens_authorization_path", "test_cross_seal_path_toggle_cannot_change_auth_or_claim_binding", "test_terminal_success_cannot_cross_bind_a_different_seal", "test_module_compilation_uses_captured_bytes_after_path_mutation"],
+      "evidence": {"post_verify_seal_path_hash_calls": 0, "post_verify_seal_path_reopens": 0, "post_verify_module_path_reopens": 0, "digest_flow_stage_count": 8}
+    }
+  ],
+  "scientific_contract": {
+    "changed_from_v2r3": false,
+    "module_change": "DOCSTRING_AND_VERSION_IDENTIFIER_ONLY",
+    "cells": ["d1_k3", "d1_k7", "d3_k3", "d3_k7", "d7_k3", "d7_k7"],
+    "inner_windows": ["2024-03", "2024-05", "2024-07"],
+    "exact_rows": 26273,
+    "p100_rows": 78156,
+    "materialization_slots": 22,
+    "physical_fit_calls": 0,
+    "result_driven_reruns": 0
+  },
+  "verification": {
+    "preseal_pytest": {"result": "PASS", "tests_passed": 62, "tests_skipped": 1, "tests_deselected_seal_dependent": 4, "skip_reason": "Windows account did not permit synthetic symlink creation; resolver parent/basename and official-token guards remain directly tested."},
+    "ruff": {"result": "PASS", "files": ["src/p2_restore/public_trajectory_dtw_v2r4.py", "scripts/run_p2_public_trajectory_dtw_curvature_transfer_v2r4.py", "tests/test_p2_public_trajectory_dtw_curvature_transfer_v2r4.py"]},
+    "full_sealed_pytest": "PENDING_SEAL_CREATION",
+    "default_preflight_twice": "PENDING_SEAL_AND_FALSE_AUTHORIZATION"
+  },
+  "safety_accounting": {
+    "physical_fit_calls": 0,
+    "numerical_materializations": 0,
+    "actual_p100_resolve_stat_open_hash_parse": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files": 0,
+    "uploads": 0,
+    "actual_experiment_namespace_mutations": 0,
+    "synthetic_test_mutations": "pytest temporary directories only"
+  },
+  "authorization": false,
+  "execution_instruction": "DO_NOT_EXECUTE. Keep authorization false until a new independent QA PASS is pinned to this exact v2r4 design and seal."
+}

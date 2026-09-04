@@ -1,0 +1,130 @@
+{
+  "schema_version": "p2.causal_multiscale_domain_stat_deepset.20260901.v14",
+  "experiment_id": "p2_causal_multiscale_domain_stat_deepset_20260901_v14",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "fresh_surface_audit": "reports/p2_v13_fresh_authenticated_surface_audit_20260901_v13c/result.json",
+    "fresh_surface_audit_sha256": "ebc91f78729ebd658b27684e724697b2651d48bbf05460f545673f1f786e32fe",
+    "required_status": "HOLD_NO_FRESH_AUTHENTICATED_SURFACE",
+    "next_action": "NEW_NONDUPLICATE_REPRESENTATION_ONLY"
+  },
+  "research_basis": [
+    {
+      "title": "Wild-Time: A Benchmark of in-the-Wild Distribution Shift over Time",
+      "publisher": "NeurIPS 2022",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/43119db5d59f07cc08fca7ba6820179a-Abstract-Datasets_and_Benchmarks.html",
+      "use": "motivation for treating fixed time windows as domains; no P2 performance transfer"
+    },
+    {
+      "title": "Evolving Standardization for Continual Domain Generalization over Temporal Drift",
+      "publisher": "NeurIPS 2023",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/459a911eb49cd2e0192055ee156d04e5-Abstract-Conference.html",
+      "use": "motivation for multi-window historical domain statistics; learned EvoS is not copied"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_FIXED_CAUSAL_DOMAIN_STAT_REPRESENTATION",
+    "reason": "No executed P2 lineage combines shifted public-layer-only multi-horizon domain statistics with permutation-invariant vertical tokens. Structured TCN learns bidirectional sequence filters with target values outside masks; DTW retrieves historical trajectories; v13 is pointwise and has no historical domain statistics.",
+    "evidence_paths": [
+      "configs/experiments/p2_structured_mask_imputer_v1.json",
+      "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v2r6_design.json",
+      "reports/historical_model_reaudit_20260831_v1/model-cards/p2-profile-analog-prequential.md",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json"
+    ],
+    "forbidden_interpretations": [
+      "v13 posthoc router",
+      "v13 gate relaxation",
+      "learned temporal attention sweep",
+      "DTW or analog residual transfer",
+      "target-layer temporal input"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "representation": {
+    "base": "v12_public_layer_tokens",
+    "public_layers": [1, 5, 6, 7, 8],
+    "channels": ["temp", "psal"],
+    "causal_shift_rows": 1,
+    "half_life_steps_10min": [144, 1008, 4320],
+    "minimum_periods": 72,
+    "temp_scale_floor": 0.05,
+    "psal_scale_floor": 0.01,
+    "z_clip": 12.0,
+    "base_token_features": 8,
+    "added_domain_stat_features": 12,
+    "total_token_features": 20,
+    "statistics_are_fixed_not_learned": true,
+    "target_layer_values_used_as_features": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 20,
+    "context_features": 11,
+    "loss": "SmoothL1_beta_1.0",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

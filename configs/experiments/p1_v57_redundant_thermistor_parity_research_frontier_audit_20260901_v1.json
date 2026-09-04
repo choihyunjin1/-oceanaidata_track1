@@ -1,0 +1,121 @@
+{
+  "schema_version": "p1.v57_redundant_thermistor_parity_research_frontier_audit.v1",
+  "experiment_id": "p1_v57_redundant_thermistor_parity_research_frontier_audit_20260901_v1",
+  "status": "NO_GO_ZERO_FIT_REDUNDANT_SENSOR_CHANNEL_UNAVAILABLE",
+  "surface": "READ_ONLY_PRIMARY_SOURCE_REPOSITORY_SEMANTIC_AND_SCHEMA_SUPPORT_AUDIT",
+  "purpose": "Audit exactly one deployment-observable sensor-consistency mechanism after v54-v56 without treating different ocean depths as redundant instruments or reusing closed cross-layer residuals.",
+  "single_mechanism": {
+    "name": "causal colocated redundant-thermistor parity residual",
+    "scientific_fingerprint": "Within each station-layer-time, compare simultaneous independently identified colocated temperature channels and use their parity residual as a sensor-failure observable on anchor-negative rows.",
+    "candidate_count": 1,
+    "fit_budget_if_ready": 3,
+    "maximum_fits_if_ready": 9,
+    "result_based_retune_or_residual_sweep": 0,
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0
+  },
+  "primary_source": {
+    "title": "Analytical Redundancy and the Design of Robust Failure Detection Systems",
+    "authors": "Edward Y. Chow and Alan S. Willsky",
+    "venue": "IEEE Transactions on Automatic Control 29(7), 603-614",
+    "publication_date": "1984-07",
+    "doi": "10.1109/TAC.1984.1103593",
+    "url": "https://doi.org/10.1109/TAC.1984.1103593",
+    "claim_boundary": "The paper establishes residual generation from authenticated redundancy relations as a fault-detection method. It does not establish that P1 layers are redundant sensors, that P1 exposes multiple colocated channels, or that a parity residual improves P1 performance."
+  },
+  "schema_support_audit": {
+    "readme_path": "C:/Users/cedis/Downloads/데이터셋_P1/P1_qc_anomaly/README.md",
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "available_columns": ["station", "year", "layer", "time", "temp", "psal", "depth"],
+    "required_but_absent": [
+      "probe or instrument identifier",
+      "two or more independent colocated temperature channels per station-layer-time",
+      "channel calibration and uncertainty metadata",
+      "authenticated redundancy/parity relation"
+    ],
+    "layer_identity_warning": {
+      "path": "src/p1_qc/data.py",
+      "sha256": "5dc1dac588faa2f50323d15ab2d83231eb06c3a709845d539ba7efbb99addd69",
+      "finding": "Layer ordinals are not stable sensor identities across years; depth deployment changes are handled as regimes."
+    },
+    "identifiability": "FAIL",
+    "reason": "The allowed schema has one temperature value per row and no independently identified colocated channel. Different layers observe different physical depths and cannot supply an authenticated sensor-parity equation.",
+    "train_rows_read": 0,
+    "target_rows_read": 0
+  },
+  "repository_negative_fingerprint": {
+    "exact_p1_analytical_redundancy_parity_space_or_redundant_probe_hits": 0,
+    "exact_duplicate": false,
+    "support_qualified_new_observable": false,
+    "invalid_layer_proxy_semantic_duplicate_or_reconstructible": true,
+    "base_cross_layer_features": {
+      "path": "src/p1_qc/features.py",
+      "sha256": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+      "overlap": "Existing features already compute simultaneous same-station peer means, residuals, peer counts, and station-layer temperature spread."
+    },
+    "stratification_peer_family": {
+      "path": "src/p1_qc/stratification.py",
+      "sha256": "9a6b69b405754fdf87d765cb3e1c119a9ff83d4d82893c48fdbc2dadba08dd19",
+      "overlap": "Existing label-blind peer features already use simultaneous cross-layer change coherence and gated peer residuals."
+    },
+    "long_event_cross_layer_family": {
+      "path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v6.py",
+      "sha256": "8b91db9234bde301730728dcffa4fd2c014b099d0c518571ddaa733608b81636",
+      "overlap": "The long-event family already computes same-station/same-time other-layer residuals for temp, psal, and depth. Relabeling those physically distinct depths as redundant probes creates no new measurement."
+    },
+    "physical_profile_closures": {
+      "physical_path": "configs/experiments/p1_v21_temperature_salinity_depth_physical_consistency_semantic_gate_20260901_v1.json",
+      "physical_sha256": "24dd0d4db213876f6f7215fd4d936358b91a5d28655b249837bbfe727b34302c",
+      "profile_path": "configs/experiments/p1_v49_causal_thorpe_overturn_state_support_gate_20260901_v1.json",
+      "profile_sha256": "297eca4e1f6eb76c00135c4d88fe0dac15e44852d252faaae9b076315c765c1d",
+      "overlap": "Physical consistency and vertical-profile/rank transforms are closed and cannot authenticate different-depth layers as redundant instruments."
+    }
+  },
+  "frontier_evidence": {
+    "candidate_registry_audit": {
+      "path": "configs/experiments/p1_v54_historical_promotable_candidate_registry_audit_20260901_v1.json",
+      "sha256": "e4b84168645073b76552235c525d24301eae18d6cd901b90e8cd485c6e95eddb"
+    },
+    "event_hazard_audit": {
+      "path": "configs/experiments/p1_v55_hawkes_event_hazard_research_frontier_audit_20260901_v1.json",
+      "sha256": "6d84fcebf273251f71e0802592bba7b5c0b363ffb6c447f256612638ed8715d3"
+    },
+    "adc_contract_audit": {
+      "path": "configs/experiments/p1_v56_adc_code_density_research_frontier_audit_20260901_v1.json",
+      "sha256": "e51a828c00d6d66428dd8e909016b185fde262e1173f10bbe10d70b45933fafd"
+    }
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": "UNCHANGED_V28",
+    "auditability_amendment": "UNCHANGED_V33",
+    "feature_contract": "UNCHANGED",
+    "split_contract": "UNCHANGED",
+    "anchor_add_only": true,
+    "maximum_fits": 9,
+    "anchor_removals": 0
+  },
+  "decision": {
+    "semantic_preflight": "FAIL_INVALID_LAYER_PROXY_RECONSTRUCTIBLE_FROM_CLOSED_CROSS_LAYER_FAMILIES",
+    "deployment_support_preflight": "FAIL_NO_INDEPENDENT_COLOCATED_SENSOR_CHANNEL_OR_PARITY_CONTRACT",
+    "ready": false,
+    "terminal": "NO_GO_ZERO_FIT_REDUNDANT_SENSOR_CHANNEL_UNAVAILABLE",
+    "reason": "A true redundant-channel residual would be deployment-observable and scientifically distinct, but the allowed P1 schema contains neither redundant channel identity nor measurements. Using other layers would violate the parity premise and duplicate existing peer residuals.",
+    "minimum_new_evidence": "Competition-allowed synchronized readings from at least two independently identified colocated temperature probes per station-layer, with stable instrument IDs and calibration/uncertainty provenance across train and deployment."
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "executable_preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "train_rows": 0,
+    "historical_target_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schema_version": "meaningful_score_ledger.v8",
+  "ledger_id": "ocean_ai_meaningful_score_replay_ledger_v8",
+  "created_at_kst": "2026-08-23T06:43:00+09:00",
+  "status": "STATIC_IMPLEMENTATION_ONLY_NOT_INITIALIZED",
+  "revision": {
+    "kind": "APPEND_ONLY_GOAL_COMPLETION_LINEAGE_CLOSURE",
+    "supersedes_static_v7_without_mutation": true,
+    "reason": "v7 closed P2 architecture curve, official-score, and upload routes but still delegated standalone GOAL_COMPLETION evidence to v5 without reconciling prior event lineage.",
+    "inherit_v7_curve_official_and_upload_policy_exactly": true,
+    "p1_p3_p2_exact_noncompletion_payloads_delegate_bit_for_bit": true
+  },
+  "completion_lineage_policy": {
+    "standalone_completion_evidence_authoritative": false,
+    "replay_with_all_prior_v8_events_required": true,
+    "p2_architecture_events_cannot_satisfy_meaningful_milestone": true,
+    "p2_meaningful_milestone_requires_distinct_event_type": "P2_EXACT_OFFICIAL_CONFIRMATION",
+    "required_event_type_currently_allowlisted": false,
+    "required_event_type_currently_policy_authorized": false,
+    "current_p2_milestone_authorized": false,
+    "current_goal_completion_result": "NOT_COMPLETE",
+    "future_authorization_requires_new_append_only_contract_revision": true
+  },
+  "scoring_contract": {
+    "path": "configs/goals/meaningful_score_maximization_v3.json",
+    "sha256": "76d7cc6e10277ae6c06b1109a15f4dcc8413216f73ac3f479ec265a065d756c0",
+    "bytes": 7922
+  },
+  "scoring_evaluator": {
+    "path": "src/ocean_goal/meaningful_score_v3.py",
+    "sha256": "720839224209cf487e500650ecf34c1e8cd3e5fb26f2395c60e76d2050ed973a",
+    "bytes": 33680
+  },
+  "predecessor_ledger": {
+    "path": "artifacts/meaningful_score_goal_v5/registry.jsonl",
+    "sha256": "729b2eb8c22d3380651e1728a2ac6c96fc3c70305e1631ef7ec1bda5d21c0989",
+    "bytes": 29320,
+    "event_count": 9,
+    "head_event_sha256": "ded6a43bdc62fbbdce9b54ede37d882ce3e27b54b193da736ba05ca0303e5066"
+  },
+  "superseded_v7_implementation": {
+    "V7_CONTRACT": {
+      "path": "configs/goals/meaningful_score_ledger_v7.json",
+      "sha256": "bd71902bd4d00fa925b6fddb15e76a5d3872d242ccbdd1c8f15fd9d7309efddc",
+      "bytes": 7644
+    },
+    "V7_EVALUATOR": {
+      "path": "src/ocean_goal/meaningful_score_ledger_v7.py",
+      "sha256": "6cea123ccc181915667643ff1a2d320368255997bec442ba847bb13d9ec29382",
+      "bytes": 34661
+    },
+    "V7_CLI": {
+      "path": "scripts/run_meaningful_score_ledger_v7.py",
+      "sha256": "b898fead7ab7b6cd1edb1896c9d33b5baeb3c963fa5177c0d2390ef56eae2b49",
+      "bytes": 7866
+    },
+    "V7_TESTS": {
+      "path": "tests/test_meaningful_score_ledger_v7.py",
+      "sha256": "b6d165d6313957f8aa27018c83123da960cccdc6284848123e439c4d579c2ad0",
+      "bytes": 16840
+    }
+  },
+  "lineage_source": {
+    "policy_and_p2_stage_a_v3_lineage": "PINNED_V7_CONTRACT_AND_DEEP_REPLAY",
+    "v7_canonical_ledger_must_remain_absent": true,
+    "v7_pre_init_qa_must_remain_absent": true
+  },
+  "canonical_paths": {
+    "ledger": "artifacts/meaningful_score_goal_v8/registry.jsonl",
+    "pre_init_qa": "artifacts/meaningful_score_goal_v8/pre_init_qa.json"
+  },
+  "event_protocol": {
+    "genesis_event_type": "GOAL_INITIALIZED",
+    "later_event_types": [
+      "CURVE_RESULT",
+      "OFFICIAL_SCORE_RESULT",
+      "UPLOAD_READINESS",
+      "GOAL_COMPLETION"
+    ],
+    "unknown_event_types_forbidden": true,
+    "payload_must_deep_equal_recomputed_payload": true,
+    "evidence_must_be_workspace_relative_sha256_and_size_pinned": true,
+    "replay_every_event_on_every_validation": true,
+    "completion_replay_receives_all_prior_records": true,
+    "replay_before_append_lock_or_write": true,
+    "append_lock": "O_EXCL_ADJACENT_LOCK",
+    "genesis_creation": "O_EXCL",
+    "all_os_open_calls_use_o_binary": true,
+    "all_os_write_calls_use_robust_write_loop": true,
+    "canonical_line_ending": "LF_ONLY"
+  },
+  "initial_state": {
+    "status": "WAITING_OFFICIAL_WINDOW_RESEARCH_ACTIVE",
+    "inherited_v5_event_count": 9,
+    "official_uploads": 0,
+    "score_promotions": {"P1": false, "P2": false, "P3": false},
+    "meaningful_promotions": {"P1": false, "P2": false, "P3": false},
+    "execution_counts": {
+      "stage_a_fit": 0,
+      "stage_a_prediction": 0,
+      "stage_b_fit": 0,
+      "stage_b_prediction": 0,
+      "upload": 0
+    }
+  },
+  "prohibitions": {
+    "automatic_upload": true,
+    "initialize_without_independent_qa": true,
+    "mutate_v3_v5_v6_or_v7_pinned_files": true,
+    "initialize_superseded_v7": true,
+    "append_unreplayed_payload": true,
+    "append_unknown_event_type": true,
+    "fit_or_predict_during_ledger_operations": true,
+    "standalone_completion_self_assertion": true,
+    "architecture_matched_p2_meaningful_milestone": true
+  }
+}

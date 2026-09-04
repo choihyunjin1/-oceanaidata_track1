@@ -1,0 +1,168 @@
+{
+  "schema_version": "gate_recalibration_research.independent_qa.20260830.v1",
+  "created_at_utc": "2026-08-30T07:13:29.676927+00:00",
+  "status": "PASS",
+  "conclusion": "Unsupported fixed tolerances changed two historical P2 interpretations, but none of the three new one-shot candidates is a submission-ready champion.",
+  "checks": {
+    "policy": {
+      "future_only_nonretroactive": true,
+      "unsupported_fixed_thresholds_removed": true,
+      "outlier_hard_deletion_not_authorized": true,
+      "official_action_not_authorized": true
+    },
+    "legacy_gate_replay": {
+      "zero_fit_aggregate_only": true,
+      "two_p2_candidates_reclassified": true,
+      "three_primary_harm_states_unchanged": true,
+      "policy_hash_matches": true,
+      "runner_hash_matches": true,
+      "all_input_hashes_match": true,
+      "all_five_primary_values_recomputed": true,
+      "interval_states_recomputed_without_legacy_vetoes": true,
+      "official_csv_upload_zero": true
+    },
+    "P1": {
+      "pooled_f1_recomputed": true,
+      "interval_crosses_zero": true,
+      "state_recomputed": true,
+      "all_level_0_gates_pass": true,
+      "pure_add_only_algebra_pass": true,
+      "implementation_hashes_match": true,
+      "exclusive_attempt_lock_matches": true,
+      "one_shot_no_search_retry": true,
+      "official_csv_upload_deletion_zero": true
+    },
+    "P2": {
+      "v1_is_sealed_technical_failure_without_metrics": true,
+      "v1_failure_hash_bound_to_guard": true,
+      "guard_failure_was_preexisting_exact_noop": true,
+      "v2_is_guard_only_overlay": true,
+      "pooled_rmse_recomputed": true,
+      "wholly_unfavorable_interval": true,
+      "state_recomputed": true,
+      "individual_qa_28_of_28": true,
+      "result_hash_matches_individual_qa": true,
+      "implementation_hashes_match": true,
+      "official_query_csv_upload_deletion_zero": true
+    },
+    "P3": {
+      "pooled_rmse_recomputed": true,
+      "interval_crosses_zero": true,
+      "state_recomputed": true,
+      "all_fatal_hard_gates_pass": true,
+      "individual_qa_14_of_14": true,
+      "result_hash_matches_individual_qa": true,
+      "attempt_lock_hash_matches_individual_qa": true,
+      "implementation_hashes_match": true,
+      "official_csv_upload_deletion_zero": true,
+      "training_source_access_disclosed": true
+    }
+  },
+  "failed_checks": [],
+  "recomputed_results": {
+    "legacy_replay": {
+      "high_value_p2_challengers": 2,
+      "unchanged_primary_harms": 3
+    },
+    "P1": {
+      "rows": 287862,
+      "anchor_f1": 0.9029170235276336,
+      "candidate_f1": 0.9005364437226241,
+      "benefit_candidate_minus_anchor_f1": -0.0023805798050094973,
+      "uncertainty_bounds": [
+        -0.017810464928264918,
+        0.013951393933980668
+      ],
+      "state": "INCONCLUSIVE_RESEARCH_ONLY",
+      "model_fits": 2
+    },
+    "P2": {
+      "rows": 69850,
+      "reference_rmse_c": 3.0857868482638113,
+      "candidate_rmse_c": 3.087777278713823,
+      "delta_candidate_minus_reference_rmse_c": 0.001990430450011793,
+      "delta_ci90_c": [
+        0.0006617799475544305,
+        0.004967253376855786
+      ],
+      "state": "PRIMARY_HARM_RESEARCH_ONLY",
+      "outer_model_fits": 3,
+      "edge_estimations": 21,
+      "preexisting_reference_extreme_exact_noop_rows": 18
+    },
+    "P3": {
+      "cases": 157,
+      "rows": 942,
+      "incumbent_rmse_m": 0.8112191629646779,
+      "candidate_rmse_m": 0.8146942334810828,
+      "benefit_incumbent_minus_candidate_rmse_m": -0.0034750705164049434,
+      "benefit_ci90_m": [
+        -0.009929381222944561,
+        0.003149363373718584
+      ],
+      "state": "INCONCLUSIVE_RESEARCH_ONLY",
+      "candidate_fits": 3
+    }
+  },
+  "data_and_action_boundary": {
+    "qa_reads_aggregate_receipts_and_code_only": true,
+    "qa_raw_training_rows_read": 0,
+    "qa_official_rows_read": 0,
+    "P1_runner_raw_training_rows_read": 0,
+    "P2_observations_source": {
+      "row_cardinality": 789408,
+      "v1_main_inferred_opens": 1,
+      "guard_diagnostic_opens": 1,
+      "v2_main_opens": 1
+    },
+    "P3_runner_training_rows_read": {
+      "train_wave.csv": 118152,
+      "train_atmos.csv": 130896
+    },
+    "official_test_sample_submission_hidden_rows_read": 0,
+    "prediction_csv_created": 0,
+    "uploads": 0,
+    "hard_deleted_or_masked_source_rows": 0
+  },
+  "outlier_finding": {
+    "P2_preexisting_reference_extreme_rows": 18,
+    "P2_new_or_active_extreme_rows": 0,
+    "P2_rows_changed_by_guard_repair": 0,
+    "P3_jump_return_flags": 2,
+    "interpretation": "Flags are diagnostics, not proof of sensor error. No hard deletion was performed; the P2 guard distinguishes inherited exact no-ops from new candidate violations."
+  },
+  "artifact_sha256": {
+    "policy": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65",
+    "gate_replay": "879efa4dc60dc5b7a88ccee7db7aabcd5d2380ac835637bfdc77d4c1cdb6ce59",
+    "gate_replay_runner": "48a65479e7e8b3e63eb061f33880da03a6e301833f7a08922b87bd7a436353d6",
+    "p1_result": "3836af402aab75bdd35041248beaba296f22d42282ae7f893cf8bd20a3d25dea",
+    "p1_attempt_lock": "efb822b565d50d8dae600b0f26ddc11d1d2c2836e4da934e4d6c7b27eb75a494",
+    "p1_config": "989a5d42878ff0062b57c2d76425da8d654161b9fd76150fcd8d9eb01c0692a2",
+    "p1_core": "0788d70905bbba59b26f08842b1dcf1c60c0b41b77f5ce38f206cfc611f0d50c",
+    "p1_runner": "aa29e44ad2e621b5ed6ea30e382090fe7d67b64dc8966c0f53f6835f532d8141",
+    "p2_v1_failure": "8a511b151bad037965fd1d93ef38e8b69ca25fbde0688e8a07f72ff90abe922a",
+    "p2_v1_guard": "fb7924636a2f06a04b35e20e9c0bdb9b938bb542f8da8a8669efc858a20088b7",
+    "p2_result": "541cc88af606888e4809c8f782747a48ef293793f8f7ec19fa11f98972d4241f",
+    "p2_qa": "86b05e63594ba7a68916cc1d60b0dce8ee237ad71f34d9450b98336639ddb7bb",
+    "p2_config": "3bc7ed47431977c08f310701bfbccff1d7a006402223a88e8b3cec87c942d57f",
+    "p2_core": "649267ba82b56b75dea2ed9aeae579595d88353ec63d8ce916d978f2296be946",
+    "p2_runner": "c48fd6aa83ce4c2991a707971229e27c7adca9d22e03669893fd32571ed4aa2b",
+    "p3_result": "1a85a1804cd2981e969ae4dfdb362afaf8b450e23a23153a7e8e23d236fe7596",
+    "p3_attempt_lock": "d78d2ebbdd00270c26598921596b550fea827ba772231d97cbcedc0ce13612ad",
+    "p3_qa": "f64be95fe072b6ed114720db607e2c17c2b1973a1a61529c473c08ede6874500",
+    "p3_config": "d941e3516bc295e8e10c7dffbd4df4ccee0ed276d98a0b67f8e7875764717611",
+    "p3_core": "cd99dda3c86bdff7f7fdb00f4896792f553ded11d0101c20e5828d3125c8a3b3",
+    "p3_runner": "531907ae4580a0018249a567b79b86485cde3a94b9a565747e8c165c047fbd9d"
+  },
+  "caveats": [
+    "All evaluated surfaces are historically exposed, so every state is research-only.",
+    "The gate replay is provenance-hashed but is not an exclusive immutable receipt.",
+    "P1 has an exclusive attempt lock and code hashes, but its result has no separate external immutable seal.",
+    "P2 v2 has an execution receipt and independent QA but no pre-fit attempt-lock or sealed result payload; do not overstate cryptographic one-shot proof.",
+    "No official hidden-mixture score transform is available, so no raw-unit practical margin was invented."
+  ],
+  "seal": {
+    "algorithm": "sha256",
+    "payload_without_seal_sha256": "01d3ee88e9f220d8b600fe9322774a42a2746e9d11481e99f4e488981f9dbe2a"
+  }
+}

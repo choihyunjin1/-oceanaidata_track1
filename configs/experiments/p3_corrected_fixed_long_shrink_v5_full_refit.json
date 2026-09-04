@@ -1,0 +1,70 @@
+{
+  "experiment_id": "p3_corrected_fixed_long_shrink_v5_full_refit",
+  "created_kst": "2026-08-22",
+  "status": "PREREGISTERED_APPEND_ONLY_ACTUAL_FULL_REFIT_OF_V4_WINNER",
+  "problem": "P3_wave_forecast",
+  "winner_evidence": {
+    "artifact": "artifacts/p3_corrected_fixed_long_shrink_v4",
+    "metrics_sha256": "07d5b2fa1c593e0cecccd568d6238d124f06bb36f6400e3d6eb90f5d8c1db603",
+    "candidate_sha256": "607f7cd4ed2c126d5aa4eb6d8130a651ac465a0c88b4e74c112d585c3421d708",
+    "corrected_oof_rmse_m": 0.7786608799293823,
+    "incumbent_corrected_oof_rmse_m": 0.7791048399763751,
+    "strictly_improved_folds": 2
+  },
+  "training": {
+    "training_anchor_count": 24360,
+    "feature_count": 591,
+    "residual_target": "target_hs_minus_current_hs",
+    "case_weight": "exp(-0.45*max(current_hs-1.5,0))_mean_normalized",
+    "seed": 20260817,
+    "single": {
+      "loss_function": "RMSE",
+      "iterations": 700,
+      "learning_rate": 0.035,
+      "depth": 6,
+      "l2_leaf_reg": 8.0,
+      "random_strength": 0.2,
+      "thread_count": 8
+    },
+    "multi": {
+      "loss_function": "MultiRMSE",
+      "iterations": 1200,
+      "learning_rate": 0.03,
+      "depth": 7,
+      "l2_leaf_reg": 10.0,
+      "random_strength": 0.15,
+      "task_type": "GPU",
+      "devices": "0",
+      "boosting_type": "Plain"
+    },
+    "router": {
+      "name": "smooth_medium",
+      "alpha": 10.0,
+      "temperature_multiplier": 2.0,
+      "strength": 0.5,
+      "active_leads": [12, 18, 24]
+    },
+    "calibrator": {
+      "kind": "fixed_long_lead_persistence_shrink",
+      "active_leads": [12, 18, 24],
+      "persistence_weight": 0.25,
+      "coefficient_search": false
+    }
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_corrected_fixed_long_shrink_v5_full_refit",
+    "attempt_lock": "artifacts/p3_corrected_fixed_long_shrink_v5_full_refit.ATTEMPT_LOCK.json",
+    "candidate": "candidate/submission.csv",
+    "reproduced_candidate": "candidate/reproduced_submission.csv",
+    "uploaded": false
+  },
+  "prohibitions": {
+    "hyperparameter_or_coefficient_search": true,
+    "test_target_or_hidden_label_access": true,
+    "absolute_test_timestamp_recovery": true,
+    "current_or_frozen_mutation": true,
+    "source_or_cache_mutation": true,
+    "submission_upload": true,
+    "rerun_after_attempt_lock": true
+  }
+}

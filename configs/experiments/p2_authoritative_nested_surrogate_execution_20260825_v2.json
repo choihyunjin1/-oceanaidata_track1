@@ -1,0 +1,40 @@
+{
+  "schema_version": "p2_authoritative_nested_surrogate_execution.v2",
+  "experiment_id": "p2_authoritative_nested_surrogate_execution_20260825_v2",
+  "created_at_kst": "2026-08-25T20:52:40+09:00",
+  "status": "SEALED_EXECUTION_READY_DRY_RUN_NO_ACTUAL_FIT",
+  "base_config": {
+    "path": "configs/experiments/p2_authoritative_nested_surrogate_execution_20260825_v1.json",
+    "sha256": "9de00eb2dab48d80f0f3342be98ec5a6b0395bfb4ae2d98665acd09553367acd"
+  },
+  "supersedes": {
+    "status": "SUPERSEDED_ROBUSTNESS_CAVEAT_DO_NOT_AUTHORIZE",
+    "reason": "v1 could expose a corrupt final evaluated_oof parquet if the process crashed during a direct exclusive write",
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v1",
+    "manifest_sha256": "86ae9a7705f963dd463bdef63380073852c370ef0e6db308a94134d4d55c6c76",
+    "preexecution_seal_sha256": "bb15426db428877f09e691c62b0670f9308670aed4613821d24db5e7615a2dbb",
+    "qa_sha256": "2331ca8ce755da4299f24e4780fcde4291f5560b551610a3c9f183bc1b6eb458"
+  },
+  "robustness_revision": {
+    "evaluated_oof_publish": "write unique partial, flush and fsync, atomic rename to final",
+    "preexisting_final": "reuse only after exact byte-size and SHA-256 verification",
+    "successful_partial": "consumed by atomic rename",
+    "failed_or_racing_partial": "preserve for audit, ignore as completion on resume",
+    "crash_resume_test_required": true,
+    "model_or_metric_semantics_changed": false
+  },
+  "checkpoint_resume": {
+    "exclusive_process_lock": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v2/execution.lock",
+    "evaluated_oof_completion_commit": "unique partial plus file fsync plus atomic rename",
+    "evaluated_oof_reuse_gate": "exact final byte-size and SHA-256 match",
+    "evaluated_oof_failed_partial_policy": "preserve for audit and never treat as completed final"
+  },
+  "exact_command": "$env:OMP_NUM_THREADS='4'; $env:MKL_NUM_THREADS='4'; $env:OPENBLAS_NUM_THREADS='4'; $env:NUMEXPR_NUM_THREADS='4'; $env:CUDA_VISIBLE_DEVICES='0'; .\\.venv-p1\\Scripts\\python.exe scripts\\run_p2_authoritative_nested_surrogate_45cell_v1.py --config \"configs\\experiments\\p2_authoritative_nested_surrogate_execution_20260825_v2.json\" --execute --data-dir \"$env:P2_DATA_DIR\" --preexecution-seal \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v2\\preexecution_seal.json\" --authorization \"artifacts\\p2_authoritative_nested_surrogate_execution_ready_20260825_v2\\EXECUTION_AUTHORIZATION.json\"",
+  "output": {
+    "readiness_directory": "artifacts/p2_authoritative_nested_surrogate_execution_ready_20260825_v2",
+    "actual_directory": "artifacts/p2_authoritative_nested_surrogate_actual_20260825_v2",
+    "append_only": true,
+    "readiness_prediction_files_written": false,
+    "readiness_model_checkpoints_written": false
+  }
+}

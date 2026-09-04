@@ -1,0 +1,45 @@
+{
+  "schema_version": "p1.v16_causal_delay_embedding_persistence_addonly.v1",
+  "result_schema_version": "p1.v16_causal_delay_embedding_persistence.result.v1",
+  "experiment_id": "p1_v16_causal_delay_embedding_persistence_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {"readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd", "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2", "allowed_files": ["README.md", "train.csv"], "official_test_sample_submission_hidden_reads": 0},
+  "primary_source": {"title": "Sliding Windows and Persistence: An Application of Topological Methods to Signal Analysis", "authors": "Perea and Harer", "venue": "Foundations of Computational Mathematics 2015", "doi": "10.1007/s10208-014-9206-z", "url": "https://arxiv.org/abs/1307.6188", "claim_boundary": "The source studies persistent homology of sliding-window/time-delay point clouds and links maximum persistence to periodicity. v16 uses only fixed causal 0-dimensional Vietoris-Rips death times, exactly represented by MST edge weights; it is not SW1PerS/H1 and makes no source-derived P1 performance claim."},
+  "deep_research_gap_matrix": {
+    "A_delay_embedding_persistence": "SELECTED: no P1 implementation or execution; multi-scale component-merger geometry differs from fixed-radius recurrence and endpoint visibility.",
+    "B_empirical_tail_copula": "REJECT_SEMANTIC_OVERLAP: nonlinear extremal dependence is distinct mathematically but its P1 action fingerprint is another prefix-fitted cross-layer dependence-change score, overlapping v9 conditional dependence and v12 distribution shift.",
+    "C_supervised_shapelet": "REJECT_SEMANTIC_OVERLAP: discriminative subsequence morphology overlaps executed causal CIF, MiniRocket, and v14 nearest-subsequence dictionary families.",
+    "transport_risk": "The prospective v13 station-layer x chronological-half veto remains fixed; pooled inner LCB alone cannot select a threshold.",
+    "limitation": "0D persistence records connected-component merger scales, not the H1 periodicity score in Perea-Harer. Fixed dimension/window/stride are a bounded falsification, not an optimized topology pipeline."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_REPRESENTATION_PROCEED_ONCE", "exact_duplicate": false, "semantic_duplicate": false,
+    "v10_recurrence": "fixed lag/radius scalar recurrence and laminar duration; v16 instead summarizes the full pairwise geometry of a causal delay-embedding cloud across all merger scales",
+    "v13_visibility": "order-obstruction graph from one endpoint; v16 is metric topology of a multi-point delay cloud and has no visibility edge rule",
+    "v9_v12": "conditional covariance/precision change and RBF-MMD recent-vs-prefix distribution shift; v16 is within-window temporal state-space shape, not cross-layer dependence or two-sample discrepancy",
+    "cif_minirocket_v14_shapelet": "interval/convolution and nearest-template morphology; v16 has no learned shapelet, random interval, kernel bank, or dictionary nearest-neighbor",
+    "evidence": {
+      "scripts/run_p1_v10_causal_recurrence_laminar_state_addonly_20260901_v1.py": "f8edf02cefbffa75d28a94376d0842f351add0dfd75aba8e1c9664d5cd7035a2",
+      "scripts/run_p1_v13_causal_endpoint_visibility_topology_addonly_20260901_v1.py": "84d0814f2a8a353bf40b149912e1bd796f904f0150a2a25139dd58176a6be527",
+      "scripts/run_p1_v9_conditional_dependence_change_addonly_20260901_v1.py": "7aec0d98147178e905d63c65c4ec42de038cee50fe70d2a622b52ca617c12625",
+      "scripts/run_p1_v12_causal_kernel_mmd_shift_addonly_20260901_v1.py": "5ca89224ba3c5163263c0a00f50b0d121877e8700413316201f91ccc175995b3",
+      "src/p1_qc/causal_minirocket_lite.py": "b03bf681aa243cd7aa4399b4c053c8b3a6916e0acefa55a306427c60533e3fa1",
+      "scripts/run_p1_causal_cif_lite32_20260831_v32b.py": "dce445a1c896e837eb8df2e6ce7817e65d0fad4b4712f84a7a93167c64b25762",
+      "scripts/run_p1_v14_causal_prefix_dictionary_discord_addonly_20260901_v1.py": "696a842be132dcbe28f2e85580f6c422311d3cbe0940a01813962a263b971269"
+    }
+  },
+  "representation": {"sequence_unit": "station_x_layer", "window_rows": 96, "delay_rows": 6, "embedding_dimension": 3, "point_count": 12, "evaluation_stride_rows": 6, "minimum_prefix_rows": 96, "normalization": "single prefix-fitted robust station-layer center and scale", "homology_dimension": 0, "complex": "Vietoris-Rips", "death_time_equivalence": "minimum-spanning-tree edge weights", "features": ["total_persistence", "mean_death", "max_death", "std_death", "median_death", "persistence_entropy", "cloud_diameter", "cloud_anisotropy"], "past_only": true, "future_interpolation": 0, "subsequence_normalization": 0},
+  "representation_support_gate": {"minimum_nonzero_feature_share": 0.5, "minimum_feature_variance": 0.000001, "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_TOPOLOGICAL_SUPPORT"},
+  "model": {"kind": "L2 SGD logistic", "alpha": 0.0001, "epochs": 20, "positive_class_weight": 12.0, "seeds": [20260901, 20260917, 20260943], "fits": 9, "sweep": 0},
+  "selection": {"inner_train_fraction": 0.85, "threshold_quantiles": [0.995, 0.9975, 0.999], "maximum_addition_share": 0.0025, "minimum_additions": 25, "wilson90_lcb_minimum": 0.55, "outer_tuning": 0, "transport_stability": {"environment": "station_x_layer_x_chronological_half", "chronological_halves": 2, "minimum_proposals_per_supported_environment": 10, "minimum_supported_environments": 2, "require_both_chronological_halves": true, "minimum_environment_precision_strictly_gt": 0.55, "reject_if_any_supported_environment_true_positives_eq": 0, "passing_threshold_tie_break": "highest_quantile_then_highest_precision_lcb"}},
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"pooled_delta_gt": 0, "ci90_lower_gte": 0, "all_folds_nonnegative": true, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p1_iors_external_loo_precheck_v1",
+  "status": "preregistered_external_only",
+  "objective": "Test whether pre-2024 QC=1 I-ORS vertical profiles reconstruct a held-out layer better than same-time depth-linear interpolation before any P1-label experiment.",
+  "source_manifest": "configs/external_data/i_ors_ctd_v1_1_1.json",
+  "split": {
+    "fit_years": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+    "holdout_year": 2023,
+    "hard_cutoff_kst": "2023-12-31T23:50:00+09:00",
+    "min_peer_temperatures": 2,
+    "max_fit_rows_per_year_layer": 6000,
+    "sampling": "deterministic evenly spaced after chronological sort"
+  },
+  "target_grid": {
+    "provenance": "label-blind aggregate P1 I-ORS deployment-depth medians fixed before this precheck",
+    "max_mapping_distance_m": 2.0,
+    "layers": {
+      "1": 5.708,
+      "2": 7.779,
+      "3": 10.869,
+      "4": 15.775,
+      "5": 20.601,
+      "6": 30.560,
+      "7": 38.591
+    }
+  },
+  "features": {
+    "target_temperature_is_masked": true,
+    "target_salinity_may_be_used_only_when_psal_qc_equals_1": true,
+    "peer_temperature_may_be_used_only_when_temp_qc_equals_1": true,
+    "depth_may_be_used_only_when_depth_qc_equals_1_else_series_median": true,
+    "calendar": ["day_of_year_sin", "day_of_year_cos", "minute_of_day_sin", "minute_of_day_cos"],
+    "profile": ["masked_peer_temperature_by_layer", "peer_depth_by_layer", "peer_temperature_mask_by_layer", "qc1_salinity_by_layer", "salinity_mask_by_layer", "peer_count", "peer_median", "peer_range", "depth_linear_baseline"]
+  },
+  "model": {
+    "family": "LightGBM quantile",
+    "quantiles": [0.1, 0.5, 0.9],
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.04,
+      "num_leaves": 63,
+      "max_bin": 127,
+      "min_child_samples": 200,
+      "subsample": 1.0,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.05,
+      "reg_lambda": 0.2,
+      "random_state": 20260821,
+      "deterministic": true,
+      "force_col_wise": true,
+      "n_jobs": 12,
+      "verbosity": -1
+    }
+  },
+  "stop_gate": {
+    "minimum_holdout_rows": 50000,
+    "minimum_evaluated_layers": 5,
+    "minimum_rmse_relative_improvement": 0.05,
+    "minimum_mae_relative_improvement": 0.05,
+    "minimum_fraction_layers_not_worse": 0.75,
+    "maximum_single_layer_relative_rmse_degradation": 0.05,
+    "q10_q90_coverage_min": 0.70,
+    "q10_q90_coverage_max": 0.90,
+    "all_source_integrity_checks_required": true
+  },
+  "decision_scope": {
+    "pass": "GO_TO_ISOLATED_P1_OOF_ONLY",
+    "fail": "NO_GO_EXTERNAL_PROFILE",
+    "cannot_promote_to_submission": true,
+    "competition_labels_used": false,
+    "competition_outer_validation_used": false,
+    "competition_upload": false
+  }
+}

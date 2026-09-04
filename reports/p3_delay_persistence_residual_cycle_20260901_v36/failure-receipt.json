@@ -1,0 +1,31 @@
+{
+  "schema_version": "p3.delay_persistence_residual.failure.v36",
+  "experiment_id": "p3_delay_persistence_residual_cycle_20260901_v36",
+  "status": "INVALID_TERMINAL_TECHNICAL_FAILURE",
+  "fit_count": 0,
+  "outer_scores_exposed": 0,
+  "failure_stage": "feature_construction_before_fit",
+  "exception": "ContractError: H0 persistence/MST lifetime contract differs",
+  "root_cause": "constant wind-speed delay cloud has exact-zero pairwise distances; SciPy dense minimum_spanning_tree treats zero weights as absent edges",
+  "same_id_restart_allowed": false,
+  "science_contract_evaluated": false,
+  "recovery_scope": "fresh ID; replace only dense MST adapter with deterministic Kruskal that preserves zero-weight edges",
+  "hashes": {
+    "config_sha256": "ad48a4ff053c663c0aefb90a8a563d57321ce358520bfd08d92693b73393556e",
+    "runner_sha256": "3dc7ee1754eb153e1c8a64f31f500cbff56973a438a23a99ead8bc807f82e8de",
+    "lock_sha256": "4409f2dd6f73b34d6d70e385a0b47fca1f574e0a50104d08afb3b913849ca447"
+  },
+  "artifacts": {
+    "result_json_exists": false,
+    "evaluation_arrays_exist": false,
+    "lock_consumed": true
+  },
+  "access": {
+    "official_test_rows": 0,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "hidden_truth_rows": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

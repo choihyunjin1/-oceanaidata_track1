@@ -1,0 +1,65 @@
+{
+  "schema_version": "p1.dependence_aware_empirical_null_feasibility.v1",
+  "experiment_id": "p1_dependence_aware_empirical_null_feasibility_20260901_v1",
+  "lane": "INFORMATION_LABEL_FREE",
+  "status": "PREREGISTERED_EXACTLY_ONCE",
+  "authority": {
+    "path": "reports/next_action_meta_deep_research_20260831_v1/report-source.md",
+    "sha256": "b35472b5712e0644854579a753635430d2762b2bb1514006b8a89ce378deb2a1"
+  },
+  "input_contract": {
+    "train_csv_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "columns": ["station", "year", "layer", "time", "temp", "psal", "depth"],
+    "target_columns_read": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "folds": ["2025_q2", "2025_q3", "2025_q4"],
+  "incumbent_audits": {
+    "2025_q2": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json",
+    "2025_q3": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json",
+    "2025_q4": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json"
+  },
+  "sealed_null_calibration": {
+    "prefix_time_split": [0.70, 0.15, 0.15],
+    "primary_block_length_rows": 144,
+    "sensitivity_block_lengths_rows": [72, 144, 288],
+    "nominal_alpha": 0.01,
+    "empirical_block_max_quantile": 0.99,
+    "cross_layer_minimum_concurrent_layers": 2,
+    "absolute_signal_statistic": "abs(clean_state_decoder_signal)",
+    "threshold_selection_uses_labels": false,
+    "alpha_sweep": false
+  },
+  "sealed_feasibility_ceilings": {
+    "realized_false_alarm_rate_lte": 0.02,
+    "proposal_row_share_lte": 0.02,
+    "maximum_single_station_layer_proposal_concentration_lte": 0.70,
+    "all_block_length_decisions_equal": true
+  },
+  "decision": {
+    "pass": "CALIBRATION_FEASIBLE_RESEARCH_ONLY",
+    "fail": "NO_GO_DEPENDENCE_CALIBRATION_PREFLIGHT",
+    "performance_claim": false,
+    "performance_stage_authorized_only_on_pass": true
+  },
+  "operation_contract": {
+    "maximum_executions": 1,
+    "supervised_model_fits": 0,
+    "input_only_clean_state_projections": 3,
+    "prediction_rows_created": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "result_driven_retry_or_retune": 0
+  },
+  "duplication_audit": {
+    "p1_clean_state_capa_falsification_20260831_v1": "Not exact or semantic duplication: replaces independent-Gaussian fixed penalty with prefix-only block empirical-null calibration and performs no label scoring.",
+    "p1_long_event_segment_proposal_rescore_20260826_v1": "Not exact or semantic duplication: no supervised proposal rescore, segment model, inner selection, or outer F1.",
+    "gaussian_capa_exact_family_repeated": false,
+    "long_event_rescore_exact_family_repeated": false
+  },
+  "primary_sources": [
+    {"citation": "Dette, Schueler, Vetter, Multiscale change point detection for dependent data", "url": "https://arxiv.org/abs/1811.05956", "use": "Dependent-error null calibration and long-run dependence."},
+    {"citation": "Cho and Fryzlewicz, Sparsified Binary Segmentation", "url": "https://doi.org/10.1111/rssb.12079", "use": "Sparse cross-coordinate aggregation."},
+    {"citation": "Li, Munk, Sieling, FDR-Control in Multiscale Change-point Segmentation", "url": "https://doi.org/10.1214/16-EJS1131", "use": "Gaussian-boundary evidence only; its guarantee is not claimed here."}
+  ]
+}

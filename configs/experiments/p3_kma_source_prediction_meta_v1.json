@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "p3_kma_source_prediction_meta_v1",
+  "status": "prepared_dry_run_only",
+  "created_at_kst": "2026-08-21T00:00:00+09:00",
+  "objective": {
+    "metric": "pooled_six_lead_rmse_meters",
+    "direction": "minimize",
+    "single_hypothesis": "A station-agnostic CatBoost trained only on pre-2024 KMA storms can summarize transferable wave-evolution information through six point predictions, and those six predictions can improve the otherwise identical frozen-surface target CatBoost.",
+    "treatment": "append_exactly_six_external_source_predictions_to_the_591_target_features",
+    "control": "same_target_catboost_without_the_six_external_predictions",
+    "causal_claim_scope": "report_591_vs_597_feature_ablation_and_separately_gate_frozen_final_integration"
+  },
+  "source": {
+    "observations": {
+      "path": "external_data/p3_kma_buoy_pre2024/kma_buoy_pre2024.parquet",
+      "sha256": "1fa5f30f6c7a4dc276f4c76c26f84cca00dbce006119f53743fa9f774a86df45"
+    },
+    "anchors": {
+      "path": "external_data/p3_kma_buoy_pre2024/storm_anchors.parquet",
+      "sha256": "a2c60614fb64f07a8db8c0892e40b3fd4ab2dcf255bdfe378da56282ddcf093f",
+      "expected_count": 1502
+    },
+    "manifest": {
+      "path": "external_data/p3_kma_buoy_pre2024/manifest.json",
+      "sha256": "0286a74ab323f060bef611b58e21619e5778eb68beda09e9c03a3c75d3fff078"
+    },
+    "source_id": "kma_ocean_buoy_pre2024",
+    "license": "Korea Open Government Licence Type 1",
+    "maximum_timestamp_kst": "2023-12-31T23:30:00+09:00",
+    "minimum_anchor_hs_m": 1.5,
+    "minimum_same_station_anchor_separation_hours": 78,
+    "all_six_targets_required": true,
+    "external_station_identity_is_grouping_only": true
+  },
+  "domain_shift": {
+    "config_path": "configs/experiments/p3_kma_domain_shift_gate_v1.json",
+    "config_sha256": "004ae5c484743928e0db0f61dfc28a0dac499e28bef6c7d4fd4a3726c8ba5c9b",
+    "result_path": "artifacts/p3_kma_domain_shift_gate_v1/result.json",
+    "result_sha256": "cb97bb2e104ceed157705ec920b915c9a1b55d2ee4469d1996e282ccb0c562ca",
+    "result_required_for_actual": true,
+    "observed_oof_auc": 0.9967791897555192,
+    "observed_effective_sample_fraction": 0.0008405546671339974,
+    "result_scope": "direct_concat_or_full_finetune_gate_only_does_not_test_transfer_utility",
+    "auc_routes": [
+      {
+        "maximum_inclusive": 0.65,
+        "route": "full_six_prediction_meta"
+      },
+      {
+        "maximum_inclusive": 0.8,
+        "route": "prediction_meta_only"
+      },
+      {
+        "maximum_inclusive": 1.0,
+        "route": "prediction_meta_only_with_inner_incremental_signal_gate"
+      }
+    ],
+    "direct_source_target_row_concatenation_allowed": false,
+    "auc_is_a_routing_signal_not_an_outer_promotion_metric": true,
+    "high_auc_inner_gate": {
+      "required_above_auc": 0.8,
+      "scope": "each_outer_train_inner_block",
+      "iteration_source": "control_only_inner_early_stopping",
+      "challenger_uses_same_iteration": true,
+      "minimum_pooled_inner_rmse_improvement_meters_exclusive": 0.0,
+      "minimum_improved_inner_blocks": 2,
+      "station_lead_or_ci_veto": false,
+      "failure_action": "stop_before_outer_prediction_and_truth"
+    }
+  },
+  "representation": {
+    "history_hours": 48,
+    "grid_minutes": 30,
+    "history_rows_including_anchor": 97,
+    "lead_hours": [3, 6, 9, 12, 18, 24],
+    "lag_hours": [1, 3, 6, 12, 24, 48],
+    "summary_windows_hours": [3, 6, 12, 24, 48],
+    "summary_statistics": ["mean", "std", "delta", "slope"],
+    "scalar_variables": ["hs", "hmax", "wspd", "gust", "airt", "relh", "caph"],
+    "direction_variables": ["wvdir", "wdir"],
+    "derived_variables": [
+      "wave_energy",
+      "hmax_hs_ratio",
+      "gust_excess",
+      "wind_wave_alignment",
+      "wind_input_proxy"
+    ],
+    "excluded_semantic_mismatch_variables": {
+      "source": ["WP"],
+      "target": ["tp"],
+      "reason": "KMA WP and P3 upper-third mean period are not guaranteed semantically equivalent"
+    },
+    "expected_source_feature_count": 447,
+    "expected_source_feature_columns_sha256": "a5d8c4accbd0c77fdc2285435eccee628b208031f787e77824cb10da42a2d52d",
+    "target_wave_asof_tolerance_minutes_exclusive": 20,
+    "target_atmos_asof_tolerance_minutes_exclusive": 10,
+    "source_resample": "exact_native_30_minute_grid_no_interpolation",
+    "target_resample": "anchor_relative_30_minute_grid_causal_backward_native_row_asof",
+    "missingness_harmonization": {
+      "causal_forward_fill_limit_minutes": 60,
+      "applied_identically_to_source_and_target": true,
+      "missingness_or_valid_fraction_features": false,
+      "remaining_nan_policy": "source_training_median_fit_once_then_applied_to_both_domains",
+      "target_fit_statistics_used": false
+    },
+    "absolute_calendar_features": false,
+    "source_station_or_proxy_features": false,
+    "test_case_or_timestamp_mapping": false
+  },
+  "source_model": {
+    "family": "CatBoostRegressor",
+    "loss_function": "MultiRMSE",
+    "target": "six_future_hs_minus_current_hs_residuals",
+    "input_feature_count": 447,
+    "iterations": 1200,
+    "learning_rate": 0.03,
+    "depth": 7,
+    "l2_leaf_reg": 10.0,
+    "random_strength": 0.1,
+    "random_seed": 20260821,
+    "task_type": "CPU",
+    "thread_count": 8,
+    "allow_writing_files": false,
+    "hyperparameter_grid_size": 0,
+    "external_station_feature": false
+  },
+  "target_model": {
+    "family": "CatBoostRegressor",
+    "loss_function": "RMSE",
+    "target": "future_hs_minus_current_hs_residual",
+    "base_feature_count": 591,
+    "challenger_added_columns": [
+      "kma_source_hs_pred_3h",
+      "kma_source_hs_pred_6h",
+      "kma_source_hs_pred_9h",
+      "kma_source_hs_pred_12h",
+      "kma_source_hs_pred_18h",
+      "kma_source_hs_pred_24h"
+    ],
+    "maximum_iterations": 1400,
+    "learning_rate": 0.035,
+    "depth": 6,
+    "l2_leaf_reg": 8.0,
+    "random_strength": 0.2,
+    "random_seed": 20260821,
+    "task_type": "CPU",
+    "thread_count": 8,
+    "allow_writing_files": false,
+    "inner_early_stopping_rounds": 120,
+    "iteration_selection": "control_only_on_outer_train_inner_block_then_shared_by_both_arms",
+    "sample_weight": "frozen_threshold_case_weights",
+    "categorical_columns": ["station", "lead_h"],
+    "hyperparameter_grid_size": 0
+  },
+  "frozen_final_integration": {
+    "source": "frozen_incumbent_oof_label_free_columns",
+    "allowed_pretruth_columns": [
+      "fold",
+      "anchor_id",
+      "station",
+      "lead_h",
+      "multi_prediction",
+      "persistence",
+      "weight_single",
+      "weight_multi",
+      "weight_persistence",
+      "second_stage_persistence_weight",
+      "prediction"
+    ],
+    "forbidden_pretruth_column": "target_hs",
+    "router_formula": "weight_single*new_single + weight_multi*frozen_multi + weight_persistence*frozen_persistence",
+    "long_lead_formula": "(1-second_stage_persistence_weight)*router + second_stage_persistence_weight*persistence",
+    "active_long_leads": [12, 18, 24],
+    "long_lead_persistence_weight": 0.2,
+    "weight_router_or_shrink_reselection": false,
+    "exact_incumbent_reference_column": "prediction",
+    "expected_exact_incumbent_rmse": 0.7801609198910191,
+    "blind_columns": [
+      "control_single_prediction",
+      "challenger_single_prediction",
+      "control_final",
+      "challenger_final",
+      "incumbent_final"
+    ]
+  },
+  "validation": {
+    "outer_membership": "frozen_incumbent_oof_keys_only",
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "embargo_hours": 78,
+    "inner_validation_days": 45,
+    "inner_membership": "outer_train_only_episode_disjoint_78h",
+    "prediction_contract": "each_fold_prediction_excludes_that_folds_validation_targets_and_global_blind_predictions_are_fsynced_hashed_and_reloaded_before_designated_scoring_read",
+    "rolling_origin_label_scope": {
+      "current_fold_validation_targets_excluded_from_that_fold_training_and_inner_selection": true,
+      "earlier_fold_validation_targets_allowed_only_as_later_fold_training_history": true,
+      "future_fold_validation_targets_forbidden_from_earlier_fold_training": true,
+      "global_process_level_zero_outer_target_exposure_before_blind_seal_claimed": false,
+      "designated_scoring_read_occurs_after_global_blind_seal": true
+    },
+    "bootstrap_unit": "independent_case_fold_anchor_id",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260821,
+    "one_shot_no_rerun": true
+  },
+  "promotion_gate": {
+    "applies_to": "challenger_final_vs_exact_incumbent_final_only",
+    "feature_ablation_is_reported_but_not_used_for_promotion": true,
+    "minimum_pooled_rmse_improvement_meters": 0.01,
+    "paired_case_bootstrap_ci90_upper_below_zero": true,
+    "minimum_improved_outer_folds": 2,
+    "maximum_any_station_rmse_degradation_meters": 0.01,
+    "maximum_any_lead_rmse_degradation_meters": 0.015,
+    "lead_18_must_not_degrade": true,
+    "lead_24_must_not_degrade": true
+  },
+  "frozen_inputs": {
+    "feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1",
+      "expected_count": 591
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "anchor_metadata_and_vault": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "incumbent_oof_keys": {
+      "path": "artifacts/p3/long_persistence_shrink/oof.parquet",
+      "sha256": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+    }
+  },
+  "p3_sources": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "policy_inputs": {
+    "official_faq_permission": {
+      "path": "configs/external_data/official_faq_permission.json",
+      "sha256": "f4d2ea55461a8af2c1cf1ed1a1642224a93349a414dfa0af7b254606b7f64f62"
+    },
+    "external_catalog": {
+      "path": "configs/external_data/catalog.toml",
+      "sha256": "08645af1c6238fff256d60580f99154ac89070d655bff5e70ca11925c1cb52a8"
+    }
+  },
+  "artifacts": {
+    "output_directory": "artifacts/p3_kma_source_prediction_meta_v1/one_shot",
+    "status_path": "artifacts/status/p3_kma_source_prediction_meta_v1.json",
+    "authorization_amendment": "artifacts/p3_kma_source_prediction_meta_v1/authorization_amendment.json",
+    "global_attempt_lock": "artifacts/experiment_locks/p3_kma_source_prediction_meta_v1.attempt.lock",
+    "canonical_outer_lock": "artifacts/p3_kma_source_prediction_meta_v1/one_shot/OUTER_TRUTH.lock",
+    "global_outer_lock": "artifacts/experiment_locks/p3_kma_source_prediction_meta_v1.outer.lock",
+    "global_ledger": "artifacts/experiment_locks/p3_outer_truth_ledger.jsonl"
+  },
+  "execution": {
+    "allowed_mode_now": "dry-run",
+    "actual_authorized": false,
+    "actual_authorization_mechanism": "separate_O_EXCL_amendment_bound_to_exact_dry_receipt_and_implementation_SHA",
+    "future_actual_authorization_token": "ROOT_APPROVED_P3_KMA_SOURCE_PREDICTION_META_V1",
+    "model_fit_count_in_dry_run": 0,
+    "outer_truth_read_count_in_dry_run": 0,
+    "test_context_read_count": 0,
+    "estimated_actual_runtime_minutes": [35, 70]
+  },
+  "prohibitions": {
+    "direct_source_target_row_concatenation": true,
+    "source_station_id_or_proxy_as_feature": true,
+    "absolute_calendar_feature": true,
+    "test_context_or_test_index_read": true,
+    "test_timestamp_reconstruction": true,
+    "outer_membership_regeneration": true,
+    "current_fold_validation_target_in_that_fold_training_or_inner_selection": true,
+    "hyperparameter_search": true,
+    "submission_write_or_upload": true,
+    "frozen_artifact_mutation": true
+  }
+}

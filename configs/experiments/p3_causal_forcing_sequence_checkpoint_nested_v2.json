@@ -1,0 +1,137 @@
+{
+  "experiment_id": "p3_causal_forcing_sequence_checkpoint_nested_v2",
+  "status": "PREREGISTERED_APPEND_ONLY_TRAIN_ONLY_RESEARCH",
+  "problem": "P3",
+  "target": "significant_wave_height_hs",
+  "metric": "pooled_row_RMSE_m",
+  "canonical_paths": {
+    "config": "configs/experiments/p3_causal_forcing_sequence_checkpoint_nested_v2.json",
+    "compact_cache": "artifacts/p3/features_all20_v1",
+    "sequence_cache": "artifacts/p3/sequences_all20_v1",
+    "fixed8_reference": "artifacts/p3_causal_forcing_sequence_residual_20260823_v1",
+    "output": "artifacts/p3_causal_forcing_sequence_checkpoint_nested_20260827_v2",
+    "attempt_lock": "artifacts/p3_causal_forcing_sequence_checkpoint_nested_20260827_v2.ATTEMPT_LOCK.json",
+    "execution_claim": "artifacts/p3_causal_forcing_sequence_checkpoint_nested_20260827_v2.EXECUTION_CLAIM.json"
+  },
+  "validation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "training_prefix_fractions": [1.0],
+    "outer_gap_hours": 78,
+    "outer_footprint_hours": 72,
+    "inner_validation_days": 45,
+    "inner_embargo_hours": 78,
+    "inner_selection_metric": "three_seed_prediction_mean_then_postprocessed_pooled_six_lead_RMSE",
+    "inner_epoch_tie_break": "earliest_exact_minimum",
+    "inner_selection_is_strictly_inside_each_outer_training_prefix": true,
+    "full_outer_training_prefix_used_for_each_refit": true,
+    "own_outer_validation_ids_forbidden_from_own_fit": true,
+    "blind_outer_predictions_committed_before_reference_oof_values_are_opened": true,
+    "expected_outer_cases": 181,
+    "expected_outer_rows_per_prefix": 1086,
+    "expected_inner_selection_cells": 3
+  },
+  "features": {
+    "raw_context_rows_10m": 289,
+    "raw_columns": ["hs", "tp", "hmax", "wvdir", "wspd", "gust", "wdir", "airt", "relh", "caph"],
+    "compact_feature_count": 591,
+    "forcing_window_steps_10m": 37,
+    "scaler": "inner_train_only_for_selection_and_full_outer_train_only_for_refit"
+  },
+  "model": {
+    "class": "LeadCoupledCausalForcingEncoder",
+    "seed_replicates": [20260816, 20260817, 20260818],
+    "seed_reducer": "arithmetic_mean_prediction_before_epoch_selection_and_outer_metric",
+    "d_model": 64,
+    "compact_hidden": 128,
+    "attention_heads": 4,
+    "group_norm_groups": 8,
+    "dropout": 0.1,
+    "wave_tcn_dilations": [1, 2, 4, 8, 16, 32, 64],
+    "forcing_tcn_dilations": [1, 2, 4, 8, 16, 32, 64, 128]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0002,
+    "batch_size": 512,
+    "maximum_inner_epochs": 8,
+    "outer_refit_epoch_rule": "selected_inner_seed_ensemble_epoch",
+    "precision": "bf16_amp_on_cuda",
+    "gradient_clip_norm": 1.0,
+    "fixed_epoch_permutation": "seed_plus_epoch",
+    "expected_inner_seed_fits": 9,
+    "expected_outer_seed_refits": 9,
+    "expected_inner_checkpoint_files": 72,
+    "warm_start_between_cells": false,
+    "architecture_search": false,
+    "postprocess_search": false
+  },
+  "postprocess": {
+    "clip_m": [0.0, 30.0],
+    "fixed_persistence_shrink_active_leads_h": [12, 18, 24],
+    "fixed_persistence_weight": 0.2,
+    "identical_to_fixed8_reference": true
+  },
+  "evaluation": {
+    "reference_prediction_columns": ["incumbent_prediction", "challenger_prediction"],
+    "new_prediction_column": "checkpoint_nested_prediction",
+    "automatic_official_promotion": false,
+    "candidate_or_submission_creation": false,
+    "research_trend_is_retained_even_when_below_promotion_threshold": true,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260827
+  },
+  "implementation_sha256": {
+    "checkpoint_module": "161f3cf7ed73b795bef6a1a985402d0e2305cd554e95ba172667d465230e4b80",
+    "causal_forcing_sequence_module": "88713d6c804219960c309bc064580a78116e849e1a01858ceb2f8d0a8cfac0d5",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "meaningful_learning_curve_module": "4ebffc9b80e522ba7a53e440fe45aa7528ab614c199eb3f7983d4202ab5a93a2",
+    "inner_split_module": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3",
+    "models_module": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "persistence_shrink_module": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "one_shot_guard_module": "9bed88b1f0ec48180ef2a350dc75fd3376dc08b2a903c90fcf00a8dd191f08e5"
+  },
+  "expected_sha256": {
+    "source/README.md": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+    "compact_cache/manifest.json": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e",
+    "compact_cache/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "compact_cache/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "sequence_cache/manifest.json": "3e6aa1c428d76ac1bba172047d9fb5048e3aeb7100fd586e3dce9b9d92f277e4",
+    "sequence_cache/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "sequence_cache/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "fixed8_reference/metrics.json": "adab38a1244b532e4e47cb4308f6a8d8c2a61cb0495b716db171f224537eba21",
+    "fixed8_reference/oof/learning_curve_oof.parquet": "3b5534130b3427611ac085ec98ec19bdf49c28938bc6bb04f8d5df5f767884c8",
+    "fixed8_reference/validation_keys.parquet": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+    "fixed8_reference/manifest.json": "204c36727e3f033e1650985ee2d0cbefe9aac75e0494cd70d61eaa685cf0de2e"
+  },
+  "access_policy": {
+    "train_only_preflight": true,
+    "allowed_source_files": ["README.md", "train_wave.csv", "train_atmos.csv"],
+    "directory_enumeration": false,
+    "anonymous_evaluation_file_reads": 0,
+    "submission_artifact_reads": 0,
+    "submission_artifact_writes": 0,
+    "upload_attempts": 0
+  },
+  "output": {
+    "artifact_dir": "artifacts/p3_causal_forcing_sequence_checkpoint_nested_20260827_v2",
+    "candidate_created": false,
+    "uploaded": false
+  },
+  "prohibitions": {
+    "anonymous_evaluation_data_access": true,
+    "hidden_target_access": true,
+    "submission_creation_or_upload": true,
+    "outer_truth_epoch_selection": true,
+    "architecture_or_postprocess_tuning": true,
+    "existing_v1_mutation": true,
+    "era5_artifact_or_process_access": true,
+    "rerun_after_attempt_lock": true
+  }
+}

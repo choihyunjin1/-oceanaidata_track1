@@ -1,0 +1,129 @@
+{
+  "schema_version": "p2_architecture_matched_stage_b.parser_correction.r1",
+  "experiment_id": "p2_architecture_matched_stage_b_parser_correction_r1",
+  "created_at_kst": "2026-08-23T06:46:19+09:00",
+  "status": "STATIC_IMPLEMENTATION_ONLY_NO_QA_NO_AUTHORIZATION",
+  "problem": "P2",
+  "comparison_mode": "ARCHITECTURE_MATCHED_TIME_SAFE_BASELINE",
+  "exact_official_incumbent_comparison": false,
+  "research_feedback_observed_from_failed_v3": false,
+  "model_family_evaluated_by_failed_v3": false,
+  "candidate_or_test_prediction_allowed": false,
+  "upload_allowed": false,
+  "base_v3": {
+    "config": {"path": "configs/experiments/p2_architecture_matched_stage_b_challenger_v3.json", "sha256": "dc11ea956241531a19e846bee95fbac09df68fe4615930336355478b108cc798", "bytes": 15111},
+    "guard": {"path": "src/p2_restore/architecture_matched_stage_b_contract_v3.py", "sha256": "974a7d7c4250390899a10e017ac0c5808e825a2cdc73474659f7822f872aba1b", "bytes": 40596},
+    "engine": {"path": "src/p2_restore/architecture_matched_stage_b_execution_v3.py", "sha256": "f2299331c5815c87af3c3f7ed6373ac335bd5e8522cea36aca31e1a5b058e27b", "bytes": 71668},
+    "runner": {"path": "scripts/run_p2_architecture_matched_stage_b_v3.py", "sha256": "d32fa5863ea0c788f1ef21c8855943cd1506d59808c8b213b2576a2128d66f1b", "bytes": 8358},
+    "tests": {"path": "tests/test_p2_architecture_matched_stage_b_v3.py", "sha256": "964ea59ad957319781b4d363c47c1920bb326122548b08866ef89c57482c9b6f", "bytes": 27096},
+    "pre_execution_qa": {"path": "artifacts/p2_architecture_matched_stage_b_v3_control/pre_execution_qa.json", "sha256": "9e0d6bb2490fcdbc447dc21d8fd398bfd6f69bcee838ed758651724eb0dcbf15", "bytes": 6931},
+    "authorization": {"path": "artifacts/p2_architecture_matched_stage_b_v3_control/authorization.json", "sha256": "02f36eb29577b9bed2dfbb3412d332eac8109f03c50577a03e24afe0574cc679", "bytes": 2000},
+    "attempt_lock": {"path": "artifacts/p2_architecture_matched_stage_b_v3_control/attempt.lock", "sha256": "f763bc49e22c634cfbab5418e9f182f00beb11e081051b7a93c09f0ffc9a716d", "bytes": 1695},
+    "empty_output": {"path": "artifacts/p2_architecture_matched_stage_b_v3", "required_recursive_entry_count": 0},
+    "failure_receipt": {"path": "artifacts/p2_architecture_matched_stage_b_v3_control/failure_receipt.json", "sha256": "2cd730fb1b9ac4bfc7112b041af47aa2df5db71fd7fcfe77f117a755e17f5d70", "bytes": 3891},
+    "failure_forensic_addendum": {"path": "artifacts/p2_architecture_matched_stage_b_v3_control/failure_forensic_addendum_r1.json", "sha256": "3e33fc651cc8df67f23952a0d87ebe23d1e848d695318a099c548539802ef1f0", "bytes": 1664}
+  },
+  "scientific_contract": {
+    "base_v3_sections": [
+      "problem",
+      "comparison_mode",
+      "exact_official_incumbent_comparison",
+      "explicitly_not_exact_official_incumbent",
+      "local_qualification_only",
+      "official_promotion_allowed",
+      "research_only",
+      "upload_allowed",
+      "official_submission_count",
+      "hypothesis",
+      "stage_a_reference",
+      "source_pins",
+      "curve_protocol",
+      "metric_and_gates",
+      "runtime_contract",
+      "data_contract",
+      "output_contract",
+      "resource_estimate"
+    ],
+    "canonical_sha256": "a7845c21478f30317a1f88f0a00f897e18922780ff46c6384f99ee40a8b87d0e",
+    "model_feature_fold_seed_prefix_bootstrap_postprocess_gate_changes": 0,
+    "score_or_validation_metric_feedback_used": false
+  },
+  "correction_contract": {
+    "allowed_changes": [
+      "decode an RFC-4180 unquoted empty selected field as the empty scalar",
+      "route the registered public layers 1,5,6,7,8 while preserving target layers 2,3,4",
+      "exercise the exact selective parser over the full pinned source before lock consumption",
+      "write aggregate-only failure ancestry and correction control metadata"
+    ],
+    "unquoted_empty_scalar_result": "",
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "withheld_target_scalar_decode_convert_use_required": 0,
+    "base_v3_module_reused_for_all_scientific_computation": true,
+    "base_v3_decoder_rebound_only_to_pinned_parser_module": true
+  },
+  "parser_preflight": {
+    "observations_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "observations_bytes": 49058719,
+    "observations_rows": 789408,
+    "expected_columns": ["station", "year", "layer", "time", "temp", "psal", "depth", "nominal_depth"],
+    "run_for_every_registered_outer_fold_before_qa_or_lock": true,
+    "retain_raw_values": false,
+    "files_written": 0,
+    "fits": 0,
+    "predictions": 0,
+    "scores": 0
+  },
+  "implementation_roles": {
+    "CONFIG": "configs/experiments/p2_architecture_matched_stage_b_parser_correction_r1.json",
+    "PARSER": "src/p2_restore/architecture_matched_stage_b_csv_r1.py",
+    "GUARD": "src/p2_restore/architecture_matched_stage_b_contract_r1.py",
+    "ENGINE": "src/p2_restore/architecture_matched_stage_b_execution_r1.py",
+    "RUNNER": "scripts/run_p2_architecture_matched_stage_b_parser_correction_r1.py",
+    "TESTS": "tests/test_p2_architecture_matched_stage_b_parser_correction_r1.py"
+  },
+  "canonical_paths": {
+    "config": "configs/experiments/p2_architecture_matched_stage_b_parser_correction_r1.json",
+    "output": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1",
+    "control": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1_control",
+    "pre_execution_qa": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1_control/pre_execution_qa.json",
+    "authorization": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1_control/authorization.json",
+    "attempt_lock": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1_control/attempt.lock",
+    "run_failure_receipt": "artifacts/p2_architecture_matched_stage_b_parser_correction_r1_control/run_failure_receipt.json"
+  },
+  "execution_policy": {
+    "check_only_is_default": true,
+    "full_pinned_source_parser_preflight_before_qa_authorization_or_lock": true,
+    "actual_run_requires_independent_static_qa": true,
+    "actual_run_requires_separate_append_only_authorization": true,
+    "qa_and_authorization_verified_before_attempt_lock": true,
+    "execution_engine_imported_after_attempt_lock": true,
+    "output_created_after_attempt_lock": true,
+    "output_and_files_use_o_excl_semantics": true,
+    "post_lock_exception_writes_aggregate_only_o_excl_failure_receipt": true,
+    "rerun_allowed": false,
+    "resume_allowed": false,
+    "candidate_or_test_prediction_allowed": false,
+    "frozen_or_submission_mutation_allowed": false,
+    "registry_append_allowed": false,
+    "automatic_upload_allowed": false
+  },
+  "qa_receipt_contract": {
+    "schema_version": "p2_architecture_matched_stage_b.parser_correction.pre_execution_qa.r1",
+    "decision": "GO_AUTHORIZE_P2_STAGE_B_PARSER_CORRECTION_R1",
+    "required_p0_count": 0,
+    "required_p1_count": 0,
+    "must_pin_exact_roles": ["CONFIG", "PARSER", "GUARD", "ENGINE", "RUNNER", "TESTS"],
+    "must_pin_parser_preflight_sha256": true
+  },
+  "authorization_contract": {
+    "schema_version": "p2_architecture_matched_stage_b.parser_correction.authorization.r1",
+    "authorization_phrase_prefix": "AUTHORIZE_P2_STAGE_B_PARSER_CORRECTION_R1:",
+    "must_pin_qa_receipt_sha256": true,
+    "must_deep_equal_current_implementation_pins": true,
+    "execution_authorized": true,
+    "candidate_or_test_prediction_allowed": false,
+    "upload_allowed": false
+  }
+}

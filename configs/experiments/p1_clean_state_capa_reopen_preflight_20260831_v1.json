@@ -1,0 +1,75 @@
+{
+  "schema_version": "p1.clean_state_capa_reopen_preflight.v1",
+  "experiment_id": "p1_clean_state_capa_reopen_preflight_20260831_v1",
+  "problem": "P1",
+  "created_at_kst": "2026-08-31T00:00:00+09:00",
+  "stage": "STAGE0_ZERO_FIT",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "hypothesis": "The never-executed v6 robust seasonal and adjacent-layer clean-state representation can recover offset/drift headroom when its pointwise logistic/run filter is replaced by a joint point-and-collective penalized segment-likelihood decoder.",
+  "lineage": {
+    "representation_source": "p1_multiscale_cross_layer_offset_drift_unary_v6r2",
+    "representation_relation": "REUSE_SCIENTIFIC_IDEA_NOT_OLD_EXECUTION_CONTRACT",
+    "decoder_change": "POINTWISE_LOGISTIC_FIXED_RUN_FILTER_TO_PENALIZED_SEGMENT_LIKELIHOOD",
+    "prior_scientific_fit_count": 0,
+    "prior_status": "TECHNICAL_NO_GO_NO_SCIENTIFIC_CONCLUSION"
+  },
+  "primary_metric": {
+    "name": "pooled_row_binary_micro_f1_delta",
+    "baseline": "same_surface_frozen_incumbent",
+    "direction": "candidate_minus_incumbent",
+    "favorable": "strictly_positive"
+  },
+  "sanity_checks": {
+    "add_only_precision_rule": "proposal_precision_strictly_greater_than_same_surface_incumbent_f1_divided_by_2",
+    "paired_uncertainty_units": [
+      "whole_positive_event",
+      "station_layer_kst_day"
+    ],
+    "diagnostic_only": [
+      "I-ORS|1",
+      "I-ORS|5",
+      "S-ORS|2",
+      "June",
+      "offset",
+      "drift",
+      "thermocline_false_positive_rate"
+    ]
+  },
+  "forbidden_old_gates": [
+    "minimum_full_fraction_delta_0p02",
+    "all_late_fractions_positive",
+    "three_of_three_inner_nonnegative",
+    "worst_of_sixteen_station_layer_nonnegative"
+  ],
+  "stage0_required_checks": [
+    "all_required_source_files_exist",
+    "v6r2_actual_run_false",
+    "v6r2_model_fits_zero",
+    "v6r4_actual_run_false",
+    "v6r4_model_fits_zero",
+    "offset_and_drift_headroom_present",
+    "hard_cell_headroom_present",
+    "segment_decoder_materially_distinct",
+    "official_test_sample_submission_hidden_rows_read_zero",
+    "model_fits_zero",
+    "csv_created_zero",
+    "uploads_zero"
+  ],
+  "stage1_authorization": {
+    "allowed_after_stage0": false,
+    "reason": "A unique executable decoder contract, frozen proposal fingerprint, and an independent QA receipt are still required. Existing exposed folds cap any later result at RESEARCH_ONLY until a fresh organizer-blind surface exists.",
+    "maximum_resource_envelope": {
+      "cpu_wall_hours": 6,
+      "ram_gib": 8,
+      "gpu_count": 0,
+      "total_top_level_fits": 120
+    }
+  },
+  "access_policy": {
+    "official_test_rows": 0,
+    "sample_submission_rows": 0,
+    "hidden_label_rows": 0,
+    "submission_csv_creation": 0,
+    "uploads": 0
+  }
+}

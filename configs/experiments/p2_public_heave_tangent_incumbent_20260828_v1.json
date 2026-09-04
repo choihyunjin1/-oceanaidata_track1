@@ -1,0 +1,116 @@
+{
+  "schema_version": "p2.public_heave_tangent_incumbent.experiment.20260828.v1",
+  "experiment_id": "p2_public_heave_tangent_incumbent_20260828_v1",
+  "problem": "P2",
+  "status": "AUTHORIZED_EXACTLY_ONE_BOUNDED_LOCAL_EXECUTION",
+  "historical_exposure": "The fixed three validation blocks and incumbent OOF lineage were used by earlier repository research. This is a new-architecture committed historical block-mask experiment, not an untouched holdout.",
+  "folds": {
+    "2024_sep_oct": {
+      "start": "2024-09-01T00:00:00+09:00",
+      "stop": "2024-11-01T00:00:00+09:00"
+    },
+    "2025_jul_aug": {
+      "start": "2025-07-01T00:00:00+09:00",
+      "stop": "2025-09-01T00:00:00+09:00"
+    },
+    "2025_nov_dec": {
+      "start": "2025-11-01T00:00:00+09:00",
+      "stop": "2026-01-01T00:00:00+09:00"
+    }
+  },
+  "comparator_priority": [
+    {
+      "name": "p2_extrapolated_soft_gate_v2",
+      "kind": "parquet",
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+      "prediction_column": "prediction",
+      "validation_label": "STRONGEST_REPRODUCIBLE_COMMON_OOF_INCUMBENT",
+      "freshness": "adaptive historically exposed OOF; no fresh holdout claim"
+    },
+    {
+      "name": "p2_physical_profile_projection_v1",
+      "kind": "parquet",
+      "path": "artifacts/p2_physical_profile_projection_v1/oof.parquet",
+      "sha256": "adffb86b43ae69ad3f11863263fe3679cc0195053b46c1ec57a307d2c54eb7cc",
+      "prediction_column": "prediction",
+      "validation_label": "DOWNGRADED_PHYSICAL_PROJECTION_OOF",
+      "freshness": "adaptive historically exposed OOF; no fresh holdout claim"
+    },
+    {
+      "name": "alpha40_forward_proxy",
+      "kind": "sealed_npz_reference",
+      "validation_label": "INCUMBENT_PROXY_VALIDATION",
+      "freshness": "architecture-fresh committed forward proxy from the closed alpha40 quasi-periodic pilot",
+      "prediction_files": {
+        "2024_sep_oct": {
+          "path": "artifacts/p2_alpha40_quasiperiodic_gp_residual_20260828_v1/predictions/p2_alpha40_quasiperiodic_gp_residual_20260828_v1_2024_sep_oct.npz",
+          "sha256": "81046517a6a25f33eabee06a70b242de815279d953ecb06d86e1d64e3feabf1f"
+        },
+        "2025_jul_aug": {
+          "path": "artifacts/p2_alpha40_quasiperiodic_gp_residual_20260828_v1/predictions/p2_alpha40_quasiperiodic_gp_residual_20260828_v1_2025_jul_aug.npz",
+          "sha256": "b2006ba2525f4262b8e90d16ddfa246b2ec0142e6a8dbe1268175a470f5d1b4f"
+        },
+        "2025_nov_dec": {
+          "path": "artifacts/p2_alpha40_quasiperiodic_gp_residual_20260828_v1/predictions/p2_alpha40_quasiperiodic_gp_residual_20260828_v1_2025_nov_dec.npz",
+          "sha256": "c92346c2d2a55c87fa3f063dd0cf22dba1120a9983bd38d026b8d4ada6ea8784"
+        }
+      },
+      "truth_anchor": {
+        "path": "artifacts/p2_state_conditional_lean_v1/oof.parquet",
+        "sha256": "4f6df66e798719f3490ed886fd57fbc35203f7f86afc1f608fd3d20172eb205f"
+      }
+    }
+  ],
+  "input_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a"
+  },
+  "model": {
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "target_nominal_depth_m": {
+      "2": 7.04,
+      "3": 9.44,
+      "4": 14.74
+    },
+    "purge_days": 7,
+    "season_bin_days": 14,
+    "season_window_days": 60.0,
+    "minimum_background_rows_per_layer": 100,
+    "minimum_public_layers": 4,
+    "minimum_public_span_m": 30.0,
+    "minimum_gradient_rms_c_per_m": 0.00003,
+    "maximum_design_condition_number": 50.0,
+    "eta_training_stride": 1,
+    "eta_absolute_quantile": 0.99,
+    "eta_hard_cap_m": 10.0,
+    "minimum_eta_training_rows": 500,
+    "maximum_correction_absolute_c": 0.20,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260828,
+    "hyperparameter_search_count": 0,
+    "cpu_thread_limit": 2
+  },
+  "gate": {
+    "aggregate_delta_rmse_max_c": -0.003,
+    "paired_kst_day_bootstrap_ci90_upper_max_c": 0.0,
+    "minimum_improved_folds": 2,
+    "maximum_worst_fold_regression_c": 0.005,
+    "maximum_layer_regression_c": 0.005,
+    "minimum_active_fraction": 0.05,
+    "maximum_correction_rms_c": 0.05,
+    "maximum_correction_p99_c": 0.20,
+    "maximum_correction_absolute_c": 0.20
+  },
+  "leakage_contract": {
+    "official_test_sample_submission_paths_read": false,
+    "official_answer_or_mirror_allowed": false,
+    "validation_target_temp_psal_masked_together": true,
+    "query_target_temp_psal_as_features": false,
+    "validation_truth_loaded_before_prediction_commitment": false,
+    "new_pava_allowed": false,
+    "candidate_csv_generation_authorized": false,
+    "official_upload_authorized": false,
+    "post_result_parameter_search_allowed": false
+  }
+}

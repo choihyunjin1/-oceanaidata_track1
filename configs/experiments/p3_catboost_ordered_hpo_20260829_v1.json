@@ -1,0 +1,199 @@
+{
+  "experiment_id": "p3_catboost_ordered_hpo_20260829_v1",
+  "status": "RESOURCE_AMENDED_AND_ROOT_AUTHORIZED_ONE_SHOT_EXECUTE",
+  "base_commit": "8e0dc9ab22a713596425375985a6fe04f878e325",
+  "purpose": "Tune only the incumbent single-row residual CatBoost regularization and ordered-boosting surface while every feature, target, downstream ensemble, router, shrink, and KMA rule stays frozen.",
+  "data_boundary": {
+    "historical_train_only": true,
+    "official_rows_read": 0,
+    "official_files_forbidden": [
+      "test_context.parquet",
+      "test_index.csv",
+      "sample_submission.csv",
+      "baseline_persistence.csv",
+      "score.py"
+    ],
+    "absolute_official_time_reconstruction_allowed": false,
+    "external_evaluation_period_matching_allowed": false,
+    "csv_output_allowed": false,
+    "submission_or_upload_allowed": false,
+    "source_mutation_allowed": false
+  },
+  "inputs": {
+    "grid": {
+      "path": "configs/experiments/p3_catboost_ordered_hpo_20260829_v1.grid.json",
+      "sha256": "98710828d73af2ecb44f0db64cd369ff4504e4eca27587b793e85c403150571e"
+    },
+    "resource_amendment": {
+      "path": "configs/experiments/p3_catboost_ordered_hpo_20260829_v1.resource_amendment.json",
+      "sha256": "70742c1a1ded515ace51aedc495bd5f959e4b6063918c9b669288834c5f9b079"
+    },
+    "feature_columns": {
+      "path": "submissions/p3_frozen_catboost/feature_columns.json",
+      "sha256": "0c8b59cc544970aa731d579476a84c249c31b08ce1f520a8cc7ec601987e61a1",
+      "expected_count": 591
+    },
+    "train_features": {
+      "path": "artifacts/p3/features_all20_v1/train_features.parquet",
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+      "expected_rows": 24360
+    },
+    "train_anchors": {
+      "path": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "expected_rows": 24360
+    },
+    "train_wave": {
+      "environment_root": "P3_DATA_DIR",
+      "relative_path": "train_wave.csv",
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "frozen_router_oof": {
+      "path": "artifacts/p3/long_persistence_shrink/oof.parquet",
+      "sha256": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "expected_cases": 182,
+      "expected_rows": 1092
+    },
+    "frozen_kma_oof": {
+      "path": "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet",
+      "sha256": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+      "expected_cases": 182,
+      "expected_rows": 1092
+    },
+    "runtime_calibration": {
+      "path": "artifacts/p3_corrected_repeated_forward_catboost_v2/metrics.json",
+      "sha256": "2c797e6169b7af27d343edb31fae5acfd4ce704149c63b732480fe33692c22e6"
+    }
+  },
+  "selection": {
+    "windows": [
+      ["selection_2024_feb_a", "2024-02-01", "2024-02-19"],
+      ["selection_2024_feb_b", "2024-02-19", "2024-03-05"],
+      ["selection_2024_mar", "2024-03-05", "2024-03-24"],
+      ["selection_2024_mar_apr", "2024-03-24", "2024-04-15"],
+      ["selection_2024_apr_may", "2024-04-15", "2024-05-15"],
+      ["selection_2024_may_jun", "2024-05-15", "2024-07-01"]
+    ],
+    "anchor_selection": "station_global_chronological_first_eligible_across_all_windows",
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "embargo_hours": 78,
+    "storm_threshold_hs_m": 1.5,
+    "feature_surface": "compact_feature_columns_fixed_v1",
+    "expected_feature_count": 591,
+    "target": "target_hs_minus_current_hs",
+    "case_weight": "exp(-0.45*max(current_hs-1.5,0))_mean_normalized",
+    "ranking_metric": "pooled_six_lead_row_MSE",
+    "expected_validation_cases": 78,
+    "expected_validation_cases_by_fold": [15, 12, 14, 12, 13, 12],
+    "tie_tolerance_rmse_m": 0.0005,
+    "tie_break": ["control_first", "lower_depth", "larger_l2_leaf_reg", "candidate_id"]
+  },
+  "successive_halving": {
+    "rungs": [
+      {"name": "rung_300", "iterations": 300, "selection_fold_count": 2, "challenger_keep": 12},
+      {"name": "rung_900", "iterations": 900, "selection_fold_count": 4, "challenger_keep": 3},
+      {"name": "rung_2500", "iterations": 2500, "selection_fold_count": 6, "challenger_keep": 1, "early_stopping_rounds": 120}
+    ],
+    "challenger_count": 48,
+    "control_count": 1,
+    "maximum_fit_count": 174,
+    "result_based_grid_expansion_allowed": false,
+    "rerun_allowed": false
+  },
+  "frozen_pipeline": {
+    "single_branch_only_tuned": true,
+    "multi_branch": {
+      "loss_function": "MultiRMSE",
+      "iterations": 1200,
+      "learning_rate": 0.03,
+      "depth": 7,
+      "l2_leaf_reg": 10.0,
+      "random_strength": 0.15,
+      "boosting_type": "Plain",
+      "weight": 0.5,
+      "retune_allowed": false
+    },
+    "single_weight": 0.5,
+    "router": {
+      "name": "smooth_medium",
+      "alpha": 10.0,
+      "temperature_multiplier": 2.0,
+      "strength": 0.5,
+      "active_leads_h": [12, 18, 24],
+      "weights_refit_or_retune_allowed": false
+    },
+    "persistence_shrink": {
+      "active_leads_h": [12, 18, 24],
+      "weight": 0.2,
+      "retune_allowed": false
+    },
+    "kma": {
+      "deployment_alpha": 0.4,
+      "active_leads_h": [18, 24],
+      "exact_no_op_leads_h": [3, 6, 9, 12],
+      "calibrator_refit_or_retune_allowed": false,
+      "alpha_retune_allowed": false
+    }
+  },
+  "selection_gate": {
+    "all_required": true,
+    "pooled_delta_rmse_m_max": -0.002,
+    "minimum_nonworse_folds": 4,
+    "minimum_nonworse_stations": 2,
+    "lead_18_delta_rmse_m_max": 0.0,
+    "lead_24_delta_rmse_m_max": 0.0
+  },
+  "confirmation": {
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "membership": "exact_frozen_182_case_router_and_kma_oof_intersection",
+    "prediction_sealed_and_hashed_before_truth_metric": true,
+    "iteration_rule": "floor_median_of_six_selection_best_iterations",
+    "maximum_confirmation_fit_count": 3,
+    "maximum_full_refit_fit_count_after_gate_pass": 1,
+    "bootstrap": {"unit": "whole_six_lead_case", "replicates": 5000, "seed": 20260829, "ci": 0.9},
+    "gate": {
+      "all_required": true,
+      "pooled_delta_rmse_m_max": -0.002,
+      "paired_case_bootstrap_ci90_upper_strictly_below_m": 0.0,
+      "minimum_nonworse_folds": 2,
+      "minimum_nonworse_stations": 2,
+      "lead_18_delta_rmse_m_max": 0.0,
+      "lead_24_delta_rmse_m_max": 0.0,
+      "short_lead_pooled_delta_rmse_m_max": 0.0005,
+      "worst_station_by_lead_delta_rmse_m_max": 0.005
+    },
+    "failure_action": "close_incumbent_core_hpo_without_full_refit_or_submission"
+  },
+  "hardware": {
+    "required_logical_cpu": 8,
+    "minimum_physical_memory_gib": 60,
+    "max_workers_after_execute_signal": 1,
+    "threads_per_fit": 6,
+    "overlap_policy": "no_model_fit_until_root_confirms_P1_P2_competing_work_is_complete",
+    "projected_wall_time_hours_max": 12,
+    "peak_memory_gib_max": 64
+  },
+  "execution": {
+    "allowed_mode_now": "one-shot-execute",
+    "actual_authorized": true,
+    "future_execute_token": "ROOT_APPROVED_P3_CATBOOST_ORDERED_HPO_20260829_V1",
+    "model_fit_count_in_static_preflight": 0,
+    "official_rows_read_in_static_preflight": 0,
+    "csv_write_count": 0
+  },
+  "outputs": {
+    "artifact_dir": "artifacts/p3_catboost_ordered_hpo_20260829_v1",
+    "static_preflight_receipt": "artifacts/p3_catboost_ordered_hpo_20260829_v1/static_preflight.json",
+    "attempt_lock": "artifacts/p3_catboost_ordered_hpo_20260829_v1/one_shot/attempt.lock",
+    "selection_aggregate": "artifacts/p3_catboost_ordered_hpo_20260829_v1/one_shot/selection_aggregate.json",
+    "confirmation_blind_predictions": "artifacts/p3_catboost_ordered_hpo_20260829_v1/one_shot/confirmation_blind_predictions.parquet",
+    "confirmation_seal": "artifacts/p3_catboost_ordered_hpo_20260829_v1/one_shot/confirmation_seal.json",
+    "result": "artifacts/p3_catboost_ordered_hpo_20260829_v1/one_shot/result.json"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "p2.official_information_probe_cycle.result.20260830.v1",
+  "task": "P2",
+  "recorded_at_kst": "2026-08-30",
+  "conclusion": {
+    "state": "NEW_PUBLIC_CHAMPION_SELECTIVE_TRANSPORT",
+    "new_champion": "P2_1_RANK1_BIN17_ONLY",
+    "new_champion_public_rmse_c": 0.430194,
+    "new_champion_public_score": 27.935464,
+    "decision": "KEEP_BIN17_ONLY; REJECT_BIN18_CORRECTION_ON_PUBLIC_TRANSFER; DO_NOT_ADAPT_FURTHER_FROM_THIS_CYCLE",
+    "summary": "The pre-frozen disjoint probes isolate the transfer result: bin17 supplies the official gain, while bin18 reverses its historical sign and slightly erodes that gain. Bin17-only improves the prior champion by 0.000015 C and alpha50 by 0.001058 C. The exact squared-loss decomposition closes to within six-decimal display rounding.",
+    "private_score_status": "UNKNOWN"
+  },
+  "candidate_identity_reconciliation": {
+    "prepared_manifest": "reports/p2_rank1_bin_decomposition_probes_20260830_v1/prepared-probes.json",
+    "prepared_manifest_sha256": "fb49547ade7e5f2f49fb3682334db57101d8bb547371c0938a82a3aecb472dab",
+    "independent_qa": "reports/p2_rank1_bin_decomposition_probes_20260830_v1/independent-qa.json",
+    "independent_qa_sha256": "7b34c757d607b4a9e8c257b88b0d629b94e35f30664f4066dac2ea608016ac45",
+    "config_sha256": "27e4d525fbfbf359c7e16463b630a5d60893a75ae95a66a37a02bbbe8f22e215",
+    "candidates": [
+      {
+        "name": "P2_1_RANK1_BIN17_ONLY",
+        "enabled_bins": [
+          17
+        ],
+        "submission_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+        "public_rmse_c": 0.430194,
+        "public_score": 27.935464,
+        "official_state": "NEW_PUBLIC_CHAMPION"
+      },
+      {
+        "name": "P2_2_RANK1_BIN18_ONLY",
+        "enabled_bins": [
+          18
+        ],
+        "submission_sha256": "0d213e97b9435862bbc892ac358afdc99b0a8834740915720f96bd420761d557",
+        "public_rmse_c": 0.431267,
+        "public_score": 27.922001,
+        "official_state": "PUBLIC_HARM_VS_ALPHA50"
+      }
+    ],
+    "comparators": [
+      {
+        "name": "P2_1_OFFICIAL_MSE_VERTEX_A083419",
+        "role": "prior_champion_equal_to_alpha50_plus_bin17_plus_bin18",
+        "submission_sha256": "bf15d705b3dbaaac4265c608b158e2a9b544fb31957bd12d8d2ca41c25faab0f",
+        "public_rmse_c": 0.430209,
+        "public_score": 27.935277
+      },
+      {
+        "name": "alpha50",
+        "role": "no_bin17_or_bin18_anchor",
+        "submission_sha256": "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+        "public_rmse_c": 0.431252,
+        "public_score": 27.922187
+      }
+    ],
+    "hash_match_to_pre_frozen_candidates": true
+  },
+  "official_pairwise_results": {
+    "bin17_only_minus_prior_champion": {
+      "delta_rmse_c": -0.000015,
+      "delta_score": 0.000187
+    },
+    "bin17_only_minus_alpha50": {
+      "delta_rmse_c": -0.001058,
+      "delta_score": 0.013277
+    },
+    "bin18_only_minus_alpha50": {
+      "delta_rmse_c": 0.000015,
+      "delta_score": -0.000186
+    },
+    "prior_champion_minus_bin18_only": {
+      "delta_rmse_c": -0.001058,
+      "delta_score": 0.013276
+    }
+  },
+  "rmse_squared_decomposition": {
+    "formula": "MSE(champion) = MSE(bin17_only) + MSE(bin18_only) - MSE(alpha50)",
+    "displayed_rmse_squared_c2": {
+      "alpha50": 0.185978287504,
+      "bin17_only": 0.185066877636,
+      "bin18_only": 0.185991225289,
+      "prior_champion": 0.185079783681
+    },
+    "bin17_increment_from_alpha50_mse_c2": -0.000911409868,
+    "bin18_increment_from_alpha50_mse_c2": 0.000012937785,
+    "sum_of_bin_increments_mse_c2": -0.000898472083,
+    "observed_champion_increment_from_alpha50_mse_c2": -0.000898503823,
+    "bin17_share_of_observed_total_mse_improvement": 1.0143639288666666,
+    "bin18_erosion_as_share_of_observed_total_mse_improvement": 0.01439925425893263,
+    "bin18_erosion_as_share_of_bin17_mse_gain": 0.014195353215113535,
+    "row_count": 26061,
+    "display_derived_sse_contributions_c2": {
+      "bin17": -23.752252569948,
+      "bin18": 0.337171614885,
+      "champion_total_from_alpha50": -23.415908131203
+    }
+  },
+  "display_rounding_adjudication": {
+    "rmse_display_decimals": 6,
+    "assumed_round_to_nearest_half_unit_c": 0.0000005,
+    "mse_identity_residual_c2": -3.174e-8,
+    "display_implied_champion_rmse_from_other_three_c": 0.4302090368890454,
+    "displayed_minus_implied_champion_rmse_c": -3.6889045370039134e-8,
+    "all_corner_rounding_envelope_for_mse_identity_residual_c2": [
+      -0.000001754662,
+      0.000001691182
+    ],
+    "zero_identity_inside_rounding_envelope": true,
+    "interpretation": "The 3.174e-8 C^2 closure residual is far below the uncertainty induced by independently rounded six-decimal RMSE displays. It is not evidence of a decomposition or candidate-identity failure."
+  },
+  "transport_interpretation": {
+    "bin17": "POSITIVE_TRANSFER. Adding the fixed bin17 correction to alpha50 improves displayed public RMSE by 0.001058 C; equivalently, adding it to bin18-only produces the same 0.001058 C improvement up to display precision.",
+    "bin18": "SIGN_REVERSAL_WEAK_PUBLIC_HARM. Adding the fixed bin18 correction to alpha50 worsens displayed public RMSE by 0.000015 C; adding it to bin17-only likewise turns 0.430194 into the prior champion's 0.430209.",
+    "full_rank1": "The prior champion transferred because the large bin17 gain dominated the small bin18 loss. Removing bin18 preserves 101.44% of the observed total MSE gain before its 1.44% erosion.",
+    "independence_caveat": "The mirrored pairwise deltas follow from disjoint-support squared-loss algebra on the same public labels; they are a consistency check, not independent replication.",
+    "generalization_caveat": "This is one Public split with six-decimal feedback and unknown Private performance. It supports candidate-family attribution, not a universal claim that all bin18 corrections are harmful."
+  },
+  "provenance_and_access": {
+    "official_values_source": "root-verified platform result values supplied for receipt recording",
+    "local_sources_read": [
+      "reports/p2_rank1_bin_decomposition_probes_20260830_v1/prepared-probes.json",
+      "reports/p2_rank1_bin_decomposition_probes_20260830_v1/independent-qa.json"
+    ],
+    "browser_reads_this_recording": 0,
+    "csv_reads_this_recording": 0,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "commits": 0,
+    "pushes": 0
+  }
+}

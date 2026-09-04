@@ -1,0 +1,95 @@
+{
+  "schema_version": "p3_target_shift_retroaudit.20260828.v1",
+  "experiment_id": "p3_target_shift_retroaudit_20260828_v1",
+  "objective": "Compare the current champion historical OOF case distribution with the public no-label test context and re-evaluate structurally different historical candidates under cross-fitted target-domain weights.",
+  "source_features": "artifacts/p3/features_all20_v1/train_features.parquet",
+  "target_features": "artifacts/p3/features_all20_v1/test_features.parquet",
+  "anchor_metadata": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+  "champion_replay": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/sealed_candidate_predictions.parquet",
+  "feature_columns": [
+    "hs_current",
+    "hs_delta_3h",
+    "hs_delta_6h",
+    "hs_delta_12h",
+    "hs_slope_3h",
+    "hs_slope_6h",
+    "hs_slope_12h",
+    "hs_std_6h",
+    "hs_std_12h",
+    "tp_current",
+    "hmax_current",
+    "wave_energy_current",
+    "wave_energy_delta_12h",
+    "wspd_current",
+    "wspd_delta_3h",
+    "wspd_delta_6h",
+    "wspd_delta_12h",
+    "wspd_slope_12h",
+    "gust_current",
+    "gust_delta_12h"
+  ],
+  "domain_classifier": {
+    "kind": "l2_logistic_regression",
+    "c": 0.5,
+    "folds": 5,
+    "repeats": 20,
+    "seed": 20260828,
+    "maximum_iterations": 4000,
+    "weight_clip_lower": 0.1,
+    "weight_clip_upper": 10.0
+  },
+  "mmd": {
+    "permutations": 1000,
+    "seed": 20260829
+  },
+  "bootstrap": {
+    "replicates": 5000,
+    "seed": 20260830,
+    "confidence": 0.90
+  },
+  "candidates": [
+    {
+      "name": "era5_hs2_energy_residual",
+      "path": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/sealed_candidate_predictions.parquet",
+      "prediction_column": "candidate_prediction"
+    },
+    {
+      "name": "era5_longlead_residual_shrink",
+      "path": "artifacts/p3_era5_longlead_energy_residual_shrink_20260828_v1/sealed_candidate_predictions.parquet",
+      "prediction_column": "candidate_prediction"
+    },
+    {
+      "name": "era5_advantage_router",
+      "path": "artifacts/p3_era5_incumbent_safe_advantage_router_20260828_v1/sealed_outer_predictions.parquet",
+      "prediction_column": "candidate_prediction"
+    },
+    {
+      "name": "timexer_direct",
+      "path": "artifacts/p3_timexer_past_exogenous_direct_multilead_20260828_v1/evaluated_outer_predictions.parquet",
+      "prediction_column": "candidate_prediction"
+    },
+    {
+      "name": "chronos2_nested",
+      "path": "artifacts/p3_chronos2_full_nested_20260828_v2/evaluated_outer_predictions.parquet",
+      "prediction_column": "prediction"
+    },
+    {
+      "name": "event_nlinear",
+      "path": "artifacts/p3_event_balanced_trajectory_v1/evaluated_predictions.parquet",
+      "prediction_column": "prediction",
+      "filters": {
+        "phase": "selection_phase_0h",
+        "variant": "nlinear"
+      }
+    }
+  ],
+  "output_dir": "artifacts/p3_target_shift_retroaudit_20260828_v1",
+  "scope_guards": {
+    "official_test_labels_read": false,
+    "absolute_test_time_reconstruction": false,
+    "submission_csv_write": false,
+    "official_upload": false,
+    "candidate_training": false,
+    "hyperparameter_search": false
+  }
+}

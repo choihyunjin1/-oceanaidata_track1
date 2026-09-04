@@ -1,0 +1,66 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v6",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v6",
+  "design_change_from_v5": "Remove arbitrary minimum-precision/minimum-addition abstention. Calibrate bagged probabilities on an inner future block and apply the exact add-only marginal F1 rule p > reference_F1/2.",
+  "decision_policy": {
+    "comparator": "P1 current Public champion F1 0.833548 / 28.909341 points",
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "worst_observed_public_transport_residual_points": -0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "score_points_per_f1": 26.578120867377286,
+    "worst_forward_block_delta_f1_minimum": -0.00025,
+    "bootstrap_probability_improved_minimum": 0.8,
+    "bootstrap_ci90_low_minimum": -0.00025,
+    "seed_delta_f1_minimum": 0.0,
+    "anchor_removals_required": 0
+  },
+  "validation": {
+    "outer_forward_tests": [
+      {"train_folds": ["2025_q2"], "test_fold": "2025_q3"},
+      {"train_folds": ["2025_q2", "2025_q3"], "test_fold": "2025_q4"}
+    ],
+    "inner_calibration_days": 21,
+    "purge_hours": 24,
+    "training_day_subsample_fraction": 0.8,
+    "seeds": [20260831, 20260847, 20260863],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260907
+  },
+  "transport_scope": {
+    "source_fit_scope": "all stations, layer 1, anchor-negative",
+    "deployment_station": "G-ORS",
+    "deployment_layer": 1,
+    "anchor_prediction_required": 0,
+    "minimum_source_probability": 0.01,
+    "add_only": true,
+    "station_layer_group_weight_shrinkage": 0.5
+  },
+  "model": {
+    "family": "bagged ExtraTrees with seed-wise isotonic calibration",
+    "n_estimators": 250,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.7,
+    "n_jobs_per_seed": 2
+  },
+  "candidates": [
+    {"name": "P1_1_CALIBRATED_BAGGED_ET_ROW", "weighting": "class-balanced rows"},
+    {"name": "P1_2_CALIBRATED_BAGGED_ET_GROUP_SHRUNK", "weighting": "50/50 shrunk class and station-layer group balance"},
+    {"name": "P1_3_CALIBRATED_BAGGED_ET_CONSENSUS", "weighting": "seed-aligned logical AND of candidates 1 and 2"}
+  ],
+  "fit_budget": {
+    "historical_base_models": 12,
+    "historical_isotonic_calibrators": 12,
+    "historical_total_maximum": 24,
+    "deployment_base_models": 6,
+    "deployment_isotonic_calibrators": 6,
+    "shared_official_feature_sources": 2,
+    "total_maximum": 38
+  },
+  "official_policy": {
+    "read_official_covariates_only_after_full_internal_pass": true,
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "maximum_materialized_candidates": 3
+  }
+}

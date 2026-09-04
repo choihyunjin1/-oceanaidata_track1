@@ -1,0 +1,84 @@
+{
+  "schema_version": "p1.v41_coteaching_label_noise_support_semantic_gate.v1",
+  "experiment_id": "p1_v41_coteaching_label_noise_support_semantic_gate_20260901_v1",
+  "status": "NO_GO_TARGET_FREE_LABEL_NOISE_SUPPORT_UNIDENTIFIED",
+  "execution_authorized": false,
+  "primary_source": {
+    "title": "Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels",
+    "authors": "Han et al.",
+    "venue": "NeurIPS 2018",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/a19744e268754fb0148b017647355b7b-Abstract.html",
+    "claim_boundary": "The source motivates two networks exchanging small-loss examples when training labels are noisy. It does not establish label noise in P1, a P1 forget rate, or P1 performance."
+  },
+  "source_contract": {
+    "allowed_files": ["README.md"],
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_rows_read": 0,
+    "label_rows_read": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "semantic_fingerprint": {
+    "candidate": "two independently initialized causal probes; each mini-batch selects prospectively scheduled small-loss rows; each peer updates only on rows selected by the other peer",
+    "repository_search": "No co-teaching, peer small-loss exchange, label-noise transition objective, or peer-loss execution was found in P1/P2/P3.",
+    "distinct_from_gce": "v36 changes a single network's scalar loss; co-teaching changes data selection and exchanges rows between two networks.",
+    "distinct_from_focal": "v38 downweights easy rows within one network; co-teaching keeps small-loss rows selected by the opposite network.",
+    "distinct_from_rdrop": "v39 matches two stochastic passes of one model on the same row; co-teaching uses two model states and cross-peer row selection.",
+    "evidence": {
+      "configs/experiments/p1_v36_causal_generalized_cross_entropy_crossquarter_addonly_20260901_v1r1.json": "e9c3b89750dc895807ba85ecd837b3f17995b1a5de5b0be868e280017879f8e5",
+      "configs/experiments/p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1.json": "bd2707558dad1c2a2ac8d6aa72bfe55b5d7dab7045281e50dcd28e9117c65b38",
+      "configs/experiments/p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1.json": "5e4be899586dbe7b6098ca19f8d6e2703d1d3689cb2d03a23c5abba5d46a77a3"
+    }
+  },
+  "target_free_support_gate": {
+    "required": [
+      "a documented reason that P1 training labels are corrupted rather than merely class-imbalanced",
+      "a label-free or externally documented estimate that prospectively fixes the forget rate",
+      "evidence that two-peer small-loss selection is identifiable for the small eight-unit probe"
+    ],
+    "observed": {
+      "readme_calls_label_ground_truth": true,
+      "documented_label_noise_rate": null,
+      "independent_annotators": null,
+      "trusted_clean_subset": null,
+      "noise_transition_or_generation_contract": null,
+      "label_free_noise_proxy": null
+    },
+    "passed": false,
+    "reason": "README documents ground-truth labels but supplies no corruption mechanism or target-free noise-rate proxy. Inspecting losses against labels to infer the hypothesis would itself consume target information before the support gate and would make the forget schedule outcome-dependent."
+  },
+  "hypothetical_fit_accounting": {
+    "peer_models_per_seed": 2,
+    "seeds": 3,
+    "optimizer_fits_if_supported": 6,
+    "maximum_fits": 9,
+    "accounting_passed": true,
+    "execution_permitted": false,
+    "reason": "Both peer optimizers count as separate fits; 2 peers times 3 seeds equals 6 fits. The independent support gate fails, so none may run."
+  },
+  "frozen_contract_if_support_had_passed": {
+    "v28_guard_sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "v33_amendment_sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128",
+    "forget_schedule_requires_predeclared_noise_rate": true,
+    "sweep": 0,
+    "threshold_retuning": 0,
+    "anchor_removals": 0,
+    "official_csv_upload": 0
+  },
+  "terminal_counters": {
+    "preflights": 0,
+    "optimizer_fits": 0,
+    "targets": 0,
+    "q2_q3_q4_target_reads": 0,
+    "anchor_removals": 0,
+    "official": 0,
+    "csv": 0,
+    "uploads": 0,
+    "locks": 0,
+    "artifacts": 0
+  },
+  "prohibitions": [
+    "Do not infer a noise rate from P1 labels after this closure.",
+    "Do not import a forget rate from MNIST or CIFAR experiments.",
+    "Do not execute, retune, retry, rescue, or submit this family under the same scientific hypothesis."
+  ]
+}

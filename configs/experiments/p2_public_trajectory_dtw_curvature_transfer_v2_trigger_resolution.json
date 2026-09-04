@@ -1,0 +1,86 @@
+{
+  "schema": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "schema_version": "ocean_hackathon.conditional_preregistration.trigger_resolution.v2",
+  "experiment_id": "p2_public_trajectory_dtw_curvature_transfer_20260826_v2",
+  "created_at_kst": "2026-08-26T07:20:24+09:00",
+  "status": "CONDITIONAL_PREREGISTERED_NOT_AUTHORIZED",
+  "resolution_id": "p2_dtw_v2_ncr_v1r7_infrastructure_failure_resolution_20260826",
+  "purpose": "Resolve the predecessor trigger prospectively without treating an infrastructure failure as a scientific result.",
+  "base_design": {
+    "path": "configs/experiments/p2_public_trajectory_dtw_curvature_transfer_v1_design.json",
+    "bytes": 15387,
+    "sha256": "341b41b79f867208de0d1494d3ea6c45108b648e87f6c347178de955897779fb",
+    "mutation_allowed": false
+  },
+  "predecessor_evidence": {
+    "experiment_id": "p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7",
+    "config": {
+      "path": "configs/experiments/p2_normalized_curvature_residual_lgbm_stage1_v1r7.json",
+      "bytes": 26038,
+      "sha256": "5be45ad6198f55e39d3f2a32a70e4784345a75a4fcdcd9f88c9124591621209c"
+    },
+    "permanent_claim": {
+      "path": "artifacts/_ncr_stage1_claims/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.claim.json",
+      "bytes": 1910,
+      "sha256": "22b739c869cb1e57b3f68fe5ef19bfa480db9530af20692f2d047ed16d4624d3"
+    },
+    "attempt_journal": {
+      "path": "artifacts/_ncr_stage1_attempt_journals/p2_normalized_curvature_residual_lgbm_stage1_20260826_v1r7.ndjson",
+      "bytes": 5820,
+      "sha256": "ab250c745ca104d4b3439d3c51bdb1283c5723a72bf6becc59711ae900ebb38d"
+    },
+    "verified_control_facts_only": [
+      "Exactly three FIT_SLOT_RESERVED events are paired with exactly three FIT_SLOT_COMPLETED events.",
+      "WORKER_FAILED records phase ALL_FITS_COMPLETED_BUILDING_RESULT and error_type ValueError.",
+      "ATTEMPT_TERMINAL_FAILED records worker_returncode 1.",
+      "The permanent claim prohibits an automatic rerun.",
+      "No valid result or recoverable scientific metric is asserted by this resolution."
+    ],
+    "scientific_outcome": "UNEVALUATED_INFRASTRUCTURE_FAILURE",
+    "must_not_be_relabelled_as": [
+      "RESEARCH_GO",
+      "RESEARCH_NO_GO",
+      "SUBMISSION_GO"
+    ],
+    "reported_independent_v1_qa": {
+      "reported_state": "TERMINAL_NO_GO",
+      "reported_counts": {"P0": 5, "P1": 4, "P2": 1},
+      "evidence_role": "context_only_not_a_v2_authorization_anchor",
+      "reason": "No independently pinned QA artifact was available when this resolution was frozen."
+    }
+  },
+  "prospective_branch_resolution": {
+    "branch": "FROZEN_EXACT_INCUMBENT_ONLY",
+    "rationale": "The exact incumbent was frozen before NCR v1r7, does not depend on NCR fits, and permits a fair deterministic comparison while preserving the original DTW hypothesis and gates.",
+    "ncr_predictions_or_metrics_consumed": false,
+    "ncr_fit_outputs_consumed": false,
+    "ncr_failure_interpreted_scientifically": false,
+    "anchor": {
+      "path": "artifacts/p2_extrapolated_soft_gate_v2/oof.parquet",
+      "bytes": 2477660,
+      "sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4"
+    },
+    "trigger_condition": "This resolution file, the v2 design amendment, implementation bundle, and zero-fit preflight must each pass independent QA; then and only then an external authorization may select the frozen-exact branch.",
+    "fail_closed_condition": "If the incident evidence, frozen anchor pin, design lineage, or independent QA cannot be verified exactly, numerical execution is prohibited.",
+    "result_driven_choice": false,
+    "new_search_or_gate_created": false
+  },
+  "authorization": {
+    "implementation_authorized": true,
+    "fit_authorized": false,
+    "materialization_authorized": false,
+    "official_action_authorized": false,
+    "external_execution_authorization_exists": false,
+    "independent_qa_required": true,
+    "current_execution_state": "BLOCKED_PENDING_INDEPENDENT_QA_AND_EXTERNAL_AUTHORIZATION"
+  },
+  "prohibitions": {
+    "rerun_ncr_v1r7": true,
+    "read_or_generate_official_test_sample_submission_or_candidate": true,
+    "upload": true,
+    "use_ncr_v1r7_as_scientific_evidence": true,
+    "change_v1_design": true,
+    "change_v2_scientific_hypothesis_search_or_gates": true,
+    "result_driven_rerun_or_tuning": true
+  }
+}

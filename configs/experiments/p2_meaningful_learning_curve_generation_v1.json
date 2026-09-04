@@ -1,0 +1,127 @@
+{
+  "schema_version": "p2_meaningful_learning_curve_generation.v1",
+  "experiment_id": "p2_meaningful_learning_curve_generation_v1",
+  "created_at_kst": "2026-08-23T00:00:00+09:00",
+  "status": "authorized_local_research_only",
+  "research_only": true,
+  "upload_allowed": false,
+  "fresh_holdout_claimed": false,
+  "purpose": "Run one preregistered structural P2 challenger through time-safe learning curves while failing closed unless the immutable official incumbent can be refit with its exact structure at every prefix.",
+  "official_incumbent": {
+    "submission_path": "output/2026-08-20/ready/P2_submission.csv",
+    "submission_sha256": "1c959f818737850fd7fa9c6609ba3ae49dc9a470a269f7313119d840df1736bf",
+    "identity": "P2_EXTRAPOLATED_SOFT_GATE_V2",
+    "exact_structure": [
+      "five-contributor deep stack with layer-specific NNLS weights",
+      "public-state soft gate fitted from frozen contributor OOF predictions",
+      "public endpoint physical projection",
+      "layer-specific extrapolation factors 10/0/2",
+      "second public endpoint physical projection"
+    ],
+    "same_prefix_fold_train_only_refit_available": false,
+    "unavailability_reason": "The sealed incumbent exposes block-LOBO contributor predictions, exposed-OOF stack and gate fits, and full checkpoints, but no leakage-safe mapping from an arbitrary chronological prefix to all contributor OOF predictions, meta-weights, and gate parameters. Inventing that mapping would change the incumbent structure.",
+    "fail_closed_decision_if_unavailable": "SURROGATE_CURVE_NOT_PROMOTION_ELIGIBLE"
+  },
+  "surrogate_incumbent": {
+    "identity": "same_prefix_corrected_public_layer_lightgbm_stack_w0625",
+    "role": "diagnostic_only_not_official_incumbent",
+    "base_arm_weight": 0.5,
+    "lean_arm_weight": 0.5,
+    "post_projection_candidate_weight": 0.625,
+    "fixed_seeds": [20260823, 20260824, 20260825]
+  },
+  "hypotheses": [
+    {
+      "priority": 1,
+      "id": "H1_LAYERWISE_CATBOOST_PUBLIC_PROFILE",
+      "structural_change": "Replace the pooled two-arm LightGBM residual stack with independent ordered-boosting residual models for layers 2, 3, and 4, average three fixed seeds, then apply the same public-endpoint profile projection.",
+      "family": "catboost_layerwise",
+      "backend": "catboost",
+      "feature_arm": "fixed_lean_public_m2",
+      "iterations": 400,
+      "layerwise": true,
+      "categorical_layer": false,
+      "fixed_seeds": [20260823, 20260824, 20260825],
+      "hyperparameter_searches": 0,
+      "target_layer_inputs": []
+    }
+  ],
+  "learning_curve": {
+    "eligible_prefix_fractions": [0.4, 0.55, 0.7, 0.85, 1.0],
+    "prefix_unit": "chronologically ordered unique UTC timestamps with all selected finite target labels retained at the chosen timestamp boundary",
+    "validation_folds": [
+      {
+        "name": "outer_2024_sep_oct",
+        "outer": ["2024-09-01T00:00:00+09:00", "2024-11-01T00:00:00+09:00"],
+        "same_season_priority": true
+      },
+      {
+        "name": "outer_2025_may_jun",
+        "outer": ["2025-05-01T00:00:00+09:00", "2025-07-01T00:00:00+09:00"],
+        "same_season_priority": false
+      },
+      {
+        "name": "outer_2025_jul_aug",
+        "outer": ["2025-07-01T00:00:00+09:00", "2025-09-01T00:00:00+09:00"],
+        "same_season_priority": false
+      }
+    ],
+    "embargo_days": 7,
+    "metric": "sqrt(mean over folds of official-layer-weighted MSE)",
+    "official_layer_counts": {"2": 8713, "3": 8712, "4": 8636},
+    "postprocess": "public layer-1/layer-5 endpoint envelope plus endpoint-implied isotonic target profile",
+    "bootstrap": {
+      "unit": "KST calendar day sampled within fold",
+      "replicates": 5000,
+      "interval": 0.9,
+      "seed": 20260823
+    }
+  },
+  "numeric_pass_gates": {
+    "late_fractions_all_improve": [0.7, 0.85, 1.0],
+    "full_and_one_other_late_ci90_exclude_zero": true,
+    "full_delta_candidate_minus_incumbent_at_most_c": -0.03,
+    "minimum_improved_folds": 2,
+    "maximum_each_layer_regression_c": 0.0075,
+    "maximum_2024_sep_oct_regression_c": 0.0075,
+    "joint_temp_psal_mask_required": true,
+    "leakage_checks_required": true,
+    "reproducibility_checks_required": true
+  },
+  "selection": {
+    "maximum_structural_hypotheses": 3,
+    "registered_hypotheses": 1,
+    "winner_rule": "first preregistered hypothesis that passes every numeric gate against the exact official incumbent prefix curve",
+    "surrogate_numeric_pass_can_promote": false,
+    "official_incumbent_unavailable_override": "SURROGATE_CURVE_NOT_PROMOTION_ELIGIBLE"
+  },
+  "masking": {
+    "jointly_null_columns": ["temp", "psal"],
+    "jointly_null_layers": [2, 3, 4],
+    "hidden_window_kst_half_open": ["2025-09-01T00:00:00+09:00", "2025-11-01T00:00:00+09:00"],
+    "hidden_target_non_null_allowed": false
+  },
+  "next_generation_if_no_pass": {
+    "count": 1,
+    "id": "P2_EXACT_INCUMBENT_PREFIX_REFIT_COMPILER_V1",
+    "description": "Implement and validate a leakage-safe chronological-prefix trainer for every immutable incumbent contributor, layer stack, public-state gate, and both fixed physical/extrapolation transforms before evaluating another challenger."
+  },
+  "source_contract": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886"
+  },
+  "output_contract": {
+    "append_only": true,
+    "directory": "artifacts/p2_meaningful_learning_curve_generation_v1",
+    "attempt_lock": "artifacts/p2_meaningful_learning_curve_generation_v1_control/attempt.lock",
+    "aggregate_learning_curve_evidence": "learning_curve_evidence.json",
+    "row_level_prediction_artifacts_allowed": false,
+    "full_fit_allowed_only_after_exact_official_incumbent_gate_pass": true,
+    "candidate_rows_if_pass": 26061,
+    "frozen_mutation_allowed": false,
+    "upload_allowed": false
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "p3_atmosphere_complete_residual_pilot.20260828.v1",
+  "experiment_id": "p3_atmosphere_complete_residual_pilot_20260828_v1",
+  "objective": "Test whether past-only observed-wind lag features predict current-champion OOF residuals on atmosphere-complete historical cases.",
+  "source_features": "artifacts/p3/features_all20_v1/train_features.parquet",
+  "anchor_metadata": "artifacts/p3/features_all20_v1/train_anchors.parquet",
+  "champion_replay": "artifacts/p3_champion_lineage_matched_energy_residual_replay_20260828_v1/sealed_candidate_predictions.parquet",
+  "wave_features": [
+    "hs_current",
+    "hs_delta_3h",
+    "hs_delta_6h",
+    "hs_delta_12h",
+    "hs_delta_24h",
+    "hs_slope_3h",
+    "hs_slope_6h",
+    "hs_slope_12h",
+    "hs_slope_24h",
+    "hs_std_6h",
+    "hs_std_12h",
+    "hs_std_24h",
+    "tp_current",
+    "wave_energy_current",
+    "hmax_hs_ratio_current"
+  ],
+  "wind_features": [
+    "wspd_current",
+    "wspd_lag_6h",
+    "wspd_lag_12h",
+    "wspd_lag_18h",
+    "wspd_lag_24h",
+    "wspd_mean_6h",
+    "wspd_mean_12h",
+    "wspd_mean_24h",
+    "wspd_std_6h",
+    "wspd_std_12h",
+    "wspd_std_24h",
+    "wspd_delta_6h",
+    "wspd_delta_12h",
+    "wspd_delta_24h",
+    "gust_current",
+    "gust_lag_12h",
+    "gust_lag_18h",
+    "gust_lag_24h",
+    "gust_mean_12h",
+    "gust_mean_24h",
+    "gust_delta_12h",
+    "gust_delta_24h",
+    "wind_input_proxy_current",
+    "wind_input_proxy_mean_12h",
+    "wind_input_proxy_mean_24h"
+  ],
+  "ridge": {
+    "alphas": [1.0, 10.0, 100.0, 1000.0],
+    "residual_scales": [0.0, 0.1, 0.25, 0.5, 1.0]
+  },
+  "catboost": {
+    "enabled": true,
+    "iterations": 300,
+    "learning_rate": 0.03,
+    "depths": [2, 3, 4],
+    "l2_leaf_regs": [5.0, 20.0],
+    "residual_scales": [0.0, 0.1, 0.25, 0.5, 1.0],
+    "random_seed": 20260828,
+    "thread_count": 4
+  },
+  "bootstrap": {
+    "replicates": 5000,
+    "confidence": 0.90,
+    "seed": 20260831
+  },
+  "promotion_gate": {
+    "overall_delta_below": 0.0,
+    "bootstrap_ci90_upper_below": 0.0,
+    "minimum_non_degrading_stations": 2,
+    "maximum_station_degradation_rmse_m": 0.01,
+    "minimum_non_degrading_folds": 2,
+    "maximum_fold_degradation_rmse_m": 0.02,
+    "long_lead_delta_below": 0.0
+  },
+  "output_dir": "artifacts/p3_atmosphere_complete_residual_pilot_20260828_v1",
+  "scope_guards": {
+    "official_test_features_read": false,
+    "official_test_labels_read": false,
+    "absolute_test_time_reconstruction": false,
+    "submission_csv_write": false,
+    "official_upload": false,
+    "hyperparameter_selection_outer_validation": false
+  }
+}

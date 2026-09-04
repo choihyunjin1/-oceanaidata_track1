@@ -1,0 +1,77 @@
+{
+  "schema_version": "p2_dtw_v2r6.inner_identifiability_certificate.v1",
+  "created_at_kst": "2026-08-26T10:41:18.1823907+09:00",
+  "design_sha256": "dc8684950bf7466038270a33ab2f2c6425820433aa205790bd40c1d5e842004e",
+  "source_contract": {
+    "observations_bytes": 49058719,
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "exact_anchor_bytes": 2477660,
+    "exact_anchor_sha256": "dab52579e99a20cc0444bf13bc3a1400191024a10303cb996ba59a89509c9cb4",
+    "v2r5_module_bytes": 78348,
+    "v2r5_module_sha256": "e523d15d6113fdd4861826786be38fef97a68f0ef5732321c196bd67acf1f05f",
+    "held_bytes_verified": true
+  },
+  "method": {
+    "surface": "Only registered inner-window time/layer keys and finite masks from historical truth and contemporaneous public-depth anchor.",
+    "prediction_values_read_or_written": false,
+    "truth_values_persisted": false,
+    "metrics_computed": false,
+    "score_called": false,
+    "p100_accessed": false,
+    "identifiable_rule": "Each target layer must have at least one finite truth-and-anchor key, the joint surface must be nonempty, and at least two KST days must remain. The frozen 18-cell graph additionally requires all three registered windows identifiable."
+  },
+  "windows": [
+    {
+      "window_id": "inner_2024_mar",
+      "time_keys": 4464,
+      "layer_finite_masks": {
+        "2": {"finite_truth": 0, "finite_anchor": 4454, "finite_truth_and_anchor": 0},
+        "3": {"finite_truth": 0, "finite_anchor": 4454, "finite_truth_and_anchor": 0},
+        "4": {"finite_truth": 0, "finite_anchor": 4454, "finite_truth_and_anchor": 0}
+      },
+      "rows_after_finite_truth_anchor_mask": 0,
+      "kst_days_after_mask": 0,
+      "identifiable_for_scoring": false,
+      "expected_v2r5_failure": "score_prediction_frame raises ValueError: prediction frame is incomplete"
+    },
+    {
+      "window_id": "inner_2024_may",
+      "time_keys": 4464,
+      "layer_finite_masks": {
+        "2": {"finite_truth": 3347, "finite_anchor": 4247, "finite_truth_and_anchor": 3332},
+        "3": {"finite_truth": 3339, "finite_anchor": 4247, "finite_truth_and_anchor": 3324},
+        "4": {"finite_truth": 3344, "finite_anchor": 4247, "finite_truth_and_anchor": 3329}
+      },
+      "rows_after_finite_truth_anchor_mask": 9985,
+      "kst_days_after_mask": 24,
+      "identifiable_for_scoring": true
+    },
+    {
+      "window_id": "inner_2024_jul",
+      "time_keys": 4464,
+      "layer_finite_masks": {
+        "2": {"finite_truth": 4459, "finite_anchor": 4464, "finite_truth_and_anchor": 4459},
+        "3": {"finite_truth": 4452, "finite_anchor": 4464, "finite_truth_and_anchor": 4452},
+        "4": {"finite_truth": 4447, "finite_anchor": 4464, "finite_truth_and_anchor": 4447}
+      },
+      "rows_after_finite_truth_anchor_mask": 13358,
+      "kst_days_after_mask": 31,
+      "identifiable_for_scoring": true
+    }
+  ],
+  "all_three_registered_windows_identifiable": false,
+  "frozen_eighteen_cell_selection_complete": false,
+  "root_cause": "The March window has 4,464 registered time keys per target layer but zero finite target-temperature truth values in layers 2, 3, and 4. The materializer legitimately filters every March scoring row; the scorer then rejects the empty frame.",
+  "classification": "SCIENTIFIC_EVALUATION_WINDOW_NONIDENTIFIABILITY_DISCOVERED_BY_INFRASTRUCTURE_RECOVERY",
+  "required_action": "Fail closed before claim. Do not replace, drop, or reweight the preregistered March window after seeing this certificate.",
+  "operation_counters": {
+    "predictions": 0,
+    "scores": 0,
+    "metrics": 0,
+    "aggregates": 0,
+    "materializations_persisted": 0,
+    "physical_fit_calls": 0,
+    "p100_filesystem_accesses": 0,
+    "official_test_sample_submission_candidate_accesses": 0
+  }
+}

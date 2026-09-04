@@ -1,0 +1,74 @@
+{
+  "schema_version": "p1.station_ablation_information_probes.v1",
+  "experiment_id": "p1_station_ablation_information_probes_20260830_v1",
+  "problem": "P1",
+  "frozen_at_kst": "2026-08-30T22:34:00+09:00",
+  "role": "platform-information probes; no expected-improvement claim",
+  "official_metric": "row-level binary F1",
+  "sources": {
+    "champion": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_DEADLINE_INFORMATION_PROBES_READY/P1_1_E150_PLUS_GI_SPIKE2/P1_submission.csv",
+      "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+      "public_f1": 0.833548
+    },
+    "e150": {
+      "path": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1/P1_MSTCN_E150_ROUTER_UNION_ALL.csv",
+      "sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b"
+    },
+    "anchor": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/P1_1_EXPLOIT_DISAGREEMENT_ROUTER/P1_submission.csv",
+      "sha256": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"
+    }
+  },
+  "output_root": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P1_STATION_ABLATION_INFORMATION_PROBES_READY_V1",
+  "candidate_order": [
+    "remove_g_ors_e150",
+    "remove_s_ors_e150",
+    "keep_i_ors_e150_only"
+  ],
+  "candidates": {
+    "remove_g_ors_e150": {
+      "directory": "P1_1_REMOVE_G_ORS_E150",
+      "remove_e150_additions_at_stations": ["G-ORS"],
+      "expected_removed_rows": 15,
+      "expected_positive_rows": 6381,
+      "title": "P1 e150 G-station ablation",
+      "summary": "GI2와 anchor는 유지하고 e150 G-ORS 추가 15행만 제거한 고정 station-axis 진단"
+    },
+    "remove_s_ors_e150": {
+      "directory": "P1_2_REMOVE_S_ORS_E150",
+      "remove_e150_additions_at_stations": ["S-ORS"],
+      "expected_removed_rows": 238,
+      "expected_positive_rows": 6158,
+      "title": "P1 e150 S-station ablation",
+      "summary": "GI2와 anchor는 유지하고 e150 S-ORS 추가 238행만 제거한 고정 station-axis 진단"
+    },
+    "keep_i_ors_e150_only": {
+      "directory": "P1_3_KEEP_I_ORS_E150_ONLY",
+      "remove_e150_additions_at_stations": ["G-ORS", "S-ORS"],
+      "expected_removed_rows": 253,
+      "expected_positive_rows": 6143,
+      "title": "P1 e150 I-only transport",
+      "summary": "GI2와 anchor는 유지하고 e150 G/S 추가 253행을 제거해 I-ORS 기여만 격리"
+    }
+  },
+  "contracts": {
+    "rows": 169011,
+    "columns": ["station", "year", "layer", "time", "label"],
+    "preserve_anchor_positives": true,
+    "preserve_gi2": true,
+    "finite_binary_labels": true,
+    "model_fits": 0,
+    "hidden_truth_reads": 0,
+    "score_py_reads": 0,
+    "uploads": 0,
+    "no_result_adaptive_retuning": true
+  },
+  "known_platform_semantic_duplicate_hashes": [
+    "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+    "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b",
+    "a8e91f8686666946cb92b5106cba9932d1a427281391714946ea1d20fccfc949",
+    "63156b4282c64415d48d898b9eef72ac886585437f9f746695dd4934c2942675",
+    "b02f08496655b455a73fa0dbb640486988ffe7f8c50e4752ca250c400adb8598"
+  ]
+}

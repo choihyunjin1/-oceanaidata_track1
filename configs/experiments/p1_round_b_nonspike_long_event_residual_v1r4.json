@@ -1,0 +1,290 @@
+{
+  "schema_version": "p1_round_b_nonspike_long_event_residual.preregistration.v1r4",
+  "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r4",
+  "problem": "P1",
+  "artifact_dir": "artifacts/p1_round_b_nonspike_long_event_residual_v1r4",
+  "objective": "Recover only high-confidence non-spike medium-or-long false negatives connected to an existing Round-B positive run while preserving the sealed Round-B precision mechanism.",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "supersedes": {
+    "experiment_id": "p1_round_b_nonspike_long_event_residual_v1r3",
+    "reason": "Independent QA NO_GO: replace residual positional cache trust, scoring truth path reopen, nonterminal claimed failures, and unverified Windows taskkill completion without changing the numerical experiment.",
+    "config_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r3.json",
+    "config_sha256": "3660cf3f89c5225225c7fdf6cb2f72270cab31c6f6e6d5f03daa994fdb75f03a",
+    "runner_path": "scripts/run_p1_round_b_nonspike_long_event_residual_v1r3.py",
+    "runner_sha256": "1fedcf7561717e39658776d888e06adefc1bd8e9705432b8aa069b89f53f1e73",
+    "test_path": "tests/test_run_p1_round_b_nonspike_long_event_residual_v1r3.py",
+    "test_sha256": "c352891ba414ba0f3f807949ca3b6c82235c055cc64c705a71ab7b0e9d2db204",
+    "authorization_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r3_execution_authorization.json",
+    "authorization_sha256": "82588532c5e5b32f09cc1aee6a21def49212cbe07d247bbb8789f56108b9579c",
+    "seal_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3/preexecution_seal.json",
+    "seal_sha256": "a18b34fff5abf6fd02df614e869cdac6d1a9134658b084c7725d2f76d063c412",
+    "strict_preflight_receipt_path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3/strict_preflight_receipt.json",
+    "strict_preflight_receipt_sha256": "b214da9f2365c172248d2636fe929ed8c44aebef5a8320d0a48dd52f7ebe9035"
+  },
+  "trust_contract": {
+    "stdlib_only_before_external_authorization": true,
+    "runner_path": "scripts/run_p1_round_b_nonspike_long_event_residual_v1r4.py",
+    "runner_normalized_sha256": "2695682f57e56e84563475efe1b3ebde211c28d2a44f8b07989bed98f700fc07",
+    "execution_authorization_path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r4_execution_authorization.json",
+    "execution_authorization_env_var": "P1_V1R4_EXECUTION_AUTHORIZATION_SHA256",
+    "numerical_entrypoint_path": "scripts/run_p1_round_b_nonspike_long_event_residual_v1.py",
+    "core_module_path": "src/p1_qc/nonspike_long_event_residual.py",
+    "verification_paths": [
+      "tests/test_run_p1_round_b_nonspike_long_event_residual_v1r4.py"
+    ],
+    "provenance_paths": [
+      "scripts/build_p1_v1r3_feature_key_binding.py"
+    ],
+    "provenance_sha256": "bf6f69ebfddd07b80d211bfd454c13b840d7721f49cea6339406288216e84de8",
+    "project_dependency_paths": [
+      "src/p1_qc/__init__.py",
+      "src/p1_qc/audit.py",
+      "src/p1_qc/augment.py",
+      "src/p1_qc/config.py",
+      "src/p1_qc/data.py",
+      "src/p1_qc/experiment.py",
+      "src/p1_qc/features.py",
+      "src/p1_qc/metrics.py",
+      "src/p1_qc/models_tabular.py",
+      "src/p1_qc/nonspike_long_event_residual.py",
+      "src/p1_qc/pipeline.py",
+      "src/p1_qc/postprocess.py",
+      "src/p1_qc/rules.py",
+      "src/p1_qc/splits.py",
+      "src/p1_qc/submission.py",
+      "src/p1_qc/validation.py",
+      "scripts/run_p1_round_b_nonspike_long_event_residual_v1.py"
+    ],
+    "runtime_versions": {
+      "python": "3.12.10",
+      "joblib": "1.5.3",
+      "lightgbm": "4.7.0",
+      "narwhals": "2.24.0",
+      "numpy": "2.3.5",
+      "p1-qc": "0.1.0",
+      "pandas": "3.0.1",
+      "psutil": "7.2.2",
+      "pyarrow": "25.0.1",
+      "python-dateutil": "2.9.0.post0",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0",
+      "six": "1.17.0",
+      "threadpoolctl": "3.6.0"
+    },
+    "lightgbm_native": {
+      "distribution_relative_path": "lightgbm/bin/lib_lightgbm.dll",
+      "bytes": 3888128,
+      "sha256": "7e366d2e49cd061aac3ab21676b2f99b0c7a758dc3e888d4b23812af1b7d301c"
+    },
+    "loaded_runtime_file_aggregate_sha256": "541cc217e7a293adbaeb818c907ca3ed9d94fe7dbaa34ddfda3ad9eec23e7cb1"
+  },
+  "execution_safety": {
+    "parent_worker_same_runner": true,
+    "parent_absolute_timeout_seconds": 1800,
+    "worker_fit_reservation_deadline_check": true,
+    "exclusive_lock": "execution.lock",
+    "attempt_journal_directory": "attempt_journal",
+    "incomplete_attempt_policy": "FAIL_CLOSED_NO_RETRY",
+    "maximum_lifetime_physical_model_fits": 9,
+    "claim_after_complete_readiness_only": true,
+    "verified_snapshot_policy": "COPY_FROM_HELD_HANDLE_WITH_EXPECTED_DIGEST_THEN_PARSE_PRIVATE_SNAPSHOT_ONLY",
+    "feature_row_key_policy": "REGENERATE_ALL_80_MODEL_INPUT_FEATURES_FROM_VERIFIED_SOURCE_AND_EXACT_ORDERED_COMPARE_TO_CACHE_BEFORE_CLAIM",
+    "ambiguous_raw_swap_probe": {
+      "expected_ambiguous_groups": 299,
+      "expected_ambiguous_rows": 603,
+      "expected_groups_with_multiple_derived_variants": 299,
+      "synthetic_swap_must_fail": true
+    },
+    "scoring_truth_policy": "PASS_HELD_VERIFIED_IN_MEMORY_TRUTH_DIRECTLY_TO_SEALED_SCORE_LOGIC_WITH_ZERO_PATH_REOPEN",
+    "claimed_failure_policy": "EXACTLY_ONE_CREATE_ONLY_HASH_CHAINED_FAILED_TERMINAL_WITH_PHASE_ERROR_FIT_STATE_AND_PREFIX_THEN_KEEP_LOCK",
+    "timeout_termination_policy": "TASKKILL_RC_ZERO_AND_PID_PLUS_DESCENDANTS_CONFIRMED_GONE_OR_FAIL_CLOSED_WITH_TERMINAL_PROVENANCE",
+    "atomic_publish_policy": "SAME_DIRECTORY_TEMP_FSYNC_THEN_ATOMIC_HARDLINK_CREATE_ONLY",
+    "directory_flush_policy": "WINDOWS_CREATEFILE_GENERIC_WRITE_FLUSHFILEBUFFERS_OR_POSIX_DIRECTORY_FSYNC_FAIL_CLOSED",
+    "pre_fit_left_censor_gate": {
+      "definition": "Count station-layer connected positive events that touch the first chronological row of each registered outer training prefix.",
+      "maximum_count_per_fold": 0,
+      "failure_policy": "NO_GO_BEFORE_ANY_MODEL_FIT_NO_SELECTION_RULE_CHANGE"
+    },
+    "terminal_order": [
+      "result.json",
+      "manifest.json",
+      "998_worker_terminal.json",
+      "parent independent verification",
+      "999_completed.json",
+      "release execution.lock"
+    ]
+  },
+  "base_config": {
+    "path": "configs/p1.toml",
+    "sha256": "7c0f5630717567b7c2fbeacb6e86b600e01b77951cc9cea0cbd34ec8c68f7947"
+  },
+  "immutable_inputs": {
+    "feature_cache": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.parquet",
+      "sha256": "f37c56ff016e90fb9a8d86299b4d9528c8f2e03181d326169b561fe3b27bc912",
+      "rows": 776706,
+      "columns": 80,
+      "source_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2"
+    },
+    "feature_metadata": {
+      "path": "artifacts/cache/train_offline_e9fe1eb46cb7431f.json",
+      "sha256": "396386d48bf3588bd765d26d66625184a5af9a41312703ffbcfd58da9dbe0abd"
+    },
+    "frozen_truth_oof": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+      "rows": 421032
+    },
+    "matched_budget_predictions": {
+      "path": "artifacts/p1_matched_budget_local_compare_20260825_v1/predictions.parquet",
+      "sha256": "23f9b59cc54a7502c87786280ef76319e64288a95a44f8c9ec37188a761033c5",
+      "rows": 421032
+    },
+    "round_b_full_prefix_parts": [
+      {
+        "fold": "2025_q2",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet",
+        "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"
+      },
+      {
+        "fold": "2025_q3",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet",
+        "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"
+      },
+      {
+        "fold": "2025_q4",
+        "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet",
+        "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"
+      }
+    ]
+  },
+  "preexecution_evidence": {
+    "feature_cache_key_binding": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys.parquet",
+      "sha256": "7a79d9beaeaf5344c10d876882c39bd35a9196b20cab70caa407c33e2892b100",
+      "bytes": 1818144,
+      "rows": 776706,
+      "source_train_key_digest": "69b961432d7dbaa0c31dbd7a08ae54f07358472b7cf327de21e677c6dedb69be"
+    },
+    "feature_cache_key_binding_receipt": {
+      "path": "artifacts/p1_round_b_nonspike_long_event_residual_v1r3_preexecution/feature_cache_row_keys_receipt.json",
+      "sha256": "0228b354b2b1512ff4fff498ba7bdece2bf80ea9fbfd135bfbe8575965c457d8"
+    }
+  },
+  "surface": {
+    "key_columns": ["station", "year", "layer", "time"],
+    "fold_order": ["2025_q2", "2025_q3", "2025_q4"],
+    "seeds": [20260813, 20260829, 20260847],
+    "expected_rows": 421032,
+    "base_family": "event_day_balanced_binary_lgbm",
+    "base_setting": "default_historical_fold_schedule",
+    "base_reuse_rule": "Reuse the exact p100 ensemble and registered seed probabilities/predictions; no Round-B base refit is permitted.",
+    "expected_base_metrics": {
+      "f1": 0.8646700887242071,
+      "precision": 0.9518036222122437,
+      "recall": 0.7921519775770788,
+      "tp": 12718,
+      "fp": 644,
+      "fn": 3337,
+      "positive_rows": 16055
+    }
+  },
+  "residual_target": {
+    "positive_definition": "complete label=1 events of at least 19 contiguous 10-minute rows containing no spike token",
+    "negative_definition": "label=0 rows only",
+    "excluded_from_fit": "positive rows outside the positive definition, including right-censored prefix-edge events",
+    "minimum_event_rows": 19,
+    "cadence_minutes": 10,
+    "exclude_event_if_any_spike_token": true,
+    "exclude_right_censored_prefix_events": true,
+    "weighting": "inverse-sqrt positive-event and normal station-layer KST-day balancing with positive-side sqrt(Nneg/Npos) scaling"
+  },
+  "residual_model": {
+    "family": "LightGBM binary classifier",
+    "probability_rule": "unweighted arithmetic mean of three registered seed probabilities",
+    "seed_rule": "registered seed plus zero-based outer-fold ordinal",
+    "parameters": {
+      "n_estimators": 700,
+      "learning_rate": 0.035,
+      "num_leaves": 63,
+      "max_depth": -1,
+      "min_child_samples": 60,
+      "subsample": 0.85,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.85,
+      "reg_alpha": 0.2,
+      "reg_lambda": 1.0,
+      "n_jobs": 8,
+      "deterministic": true,
+      "force_row_wise": true,
+      "verbosity": -1
+    }
+  },
+  "rescue_decoder": {
+    "probability_threshold": 0.8,
+    "maximum_anchor_distance_rows": 18,
+    "maximum_anchor_distance_minutes": 180,
+    "requires_contiguous_10_minute_path_to_existing_round_b_positive": true,
+    "exclude_rule_spike_candidate": true,
+    "may_remove_round_b_positive": false,
+    "may_create_disconnected_event": false,
+    "threshold_tuning_grid": []
+  },
+  "outer_protocol": {
+    "one_shot": true,
+    "score_only_after_all_fold_predictions_are_persisted": true,
+    "paired_bootstrap": {
+      "unit": "positive event and normal station-layer KST day",
+      "normal_day_timezone": "Asia/Seoul",
+      "replicates": 5000,
+      "seed": 20260825,
+      "confidence": 0.9
+    },
+    "adequate_cell_support": {
+      "minimum_positive_rows": 100,
+      "minimum_positive_events": 5,
+      "minimum_positive_kst_days": 10
+    }
+  },
+  "fail_fast_gates": {
+    "pooled_micro_f1_delta_gte": 0.003,
+    "paired_bootstrap_ci90_lower_gt": 0.0,
+    "minimum_nonnegative_fold_count": 2,
+    "minimum_nonnegative_station_count": 2,
+    "equal_weight_station_fold_f1_delta_gte": 0.0015,
+    "adequately_supported_worst_cell_f1_delta_gte": -0.002,
+    "all_seed_f1_deltas_gte": 0.0,
+    "precision_delta_gte": -0.002,
+    "recall_delta_gte": 0.008,
+    "normal_fp_per_day_ratio_lte": 1.02,
+    "spike_recall_delta_gte": 0.0,
+    "new_disconnected_events_eq": 0,
+    "new_singletons_eq": 0
+  },
+  "resource_budget": {
+    "round_b_base_model_fits": 0,
+    "residual_model_fits": 9,
+    "configurations": 1,
+    "tuning_grid_points": 0,
+    "wall_clock_cap_seconds": 1800,
+    "result_driven_reruns": 0
+  },
+  "interpretation": {
+    "pass_label": "GO_LOCAL_SCREEN_ONLY",
+    "fail_label": "NO_GO_LOCAL_GATE",
+    "independent_confirmation": "Unavailable retrospectively; a pass is not submission authorization and is not an official-score guarantee."
+  },
+  "prohibitions": {
+    "official_test_reads": 0,
+    "sample_format_reads": 0,
+    "submission_candidate_reads": 0,
+    "candidate_files_generated": 0,
+    "uploads": 0,
+    "full_fit": 0,
+    "base_refits": 0,
+    "post_result_tuning": 0,
+    "result_driven_reruns": 0,
+    "source_mutations": 0,
+    "frozen_artifact_mutations": 0
+  }
+}

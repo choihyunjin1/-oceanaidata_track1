@@ -1,0 +1,83 @@
+{
+  "experiment_id": "p2_top3_parallel_tuning_v1",
+  "created_at_kst": "2026-08-16",
+  "status": "authorized_local_parallel_tuning",
+  "research_only": true,
+  "upload_allowed": false,
+  "objective": "Tune the top three P2 GBM structures under one nested validation contract, train to a validation-selected convergence checkpoint, and compare standalone and deep-pair RMSE.",
+  "metric": "pooled_row_rmse_celsius",
+  "feature_arm": "phase_81_public_only_features",
+  "families": [
+    "catboost_layerwise",
+    "catboost_pooled",
+    "lgbm_dart"
+  ],
+  "ranking_source": {
+    "artifact": "artifacts/p2_gbm_family_tournament_v1/result.json",
+    "sha256": "f7b0346e498e981209eed9d77c528ec2ef2c87d87bdf25e9fb8c3e39eae9a74e",
+    "criterion": "ascending leave-one-block-out deep-pair RMSE",
+    "top_three": [
+      "catboost_layerwise",
+      "catboost_pooled",
+      "lgbm_dart"
+    ]
+  },
+  "parallelism": {
+    "workers": 3,
+    "threads_per_worker": 2,
+    "optuna_jobs_per_worker": 1,
+    "reason": "Three independent family searches share an 8-logical-CPU host without nested oversubscription."
+  },
+  "search": {
+    "trials_per_family": 36,
+    "trials_per_outer_fold": 12,
+    "sampler": "Optuna TPESampler seed 20260816",
+    "pruner": "MedianPruner startup 8 warmup 1",
+    "same_hyperparameters_across_folds": false,
+    "selection_scope": "three fully separate outer-train-only studies; no outer fold label is used by its own search",
+    "outer_evaluation": "one frozen pass per family",
+    "resume_database": true,
+    "full_fit_parameter_policy": "use the 2025_nov_dec study's 2025_jul_aug inner-selected parameters; use median CatBoost convergence round across the three separate studies; never rank parameters by outer score"
+  },
+  "convergence": {
+    "catboost_max_iterations": 3000,
+    "catboost_early_stopping_rounds": 150,
+    "catboost_full_fit_rounds": "median best iteration across the three inner blocks; per-layer median for layerwise",
+    "lgbm_dart_round_candidates": [200, 400, 600, 800, 1200, 1600, 2400, 3000],
+    "lgbm_dart_note": "DART does not support standard early stopping; iteration count is selected inside the same inner search."
+  },
+  "inner_blocks": {
+    "outer_2024_sep_oct": ["2024-07-01", "2024-09-01"],
+    "outer_2025_jul_aug": ["2025-05-01", "2025-07-01"],
+    "outer_2025_nov_dec": ["2025-07-01", "2025-09-01"]
+  },
+  "outer_blocks": [
+    "2024_sep_oct",
+    "2025_jul_aug",
+    "2025_nov_dec"
+  ],
+  "comparison": {
+    "standalone": true,
+    "deep_pair": "layer-specific nonnegative sum-to-one weight",
+    "robust_deep_pair": "leave-one-outer-block-out weight",
+    "bootstrap": {
+      "unit": "KST_day",
+      "replicates": 2000,
+      "seed": 20260816
+    }
+  },
+  "sources": {
+    "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "deep_stack_oof": "76f52261259112d03289226c23712e27a17a17f9320c8565c96a662c1093be8d",
+    "deep_stack_submission": "ea5cedbd08817da4da00274e1078689f09a1d9c65d2a464f5f5f5ba9ffcc82e8"
+  },
+  "output_policy": {
+    "save_all_three_models": true,
+    "save_all_three_standalone_submissions": true,
+    "build_best_research_deep_pair": true,
+    "platform_upload": false,
+    "promotion_requires_independent_validation": true
+  }
+}
