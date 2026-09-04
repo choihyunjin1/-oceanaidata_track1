@@ -1,0 +1,3 @@
+# P1 v19 local-extrema prominence/return-time — zero-fit closure
+
+`NO_GO_SEMANTIC_DUPLICATE`. No source data, target, fit, lock, or artifact was used. Causal prominence repeats existing spike/peak geometry in `features.py`, `rules.py`, and peak-localized `clean_state_capa.py`. Endpoint-extrema ordering was already executed by v13 visibility, while return-time/run timing repeats v10 recurrence/laminar and event-proposal families. Exact evidence hashes are frozen in the config. Official/test/sample/submission/hidden/CSV/upload counters are zero. This ID is immutable and must not be executed or retuned.

@@ -1,0 +1,53 @@
+{
+  "schema_version": "p1.v35_v34_rejected_candidate_q2_adjudication.v1",
+  "result_schema_version": "p1.v35_v34_rejected_candidate_q2_adjudication.result.v1",
+  "experiment_id": "p1_v35_v34_rejected_candidate_q2_adjudication_20260901_v1",
+  "status": "PREREGISTERED_AUDIT_ONLY_EXACTLY_ONCE",
+  "purpose": "Diagnose a possible v28 guard false negative using only v34's pre-target persisted Q2 action mask.",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "sealed_parent": {
+    "experiment_id": "p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1",
+    "config_path": "configs/experiments/p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1.json",
+    "config_sha256": "3feca51dc74b0d8223e33a3156a22ea04bfc847412161227156923c363b67107",
+    "result_path": "artifacts/p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1/result.json",
+    "result_sha256": "efd57f065ed09703013655eec1c3c72b0faaa58eea0aecaba463988ca7aa409d",
+    "manifest_path": "artifacts/p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1/q2_all_threshold_auditability_manifest.json",
+    "manifest_sha256": "752e43942f7bc1e2cb9a1cca0f015f5f3b790913b961d5ba52d1ce132264b8c7",
+    "bundle_path": "artifacts/p1_v34_causal_detrended_fluctuation_crossquarter_addonly_20260901_v1/q2_all_threshold_label_blind_actions_sealed.npz",
+    "bundle_sha256": "4d60a778195377c6c6da1274ff79357881ef2816845089cf720c2905ac0a4c7a",
+    "q2_part_path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet",
+    "q2_part_sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"
+  },
+  "selection_fixed_before_q2_target": {
+    "rule": "maximum pre-Q2 Wilson 90% precision LCB among the three v34 sealed candidates",
+    "candidate_index": 0,
+    "action_key": "actions_candidate_0",
+    "quantile": 0.995,
+    "threshold": 0.6668935418128967,
+    "pre_q2_precision": 0.0711743772241993,
+    "pre_q2_wilson90_lcb": 0.04982441404016664,
+    "q2_label_blind_action_count": 332,
+    "q2_label_blind_action_share": 0.0024930539911391454
+  },
+  "contract": {
+    "fits": 0,
+    "refits": 0,
+    "score_recomputation": 0,
+    "threshold_reselection": 0,
+    "q2_target_windows": 1,
+    "q3_q4_target_reads": 0,
+    "candidate_promotion_rescue_retune": 0,
+    "parent_decision_unchanged": true
+  },
+  "diagnosis": {
+    "guard_false_negative_if_q2_delta_f1_gt": 0.0,
+    "otherwise": "GUARD_TRUE_NEGATIVE_ON_THIS_FIXED_REJECT",
+    "prospective_only": true
+  },
+  "operations": {"exactly_once": true, "official": 0, "csv": 0, "uploads": 0}
+}

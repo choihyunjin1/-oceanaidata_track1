@@ -1,0 +1,58 @@
+{
+  "schema_version": "p3.midpoint_materializer.failure_receipt.v18m1",
+  "experiment_id": "p3_kma_v14b_v16_midpoint_materializer_20260831_v18m1",
+  "status": "TERMINAL_TECHNICAL_FAILURE",
+  "decision": "INTERNAL_PASS_NOT_DEPLOYABLE_WITH_AVAILABLE_OFFICIAL_SCHEMA",
+  "attempt_consumed": true,
+  "automatic_restart_performed": false,
+  "failure": {
+    "exception_type": "KeyError",
+    "exception_message": "anchor_time",
+    "stage": "prediction_before_submission_construction",
+    "csv_rows_written": 0,
+    "delivery_directory_created": false,
+    "uploads": 0
+  },
+  "root_cause": {
+    "classification": "missing_required_inference_feature",
+    "detail": "The frozen v16 harmonic multiplier requires anchor_time, but official test_index contains only case_id, station, lead_h; official test_context and the sealed test feature parquet also contain no anchor_time. The dtype-independent key/order repair passed before prediction, exposing this separate deployability blocker.",
+    "safe_recovery": "none_without_changing_the_frozen_prediction_contract_or_obtaining_an_authoritative_anchor_time_mapping",
+    "prediction_logic_changed": false
+  },
+  "internal_evidence": {
+    "result_status": "COMPLETE",
+    "decision": "PASS_INTERNAL_AWAITING_SEPARATE_MATERIALIZER",
+    "qa_status": "PASS",
+    "qa_checks": "12/12",
+    "pooled_delta_rmse_m": -0.004417860845763566,
+    "central_raw_expected_points": 0.07011471662901465,
+    "central_calibrated_expected_points": 0.020528662536725722
+  },
+  "official_schema_metadata": {
+    "test_index_columns": ["case_id", "station", "lead_h"],
+    "test_context_has_anchor_time": false,
+    "test_features_has_anchor_time": false
+  },
+  "data_access_this_attempt": {
+    "official_test_index_rows_read": 1200,
+    "official_test_context_rows_read": 200,
+    "official_feature_rows_read": 200,
+    "official_component_prediction_rows_read": 3600,
+    "hidden_truth_rows_read": 0,
+    "uploads": 0
+  },
+  "cumulative_official_access_including_prior_failure_diagnostics": {
+    "official_test_index_rows_read": 4800,
+    "official_test_context_rows_read": 800,
+    "official_feature_rows_read": 800,
+    "official_component_prediction_rows_read": 14400,
+    "hidden_truth_rows_read": 0,
+    "uploads": 0
+  },
+  "provenance": {
+    "materializer_runner_sha256": "9f9b4a00e35be76436dd666cf5a77298a67fa4affb3a1357e996d9b4335199d4",
+    "materializer_lock_sha256": "d9071444aed0e0b0e044ff87fd281c4d002808c4268ca64aac40b18a7bfb7291",
+    "recovery_result_sha256": "15f2c048dab7e5778fec7617e2035ffa4f47e8a49c1917b8c902cc7ba5b6bd19",
+    "recovery_qa_sha256": "d1ed383d34437679e5807f93a905929c3d084eacf3561e9c07efe66bc48e37c3"
+  }
+}

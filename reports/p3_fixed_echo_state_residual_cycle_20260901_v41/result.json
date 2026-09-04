@@ -1,0 +1,731 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.002493382868785371,
+          0.0018446607245843182
+        ],
+        "median_m": -0.00047539085661163494,
+        "probability_improve": 0.6426,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.00041438638409885264,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0009495872668011662,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00893543846781819,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0019947939451860908,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.002366407376180768,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0030027279373090465,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0022937082090511707,
+          0.001408005475759611
+        ],
+        "median_m": -0.0004643276233775584,
+        "probability_improve": 0.6582,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.21084315309087,
+        "raw_gain": 0.007244153090870866,
+        "transport_adjusted_gain": -0.04234190100141806,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 4,
+      "lead": {
+        "12": {
+          "delta_rmse_m": 0.00027248383881028904,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0026241213611419845,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.001677661256836771,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": 0.0007214831045463388,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.00251738766848153,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0008843266542613026,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_ESN96_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.01110627445089607,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0025691304716528585,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.01108558228193457,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": 0.0014013281690721247,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0013576936662159644,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.000513844253961615,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7807350775742145,
+        "delta_candidate_minus_uniform": -0.0004564471175175777,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0017538630216997753,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.003159739498880376,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.00042721851254079457,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.003895473595410315,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": 0.0006396504565564509,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.0005042455847752425,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0009586847872776749,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.002689980794500224,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.002552571308175211,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0023524166228037213,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.007291921674309365,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004737128857029815,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.0002865232519051464,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.001230416211787766,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.004271415734935502,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0009123141979543448,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0024902912962818657,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0015749308852252009,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.0007686647382383338,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0035034355541240236,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0007032673979833204,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.00893543846781819,
+      "worst_lead_delta_m": 0.00251738766848153,
+      "worst_reference_tail_block_delta_m": 0.01110627445089607,
+      "worst_station_lead_delta_m": 0.003895473595410315
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0025772477484036827,
+          0.0009636320800009273
+        ],
+        "median_m": -0.0008999485323987755,
+        "probability_improve": 0.7898,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.000539066482386219,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.001582070492028964,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0077492276090139756,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.002634101466658212,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.001961956362084072,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.002726392989637616,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0023477404288648864,
+          0.0006354469284272693
+        ],
+        "median_m": -0.0008473239132945065,
+        "probability_improve": 0.8298,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.217763801255455,
+        "raw_gain": 0.01416480125545405,
+        "transport_adjusted_gain": -0.03542125283683488,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.00039192479416694237,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0032409033663749476,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0019217118721636117,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": 0.0003875706091651665,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.002029604112625316,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0011254623053046364,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_ESN96_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.008938963715461545,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003990833152088369,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.009841529977959285,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0004449383896446557,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.001834015185748994,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.000179322579257013,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7802990141908966,
+        "delta_candidate_minus_uniform": -0.0008925105008353862,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0006215805695852783,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.002872079170947228,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.00077627281618875,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0016328478256537604,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0009624175688505154,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -4.051935817983576e-06,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0005443133510305564,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0020355380395473688,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0014244187253742435,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.00219676907177202,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.006878168127929518,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004163362482591748,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.00023837919810953956,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0009921524356965028,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0035843026621990015,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0007906757671226616,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0028543055041919674,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0021698135160510557,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.00032477617183745977,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.002937637963281614,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0010559566238771412,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0077492276090139756,
+      "worst_lead_delta_m": 0.002029604112625316,
+      "worst_reference_tail_block_delta_m": 0.009841529977959285,
+      "worst_station_lead_delta_m": 0.002937637963281614
+    }
+  ],
+  "created_at_utc": "2026-08-31T21:43:16.328502+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_FIXED_ESN_CANDIDATES",
+  "duplication_audit": {
+    "cross_problem_note": "P1 v20 used an echo-state detector for a different binary anomaly task; no P1 feature, prediction, threshold, result, or hyperparameter is imported into this independently sealed P3 regression contract.",
+    "distinction": "P3 TCN/TimeXer learn encoder weights; NLinear/state-space are linear dynamics; v22 models output residual rank; v26 uses feed-forward interval convolutions; v32 is a Bayesian run-length posterior. v41 learns no recurrent encoder and instead maps the entire causal path through one fixed contractive tanh reservoir before fitting only the strong linear residual head.",
+    "novel_axis": "deterministic fixed-weight nonlinear echo-state trajectory summaries over the multichannel past-only context",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_FIXED_NONLINEAR_RECURRENT_STATE_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.618158700002823,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_fixed_echo_state_residual_cycle_20260901_v41",
+  "feature_receipt": {
+    "columns": 96,
+    "finite": true,
+    "matrix_sha256": "6210f2292da3c39ef959286048c5d53a5895a668c52e765922f53aa22273b1c3",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.197233284293682,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06866585372965767,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.19199105903822283,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06479022654994684,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.20394780818087038,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06827904832526893,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.21030803968039877,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06945134664736399,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.20950988359559933,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06871251655837164,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_ESN96_RIDGE512_ADD10",
+      "coefficient_l2": 0.18796243223923323,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_ESN96_RIDGE2048_ADD10",
+      "coefficient_l2": 0.061039729708166936,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Jaeger, The echo state approach to analysing and training recurrent neural networks, GMD Report 148 (2001)",
+      "url": "https://doi.org/10.24406/publica-fhg-291111",
+      "use": "fixed recurrent reservoir and trained readout mechanism only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "f9e1d2db35885da564ba68eae7f3c1ec80dc4cad3feaee3d1c063ace5eda8682",
+    "evaluation_arrays_sha256": "32f0a3500f24fc7e0e008b9ec5a90b2c0604279acd99d73fe9d654a3771a76dd",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "9af811d31ccc489081883e5c8d9384dbbca82d973c55a3342ec9999a9120e2ea",
+    "runner_sha256": "0500b242493292f9cdcc2a2d210d5f4a93020763347df84a53b37bec5873894d"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.fixed_echo_state_residual.result.v41",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

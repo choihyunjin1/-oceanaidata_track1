@@ -1,0 +1,82 @@
+{
+  "schema_version": "ocean.final_submission.20260905.v1",
+  "status": "FROZEN_CLEAN_LINEAGE_CANDIDATES",
+  "policy": {
+    "organizer_distributed_data_only": true,
+    "external_observation_rows": 0,
+    "external_reanalysis_rows": 0,
+    "external_forecast_rows": 0,
+    "pretrained_weight_files_loaded": 0,
+    "hidden_truth_rows_read": 0,
+    "source_data_redistribution_allowed": false,
+    "maximum_upload_file_bytes": 50000000
+  },
+  "P1": {
+    "candidate_id": "P1_1_E150_PLUS_GI_SPIKE2",
+    "title": "P1 MS-TCN e150 + GI spike2 clean incumbent",
+    "summary": "배포 데이터만으로 scratch 학습한 3-seed MS-TCN e150 앙상블에 GI 고신뢰 spike 2행만 더한 공식 최고 clean 계보입니다.",
+    "official_metric": "F1",
+    "official_public_metric_value": 0.833548,
+    "official_points": 28.909341,
+    "expected_rows": 169011,
+    "expected_columns": ["station", "year", "layer", "time", "label"],
+    "expected_positive_rows": 6396,
+    "candidate_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+    "anchor_sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b",
+    "official_inputs": {
+      "README.md": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+      "train.csv": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+      "test.csv": "6d5c6522c282651b99f4261ffa803cf99950596028e996de1e7714db77408387",
+      "sample_submission.csv": "e7027bcb56836587715e5cd818c6d595ebef4a8518538fa7de7bdcba2b7fc1e4"
+    },
+    "environment_variable": "P1_DATA_DIR",
+    "notebook": "notebooks/final_submission_20260905/P1/P1_final_submission.ipynb"
+  },
+  "P2": {
+    "candidate_id": "P2_V52_SCORE_PRIORITY_FULL_HISTORY_BLEND020",
+    "title": "P2 v52 third-moment input-gradient clean incumbent",
+    "summary": "배포 데이터만으로 scratch 학습한 v52 3-seed 모델을 bin17 clean anchor와 80/20 혼합한 공식 최고 clean 계보입니다.",
+    "official_metric": "RMSE_C",
+    "official_public_metric_value": 0.424019,
+    "official_points": 28.012945,
+    "expected_rows": 26061,
+    "expected_columns": ["station", "layer", "time", "temp"],
+    "candidate_sha256": "331b1635bb036e773ff73487075e803b1308223e905c28b0d1494ea88b4d94c9",
+    "anchor_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "official_inputs": {
+      "README.md": "6fb1dc0602f4380aabdf2a44fb088710c675feeae74dfc61f533bb9e3cb50886",
+      "observations.csv": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+      "test_index.csv": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+      "sample_submission.csv": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+      "baseline_interp.csv": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036"
+    },
+    "environment_variable": "P2_DATA_DIR",
+    "notebook": "notebooks/final_submission_20260905/P2/P2_final_submission.ipynb"
+  },
+  "P3": {
+    "candidate_id": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+    "title": "P3 clean refined long-lead optimum",
+    "summary": "배포 데이터만으로 scratch 학습한 두 고정 CatBoost 계보의 장기리드 축을 봉인된 alpha로 결합한 최고 clean 계보입니다.",
+    "official_metric": "RMSE_m",
+    "official_public_metric_value": 0.583892,
+    "official_points": 24.066168,
+    "expected_rows": 1200,
+    "expected_columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "candidate_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+    "original_component_sha256": "d89e69b940c90ea1fbecf1e882bee69136255fffb12601d2fc853d032900e5b7",
+    "axis_component_sha256": "607f7cd4ed2c126d5aa4eb6d8130a651ac465a0c88b4e74c112d585c3421d708",
+    "alpha": -10.21743189862218,
+    "active_leads": [12, 18, 24],
+    "official_inputs": {
+      "README.md": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c",
+      "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+      "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f",
+      "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+      "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc",
+      "sample_submission.csv": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+      "baseline_persistence.csv": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110"
+    },
+    "environment_variable": "P3_DATA_DIR",
+    "notebook": "notebooks/final_submission_20260905/P3/P3_final_submission.ipynb"
+  }
+}

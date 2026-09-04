@@ -1,0 +1,66 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v8",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v8",
+  "design": "Layer-2 drift-only direct learned-score rank adapter. Select one fixed intervention fraction on the inner future block only; outer labels never select a fraction.",
+  "decision_policy": {
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "worst_observed_public_transport_residual_points": -0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "score_points_per_f1": 26.578120867377286,
+    "worst_forward_block_delta_f1_minimum": 0.0,
+    "bootstrap_probability_improved_minimum": 0.8,
+    "bootstrap_ci90_low_minimum": 0.0005788103467134221,
+    "seed_delta_f1_minimum": 0.0,
+    "anchor_removals_required": 0
+  },
+  "validation": {
+    "outer_forward_tests": [
+      {"train_folds": ["2025_q2"], "test_fold": "2025_q3"},
+      {"train_folds": ["2025_q2", "2025_q3"], "test_fold": "2025_q4"}
+    ],
+    "inner_calibration_days": 21,
+    "purge_hours": 24,
+    "training_day_subsample_fraction": 0.8,
+    "seeds": [20260831, 20260847, 20260863],
+    "inner_bootstrap_replicates": 500,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260907
+  },
+  "rank_selection": {
+    "top_fractions": [0.0005, 0.001, 0.002, 0.005],
+    "maximum_additions_per_station_day": 1,
+    "inner_f1_gain_lcb_minimum": 0.0,
+    "station_layer_shrinkage": 0.5
+  },
+  "transport_scope": {
+    "source_fit_scope": "all stations/layers anchor-negative",
+    "deployment_scope": "layer 2 anchor-negative probability-source drift pmax>=0.01",
+    "all_other_rows_exact_no_op": true,
+    "add_only": true
+  },
+  "model": {
+    "family": "bagged ExtraTrees direct rank score",
+    "n_estimators": 250,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.7,
+    "n_jobs_per_seed": 2
+  },
+  "candidates": [
+    {"name": "P1_1_L2_DRIFT_STATION_POOLED_RANK"},
+    {"name": "P1_2_L2_DRIFT_STATION_SHRUNK_RANK"},
+    {"name": "P1_3_L2_DRIFT_RANK_CONSENSUS"}
+  ],
+  "fit_budget": {
+    "historical_models": 6,
+    "deployment_models": 3,
+    "shared_official_feature_sources": 2,
+    "total_maximum": 11
+  },
+  "official_policy": {
+    "read_only_after_full_internal_pass": true,
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "maximum_materialized_candidates": 3
+  }
+}

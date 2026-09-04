@@ -1,0 +1,34 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v10.preflight",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v10",
+  "status": "NO_GO_DUPLICATE_STRUCTURAL_PREFLIGHT",
+  "reason": "A sealed P1 historical-vs-official density-ratio experiment already tested the same domain representation and failed immutable support gates before frozen-mask re-ranking could be scientifically interpretable.",
+  "duplicate_evidence": {
+    "experiment": "p1_target_covariate_density_ratio_xgb_v1",
+    "domain_oof_auc": 0.8892,
+    "daily_ess_fraction": 0.2196,
+    "required_daily_ess_fraction": 0.25,
+    "row_ess_fraction": 0.2190,
+    "required_row_ess_fraction": 0.25,
+    "minimum_station_layer_ess_fraction": 0.15093,
+    "required_minimum_station_layer_ess_fraction": 0.20,
+    "low_clip_fraction": 0.461,
+    "best_delta_f1": 0.004186,
+    "ci90_low_delta_f1": -0.009429,
+    "required_transport_f1_equivalent": 0.004954
+  },
+  "policy": {
+    "ess_or_clip_relaxation": false,
+    "duplicate_refit": false,
+    "official_covariate_reads_this_preflight": 0,
+    "hidden_truth_reads": 0,
+    "submission_value_reads": 0,
+    "uploads": 0
+  },
+  "source_paths": [
+    "configs/experiments/p1_target_covariate_density_ratio_xgb_v1.json",
+    "artifacts/p1_target_covariate_density_ratio_xgb_v1/domain_audit.json",
+    "artifacts/p1_target_covariate_density_ratio_xgb_v1/result.json",
+    "reports/public_transport_calibration_20260831_v2/calibration.json"
+  ]
+}

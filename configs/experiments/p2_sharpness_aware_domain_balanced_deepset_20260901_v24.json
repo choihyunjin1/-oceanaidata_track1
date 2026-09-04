@@ -1,0 +1,122 @@
+{
+  "schema_version": "p2.sharpness_aware_domain_balanced_deepset.20260901.v24",
+  "experiment_id": "p2_sharpness_aware_domain_balanced_deepset_20260901_v24",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json",
+    "required_status": "EXPLORATORY_SAFETY_PASS_REQUIRES_FRESH_CONFIRMATION",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v18_result": "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json",
+    "v19_result": "reports/p2_layer_month_risk_variance_rex_20260901_v19/result.json",
+    "v20_result": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json",
+    "v23_result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json"
+  },
+  "primary_source": {
+    "citation": "Foret et al., ICLR 2021, Sharpness-Aware Minimization for Efficiently Improving Generalization",
+    "url": "https://openreview.net/pdf?id=6Tm1mposlrM",
+    "official_implementation": "https://github.com/google-research/sam",
+    "use": "parameter-neighborhood optimizer motivation and fixed rho precedent only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_PARAMETER_NEIGHBORHOOD_SHARPNESS_AWARE_OPTIMIZER_GEOMETRY",
+    "repository_exact_terms": [
+      "sharpness-aware minimization",
+      "SAM optimizer",
+      "adaptive sharpness-aware minimization",
+      "parameter-neighborhood perturbation"
+    ],
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v23": "v23 differentiates loss with respect to observed inputs; v24 perturbs trainable parameters along the normalized parameter gradient",
+      "v18": "v18 optimizes a worst environment group; v24 keeps exact v13 row weights and changes only local parameter-neighborhood geometry",
+      "v19": "v19 penalizes variance among environment losses; v24 has no environment-risk dispersion term",
+      "weight_decay": "AdamW weight decay remains fixed and is separate from the SAM min-max parameter-neighborhood step"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_beta_1.0_with_vanilla_SAM_parameter_neighborhood",
+    "optimizer_geometry": {
+      "name": "vanilla_SAM",
+      "rho": 0.05,
+      "gradient_norm": "global_L2_over_all_trainable_parameters",
+      "adaptive_asam": false,
+      "rho_sweep": false,
+      "scheduler": false,
+      "base_optimizer": "AdamW",
+      "apply_every_batch": true
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v31r1-authorization",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v31r1",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "purpose": "Authorize the already-presealed v31 prefix-logit shrinkage protocol without changing its model, folds, threshold rule, transport policy, or safety gates.",
+  "base_contract": {
+    "path": "configs/experiments/p1_public_transport_repair_cycle_20260831_v31.json",
+    "sha256": "af2797e49f3645d7b1ec4b9135f47a80e77f570b1cb0e60430a5cd032a4f0a1c"
+  },
+  "base_runner": {
+    "path": "scripts/run_p1_public_transport_repair_cycle_20260831_v31.py",
+    "sha256": "c4dd8b2f47d56f580463b9dd27241b162848822ee98eab4a22f0b9cdb597f960"
+  },
+  "base_source": {
+    "path": "src/p1_qc/logit_shrunk_label_shift.py",
+    "sha256": "0a9703825c0859d8f7bc5096dd1dccff506c84e867ef9885801630db91d6c809"
+  },
+  "base_preflight": {
+    "path": "reports/p1_public_transport_repair_cycle_20260831_v31/preflight-report.json",
+    "sha256": "83d41e492b8c1bf6dd3fd31223ea562008abdeceb173ba8ba1c068c24788e6fc",
+    "required_status": "PASS"
+  },
+  "amendment": {
+    "model_parameter_changes": 0,
+    "threshold_rule_changes": 0,
+    "fold_changes": 0,
+    "gate_changes": 0,
+    "maximum_historical_fits": 2,
+    "searches": 0,
+    "retries": 0
+  },
+  "authorization": {
+    "historical_execution": true,
+    "attempt_lock_creation": true,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

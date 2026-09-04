@@ -1,0 +1,140 @@
+{
+  "schema_version": "p2.virtual_domain_meta_generalization_deepset.20260901.v33",
+  "experiment_id": "p2_virtual_domain_meta_generalization_deepset_20260901_v33",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_score_aligned_weighted_mse_deepset_20260901_v32/result.json",
+    "required_status": "EXPLORATORY_NO_GO_SCORE_ALIGNED_WEIGHTED_MSE",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v18_result": "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json",
+    "v19_result": "reports/p2_layer_month_risk_variance_rex_20260901_v19/result.json",
+    "v20_result": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json",
+    "v23_result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json",
+    "v28_result": "reports/p2_layer_task_gradient_surgery_deepset_20260901_v28/result.json",
+    "v30_result": "reports/p2_irmv1_layer_month_invariant_deepset_20260901_v30/result.json",
+    "v31_result": "reports/p2_within_layer_month_adversarial_deepset_20260901_v31/result.json",
+    "v32_result": "reports/p2_score_aligned_weighted_mse_deepset_20260901_v32/result.json"
+  },
+  "primary_source": {
+    "citation": "Li, Yang, Song, and Hospedales, AAAI 2018, Learning to Generalize: Meta-Learning for Domain Generalization",
+    "url": "https://ojs.aaai.org/index.php/AAAI/article/view/11596",
+    "use": "virtual train/test domain-shift meta-objective motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_FIXED_VIRTUAL_DOMAIN_MLDG_DEEPSET",
+    "repository_exact_terms": [
+      "MLDG",
+      "meta-learning for domain generalization",
+      "virtual meta-test",
+      "meta-train meta-test",
+      "AAAI 11596"
+    ],
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v18": "v18 directly minimizes a worst-group risk; v33 evaluates a differentiably adapted model on a held virtual domain",
+      "v19": "v19 penalizes the variance of group risks at the current parameters; v33 uses a one-step cross-domain transfer objective",
+      "v20": "v20 aligns latent covariance by month; v33 has no latent moment alignment",
+      "v28": "v28 projects conflicting layer-task gradients; v33 performs no pairwise projection and instead differentiates through one virtual-domain adaptation step",
+      "v30": "v30 penalizes an IRMv1 scale gradient at the current parameters; v33 simulates train/test domain shift",
+      "v31": "v31 trains month adversaries through gradient reversal; v33 has no domain classifier or adversarial head",
+      "v32": "v32 changes the pointwise loss to MSE; v33 retains exact v13 SmoothL1 and changes only the training objective geometry"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_MLDG_virtual_layer_month_transfer",
+    "optimizer": "exact_v13_AdamW_outer",
+    "meta_objective": {
+      "environment": "target_layer_x_calendar_month",
+      "virtual_meta_test_rule": "within each deterministic shuffled batch, sort present environment IDs and select index (epoch*steps_per_epoch+batch_index) modulo present_count",
+      "meta_train_loss": "v13 weighted_SmoothL1_beta_1.0 on all non-selected environments",
+      "inner_update": "theta_prime = theta - 0.001 * gradient(meta_train_loss)",
+      "inner_learning_rate": 0.001,
+      "inner_steps": 1,
+      "meta_test_loss": "v13 weighted_SmoothL1_beta_1.0 on selected virtual environment evaluated at theta_prime",
+      "meta_test_coefficient": 1.0,
+      "second_order": true,
+      "domain_classifier": false,
+      "gradient_projection": false,
+      "latent_alignment": false,
+      "loss_sweep": false
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

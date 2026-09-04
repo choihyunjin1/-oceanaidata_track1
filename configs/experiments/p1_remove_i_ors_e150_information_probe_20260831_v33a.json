@@ -1,0 +1,79 @@
+{
+  "schema_version": "p1.remove_i_ors_e150_information_probe.20260831.v33a",
+  "experiment_id": "p1_remove_i_ors_e150_information_probe_20260831_v33a",
+  "candidate": "P1_REMOVE_I_ORS_E150_INFORMATION_PROBE",
+  "scientific_question": "The 2026-08-30 official station factorial found G-ORS E150 additions beneficial and S-ORS additions neutral; the I-ORS E150 contribution is the only unseparated station axis.",
+  "historical_sources": {
+    "anchor": {
+      "path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet",
+      "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+    },
+    "truth": {
+      "path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet",
+      "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"
+    },
+    "2025_q2": {
+      "path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz",
+      "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"
+    },
+    "2025_q3": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz",
+      "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"
+    },
+    "2025_q4": {
+      "path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz",
+      "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"
+    }
+  },
+  "decoder": {
+    "reference": "raw E150 anchor-union bits",
+    "candidate": "raw E150 except I-ORS rows where incumbent=0 and raw_E150=1 are reset to 0",
+    "station": "I-ORS",
+    "preserve_incumbent_positives": true,
+    "threshold": null,
+    "top_k": null,
+    "model_fits": 0,
+    "outer_result_based_tuning": false,
+    "retries": 0
+  },
+  "validation": {
+    "diagnostic_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "primary_outer_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260933
+  },
+  "score": {
+    "points_per_f1": 26.578120867377286,
+    "transport_penalty_points": 0.0,
+    "claim": "information probe, not an expected-improvement promotion"
+  },
+  "official_materializer": {
+    "champion": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_DEADLINE_INFORMATION_PROBES_READY/P1_1_E150_PLUS_GI_SPIKE2/P1_submission.csv",
+      "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687"
+    },
+    "e150": {
+      "path": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1/P1_MSTCN_E150_ROUTER_UNION_ALL.csv",
+      "sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b"
+    },
+    "anchor": {
+      "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/P1_1_EXPLOIT_DISAGREEMENT_ROUTER/P1_submission.csv",
+      "sha256": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"
+    },
+    "expected_rows": 169011,
+    "expected_removed_i_ors_e150_additions": 80,
+    "expected_positive_rows": 6316,
+    "output": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260831_P1_REMOVE_I_ORS_E150_INFO_PROBE_READY_V33A/P1_1_REMOVE_I_ORS_E150/P1_submission.csv",
+    "title": "P1 remove I-ORS E150 information probe",
+    "summary": "Champion+GI2와 anchor positive를 보존하고 I-ORS E150 addition 80행만 제거한 미분리 station-axis probe"
+  },
+  "authorization": {
+    "historical_truth_reads_after_action_seal": true,
+    "official_reads": 0,
+    "hidden_truth_reads": 0,
+    "test_reads": 0,
+    "sample_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "p1.robust_subspace_block_conformal_feasibility.v1",
+  "experiment_id": "p1_robust_subspace_block_conformal_feasibility_20260901_v1",
+  "lane": "INFORMATION_LABEL_FREE",
+  "design_authority": {"path": "reports/p1_robust_subspace_block_conformal_design_20260901_v1/report-source.md", "sha256": "3ad04a48f031cd2c5512cabdef9863566e8c6d8fafc3300c4d8c1bca8c1fdae4"},
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "fold_audits": {
+    "2025_q2": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json",
+    "2025_q3": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json",
+    "2025_q4": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json"
+  },
+  "frozen_method": {
+    "prefix_split": [0.70, 0.15, 0.15],
+    "center": "station_layer_prefix_median",
+    "scale": "1.4826_station_layer_prefix_MAD_floor_1e-6",
+    "subspace_rank": 1,
+    "common_factor": "station_time_cross_layer_median_standardized_temp",
+    "innovation": "abs(layer_z_minus_common_factor)",
+    "block_lengths_rows": [72, 144, 288],
+    "primary_block_length_rows": 144,
+    "conformal_p": "(1 + calibration_block_maxima_ge_test)/(1 + calibration_block_count)",
+    "e_value": "0.5/sqrt(p)",
+    "e_bh_q": 0.01,
+    "minimum_concurrent_layers": 2,
+    "minimum_run_rows": 12,
+    "result_based_parameter_choices": 0
+  },
+  "sealed_ceilings": {"false_alarm_rate_lte": 0.01, "proposal_row_share_lte": 0.01, "cell_concentration_lte": 0.70, "all_block_decisions_equal": true},
+  "decision": {"pass": "ROBUST_SUBSPACE_CONFORMAL_FEASIBLE_RESEARCH_ONLY", "fail": "NO_GO_ROBUST_SUBSPACE_CONFORMAL_PREFLIGHT"},
+  "operations": {"maximum_executions": 1, "maximum_input_only_fits": 3, "supervised_fits": 0, "target_reads": 0, "official_reads": 0, "csv_files": 0, "uploads": 0, "retry_or_retune": 0}
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v9",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v9",
+  "design": "Prequential I-ORS layer-1 whole-CAPA-proposal benefit selector with frozen beta-binomial lower bounds and a per-KST-day intervention budget.",
+  "transport_family": {
+    "family_id": "P1_CAPA_HIERARCHICAL_BENEFIT_SELECTOR",
+    "tier_id": "HARD_CONDITIONAL_ROUTER",
+    "representation_changed": true,
+    "routing_discontinuous": true,
+    "active_share_rule": "whole proposals only; every KST day additions <= floor(0.005 * full-surface day rows)",
+    "comparator": "CURRENT_PUBLIC_P1_CHAMPION_F1_0.833548",
+    "calibration_sha256": "1a1d2c96cbe6c2c69b753fb4a130eb092922cc46524286cabcc0f9fce150441f"
+  },
+  "decision_policy": {
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "transport_penalty_points": 0.3219056897594759,
+    "minimum_raw_expected_point_delta_inclusive": 0.33190568975947593,
+    "score_points_per_f1": 26.578120867377286,
+    "minimum_pooled_delta_f1_strict": 0.0,
+    "minimum_each_forward_fold_delta_f1": 0.0,
+    "bootstrap_ci90_low_minimum": 0.0005788103467134221,
+    "bootstrap_probability_improved_minimum": 0.8,
+    "anchor_removals_required": 0
+  },
+  "validation": {
+    "outer_forward_tests": [
+      {"train_folds": ["2025_q2"], "test_fold": "2025_q3"},
+      {"train_folds": ["2025_q2", "2025_q3"], "test_fold": "2025_q4"}
+    ],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260911,
+    "one_sided_lower_quantile": 0.05,
+    "deterministic_selector_stability": true
+  },
+  "scope": {
+    "station": "I-ORS",
+    "layer": 1,
+    "add_only": true,
+    "whole_proposals_only": true,
+    "daily_full_surface_fraction_cap": 0.005,
+    "all_other_rows_exact_no_op": true
+  },
+  "selectors": [
+    {"name": "P1_1_CAPA_FLAT_BETA_LCB90", "kind": "flat", "prior_alpha": 1.0, "prior_beta": 1.0},
+    {"name": "P1_2_CAPA_MODEL_DURATION_HIER_LCB90", "kind": "model_duration", "prior_strength": 20.0},
+    {"name": "P1_3_CAPA_MODEL_MONTH_DURATION_HIER_LCB90", "kind": "model_month_duration", "prior_strength": 50.0}
+  ],
+  "proposal_policy": {
+    "posterior_precision_lcb_quantile": 0.1,
+    "accept_if_lcb_strictly_greater_than_train_anchor_f1_divided_by_2": true,
+    "duration_bins": ["le96", "192_to_384", "ge519"],
+    "ordering": ["posterior_lcb_desc", "score_per_row_desc", "start_time_asc"],
+    "overlap": "reject later whole proposal",
+    "budget_failure": "reject whole proposal",
+    "threshold_or_budget_relaxation": false
+  },
+  "fit_budget": {"selector_fits": 6, "maximum": 6},
+  "official_policy": {
+    "read_only_after_strict_internal_pass": true,
+    "official_covariate_reads_before_pass": 0,
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "maximum_materialized_candidates": 3
+  }
+}

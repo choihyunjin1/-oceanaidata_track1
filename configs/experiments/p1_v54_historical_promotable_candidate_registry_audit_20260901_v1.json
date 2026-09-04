@@ -1,0 +1,144 @@
+{
+  "schema_version": "p1.v54_historical_promotable_candidate_registry_audit.v1",
+  "experiment_id": "p1_v54_historical_promotable_candidate_registry_audit_20260901_v1",
+  "status": "NO_OVERLOOKED_PROMOTABLE_P1_CANDIDATE",
+  "surface": "TERMINAL_METADATA_AND_OFFICIAL_SHA_MEMBERSHIP_ONLY",
+  "purpose": "Audit whether a historical P1 candidate satisfying all original prospective promotion, nonduplicate official SHA, and reproducible commitment requirements was omitted. This audit cannot select rows, fit, materialize, score official inputs, or reinterpret a failed gate.",
+  "corpus_contract": {
+    "roots": ["artifacts", "reports"],
+    "extensions": [".json", ".md"],
+    "filename_tokens": ["result", "terminal", "qa", "manifest", "report-source"],
+    "p1_scope": "relative path contains /p1 or filename starts p1; paths scoped to /p2 or /p3 are excluded",
+    "self_exclusion": "paths containing p1_v54_historical_promotable_candidate_registry_audit_20260901_v1",
+    "files": 470,
+    "json_files": 374,
+    "parseable_json_files": 372,
+    "markdown_files": 96,
+    "top_level_experiment_ids": 155,
+    "result_documents": 149,
+    "ordered_path_bytes_sha256_corpus_digest": "1f0343e12fbdfdb9a8a6e9a0f16b9bdfb9c9f2309d91eed17e4bff74032dda13"
+  },
+  "promotion_contract": {
+    "all_required": true,
+    "a": "valid terminal internal PASS or positive pooled/outer historical result with complete metadata",
+    "b": "the unchanged prospective promotion gate in force for that experiment passed; diagnostic-only, information-only, retrospective, or NO_GO states do not qualify",
+    "c": "the exact committed candidate SHA/diff is absent from the durable official submission ledger and is not a duplicate of the current champion or a submitted candidate",
+    "d": "an authenticated reproducible model, sealed prediction/action, or byte-identical candidate commitment exists",
+    "official_receipt_use": "SHA membership and submitted/not-submitted status only; official performance values and rows are not used"
+  },
+  "reviewed_lineages": [
+    {
+      "id": "p1_full_improvement_cycle_v1",
+      "evidence_path": "artifacts/p1_full_improvement_cycle_20260822_v1/result.json",
+      "evidence_sha256": "222fae7b2fa49c3d24ee3c01b25667f31e008b4ffcb8b9663b39c7c78ac28f08",
+      "candidate_sha256": "8c0f4627b8da2af1c8362233e6a563e1033dd7119db126d6097272a0cc37bd6e",
+      "a": true, "b": true, "c": false, "d": true,
+      "exclusion": "exact candidate SHA already occurs in the official submission ledger"
+    },
+    {
+      "id": "p1_meaningful_learning_curve_event_day_balanced_lgbm",
+      "evidence_path": "artifacts/p1_meaningful_learning_curve_generation_v1/result.json",
+      "evidence_sha256": "0b0f9ea0826f6bc642c5473325f358c9c6ba82e966c5d0f586c309d80c21f394",
+      "candidate_sha256": null,
+      "a": true, "b": false, "c": null, "d": false,
+      "exclusion": "positive full-fraction delta remained RESEARCH_ONLY because the sealed effect, CI, and critical-slice gates did not all pass; no exact promotable deployment commitment"
+    },
+    {
+      "id": "p1_incumbent_preserving_mstcn_asrf_v2_and_e150_deployment",
+      "evidence_path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/terminal_result.json",
+      "evidence_sha256": "7640cc0e29f364a26cd8199a7e9a55acdf329699cd5923679d8f0d513c4af2b1",
+      "candidate_sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b",
+      "a": true, "b": false, "c": false, "d": true,
+      "exclusion": "one outer fold was positive but pooled Q3-Q4 confirmation and its CI failed; exact deployment SHA is also already submitted"
+    },
+    {
+      "id": "p1_mstcn_bootstrap_lower_bound_veto_20260829_v1",
+      "evidence_path": "artifacts/p1_mstcn_bootstrap_lower_bound_veto_20260829_v1/result.json",
+      "evidence_sha256": "1781bbcffe95e9e044b8024cbc0533db47192330f9d37fdd44d7f32a1fdecdbc",
+      "candidate_sha256": "a8e91f8686666946cb92b5106cba9932d1a427281391714946ea1d20fccfc949",
+      "a": true, "b": false, "c": false, "d": true,
+      "exclusion": "the PASS explicitly authorized only a label-free shadow audit, not promotion; the exact later package SHA is already submitted"
+    },
+    {
+      "id": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+      "evidence_path": "artifacts/full_internal_submission_cycle_20260831_v3/p1_result.json",
+      "evidence_sha256": "f6df583607fa5d76a941729ef64ac9bf5acdeeaf518f82d46842fd9f4e9e52ef",
+      "candidate_sha256": "8c0069b9b73f196b22ed624fe20e8434158483aed642c34d8a6f2bdf0d48afba",
+      "a": true, "b": true, "c": false, "d": true,
+      "exclusion": "strict internal PASS commitment is already present under the exact SHA in the official submission ledger"
+    },
+    {
+      "id": "p1_public_transport_repair_cycle_20260831_v28",
+      "evidence_path": "artifacts/p1_public_transport_repair_cycle_20260831_v28/result.json",
+      "evidence_sha256": "4b6c9103828ec5eeddd475006b6164cbd4f0c31545362207803d61414c55ea9a",
+      "candidate_sha256": null,
+      "a": true, "b": false, "c": null, "d": false,
+      "exclusion": "positive pooled historical result failed the sealed day concentration and supported station-layer safety gates; strict_internal_pass=false and materialization was forbidden"
+    },
+    {
+      "id": "p1_public_transport_repair_cycle_20260831_v30",
+      "evidence_path": "artifacts/p1_public_transport_repair_cycle_20260831_v30/result.json",
+      "evidence_sha256": "5f47835934bdfababb2a86c7674596a39ddc64da677609c7992d83c359b04826",
+      "candidate_sha256": "639c26cda576da74880e3f887b8653465db16c8572deedf225e4ae39ae51efa3",
+      "a": true, "b": true, "c": false, "d": true,
+      "exclusion": "strict internal PASS was reproducibly materialized, but the exact SHA already occurs in the official submission ledger"
+    },
+    {
+      "id": "p1_remove_i_ors_e150_information_probe_20260831_v33a",
+      "evidence_path": "reports/p1_remove_i_ors_e150_information_probe_20260831_v33a/result.json",
+      "evidence_sha256": "5fced465b2fd17454e182ff0dcac686570efa47577672c4c202b23c9c6293c0f",
+      "candidate_sha256": "c0cc4ad59008eeb39972a4ca1236a254abcc4786e64af750a3c047dc8ef94ab5",
+      "a": true, "b": false, "c": false, "d": true,
+      "exclusion": "terminal status was information-value positive rather than promotion PASS, and the exact materialized SHA is already submitted"
+    },
+    {
+      "id": "p1_iors_e150_microfragment_veto_20260901_v34a",
+      "evidence_path": "reports/p1_iors_e150_microfragment_veto_20260901_v34a/result.json",
+      "evidence_sha256": "3596985381c94bc28de8558561b189101d9a8cf3c6c86b654360e45ea2dde350",
+      "candidate_sha256": null,
+      "a": true, "b": false, "c": true, "d": false,
+      "exclusion": "positive point estimate failed the preregistered CI gate and exposed an unresolved metric-geometry inconsistency; materialization remained forbidden"
+    }
+  ],
+  "counts": {
+    "terminal_positive_or_pass_lineages_reviewed": 9,
+    "passed_unchanged_prospective_promotion_gate_b": 3,
+    "failed_gate_b": 6,
+    "exact_reproducible_commitment_d": 6,
+    "gate_b_passes_already_submitted_exact_sha": 3,
+    "gate_b_passes_unsubmitted_nonduplicate_sha": 0,
+    "all_a_b_c_d": 0,
+    "overlooked_promotable_candidates": 0
+  },
+  "official_sha_ledger": {
+    "path": "reports/p1_official_component_score_ledger_20260901_v1/score-ledger.json",
+    "sha256": "dda992485097040504e8b08ffb09a1693bc996ff4f2c747bc907bc3dbe4c4326",
+    "records": 19,
+    "distinct_non_null_sha256": 18,
+    "performance_fields_used_for_v54": 0,
+    "row_or_candidate_selection_uses": 0,
+    "candidate_sha_membership_checks": 6
+  },
+  "decision": {
+    "terminal": "NO_OVERLOOKED_PROMOTABLE_P1_CANDIDATE",
+    "ready": false,
+    "candidate_pointer": null,
+    "fresh_confirmation_contract": null,
+    "reason": "Every lineage that passed its contemporaneous promotion gate and has an exact reproducible commitment is already represented by the same SHA in the official ledger. All remaining positive historical results failed their unchanged gate or were diagnostic/information-only."
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "materializations": 0,
+    "runner_created": 0,
+    "preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "candidate_csv_reads": 0,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "hidden_reads": 0,
+    "raw_submission_value_reads": 0,
+    "uploads": 0
+  }
+}

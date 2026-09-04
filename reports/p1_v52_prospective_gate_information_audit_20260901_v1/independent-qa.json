@@ -1,0 +1,57 @@
+{
+  "schema_version": "p1.v52_prospective_gate_information_audit.independent_qa.v1",
+  "experiment_id": "p1_v52_prospective_gate_information_audit_20260901_v1",
+  "verdict": "PASS",
+  "decision": "GUARD_TRUE_NEGATIVE_ON_THIS_FIXED_REJECT",
+  "metrics": {
+    "q2_rows": 133170,
+    "additions": 77,
+    "tp": 4,
+    "fp": 73,
+    "precision": 0.05194805194805195,
+    "baseline_f1": 0.7784135753749013,
+    "candidate_f1": 0.7733281112307843,
+    "delta_f1": -0.005085464144117036
+  },
+  "confusion_evidence": {
+    "guard_reject_nonbeneficial": 2,
+    "guard_reject_beneficial": 0,
+    "guard_accept_nonbeneficial": 1,
+    "guard_accept_beneficial": 0,
+    "observed_reject_negative_predictive_value": 1.0,
+    "candidate_level_specificity": 0.6666666666666666,
+    "sensitivity": null,
+    "warning": "v35 and v52 are different immutable candidate outcomes on the same Q2 target surface; they are not independent target windows and cannot validate overall guard discrimination."
+  },
+  "checks": {
+    "parent_selected_pretarget": true,
+    "max_wilson_lcb_candidate_fixed_pretarget": true,
+    "parent_bundle_hash_revalidated": true,
+    "fits_zero": true,
+    "refits_zero": true,
+    "score_recomputations_zero": true,
+    "threshold_reselections_zero": true,
+    "q2_target_reads_one": true,
+    "q3_q4_target_reads_zero": true,
+    "v38_decision_unchanged": true,
+    "candidate_rescue_promotion_retune_zero": true,
+    "official_test_sample_submission_hidden_reads_zero": true,
+    "csv_upload_zero": true,
+    "focused_pytest_6_of_6": true,
+    "ruff_pass": true,
+    "lifecycle_qa_pass": true
+  },
+  "preflight": {"runs": 2, "byte_identical": true, "bytes": 2014, "sha256": "90e67aa88e66d703d684319084a40ceeada84b4018b43b1bb09a413df2412002"},
+  "hashes": {
+    "config": "afeeea2d73fdc967ee4b3291e11488770639813cf39f7690741c9a973f43d45e",
+    "runner": "f1704fb0ac809a805c13a7f19bcf16750b2f6e5afcdd6f9a5ecc7e5840f0b139",
+    "focused_test": "0690b7036052e783998dc2d8019c60e0603f854e0877af13e299b5d9203195ef",
+    "parent_bundle": "c77115bb5b7d1ef4788afa639f299c4f2cea6959d1d713650d76366796af78e2",
+    "selection_seal": "edcdd10be1f068a44195a3125b92dc173f1244930991af39182d68d1b70c4b3c",
+    "completion": "a5eaee935c24a427b51f83b58933394418184adf409c8477cb5398f591531bed",
+    "lock": "59a3fcd36108e15a852ba8bfe8f8a9acf40e62ef8630f7a695699a815a672784",
+    "result": "5fa54dc58dc6193d0469127ab8f560f29f6f31704890668fc8f5ef8ed36b231f"
+  },
+  "access": {"official": 0, "test": 0, "sample_submission": 0, "submission": 0, "hidden": 0, "csv": 0, "uploads": 0},
+  "prospective_recommendation": "KEEP_V28_UNCHANGED; REQUIRE_A_GENUINELY_UNEXPOSED_LABELED_TRANSPORT_WINDOW_AND_AT_LEAST_ONE_BENEFICIAL_OUTCOME_BEFORE_SENSITIVITY_CAN_BE_ESTIMATED."
+}

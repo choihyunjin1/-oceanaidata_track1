@@ -1,0 +1,734 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.005484943879700194,
+          -0.001871459702672317
+        ],
+        "median_m": -0.003714413050663168,
+        "probability_improve": 0.9996,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.004579850990012568,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003917494609179117,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0010107613321753695,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.006941684642534085,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.003246932093822985,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0032424015580364562,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0055284533843400815,
+          -0.0019456113003804287
+        ],
+        "median_m": -0.0037482838640931493,
+        "probability_improve": 0.9996,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.263183459190227,
+        "raw_gain": 0.05958445919022623,
+        "transport_adjusted_gain": 0.009998405097937299,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.004412653405471367,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006122944120728224,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0032641140055161832,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0006600913703547207,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.0004808614649589593,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.006164170620349685,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_RAIN72_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.013037155644820997,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.008586795061617414,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": -0.0004754605003141066,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.003949317998894641,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.003595003224443394,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0013950425984482484,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7774371652372781,
+        "delta_candidate_minus_uniform": -0.003754359454453904,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0010745339402629117,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.005344979525544247,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.005075769955097398,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.001650656530095329,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0024999460058166,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.001474028466223909,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0022484214946263403,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0013674472528416581,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.0008220649482372222,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.006073428876454012,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.01027290602555897,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004689537547288736,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0019103069547905527,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.00017870323436308677,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.007267353564768708,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.005652086122445055,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.006800754919059071,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.004004393165464526,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0028750139542181863,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": -0.0002898300624651906,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.009567617589853361,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0010107613321753695,
+      "worst_lead_delta_m": -0.0004808614649589593,
+      "worst_reference_tail_block_delta_m": 0.013037155644820997,
+      "worst_station_lead_delta_m": 0.0022484214946263403
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.004083517605463327,
+          -0.0010624723687536683
+        ],
+        "median_m": -0.0026477826088918133,
+        "probability_improve": 0.996,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0027233356966209765,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0034755531389694116,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.003851742339711195,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.005190219474567881,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.002755054109656152,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0030882280065440693,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.00406232024405942,
+          -0.0011987851907030499
+        ],
+        "median_m": -0.0026344264014205865,
+        "probability_improve": 0.9972,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.245697266357432,
+        "raw_gain": 0.04209826635743018,
+        "transport_adjusted_gain": -0.007487787734858753,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.003135317516831493,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.005223828492807225,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.002764775192835245,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -2.1498066614999978e-05,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0006566516501662623,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.003985401215639728,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.009965098265391936,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.007366432028499181,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0040457052389203385,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0021547366245371347,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.003312507387172925,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0011910722533495788,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.778538953426286,
+        "delta_candidate_minus_uniform": -0.0026525712654460465,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0009451761340573128,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.004217248848886079,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.003061957512576985,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": -0.001141226472384238,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0026697259824994823,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0010228585848256477,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0012843935113737714,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.00046591224379255447,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.0007679061084659988,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0045796052607981474,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.008806485183658008,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004652086251536569,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0007306766709064272,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0007108113033810204,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005288123155238189,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.00383336993844674,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.005187214596988565,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0031054575845373966,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0009120180609716311,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0015796738665915244,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.00551340427446434,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.003851742339711195,
+      "worst_lead_delta_m": 0.0006566516501662623,
+      "worst_reference_tail_block_delta_m": 0.009965098265391936,
+      "worst_station_lead_delta_m": 0.0015796738665915244
+    }
+  ],
+  "created_at_utc": "2026-08-31T22:38:16.208787+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "PASS_CANDIDATE_AVAILABLE",
+  "duplication_audit": {
+    "distinction": "v40 counts crossings and excursions against fixed levels, while v49 measures local top-hat morphology. v54 first reduces the path to reversals and then pairs nested closed and half cycles with fixed rainflow logic, preserving hysteretic cycle depth and mean rather than threshold occupancy or local extrema filtering.",
+    "forbidden_reuse": [
+      "v42-v53 predictions/features",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed turning-point rainflow pairing and cycle-range spectrum over each historical path",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_NESTED_RAINFLOW_CYCLE_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.6815253000095254,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_rainflow_cycle_spectrum_residual_cycle_20260901_v54",
+  "feature_receipt": {
+    "columns": 72,
+    "finite": true,
+    "matrix_sha256": "5191a7cdc85e95b342c105d96afd7bb2f3279caf7f4033f876ebca1d01701e59",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19549279895197788,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07986788657332286,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.20430874289343573,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08574209648035472,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.20623302981910563,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08458844265366004,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.20829059774722197,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08970697251266282,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.22099234121292258,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.09116008357385041,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_RAIN72_RIDGE512_ADD10",
+      "coefficient_l2": 0.21430258465485177,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_RAIN72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08633652535731531,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Downing and Socie, Simple Rainflow Counting Algorithms, International Journal of Fatigue 4(1), 31-40 (1982)",
+      "url": "https://doi.org/10.1016/0142-1123(82)90018-4",
+      "use": "rainflow cycle-counting mechanism only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "e1130108271befe652410ea2f8a1e66cf24bdde0a4103253245e03dd0fc3bb0d",
+    "evaluation_arrays_sha256": "071880b385f84585d8ec70194236ed265721c3b58502770255ad56dfe199d246",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "ae3f5331482f1caae224bc7cc879e24fe773cf11f980cc4578fa9b47b8d7b897",
+    "runner_sha256": "a53720209223af5aae963b054ad14f7c6f98a769d161a74807e849e14a81fea5"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.rainflow_cycle_spectrum_residual.result.v54",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

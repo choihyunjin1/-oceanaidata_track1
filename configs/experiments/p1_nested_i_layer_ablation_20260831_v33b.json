@@ -1,0 +1,18 @@
+{
+  "experiment_id": "p1_nested_i_layer_ablation_20260831_v33b",
+  "candidate": "nested causal I-ORS E150 layer ablation",
+  "selection": {
+    "station": "I-ORS",
+    "minimum_layer_addition_support_inclusive": 10,
+    "remove_when_marginal_precision_strictly_below_prefix_incumbent_f1_divided_by": 2.0,
+    "q2": "abstain",
+    "q3_prefix_folds": ["2025_q2"],
+    "q4_prefix_folds": ["2025_q2", "2025_q3"],
+    "deployment_prefix_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "outer_result_reselection": false
+  },
+  "validation": {"bootstrap_replicates": 5000, "bootstrap_seed": 20260941},
+  "guards": {"maximum_changed_fraction": 0.005, "maximum_single_layer_change_share": 0.5},
+  "fit_budget": 0,
+  "official_budget": {"test": 0, "sample": 0, "submission": 0, "hidden": 0, "upload": 0}
+}

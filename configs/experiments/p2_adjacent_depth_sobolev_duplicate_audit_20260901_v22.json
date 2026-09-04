@@ -1,0 +1,45 @@
+{
+  "schema_version": "p2.adjacent_depth_sobolev_duplicate_audit.20260901.v22",
+  "experiment_id": "p2_adjacent_depth_sobolev_duplicate_audit_20260901_v22",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE_EXECUTED_ADJACENT_DEPTH_DERIVATIVE_LOSS",
+  "proposed_axis": {
+    "name": "adjacent_target_depth_sobolev_derivative_loss",
+    "definition": "Jointly fit target temperature values and their adjacent-depth finite differences.",
+    "proposed_derivative_weight": 0.25,
+    "proposed_architecture": "frozen_v13_deepset",
+    "proposed_model_fits": 9
+  },
+  "duplicate_authority": {
+    "experiment_id": "p2_ts_continuous_depth_challenger_20260827_v1",
+    "source_module": "src/p2_restore/ts_continuous_depth_challenger_20260827_v1.py",
+    "source_module_sha256": "8edfdd89dcfff3bda181a319ca538646ef86cabb5713be88eabbcd5165363011",
+    "runner": "scripts/run_p2_ts_continuous_depth_challenger_20260827_v1.py",
+    "runner_sha256": "18155bb95e681bb1f702574fa7721815d47ff3422e941b1700ff1889281d4142",
+    "terminal_result": "artifacts/structural_challenger_20260827_v1/p2/result.json",
+    "terminal_result_sha256": "aca355e9cc5ab6df5d9e04d0a7aeb61ecb785f0adcc21534a5d892064217954e",
+    "exact_overlap": {
+      "predicted_adjacent_difference_lines": "443-445",
+      "target_adjacent_difference_lines": "445-445",
+      "squared_difference_loss_lines": "446-449",
+      "sealed_vertical_difference_weight_line": "378",
+      "sealed_vertical_difference_weight": 0.25
+    }
+  },
+  "closure_rule": {
+    "semantic_duplicate_requires_zero_fit": true,
+    "result_driven_reopening_forbidden": true,
+    "weight_or_architecture_relabel_does_not_create_a_new_scientific_axis": true
+  },
+  "operation_limits": {
+    "observations_rows_read": 0,
+    "historical_label_rows_read": 0,
+    "model_fits": 0,
+    "candidate_predictions": 0,
+    "attempt_lock_created": 0,
+    "candidate_artifacts_created": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

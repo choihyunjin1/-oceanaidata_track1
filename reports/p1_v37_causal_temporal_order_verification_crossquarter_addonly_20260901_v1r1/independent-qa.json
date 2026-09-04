@@ -1,0 +1,16 @@
+{
+  "schema_version": "p1.v37_temporal_order_verification.independent_qa.v1",
+  "experiment_id": "p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1r1",
+  "verdict": "PASS",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "commands": [
+    ".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1r1.py -q",
+    ".\\.venv-p1\\Scripts\\python.exe -m ruff check scripts/run_p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1r1.py tests/test_p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1r1.py",
+    ".\\.venv-p1\\Scripts\\python.exe scripts/run_p1_v37_causal_temporal_order_verification_crossquarter_addonly_20260901_v1r1.py --data-dir C:\\Users\\cedis\\Downloads\\데이터셋_P1\\P1_qc_anomaly --qa"
+  ],
+  "checks": {"focused_pytest_5_of_5": true, "ruff": true, "postterminal_lifecycle_22_checks": true, "preflights_byte_identical": true, "frozen_science_hash": true, "wrapper_identity": true, "support_mapping": true, "fits_within_budget": true, "v28_guard": true, "v33_bundle_before_target": true, "q2_q3_target_zero": true, "q4_unopened": true, "add_only_removal_zero": true, "access_zero": true},
+  "counters": {"fits": 3, "transport_target_windows_read": 0, "q4_target_reads": 0, "q4_actions": 0, "anchor_removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "metrics": {"inner_proposals": 460, "inner_true_positives": 10, "inner_precision": 0.021739130434782608, "inner_wilson90_lcb": 0.013039079639451319, "raw_f1_delta": 0.0, "nominal_points": 0.0, "transport_adjusted_points": 0.0, "official_champion_expected_score": 0.833548, "official_champion_points": 28.909341, "incremental_expected_official_points": 0.0},
+  "hashes": {"result": "a56c85f9a2867604207d61e53ecca867e60f2430ed1dc0f7e33dee21fe8586e7", "config": "fde2431bae280fe281b74b042ae733f142aa8fbbcb159fe9b59933ab46c04e27", "runner": "4794b5093787718bcc3f89e919a8ba5154f1ab2650f28ddce493888b599edead", "test": "ee90772b4eb5ecadd9bd60e073103fd73c48519fa749c221b841ea116fe6a2c7", "lock": "b82563b988a3df174ee53c3a5860b7fb1b6896c379d60c1e9e2b96feced6afd7", "completion": "40cb63e461798bc76aa1b700f6150423b539cc19d1686b7f8ecc5971be4db890", "preflight_receipt": "b9aa58bd0c62f4c16bb00fadc62a8cd43e8d339fa5f6f659c407b64a7797ecc0", "pre_q2_seal": "0ac18627fc6d397f6e8b1ea39376f252d2746a49e001b70d60ff5710b8a286bf", "auditability_manifest": "36470718c413b29d2057a3af8b22621ea0dd82afc9cd7de38861cd7c47664f6c", "auditability_bundle": "f6646a639d196612b704f08d8e894a70ec9a2cb1c1609351b0b5abf6cf74a826", "frozen_science_module": "8c54b64de84d50d5a4fa770b52a4e629f4d1ae4b1352deedbcaa09a0ab946e3b", "shared_engine": "a04bcee6504ee68e1cfc3fc55728ed9d0228e7a5f8589f9b04e8e5be3f30fe47", "invalid_parent_failure_receipt": "36a031e3910c12fd701f0abb52f1dcef620d53ae008ca795d5de24559d723588"}
+}

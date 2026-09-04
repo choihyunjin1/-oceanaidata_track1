@@ -1,0 +1,137 @@
+{
+  "schema_version": "p2.continuous_depth_permutation_invariant_set_encoder.20260901.v12",
+  "experiment_id": "p2_continuous_depth_permutation_invariant_set_encoder_20260901_v12",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "scientific_question": "Can a compact permutation-invariant public-depth set representation add a transportable correction while preserving 80 percent of the sealed champion proxy?",
+  "semantic_audit": {
+    "classification": "UNUSED_REPRESENTATION_AXIS",
+    "reason": "The prior executed continuous-depth challenger is an order-sensitive temporal TCN with a depth decoder. The vertical set encoder in the heavy-model scout was a proposal only, and the external neural-field plan was never trained or evaluated. V12 instead applies one shared element MLP to same-time public depth/value/mask tokens and commutative masked mean/max pooling.",
+    "evidence_paths": [
+      "reports/P2_HEAVY_MODEL_SCOUT_2026-08-16.md",
+      "configs/experiments/p2_external_depth_query_v1.json",
+      "src/p2_restore/ts_continuous_depth_challenger_20260827_v1.py",
+      "reports/p2_group_balanced_raw_residual_20260901_v8r1/result.json",
+      "reports/p2_domain_invariant_vertical_curvature_20260901_v9r1/result.json",
+      "reports/p2_supported_layer_change_coherence_20260901_v11r1/result.json"
+    ],
+    "closed_families_excluded": [
+      "DINEOF_or_EOF_completion",
+      "Gaussian_process",
+      "PLS",
+      "CatBoost_soft_gate",
+      "PAVA_or_isotonic",
+      "rank_season_bin_search",
+      "raw_Celsius_L1_or_L2_residual",
+      "linear_vertical_curvature_Ridge",
+      "fixed_threshold_change_coherence"
+    ],
+    "primary_sources": [
+      "Zaheer et al., Deep Sets, NeurIPS 2017, https://proceedings.neurips.cc/paper/2017/hash/f22e4747da1aa27e363d86d40ff442fe-Abstract.html",
+      "Lee et al., Set Transformer, ICML/PMLR 2019, https://proceedings.mlr.press/v97/lee19d.html"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "registered_windows_kst": [
+      {
+        "id": "2024_may_jun",
+        "start_inclusive": "2024-05-01T00:00:00+09:00",
+        "end_exclusive": "2024-07-01T00:00:00+09:00"
+      },
+      {
+        "id": "2024_jul_to_aug24",
+        "start_inclusive": "2024-07-01T00:00:00+09:00",
+        "end_exclusive": "2024-08-25T00:00:00+09:00"
+      }
+    ],
+    "expected_rows": 45935,
+    "public_layers": [1, 5, 6, 7, 8],
+    "target_layers": [2, 3, 4],
+    "token_features": [
+      "temperature_minus_public_baseline_over_profile_scale",
+      "salinity_minus_public_profile_mean_over_public_profile_scale",
+      "actual_depth_minus_target_depth_over_50m",
+      "nominal_depth_minus_target_depth_over_50m",
+      "temperature_present",
+      "salinity_present",
+      "actual_depth_present",
+      "nominal_depth_present"
+    ],
+    "context_features": [
+      "target_depth_over_50m",
+      "target_layer_is_2",
+      "target_layer_is_3",
+      "target_layer_is_4",
+      "log1p_profile_scale",
+      "doy_sin",
+      "doy_cos",
+      "hour_sin",
+      "hour_cos",
+      "m2_sin",
+      "m2_cos"
+    ],
+    "architecture": {
+      "family": "DeepSets_style_shared_element_MLP_masked_mean_max_joint_depth_head",
+      "element_hidden": 32,
+      "element_layers": 2,
+      "head_hidden": 32,
+      "head_layers": 2,
+      "pooling": ["masked_mean", "masked_max"],
+      "attention": false,
+      "dropout": 0.0
+    },
+    "loss": "SmoothL1_beta_1.0",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_unit": "fold_x_KST_calendar_day",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "strict_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

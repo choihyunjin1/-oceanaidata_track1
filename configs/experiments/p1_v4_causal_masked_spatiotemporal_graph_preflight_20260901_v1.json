@@ -1,0 +1,53 @@
+{
+  "schema_version": "p1.v4_causal_masked_spatiotemporal_graph_preflight.v1",
+  "experiment_id": "p1_v4_causal_masked_spatiotemporal_graph_preflight_20260901_v1",
+  "status": "PREREGISTERED_ZERO_FIT_RESOURCE_AND_DATA_CONTRACT_GATE",
+  "architecture": {
+    "nodes": "station_x_layer",
+    "horizontal_edges": "requires signed station coordinate or physical adjacency manifest",
+    "vertical_edges": "adjacent observed layers within station",
+    "temporal_encoder": "past-only causal masked encoder",
+    "head": "small anchor-negative add-only anomaly head",
+    "anchor_operation": "union_no_removals",
+    "maximum_fits_if_unblocked": 9,
+    "seeds": [20260901, 20260917, 20260943],
+    "outer_quarters": ["2025_q2", "2025_q3", "2025_q4"],
+    "epochs": 20,
+    "hidden_width": 64,
+    "weight_decay": 0.0001,
+    "sweep_count": 0
+  },
+  "semantic_audit": {
+    "novel": true,
+    "mstcn": "MS-TCN uses temporal convolutions over row sequences, not fixed station-layer graph message passing.",
+    "graph_derived_tabular": "Existing adjacent-layer residuals are fixed tabular features, not a learned masked node encoder.",
+    "group_dro": "Group-DRO changes the loss weighting of MS-TCN and is not a graph architecture.",
+    "event_classifiers": "Existing logistic/CatBoost event heads score frozen proposals rather than learn causal station-layer node representations.",
+    "exact_duplicate": false,
+    "semantic_duplicate": false
+  },
+  "resource_contract": {
+    "required_cuda_devices_gte": 1,
+    "required_gpu_memory_mib_gte": 16384,
+    "observed_gpu": "NVIDIA GeForce RTX 5090",
+    "observed_gpu_memory_mib": 32607,
+    "observed_torch": "2.13.0+cu130",
+    "observed_cuda_devices": 1,
+    "status": "PASS"
+  },
+  "data_contract": {
+    "source_readme": {"path": "C:/Users/cedis/Downloads/데이터셋_P1/P1_qc_anomaly/README.md", "sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd"},
+    "readme_exposes_station_id": true,
+    "readme_exposes_station_coordinates": false,
+    "signed_horizontal_edge_manifest_present": false,
+    "arbitrary_complete_or_name_order_graph_allowed": false,
+    "status": "FAIL_MISSING_PHYSICAL_HORIZONTAL_ADJACENCY_AUTHORITY"
+  },
+  "decision": "CLOSE_ZERO_FIT_MISSING_HORIZONTAL_GRAPH_CONTRACT",
+  "operations": {"fits": 0, "targets": 0, "official_test_sample_submission_hidden_reads": 0, "csv": 0, "uploads": 0, "retry_or_retune": 0},
+  "simpler_unused_candidate": {
+    "name": "shared_causal_station_layer_state_space_predictor",
+    "description": "One weight-shared causal linear state-space next-step predictor per station-layer with mask channels; no horizontal graph and no label fit in the representation.",
+    "status": "AUDIT_ONLY_REQUIRES_NEW_PREREGISTRATION"
+  }
+}

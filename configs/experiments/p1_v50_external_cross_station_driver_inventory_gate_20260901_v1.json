@@ -1,0 +1,140 @@
+{
+  "schema_version": "p1.v50_external_cross_station_driver_inventory_gate.v1",
+  "experiment_id": "p1_v50_external_cross_station_driver_inventory_gate_20260901_v1",
+  "status": "EXTERNAL_DRIVER_UNAVAILABLE",
+  "surface": "READ_ONLY_LOCAL_MANIFEST_INVENTORY",
+  "policy": {
+    "official_faq_path": "configs/external_data/official_faq_external_data_2026-08-21.json",
+    "official_faq_sha256": "41e762264c667baf401f60bef104110d3dd1bc668ab209c4e635b46b0a924be9",
+    "faq_id": 9,
+    "external_public_data_allowed_with_attribution": true,
+    "permission_does_not_override_rights_reproducibility_or_leakage_gates": true
+  },
+  "requirements_sealed_before_inventory_decision": {
+    "p1_train_period_kst": ["2024-01-01T00:00:00+09:00", "2025-12-31T23:59:59+09:00"],
+    "minimum_exact_or_predeclared_station_proxies": 2,
+    "minimum_concurrent_coverage_share_per_station": 0.8,
+    "past_only_alignment": "asof backward at driver native issuance or observation time; no future interpolation",
+    "minimum_driver_variance": 0.000001,
+    "must_be_nonreconstructible_from_time_temp_psal_depth": true,
+    "network_downloads": 0,
+    "target_columns_read": 0
+  },
+  "inventory": [
+    {
+      "family": "ERA5 multi-station context pretrain",
+      "manifest": "external_data/quarantine/era5_p3_context_pretrain_v1/manifests/manifest.json",
+      "manifest_sha256": "72c1b49791a1c73be34f8cf9c78430e074354dfad5a83f0d891edf46e20752b2",
+      "stations": ["G-ORS", "I-ORS", "S-ORS"],
+      "observed_start_utc": "2014-01-01T00:00:00+00:00",
+      "observed_end_utc": "2023-12-31T14:00:00+00:00",
+      "p1_train_overlap_rows": 0,
+      "nonreconstructible": true,
+      "decision": "REJECT_NO_2024_2025_CONCURRENT_COVERAGE"
+    },
+    {
+      "family": "KMA ocean buoy meteorology and waves",
+      "manifest": "external_data/p3_kma_buoy_pre2024/manifest.json",
+      "manifest_sha256": "0286a74ab323f060bef611b58e21619e5778eb68beda09e9c03a3c75d3fff078",
+      "station_proxies": ["G_proxy", "I_proxy", "S_proxy"],
+      "observed_start_kst": "2016-03-01T00:00:00+09:00",
+      "observed_end_kst": "2023-12-31T23:30:00+09:00",
+      "p1_train_overlap_rows": 0,
+      "nonreconstructible": true,
+      "decision": "REJECT_NO_2024_2025_CONCURRENT_COVERAGE"
+    },
+    {
+      "family": "NASA POWER hourly meteorology",
+      "manifests": ["external_data/quarantine/nasa_power_sors_meteorology/manifest_2024.json", "external_data/quarantine/nasa_power_sors_meteorology/manifest_2025.json"],
+      "manifest_sha256": ["3c5457109f1c0ec74ae384f038f4e399ff3d8ba31acc430313844a3ef4851d0a", "23b88050436512ce51b42cc56df38cd38c84646c0c0291a1d9fb0edf7a6216e8"],
+      "stations": ["S-ORS"],
+      "observed_start_utc": "2024-01-01T00:00:00+00:00",
+      "observed_end_utc": "2025-12-31T23:00:00+00:00",
+      "concurrent_station_count": 1,
+      "nonreconstructible": true,
+      "decision": "REJECT_SINGLE_STATION_WOULD_REINFORCE_S_ONLY_COLLAPSE"
+    },
+    {
+      "family": "ERA5 S-ORS surface forcing exact historical blocks",
+      "manifest": "artifacts/p2_era5_full_retrieval_v1/manifest.json",
+      "manifest_sha256": "17591180646a762cfa9a309cf0cc934c8109879c17d10084055133e9aa4f5bee",
+      "stations": ["S-ORS"],
+      "observed_start_kst": "2024-08-25T00:00:00+09:00",
+      "observed_end_kst": "2025-12-17T03:00:00+09:00",
+      "unique_hour_count": 4900,
+      "coverage_kind": "three_disjoint_P2_outer_blocks_only",
+      "concurrent_station_count": 1,
+      "nonreconstructible": true,
+      "decision": "REJECT_SINGLE_STATION_AND_INCOMPLETE_TRAIN_COVERAGE"
+    },
+    {
+      "family": "I-ORS historical external CTD profiles",
+      "manifest": "configs/external_data/i_ors_ctd_v1_1_1.json",
+      "manifest_sha256": "8c8c223aa82794e0bdf27c531204b9b307fcdd3deb27f2199920ac47f4983c20",
+      "stations": ["I-ORS"],
+      "observed_start_utc": "2014-01-01T00:00:00+00:00",
+      "observed_end_utc": "2023-12-31T14:50:00+00:00",
+      "p1_train_overlap_rows": 0,
+      "nonreconstructible": false,
+      "closed_registry": {"path": "reports/historical_model_reaudit_20260831_v1/model-cards/p1-external-density-transfer.md", "sha256": "85bfd21cd927d38e5ffe26a7bb6f45475513618809de233465483ffe1b6ccd3f"},
+      "decision": "REJECT_SINGLE_STATION_NO_CONCURRENT_COVERAGE_AND_CLOSED_TRANSFER"
+    },
+    {
+      "family": "astronomical tide phase or harmonic clock",
+      "manifest": "artifacts/p2_tide_rts_v1/manifest.json",
+      "manifest_sha256": "09f2365f13e9d9c20461d41f7979560896bc313299dac1b6ed178f6dc6755a72",
+      "external_values_used": false,
+      "coverage": "all_rows_from_timestamp_formula",
+      "nonreconstructible": false,
+      "reconstructible_from": ["time", "station calendar"],
+      "p1_phase_registry": {"path": "configs/experiments/p1_window_phase_consistency_20260829_v1.json", "sha256": "2baa515c2ba00a57e6aa6882811bba4d6493fe5a0c501416a982bef2d6eea76a"},
+      "decision": "REJECT_RECONSTRUCTIBLE_AND_CLOSED_PHASE_FAMILY"
+    }
+  ],
+  "candidate_selection": {
+    "qualifying_families": 0,
+    "selected": null,
+    "gate": "FAIL_NO_ALLOWED_LOCAL_NONRECONSTRUCTIBLE_DRIVER_WITH_2024_2025_COVERAGE_AT_TWO_STATIONS",
+    "ready": false
+  },
+  "prospective_contract_if_a_driver_had_qualified": {
+    "past_only": true,
+    "alignment": "backward_asof_native_timestamp",
+    "maximum_staleness_hours": 3,
+    "driver_features": ["current", "backward_6h_change", "backward_24h_mean", "backward_24h_std"],
+    "seeds": [20260901, 20260917, 20260943],
+    "fits": 3,
+    "maximum_fits": 9,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0,
+    "sweep": 0
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6"},
+    "auditability_amendment": {"path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json", "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"},
+    "add_only": true,
+    "anchor_removals": 0,
+    "maximum_fits": 9
+  },
+  "operations": {
+    "network_fetches": 0,
+    "downloads": 0,
+    "runner_created": 0,
+    "preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "target_reads": 0,
+    "actions": 0,
+    "removals": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  },
+  "terminal": "EXTERNAL_DRIVER_UNAVAILABLE"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "p1.v31_crossquarter_guard_validity_audit.v1",
+  "experiment_id": "p1_v31_crossquarter_guard_validity_audit_20260901_v1",
+  "status": "TERMINAL_ZERO_FIT_RECEIPT_ONLY",
+  "verdict": "GUARD_DISCRIMINATIVE_VALIDITY_NON_IDENTIFIABLE",
+  "scope": {
+    "fits": 0,
+    "new_label_reads": 0,
+    "new_q4_reads": 0,
+    "official_test_sample_submission_hidden_reads": 0,
+    "csv": 0,
+    "uploads": 0,
+    "prior_result_re_evaluations": 0
+  },
+  "receipts": [
+    {"cycle": "v24", "role": "historical_motivation_excluded_from_prospective_confusion", "result_sha256": "9915b48421f5e8b3d70e9c100286ede5a45c219cc3b5665c7dd3d7fd9974be36", "gate": "legacy_pass", "outer_additions": 332, "outer_tp": 0, "outer_delta_f1": -0.009359824273496353},
+    {"cycle": "v27", "role": "prospective_v26_guard_pass_with_observed_outer", "result_sha256": "df57fba75d34a03b1b2956d0c145a4efef554d3faccabff087a989d3aa0e15b7", "gate": "multi_station_cell_pass", "outer_additions": 332, "outer_tp": 4, "outer_precision": 0.012048192771084338, "outer_delta_f1": -0.009097718251610432},
+    {"cycle": "v29", "role": "prospective_v28_guard_reject_without_outer", "result_sha256": "270fb5a19f21322a4c5877b26756a6cf95bb328a883809ca17111cdf6c60a8d2", "gate": "pre_q2_reject", "q2_q3_q4_target_reads": 0, "actions": 0},
+    {"cycle": "v30", "role": "prospective_v28_guard_reject_without_outer", "result_sha256": "1c7b930dcd47dac3db605f62b637cc6da5a9e9daf706ceee39e8db2e657e97eb", "gate": "pre_q2_reject", "q2_q3_q4_target_reads": 0, "actions": 0}
+  ],
+  "confusion": {
+    "population": "prospective multi-station-cell decisions with observable independent outer outcome",
+    "gate_pass_outer_beneficial": 0,
+    "gate_pass_outer_nonbeneficial": 1,
+    "gate_reject_outer_beneficial": null,
+    "gate_reject_outer_nonbeneficial": null,
+    "pass_positive_predictive_value": 0.0,
+    "sensitivity": null,
+    "specificity": null,
+    "negative_predictive_value": null,
+    "reason_undefined": "Rejected candidates remain target-unopened by contract."
+  },
+  "coverage": {
+    "v28_completed_axes": 2,
+    "v28_axes_reaching_first_transport_window": 0,
+    "v28_acceptance_coverage": 0.0,
+    "v28_independent_outcome_coverage": 0.0
+  },
+  "prospective_proposal": "After immutable zero-action decisions, pre-register audit-only outcome opening for a fixed random subset of rejects; never use those outcomes to promote, retune, or rescue the candidate."
+}

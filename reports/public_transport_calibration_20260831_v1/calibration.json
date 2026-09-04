@@ -1,0 +1,85 @@
+{
+  "schema_version": "public_transport_calibration.20260831.v1",
+  "status": "CALIBRATED_GATE_READY",
+  "minimum_point_gain": 0.01,
+  "calibration_method": "Worst observed candidate-specific residual between pre-submission central expected point delta and official Public point delta. This is an empirical guardrail, not a confidence bound.",
+  "gates": {
+    "P1": {
+      "observations": 1,
+      "observed_pairs": [
+        {
+          "candidate": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+          "expected_central_points_delta": 0.005383691373120247,
+          "actual_points_delta": 0.0,
+          "transport_residual": -0.005383691373120247
+        }
+      ],
+      "worst_observed_transport_residual_points": -0.005383691373120247,
+      "transport_penalty_points": 0.005383691373120247,
+      "minimum_calibrated_expected_points_delta": 0.01,
+      "minimum_uncalibrated_expected_points_delta": 0.015383691373120248,
+      "full_transport_metric_improvement_equivalent": 0.0005788103467134221,
+      "pass_rule": "candidate_raw_expected_points_delta + worst_observed_transport_residual_points >= 0.01"
+    },
+    "P2": {
+      "observations": 3,
+      "observed_pairs": [
+        {
+          "candidate": "P2_2_HGB_ABSOLUTE_PROFILE",
+          "expected_central_points_delta": 0.02709932699261711,
+          "actual_points_delta": -0.016789,
+          "transport_residual": -0.043888326992617105
+        },
+        {
+          "candidate": "P2_1_PUBLIC_PROFILE_RESIDUAL_SHALLOW",
+          "expected_central_points_delta": 0.017918091610006164,
+          "actual_points_delta": -0.103764,
+          "transport_residual": -0.12168209161000616
+        },
+        {
+          "candidate": "P2_3_BIN17_DROP_LAYER4",
+          "expected_central_points_delta": 0.00038919342202228824,
+          "actual_points_delta": -0.007601,
+          "transport_residual": -0.007990193422022288
+        }
+      ],
+      "worst_observed_transport_residual_points": -0.12168209161000616,
+      "transport_penalty_points": 0.12168209161000616,
+      "minimum_calibrated_expected_points_delta": 0.01,
+      "minimum_uncalibrated_expected_points_delta": 0.13168209161000616,
+      "full_transport_metric_improvement_equivalent": 0.010494661504366079,
+      "pass_rule": "candidate_raw_expected_points_delta + worst_observed_transport_residual_points >= 0.01"
+    },
+    "P3": {
+      "observations": 2,
+      "observed_pairs": [
+        {
+          "candidate": "P3_2_EXTRATREES_HARD_PHYSICAL_ROUTER",
+          "expected_central_points_delta": 0.0723476897594759,
+          "actual_points_delta": -0.249558,
+          "transport_residual": -0.3219056897594759
+        },
+        {
+          "candidate": "P3_2_KMA_A18_0200_A24_0425",
+          "expected_central_points_delta": 0.028057054092288935,
+          "actual_points_delta": -0.021529,
+          "transport_residual": -0.04958605409228893
+        }
+      ],
+      "worst_observed_transport_residual_points": -0.3219056897594759,
+      "transport_penalty_points": 0.3219056897594759,
+      "minimum_calibrated_expected_points_delta": 0.01,
+      "minimum_uncalibrated_expected_points_delta": 0.33190568975947593,
+      "full_transport_metric_improvement_equivalent": 0.020913058224751535,
+      "pass_rule": "candidate_raw_expected_points_delta + worst_observed_transport_residual_points >= 0.01"
+    }
+  },
+  "invariants": {
+    "strictly_time_ordered_validation": true,
+    "group_or_episode_blocking_required": true,
+    "nested_selection_or_frozen_candidate_required": true,
+    "official_public_score_not_used_as_training_label": true,
+    "candidates_per_problem_min": 1,
+    "candidates_per_problem_max": 3
+  }
+}

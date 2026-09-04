@@ -1,0 +1,64 @@
+{
+  "schema_version": "p3.lagged_distance_correlation_residual.config.v44",
+  "experiment_id": "p3_lagged_distance_correlation_residual_cycle_20260901_v44",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_LAGGED_DISTANCE_CORRELATION_AXIS",
+    "novel_axis": "fixed nonlinear distance-correlation dependence between historical Hs and every other transformed channel at sealed temporal alignments",
+    "distinction": "Distance correlation uses double-centered pairwise distance matrices and detects general nonlinear dependence. It is not v33 linear DCCA, v30 conditional-bin mutual information, v38 tail-hit cross-quantilogram, v28 wavelet phase, or v29 recurrence geometry.",
+    "posthoc_prior_cycle_adjustment": false,
+    "forbidden_reuse": ["v42 predictions/features/bins", "v43 predictions/features"]
+  },
+  "encoder": {
+    "input": "all 12 transformed channels at fixed 20-minute subsampling from the past-only 48h context",
+    "context_rows": 145,
+    "reference_channel": "hs",
+    "other_channel_count": 11,
+    "lag_rows": [0, 3, 6],
+    "lagged_directions": {"lag0": ["contemporaneous"], "positive_lags": ["hs_earlier_other_later", "other_earlier_hs_later"]},
+    "estimator": "biased sample distance correlation from double-centered Euclidean-distance matrices",
+    "feature_count": 55,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false,
+    "support_gate": {"minimum_nonzero_share": 0.50, "minimum_positive_variance_features": 50, "target_used": false}
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_DCOR55_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_DCOR55_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Szekely, Rizzo and Bakirov, Measuring and testing dependence by correlation of distances, Annals of Statistics 35, 2769-2794 (2007)", "url": "https://doi.org/10.1214/009053607000000505", "use": "distance-correlation mechanism only; not performance evidence"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

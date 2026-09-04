@@ -1,0 +1,23 @@
+{
+  "schema_version": "p1.v25_deep_svdd_hypersphere_semantic_gate.v1",
+  "experiment_id": "p1_v25_deep_svdd_hypersphere_semantic_gate_20260901_v1",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE",
+  "decision": "NO_GO_SEMANTIC_DUPLICATE",
+  "primary_source": {
+    "title": "Deep One-Class Classification",
+    "authors": "Ruff et al.",
+    "venue": "ICML 2018, PMLR 80",
+    "url": "https://proceedings.mlr.press/v80/ruff18a.html",
+    "claim_boundary": "Deep SVDD maps normal data toward a hypersphere center. It makes no P1 performance claim."
+  },
+  "candidate_fingerprint": "normal-prefix neural embedding compacted around a center; distance-to-normal-center anomaly score; add-only thresholded action",
+  "duplicate_of": {
+    "module": {"path": "src/p1_qc/ts2vec_conditional_normal_prototype.py", "sha256": "54ad846a64796542dc015c1d62d26429e6b101405869febb0ae0e283025e412d", "fingerprint": "learned timestamp embedding followed by conditional normal-prototype distance"},
+    "config": {"path": "configs/experiments/p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1.json", "sha256": "3318b206add99b3520a9796b140ff9922cb84afa3ff7d651ed5ced90cd1be2dd"},
+    "runner": {"path": "scripts/run_p1_ts2vec_conditional_normal_prototype_rescue_20260828_v1.py", "sha256": "da4c3a94582d60556818ba1713911d0f12168243e5dde992e49013836b5910ad"},
+    "one_class_registry": {"path": "reports/P1_BREAKTHROUGH_RESEARCH_2026-08-13.md", "sha256": "5e29b4bc6c3b7e27e68b0af01a0d575cdfc347f299dccbc1294ce4c83c2cd165"}
+  },
+  "reason": "Changing the embedding objective from hierarchical contrastive agreement to hypersphere compactness does not create a sufficiently independent P1 action family: both learn a normal embedding and threshold distance to a learned normal center/prototype. The prior TS2Vec normal-prototype lane already consumed this representation-action fingerprint and failed its coverage gate. A Deep-SVDD rerun would also repeat the repository's one-class normal-distance axis.",
+  "operations": {"source_reads": 0, "targets_read": 0, "fits": 0, "lock_created": 0, "artifact_created": 0, "official_test_sample_submission_hidden_reads": 0, "csv": 0, "uploads": 0, "retune": 0},
+  "next_axis": "non-contrastive redundancy-reduction pretraining with a supervised add-only head, only after a separate Barlow-Twins versus TS2Vec/SupCon/masked-reconstruction semantic audit"
+}

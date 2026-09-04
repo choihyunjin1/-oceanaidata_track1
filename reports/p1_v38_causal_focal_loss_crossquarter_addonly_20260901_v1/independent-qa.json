@@ -1,0 +1,13 @@
+{
+  "schema_version": "p1.v38_causal_focal_loss.independent_qa.v1",
+  "experiment_id": "p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1",
+  "verdict": "PASS",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "commands": [".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1.py -q", ".\\.venv-p1\\Scripts\\python.exe -m ruff check scripts/run_p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1.py tests/test_p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1.py", ".\\.venv-p1\\Scripts\\python.exe scripts/run_p1_v38_causal_focal_loss_crossquarter_addonly_20260901_v1.py --data-dir C:\\Users\\cedis\\Downloads\\데이터셋_P1\\P1_qc_anomaly --qa"],
+  "checks": {"focused_pytest_5_of_5": true, "ruff": true, "postterminal_lifecycle_20_checks": true, "preflights_byte_identical": true, "focal_math_guards": true, "fits_within_budget": true, "v28_guard": true, "v33_bundle_before_target": true, "q2_q3_target_zero": true, "q4_unopened": true, "add_only_removal_zero": true, "access_zero": true},
+  "counters": {"fits": 3, "transport_target_windows_read": 0, "q4_target_reads": 0, "q4_actions": 0, "anchor_removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "best_pooled_inner": {"quantile": 0.9975, "threshold": 0.7167971730232239, "proposals": 141, "true_positives": 121, "precision": 0.8581560283687943, "wilson90_lcb": 0.8030687406089755, "gate_failure": "G-ORS/L1 supported environment had zero true positives"},
+  "metrics": {"raw_f1_delta": 0.0, "nominal_points": 0.0, "transport_adjusted_points": 0.0, "official_champion_expected_score": 0.833548, "official_champion_points": 28.909341, "incremental_expected_official_points": 0.0, "outer_ci": null},
+  "hashes": {"result": "a8d5f31f580507005e63ae98733d65c7093ade240d9bd4d5d5a0ec44ef9a982a", "config": "bd2707558dad1c2a2ac8d6aa72bfe55b5d7dab7045281e50dcd28e9117c65b38", "runner": "06956b99b813d0ec51ac8f7b87feaa73b5f40fdf91f3bc225f10b8f3d8e220fe", "test": "eca03f1ac29b6aaa1757c8980553eae5d9a9b7eb7300dfaf53217e9e4bc8caeb", "lock": "9c59c9dbd7eed74ee5b6f9903c7c162d6b224a0b6b70722d46c36e2e82e77a77", "completion": "829565f5fd81315f0383145c363580524995282bb8247308aa478fb7fd2ddaff", "preflight_receipt": "df0d0b3520313242e805adf6072d5080fbf6a6d2d70542d4eef7e69cd10149d2", "pre_q2_seal": "c193681ed0e4d94716ba141d802ec7530280de024de5d3fdfdc583994fd162a8", "auditability_manifest": "01cf1b520adde9bb45ff914e537b62b99ccd3b5a556aa584f3ec5da1f236ebdf", "auditability_bundle": "c77115bb5b7d1ef4788afa639f299c4f2cea6959d1d713650d76366796af78e2"}
+}

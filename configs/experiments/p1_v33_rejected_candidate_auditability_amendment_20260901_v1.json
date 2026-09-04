@@ -1,0 +1,25 @@
+{
+  "schema_version": "p1.v33_rejected_candidate_auditability_amendment.v1",
+  "experiment_id": "p1_v33_rejected_candidate_auditability_amendment_20260901_v1",
+  "status": "SEALED_PROSPECTIVE_ONLY",
+  "rationale": "v32 could not perform an authorized zero-fit false-negative audit because v29/v30 preserved thresholds and model hashes but no model states, Q2 scores, or Q2 action masks.",
+  "applies_to": "new axes created after this amendment only",
+  "required_before_any_q2_target_access": {
+    "ensemble_score_vector": "one label-blind Q2 score per authenticated row position",
+    "candidate_action_masks": "one fixed-budget add-only Q2 mask for every pre-Q2 threshold candidate, including candidates rejected by environment gates",
+    "model_state_hashes": "one deterministic hash per fitted seed and scaler state",
+    "row_positions_and_incumbent": "authenticated Q2 row positions and frozen anchor prediction",
+    "threshold_receipts": "numeric threshold, source quantile, action count, and action share",
+    "artifact_hashes": "SHA-256 for score/action bundle and manifest",
+    "q2_target_reads_before_seal": 0
+  },
+  "forbidden": {"q2_label_or_metric_access_for_preservation": 0, "threshold_reselection": 0, "refit": 0, "candidate_promotion": 0, "guard_relaxation": 0, "retroactive_application_to_v29_v30": 0},
+  "later_audit_contract": {"new_experiment_id_required": true, "fits": 0, "refits": 0, "threshold_reselection": 0, "maximum_target_windows": 1, "q3_q4_unopened": true, "diagnostic_only_no_rescue": true},
+  "access": {"official": 0, "hidden": 0, "test": 0, "sample_submission": 0, "csv": 0, "uploads": 0},
+  "evidence": {
+    "v28_guard_path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json",
+    "v28_guard_sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "v32_adjudication_path": "configs/experiments/p1_v32_gate_false_negative_adjudication_20260901_v1.json",
+    "v32_adjudication_sha256": "258ec2cda104167c123d1c13d9674e9996923adb6c83833a45d5edd2e929d0f1"
+  }
+}

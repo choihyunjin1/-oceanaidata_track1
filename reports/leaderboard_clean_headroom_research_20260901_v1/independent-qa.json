@@ -1,0 +1,63 @@
+{
+  "schema_version": "leaderboard.clean_headroom.independent_qa.20260901.v1",
+  "status": "PASS",
+  "as_of_kst": "2026-09-01T20:20:00+09:00",
+  "verified_incumbents": {
+    "P1": {"metric": "F1", "value": 0.833548, "points": 28.909341},
+    "P2": {"metric": "RMSE_C", "value": 0.424019, "points": 28.012945},
+    "P3_clean": {"metric": "RMSE_m", "value": 0.583892, "points": 24.066168},
+    "P3_displayed_forbidden": {"metric": "RMSE_m", "value": 0.575233, "points": 24.203599}
+  },
+  "problem_bests": {"P1": 32.110453, "P2": 28.674902, "P3": 24.784043},
+  "point_gaps": {"P1": 3.201112, "P2": 0.661957, "P3_clean": 0.717875},
+  "empirical_planning_conversion": {
+    "not_an_official_formula": true,
+    "P1": {"slope_points_per_f1": 26.57801565767444, "intercept": 6.75529292181972, "leader_implied_f1": 0.9539899593993557, "gap_f1": 0.12044195939935576},
+    "P2": {"slope_points_per_rmse_C": -12.54545454545585, "intercept": 33.33245609090965, "leader_implied_rmse_C": 0.371254311594209, "gap_rmse_C": 0.05276468840579096},
+    "P3": {"slope_points_per_rmse_m": -15.871463217462498, "intercept": 33.33338840097059, "leader_implied_rmse_m": 0.5386614506697918, "clean_gap_rmse_m": 0.0452305493302082}
+  },
+  "p3_fractional_split_repair": {
+    "experiment_id": "p3_clean_fractional_change_residual_20260901_c1r1",
+    "status": "COMPLETE_NO_GO_CLEAN_FRACTIONAL_CHANGE",
+    "fit_count": 3,
+    "runtime_seconds": 191.47167009999976,
+    "rows": 1086,
+    "duplicates": 0,
+    "finite": true,
+    "clean_fallback_rmse_m_recomputed": 0.7791048399763751,
+    "candidate_rmse_m_recomputed": 0.7800060253741768,
+    "delta_rmse_m_recomputed": 0.000901185397801707,
+    "improved_folds": 1,
+    "validation_cases": 181,
+    "validation_keys_sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+    "result_sha256": "77aec5178d4de1700b0a416c26beb0dde2734419c672a212de289fc485b352ab",
+    "terminal_sha256": "d3cf91b199cc4678c4c2eaf10ec62168c52b94aa860debfea1616713f97c7344",
+    "oof_sha256": "e2ecb323394ba8df10e8927568d439b6526960d67fe157b4795e4c793307f8bd",
+    "official_access_zero": true
+  },
+  "focused_checks": {
+    "pytest_original_and_repair": "10 passed",
+    "ruff": "PASS",
+    "implementation_hashes_pinned": true,
+    "two_byte_identical_preflights": true,
+    "one_shot_lock_consumed": true,
+    "automatic_restart": false
+  },
+  "evidence": {
+    "leaderboard_snapshot": {"sha256": "b55af546a1cf1aef4b718f4411c7a7ca5ed8f657166dadce011fd163d1d20377"},
+    "p1_score_ledger": {"sha256": "dda992485097040504e8b08ffb09a1693bc996ff4f2c747bc907bc3dbe4c4326"},
+    "p2_v52_receipt": {"sha256": "74cb521cffe273e579a8f52475725e1347e1c5ffef6f5f70cf32b3e55340bdb8"},
+    "p3_clean_registry": {"sha256": "45dc0d41676e83bb9dd68c3ae9544f33888e9ea407014296205125fd597eb7bb"},
+    "p1_v54_audit": {"sha256": "f557d2018b084e6e76a41b97221c9e8877a6c4580eb4b10dee94eb7d708e691f"},
+    "p1_v53_audit": {"sha256": "72ce2e79035fd27bd673fe6764ad2788a14a6a3ffeea948094b3eda95ad59048"}
+  },
+  "access_audit": {
+    "external_data_rows": 0,
+    "real_observation_pretrained_weight_files_loaded": 0,
+    "official_test_rows": 0,
+    "sample_submission_prediction_values": 0,
+    "hidden_truth_rows": 0,
+    "submission_csv_rows_created_in_this_cycle": 0,
+    "uploads_in_this_cycle": 0
+  }
+}

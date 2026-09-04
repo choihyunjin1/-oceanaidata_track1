@@ -1,0 +1,40 @@
+{
+  "schema_version": "p3.kma_lead_factor_submission_ladder.20260831.v1",
+  "experiment_id": "p3_kma_lead_factor_submission_ladder_20260831_v1",
+  "status": "FROZEN_BEFORE_SCORE_READY_TO_BUILD",
+  "problem": "OCN-03",
+  "reference_alpha": 0.4,
+  "candidates": [
+    {
+      "priority": 1,
+      "name": "P3_1_KMA_A18_0425_A24_0600",
+      "alpha_18": 0.425,
+      "alpha_24": 0.6,
+      "title": "P3 KMA 18h 0.425 24h 0.600",
+      "summary": "공식 최고 균일 0.425에서 18h는 유지하고 24h KMA 보정만 0.600으로 강화합니다."
+    },
+    {
+      "priority": 2,
+      "name": "P3_2_KMA_A18_0200_A24_0425",
+      "alpha_18": 0.2,
+      "alpha_24": 0.425,
+      "title": "P3 KMA 18h 0.200 24h 0.425",
+      "summary": "공식 최고 균일 0.425에서 24h는 유지하고 18h KMA 보정만 0.200으로 약화합니다."
+    },
+    {
+      "priority": 3,
+      "name": "P3_3_KMA_A18_0200_A24_0600",
+      "alpha_18": 0.2,
+      "alpha_24": 0.6,
+      "title": "P3 KMA 18h 0.200 24h 0.600",
+      "summary": "사전 고정된 lead 분리 가설대로 18h 보정은 약화하고 24h 보정은 강화합니다."
+    }
+  ],
+  "contract": {
+    "rows": 1200,
+    "columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "range_m": [0.0, 30.0],
+    "hidden_truth_reads": 0,
+    "uploads": 0
+  }
+}

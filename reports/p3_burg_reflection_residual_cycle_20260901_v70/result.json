@@ -1,0 +1,736 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.00578456919522311,
+          -0.001494796540866649
+        ],
+        "median_m": -0.003864668281709782,
+        "probability_improve": 0.9954,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0019351857935813177,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.006050933931284086,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00461052420374275,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.006348104910607444,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0034238507574487764,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0060304016343374345,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.00581627441094606,
+          -0.0017206944371720874
+        ],
+        "median_m": -0.0038082547866772898,
+        "probability_improve": 0.998,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.26402111116666,
+        "raw_gain": 0.06042211116666032,
+        "transport_adjusted_gain": 0.010836057074371387,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0009058012948658378,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.007903246971659561,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0033974691283907843,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0013959815004764842,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.0015170391891945467,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.006701337851196976,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_BURG192_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.009684790151523903,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.006571104728389843,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005067852207820467,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.01039953901879409,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.01880049850032528,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0045016553224528355,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7773843855920484,
+        "delta_candidate_minus_uniform": -0.003807139099683665,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0018477743856734063,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0069737604023517585,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0032080213242513533,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0037597618823793644,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.007066401962690261,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0013821791844873532,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.001767885426485094,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0030540620354795323,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.0044972123460665925,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.005088945134490541,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.012050586922962125,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.005691614649882437,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.005470425903773779,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.003071154654524011,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.009642239125169483,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.001816263125669848,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.005586720157630065,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.00370916449072467,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0019657173139250306,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0010183390932618774,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.006237737909828067,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.00461052420374275,
+      "worst_lead_delta_m": -0.0009058012948658378,
+      "worst_reference_tail_block_delta_m": 0.009684790151523903,
+      "worst_station_lead_delta_m": 0.0037597618823793644
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0042204112157241845,
+          -0.000991525727792425
+        ],
+        "median_m": -0.0027361359895991533,
+        "probability_improve": 0.9928,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001766701411410554,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0038694648319747005,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005086186497444856,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004670485365277033,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0026874465685687854,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.004820088162545644,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.004167856722053403,
+          -0.0011780087846815334
+        ],
+        "median_m": -0.0026882478372246,
+        "probability_improve": 0.9968,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.24653978233661,
+        "raw_gain": 0.04294078233660801,
+        "transport_adjusted_gain": -0.006645271755680922,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0009248831479957698,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006111073822332669,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.002828784313032018,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0008575101209588043,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.00041756939182779895,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.004094452244201019,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_BURG192_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.009122249368339164,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.005630853770609789,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00731883216312601,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.005567253853722587,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.010993709953075692,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.003451205956805925,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7784858673049224,
+        "delta_candidate_minus_uniform": -0.0027056573868096123,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0013515005271852454,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.004394998394870675,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.002683234827167036,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0014716647090748936,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.004670247547549189,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0009320040424530829,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0004229693057471451,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0015827673748700644,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.002226529089802587,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.003178939906899103,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.008594370638766446,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004467375772867932,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0026880567347430384,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0007662345435128781,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005691886143420755,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0013107671042297264,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0057409646638570955,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0035144071870275573,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0009606030497967266,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0008432244499700925,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.004367431395940091,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005086186497444856,
+      "worst_lead_delta_m": -0.00041756939182779895,
+      "worst_reference_tail_block_delta_m": 0.009122249368339164,
+      "worst_station_lead_delta_m": 0.0014716647090748936
+    }
+  ],
+  "created_at_utc": "2026-09-01T02:11:35.243303+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "PASS_CANDIDATE_AVAILABLE",
+  "duplication_audit": {
+    "distinction": "ordinary FFT and real cepstrum report unconditional frequency composition; v63 reports absolute/squared-increment ACF; NLinear and state-space families learn forecasters or latent transitions. v70 is a fixed unsupervised signed-level conditional-correlation diagnostic after lower lags.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed per-case sequential conditional-memory spectrum from Burg reflection coefficients and innovation-variance decay",
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_BURG_REFLECTION_MEMORY_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.6709635000006529,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_burg_reflection_residual_cycle_20260901_v70",
+  "feature_receipt": {
+    "columns": 192,
+    "finite": true,
+    "matrix_sha256": "d13e568eb63cc9504f190ef17fc68c22bb070af809d6226678032e883f17e550",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.2551715719763754,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.10006402310374284,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.2542571499553521,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.0975254129344272,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.277231690226122,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.1065660506210501,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.26234658945874695,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.09964088672985313,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.28750090160254665,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.10925775011392612,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_BURG192_RIDGE512_ADD10",
+      "coefficient_l2": 0.2585419142238709,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_BURG192_RIDGE2048_ADD10",
+      "coefficient_l2": 0.09188936981748871,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Ulrych and Bishop, Maximum entropy spectral analysis and autoregressive decomposition, Reviews of Geophysics 13, 183-200 (1975)",
+      "url": "https://doi.org/10.1029/RG013i001p00183",
+      "use": "AR/reflection decomposition motivation only; no P3 performance claim"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "b8ab3f4e064b5c2a82c7074f1dd182ec04f1607792608df0b0b94808a9ce377b",
+    "evaluation_arrays_sha256": "6c5ff564def28c9b35ca52834c56ac02b1bb563814edbea675f528682e1c69f2",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "eed47cb5a76eabbf02cd06dc422b84f00e99fa57cd4556bb0c174d80fa348f31",
+    "runner_sha256": "9afe1d33f0200a52159790cb24f5f15d68d9c5ed296df9fef3e735ace034e728"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.burg_reflection_residual.result.v70",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

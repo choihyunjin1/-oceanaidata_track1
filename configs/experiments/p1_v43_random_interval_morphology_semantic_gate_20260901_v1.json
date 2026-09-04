@@ -1,0 +1,39 @@
+{
+  "schema_version": "p1.v43_random_interval_morphology_semantic_gate.v1",
+  "experiment_id": "p1_v43_random_interval_morphology_semantic_gate_20260901_v1",
+  "status": "NO_GO_EXACT_FAMILY_DUPLICATE_CAUSAL_CIF_V32B_V32D",
+  "execution_authorized": false,
+  "candidate_fingerprint": {
+    "representation": "sealed causal backward window; deterministic random subintervals; interval median, IQR, mean, standard deviation, slope, minimum, maximum, and last-minus-first summaries; tree ensemble scorer",
+    "intended_contract": "v28/v33 add-only linear or tree head with maximum nine fits",
+    "target_free_support_possible": true,
+    "novelty_gate_passed": false
+  },
+  "reconstructibility_audit": {
+    "decision": "EXACT_DUPLICATE_CLOSE_ZERO_FIT",
+    "causal_cif_v32b": {
+      "config": "configs/experiments/p1_causal_cif_lite32_20260831_v32b.json",
+      "config_sha256": "03964dec841166fa76de7b9bd2e55db33a1b9e1b6f65f5965e9936b6bc9ff5b7",
+      "runner": "scripts/run_p1_causal_cif_lite32_20260831_v32b.py",
+      "runner_sha256": "dce445a1c896e837eb8df2e6ce7817e65d0fad4b4712f84a7a93167c64b25762",
+      "result": "artifacts/p1_causal_cif_lite32_20260831_v32b/result.json",
+      "result_sha256": "649f9d40d4c2a0db0d8decb7aba5e00a3db59a35ff09ce0d36ecac608660a5a2",
+      "exact_overlap": ["36-row causal window", "32 deterministic Sobol intervals", "median/IQR/mean/std/slope/min/max/last-minus-first", "tree ensemble", "causal robust normalization and gap channel"],
+      "historical_fits": 2
+    },
+    "selective_v32d": {
+      "config": "configs/experiments/p1_causal_cif_selective_bidirectional_20260831_v32d.json",
+      "config_sha256": "1f5710df2281208a4fd47fb7b9f2f0db725b961fb727d6341d3e18ead1b722bd",
+      "result": "reports/p1_causal_cif_selective_bidirectional_20260831_v32d/result.json",
+      "result_sha256": "1d893372d31c2c2dcaf1a880f4a23609d3523b779f9631e97fcd64796e407911",
+      "historical_decision": "NO_GO",
+      "historical_evidence": {"pooled_delta_f1": -0.068800366, "true_positive_additions": 0, "false_positive_additions": 901, "incumbent_true_positive_removals": 531}
+    },
+    "rolling_bank": {"path": "src/p1_qc/features.py", "sha256": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162", "overlap": "trailing median/residual/std/difference-std/MAD and robust slope proxies already cover the basic endpoint-window summaries"},
+    "minirocket": {"path": "src/p1_qc/causal_minirocket_lite.py", "sha256": "b03bf681aa243cd7aa4399b4c053c8b3a6916e0acefa55a306427c60533e3fa1", "overlap": "causal 97-row windows with fixed dilated convolution kernels and PPV summaries already cover local interval morphology through a different but overlapping basis"},
+    "direct_interval": {"path": "src/p1_qc/direct_interval_set_torch.py", "sha256": "f5aee5ac1dc9a74372b6214d6e1c8a75acea7b97f4b36e4481e6518b05ac9a1a", "overlap": "direct interval actions already instantiate interval-level event geometry"}
+  },
+  "why_no_repair": "Changing interval count, window length, summary subset, forest depth, threshold, or add-only decoder would be same-family retuning after v32b/v32d exposure, not a genuinely distinct v43 axis.",
+  "terminal_counters": {"preflights": 0, "fits": 0, "targets": 0, "q2_q3_q4_target_reads": 0, "locks": 0, "artifacts": 0, "anchor_removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "prohibitions": ["Do not execute random-interval/CIF morphology under a new seed, window, interval count, summary subset, tree, threshold, or decoder.", "Do not use v32b/v32d outcomes to choose a repair.", "Do not create a runner, lock, prediction bundle, CSV, or submission for v43."]
+}

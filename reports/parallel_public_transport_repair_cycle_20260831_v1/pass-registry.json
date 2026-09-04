@@ -1,0 +1,168 @@
+{
+  "schema_version": "parallel.public_transport_repair.pass_registry.v1",
+  "cycle_id": "parallel_public_transport_repair_cycle_20260831_v1",
+  "status": "P1_P3_UPLOADED_SCORED_P2_BLOCKED_DAILY_LIMIT",
+  "minimum_calibrated_expected_points_inclusive": 0.01,
+  "problems": {
+    "P1": {
+      "status": "UPLOADED_SCORED_INTERNAL_PASS_OFFICIAL_REGRESSION",
+      "experiment_id": "p1_public_transport_repair_cycle_20260831_v30",
+      "candidate": "P1_1_LABEL_FREE_RELIABILITY_GUARDED_LABEL_SHIFT_EM",
+      "fit_count": {
+        "internal_nested": 2,
+        "full_deployment_base_peer": 2,
+        "full_deployment_v30_calibrator": 1,
+        "total_model_fits": 5
+      },
+      "metrics": {
+        "pooled_delta_f1": 0.001820930400542653,
+        "q3_delta_f1": 0.003104782991018129,
+        "q4_delta_f1": 0.0,
+        "true_positive_additions_internal": 33,
+        "false_positive_additions_internal": 0,
+        "bootstrap_probability_improved": 1.0,
+        "bootstrap_ci90_delta_f1": [0.0007644228497011463, 0.0031720682353547362],
+        "raw_expected_points": 0.04839690827670436,
+        "transport_penalty_points": 0.005383691373120247,
+        "calibrated_expected_points": 0.04301321690358412,
+        "gate_gte_0p01_inclusive": true
+      },
+      "submission": {
+        "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\submissions\\p1_public_transport_repair_cycle_20260831_v30\\P1_submission.csv",
+        "rows": 169011,
+        "schema": ["station", "year", "layer", "time", "label"],
+        "key_values_and_order_exact": true,
+        "duplicate_keys": 0,
+        "binary_finite_integer_label": true,
+        "positive_rows": 7151,
+        "additions_vs_anchor": 755,
+        "anchor_removals": 0,
+        "sha256": "639c26cda576da74880e3f887b8653465db16c8572deedf225e4ae39ae51efa3"
+      },
+      "hashes": {
+        "internal_result": "5f47835934bdfababb2a86c7674596a39ddc64da677609c7992d83c359b04826",
+        "materialization_result": "3bf4080ca09315cb2bfb076e43f902c6795cfc6d2b4651d22c2b8784b7443a75",
+        "postrun_qa": "1e7c7f5d9112b227f183b1bfe0875cd50e6afdb744a5195b2d1d9b1086227090"
+      },
+      "transport_warning": {
+        "official_em_target_prevalence": 0.999999,
+        "eligible_before_day_cap": 133153,
+        "meaning": "label-shift EM reached its upper boundary; the fixed day cap controls output size but official transport risk remains high"
+      },
+      "official_result": {
+        "submitted_at_kst": "2026-08-31T21:22:00+09:00",
+        "public_f1": 0.798819,
+        "public_score_points": 27.986329,
+        "reference_public_f1": 0.833548,
+        "reference_public_score_points": 28.909341,
+        "observed_score_delta_points": -0.923012,
+        "new_personal_best": false
+      },
+      "access": {
+        "official_before_internal_gate_rows": 0,
+        "materializer_official_test_covariate_reads": 2,
+        "materializer_champion_prediction_reads": 1,
+        "materializer_e150_prediction_array_reads": 3,
+        "postrun_and_validator_official_key_reads": 2,
+        "root_final_official_key_reads": 1,
+        "hidden_truth_rows": 0,
+        "uploads": 1
+      }
+    },
+    "P2": {
+      "status": "PASS_SUBMISSION_READY_UPLOAD_BLOCKED_DAILY_LIMIT",
+      "experiment_id": "p2_public_feature_benefit_gate_cycle_20260831_v7",
+      "candidate": "P2_V7_EXTRATREES_PUBLIC_BENEFIT_GATE",
+      "fit_count": {"internal": 2, "full": 1, "total": 3},
+      "metrics": {
+        "october_delta_rmse_m": -0.013071642838043296,
+        "bootstrap_ci90_high_delta_rmse_m": -0.01079473458006648,
+        "raw_expected_points": 0.1354472678596296,
+        "transport_penalty_points": 0.12168209161000616,
+        "calibrated_expected_points": 0.013765176249623437,
+        "gate_gte_0p01_inclusive": true
+      },
+      "submission": {
+        "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_public_feature_benefit_gate_cycle_20260831_v7\\submission\\P2_V7_EXTRATREES_PUBLIC_BENEFIT_GATE\\P2_submission.csv",
+        "rows": 26061,
+        "schema": ["station", "layer", "time", "temp"],
+        "key_values_and_order_exact": true,
+        "duplicate_keys": 0,
+        "finite": true,
+        "sha256": "c6f2a7e02ff3e5064ec653af0a52b117cbf8ae49d80e651a2a96276190f4f620"
+      },
+      "hashes": {
+        "result": "db35e824d8d4957dac35a281b5d48bb03716c7b920ed94e5e5e5ece8a6ad5a10",
+        "independent_qa": "31e386c0ca57a8659e406f10e948000aeb0d5fdd0c8fbc8ee08c5eda47aab1ad",
+        "root_ready_qa": "5d591dbe82b4af3653d04fc8b3dc3f652ef71281bb89696da3a5d3964dbf1bb3"
+      },
+      "access": {
+        "official_before_internal_gate_rows": 0,
+        "known_cumulative_official_test_index_rows": 104244,
+        "hidden_truth_rows": 0,
+        "uploads": 0
+      },
+      "official_submission_blocker": {
+        "remaining_submissions": 0,
+        "daily_limit": 3,
+        "reset_displayed": "2026-09-01T00:00:00+09:00"
+      }
+    },
+    "P3": {
+      "status": "UPLOADED_SCORED_OFFICIAL_IMPROVEMENT_VS_COMPARATOR",
+      "experiment_id": "p3_kma_continuous_wave_power_factor_cycle_20260831_v19",
+      "candidate": "P3_1_KMA_CONTINUOUS_WAVE_POWER_FACTOR",
+      "fit_count": {"ecdf_calibration_fits": 6, "model_fits": 0, "full_deployment_ecdf_fits": 1},
+      "metrics": {
+        "pooled_delta_rmse_m": -0.004290325362721004,
+        "improved_bimonth_blocks": 4,
+        "episode_ci90_m": [-0.007585173743052165, -0.0009996836718746782],
+        "block_station_ci90_m": [-0.00806005127366855, -0.0005240248166536504],
+        "worst_station_lead_delta_rmse_m": 0.007404054417502692,
+        "changed_rows_share": 0.3333333333333333,
+        "raw_expected_points": 0.06809063425841472,
+        "transport_penalty_points": 0.04958605409228893,
+        "calibrated_expected_points": 0.018504580166125786,
+        "gate_gte_0p01_inclusive": true
+      },
+      "submission": {
+        "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260831_P3_KMA_CONTINUOUS_WAVE_POWER_V19\\P3_submission.csv",
+        "rows": 1200,
+        "schema": ["case_id", "station", "lead_h", "hs_pred"],
+        "key_values_and_order_exact": true,
+        "duplicate_keys": 0,
+        "finite": true,
+        "sha256": "b1b72f905e36df994f82ef8dc5c425328c5e0b0b4d16ec2a0dbfd8497c48d0c4"
+      },
+      "hashes": {
+        "result": "fba999a9a42878a564ee3f0680604368274e2bcc4b17f9f54b5401842f3cae5c",
+        "independent_qa": "bb8ca51af5374c199977b8f74ef63a8830fdae69bcc977cbffc12a12c90f9045",
+        "delivery_qa": "601797a54bb3547605bf4e8892fe8dee82fd3645ae94be37f4367fae8c8a99bc"
+      },
+      "access": {
+        "official_before_internal_gate_rows": 0,
+        "known_cumulative_official_test_index_rows": 3600,
+        "official_test_context_rows": 200,
+        "official_feature_rows": 200,
+        "official_component_prediction_rows": 3600,
+        "hidden_truth_rows": 0,
+        "uploads": 1
+      },
+      "official_result": {
+        "submitted_at_kst": "2026-08-31T21:23:00+09:00",
+        "public_rmse_m": 0.58984,
+        "public_score_points": 23.971758,
+        "immediate_reference_rmse_m": 0.590956,
+        "immediate_reference_score_points": 23.954041,
+        "observed_score_delta_points_vs_immediate_reference": 0.017717,
+        "personal_best_score_points": 24.203599,
+        "new_personal_best": false
+      }
+    }
+  },
+  "ready_submission_count": 3,
+  "uploaded_submission_count": 2,
+  "overall_ready": true,
+  "all_uploads_complete": false,
+  "blocking_reason": "P2 daily submission quota is exhausted (0/3 remaining)"
+}

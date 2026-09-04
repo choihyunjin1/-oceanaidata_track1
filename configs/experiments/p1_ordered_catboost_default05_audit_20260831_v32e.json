@@ -1,0 +1,20 @@
+{
+  "experiment_id": "p1_ordered_catboost_default05_audit_20260831_v32e",
+  "source_experiment": "p1_ordered_catboost_eventday_20260831_v32a",
+  "source_oof": "artifacts/p1_ordered_catboost_eventday_20260831_v32a/historical_oof.parquet",
+  "source_oof_sha256": "7f3db0fbe9cb8348a15526764b9c62a220add38a0064132b08f30e7ba8f9fe19",
+  "decision_threshold": 0.5,
+  "threshold_provenance": "CatBoost binary-classification default decision threshold; fixed before truth evaluation",
+  "fit_budget": 0,
+  "bootstrap_replicates": 5000,
+  "bootstrap_seed": 20260935,
+  "folds": ["2025_q2", "2025_q3", "2025_q4"],
+  "strict_gate": {
+    "each_fold_delta_vs_tabular_nonnegative": true,
+    "pooled_delta_vs_tabular_positive": true,
+    "pooled_ci90_low_vs_tabular_positive": true,
+    "q3_q4_delta_vs_e150_positive": true,
+    "q3_q4_ci90_low_vs_e150_positive": true
+  },
+  "official_budget": {"test": 0, "sample": 0, "submission": 0, "hidden": 0, "upload": 0}
+}

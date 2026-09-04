@@ -1,0 +1,130 @@
+{
+  "schema_version": "p2.all_linear_weight_normalized_deepset.20260901.v41",
+  "experiment_id": "p2_all_linear_weight_normalized_deepset_20260901_v41",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/result.json",
+    "required_status": "EXPLORATORY_NO_GO_PREDICTIVE_DROPOUT_CONSISTENCY",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v27_failure_report": "reports/p2_spectral_normalized_domain_balanced_deepset_20260901_v27/failure-report.md",
+    "v29_result": "reports/p2_lookahead_domain_balanced_deepset_20260901_v29/result.json",
+    "v34_result": "reports/p2_gradient_centralized_domain_balanced_deepset_20260901_v34/result.json",
+    "v35_result": "reports/p2_rectified_adam_domain_balanced_deepset_20260901_v35/result.json",
+    "v40_result": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/result.json",
+    "fingerprint": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/next-axis-fingerprint.md",
+    "fingerprint_sha256": "5e6b80288517257d89012917a3ab41083accf4194ac3a1c6f0bb32cc499678b3"
+  },
+  "primary_source": {
+    "citation": "Salimans and Kingma, NIPS 2016, Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2016/hash/ed265bc903a5a097f61d3ec064d96d2e-Abstract.html",
+    "use": "weight-vector length-direction reparameterization motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_ALL_LINEAR_PER_OUTPUT_WEIGHT_NORMALIZATION",
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v27": "v27 globally constrains operator spectral norm with power iteration and fixed norm one; v41 learns one magnitude per output vector, has no spectral buffer or power iteration, and does not reuse v27 code or tolerance",
+      "v29": "v29 maintains and interpolates slow Lookahead states; v41 has one contemporaneous state and no temporal interpolation",
+      "v34": "v34 centralizes gradients before AdamW; v41 leaves the scalar loss and ordinary gradient intact while reparameterizing weights",
+      "v35": "v35 replaces AdamW with RAdam; v41 retains exact AdamW",
+      "v40": "v40 uses stochastic dropout views and prediction consistency; v41 has one deterministic SmoothL1 pass"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2_with_all_five_Linear_weight_norm",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_beta_1.0_with_all_five_Linear_per_output_weight_normalization",
+    "optimizer": "exact_v13_AdamW_on_weight_norm_magnitude_and_direction_parameters",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "weight_normalization": {
+      "api": "torch.nn.utils.parametrizations.weight_norm",
+      "dimension": 0,
+      "linear_module_count": 5,
+      "learned_per_output_magnitude": true,
+      "unit_direction": true,
+      "initial_function_maximum_abs_error_lte": 0.000001,
+      "bias_parametrized": false,
+      "spectral_normalization": false,
+      "power_iteration": false,
+      "global_operator_norm_constraint": false,
+      "batch_statistics": false,
+      "activation_normalization": false,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

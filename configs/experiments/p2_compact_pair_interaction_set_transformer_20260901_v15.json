@@ -1,0 +1,123 @@
+{
+  "schema_version": "p2.compact_pair_interaction_set_transformer.20260901.v15",
+  "experiment_id": "p2_compact_pair_interaction_set_transformer_20260901_v15",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "closed_predecessor": "reports/p2_causal_multiscale_domain_stat_deepset_20260901_v14/result.json",
+    "closed_predecessor_sha256": "a9b1bf09c7b887d2b0312013d8f655721d8827a5988f95c487363491a302c4c3",
+    "required_status": "EXPLORATORY_NO_GO_CAUSAL_MULTISCALE_DOMAIN_STATS",
+    "independent_qa": "reports/p2_causal_multiscale_domain_stat_deepset_20260901_v14/independent-qa.json",
+    "independent_qa_sha256": "c5534566dcdb9380c8854b7b9c982d934ec0227253f5e9b2b82e1ca24009594e"
+  },
+  "research_basis": [
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "publisher": "ICML/PMLR 2019",
+      "url": "https://proceedings.mlr.press/v97/lee19d.html",
+      "use": "motivation for fixed same-time element interactions and permutation invariance; no P2 performance transfer"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_SAME_TIME_PAIR_INTERACTION_SET_REPRESENTATION",
+    "reason": "v12/v13 independently map each public-depth token before commutative pooling and therefore have no token-token interaction. Earlier ImputeFormer/tournament attention operates over temporal patches or channels for sequence imputation, not a same-timestamp unordered public-depth set. v15 has no time axis, no positional encoding, no temporal attention, and exactly one fixed self-attention block.",
+    "evidence_paths": [
+      "reports/p2_continuous_depth_permutation_invariant_set_encoder_20260901_v12/result.json",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+      "configs/experiments/p2_deep_model_tournament_v1.json",
+      "src/p2_restore/deep_models.py"
+    ],
+    "forbidden_interpretations": [
+      "v13 posthoc router",
+      "v14 EWM retune",
+      "temporal transformer",
+      "attention head or block sweep",
+      "positional public-layer encoding"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "representation": {
+    "base": "v12_public_layer_tokens",
+    "public_layers": [1, 5, 6, 7, 8],
+    "token_features": 8,
+    "context_features": 11,
+    "hidden_width": 32,
+    "attention_blocks": 1,
+    "attention_heads": 2,
+    "attention_dropout": 0.0,
+    "positional_encoding": false,
+    "temporal_axis": false,
+    "target_layer_values_used_as_features": false,
+    "pooling": "masked_mean_plus_masked_max"
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "shared_linear32_one_set_attention_block_two_heads_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "loss": "SmoothL1_beta_1.0",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

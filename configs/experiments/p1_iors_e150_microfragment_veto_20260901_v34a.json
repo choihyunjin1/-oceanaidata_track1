@@ -1,0 +1,72 @@
+{
+  "schema_version": "p1.iors_e150_microfragment_veto.20260901.v34a",
+  "experiment_id": "p1_iors_e150_microfragment_veto_20260901_v34a",
+  "candidate": "P1_IORS_E150_MICROFRAGMENT_VETO",
+  "scientific_question": "Does preserving every long I-ORS E150 proposal while vetoing only isolated one- or two-row I-ORS E150 additions remove unstable morphology without repeating the all-I or layer-ablation probes?",
+  "discovery_contract": {
+    "source_fold": "2025_q2",
+    "q2_i_ors_segments": 8,
+    "q2_i_ors_rows": 204,
+    "q2_microfragment_segments": 1,
+    "q2_microfragment_rows": 2,
+    "q2_microfragment_true_positive_rows": 0,
+    "q2_microfragment_false_positive_rows": 2,
+    "frozen_maximum_segment_length_inclusive": 2,
+    "outer_truth_used_to_choose_rule": false
+  },
+  "historical_sources": {
+    "anchor": {"path": "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet", "sha256": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"},
+    "truth": {"path": "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet", "sha256": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a"},
+    "2025_q2": {"path": "artifacts/p1_incumbent_preserving_mstcn_asrf_v2/q2_qualification_grid_blind.npz", "sha256": "867d4b25d968ce4231179181e05eee95cda04d76689c03c1514b907e21dd1f02"},
+    "2025_q3": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q3_blind_checkpoint_curve.npz", "sha256": "402a8abe977c17d62cc93cf847b37a6fe69ab650a13510d95c0f39dccbfc908f"},
+    "2025_q4": {"path": "artifacts/p1_mstcn_checkpoint_diagnostic_20260827_v2/q4_blind_checkpoint_curve.npz", "sha256": "ce482f126b099273a468747473c55944d98e9fe9fa25c882dced1bb57909a76e"}
+  },
+  "decoder": {
+    "reference": "raw E150 anchor-union bits",
+    "station": "I-ORS",
+    "remove_only_incumbent_negative_raw_e150_positive_segments": true,
+    "maximum_segment_length_inclusive": 2,
+    "continuity_minutes": 10,
+    "preserve_all_segments_longer_than_two_rows": true,
+    "preserve_incumbent_positives": true,
+    "model_fits": 0,
+    "threshold_tuning": 0,
+    "outer_result_reselection": false,
+    "retries": 0
+  },
+  "validation": {
+    "diagnostic_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "primary_outer_folds": ["2025_q3", "2025_q4"],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260934,
+    "gates": {
+      "primary_delta_f1_strictly_positive": true,
+      "q3_delta_f1_nonnegative": true,
+      "q4_delta_f1_nonnegative": true,
+      "primary_day_block_ci90_low_nonnegative": true,
+      "removed_true_positive_share_strictly_below_reference_f1_half": true,
+      "anchor_removals_zero": true,
+      "primary_removed_rows_at_least": 1
+    }
+  },
+  "score": {"points_per_f1": 26.578120867377286},
+  "official_aggregate_evidence": {
+    "champion_public_f1": 0.833548,
+    "champion_points": 28.909341,
+    "champion_positive_rows": 6396,
+    "v33a_public_f1": 0.822795,
+    "v33a_points": 28.623545,
+    "v33a_positive_rows": 6316,
+    "v33a_changed_rows": 80,
+    "v33a_change_direction": "1_to_0",
+    "metric_geometry_reconciliation_required_before_official_execute": true
+  },
+  "official_materializer": {
+    "champion": {"path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260828_DEADLINE_INFORMATION_PROBES_READY/P1_1_E150_PLUS_GI_SPIKE2/P1_submission.csv", "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687"},
+    "e150": {"path": "artifacts/p1_mstcn_e150_full_deployment_20260827_v1/P1_MSTCN_E150_ROUTER_UNION_ALL.csv", "sha256": "a52dc49c5f522ae92eb67805a8a567dc04d62791725a5de622f544af7a3ce33b"},
+    "anchor": {"path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260826_round_D_preregistered_P1x3_P2x3_P3x3/P1_1_EXPLOIT_DISAGREEMENT_ROUTER/P1_submission.csv", "sha256": "1b04e81c18d5a5cac3115c3a256e8d5a38a9493a32478a184df81fd99f9f6e5f"},
+    "expected_rows": 169011,
+    "output": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_IORS_E150_MICROFRAGMENT_VETO_V34A/P1_submission.csv"
+  },
+  "authorization": {"historical_truth_reads_after_action_seal": true, "official_reads": 0, "hidden_truth_reads": 0, "test_reads": 0, "sample_reads": 0, "submission_csv_created": 0, "uploads": 0}
+}

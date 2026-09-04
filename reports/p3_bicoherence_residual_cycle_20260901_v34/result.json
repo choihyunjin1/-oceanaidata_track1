@@ -1,0 +1,737 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0029505892619600847,
+          0.00036908410761754
+        ],
+        "median_m": -0.0013539327949701474,
+        "probability_improve": 0.9014,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001569780978590174,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.001715400312209403,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005077252936150356,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.003463656281514682,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.002181433144622491,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0018883013735415677,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.002765498170012043,
+          9.538609924331101e-05
+        ],
+        "median_m": -0.001374104362258155,
+        "probability_improve": 0.9402,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.225120494370593,
+        "raw_gain": 0.021521494370591993,
+        "transport_adjusted_gain": -0.028064559721696938,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": 8.427739153593627e-05,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.004229737297673508,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0037104030261644327,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -4.441257475962246e-05,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0018659612664896352,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0009024209350912971,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_BIC72_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.00912636518854082,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004080265235347769,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.008839058416083345,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": 0.0007031319705318451,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.005111333568438181,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": 0.0008686960075421357,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7798354760347114,
+        "delta_candidate_minus_uniform": -0.0013560486570206587,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -8.862842149182093e-06,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0030848403728792606,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0012832291011085628,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0012727909975158713,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0017949360195129715,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0006349211058446214,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 1.5867547404346816e-05,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.001804393228410417,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.00020353190057520454,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.001387173623078164,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.007909207496889947,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.005895623512150894,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.00017182749277644405,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0007369915600261567,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.002474533511503285,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.00018315649842903792,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0039835071330014404,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.005179482131258961,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -2.1079474182283953e-05,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0029019472200632057,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.00047171937943968345,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005077252936150356,
+      "worst_lead_delta_m": 0.0018659612664896352,
+      "worst_reference_tail_block_delta_m": 0.00912636518854082,
+      "worst_station_lead_delta_m": 0.0029019472200632057
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.002917866817870074,
+          0.00022353072418260258
+        ],
+        "median_m": -0.0014664400727743554,
+        "probability_improve": 0.9278,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0014898262780146387,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0020725086471340415,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005914404344367519,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0032285718460889345,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0020392290233813837,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0026231808801369105,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0027798223055296666,
+          -6.10946815561507e-05
+        ],
+        "median_m": -0.0014348887872235316,
+        "probability_improve": 0.9562,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.22656197338922,
+        "raw_gain": 0.022962973389218013,
+        "transport_adjusted_gain": -0.026623080703070918,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0006077331461611379,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.004145180007052773,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0029360327547611753,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -1.0872214376567158e-06,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0014693768716311784,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.001306802440028565,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_BIC72_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.0076572533733946235,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004675094832826576,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.008858769745050399,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0007889847039183051,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0035888823781997647,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": 1.896344819907192e-05,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7797446498284233,
+        "delta_candidate_minus_uniform": -0.0014468748633087447,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00029404499126106654,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.003027148207843333,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0013077644099594998,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.00037683710474623044,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0021429930482301796,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0007026578511900583,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0001397475833962991,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.001310665591147453,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.00024864697293747184,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.002028723752626971,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.0073480672912538125,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004917509065612391,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.00011140068220627519,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0007022766192480434,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0029817774652658446,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.00037512094510849803,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0038057249081084876,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.003703384370556173,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -7.388590268375683e-05,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.002278267223088437,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.001147609897947599,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005914404344367519,
+      "worst_lead_delta_m": 0.0014693768716311784,
+      "worst_reference_tail_block_delta_m": 0.008858769745050399,
+      "worst_station_lead_delta_m": 0.002278267223088437
+    }
+  ],
+  "created_at_utc": "2026-08-31T20:56:48.275257+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_BICOHERENCE_CANDIDATES",
+  "duplication_audit": {
+    "distinction": "Ordinary spectral features retain second-order power only; cross-wavelet phase is pairwise cross-channel phase; DCCA is detrended second-order covariance; bicoherence is a normalized third-order statistic for quadratic phase coupling and non-Gaussianity.",
+    "novel_axis": "case-local normalized bispectral coupling among envelope-frequency triads of the historical significant-wave-height path",
+    "posthoc_prior_cycle_adjustment": false,
+    "rejected_axes": {
+      "posthoc_bicoherence_router": "routing on the exposed surface is forbidden",
+      "wavelet_bicoherence": "would reuse the closed v27/v28 wavelet kernel lineage; fixed Fourier bicoherence isolates the higher-order statistic"
+    },
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_QUADRATIC_PHASE_COUPLING_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.5835691000102088,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_bicoherence_residual_cycle_20260901_v34",
+  "feature_receipt": {
+    "columns": 72,
+    "finite": true,
+    "matrix_sha256": "991c7974422b86649c9e59712432f8117803e59c7cb14fe2e3c3ee850caf1641",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.18281358877049786,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.05403663644723439,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.18682027277561258,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.05701087523148943,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.1887032828796035,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.05646586624257022,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19612861691004843,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.059406126642418955,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19438433858078102,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.05940037424465658,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_BIC72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19588564555802887,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_BIC72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06008996688832567,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Raghuveer and Nikias, Bispectrum estimation: A parametric approach, IEEE TASSP 33(5), 1213-1230 (1985)",
+      "url": "https://doi.org/10.1109/TASSP.1985.1164679"
+    },
+    {
+      "citation": "Ma et al., Experimental study of wave-wave nonlinear interactions using the wavelet-based bicoherence, Coastal Engineering 55, 741-752 (2008)",
+      "url": "https://doi.org/10.1016/j.coastaleng.2008.02.015"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "7ca4477027b54c7f27e0f1c624656228d150638abc94b97c242a86565bcd274f",
+    "evaluation_arrays_sha256": "ffc0d03b071d860d419a935bb7acdb51efde450f3426e7231e129b4945d21f5b",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "ccfa1443252f259f43ab7316cedf704f37ff8812b82c424b0fa35f06ff2dca07",
+    "runner_sha256": "59f8cc6ae1e38a6022ea38221dc1ae7883a9290d1aba406ca31f538abb12cb39"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.bicoherence_residual.result.v34",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "p1.transport_guard_amendment.20260901.v1",
+  "amendment_id": "p1_v26_transport_guard_amendment_20260901_v1",
+  "effective_for_new_experiments_starting_with": "p1_v26",
+  "not_retroactive": true,
+  "trigger_evidence": {
+    "experiment_id": "p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1",
+    "result_sha256": "9915b48421f5e8b3d70e9c100286ede5a45c219cc3b5665c7dd3d7fd9974be36",
+    "observation": "The old minimum-two-supported-environments gate passed using S-ORS layer 5 in chronological halves 0 and 1, yet outer additions moved to G-ORS/I-ORS and all 332 were false positives.",
+    "interpretation_boundary": "This is evidence that the old environment count did not enforce station-layer identity diversity. It does not identify a better v24 coefficient, architecture, threshold, or result-dependent rescue."
+  },
+  "requirements": {
+    "require_both_chronological_halves": true,
+    "minimum_supported_environments": 2,
+    "minimum_distinct_station_layer_identities": 2,
+    "minimum_distinct_stations": 2,
+    "minimum_proposals_per_supported_environment": 10,
+    "minimum_environment_precision_strictly_gt": 0.55,
+    "reject_if_any_supported_environment_true_positives_eq": 0,
+    "retain_pooled_wilson90_lcb_minimum": 0.55,
+    "retain_minimum_additions": 25
+  },
+  "prohibitions": {
+    "v24_rerun": true,
+    "v24_retune": true,
+    "guard_only_execution": true,
+    "outer_result_threshold_selection": true
+  },
+  "access": {"source_rows": 0, "targets": 0, "fits": 0, "locks": 0, "artifacts": 0, "official_test_sample_submission_hidden_reads": 0, "csv": 0, "uploads": 0}
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "p2.v52_score_priority_deployment.20260901.v1",
+  "experiment_id": "p2_v52_score_priority_deployment_20260901_v1",
+  "status": "PREREGISTERED_USER_APPROVED_NOT_EXECUTED",
+  "authorization": "USER_EXPLICITLY_APPROVED_V52_OFFICIAL_SUBMISSION_MATERIALIZATION",
+  "frozen_candidate": {
+    "source_experiment_id": "p2_v52_score_priority_third_moment_input_gradient_20260901_v1",
+    "config": "configs/experiments/p2_v52_score_priority_third_moment_input_gradient_20260901_v1.json",
+    "config_sha256": "874c65812c53b71230b4d4e8770f79469e284e9f3b266b4166ea9ab8d006f316",
+    "runner": "scripts/run_p2_v52_score_priority_third_moment_input_gradient_20260901_v1.py",
+    "runner_sha256": "44697827b2ed481798309600e6e1e5e43529b9f64d6a3214e9b6cbd3d5c353f7",
+    "result": "reports/p2_v52_score_priority_third_moment_input_gradient_20260901_v1/result.json",
+    "result_sha256": "8c93bae044d4695279618f995fe18d9a6a633b674c19fe59a5a05b3f583825a5",
+    "independent_qa": "reports/p2_v52_score_priority_third_moment_input_gradient_20260901_v1/independent-qa.json",
+    "independent_qa_sha256": "d56d432097736cd916a0c6c08e09c6e0d1f928692f3087b4ed4bef9dc0c5cefb",
+    "required_status": "SCORE_PRIORITY_PASS_EXPLICIT_STABILITY_RISK",
+    "required_qa_status": "PASS",
+    "architecture": "v50_masked_third_central_moment_pooling",
+    "objective": "v13_weighted_SmoothL1_plus_v23_observed_public_temperature_input_gradient_L2",
+    "input_gradient_coefficient": 0.01,
+    "input_gradient_token_channel": 0,
+    "seeds": [20260901, 20260902, 20260903],
+    "epochs": 60,
+    "blend": {"anchor_weight": 0.8, "model_weight": 0.2},
+    "model_minus_anchor_clip_C": 2.5,
+    "maximum_action_C": 0.5,
+    "full_history_fit_count": 3,
+    "tuning": 0,
+    "automatic_retry_count": 0
+  },
+  "data_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "baseline_interp_sha256": "ae8097be1f0f1ba8c4d61de9741162106262c826b42636ae963c6c9eebd1f036",
+    "anchor_path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260830_P2_RANK1_BIN_DECOMPOSITION_READY_V1/P2_1_RANK1_BIN17_ONLY/P2_submission.csv",
+    "anchor_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2",
+    "anchor_name": "P2_1_RANK1_BIN17_ONLY",
+    "hidden_truth_allowed": false,
+    "score_file_allowed": false,
+    "sample_submission_temp_values_allowed": false,
+    "external_data_allowed": false,
+    "pretrained_weights_allowed": false
+  },
+  "training_contract": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "training_end": "all_finite_target_rows_in_observations",
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "row_deletion": false,
+    "outer_result_tuning": false,
+    "official_feedback_tuning": false
+  },
+  "output": {
+    "directory": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P2_V52_SCORE_PRIORITY_READY_V1",
+    "filename": "P2_submission.csv",
+    "expected_rows": 26061,
+    "title": "P2 v52 3차 중심모멘트·입력기울기 고득점형",
+    "summary": "배포 데이터만으로 scratch 학습한 고정 v52를 bin17 clean anchor 80%와 full-history 3-seed 모델 20%로 혼합한 score-priority 후보입니다. 내부 최고점 갱신과 fold-layer 안정성 위험을 함께 기록했습니다.",
+    "upload_count": 0
+  }
+}

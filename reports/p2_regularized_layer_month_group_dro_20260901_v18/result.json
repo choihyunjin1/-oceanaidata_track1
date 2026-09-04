@@ -1,0 +1,1556 @@
+{
+  "schema_version": "p2.regularized_layer_month_group_dro.result.20260901.v18",
+  "experiment_id": "p2_regularized_layer_month_group_dro_20260901_v18",
+  "status": "EXPLORATORY_SAFETY_PASS_REQUIRES_FRESH_CONFIRMATION",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "runtime_seconds": 71.10627020000538,
+  "fit_count": 9,
+  "semantic_audit": {
+    "classification": "NEW_P2_REGULARIZED_LAYER_MONTH_GROUP_DRO_OBJECTIVE",
+    "reason": "Repository-wide audit found no executed P2 exponentiated-gradient Group-DRO objective. v13 statically equalizes layer x calendar-month x KST-day risk but does not adapt adversarial group weights. v18 freezes the exact v13 representation, architecture, prefix, purge, seeds, epochs, output blend, and cap; only the training objective changes to one fixed layer x calendar-month Group-DRO update with stronger fixed L2 regularization. The executed P1 Group-DRO uses a different problem, MS-TCN, BCE, and station x layer x quarter groups.",
+    "evidence_sha256": {
+      "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/independent-qa.json": "f3d8ca4ec596b935422bb7108815a58f9537f4a13a9d1cb66d75058270074956",
+      "scripts/run_p1_mstcn_group_dro_20260829_v2.py": "bd821ae460879c55ab18fce181ef73a1c6f036c62985fe7bb5e49e1b7c7bbf3f",
+      "artifacts/p1_mstcn_group_dro_20260829_v2/aggregate.json": "b46a0c6f899d53721e3db86da7b3a267262a8a92eed950589cfe8e30700cb2ed",
+      "reports/p2_local_prefix_masked_public_auxiliary_20260901_v17/result.json": "d619f5b1e42aacf524aebf297d0a5fa22be4848275902ca5415a92557545067a"
+    },
+    "prior_p2_group_dro_runners": [],
+    "prior_p2_group_dro_artifacts": [],
+    "prior_p2_group_dro_reports": [],
+    "v13_static_domain_balance_only": true,
+    "p1_group_dro_is_cross_problem_only": true,
+    "result_adaptive_group_or_hyperparameter_selection": false
+  },
+  "permutation_invariance": {
+    "public_layer_permutation": [
+      4,
+      2,
+      0,
+      3,
+      1
+    ],
+    "maximum_abs_error": 1.4901161193847656e-08
+  },
+  "training": {
+    "row_deletion": 0,
+    "group_definition": "target_layer_x_calendar_month",
+    "group_dro_eta": 0.1,
+    "weight_decay": 0.001,
+    "folds": {
+      "2024_sep_oct": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2024-08-25T00:00:00+09:00",
+        "training_rows": 45935,
+        "training_calendar_months": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "group_receipt": {
+          "groups": {
+            "layer2:month05": {
+              "group_id": 0,
+              "rows": 3332,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer2:month06": {
+              "group_id": 1,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month07": {
+              "group_id": 2,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month08": {
+              "group_id": 3,
+              "rows": 3208,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month05": {
+              "group_id": 4,
+              "rows": 3324,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month06": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month07": {
+              "group_id": 6,
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month08": {
+              "group_id": 7,
+              "rows": 3214,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            },
+            "layer4:month05": {
+              "group_id": 8,
+              "rows": 3329,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month06": {
+              "group_id": 9,
+              "rows": 4319,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month07": {
+              "group_id": 10,
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer4:month08": {
+              "group_id": 11,
+              "rows": 3215,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            }
+          },
+          "group_count": 12,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.8575082138590202,
+          "normalized_max": 8.860918209876543
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 12,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.1498765286744038,
+            "robust_loss_last": 0.13545165537638493,
+            "worst_group_loss_first": 0.43117648363113403,
+            "worst_group_loss_last": 0.2948542535305023,
+            "initial_group_probabilities": {
+              "layer2:month05": 0.0833333358168602,
+              "layer2:month06": 0.0833333358168602,
+              "layer2:month07": 0.0833333358168602,
+              "layer2:month08": 0.0833333358168602,
+              "layer3:month05": 0.0833333358168602,
+              "layer3:month06": 0.0833333358168602,
+              "layer3:month07": 0.0833333358168602,
+              "layer3:month08": 0.0833333358168602,
+              "layer4:month05": 0.0833333358168602,
+              "layer4:month06": 0.0833333358168602,
+              "layer4:month07": 0.0833333358168602,
+              "layer4:month08": 0.0833333358168602
+            },
+            "final_group_probabilities": {
+              "layer2:month05": 0.04628964513540268,
+              "layer2:month06": 0.053303539752960205,
+              "layer2:month07": 0.055411238223314285,
+              "layer2:month08": 0.054409559816122055,
+              "layer3:month05": 0.05360100418329239,
+              "layer3:month06": 0.05818041414022446,
+              "layer3:month07": 0.06371977925300598,
+              "layer3:month08": 0.06266994774341583,
+              "layer4:month05": 0.10041443258523941,
+              "layer4:month06": 0.07545123994350433,
+              "layer4:month07": 0.28309366106987,
+              "layer4:month08": 0.09345555305480957
+            },
+            "final_group_losses": {
+              "layer2:month05": 0.018143489956855774,
+              "layer2:month06": 0.04004300385713577,
+              "layer2:month07": 0.04756169393658638,
+              "layer2:month08": 0.04328141361474991,
+              "layer3:month05": 0.037577029317617416,
+              "layer3:month06": 0.049172110855579376,
+              "layer3:month07": 0.0713944286108017,
+              "layer3:month08": 0.0644453763961792,
+              "layer4:month05": 0.13455182313919067,
+              "layer4:month06": 0.08673514425754547,
+              "layer4:month07": 0.2948542535305023,
+              "layer4:month08": 0.12396750599145889
+            },
+            "final_probability_sum": 1.0000000149011612,
+            "final_probability_min": 0.04628964513540268,
+            "final_probability_max": 0.28309366106987,
+            "final_probability_entropy": 2.2931195410008023,
+            "probability_l1_change": 0.45392729341983795,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 12,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.12104078184623548,
+            "robust_loss_last": 0.13441058019187996,
+            "worst_group_loss_first": 0.41182413697242737,
+            "worst_group_loss_last": 0.29575106501579285,
+            "initial_group_probabilities": {
+              "layer2:month05": 0.0833333358168602,
+              "layer2:month06": 0.0833333358168602,
+              "layer2:month07": 0.0833333358168602,
+              "layer2:month08": 0.0833333358168602,
+              "layer3:month05": 0.0833333358168602,
+              "layer3:month06": 0.0833333358168602,
+              "layer3:month07": 0.0833333358168602,
+              "layer3:month08": 0.0833333358168602,
+              "layer4:month05": 0.0833333358168602,
+              "layer4:month06": 0.0833333358168602,
+              "layer4:month07": 0.0833333358168602,
+              "layer4:month08": 0.0833333358168602
+            },
+            "final_group_probabilities": {
+              "layer2:month05": 0.04676069691777229,
+              "layer2:month06": 0.05344206094741821,
+              "layer2:month07": 0.05587756261229515,
+              "layer2:month08": 0.054258864372968674,
+              "layer3:month05": 0.05385212600231171,
+              "layer3:month06": 0.05786217004060745,
+              "layer3:month07": 0.0643482580780983,
+              "layer3:month08": 0.06276102364063263,
+              "layer4:month05": 0.09980984032154083,
+              "layer4:month06": 0.07374695688486099,
+              "layer4:month07": 0.28516140580177307,
+              "layer4:month08": 0.09211903810501099
+            },
+            "final_group_losses": {
+              "layer2:month05": 0.017658496275544167,
+              "layer2:month06": 0.038921453058719635,
+              "layer2:month07": 0.04691794514656067,
+              "layer2:month08": 0.04105035215616226,
+              "layer3:month05": 0.03809695318341255,
+              "layer3:month06": 0.04810798540711403,
+              "layer3:month07": 0.07011184096336365,
+              "layer3:month08": 0.06414885073900223,
+              "layer4:month05": 0.13220615684986115,
+              "layer4:month06": 0.0825691819190979,
+              "layer4:month07": 0.29575106501579285,
+              "layer4:month08": 0.11697185784578323
+            },
+            "final_probability_sum": 1.0000000037252903,
+            "final_probability_min": 0.04676069691777229,
+            "final_probability_max": 0.28516140580177307,
+            "final_probability_entropy": 2.2912956900955868,
+            "probability_l1_change": 0.4541805796325207,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 12,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.10825548493058007,
+            "robust_loss_last": 0.13874662141466312,
+            "worst_group_loss_first": 0.3820198178291321,
+            "worst_group_loss_last": 0.30450427532196045,
+            "initial_group_probabilities": {
+              "layer2:month05": 0.0833333358168602,
+              "layer2:month06": 0.0833333358168602,
+              "layer2:month07": 0.0833333358168602,
+              "layer2:month08": 0.0833333358168602,
+              "layer3:month05": 0.0833333358168602,
+              "layer3:month06": 0.0833333358168602,
+              "layer3:month07": 0.0833333358168602,
+              "layer3:month08": 0.0833333358168602,
+              "layer4:month05": 0.0833333358168602,
+              "layer4:month06": 0.0833333358168602,
+              "layer4:month07": 0.0833333358168602,
+              "layer4:month08": 0.0833333358168602
+            },
+            "final_group_probabilities": {
+              "layer2:month05": 0.047029271721839905,
+              "layer2:month06": 0.05347626656293869,
+              "layer2:month07": 0.05645737797021866,
+              "layer2:month08": 0.054921358823776245,
+              "layer3:month05": 0.05407673120498657,
+              "layer3:month06": 0.05789380148053169,
+              "layer3:month07": 0.06448522210121155,
+              "layer3:month08": 0.06379445642232895,
+              "layer4:month05": 0.1008576974272728,
+              "layer4:month06": 0.07310386747121811,
+              "layer4:month07": 0.2803190052509308,
+              "layer4:month08": 0.09358496218919754
+            },
+            "final_group_losses": {
+              "layer2:month05": 0.019412288442254066,
+              "layer2:month06": 0.03954623267054558,
+              "layer2:month07": 0.05106428265571594,
+              "layer2:month08": 0.044457245618104935,
+              "layer3:month05": 0.04034192115068436,
+              "layer3:month06": 0.04972526803612709,
+              "layer3:month07": 0.07299821078777313,
+              "layer3:month08": 0.06890732049942017,
+              "layer4:month05": 0.13757120072841644,
+              "layer4:month06": 0.08463750034570694,
+              "layer4:month07": 0.30450427532196045,
+              "layer4:month08": 0.1278751641511917
+            },
+            "final_probability_sum": 1.0000000186264515,
+            "final_probability_min": 0.047029271721839905,
+            "final_probability_max": 0.2803190052509308,
+            "final_probability_entropy": 2.2978845465273436,
+            "probability_l1_change": 0.44952332600951195,
+            "parameters": 4865
+          }
+        ]
+      },
+      "2025_jul_aug": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-06-24T00:00:00+09:00",
+        "training_rows": 119667,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "group_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "group_id": 0,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "group_id": 1,
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "group_id": 2,
+              "rows": 7627,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month07": {
+              "group_id": 3,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month08": {
+              "group_id": 4,
+              "rows": 4216,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month09": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "group_id": 6,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "group_id": 7,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "group_id": 8,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "group_id": 9,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "group_id": 10,
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "group_id": 11,
+              "rows": 7626,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month07": {
+              "group_id": 12,
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "group_id": 13,
+              "rows": 4221,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month09": {
+              "group_id": 14,
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "group_id": 15,
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "group_id": 16,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "group_id": 17,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "group_id": 18,
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "group_id": 19,
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "group_id": 20,
+              "rows": 7628,
+              "days": 53,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "group_id": 21,
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "group_id": 22,
+              "rows": 4223,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "group_id": 23,
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "group_id": 24,
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "group_id": 25,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "group_id": 26,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 0.9999999999999999,
+          "normalized_min": 0.5699731367169639,
+          "normalized_max": 11.080277777777777
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.07363146439769991,
+            "robust_loss_last": 0.07902266033717895,
+            "worst_group_loss_first": 0.4142659604549408,
+            "worst_group_loss_last": 0.29389238357543945,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.03076252155005932,
+              "layer2:month05": 0.028226805850863457,
+              "layer2:month06": 0.031030070036649704,
+              "layer2:month07": 0.03416469320654869,
+              "layer2:month08": 0.031961143016815186,
+              "layer2:month09": 0.026704298332333565,
+              "layer2:month10": 0.026391874998807907,
+              "layer2:month11": 0.025866128504276276,
+              "layer2:month12": 0.026319436728954315,
+              "layer3:month04": 0.03309127688407898,
+              "layer3:month05": 0.03157448023557663,
+              "layer3:month06": 0.033214494585990906,
+              "layer3:month07": 0.03912074491381645,
+              "layer3:month08": 0.036611102521419525,
+              "layer3:month09": 0.02892886847257614,
+              "layer3:month10": 0.027635827660560608,
+              "layer3:month11": 0.026011256501078606,
+              "layer3:month12": 0.026336442679166794,
+              "layer4:month04": 0.02663523145020008,
+              "layer4:month05": 0.04276706278324127,
+              "layer4:month06": 0.04047749191522598,
+              "layer4:month07": 0.17351184785366058,
+              "layer4:month08": 0.053605131804943085,
+              "layer4:month09": 0.03713807836174965,
+              "layer4:month10": 0.029207773506641388,
+              "layer4:month11": 0.02625388838350773,
+              "layer4:month12": 0.02645207941532135
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.028104271739721298,
+              "layer2:month05": 0.014804874546825886,
+              "layer2:month06": 0.03030654788017273,
+              "layer2:month07": 0.04427745193243027,
+              "layer2:month08": 0.03568825498223305,
+              "layer2:month09": 0.00654847314581275,
+              "layer2:month10": 0.004500827752053738,
+              "layer2:month11": 0.0014525842852890491,
+              "layer2:month12": 0.004334774799644947,
+              "layer3:month04": 0.03712238743901253,
+              "layer3:month05": 0.031218109652400017,
+              "layer3:month06": 0.039436277002096176,
+              "layer3:month07": 0.0658983513712883,
+              "layer3:month08": 0.05477709695696831,
+              "layer3:month09": 0.018403004854917526,
+              "layer3:month10": 0.011239760555326939,
+              "layer3:month11": 0.0021863002330064774,
+              "layer3:month12": 0.004304285626858473,
+              "layer4:month04": 0.0034327355679124594,
+              "layer4:month05": 0.0785624161362648,
+              "layer4:month06": 0.0701778456568718,
+              "layer4:month07": 0.29389238357543945,
+              "layer4:month08": 0.10431486368179321,
+              "layer4:month09": 0.05271080136299133,
+              "layer4:month10": 0.01855567656457424,
+              "layer4:month11": 0.003799879690632224,
+              "layer4:month12": 0.004875493235886097
+            },
+            "final_probability_sum": 1.0000000521540642,
+            "final_probability_min": 0.025866128504276276,
+            "final_probability_max": 0.17351184785366058,
+            "final_probability_entropy": 3.1382353271886942,
+            "probability_l1_change": 0.32879622280597687,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.06108531551674501,
+            "robust_loss_last": 0.07839074143320073,
+            "worst_group_loss_first": 0.4052574038505554,
+            "worst_group_loss_last": 0.29446643590927124,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.031117530539631844,
+              "layer2:month05": 0.028309743851423264,
+              "layer2:month06": 0.031119147315621376,
+              "layer2:month07": 0.034537676721811295,
+              "layer2:month08": 0.03221292793750763,
+              "layer2:month09": 0.026817860081791878,
+              "layer2:month10": 0.026629630476236343,
+              "layer2:month11": 0.026074348017573357,
+              "layer2:month12": 0.0265562254935503,
+              "layer3:month04": 0.03353988751769066,
+              "layer3:month05": 0.03158769756555557,
+              "layer3:month06": 0.03308477625250816,
+              "layer3:month07": 0.03948276862502098,
+              "layer3:month08": 0.0369100496172905,
+              "layer3:month09": 0.029182126745581627,
+              "layer3:month10": 0.027916986495256424,
+              "layer3:month11": 0.02624448575079441,
+              "layer3:month12": 0.026567935943603516,
+              "layer4:month04": 0.026949524879455566,
+              "layer4:month05": 0.0425807423889637,
+              "layer4:month06": 0.03994745388627052,
+              "layer4:month07": 0.16870681941509247,
+              "layer4:month08": 0.05394647270441055,
+              "layer4:month09": 0.037458572536706924,
+              "layer4:month10": 0.029382148757576942,
+              "layer4:month11": 0.026462018489837646,
+              "layer4:month12": 0.026674453169107437
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.028714943677186966,
+              "layer2:month05": 0.014280651696026325,
+              "layer2:month06": 0.02977066859602928,
+              "layer2:month07": 0.04659877344965935,
+              "layer2:month08": 0.03465958312153816,
+              "layer2:month09": 0.005903075914829969,
+              "layer2:month10": 0.004721616394817829,
+              "layer2:month11": 0.0013803597539663315,
+              "layer2:month12": 0.004299296531826258,
+              "layer3:month04": 0.038163840770721436,
+              "layer3:month05": 0.03040098212659359,
+              "layer3:month06": 0.03949107974767685,
+              "layer3:month07": 0.0684673860669136,
+              "layer3:month08": 0.05539880320429802,
+              "layer3:month09": 0.01866854913532734,
+              "layer3:month10": 0.011770475655794144,
+              "layer3:month11": 0.0023080550599843264,
+              "layer3:month12": 0.004300836939364672,
+              "layer4:month04": 0.005166619550436735,
+              "layer4:month05": 0.07659059762954712,
+              "layer4:month06": 0.06857743859291077,
+              "layer4:month07": 0.29446643590927124,
+              "layer4:month08": 0.11089632660150528,
+              "layer4:month09": 0.055307283997535706,
+              "layer4:month10": 0.019250111654400826,
+              "layer4:month11": 0.00379792763851583,
+              "layer4:month12": 0.00501515157520771
+            },
+            "final_probability_sum": 1.000000011175871,
+            "final_probability_min": 0.026074348017573357,
+            "final_probability_max": 0.16870681941509247,
+            "final_probability_entropy": 3.146570337027682,
+            "probability_l1_change": 0.3198012076318264,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.057180113349599666,
+            "robust_loss_last": 0.07656056873513747,
+            "worst_group_loss_first": 0.38929250836372375,
+            "worst_group_loss_last": 0.28726571798324585,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.031006429344415665,
+              "layer2:month05": 0.02837963216006756,
+              "layer2:month06": 0.031245384365320206,
+              "layer2:month07": 0.034658677875995636,
+              "layer2:month08": 0.032198596745729446,
+              "layer2:month09": 0.02687424048781395,
+              "layer2:month10": 0.026736516505479813,
+              "layer2:month11": 0.026180962100625038,
+              "layer2:month12": 0.02664344385266304,
+              "layer3:month04": 0.03311360627412796,
+              "layer3:month05": 0.03162691742181778,
+              "layer3:month06": 0.033199749886989594,
+              "layer3:month07": 0.039625804871320724,
+              "layer3:month08": 0.03705199062824249,
+              "layer3:month09": 0.029109690338373184,
+              "layer3:month10": 0.027942150831222534,
+              "layer3:month11": 0.02631545066833496,
+              "layer3:month12": 0.0266838651150465,
+              "layer4:month04": 0.026813652366399765,
+              "layer4:month05": 0.04254680871963501,
+              "layer4:month06": 0.04012332111597061,
+              "layer4:month07": 0.1679159253835678,
+              "layer4:month08": 0.05401001125574112,
+              "layer4:month09": 0.03729158639907837,
+              "layer4:month10": 0.029390955343842506,
+              "layer4:month11": 0.026535971090197563,
+              "layer4:month12": 0.026778601109981537
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.02604227513074875,
+              "layer2:month05": 0.014468943700194359,
+              "layer2:month06": 0.029652466997504234,
+              "layer2:month07": 0.04461226612329483,
+              "layer2:month08": 0.03396495804190636,
+              "layer2:month09": 0.005907465238124132,
+              "layer2:month10": 0.0047517274506390095,
+              "layer2:month11": 0.0013408571248874068,
+              "layer2:month12": 0.004237522836774588,
+              "layer3:month04": 0.03338067606091499,
+              "layer3:month05": 0.02931603603065014,
+              "layer3:month06": 0.039082810282707214,
+              "layer3:month07": 0.06678631156682968,
+              "layer3:month08": 0.05524139478802681,
+              "layer3:month09": 0.018474332988262177,
+              "layer3:month10": 0.011468562297523022,
+              "layer3:month11": 0.002229380654171109,
+              "layer3:month12": 0.004522483330219984,
+              "layer4:month04": 0.0042844898998737335,
+              "layer4:month05": 0.076839379966259,
+              "layer4:month06": 0.06929653882980347,
+              "layer4:month07": 0.28726571798324585,
+              "layer4:month08": 0.11036115884780884,
+              "layer4:month09": 0.05596690997481346,
+              "layer4:month10": 0.01903349533677101,
+              "layer4:month11": 0.003685645293444395,
+              "layer4:month12": 0.005016994662582874
+            },
+            "final_probability_sum": 0.9999999422580004,
+            "final_probability_min": 0.026180962100625038,
+            "final_probability_max": 0.1679159253835678,
+            "final_probability_entropy": 3.1479168833637186,
+            "probability_l1_change": 0.31861243955790997,
+            "parameters": 4865
+          }
+        ]
+      },
+      "2025_nov_dec": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-10-25T00:00:00+09:00",
+        "training_rows": 149384,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "group_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "group_id": 0,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "group_id": 1,
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "group_id": 2,
+              "rows": 8635,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month07": {
+              "group_id": 3,
+              "rows": 8904,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month08": {
+              "group_id": 4,
+              "rows": 8661,
+              "days": 62,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month09": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "group_id": 6,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "group_id": 7,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "group_id": 8,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "group_id": 9,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "group_id": 10,
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "group_id": 11,
+              "rows": 8634,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month07": {
+              "group_id": 12,
+              "rows": 8901,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "group_id": 13,
+              "rows": 8647,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month09": {
+              "group_id": 14,
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "group_id": 15,
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "group_id": 16,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "group_id": 17,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "group_id": 18,
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "group_id": 19,
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "group_id": 20,
+              "rows": 8636,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "group_id": 21,
+              "rows": 8911,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "group_id": 22,
+              "rows": 8687,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "group_id": 23,
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "group_id": 24,
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "group_id": 25,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "group_id": 26,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.6197066241869109,
+          "normalized_max": 13.831851851851852
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.05781294147337673,
+            "robust_loss_last": 0.0379506103768027,
+            "worst_group_loss_first": 0.23352771997451782,
+            "worst_group_loss_last": 0.1626831442117691,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.035728223621845245,
+              "layer2:month05": 0.03249630704522133,
+              "layer2:month06": 0.0353345051407814,
+              "layer2:month07": 0.0347980260848999,
+              "layer2:month08": 0.033694375306367874,
+              "layer2:month09": 0.030782541260123253,
+              "layer2:month10": 0.030543260276317596,
+              "layer2:month11": 0.029939860105514526,
+              "layer2:month12": 0.03048814833164215,
+              "layer3:month04": 0.038491152226924896,
+              "layer3:month05": 0.036041323095560074,
+              "layer3:month06": 0.03756651282310486,
+              "layer3:month07": 0.03799664229154587,
+              "layer3:month08": 0.0370030552148819,
+              "layer3:month09": 0.03328695148229599,
+              "layer3:month10": 0.03194421902298927,
+              "layer3:month11": 0.03008473850786686,
+              "layer3:month12": 0.030499853193759918,
+              "layer4:month04": 0.03072049282491207,
+              "layer4:month05": 0.04802265763282776,
+              "layer4:month06": 0.04438021034002304,
+              "layer4:month07": 0.08606772124767303,
+              "layer4:month08": 0.04794708266854286,
+              "layer4:month09": 0.04150833934545517,
+              "layer4:month10": 0.03365414962172508,
+              "layer4:month11": 0.030376136302947998,
+              "layer4:month12": 0.030603500083088875
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.028594976291060448,
+              "layer2:month05": 0.01332206279039383,
+              "layer2:month06": 0.02640421874821186,
+              "layer2:month07": 0.02484922856092453,
+              "layer2:month08": 0.019855588674545288,
+              "layer2:month09": 0.005370418541133404,
+              "layer2:month10": 0.004152132198214531,
+              "layer2:month11": 0.001147306407801807,
+              "layer2:month12": 0.00394807942211628,
+              "layer3:month04": 0.03784715011715889,
+              "layer3:month05": 0.026586255058646202,
+              "layer3:month06": 0.034570373594760895,
+              "layer3:month07": 0.039105646312236786,
+              "layer3:month08": 0.03398919478058815,
+              "layer3:month09": 0.016894901171326637,
+              "layer3:month10": 0.010971959680318832,
+              "layer3:month11": 0.0017333455616608262,
+              "layer3:month12": 0.004018882755190134,
+              "layer4:month04": 0.0030684189405292273,
+              "layer4:month05": 0.06869816035032272,
+              "layer4:month06": 0.058186981827020645,
+              "layer4:month07": 0.1626831442117691,
+              "layer4:month08": 0.0717608779668808,
+              "layer4:month09": 0.0471801683306694,
+              "layer4:month10": 0.01832742430269718,
+              "layer4:month11": 0.003255925141274929,
+              "layer4:month12": 0.0043611410073935986
+            },
+            "final_probability_sum": 0.9999999850988388,
+            "final_probability_min": 0.029939860105514526,
+            "final_probability_max": 0.08606772124767303,
+            "final_probability_entropy": 3.2614052680988723,
+            "probability_l1_change": 0.1713680624961853,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.047264777847957296,
+            "robust_loss_last": 0.03744286445468068,
+            "worst_group_loss_first": 0.22179830074310303,
+            "worst_group_loss_last": 0.16141213476657867,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.03559494763612747,
+              "layer2:month05": 0.03253225237131119,
+              "layer2:month06": 0.035364095121622086,
+              "layer2:month07": 0.03503623232245445,
+              "layer2:month08": 0.03376234322786331,
+              "layer2:month09": 0.030835788697004318,
+              "layer2:month10": 0.03067958354949951,
+              "layer2:month11": 0.030105017125606537,
+              "layer2:month12": 0.030642544850707054,
+              "layer3:month04": 0.03800839185714722,
+              "layer3:month05": 0.03618434816598892,
+              "layer3:month06": 0.03746126964688301,
+              "layer3:month07": 0.03824454918503761,
+              "layer3:month08": 0.03709053248167038,
+              "layer3:month09": 0.033416252583265305,
+              "layer3:month10": 0.03203687071800232,
+              "layer3:month11": 0.030250325798988342,
+              "layer3:month12": 0.030650852248072624,
+              "layer4:month04": 0.030881507322192192,
+              "layer4:month05": 0.04827043414115906,
+              "layer4:month06": 0.0436868742108345,
+              "layer4:month07": 0.0846325159072876,
+              "layer4:month08": 0.047937266528606415,
+              "layer4:month09": 0.041728727519512177,
+              "layer4:month10": 0.03369160369038582,
+              "layer4:month11": 0.03051118366420269,
+              "layer4:month12": 0.030763722956180573
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.027236025780439377,
+              "layer2:month05": 0.013090178370475769,
+              "layer2:month06": 0.02640790119767189,
+              "layer2:month07": 0.025145115330815315,
+              "layer2:month08": 0.01949823461472988,
+              "layer2:month09": 0.004592020530253649,
+              "layer2:month10": 0.003996445797383785,
+              "layer2:month11": 0.0010807702783495188,
+              "layer2:month12": 0.0037348878104239702,
+              "layer3:month04": 0.03449656441807747,
+              "layer3:month05": 0.02778562344610691,
+              "layer3:month06": 0.03378915786743164,
+              "layer3:month07": 0.03906073793768883,
+              "layer3:month08": 0.03458065539598465,
+              "layer3:month09": 0.016776980832219124,
+              "layer3:month10": 0.010523734614253044,
+              "layer3:month11": 0.0017313597491011024,
+              "layer3:month12": 0.0037562507204711437,
+              "layer4:month04": 0.0037274162750691175,
+              "layer4:month05": 0.07167088240385056,
+              "layer4:month06": 0.05475594103336334,
+              "layer4:month07": 0.16141213476657867,
+              "layer4:month08": 0.07148120552301407,
+              "layer4:month09": 0.04922182485461235,
+              "layer4:month10": 0.017553269863128662,
+              "layer4:month11": 0.003061105962842703,
+              "layer4:month12": 0.004243015311658382
+            },
+            "final_probability_sum": 1.0000000335276127,
+            "final_probability_min": 0.030105017125606537,
+            "final_probability_max": 0.0846325159072876,
+            "final_probability_entropy": 3.262950123052193,
+            "probability_l1_change": 0.16745442524552345,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "group_count": 27,
+            "group_dro_eta": 0.1,
+            "weight_decay": 0.001,
+            "robust_loss_first": 0.04301984411759106,
+            "robust_loss_last": 0.03742595435005233,
+            "worst_group_loss_first": 0.2108255922794342,
+            "worst_group_loss_last": 0.16174261271953583,
+            "initial_group_probabilities": {
+              "layer2:month04": 0.03703703731298447,
+              "layer2:month05": 0.03703703731298447,
+              "layer2:month06": 0.03703703731298447,
+              "layer2:month07": 0.03703703731298447,
+              "layer2:month08": 0.03703703731298447,
+              "layer2:month09": 0.03703703731298447,
+              "layer2:month10": 0.03703703731298447,
+              "layer2:month11": 0.03703703731298447,
+              "layer2:month12": 0.03703703731298447,
+              "layer3:month04": 0.03703703731298447,
+              "layer3:month05": 0.03703703731298447,
+              "layer3:month06": 0.03703703731298447,
+              "layer3:month07": 0.03703703731298447,
+              "layer3:month08": 0.03703703731298447,
+              "layer3:month09": 0.03703703731298447,
+              "layer3:month10": 0.03703703731298447,
+              "layer3:month11": 0.03703703731298447,
+              "layer3:month12": 0.03703703731298447,
+              "layer4:month04": 0.03703703731298447,
+              "layer4:month05": 0.03703703731298447,
+              "layer4:month06": 0.03703703731298447,
+              "layer4:month07": 0.03703703731298447,
+              "layer4:month08": 0.03703703731298447,
+              "layer4:month09": 0.03703703731298447,
+              "layer4:month10": 0.03703703731298447,
+              "layer4:month11": 0.03703703731298447,
+              "layer4:month12": 0.03703703731298447
+            },
+            "final_group_probabilities": {
+              "layer2:month04": 0.035805340856313705,
+              "layer2:month05": 0.03257668763399124,
+              "layer2:month06": 0.03558861464262009,
+              "layer2:month07": 0.03490535542368889,
+              "layer2:month08": 0.03381553664803505,
+              "layer2:month09": 0.030881118029356003,
+              "layer2:month10": 0.030731895938515663,
+              "layer2:month11": 0.030155513435602188,
+              "layer2:month12": 0.030677707865834236,
+              "layer3:month04": 0.037944670766592026,
+              "layer3:month05": 0.03615393862128258,
+              "layer3:month06": 0.03756546974182129,
+              "layer3:month07": 0.038165315985679626,
+              "layer3:month08": 0.037125833332538605,
+              "layer3:month09": 0.033350758254528046,
+              "layer3:month10": 0.0320669524371624,
+              "layer3:month11": 0.030300546437501907,
+              "layer3:month12": 0.030701246112585068,
+              "layer4:month04": 0.030759932473301888,
+              "layer4:month05": 0.048099420964717865,
+              "layer4:month06": 0.04351937025785446,
+              "layer4:month07": 0.08447159826755524,
+              "layer4:month08": 0.04828901216387749,
+              "layer4:month09": 0.04137200489640236,
+              "layer4:month10": 0.03362622857093811,
+              "layer4:month11": 0.030552474781870842,
+              "layer4:month12": 0.030797496438026428
+            },
+            "final_group_losses": {
+              "layer2:month04": 0.026989562436938286,
+              "layer2:month05": 0.013233350589871407,
+              "layer2:month06": 0.0275417473167181,
+              "layer2:month07": 0.023983320221304893,
+              "layer2:month08": 0.020003097131848335,
+              "layer2:month09": 0.005034194327890873,
+              "layer2:month10": 0.004123700316995382,
+              "layer2:month11": 0.001174803706817329,
+              "layer2:month12": 0.003908742684870958,
+              "layer3:month04": 0.03326328843832016,
+              "layer3:month05": 0.028075015172362328,
+              "layer3:month06": 0.03453390300273895,
+              "layer3:month07": 0.03817824274301529,
+              "layer3:month08": 0.034108150750398636,
+              "layer3:month09": 0.01709095388650894,
+              "layer3:month10": 0.010865326970815659,
+              "layer3:month11": 0.0019425653154030442,
+              "layer3:month12": 0.004018575884401798,
+              "layer4:month04": 0.0027625844813883305,
+              "layer4:month05": 0.07046867161989212,
+              "layer4:month06": 0.054603930562734604,
+              "layer4:month07": 0.16174261271953583,
+              "layer4:month08": 0.07291130721569061,
+              "layer4:month09": 0.048867493867874146,
+              "layer4:month10": 0.017717881128191948,
+              "layer4:month11": 0.0031929239630699158,
+              "layer4:month12": 0.004349610768258572
+            },
+            "final_probability_sum": 1.0000000409781933,
+            "final_probability_min": 0.030155513435602188,
+            "final_probability_max": 0.08447159826755524,
+            "final_probability_entropy": 3.2631646807435257,
+            "probability_l1_change": 0.16643868759274483,
+            "parameters": 4865
+          }
+        ]
+      }
+    }
+  },
+  "candidate": {
+    "name": "P2_V18_REGULARIZED_LAYER_MONTH_GROUP_DRO_BLEND020",
+    "objective": "regularized_layer_month_exponentiated_group_DRO_SmoothL1",
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reference_rmse": 3.085714618974286,
+    "candidate_rmse": 3.0349747492341876,
+    "delta_rmse": -0.05073986974009825,
+    "by_fold": {
+      "2024_sep_oct": {
+        "rows": 26273,
+        "reference_rmse": 4.882135051908297,
+        "candidate_rmse": 4.8031284666276175,
+        "delta_rmse": -0.07900658528067961
+      },
+      "2025_jul_aug": {
+        "rows": 26693,
+        "reference_rmse": 1.1857780665476285,
+        "candidate_rmse": 1.16174638372907,
+        "delta_rmse": -0.024031682818558497
+      },
+      "2025_nov_dec": {
+        "rows": 16884,
+        "reference_rmse": 0.28073218471331673,
+        "candidate_rmse": 0.2718520037125073,
+        "delta_rmse": -0.00888018100080945
+      }
+    },
+    "by_layer": {
+      "2": {
+        "rows": 23298,
+        "reference_rmse": 0.977425784480094,
+        "candidate_rmse": 0.8451053081133441,
+        "delta_rmse": -0.13232047636674993
+      },
+      "3": {
+        "rows": 23280,
+        "reference_rmse": 1.614255614462584,
+        "candidate_rmse": 1.51417829079565,
+        "delta_rmse": -0.10007732366693389
+      },
+      "4": {
+        "rows": 23272,
+        "reference_rmse": 5.001566713966556,
+        "candidate_rmse": 4.96368285165538,
+        "delta_rmse": -0.03788386231117524
+      }
+    },
+    "by_fold_layer": {
+      "2024_sep_oct": {
+        "2": {
+          "rows": 8777,
+          "reference_rmse": 1.4655912558305686,
+          "candidate_rmse": 1.2347031106513282,
+          "delta_rmse": -0.2308881451792404
+        },
+        "3": {
+          "rows": 8774,
+          "reference_rmse": 2.411153774848093,
+          "candidate_rmse": 2.234046747779426,
+          "delta_rmse": -0.17710702706866677
+        },
+        "4": {
+          "rows": 8722,
+          "reference_rmse": 7.986758349725424,
+          "candidate_rmse": 7.93336768323507,
+          "delta_rmse": -0.053390666490353844
+        }
+      },
+      "2025_jul_aug": {
+        "2": {
+          "rows": 8890,
+          "reference_rmse": 0.5930813808765173,
+          "candidate_rmse": 0.5892162415710575,
+          "delta_rmse": -0.0038651393054598415
+        },
+        "3": {
+          "rows": 8875,
+          "reference_rmse": 1.02350668839,
+          "candidate_rmse": 1.0247748580962588,
+          "delta_rmse": 0.0012681697062588704
+        },
+        "4": {
+          "rows": 8928,
+          "reference_rmse": 1.6769858971289795,
+          "candidate_rmse": 1.6265238930795456,
+          "delta_rmse": -0.050462004049433906
+        }
+      },
+      "2025_nov_dec": {
+        "2": {
+          "rows": 5631,
+          "reference_rmse": 0.2223371212774351,
+          "candidate_rmse": 0.17509878162882078,
+          "delta_rmse": -0.04723833964861432
+        },
+        "3": {
+          "rows": 5631,
+          "reference_rmse": 0.2518955116552082,
+          "candidate_rmse": 0.21651111300692846,
+          "delta_rmse": -0.03538439864827972
+        },
+        "4": {
+          "rows": 5622,
+          "reference_rmse": 0.35159372870754263,
+          "candidate_rmse": 0.3798504745103152,
+          "delta_rmse": 0.028256745802772543
+        }
+      }
+    },
+    "bootstrap": {
+      "unit": "fold_x_kst_date",
+      "groups": 163,
+      "replicates": 5000,
+      "mean_delta_rmse": -0.05464632795233058,
+      "ci90_low": -0.08166789046198616,
+      "ci90_high": -0.037412712840477334,
+      "probability_improved": 1.0
+    },
+    "official_like_bootstrap": {
+      "unit": "kst_date",
+      "groups": 61,
+      "replicates": 5000,
+      "ci90_low": -0.12884151471348892,
+      "ci90_high": -0.05754664356618888,
+      "probability_improved": 1.0
+    },
+    "raw_expected_points_delta": 0.72206829984737,
+    "transport_calibrated_expected_points_delta": 0.6003862082373638,
+    "candidate_change_rms_C": 0.1852852369447951,
+    "candidate_change_abs_max_C": 0.5000000000000018,
+    "gate_checks": {
+      "pooled_improves": true,
+      "minimum_two_folds_improve": true,
+      "official_like_fold_improves": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "calibrated_expected_points_gte_0_01": true
+    },
+    "strict_exploratory_pass": true,
+    "by_month": {
+      "2024-09": {
+        "rows": 12934,
+        "reference_rmse": 2.2787351769737767,
+        "candidate_rmse": 2.003903144328752,
+        "delta_rmse": -0.27483203264502487
+      },
+      "2024-10": {
+        "rows": 13339,
+        "reference_rmse": 6.473934093544442,
+        "candidate_rmse": 6.4456129526002455,
+        "delta_rmse": -0.0283211409441968
+      },
+      "2025-07": {
+        "rows": 13358,
+        "reference_rmse": 1.3894354530721664,
+        "candidate_rmse": 1.3555985673700715,
+        "delta_rmse": -0.033836885702094976
+      },
+      "2025-08": {
+        "rows": 13335,
+        "reference_rmse": 0.9384581958535501,
+        "candidate_rmse": 0.9278039458649049,
+        "delta_rmse": -0.01065424998864517
+      },
+      "2025-11": {
+        "rows": 12951,
+        "reference_rmse": 0.29628626798459773,
+        "candidate_rmse": 0.294246110574282,
+        "delta_rmse": -0.0020401574103157127
+      },
+      "2025-12": {
+        "rows": 3933,
+        "reference_rmse": 0.22193861634935502,
+        "candidate_rmse": 0.1793278524311303,
+        "delta_rmse": -0.042610763918224714
+      }
+    },
+    "action_geometry": {
+      "active_rows_gt_1e_12": 69850,
+      "active_share_gt_1e_12": 1.0,
+      "abs_action_p50_C": 0.07918500533643602,
+      "abs_action_p90_C": 0.35802463865981726,
+      "abs_action_p95_C": 0.5,
+      "abs_action_p99_C": 0.5,
+      "abs_action_p999_C": 0.5,
+      "abs_action_max_C": 0.5000000000000018,
+      "action_rms_C": 0.1852852369447951,
+      "sse_gain_top_0_1pct_share": 0.006167402770632938,
+      "sse_gain_top_1pct_share": 0.09410637777924906
+    },
+    "canonical_nominal_pooled_points_delta": 0.6366600935738318,
+    "canonical_transport_adjusted_pooled_points_delta": 0.5149780019638256,
+    "legacy_engine_score_translation": {
+      "raw_expected_points_delta": 0.72206829984737,
+      "transport_calibrated_expected_points_delta": 0.6003862082373638,
+      "meaning": "official-like Sep-Oct day-bootstrap CI90-high translation"
+    },
+    "prediction_commitment": {
+      "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_regularized_layer_month_group_dro_20260901_v18\\P2_V18_REGULARIZED_LAYER_MONTH_GROUP_DRO_BLEND020.npz",
+      "sha256": "6fbafe5344a0589b9f976372475ac13db571df8e2059e36e1b4530fe63d6f7ce",
+      "rows": 69850,
+      "metric_computed_at_commitment": false
+    },
+    "safety_gate_checks": {
+      "all_three_folds_non_harm": true,
+      "all_six_months_within_0_003C": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "canonical_transport_points_gte_0_01": true
+    },
+    "safety_pass": true
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "94842e0f404c3f63251e2a62cb253b2df1fd08213d79c415ed425c14b51c0919",
+    "runner": "7651ad4b863bb022542330be4f70e232fcaebe5b9b9713ebc341b802bdd5a593",
+    "v13_runner": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+    "v12_runner": "1c027fc0d753273ce62e362a7505afb0ef16fb34daa18f78fb315d83941d60ae",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "prediction_npz": "6fbafe5344a0589b9f976372475ac13db571df8e2059e36e1b4530fe63d6f7ce"
+  }
+}

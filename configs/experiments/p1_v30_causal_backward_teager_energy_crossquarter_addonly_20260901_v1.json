@@ -1,0 +1,41 @@
+{
+  "schema_version": "p1.v30_causal_backward_teager_energy_crossquarter_addonly.v1",
+  "result_schema_version": "p1.v30_causal_backward_teager_energy_crossquarter.result.v1",
+  "experiment_id": "p1_v30_causal_backward_teager_energy_crossquarter_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE_WITH_NEW_Q4_ONLY_OUTER",
+  "source": {"readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd", "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2", "allowed_files": ["README.md", "train.csv"], "official_test_sample_submission_hidden_reads": 0},
+  "primary_source": {"title": "On a simple algorithm to calculate the energy of a signal", "author": "J. F. Kaiser", "venue": "ICASSP 1990", "doi": "10.1109/ICASSP.1990.115702", "url": "https://doi.org/10.1109/ICASSP.1990.115702", "claim_boundary": "The source motivates a nonlinear local signal-energy operator. v30 uses a one-sample-delayed causal form on ocean temperature; it makes no physical-energy, anomaly-validity, or P1 performance claim."},
+  "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6", "prospective_only": true},
+  "semantic_audit": {
+    "decision": "NOVEL_P1_OBJECTIVE_PROCEED_ONCE", "exact_duplicate": false, "semantic_duplicate": false,
+    "objective_fingerprint": "prefix-normalized causal one-sample-delayed Teager nonlinear energy x[t-1]^2-x[t-2]x[t], sign split, within-contiguous-run causal summaries, fixed linear probe",
+    "repository_search": "No P1 Teager, Teager-Kaiser, nonlinear energy operator, AM-FM energy, or three-sample energy execution was found.",
+    "wavelet": "v11 uses linear Haar modulus cascades and scale ratios. v30 uses a nonlinear three-sample product with no filter bank or modulus scattering.",
+    "diffusion": "v18 estimates state-bin conditional increment moments. v30 fits no conditional moment and uses the cross product of samples two steps apart.",
+    "extrema_recurrence_path": "v19 prominence/return-time, recurrence similarity, visibility, and v7 cross-variable signed area have different representations and actions; none computes local nonlinear signal energy.",
+    "learning_axis": "The probe is deliberately linear and fixed. Novelty is the causal representation, not a new loss, VIB continuation, or threshold change.",
+    "evidence": {
+      "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+      "scripts/run_p1_v29_causal_variational_information_bottleneck_crossquarter_addonly_20260901_v1.py": "e1fa64cc4e5f1345e2cea416cb466c60863c76b8bb1c57cbde0def724be042af",
+      "configs/experiments/p1_v29_causal_variational_information_bottleneck_crossquarter_addonly_20260901_v1.json": "4119bff05ebe644634ba1eb5af493e8764562b5b13366a8858643c4f3129b538",
+      "scripts/run_p1_v11_causal_wavelet_scattering_addonly_20260901_v1.py": "70c363e28d32bf388da8b51ce201b8cb7b9244a8edf65de3e6b1262b103ceb86",
+      "scripts/run_p1_v18_causal_state_dependent_diffusion_addonly_20260901_v1.py": "e717d9b3d24cb46373c6c901fac0fe72f547161f13ae1ad63f3b81f989627959",
+      "configs/experiments/p1_v19_local_extrema_return_time_semantic_gate_20260901_v1.json": "6e955a72c4590bf0a8a01989cbb85b9254dcb03050cbad646f0ad583b4d314bd",
+      "scripts/run_p1_v7_causal_path_crossmoment_addonly_20260901_v1.py": "89b6e7320f8c5e18eaa122f1f7bc2fb4f711bd42b344b0476cf553e14a871025"
+    }
+  },
+  "representation": {"kind": "causal_backward_teager_nonlinear_energy", "formula": "psi_available_at_t=x[t-1]^2-x[t-2]*x[t]", "normalization": "station-layer prefix median/MAD only", "rolling_rows": [6, 24, 96], "features": ["current", "energy", "absolute_energy", "positive_energy", "negative_energy", "energy_mean_6", "energy_mean_24", "energy_mean_96", "energy_change", "cadence_support"], "past_only": true, "one_sample_delay": true, "future_interpolation": 0, "subsequence_normalization": 0},
+  "representation_support_gate": {"minimum_nonzero_feature_share": 0.5, "minimum_feature_variance": 0.000001, "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_TEAGER_SUPPORT"},
+  "model": {"kind": "fixed_linear_logistic_probe", "hidden_units": 0, "latent_units": 0, "kl_coefficient": 0.0, "weight_decay": 0.0001, "epochs": 12, "learning_rate": 0.002, "positive_class_weight": 3.0, "maximum_sample_rows_per_fit": 80000, "negative_to_positive_sample_ratio": 3, "batch_rows": 4096, "seeds": [20260901, 20260917, 20260943], "fits": 3, "maximum_fits": 9, "sweep": 0, "inference": "deterministic_sigmoid"},
+  "selection": {"inner_train_fraction": 0.85, "threshold_quantiles": [0.995, 0.9975, 0.999], "threshold_choice": "highest_quantile_passing_pre_q2_calibration_gate_then_highest_wilson90_lcb", "maximum_addition_share": 0.0025, "minimum_additions": 25, "wilson90_lcb_minimum": 0.55, "precision_strictly_gt": 0.55, "environment": {"minimum_proposals_per_supported_environment": 10, "minimum_supported_environments": 2, "require_both_chronological_halves": true, "minimum_distinct_station_layer_identities": 2, "minimum_distinct_stations": 2, "minimum_environment_precision_strictly_gt": 0.55, "reject_if_any_supported_environment_true_positives_eq": 0}, "candidate_threshold_fixed_before_q2": true, "q2_q3_threshold_selection": 0, "q2_q3_refits": 0, "q4_open_only_after_q2_q3_pass": true, "outer_tuning": 0},
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"role": "transport_veto_1", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"role": "transport_veto_2", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"role": "single_unused_performance_window", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {"q4_delta_gt": 0, "q4_ci90_lower_gte": 0, "bootstrap_replicates": 2000, "seed": 20260901, "pass": "POSITIVE_EXPLORATORY_ONLY", "transport_fail": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED", "performance_fail": "NO_GO_EXPLORATORY_ONLY"},
+  "operations": {"exactly_once": true, "fits_maximum": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "p2.spectral_normalized_domain_balanced_deepset.technical_failure.20260901.v27",
+  "experiment_id": "p2_spectral_normalized_domain_balanced_deepset_20260901_v27",
+  "status": "TERMINAL_TECHNICAL_INVALID_SPECTRAL_RUNTIME_CONTRACT",
+  "scientific_conclusion": "NOT_EVALUATED_NOT_NO_GO",
+  "automatic_restart_allowed": false,
+  "same_id_retry_allowed": false,
+  "attempt": {
+    "attempt_lock_consumed": true,
+    "planned_fits": 9,
+    "operational_attempted_fits": 1,
+    "committed_fit_receipts": 0,
+    "metrics_computed": false,
+    "prediction_commitment_created": false,
+    "terminal_result_created": false,
+    "failure_position": "first_fold_2024_sep_oct_first_seed_20260901_after_60_epoch_training_and_inference_before_fit_receipt_return"
+  },
+  "error": {
+    "type": "ContractError",
+    "message": "v27 training/spectral contract failed",
+    "runner_location": "scripts/run_p2_spectral_normalized_domain_balanced_deepset_20260901_v27.py:195",
+    "caller_location": "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py:298",
+    "bounded_cause": "The combined post-fit contract requires finite losses/predictions, exactly five parametrized Linear maps, and all effective spectral norms within [0.98, 1.02]. The exception occurred before a receipt was persisted, so the exact failed subcheck cannot be distinguished read-only.",
+    "preflight_difference": "Synthetic preflight checked five maps with maximum norm error 7.867813110351562e-06, but did not expose the post-training runtime failure."
+  },
+  "pre_execution_validation": {
+    "focused_pytest": "6 passed",
+    "ruff": "PASS",
+    "py_compile": "PASS",
+    "preflight_repetitions": 2,
+    "preflight_sha256": "6b22cb5583e4e25399324d51b2b1acaa4ebf771b83691fc422482da9feacb34f",
+    "namespace_before_execute": "EMPTY"
+  },
+  "disposition": {
+    "spectral_normalization_family": "CLOSED_WITHOUT_RETUNE",
+    "tolerance_change": "PROHIBITED",
+    "power_iteration_change": "PROHIBITED",
+    "selective_layer_change": "PROHIBITED",
+    "next_action": "audit a genuinely distinct P2 axis under a new experiment ID"
+  },
+  "access": {
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "attempt_lock": "219d6d945001be3e0e7e7a7483f3f58a92c8dfcbcc7e33e5943597e0dbba3f54",
+    "config": "b2169769f3c585dd83290ac91935461e9fc97e4f248f09e71ae9af5df6a08b0d",
+    "runner": "6e9c057f6ce6d89f6f1f17be9d4e8ffe8a1bf810bcff0a35cdff38320c887644",
+    "prospective_gate_amendment": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680"
+  }
+}

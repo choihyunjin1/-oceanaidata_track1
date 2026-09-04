@@ -6,20 +6,21 @@ These rules apply to every task in this repository.
 
 Use this precedence when instructions conflict:
 
-1. latest written organizer rule or direct organizer answer
+1. latest written organizer rule or direct organizer answer; the active 2026-09-01 snapshot is `00_ORGANIZER_DATA_POLICY.md`
 2. source dataset README.md
 3. latest problem statement supplied by the user
-4. 00_MUST_READ_FIRST.md
+4. 00_MUST_READ_FIRST.md and the problem-specific must-read file
 5. implementation notes and experiment records
 
 Before reading data, changing code, running a notebook, training, using Git, or preparing a submission:
 
-1. Read 00_MUST_READ_FIRST.md completely.
-2. For P2 work, also read 01_P2_MUST_READ_FIRST.md completely. For P3 work, read 02_P3_MUST_READ_FIRST.md completely.
-3. Read the source README for the active problem: P1_qc_anomaly/README.md, P2_profile_restore/README.md, or P3_wave_forecast/README.md.
-4. Check git status --short --branch.
-5. Confirm the action does not mutate or redistribute source data.
-6. Stop and ask if any rule, data right, or submission action is ambiguous.
+1. Read `00_ORGANIZER_DATA_POLICY.md` completely.
+2. Read 00_MUST_READ_FIRST.md completely.
+3. For P2 work, also read 01_P2_MUST_READ_FIRST.md completely. For P3 work, read 02_P3_MUST_READ_FIRST.md completely.
+4. Read the source README for the active problem: P1_qc_anomaly/README.md, P2_profile_restore/README.md, or P3_wave_forecast/README.md.
+5. Check git status --short --branch.
+6. Confirm the action does not mutate or redistribute source data.
+7. Stop and ask if any rule, data right, pretrained-weight provenance, or submission action is ambiguous.
 
 ## Source-data boundary
 
@@ -32,7 +33,8 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 ## Leakage and validation
 
 - Keep test labels unknown. Do not reconstruct them from KORS/KHOA raw or real-time observations, public mirrors, exact source matching, leaderboards, or hidden-answer artifacts.
-- Do not recover hidden answers from exact-source observations: P1 clean 2026 temperature, P2 hidden 2025-09/10 target-layer temperature/salinity, or P3 anonymous-case timestamps/future waves. Independent public covariates and historical pretraining data are allowed only through the external-data gate.
+- Do not recover hidden answers from exact-source observations: P1 clean 2026 temperature, P2 hidden 2025-09/10 target-layer temperature/salinity, or P3 anonymous-case timestamps/future waves.
+- Do not use any non-distributed observation, reanalysis, forecast, derived prediction, or feature. Public availability and historical-only timestamps do not create an exception.
 - Do not use random row splits as primary validation. Preserve station/layer groups, chronological blocks, anomaly runs, and real observation gaps.
 - Purge or embargo validation boundaries by at least the maximum feature and post-processing dependency.
 - Fit scalers, imputers, station/layer baselines, feature statistics, thresholds, and post-processing parameters on the training portion of each fold only.
@@ -40,13 +42,14 @@ Before reading data, changing code, running a notebook, training, using Git, or 
 - Maintain a strictly causal mode as an operational ablation. If a later written organizer rule forbids future context, promote the causal result and retire the offline candidate.
 - Do not force the test positive rate to match train prevalence or the baseline submission.
 
-## External-data quarantine
+## Competition data and pretrained-weight prohibition
 
-- The official public FAQ API (id 9) allows public external data and requires source attribution. A separate organizer-approval wait is no longer required.
-- Keep every external-data experiment in an explicitly named quarantined path with source DOI/URL, version, license, retrieval date, checksum, transformation log, time range, and target-leakage classification.
-- Use only sources whose license permits the intended use. Competition permission and copyright permission are separate.
-- Do not use or redistribute the S-ORS ScienceWatch dataset until its rights holder clarifies the absent per-item open license.
-- Never place external raw files in Git.
+- The 2026-09-01 organizer notice supersedes the older FAQ receipt that allowed public external data.
+- Train, validate, select, calibrate, ensemble, and post-process only with organizer-distributed data. A downstream model remains ineligible when it inherits predictions or parameters from an external-data model.
+- Treat non-distributed KIOST source observations as answer-equivalent and never access or compare them for competition work.
+- Do not use pretrained weights learned from real observation, weather, or ocean data.
+- A synthetic-only pretrained model is allowed only when all four organizer conditions in `00_ORGANIZER_DATA_POLICY.md` are proven. Unclear provenance means forbidden.
+- Preserve historical external-data artifacts and receipts as audit evidence, but never reuse them or include them in the reproducibility package. Never place external raw files in Git.
 
 ## Portable and reproducible code
 

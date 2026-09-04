@@ -1,0 +1,90 @@
+{
+  "access_audit": {
+    "clean_incumbent_prediction_rows_read": 1200,
+    "external_observation_reanalysis_forecast_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "internet_rows_read": 0,
+    "kiost_raw_rows_read": 0,
+    "kma_era5_v21_v81_prediction_or_metric_rows_read": 0,
+    "official_baseline_rows_read": 1200,
+    "official_sample_key_rows_read": 1200,
+    "official_sample_prediction_values_read": 0,
+    "official_test_feature_cases_read": 200,
+    "official_test_index_rows_read": 1200,
+    "organizer_train_oof_rows_read": 1086,
+    "uploads": 0
+  },
+  "candidate": {
+    "bytes": 39888,
+    "cases": 200,
+    "changed_rows_vs_clean_incumbent": 1200,
+    "duplicate_of_clean_incumbent": false,
+    "maximum_absolute_change_m": 0.15000000000000013,
+    "maximum_m": 4.196312472374468,
+    "median_m": 1.6002696797984135,
+    "minimum_m": 0.5342156122845984,
+    "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260901_P3_LEAD_CONTINUOUS_SCORE_PRIORITY_READY_V1\\P3_submission.csv",
+    "prediction_audit": {
+      "clipped_weight_fraction": 0.255,
+      "correction_limit_hit_fraction": 0.18166666666666667,
+      "maximum_absolute_correction_m": 0.15,
+      "raw_weight_max": 1.6842131102751094,
+      "raw_weight_min": -1.236686526436798
+    },
+    "rows": 1200,
+    "sha256": "7d603e16959eba20a90bfa3179089f2d3c85a47cf8e8623cce7d8a4e278bf335"
+  },
+  "created_at_kst": "2026-09-01T19:23:23.684849+09:00",
+  "decision": {
+    "eligible_comparator": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+    "eligible_comparator_points": 24.066168,
+    "eligible_comparator_public_rmse_m": 0.583892,
+    "estimated_point_gain_vs_clean_incumbent": 0.06646686239290145,
+    "estimated_public_points": 24.1326348623929,
+    "estimated_public_rmse_m": 0.5797041780278125,
+    "selection_metric": "active_prequential_delta_candidate_minus_incumbent_m",
+    "selection_metric_value_m": -0.004187821972187478,
+    "translation_is_heuristic_not_official_score": true,
+    "upload_authorized_here": false
+  },
+  "experiment_id": "p3_lead_continuous_score_priority_deployment_20260901_v1",
+  "fit": {
+    "fit_count": 1,
+    "fit_elapsed_seconds": 0.002340299979550764,
+    "history_cases": 181,
+    "history_minimum_gap_h": 78.0,
+    "history_rows": 1086,
+    "hyperparameter_search_count": 0,
+    "model_state_sha256": "dab5e21d1e836c4f4991549240b10321629908d4077c370f02abea9469a20d2a",
+    "pretrained_weight_files_loaded": 0,
+    "scratch_fit": true
+  },
+  "provenance": {
+    "baseline_persistence": "0533ef3ad4bdff406a7680c9d4b17033d7d81afddad0cd5579ccbca80ec43110",
+    "clean_incumbent_csv": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa",
+    "config": "2a2ca1d6c42e4efc7a8dca5a1375f7e51d3412636bb44925d887625cb0de1a0e",
+    "fresh_confirmation": "30fc5f38d27f39e5caf787c68f80f7e352880bd54ee34d056908c4f0c00bd4e1",
+    "runner": "105cd92be7857bbfe600f45ca2efb76d0f43b92bb5ecae8366827eed78768a10",
+    "sample_submission": "3b0e87ae166b4aea68292fdd1443ee6d436e09a605ce77245587dd4273ab7465",
+    "source_metrics": "5343dfd5846f2ed21bfe1b1e033e9acebf03385e98d79bf9693486cb3ba5ee8c",
+    "source_runner": "50787bc3308623f57a76dfdf22246f85ff770e5f6df7688db2cc83f845e12dbf",
+    "test_features": "004018935c155b0ab4fea18bdcfa2c99bdef265734c1ddcdd5ea5c2fee68312d",
+    "test_index": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc"
+  },
+  "runtime_seconds": 0.2707460999954492,
+  "schema_version": "p3.lead_continuous_score_priority.result.20260901.v1",
+  "stability_disclosure": {
+    "candidate_policy": "score_priority_with_explicit_low_stability_disclosure",
+    "fresh_delta_candidate_minus_incumbent_rmse_m": 0.022617090405150586,
+    "fresh_independent_cases": 1,
+    "fresh_submission_readiness": "NOT_READY_INSUFFICIENT_FRESH_SUPPORT",
+    "historical_active_delta_rmse_m": -0.004187821972187478,
+    "historical_active_leads_improved": 6,
+    "historical_active_leads_total": 6,
+    "historical_i_ors_delta_rmse_m": 0.002158216011739378,
+    "historical_overall_delta_rmse_m": -0.0031408040680385163
+  },
+  "status": "MATERIALIZED_READY_NOT_UPLOADED_SCORE_PRIORITY_RISK_DISCLOSED",
+  "summary": "배포 데이터 전용 clean incumbent에 frozen lead×causal-regime ridge를 1회 적용한 고득점 우선 후보입니다. 내부 활성 ΔRMSE -0.004188m(+0.066467점 추정)이지만 fresh 독립 1-case에서는 +0.022617m 악화해 안정성이 낮습니다.",
+  "title": "P3 Clean Lead-Continuous Score-Priority V1"
+}

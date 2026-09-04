@@ -1,0 +1,78 @@
+{
+  "schema_version": "p1.v5_within_station_vertical_causal_graph.v1r1",
+  "experiment_id": "p1_v5_within_station_vertical_causal_graph_20260901_v1r1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_TIME_UNIT_REPAIR_ONLY",
+  "repair": {
+    "invalid_predecessor": "p1_v5_within_station_vertical_causal_graph_20260901_v1",
+    "predecessor_result_use_for_selection": 0,
+    "predecessor_runner_sha256": "b2cccef50328378a4f1802015139119502542a49115b62dd6ded8725a9568a71",
+    "only_change": "DatetimeIndex.asi8 nanoseconds plus explicit unit and fold-boundary assertions"
+  },
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "mstcn": "MS-TCN is causal temporal convolution over independent station-layer row sequences; it has no within-time vertical message pass.",
+    "tabular_cross_layer": "The feature pipeline uses fixed peer means/residuals; it does not learn a shared vertical representation.",
+    "vertical_interpolation": "The offset-drift family fits label-free robust adjacent-layer offsets; it does not optimize a supervised causal graph encoder or add-only head.",
+    "group_dro": "Group-DRO changes loss weights on the existing MS-TCN and adds no graph operator.",
+    "event_classifiers": "Event classifiers rescore frozen proposals rather than jointly encode station-layer nodes.",
+    "evidence": {
+      "src/p1_qc/ms_tcn_asrf.py": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f",
+      "src/p1_qc/features.py": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+      "src/p1_qc/multiscale_cross_layer_offset_drift.py": "434bce024437d5dea77a4827bfdde95f0726659f901993fd4c033df82ab605d8",
+      "scripts/run_p1_mstcn_group_dro_20260829_v2.py": "bd821ae460879c55ab18fce181ef73a1c6f036c62985fe7bb5e49e1b7c7bbf3f"
+    }
+  },
+  "architecture": {
+    "nodes": "observed station_x_layer",
+    "horizontal_edges": 0,
+    "vertical_edges": "bidirectional adjacent nodes in observed layer order, verified by increasing train-only median depth",
+    "input_channels": ["temp", "psal", "depth", "psal_missing", "depth_missing", "layer_order"],
+    "temporal_encoder": "one past-only left-padded Conv1d",
+    "graph_encoder": "one fixed row-normalized adjacency message pass",
+    "head": "one linear anomaly logit",
+    "hidden_width": 16,
+    "temporal_kernel": 9,
+    "epochs": 4,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "positive_class_weight": 12.0,
+    "seeds": [20260901, 20260917, 20260943],
+    "outer_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "maximum_fits": 9,
+    "sweeps": 0
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "maximum_addition_share": 0.0025,
+    "minimum_additions_for_precision_gate": 25,
+    "precision_lcb_minimum": 0.55,
+    "wilson_z": 1.6448536269514722,
+    "no_eligible_threshold": "no_additions",
+    "outer_tuning": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {
+    "pooled_delta_gt": 0,
+    "ci90_lower_gte": 0,
+    "all_folds_nonnegative": true,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260901,
+    "pass": "POSITIVE_RESEARCH_ONLY",
+    "fail": "NO_GO_RESEARCH_ONLY"
+  },
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_or_retune": 0}
+}

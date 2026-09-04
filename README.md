@@ -2,7 +2,7 @@
 
 종합해양과학기지의 10분 수온 시계열에서 합성 센서 이상을 탐지하는 재현 가능한 대회 프로젝트입니다. 판정 대상은 `temp`, 참고 변수는 `psal`과 `depth`, 공식 평가지표는 행 단위 binary F1입니다. 주최측 규칙 기반 기준값은 0.548255입니다.
 
-실험이나 제출 작업 전에는 [00_MUST_READ_FIRST.md](00_MUST_READ_FIRST.md)를 처음부터 끝까지 읽어야 합니다.
+실험이나 제출 작업 전에는 최상위 [00_ORGANIZER_DATA_POLICY.md](00_ORGANIZER_DATA_POLICY.md)와 [00_MUST_READ_FIRST.md](00_MUST_READ_FIRST.md)를 처음부터 끝까지 읽어야 합니다. 2026-09-01 최신 공지에 따라 배포 데이터 밖의 관측·재분석·예보 자료와 실제 관측으로 사전학습된 가중치는 금지됩니다.
 
 ## 현재 상태
 
@@ -57,8 +57,8 @@
 | [P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md](reports/P1_ACADEMIC_METHODS_SCOUT_2026-08-13.md) | CAPA·PELT·CPOP·반사실적 재구성·성층 gate의 학술 근거와 동결 실험 순서 |
 | [P1 학술 정찰 HTML 보고서](reports/p1_academic_methods_20260813/report.html) | 검증된 지표·차트·우선순위 표가 포함된 휴대형 기술 보고서 |
 | `reports/ENVIRONMENT_2026-08-13.md` | Python·패키지 lock·CPU/GPU 실행 환경 |
-| `reports/EXTERNAL_DATA_APPROVAL_DRAFT.md` | 외부자료와 운영 범위 서면 문의 초안 |
-| [EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md](reports/EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md) | 공식 FAQ에 따른 외부 공개 데이터 허용·출처·누출 정책 갱신 |
+| `reports/EXTERNAL_DATA_APPROVAL_DRAFT.md` | 폐기된 외부자료 허용 판단의 역사적 문의 초안; 현재 권한으로 사용 금지 |
+| [EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md](reports/EXTERNAL_DATA_POLICY_UPDATE_2026-08-21.md) | 2026-09-01 최신 공지로 폐기된 과거 정책 기록 |
 
 ## 환경 구성
 
@@ -128,9 +128,27 @@ PowerShell 예시:
 - 행 단위 무작위 분할, test 양성률 4% 강제, 결측을 정답처럼 사용하는 모델을 금지합니다.
 - centered 피처는 동일 연속 segment 안에서만 계산하며 fold의 purge가 최대 의존 범위를 덮어야 합니다.
 - causal 결과는 offline 결과와 분리해 보고합니다.
-- 공식 FAQ에 따라 출처를 명시한 외부 공개 데이터는 사용할 수 있습니다. 숨은 정답을 직접 복원하는 동일 센서 원자료는 제외하고, 라이선스·기간·SHA-256·가공 이력과 external-off ablation을 기록합니다.
+- 배포 데이터 밖의 관측·재분석·예보 자료는 공개 여부와 관계없이 사용하지 않습니다. 실제 관측으로 사전학습된 가중치도 금지하며, 합성-only 사전학습 모델은 운영진의 네 조건을 모두 입증할 때만 예외로 사용합니다.
 - 문제별 하루 3회 제출 기회를 보호하기 위해 로컬 validator와 재현 검사를 통과한 정확한 파일만 사용자에게 제시합니다.
 - 최종 모델 지정 뒤 예측 업로드가 잠길 수 있으므로 별도 경고와 사용자 재확인 없이 최종 모델을 지정하지 않습니다.
+
+## TabPFN-3 합성 사전학습 예외
+
+P1/P3 구조 전환 실험은 `tabpfn==8.5.0`에서 `ModelVersion.V3`을 명시하고,
+Prior Labs가 순수 합성 tabular task로만 사전학습했다고 공개한 TabPFN-3 classifier/regressor를 사용합니다.
+실제 관측·기상·해양 자료로 사전학습된 가중치는 사용하지 않습니다. 사용자는 Prior Labs 플랫폼에서
+비상업 라이선스를 직접 수락해야 하며, runner는 로그인·토큰·자동 다운로드를 수행하지 않습니다.
+
+재현 패키지에는 다음 두 파일을 정확한 이름과 SHA-256으로 동봉하고 로컬 경로로만 로드합니다.
+
+- `tabpfn-v3-classifier-v3_default.ckpt`
+- `tabpfn-v3-regressor-v3_default.ckpt`
+
+로컬 경로는 `TABPFN3_CLASSIFIER_PATH`, `TABPFN3_REGRESSOR_PATH`, 사용자 수락 영수증은
+`TABPFN3_LICENSE_RECEIPT_PATH`로 전달합니다. `TABPFN_NO_BROWSER=1`을 강제하며, 6시간 재현 제한은
+P1의 셀별 49,000행 상한과 P3의 24,360행 lead별 학습으로 지킵니다. 정확한 실행 계약은
+`configs/compliance/tabpfn3_offline_transition_20260901.json`에 있습니다. V3는 2026년 5월 이후 공식 기본 모델이며,
+공식 기술 보고서의 합성-only 사전학습 및 100,000행×2,000피처 검증 구간을 근거로 2.6 대신 고정했습니다.
 
 ## 공식 일정
 

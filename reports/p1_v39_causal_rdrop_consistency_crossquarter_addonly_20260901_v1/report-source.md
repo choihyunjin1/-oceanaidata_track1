@@ -1,0 +1,15 @@
+# P1 v39 causal R-Drop consistency cycle
+
+Liang et al.'s [NeurIPS 2021 R-Drop paper](https://proceedings.neurips.cc/paper_files/paper/2021/hash/5a66b9200f29ac3fa0ae244cc2a51b39-Abstract.html) motivates bidirectional KL consistency between two dropout submodels for the same labeled input. v39 fixed hidden dropout `0.1` and symmetric Bernoulli-KL coefficient `1.0` before metrics; the source makes no P1 or anomaly-performance claim.
+
+Repository-wide search found no R-Drop/two-dropout predictive-consistency execution. Unlike v26 Barlow, v39 uses labels in both passes and matches each row's output distributions rather than label-free batch cross-correlations; it has no frozen pretrainer. It also has no contrastive pairs, prototype distance, domain discriminator, confidence weighting, or pairwise ranking. SAM was rejected at zero fits because P2 v24 already executes its parameter-neighborhood optimizer fingerprint. The fixed causal state, seeds, thresholds, v28 guard, and v33 persistence were unchanged.
+
+Focused pytest passed `5/5`; Ruff passed. Two zero-operation preflights were byte-identical at 4,350 bytes with SHA-256 `104eed60dc126a30d3e54b393f9747315ba6ef6b71699be7e3c74a483801e14a`. Exactly-once execution completed 3 fits in 9.813 seconds.
+
+Every fixed threshold failed the pre-Q2 environment gate. q `.995` had 234/281 TP, precision `0.8327402135231317`, Wilson-90 LCB `0.7929836796533101`, and three stations, but G-ORS/L1 had 0/31 TP. q `.9975` had 131/141 TP, precision `0.9290780141843972`, LCB `0.8848638061383676`, but only S-ORS/L5 supplied supported environments. q `.999` had 55/57 TP, precision `0.9649122807017544`, LCB `0.8993697422158083`, but only S-ORS/L5 in the second half was supported. High pooled precision does not authorize guard relaxation, rescue, or retuning.
+
+Decision: `NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED` at `PRE_Q2_CALIBRATION_GATE`. Q2/Q3 target windows read `0`, Q4 target/actions `0`, anchor removals `0`, and raw F1/nominal/transport-adjusted point deltas are exact no-ops `0`. Expected official remains the existing champion `0.833548 / 28.909341`, with incremental expected points `0`; no outer CI is estimable because the outer performance surface stayed unopened. Official/test/sample/submission/hidden, CSV, and upload access remained zero.
+
+v33 preserved label-blind Q2 actions of 332, 332, and 172 rows for q `.995/.9975/.999` and all three model hashes before target access. Bundle SHA-256 is `9f526875e68fa6e430780edeb7283ca601267aba85206f9ddc86ca1f689d378b`; manifest SHA-256 is `41eddac17f70a99acc067ac5084b435f98eb4ae059546caeb06c79e99074ed53`. These receipts are diagnostic-only.
+
+Result/config/runner/lock/completion SHA-256 values are `bdeed73101ed09c0b2eb268768554f8cdcbe048e5901b7da17839d5c2f31da7c`, `5e4be899586dbe7b6098ca19f8d6e2703d1d3689cb2d03a23c5abba5d46a77a3`, `6ec4554aa1437cbd22a7cf7cb144098c5ae2b21c1c5b8b46088bf9cff663e4e7`, `10b5fc977e67e1d36ed58a2a15306c0656f5a40b7872761af5513cab57df2f10`, and `1b66dc7af1c57e91b9423c01cc040b3f39af703297c30475d096aa0a75940a07`.

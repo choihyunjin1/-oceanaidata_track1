@@ -1,0 +1,62 @@
+{
+  "schema_version": "p3.central_quantile_residual.config.v31",
+  "experiment_id": "p3_central_quantile_residual_cycle_20260901_v31",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_DISTRIBUTIONAL_TARGET_AXIS",
+    "novel_axis": "two fixed conditional residual quantiles whose central-interval midpoint supplies a robust point correction",
+    "distinction": "Prior P3 Huber/Ridge/GBDT heads optimize conditional location directly; uncertainty routers use component spread. No P3 lineage fits pinball-loss conditional residual quantiles and converts a sealed central interval to a point forecast.",
+    "rejected_axes": {
+      "fixed_shapelet_dictionary": "semantic duplicate of executed interval-convolution ROCKET and nearest-shape analog families",
+      "expectile_half": "exactly the conditional squared-loss mean and therefore a direct Ridge-location duplicate"
+    },
+    "posthoc_v27_v28_v29_v30_adjustment": false
+  },
+  "features": {
+    "context_rows": 289,
+    "transformed_channels": 12,
+    "case_statistics_per_channel": ["last", "mean24", "mean72", "std72", "slope24", "slope72", "q10", "q50", "q90"],
+    "case_feature_count": 108,
+    "row_features": "108 case statistics + station one-hot3 + lead one-hot6",
+    "row_feature_count": 117,
+    "absolute_time": false,
+    "future_covariates": false
+  },
+  "model": {
+    "target": "rowwise target_hs minus exact uniform alpha 0.425 reference",
+    "family": "two fixed linear QuantileRegressor heads with HiGHS solver",
+    "quantiles": [0.25, 0.75],
+    "l1_alpha": 0.1,
+    "point_functional": "arithmetic midpoint of q25 and q75 residual predictions",
+    "additive_residual_weight": 0.10,
+    "candidate_name": "P3_1_Q25_Q75_MID_ALPHA010_ADD10",
+    "row_deletion": 0,
+    "target_winsor": null,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "quantile_fits_per_block": 2,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Koenker and Bassett, Regression Quantiles, Econometrica 46(1), 33-50 (1978)", "url": "https://doi.org/10.2307/1913643"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

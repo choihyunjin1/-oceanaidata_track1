@@ -1,0 +1,17 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v24-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v24",
+  "status": "EXACTLY_ONCE_HISTORICAL_AUTHORIZED",
+  "candidate": "P1_1_GCE_INNER_UNION_F1_ADDONLY",
+  "lineage": {"v16_fixed_threshold_result": "CLOSED_NO_PASS_UNCHANGED", "score_model": "exact v16 GCE affine residual", "new_question": "chronological inner-only threshold selection under calibration v3", "adaptive_development_evidence_only": true},
+  "features": {"source_contract": "frozen 165-column P1 projection", "encoded_feature_count": 165, "prefix_scale": "median_iqr", "scaled_clip": [-10.0, 10.0], "missing_indicators": true, "row_valid_and_gap_channels": true},
+  "model": {"architecture": "affine_sigmoid", "gce_q": 0.7, "l2": 0.001, "optimizer": "L-BFGS-B", "optimizer_max_iterations": 500, "optimizer_ftol": 1e-12, "training_population": "incumbent-negative", "retuning": false},
+  "inner_selector": {"split": "first75 fit last25 calibration by global chronological prefix", "threshold_candidates": "all finite inner probabilities plus positive infinity", "objective": "maximum actual add-only union F1", "hard_gates": ["inner delta F1 > 0", "central marginal precision > inner anchor F1/2", "changed fraction <=0.005", "positive additions"], "tie_break": "higher threshold then fewer additions", "outer_labels_used": false},
+  "validation": {"pipeline_fits": [{"train_folds": ["2025_q2"], "outer": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "outer": "2025_q4"}], "maximum_pipeline_fits": 2, "bootstrap_replicates": 5000, "bootstrap_seed": 20260925, "outer_gates": ["Q3 Q4 nonnegative", "dependent bootstrap CI90 low >0", "slice gates unchanged", "raw>=0.015383691373120248", "calibrated>=0.01"]},
+  "transport": {"calibration_version": "v3", "calibration_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10", "family_id": "P1_GCE_SMOOTH_LINEAR_RESIDUAL", "tier_id": "SMOOTH_LEARNED_PROFILE", "penalty_points": 0.005383691373120247},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.015383691373120248, "minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.005383691373120247, "score_points_per_f1": 26.578120867377286, "bootstrap_probability_improved_minimum_inclusive": 0.8},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_changed_fraction_any_kst_day": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "minimum_each_supported_station_layer_delta_f1": 0.0},
+  "resource_caps": {"wall_seconds": 1200, "rss_bytes": 8589934592, "vram_bytes": 0},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "authorization": {"synthetic_preflight": true, "historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "uploads": 0}
+}

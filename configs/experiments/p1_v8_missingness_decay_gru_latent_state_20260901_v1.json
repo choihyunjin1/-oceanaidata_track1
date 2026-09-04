@@ -1,0 +1,104 @@
+{
+  "schema_version": "p1.v8_missingness_decay_gru_latent_state.v1",
+  "experiment_id": "p1_v8_missingness_decay_gru_latent_state_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Recurrent Neural Networks for Multivariate Time Series with Missing Values",
+    "authors": "Che et al.",
+    "venue": "Scientific Reports 2018",
+    "doi": "10.1038/s41598-018-24271-9",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5904216/",
+    "claim": "Masks and elapsed time since observation can be explicit inputs to a recurrent latent state, with missing values decayed toward a fold-local mean."
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_REPRESENTATION_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "full_ledger": "P1 long-event CAPA/CPOP, typed HSMM, asynchronous latent GP, TCN/MS-TCN, masked TCN autoencoder, graph and deterministic path families were checked.",
+    "typed_semimarkov": "Explicit-duration discrete decoding over supplied unary scores; no learned observation-mask/time-gap recurrent state.",
+    "async_latent_gp": "Peer-only Matérn state and interval subset scan; no supervised per-sensor recurrent state or learned anomaly head.",
+    "mstcn": "Causal/offline temporal convolutions with row masks; no elapsed-since-channel-observation decay representation or recurrent hidden state.",
+    "masked_ssl": "Artificial block masking for TCN reconstruction; no natural-missingness elapsed-time representation.",
+    "v7": "Deterministic path cross-moments; no learned latent state.",
+    "evidence": {
+      "reports/historical_model_reaudit_20260831_v1/candidate-ledger.json": "8e7f2fbe07c74d313ce3c652b6eeffdd4d5a7af1351b96d7fc984be987778f69",
+      "reports/p1_last_orthogonal_probe_20260831_v32i/report-source.md": "e440450d766f19b649230ee9acd0b0e2bf8f2b6f4a2985f365955016353c3565",
+      "src/p1_qc/typed_factorial_semimarkov.py": "90077f73563035e34a5ce26590d8947a5239c6834141799ea25d02778f528e64",
+      "src/p1_qc/typed_duration_semimarkov.py": "2966815f2a265b39aee72432b322c60afbaa174ffbd937eec0c84ddb87d67387",
+      "src/p1_qc/p1_async_latent_state_gp_subset_scan_anchor_union_20260828_v1.py": "7405156e013fe0e1384fe7a5ede71b540975d6d2f89dcecc958eb5251fea4146",
+      "src/p1_qc/temporal_event_tcn.py": "667c1894f8fc4fc74351e0a2089dd5bab666f4a39bbe6dd193844007331fe746",
+      "src/p1_qc/ms_tcn_asrf.py": "57c135bfe746d06a53e5c3b83517cb96f8262a765febefbf43e1d3a3c344fd7f",
+      "src/p1_qc/models_ssl.py": "4c1c4ed44353bd3df5d956438a7b2dadada9a04e8c8e7b6b0b11ae1914d58170"
+    }
+  },
+  "architecture": {
+    "kind": "causal fixed-decay missingness-aware GRU",
+    "sequence_unit": "station_x_layer",
+    "input_channels": [
+      "temp_decay_imputed",
+      "psal_decay_imputed",
+      "depth_decay_imputed",
+      "temp_observed",
+      "psal_observed",
+      "depth_observed",
+      "temp_elapsed",
+      "psal_elapsed",
+      "depth_elapsed",
+      "row_time_gap"
+    ],
+    "decay_half_life_hours": 24.0,
+    "hidden_width": 16,
+    "layers": 1,
+    "epochs": 3,
+    "chunk_rows": 8192,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "positive_class_weight": 12.0,
+    "seeds": [20260901, 20260917, 20260943],
+    "outer_folds": ["2025_q2", "2025_q3", "2025_q4"],
+    "maximum_fits": 9,
+    "sweeps": 0,
+    "past_only": true,
+    "future_interpolation": 0
+  },
+  "representation_support_gate": {
+    "minimum_missing_rows_per_supported_channel": 100,
+    "minimum_supported_channels": 2,
+    "minimum_elapsed_variance": 0.000001,
+    "required_supported_channels": ["psal", "depth"],
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_MISSINGNESS_SIGNAL"
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "maximum_addition_share": 0.0025,
+    "minimum_additions_for_precision_gate": 25,
+    "precision_lcb_minimum": 0.55,
+    "wilson_z": 1.6448536269514722,
+    "no_eligible_threshold": "no_additions",
+    "outer_tuning": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "parts": {
+    "2025_q2": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {
+    "pooled_delta_gt": 0,
+    "ci90_lower_gte": 0,
+    "all_folds_nonnegative": true,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260901,
+    "pass": "POSITIVE_EXPLORATORY_ONLY",
+    "fail": "NO_GO_EXPLORATORY_ONLY"
+  },
+  "operations": {"exactly_once": true, "fits": 9, "official": 0, "csv": 0, "uploads": 0, "retry_or_retune": 0}
+}

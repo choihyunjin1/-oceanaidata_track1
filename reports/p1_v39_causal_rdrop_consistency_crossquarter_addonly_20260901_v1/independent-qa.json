@@ -1,0 +1,13 @@
+{
+  "schema_version": "p1.v39_causal_rdrop_consistency.independent_qa.v1",
+  "experiment_id": "p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1",
+  "verdict": "PASS",
+  "terminal_decision": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+  "failed_stage": "PRE_Q2_CALIBRATION_GATE",
+  "commands": [".\\.venv-p1\\Scripts\\python.exe -m pytest tests/test_p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1.py -q", ".\\.venv-p1\\Scripts\\python.exe -m ruff check scripts/run_p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1.py tests/test_p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1.py", ".\\.venv-p1\\Scripts\\python.exe scripts/run_p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1.py --data-dir C:\\Users\\cedis\\Downloads\\데이터셋_P1\\P1_qc_anomaly --qa"],
+  "checks": {"focused_pytest_5_of_5": true, "ruff": true, "postterminal_lifecycle_20_checks": true, "preflights_byte_identical": true, "rdrop_math_guards": true, "fits_within_budget": true, "v28_guard": true, "v33_bundle_before_target": true, "q2_q3_target_zero": true, "q4_unopened": true, "add_only_removal_zero": true, "access_zero": true},
+  "counters": {"fits": 3, "transport_target_windows_read": 0, "q4_target_reads": 0, "q4_actions": 0, "anchor_removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "best_pooled_inner": {"quantile": 0.9975, "threshold": 0.8402734994888306, "proposals": 141, "true_positives": 131, "precision": 0.9290780141843972, "wilson90_lcb": 0.8848638061383676, "gate_failure": "only one distinct station-layer identity and station supplied supported environments"},
+  "metrics": {"raw_f1_delta": 0.0, "nominal_points": 0.0, "transport_adjusted_points": 0.0, "official_champion_expected_score": 0.833548, "official_champion_points": 28.909341, "incremental_expected_official_points": 0.0, "outer_ci": null},
+  "hashes": {"result": "bdeed73101ed09c0b2eb268768554f8cdcbe048e5901b7da17839d5c2f31da7c", "config": "5e4be899586dbe7b6098ca19f8d6e2703d1d3689cb2d03a23c5abba5d46a77a3", "runner": "6ec4554aa1437cbd22a7cf7cb144098c5ae2b21c1c5b8b46088bf9cff663e4e7", "test": "117b8cbfeff3a8259aa5be9b25359ad92d490615646dbd4e7629431a754547a8", "lock": "10b5fc977e67e1d36ed58a2a15306c0656f5a40b7872761af5513cab57df2f10", "completion": "1b66dc7af1c57e91b9423c01cc040b3f39af703297c30475d096aa0a75940a07", "preflight_receipt": "0145040ec2d3a9a4d8c9fb281f340b4bde00b5b6750b16940d7d930d330939f0", "pre_q2_seal": "4c421af143b482e5fe810dae21026f37a1e43a00d6835ecca1b1555fb00cdb13", "auditability_manifest": "41eddac17f70a99acc067ac5084b435f98eb4ae059546caeb06c79e99074ed53", "auditability_bundle": "9f526875e68fa6e430780edeb7283ca601267aba85206f9ddc86ca1f689d378b"}
+}

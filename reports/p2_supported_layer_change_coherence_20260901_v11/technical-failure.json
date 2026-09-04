@@ -1,0 +1,37 @@
+{
+  "schema_version": "p2.supported_layer_change_coherence.technical_failure.20260901.v11",
+  "experiment_id": "p2_supported_layer_change_coherence_20260901_v11",
+  "status": "INVALID_ZERO_FIT_READ_ONLY_COHERENCE_SCORE_ARRAY",
+  "classification": "TECHNICAL_ARRAY_MUTABILITY_FAILURE_NOT_SCIENTIFIC_NO_GO",
+  "exact_error": "ValueError: assignment destination is read-only",
+  "failure_site": "score[available < minimum_available_public_layers] = np.nan",
+  "data_contract_cause": "pandas DataFrame max(...).to_numpy(float) returned a read-only ndarray view; the sealed runner attempted in-place masking without an explicit copy",
+  "attempt_lock_consumed": true,
+  "automatic_restart_allowed": false,
+  "model_fits": 0,
+  "prediction_commitments": 0,
+  "metrics": 0,
+  "hashes": {
+    "config": "2dbec0ef523e4a7b0569c379e328c0f2159f8ae54baa86b81a21d64c17df01cd",
+    "runner": "a54f0c65e904fb663e4e99dee828cc8f9cfc07e587dced447f5c18339bc94c2d",
+    "attempt_lock": "c370378ddeac9c76d8d5f780fd807d0c6ba13e7ef6a822fe28dd24c0f6a73bc3"
+  },
+  "preexecution_validation": {
+    "preflight_output_sha256": "90dbd30d9df97d09a2f710aa95c0619365dca58870638dd9617cc1f86bf0c5fb",
+    "two_preflight_outputs_byte_identical": true,
+    "focused_pytest": "6_passed",
+    "ruff": "PASS",
+    "pycompile": "PASS"
+  },
+  "operation_counters": {
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "existing_v7_submission_csv_value_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

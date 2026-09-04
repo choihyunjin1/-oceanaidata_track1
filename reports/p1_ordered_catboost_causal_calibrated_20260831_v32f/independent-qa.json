@@ -1,0 +1,134 @@
+{
+  "checks": {
+    "2025_q2_candidate_f1_matches": true,
+    "2025_q2_one_threshold": true,
+    "2025_q2_tabular_f1_matches": true,
+    "2025_q2_threshold_matches": true,
+    "2025_q2_threshold_on_grid": true,
+    "2025_q3_candidate_f1_matches": true,
+    "2025_q3_one_threshold": true,
+    "2025_q3_tabular_f1_matches": true,
+    "2025_q3_threshold_matches": true,
+    "2025_q3_threshold_on_grid": true,
+    "2025_q4_candidate_f1_matches": true,
+    "2025_q4_one_threshold": true,
+    "2025_q4_tabular_f1_matches": true,
+    "2025_q4_threshold_matches": true,
+    "2025_q4_threshold_on_grid": true,
+    "calibration_periods_are_45_days": true,
+    "candidate_binary": true,
+    "config_hash_matches": true,
+    "fit_count_three": true,
+    "gates_recomputed_match": true,
+    "internal_purge_at_least_14_days": true,
+    "keys_unique": true,
+    "no_submission_artifact": true,
+    "official_access_zero": true,
+    "oof_hash_matches": true,
+    "pooled_candidate_f1_matches": true,
+    "pooled_tabular_f1_matches": true,
+    "probabilities_finite": true,
+    "q34_candidate_f1_matches": true,
+    "q34_e150_f1_matches": true,
+    "rows_421032": true,
+    "runner_no_materializer": true,
+    "runtime_within_cap": true,
+    "tabular_reference_reloaded_matches": true,
+    "terminal_no_go": true
+  },
+  "checks_passed": 35,
+  "checks_total": 35,
+  "experiment_id": "p1_ordered_catboost_causal_calibrated_20260831_v32f",
+  "hashes": {
+    "config": "f03839528fd69ef7ea8d5def5423365b668d07cb69c57ceda03f11f934974e7a",
+    "historical_oof": "220ddf4289dd0554d0031c616040c84f76667835d511bf45d5f44a26ede15661",
+    "result": "004697a46f25863435a9716e4d2a77f8d3571740b7b8d75e978ec11ca03ecabc",
+    "runner": "2f9e2601936fa45ece75577512f91fe5ec83e223c8e3c3e1671d80b89a9200e3"
+  },
+  "recomputed": {
+    "folds": {
+      "2025_q2": {
+        "candidate": {
+          "f1": 0.6816108227151172,
+          "positives": 7344,
+          "precision": 0.5900054466230937,
+          "recall": 0.8068901303538175
+        },
+        "delta_f1": -0.0942391421830876,
+        "tabular": {
+          "f1": 0.7758499648982048,
+          "positives": 4601,
+          "precision": 0.8406868072158227,
+          "recall": 0.7202979515828678
+        },
+        "threshold": 0.06
+      },
+      "2025_q3": {
+        "candidate": {
+          "f1": 0.7277193672005503,
+          "positives": 3780,
+          "precision": 0.9796296296296296,
+          "recall": 0.5788650930123496
+        },
+        "delta_f1": -0.17416838358248532,
+        "tabular": {
+          "f1": 0.9018877507830356,
+          "positives": 5416,
+          "precision": 0.9835672082717873,
+          "recall": 0.8327340941066125
+        },
+        "threshold": 0.68
+      },
+      "2025_q4": {
+        "candidate": {
+          "f1": 0.8673621460506706,
+          "positives": 3764,
+          "precision": 0.9277364505844846,
+          "recall": 0.8143656716417911
+        },
+        "delta_f1": -0.0364097946937586,
+        "tabular": {
+          "f1": 0.9037719407444292,
+          "positives": 3745,
+          "precision": 0.9692923898531375,
+          "recall": 0.8465485074626866
+        },
+        "threshold": 0.4
+      }
+    },
+    "gates": {
+      "all_q2_q3_q4_delta_f1_vs_tabular_nonnegative": false,
+      "official_accesses_equal_zero": true,
+      "pooled_bootstrap_ci90_low_vs_tabular_positive": false,
+      "pooled_delta_f1_vs_tabular_positive": false,
+      "q3_q4_bootstrap_ci90_low_vs_e150_positive": false,
+      "q3_q4_delta_f1_vs_e150_positive": false,
+      "runtime_at_most_seconds": true
+    },
+    "pooled_candidate": {
+      "f1": 0.745111980092428,
+      "positives": 14888,
+      "precision": 0.7743148844707146,
+      "recall": 0.7180317658050451
+    },
+    "pooled_tabular": {
+      "f1": 0.86024750980984,
+      "positives": 13762,
+      "precision": 0.9319139659933149,
+      "recall": 0.7988165680473372
+    },
+    "q3_q4_candidate": {
+      "f1": 0.7894015030994569,
+      "positives": 7544,
+      "precision": 0.9537380699893956,
+      "recall": 0.673373888628919
+    },
+    "q3_q4_e150": {
+      "f1": 0.9068037200195791,
+      "positives": 9745,
+      "precision": 0.9505387378142637,
+      "recall": 0.8669162377164249
+    }
+  },
+  "status": "PASS"
+}

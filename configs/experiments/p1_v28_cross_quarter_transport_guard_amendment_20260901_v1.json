@@ -1,0 +1,58 @@
+{
+  "schema_version": "p1.v28_cross_quarter_transport_guard_amendment.v1",
+  "experiment_id": "p1_v28_cross_quarter_transport_guard_amendment_20260901_v1",
+  "status": "SEALED_PROSPECTIVE_ONLY",
+  "rationale": {
+    "negative_evidence": "v24 and v27 passed within-prefix chronological and station-layer checks but failed on isolated future quarters; v27 specifically passed the v26 identity-diversity amendment before 332 outer additions yielded only 4 true positives.",
+    "structural_gap": "Multiple environments cut from one calibration surface do not establish persistence across independently labeled calendar windows.",
+    "nonretroactive": "The amendment must not re-evaluate, rescue, compare, or retune v24 or v27. It applies only to a new scientific axis sealed after this file."
+  },
+  "chronological_nesting": {
+    "fit_and_threshold_selection_surface": "strictly before the first transport window",
+    "transport_windows_in_order": ["2025_q2", "2025_q3"],
+    "single_unused_performance_window": "2025_q4",
+    "same_candidate_required": true,
+    "same_ensemble_required": true,
+    "same_numeric_threshold_required": true,
+    "per_window_threshold_selection": 0,
+    "refit_after_transport_labels": 0,
+    "open_performance_window_only_after_both_transport_windows_pass": true,
+    "performance_window_labels_before_gate_seal": 0
+  },
+  "each_transport_window_gate": {
+    "minimum_additions": 25,
+    "maximum_addition_share": 0.0025,
+    "precision_strictly_gt": 0.55,
+    "true_positives_strictly_gt": 0,
+    "wilson90_lcb_minimum": 0.55,
+    "station_layer_environment": {
+      "minimum_proposals_per_supported_environment": 10,
+      "minimum_supported_environments": 2,
+      "minimum_distinct_station_layer_identities": 2,
+      "minimum_distinct_stations": 2,
+      "minimum_environment_precision_strictly_gt": 0.55,
+      "reject_if_any_supported_environment_true_positives_eq": 0
+    }
+  },
+  "selection": {
+    "threshold_quantiles_fixed_before_any_transport_labels": [0.995, 0.9975, 0.999],
+    "one_threshold_selection_rule": "highest quantile passing the pre-transport calibration gate; ties use highest Wilson90 LCB",
+    "transport_windows_are_vetoes_not_threshold_selection_surfaces": true,
+    "result_based_gate_or_coefficient_changes": 0
+  },
+  "fit_budget": {
+    "maximum_supervised_fits": 9,
+    "preferred_single_candidate_ensemble": "3 fixed seeds trained once before 2025_q2",
+    "quarter_refits": 0,
+    "sweeps": 0,
+    "retries": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "access": {"allowed": ["README.md", "train.csv", "authenticated_historical_prediction_parts"], "official": 0, "hidden": 0, "test": 0, "sample_submission": 0, "csv": 0, "uploads": 0},
+  "evidence": {
+    "prior_guard_path": "configs/experiments/p1_v26_transport_guard_amendment_20260901_v1.json",
+    "prior_guard_sha256": "6d0f6f21aaa72410ad84d6a42e400b94a3e681f65670f81a02d464989b592383",
+    "v27_result_path": "artifacts/p1_v27_causal_dirichlet_evidential_addonly_20260901_v1/result.json",
+    "v27_result_sha256": "df57fba75d34a03b1b2956d0c145a4efef554d3faccabff087a989d3aa0e15b7"
+  }
+}

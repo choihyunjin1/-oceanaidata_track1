@@ -1,0 +1,67 @@
+{
+  "schema_version": "p3.moist_air_momentum_residual.config.v76",
+  "experiment_id": "p3_moist_air_momentum_residual_cycle_20260901_v76",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_MOIST_AIR_MOMENTUM_AXIS",
+    "novel_axis": "past-only moist-air-density-weighted sustained and gust wind momentum-flux proxies",
+    "distinction": "v20 and forcing analogs use wind-speed-squared, gust excess, direction alignment and pressure tendency as separate inputs. v76 uniquely combines observed pressure, air temperature and relative humidity into moist-air density before weighting sustained/gust squared speeds; it contains no KMA adjustment, direction alignment, forecast output, spectrum, pole, codifference or causal-dependence estimator.",
+    "repository_negative_fingerprint": "No executed P3 air-density, moist-air equation-of-state, rho-U-squared, density-weighted gust momentum, or thermodynamic wind-momentum feature contract was found.",
+    "posthoc_prior_cycle_adjustment": false,
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "forbidden_reuse": ["v64 or earlier predictions/features", "official result or slices", "prior candidate ensembles or routers"]
+  },
+  "encoder": {
+    "input": "past-only local wspd/gust/airt/relh/caph on the native context, linearly filled within the observed prefix and sampled on the fixed 20-minute grid",
+    "derived_paths": ["moist_air_density", "rho_times_wspd_squared", "rho_times_gust_squared", "rho_times_nonnegative_gust_squared_excess"],
+    "windows": {"full": [0, 145], "recent": [72, 145]},
+    "moist_air_formula": "ideal dry-air plus water-vapor partial densities; saturation vapor pressure 6.112*exp(17.67*T/(T+243.5)) hPa",
+    "constants": {"dry_air_gas_constant": 287.05, "water_vapor_gas_constant": 461.495},
+    "statistics": ["median", "IQR", "p90", "endpoint difference", "OLS time slope", "fraction positive increments"],
+    "feature_count": 48,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false,
+    "row_deletion": 0,
+    "support_gate": {"minimum_cases": 180, "minimum_positive_variance_features": 40, "minimum_density_kg_m3": 0.8, "maximum_density_kg_m3": 1.5, "target_used": false}
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_MOISTAIR48_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_MOISTAIR48_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Picard, Davis, Glaser, and Fujii, Revised formula for the density of moist air (CIPM-2007), Metrologia 45, 149-155 (2008)", "url": "https://doi.org/10.1088/0026-1394/45/2/004", "use": "moist-air density motivation only; simplified fixed partial-density calculation is preregistered here"},
+    {"citation": "Large and Pond, Open ocean momentum flux measurements in moderate to strong winds, Journal of Physical Oceanography 11, 324-336 (1981)", "url": "https://doi.org/10.1175/1520-0485(1981)011%3C0324:OOMFMI%3E2.0.CO;2", "use": "air-density and squared-wind momentum-flux motivation only; no P3 performance claim"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

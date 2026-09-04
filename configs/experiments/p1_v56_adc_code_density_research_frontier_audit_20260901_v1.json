@@ -1,0 +1,99 @@
+{
+  "schema_version": "p1.v56_adc_code_density_research_frontier_audit.v1",
+  "experiment_id": "p1_v56_adc_code_density_research_frontier_audit_20260901_v1",
+  "status": "NO_GO_ZERO_FIT_ADC_CODE_DENSITY_SOURCE_CONTRACT_UNAVAILABLE",
+  "surface": "READ_ONLY_PRIMARY_SOURCE_REPOSITORY_SEMANTIC_AND_SCHEMA_SUPPORT_AUDIT",
+  "purpose": "Audit exactly one unexecuted train-only observable after v54 and v55, without inventing acquisition metadata or forcing another decimal-bin, plateau, symbolic, or occupancy variant.",
+  "single_mechanism": {
+    "name": "causal station-layer ADC output-code occupancy and missing-code/DNL diagnostic",
+    "scientific_fingerprint": "On a prefix stream of raw integer converter output codes, compare observed code occupancy with the converter code-transition contract to diagnose missing codes or differential nonlinearity before proposing anchor-negative rows.",
+    "candidate_count": 1,
+    "fit_budget_if_ready": 3,
+    "maximum_fits_if_ready": 9,
+    "result_based_retune_or_bin_width_sweep": 0,
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0
+  },
+  "primary_source": {
+    "title": "IEEE Standard for Terminology and Test Methods for Analog-to-Digital Converters",
+    "standard": "IEEE 1241-2023",
+    "publication_date": "2023-10-06",
+    "url": "https://standards.ieee.org/ieee/1241/6797/",
+    "claim_boundary": "IEEE 1241 provides ADC terminology and test-method context. It does not establish that P1 temp values are raw ADC codes, that passive ocean-state samples satisfy a code-density stimulus contract, or that this mechanism improves P1 performance."
+  },
+  "schema_support_audit": {
+    "readme_path": "C:/Users/cedis/Downloads/데이터셋_P1/P1_qc_anomaly/README.md",
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "available_columns": ["station", "year", "layer", "time", "temp", "psal", "depth"],
+    "available_temperature_representation": "processed physical temperature values in CSV",
+    "required_but_absent": [
+      "raw integer ADC output code",
+      "converter resolution or bit depth",
+      "LSB/code width",
+      "code transition levels or transfer function",
+      "gain/offset/calibration and serialization provenance",
+      "controlled or otherwise justified code-density stimulus distribution"
+    ],
+    "identifiability": "FAIL",
+    "reason": "Decimal physical values cannot distinguish sensor quantization from calibration, unit conversion, rounding, CSV serialization, or genuine repeated ocean states. Missing ADC codes and DNL therefore are not identifiable from the allowed schema.",
+    "train_rows_read": 0,
+    "target_rows_read": 0
+  },
+  "repository_negative_fingerprint": {
+    "exact_p1_adc_dnl_or_code_density_implementation_hits": 0,
+    "exact_duplicate": false,
+    "support_qualified_new_observable": false,
+    "proxy_semantic_duplicate_or_reconstructible": true,
+    "plateau_and_zero_step_family": {
+      "path": "src/p1_qc/rules.py",
+      "sha256": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c",
+      "overlap": "Existing hard rules explicitly detect exact/near-exact plateaus and preserve zero steps in quiet or quantized series. These are the observable row-level signatures available without converter metadata."
+    },
+    "soft_symbolic_family": {
+      "path": "src/p1_qc/causal_soft_symbolic.py",
+      "sha256": "dec110408ac08cd64aebe390f96acd70fff1451f05d1fe6b08bb115b567271d9",
+      "overlap": "Existing causal soft-symbolic features quantize physical-value windows and count symbol transitions. A chosen decimal grid would be another unsupported quantization map."
+    },
+    "state_occupancy_family": {
+      "path": "configs/experiments/p1_v42_causal_half_space_mass_crossquarter_addonly_20260901_v1.json",
+      "sha256": "6c112d7aa382f4477a5fd9960c41f0fdcfd1f29091fef4166ffe58dd510e0e45",
+      "overlap": "v42 already measures prefix state-space occupancy. Histogramming decimal temperature bins changes the partition, not the authenticated information source."
+    }
+  },
+  "frontier_evidence": {
+    "candidate_registry_audit": {
+      "path": "configs/experiments/p1_v54_historical_promotable_candidate_registry_audit_20260901_v1.json",
+      "sha256": "e4b84168645073b76552235c525d24301eae18d6cd901b90e8cd485c6e95eddb",
+      "finding": "no overlooked promotable nonduplicate P1 candidate"
+    },
+    "event_hazard_frontier_audit": {
+      "path": "configs/experiments/p1_v55_hawkes_event_hazard_research_frontier_audit_20260901_v1.json",
+      "sha256": "6d84fcebf273251f71e0802592bba7b5c0b363ffb6c447f256612638ed8715d3",
+      "finding": "event-hazard axis lacks a deployment-time label-independent event stream"
+    }
+  },
+  "decision": {
+    "semantic_preflight": "FAIL_PROXY_RECONSTRUCTIBLE_FROM_CLOSED_PLATEAU_SYMBOLIC_OCCUPANCY_FAMILIES",
+    "deployment_support_preflight": "FAIL_RAW_ADC_CODE_AND_TRANSFER_CONTRACT_ABSENT",
+    "ready": false,
+    "terminal": "NO_GO_ZERO_FIT_ADC_CODE_DENSITY_SOURCE_CONTRACT_UNAVAILABLE",
+    "reason": "The exact ADC diagnostic is not supported by the allowed data contract. A decimal-value surrogate would require inventing a bit depth/bin width and would repeat closed plateau, symbolic, and occupancy observables.",
+    "minimum_new_evidence": "Competition-allowed raw sensor integer codes plus converter resolution, code-transition/calibration provenance, and a defensible stimulus/occupancy contract covering train and deployment; otherwise a genuinely new authenticated deployment-time scientific covariate."
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "executable_preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "train_rows": 0,
+    "historical_target_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,1135 @@
+{
+  "schema_version": "p2.layer_month_risk_variance_rex.result.20260901.v19",
+  "experiment_id": "p2_layer_month_risk_variance_rex_20260901_v19",
+  "status": "EXPLORATORY_NO_GO_LAYER_MONTH_RISK_VARIANCE_REX",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "runtime_seconds": 85.0585071999958,
+  "fit_count": 9,
+  "semantic_audit": {
+    "classification": "NEW_P2_LAYER_MONTH_RISK_VARIANCE_REX_OBJECTIVE",
+    "reason": "Repository-wide audit found no executed P2 V-REx or environment-risk-variance objective. v13 uses static equal group mass; v18 uses an exponentiated minimax adversary. v19 instead minimizes mean layer-month SmoothL1 plus a fixed population variance penalty over layer-month risks in every stochastic batch. Architecture, inputs, prefix/purge, seeds, epochs, blend, and action cap remain v13-exact.",
+    "evidence_sha256": {
+      "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+      "scripts/run_p2_regularized_layer_month_group_dro_20260901_v18.py": "7651ad4b863bb022542330be4f70e232fcaebe5b9b9713ebc341b802bdd5a593",
+      "reports/p2_regularized_layer_month_group_dro_20260901_v18/result.json": "db25e23ad56d9f9bc3eba283cd31d706e2f0569dbdb516f919eaafed55c7ca70",
+      "reports/p2_regularized_layer_month_group_dro_20260901_v18/independent-qa.json": "09eb3fbece87681989d4e7ced0dc85af0437263a07d49dd200239a7fa64d504b"
+    },
+    "prior_p2_vrex_runners": [],
+    "prior_p2_vrex_artifacts": [],
+    "prior_p2_vrex_reports": [],
+    "v13_static_domain_balance_only": true,
+    "v18_minimax_adversary_not_risk_variance": true,
+    "result_adaptive_environment_or_hyperparameter_selection": false
+  },
+  "permutation_invariance": {
+    "public_layer_permutation": [
+      4,
+      2,
+      0,
+      3,
+      1
+    ],
+    "maximum_abs_error": 1.4901161193847656e-08
+  },
+  "training": {
+    "row_deletion": 0,
+    "environment_definition": "target_layer_x_calendar_month",
+    "risk_variance_coefficient": 10.0,
+    "weight_decay": 0.001,
+    "folds": {
+      "2024_sep_oct": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2024-08-25T00:00:00+09:00",
+        "training_rows": 45935,
+        "training_calendar_months": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "environment_receipt": {
+          "groups": {
+            "layer2:month05": {
+              "group_id": 0,
+              "rows": 3332,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer2:month06": {
+              "group_id": 1,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month07": {
+              "group_id": 2,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month08": {
+              "group_id": 3,
+              "rows": 3208,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month05": {
+              "group_id": 4,
+              "rows": 3324,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month06": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month07": {
+              "group_id": 6,
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month08": {
+              "group_id": 7,
+              "rows": 3214,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            },
+            "layer4:month05": {
+              "group_id": 8,
+              "rows": 3329,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month06": {
+              "group_id": 9,
+              "rows": 4319,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month07": {
+              "group_id": 10,
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer4:month08": {
+              "group_id": 11,
+              "rows": 3215,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            }
+          },
+          "group_count": 12,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.8575082138590202,
+          "normalized_max": 8.860918209876543
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 12,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.2394435666501522,
+            "objective_last": 0.14773293087879816,
+            "mean_environment_risk_first": 0.15022351096073785,
+            "mean_environment_risk_last": 0.0933023306230704,
+            "batch_environment_risk_variance_first": 0.008922006042363742,
+            "batch_environment_risk_variance_last": 0.005443059994528691,
+            "minimum_environments_present_per_batch": 12,
+            "final_epoch_environment_risks": {
+              "layer2:month05": 0.03786151289142565,
+              "layer2:month06": 0.048832860915318736,
+              "layer2:month07": 0.05367467887109792,
+              "layer2:month08": 0.050602963757397985,
+              "layer3:month05": 0.05323489589193693,
+              "layer3:month06": 0.057790949094719116,
+              "layer3:month07": 0.0721738615211453,
+              "layer3:month08": 0.0729449334949006,
+              "layer4:month05": 0.1450579683946765,
+              "layer4:month06": 0.09843348541146155,
+              "layer4:month07": 0.29804079101860836,
+              "layer4:month08": 0.13367620876398129
+            },
+            "final_epoch_environment_risk_mean": 0.0935270925022225,
+            "final_epoch_environment_risk_population_variance": 0.004868696155534204,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 12,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.2210992065568765,
+            "objective_last": 0.15005269957085451,
+            "mean_environment_risk_first": 0.12162276916205883,
+            "mean_environment_risk_last": 0.08966779274245103,
+            "batch_environment_risk_variance_first": 0.009947643925746283,
+            "batch_environment_risk_variance_last": 0.006038490624632686,
+            "minimum_environments_present_per_batch": 12,
+            "final_epoch_environment_risks": {
+              "layer2:month05": 0.03472444084848553,
+              "layer2:month06": 0.04869461858640535,
+              "layer2:month07": 0.05444050603092556,
+              "layer2:month08": 0.04762021700511814,
+              "layer3:month05": 0.044081166290480735,
+              "layer3:month06": 0.05508251931917924,
+              "layer3:month07": 0.07027919644084683,
+              "layer3:month08": 0.06893087014573226,
+              "layer4:month05": 0.13291144323909684,
+              "layer4:month06": 0.09080487471477429,
+              "layer4:month07": 0.2935193685198243,
+              "layer4:month08": 0.12409744388801214
+            },
+            "final_epoch_environment_risk_mean": 0.08876555541907344,
+            "final_epoch_environment_risk_population_variance": 0.004699096354077504,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 12,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.20026880378524461,
+            "objective_last": 0.15361152527232966,
+            "mean_environment_risk_first": 0.10763679258525372,
+            "mean_environment_risk_last": 0.09491013921797276,
+            "batch_environment_risk_variance_first": 0.009263200840602318,
+            "batch_environment_risk_variance_last": 0.005870138566630582,
+            "minimum_environments_present_per_batch": 12,
+            "final_epoch_environment_risks": {
+              "layer2:month05": 0.040587699764496776,
+              "layer2:month06": 0.04605372502417372,
+              "layer2:month07": 0.05823743252860251,
+              "layer2:month08": 0.050805611669185805,
+              "layer3:month05": 0.049903771553120174,
+              "layer3:month06": 0.0575904454377875,
+              "layer3:month07": 0.0761478062423195,
+              "layer3:month08": 0.07193491896118262,
+              "layer4:month05": 0.14507873679521638,
+              "layer4:month06": 0.09960893155070923,
+              "layer4:month07": 0.3008044641111008,
+              "layer4:month08": 0.1308498418414009
+            },
+            "final_epoch_environment_risk_mean": 0.09396694878994133,
+            "final_epoch_environment_risk_population_variance": 0.004928218228579628,
+            "parameters": 4865
+          }
+        ]
+      },
+      "2025_jul_aug": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-06-24T00:00:00+09:00",
+        "training_rows": 119667,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "environment_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "group_id": 0,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "group_id": 1,
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "group_id": 2,
+              "rows": 7627,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month07": {
+              "group_id": 3,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month08": {
+              "group_id": 4,
+              "rows": 4216,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month09": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "group_id": 6,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "group_id": 7,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "group_id": 8,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "group_id": 9,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "group_id": 10,
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "group_id": 11,
+              "rows": 7626,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month07": {
+              "group_id": 12,
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "group_id": 13,
+              "rows": 4221,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month09": {
+              "group_id": 14,
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "group_id": 15,
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "group_id": 16,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "group_id": 17,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "group_id": 18,
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "group_id": 19,
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "group_id": 20,
+              "rows": 7628,
+              "days": 53,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "group_id": 21,
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "group_id": 22,
+              "rows": 4223,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "group_id": 23,
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "group_id": 24,
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "group_id": 25,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "group_id": 26,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 0.9999999999999999,
+          "normalized_min": 0.5699731367169639,
+          "normalized_max": 11.080277777777777
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.14530414193868638,
+            "objective_last": 0.07094869650900364,
+            "mean_environment_risk_first": 0.07323246076703072,
+            "mean_environment_risk_last": 0.03916189583639304,
+            "batch_environment_risk_variance_first": 0.007207168134239813,
+            "batch_environment_risk_variance_last": 0.003178680020694931,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.030884877445227176,
+              "layer2:month05": 0.015318602025556467,
+              "layer2:month06": 0.030684458350632417,
+              "layer2:month07": 0.04358303899747069,
+              "layer2:month08": 0.035266413265037704,
+              "layer2:month09": 0.008006864741768442,
+              "layer2:month10": 0.006373811788129392,
+              "layer2:month11": 0.0027976627940139815,
+              "layer2:month12": 0.005269551279445999,
+              "layer3:month04": 0.04116560230753085,
+              "layer3:month05": 0.03060378845980197,
+              "layer3:month06": 0.040488578295970086,
+              "layer3:month07": 0.06547838235514701,
+              "layer3:month08": 0.05579916268325338,
+              "layer3:month09": 0.019675837283949837,
+              "layer3:month10": 0.013939537340320041,
+              "layer3:month11": 0.0037396560491708268,
+              "layer3:month12": 0.005717220995882161,
+              "layer4:month04": 0.005163358775122165,
+              "layer4:month05": 0.07481424832287442,
+              "layer4:month06": 0.06789696746580128,
+              "layer4:month07": 0.2758786684534963,
+              "layer4:month08": 0.09954356880486837,
+              "layer4:month09": 0.052210579407301394,
+              "layer4:month10": 0.021513091003399827,
+              "layer4:month11": 0.005181459029959608,
+              "layer4:month12": 0.006442092179408425
+            },
+            "final_epoch_environment_risk_mean": 0.03938655851483482,
+            "final_epoch_environment_risk_population_variance": 0.002790258649159266,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.12557362727820873,
+            "objective_last": 0.07375399619340897,
+            "mean_environment_risk_first": 0.060670925428469975,
+            "mean_environment_risk_last": 0.04009993759294351,
+            "batch_environment_risk_variance_first": 0.006490270160914709,
+            "batch_environment_risk_variance_last": 0.0033654058429722984,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.02920218266397481,
+              "layer2:month05": 0.015795591012273732,
+              "layer2:month06": 0.030657469748763547,
+              "layer2:month07": 0.04646342189201239,
+              "layer2:month08": 0.036767948831073746,
+              "layer2:month09": 0.007601890606874756,
+              "layer2:month10": 0.005169535687553944,
+              "layer2:month11": 0.0016621689429941902,
+              "layer2:month12": 0.00561814173195776,
+              "layer3:month04": 0.04010508978660268,
+              "layer3:month05": 0.03207327115711702,
+              "layer3:month06": 0.04018499073459837,
+              "layer3:month07": 0.0679498326216247,
+              "layer3:month08": 0.058152670493551065,
+              "layer3:month09": 0.020196826937084692,
+              "layer3:month10": 0.01342357169369511,
+              "layer3:month11": 0.0029362383533285256,
+              "layer3:month12": 0.005710737349288228,
+              "layer4:month04": 0.006753405877292371,
+              "layer4:month05": 0.07311811135679933,
+              "layer4:month06": 0.06605130539333444,
+              "layer4:month07": 0.27926466602112143,
+              "layer4:month08": 0.11027278993342307,
+              "layer4:month09": 0.054309742025795735,
+              "layer4:month10": 0.02214407028794369,
+              "layer4:month11": 0.004319097557309367,
+              "layer4:month12": 0.007491887965299089
+            },
+            "final_epoch_environment_risk_mean": 0.04012580209861806,
+            "final_epoch_environment_risk_population_variance": 0.00290733079279935,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.11621023292342822,
+            "objective_last": 0.0760516632348299,
+            "mean_environment_risk_first": 0.058256917943557106,
+            "mean_environment_risk_last": 0.04101020197073619,
+            "batch_environment_risk_variance_first": 0.005795331388556709,
+            "batch_environment_risk_variance_last": 0.0035041461718113474,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.030277237858530034,
+              "layer2:month05": 0.015252905565868209,
+              "layer2:month06": 0.031418135505088214,
+              "layer2:month07": 0.04508302846559774,
+              "layer2:month08": 0.03508635562152463,
+              "layer2:month09": 0.007748337486442698,
+              "layer2:month10": 0.006866127969314379,
+              "layer2:month11": 0.0023910430222992786,
+              "layer2:month12": 0.005061538702260542,
+              "layer3:month04": 0.04026163768313416,
+              "layer3:month05": 0.03221652476276986,
+              "layer3:month06": 0.041236867994609745,
+              "layer3:month07": 0.06798758678190502,
+              "layer3:month08": 0.0569123526569273,
+              "layer3:month09": 0.02074330129466811,
+              "layer3:month10": 0.014296816802183506,
+              "layer3:month11": 0.0037747614966036616,
+              "layer3:month12": 0.005285868100453793,
+              "layer4:month04": 0.004643149658794801,
+              "layer4:month05": 0.07988368606750616,
+              "layer4:month06": 0.0738050935972631,
+              "layer4:month07": 0.2854745870878078,
+              "layer4:month08": 0.11099769394179425,
+              "layer4:month09": 0.058300433693427925,
+              "layer4:month10": 0.02233279528994322,
+              "layer4:month11": 0.004878591517110669,
+              "layer4:month12": 0.005709702210195766
+            },
+            "final_epoch_environment_risk_mean": 0.04103430225311202,
+            "final_epoch_environment_risk_population_variance": 0.003059022016389851,
+            "parameters": 4865
+          }
+        ]
+      },
+      "2025_nov_dec": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-10-25T00:00:00+09:00",
+        "training_rows": 149384,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "environment_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "group_id": 0,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "group_id": 1,
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "group_id": 2,
+              "rows": 8635,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month07": {
+              "group_id": 3,
+              "rows": 8904,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month08": {
+              "group_id": 4,
+              "rows": 8661,
+              "days": 62,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month09": {
+              "group_id": 5,
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "group_id": 6,
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "group_id": 7,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "group_id": 8,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "group_id": 9,
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "group_id": 10,
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "group_id": 11,
+              "rows": 8634,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month07": {
+              "group_id": 12,
+              "rows": 8901,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "group_id": 13,
+              "rows": 8647,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month09": {
+              "group_id": 14,
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "group_id": 15,
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "group_id": 16,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "group_id": 17,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "group_id": 18,
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "group_id": 19,
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "group_id": 20,
+              "rows": 8636,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "group_id": 21,
+              "rows": 8911,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "group_id": 22,
+              "rows": 8687,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "group_id": 23,
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "group_id": 24,
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "group_id": 25,
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "group_id": 26,
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.6197066241869109,
+          "normalized_max": 13.831851851851852
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.08624689421943717,
+            "objective_last": 0.04281387729821978,
+            "mean_environment_risk_first": 0.0578446356025902,
+            "mean_environment_risk_last": 0.02943387647738328,
+            "batch_environment_risk_variance_first": 0.002840225856965156,
+            "batch_environment_risk_variance_last": 0.0013380000797238805,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.028260872703974333,
+              "layer2:month05": 0.01372975180721393,
+              "layer2:month06": 0.028192184470887987,
+              "layer2:month07": 0.025482866791281634,
+              "layer2:month08": 0.020387703590542424,
+              "layer2:month09": 0.006190877128483481,
+              "layer2:month10": 0.004753818236387146,
+              "layer2:month11": 0.0014910346333938049,
+              "layer2:month12": 0.0045324061245646625,
+              "layer3:month04": 0.03782155617343462,
+              "layer3:month05": 0.029844838690547947,
+              "layer3:month06": 0.03531037637657689,
+              "layer3:month07": 0.03968651044076748,
+              "layer3:month08": 0.03551158018867342,
+              "layer3:month09": 0.018285508501187236,
+              "layer3:month10": 0.011901689233039577,
+              "layer3:month11": 0.0021471225564225643,
+              "layer3:month12": 0.0049806569677243555,
+              "layer4:month04": 0.004328015131408354,
+              "layer4:month05": 0.07458118174769275,
+              "layer4:month06": 0.0574475265340981,
+              "layer4:month07": 0.16173338589356312,
+              "layer4:month08": 0.07139994649460282,
+              "layer4:month09": 0.05057815839078407,
+              "layer4:month10": 0.018810484862008186,
+              "layer4:month11": 0.003573136537189605,
+              "layer4:month12": 0.005912958574576425
+            },
+            "final_epoch_environment_risk_mean": 0.029513931436334333,
+            "final_epoch_environment_risk_population_variance": 0.0010895535029146223,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.07193881323611415,
+            "objective_last": 0.04158529659380784,
+            "mean_environment_risk_first": 0.04744564993558703,
+            "mean_environment_risk_last": 0.0291581746895571,
+            "batch_environment_risk_variance_first": 0.0024493163092867347,
+            "batch_environment_risk_variance_last": 0.001242712207730054,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.027549590920752653,
+              "layer2:month05": 0.014147314626680443,
+              "layer2:month06": 0.0270975352191423,
+              "layer2:month07": 0.025771494462472042,
+              "layer2:month08": 0.020366932977848272,
+              "layer2:month09": 0.006234222293131268,
+              "layer2:month10": 0.004951040504327245,
+              "layer2:month11": 0.0015301206126989786,
+              "layer2:month12": 0.0045952064912520895,
+              "layer3:month04": 0.03570905157636416,
+              "layer3:month05": 0.03005227445013803,
+              "layer3:month06": 0.03529603584341071,
+              "layer3:month07": 0.039895077003577306,
+              "layer3:month08": 0.03439011341683436,
+              "layer3:month09": 0.017728608741441977,
+              "layer3:month10": 0.011853040700674417,
+              "layer3:month11": 0.002356109733208911,
+              "layer3:month12": 0.004806578983238149,
+              "layer4:month04": 0.005440252337303669,
+              "layer4:month05": 0.06896335197289252,
+              "layer4:month06": 0.055457379228305966,
+              "layer4:month07": 0.1581039919029576,
+              "layer4:month08": 0.07402520525627614,
+              "layer4:month09": 0.05064920081812239,
+              "layer4:month10": 0.01983934605135523,
+              "layer4:month11": 0.0039005562614542666,
+              "layer4:month12": 0.005377937898361708
+            },
+            "final_epoch_environment_risk_mean": 0.029114354454971212,
+            "final_epoch_environment_risk_population_variance": 0.0010368653965561905,
+            "parameters": 4865
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "environment_count": 27,
+            "risk_variance_coefficient": 10.0,
+            "weight_decay": 0.001,
+            "objective_first": 0.06529700464090786,
+            "objective_last": 0.040408075610930856,
+            "mean_environment_risk_first": 0.04375019055363294,
+            "mean_environment_risk_last": 0.028590164977956464,
+            "batch_environment_risk_variance_first": 0.0021546814257178354,
+            "batch_environment_risk_variance_last": 0.0011817910771414234,
+            "minimum_environments_present_per_batch": 27,
+            "final_epoch_environment_risks": {
+              "layer2:month04": 0.027465440296252832,
+              "layer2:month05": 0.014676835997867595,
+              "layer2:month06": 0.026600643068553812,
+              "layer2:month07": 0.025703531155064234,
+              "layer2:month08": 0.02008740126966567,
+              "layer2:month09": 0.0055603669670739545,
+              "layer2:month10": 0.004701333469513694,
+              "layer2:month11": 0.0013954331159749553,
+              "layer2:month12": 0.004428240685429595,
+              "layer3:month04": 0.03385083697972207,
+              "layer3:month05": 0.029026409415961178,
+              "layer3:month06": 0.03407074821138555,
+              "layer3:month07": 0.039281619633054966,
+              "layer3:month08": 0.033801434680407604,
+              "layer3:month09": 0.01786362215412443,
+              "layer3:month10": 0.011865773085082108,
+              "layer3:month11": 0.0023392273538987715,
+              "layer3:month12": 0.004658774083741696,
+              "layer4:month04": 0.003942403510207136,
+              "layer4:month05": 0.06718490648446902,
+              "layer4:month06": 0.05627909678387398,
+              "layer4:month07": 0.1582030668198771,
+              "layer4:month08": 0.07335016603044056,
+              "layer4:month09": 0.04950802290698639,
+              "layer4:month10": 0.018859463352019157,
+              "layer4:month11": 0.003795203303164668,
+              "layer4:month12": 0.005747601520582219
+            },
+            "final_epoch_environment_risk_mean": 0.028675837123496105,
+            "final_epoch_environment_risk_population_variance": 0.0010331522276001693,
+            "parameters": 4865
+          }
+        ]
+      }
+    }
+  },
+  "candidate": {
+    "name": "P2_V19_LAYER_MONTH_RISK_VARIANCE_REX_BLEND020",
+    "objective": "layer_month_mean_risk_plus_10x_population_variance_VREx",
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reference_rmse": 3.085714618974286,
+    "candidate_rmse": 3.037946559679551,
+    "delta_rmse": -0.04776805929473493,
+    "by_fold": {
+      "2024_sep_oct": {
+        "rows": 26273,
+        "reference_rmse": 4.882135051908297,
+        "candidate_rmse": 4.80839925736014,
+        "delta_rmse": -0.07373579454815715
+      },
+      "2025_jul_aug": {
+        "rows": 26693,
+        "reference_rmse": 1.1857780665476285,
+        "candidate_rmse": 1.1591425727052882,
+        "delta_rmse": -0.02663549384234032
+      },
+      "2025_nov_dec": {
+        "rows": 16884,
+        "reference_rmse": 0.28073218471331673,
+        "candidate_rmse": 0.28158353129138963,
+        "delta_rmse": 0.0008513465780728979
+      }
+    },
+    "by_layer": {
+      "2": {
+        "rows": 23298,
+        "reference_rmse": 0.977425784480094,
+        "candidate_rmse": 0.8530154170475432,
+        "delta_rmse": -0.12441036743255074
+      },
+      "3": {
+        "rows": 23280,
+        "reference_rmse": 1.614255614462584,
+        "candidate_rmse": 1.521072383178474,
+        "delta_rmse": -0.09318323128410988
+      },
+      "4": {
+        "rows": 23272,
+        "reference_rmse": 5.001566713966556,
+        "candidate_rmse": 4.965675856648125,
+        "delta_rmse": -0.03589085731843067
+      }
+    },
+    "by_fold_layer": {
+      "2024_sep_oct": {
+        "2": {
+          "rows": 8777,
+          "reference_rmse": 1.4655912558305686,
+          "candidate_rmse": 1.2457463053378555,
+          "delta_rmse": -0.21984495049271313
+        },
+        "3": {
+          "rows": 8774,
+          "reference_rmse": 2.411153774848093,
+          "candidate_rmse": 2.2447176554293384,
+          "delta_rmse": -0.16643611941875447
+        },
+        "4": {
+          "rows": 8722,
+          "reference_rmse": 7.986758349725424,
+          "candidate_rmse": 7.938216620202857,
+          "delta_rmse": -0.04854172952256697
+        }
+      },
+      "2025_jul_aug": {
+        "2": {
+          "rows": 8890,
+          "reference_rmse": 0.5930813808765173,
+          "candidate_rmse": 0.5913567908423414,
+          "delta_rmse": -0.0017245900341759102
+        },
+        "3": {
+          "rows": 8875,
+          "reference_rmse": 1.02350668839,
+          "candidate_rmse": 1.0261941090200033,
+          "delta_rmse": 0.0026874206300033787
+        },
+        "4": {
+          "rows": 8928,
+          "reference_rmse": 1.6769858971289795,
+          "candidate_rmse": 1.6192906543369379,
+          "delta_rmse": -0.057695242792041634
+        }
+      },
+      "2025_nov_dec": {
+        "2": {
+          "rows": 5631,
+          "reference_rmse": 0.2223371212774351,
+          "candidate_rmse": 0.19887102395920506,
+          "delta_rmse": -0.023466097318230045
+        },
+        "3": {
+          "rows": 5631,
+          "reference_rmse": 0.2518955116552082,
+          "candidate_rmse": 0.2330912134130568,
+          "delta_rmse": -0.01880429824215138
+        },
+        "4": {
+          "rows": 5622,
+          "reference_rmse": 0.35159372870754263,
+          "candidate_rmse": 0.3795921869271213,
+          "delta_rmse": 0.027998458219578692
+        }
+      }
+    },
+    "bootstrap": {
+      "unit": "fold_x_kst_date",
+      "groups": 163,
+      "replicates": 5000,
+      "mean_delta_rmse": -0.051364749700240915,
+      "ci90_low": -0.07621317476852625,
+      "ci90_high": -0.03528655811580501,
+      "probability_improved": 1.0
+    },
+    "official_like_bootstrap": {
+      "unit": "kst_date",
+      "groups": 61,
+      "replicates": 5000,
+      "ci90_low": -0.11946354105282204,
+      "ci90_high": -0.05390560285155699,
+      "probability_improved": 1.0
+    },
+    "raw_expected_points_delta": 0.67638222824416,
+    "transport_calibrated_expected_points_delta": 0.5547001366341539,
+    "candidate_change_rms_C": 0.1761638656632823,
+    "candidate_change_abs_max_C": 0.5000000000000018,
+    "gate_checks": {
+      "pooled_improves": true,
+      "minimum_two_folds_improve": true,
+      "official_like_fold_improves": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "calibrated_expected_points_gte_0_01": true
+    },
+    "strict_exploratory_pass": true,
+    "by_month": {
+      "2024-09": {
+        "rows": 12934,
+        "reference_rmse": 2.2787351769737767,
+        "candidate_rmse": 2.025040602756044,
+        "delta_rmse": -0.2536945742177328
+      },
+      "2024-10": {
+        "rows": 13339,
+        "reference_rmse": 6.473934093544442,
+        "candidate_rmse": 6.446947567449613,
+        "delta_rmse": -0.02698652609482899
+      },
+      "2025-07": {
+        "rows": 13358,
+        "reference_rmse": 1.3894354530721664,
+        "candidate_rmse": 1.3540223003655054,
+        "delta_rmse": -0.03541315270666101
+      },
+      "2025-08": {
+        "rows": 13335,
+        "reference_rmse": 0.9384581958535501,
+        "candidate_rmse": 0.9235810083541818,
+        "delta_rmse": -0.014877187499368283
+      },
+      "2025-11": {
+        "rows": 12951,
+        "reference_rmse": 0.29628626798459773,
+        "candidate_rmse": 0.3045751728319883,
+        "delta_rmse": 0.008288904847390588
+      },
+      "2025-12": {
+        "rows": 3933,
+        "reference_rmse": 0.22193861634935502,
+        "candidate_rmse": 0.1868464853366802,
+        "delta_rmse": -0.03509213101267483
+      }
+    },
+    "action_geometry": {
+      "active_rows_gt_1e_12": 69850,
+      "active_share_gt_1e_12": 1.0,
+      "abs_action_p50_C": 0.06874576869966909,
+      "abs_action_p90_C": 0.33027498769714575,
+      "abs_action_p95_C": 0.5,
+      "abs_action_p99_C": 0.5,
+      "abs_action_p999_C": 0.5,
+      "abs_action_max_C": 0.5000000000000018,
+      "action_rms_C": 0.1761638656632823,
+      "sse_gain_top_0_1pct_share": 0.07264964236437468,
+      "sse_gain_top_1pct_share": 0.19471135102638198
+    },
+    "canonical_nominal_pooled_points_delta": 0.5993712095873307,
+    "canonical_transport_adjusted_pooled_points_delta": 0.47768911797732455,
+    "legacy_engine_score_translation": {
+      "raw_expected_points_delta": 0.67638222824416,
+      "transport_calibrated_expected_points_delta": 0.5547001366341539,
+      "meaning": "official-like Sep-Oct day-bootstrap CI90-high translation"
+    },
+    "prediction_commitment": {
+      "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_layer_month_risk_variance_rex_20260901_v19\\P2_V19_LAYER_MONTH_RISK_VARIANCE_REX_BLEND020.npz",
+      "sha256": "72d915a7c1454827de0f8af76050b3f5c1bc9ac3b92a5babda6241d62aaaf3bf",
+      "rows": 69850,
+      "metric_computed_at_commitment": false
+    },
+    "safety_gate_checks": {
+      "all_three_folds_non_harm": false,
+      "all_six_months_within_0_003C": false,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "canonical_transport_points_gte_0_01": true
+    },
+    "safety_pass": false
+  },
+  "comparison_to_preserved_candidates": {
+    "use": "ledger_only_no_posthoc_selection_or_ensemble",
+    "v13_delta_rmse": -0.050854574991828105,
+    "v13_canonical_nominal_points": 0.6380993612872454,
+    "v18_delta_rmse": -0.05073986974009825,
+    "v18_canonical_nominal_points": 0.6366600935738318,
+    "v19_minus_v13_delta_rmse": 0.003086515697093173,
+    "v19_minus_v18_delta_rmse": 0.002971810445363321,
+    "v19_minus_v13_canonical_nominal_points": -0.038728151699914726,
+    "v19_minus_v18_canonical_nominal_points": -0.0372888839865011
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "68bec4bd935d73953986ae79c79daee2ee846fc854316b20acb8c27e6178d64c",
+    "runner": "17465a969b26400198febaa4a7e7a51591dea3b6b992169af0fb22ed87650864",
+    "v13_runner": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+    "v18_runner": "7651ad4b863bb022542330be4f70e232fcaebe5b9b9713ebc341b802bdd5a593",
+    "v12_runner": "1c027fc0d753273ce62e362a7505afb0ef16fb34daa18f78fb315d83941d60ae",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "prediction_npz": "72d915a7c1454827de0f8af76050b3f5c1bc9ac3b92a5babda6241d62aaaf3bf"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "access": {
+    "attempt_locks": 0,
+    "hidden_truth_reads": 0,
+    "historical_fits": 0,
+    "historical_truth_reads": 0,
+    "official_input_reads": 0,
+    "official_rows_read": 0,
+    "submission_csv_reads": 0,
+    "submission_csv_writes": 0,
+    "uploads": 0
+  },
+  "candidate_count": 0,
+  "checks": {
+    "continuous_score_or_checkpoint_missing": true,
+    "deployment_model_not_serialized": true,
+    "exact_rerun_forbidden": true,
+    "historical_fit_count_zero": true,
+    "minimum_calibrated_delta_preserved": true,
+    "no_lock_or_submission_authorized": true,
+    "official_and_hidden_zero": true,
+    "only_aggregate_evidence_read": true,
+    "posthoc_k_forbidden": true,
+    "q3_not_positive": true,
+    "q4_positive": true,
+    "source_internal_positive": true,
+    "top_k_not_registered": true
+  },
+  "decision": "NO_GO",
+  "fit_count": 0,
+  "hashes": {
+    "config_sha256": "5e1714fa20ef0b89a2cc5bc2d9e21ff2553e2338a5a8d9620a20e3f3c474627e",
+    "runner_sha256": "62aebe09f10396ba201c833c58b4e69c251b55f14d81dfef947f18cfbefacb8b",
+    "source_result_sha256": "f6df583607fa5d76a941729ef64ac9bf5acdeeaf518f82d46842fd9f4e9e52ef",
+    "source_runner_sha256": "30e43728f62b0a25d5b4009d1aea11d1d7edc0cca9ed8d79daeb24e3df59a9d7"
+  },
+  "persistence_audit": {
+    "artifact_directory": "artifacts/full_internal_submission_cycle_20260831_v3",
+    "continuous_score_or_model_files": [],
+    "files": [
+      "artifacts/full_internal_submission_cycle_20260831_v3/attempt_lock.json",
+      "artifacts/full_internal_submission_cycle_20260831_v3/p1_result.json",
+      "artifacts/full_internal_submission_cycle_20260831_v3/p2_result.json",
+      "artifacts/full_internal_submission_cycle_20260831_v3/p3_result.json",
+      "artifacts/full_internal_submission_cycle_20260831_v3/result.json"
+    ],
+    "top_k": null
+  },
+  "reason": "The exposed HGB candidate cannot be converted to a prospective stable top-k rule: continuous prefix/deployment scores and a reproducible checkpoint were not persisted, and k=4 would be selected after observing the deployment output and Public tie.",
+  "runtime_seconds": 0.0014739999969606288,
+  "schema_version": "p1.v23.no-go-preflight.1",
+  "source_metrics": {
+    "deployment_additions": 4,
+    "deployment_threshold": 0.8875,
+    "internal_delta_f1": 0.0013809855753390554,
+    "official_result": "TIE",
+    "official_score_delta": 0.0,
+    "q3_delta_f1": 0.0,
+    "q3_threshold": 1.0,
+    "q4_delta_f1": 0.003432580085375281,
+    "q4_threshold": 0.7749999999999999
+  },
+  "status": "NO_GO_MISSING_CONTINUOUS_SCORE_LINEAGE_AND_POSTHOC_K",
+  "transport": {
+    "gate_evaluated": false,
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "penalty_points": "PENDING_V3",
+    "raw_gate": "PENDING_V3"
+  }
+}

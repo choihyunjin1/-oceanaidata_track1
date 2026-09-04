@@ -1,0 +1,60 @@
+{
+  "schema_version": "p2.masked_third_central_moment_profile_pooling.negative_fingerprint.20260901.v50",
+  "candidate_experiment_id": "p2_masked_third_central_moment_profile_pooling_deepset_20260901_v50",
+  "created_at_kst": "2026-09-01T18:01:38+09:00",
+  "created_before_preregistration": true,
+  "scope": "repository P2 configs, runners, reports, and tests; artifacts, submissions, and raw data excluded",
+  "searches": {
+    "masked third central moment": 0,
+    "third-central-moment profile pooling": 0,
+    "latent skewness pooling": 0,
+    "masked_third_central_moment_profile_pooling": 0,
+    "coordinatewise third central moment": 0,
+    "third moment deepset": 0
+  },
+  "exact_execution_hit_count": 0,
+  "semantic_execution_hit_count": 0,
+  "selected_axis": {
+    "classification": "NEW_P2_MASKED_THIRD_CENTRAL_MOMENT_PROFILE_POOLING",
+    "single_change": "append the masked coordinatewise third central moment of the 32 element-embedding coordinates to the exact v13 masked mean, masked maximum, and context before the unchanged head",
+    "historical_support": "v13 executed all three prefix-purged folds; every selected scoring row uses the finite organizer-distributed public-token mask and the fixed third-central-moment descriptor has an exact zero fallback when support is absent; training rows are 45935, 119667, and 149384",
+    "identity_initialization": "the new 32 head columns are exactly zero and the original 75 head columns are copied, so the initial function equals v13",
+    "moment_order": 3,
+    "moment_or_pooling_sweep": false,
+    "no_new_data": true,
+    "scratch_weights_only": true,
+    "no_result_adaptive_choice": true
+  },
+  "distinctions": {
+    "v15": "v15 learns token-token self-attention before pooling; v50 has no attention and uses one fixed coordinatewise signed third central moment",
+    "v16": "v16 passes physical-depth graph messages; v50 has no graph, adjacency, depth kernel, or message passing",
+    "v20": "v20 aligns centered latent covariances across months as a loss; v50 adds no alignment or auxiliary loss",
+    "v43": "v43 applies target-layer FiLM inside token embeddings; v50 does not condition the element encoder on target layer",
+    "v45_v45c": "v45 and v45c stochastically mask Linear weights during training; v50 is deterministic and changes only the pooled descriptor",
+    "v46": "v46 applies LayerNorm to hidden activations; v50 has no normalization",
+    "v47": "v47 learns CrossNet interactions among already pooled coordinates; v50 has no cross layer",
+    "v48": "v48 pools the uncentered nonnegative diagonal second moment mean(z^2); v50 pools the signed centered third moment mean((z-mean(z))^3)",
+    "v49": "v49 pools log(mean(exp(z))) at a fixed temperature; v50 contains no exponential, logarithm, temperature, smooth maximum, or pooling sweep"
+  },
+  "v49_failure_separation": {
+    "classification": "TERMINAL_TECHNICAL_FAILURE_NOT_SCIENTIFIC_EVIDENCE",
+    "attempt_lock_sha256": "fb77ca2d0ffd540aa27b8801b73152e9528221e2ae546a30ca17a2b79b281578",
+    "stderr_sha256": "942e296039360cdadaf2a919e4ccb573a0bd1e2b7c70b26f94573675fc4b9e25",
+    "v49_result_used_for_axis_selection": false,
+    "required_repair": "fresh experiment ID plus pre-lock synthetic validation of every inherited source-contract key"
+  },
+  "primary_source": {
+    "citation": "Zaheer et al., Deep Sets, NeurIPS 2017",
+    "url": "https://papers.nips.cc/paper/6931-deep-sets",
+    "claim": "symmetric aggregation provides a permutation-invariant representation of a set",
+    "use": "representation motivation only; no P2 performance or hyperparameter transfer"
+  },
+  "operation_counters": {
+    "data_rows_read_for_fingerprint": 0,
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

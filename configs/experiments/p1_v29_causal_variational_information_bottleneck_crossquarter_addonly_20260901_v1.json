@@ -1,0 +1,116 @@
+{
+  "schema_version": "p1.v29_causal_variational_information_bottleneck_crossquarter_addonly.v1",
+  "result_schema_version": "p1.v29_causal_variational_information_bottleneck_crossquarter.result.v1",
+  "experiment_id": "p1_v29_causal_variational_information_bottleneck_crossquarter_addonly_20260901_v1",
+  "status": "PREREGISTERED_EXACTLY_ONCE_EXPLORATORY",
+  "surface": "EXPLORATORY_REUSED_SURFACE_WITH_NEW_Q4_ONLY_OUTER",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "primary_source": {
+    "title": "Deep Variational Information Bottleneck",
+    "authors": "Alemi, Fischer, Dillon, Murphy",
+    "venue": "ICLR 2017",
+    "url": "https://research.google/pubs/deep-variational-information-bottleneck/",
+    "claim_boundary": "The paper motivates a variational approximation to the information bottleneck with a stochastic latent and reparameterization. It does not establish P1 performance, transport, or anomaly-detection validity."
+  },
+  "cross_quarter_guard": {
+    "path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json",
+    "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "prospective_only": true
+  },
+  "semantic_audit": {
+    "decision": "NOVEL_P1_OBJECTIVE_PROCEED_ONCE",
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "objective_fingerprint": "supervised stochastic Gaussian bottleneck; reparameterized latent; binary predictive loss plus fixed KL-to-standard-normal compression; deterministic posterior-mean action score",
+    "repository_search": "No P1 information-bottleneck, variational-bottleneck, stochastic-latent classifier, or beta-weighted latent compression execution was found.",
+    "masked_reconstruction": "Masked TCN predicts hidden inputs before event fine-tuning. v29 reconstructs no input and directly compresses supervised predictive information.",
+    "ts2vec_prototype": "TS2Vec learns contrastive agreement and thresholds normal-prototype distance. v29 has no contrastive pairs, prototype, or distance action.",
+    "barlow": "v26 matches cross-view correlations and freezes an encoder. v29 uses no views or cross-correlation objective and trains its stochastic bottleneck end-to-end.",
+    "domain_ranking_evidential": "v29 has no station adversary, pairwise ranking, Dirichlet evidence, uncertainty threshold, or score recalibration.",
+    "evidence": {
+      "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+      "configs/experiments/p1_v26_transport_guard_amendment_20260901_v1.json": "6d0f6f21aaa72410ad84d6a42e400b94a3e681f65670f81a02d464989b592383",
+      "configs/experiments/p1_masked_pretrain_binary_event_v4r4.json": "dcedcd7129687554969fd87aceacde50897583476c5aad32d811d2791a5ef803",
+      "src/p1_qc/ts2vec_conditional_normal_prototype.py": "54ad846a64796542dc015c1d62d26429e6b101405869febb0ae0e283025e412d",
+      "scripts/run_p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1.py": "186f26fc9c7edea1eea01e78a485c10719ed19a0823f5ec74d79a2406f32fc6a",
+      "scripts/run_p1_v26_causal_barlow_redundancy_reduction_addonly_20260901_v1.py": "9f76ab16a06c3107eb10c3935e425165b7436c67d093595ade24184a643556e2",
+      "scripts/run_p1_v27_causal_dirichlet_evidential_addonly_20260901_v1.py": "02d82470f60bc8f856f9218cbe80c5042b7b9f2b41165f7ef246088684fb7143"
+    }
+  },
+  "representation": {
+    "kind": "fixed_prefix_robust_causal_temperature_state",
+    "features": ["current", "lag1", "lag6", "lag36", "difference1", "absolute_difference1", "backward_acceleration", "gap_support"],
+    "lag_rows": [1, 6, 36],
+    "past_only": true,
+    "future_interpolation": 0,
+    "subsequence_normalization": 0
+  },
+  "representation_support_gate": {
+    "minimum_nonzero_feature_share": 0.5,
+    "minimum_feature_variance": 0.000001,
+    "failure": "CLOSE_ZERO_FIT_INSUFFICIENT_VIB_INPUT_SUPPORT"
+  },
+  "model": {
+    "kind": "supervised_variational_information_bottleneck",
+    "hidden_units": 12,
+    "latent_units": 4,
+    "kl_coefficient": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 12,
+    "learning_rate": 0.002,
+    "positive_class_weight": 3.0,
+    "maximum_sample_rows_per_fit": 80000,
+    "negative_to_positive_sample_ratio": 3,
+    "batch_rows": 4096,
+    "seeds": [20260901, 20260917, 20260943],
+    "fits": 3,
+    "maximum_fits": 9,
+    "sweep": 0,
+    "inference": "posterior_mean_no_sampling"
+  },
+  "selection": {
+    "inner_train_fraction": 0.85,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "threshold_choice": "highest_quantile_passing_pre_q2_calibration_gate_then_highest_wilson90_lcb",
+    "maximum_addition_share": 0.0025,
+    "minimum_additions": 25,
+    "wilson90_lcb_minimum": 0.55,
+    "precision_strictly_gt": 0.55,
+    "environment": {
+      "minimum_proposals_per_supported_environment": 10,
+      "minimum_supported_environments": 2,
+      "require_both_chronological_halves": true,
+      "minimum_distinct_station_layer_identities": 2,
+      "minimum_distinct_stations": 2,
+      "minimum_environment_precision_strictly_gt": 0.55,
+      "reject_if_any_supported_environment_true_positives_eq": 0
+    },
+    "candidate_threshold_fixed_before_q2": true,
+    "q2_q3_threshold_selection": 0,
+    "q2_q3_refits": 0,
+    "q4_open_only_after_q2_q3_pass": true,
+    "outer_tuning": 0
+  },
+  "anchor": {"operation": "bitwise_or", "removals": 0},
+  "diagnostics": {"long_event_interior": true, "offset_recall": true, "drift_recall": true, "boundary_recall": {"minimum_run_rows": 18, "boundary_rows_each_side": 6}},
+  "parts": {
+    "2025_q2": {"role": "transport_veto_1", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q2_p100.json", "sha256": "67ee943c6b577c8ae2f1f89cc36ee72a0aa204e5a9a6e45e1be9998d32846626"},
+    "2025_q3": {"role": "transport_veto_2", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q3_p100.json", "sha256": "8c8f3b1f9f944cacca370201fbf9acd32560ad2a9307a127253ec1ab7c76c369"},
+    "2025_q4": {"role": "single_unused_performance_window", "path": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.parquet", "audit": "artifacts/p1_meaningful_learning_curve_generation_v1/prediction_parts/2025_q4_p100.json", "sha256": "f484c69ea7bc05bd59080b9e480faba814a50144a54ee291b5153320794a5bd3"}
+  },
+  "decision": {
+    "q4_delta_gt": 0,
+    "q4_ci90_lower_gte": 0,
+    "bootstrap_replicates": 2000,
+    "seed": 20260901,
+    "pass": "POSITIVE_EXPLORATORY_ONLY",
+    "transport_fail": "NO_GO_CROSS_QUARTER_TRANSPORT_VETO_Q4_UNOPENED",
+    "performance_fail": "NO_GO_EXPLORATORY_ONLY"
+  },
+  "operations": {"exactly_once": true, "fits_maximum": 9, "official": 0, "csv": 0, "uploads": 0, "retry_retune": 0}
+}

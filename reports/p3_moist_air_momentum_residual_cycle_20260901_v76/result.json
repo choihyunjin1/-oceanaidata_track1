@@ -1,0 +1,65 @@
+{
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 0,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "decision": "STOP_SUPPORT_GATE_ZERO_FIT",
+  "duplication_audit": {
+    "distinction": "v20 and forcing analogs use wind-speed-squared, gust excess, direction alignment and pressure tendency as separate inputs. v76 uniquely combines observed pressure, air temperature and relative humidity into moist-air density before weighting sustained/gust squared speeds; it contains no KMA adjustment, direction alignment, forecast output, spectrum, pole, codifference or causal-dependence estimator.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "past-only moist-air-density-weighted sustained and gust wind momentum-flux proxies",
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "repository_negative_fingerprint": "No executed P3 air-density, moist-air equation-of-state, rho-U-squared, density-weighted gust momentum, or thermodynamic wind-momentum feature contract was found.",
+    "semantic_verdict": "NON_DUPLICATE_P3_MOIST_AIR_MOMENTUM_AXIS"
+  },
+  "experiment_id": "p3_moist_air_momentum_residual_cycle_20260901_v76",
+  "fit_count": 0,
+  "primary_sources": [
+    {
+      "citation": "Picard, Davis, Glaser, and Fujii, Revised formula for the density of moist air (CIPM-2007), Metrologia 45, 149-155 (2008)",
+      "url": "https://doi.org/10.1088/0026-1394/45/2/004",
+      "use": "moist-air density motivation only; simplified fixed partial-density calculation is preregistered here"
+    },
+    {
+      "citation": "Large and Pond, Open ocean momentum flux measurements in moderate to strong winds, Journal of Physical Oceanography 11, 324-336 (1981)",
+      "url": "https://doi.org/10.1175/1520-0485(1981)011%3C0324:OOMFMI%3E2.0.CO;2",
+      "use": "air-density and squared-wind momentum-flux motivation only; no P3 performance claim"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "c825d75e99af626131e070a6db1dfc65f7462ff17aceda8446fe30967bfe0b01",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "def8b4c3740ca026c2f4a20b71d8eafa4b8476024b6d7e512d4ab2344905c35c",
+    "runner_sha256": "bba6ed0f21acc9d79ee352aea973fd8bc162f13345f4a51dc1d22428eeefadf6"
+  },
+  "schema_version": "p3.moist_air_momentum_residual.result.v76",
+  "status": "COMPLETE",
+  "support_receipt": {
+    "columns": 48,
+    "density_max_kg_m3": 1.3439843641133904,
+    "density_min_kg_m3": 0.0012753848210649446,
+    "finite": true,
+    "matrix_sha256": "56431b4069dc70d628f668be726837a8dcb1cd8629fd55a8e8bb0bb6cdca89d4",
+    "passed": false,
+    "positive_variance_features": 48,
+    "rows": 182,
+    "target_used": false
+  }
+}

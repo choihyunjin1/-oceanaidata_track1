@@ -1,0 +1,736 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0022029142991147168,
+          0.001302219616084322
+        ],
+        "median_m": -0.0005316035236591077,
+        "probability_improve": 0.6898,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0013806984733084615,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.001087121045261319,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006192234449521328,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0015818372216777066,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0016408032215937673,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0008671302815170812,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0021807685134886566,
+          0.0011856836930334465
+        ],
+        "median_m": -0.0005482516009852612,
+        "probability_improve": 0.7038,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.21218884270427,
+        "raw_gain": 0.008589842704266932,
+        "transport_adjusted_gain": -0.040996211388022,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": 0.00019334694049888412,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0013278302361903194,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0019900623310704635,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0001057070159569129,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0017871480831416209,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0012286537514389906,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.006259906636370882,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.005223255985884578,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.007884082517756297,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0022500635162104876,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.007392091797381761,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0018586603030904536,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7806502869662023,
+        "delta_candidate_minus_uniform": -0.0005412377255297196,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.00016815759130672792,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0023372254672046067,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": 0.00019487272399187905,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.001193492180649236,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.00019669884455286724,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.0004451896697817981,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 3.6444557061421357e-05,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0004830950201802908,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.00020637079182994622,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0023411865594564762,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.00418406127891513,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.0038751417494358176,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -5.8128232967025184e-05,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0014090024145894109,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0036681541497719516,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.001307160595816259,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.000308040184396674,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.0030318704233806004,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.00028732369598361007,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.004065593377906462,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -3.289972736753022e-05,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.006192234449521328,
+      "worst_lead_delta_m": 0.0017871480831416209,
+      "worst_reference_tail_block_delta_m": 0.007884082517756297,
+      "worst_station_lead_delta_m": 0.004065593377906462
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0025231613324551093,
+          0.0007525926849852597
+        ],
+        "median_m": -0.0009973975609351426,
+        "probability_improve": 0.8278,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0010239457895012682,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0017030748595587841,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00669617188253413,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0028766098152566144,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0021045762821080283,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0018284473382520483,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.002417614940685403,
+          0.0005339725488935521
+        ],
+        "median_m": -0.000962788558394323,
+        "probability_improve": 0.8566,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.2190953782245,
+        "raw_gain": 0.015496378224499601,
+        "transport_adjusted_gain": -0.034089675867789326,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0003335590975167557,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.0028017175085248702,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0026234027917344527,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": 5.7285927271832904e-05,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0017617213980603008,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0009715723585682623,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.00692283227563284,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004969918296068188,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.009097286469649135,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0020846737249541336,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.004864807322096265,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0010081345462479296,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7802151128070289,
+        "delta_candidate_minus_uniform": -0.0009764118847030989,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00016945010628688362,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.002481085888861534,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0005652735538949072,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0005633044768716955,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0014638671993396635,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0006433307911170028,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -2.6219927922843667e-05,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0006936804282245967,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0005422235468046654,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.002130918860345221,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.0054332349487672404,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004150543997054501,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 5.948466500405036e-05,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.0012916204710037293,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.0031264796431297315,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": 0.00028103052051819954,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.002187969482061458,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.00347700616321156,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": 0.00014343334992317214,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0031023607469082837,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.00036769944539849497,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.00669617188253413,
+      "worst_lead_delta_m": 0.0017617213980603008,
+      "worst_reference_tail_block_delta_m": 0.009097286469649135,
+      "worst_station_lead_delta_m": 0.0031023607469082837
+    }
+  ],
+  "created_at_utc": "2026-09-01T00:44:44.576902+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_PETTITT_CANDIDATES",
+  "duplication_audit": {
+    "distinction": "v32 uses an online Gaussian BOCPD run-length posterior, v48 compares one fixed early/late split with marginal OT, v40 uses fixed amplitude crossings, and v66 follows adaptive records. v67 scans every split with a Mann-Whitney rank cumulative score and records the maximizing split's robust location/scale change.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "distribution-free maximum rank-change geometry over every internal split of a past-only window",
+    "official_exclusion": "official feedback is transport-risk context only and is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_PETTITT_RANK_CHANGE_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 1.1457860999944387,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_pettitt_rank_change_residual_cycle_20260901_v67",
+  "feature_receipt": {
+    "columns": 64,
+    "finite": true,
+    "matrix_sha256": "19dbdf401c2e707077a7ad35499415746f2582a93af67f7661064d3681930eb6",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.1885849668913018,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.06492534540296552,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.19280151315058017,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07302045205179185,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.19320686772381845,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07251445181083767,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.2079068193478064,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07143040401231068,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.21309478477857707,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07380667697301944,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_PETTITT64_RIDGE512_ADD10",
+      "coefficient_l2": 0.1888501505370027,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_PETTITT64_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07263575535770167,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Pettitt, A Non-Parametric Approach to the Change-Point Problem, JRSS C 28(2), 126-135 (1979)",
+      "url": "https://doi.org/10.2307/2346729",
+      "use": "rank-change mechanism motivation only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "ec946975b008de9f425ae60d00c6a1d4028ddd38925d230f0c0ff4e74797aa1b",
+    "evaluation_arrays_sha256": "028bd08567038e99ed95d437bc9337f8358c53c675431b9cce20b79a41beb6b0",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "f0432cc80020de0628db47652ff7a71b256879f6f88b860e841a576c7554f0a3",
+    "runner_sha256": "9e4e08155318e7f46afd40b2ed428af4832145056cfb6154382af723b93b4e92"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.pettitt_rank_change_residual.result.v67",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v20r1",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v20r1",
+  "status": "TECHNICAL_CONTRACT_REPAIR_EXACTLY_ONCE_AUTHORIZED",
+  "base_contract": "configs/experiments/p1_public_transport_repair_cycle_20260831_v20.json",
+  "repair": {"only_change": "derive missing gap_minutes from causal previous time key within station/layer/year", "scientific_parameters_changed": false, "predecessor_status": "PREFIT_TERMINAL_TECHNICAL_FAILURE"},
+  "candidate": "P1_1_ROBUST_STUDENT_T_CLASS_LLR_ADDONLY",
+  "features": {"names": ["abs_temp_robust_z_6h", "abs_temp_robust_z_24h", "abs_temp_robust_z_72h", "temp_abs_median_resid_6h", "temp_abs_median_resid_24h", "temp_abs_median_resid_72h", "temp_abs_peer_residual", "has_gap_before", "gap_minutes", "depth_raw"]},
+  "model": {"distribution": "independent Student-t location-scale", "degrees_of_freedom": 4.0, "inner_fit_fraction": 0.75, "retuning": false},
+  "fit_budget": {"pipeline_fits": 2, "maximum": 2},
+  "decision_policy": {"minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.12168209161000616, "minimum_raw_expected_point_delta_inclusive": 0.13168209161000616},
+  "authorization": {"historical_execution": true, "attempt_lock_creation": true, "official_reads": 0, "hidden_truth_reads": 0, "uploads": 0}
+}

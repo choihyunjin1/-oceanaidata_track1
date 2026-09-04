@@ -1,0 +1,56 @@
+{
+  "schema_version": "competition.organizer_data_policy.20260901.v1",
+  "status": "ACTIVE_HIGHEST_PRECEDENCE",
+  "effective_date_kst": "2026-09-01",
+  "canonical_document": "00_ORGANIZER_DATA_POLICY.md",
+  "distributed_data_only": true,
+  "forbidden_external_source_classes": [
+    "observation",
+    "reanalysis",
+    "forecast"
+  ],
+  "forbidden_uses": [
+    "training",
+    "feature_generation",
+    "validation",
+    "candidate_selection",
+    "calibration",
+    "ensembling",
+    "postprocessing",
+    "prediction_inheritance"
+  ],
+  "kiost_non_distributed_raw_is_answer_equivalent": true,
+  "pretrained_weights": {
+    "real_observation_trained": "FORBIDDEN",
+    "default_when_provenance_is_unclear": "FORBIDDEN",
+    "synthetic_only_exception": {
+      "allowed_only_if_all_conditions_hold": true,
+      "conditions": [
+        "synthetic_only_pretraining_proven_by_versioned_primary_evidence",
+        "exact_weights_bundled_and_loaded_locally_offline",
+        "end_to_end_runtime_within_6_hours",
+        "readme_discloses_model_version_weight_sha256_and_synthetic_pretraining_character"
+      ]
+    }
+  },
+  "superseded_authorization_receipts": [
+    "configs/external_data/official_faq_permission.json"
+  ],
+  "historical_external_lineages": {
+    "retain_as_audit_evidence": true,
+    "delete_or_conceal": false,
+    "reuse_for_science_or_submission": false
+  },
+  "p3": {
+    "forbidden_lineages": [
+      "KMA",
+      "ERA5",
+      "Chronos",
+      "KMA_prediction_descendants"
+    ],
+    "provisional_clean_incumbent": {
+      "candidate_id": "P3_REFINED_PUBLIC_OPTIMUM_20260827",
+      "csv_sha256": "ea65370a5c9291868769ad9e54a54707035dc93a01ffa4772d9fd26342f357aa"
+    }
+  }
+}

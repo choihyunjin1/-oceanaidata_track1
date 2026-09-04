@@ -1,0 +1,121 @@
+{
+  "schema_version": "p1.v58_conductivity_cell_thermal_lag_research_frontier_audit.v1",
+  "experiment_id": "p1_v58_conductivity_cell_thermal_lag_research_frontier_audit_20260901_v1",
+  "status": "NO_GO_ZERO_FIT_CONDUCTIVITY_CELL_THERMAL_LAG_CONTRACT_UNAVAILABLE",
+  "surface": "READ_ONLY_PRIMARY_SOURCE_REPOSITORY_SEMANTIC_AND_SCHEMA_SUPPORT_AUDIT",
+  "purpose": "Audit exactly one authenticated ocean-sensor observable after v54-v57 without inferring raw CTD response physics from processed salinity.",
+  "single_mechanism": {
+    "name": "causal conductivity-cell thermal-inertia mismatch residual",
+    "scientific_fingerprint": "Use synchronized raw temperature and conductivity channels plus authenticated cell-flow and response parameters to predict the conductivity-cell wall thermal anomaly; its causal correction residual is a sensor-state observable on anchor-negative rows.",
+    "candidate_count": 1,
+    "fit_budget_if_ready": 3,
+    "maximum_fits_if_ready": 9,
+    "result_based_retune_or_response_constant_sweep": 0,
+    "anchor_operation": "bitwise_or",
+    "anchor_removals": 0
+  },
+  "primary_source": {
+    "title": "Thermal Inertia of Conductivity Cells: Theory",
+    "author": "Rolf G. Lueck",
+    "venue": "Journal of Atmospheric and Oceanic Technology 7(5), 741-755",
+    "publication_date": "1990-10-01",
+    "doi": "10.1175/1520-0426(1990)007<0741:TIOCCT>2.0.CO;2",
+    "url": "https://journals.ametsoc.org/view/journals/atot/7/5/1520-0426_1990_007_0741_tiocct_2_0_co_2.xml",
+    "claim_boundary": "The paper models temperature anomalies induced by heat stored in conductivity-cell walls under stated flow and heat-transfer assumptions. It does not establish P1 instrument type, raw-channel availability, response parameters, anomaly benefit, or competition performance."
+  },
+  "schema_support_audit": {
+    "readme_path": "C:/Users/cedis/Downloads/데이터셋_P1/P1_qc_anomaly/README.md",
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "available_columns": ["station", "year", "layer", "time", "temp", "psal", "depth"],
+    "available_salinity_representation": "processed practical salinity, not raw conductivity",
+    "required_but_absent": [
+      "raw conductivity-cell output",
+      "raw thermistor channel with authenticated sensor-to-cell time alignment",
+      "pressure channel and conductivity-to-salinity processing provenance",
+      "conductivity-cell geometry/material and thermal response coefficient",
+      "pump or free-stream flow rate through the cell",
+      "instrument model, firmware, and prior thermal-lag correction status"
+    ],
+    "identifiability": "FAIL",
+    "reason": "Processed salinity can already contain proprietary or upstream temperature, pressure, calibration, and thermal-lag corrections. The original cell-wall anomaly and response state cannot be recovered uniquely from temp, psal, and depth.",
+    "train_rows_read": 0,
+    "target_rows_read": 0
+  },
+  "repository_negative_fingerprint": {
+    "exact_p1_conductivity_cell_thermal_lag_or_inertia_hits": 0,
+    "exact_duplicate": false,
+    "support_qualified_new_observable": false,
+    "processed_proxy_semantic_duplicate_or_reconstructible": true,
+    "temperature_salinity_matched_filter": {
+      "path": "src/p1_qc/ts_matched_filter.py",
+      "sha256": "28a2834b475e70f4a885ffe187bc23ea9eec64f69cfa7ddf80c27715a83d0a4c",
+      "overlap": "Existing P1 logic compares temperature interval boundaries and drift with same-boundary processed-salinity changes. A lagged temp-psal proxy would reuse these channels and action geometry without recovering cell physics."
+    },
+    "causal_path_crossmoment": {
+      "path": "configs/experiments/p1_v7_causal_path_crossmoment_addonly_20260901_v1.json",
+      "sha256": "17c6e08570bcb02132f4a747acd64792aec30b43d377bcec0c73c0f2ecab14b1",
+      "overlap": "v7 already executed continuous ordered temp-psal signed path area and multiscale increments. A processed-channel phase or hysteresis summary is reconstructible from that closed family."
+    },
+    "base_temporal_features": {
+      "path": "src/p1_qc/features.py",
+      "sha256": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+      "overlap": "Base features already expose raw/missing/difference/rolling temp and psal information to supervised models."
+    },
+    "physical_consistency_closure": {
+      "path": "configs/experiments/p1_v21_temperature_salinity_depth_physical_consistency_semantic_gate_20260901_v1.json",
+      "sha256": "24dd0d4db213876f6f7215fd4d936358b91a5d28655b249837bbfe727b34302c",
+      "overlap": "v21 closed deterministic temp-psal-depth consistency transforms because they introduce no new observed or intervention layer."
+    }
+  },
+  "frontier_evidence": {
+    "candidate_registry_audit": {
+      "path": "configs/experiments/p1_v54_historical_promotable_candidate_registry_audit_20260901_v1.json",
+      "sha256": "e4b84168645073b76552235c525d24301eae18d6cd901b90e8cd485c6e95eddb"
+    },
+    "event_hazard_audit": {
+      "path": "configs/experiments/p1_v55_hawkes_event_hazard_research_frontier_audit_20260901_v1.json",
+      "sha256": "6d84fcebf273251f71e0802592bba7b5c0b363ffb6c447f256612638ed8715d3"
+    },
+    "adc_contract_audit": {
+      "path": "configs/experiments/p1_v56_adc_code_density_research_frontier_audit_20260901_v1.json",
+      "sha256": "e51a828c00d6d66428dd8e909016b185fde262e1173f10bbe10d70b45933fafd"
+    },
+    "redundant_sensor_audit": {
+      "path": "configs/experiments/p1_v57_redundant_thermistor_parity_research_frontier_audit_20260901_v1.json",
+      "sha256": "92861ca171c4017fa14aef95911589604ecc1c73aab6622578dbea52693e94de"
+    }
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": "UNCHANGED_V28",
+    "auditability_amendment": "UNCHANGED_V33",
+    "feature_contract": "UNCHANGED",
+    "split_contract": "UNCHANGED",
+    "anchor_add_only": true,
+    "maximum_fits": 9,
+    "anchor_removals": 0
+  },
+  "decision": {
+    "semantic_preflight": "FAIL_PROCESSED_TEMP_PSAL_PROXY_RECONSTRUCTIBLE_FROM_CLOSED_FAMILIES",
+    "deployment_support_preflight": "FAIL_RAW_CONDUCTIVITY_FLOW_RESPONSE_AND_PROCESSING_CONTRACT_ABSENT",
+    "ready": false,
+    "terminal": "NO_GO_ZERO_FIT_CONDUCTIVITY_CELL_THERMAL_LAG_CONTRACT_UNAVAILABLE",
+    "reason": "The exact thermal-inertia observable is scientifically distinct but cannot be computed from processed salinity without raw conductivity, time-alignment, cell, flow, and correction provenance. Any processed temp-psal surrogate repeats closed features.",
+    "minimum_new_evidence": "Competition-allowed synchronized raw conductivity, thermistor temperature and pressure; stable instrument identity; cell geometry/material, flow, sampling alignment, calibration, and prior-correction provenance across train and deployment."
+  },
+  "operations": {
+    "candidate_selected": 0,
+    "executable_preflights": 0,
+    "locks": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "train_rows": 0,
+    "historical_target_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0
+  }
+}

@@ -1,0 +1,734 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.004802190685652024,
+          -0.000660491832017229
+        ],
+        "median_m": -0.002718326716003139,
+        "probability_improve": 0.9838,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0009816489697751507,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0043859875545322335,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.004239499719828843,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.003778514670277233,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": 0.0013777666897664131,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0077483569674285935,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.004675012004001849,
+          -0.0008883970202068766
+        ],
+        "median_m": -0.0027761090315958636,
+        "probability_improve": 0.9916,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.24770322680393,
+        "raw_gain": 0.04410422680393082,
+        "transport_adjusted_gain": -0.00548182728835811,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 4,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0004807808952533854,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006371054920503383,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0019560710235723144,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.00021465404330001103,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.0013566072692832165,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0053434913731154055,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_EMDH80_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.016114902271112008,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.008006127207624392,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006620588324994459,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0047044190508446215,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": 0.0035624207586376633,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.008184188689662086,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.778412559788248,
+        "delta_candidate_minus_uniform": -0.0027789649034840602,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": false,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0003745535834430713,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0042440551504517865,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.003928580726108688,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0020237247178451767,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0026115875941638,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.00041609285911481386,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.001780904421150975,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0024033426310039463,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.0014472467722734805,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.002915170553428159,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.00914608546332274,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004043805117591837,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.002055548595424783,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0005329195492833616,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005545285123634502,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0008146593069063846,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.008279128987851325,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.002780609614088214,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0010631763986022058,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": -0.0011911932248116486,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.008365348497220704,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.004239499719828843,
+      "worst_lead_delta_m": -0.00021465404330001103,
+      "worst_reference_tail_block_delta_m": 0.016114902271112008,
+      "worst_station_lead_delta_m": 0.0020237247178451767
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.004329843254102961,
+          -0.0008983531265506438
+        ],
+        "median_m": -0.002669257049059237,
+        "probability_improve": 0.9924,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0017820747396393166,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.003601464525505582,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.005048185719293219,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.003608058246798884,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0013086030362995382,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.006279006659773545,
+          "rows": 240
+        }
+      },
+      "decision": "PASS_STABLE",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0041915190867585885,
+          -0.00111137983046799
+        ],
+        "median_m": -0.0026662913118335463,
+        "probability_improve": 0.9978,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.246177821968608,
+        "raw_gain": 0.04257882196860622,
+        "transport_adjusted_gain": -0.007007232123682712,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0012681492552488738,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006068410417022774,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.002430877704579837,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0002731623196573496,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": -0.0005975502456605497,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0043410452028332935,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.012100611511477344,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.006687641475294437,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.007776057266707159,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004237110668649624,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0006290628914112917,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": -0.005297113487163774,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7785086740795112,
+        "delta_candidate_minus_uniform": -0.002682850612220844,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": true,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.0008696673396965116,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0043084240124506845,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0031448262906088598,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0002928052011655913,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.003044344595578563,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.000276133243026333,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.0011328880345060632,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0014043434472593708,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": -0.001481588325497718,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.003512485960308065,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.00909822817617656,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.004645523175606736,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0015747491181699047,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0002744863072502435,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005271638593417949,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0009117295281318993,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.006978207283884985,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.002940813582314128,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0008667768078787219,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": -0.00019905796952413013,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0059255880106869885,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.005048185719293219,
+      "worst_lead_delta_m": -0.0002731623196573496,
+      "worst_reference_tail_block_delta_m": 0.012100611511477344,
+      "worst_station_lead_delta_m": 0.0011328880345060632
+    }
+  ],
+  "created_at_utc": "2026-08-31T21:05:34.276152+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "PASS_CANDIDATE_AVAILABLE",
+  "duplication_audit": {
+    "distinction": "Closed Fourier/RFF and bispectral families use fixed global sinusoids, wavelet/scattering uses fixed dyadic filters, SSA/state-space uses linear low-rank or transition structure, and DCCA uses detrended second-order covariance. v35 instead fixes an extrema-defined nonlinear data-adaptive decomposition and summarizes each intrinsic mode through its analytic signal.",
+    "novel_axis": "case-local adaptive extrema-envelope intrinsic modes and Hilbert instantaneous amplitude/frequency summaries over four past-only scalar paths",
+    "posthoc_prior_cycle_adjustment": false,
+    "rejected_axes": {
+      "posthoc_mode_router": "routing or selecting modes on the repeatedly exposed outer surface is forbidden",
+      "univariate_mfdfa": "already rejected at v33 because of semantic proximity to fixed wavelet/scattering and spectral lineages"
+    },
+    "repository_exact_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_ADAPTIVE_INTRINSIC_MODE_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 5.476725799991982,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_empirical_mode_hilbert_residual_cycle_20260901_v35",
+  "feature_receipt": {
+    "columns": 80,
+    "finite": true,
+    "matrix_sha256": "abc073e6819abb590c107378648ae506562cb8bbf30f60fd6b0bffa369c179fe",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.2022174853619114,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07958786958937507,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.1931505646812781,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07646423665040673,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.20645557661056463,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08051085876090938,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.20372728599447207,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08652282193126343,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.2240287928757371,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08709992700787655,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_EMDH80_RIDGE512_ADD10",
+      "coefficient_l2": 0.1924025439756506,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_EMDH80_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07235886236612919,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Huang et al., The empirical mode decomposition and the Hilbert spectrum for nonlinear and non-stationary time series analysis, Proceedings of the Royal Society A 454, 903-995 (1998)",
+      "url": "https://doi.org/10.1098/rspa.1998.0193",
+      "use": "motivation for extrema-defined intrinsic modes and Hilbert instantaneous amplitude/frequency only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "f608f671e26fbc5c4a484dba8207216a7d9570b3be89466e765d2c6e30927543",
+    "evaluation_arrays_sha256": "d0e78550cda7fff68e0a46be8f826edf271c7c5316636516ae8a77f391b8c26a",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "6a458fe00479ab008e0510b02de8ff301240326bc173183c055757356c0a77da",
+    "runner_sha256": "d4d61d6e56af6ad8bbcc267fc33cd95b48ed50715153781e9eb4a88b3a8b6c1f"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.empirical_mode_hilbert_residual.result.v35",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

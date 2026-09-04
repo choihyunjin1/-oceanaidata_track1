@@ -1,0 +1,50 @@
+{
+  "effective_scope": "newly preregistered experiments after this v3 only",
+  "method": "Same-problem-first empirical transport guardrail. Use same-problem exact family worst adverse residual; otherwise same-problem tier worst when available; otherwise same-problem worst observed adverse residual. Only when a problem has no official pair may the v2 cross-problem tier/global fallback be used.",
+  "minimum_calibrated_expected_points_delta": 0.01,
+  "p1": {
+    "mechanism": "anchor-preserving add-only intervention",
+    "metric": "F1 classification score mapped to competition points",
+    "observed_actual_points_delta": 0.0,
+    "observed_adverse_residual_points": 0.005383691373120247,
+    "observed_candidate": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+    "observed_expected_central_points_delta": 0.005383691373120247,
+    "observed_family_id": "P1_FIXED_ADD_ONLY_UNION",
+    "observed_pair_count": 1,
+    "observed_tier_id": "LOW_DOF_FIXED",
+    "prospective_exact_family_penalty_points": 0.005383691373120247,
+    "prospective_minimum_raw_expected_points_delta": 0.015383691373120248,
+    "prospective_unseen_family_or_tier_penalty_points": 0.005383691373120247,
+    "relaxation_review_minimum_same_problem_pairs": 3,
+    "uncertainty_status": "PROVISIONAL_N1_NOT_A_CONFIDENCE_INTERVAL"
+  },
+  "p2_p3": {
+    "policy": "unchanged_from_v2",
+    "reason": "v3 audits P1 only and does not retroactively alter other problem gates"
+  },
+  "policy": {
+    "candidate_family_registered_before_internal_results": true,
+    "existing_v5_v22_results_unchanged": true,
+    "minimum_plus_0_01_points_maintained": true,
+    "nested_or_frozen_validation_required": true,
+    "no_future_penalty_reduction_before_three_same_problem_pairs": true,
+    "public_score_as_row_label_forbidden": true,
+    "retroactive_reclassification_forbidden": true,
+    "single_pair_penalty_is_empirical_floor_not_interval": true
+  },
+  "precedence": [
+    "same_problem_exact_family",
+    "same_problem_tier",
+    "same_problem_worst_observed",
+    "cross_problem_v2_fallback_only_if_problem_has_zero_pairs"
+  ],
+  "provenance": {
+    "hidden_truth_reads": 0,
+    "official_ledger_sha256": "650ddb36e61b2478d826735a3280db5c65180a59941be864ef69b77628a0ec29",
+    "official_row_reads": 0,
+    "uploads": 0,
+    "v2_sha256": "1a1d2c96cbe6c2c69b753fb4a130eb092922cc46524286cabcc0f9fce150441f"
+  },
+  "schema_version": "public_transport_calibration.20260831.v3",
+  "status": "PROSPECTIVE_PROBLEM_SPECIFIC_GUARDRAIL_READY"
+}

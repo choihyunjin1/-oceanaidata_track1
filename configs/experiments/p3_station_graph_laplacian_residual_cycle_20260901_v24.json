@@ -1,0 +1,89 @@
+{
+  "schema_version": "p3.station_graph_laplacian_residual.config.v24",
+  "experiment_id": "p3_station_graph_laplacian_residual_cycle_20260901_v24",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "public_rmse_m": 0.575233,
+    "public_points": 24.203599,
+    "policy": "exact uniform alpha 0.425 comparator"
+  },
+  "duplication_audit": {
+    "concurrent_cross_station_propagation": "STOP_NO_DEPLOYMENT_CONTRACT",
+    "concurrent_stop_reason": "anonymous cases have no signed case-to-UTC or cross-station simultaneity linkage, so remote contemporaneous observations cannot be aligned at deployment",
+    "directional_wind_sea_wave_age": "STOP_SEMANTIC_DUPLICATE",
+    "directional_duplicate_evidence": [
+      "src/p3_wave/sea_state.py already implements inverse-wave-age and wind-sea growth features",
+      "p3_causal_forcing_conditioned_episode_analog_v2 already uses wind-wave alignment and directional wind input"
+    ],
+    "selected_axis": "coordinate-graph Laplacian sharing of station-specific residual coefficients",
+    "semantic_verdict": "NON_DUPLICATE_ARCHITECTURE_AXIS",
+    "distinction": "existing P3 models use station one-hot, station-specific normalization, shared models, or independent station effects; repository audit found no graph-Laplacian regularization that couples station-specific forecast coefficient matrices by fixed geographic geometry",
+    "deployment_contract": "requires only the case-local past 48h context, station ID, and three fixed station coordinates; no absolute case time and no remote contemporaneous observation"
+  },
+  "station_graph": {
+    "stations": ["G-ORS", "I-ORS", "S-ORS"],
+    "coordinates_degrees": {
+      "G-ORS": [33.9428, 124.5919],
+      "I-ORS": [32.1228, 125.1822],
+      "S-ORS": [37.4231, 124.7380]
+    },
+    "coordinate_source": "existing pinned repository KIOST station metadata in src/p3_wave/era5_pretrain_data.py",
+    "edge_weight": "exp(-haversine_distance_km / 300)",
+    "inference": "station-specific six-lead coefficient head regularized by weighted graph Laplacian; no message passing over query observations"
+  },
+  "features": {
+    "source": "289-row case-local past context only",
+    "transformed_channels": ["hs", "tp", "hmax", "wvdir_sin", "wvdir_cos", "wspd", "gust", "wdir_sin", "wdir_cos", "airt", "relh", "caph"],
+    "summaries_per_transformed_channel": ["current", "mean_6h", "mean_24h", "std_6h", "std_24h", "slope_6h", "slope_24h"],
+    "missing_summaries": "raw-channel missing fraction over 6h and 24h",
+    "feature_count": 104,
+    "missing_rule": "case-local past-only linear interpolation with nearest endpoint fill; all-missing channel zero; missing fractions retained",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "future_covariates": false,
+    "absolute_time": false
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "closed-form multi-output Ridge with graph-Laplacian station coefficient sharing",
+    "ridge_alpha": 128.0,
+    "additive_residual_weight": 0.10,
+    "candidates": [
+      {"name": "P3_1_STATION_GRAPH_LAP16_ADD10", "graph_strength": 16.0},
+      {"name": "P3_2_STATION_GRAPH_LAP64_ADD10", "graph_strength": 64.0}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "gate": "delta RMSE below zero, at least 4/6 blocks improve, episode and block-station CI90 upper below zero, worst station-lead <=0.01m",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "fixed_transport_penalty_points": 0.04958605409228893
+  },
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

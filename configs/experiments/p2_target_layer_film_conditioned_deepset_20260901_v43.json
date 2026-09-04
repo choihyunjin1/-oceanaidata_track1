@@ -1,0 +1,135 @@
+{
+  "schema_version": "p2.target_layer_film_conditioned_deepset.20260901.v43",
+  "experiment_id": "p2_target_layer_film_conditioned_deepset_20260901_v43",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_masked_token_virtual_adversarial_deepset_20260901_v42/result.json",
+    "required_status": "EXPLORATORY_NO_GO_MASKED_TOKEN_VIRTUAL_ADVERSARIAL",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v15_result": "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/result.json",
+    "v16_result": "reports/p2_fixed_physical_depth_graph_message_passing_20260901_v16/result.json",
+    "v31_result": "reports/p2_within_layer_month_adversarial_deepset_20260901_v31/result.json",
+    "v40_result": "reports/p2_predictive_dropout_consistency_deepset_20260901_v40/result.json",
+    "v41_result": "reports/p2_all_linear_weight_normalized_deepset_20260901_v41/result.json",
+    "v42_result": "reports/p2_masked_token_virtual_adversarial_deepset_20260901_v42/result.json",
+    "fingerprint": "reports/p2_masked_token_virtual_adversarial_deepset_20260901_v42/next-axis-fingerprint.md",
+    "fingerprint_sha256": "c092ccba665394e9f576fb787d3ea6699c10596a8619979b6abc437b547a0c7a"
+  },
+  "primary_source": {
+    "citation": "Perez, Strub, de Vries, Dumoulin, and Courville, AAAI 2018, FiLM: Visual Reasoning with a General Conditioning Layer",
+    "url": "https://doi.org/10.1609/aaai.v32i1.11671",
+    "use": "feature-wise affine conditioning motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_TARGET_LAYER_CONDITIONED_ELEMENT_FILM",
+    "repository_execution_hits": 0,
+    "distinct_from": {
+      "v15": "v15 models pairwise public-token interactions without target-layer conditioning inside the element interaction",
+      "v16": "v16 uses physical-depth graph edges; v43 uses no graph or public-token identity",
+      "v31": "v31 uses layer-conditioned month adversary; v43 has no adversarial/domain objective",
+      "v40_v42": "v40/v42 add predictive consistency; v43 retains one deterministic SmoothL1 pass",
+      "v41": "v41 reparameterizes all Linear weights; v43 retains ordinary v13 weights plus one conditional affine generator"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_plus_identity_initialized_target_layer_FiLM_after_second_element_ReLU_before_pooling",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "exact_v13_weighted_SmoothL1_beta_1.0",
+    "optimizer": "exact_v13_AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "target_layer_film": {
+      "conditioning_context_columns": [1, 2, 3],
+      "conditioning_meaning": ["target_layer_2", "target_layer_3", "target_layer_4"],
+      "generator": "Linear_3_to_64_bias_false",
+      "generator_count": 1,
+      "added_parameters": 192,
+      "gamma_width": 32,
+      "beta_width": 32,
+      "location": "after_second_shared_element_ReLU_before_masked_mean_max_pooling",
+      "broadcast_same_gamma_beta_to_all_public_tokens_in_row": true,
+      "gamma_initialization": 1.0,
+      "beta_initialization": 0.0,
+      "initial_function_maximum_abs_error_lte": 0.000001,
+      "normalization": false,
+      "attention": false,
+      "month_station_year_conditioning": false,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "extra_loss": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

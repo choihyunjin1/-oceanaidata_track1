@@ -1,0 +1,120 @@
+{
+  "schema_version": "p1.prospective_transport_gate.20260831.v4",
+  "policy_id": "p1_prospective_transport_gate_20260831_v4",
+  "status": "PROSPECTIVE_ONLY_READY_NO_MODEL_OR_OFFICIAL_ACTION",
+  "purpose": "Align P1 promotion with the official pooled row-level binary F1 objective while retaining dependence-aware uncertainty and empirical Public transport calibration. Per-day and station-layer minima remain visible transport diagnostics, but are not uncalibrated surrogate objectives.",
+  "effective_scope": {
+    "future_preregistrations_only": true,
+    "candidate_must_be_sealed_after_policy": true,
+    "historical_results_reclassified": false,
+    "p1_v28_retroactive_pass_forbidden": true,
+    "same_exposed_surface_retuning_forbidden": true
+  },
+  "official_metric_contract": {
+    "problem": "P1",
+    "metric": "pooled row-level binary F1 over anomaly labels",
+    "anomaly_type_ranked": false,
+    "primary_benefit": "candidate pooled F1 minus incumbent pooled F1",
+    "station_layer_or_day_macro_weighting": false,
+    "source": "distributed P1 README preserved in 00_MUST_READ_FIRST.md and README.md"
+  },
+  "hard_validity_gates": [
+    "metric_truth_key_row_order_comparator_and_prediction_lineage_exact",
+    "no_target_temporal_episode_or_official_interface_leakage",
+    "candidate_population_and_action_rule_preregistered_before_outcomes",
+    "no_result_driven_retry_mutation_or_threshold_search",
+    "official_hidden_submission_and_upload_boundaries_respected"
+  ],
+  "hard_scientific_and_transport_gates": {
+    "pooled_delta_f1_strictly_above": 0.0,
+    "minimum_each_q3_q4_delta_f1_inclusive": 0.0,
+    "dependent_resampling_unit": "joint KST-day blocks preserving station-layer observations and complete events",
+    "dependent_bootstrap_ci90_low_strictly_above_f1": 0.0,
+    "dependent_bootstrap_probability_improved_minimum_inclusive": 0.8,
+    "minimum_calibrated_expected_point_delta_inclusive": 0.01,
+    "transport_penalty_points": 0.005383691373120247,
+    "minimum_raw_expected_point_delta_inclusive": 0.015383691373120248,
+    "transport_calibration_version": "v3",
+    "transport_calibration_provisional_n1": true,
+    "anchor_removals_required": 0,
+    "positive_additions_required_for_add_only_candidate": true,
+    "addition_precision_strictly_above_incumbent_f1_divided_by_two": true,
+    "maximum_overall_changed_fraction_inclusive": 0.005,
+    "maximum_addition_concentration_any_station_layer_quarter_inclusive": 0.5
+  },
+  "diagnostic_only_transport_checks": {
+    "maximum_changed_fraction_any_kst_day": {
+      "former_hard_threshold": 0.005,
+      "new_role": "diagnostic_warning_only",
+      "reason": "No official mixture, safety loss, or operational action-cost calibration supports an equal per-day percentage veto; unequal and small day denominators create integer discontinuities.",
+      "report": [
+        "maximum and quantiles of per-day changed fraction",
+        "number of action days",
+        "number of days above the former threshold",
+        "maximum share and HHI of additions across KST days"
+      ]
+    },
+    "minimum_each_supported_station_layer_delta_f1": {
+      "former_hard_threshold": 0.0,
+      "new_role": "diagnostic_warning_only",
+      "reason": "Requiring every group point estimate to be nonnegative changes pooled empirical risk into a worst-group objective. Such an objective is appropriate only when group robustness is explicitly intended and calibrated.",
+      "report": [
+        "all station-layer row, positive, TP, FP, FN counts",
+        "per-group F1 deltas with dependence-aware uncertainty when estimable",
+        "worst-group point estimate and multiplicity caveat",
+        "unseen or unsupported deployment groups as Level-0 blockers"
+      ]
+    }
+  },
+  "decision_states": {
+    "PASS_PRIMARY_NO_WARNING": "All validity/scientific/transport hard gates pass and no diagnostic warning is present.",
+    "PASS_PRIMARY_WITH_TRANSPORT_WARNING": "All hard gates pass, while at least one diagnostic-only day or station-layer warning is present; warning must be disclosed but cannot reverse the pooled decision.",
+    "NO_PASS_PRIMARY_GATE": "At least one validity-independent scientific or calibrated transport hard gate fails.",
+    "QA_BLOCKED": "A Level-0 validity or access-boundary gate fails; metrics are inadmissible."
+  },
+  "audit_isolation": {
+    "unchanged_from_v28_pending_separate_audit": [
+      "minimum_each_q3_q4_delta_f1_inclusive",
+      "maximum_overall_changed_fraction_inclusive",
+      "maximum_addition_concentration_any_station_layer_quarter_inclusive"
+    ],
+    "only_role_changes_in_v4": [
+      "maximum_changed_fraction_any_kst_day",
+      "minimum_each_supported_station_layer_delta_f1"
+    ],
+    "numeric_thresholds_derived_from_v28_outcomes": false
+  },
+  "boundaries": {
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "commit_or_push_authorized": false
+  },
+  "frozen_input_hashes": {
+    "00_MUST_READ_FIRST.md": "d36e9137e02bb042e3b8f9cc349dba1f22cdb75a8b49415aa689d723a2dc3b0a",
+    "README.md": "0b7df806ed62d86f2ff234a2d7660eadffd3d22995cfa86ad030f153135d6817",
+    "configs/goals/metric_aligned_gate_recalibration_20260830_v1.json": "48f200b6f239ae19d2feed281864c34efbfd6ade7651f1a8290beff1caac0f65",
+    "configs/goals/tolerance_recalibration_and_failure_replay_20260830_v2.json": "2ab04a2550f660f0d5a178d3c64a23bb4341e6b12929188b4890738a49491e80",
+    "reports/public_transport_calibration_20260831_v3/calibration.json": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10",
+    "reports/parallel_internal_pass_registry_20260831_v1/official-submission-results-20260831.json": "650ddb36e61b2478d826735a3280db5c65180a59941be864ef69b77628a0ec29",
+    "reports/deadline_submission_results_20260828_v1/official-results.md": "d268aaca88906ff5151cd02f3434b21117982bc6bd8fe81915098ef2052df41a",
+    "artifacts/p1_public_transport_repair_cycle_20260831_v28/result.json": "4b6c9103828ec5eeddd475006b6164cbd4f0c31545362207803d61414c55ea9a",
+    "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536"
+  },
+  "primary_sources": [
+    {
+      "claim": "Repeatedly optimizing finite-sample selection criteria can produce selection bias; the prospective policy must be frozen and cannot reclassify v28.",
+      "url": "https://www.jmlr.org/papers/v11/cawley10a.html"
+    },
+    {
+      "claim": "Worst-group optimization is a distinct minimax objective, not a free safety check on average-risk evaluation.",
+      "url": "https://arxiv.org/abs/1911.08731"
+    },
+    {
+      "claim": "Block resampling supports inference for dependent observations; P1 retains KST-day dependence-preserving bootstrap inference.",
+      "url": "https://doi.org/10.1080/01621459.1994.10476870"
+    }
+  ]
+}

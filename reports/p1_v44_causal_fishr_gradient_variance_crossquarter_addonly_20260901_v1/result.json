@@ -1,0 +1,71 @@
+{
+  "schema_version": "p1.v44_zero_fit_terminal.v1",
+  "experiment_id": "p1_v44_causal_fishr_gradient_variance_crossquarter_addonly_20260901_v1",
+  "decision": "CLOSE_ZERO_FIT_INSUFFICIENT_STATION_LAYER_PERIOD_SUPPORT",
+  "failed_stage": "TARGET_FREE_SOURCE_ENVIRONMENT_SUPPORT_PREFLIGHT",
+  "semantic_audit": {
+    "exact_duplicate": false,
+    "semantic_duplicate": false,
+    "fishr_repository_matches": 0,
+    "claim_scope": "Fishr-inspired fixed P1 falsification only; no domain-generalization or P1 performance claim"
+  },
+  "source_environment_support": {
+    "fit_boundary_utc": "2025-01-16T17:50:00+00:00",
+    "calibration_cutoff_utc": "2025-03-24T14:50:00+00:00",
+    "rows": 294278,
+    "stations": 3,
+    "station_layers": 11,
+    "station_layer_quarter_environments": 29,
+    "minimum_rows_per_environment": 54,
+    "median_rows_per_environment": 12878.0,
+    "maximum_rows_per_environment": 15361,
+    "required_minimum_rows_per_environment": 100,
+    "target_columns_read": 0
+  },
+  "sealed_science": {
+    "environment": "station_x_layer_x_calendar_quarter",
+    "objective": "weighted_bce_plus_last_layer_per_sample_gradient_variance_matching",
+    "fishr_coefficient": 1.0,
+    "seeds": [20260901, 20260917, 20260943],
+    "planned_fits": 3,
+    "maximum_fits": 9,
+    "threshold_quantiles": [0.995, 0.9975, 0.999],
+    "v28_cross_quarter_guard_unchanged": true,
+    "v33_auditability_unchanged": true
+  },
+  "counters": {
+    "fits": 0,
+    "optimizer_steps": 0,
+    "pre_q2_target_reads": 0,
+    "q2_target_reads": 0,
+    "q3_target_reads": 0,
+    "q4_target_reads": 0,
+    "official": 0,
+    "test": 0,
+    "sample_submission": 0,
+    "hidden": 0,
+    "csv": 0,
+    "uploads": 0,
+    "anchor_removals": 0
+  },
+  "hashes": {
+    "config": "e4dd6e1e545f6746dea483677dc4ff85ab1ab0e3c8ff8fcc69a1dd6ea7b8a512",
+    "runner": "6190acffd0c711da0756960152be2d981b53b938eb7cad6c37243417c94ebd68",
+    "test": "b7d3eb92563928f248fb1016a88d7aaf8089171e5391f24588ae27bb67eb1145",
+    "cross_quarter_guard": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6",
+    "auditability_amendment": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"
+  },
+  "immutability": {
+    "attempt_lock_created": false,
+    "artifact_namespace_created": false,
+    "support_gate_relaxed": false,
+    "retry_or_retune_allowed": false
+  },
+  "next_axis": {
+    "rejected_intermediate": "environment-support intersection/abstention is a semantic duplicate of the clean-state CAPA unsupported-group zero-signal policy and prior station-concentration abstention",
+    "proposal": "causal cross-environment gradient sign agreement mask",
+    "mechanism": "compute station-by-calendar-quarter source gradients for one shared head and apply only parameter coordinates whose signs agree prospectively across environments; no variance matching, loss reweighting, adversary, router, threshold retuning, or environment input at inference",
+    "primary_source": "Parascandolo et al., Learning Explanations that are Hard to Vary, ICLR 2021, https://openreview.net/forum?id=hb1sDDSLbV",
+    "required_dedup": "repository-wide AND-mask/sign-agreement audit and target-free station-quarter plus layer-diversity support before any config or fit"
+  }
+}

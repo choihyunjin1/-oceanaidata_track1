@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "checks": {
+    "attempt_lock_preserved": true,
+    "current_runner_matches_recovery": true,
+    "technical_failure_before_metric": true,
+    "technical_failure_before_prediction": true,
+    "technical_failure_before_official_read": true,
+    "prediction_hashes_match": true,
+    "metrics_recomputed_exactly": true,
+    "gates_recomputed_exactly": true,
+    "only_pass_materialized": true,
+    "submission_checks_pass": true,
+    "two_pass_registry_hashes_match": true,
+    "hidden_truth_rows_zero": true,
+    "upload_count_zero": true
+  },
+  "recovery_chain": {
+    "initial_runner_sha256": "56c9fbfd6ca51c5c7a935ccf60065d87533439f53040e732b0fc488dee1b3a47",
+    "repaired_runner_sha256": "cb773cd8e6ad34b0b111b8f5b67603bde3db226929d5aac185a65fad34019b42",
+    "reason": "all-missing train-fold feature reached sklearn HGB binning",
+    "repair": "select train-fold finite nonconstant feature columns",
+    "performance_adaptive_change": false
+  },
+  "prediction_hash_checks": {
+    "P2_2_HGB_ABSOLUTE_PROFILE": true,
+    "P2_3_PLS2_ROBUST_PROFILE": true
+  },
+  "metric_checks": {
+    "P2_2_HGB_ABSOLUTE_PROFILE": {
+      "reference_rmse_match": true,
+      "candidate_rmse_match": true,
+      "pooled_delta_match": true,
+      "fold_deltas_match": true
+    },
+    "P2_3_PLS2_ROBUST_PROFILE": {
+      "reference_rmse_match": true,
+      "candidate_rmse_match": true,
+      "pooled_delta_match": true,
+      "fold_deltas_match": true
+    }
+  },
+  "gate_checks": {
+    "P2_2_HGB_ABSOLUTE_PROFILE": true,
+    "P2_3_PLS2_ROBUST_PROFILE": true
+  },
+  "submission_checks": {
+    "P2_2_HGB_ABSOLUTE_PROFILE": {
+      "sha256_match": true,
+      "structural_qa_pass": true,
+      "recorded_qa_match": true
+    }
+  },
+  "pass_registry_checks": {
+    "P2_1_PUBLIC_PROFILE_RESIDUAL_SHALLOW": true,
+    "P2_2_HGB_ABSOLUTE_PROFILE": true
+  }
+}

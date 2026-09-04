@@ -1,0 +1,118 @@
+{
+  "schema_version": "p2.fold_layer_gate_validity_audit.20260901.v26a",
+  "experiment_id": "p2_fold_layer_gate_validity_audit_20260901_v26a",
+  "status": "ZERO_FIT_PROSPECTIVE_GATE_AMENDMENT_RECOMMENDED",
+  "claim_level": "AUDIT_ONLY_DOES_NOT_REINTERPRET_PRIOR_TERMINAL_RESULTS",
+  "scope": {
+    "source_versions": [20, 21, 22, 23, 24, 25, 26],
+    "source": "already_open_result_json_fold_x_layer_receipts_only",
+    "model_fits": 0,
+    "observations_rows_read": 0,
+    "official_test_index_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "finding": {
+    "aggregate_gate_can_hide_local_harm": true,
+    "executed_candidates_audited": 6,
+    "zero_fit_duplicate_closures_audited": 1,
+    "aggregate_safety_pass_candidates_with_positive_fold_layer_cells": 5,
+    "candidate_with_all_nine_fold_layer_cells_non_harm": "p2_sharpness_aware_domain_balanced_deepset_20260901_v24",
+    "interpretation": "The existing all-fold, all-month and aggregate-layer checks do not imply non-harm at each fold x layer cell. This is a prospective validity amendment only."
+  },
+  "candidates": [
+    {
+      "id": "p2_layer_conditioned_month_covariance_alignment_20260901_v20",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.05184038539456637,
+      "non_harm_cells": 6,
+      "total_cells": 9,
+      "non_harm_coverage": 0.6666666666666666,
+      "positive_harm_cells": 3,
+      "maximum_cell_harm_C": 0.03083096087752185,
+      "prospective_gate_pass": false
+    },
+    {
+      "id": "p2_fixed_student_t_robust_deepset_20260901_v21",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.050482137912319036,
+      "non_harm_cells": 6,
+      "total_cells": 9,
+      "non_harm_coverage": 0.6666666666666666,
+      "positive_harm_cells": 3,
+      "maximum_cell_harm_C": 0.042112408965122805,
+      "prospective_gate_pass": false
+    },
+    {
+      "id": "p2_adjacent_depth_sobolev_duplicate_audit_20260901_v22",
+      "fit_count": 0,
+      "classification": "CLOSED_ZERO_FIT_SEMANTIC_DUPLICATE",
+      "prospective_gate_applicable": false
+    },
+    {
+      "id": "p2_public_temperature_input_gradient_regularized_deepset_20260901_v23",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.05189246657169555,
+      "non_harm_cells": 6,
+      "total_cells": 9,
+      "non_harm_coverage": 0.6666666666666666,
+      "positive_harm_cells": 3,
+      "maximum_cell_harm_C": 0.026044343256935,
+      "prospective_gate_pass": false
+    },
+    {
+      "id": "p2_sharpness_aware_domain_balanced_deepset_20260901_v24",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.049469327892512016,
+      "non_harm_cells": 9,
+      "total_cells": 9,
+      "non_harm_coverage": 1.0,
+      "positive_harm_cells": 0,
+      "maximum_cell_harm_C": 0.0,
+      "prospective_gate_pass": true
+    },
+    {
+      "id": "p2_heteroscedastic_gaussian_domain_balanced_deepset_20260901_v25",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.04502319319976911,
+      "non_harm_cells": 7,
+      "total_cells": 9,
+      "non_harm_coverage": 0.7777777777777778,
+      "positive_harm_cells": 2,
+      "maximum_cell_harm_C": 0.007908097519935264,
+      "prospective_gate_pass": false
+    },
+    {
+      "id": "p2_layer_month_group_preserving_mixup_deepset_20260901_v26",
+      "fit_count": 9,
+      "pooled_delta_rmse_C": -0.04872763180690587,
+      "non_harm_cells": 6,
+      "total_cells": 9,
+      "non_harm_coverage": 0.6666666666666666,
+      "positive_harm_cells": 3,
+      "maximum_cell_harm_C": 0.028924325258164796,
+      "prospective_gate_pass": false
+    }
+  ],
+  "prospective_rule": {
+    "apply_only_to_future_candidates": true,
+    "retain_existing_pooled_fold_month_layer_ci_and_points_gates": true,
+    "minimum_fold_layer_non_harm_cells": 8,
+    "total_fold_layer_cells": 9,
+    "minimum_non_harm_coverage": 0.8888888888888888,
+    "maximum_any_fold_layer_delta_rmse_C": 0.003,
+    "failure_disposition": "SAFETY_NOT_READY_REQUIRES_GENUINELY_FRESH_CONFIRMATION_NOT_ROUTER_OR_RETUNE",
+    "rationale": "Coverage prevents a gain concentrated in one fold from masking repeated cell harm; the 0.003 C tolerance extends the already preregistered month/layer local tolerance without selecting a new value from candidate performance."
+  },
+  "source_hashes": {
+    "v20_result": "877cb5995f6c10767ab4340a79463fd5d2e537c3b347218d438fec48e21e60a0",
+    "v21_result": "7c2ab1698ee74038365c91b55dbe1295a03ac72253fc9ce1081c0dbf983208c3",
+    "v22_result": "dabbb7cb929a524b10df31731cae29b1e52da0fdeee2971f163f80a43b199bb8",
+    "v23_result": "ddecf11bfde6ceb6cb0c814e5069bd0e8c96ee2b079020a1e2e468e84754e64b",
+    "v24_result": "d5d6d7fae5e6ae30278acd698516e1792f90a17ffc81234b87fc6af1141a3b6a",
+    "v25_result": "89b889adff7cf325a40ce781a9efb93fd5dd1bc0eb10fcfe8e2c322c7cb5dc79",
+    "v26_result": "7547e7c97344ef06d2e8107f565e7e704e2eb474bfd154787f6d82301b869281"
+  }
+}

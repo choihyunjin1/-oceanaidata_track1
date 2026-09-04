@@ -1,0 +1,57 @@
+{
+  "schema_version": "leaderboard.clean_headroom.tabpfn_preflight.20260901.v1",
+  "status": "BLOCKED_PENDING_USER_LICENSE_AND_LOCAL_SYNTHETIC_ONLY_WEIGHTS",
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "vram_gb": 31.84,
+    "tabpfn_package_installed": false,
+    "tabpfn_extensions_installed": false,
+    "windows_appdata_tabpfn_cache_exists": false
+  },
+  "eligible_model_constraint": {
+    "version": "v2.6",
+    "classifier_filename": "tabpfn-v2.6-classifier-v2.6_default.ckpt",
+    "regressor_filename": "tabpfn-v2.6-regressor-v2.6_default.ckpt",
+    "training_data_claim": "purely synthetic",
+    "explicit_model_path_required": true,
+    "automatic_default_model_forbidden": true,
+    "real_data_finetuned_checkpoint_forbidden": true,
+    "remote_api_inference_forbidden": true,
+    "local_weight_bundle_required": true,
+    "checkpoint_sha256_required": true,
+    "readme_disclosure_required": true,
+    "six_hour_wall_cap_required": true
+  },
+  "p1_fixed_contract": {
+    "task_partition": "station_x_layer binary classifiers",
+    "features": "165 past-only",
+    "historical_cell_rows_q3_q4_min": 7334,
+    "historical_cell_rows_q3_q4_max": 23279,
+    "threshold": 0.5,
+    "decoder": "existing anchor-union",
+    "result_based_tuning": false
+  },
+  "p3_fixed_contract": {
+    "task_partition": "six lead-specific residual regressors",
+    "anchor_rows": 24360,
+    "features": 591,
+    "target": "target_hs_minus_current_hs",
+    "blend_weight_with_clean_fallback": 0.25,
+    "validation_cases": 181,
+    "result_based_tuning": false
+  },
+  "access_audit": {
+    "external_observation_rows": 0,
+    "external_reanalysis_rows": 0,
+    "external_forecast_rows": 0,
+    "real_observation_pretrained_weights_loaded": 0,
+    "tabpfn_weights_loaded": 0,
+    "official_test_rows": 0,
+    "hidden_truth_rows": 0,
+    "submission_rows_created": 0,
+    "uploads": 0
+  }
+}

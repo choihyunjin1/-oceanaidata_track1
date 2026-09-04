@@ -1,0 +1,101 @@
+{
+  "schema_version": "parallel_internal_pass_registry.20260831.v1",
+  "status": "COMPLETE_MINIMUM_ONE_CANDIDATE_PER_PROBLEM_NOT_UPLOADED",
+  "as_of_kst": "2026-08-31T17:42:00+09:00",
+  "current_public": {
+    "P1": {"metric": 0.833548, "points": 28.909341},
+    "P2": {"metric": 0.430194, "points": 27.935464},
+    "P3": {"metric": 0.575233, "points": 24.203599},
+    "total_points": 81.048404
+  },
+  "empirical_score_mapping": {
+    "warning": "Planning estimate inferred from our official submission history; not an official scoring formula and not used for model selection.",
+    "P1_points_per_f1": 26.5781209,
+    "P2_points_per_rmse_c": -12.5475311,
+    "P3_points_per_rmse_m": -15.870739046986959
+  },
+  "counts": {"P1": 1, "P2": 2, "P3": 1, "total": 4},
+  "candidates": [
+    {
+      "problem": "P1",
+      "name": "P1_2_HIST_GBDT_OOF_STACK_UNION",
+      "decision": "STRICT_INTERNAL_PASS",
+      "internal_metric": {"reference_f1": 0.9068037200195791, "candidate_f1": 0.9081847055949182, "delta_f1": 0.0013809855753390554},
+      "official_change_contract": {"additions": 4, "removals": 0},
+      "expected_points": {
+        "method": "Four-row add-only outcome scenarios using current official F1 and a feasible hidden-positive-count range; local F1 delta is not transported directly.",
+        "conservative_delta": -0.00673351595716719,
+        "central_delta": 0.005383691373120247,
+        "optimistic_delta": 0.011303714499182063,
+        "conservative_points": 28.902607484042834,
+        "central_points": 28.91472469137312,
+        "optimistic_points": 28.92064471449918
+      },
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260831_FULL_INTERNAL_CYCLE_V3\\P1_2_HIST_GBDT_OOF_STACK_UNION\\P1_submission.csv",
+      "rows": 169011,
+      "sha256": "8c0069b9b73f196b22ed624fe20e8434158483aed642c34d8a6f2bdf0d48afba"
+    },
+    {
+      "problem": "P2",
+      "name": "P2_1_PUBLIC_PROFILE_RESIDUAL_SHALLOW",
+      "decision": "STRICT_INTERNAL_PASS",
+      "internal_metric": {"reference_rmse_c": 3.085714618974286, "candidate_rmse_c": 3.0754716730243885, "delta_rmse_c": -0.010242945949897386},
+      "expected_points": {
+        "method": "Conservative quarter-strength pooled-relative transport, central pooled-relative transport, and optimistic official-like Sep-Oct relative transport.",
+        "conservative_delta": 0.004479522902501541,
+        "central_delta": 0.017918091610006164,
+        "optimistic_delta": 0.022493689081017867,
+        "conservative_points": 27.9399435229025,
+        "central_points": 27.953382091610006,
+        "optimistic_points": 27.95795768908102
+      },
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260831_FULL_INTERNAL_CYCLE_V3\\P2_1_PUBLIC_PROFILE_RESIDUAL_SHALLOW\\P2_submission.csv",
+      "rows": 26061,
+      "sha256": "098b5bb25637b026c13e8eec7afc04fbf78cc6cc25f3da4c177323b15f8978dc"
+    },
+    {
+      "problem": "P2",
+      "name": "P2_2_HGB_ABSOLUTE_PROFILE",
+      "decision": "STRICT_INTERNAL_PASS",
+      "internal_metric": {"reference_rmse_c": 3.085714618974286, "candidate_rmse_c": 3.0702231845232553, "delta_rmse_c": -0.015491434451030628},
+      "expected_points": {
+        "method": "Conservative quarter-strength pooled-relative transport, central pooled-relative transport, and optimistic official-like Sep-Oct relative transport.",
+        "conservative_delta": 0.0067748317481542775,
+        "central_delta": 0.02709932699261711,
+        "optimistic_delta": 0.03982237626586563,
+        "conservative_points": 27.942238831748155,
+        "central_points": 27.962563326992615,
+        "optimistic_points": 27.975286376265867
+      },
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260831_P2_PARALLEL_CANDIDATE_CYCLE_V4\\P2_2_HGB_ABSOLUTE_PROFILE\\P2_submission.csv",
+      "rows": 26061,
+      "sha256": "642265be7eec4505ab9f99c97b7efeda71a3b629d3352e2c3f3927b0142efd06"
+    },
+    {
+      "problem": "P3",
+      "name": "P3_2_EXTRATREES_HARD_PHYSICAL_ROUTER",
+      "decision": "COMPETITION_EXPECTED_VALUE_PASS_SCIENTIFIC_INCONCLUSIVE",
+      "internal_metric": {"reference_rmse_m": 0.781191524691732, "candidate_rmse_m": 0.776632966357096, "delta_rmse_m": -0.0045585583346360314, "bootstrap_ci90_low": -0.009923488077503873, "bootstrap_ci90_high": 0.0007952167963225083, "probability_improved": 0.9156},
+      "expected_points": {
+        "method": "Historical delta and episode CI mapped 1:1 through the empirical score slope for planning only.",
+        "conservative_delta": -0.012620678260215509,
+        "central_delta": 0.0723476897594759,
+        "optimistic_delta": 0.15749308971395026,
+        "conservative_points": 24.190978321739784,
+        "central_points": 24.275946689759476,
+        "optimistic_points": 24.36109208971395
+      },
+      "path": "C:\\Users\\cedis\\Downloads\\해양 해커톤 제출용\\20260831_P3_V5_EXTRATREES_ADJUDICATED_V7\\P3_submission.csv",
+      "rows": 1200,
+      "sha256": "1bb1a90c149e566497f95fcb9d1bb1aa3895f4fef341afc6b30d6fe6710ca65d"
+    }
+  ],
+  "portfolio_scenario": {
+    "note": "Leaderboard keeps the best score per problem, so a weaker probe does not lower the existing total; it only consumes a submission slot.",
+    "conservative_best_of_problem_points": 81.05517883174815,
+    "central_best_of_problem_points": 81.15323470712522,
+    "optimistic_best_of_problem_points": 81.25702318047899
+  },
+  "hidden_truth_reads": 0,
+  "uploads": 0
+}

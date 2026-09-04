@@ -1,0 +1,16 @@
+{
+  "schema_version": "p1.public_transport_repair_cycle.20260831.v31-preseal",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v31",
+  "status": "PRESEALED_HISTORICAL_NOT_AUTHORIZED",
+  "candidate": "P1_1_PREFIX_LOGIT_SHRUNK_LABEL_SHIFT_EM",
+  "lineage": {"v28_result": "CLOSED_UNCHANGED_NOT_RETROACTIVE", "v29r1_result": "CLOSED_NO_GO_UNCHANGED", "outer_result_retuning": false},
+  "model": {"inputs": ["probability_base", "probability_peer", "e150_probability"], "classifier": "sklearn_LogisticRegression", "C": 0.1, "solver": "lbfgs", "max_iter": 500, "tol": 1e-8, "outer_prefix_fit_fraction": 0.75, "maximum_fits": 2},
+  "inner_protocol": {"remaining_25_percent_split": "first half shrink calibration, second half threshold selection", "source_prevalence": "fit-prefix anchor-negative truth prevalence", "shrink_lambda": "clip((logit(observed calibration prevalence)-logit(source prevalence))/(logit(EM calibration prevalence)-logit(source prevalence)),0,1); denominator near zero =>0", "threshold": "selection-half actual add-only union F1 with positive additions, precision>anchor F1/2, changed<=.005; tie higher threshold then fewer additions", "outer_labels_used": false},
+  "em": {"maximum_iterations": 200, "tolerance": 1e-10, "epsilon": 1e-6, "outer_target_prior": "logit(source)+lambda*(logit(outer EM target)-logit(source))", "posterior": "single prior-odds correction from frozen source posterior"},
+  "validation": {"nested_fits": [{"train_folds": ["2025_q2"], "validation_fold": "2025_q3"}, {"train_folds": ["2025_q2", "2025_q3"], "validation_fold": "2025_q4"}], "bootstrap_replicates": 5000, "bootstrap_seed": 20260931},
+  "prospective_gate_v4": {"path": "configs/goals/p1_prospective_transport_gate_20260831_v4.json", "sha256": "11776104ad02f7d17a84580d3ebb3fb43a948d10a03267e07d535b85e1c5604b", "hard": ["pooled delta>0", "Q3 and Q4 delta>=0", "day-block CI90 low>0", "P(improve)>=.8", "raw points>=.015383691373120248", "calibrated points>=.01", "anchor removals=0", "addition precision>anchor F1/2", "overall changed<=.005", "concentration<=.5"], "diagnostic_only": ["per-day changed fraction", "each station-layer delta F1"]},
+  "transport": {"calibration_version": "v3", "calibration_sha256": "0f44820742951f2cd5c099fbd0d4a74d7066a57874c5e8215d0c69679ed21a10", "family_id": "P1_PREFIX_LOGIT_SHRUNK_LABEL_SHIFT_EM", "tier_id": "SMOOTH_LEARNED_PROFILE", "transport_penalty_points": 0.005383691373120247},
+  "decision_policy": {"minimum_raw_expected_point_delta_inclusive": 0.015383691373120248, "minimum_calibrated_expected_point_delta_inclusive": 0.01, "transport_penalty_points": 0.005383691373120247, "score_points_per_f1": 26.578120867377286, "bootstrap_probability_improved_minimum_inclusive": 0.8},
+  "safety": {"maximum_changed_fraction": 0.005, "maximum_addition_concentration_any_station_layer_quarter": 0.5, "maximum_changed_fraction_any_kst_day": "diagnostic_only", "minimum_each_supported_station_layer_delta_f1": "diagnostic_only"},
+  "authorization": {"synthetic_preflight": true, "historical_execution": false, "attempt_lock_creation": false, "official_reads": 0, "hidden_truth_reads": 0, "submission_csv_created": 0, "uploads": 0}
+}

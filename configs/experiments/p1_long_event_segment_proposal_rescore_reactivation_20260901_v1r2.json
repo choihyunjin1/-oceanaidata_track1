@@ -1,0 +1,112 @@
+{
+  "schema_version": "p1_long_event_segment_proposal_rescore.reactivation.v1r2",
+  "experiment_id": "p1_long_event_segment_proposal_rescore_reactivation_20260901_v1r2",
+  "scientific_experiment_id": "p1_long_event_segment_proposal_rescore_20260826_v1",
+  "created_at_kst": "2026-09-01T00:00:00+09:00",
+  "status": "PINNED_COMPATIBILITY_BRIDGE_PENDING_ZERO_OPERATION_QA",
+  "purpose": "Repair only three absent namespace aliases expected by the frozen v6 execution module, using their exact authenticated snapshot callables.",
+  "supersedes_technical_invalid": {
+    "experiment_id": "p1_long_event_segment_proposal_rescore_reactivation_20260901_v1r1",
+    "status": "INVALID_TECHNICAL_PARTIAL_FIT",
+    "physical_fits": 3,
+    "scientific_materializations": 1,
+    "outer_scores": 0,
+    "resume_or_reuse": false,
+    "lock_and_failure_receipts_preserved": true
+  },
+  "artifact_dir": "artifacts/p1_long_event_segment_proposal_rescore_reactivation_20260901_v1r2",
+  "execution_contract": {
+    "same_process": true,
+    "hidden_worker": false,
+    "parent_process_capability": false,
+    "subprocess_launches": 0,
+    "single_attempt": true,
+    "automatic_resume_or_rerun_count": 0,
+    "failure_retains_lock": true,
+    "success_removes_lock_as_final_commit": true
+  },
+  "same_process_state_reuse_repair": {
+    "readiness_passes_per_execute": 1,
+    "numerical_module_loads_per_execute": 1,
+    "execution_module_loads_per_execute": 1,
+    "state_builds_per_execute": 1,
+    "load_worker_state_calls": 0,
+    "reuse_exact_objects_from_readiness": ["numerical", "execution", "state", "readiness_receipt"],
+    "scientific_change": false
+  },
+  "pinned_compatibility_bridge": {
+    "preexisting_required_aliases": ["TabularEncoder"],
+    "exact_missing_aliases": ["apply_postprocess", "detect_plateaus", "detect_singleton_spikes"],
+    "bindings": {
+      "apply_postprocess": "p1_qc.pipeline.apply_postprocess",
+      "detect_plateaus": "p1_qc.rules.detect_plateaus",
+      "detect_singleton_spikes": "p1_qc.rules.detect_singleton_spikes"
+    },
+    "other_aliases_added": 0,
+    "callable_wrappers": 0,
+    "scientific_change": false
+  },
+  "immutable_scientific_authorities": {
+    "design": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_design.json", "sha256": "31b0bde27d8ef7e2b42135709563cca0bcca61c6ec6fdabefbb3530906869563"},
+    "trigger_resolution": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v1_trigger_resolution.json", "sha256": "f70a17ff6a30d59522a007b9605da12b23f8b5fb0c3247e45c9b30772c1cc2f1"},
+    "operational_amendment_v2": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v2_operational_amendment.json", "sha256": "b33f7d386e05cd7ab79976f58e9f4ab752f37cfe6a8856849867ef5f541cb276"},
+    "execution_closure_v3": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v3_execution_closure_amendment.json", "sha256": "b7afec5a11e908f6e5fd8a1ef28404cbb062da39764b2649ddabc2659a56ad99"},
+    "trust_firewall_v5": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v5_trust_firewall_amendment.json", "sha256": "bd0370c7100ae7602eb2b045b4ef69bf7808d345fcb3255234c0726225e57563"},
+    "bootstrap_target_firewall_v6": {"path": "configs/experiments/p1_long_event_segment_proposal_rescore_v6_bootstrap_target_firewall_amendment.json", "sha256": "16d726d217dc2b0d03264ce99eeacd796c8e34017901e02b29bcc76d479846f6"},
+    "science_module": {"path": "src/p1_qc/long_event_segment_proposal_rescore.py", "sha256": "68aaf1fae9902b386b024500b5873328af5b0dddaf9d99243d799d68aa5c5feb"},
+    "execution_module_v6": {"path": "src/p1_qc/long_event_segment_proposal_rescore_execution_v6.py", "sha256": "8b91db9234bde301730728dcffa4fd2c014b099d0c518571ddaa733608b81636"},
+    "pipeline_module": {"path": "src/p1_qc/pipeline.py", "sha256": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669"},
+    "rules_module": {"path": "src/p1_qc/rules.py", "sha256": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c"},
+    "same_process_readiness_helper_v6": {"path": "scripts/run_p1_long_event_segment_proposal_rescore_v6.py", "sha256": "001109137fa4daa5408977d14473d95639ba51b8c70301e802626c60ea59509e"},
+    "legacy_readiness_config": {"path": "configs/experiments/p1_round_b_nonspike_long_event_residual_v1r6.json", "sha256": "e447106eef3123f52b06a1577944f006ec9fd469c325069bda8b87cd37fbacc1"}
+  },
+  "data_access_contract": {
+    "environment_variable": "P1_DATA_DIR",
+    "canonical_local_directory": "C:/Users/cedis/Downloads/데이터셋_P1/P1_qc_anomaly",
+    "preflight_allowed_source_files": ["README.md", "train.csv"],
+    "execute_allowed_source_files": ["train.csv"],
+    "readme": {"bytes": 1586, "sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd"},
+    "train": {"bytes": 50584654, "sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2"},
+    "directory_enumeration": false,
+    "repository_search_fallback": false,
+    "official_test_reads": 0,
+    "sample_submission_reads": 0,
+    "submission_candidate_reads": 0,
+    "uploads": 0
+  },
+  "frozen_operation_graph": {
+    "inner_anchor_physical_fits": 9,
+    "inner_segment_physical_fits": 54,
+    "outer_segment_physical_fits": 9,
+    "maximum_lifetime_physical_fits": 72,
+    "scientific_materializations": 21,
+    "outer_scores": 1,
+    "hard_wall_seconds": 21600,
+    "candidate_files": 0,
+    "row_level_prediction_files": 0
+  },
+  "unchanged_science": {
+    "models": true,
+    "features": true,
+    "inner_and_outer_windows": true,
+    "round_b_seeds": [20260813, 20260829, 20260847],
+    "segment_seeds": [20260826, 20260843, 20260871],
+    "postprocess": true,
+    "selection_rule": true,
+    "decision_gates": true,
+    "outer_target_firewall": true,
+    "result_driven_tuning_or_search_expansion": false
+  },
+  "family_overlap_adjudication": {
+    "dependence_calibration_meta_audit": {"exact_duplicate": false, "semantic_duplicate": false, "reason": "Information-lane zero-supervised-fit feasibility audit, not this fixed 72-fit segment-rescore screen."},
+    "p1_e150_f1aware_long_event_cp_rescue_20260828_v1": {"terminal_status": "NO_GO_LOCAL_BLIND_GATE", "exact_duplicate": false, "semantic_duplicate": false, "conceptual_overlap": "Both concern long intervals; e150 uses a width-512 epoch-150 Router-union anchor and logistic proposal scoring on Q2 design/Q3-Q4 blind folds, whereas this screen rescores frozen Round-B candidates using three inner windows and Q2-Q4 outer folds.", "gate_reuse_or_mutation": false}
+  },
+  "output_contract": {
+    "aggregate_only": true,
+    "allowed": ["metrics.json", "result.json", "manifest.json", "report_ko.md", "attempt_journal"],
+    "csv_files": 0,
+    "candidate_materialization": 0,
+    "submission_files": 0,
+    "uploads": 0
+  }
+}

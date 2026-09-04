@@ -1,0 +1,30 @@
+{
+  "experiment_id": "p1_remove_i_ors_e150_information_probe_20260831_v33a",
+  "status": "PASS_READY_TO_UPLOAD_NOT_UPLOADED",
+  "candidate": {
+    "rows": 169011,
+    "positive_rows": 6316,
+    "changed_rows": 80,
+    "sha256": "c0cc4ad59008eeb39972a4ca1236a254abcc4786e64af750a3c047dc8ef94ab5"
+  },
+  "checks": {
+    "schema_exact": true,
+    "keys_unique": true,
+    "labels_binary": true,
+    "changed_exact_expected_i_ors_e150_mask": true,
+    "all_changes_one_to_zero": true,
+    "all_changed_station_i_ors": true,
+    "anchor_positives_preserved": true,
+    "gi2_rows_equal_two": true,
+    "gi2_preserved": true,
+    "unexpected_additions_zero": true,
+    "focused_pytest_3_pass": true,
+    "ruff_pass": true
+  },
+  "source_projection_note": "The anchor source has an extra anomaly_type column; the independent QA and materializer both project the exact required station/year/layer/time/label schema before comparison.",
+  "operations": {
+    "hidden_truth_reads": 0,
+    "uploads": 0,
+    "browser_actions": 0
+  }
+}

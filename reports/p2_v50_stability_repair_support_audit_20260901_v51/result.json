@@ -1,0 +1,201 @@
+{
+  "schema_version": "p2.v50_stability_repair_support_audit.20260901.v51",
+  "experiment_id": "p2_v50_stability_repair_support_audit_20260901_v51",
+  "status": "NO_GO_SUPPORT_AUDIT_ZERO_FIT",
+  "terminal": true,
+  "decision": "FAIL_CLOSED",
+  "completed_at_kst": "2026-09-01T18:41:36+09:00",
+  "claim_level": "PROSPECTIVE_SUPPORT_AUDIT_ONLY_NO_NEW_MODEL_FIT",
+  "conclusion": "The preregistration candidate does not have prospective held-out support. No v51 training, attempt lock, preflight, runner, submission CSV, or upload was created.",
+  "source_cycle": {
+    "experiment_id": "p2_masked_third_central_moment_profile_pooling_deepset_20260901_v50",
+    "status": "EXPLORATORY_NO_GO_MASKED_THIRD_CENTRAL_MOMENT_PROFILE_POOLING",
+    "result_path": "reports/p2_masked_third_central_moment_profile_pooling_deepset_20260901_v50/result.json",
+    "result_sha256": "517aac76ded7c7ae67e6189d73ca94d174842e17546ee81d22801d95f732617b",
+    "independent_qa_path": "reports/p2_masked_third_central_moment_profile_pooling_deepset_20260901_v50/independent-qa.json",
+    "independent_qa_sha256": "e2b851b76b1dc27593cde2244a5d9480bd562bbef3742c5c830c6e66a7a65c26",
+    "prediction_commitment_sha256": "fafcf663d7dec937b8de2dd3d4196a858f64d5f8a7d5b5daede9606810bf5128",
+    "oof_rows": 69850,
+    "reference_delta_rmse_C": -0.05146012524025734,
+    "reference_nominal_points_delta": 0.6456975218620239,
+    "reference_transport_points_delta": 0.5240154302520177,
+    "reference_non_harm_fold_layer_cells": 6,
+    "reference_fold_layer_cells": 9,
+    "reference_maximum_fold_layer_delta_rmse_C": 0.030862565896081273
+  },
+  "policy": {
+    "path": "configs/compliance/organizer_data_policy_20260901.json",
+    "sha256": "ada02955d99872620e99c6f6129106b6b9bea7a4901ba13d53d2d4d6d07b8d2c",
+    "status": "ACTIVE_HIGHEST_PRECEDENCE",
+    "distributed_data_only": true,
+    "only_source_filename": "observations.csv",
+    "scratch_weights_only": true,
+    "official_query_support_not_authorized": true
+  },
+  "fixed_mechanism": {
+    "name": "leakage_safe_leave_one_fold_out_layerwise_minimax_shrink",
+    "candidate_action": "alpha times the frozen v50 residual correction",
+    "alpha_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "selection_rule": "For each held-out historical fold and layer, use only the other two folds and choose alpha minimizing the worst calibration delta RMSE; ties choose the smaller alpha.",
+    "held_out_labels_used_for_alpha_selection": false,
+    "selected_alpha_by_held_out_fold_and_layer": {
+      "2024_sep_oct": {
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0
+      },
+      "2025_jul_aug": {
+        "2": 1.0,
+        "3": 1.0,
+        "4": 0.0
+      },
+      "2025_nov_dec": {
+        "2": 0.0,
+        "3": 0.0,
+        "4": 1.0
+      }
+    }
+  },
+  "prospective_gates": {
+    "pooled_delta_rmse_C_lt_zero": true,
+    "minimum_non_harm_fold_layer_cells": 8,
+    "total_fold_layer_cells": 9,
+    "maximum_fold_layer_delta_rmse_C_lte": 0.003,
+    "canonical_transport_points_delta_gte": 0.01,
+    "gate_relaxation_allowed": false
+  },
+  "lofo_result": {
+    "delta_rmse_C_by_held_out_fold": {
+      "2024_sep_oct": 0.0,
+      "2025_jul_aug": 0.00913520819,
+      "2025_nov_dec": 0.00594624308
+    },
+    "pooled_delta_rmse_C": 0.00147848192,
+    "non_harm_fold_layer_cells": 6,
+    "total_fold_layer_cells": 9,
+    "maximum_fold_layer_delta_rmse_C": 0.030862565896081273,
+    "canonical_nominal_points_delta": -0.01855129788,
+    "canonical_transport_points_delta": -0.14023338949,
+    "gate_checks": {
+      "pooled_improves": false,
+      "minimum_eight_of_nine_non_harm": false,
+      "maximum_cell_within_plus_0_003C": false,
+      "canonical_transport_points_gte_0_01": false
+    },
+    "pass": false
+  },
+  "v50_fold_layer_diagnostics": {
+    "2024_sep_oct": {
+      "2": -0.23658965132286203,
+      "3": -0.1818004083275535,
+      "4": -0.05439527044636261
+    },
+    "2025_jul_aug": {
+      "2": 0.030862565896081273,
+      "3": 0.013485549159474752,
+      "4": -0.06589071608609465
+    },
+    "2025_nov_dec": {
+      "2": -0.03324242216332329,
+      "3": -0.02765826881702732,
+      "4": 0.014125886273126331
+    }
+  },
+  "nonadaptive_structural_screen": {
+    "name": "fixed_shallow_layer_broadcast",
+    "definition": "Broadcast the layer-2 v50 correction to layers 2-4 for complete profiles, with own-layer fallback for incomplete profiles.",
+    "full_strength": {
+      "alpha": 1.0,
+      "pooled_delta_rmse_C": -0.04145825656,
+      "non_harm_fold_layer_cells": 8,
+      "maximum_fold_layer_delta_rmse_C": 0.030862565896081273,
+      "canonical_nominal_points_delta": 0.5201987635,
+      "canonical_transport_points_delta": 0.39851667189,
+      "pass": false,
+      "failed_gate": "maximum_fold_layer_delta_rmse_C_lte_0.003"
+    },
+    "fixed_shrink_boundary": [
+      {
+        "alpha": 0.1,
+        "pooled_delta_rmse_C": -0.0046122,
+        "non_harm_fold_layer_cells": 8,
+        "maximum_fold_layer_delta_rmse_C": 0.0016454,
+        "canonical_transport_points_delta": -0.06381,
+        "pass": false
+      },
+      {
+        "alpha": 0.15,
+        "pooled_delta_rmse_C": -0.00687985,
+        "non_harm_fold_layer_cells": 8,
+        "maximum_fold_layer_delta_rmse_C": 0.00259243,
+        "canonical_transport_points_delta": -0.03536,
+        "pass": false
+      },
+      {
+        "alpha": 0.2,
+        "non_harm_fold_layer_cells": 8,
+        "maximum_fold_layer_delta_rmse_C": 0.00362183,
+        "canonical_transport_points_delta": -0.00723,
+        "pass": false
+      },
+      {
+        "alpha": 0.25,
+        "non_harm_fold_layer_cells": 8,
+        "maximum_fold_layer_delta_rmse_C": 0.00473318,
+        "canonical_transport_points_delta": 0.02058,
+        "pass": false
+      }
+    ],
+    "support_overlap_exists": false,
+    "interpretation": "Within the audited fixed shrink boundary, settings satisfying the +0.003 C cell cap have negative transport value, while the first positive-transport setting breaches the cell cap. This screen is diagnostic only and was not promoted or executed."
+  },
+  "fail_closed_reason": {
+    "primary": "The leakage-safe LOFO mechanism degrades pooled RMSE and fails all preregistration gates.",
+    "secondary": "The fixed label-free structural screen cannot satisfy the safety and transport-value gates simultaneously.",
+    "result_based_range_expansion_performed": false,
+    "gate_relaxation_performed": false,
+    "next_mechanism_searched_after_failure": false
+  },
+  "execution_receipt": {
+    "execution_stage_reached": false,
+    "config_created": false,
+    "runner_created": false,
+    "negative_fingerprint_created": false,
+    "ready_preflight_receipts_created": 0,
+    "attempt_lock_created": false,
+    "model_fits": 0,
+    "reason": "Prospective support failed before preregistration and lock."
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "v50_oof_rows_read": 69850,
+    "model_fits": 0,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "external_observation_rows_read": 0,
+    "external_reanalysis_rows_read": 0,
+    "external_forecast_rows_read": 0,
+    "pretrained_weight_files_loaded": 0
+  },
+  "source_hashes": {
+    "organizer_policy_registry": "ada02955d99872620e99c6f6129106b6b9bea7a4901ba13d53d2d4d6d07b8d2c",
+    "observations_recorded_by_v50": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "truth_free_scoring_frame_recorded_by_v50": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "v50_result": "517aac76ded7c7ae67e6189d73ca94d174842e17546ee81d22801d95f732617b",
+    "v50_independent_qa": "e2b851b76b1dc27593cde2244a5d9480bd562bbef3742c5c830c6e66a7a65c26",
+    "v50_prediction_commitment": "fafcf663d7dec937b8de2dd3d4196a858f64d5f8a7d5b5daede9606810bf5128"
+  }
+}

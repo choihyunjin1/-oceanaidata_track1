@@ -1,0 +1,694 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.15,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.006020679080417213,
+          0.0008924558847098697
+        ],
+        "median_m": -0.0028733378286272537,
+        "probability_improve": 0.8956,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.003735761819520733,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.002147703836559267,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.018105662802020528,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004969731090510354,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.00334264239055182,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.009909632593133932,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.00627989880727034,
+          0.0009432512621910149
+        ],
+        "median_m": -0.0028135249185160527,
+        "probability_improve": 0.8944,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.24793244548889,
+        "raw_gain": 0.044333445488889796,
+        "transport_adjusted_gain": -0.005252608603399135,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -7.806531054910248e-05,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006406809248725165,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.005860988116001886,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0015916612073465508,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.001743259521630347,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.003258324568014337,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "ridge_alpha": 256.0,
+      "rmse_m": {
+        "candidate": 0.7783981169394127,
+        "delta_candidate_minus_uniform": -0.002793407752319288,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0014621663920887373,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0056380785639083,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.004616888320030155,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.006528201956883306,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0015217970587558804,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": 0.0017217195756773496,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -0.00017765355264331983,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.0019991829814907103,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.004196046072216353,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.006088478857065094,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.011685238318816848,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.010726799354641492,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.0012981274210818183,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.005177869043813232,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.007898850490134834,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.001293196152310383,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.007567057098493923,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.009899876685445563,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0050584600093818155,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.002108966899073028,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.005189196413239894,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.018105662802020528,
+      "worst_station_lead_delta_m": 0.006528201956883306
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0052758370098423156,
+          7.738339606304724e-05
+        ],
+        "median_m": -0.002858407127386997,
+        "probability_improve": 0.946,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.0033218065174804856,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.004005832793119279,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.0137635356589203,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0037799023574925927,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0037468734370528223,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.00722207923512197,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.005465343913465065,
+          -1.0957132112780861e-06
+        ],
+        "median_m": -0.0028468582644083362,
+        "probability_improve": 0.95,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.247891154653548,
+        "raw_gain": 0.04429215465354779,
+        "transport_adjusted_gain": -0.005293899438741138,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0013915389925506227,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.006727432125097077,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.0050920027024231596,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0015782826641753678,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0024373117526588217,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0028551141664361346,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "ridge_alpha": 1024.0,
+      "rmse_m": {
+        "candidate": 0.7784007186352266,
+        "delta_candidate_minus_uniform": -0.0027908060565053905,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": -0.00035327229033754737,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.004954021550103493,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0034227813513360017,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0017754545891821572,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.003975921395925286,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.0006425294184841945,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": -0.000336716990756325,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": -0.00028662717458149967,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.0027031841930189593,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.004888766657861532,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.011047122774152873,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.008712148496799466,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": 0.00023132463413333415,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": 0.004024400956038399,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.006301222568948606,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0014945990155760258,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.00633306053594529,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.006875233741345355,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.004121464711906109,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0034956014478275677,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.004319245951263984,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.0137635356589203,
+      "worst_station_lead_delta_m": 0.004024400956038399
+    }
+  ],
+  "created_at_utc": "2026-08-31T19:24:03.835249+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_PATH_SIGNATURES",
+  "duplication_audit": {
+    "closed_families_unchanged": [
+      "NLinear station multi-output Ridge",
+      "causal spectral random-feature multi-output Ridge",
+      "TCN and TimeXer direct six-lead heads",
+      "masked SSL and state-space",
+      "v13-v22 alpha, router, residual, ERA5, robust fallback, and reduced-rank proposals"
+    ],
+    "distinction": "NLinear uses fixed lags and summaries; spectral uses unordered Fourier amplitudes and random features; TCN/TimeXer/masked-SSL/state-space learn discrete or latent encoders. This cycle uses no deep net and no learned path encoder: its only new information representation is deterministic ordered cross-channel path geometry.",
+    "novel_axis": "deterministic level-2 ordered iterated integrals over a causal multivariate path",
+    "repository_exact_path_signature_hits": 0,
+    "semantic_verdict": "NON_DUPLICATE_REPRESENTATION_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.7589369999914197,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_path_signature_residual_cycle_20260901_v23",
+  "feature_receipt": {
+    "columns": 140,
+    "finite": true,
+    "matrix_sha256": "8628fc70bc2d19b7466c1c34d12a96ca822cf00dd0d58239fdcfb951fb2c3f5f",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.15,
+      "block": "01_02",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.26770375973623417,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "01_02",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.12576912578016222,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "03_04",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.31020129740526664,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "03_04",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.14524216155908942,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "05_06",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.2993034760290313,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "05_06",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.15063947362488517,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "07_08",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.2947373015154324,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "07_08",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.15093572722163187,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "09_10",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.29906754749081477,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "09_10",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.14454876422463336,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "11_12",
+      "candidate": "P3_1_PATHSIG_L2_RIDGE256_ADD15",
+      "coefficient_l2": 0.28822281436061115,
+      "fit_count": 1,
+      "ridge_alpha": 256.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.15,
+      "block": "11_12",
+      "candidate": "P3_2_PATHSIG_L2_RIDGE1024_ADD15",
+      "coefficient_l2": 0.13791894199736873,
+      "fit_count": 1,
+      "ridge_alpha": 1024.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "path_contract": {
+    "absolute_time": false,
+    "augmentation": "normalized time plus five linearly filled physical channels plus five observed-mask channels",
+    "context_rows": 289,
+    "feature_count": 140,
+    "future_covariates": false,
+    "missing_rule": "case-local linear interpolation between observed past values; nearest endpoint fill; all-missing channel zero; explicit mask retained",
+    "physical_center": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1013.0
+    ],
+    "physical_scale": [
+      5.0,
+      20.0,
+      10.0,
+      30.0,
+      50.0
+    ],
+    "selected_channels": [
+      "hs",
+      "tp",
+      "hmax",
+      "wspd",
+      "caph"
+    ],
+    "selected_indices": [
+      0,
+      1,
+      2,
+      4,
+      9
+    ],
+    "signature_formula": "piecewise-linear Chen signature: level1 increments and ordered level2 iterated integrals",
+    "signature_level": 2,
+    "static_features": "five scaled current endpoints plus station one-hot"
+  },
+  "provenance": {
+    "config_sha256": "f423114794ec44c6875362feb6661983f55c6abfc7c60884206dfd99b4aad4cb",
+    "evaluation_arrays_sha256": "4b943b6e7b438e4b2e88cb07997e908d7a5cd02bdd21841f5ad51a9cdc9ad41b",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "c8f35536dfcffa1cb184106e7e1f71b7147a26021af5e55936ece4a727ace7af",
+    "runner_sha256": "75ca77525fbad9ae724615335a21a568034f544a014c546e1a59345fb95fa5c5"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.path_signature_residual.result.v23",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

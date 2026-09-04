@@ -1,0 +1,737 @@
+{
+  "candidates": [
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0038899738195258215,
+          0.0006925865027202275
+        ],
+        "median_m": -0.0017847665475153596,
+        "probability_improve": 0.8864,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001536903711497728,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.002463641831957686,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.00583695894271985,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.0052397074460124315,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0024222864974795533,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0020493556678536917,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.0037308448943405236,
+          0.0002888501176667058
+        ],
+        "median_m": -0.001767675755214082,
+        "probability_improve": 0.9234,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.23103323180928,
+        "raw_gain": 0.0274342318092813,
+        "transport_adjusted_gain": -0.02215182228300763,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": 0.0013994005130053555,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.004762948190290439,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.003911414519706891,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.00049684832203023,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0013646775666167343,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.0029864198313349632,
+          "rows": 182
+        }
+      },
+      "name": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.007924041216998745,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0030566811651608905,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.011816475501942092,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.007552895898513823,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.00955306893197494,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": 0.0012905190154507418,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 512.0,
+      "rmse_m": {
+        "candidate": 0.7794629201366411,
+        "delta_candidate_minus_uniform": -0.0017286045550909401,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": false,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0019546066548030705,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.003911703164146463,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.003518122303403537,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.007824756309882108,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0036017877050606995,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.001369354252566679,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.003945200822876749,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0029139221435255935,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.004733040595217952,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.003362595745017516,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.0033948397047313117,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.0054855998711543785,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0013787325371502623,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.0016277528059654989,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.007217621459978063,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.000620380000184384,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.0071201106834319905,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.00530273798930192,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.00459086522858243,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0025557379522681556,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0054458120778845265,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.00583695894271985,
+      "worst_lead_delta_m": 0.0013994005130053555,
+      "worst_reference_tail_block_delta_m": 0.011816475501942092,
+      "worst_station_lead_delta_m": 0.007824756309882108
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block_station_bootstrap": {
+        "ci90_m": [
+          -0.0036543346738871383,
+          6.250800071399008e-05
+        ],
+        "median_m": -0.0019445427772978863,
+        "probability_improve": 0.9432,
+        "replicates": 5000,
+        "unit": "block|station",
+        "units": 17
+      },
+      "by_block": {
+        "01_02": {
+          "delta_rmse_m": -0.001846703371370828,
+          "rows": 240
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0026544796120606673,
+          "rows": 186
+        },
+        "05_06": {
+          "delta_rmse_m": 0.006180226957037016,
+          "rows": 132
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004564306100677595,
+          "rows": 156
+        },
+        "09_10": {
+          "delta_rmse_m": -0.0025217787909839195,
+          "rows": 138
+        },
+        "11_12": {
+          "delta_rmse_m": -0.0029779972625998408,
+          "rows": 240
+        }
+      },
+      "decision": "NO_GO",
+      "episode_bootstrap": {
+        "ci90_m": [
+          -0.003527068980494369,
+          -0.00035301732701830015
+        ],
+        "median_m": -0.0019180980763000566,
+        "probability_improve": 0.9778,
+        "replicates": 5000,
+        "unit": "episode_id",
+        "units": 133
+      },
+      "expected_points": {
+        "nominal_official_score": 24.234266702421788,
+        "raw_gain": 0.03066770242178643,
+        "transport_adjusted_gain": -0.0189183516705025,
+        "transport_penalty": 0.04958605409228893
+      },
+      "high_risk_checks": {
+        "delta_rmse_at_most_minus_0p005m": false,
+        "finite_predictions": true,
+        "worst_station_lead_at_most_0p02m": true
+      },
+      "improved_blocks": 5,
+      "lead": {
+        "12": {
+          "delta_rmse_m": -0.0004151165386250266,
+          "rows": 182
+        },
+        "18": {
+          "delta_rmse_m": -0.004830522448234342,
+          "rows": 182
+        },
+        "24": {
+          "delta_rmse_m": -0.00363421060850444,
+          "rows": 182
+        },
+        "3": {
+          "delta_rmse_m": -0.0007218324405409149,
+          "rows": 182
+        },
+        "6": {
+          "delta_rmse_m": 0.0016105660005135691,
+          "rows": 182
+        },
+        "9": {
+          "delta_rmse_m": -0.00246991301326116,
+          "rows": 182
+        }
+      },
+      "name": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "reference_tail_by_block": {
+        "01_02": {
+          "delta_rmse_m": 0.006050470527754648,
+          "rows": 48,
+          "uniform_threshold_m": 2.2004180810435474
+        },
+        "03_04": {
+          "delta_rmse_m": -0.0038637627337366753,
+          "rows": 38,
+          "uniform_threshold_m": 1.9628489185138696
+        },
+        "05_06": {
+          "delta_rmse_m": 0.010558272951215142,
+          "rows": 27,
+          "uniform_threshold_m": 1.8614253196870383
+        },
+        "07_08": {
+          "delta_rmse_m": -0.004838636026356036,
+          "rows": 32,
+          "uniform_threshold_m": 1.509684591494232
+        },
+        "09_10": {
+          "delta_rmse_m": -0.006452403123342498,
+          "rows": 28,
+          "uniform_threshold_m": 1.9566301974540037
+        },
+        "11_12": {
+          "delta_rmse_m": 0.0001341328256702079,
+          "rows": 48,
+          "uniform_threshold_m": 1.8528810211089686
+        }
+      },
+      "ridge_alpha": 2048.0,
+      "rmse_m": {
+        "candidate": 0.7792591822638847,
+        "delta_candidate_minus_uniform": -0.0019323424278473444,
+        "uniform_0p425": 0.781191524691732
+      },
+      "stable_checks": {
+        "block_station_ci90_upper_below_zero": false,
+        "delta_rmse_negative": true,
+        "episode_ci90_upper_below_zero": true,
+        "finite_predictions": true,
+        "minimum_four_improved_blocks": true,
+        "worst_block_at_most_0p015m": true,
+        "worst_lead_at_most_0p010m": true,
+        "worst_reference_tail_block_at_most_0p015m": true,
+        "worst_station_lead_at_most_0p01m": true
+      },
+      "station": {
+        "G-ORS": {
+          "delta_rmse_m": 0.0005042303734662523,
+          "rows": 408
+        },
+        "I-ORS": {
+          "delta_rmse_m": -0.0038622830530679053,
+          "rows": 276
+        },
+        "S-ORS": {
+          "delta_rmse_m": -0.0027387481588048157,
+          "rows": 408
+        }
+      },
+      "station_lead": {
+        "G-ORS|12": {
+          "delta_rmse_m": 0.0032031203747606707,
+          "rows": 68
+        },
+        "G-ORS|18": {
+          "delta_rmse_m": -0.0033755721978538933,
+          "rows": 68
+        },
+        "G-ORS|24": {
+          "delta_rmse_m": -0.001393332158371896,
+          "rows": 68
+        },
+        "G-ORS|3": {
+          "delta_rmse_m": 0.002102473407793126,
+          "rows": 68
+        },
+        "G-ORS|6": {
+          "delta_rmse_m": 0.0020799160149059803,
+          "rows": 68
+        },
+        "G-ORS|9": {
+          "delta_rmse_m": 0.002520113774434063,
+          "rows": 68
+        },
+        "I-ORS|12": {
+          "delta_rmse_m": -0.0034388347323127677,
+          "rows": 46
+        },
+        "I-ORS|18": {
+          "delta_rmse_m": -0.005574039638526762,
+          "rows": 46
+        },
+        "I-ORS|24": {
+          "delta_rmse_m": -0.005511013246642493,
+          "rows": 46
+        },
+        "I-ORS|3": {
+          "delta_rmse_m": -0.0018063838453078462,
+          "rows": 46
+        },
+        "I-ORS|6": {
+          "delta_rmse_m": -0.00013298845890008515,
+          "rows": 46
+        },
+        "I-ORS|9": {
+          "delta_rmse_m": -0.005633667104951168,
+          "rows": 46
+        },
+        "S-ORS|12": {
+          "delta_rmse_m": -0.0012886834185874552,
+          "rows": 68
+        },
+        "S-ORS|18": {
+          "delta_rmse_m": -0.005838128835834011,
+          "rows": 68
+        },
+        "S-ORS|24": {
+          "delta_rmse_m": -0.004490484074554657,
+          "rows": 68
+        },
+        "S-ORS|3": {
+          "delta_rmse_m": -0.0029605277073789793,
+          "rows": 68
+        },
+        "S-ORS|6": {
+          "delta_rmse_m": 0.0026962458647070697,
+          "rows": 68
+        },
+        "S-ORS|9": {
+          "delta_rmse_m": -0.0037202036452612663,
+          "rows": 68
+        }
+      },
+      "worst_block_delta_m": 0.006180226957037016,
+      "worst_lead_delta_m": 0.0016105660005135691,
+      "worst_reference_tail_block_delta_m": 0.010558272951215142,
+      "worst_station_lead_delta_m": 0.0032031203747606707
+    }
+  ],
+  "created_at_utc": "2026-09-01T04:42:27.190192+00:00",
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 1092,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "data_profile": {
+    "blocks": {
+      "01_02": 40,
+      "03_04": 31,
+      "05_06": 22,
+      "07_08": 26,
+      "09_10": 23,
+      "11_12": 40
+    },
+    "cases": 182,
+    "duplicate_pair_keys": 0,
+    "episodes": 133,
+    "nonfinite_values": 0,
+    "official_rows_read_before_internal_gate": 0,
+    "rows": 1092,
+    "target_rows_read": 1092
+  },
+  "decision": "NO_GO_ALL_MATRIX_PENCIL_CANDIDATES",
+  "duplication_audit": {
+    "distinction": "Fourier and cepstral cycles summarize stationary frequency magnitudes; v35 EMD and v52 VMD decompose modes; prior state-space and reduced-rank cycles fit predictive latent states or targets. v75 performs no forecast or adaptive decomposition: it extracts a fixed four-pole generalized-shift operator from each observed path and records pole radii, angles and rank-four residual energy.",
+    "forbidden_reuse": [
+      "v64 or earlier predictions/features",
+      "official result or slices",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed truncated matrix-pencil complex-pole damping and frequency geometry",
+    "official_exclusion": "official feedback is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "repository_negative_fingerprint": "No executed P3 matrix-pencil, Prony, ESPRIT, generalized-Hankel-eigenvalue, complex-pole-radius, or damped-mode feature contract was found.",
+    "semantic_verdict": "NON_DUPLICATE_P3_MATRIX_PENCIL_DAMPED_MODE_AXIS"
+  },
+  "execution": {
+    "candidate_count": 2,
+    "elapsed_seconds": 0.7322311000025366,
+    "outer_result_parameter_changes": 0,
+    "python": "3.12.10",
+    "result_based_tuning": false,
+    "row_deletion": 0
+  },
+  "experiment_id": "p3_matrix_pencil_mode_residual_cycle_20260901_v75",
+  "feature_receipt": {
+    "columns": 72,
+    "finite": true,
+    "matrix_sha256": "fa7508c33f8bb8c18f16cde4668232e4b9fb71cf9bc5eccdccc668c487e10f31",
+    "rows": 182
+  },
+  "fit_count": 12,
+  "fit_receipts": [
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.18717242276276475,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "01_02",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.07405433981223097,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 142,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.20018384014888593,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "03_04",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08487558020492733,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 151,
+      "valid_cases": 31
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.2107662320422099,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "05_06",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08945025017399956,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 160,
+      "valid_cases": 22
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.19664979236065955,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "07_08",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08606014404197784,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 156,
+      "valid_cases": 26
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.2222476725387792,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "09_10",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.09386384883435378,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 158,
+      "valid_cases": 23
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_1_MPENCIL72_RIDGE512_ADD10",
+      "coefficient_l2": 0.20809414600585396,
+      "fit_count": 1,
+      "ridge_alpha": 512.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    },
+    {
+      "additive_residual_weight": 0.1,
+      "block": "11_12",
+      "candidate": "P3_2_MPENCIL72_RIDGE2048_ADD10",
+      "coefficient_l2": 0.08790694237684175,
+      "fit_count": 1,
+      "ridge_alpha": 2048.0,
+      "row_deletion": 0,
+      "target_winsor": [
+        0.025,
+        0.975
+      ],
+      "train_cases": 141,
+      "valid_cases": 40
+    }
+  ],
+  "primary_sources": [
+    {
+      "citation": "Hua and Sarkar, Matrix pencil method for estimating parameters of exponentially damped/undamped sinusoids in noise, IEEE TASSP 38, 814-824 (1990)",
+      "url": "https://doi.org/10.1109/29.56027",
+      "use": "fixed damped-mode pole extraction motivation only; no P3 performance claim"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "e1a8e0d8bebabf284d482404bea8de77e706d599d23f385dba618ab57dd00813",
+    "evaluation_arrays_sha256": "3ec06e138cbc6c1108d80babc54c349c51aec340329fe360ebcdfa27161a3d86",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "7ebab137c90416b8766ba7f91fccbf94df1d6e6ef1cafb8e4acd3783dd71dcf3",
+    "runner_sha256": "1ff4e776f6c43bcfa927ba44b57960956277a6973ab63cf6b055a791bef79d42"
+  },
+  "reference": {
+    "candidate": "P3_KMA_UNIFORM_0425_20260830_V1",
+    "policy": "exact uniform alpha 0.425 comparator",
+    "public_points": 24.203599,
+    "public_rmse_m": 0.575233
+  },
+  "schema_version": "p3.matrix_pencil_mode_residual.result.v75",
+  "status": "COMPLETE",
+  "surface_claim": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases"
+}

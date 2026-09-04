@@ -1,0 +1,75 @@
+{
+  "schema_version": "p3.kma_wind_work_residual_axis.config.v20",
+  "experiment_id": "p3_kma_wind_work_residual_axis_cycle_20260901_v20",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "candidate": {
+    "name": "P3_1_V19_WIND_WORK_RESIDUAL_AXIS",
+    "family_id": "P3_V19_WIND_WORK_RESIDUAL_AXIS",
+    "reference": "p3_kma_continuous_wave_power_factor_cycle_20260831_v19",
+    "orthogonal_change": "Train-only wind-work and pressure-tendency residual correction on top of the frozen v19 wave-power KMA schedule",
+    "features": [
+      "log1p_nonnegative_wind_input_proxy_current",
+      "wind_wave_alignment_current",
+      "wspd_change_6h",
+      "caph_change_6h",
+      "gust_excess_current"
+    ],
+    "missing_rule": "train-fold median imputation plus missing indicators; exact v19 no-op if fewer than two raw features are finite",
+    "scaling": "train-fold median and IQR, clipped to [-4,4], then train-fold mean centered",
+    "model": "Ridge(alpha=64, fit_intercept=false) on delta_kma times standardized feature basis",
+    "alpha_prior": "frozen v19 alpha schedule",
+    "alpha_adjustment": "0.5 * clip(z_beta, -0.20, 0.20)",
+    "alpha_bounds": [0.0, 0.65],
+    "short_leads": "bit-exact uniform KMA alpha 0.425 comparator",
+    "grid_or_search": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "six frozen bimonth outer blocks",
+    "purge_hours": 78,
+    "outer_model_fits": 6,
+    "bootstrap_replicates": 5000,
+    "bootstrap_units": ["episode_id", "block_station"],
+    "surface_claim": "adaptive 182-case development surface; not independent confirmation"
+  },
+  "decision": {
+    "stable_candidate": {
+      "delta_rmse_vs_v19_strictly_negative": true,
+      "minimum_improved_bimonth_blocks_vs_v19": 4,
+      "episode_ci90_upper_vs_v19_below_zero": true,
+      "block_station_ci90_upper_vs_v19_below_zero": true,
+      "worst_station_lead_delta_vs_v19_max_m": 0.01
+    },
+    "preserve_high_risk_candidate": {
+      "delta_rmse_vs_v19_max_m": -0.002,
+      "delta_rmse_vs_uniform_max_m": -0.005,
+      "worst_station_lead_delta_vs_v19_max_m": 0.02
+    },
+    "note": "+0.1 point is not a termination threshold; central score and stability are reported separately"
+  },
+  "score": {
+    "points_per_rmse_m": 15.870739046986959,
+    "current_official_champion_points_receipt": 24.203599
+  },
+  "duplication_audit": {
+    "excluded_prior_axes": [
+      "uniform or station/lead alpha grid",
+      "wave-energy ECDF",
+      "wave-power ECDF",
+      "steepness ECDF",
+      "annual harmonic shrink",
+      "generic current-state GBDT/Huber/Ridge",
+      "robust outlier retrain",
+      "ERA5 S-ORS correction"
+    ],
+    "verdict": "NON_DUPLICATE"
+  },
+  "official_policy": {
+    "official_test_reads": 0,
+    "official_sample_reads": 0,
+    "official_submission_reads": 0,
+    "hidden_truth_reads": 0,
+    "csv_materializations": 0,
+    "uploads": 0
+  }
+}

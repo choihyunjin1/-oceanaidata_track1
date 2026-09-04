@@ -1,0 +1,33 @@
+{
+  "schema_version": "ocean.official_final_submission.qa.20260905.v1",
+  "status": "PASS_PRECOMMIT_REQUIRES_POST_PUSH_REBUILD",
+  "scope": [
+    "three independently executed Jupyter notebooks",
+    "official input SHA-256 contracts",
+    "output schema, rows, key order, finite/domain and exact candidate SHA-256",
+    "P1 split-checkpoint streaming reassembly hashes",
+    "all upload files <= 50000000 bytes and ZIP integrity",
+    "absence of redistributed official source data and common credential patterns"
+  ],
+  "official_hidden_truth_rows_read": 0,
+  "external_observation_reanalysis_forecast_rows": 0,
+  "pretrained_weight_files_loaded": 0,
+  "uploads": 0,
+  "focused_pytest": {
+    "passed": 4,
+    "failed": 0
+  },
+  "ruff": "PASS",
+  "notebooks": {
+    "P1": {"code_cells_executed": 4, "error_outputs": 0, "candidate_sha_exact": true},
+    "P2": {"code_cells_executed": 4, "error_outputs": 0, "candidate_sha_exact": true},
+    "P3": {"code_cells_executed": 4, "error_outputs": 0, "candidate_sha_exact": true}
+  },
+  "forbidden_source_data_files_in_package": 0,
+  "secret_pattern_hits_in_package": 0,
+  "upload_file_count": 18,
+  "upload_files_over_50000000_bytes": 0,
+  "zip_integrity_failures": 0,
+  "p1_checkpoint_reassembly_hashes_exact": 3,
+  "note": "All precommit checks passed. The local package is rebuilt once more after the non-force push so built_from_git_commit points to the remote commit."
+}

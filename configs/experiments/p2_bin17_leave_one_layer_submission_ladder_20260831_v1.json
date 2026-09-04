@@ -1,0 +1,50 @@
+{
+  "schema_version": "p2.bin17_leave_one_layer_submission_ladder.20260831.v1",
+  "experiment_id": "p2_bin17_leave_one_layer_submission_ladder_20260831_v1",
+  "status": "FROZEN_BEFORE_SCORE_READY_TO_BUILD",
+  "problem": "OCN-02",
+  "source_pins": {
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "test_index_sha256": "2397ac4a240e92cd1f75194a92a3adbffb7f9c681739c6f24cac481ab8c26ff0",
+    "sample_submission_sha256": "3804e83d703e2642351c1191cc8cd3c1d0f485795d7f843a096cb6855360362b",
+    "alpha50_sha256": "bd550127cfbab9bcd2df75ad7d3fb65dafdf62568fca628851b0e0ae1dc241d5",
+    "champion_sha256": "99c6925cec605905c80f2924c5655b3dd83ed712c9f27853c58d6d9e0f74e2e2"
+  },
+  "recipe": {
+    "season_bin_days": 14,
+    "active_bin": 17,
+    "adaptive_change_after_score": false,
+    "label_blind_postprocess": "public layer1/layer5 endpoint envelope plus three-layer PAVA",
+    "candidates": [
+      {
+        "priority": 1,
+        "name": "P2_1_BIN17_DROP_LAYER2",
+        "disabled_layers": [2],
+        "title": "P2 bin17 수층2 제외",
+        "summary": "공식 rank-1 bin17 챔피언에서 수층2 보정만 alpha50으로 되돌려 해당 수층의 순효과를 분리합니다."
+      },
+      {
+        "priority": 2,
+        "name": "P2_2_BIN17_DROP_LAYER3",
+        "disabled_layers": [3],
+        "title": "P2 bin17 수층3 제외",
+        "summary": "공식 rank-1 bin17 챔피언에서 수층3 보정만 alpha50으로 되돌려 해당 수층의 순효과를 분리합니다."
+      },
+      {
+        "priority": 3,
+        "name": "P2_3_BIN17_DROP_LAYER4",
+        "disabled_layers": [4],
+        "title": "P2 bin17 수층4 제외",
+        "summary": "공식 rank-1 bin17 챔피언에서 수층4 보정만 alpha50으로 되돌려 해당 수층의 순효과를 분리합니다."
+      }
+    ]
+  },
+  "contract": {
+    "rows": 26061,
+    "test_columns": ["station", "layer", "time", "nominal_depth"],
+    "output_columns": ["station", "layer", "time", "temp"],
+    "temperature_range_c": [-5.0, 45.0],
+    "hidden_truth_reads": 0,
+    "uploads": 0
+  }
+}

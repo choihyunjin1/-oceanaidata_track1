@@ -1,0 +1,35 @@
+{
+  "schema_version": "p1.v22_latent_dynamics_compliance_flow_semantic_gate.v1",
+  "experiment_id": "p1_v22_latent_dynamics_compliance_flow_semantic_gate_20260901_v1",
+  "status": "CLOSE_ZERO_FIT_SEMANTIC_OVERLAP_AND_COMPUTE_SCOPE",
+  "primary_source": {
+    "title": "Anomaly detection in time-series via inductive biases in the latent space of conditional normalizing flows",
+    "authors": "Baumgartner, da Silva, Urteaga",
+    "venue": "UAI 2026, PMLR 337",
+    "url": "https://proceedings.mlr.press/v337/baumgartner26a.html",
+    "claim_boundary": "The paper motivates testing compliance with prescribed latent dynamics rather than observation likelihood. It does not establish performance for P1 or license replacing its conditional flow with a linear innovation proxy."
+  },
+  "semantic_audit": {
+    "decision": "DO_NOT_EXECUTE",
+    "exact_duplicate": false,
+    "semantic_overlap": true,
+    "reason": "A faithful candidate requires a conditional normalizing flow plus prescribed state-space latent evolution and goodness-of-fit test. The proposed cheap causal approximation would reduce to the already closed P1 causal state-space innovation/latent-GP/Koopman family; retaining the nonlinear flow would be a materially larger deep generative architecture that is not safely fixed or supported inside this cycle's maximum-nine-fit contract.",
+    "existing_fingerprints": {
+      "configs/experiments/p1_v4_causal_masked_spatiotemporal_graph_preflight_20260901_v1.json": "d0b590e6ae4f368daf2b9b8952e18b40c0eb850153d1872d01cbb39acd2cf384",
+      "configs/experiments/p1_v15_koopman_innovation_semantic_gate_20260901_v1.json": "0eab52a0e2d386aa7f3295d0f37e709d89a6f0d5604d320527644af2baf2f6c3",
+      "configs/experiments/p1_async_latent_state_gp_subset_scan_anchor_union_20260828_v1.json": "c7921ca336d0fcf0c1aeaff6a3cf58b3d04dd02339f61ebd3a835fa31feb7dbc",
+      "src/p1_qc/temporally_fused_rpca.py": "ce13a07e4f7645d4f7eed599934740765b47c3bda79a424e955bd166dd2d954b"
+    }
+  },
+  "counters": {
+    "source_reads": 0,
+    "targets": 0,
+    "fits": 0,
+    "locks": 0,
+    "artifacts": 0,
+    "official_test_sample_submission_hidden_reads": 0,
+    "csv": 0,
+    "uploads": 0
+  },
+  "next_axis": "row-level prefix-supervised bipartite ranking loss over a fixed causal context basis, with add-only decoding and the unchanged multi-environment transport veto"
+}

@@ -1,0 +1,35 @@
+{
+  "experiment_id": "p2_public_transport_repair_cycle_20260831_v5",
+  "frozen_before_execution": true,
+  "base_prediction": "sealed P2_2_HGB_ABSOLUTE_PROFILE historical OOF correction",
+  "candidates": [
+    {"name": "P2_V5_GLOBAL_HUBER_ROUTER", "scope": "global", "epsilon": 1.35, "alpha": 0.01},
+    {"name": "P2_V5_LAYER_HUBER_ROUTER", "scope": "layer", "epsilon": 1.35, "alpha": 0.01}
+  ],
+  "outer_tests": {
+    "2024_oct_nested": {"train": "2024-09-01/2024-09-30", "test": "2024-10-01/2024-10-31"},
+    "2025_jul_aug": {"train": "all earlier sealed rows", "test": "2025-07-01/2025-08-31"},
+    "2025_nov_dec": {"train": "all earlier sealed rows", "test": "2025-11-01/2025-12-31"}
+  },
+  "robustification": "Huber M-estimation only; no row deletion; train-fold scaling only",
+  "transport_calibration": {
+    "points_per_rmse": 12.5475311,
+    "worst_observed_penalty_points": 0.12168209161000616,
+    "minimum_calibrated_gain_points": 0.01,
+    "inclusive": true
+  },
+  "gate": {
+    "calibrated_expected_points_gte": 0.01,
+    "minimum_improved_outer_tests": 2,
+    "official_like_nested_test_improves": true,
+    "worst_outer_delta_rmse_lte": 0.002,
+    "all_official_like_layers_improve": true
+  },
+  "sources": [
+    "https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf",
+    "https://jmlr.csail.mit.edu/papers/volume8/sugiyama07a/sugiyama07a.pdf",
+    "https://doi.org/10.1214/aoms/1177703732"
+  ],
+  "official_hidden_truth_rows": 0,
+  "upload_count": 0
+}

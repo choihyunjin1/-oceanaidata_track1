@@ -1,10 +1,10 @@
-"""External-data quarantine shared by P1, P2, and P3.
+"""Historical external-data metadata and a fail-closed execution gate.
 
-This module performs metadata and provenance checks only. It never downloads a
-source and it verifies written competition-permission evidence before touching
-a candidate data file. The official public FAQ allows public external data with
-source attribution; competition permission, copyright, reproducibility, and
-hidden-target leakage remain independent gates.
+The 2026-09-01 organizer notice supersedes the older public FAQ permission.
+Catalog and receipt readers remain available only to preserve audit evidence;
+``preflight_external_use`` rejects every competition use before touching a
+manifest or candidate data file. Synthetic-only pretrained weights, if ever
+used, require a separate four-condition gate and are not external observations.
 """
 
 from __future__ import annotations
@@ -286,89 +286,10 @@ def preflight_external_use(
     source_id: str,
     purpose: str,
 ) -> dict[str, Any]:
-    """Validate one external use before a caller reads the candidate file.
+    """Reject external observations before any supplied path is touched."""
 
-    The approval receipt and its evidence are validated first. Only after all
-    policy and rights checks pass is the manifest loaded and the candidate file
-    opened for a SHA256 comparison.
-    """
-
-    if problem not in _ALLOWED_PROBLEMS:
-        raise PolicyError(f"unknown problem: {problem}")
-    if purpose not in _ALLOWED_PURPOSES:
-        raise PolicyError(f"unknown purpose: {purpose}")
-
-    approval_path = Path(approval_receipt_path)
-    if not approval_path.is_file():
-        raise PolicyError("official competition permission receipt is required")
-    approval = ApprovalReceipt.load(approval_path)
-    if approval.status != "approved":
-        raise PolicyError("competition permission status is not approved")
-    _verify_evidence(
-        approval.evidence_file,
-        approval.evidence_sha256,
-        label="competition permission",
+    del catalog_path, approval_receipt_path, manifest_path, problem, source_id, purpose
+    raise PolicyError(
+        "external-data use is forbidden by the active 2026-09-01 organizer policy; "
+        "older FAQ receipts are superseded audit evidence only"
     )
-    if source_id not in approval.allowed_sources:
-        raise PolicyError(f"source {source_id} is not named in organizer approval")
-    if problem not in approval.allowed_problems:
-        raise PolicyError(f"problem {problem} is not named in organizer approval")
-    if purpose not in approval.allowed_purposes:
-        raise PolicyError(f"purpose {purpose} is not named in organizer approval")
-
-    sources = load_catalog(catalog_path)
-    if source_id not in sources:
-        raise PolicyError(f"source {source_id} is not registered in the catalog")
-    source = sources[source_id]
-    if problem not in source.eligible_problems:
-        raise PolicyError(f"source {source_id} is not eligible for {problem}")
-    if purpose not in source.allowed_purposes:
-        raise PolicyError(f"source {source_id} is not eligible for {purpose}")
-    if source.rights_state in {"review_required", "training_provenance_review_required"}:
-        raise PolicyError(f"source {source_id} still requires rights/provenance review")
-    if source.rights_state == "holder_permission_required":
-        evidence = approval.rights_evidence.get(source_id)
-        if not evidence:
-            raise PolicyError(f"source {source_id} requires separate rights-holder permission")
-        _verify_evidence(
-            str(evidence.get("evidence_file", "")),
-            str(evidence.get("evidence_sha256", "")),
-            label=f"rights holder for {source_id}",
-        )
-
-    cutoff_value = approval.cutoff_by_problem.get(problem)
-    if cutoff_value is None:
-        raise PolicyError(f"approval receipt does not define a cutoff for {problem}")
-    approved_cutoff = _aware_datetime(cutoff_value, field=f"cutoff_by_problem.{problem}")
-    catalog_cutoff = _aware_datetime(
-        source.max_observation_time, field="source.max_observation_time"
-    )
-    effective_cutoff = min(approved_cutoff, catalog_cutoff)
-
-    manifest = ExternalManifest.load(Path(manifest_path))
-    if manifest.source_id != source_id:
-        raise PolicyError("external manifest source_id mismatch")
-    observed_end = _aware_datetime(manifest.observed_end, field="observed_end")
-    if observed_end > effective_cutoff:
-        raise PolicyError(
-            f"external observations exceed the approved cutoff {effective_cutoff.isoformat()}"
-        )
-
-    candidate_path = Path(manifest.local_file)
-    if not candidate_path.is_file():
-        raise PolicyError("external candidate file is missing")
-    if _sha256(candidate_path) != manifest.file_sha256:
-        raise PolicyError("external candidate SHA256 mismatch")
-
-    return {
-        "accepted": True,
-        "problem": problem,
-        "source_id": source_id,
-        "purpose": purpose,
-        "effective_cutoff": effective_cutoff.isoformat(),
-        "catalog_sha256": _sha256(Path(catalog_path)),
-        "approval_receipt_sha256": _sha256(approval_path),
-        "manifest_sha256": _sha256(Path(manifest_path)),
-        "candidate_sha256": manifest.file_sha256,
-        "row_count": manifest.row_count,
-    }

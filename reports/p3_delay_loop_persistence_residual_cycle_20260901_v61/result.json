@@ -1,0 +1,65 @@
+{
+  "data_access": {
+    "csv_materializations": 0,
+    "hidden_truth_rows": 0,
+    "historical_target_rows": 0,
+    "official_sample_rows": 0,
+    "official_submission_rows": 0,
+    "official_test_rows": 0,
+    "uploads": 0
+  },
+  "decision": "STOP_SUPPORT_GATE_ZERO_FIT",
+  "duplication_audit": {
+    "distinction": "v36/v36r1 explicitly compute only H0 connected-component deaths equivalent to MST edges; v29 uses one fixed recurrence threshold; v47 uses local curvature and torsion. v61 computes H1 birth-death lifetimes from edges and triangles across the full filtration and uses no prior topology feature or prediction.",
+    "forbidden_reuse": [
+      "v36/v36r1 features or predictions",
+      "v42 official result or slices",
+      "v42-v60 predictions/features",
+      "prior candidate ensembles or routers"
+    ],
+    "novel_axis": "fixed one-dimensional Vietoris-Rips loop-persistence summaries of normalized sliding-window delay clouds",
+    "official_v42_exclusion": "the aggregate official v42 sign reversal is transport-risk context only and is excluded from features, gates, model fitting and candidate selection",
+    "posthoc_prior_cycle_adjustment": false,
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_P3_DELAY_LOOP_H1_PERSISTENCE_AXIS"
+  },
+  "experiment_id": "p3_delay_loop_persistence_residual_cycle_20260901_v61",
+  "fit_count": 0,
+  "primary_sources": [
+    {
+      "citation": "Perea and Harer, Sliding Windows and Persistence: An Application of Topological Methods to Signal Analysis, Foundations of Computational Mathematics 15, 799-838 (2015)",
+      "url": "https://doi.org/10.1007/s10208-014-9206-z",
+      "use": "sliding-window loop-persistence motivation only; not performance evidence"
+    },
+    {
+      "citation": "Edelsbrunner, Letscher and Zomorodian, Topological Persistence and Simplification, Discrete & Computational Geometry 28, 511-533 (2002)",
+      "url": "https://doi.org/10.1007/s00454-002-2885-2",
+      "use": "birth-death persistence algorithm motivation only; not performance evidence"
+    }
+  ],
+  "provenance": {
+    "config_sha256": "ff500afa975c3627e14a991fb0d0dcfea0fb2dd8c3683adfa99845bb2c4cac65",
+    "input_sha256": {
+      "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+      "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd",
+      "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+      "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+      "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b"
+    },
+    "preflight_receipt_sha256": "83a11694f01f266ff2cca90bedebbe100f4f4b0eaf78bf6a893bcb6561703e40",
+    "runner_sha256": "010f94578628711bc7c7af5683c91f84459bd388d0a41cff24386d957a5457f4"
+  },
+  "schema_version": "p3.delay_loop_persistence_residual.result.v61",
+  "status": "COMPLETE",
+  "support_receipt": {
+    "cloud_points": 16,
+    "columns": 32,
+    "finite": true,
+    "matrix_sha256": "566d5360263716d9c87804d3dbfe2d44a120921801fbe1b7b74b9150570270c6",
+    "nonzero_share": 0.39817994505494503,
+    "passed": false,
+    "positive_variance_features": 32,
+    "rows": 182,
+    "target_used": false
+  }
+}

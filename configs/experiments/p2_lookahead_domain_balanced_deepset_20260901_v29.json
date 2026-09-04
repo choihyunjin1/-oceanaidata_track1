@@ -1,0 +1,127 @@
+{
+  "schema_version": "p2.lookahead_domain_balanced_deepset.20260901.v29",
+  "experiment_id": "p2_lookahead_domain_balanced_deepset_20260901_v29",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_layer_task_gradient_surgery_deepset_20260901_v28/terminal-amendment.json",
+    "required_status": "EXPLORATORY_NO_GO_LAYER_TASK_PCGRAD",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v23_result": "reports/p2_public_temperature_input_gradient_regularized_deepset_20260901_v23/result.json",
+    "v24_result": "reports/p2_sharpness_aware_domain_balanced_deepset_20260901_v24/result.json",
+    "v26_result": "reports/p2_layer_month_group_preserving_mixup_deepset_20260901_v26/result.json",
+    "v28_terminal": "reports/p2_layer_task_gradient_surgery_deepset_20260901_v28/terminal-amendment.json"
+  },
+  "primary_source": {
+    "citation": "Zhang, Lucas, Ba, and Hinton, NeurIPS 2019, Lookahead Optimizer: k steps forward, 1 step back",
+    "url": "https://proceedings.neurips.cc/paper/2019/hash/90fd4f88f588ae64038134f1eeaa023f-Abstract.html",
+    "use": "two-weight optimizer-trajectory stability motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_FIXED_LOOKAHEAD_ADAMW_OPTIMIZER_TRAJECTORY",
+    "repository_exact_terms": [
+      "P2 Lookahead optimizer",
+      "P2 slow weights",
+      "P2 k steps forward 1 step back"
+    ],
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v23": "v23 penalizes gradients with respect to one observed input; v29 has no input-gradient term",
+      "v24": "v24 evaluates an adversarial parameter-neighborhood loss; v29 uses only ordinary v13 loss and interpolates optimizer state every five steps",
+      "v25": "v25 learns an aleatoric variance head; v29 keeps the scalar v13 output and loss",
+      "v26": "v26 creates virtual convex rows; v29 changes no inputs, masks, targets, or row weights",
+      "v28": "v28 projects conflicting target-layer gradients; v29 computes the unmodified aggregate v13 gradient and changes only optimizer trajectory"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_beta_1.0_with_fixed_Lookahead_AdamW",
+    "optimizer_geometry": {
+      "name": "Lookahead_AdamW",
+      "inner_optimizer": "AdamW",
+      "synchronization_period_steps": 5,
+      "slow_weight_interpolation_alpha": 0.5,
+      "initial_slow_weights_equal_fast_weights": true,
+      "inference_weights": "current_fast_weights_after_periodic_slow_sync",
+      "posthoc_weight_ensemble": false,
+      "hyperparameter_sweep": false,
+      "scheduler": false
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

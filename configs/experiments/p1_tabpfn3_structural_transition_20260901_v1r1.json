@@ -1,0 +1,88 @@
+{
+  "schema_version": "p1.tabpfn3.structural_transition.contract.v1",
+  "experiment_id": "p1_tabpfn3_structural_transition_20260901_v1r1",
+  "status": "READY_GUARDED",
+  "problem": "P1_qc_anomaly",
+  "recovery": {
+    "reason": "operator_requested_pause_during_q2",
+    "supersedes_incomplete_attempt": "p1_tabpfn3_structural_transition_20260901_v1",
+    "configuration_changed": false,
+    "model_or_threshold_changed": false,
+    "result_based_retry": false,
+    "authorized_by_user": true
+  },
+  "organizer_policy": {
+    "distributed_data_only": true,
+    "synthetic_only_pretrained_exception_used": true,
+    "external_observation_rows": 0,
+    "hidden_truth_rows": 0
+  },
+  "pinned_inputs": {
+    "base_runner": {
+      "path": "scripts/run_p1_incumbent_preserving_mstcn_asrf_v2.py",
+      "sha256": "78df1bd3b4777560b0134bc69ad45839c8c0093da39d2c1d3d458b3a3ba9b87a"
+    },
+    "base_config": {
+      "path": "configs/experiments/p1_incumbent_preserving_mstcn_asrf_v2.json",
+      "sha256": "1f8940d29ea6b047273e4f53445f62230e7d72bf1f0b14abe9fb18476f0345f0"
+    },
+    "tabpfn_contract": {
+      "path": "configs/compliance/tabpfn3_offline_transition_20260901.json",
+      "sha256": "4a1cfc24246ade6e6922eca4e93ff6056e1608bc8912c88d837842d44c50288f"
+    },
+    "tabpfn_adapter": {
+      "path": "src/ocean_tabpfn3/offline.py",
+      "sha256": "0e3c9631c222ca26387ce1f7f73d6276d192631bdf6820847e574e2ba17a1e55"
+    },
+    "superseded_attempt_lock": {
+      "path": "artifacts/p1_tabpfn3_structural_transition_20260901_v1.ATTEMPT_LOCK.json",
+      "sha256": "ac821f7188df88914cdf72d9af7b02b8db2acf4a8af4a699c5900e77c6799e42"
+    },
+    "superseded_preflight": {
+      "path": "artifacts/p1_tabpfn3_structural_transition_20260901_v1/preflight.json",
+      "sha256": "cad66491eaaf0a7362d467156d40436f93997e2752d6d63213f1c2ff147d23df"
+    },
+    "superseded_progress": {
+      "path": "artifacts/p1_tabpfn3_structural_transition_20260901_v1/progress.json",
+      "sha256": "da3bd16161958fd815947315c044e0d80f372af54b1d6eb0786e36fae7fa2a78"
+    }
+  },
+  "features": {
+    "surface": "frozen 165-column split-local robust encoded past-only surface",
+    "expected_count": 165,
+    "grouping": ["station", "layer_category"],
+    "outlier_hard_deletion": false
+  },
+  "model": {
+    "family": "TabPFN-3 classifier",
+    "package_version": "8.5.0",
+    "n_estimators": 8,
+    "training_cap_per_cell": 49000,
+    "sampling": "retain every positive then SHA256-rank negatives",
+    "threshold": 0.5,
+    "candidate": "frozen_current_router_anchor OR tabpfn_probability_gte_0.5",
+    "maximum_cell_fits": 48
+  },
+  "protocol": {
+    "screen": "2025_q2",
+    "screen_pass": "pooled candidate F1 strictly greater than anchor F1",
+    "confirmation": ["2025_q3", "2025_q4"],
+    "confirmation_pass": "pooled Q3+Q4 candidate F1 strictly greater than anchor F1",
+    "both_confirmation_predictions_sealed_before_truth": true,
+    "threshold_tuning": false,
+    "result_based_retry": false
+  },
+  "output": {
+    "directory": "artifacts/p1_tabpfn3_structural_transition_20260901_v1r1",
+    "attempt_lock": "artifacts/p1_tabpfn3_structural_transition_20260901_v1r1.ATTEMPT_LOCK.json",
+    "submission_csv": null,
+    "checkpoint_copy": null
+  },
+  "official_access_budget": {
+    "test_rows": 0,
+    "sample_submission_rows": 0,
+    "submission_csv_rows_created": 0,
+    "uploads": 0,
+    "hidden_truth_rows": 0
+  }
+}

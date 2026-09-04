@@ -1,7 +1,7 @@
 # 반드시 먼저 읽을 메모 — Ocean AI Data P2
 
-> 상태: 2026-08-16 KST 기준
-> P2 데이터 열람, 특징 설계, 검증, 학습, 제출 준비 전에 이 문서와 원본 `README.md`를 처음부터 끝까지 다시 읽는다.
+> 상태: 2026-09-01 KST 규정 갱신
+> P2 데이터 열람, 특징 설계, 검증, 학습, 제출 준비 전에 `00_ORGANIZER_DATA_POLICY.md`, 이 문서와 원본 `README.md`를 처음부터 끝까지 다시 읽는다.
 
 ## 1. 문제의 정확한 목표
 
@@ -55,8 +55,9 @@ station,layer,time,temp
 ## 5. 누출 방지와 검증
 
 - 2025년 가림 구간의 실제 KORS/S-ORS 원자료, 실시간 자료, 공개 mirror를 검색·다운로드·대조하지 않는다. 이는 정답을 직접 복원하는 누출이다.
-- 공식 FAQ에 따라 출처를 명시한 외부 공개 데이터는 사용할 수 있다. 다만 2025년 가림 구간의 S-ORS layer 2·3·4 실제 수온·염분 또는 이를 직접 복원하는 mirror는 숨은 정답이므로 사용하지 않는다.
-- 동기간 ERA5·CMEMS·위성·조석·태풍처럼 목표 센서값과 독립적인 공개 공변량은 라이선스·동화자료·시간정합·출처 manifest를 확인하고, fold별 과거시점 재현 및 external-off ablation을 통과한 경우에만 사용한다.
+- 2026-09-01 최신 운영진 공지에 따라 배포 데이터 밖의 관측·재분석·예보 자료는 공개 여부와 관계없이 사용할 수 없다. 과거 FAQ 허용 판단은 감사 증거일 뿐 현재 권한이 아니다.
+- ERA5·CMEMS·위성·조석·태풍·NASA POWER 및 비배포 KIOST 자료를 특징, 학습, 검증, 선택, 보정 또는 후처리에 사용하지 않는다. 외부 prediction을 이어받은 후보도 비적격이다.
+- 실제 관측·기상·해양 자료로 사전학습된 가중치는 금지한다. 합성-only 모델은 `00_ORGANIZER_DATA_POLICY.md`의 네 조건을 모두 입증할 때만 예외다.
 - validation에서는 layer 2·3·4의 temp와 psal을 **동시에 모두 가린 상태**로 특징을 계산한다. 한 target layer를 복원할 때 다른 target layer의 값을 입력하면 안 된다.
 - 공개층의 동시각 관측, 2024 동일 계절, 2025 가림 전후 관측은 문제에서 제공한 범위이므로 사용할 수 있다.
 - 무작위 행 분할을 주 검증으로 쓰지 않는다. 최소한 다음 연속 블록을 독립적으로 보고한다.
@@ -107,7 +108,7 @@ station,layer,time,temp
 - 2026-08-16 구조·대형 모델 문헌 정찰 결과, 다음 1순위는 공개층 수직 set encoder + 61일 양방향 multi-scale TCN + DeepONet식 target-depth query를 결합하고 선형보간 잔차를 공동 출력하는 3–8M parameter 모델이다. 단순히 범용 Transformer의 크기만 키우지 않는다.
 - 61일 exact-cadence 창 중 공개층 관측률과 목표 정답 가용률이 각각 95% 이상인 창은 endpoint 19,595개, 6시간 stride 약 545개지만 목표 3층이 모든 시각에서 완전한 61일 창은 0개다. 따라서 deep loss는 관측된 목표 정답에만 적용하고 세 목표층을 같은 중앙 구간에서 함께 가리는 structured mask를 사용해야 한다.
 - 첫 deep screen은 AdamW learning rate `{1e-4, 3e-4, 1e-3}` × weight decay `{1e-4, 1e-3}`, 최대 300 epoch, patience 30으로 제한한다. 마지막 epoch가 아니라 최저 validation RMSE checkpoint를 복원하고, 선택된 구조 하나만 3개 seed로 재학습한다.
-- 우선순위는 custom depth-query BiTCN → ImputeFormer block-missing benchmark → SSSD-S4/CSDI posterior-mean 상한선이다. MOMENT/UniTS pretrained weight는 운영진 허용 확인 전 사용하지 않는다. 문헌 benchmark 개선율은 P2 기대효과가 아니며 모든 승격은 현재 router의 동일 target-proxy RMSE `0.7888895064`와 비교한다.
+- 우선순위는 custom depth-query BiTCN → ImputeFormer block-missing benchmark → SSSD-S4/CSDI posterior-mean 상한선이다. MOMENT/UniTS pretrained weight는 실제 관측 사전학습 또는 provenance 불명으로 금지하며, 합성-only 네 조건을 별도로 모두 입증하지 않는 한 사용하지 않는다. 문헌 benchmark 개선율은 P2 기대효과가 아니며 모든 승격은 현재 router의 동일 target-proxy RMSE `0.7888895064`와 비교한다.
 - 8개 deep 구조 비교와 finalist 재학습 후, tree·Depth-query BiTCN·3-seed LSTI·3-seed TimeMixer++·local patch proxy의 layer별 convex stack을 만들었다. 동일 69,850행 fitted OOF RMSE는 `0.7458139094`, leave-one-block-out weight RMSE는 `0.7756600313`이었다. 제출 형식 후보 `submissions/p2/P2_DEEP_STACK_V1.csv`는 26,061행과 저장 가중치 재현을 통과했으며 SHA256은 `ea5cedbd08817da4da00274e1078689f09a1d9c65d2a464f5f5f5ba9ffcc82e8`이다. 업로드하지 않았다.
 - 이어서 public-only phase 81개 특징과 400 boosting iteration을 고정해 LightGBM GBDT·ExtraTrees·DART, XGBoost hist, CatBoost pooled·layerwise를 비교했다. 단독 최강은 ExtraTrees `0.8160964885`였지만 deep stack과의 LOBO pair를 개선한 계열은 layerwise CatBoost뿐이었다: `0.7756600313→0.7745773144`, Δ `-0.0010827169`℃. 2,000회 KST-day bootstrap 90% CI `[-0.0051327138,+0.0032154573]`이 0을 포함하므로 deep 제출 후보는 유지하고, 다음 파라미터 최적화 대상만 layerwise CatBoost로 좁힌다.
 - CatBoost fitted pair 가중치는 layer 2=`0.2808396511`, layer 3=`0.2792596524`, layer 4=`0`이다. 연구 challenger `submissions/p2/P2_DEEP_GBM_RESEARCH_V1.csv`는 제출 스키마를 통과했지만 현재 제출 1순위로 승격하지 않으며 업로드하지 않는다.

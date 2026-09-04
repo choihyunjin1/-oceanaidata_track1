@@ -1,0 +1,129 @@
+{
+  "schema_version": "p2.fixed_physical_depth_graph_message_passing.20260901.v16",
+  "experiment_id": "p2_fixed_physical_depth_graph_message_passing_20260901_v16",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "closed_predecessor": "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/result.json",
+    "closed_predecessor_sha256": "d453aa792e7b0732d0b0c5fae404af108cb5b941c28e8443def3eb38188ec26d",
+    "required_status": "EXPLORATORY_NO_GO_COMPACT_SET_TRANSFORMER",
+    "independent_qa": "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/independent-qa.json",
+    "independent_qa_sha256": "e9caf464758e329487f3d6d677b26b9c5f0f661d7bfc633efc19b809a096c0b1"
+  },
+  "research_basis": [
+    {
+      "title": "Neural Message Passing for Quantum Chemistry",
+      "publisher": "ICML/PMLR 2017",
+      "url": "https://proceedings.mlr.press/v70/gilmer17a.html",
+      "use": "motivation for graph message aggregation only; no P2 performance transfer"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_FIXED_PHYSICAL_DEPTH_GRAPH_MESSAGE_PASSING",
+    "reason": "The rejected spline proposal duplicates executed cubic B-spline functional PCA, supervised functional residual, and PAVA/isotonic families. No P2 execution uses a fixed physical-depth graph operator. v9 uses precomputed linear curvature features; v12/v13 have no interactions; v15 learns all-pairs content attention; prior TCN/ImputeFormer models aggregate across time. v16 instead performs one nonlinear message block over deterministic nominal-depth-distance edges at one timestamp.",
+    "rejected_duplicate_axis": "PHYSICALLY_CONSTRAINED_MONOTONE_SPLINE_PROFILE_BASIS",
+    "evidence_paths": [
+      "src/p2_restore/depth_registered_cmfpca.py",
+      "src/p2_restore/supervised_rank1_functional_residual.py",
+      "src/p2_restore/profile_projection.py",
+      "reports/p2_domain_invariant_vertical_curvature_20260901_v9r1/result.json",
+      "reports/p2_compact_pair_interaction_set_transformer_20260901_v15/result.json",
+      "configs/experiments/p2_deep_model_tournament_v1.json"
+    ],
+    "forbidden_interpretations": [
+      "spline or PAVA retry",
+      "v15 attention retune",
+      "temporal TCN",
+      "learned graph structure",
+      "bandwidth or blend sweep",
+      "season router"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "representation": {
+    "base": "v12_public_layer_tokens",
+    "public_layers": [1, 5, 6, 7, 8],
+    "token_features": 8,
+    "context_features": 11,
+    "hidden_width": 32,
+    "message_blocks": 1,
+    "adjacency": "exp_negative_absolute_nominal_depth_distance_row_normalized_no_self_edge",
+    "bandwidth_normalized_depth": 0.20,
+    "bandwidth_meters": 10.0,
+    "learned_adjacency": false,
+    "positional_index_encoding": false,
+    "temporal_axis": false,
+    "target_layer_values_used_as_features": false,
+    "pooling": "masked_mean_plus_masked_max"
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "shared_element32_fixed_depth_graph_message_block32_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "loss": "SmoothL1_beta_1.0",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

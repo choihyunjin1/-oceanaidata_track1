@@ -1,0 +1,69 @@
+{
+  "schema_version": "p3.gust_factor_intermittency_residual.config.v80",
+  "experiment_id": "p3_gust_factor_intermittency_residual_cycle_20260901_v80",
+  "status": "SEALED_BEFORE_OUTER_SCORING",
+  "reference": {"candidate": "P3_KMA_UNIFORM_0425_20260830_V1", "public_rmse_m": 0.575233, "public_points": 24.203599, "policy": "exact uniform alpha 0.425 comparator"},
+  "duplication_audit": {
+    "repository_exact_hits_p3": 0,
+    "semantic_verdict": "NON_DUPLICATE_HISTORICAL_GUST_FACTOR_INTERMITTENCY_AXIS",
+    "novel_axis": "past-only joint sustained-wind/gust ratio distribution, excess magnitude and excess persistence over full and recent context",
+    "distinction": "v20 uses one current gust-excess scalar inside a KMA adjustment and the older analog audit uses one context mean excess; v26 applies generic fixed convolutions to the raw gust channel. v80 instead seals an explicitly physical gust-factor ratio and gust-excess intermittency distribution over two historical windows. It is not reconstructible from their stored outputs and uses no KMA/prior predictions.",
+    "full_registry_boundary": "Distinct from v29-v79 recurrence, embedding, spectral, decomposition, tail, volatility, crossing, record, ordinal, topology, causality, covariance, mode, and intrinsic-time representations; no prior output is consumed.",
+    "repository_negative_fingerprint": "No executed P3 per-case gust-factor distribution plus excess-persistence residual contract was found.",
+    "posthoc_prior_cycle_adjustment": false,
+    "official_exclusion": "v64, v78/v79 and all prior/official results are excluded from features, gates, fitting and candidate selection",
+    "forbidden_reuse": ["v64/v78/v79 or earlier predictions/features", "official result or slices", "posthoc blends or routers"]
+  },
+  "encoder": {
+    "input": "past-only sustained wind speed and gust on the native context, linearly filled within the observed prefix and sampled on the fixed 20-minute grid",
+    "channels": ["wspd", "gust"],
+    "raw_column_indices": [4, 5],
+    "windows": {"full": [0, 145], "recent": [72, 145]},
+    "wind_floor_mps": 1.0,
+    "gust_factor": "max(gust,0)/max(max(wspd,0),1.0)",
+    "gust_excess": "max(gust-wspd,0)/max(median(max(wspd,0)),1.0)",
+    "statistics_per_window": ["gust_factor_median", "gust_factor_q75", "gust_factor_q90", "gust_factor_max", "gust_excess_mean", "gust_excess_q90", "share_gust_gt_1p25_times_max_wspd_1", "gust_excess_lag1_correlation"],
+    "feature_count": 16,
+    "learned_encoder": false,
+    "absolute_time": false,
+    "future_covariates": false,
+    "row_deletion": 0,
+    "support_gate": {"minimum_cases": 180, "minimum_positive_variance_features": 16, "minimum_nonzero_feature_share": 0.60, "target_used": false}
+  },
+  "model": {
+    "target": "six-lead target_hs minus exact uniform alpha 0.425 reference",
+    "train_fold_scaler": "median and IQR, clip standardized features to [-8,8]",
+    "target_winsor": [0.025, 0.975],
+    "row_deletion": 0,
+    "family": "strongly regularized multi-output Ridge",
+    "candidates": [
+      {"name": "P3_1_GUST16_RIDGE512_ADD10", "ridge_alpha": 512.0, "additive_residual_weight": 0.10},
+      {"name": "P3_2_GUST16_RIDGE2048_ADD10", "ridge_alpha": 2048.0, "additive_residual_weight": 0.10}
+    ],
+    "candidate_selection_after_outer": false,
+    "result_based_tuning": false
+  },
+  "validation": {
+    "surface": "EXPLORATORY_ONLY repeatedly exposed 182 complete historical cases",
+    "outer_blocks": ["01_02", "03_04", "05_06", "07_08", "09_10", "11_12"],
+    "purge_hours": 78,
+    "fits_per_candidate": 6,
+    "maximum_total_fits": 12,
+    "bootstrap_replicates": 5000,
+    "tail_guards": {"worst_block_delta_m_lte": 0.015, "worst_lead_delta_m_lte": 0.010, "worst_station_lead_delta_m_lte": 0.010, "reference_tail_quantile_within_block": 0.80, "worst_reference_tail_block_delta_m_lte": 0.015},
+    "gate": "pooled delta<0, >=4/6 blocks, episode and block-station CI90 upper<0, sealed block/lead/station-lead/reference-tail guards",
+    "high_risk_preserve": "delta RMSE <=-0.005m and worst station-lead <=0.02m"
+  },
+  "score": {"points_per_rmse_m": 15.870739046986959, "fixed_transport_penalty_points": 0.04958605409228893},
+  "primary_sources": [
+    {"citation": "Wieringa, Gust factors over open water and built-up country, Boundary-Layer Meteorology 3, 424-441 (1973)", "url": "https://doi.org/10.1007/BF01034986", "use": "open-water gust-factor mechanism motivation only; no P3 performance claim"}
+  ],
+  "inputs": {
+    "artifacts/p3/sequences_all20_v1/train_values.npy": "821bef4e54f3ddefe7ac1c4a3bf82677f8f89101dbe91424200a9dede990e7a8",
+    "artifacts/p3/sequences_all20_v1/train_station.npy": "3fe5d28fcac85bd3a4794a9c08e19e25bde829342011e0b2e2745be39cd31a61",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_kma_calibrated_longlead_blend_v2/one_shot/blind_predictions.parquet": "1a28b8686cc6edfb03f595cb2d81b230898c37686288bb2be486da299497fa7b",
+    "artifacts/p3/long_persistence_shrink/oof.parquet": "2850ac32676b7425935b5a3dd40892c589f4c48b1a6d2f66cdf184b39744bedd"
+  },
+  "official_policy": {"official_test_reads": 0, "official_sample_reads": 0, "official_submission_reads": 0, "hidden_truth_reads": 0, "csv_materializations": 0, "uploads": 0}
+}

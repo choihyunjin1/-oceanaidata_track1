@@ -1,0 +1,90 @@
+{
+  "schema_version": "p1.v48_identity_routing_moe_semantic_support_gate.v1",
+  "experiment_id": "p1_v48_identity_routing_moe_semantic_support_gate_20260901_v1",
+  "status": "CLOSED_ZERO_FIT_SEMANTIC_AND_IDENTIFIABILITY_GATE",
+  "surface": "TARGET_FREE_REPOSITORY_AND_OCCUPANCY_AUDIT_ONLY",
+  "source": {
+    "readme_sha256": "cb658f09cd3a19824bc9113d6a49568a24edebbd4ecd024554b4d3b37c87eafd",
+    "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+    "allowed_files": ["README.md", "train.csv"],
+    "train_columns_read": ["station", "layer", "time"],
+    "target_columns_read": 0,
+    "official_test_sample_submission_hidden_reads": 0
+  },
+  "root_cause_audit": {
+    "fit_boundary": "2025-01-17T02:50:00+09:00",
+    "prefix_rows": 294278,
+    "stations": 3,
+    "layers": 8,
+    "station_layer_cells": 11,
+    "minimum_station_layer_rows": 1971,
+    "median_station_layer_rows": 31217.0,
+    "maximum_station_layer_rows": 54268,
+    "station_quarter_cells": 7,
+    "supported_station_quarter_cells_rows4096_layers2": 5,
+    "finding": "Identity collapse is not explained by absent row occupancy. Multiple high-LCB objectives concentrate their highest threshold actions in one station-layer and one chronological half.",
+    "exposed_receipts": [
+      {"id": "p1_v36_causal_generalized_cross_entropy_crossquarter_addonly_20260901_v1r1", "best_quantile": 0.999, "precision_lcb": 0.9546852218810206, "distinct_stations": 1, "distinct_station_layer_identities": 1, "halves": [1]},
+      {"id": "p1_v39_causal_rdrop_consistency_crossquarter_addonly_20260901_v1", "best_quantile": 0.999, "precision_lcb": 0.8993697422158083, "distinct_stations": 1, "distinct_station_layer_identities": 1, "halves": [1]},
+      {"id": "p1_v46_causal_spectral_decoupling_crossquarter_addonly_20260901_v1", "best_quantile": 0.999, "precision_lcb": 0.9251111737489122, "distinct_stations": 1, "distinct_station_layer_identities": 1, "halves": [1]},
+      {"id": "p1_v47_causal_hidden_mixstyle_crossquarter_addonly_20260901_v1r1", "best_quantile": 0.999, "precision_lcb": 0.8993697422158083, "distinct_stations": 1, "distinct_station_layer_identities": 1, "halves": [1]}
+    ]
+  },
+  "candidate": {
+    "name": "fixed causal identity-aware mixture of experts",
+    "primary_source": {
+      "title": "Mixture-of-Experts with Expert Choice Routing",
+      "authors": "Zhou et al.",
+      "venue": "NeurIPS 2022",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/2f00ecd787b432c1d36f3de9800728eb-Abstract-Conference.html",
+      "supported_claim": "Expert-choice routing assigns fixed expert capacity and was designed to reduce expert under- or over-specialization.",
+      "claim_boundary": "The paper does not establish station-layer action diversity, anomaly precision, or P1 transport. Balanced expert utilization is not balanced identity-level proposals."
+    },
+    "prospective_fixed_recipe_if_identifiable": {
+      "experts": 4,
+      "routing": "expert_choice_fixed_equal_capacity",
+      "top_k": 1,
+      "past_only_features": 8,
+      "seeds": [20260901, 20260917, 20260943],
+      "fits": 3,
+      "maximum_fits": 9,
+      "threshold_quantiles": [0.995, 0.9975, 0.999],
+      "anchor_operation": "bitwise_or",
+      "anchor_removals": 0,
+      "sweep": 0
+    }
+  },
+  "semantic_audit": {
+    "decision": "REJECT_ZERO_FIT",
+    "exact_duplicate": true,
+    "duplicate": {
+      "registry_path": "configs/p1_meaningful_learning_curve_generation_v1.json",
+      "registry_sha256": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7",
+      "candidate_id": "station_routed_binary_experts_lgbm",
+      "existing_structure": "one global fallback plus eligible station-specific binary experts per seed with deterministic station routing",
+      "overlap": "The direct identity-specific expert intervention already exists. Replacing deterministic station routing by expert-choice routing changes capacity allocation but does not target station-layer action coverage."
+    },
+    "negative_fingerprint": {
+      "station_adversarial": {"path": "configs/experiments/p1_v24_causal_station_adversarial_invariant_addonly_20260901_v1.json", "sha256": "6ca2904c09084ada7d7a49893e14399c8bc3a2f81f67de52db186e3032098392"},
+      "barlow_redundancy": {"path": "configs/experiments/p1_v26_causal_barlow_redundancy_reduction_addonly_20260901_v1.json", "sha256": "df57f36528e92d2d386b7a12f91d57614753ed1a210b375555b6712d3cd218fe"},
+      "fishr": {"path": "configs/experiments/p1_v44_causal_fishr_gradient_variance_crossquarter_addonly_20260901_v1.json", "sha256": "e4dd6e1e545f6746dea483677dc4ff85ab1ab0e3c8ff8fcc69a1dd6ea7b8a512"},
+      "and_mask": {"path": "configs/experiments/p1_v45_causal_cross_environment_gradient_sign_mask_crossquarter_addonly_20260901_v1.json", "sha256": "676f357ed3953df9ad26c81ceea76cc27413e3ca096f1e67d3713873798561b9"},
+      "mixstyle": {"path": "configs/experiments/p1_v47_causal_hidden_mixstyle_crossquarter_addonly_20260901_v1r1.json", "sha256": "3f0fe08e9b360d9c90ae40f6ded3fc12d1b182bf998246c6ed4e1ec60d604444"}
+    }
+  },
+  "identifiability_gate": {
+    "target_free_row_occupancy": "PASS",
+    "target_free_identity_action_coverage": "NOT_IDENTIFIABLE",
+    "reason": "Unlabeled station-layer occupancy cannot establish that a learned router will allocate high anomaly scores or true-positive actions across identities. Expert capacity balance is insufficient for the v28 identity precision/TP gate.",
+    "gate": "FAIL_CLOSE_ZERO_FIT_NO_SUPPORT_QUALIFIED_NONDUPLICATE_ROUTER"
+  },
+  "contracts_preserved": {
+    "cross_quarter_guard": {"path": "configs/experiments/p1_v28_cross_quarter_transport_guard_amendment_20260901_v1.json", "sha256": "a051d4d0837b395f9c1d42d71d65572efb99d6c1aeae6aabdb52c8427539c8d6"},
+    "auditability_amendment": {"path": "configs/experiments/p1_v33_rejected_candidate_auditability_amendment_20260901_v1.json", "sha256": "a20cf248c3c4cd4ced858deccca1fbb52f4e1ed114582988d9957018a7e43128"},
+    "add_only": true,
+    "anchor_removals": 0,
+    "maximum_fits": 9
+  },
+  "counters": {"fits": 0, "optimizer_steps": 0, "target_reads": 0, "actions": 0, "removals": 0, "official": 0, "csv": 0, "uploads": 0},
+  "next_research_gap": "A genuinely new method needs a target-free certificate linking causal scientific state to prospective station-layer action opportunity, rather than merely balancing training rows, expert capacity, loss, or score thresholds. No such observable proxy is currently established in the train-only schema."
+}

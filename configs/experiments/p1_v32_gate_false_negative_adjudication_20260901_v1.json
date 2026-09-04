@@ -1,0 +1,23 @@
+{
+  "schema_version": "p1.v32_gate_false_negative_adjudication.v1",
+  "experiment_id": "p1_v32_gate_false_negative_adjudication_20260901_v1",
+  "status": "INVALID_TECHNICAL_PRETARGET_STATE_UNAVAILABLE",
+  "purpose": "Audit-only false-negative adjudication of the maximum-Wilson-LCB sealed pre-Q2 candidates from v29 and v30.",
+  "selection_fixed_before_any_q2_target_access": {
+    "v29": {"quantile": 0.999, "threshold": 0.8519394397735596, "pre_q2_count": 57, "pre_q2_precision": 0.9473684210526315, "pre_q2_wilson90_lcb": 0.8754197892940535},
+    "v30": {"quantile": 0.9975, "threshold": 0.7439806461334229, "pre_q2_count": 141, "pre_q2_precision": 1.0, "pre_q2_wilson90_lcb": 0.9811730056540257}
+  },
+  "required_execution_contract": {"fits": 0, "refits": 0, "threshold_reselection": 0, "q2_windows": 1, "q3_q4_reads": 0, "candidate_promotion_or_rescue": 0},
+  "blocking_inventory": {
+    "v29_pre_q2_seal_sha256": "e0234831423a676a2765ea4b479daec51516eb211769ed00563927ca6badf09f",
+    "v29_result_sha256": "270fb5a19f21322a4c5877b26756a6cf95bb328a883809ca17111cdf6c60a8d2",
+    "v30_pre_q2_seal_sha256": "e0bb46b79f73aef55552905d2931d67554f97cc0a18d26c3fc19101a77ddeec7",
+    "v30_result_sha256": "1c7b930dcd47dac3db605f62b637cc6da5a9e9daf706ceee39e8db2e657e97eb",
+    "persisted_model_state_files": 0,
+    "persisted_q2_score_files": 0,
+    "persisted_q2_action_masks": 0
+  },
+  "reason": "A numeric threshold plus model hashes cannot reconstruct Q2 actions. Recreating either ensemble would be a prohibited refit; no allowed zero-fit route exists.",
+  "access": {"new_label_reads": 0, "q2_target_reads": 0, "q3_target_reads": 0, "q4_target_reads": 0, "official_test_sample_submission_hidden_reads": 0, "csv": 0, "uploads": 0},
+  "decision": "KEEP_V28_GUARD_UNCHANGED_INSUFFICIENT_ADJUDICATION_EVIDENCE"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "p1.v28_score_priority_deployment.20260901.v1",
+  "experiment_id": "p1_public_transport_repair_cycle_20260831_v28m1",
+  "status": "PREREGISTERED_USER_APPROVED_NOT_EXECUTED",
+  "authorization": "USER_EXPLICITLY_APPROVED_ORGANIZER_DATA_ONLY_SCORE_PRIORITY_MATERIALIZATION",
+  "frozen_candidate": {
+    "source_experiment_id": "p1_public_transport_repair_cycle_20260831_v28",
+    "source_config": "configs/experiments/p1_public_transport_repair_cycle_20260831_v28.json",
+    "source_config_sha256": "5c7c47658854d65b7fbea1a93a7fe49f50997256acaccf0c41e5f73d75236259",
+    "source_runner": "scripts/run_p1_public_transport_repair_cycle_20260831_v28.py",
+    "source_runner_sha256": "99b4fcfd84025b7ee15214715b965308dd52b4b0edaadf863a7ae1e0999b43c2",
+    "source_result": "artifacts/p1_public_transport_repair_cycle_20260831_v28/result.json",
+    "source_result_sha256": "4b6c9103828ec5eeddd475006b6164cbd4f0c31545362207803d61414c55ea9a",
+    "source_qa": "reports/p1_public_transport_repair_cycle_20260831_v28/postrun-qa.json",
+    "source_qa_sha256": "bd6803cd6e8c2fa865c29589ebec79d966f596fcf64ff3d54d9146fa02b54fa5",
+    "required_source_status": "COMPLETE_INTERNAL_ONLY",
+    "candidate_name": "P1_1_PREQUENTIAL_LABEL_SHIFT_EM_STACK_ADDONLY",
+    "historical_delta_f1": 0.008746570712812818,
+    "raw_expected_points_delta": 0.23246741358020137,
+    "transport_adjusted_expected_points_delta": 0.22708372220708112,
+    "historical_fit_count": 2,
+    "full_history_calibrator_fit_count": 1,
+    "threshold_rule": "unchanged_inner_only_maximum_add_only_binary_micro_f1",
+    "outer_label_shift": "unchanged_Saerens_EM",
+    "tuning": 0,
+    "automatic_retries": 0,
+    "known_failed_safety_gates": [
+      "each_kst_day_changed_fraction_at_most_0_005",
+      "each_supported_station_layer_nonnegative"
+    ]
+  },
+  "data_policy": {
+    "organizer_distributed_data_only": true,
+    "scratch_training_only": true,
+    "internet_data_allowed": false,
+    "kiost_original_data_allowed": false,
+    "external_observation_allowed": false,
+    "external_reanalysis_allowed": false,
+    "external_forecast_allowed": false,
+    "real_observation_pretrained_weights_allowed": false,
+    "hidden_truth_allowed": false,
+    "official_aggregate_score_for_model_selection": false,
+    "official_test_covariates_allowed_after_user_approval": true,
+    "official_sample_keys_allowed_after_user_approval": true,
+    "upload_allowed": false
+  },
+  "output": {
+    "directory": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_V28_SCORE_PRIORITY_READY_V1",
+    "filename": "P1_submission.csv",
+    "expected_rows": 169011,
+    "title": "P1 v28 prequential label-shift EM 고득점 probe",
+    "summary": "배포 데이터만으로 scratch 학습한 v28 add-only 후보입니다. 내부 ΔF1 +0.008747, 예상 +0.227점이나 일별 집중도와 일부 station-layer 안정성 실패를 명시적으로 감수하는 정보가치 probe입니다.",
+    "upload_count": 0
+  }
+}

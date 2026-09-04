@@ -1,0 +1,46 @@
+{
+  "schema_version": "p1.v13.technical_failure_recovery_receipt",
+  "source_experiment_id": "p1_public_transport_repair_cycle_20260831_v13",
+  "recovery_experiment_id": "p1_public_transport_repair_cycle_20260831_v13r1",
+  "status": "APPROVED_MINIMAL_RECOVERY_PREFLIGHT_PASS",
+  "failure": {
+    "error_type": "ValueError",
+    "cause": "historical time was str while the sealed anchor time was datetime64[us, UTC]",
+    "phase": "truth_attachment_after_target_blind_proposal_seal",
+    "model_fits": 0,
+    "metrics_computed": 0,
+    "official_covariate_reads": 0,
+    "hidden_truth_reads": 0,
+    "submission_csv_created": 0,
+    "uploads": 0,
+    "terminal_failure_sha256": "76fdef7844c6241a722958e06134384bdd295b166c01f68a91e02e93acf3dea0"
+  },
+  "change_scope": {
+    "only_change": "historical['time'] = pd.to_datetime(historical['time'], utc=True)",
+    "proposal_regenerated": false,
+    "candidate_changed": false,
+    "quorum_changed": false,
+    "lookback_changed": false,
+    "gate_changed": false,
+    "config_changed": false
+  },
+  "hashes": {
+    "config_sha256": "cb115d557ac2a0919c7fb4e318b969ab166f474665115f0f47471836c6f7f62e",
+    "first_runner_sha256": "af324b1d594d0aba5428f317924255d39b1e10b5117069c87b7e10230524d00d",
+    "corrected_v13_runner_sha256": "91b06776aab1d00fe89cc0e550d0264fa865e4a4bf8ec50a2179fa2b5ef2ca50",
+    "recovery_runner_sha256": "a9a8c243d38b8ad82c92070ec659d1ac3f175bbe99c06ff5e77f55de2ab136e8",
+    "first_attempt_lock_sha256": "954f612e1bc1fa686e5757890b2483ae2be251d6b225d97e27ece0c0436eb619",
+    "sealed_proposal_npz_sha256": "4c25647085a9e36bdfd7ecfe9c765e7bc4130d650c665955ab0157a69e9a151c",
+    "sealed_proposal_receipt_sha256": "4a61ea5f9c30e44228c6f6d4b0dd0d9a5b6aeff4f5f993bdcbcf5410e96b1b97",
+    "sealed_additions_bits_sha256": "a1bc6058b5eb116342071ee7c68287e672fe5b0ddb6a7bedf4cfefc28ead7ae9",
+    "sealed_candidate_bits_sha256": "fade3116ae3cd26cae3bdbd04eb19c1feb70d3bc1a9794a33a02b3085b25f4a4"
+  },
+  "preflight": {
+    "py_compile": "PASS",
+    "ruff": "PASS",
+    "focused_pytest": "6 PASS",
+    "utc_merge_test": "PASS",
+    "proposal_hash_bit_exact_test": "PASS",
+    "validate_only": "VALID_RECOVERY"
+  }
+}

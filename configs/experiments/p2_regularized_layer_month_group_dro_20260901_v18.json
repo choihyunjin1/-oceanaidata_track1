@@ -1,0 +1,117 @@
+{
+  "schema_version": "p2.regularized_layer_month_group_dro.20260901.v18",
+  "experiment_id": "p2_regularized_layer_month_group_dro_20260901_v18",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "closed_predecessor": "reports/p2_local_prefix_masked_public_auxiliary_20260901_v17/result.json",
+    "closed_predecessor_sha256": "d619f5b1e42aacf524aebf297d0a5fa22be4848275902ca5415a92557545067a",
+    "required_status": "EXPLORATORY_NO_GO_MASKED_PUBLIC_AUXILIARY",
+    "independent_qa": "reports/p2_local_prefix_masked_public_auxiliary_20260901_v17/independent-qa.json",
+    "independent_qa_sha256": "dbc52016b112fbc73d091cce1e7f553b7cff9534a847c4cbbbdcdc571f739068"
+  },
+  "research_basis": [
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "publisher": "ICLR 2020",
+      "url": "https://openreview.net/forum?id=ryxGuJrFvS",
+      "use": "motivation for a preregistered worst-group objective with stronger regularization only; no P2 performance transfer"
+    }
+  ],
+  "semantic_audit": {
+    "classification": "NEW_P2_REGULARIZED_LAYER_MONTH_GROUP_DRO_OBJECTIVE",
+    "reason": "Repository-wide audit found no executed P2 exponentiated-gradient Group-DRO objective. v13 statically equalizes layer x calendar-month x KST-day risk but does not adapt adversarial group weights. v18 freezes the exact v13 representation, architecture, prefix, purge, seeds, epochs, output blend, and cap; only the training objective changes to one fixed layer x calendar-month Group-DRO update with stronger fixed L2 regularization. The executed P1 Group-DRO uses a different problem, MS-TCN, BCE, and station x layer x quarter groups.",
+    "evidence_paths": [
+      "scripts/run_p2_prefix_safe_domain_balanced_deepset_20260901_v13.py",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/independent-qa.json",
+      "scripts/run_p1_mstcn_group_dro_20260829_v2.py",
+      "artifacts/p1_mstcn_group_dro_20260829_v2/aggregate.json",
+      "reports/p2_local_prefix_masked_public_auxiliary_20260901_v17/result.json"
+    ],
+    "forbidden_interpretations": [
+      "P1 Group-DRO retry",
+      "group-definition sweep",
+      "Group-DRO eta sweep",
+      "regularization sweep",
+      "blend sweep",
+      "month router",
+      "posthoc environment selection"
+    ]
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "loss": "SmoothL1_beta_1.0",
+    "group_definition": "target_layer_x_calendar_month",
+    "within_group_weighting": "equal_KST_day_then_equal_row",
+    "group_dro_update": "epoch_end_exponentiated_gradient",
+    "group_dro_eta": 0.1,
+    "group_weight_initialization": "uniform",
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "row_deletion": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

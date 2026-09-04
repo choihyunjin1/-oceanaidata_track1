@@ -1,0 +1,1218 @@
+{
+  "schema_version": "p2.layer_conditioned_calendar_month_cmd_deepset.result.20260901.v37",
+  "experiment_id": "p2_layer_conditioned_calendar_month_cmd_deepset_20260901_v37",
+  "status": "EXPLORATORY_NO_GO_LAYER_CONDITIONED_MONTH_CMD",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "runtime_seconds": 981.7144888000039,
+  "fit_count": 9,
+  "permutation_invariance": {
+    "public_layer_permutation": [
+      4,
+      2,
+      0,
+      3,
+      1
+    ],
+    "maximum_abs_error": 1.4901161193847656e-08
+  },
+  "training": {
+    "row_deletion": 0,
+    "folds": {
+      "2024_sep_oct": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2024-08-25T00:00:00+09:00",
+        "training_rows": 45935,
+        "training_calendar_months": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month05": {
+              "rows": 3332,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer2:month06": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month07": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer2:month08": {
+              "rows": 3208,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month05": {
+              "rows": 3324,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer3:month06": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month07": {
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer3:month08": {
+              "rows": 3214,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            },
+            "layer4:month05": {
+              "rows": 3329,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month06": {
+              "rows": 4319,
+              "days": 30,
+              "raw_weight_sum": 0.08333333333333334
+            },
+            "layer4:month07": {
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.08333333333333333
+            },
+            "layer4:month08": {
+              "rows": 3215,
+              "days": 24,
+              "raw_weight_sum": 0.08333333333333331
+            }
+          },
+          "group_count": 12,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.8575082138590202,
+          "normalized_max": 8.860918209876543,
+          "cmd_environment_contract": {
+            "encoding": "100*target_layer+KST_calendar_month",
+            "environment_ids": [
+              205,
+              206,
+              207,
+              208,
+              305,
+              306,
+              307,
+              308,
+              405,
+              406,
+              407,
+              408
+            ],
+            "environment_rows": [
+              3332,
+              4318,
+              4459,
+              3208,
+              3324,
+              4318,
+              4452,
+              3214,
+              3329,
+              4319,
+              4447,
+              3215
+            ],
+            "environment_count": 12
+          }
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.15037632801576115,
+            "base_loss_last": 0.08678033691087356,
+            "cmd_penalty_first": 0.004251775448210537,
+            "cmd_penalty_last": 0.0011941399813319247,
+            "total_loss_first": 0.15340996285279593,
+            "total_loss_last": 0.08762165593604247,
+            "optimizer_steps": 720,
+            "cmd_penalty_steps": 720,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 12,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 60,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.12113508272490045,
+            "base_loss_last": 0.08589570439008837,
+            "cmd_penalty_first": 0.003840107082699736,
+            "cmd_penalty_last": 0.0012795323952256392,
+            "total_loss_first": 0.12401181894044082,
+            "total_loss_last": 0.08799137299259503,
+            "optimizer_steps": 720,
+            "cmd_penalty_steps": 720,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 12,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 60,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.10960387124702187,
+            "base_loss_last": 0.08586583796281476,
+            "cmd_penalty_first": 0.004607806932957222,
+            "cmd_penalty_last": 0.0012259833747521043,
+            "total_loss_first": 0.11346132680773735,
+            "total_loss_last": 0.08823867390553157,
+            "optimizer_steps": 720,
+            "cmd_penalty_steps": 720,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 12,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 60,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      },
+      "2025_jul_aug": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-06-24T00:00:00+09:00",
+        "training_rows": 119667,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "rows": 7627,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month07": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month08": {
+              "rows": 4216,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month09": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "rows": 7626,
+              "days": 53,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month07": {
+              "rows": 4452,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "rows": 4221,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month09": {
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "rows": 7628,
+              "days": 53,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "rows": 4447,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "rows": 4223,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 0.9999999999999999,
+          "normalized_min": 0.5699731367169639,
+          "normalized_max": 11.080277777777777,
+          "cmd_environment_contract": {
+            "encoding": "100*target_layer+KST_calendar_month",
+            "environment_ids": [
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              304,
+              305,
+              306,
+              307,
+              308,
+              309,
+              310,
+              311,
+              312,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412
+            ],
+            "environment_rows": [
+              1336,
+              7478,
+              7627,
+              4459,
+              4216,
+              4318,
+              4459,
+              4320,
+              1711,
+              1336,
+              7469,
+              7626,
+              4452,
+              4221,
+              4316,
+              4458,
+              4320,
+              1711,
+              1306,
+              7477,
+              7628,
+              4447,
+              4223,
+              4300,
+              4422,
+              4320,
+              1711
+            ],
+            "environment_count": 27
+          }
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.07425147334921688,
+            "base_loss_last": 0.043972464430653044,
+            "cmd_penalty_first": 0.0075404467061161995,
+            "cmd_penalty_last": 0.0009587349952198565,
+            "total_loss_first": 0.08153603685398897,
+            "total_loss_last": 0.04449296941359838,
+            "optimizer_steps": 1800,
+            "cmd_penalty_steps": 1800,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.061699916771401596,
+            "base_loss_last": 0.03889968576837489,
+            "cmd_penalty_first": 0.005457195298125346,
+            "cmd_penalty_last": 0.0009300216411550839,
+            "total_loss_first": 0.06665949622790018,
+            "total_loss_last": 0.039770149750014146,
+            "optimizer_steps": 1800,
+            "cmd_penalty_steps": 1800,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.05921811546736203,
+            "base_loss_last": 0.040099257316334846,
+            "cmd_penalty_first": 0.00524701161775738,
+            "cmd_penalty_last": 0.0008552736137062312,
+            "total_loss_first": 0.06407665262619654,
+            "total_loss_last": 0.04103732369840145,
+            "optimizer_steps": 1800,
+            "cmd_penalty_steps": 1800,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      },
+      "2025_nov_dec": {
+        "training_start_kst": "2024-05-01T00:00:00+09:00",
+        "training_cutoff_exclusive_kst": "2025-10-25T00:00:00+09:00",
+        "training_rows": 149384,
+        "training_calendar_months": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "weight_receipt": {
+          "groups": {
+            "layer2:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer2:month05": {
+              "rows": 7478,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month06": {
+              "rows": 8635,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month07": {
+              "rows": 8904,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month08": {
+              "rows": 8661,
+              "days": 62,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month09": {
+              "rows": 4318,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month10": {
+              "rows": 4459,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer2:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer2:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer3:month04": {
+              "rows": 1336,
+              "days": 10,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer3:month05": {
+              "rows": 7469,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month06": {
+              "rows": 8634,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month07": {
+              "rows": 8901,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month08": {
+              "rows": 8647,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month09": {
+              "rows": 4316,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month10": {
+              "rows": 4458,
+              "days": 31,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer3:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer3:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            },
+            "layer4:month04": {
+              "rows": 1306,
+              "days": 10,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month05": {
+              "rows": 7477,
+              "days": 54,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month06": {
+              "rows": 8636,
+              "days": 60,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month07": {
+              "rows": 8911,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703704
+            },
+            "layer4:month08": {
+              "rows": 8687,
+              "days": 62,
+              "raw_weight_sum": 0.03703703703703705
+            },
+            "layer4:month09": {
+              "rows": 4300,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month10": {
+              "rows": 4422,
+              "days": 31,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month11": {
+              "rows": 4320,
+              "days": 30,
+              "raw_weight_sum": 0.037037037037037035
+            },
+            "layer4:month12": {
+              "rows": 1711,
+              "days": 12,
+              "raw_weight_sum": 0.03703703703703703
+            }
+          },
+          "group_count": 27,
+          "normalized_mean": 1.0,
+          "normalized_min": 0.6197066241869109,
+          "normalized_max": 13.831851851851852,
+          "cmd_environment_contract": {
+            "encoding": "100*target_layer+KST_calendar_month",
+            "environment_ids": [
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              304,
+              305,
+              306,
+              307,
+              308,
+              309,
+              310,
+              311,
+              312,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412
+            ],
+            "environment_rows": [
+              1336,
+              7478,
+              8635,
+              8904,
+              8661,
+              4318,
+              4459,
+              4320,
+              1711,
+              1336,
+              7469,
+              8634,
+              8901,
+              8647,
+              4316,
+              4458,
+              4320,
+              1711,
+              1306,
+              7477,
+              8636,
+              8911,
+              8687,
+              4300,
+              4422,
+              4320,
+              1711
+            ],
+            "environment_count": 27
+          }
+        },
+        "fit_receipts": [
+          {
+            "seed": 20260901,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.058638680995275194,
+            "base_loss_last": 0.031991892946374514,
+            "cmd_penalty_first": 0.007252539306677677,
+            "cmd_penalty_last": 0.0007547016217801216,
+            "total_loss_first": 0.06566629186272621,
+            "total_loss_last": 0.03265383960427465,
+            "optimizer_steps": 2220,
+            "cmd_penalty_steps": 2220,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260902,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.04813541350149074,
+            "base_loss_last": 0.02876814755974756,
+            "cmd_penalty_first": 0.005231244829357476,
+            "cmd_penalty_last": 0.0007986665885845149,
+            "total_loss_first": 0.053264408196146425,
+            "total_loss_last": 0.02959900928308835,
+            "optimizer_steps": 2220,
+            "cmd_penalty_steps": 2220,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          },
+          {
+            "seed": 20260903,
+            "device": "cuda",
+            "epochs": 60,
+            "parameters": 4865,
+            "base_loss_first": 0.046000696411358205,
+            "base_loss_last": 0.029076493233208742,
+            "cmd_penalty_first": 0.004659708457168292,
+            "cmd_penalty_last": 0.0006613354812174834,
+            "total_loss_first": 0.050569978517455025,
+            "total_loss_last": 0.02968893260569186,
+            "optimizer_steps": 2220,
+            "cmd_penalty_steps": 2220,
+            "coefficient": 1.0,
+            "orders": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "bounded_latent_dimension": 32,
+            "supported_environment_count_min": 27,
+            "supported_target_layer_count_min": 3,
+            "moment_term_count_min": 135,
+            "kernel_steps": 0,
+            "adversary_steps": 0,
+            "ema_steps": 0,
+            "warmup_steps": 0,
+            "loss": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+            "loss_finite": true,
+            "row_deletion": 0
+          }
+        ]
+      }
+    },
+    "objective": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+    "central_moment_discrepancy": {
+      "coefficient": 1.0,
+      "environment": "target_layer_x_KST_calendar_month",
+      "representation": "tanh_of_v13_first_head_hidden_width32",
+      "orders": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "order1": "raw_mean",
+      "orders2to5": "central_moment_about_each_distribution_mean",
+      "reference": "all_rows_of_same_target_layer_in_batch",
+      "matching": "mean_over_supported_layer_month_order_of_L2_over_sqrt32",
+      "minimum_rows_per_month_in_batch": 2,
+      "minimum_supported_months_per_layer_in_batch": 2,
+      "kernel": false,
+      "adversary": false,
+      "ema": false,
+      "warmup": false,
+      "sweep": false
+    },
+    "input_perturbation": 0,
+    "data_augmentation": 0
+  },
+  "candidate": {
+    "name": "P2_V37_LAYER_CONDITIONED_MONTH_CMD_DEEPSET_BLEND020",
+    "objective": "weighted_SmoothL1_beta_1.0",
+    "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+    "reference_rmse": 3.085714618974286,
+    "candidate_rmse": 3.035332453590665,
+    "delta_rmse": -0.05038216538362095,
+    "by_fold": {
+      "2024_sep_oct": {
+        "rows": 26273,
+        "reference_rmse": 4.882135051908297,
+        "candidate_rmse": 4.804436447829764,
+        "delta_rmse": -0.0776986040785328
+      },
+      "2025_jul_aug": {
+        "rows": 26693,
+        "reference_rmse": 1.1857780665476285,
+        "candidate_rmse": 1.155925994242077,
+        "delta_rmse": -0.029852072305551536
+      },
+      "2025_nov_dec": {
+        "rows": 16884,
+        "reference_rmse": 0.28073218471331673,
+        "candidate_rmse": 0.2909618845202389,
+        "delta_rmse": 0.010229699806922177
+      }
+    },
+    "by_layer": {
+      "2": {
+        "rows": 23298,
+        "reference_rmse": 0.977425784480094,
+        "candidate_rmse": 0.8419381198235203,
+        "delta_rmse": -0.1354876646565737
+      },
+      "3": {
+        "rows": 23280,
+        "reference_rmse": 1.614255614462584,
+        "candidate_rmse": 1.512054832678786,
+        "delta_rmse": -0.10220078178379799
+      },
+      "4": {
+        "rows": 23272,
+        "reference_rmse": 5.001566713966556,
+        "candidate_rmse": 4.965525369202453,
+        "delta_rmse": -0.03604134476410259
+      }
+    },
+    "by_fold_layer": {
+      "2024_sep_oct": {
+        "2": {
+          "rows": 8777,
+          "reference_rmse": 1.4655912558305686,
+          "candidate_rmse": 1.2322026929847374,
+          "delta_rmse": -0.2333885628458312
+        },
+        "3": {
+          "rows": 8774,
+          "reference_rmse": 2.411153774848093,
+          "candidate_rmse": 2.233531945292859,
+          "delta_rmse": -0.1776218295552341
+        },
+        "4": {
+          "rows": 8722,
+          "reference_rmse": 7.986758349725424,
+          "candidate_rmse": 7.936289896936719,
+          "delta_rmse": -0.05046845278870471
+        }
+      },
+      "2025_jul_aug": {
+        "2": {
+          "rows": 8890,
+          "reference_rmse": 0.5930813808765173,
+          "candidate_rmse": 0.5740039559549592,
+          "delta_rmse": -0.01907742492155806
+        },
+        "3": {
+          "rows": 8875,
+          "reference_rmse": 1.02350668839,
+          "candidate_rmse": 1.014129330247311,
+          "delta_rmse": -0.00937735814268903
+        },
+        "4": {
+          "rows": 8928,
+          "reference_rmse": 1.6769858971289795,
+          "candidate_rmse": 1.6261748019158224,
+          "delta_rmse": -0.050811095213157076
+        }
+      },
+      "2025_nov_dec": {
+        "2": {
+          "rows": 5631,
+          "reference_rmse": 0.2223371212774351,
+          "candidate_rmse": 0.21471708583304466,
+          "delta_rmse": -0.007620035444390438
+        },
+        "3": {
+          "rows": 5631,
+          "reference_rmse": 0.2518955116552082,
+          "candidate_rmse": 0.24104595988358812,
+          "delta_rmse": -0.010849551771620058
+        },
+        "4": {
+          "rows": 5622,
+          "reference_rmse": 0.35159372870754263,
+          "candidate_rmse": 0.387135772416568,
+          "delta_rmse": 0.03554204370902536
+        }
+      }
+    },
+    "bootstrap": {
+      "unit": "fold_x_kst_date",
+      "groups": 163,
+      "replicates": 5000,
+      "mean_delta_rmse": -0.054245771767584425,
+      "ci90_low": -0.08081908331731245,
+      "ci90_high": -0.0371102257117845,
+      "probability_improved": 1.0
+    },
+    "official_like_bootstrap": {
+      "unit": "kst_date",
+      "groups": 61,
+      "replicates": 5000,
+      "ci90_low": -0.12683196030855928,
+      "ci90_high": -0.05653524133870373,
+      "probability_improved": 1.0
+    },
+    "raw_expected_points_delta": 0.7093776989433908,
+    "transport_calibrated_expected_points_delta": 0.5876956073333846,
+    "candidate_change_rms_C": 0.16905616601293094,
+    "candidate_change_abs_max_C": 0.5000000000000018,
+    "gate_checks": {
+      "pooled_improves": true,
+      "minimum_two_folds_improve": true,
+      "official_like_fold_improves": true,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "calibrated_expected_points_gte_0_01": true
+    },
+    "strict_exploratory_pass": true,
+    "by_month": {
+      "2024-09": {
+        "rows": 12934,
+        "reference_rmse": 2.2787351769737767,
+        "candidate_rmse": 2.0095520039574235,
+        "delta_rmse": -0.2691831730163532
+      },
+      "2024-10": {
+        "rows": 13339,
+        "reference_rmse": 6.473934093544442,
+        "candidate_rmse": 6.4458276990198895,
+        "delta_rmse": -0.02810639452455277
+      },
+      "2025-07": {
+        "rows": 13358,
+        "reference_rmse": 1.3894354530721664,
+        "candidate_rmse": 1.3461696548803432,
+        "delta_rmse": -0.04326579819182319
+      },
+      "2025-08": {
+        "rows": 13335,
+        "reference_rmse": 0.9384581958535501,
+        "candidate_rmse": 0.9270038067443053,
+        "delta_rmse": -0.01145438910924479
+      },
+      "2025-11": {
+        "rows": 12951,
+        "reference_rmse": 0.29628626798459773,
+        "candidate_rmse": 0.31328791575405596,
+        "delta_rmse": 0.017001647769458228
+      },
+      "2025-12": {
+        "rows": 3933,
+        "reference_rmse": 0.22193861634935502,
+        "candidate_rmse": 0.20058880259377052,
+        "delta_rmse": -0.021349813755584507
+      }
+    },
+    "action_geometry": {
+      "active_rows_gt_1e_12": 69850,
+      "active_share_gt_1e_12": 1.0,
+      "abs_action_p50_C": 0.059475609708863786,
+      "abs_action_p90_C": 0.3132788505747106,
+      "abs_action_p95_C": 0.5,
+      "abs_action_p99_C": 0.5,
+      "abs_action_p999_C": 0.5,
+      "abs_action_max_C": 0.5000000000000018,
+      "action_rms_C": 0.16905616601293094,
+      "sse_gain_top_0_1pct_share": 0.011502254147962953,
+      "sse_gain_top_1pct_share": 0.13935363213222465
+    },
+    "canonical_nominal_pooled_points_delta": 0.6321717870363273,
+    "canonical_transport_adjusted_pooled_points_delta": 0.510489695426321,
+    "legacy_engine_score_translation": {
+      "raw_expected_points_delta": 0.7093776989433908,
+      "transport_calibrated_expected_points_delta": 0.5876956073333846,
+      "meaning": "official-like Sep-Oct day-bootstrap CI90-high translation"
+    },
+    "prediction_commitment": {
+      "path": "C:\\Users\\cedis\\PycharmProjects\\PythonProject\\artifacts\\p2_layer_conditioned_calendar_month_cmd_deepset_20260901_v37\\P2_V37_LAYER_CONDITIONED_MONTH_CMD_DEEPSET_BLEND020.npz",
+      "sha256": "321eed9c02a2489e1173032da2f875c2e18ed1fc34a2317a5fd8ff7ee8da15ff",
+      "rows": 69850,
+      "metric_computed_at_commitment": false
+    },
+    "safety_gate_checks": {
+      "all_three_folds_non_harm": false,
+      "all_six_months_within_0_003C": false,
+      "all_layers_within_0_003C": true,
+      "pooled_ci90_high_below_zero": true,
+      "canonical_transport_points_gte_0_01": true
+    },
+    "safety_pass": false,
+    "legacy_safety_pass_without_v26a_amendment": false,
+    "prospective_fold_layer_gate": {
+      "source": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+      "source_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+      "non_harm_cells": 8,
+      "total_cells": 9,
+      "non_harm_coverage": 0.8888888888888888,
+      "maximum_cell_delta_rmse_C": 0.03554204370902536,
+      "checks": {
+        "minimum_eight_of_nine_non_harm": true,
+        "all_cells_within_plus_0_003C": false
+      },
+      "pass": false
+    },
+    "safety_pass_with_v26a_amendment": false
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "historical_scoring_rows_read": 69850,
+    "official_test_index_rows_read": 0,
+    "sample_rows_read": 0,
+    "baseline_file_rows_read": 0,
+    "score_file_rows_read": 0,
+    "query_support_rows_read": 0,
+    "hidden_truth_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  },
+  "hashes": {
+    "config": "af5eaf564c383454a6c69c668a20f3061a0bf2582ddc0caf90f57f5ac5d98a1a",
+    "runner": "3999b4cc3844438761cfe45738e142753c5c0ba4b42d0ebba1c22a9ecc1d801d",
+    "v12_runner": "1c027fc0d753273ce62e362a7505afb0ef16fb34daa18f78fb315d83941d60ae",
+    "observations": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "prediction_npz": "321eed9c02a2489e1173032da2f875c2e18ed1fc34a2317a5fd8ff7ee8da15ff",
+    "v13_runner": "767fd8c0f2fc6e5f4482ffa046cbd8c63b49f66ca9d74db2fbba2adee6f78505",
+    "prospective_gate_amendment": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_LAYER_CONDITIONED_CALENDAR_MONTH_LATENT_CMD_ORDERS_1_TO_5",
+    "repository_p2_exact_execution_hits": 0,
+    "v20_covariance_only_distinguished": true,
+    "v31_adversarial_distinguished": true,
+    "v36_gradient_variance_distinguished": true,
+    "official_v23_feedback_used_for_selection": false,
+    "evidence_sha256": {
+      "reports/p2_layer_month_fishr_gradient_variance_deepset_20260901_v36/result.json": "cabb73eb3b15051a4cd0d3d00c26ab53bc0301d6cbca1234d82460487d39954f",
+      "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+      "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json": "1f1b486ff1cda87887075fc31a04d9f7631c891f8ae3c4ee7ddb14e54fa1d2a4",
+      "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json": "877cb5995f6c10767ab4340a79463fd5d2e537c3b347218d438fec48e21e60a0",
+      "reports/p2_within_layer_month_adversarial_deepset_20260901_v31/result.json": "e73dbba22d5e2f3f1b5b15583d32ec2ee4bbfe3dc924af9fa2a252a5003325a7"
+    }
+  },
+  "cmd_contract": {
+    "penalty": 0.23344899713993073,
+    "permuted_penalty": 0.23344896733760834,
+    "permutation_invariant": true,
+    "gradients_finite": true,
+    "coefficient": 1.0,
+    "bounded_latent_dimension": 7,
+    "orders": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "supported_environment_ids": [
+      201,
+      202,
+      203,
+      301,
+      302,
+      303
+    ],
+    "supported_environment_count": 6,
+    "supported_target_layers": [
+      2,
+      3
+    ],
+    "supported_target_layer_count": 2,
+    "skipped_environment_ids": [],
+    "skipped_environment_count": 0,
+    "moment_term_count": 30,
+    "penalty_finite": true
+  },
+  "forward_contract": {
+    "prediction_maximum_abs_error": 0.0,
+    "latent_shape": [
+      5,
+      32
+    ],
+    "bounded_latent_maximum_abs_value": 0.5724485516548157
+  },
+  "comparison_to_preserved_candidates": {
+    "use": "ledger_only_no_posthoc_selection_router_or_ensemble",
+    "official_v23_feedback_used_for_selection": false,
+    "v13_delta_rmse": -0.050854574991828105,
+    "v20_delta_rmse": -0.05184038539456637,
+    "v31_delta_rmse": -0.040325950389616505,
+    "v36_delta_rmse": -0.050436335006336375
+  }
+}

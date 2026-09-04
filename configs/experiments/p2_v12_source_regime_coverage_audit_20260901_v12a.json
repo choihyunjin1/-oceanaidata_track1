@@ -1,0 +1,47 @@
+{
+  "schema_version": "p2.v12_source_regime_coverage_audit.20260901.v12a",
+  "experiment_id": "p2_v12_source_regime_coverage_audit_20260901_v12a",
+  "status": "PREREGISTERED_ZERO_FIT_NOT_EXECUTED",
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "v12_training_windows_kst": [
+    {
+      "id": "2024_may_jun",
+      "start_inclusive": "2024-05-01T00:00:00+09:00",
+      "end_exclusive": "2024-07-01T00:00:00+09:00"
+    },
+    {
+      "id": "2024_jul_to_aug24",
+      "start_inclusive": "2024-07-01T00:00:00+09:00",
+      "end_exclusive": "2024-08-25T00:00:00+09:00"
+    }
+  ],
+  "outer_fold_starts_kst": {
+    "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+    "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+    "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+  },
+  "prefix_embargo_days": 7,
+  "descriptor": "permutation_invariant_raw_token_masked_mean_max_plus_context",
+  "robust_scale_floor": 0.05,
+  "authorization_gate": {
+    "minimum_outer_folds_with_calendar_months_absent_from_v12_training": 2,
+    "minimum_outer_folds_with_prior_same_calendar_month_support": 2
+  },
+  "operation_limits": {
+    "model_fits": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

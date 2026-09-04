@@ -1,0 +1,105 @@
+{
+  "schema_version": "p1.v32g1.independent_deployment_qa.20260901.v1",
+  "status": "PASS_UPLOAD_INTEGRITY_EXPLICIT_INTERNAL_NO_GO",
+  "candidate": {
+    "path": "C:/Users/cedis/Downloads/해양 해커톤 제출용/20260901_P1_V32G_CATBOOST_UNION_SCORE_PRIORITY_READY_V1/P1_submission.csv",
+    "sha256": "2f6b115dd706d42b8851685af4c2e4a065f111e2b51b8dee9bc6170396e5e279",
+    "rows": 169011,
+    "bytes": 6929481,
+    "positive_rows": 6419,
+    "negative_rows": 162592,
+    "unique_label_count": 2,
+    "binary_nonconstant": true
+  },
+  "organizer_contract": {
+    "allowed_minimal_schema": [
+      "station",
+      "year",
+      "layer",
+      "time",
+      "label"
+    ],
+    "schema_allowed": true,
+    "key_order_matches_sample": true,
+    "key_order_matches_test": true,
+    "keys_unique": true,
+    "duplicate_key_rows": 0,
+    "duplicate_full_rows": 0,
+    "label_finite_integer_binary": true
+  },
+  "champion_diff": {
+    "current_champion_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+    "current_champion_positive_rows": 6396,
+    "candidate_positive_rows": 6419,
+    "additions": 23,
+    "removals": 0,
+    "changed_rows": 23,
+    "changed_fraction": 0.00013608581689949175,
+    "maximum_kst_day_addition_fraction": 0.003161222339304531,
+    "frozen_maximum_changed_fraction": 0.005,
+    "add_only_arithmetic_exact": true,
+    "daily_share_guard_pass": true
+  },
+  "novelty": {
+    "official_score_ledger_path": "reports/p1_official_component_score_ledger_20260901_v1/score-ledger.json",
+    "official_score_ledger_sha256": "dda992485097040504e8b08ffb09a1693bc996ff4f2c747bc907bc3dbe4c4326",
+    "official_hashes_compared": 18,
+    "local_p1_submission_csvs_compared": 47,
+    "matches_current_champion": false,
+    "matches_existing_official_hash": false,
+    "matches_other_local_p1_submission_csv": false
+  },
+  "lineage_hashes": {
+    "deployment_result_sha256": "f39c8f818d07c7f424107b6ab916c6df92dd92e00a3c00b9251bd8ae62fd410a",
+    "manifest_sha256": "f39c8f818d07c7f424107b6ab916c6df92dd92e00a3c00b9251bd8ae62fd410a",
+    "deployment_config_sha256": "beb5be1c342c9cbed7f51f15385b0b214e070e9aba999405cab91fb38ce2f87a",
+    "materializer_sha256": "2d456f420d5013715930a22064b5013d8f29a89f9dd0fee0a42ec4874c551834",
+    "attempt_lock_sha256": "97cd5043fa022630dca6cb12d92ff938a92fa0b1a7b5dce100f88b158adb21c4",
+    "source_config_sha256": "bed5499c56daa68f280bc1f1c3a2700a6771626c24cd2dec4b16e8f6c017504c",
+    "source_runner_sha256": "6399838d953cb2dd0fcd499c11ccd0e9b9247ec962d98ed4487ff8ab324d78de",
+    "source_result_sha256": "d6bcc13d0995637a91cecaa9092922485b1d4e15ac0b814255ae127a515afc78",
+    "source_qa_sha256": "c03b449be6081e5351a0bf6549c25fe0cf8eec284156531f1bd36a9bc5025ff1",
+    "base_model_config_sha256": "43e4b20467316cc0d7a2e4135a74fd53d47e5364f43f0f38517a7b4dd637949e",
+    "base_model_runner_sha256": "d83e7f697fb0b07ed73a3093fc489ff9ff6470cc66d2f121a589e3a454872615",
+    "all_lineage_and_immutable_input_hashes_match": true
+  },
+  "policy_and_access": {
+    "organizer_distributed_data_only": true,
+    "scratch_training_only": true,
+    "hidden_truth_reads": 0,
+    "internet_rows_read": 0,
+    "kiost_original_rows_read": 0,
+    "external_observation_rows_read": 0,
+    "external_reanalysis_rows_read": 0,
+    "external_forecast_rows_read": 0,
+    "real_observation_pretrained_weight_files_loaded": 0,
+    "official_aggregate_score_reads_for_selection": 0,
+    "uploads": 0,
+    "prediction_values_printed_during_independent_qa": 0
+  },
+  "scientific_state": {
+    "source_status": "NO_GO_INTERNAL_GATE",
+    "pooled_delta_f1": -0.00017298224936446172,
+    "q3_q4_delta_f1": -0.0002388046492630691,
+    "expected_points_center": 28.902994021168197,
+    "expected_points_ci90": [
+      28.891794399564443,
+      28.91217975162548
+    ],
+    "current_champion_points": 28.909341,
+    "interpretation": "Integrity and novelty pass, but the historical center is below the champion. This is an explicitly authorized information-value probe, not an internally promoted improvement."
+  },
+  "verification_execution": {
+    "independent_checks": "PASS_42_OF_42",
+    "focused_pytest": "PASS_4_OF_4",
+    "ruff": "PASS"
+  },
+  "decision": {
+    "file_integrity_pass": true,
+    "policy_pass": true,
+    "novel_probe_pass": true,
+    "scientific_promotion_gate_pass": false,
+    "upload_performed_by_qa": false,
+    "verdict": "PASS_FOR_USER_AUTHORIZED_INFORMATION_PROBE_ONLY"
+  }
+}

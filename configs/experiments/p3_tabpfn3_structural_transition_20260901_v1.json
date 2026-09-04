@@ -1,0 +1,79 @@
+{
+  "schema_version": "p3.tabpfn3.structural_transition.contract.v1",
+  "experiment_id": "p3_tabpfn3_structural_transition_20260901_v1",
+  "status": "READY_GUARDED",
+  "problem": "P3_wave_forecast",
+  "organizer_policy": {
+    "distributed_data_only": true,
+    "synthetic_only_pretrained_exception_used": true,
+    "forbidden_kma_era5_chronos_descendants": 0,
+    "external_observation_rows": 0,
+    "hidden_truth_rows": 0
+  },
+  "pinned_inputs": {
+    "clean_contract": {
+      "path": "configs/experiments/p3_clean_fractional_change_residual_20260901_c1r1.json",
+      "sha256": "056972bda80d650373ca971e4905ad671ad222cc405a7532ad2931b15915b87b"
+    },
+    "clean_module": {
+      "path": "src/p3_wave/clean_fractional_change_residual_20260901_c1r1.py",
+      "sha256": "2efdc1476ab34e907d444d41580547bea9437e8d5e665151dece70fdceeeb9eb"
+    },
+    "corrected_split": {
+      "path": "src/p3_wave/corrected_repeated_forward.py",
+      "sha256": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474"
+    },
+    "validation": {
+      "path": "src/p3_wave/validation.py",
+      "sha256": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30"
+    },
+    "tabpfn_contract": {
+      "path": "configs/compliance/tabpfn3_offline_transition_20260901.json",
+      "sha256": "4a1cfc24246ade6e6922eca4e93ff6056e1608bc8912c88d837842d44c50288f"
+    },
+    "tabpfn_adapter": {
+      "path": "src/ocean_tabpfn3/offline.py",
+      "sha256": "0e3c9631c222ca26387ce1f7f73d6276d192631bdf6820847e574e2ba17a1e55"
+    }
+  },
+  "features": {
+    "surface": "clean compact_feature_columns_fixed_v1",
+    "base_feature_count": 591,
+    "runtime_feature_count": 593,
+    "runtime_additions": ["station_code", "current_hs_for_residual"],
+    "outlier_hard_deletion": false
+  },
+  "model": {
+    "family": "six lead-specific TabPFN-3 residual regressors",
+    "package_version": "8.5.0",
+    "n_estimators": 8,
+    "leads_h": [1, 2, 3, 6, 12, 24],
+    "target": "target_hs_minus_current_hs",
+    "clean_fallback_weight": 0.75,
+    "tabpfn_weight": 0.25,
+    "prediction_clip_m": [0.0, 30.0],
+    "maximum_fits": 18
+  },
+  "validation": {
+    "surface": "clean corrected repeated-forward 181 cases / 1086 rows",
+    "folds": ["2024_h2_storm", "winter_transition", "2025_h1"],
+    "promotion": "candidate pooled RMSE strictly below clean fallback pooled RMSE",
+    "fold_or_station_tolerance": null,
+    "blend_tuning": false,
+    "result_based_retry": false
+  },
+  "output": {
+    "directory": "artifacts/p3_tabpfn3_structural_transition_20260901_v1",
+    "attempt_lock": "artifacts/p3_tabpfn3_structural_transition_20260901_v1.ATTEMPT_LOCK.json",
+    "submission_csv": null,
+    "checkpoint_copy": null
+  },
+  "official_access_budget": {
+    "test_context_rows": 0,
+    "test_index_rows": 0,
+    "sample_submission_rows": 0,
+    "submission_csv_rows_created": 0,
+    "uploads": 0,
+    "hidden_truth_rows": 0
+  }
+}

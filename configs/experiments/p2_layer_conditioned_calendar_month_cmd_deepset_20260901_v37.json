@@ -1,0 +1,132 @@
+{
+  "schema_version": "p2.layer_conditioned_calendar_month_cmd_deepset.20260901.v37",
+  "experiment_id": "p2_layer_conditioned_calendar_month_cmd_deepset_20260901_v37",
+  "status": "PREREGISTERED_EXPLORATORY_NOT_EXECUTED",
+  "claim_level": "EXPLORATORY_ONLY_NO_FRESH_CONFIRMATION",
+  "authorization_evidence": {
+    "audit_result": "reports/p2_layer_month_fishr_gradient_variance_deepset_20260901_v36/result.json",
+    "required_status": "EXPLORATORY_NO_GO_LAYER_MONTH_FISHR",
+    "prospective_gate_amendment": "reports/p2_fold_layer_gate_validity_audit_20260901_v26a/result.json",
+    "prospective_gate_amendment_sha256": "c7fde8c5d9f535ab8080eb561bf082c55e5c7172117d00e12e1479f9b4417680",
+    "v13_result": "reports/p2_prefix_safe_domain_balanced_deepset_20260901_v13/result.json",
+    "v20_result": "reports/p2_layer_conditioned_month_covariance_alignment_20260901_v20/result.json",
+    "v31_result": "reports/p2_within_layer_month_adversarial_deepset_20260901_v31/result.json",
+    "v36_result": "reports/p2_layer_month_fishr_gradient_variance_deepset_20260901_v36/result.json"
+  },
+  "primary_source": {
+    "citation": "Zellinger et al., ICLR 2017, Central Moment Discrepancy (CMD) for Domain-Invariant Representation Learning",
+    "url": "https://openreview.net/pdf?id=SkB-_mcel",
+    "use": "higher-order bounded latent moment alignment motivation only; no P2 performance transfer"
+  },
+  "semantic_audit": {
+    "classification": "NEW_P2_LAYER_CONDITIONED_CALENDAR_MONTH_LATENT_CMD_ORDERS_1_TO_5",
+    "repository_exact_terms": [
+      "Central Moment Discrepancy",
+      "higher-order bounded latent moment alignment",
+      "calendar-month CMD",
+      "CMD orders 1 through 5"
+    ],
+    "p2_exact_execution_hits": 0,
+    "distinct_from": {
+      "v20": "v20 aligns only latent covariance matrices pairwise across months; v37 aligns bounded latent first through fifth central moments of each supported month to its target-layer pooled reference",
+      "v31": "v31 removes month information through a learned adversary; v37 has no adversary",
+      "v36": "v36 matches per-sample loss-gradient variances; v37 aligns forward latent distributions and never differentiates per-sample parameter gradients"
+    },
+    "result_adaptive_search": false
+  },
+  "source_contract": {
+    "environment_variable": "P2_DATA_DIR",
+    "only_source_filename": "observations.csv",
+    "observations_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+    "scoring_frame": "artifacts/p2_alpha50_supervised_rank1_threeway_crossfit_regime_veto_20260828_v2/scored_predictions_no_truth.parquet",
+    "scoring_frame_sha256": "2db4b6688dcd5efb78beff09c653fa45939e8440affa3bdc8221f7aad5de4ebc",
+    "official_inputs_allowed": false,
+    "hidden_truth_allowed": false,
+    "submission_csv_allowed": false,
+    "upload_allowed": false
+  },
+  "training": {
+    "training_start_inclusive_kst": "2024-05-01T00:00:00+09:00",
+    "fold_starts_kst": {
+      "2024_sep_oct": "2024-09-01T00:00:00+09:00",
+      "2025_jul_aug": "2025-07-01T00:00:00+09:00",
+      "2025_nov_dec": "2025-11-01T00:00:00+09:00"
+    },
+    "embargo_days": 7,
+    "weighting": "equal_total_mass_per_target_layer_x_calendar_month_then_equal_KST_day_then_equal_row",
+    "architecture": "v13_exact_DeepSets_shared_element_MLP32x2_masked_mean_max_head32x2",
+    "token_features": 8,
+    "context_features": 11,
+    "objective": "weighted_SmoothL1_beta_1.0_plus_fixed_layer_conditioned_calendar_month_CMD_orders1to5",
+    "optimizer": "exact_v13_AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 60,
+    "batch_size": 4096,
+    "seeds": [20260901, 20260902, 20260903],
+    "central_moment_discrepancy": {
+      "coefficient": 1.0,
+      "environment": "target_layer_x_KST_calendar_month",
+      "representation": "tanh_of_v13_first_head_hidden_width32",
+      "orders": [1, 2, 3, 4, 5],
+      "order1": "raw_mean",
+      "orders2to5": "central_moment_about_each_distribution_mean",
+      "reference": "all_rows_of_same_target_layer_in_batch",
+      "matching": "mean_over_supported_layer_month_order_of_L2_over_sqrt32",
+      "minimum_rows_per_month_in_batch": 2,
+      "minimum_supported_months_per_layer_in_batch": 2,
+      "kernel": false,
+      "adversary": false,
+      "ema": false,
+      "warmup": false,
+      "sweep": false
+    },
+    "row_deletion": false,
+    "input_perturbation": false,
+    "data_augmentation": false,
+    "early_stopping": false,
+    "outer_fold_tuning": false,
+    "champion_preserving_weight": 0.8,
+    "model_weight": 0.2,
+    "model_minus_champion_clip_C": 2.5,
+    "maximum_final_action_C": 0.5,
+    "maximum_fit_count": 9
+  },
+  "evaluation": {
+    "folds": ["2024_sep_oct", "2025_jul_aug", "2025_nov_dec"],
+    "official_like_fold": "2024_sep_oct",
+    "comparator": "sealed_cross_fit_bin17_champion_proxy",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260901,
+    "points_per_rmse_C": 12.5475311,
+    "transport_penalty_points": 0.12168209161000616,
+    "formal_gate": {
+      "pooled_delta_rmse_lt": 0.0,
+      "minimum_improved_folds": 2,
+      "official_like_delta_rmse_lt": 0.0,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "transport_calibrated_expected_points_gte": 0.01
+    },
+    "safety_gate": {
+      "all_three_folds_delta_rmse_lte": 0.0,
+      "all_six_months_delta_rmse_lte": 0.003,
+      "maximum_layer_delta_rmse_C": 0.003,
+      "pooled_bootstrap_ci90_high_lt": 0.0,
+      "canonical_transport_adjusted_pooled_points_gte": 0.01,
+      "minimum_fold_layer_non_harm_cells": 8,
+      "total_fold_layer_cells": 9,
+      "maximum_any_fold_layer_delta_rmse_C": 0.003
+    }
+  },
+  "result_adaptive_tuning": false,
+  "operation_limits": {
+    "maximum_candidate_count": 1,
+    "maximum_fit_count": 9,
+    "automatic_retry_count": 0,
+    "official_rows_read": 0,
+    "hidden_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

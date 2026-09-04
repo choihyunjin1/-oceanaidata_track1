@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "checks": {
+    "terminal_no_go": true,
+    "exploratory_not_fresh": true,
+    "fit_count_six": true,
+    "fallback_executed": true,
+    "two_candidates": true,
+    "training_rows_45935": true,
+    "feature_count_55": true,
+    "six_weight_groups": true,
+    "weights_sum_one": true,
+    "weights_mean_one": true,
+    "v8_invalid_artifact_preserved": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:hash": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:rows": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:finite": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:pooled_reference": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:pooled_candidate": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:fold:2024_sep_oct": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:fold:2025_jul_aug": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:fold:2025_nov_dec": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:layer:2": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:layer:3": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:layer:4": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:one_of_three_folds_only": true,
+    "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL:strict_no_go": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:hash": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:rows": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:finite": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:pooled_reference": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:pooled_candidate": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:fold:2024_sep_oct": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:fold:2025_jul_aug": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:fold:2025_nov_dec": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:layer:2": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:layer:3": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:layer:4": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:one_of_three_folds_only": true,
+    "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL:strict_no_go": true,
+    "operation_zero:official_test_index_rows_read": true,
+    "operation_zero:sample_rows_read": true,
+    "operation_zero:baseline_file_rows_read": true,
+    "operation_zero:score_file_rows_read": true,
+    "operation_zero:query_support_rows_read": true,
+    "operation_zero:hidden_truth_rows_read": true,
+    "operation_zero:submission_csv_created": true,
+    "operation_zero:uploads": true
+  },
+  "recomputed": [
+    {
+      "name": "P2_V8_GROUP_BALANCED_L2_RAW_RESIDUAL",
+      "reference_rmse": 3.085714618974286,
+      "candidate_rmse": 1.440105357789846,
+      "delta_rmse": -1.64560926118444,
+      "by_fold_delta_rmse": {
+        "2024_sep_oct": -3.955038622308947,
+        "2025_jul_aug": 0.4115138516663184,
+        "2025_nov_dec": 1.5105796893589778
+      }
+    },
+    {
+      "name": "P2_V8_GROUP_BALANCED_L1_RAW_RESIDUAL",
+      "reference_rmse": 3.085714618974286,
+      "candidate_rmse": 1.3147632371421327,
+      "delta_rmse": -1.7709513818321532,
+      "by_fold_delta_rmse": {
+        "2024_sep_oct": -4.092515637360923,
+        "2025_jul_aug": 0.3252897548775018,
+        "2025_nov_dec": 1.322777483910373
+      }
+    }
+  ],
+  "interpretation": {
+    "official_like_points_are_nominal_extrapolation_only": true,
+    "reason": "The local RMSE deltas are far outside the small-delta calibration range and the comparator surface is exposed.",
+    "submission_ready": false
+  },
+  "operation_counters": {
+    "observations_rows_read": 789408,
+    "official_rows_read": 0,
+    "submission_csv_created": 0,
+    "uploads": 0
+  }
+}

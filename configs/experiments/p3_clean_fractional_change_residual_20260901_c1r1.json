@@ -1,0 +1,168 @@
+{
+  "schema_version": "p3.clean_fractional_change.split_repair.contract.v1",
+  "experiment_id": "p3_clean_fractional_change_residual_20260901_c1r1",
+  "created_at_kst": "2026-09-01T20:09:04+09:00",
+  "status": "PREREGISTERED_READY_NOT_EXECUTED",
+  "problem": "P3_wave_forecast",
+  "purpose": "Repair only the zero-fit c1 split-constructor mismatch, then test the unchanged scratch CatBoost fractional-change residual at fixed weight 0.15 on the exact clean corrected repeated-forward surface.",
+  "supersedes": {
+    "experiment_id": "p3_clean_fractional_change_residual_20260901_c1",
+    "reason": "zero-fit technical failure from generic instead of corrected validation splitter",
+    "science_changed": false,
+    "repair_scope": "split constructor and exact validation-key receipt only"
+  },
+  "organizer_policy": {
+    "highest_precedence": true,
+    "distributed_data_only": true,
+    "scratch_weights_only": true,
+    "synthetic_pretrained_exception_used": false,
+    "external_or_pretrained_descendants_used": false
+  },
+  "negative_fingerprint": {
+    "namespace_token": "clean_fractional_change_residual_20260901_c1r1",
+    "precreation_repository_matches": 0,
+    "search_scope": [
+      "configs/experiments",
+      "scripts",
+      "src/p3_wave",
+      "tests"
+    ],
+    "distinct_axis_tokens": [
+      "fractional_change_residual",
+      "anchor_scaled_delta",
+      "corrected_station_global_split"
+    ]
+  },
+  "inputs": {
+    "policy/00_ORGANIZER_DATA_POLICY.md": {
+      "bytes": 3258,
+      "sha256": "c3f411db26841ff5a1467b0952503d22dcde821d8e67d92c046f600d92bd397a"
+    },
+    "policy/organizer_data_policy_20260901.json": {
+      "bytes": 1698,
+      "sha256": "ada02955d99872620e99c6f6129106b6b9bea7a4901ba13d53d2d4d6d07b8d2c"
+    },
+    "policy/p3_clean_incumbent_20260901.json": {
+      "bytes": 2529,
+      "sha256": "45dc0d41676e83bb9dd68c3ae9544f33888e9ea407014296205125fd597eb7bb"
+    },
+    "source/README.md": {
+      "bytes": 3037,
+      "sha256": "fba1473b65e788c33a5d061205d80640cd4b34f6828860c03134add0d7be805c"
+    },
+    "source/train_wave.csv": {
+      "bytes": 6132036,
+      "sha256": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e"
+    },
+    "source/train_atmos.csv": {
+      "bytes": 8962353,
+      "sha256": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+    },
+    "cache/manifest.json": {
+      "bytes": 1602,
+      "sha256": "33ec27b00a3aaf81a92879d49d1db405b37948c2b50ac5317447f2c3e0225b7e"
+    },
+    "cache/train_features.parquet": {
+      "bytes": 106288494,
+      "sha256": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388"
+    },
+    "cache/train_anchors.parquet": {
+      "bytes": 461964,
+      "sha256": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a"
+    },
+    "clean_fallback/oof.parquet": {
+      "bytes": 74036,
+      "sha256": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e"
+    },
+    "clean_fallback/validation_keys.parquet": {
+      "bytes": 4147,
+      "sha256": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54"
+    },
+    "superseded/terminal_result.json": {
+      "bytes": 1300,
+      "sha256": "dc2bda29b241493b6a1c2a184218a526743b8c22da1d898bf16c62b65e33d764"
+    },
+    "superseded/attempt_lock.json": {
+      "bytes": 301,
+      "sha256": "35e23682798af9f7f1b9b000ebf869934429355ef09f08760ef12d97c97cee5b"
+    }
+  },
+  "implementation_sha256": {
+    "runner": "06a27fb66101ae44254490b3f554d488e214012b836c287705d748dcb6ac5790",
+    "module": "2efdc1476ab34e907d444d41580547bea9437e8d5e665151dece70fdceeeb9eb",
+    "test": "bc6764582ad954ff79e28a8d6d121df318532305dd5475150373cb9aa93f8c95",
+    "shared_fractional_module": "123e77ca0bcebcf7cf3469445678d0205408f8b1a7a615216a7891e30ea99945",
+    "corrected_split_module": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "episode_module": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3"
+  },
+  "validation": {
+    "surface": "clean corrected repeated-forward historical OOF",
+    "windows": [
+      ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+      ["winter_transition", "2024-11-01", "2025-03-01"],
+      ["2025_h1", "2025-03-01", "2025-06-25"]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "context_hours": 48,
+    "target_hours": 24,
+    "embargo_hours": 78,
+    "footprint_hours": 72,
+    "independent_case_spacing_hours": 78,
+    "expected_validation_cases": 181,
+    "expected_validation_rows": 1086,
+    "expected_fold_cases": {
+      "2024_h2_storm": 49,
+      "winter_transition": 79,
+      "2025_h1": 53
+    }
+  },
+  "features": {
+    "surface": "clean compact_feature_columns_fixed_v1",
+    "expected_feature_count": 591,
+    "test_features_read": false
+  },
+  "model": {
+    "family": "scratch CatBoost fractional-change residual",
+    "target": "(target_hs-current_hs)/(current_hs+0.5)",
+    "fractional_offset_m": 0.5,
+    "challenger_weight": 0.15,
+    "fold_seeds": [20260901, 20260902, 20260903],
+    "catboost": {
+      "loss_function": "Huber:delta=1.0",
+      "iterations": 600,
+      "learning_rate": 0.035,
+      "depth": 6,
+      "l2_leaf_reg": 10.0,
+      "random_strength": 0.2,
+      "thread_count": 6,
+      "verbose": false,
+      "allow_writing_files": false
+    },
+    "maximum_fits": 3,
+    "pretrained_weight_files_loaded": 0
+  },
+  "gate": {
+    "strict_pooled_improvement": true,
+    "minimum_improved_folds": 2,
+    "maximum_station_degradation_m": 0.015,
+    "maximum_long_lead_degradation_m": 0.015,
+    "prediction_clip_m": [0.0, 30.0],
+    "on_pass": "local confirmation only; no official materialization",
+    "on_fail": "retain clean incumbent and stop"
+  },
+  "execution": {
+    "two_byte_identical_ready_preflights": true,
+    "exactly_once_attempt_lock": "artifacts/p3_clean_fractional_change_residual_20260901_c1r1.ATTEMPT_LOCK.json",
+    "output": "artifacts/p3_clean_fractional_change_residual_20260901_c1r1",
+    "automatic_restart": false,
+    "result_based_scope_change": false
+  },
+  "official_access_budget": {
+    "test_context_rows": 0,
+    "test_index_rows": 0,
+    "sample_submission_rows": 0,
+    "submission_csv_rows_created": 0,
+    "uploads": 0,
+    "hidden_truth_rows": 0
+  }
+}
