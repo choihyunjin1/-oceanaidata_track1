@@ -1,0 +1,557 @@
+{
+  "fold": "2025_q3",
+  "inner_start": "2025-04-11T00:00:00+09:00",
+  "inner_end": "2025-06-10T00:00:00+09:00",
+  "outer_start": "2025-07-01T00:00:00+09:00",
+  "outer_end": "2025-10-01T00:00:00+09:00",
+  "purge_days": 21,
+  "inner_depth": {
+    "control": {
+      "rows": 80736,
+      "raw_depth_missing": 607,
+      "nominal_depth_missing": 40736,
+      "unseen_year_key_rows": 33957,
+      "observed_depth_but_nominal_missing": 40439
+    },
+    "candidate": {
+      "rows": 80736,
+      "raw_depth_missing": 607,
+      "nominal_depth_missing": 607,
+      "unseen_year_key_rows": 33957,
+      "observed_depth_but_nominal_missing": 0
+    }
+  },
+  "outer_depth": {
+    "control": {
+      "rows": 176619,
+      "raw_depth_missing": 104,
+      "nominal_depth_missing": 0,
+      "unseen_year_key_rows": 0,
+      "observed_depth_but_nominal_missing": 0
+    },
+    "candidate": {
+      "rows": 176619,
+      "raw_depth_missing": 104,
+      "nominal_depth_missing": 104,
+      "unseen_year_key_rows": 0,
+      "observed_depth_but_nominal_missing": 0
+    }
+  },
+  "selections": {
+    "control": {
+      "policy": "balanced_union",
+      "calibrations": {
+        "original": {
+          "threshold": 0.5,
+          "inner_f1": 0.839806427596476
+        },
+        "balanced": {
+          "threshold": 0.3,
+          "inner_f1": 0.826076076076076
+        },
+        "balanced_union": {
+          "threshold": 0.5,
+          "inner_f1": 0.845163663111438
+        }
+      }
+    },
+    "candidate": {
+      "policy": "balanced_union",
+      "calibrations": {
+        "original": {
+          "threshold": 0.5,
+          "inner_f1": 0.8422503445683498
+        },
+        "balanced": {
+          "threshold": 0.4,
+          "inner_f1": 0.8186906156449304
+        },
+        "balanced_union": {
+          "threshold": 0.5,
+          "inner_f1": 0.845455675742882
+        }
+      }
+    }
+  },
+  "keys_sha256": "58f93658631f8cacc3d0162a580ece414a680594a0159d11c8a7e6090bab7df6",
+  "control_exact_replay": true,
+  "metrics": {
+    "control": {
+      "rows": 176619,
+      "tp": 4933,
+      "fp": 23,
+      "fn": 1345,
+      "f1": 0.878226811465195,
+      "precision": 0.9953591606133979,
+      "recall": 0.785759796113412,
+      "added_tp": 0,
+      "added_fp": 0,
+      "removed_tp": 0,
+      "removed_fp": 0,
+      "station_layer": {
+        "G-ORS/L1": {
+          "rows": 7714,
+          "tp": 597,
+          "fp": 0,
+          "fn": 398,
+          "f1": 0.75,
+          "precision": 1.0,
+          "recall": 0.6
+        },
+        "I-ORS/L1": {
+          "rows": 12681,
+          "tp": 142,
+          "fp": 0,
+          "fn": 34,
+          "f1": 0.8930817610062893,
+          "precision": 1.0,
+          "recall": 0.8068181818181818
+        },
+        "I-ORS/L2": {
+          "rows": 12723,
+          "tp": 428,
+          "fp": 0,
+          "fn": 296,
+          "f1": 0.7430555555555556,
+          "precision": 1.0,
+          "recall": 0.5911602209944752
+        },
+        "I-ORS/L3": {
+          "rows": 12662,
+          "tp": 682,
+          "fp": 0,
+          "fn": 31,
+          "f1": 0.9777777777777777,
+          "precision": 1.0,
+          "recall": 0.9565217391304348
+        },
+        "I-ORS/L4": {
+          "rows": 12675,
+          "tp": 370,
+          "fp": 1,
+          "fn": 1,
+          "f1": 0.9973045822102425,
+          "precision": 0.9973045822102425,
+          "recall": 0.9973045822102425
+        },
+        "I-ORS/L5": {
+          "rows": 87,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "I-ORS/L6": {
+          "rows": 12635,
+          "tp": 267,
+          "fp": 0,
+          "fn": 14,
+          "f1": 0.9744525547445255,
+          "precision": 1.0,
+          "recall": 0.9501779359430605
+        },
+        "I-ORS/L7": {
+          "rows": 12666,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "S-ORS/L1": {
+          "rows": 13225,
+          "tp": 748,
+          "fp": 0,
+          "fn": 98,
+          "f1": 0.9385194479297365,
+          "precision": 1.0,
+          "recall": 0.8841607565011821
+        },
+        "S-ORS/L2": {
+          "rows": 8890,
+          "tp": 78,
+          "fp": 0,
+          "fn": 256,
+          "f1": 0.3786407766990291,
+          "precision": 1.0,
+          "recall": 0.23353293413173654
+        },
+        "S-ORS/L3": {
+          "rows": 8875,
+          "tp": 254,
+          "fp": 0,
+          "fn": 0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "S-ORS/L4": {
+          "rows": 8928,
+          "tp": 257,
+          "fp": 4,
+          "fn": 78,
+          "f1": 0.8624161073825504,
+          "precision": 0.9846743295019157,
+          "recall": 0.7671641791044777
+        },
+        "S-ORS/L5": {
+          "rows": 13243,
+          "tp": 4,
+          "fp": 4,
+          "fn": 0,
+          "f1": 0.6666666666666666,
+          "precision": 0.5,
+          "recall": 1.0
+        },
+        "S-ORS/L6": {
+          "rows": 13201,
+          "tp": 452,
+          "fp": 12,
+          "fn": 121,
+          "f1": 0.8717454194792671,
+          "precision": 0.9741379310344828,
+          "recall": 0.7888307155322862
+        },
+        "S-ORS/L7": {
+          "rows": 13170,
+          "tp": 458,
+          "fp": 1,
+          "fn": 17,
+          "f1": 0.9807280513918629,
+          "precision": 0.9978213507625272,
+          "recall": 0.9642105263157895
+        },
+        "S-ORS/L8": {
+          "rows": 13244,
+          "tp": 196,
+          "fp": 1,
+          "fn": 1,
+          "f1": 0.9949238578680203,
+          "precision": 0.9949238578680203,
+          "recall": 0.9949238578680203
+        }
+      }
+    },
+    "candidate": {
+      "rows": 176619,
+      "tp": 4983,
+      "fp": 83,
+      "fn": 1295,
+      "f1": 0.8785260930888575,
+      "precision": 0.9836162652980656,
+      "recall": 0.793724115960497,
+      "added_tp": 71,
+      "added_fp": 63,
+      "removed_tp": 21,
+      "removed_fp": 3,
+      "station_layer": {
+        "G-ORS/L1": {
+          "rows": 7714,
+          "tp": 609,
+          "fp": 0,
+          "fn": 386,
+          "f1": 0.7593516209476309,
+          "precision": 1.0,
+          "recall": 0.6120603015075377
+        },
+        "I-ORS/L1": {
+          "rows": 12681,
+          "tp": 142,
+          "fp": 38,
+          "fn": 34,
+          "f1": 0.797752808988764,
+          "precision": 0.7888888888888889,
+          "recall": 0.8068181818181818
+        },
+        "I-ORS/L2": {
+          "rows": 12723,
+          "tp": 427,
+          "fp": 0,
+          "fn": 297,
+          "f1": 0.7419635099913119,
+          "precision": 1.0,
+          "recall": 0.5897790055248618
+        },
+        "I-ORS/L3": {
+          "rows": 12662,
+          "tp": 690,
+          "fp": 0,
+          "fn": 23,
+          "f1": 0.9836065573770492,
+          "precision": 1.0,
+          "recall": 0.967741935483871
+        },
+        "I-ORS/L4": {
+          "rows": 12675,
+          "tp": 370,
+          "fp": 23,
+          "fn": 1,
+          "f1": 0.9685863874345549,
+          "precision": 0.9414758269720102,
+          "recall": 0.9973045822102425
+        },
+        "I-ORS/L5": {
+          "rows": 87,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "I-ORS/L6": {
+          "rows": 12635,
+          "tp": 266,
+          "fp": 0,
+          "fn": 15,
+          "f1": 0.9725776965265083,
+          "precision": 1.0,
+          "recall": 0.9466192170818505
+        },
+        "I-ORS/L7": {
+          "rows": 12666,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "S-ORS/L1": {
+          "rows": 13225,
+          "tp": 750,
+          "fp": 0,
+          "fn": 96,
+          "f1": 0.9398496240601504,
+          "precision": 1.0,
+          "recall": 0.8865248226950354
+        },
+        "S-ORS/L2": {
+          "rows": 8890,
+          "tp": 78,
+          "fp": 0,
+          "fn": 256,
+          "f1": 0.3786407766990291,
+          "precision": 1.0,
+          "recall": 0.23353293413173654
+        },
+        "S-ORS/L3": {
+          "rows": 8875,
+          "tp": 254,
+          "fp": 0,
+          "fn": 0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "S-ORS/L4": {
+          "rows": 8928,
+          "tp": 295,
+          "fp": 4,
+          "fn": 40,
+          "f1": 0.9305993690851735,
+          "precision": 0.9866220735785953,
+          "recall": 0.8805970149253731
+        },
+        "S-ORS/L5": {
+          "rows": 13243,
+          "tp": 4,
+          "fp": 5,
+          "fn": 0,
+          "f1": 0.6153846153846154,
+          "precision": 0.4444444444444444,
+          "recall": 1.0
+        },
+        "S-ORS/L6": {
+          "rows": 13201,
+          "tp": 445,
+          "fp": 11,
+          "fn": 128,
+          "f1": 0.8649173955296404,
+          "precision": 0.9758771929824561,
+          "recall": 0.7766143106457243
+        },
+        "S-ORS/L7": {
+          "rows": 13170,
+          "tp": 457,
+          "fp": 1,
+          "fn": 18,
+          "f1": 0.9796355841371919,
+          "precision": 0.9978165938864629,
+          "recall": 0.9621052631578947
+        },
+        "S-ORS/L8": {
+          "rows": 13244,
+          "tp": 196,
+          "fp": 1,
+          "fn": 1,
+          "f1": 0.9949238578680203,
+          "precision": 0.9949238578680203,
+          "recall": 0.9949238578680203
+        }
+      }
+    },
+    "candidate_fixed_control_threshold": {
+      "rows": 176619,
+      "tp": 4983,
+      "fp": 83,
+      "fn": 1295,
+      "f1": 0.8785260930888575,
+      "precision": 0.9836162652980656,
+      "recall": 0.793724115960497,
+      "added_tp": 71,
+      "added_fp": 63,
+      "removed_tp": 21,
+      "removed_fp": 3,
+      "station_layer": {
+        "G-ORS/L1": {
+          "rows": 7714,
+          "tp": 609,
+          "fp": 0,
+          "fn": 386,
+          "f1": 0.7593516209476309,
+          "precision": 1.0,
+          "recall": 0.6120603015075377
+        },
+        "I-ORS/L1": {
+          "rows": 12681,
+          "tp": 142,
+          "fp": 38,
+          "fn": 34,
+          "f1": 0.797752808988764,
+          "precision": 0.7888888888888889,
+          "recall": 0.8068181818181818
+        },
+        "I-ORS/L2": {
+          "rows": 12723,
+          "tp": 427,
+          "fp": 0,
+          "fn": 297,
+          "f1": 0.7419635099913119,
+          "precision": 1.0,
+          "recall": 0.5897790055248618
+        },
+        "I-ORS/L3": {
+          "rows": 12662,
+          "tp": 690,
+          "fp": 0,
+          "fn": 23,
+          "f1": 0.9836065573770492,
+          "precision": 1.0,
+          "recall": 0.967741935483871
+        },
+        "I-ORS/L4": {
+          "rows": 12675,
+          "tp": 370,
+          "fp": 23,
+          "fn": 1,
+          "f1": 0.9685863874345549,
+          "precision": 0.9414758269720102,
+          "recall": 0.9973045822102425
+        },
+        "I-ORS/L5": {
+          "rows": 87,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "I-ORS/L6": {
+          "rows": 12635,
+          "tp": 266,
+          "fp": 0,
+          "fn": 15,
+          "f1": 0.9725776965265083,
+          "precision": 1.0,
+          "recall": 0.9466192170818505
+        },
+        "I-ORS/L7": {
+          "rows": 12666,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        "S-ORS/L1": {
+          "rows": 13225,
+          "tp": 750,
+          "fp": 0,
+          "fn": 96,
+          "f1": 0.9398496240601504,
+          "precision": 1.0,
+          "recall": 0.8865248226950354
+        },
+        "S-ORS/L2": {
+          "rows": 8890,
+          "tp": 78,
+          "fp": 0,
+          "fn": 256,
+          "f1": 0.3786407766990291,
+          "precision": 1.0,
+          "recall": 0.23353293413173654
+        },
+        "S-ORS/L3": {
+          "rows": 8875,
+          "tp": 254,
+          "fp": 0,
+          "fn": 0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "S-ORS/L4": {
+          "rows": 8928,
+          "tp": 295,
+          "fp": 4,
+          "fn": 40,
+          "f1": 0.9305993690851735,
+          "precision": 0.9866220735785953,
+          "recall": 0.8805970149253731
+        },
+        "S-ORS/L5": {
+          "rows": 13243,
+          "tp": 4,
+          "fp": 5,
+          "fn": 0,
+          "f1": 0.6153846153846154,
+          "precision": 0.4444444444444444,
+          "recall": 1.0
+        },
+        "S-ORS/L6": {
+          "rows": 13201,
+          "tp": 445,
+          "fp": 11,
+          "fn": 128,
+          "f1": 0.8649173955296404,
+          "precision": 0.9758771929824561,
+          "recall": 0.7766143106457243
+        },
+        "S-ORS/L7": {
+          "rows": 13170,
+          "tp": 457,
+          "fp": 1,
+          "fn": 18,
+          "f1": 0.9796355841371919,
+          "precision": 0.9978165938864629,
+          "recall": 0.9621052631578947
+        },
+        "S-ORS/L8": {
+          "rows": 13244,
+          "tp": 196,
+          "fp": 1,
+          "fn": 1,
+          "f1": 0.9949238578680203,
+          "precision": 0.9949238578680203,
+          "recall": 0.9949238578680203
+        }
+      }
+    }
+  }
+}

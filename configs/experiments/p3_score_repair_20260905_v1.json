@@ -1,0 +1,55 @@
+{
+  "experiment_id": "p3_score_repair_20260905_v1",
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "pinned_files": {
+    "artifacts/p3/features_all20_v1/train_features.parquet": "f974e7951ed9490e68b96154f89afd69ee98e4ed2d27c179fc898779a4aec388",
+    "artifacts/p3/features_all20_v1/train_anchors.parquet": "07452389a19efd63121f4465a9c08cf7f9ef9e58cf1e3ea1f577e2dca5d8611a",
+    "artifacts/p3_corrected_repeated_forward_catboost_v2/oof.parquet": "eb0af75ec29210254da0d13d1bb8164c0d6b427f4ad5853622144a11fe795f7e",
+    "artifacts/p3_corrected_repeated_forward_catboost_v2/validation_keys.parquet": "b2a0293d25eab34498baca3558dd398375376e9e24b0b6a13751fc90efb25a54",
+    "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+    "scripts/run_p3_corrected_repeated_forward_catboost_v1.py": "4539f3e1778213a12485d204c01de60530178fc1db235496ad38dc16602d3dd5",
+    "src/p3_wave/features.py": "c7c2d8f1e6301d57899ee807e97bfd4c28575d2f40ea97801122e29c1701fdb2",
+    "src/p3_wave/data.py": "cdbbbe8e8e03f91b81dd6074a3e3b75ca21092fda86e53fc9d15b16ae47d0432",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/revin_patch.py": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3",
+    "src/p3_wave/corrected_repeated_forward.py": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474"
+  },
+  "optional_tabpfn_oof": {
+    "path": "artifacts/p3_tabpfn3_structural_transition_20260901_v1r1/oof.parquet",
+    "sha256": "f1be62e1c32315497f0d695625e8593dd9c65bbad4c2521b03ab5a3c737323d7",
+    "use": "historical exploratory 0-fit comparison only; deployment needs independent synthetic-weight eligibility QA"
+  },
+  "windows": [
+    ["2024_h2_storm", "2024-07-01", "2024-11-01"],
+    ["winter_transition", "2024-11-01", "2025-03-01"],
+    ["2025_h1", "2025-03-01", "2025-06-25"]
+  ],
+  "validation": {"cases": 181, "rows": 1086, "gap_hours": 78, "footprint_hours": 72, "previously_seen": true},
+  "features": {"recipe": "compact_feature_columns", "count": 591},
+  "seeds": [20260905, 20260906],
+  "arms": ["control", "weather_blockmask"],
+  "model": {
+    "objective": "regression_l2", "n_estimators": 700, "learning_rate": 0.025,
+    "num_leaves": 15, "max_depth": -1, "min_child_samples": 80,
+    "subsample": 0.85, "colsample_bytree": 0.55, "reg_alpha": 1.0, "reg_lambda": 8.0,
+    "deterministic": true, "force_row_wise": true, "verbosity": -1,
+    "n_jobs": 2, "device_type": "cpu"
+  },
+  "augmentation": {
+    "original_weight": 0.5, "masked_weight": 0.5,
+    "scope": "all weather-observed training cases, entire 48-hour weather block; 6 leads consistent",
+    "already_unobserved_weight": 1.0,
+    "preserve_hs_and_targets": true,
+    "case_weight": "existing threshold_case_weights; per-case original+masked total preserved"
+  },
+  "fallback_blend": {"new_model": 0.25, "clean_corrected_reference": 0.75},
+  "zero_fit_complementarity_candidates": ["tabpfn25_6h_only", "single25_all_leads", "multi25_all_leads"],
+  "resources": {"maximum_tree_fits": 12, "wall_cap_seconds": 2700, "rss_cap_gib": 10, "gpu_allowed": false},
+  "official_input_access": false,
+  "submission_generation": false,
+  "result_based_retry": false
+}

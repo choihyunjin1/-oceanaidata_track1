@@ -1,0 +1,61 @@
+{
+  "status": "PASS_SCOPED_WORKFLOW_CLEANUP",
+  "checked_at_kst": "2026-09-05T21:42:57+09:00",
+  "scope": "Project guidance and focused checker only; no model quality certification",
+  "entry_docs_before_lines": 904,
+  "entry_docs_after_lines": 174,
+  "runbook_before_lines": 157,
+  "runbook_after_lines": 43,
+  "runbook_archive_content_verified_before_rewrite": true,
+  "original_six_archive_content_checks": {
+    "AGENTS.md": true,
+    "AI_HANDOFF.md": true,
+    "README.md": true,
+    "01_P2_MUST_READ_FIRST.md": true,
+    "00_MUST_READ_FIRST.md": true,
+    "02_P3_MUST_READ_FIRST.md": true
+  },
+  "links": {
+    "files": 9,
+    "local_links": 38,
+    "broken_links": [],
+    "hashes": {
+      "scripts/agent_verify.py": "540ceb5d51e688206afd67b739935feb7db8c9827f188486d7395cf949ef31d9",
+      ".agents/skills/ocean-experiment/SKILL.md": "7171055c945ab39eabd01af64b44d73d3b3b10de8a7db317e5cba83f99a63fed",
+      "pyproject.toml": "9669353d0860b3114eb5b7664fcb9e06c7fe79ec2ceb4ea12f26c4f175d623a6",
+      "docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md": "03fe3d551f8b3816d78a56c11b640c2500e3c66bea0d85c30a4572dbaace85f8",
+      "AGENTS.md": "caac57b1c4f149225d87016a28542d737701dcb2af1deb7fa84bf0f52dd615c5",
+      "docs/AGENT_WORKFLOW.md": "94c6525113488890e0a12e4be4749d0c05686ac3c81060705b6732ed8f722429",
+      "AI_HANDOFF.md": "a41c804e01711ff4b1cae924546ac3df4183f3a5eafa3abc0ab8964fa9347391",
+      ".gitignore": "4d718731b1a672348342c34e615f2f02fae8212804a5244a9242132829b94e57",
+      "02_P3_MUST_READ_FIRST.md": "aed38c00603e25be41c8b825114a29bdbfcaa8b22e0a9a1df13c0ccc094c03da",
+      "README.md": "395285c029b0d59c0af3c3a2dadbf0e8de7b0ba8d48552763edc7119b2f1a911",
+      "tests/test_agent_verify.py": "4c7a3d741b761a15d648541a81feed1cd96813665eb653f6637f08ab239af1fd",
+      "01_P2_MUST_READ_FIRST.md": "cdd602197bbdfe18851fb6222f2a9b76cdbc28e7105c8bee4a1918c394d619ac",
+      "00_MUST_READ_FIRST.md": "bf314a2f61a8ff41087b56329c47c032da41f0362ee48d214adedc2de199d578"
+    }
+  },
+  "code_tests": {
+    "passed": 22,
+    "pytest_seconds": 3.56,
+    "ruff": "PASS",
+    "receipt": "artifacts/agent_verification/a293ac4f682de9da7737c7b40eed2e05b87735cc865c838716d916f698d8f837.json",
+    "reuse_success_claimed": false
+  },
+  "skill_schema": "PASS",
+  "independent_review": {
+    "reviewer": "p1_next_design",
+    "fixed": [
+      "test helper/config fingerprint gap",
+      "collection-only false pass",
+      "cache temporary-file collision",
+      "root conftest fingerprint"
+    ],
+    "limitations": "Fixtures outside covered extensions and external state require noncached checks."
+  },
+  "material_python_deletions": 0,
+  "frozen_runner_config_changes": 0,
+  "global_skill_or_settings_changes": 0,
+  "git_stage_commit_push": 0,
+  "official_uploads": 0
+}

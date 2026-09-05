@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "PASS_WITH_RESEARCH_SPEC_REVISIONS_REQUIRED",
+  "scope": "Publication safety and focused synthetic/unit integration; not a new model run, full clean-room retraining, organizer eligibility certification, or approval to execute ocean_v2 T0-T8.",
+  "base_commit": "535f94a1791f2398f82ad27659b58701513ab327",
+  "branch": "codex/p1-qc",
+  "inventory": {
+    "snapshot_files": 237,
+    "bytes": 2503134,
+    "additional_publication_documents": 3,
+    "over_one_mib": 0,
+    "forbidden_new_paths": 0,
+    "high_confidence_secret_findings": 0,
+    "parse_errors": 0
+  },
+  "tests": {
+    "runner": ".venv-p1/Scripts/python.exe -m pytest -q -o addopts= <all 21 new test modules selected by explicit discovery>",
+    "passed": 174,
+    "failed": 0,
+    "elapsed_seconds": 12.98,
+    "selection": "new tests/test_*.py returned by git ls-files --others --exclude-standard tests",
+    "cuda_visible_devices": "",
+    "omp_num_threads": 1,
+    "mkl_num_threads": 1
+  },
+  "ruff": {
+    "status": "PASS",
+    "files": 50,
+    "scope": "new scripts and tests .py files"
+  },
+  "notebooks": {
+    "files": 2,
+    "output_cells_each": 3,
+    "inspection": "aggregate metrics/hash/QA only; no raw observations, labels or prediction rows"
+  },
+  "research_review": {
+    "original_documents": 19,
+    "independent_designs": 6,
+    "status": "Needs revision before execution",
+    "review": "../../docs/ocean_v2_codex/REVIEW_NOTES_20260905.md",
+    "reviewers": [
+      "p1_next_design: recon/design evidence",
+      "p2_next_design: implementation contracts",
+      "p3_next_design: publication and notebook safety"
+    ],
+    "authorship": "Documents identify Claude; Fable execution identity is not independently proven."
+  },
+  "this_preservation_task": {
+    "model_fits": 0,
+    "new_official_csvs": 0,
+    "uploads": 0,
+    "raw_or_model_value_reads": 0
+  },
+  "git_safety": {
+    "staged_allowlist_files_verified": 240,
+    "sealed_blob_byte_matches": 90,
+    "new_report_local_links_verified": 12,
+    "whitespace_audit": "With cr-at-eol, 10 pre-existing trailing-space or blank-EOF findings remain in supplied/earlier Markdown. Preserved without rewriting original documents; not code failures. Default diff --check also flags intentionally byte-preserved CRLF JSON/notebooks.",
+    "publication": "explicit paths only; no force push/rebase/reset",
+    "sealed_record_bytes": "scoped .gitattributes -text rules",
+    "provided_original_documents_modified": false
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "verified_inputs": {
+    "artifacts/p3_score_repair_deploy_20260905_v1/oof.parquet": "709eb149de9aedaa620f75acc964d5b05a085e6b01e2a790ff87c966769e32ea",
+    "artifacts/p3_score_repair_deploy_20260905_v1/validation_keys.parquet": "88d4ea7c3a4aed662536b0d067c74b1c9ddbcdca349fd6ad8ddf9640f71af131",
+    "artifacts/p3_score_repair_deploy_20260905_v1/train_anchors.parquet": "d90486257c725856357959e30ffd0f35c35f3b9c06be6ab93bcdd221bfa9bfe0",
+    "artifacts/p3_score_repair_deploy_20260905_v1/train_features.parquet": "2cbfbc7e521c395a17d9595982fa5773fb0ad8e9c5ca5484f392769e9dff0c3f",
+    "artifacts/p3_score_repair_deploy_20260905_v1/feature_columns.json": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+    "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+    "scripts/run_p3_corrected_repeated_forward_catboost_v1.py": "4539f3e1778213a12485d204c01de60530178fc1db235496ad38dc16602d3dd5",
+    "src/p3_wave/corrected_repeated_forward.py": "4b614e2d0fd2259c77d462a69eff27245579d98671ec2a083ce4116278417474",
+    "src/p3_wave/loss_router.py": "2e357a9f428cdf52d2f3e38b364ebd6a156571067435d1c75622313976219000",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/persistence_shrink.py": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/revin_patch.py": "188c17be0e5eb2bba5bf8a787a614b6d15b2c113935f9ce3184a9cbb7443a8b3",
+    "scripts/run_p3_direct_sse_meta_20260905_v2.py": "79e63357e135556e7fb915492530048bcd13614aaa1f8cb74bd2532b0b6bfdb1",
+    "source/train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "source/train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "split_audit": {
+    "selection_rule": "station-global chronological first eligible across all fixed windows",
+    "validation_case_count": 181,
+    "validation_row_count": 1086,
+    "unique_station_episode_count": 181,
+    "repeated_station_episode_count": 0,
+    "station_global_minimum_gap_hours": {
+      "G-ORS": 78.0,
+      "I-ORS": 78.0,
+      "S-ORS": 78.0
+    },
+    "cross_window_pairs_below_78h": 0,
+    "context48_plus_target24_footprint_overlap_pairs": 0,
+    "footprint_definition": "[anchor-48h, anchor+24h] within station",
+    "folds": {
+      "2024_h2_storm": {
+        "train_anchor_count": 7912,
+        "validation_case_count": 49,
+        "validation_by_station": {
+          "G-ORS": 21,
+          "I-ORS": 4,
+          "S-ORS": 24
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 112.66666666666667,
+        "minimum_train_validation_footprint_separation_hours": 40.66666666666667
+      },
+      "winter_transition": {
+        "train_anchor_count": 11754,
+        "validation_case_count": 79,
+        "validation_by_station": {
+          "G-ORS": 28,
+          "I-ORS": 25,
+          "S-ORS": 26
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 132.66666666666666,
+        "minimum_train_validation_footprint_separation_hours": 60.66666666666666
+      },
+      "2025_h1": {
+        "train_anchor_count": 20899,
+        "validation_case_count": 53,
+        "validation_by_station": {
+          "G-ORS": 18,
+          "I-ORS": 17,
+          "S-ORS": 18
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 119.33333333333333,
+        "minimum_train_validation_footprint_separation_hours": 47.33333333333333
+      }
+    }
+  },
+  "weight_audit": [
+    {
+      "fold": "2024_h2_storm",
+      "train_anchors": 7912,
+      "cases": 49,
+      "train_episodes": 420,
+      "largest_episode_train_anchor_count": 487,
+      "weight_min": 0.07657794850913585,
+      "weight_max": 7.468643232942048,
+      "weight_mean": 0.9999999999999999,
+      "weights_only_outer_train": true
+    },
+    {
+      "fold": "winter_transition",
+      "train_anchors": 11754,
+      "cases": 79,
+      "train_episodes": 673,
+      "largest_episode_train_anchor_count": 487,
+      "weight_min": 0.07293326871832352,
+      "weight_max": 7.113177807374482,
+      "weight_mean": 1.0,
+      "weights_only_outer_train": true
+    },
+    {
+      "fold": "2025_h1",
+      "train_anchors": 20899,
+      "cases": 53,
+      "train_episodes": 1012,
+      "largest_episode_train_anchor_count": 487,
+      "weight_min": 0.08015537516098194,
+      "weight_max": 7.817549463453946,
+      "weight_mean": 1.0,
+      "weights_only_outer_train": true
+    }
+  ],
+  "feature_count": 591,
+  "train_anchor_count": 24360,
+  "cases": 181,
+  "reuse_control_seed_one_oof_only": true,
+  "official_input_rows": 0
+}

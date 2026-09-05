@@ -1,0 +1,144 @@
+{
+  "status": "PASS_INTEGRATION_NO_NEW_PRIMARY_WINNER",
+  "scope": "Root rechecks of aggregate arithmetic and source QA/hash consistency. Individual QA scripts performed row-level checks and model replay; not fresh holdout or OS-wide access attestation.",
+  "branch": "codex/p1-qc",
+  "base_head": "535f94a1791f2398f82ad27659b58701513ab327",
+  "checked_at_kst": "2026-09-05T21:46:02.5928438+09:00",
+  "source_qa": [
+    {
+      "path": "reports/p1_depth_contract_repair_20260905_v2/cycle-independent-qa.json",
+      "status": "PASS",
+      "checks": 24,
+      "all_checks_true": true
+    },
+    {
+      "path": "reports/p2_objective_alignment_20260905_v2/independent-recalculation.json",
+      "status": "PASS",
+      "checks": 34,
+      "all_checks_true": true
+    },
+    {
+      "path": "reports/p2_physical_profile_tree_20260905_v2/independent-recalculation.json",
+      "status": "PASS",
+      "checks": 30,
+      "all_checks_true": true
+    },
+    {
+      "path": "reports/p3_direct_sse_meta_20260905_v2/independent-qa.json",
+      "status": "PASS",
+      "checks": 13,
+      "all_checks_true": true
+    },
+    {
+      "path": "reports/p3_episode_weight_20260905_v2/independent-qa.json",
+      "status": "PASS",
+      "checks": 35,
+      "all_checks_true": true
+    }
+  ],
+  "source_hashes": {
+    "reports/p1_depth_contract_repair_20260905_v2/cycle-independent-qa.json": "9aae9e50c712bd699126f73c0803e21fef4c808490d6bd3a6e72b5e9f8a94c0e",
+    "reports/p2_objective_alignment_20260905_v2/independent-recalculation.json": "0af15bbafc9216af3e5e2168fe4947c4539613cec9f1b0605884ddbb63893b25",
+    "reports/p2_physical_profile_tree_20260905_v2/independent-recalculation.json": "f713ec5fa7b54558b369db80821a99fb5ea94dea1dced0a4e9de071d1a052a7d",
+    "reports/p3_direct_sse_meta_20260905_v2/independent-qa.json": "c7af55348e62429b8e1030a87b9f578f8a373f9e0316836237d9fe19f060e6ed",
+    "reports/p3_episode_weight_20260905_v2/independent-qa.json": "8f34e5271d94b9d2e9c0d2458cf8b9794e830358e3b9f8077a12b9876fc09716",
+    "reports/p1_depth_contract_repair_20260905_v2/result.json": "e1c9051222dbd5cc0a391c699ee3f1ab5bb73d628c17aed139bf28b76b9accd7",
+    "reports/p1_depth_contract_repair_20260905_v2/decoder-result.json": "ef2c1ed0f2d9251bee208f2317f713ab8016beba53aab48c9c79a26e52bdc5bd",
+    "reports/p2_objective_alignment_20260905_v2/result.json": "5b2f175200e5ee94a6f7cef42f13e327cf48681ab4d4fdfef5d38485d15a8ed1",
+    "reports/p2_physical_profile_tree_20260905_v2/result.json": "6ed35067d55eb07659c22d869a7c2fb8d8b5af0239edad30cf3bc06c1afd820b",
+    "reports/p3_direct_sse_meta_20260905_v2/result.json": "8e7e3a16d3d1505eb97f9746f98dd89f216eae32ee1e9601858f932845c9f5e7",
+    "reports/p3_episode_weight_20260905_v2/result.json": "c00d3edc4e6832dfb8fe8c129f5ad38956afc0a330782a9f00f6eacf868784c1",
+    "reports/agent_workflow_cleanup_20260905_v1/independent-qa.json": "50c32fd2b858e0f7e65dc633283b63b21473ec146a11a649ff4f3fb71f7a72ca"
+  },
+  "p1_confusion_arithmetic": [
+    {
+      "policy": "control",
+      "recalculated_f1": 0.8511742399041979,
+      "match": true
+    },
+    {
+      "policy": "candidate",
+      "recalculated_f1": 0.8489614440241555,
+      "match": true
+    },
+    {
+      "policy": "candidate_decoder_on",
+      "recalculated_f1": 0.8498715853373804,
+      "match": true
+    }
+  ],
+  "p3_sse_arithmetic": [
+    {
+      "policy": "control",
+      "recalculated_rmse_m": 0.7833381709227665,
+      "match": true,
+      "delta_match": true
+    },
+    {
+      "policy": "episode_weight",
+      "recalculated_rmse_m": 0.7945575383912831,
+      "match": true,
+      "delta_match": true
+    }
+  ],
+  "p3_replay": {
+    "process_id": 19796,
+    "training_process_id": 5728,
+    "models_reloaded": 18,
+    "six_lead_rows": 3258,
+    "scalar_component_predictions": 6516,
+    "maximum_absolute_difference_m": 0,
+    "new_fits": 0,
+    "prediction_device": "CPU",
+    "cpu_threads": 2,
+    "official_inputs": 0
+  },
+  "active_cycle_processes": [],
+  "root_checks": {
+    "reported_agent_qa_hashes_match": true,
+    "source_qa_all_pass": true,
+    "p1_confusion_arithmetic_matches": true,
+    "p3_sse_and_delta_arithmetic_matches": true,
+    "cycle_processes_terminated": true
+  },
+  "new_fits": {
+    "p1_base": 16,
+    "p2_base": 12,
+    "p3_base": 18,
+    "total_base": 46,
+    "p3_meta_and_router": 8,
+    "p3_synthetic_separate": 2,
+    "qa_retraining": 0
+  },
+  "tests": {
+    "p1_focused_passed": 11,
+    "p2_focused_passed": 27,
+    "p3_focused_passed": 29,
+    "workflow_and_policy_passed": 22,
+    "ruff": "PASS",
+    "not_claimed": "These scope counts are not a deduplicated repository-wide total."
+  },
+  "decision": {
+    "P1": "Control retained; A/C primary worse. B incompatible OOF requires separately budgeted matched training.",
+    "P2": "Control retained; A/B primary worse. Outage result retained as conditional research clue.",
+    "P3": "Legacy control retained; all fixed A/B completed policies worse. Fulltrain branch not executed."
+  },
+  "actions": {
+    "official_input_rows_this_cycle": 0,
+    "submission_csv_written": 0,
+    "uploads": 0,
+    "git_stage_commit_push": 0,
+    "new_long_p1_training_started": 0
+  },
+  "limitations": [
+    "Repeated historical development, not fresh confirmation.",
+    "Expected official score unestimated; official scores belong only to prior exact submitted hashes.",
+    "Replay equivalence is not repeated-training determinism or full final-package six-hour certification.",
+    "No safe Python code deletion proven; archived instructions preserved."
+  ],
+  "document_independent_review": {
+    "reviewer": "p2_next_design",
+    "scope": "P2 populations, seeds, fit totals and causal-language limits",
+    "outcome": "No major defect; changed episode equalization wording to inverse-square-root repetition downweighting."
+  }
+}

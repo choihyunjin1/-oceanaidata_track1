@@ -1,0 +1,60 @@
+{
+  "qc_columns_present": false,
+  "selection_proxy": "finite target temp and >=2 public temperature tokens; not hidden QC",
+  "source_rows_in_date_range": 667386,
+  "eligible_target_rows": 166268,
+  "evaluation_rows": 69850,
+  "target_actual_depth": {
+    "finite_positive_fraction": 0.9995429066326653
+  },
+  "T5": {
+    "missing_count": 12630,
+    "run_count": 277,
+    "max_run_steps": 11255,
+    "runs_ge_144_steps": 4
+  },
+  "S5": {
+    "missing_count": 12613,
+    "run_count": 271,
+    "max_run_steps": 11255,
+    "runs_ge_144_steps": 4
+  },
+  "timestamp_step_seconds_counts": {
+    "600.0": 87839
+  },
+  "folds": [
+    {
+      "id": "2024_sep_oct",
+      "calendar_days": 61,
+      "train_rows": 133948,
+      "validation_rows": 26273,
+      "train_before": 45935,
+      "train_after": 88013,
+      "target_temp_psal_masked": true,
+      "feature_temporal_dependency_hours": 0,
+      "purge_days": 7
+    },
+    {
+      "id": "2025_jul_aug",
+      "calendar_days": 62,
+      "train_rows": 136551,
+      "validation_rows": 26693,
+      "train_before": 119667,
+      "train_after": 16884,
+      "target_temp_psal_masked": true,
+      "feature_temporal_dependency_hours": 0,
+      "purge_days": 7
+    },
+    {
+      "id": "2025_nov_dec",
+      "calendar_days": 61,
+      "train_rows": 149384,
+      "validation_rows": 16884,
+      "train_before": 149384,
+      "train_after": 0,
+      "target_temp_psal_masked": true,
+      "feature_temporal_dependency_hours": 0,
+      "purge_days": 7
+    }
+  ]
+}

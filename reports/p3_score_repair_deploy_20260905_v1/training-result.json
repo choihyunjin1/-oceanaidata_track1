@@ -1,0 +1,86 @@
+{
+  "status": "TRAINED_AWAITING_FRESH_PROCESS_REPLAY",
+  "experiment_id": "p3_score_repair_deploy_20260905_v1",
+  "backbone_fit_count": 9,
+  "catboost_fit_count": 8,
+  "tabpfn_fit_count": 1,
+  "router_fit_count": 3,
+  "train_seconds": 927.5707380000094,
+  "prepare_seconds": 697.8306537000171,
+  "elapsed_prepare_plus_train_seconds": 1625.4013917000266,
+  "under_6h_before_final_predict": true,
+  "regenerated_baseline_oof_rmse_m": 0.7791048399763751,
+  "reference_drift_m": 0.0,
+  "official_input_rows": 0,
+  "submission_rows": 0,
+  "uploads": 0,
+  "network_connections_allowed": 0,
+  "historical_oof_or_csv_runtime_inputs": 0,
+  "full_training_receipts": [
+    {
+      "fold": "2024_h2_storm",
+      "seed": 20260816,
+      "train_anchor_count": 7912,
+      "train_single_rows": 47472,
+      "validation_case_count": 49,
+      "validation_rows": 294,
+      "elapsed_seconds": 176.83287050001672,
+      "model_sha256": {
+        "single.cbm": "4f30b60281e1cc8f4ddd4ef8b0ddb67f8e28525993c5194b5a46a0d5acb448cb",
+        "multi.cbm": "a4ba6ab9cc1f81934969867f541df9590c215c088f2488492c8cecbfce10535b"
+      }
+    },
+    {
+      "fold": "winter_transition",
+      "seed": 20260817,
+      "train_anchor_count": 11754,
+      "train_single_rows": 70524,
+      "validation_case_count": 79,
+      "validation_rows": 474,
+      "elapsed_seconds": 196.00266679999186,
+      "model_sha256": {
+        "single.cbm": "f3d0e59aed6a2c8b4cb72c45b15775f1b5c0d8a683b931ef26d8f500494a4f42",
+        "multi.cbm": "d91b14c54790cf135a1580bfc9f14d872c8847cf3a8a1ed3a9138d1c72947672"
+      }
+    },
+    {
+      "fold": "2025_h1",
+      "seed": 20260818,
+      "train_anchor_count": 20899,
+      "train_single_rows": 125394,
+      "validation_case_count": 53,
+      "validation_rows": 318,
+      "elapsed_seconds": 237.47709410000243,
+      "model_sha256": {
+        "single.cbm": "464eed114d78ec41f92850c8696f04cc937a1a2f76fd625d0724518250328fb4",
+        "multi.cbm": "aa31ae5a54b39a826aec8a77a4bd10d0a7bc475d93bc4a49b2516aa7726c7c32"
+      }
+    },
+    {
+      "name": "full_single",
+      "seconds": 230.66895600000862,
+      "rows": 146160
+    },
+    {
+      "name": "full_multi",
+      "seconds": 24.60715799999889,
+      "rows": 24360
+    },
+    {
+      "name": "full_tabpfn6",
+      "fit_seconds": 1.7435122999886516,
+      "fit_plus_replay_save_seconds": 59.87063489999855,
+      "train_cases": 24360
+    }
+  ],
+  "files": {
+    "models/full/license-receipt.json": "c6cd3122279871fe4906f5f60a560946e7465d9402515abe8fe408d853ea08c9",
+    "models/full/multi.cbm": "8316243d07076a8aeca94d042b2f61b844bf3ad95c59bbe0cedc6cf429d864b6",
+    "models/full/router.joblib": "897caa8e357b58db59f3ce8746a01fa85750f9379fc56d8ea00986cf5fed4bca",
+    "models/full/single.cbm": "78600dfd8eca5580bed06edd15f1a7770fddc5a8ba71ca77aa343cfba9818a05",
+    "models/full/tabpfn6.tabpfn_fit": "f3d19f2781caa975a4e1321615d3b4bac27e309b8bf75fad8403b67d7919764e",
+    "models/full/weights/tabpfn-v3-regressor-v3_default.ckpt": "311ce18d97e9533d8585eaadafe040fbdd8070533209ed8696641dadc97a7301"
+  },
+  "config_sha256": "f8b64d3c2783a3bb11f8bda4b9100032610b08d86122b5d6067530e5e4e5a39f",
+  "runner_sha256": "c4dd2c284dc2be5088b26e5e419f43dabdeda1506d3c092b9e8dd59b27c5d1e6"
+}

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "p3_episode_policy_fulltrain_20260905_v2",
+  "parent_plan": "docs/SCORE_IMPROVEMENT_PLAN_20260905_V2.md",
+  "conditional_authorization": "root: only a completed independently verified B policy better than legacy may continue",
+  "b_config": "configs/experiments/p3_episode_weight_20260905_v2.json",
+  "b_config_sha256": "557384ee373b572043ea8394c4aaef82bcf9072f4d7e6488d4d0e161ad5bee3e",
+  "b_runner_sha256": "54591a09145c1a7552accb27db9c8b102fe629cfbd73cb9e6f2540b78ecb6705",
+  "full_seeds": [20260817, 20260917],
+  "full_backbone_fit_budget": 4,
+  "full_router_fit_budget": 1,
+  "historical_fits": 0,
+  "selection": "use_B_frozen_winner_only_if_pooled_RMSE_less_than_legacy_control_and_independent_QA_pass",
+  "router_training": "selected_arm_181cases_two_seed_averaged_OOF_components_only",
+  "replay": "all_181_historical_case_contexts_training_membership_explicit_no_validation_metric_claim",
+  "resources": {"cpu_threads": 2, "gpu": 0},
+  "official_input_rows": 0,
+  "submission_csv": false,
+  "upload": false,
+  "public_score_fitting": false
+}

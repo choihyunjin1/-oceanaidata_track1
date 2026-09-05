@@ -1,0 +1,29 @@
+{
+  "experiment_id": "p3_score_repair_deploy_20260905_v1",
+  "description": "Rebuild legal clean baseline and exploratory 6h-only TabPFN25 from distributed training data; historical CSV/OOF are not runtime inputs",
+  "reference_config": "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json",
+  "reference_config_sha256": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+  "reference_helpers": "scripts/run_p3_corrected_repeated_forward_catboost_v1.py",
+  "reference_helpers_sha256": "4539f3e1778213a12485d204c01de60530178fc1db235496ad38dc16602d3dd5",
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "tree_fits": {"historical_single_multi": 6, "full_single_multi": 2, "cpu_threads": 2, "multi_device": "GPU"},
+  "router_fits": {"prequential": 2, "full": 1},
+  "tabpfn": {
+    "model_name": "TabPFN-3", "package_version": "8.5.0", "synthetic_only": true,
+    "checkpoint": "artifacts/tabpfn3/weights/tabpfn-v3-regressor-v3_default.ckpt",
+    "sha256": "311ce18d97e9533d8585eaadafe040fbdd8070533209ed8696641dadc97a7301",
+    "license_receipt": "artifacts/tabpfn3/user-license-receipt.json",
+    "provenance_contract": "configs/compliance/tabpfn3_offline_transition_20260901.json",
+    "n_estimators": 8, "lead_h": 6, "seed": 20260901, "full_fits": 1,
+    "fit_mode": "fit_preprocessors", "prediction_clip_m": [0, 30],
+    "candidate_weight_at_6h_only": 0.25, "automatic_download": false
+  },
+  "comparison": {"historical_clean_rmse_m": 0.7791048399763751, "historical_6h_candidate_rmse_m": 0.7783397516664796, "fresh_confirmation": false},
+  "resources": {"cpu_threads": 2, "maximum_total_seconds": 21600, "rss_cap_gib": 10},
+  "official_prediction_requires_explicit_cli_approval": true,
+  "upload_commit_push": false,
+  "result_based_tuning_or_retry": false
+}

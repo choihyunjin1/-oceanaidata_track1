@@ -1,0 +1,299 @@
+{
+  "scope": "Independent numerical OOF audit; no training, official data reads, or upload",
+  "problems": {
+    "P1": {
+      "status": "NUMERICAL_QA_PASS",
+      "rows": 421032,
+      "unique_keys": 421032,
+      "reference": {
+        "f1": 0.8511742399041979,
+        "tp": 12794,
+        "fp": 1213,
+        "fn": 3261
+      },
+      "candidate": {
+        "f1": 0.8369278813311213,
+        "tp": 12864,
+        "fp": 1822,
+        "fn": 3191
+      },
+      "candidate_minus_reference": -0.014246358573076656,
+      "improves_reference": false,
+      "changed_rows": 1031,
+      "folds": {
+        "2025_q2": {
+          "rows": 133170,
+          "reference": {
+            "f1": 0.7721567135793077,
+            "tp": 4060,
+            "fp": 1086,
+            "fn": 1310
+          },
+          "candidate": {
+            "f1": 0.7696677080374893,
+            "tp": 4065,
+            "fp": 1128,
+            "fn": 1305
+          }
+        },
+        "2025_q3": {
+          "rows": 176619,
+          "reference": {
+            "f1": 0.878226811465195,
+            "tp": 4933,
+            "fp": 23,
+            "fn": 1345
+          },
+          "candidate": {
+            "f1": 0.8469750889679716,
+            "tp": 4998,
+            "fp": 526,
+            "fn": 1280
+          }
+        },
+        "2025_q4": {
+          "rows": 111243,
+          "reference": {
+            "f1": 0.9145813282001924,
+            "tp": 3801,
+            "fp": 104,
+            "fn": 606
+          },
+          "candidate": {
+            "f1": 0.9075931232091691,
+            "tp": 3801,
+            "fp": 168,
+            "fn": 606
+          }
+        }
+      },
+      "claim_limit": "Retrospective internal comparison; not fresh confirmation or official score.",
+      "changes": {
+        "added_tp": 244,
+        "added_fp": 611,
+        "removed_tp": 174,
+        "removed_fp": 2
+      },
+      "artifact": "artifacts/p1_score_repair_20260905_v1/qa_oof.npz",
+      "archive_sha256": "94bd1e79ff28fe6bdb7bac35232e5ccde74cf6dff65cc14c597ee476f43274f8"
+    },
+    "P2": {
+      "status": "NUMERICAL_QA_PASS",
+      "rows": 69850,
+      "unique_keys": 69850,
+      "reference": {
+        "rmse": 0.92034593873515,
+        "sse": 59165.509789197975,
+        "rows": 69850,
+        "bias": -0.2486724759412857
+      },
+      "candidate": {
+        "rmse": 0.8592499137102484,
+        "sse": 51570.982432643184,
+        "rows": 69850,
+        "bias": -0.13941828402255294
+      },
+      "candidate_minus_reference": -0.061096025024901635,
+      "improves_reference": true,
+      "changed_rows": 69850,
+      "folds": {
+        "2024_sep_oct": {
+          "rows": 26273,
+          "reference": {
+            "rmse": 0.49235496791734285,
+            "sse": 6368.927637395258,
+            "rows": 26273,
+            "bias": -0.12593907227530246
+          },
+          "candidate": {
+            "rmse": 0.4882843263308918,
+            "sse": 6264.050259102667,
+            "rows": 26273,
+            "bias": -0.11484477881842312
+          }
+        },
+        "2025_jul_aug": {
+          "rows": 26693,
+          "reference": {
+            "rmse": 1.3699640271768725,
+            "sse": 50097.4607247063,
+            "rows": 26693,
+            "bias": -0.4310427799271046
+          },
+          "candidate": {
+            "rmse": 1.2862090206406265,
+            "sse": 44159.12798004098,
+            "rows": 26693,
+            "bias": -0.1510872107487226
+          }
+        },
+        "2025_nov_dec": {
+          "rows": 16884,
+          "reference": {
+            "rmse": 0.3998283085606719,
+            "sse": 2699.1214270964215,
+            "rows": 16884,
+            "bias": -0.1513356002141424
+          },
+          "candidate": {
+            "rmse": 0.2607331381658398,
+            "sse": 1147.804193499532,
+            "rows": 16884,
+            "bias": -0.1592086797301136
+          }
+        }
+      },
+      "claim_limit": "Retrospective internal comparison; not fresh confirmation or official score.",
+      "artifact": "artifacts/p2_score_repair_20260905_v1/qa_oof.npz",
+      "archive_sha256": "41ebd6a7b0e994e977796bda1792fddec5ac4bfb44119db64e9a04ee2d264b2c"
+    },
+    "P3": {
+      "status": "NUMERICAL_QA_PASS",
+      "rows": 1086,
+      "unique_keys": 1086,
+      "reference": {
+        "rmse": 0.7791048399763751,
+        "sse": 659.2067259186298,
+        "rows": 1086,
+        "bias": -0.10339048747292207
+      },
+      "candidate": {
+        "rmse": 0.7783397516664796,
+        "sse": 657.9126671603215,
+        "rows": 1086,
+        "bias": -0.10975141079233083
+      },
+      "candidate_minus_reference": -0.000765088309895523,
+      "improves_reference": true,
+      "changed_rows": 181,
+      "folds": {
+        "2024_h2_storm": {
+          "rows": 294,
+          "reference": {
+            "rmse": 0.714686278293078,
+            "sse": 150.16828405584081,
+            "rows": 294,
+            "bias": -0.13462222154720926
+          },
+          "candidate": {
+            "rmse": 0.7111787244291565,
+            "sse": 148.69790235572057,
+            "rows": 294,
+            "bias": -0.14251909358754228
+          }
+        },
+        "2025_h1": {
+          "rows": 318,
+          "reference": {
+            "rmse": 0.8242756714490247,
+            "sse": 216.0588616485915,
+            "rows": 318,
+            "bias": 0.06964595617491458
+          },
+          "candidate": {
+            "rmse": 0.8250638331379684,
+            "sse": 216.47224454323694,
+            "rows": 318,
+            "bias": 0.06165308960552677
+          }
+        },
+        "winter_transition": {
+          "rows": 474,
+          "reference": {
+            "rmse": 0.7861936022372155,
+            "sse": 292.97958021419754,
+            "rows": 474,
+            "bias": -0.2001066462538748
+          },
+          "candidate": {
+            "rmse": 0.7858754695980513,
+            "sse": 292.7425202613639,
+            "rows": 474,
+            "bias": -0.20442004451538262
+          }
+        }
+      },
+      "claim_limit": "Retrospective internal comparison; not fresh confirmation or official score.",
+      "artifact": "artifacts/p3_score_repair_20260905_v1/qa_oof.npz",
+      "archive_sha256": "2eea67420fcb92e2fb0b6f570c4f09676929a5aee94bd49b52c01cd460b40b78"
+    }
+  },
+  "conditional_followups": {
+    "P1_binary_decoder": {
+      "status": "NUMERICAL_QA_PASS",
+      "rows": 421032,
+      "unique_keys": 421032,
+      "reference": {
+        "f1": 0.8511742399041979,
+        "tp": 12794,
+        "fp": 1213,
+        "fn": 3261
+      },
+      "candidate": {
+        "f1": 0.8502914238134888,
+        "tp": 12765,
+        "fp": 1205,
+        "fn": 3290
+      },
+      "candidate_minus_reference": -0.0008828160907091709,
+      "improves_reference": false,
+      "changed_rows": 79,
+      "folds": {
+        "2025_q2": {
+          "rows": 133170,
+          "reference": {
+            "f1": 0.7721567135793077,
+            "tp": 4060,
+            "fp": 1086,
+            "fn": 1310
+          },
+          "candidate": {
+            "f1": 0.7721567135793077,
+            "tp": 4060,
+            "fp": 1086,
+            "fn": 1310
+          }
+        },
+        "2025_q3": {
+          "rows": 176619,
+          "reference": {
+            "f1": 0.878226811465195,
+            "tp": 4933,
+            "fp": 23,
+            "fn": 1345
+          },
+          "candidate": {
+            "f1": 0.878226811465195,
+            "tp": 4933,
+            "fp": 23,
+            "fn": 1345
+          }
+        },
+        "2025_q4": {
+          "rows": 111243,
+          "reference": {
+            "f1": 0.9145813282001924,
+            "tp": 3801,
+            "fp": 104,
+            "fn": 606
+          },
+          "candidate": {
+            "f1": 0.9116616314199396,
+            "tp": 3772,
+            "fp": 96,
+            "fn": 635
+          }
+        }
+      },
+      "claim_limit": "Retrospective internal comparison; not fresh confirmation or official score.",
+      "changes": {
+        "added_tp": 21,
+        "added_fp": 0,
+        "removed_tp": 50,
+        "removed_fp": 8
+      },
+      "artifact": "artifacts/p1_score_repair_decoder_20260905_v1/qa_oof.npz",
+      "archive_sha256": "f2c956411661982b57a4de03cd59394ece49755fde651ab0b71a838bfa2b32b5"
+    }
+  }
+}

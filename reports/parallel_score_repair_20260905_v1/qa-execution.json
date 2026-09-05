@@ -1,0 +1,71 @@
+{
+  "status": "FOCUSED_TESTS_NUMERICAL_AND_LOCAL_CANDIDATE_QA_PASS",
+  "verified_date_kst": "2026-09-05",
+  "git_base": "535f94a1791f2398f82ad27659b58701513ab327",
+  "pytest": {
+    "passed": 78,
+    "failed": 0,
+    "seconds": 6.78,
+    "runtime": ".venv-p1/Scripts/python.exe",
+    "test_files": [
+      "tests/test_parallel_score_repair_qa_20260905_v1.py",
+      "tests/test_score_use_policy_20260902.py",
+      "tests/test_p1_score_repair_20260905_v1.py",
+      "tests/test_p1_score_repair_decoder_20260905_v1.py",
+      "tests/test_p1_clean_control_fulltrain_20260905_v1.py",
+      "tests/test_p2_score_repair_20260905_v1.py",
+      "tests/test_p2_score_repair_deploy_20260905_v1.py",
+      "tests/test_p3_score_repair_20260905_v1.py",
+      "tests/test_p3_score_repair_deploy_20260905_v1.py"
+    ],
+    "scope": "Focused synthetic, policy and implementation contracts; not model generalization certification."
+  },
+  "ruff": {"status": "PASS", "scope": "The nine test files and eight corresponding new execution/QA scripts."},
+  "independent_numerical_audit": {
+    "status": "PASS",
+    "initial_problems": ["P1", "P2", "P3"],
+    "conditional_followups": ["P1_binary_decoder"],
+    "receipt": "independent-qa.json"
+  },
+  "notebook": {
+    "path": "notebooks/parallel_score_repair_20260905_v1.ipynb",
+    "executed_code_cells": 4,
+    "errors": 0,
+    "executor": "nbclient",
+    "scope": "Initial P1/P2/P3 numerical audits only; decoder is in independent-qa.json.",
+    "initial_nbconvert_attempt": "Unavailable module; no notebook execution occurred and no dependencies were installed."
+  },
+  "p2_read_only_followup": {
+    "effective_training_rows": 166268,
+    "effective_min_time_kst": "2024-05-08T18:00:00+09:00",
+    "effective_max_time_kst": "2025-12-10T03:00:00+09:00",
+    "rows_before_registered_start": 0,
+    "month04_group": "Calendar month pooled over years: April 2025, not April 2024.",
+    "model_or_config_changes": 0
+  },
+  "p1_always_on_diagnostic_root_recalculation": {
+    "rows": 421032,
+    "f1": 0.8527915383585487,
+    "tp": 12739,
+    "fp": 1082,
+    "fn": 3316,
+    "hard_anchor_removed": 0,
+    "selected_for_deployment": false,
+    "reason": "Diagnostic always-on output, not the preregistered inner-selected strategy; no retrospective replacement of the selection rule."
+  },
+  "p3_regenerated_oof_root_recalculation": {
+    "rows": 1086,
+    "unique_keys": 1086,
+    "rmse_m": 0.7791048399763751,
+    "archive_sha256": "709eb149de9aedaa620f75acc964d5b05a085e6b01e2a790ff87c966769e32ea",
+    "historical_reference_key_sets_equal": true,
+    "truth_max_absolute_difference": 0.0,
+    "prediction_max_absolute_difference": 0.0,
+    "scope": "Root compared historical OOF read-only after source-only regenerated OOF completed. The training runner did not consume the historical OOF. This is same-case reproducibility, not fresh validation."
+  },
+  "upload": 0,
+  "local_candidate_qa": "candidate-qa.json",
+  "root_p3_qa_technical_note": "Initial read-only QA used a superseded runtime field name and stopped with KeyError; rerun with source_prepare_train_replay_predict_seconds passed. No model, candidate or receipt was modified to resolve this QA-only error.",
+  "git_mutations": 0,
+  "final_package_certified": false
+}

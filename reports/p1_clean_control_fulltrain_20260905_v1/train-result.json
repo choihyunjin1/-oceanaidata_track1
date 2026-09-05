@@ -1,0 +1,73 @@
+{
+  "experiment_id": "p1_clean_control_fulltrain_20260905_v1",
+  "status": "MODELS_AND_RECIPE_FROZEN_OFFICIAL_UNREAD",
+  "pid": 6188,
+  "started": "2026-09-05T19:05:29.696271+09:00",
+  "full_backbone_fits": 2,
+  "new_calibration_searches": 0,
+  "transition_estimates": 0,
+  "official_rows": 0,
+  "csv_written": 0,
+  "upload": 0,
+  "config_sha256": "6dbca84c6b5054168d72d71b4dee716c29c4b1dc68af4ddc4066dd38d05fa64e",
+  "runner_sha256": "e43e9b6a529a79ec3ea6a368b67951ea21a86e91df96c6ffe925760c79eb6a38",
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "threads": 4,
+  "cuda": false,
+  "fits": [
+    {
+      "model": "original",
+      "runtime_seconds": 95.06200000000536,
+      "sha256": "2c2eb3e3539140cc0dc1aeb6ef8514ab4b6b097e8b6dd2a047d7ac83bc088e5f",
+      "reload_probe_equal": true
+    },
+    {
+      "model": "balanced",
+      "runtime_seconds": 40.187000000005355,
+      "sha256": "95f2f6a4d9f643ecd26a261c76480acf2a6649d6236f613ef157cc4f2b247b0c",
+      "reload_probe_equal": true
+    }
+  ],
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.0",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.4.0",
+    "joblib": "1.5.3",
+    "pyarrow": "25.0.1",
+    "psutil": "7.2.2"
+  },
+  "training_rows": 776706,
+  "feature_count": 80,
+  "runtime_seconds": 160.23400000002584,
+  "frozen_recipe_sha256": "d83088293176bba5077f8d1e06ea6304d4f8c8bf5ff6d9f4aa8dc5150c11a9db",
+  "source_hashes": {
+    "configs/experiments/p1_clean_control_fulltrain_20260905_v1.json": "6dbca84c6b5054168d72d71b4dee716c29c4b1dc68af4ddc4066dd38d05fa64e",
+    "configs/experiments/p1_score_repair_20260905_v1.json": "e6863bc50be5d35efcb9a5e4d1ca0ed952a44c5ef6a10ff33614bb715b85d2fe",
+    "configs/p1.toml": "d04c8a5759645f11bcf0d987fff44829e47f4092f310a48704ef644ac6bc3e80",
+    "configs/p1_meaningful_learning_curve_generation_v1.json": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7",
+    "reports/p1_score_repair_20260905_v1/result.json": "ba10a102c69d1f6c0500d59ec6c2e89b3931da61ce5b6f3ebf2695479daf21a3",
+    "reports/p1_score_repair_decoder_20260905_v1/result.json": "d6650e05026fb9bf4db264dbee0f3ad2b1aab636d27fecdd2f8f27cfeff2ce12",
+    "scripts/run_p1_clean_control_fulltrain_20260905_v1.py": "e43e9b6a529a79ec3ea6a368b67951ea21a86e91df96c6ffe925760c79eb6a38",
+    "scripts/run_p1_meaningful_learning_curve_generation_v1.py": "c22896fb17a5ece10831759631b9f7414cb9564ca80af2d1a4f3272fdeed6b9a",
+    "scripts/run_p1_score_repair_20260905_v1.py": "53b83d58f2f020d54cbd597655b34bb6371a29dd4ad8fd1eebc74bccad10d63a",
+    "scripts/run_p1_score_repair_decoder_20260905_v1.py": "d5ed9ff15745b7e400066eff2331c533d6fd3a420e941d04cf317ef40b530db9",
+    "src/ocean_goal/__init__.py": "a7a4f8f969d1425d5573d7ea7ff0f3253f9c17f19a7b377ee70f31334b013bf7",
+    "src/ocean_goal/meaningful_score.py": "69b9dc1168a47e0d1b1a50e5590c3d2f0966f2885f0f92730d4c38c4ea92800c",
+    "src/p1_qc/__init__.py": "5a7743ab77b2f9bd6851f12ebe694313c4fb361611821ed68dfd3b7574a82088",
+    "src/p1_qc/augment.py": "290a9b17d5c32940c745f70ea5f5ffe803180e401005a1febfc17e575d3a884a",
+    "src/p1_qc/config.py": "adf2e04123b95e51bcc7989e2c80b9faee776cb32fe63179b984a48cba2651f1",
+    "src/p1_qc/data.py": "5dc1dac588faa2f50323d15ab2d83231eb06c3a709845d539ba7efbb99addd69",
+    "src/p1_qc/experiment.py": "a331d15447abe1601dc98f351e5a47c23c8d2f50cc3145c48d07dd6814b75ab1",
+    "src/p1_qc/features.py": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+    "src/p1_qc/metrics.py": "8ef58064c09b4d9710b1485151321d90ee0433b45f125dd52da9b3808464abbc",
+    "src/p1_qc/models_tabular.py": "07b068a21c9101f9a4de53ee5f458d89ee9101468a148d8cde6f0afc50599311",
+    "src/p1_qc/pipeline.py": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669",
+    "src/p1_qc/postprocess.py": "2066d8a45c71cdd1b77365a2334c16efb075c7e6d8feb7808d76aaef22cb5bf5",
+    "src/p1_qc/rules.py": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c",
+    "src/p1_qc/splits.py": "86e0f3990c73a0dbfa0810dce403001dbae726b8806df0e4f9483d3a05d7eb9d",
+    "src/p1_qc/submission.py": "3d36d58c839536823c080d9ac7d377af73dae0ea00f3bf0d098f6d2fd125bb10",
+    "src/p1_qc/validation.py": "7794d8c2c69fd35f93272088fecf9b80be553581351c0dbf6c5211b11df8ada6"
+  }
+}

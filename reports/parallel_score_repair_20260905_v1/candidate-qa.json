@@ -1,0 +1,61 @@
+{
+  "status": "ALL_LOCAL_CANDIDATES_ROOT_QA_PASS_NOT_UPLOADED",
+  "verified_date_kst": "2026-09-05",
+  "scope": "Root independent structure, keys, finite values, candidate and trained model hashes. No hidden truth or official scoring.",
+  "P1": {
+    "status": "ROOT_CANDIDATE_QA_PASS",
+    "candidate": "artifacts/p1_clean_control_fulltrain_20260905_v1/05_answer/P1_submission.csv",
+    "sha256": "064ef022faf2a3e8bc7c70633210847aa494060858374aa43f28f4eced84ec43",
+    "rows": 169011,
+    "columns": ["station", "year", "layer", "time", "label"],
+    "positive": 6505,
+    "schema_unique_keys_test_sample_order_binary": "PASS",
+    "trained_model_hashes_checked": 2,
+    "frozen_recipe_sha256": "d83088293176bba5077f8d1e06ea6304d4f8c8bf5ff6d9f4aa8dc5150c11a9db",
+    "model_seal_before_official_input": true,
+    "copied_code_fresh_process_csv_byte_equality": "PASS",
+    "copied_code_replay_seconds": 14.484,
+    "new_official_score": null,
+    "caveat": "2026 nominal-depth dictionary keys are unknown for all 169011 official rows; no post-hoc fallback added. Candidate is not the historical 28.909341 file."
+  },
+  "P2": {
+    "status": "ROOT_CANDIDATE_QA_PASS",
+    "candidate": "artifacts/p2_score_repair_deploy_20260905_v1/submission_p2_v23_blockmask_3seed.csv",
+    "sha256": "46d194a1ef40a1deaebd084916644d9359433d2e6ce7d5c0b53d9f515bbec071",
+    "rows": 26061,
+    "columns": ["station", "layer", "time", "temp"],
+    "schema_unique_keys_sample_order_index_keys_finite": "PASS",
+    "trained_model_hashes_checked": 3,
+    "fresh_process_repeat_inference_max_absolute_difference": 0.0,
+    "new_official_score": null,
+    "caveat": "Prior official 0.424019 C does not belong to this candidate; internal September-October gain is much smaller than pooled gain."
+  },
+  "P3": {
+    "status": "ROOT_CANDIDATE_QA_PASS",
+    "outputs": {
+      "clean_baseline": {
+        "candidate": "artifacts/p3_score_repair_deploy_20260905_v1/candidates/clean_baseline.csv",
+        "sha256": "6bfa23d25f944df4711c11d1fce82978a96df08b58fdc57f666ac792a7da96b7",
+        "rows": 1200
+      },
+      "tabpfn25_6h_only": {
+        "candidate": "artifacts/p3_score_repair_deploy_20260905_v1/candidates/tabpfn25_6h_only.csv",
+        "sha256": "a7c7b247e5d74e7a0b6c8be42a7d4298a220b73881acb99490fcf7fe85f82f29",
+        "rows": 1200
+      }
+    },
+    "columns": ["case_id", "station", "lead_h", "hs_pred"],
+    "schema_unique_keys_index_order_finite_range": "PASS",
+    "model_weight_receipt_hashes_checked": 6,
+    "fresh_process_replay_max_absolute_difference": 0.0,
+    "changed_rows_6h": 200,
+    "changed_rows_other_leads": 0,
+    "source_prepare_train_replay_predict_seconds": 1678.4127939000318,
+    "under_six_hours_current_host": true,
+    "new_official_score": null,
+    "caveat": "Current RTX5090/CPU2 host timing, not organizer hardware guarantee; tiny historical recipe-level 6h gain is not fresh validation of this full-trained CSV."
+  },
+  "hidden_values_read": 0,
+  "uploads": 0,
+  "final_model_zip_certification": false
+}

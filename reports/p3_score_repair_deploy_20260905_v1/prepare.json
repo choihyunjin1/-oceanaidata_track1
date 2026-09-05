@@ -1,0 +1,78 @@
+{
+  "status": "PREPARED_FROM_DISTRIBUTED_TRAIN",
+  "source_sha256": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "train_anchors": 24360,
+  "feature_count": 591,
+  "split_audit": {
+    "selection_rule": "station-global chronological first eligible across all fixed windows",
+    "validation_case_count": 181,
+    "validation_row_count": 1086,
+    "unique_station_episode_count": 181,
+    "repeated_station_episode_count": 0,
+    "station_global_minimum_gap_hours": {
+      "G-ORS": 78.0,
+      "I-ORS": 78.0,
+      "S-ORS": 78.0
+    },
+    "cross_window_pairs_below_78h": 0,
+    "context48_plus_target24_footprint_overlap_pairs": 0,
+    "footprint_definition": "[anchor-48h, anchor+24h] within station",
+    "folds": {
+      "2024_h2_storm": {
+        "train_anchor_count": 7912,
+        "validation_case_count": 49,
+        "validation_by_station": {
+          "G-ORS": 21,
+          "I-ORS": 4,
+          "S-ORS": 24
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 112.66666666666667,
+        "minimum_train_validation_footprint_separation_hours": 40.66666666666667
+      },
+      "winter_transition": {
+        "train_anchor_count": 11754,
+        "validation_case_count": 79,
+        "validation_by_station": {
+          "G-ORS": 28,
+          "I-ORS": 25,
+          "S-ORS": 26
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 132.66666666666666,
+        "minimum_train_validation_footprint_separation_hours": 60.66666666666666
+      },
+      "2025_h1": {
+        "train_anchor_count": 20899,
+        "validation_case_count": 53,
+        "validation_by_station": {
+          "G-ORS": 18,
+          "I-ORS": 17,
+          "S-ORS": 18
+        },
+        "removed_same_episode_train_anchors": 0,
+        "shared_train_validation_station_episode_count": 0,
+        "minimum_train_validation_anchor_gap_hours": 119.33333333333333,
+        "minimum_train_validation_footprint_separation_hours": 47.33333333333333
+      }
+    }
+  },
+  "runtime_seconds": 697.8306537000171,
+  "runner_sha256": "5e7a9c78a852259e3078270139e5156e5d7b28075202f2e99740cfbc5f99dc32",
+  "config_sha256": "f8b64d3c2783a3bb11f8bda4b9100032610b08d86122b5d6067530e5e4e5a39f",
+  "files": {
+    "train_features.parquet": "2cbfbc7e521c395a17d9595982fa5773fb0ad8e9c5ca5484f392769e9dff0c3f",
+    "train_anchors.parquet": "d90486257c725856357959e30ffd0f35c35f3b9c06be6ab93bcdd221bfa9bfe0",
+    "validation_keys.parquet": "88d4ea7c3a4aed662536b0d067c74b1c9ddbcdca349fd6ad8ddf9640f71af131",
+    "replay_cases.parquet": "44f3ccb13cd4cbc32c603c56b99b0c18b03d40cf7e70da38feb04c2b79a22b26",
+    "feature_columns.json": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a"
+  },
+  "historical_cache_reads": 0,
+  "official_input_rows": 0,
+  "fits": 0
+}

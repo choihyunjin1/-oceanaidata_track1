@@ -1,0 +1,31 @@
+{
+  "experiment_id": "p2_score_repair_20260905_v1",
+  "status": "PREREGISTERED_EXPLORATORY",
+  "source_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+  "train_start": "2024-05-01T00:00:00+09:00",
+  "train_stop": "2026-01-01T00:00:00+09:00",
+  "folds": [
+    {"id": "2024_sep_oct", "start": "2024-09-01T00:00:00+09:00", "stop": "2024-11-01T00:00:00+09:00"},
+    {"id": "2025_jul_aug", "start": "2025-07-01T00:00:00+09:00", "stop": "2025-09-01T00:00:00+09:00"},
+    {"id": "2025_nov_dec", "start": "2025-11-01T00:00:00+09:00", "stop": "2026-01-01T00:00:00+09:00"}
+  ],
+  "purge_days": 7,
+  "feature_dependency_hours": 0,
+  "seeds": [20260901, 20260902, 20260903],
+  "epochs": 60,
+  "batch_size": 4096,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_coefficient": 0.01,
+  "cpu_threads": 1,
+  "loader_workers": 0,
+  "maximum_deepset_fits": 24,
+  "blockmask": {"coverage": 0.3, "length_days": [3, 7, 14], "seed": 20260905},
+  "actualdepth": {"append": ["effective_actual_depth_div50", "actual_depth_present"], "invalid_fallback": "nominal"},
+  "oas": {"season_bin_days": 14, "season_window_days": 60, "minimum_season_rows": 100, "fallback_nearest_complete_rows": 1000},
+  "selection": "pooled_sse_over_n;screen_control=v23_or_v52;ablations_independent;confirm_control_and_best_distinct_if_improved;fixed_oas_blend_0.5_diagnostic_only",
+  "official_access": 0,
+  "csv_written": 0,
+  "upload": 0,
+  "validation_scope": "reused_historical_exploratory_not_fresh;finite_target_and_two_public_temperature_proxy_not_hidden_QC"
+}

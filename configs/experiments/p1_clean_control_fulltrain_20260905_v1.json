@@ -1,0 +1,30 @@
+{
+  "experiment_id": "p1_clean_control_fulltrain_20260905_v1",
+  "full_backbone_fits": 2,
+  "new_calibration_searches": 0,
+  "decoder_enabled": false,
+  "transition_estimates": 0,
+  "threads": 4,
+  "wall_cap_seconds": 3600,
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "feature_contract": "configs/experiments/p1_score_repair_20260905_v1.json",
+  "selection": "balanced_union",
+  "calibrations": {
+    "original": {"threshold": 0.2},
+    "balanced_union": {"threshold": 0.3}
+  },
+  "calibration_provenance": "Already fixed 2025_q4 inner selection from p1_score_repair_20260905_v1; no outer-label threshold fitting or official score inversion",
+  "decoder_decision": "Root independent QA PASS: preregistered inner-on/off strategy pooled F1 delta -0.0008828160907091709; retain OFF. Always-on diagnostic cannot override preregistration.",
+  "unknown_year_depth_policy": "Preserve exact tested train-only station-year-layer dictionary; unseen 2026 nominal depth remains missing and depth_regime unknown. No fallback added.",
+  "official_inference_after_model_seal_authorized": true,
+  "upload_authorized": false,
+  "source_pins": {
+    "scripts/run_p1_score_repair_20260905_v1.py": "53b83d58f2f020d54cbd597655b34bb6371a29dd4ad8fd1eebc74bccad10d63a",
+    "scripts/run_p1_score_repair_decoder_20260905_v1.py": "d5ed9ff15745b7e400066eff2331c533d6fd3a420e941d04cf317ef40b530db9",
+    "reports/p1_score_repair_20260905_v1/result.json": "ba10a102c69d1f6c0500d59ec6c2e89b3931da61ce5b6f3ebf2695479daf21a3",
+    "reports/p1_score_repair_decoder_20260905_v1/result.json": "d6650e05026fb9bf4db264dbee0f3ad2b1aab636d27fecdd2f8f27cfeff2ce12",
+    "configs/experiments/p1_score_repair_20260905_v1.json": "e6863bc50be5d35efcb9a5e4d1ca0ed952a44c5ef6a10ff33614bb715b85d2fe",
+    "configs/p1.toml": "d04c8a5759645f11bcf0d987fff44829e47f4092f310a48704ef644ac6bc3e80",
+    "configs/p1_meaningful_learning_curve_generation_v1.json": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7"
+  }
+}

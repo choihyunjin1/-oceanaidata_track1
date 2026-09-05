@@ -1,0 +1,3010 @@
+{
+  "experiment_id": "p1_score_repair_20260905_v1",
+  "pid": 9384,
+  "started": "2026-09-05T18:37:52.680531+09:00",
+  "config_sha256": "e6863bc50be5d35efcb9a5e4d1ca0ed952a44c5ef6a10ff33614bb715b85d2fe",
+  "runner_sha256": "53b83d58f2f020d54cbd597655b34bb6371a29dd4ad8fd1eebc74bccad10d63a",
+  "dependency_hashes": {
+    "src/p1_qc/features.py": "e769dbe187eeaa5061047a634bb2bcac6ea9a2ad9a359d48d98f49ba4b4b7162",
+    "src/p1_qc/pipeline.py": "389a905abbaf4b62e7d862c44fa25bba2e58dae7b7a7f5bcb4e1e8438d914669",
+    "src/p1_qc/models_tabular.py": "07b068a21c9101f9a4de53ee5f458d89ee9101468a148d8cde6f0afc50599311",
+    "src/p1_qc/rules.py": "ec921139f210f3b264c519346547fa0e17b094f54ce83780f21cf48f5287069c",
+    "src/p1_qc/postprocess.py": "2066d8a45c71cdd1b77365a2334c16efb075c7e6d8feb7808d76aaef22cb5bf5",
+    "src/p1_qc/data.py": "5dc1dac588faa2f50323d15ab2d83231eb06c3a709845d539ba7efbb99addd69",
+    "scripts/run_p1_meaningful_learning_curve_generation_v1.py": "c22896fb17a5ece10831759631b9f7414cb9564ca80af2d1a4f3272fdeed6b9a"
+  },
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "git_head": "535f94a1791f2398f82ad27659b58701513ab327",
+  "python": "3.12.10",
+  "threads": 4,
+  "cuda": false,
+  "lgbm_fits": 12,
+  "xgboost_fits": 6,
+  "calibration_searches": 15,
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_written": 0,
+  "upload": 0,
+  "max_rss_gib": 1.3253250122070312,
+  "fit_receipts": [
+    {
+      "fold": "2025_q2",
+      "stage": "inner",
+      "model": "balanced",
+      "seconds": 20.937999999994645,
+      "training_rows": 275567,
+      "features": 80,
+      "model_sha256": "fbf05c86128ccccbb02289e0d61906adf67c11b48851e39d3d52944fe1aaf5ff"
+    },
+    {
+      "fold": "2025_q2",
+      "stage": "inner",
+      "model": "flank",
+      "seconds": 24.546999999991385,
+      "training_rows": 275567,
+      "features": 105,
+      "model_sha256": "2af3a3f94dd34054d38f8ef4d0f09fa73105b6beddc177d493f988bf0c485c68"
+    },
+    {
+      "fold": "2025_q2",
+      "stage": "inner",
+      "model": "original",
+      "seconds": 15.0,
+      "training_rows": 275567,
+      "features": 80,
+      "model_sha256": "df6a0d4311430d76d4696aa5b6cbf3a67c57b8beba344ccd34616b0696d6b36c"
+    },
+    {
+      "fold": "2025_q2",
+      "stage": "outer",
+      "model": "balanced",
+      "seconds": 25.937000000005355,
+      "training_rows": 338836,
+      "features": 80,
+      "model_sha256": "617114d276d30b97bdf76010def2e57cccf5fc4ad2f42672b7ca54b1fcaa4364"
+    },
+    {
+      "fold": "2025_q2",
+      "stage": "outer",
+      "model": "flank",
+      "seconds": 31.437999999994645,
+      "training_rows": 338836,
+      "features": 105,
+      "model_sha256": "b9198850afc33390f502e658d055d1b10bb9ac80b154434c3dc0d0577cb66774"
+    },
+    {
+      "fold": "2025_q2",
+      "stage": "outer",
+      "model": "original",
+      "seconds": 17.67200000002049,
+      "training_rows": 338836,
+      "features": 80,
+      "model_sha256": "6efba74078a7d99a8c17e056a082406d17ebf286621b3bf543f76709c9d2faa9"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "inner",
+      "model": "balanced",
+      "seconds": 28.687999999994645,
+      "training_rows": 347004,
+      "features": 80,
+      "model_sha256": "f89578e5400f60300015ea81c7ba47e64376e230892f8523257a213a6ed883ec"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "inner",
+      "model": "flank",
+      "seconds": 28.65700000000652,
+      "training_rows": 347004,
+      "features": 105,
+      "model_sha256": "80f9f53464b83fb92efa07a1a747770347c36ee81709539676eba2d69726c626"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "inner",
+      "model": "original",
+      "seconds": 17.546999999991385,
+      "training_rows": 347004,
+      "features": 80,
+      "model_sha256": "7ecb18ffccc0a74735e18d51817eeac1dbb0fcc3abc980b5d54070af7e69cf5e"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "outer",
+      "model": "balanced",
+      "seconds": 30.453000000008615,
+      "training_rows": 444081,
+      "features": 80,
+      "model_sha256": "78563e169085f7c727a7f30e335e8309cad03589fce744be49a87231f8d45802"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "outer",
+      "model": "flank",
+      "seconds": 37.546999999991385,
+      "training_rows": 444081,
+      "features": 105,
+      "model_sha256": "6d4220183f3be94c62181569026cc96e0ee8e4a890737635bc93c318d79cd423"
+    },
+    {
+      "fold": "2025_q3",
+      "stage": "outer",
+      "model": "original",
+      "seconds": 20.0,
+      "training_rows": 444081,
+      "features": 80,
+      "model_sha256": "4f8065d66d2d62184ea91fb1d26b56361ad7f426f6ce740f28cdd370f7b51387"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "inner",
+      "model": "balanced",
+      "seconds": 30.125,
+      "training_rows": 467282,
+      "features": 80,
+      "model_sha256": "ffa426708449d8416eda62a21f168cff1c3f932e21cb5d26e706b9e6ffda3e53"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "inner",
+      "model": "flank",
+      "seconds": 32.610000000015134,
+      "training_rows": 467282,
+      "features": 105,
+      "model_sha256": "59da328e491060d5dc6207c81336b36a38a4f7258b3e6cce7ee6bd0dff0ad904"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "inner",
+      "model": "original",
+      "seconds": 17.65700000000652,
+      "training_rows": 467282,
+      "features": 80,
+      "model_sha256": "0f11ece4abb877fdb903462a09f97937f81659428d142fa141d21e1a7d4cddfa"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "outer",
+      "model": "balanced",
+      "seconds": 30.85899999999674,
+      "training_rows": 635297,
+      "features": 80,
+      "model_sha256": "6c17459d1ce4ef0362c66f5a219c3d17722c64057fa4870162fa478b09c2a49f"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "outer",
+      "model": "flank",
+      "seconds": 35.64100000000326,
+      "training_rows": 635297,
+      "features": 105,
+      "model_sha256": "055984a91fa03714d4063e6f223a6dc7d89d07282394110fd3a1be1b1a30f268"
+    },
+    {
+      "fold": "2025_q4",
+      "stage": "outer",
+      "model": "original",
+      "seconds": 23.15700000000652,
+      "training_rows": 635297,
+      "features": 80,
+      "model_sha256": "78b58eb0a439dd169c68af3cd82c5331c8f59b7e877636662bff1841f25ae58c"
+    }
+  ],
+  "folds": [
+    {
+      "fold": "2025_q2",
+      "outer_rows": 133170,
+      "inner_rows": 50506,
+      "outer_start": "2025-04-01T00:00:00+09:00",
+      "outer_end": "2025-07-01T00:00:00+09:00",
+      "inner_start": "2025-01-10T00:00:00+09:00",
+      "inner_end": "2025-03-11T00:00:00+09:00",
+      "purge_days": 21,
+      "previously_exposed_development_replay": true,
+      "inner_train_rows": 275567,
+      "inner_train_max": "2024-12-19T14:50:00+00:00",
+      "outer_train_rows": 338836,
+      "outer_train_max": "2025-03-10T14:50:00+00:00",
+      "calibrations": {
+        "original": {
+          "threshold": 0.1,
+          "inner_f1": 0.6662569145666871
+        },
+        "balanced": {
+          "threshold": 0.1,
+          "inner_f1": 0.64302203567681
+        },
+        "flank": {
+          "threshold": 0.1,
+          "inner_f1": 0.6506024096385542
+        },
+        "balanced_union": {
+          "threshold": 0.8,
+          "inner_f1": 0.6662569145666871
+        },
+        "flank_union": {
+          "threshold": 0.15,
+          "inner_f1": 0.6663936104853574
+        }
+      },
+      "selected_control": "original",
+      "selected_candidate": "flank_union",
+      "intact": {
+        "original": {
+          "rows": 133170,
+          "tp": 4060,
+          "fp": 1086,
+          "fn": 1310,
+          "f1": 0.7721567135793077,
+          "precision": 0.7889623008161679,
+          "recall": 0.7560521415270018,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6172607879924953,
+          "long_probability_mean": 0.5471998661613084,
+          "long_below_probability_005": 1240,
+          "normal_fp_rate": 0.008497652582159624,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 646,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1748,
+              "fp": 273,
+              "fn": 579,
+              "f1": 0.8040478380864765,
+              "precision": 0.8649183572488867,
+              "recall": 0.75118177911474
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2248,
+              "fp": 813,
+              "fn": 724,
+              "f1": 0.7452345433449362,
+              "precision": 0.7344005227049983,
+              "recall": 0.756393001345895
+            }
+          }
+        },
+        "balanced": {
+          "rows": 133170,
+          "tp": 3905,
+          "fp": 940,
+          "fn": 1465,
+          "f1": 0.7645619187469408,
+          "precision": 0.8059855521155831,
+          "recall": 0.7271880819366853,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6022514071294559,
+          "long_probability_mean": 0.5471998661613084,
+          "long_below_probability_005": 1240,
+          "normal_fp_rate": 0.007355242566510172,
+          "added_tp": 11,
+          "added_fp": 185,
+          "removed_tp": 166,
+          "removed_fp": 331,
+          "partial_event_missing_rows": 802,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 66,
+              "fp": 0,
+              "fn": 5,
+              "f1": 0.9635036496350365,
+              "precision": 1.0,
+              "recall": 0.9295774647887324
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1709,
+              "fp": 154,
+              "fn": 618,
+              "f1": 0.8157517899761336,
+              "precision": 0.917337627482555,
+              "recall": 0.7344220025784272
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2130,
+              "fp": 786,
+              "fn": 842,
+              "f1": 0.7235054347826086,
+              "precision": 0.7304526748971193,
+              "recall": 0.7166890982503364
+            }
+          }
+        },
+        "flank": {
+          "rows": 133170,
+          "tp": 3806,
+          "fp": 228,
+          "fn": 1564,
+          "f1": 0.8094427903019992,
+          "precision": 0.9434804164600893,
+          "recall": 0.7087523277467411,
+          "long_positive_rows": 3198,
+          "long_recall": 0.558786741713571,
+          "long_probability_mean": 0.5463470508474305,
+          "long_below_probability_005": 1411,
+          "normal_fp_rate": 0.001784037558685446,
+          "added_tp": 9,
+          "added_fp": 80,
+          "removed_tp": 263,
+          "removed_fp": 938,
+          "partial_event_missing_rows": 504,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 46,
+              "fp": 0,
+              "fn": 25,
+              "f1": 0.7863247863247863,
+              "precision": 1.0,
+              "recall": 0.647887323943662
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1546,
+              "fp": 4,
+              "fn": 781,
+              "f1": 0.7975238586535981,
+              "precision": 0.9974193548387097,
+              "recall": 0.6643747314138375
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2214,
+              "fp": 224,
+              "fn": 758,
+              "f1": 0.8184842883548983,
+              "precision": 0.9081214109926169,
+              "recall": 0.7449528936742934
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 133170,
+          "tp": 4071,
+          "fp": 1271,
+          "fn": 1299,
+          "f1": 0.7600821508588499,
+          "precision": 0.7620741295394983,
+          "recall": 0.7581005586592179,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6191369606003753,
+          "long_probability_mean": 0.5471998661613084,
+          "long_below_probability_005": 1240,
+          "normal_fp_rate": 0.009945226917057903,
+          "added_tp": 11,
+          "added_fp": 185,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 636,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 67,
+              "fp": 0,
+              "fn": 4,
+              "f1": 0.9710144927536232,
+              "precision": 1.0,
+              "recall": 0.9436619718309859
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1756,
+              "fp": 277,
+              "fn": 571,
+              "f1": 0.8055045871559633,
+              "precision": 0.8637481554353172,
+              "recall": 0.7546196819939837
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2248,
+              "fp": 994,
+              "fn": 724,
+              "f1": 0.723527518506598,
+              "precision": 0.6933991363355954,
+              "recall": 0.756393001345895
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 133170,
+          "tp": 4060,
+          "fp": 1095,
+          "fn": 1310,
+          "f1": 0.7714964370546318,
+          "precision": 0.7875848690591658,
+          "recall": 0.7560521415270018,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6172607879924953,
+          "long_probability_mean": 0.5471998661613084,
+          "long_below_probability_005": 1240,
+          "normal_fp_rate": 0.008568075117370892,
+          "added_tp": 0,
+          "added_fp": 9,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 646,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1748,
+              "fp": 273,
+              "fn": 579,
+              "f1": 0.8040478380864765,
+              "precision": 0.8649183572488867,
+              "recall": 0.75118177911474
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2248,
+              "fp": 822,
+              "fn": 724,
+              "f1": 0.7441244620986428,
+              "precision": 0.7322475570032573,
+              "recall": 0.756393001345895
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 133170,
+          "tp": 4065,
+          "fp": 1128,
+          "fn": 1305,
+          "f1": 0.7696677080374893,
+          "precision": 0.7827845176198729,
+          "recall": 0.7569832402234636,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6185115697310819,
+          "long_probability_mean": 0.5463470508474305,
+          "long_below_probability_005": 1411,
+          "normal_fp_rate": 0.008826291079812207,
+          "added_tp": 5,
+          "added_fp": 42,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 642,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1751,
+              "fp": 275,
+              "fn": 576,
+              "f1": 0.8045026418561911,
+              "precision": 0.8642645607107601,
+              "recall": 0.7524709926944564
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2250,
+              "fp": 853,
+              "fn": 722,
+              "f1": 0.7407407407407407,
+              "precision": 0.7251047373509507,
+              "recall": 0.7570659488559892
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 133170,
+          "tp": 4060,
+          "fp": 1086,
+          "fn": 1310,
+          "f1": 0.7721567135793077,
+          "precision": 0.7889623008161679,
+          "recall": 0.7560521415270018,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6172607879924953,
+          "long_probability_mean": 0.5471998661613084,
+          "long_below_probability_005": 1240,
+          "normal_fp_rate": 0.008497652582159624,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 646,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1748,
+              "fp": 273,
+              "fn": 579,
+              "f1": 0.8040478380864765,
+              "precision": 0.8649183572488867,
+              "recall": 0.75118177911474
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2248,
+              "fp": 813,
+              "fn": 724,
+              "f1": 0.7452345433449362,
+              "precision": 0.7344005227049983,
+              "recall": 0.756393001345895
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 133170,
+          "tp": 4065,
+          "fp": 1128,
+          "fn": 1305,
+          "f1": 0.7696677080374893,
+          "precision": 0.7827845176198729,
+          "recall": 0.7569832402234636,
+          "long_positive_rows": 3198,
+          "long_recall": 0.6185115697310819,
+          "long_probability_mean": 0.5463470508474305,
+          "long_below_probability_005": 1411,
+          "normal_fp_rate": 0.008826291079812207,
+          "added_tp": 5,
+          "added_fp": 42,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 642,
+          "station": {
+            "G-ORS": {
+              "rows": 6743,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 38709,
+              "tp": 1751,
+              "fp": 275,
+              "fn": 576,
+              "f1": 0.8045026418561911,
+              "precision": 0.8642645607107601,
+              "recall": 0.7524709926944564
+            },
+            "S-ORS": {
+              "rows": 87718,
+              "tp": 2250,
+              "fp": 853,
+              "fn": 722,
+              "f1": 0.7407407407407407,
+              "precision": 0.7251047373509507,
+              "recall": 0.7570659488559892
+            }
+          }
+        }
+      },
+      "fragmented": {
+        "original": {
+          "rows": 128850,
+          "tp": 4031,
+          "fp": 1013,
+          "fn": 1317,
+          "f1": 0.7757890685142417,
+          "precision": 0.799167327517843,
+          "recall": 0.7537397157816006,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6161078031964902,
+          "long_probability_mean": 0.5455321881264107,
+          "long_below_probability_005": 1242,
+          "normal_fp_rate": 0.00820229631908795,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 653,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1740,
+              "fp": 269,
+              "fn": 587,
+              "f1": 0.8025830258302583,
+              "precision": 0.8661025385764062,
+              "recall": 0.7477438762354963
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2227,
+              "fp": 744,
+              "fn": 723,
+              "f1": 0.7522377976693126,
+              "precision": 0.7495792662403231,
+              "recall": 0.7549152542372881
+            }
+          }
+        },
+        "balanced": {
+          "rows": 128850,
+          "tp": 3874,
+          "fp": 923,
+          "fn": 1474,
+          "f1": 0.7637259733859044,
+          "precision": 0.8075880758807588,
+          "recall": 0.7243829468960359,
+          "long_positive_rows": 3191,
+          "long_recall": 0.600438733939204,
+          "long_probability_mean": 0.5455321881264107,
+          "long_below_probability_005": 1242,
+          "normal_fp_rate": 0.007473563181163058,
+          "added_tp": 10,
+          "added_fp": 239,
+          "removed_tp": 167,
+          "removed_fp": 329,
+          "partial_event_missing_rows": 811,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 66,
+              "fp": 0,
+              "fn": 5,
+              "f1": 0.9635036496350365,
+              "precision": 1.0,
+              "recall": 0.9295774647887324
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1700,
+              "fp": 148,
+              "fn": 627,
+              "f1": 0.8143712574850299,
+              "precision": 0.9199134199134199,
+              "recall": 0.730554361839278
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2108,
+              "fp": 775,
+              "fn": 842,
+              "f1": 0.7227841590948054,
+              "precision": 0.7311827956989247,
+              "recall": 0.7145762711864406
+            }
+          }
+        },
+        "flank": {
+          "rows": 128850,
+          "tp": 3573,
+          "fp": 129,
+          "fn": 1775,
+          "f1": 0.7896132596685083,
+          "precision": 0.9651539708265803,
+          "recall": 0.6681002243829469,
+          "long_positive_rows": 3191,
+          "long_recall": 0.558759009714823,
+          "long_probability_mean": 0.5455822080399089,
+          "long_below_probability_005": 1402,
+          "normal_fp_rate": 0.001044517497692345,
+          "added_tp": 13,
+          "added_fp": 16,
+          "removed_tp": 471,
+          "removed_fp": 900,
+          "partial_event_missing_rows": 715,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 46,
+              "fp": 0,
+              "fn": 25,
+              "f1": 0.7863247863247863,
+              "precision": 1.0,
+              "recall": 0.647887323943662
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1429,
+              "fp": 3,
+              "fn": 898,
+              "f1": 0.7603085927108274,
+              "precision": 0.9979050279329609,
+              "recall": 0.614095401804899
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2098,
+              "fp": 126,
+              "fn": 852,
+              "f1": 0.8109779667568612,
+              "precision": 0.9433453237410072,
+              "recall": 0.7111864406779661
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 128850,
+          "tp": 4041,
+          "fp": 1252,
+          "fn": 1307,
+          "f1": 0.7595150831688751,
+          "precision": 0.7634611751369733,
+          "recall": 0.7556095736724009,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6173613287370731,
+          "long_probability_mean": 0.5455321881264107,
+          "long_below_probability_005": 1242,
+          "normal_fp_rate": 0.01013748765202183,
+          "added_tp": 10,
+          "added_fp": 239,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 644,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 67,
+              "fp": 0,
+              "fn": 4,
+              "f1": 0.9710144927536232,
+              "precision": 1.0,
+              "recall": 0.9436619718309859
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1747,
+              "fp": 274,
+              "fn": 580,
+              "f1": 0.8035878564857406,
+              "precision": 0.8644235526966848,
+              "recall": 0.7507520412548345
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2227,
+              "fp": 978,
+              "fn": 723,
+              "f1": 0.7236393176279448,
+              "precision": 0.6948517940717629,
+              "recall": 0.7549152542372881
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 128850,
+          "tp": 4031,
+          "fp": 1016,
+          "fn": 1317,
+          "f1": 0.7755651755651756,
+          "precision": 0.798692292450961,
+          "recall": 0.7537397157816006,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6161078031964902,
+          "long_probability_mean": 0.5455321881264107,
+          "long_below_probability_005": 1242,
+          "normal_fp_rate": 0.008226587423685447,
+          "added_tp": 0,
+          "added_fp": 3,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 653,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1740,
+              "fp": 269,
+              "fn": 587,
+              "f1": 0.8025830258302583,
+              "precision": 0.8661025385764062,
+              "recall": 0.7477438762354963
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2227,
+              "fp": 747,
+              "fn": 723,
+              "f1": 0.7518568534773802,
+              "precision": 0.7488231338264963,
+              "recall": 0.7549152542372881
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 128850,
+          "tp": 4035,
+          "fp": 1020,
+          "fn": 1313,
+          "f1": 0.7757377679515525,
+          "precision": 0.798219584569733,
+          "recall": 0.7544876589379207,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6170479473519273,
+          "long_probability_mean": 0.5455822080399089,
+          "long_below_probability_005": 1402,
+          "normal_fp_rate": 0.008258975563148774,
+          "added_tp": 4,
+          "added_fp": 7,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 650,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1742,
+              "fp": 271,
+              "fn": 585,
+              "f1": 0.8027649769585253,
+              "precision": 0.8653750620963736,
+              "recall": 0.7486033519553073
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2229,
+              "fp": 749,
+              "fn": 721,
+              "f1": 0.7520242914979757,
+              "precision": 0.7484889187374076,
+              "recall": 0.755593220338983
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 128850,
+          "tp": 4031,
+          "fp": 1013,
+          "fn": 1317,
+          "f1": 0.7757890685142417,
+          "precision": 0.799167327517843,
+          "recall": 0.7537397157816006,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6161078031964902,
+          "long_probability_mean": 0.5455321881264107,
+          "long_below_probability_005": 1242,
+          "normal_fp_rate": 0.00820229631908795,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 653,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1740,
+              "fp": 269,
+              "fn": 587,
+              "f1": 0.8025830258302583,
+              "precision": 0.8661025385764062,
+              "recall": 0.7477438762354963
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2227,
+              "fp": 744,
+              "fn": 723,
+              "f1": 0.7522377976693126,
+              "precision": 0.7495792662403231,
+              "recall": 0.7549152542372881
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 128850,
+          "tp": 4035,
+          "fp": 1020,
+          "fn": 1313,
+          "f1": 0.7757377679515525,
+          "precision": 0.798219584569733,
+          "recall": 0.7544876589379207,
+          "long_positive_rows": 3191,
+          "long_recall": 0.6170479473519273,
+          "long_probability_mean": 0.5455822080399089,
+          "long_below_probability_005": 1402,
+          "normal_fp_rate": 0.008258975563148774,
+          "added_tp": 4,
+          "added_fp": 7,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 650,
+          "station": {
+            "G-ORS": {
+              "rows": 6416,
+              "tp": 64,
+              "fp": 0,
+              "fn": 7,
+              "f1": 0.9481481481481482,
+              "precision": 1.0,
+              "recall": 0.9014084507042254
+            },
+            "I-ORS": {
+              "rows": 37557,
+              "tp": 1742,
+              "fp": 271,
+              "fn": 585,
+              "f1": 0.8027649769585253,
+              "precision": 0.8653750620963736,
+              "recall": 0.7486033519553073
+            },
+            "S-ORS": {
+              "rows": 84877,
+              "tp": 2229,
+              "fp": 749,
+              "fn": 721,
+              "f1": 0.7520242914979757,
+              "precision": 0.7484889187374076,
+              "recall": 0.755593220338983
+            }
+          }
+        }
+      },
+      "intact_same_retained_rows": {
+        "original": {
+          "rows": 128850,
+          "tp": 4038,
+          "fp": 1022,
+          "fn": 1310,
+          "f1": 0.7759415833973866,
+          "precision": 0.7980237154150197,
+          "recall": 0.7550486163051608
+        },
+        "balanced": {
+          "rows": 128850,
+          "tp": 3883,
+          "fp": 877,
+          "fn": 1465,
+          "f1": 0.7683023347843293,
+          "precision": 0.8157563025210084,
+          "recall": 0.7260658189977561
+        },
+        "flank": {
+          "rows": 128850,
+          "tp": 3784,
+          "fp": 205,
+          "fn": 1564,
+          "f1": 0.8105387169326336,
+          "precision": 0.948608673853096,
+          "recall": 0.7075542258788332
+        },
+        "original_balanced_union": {
+          "rows": 128850,
+          "tp": 4049,
+          "fp": 1195,
+          "fn": 1299,
+          "f1": 0.7645392749244713,
+          "precision": 0.7721205186880244,
+          "recall": 0.7571054599850411
+        },
+        "balanced_union": {
+          "rows": 128850,
+          "tp": 4038,
+          "fp": 1031,
+          "fn": 1310,
+          "f1": 0.7752711913218777,
+          "precision": 0.7966068258039061,
+          "recall": 0.7550486163051608
+        },
+        "flank_union": {
+          "rows": 128850,
+          "tp": 4043,
+          "fp": 1064,
+          "fn": 1305,
+          "f1": 0.7734098517455763,
+          "precision": 0.7916585079302918,
+          "recall": 0.755983545250561
+        },
+        "selected_control": {
+          "rows": 128850,
+          "tp": 4038,
+          "fp": 1022,
+          "fn": 1310,
+          "f1": 0.7759415833973866,
+          "precision": 0.7980237154150197,
+          "recall": 0.7550486163051608
+        },
+        "selected_candidate": {
+          "rows": 128850,
+          "tp": 4043,
+          "fp": 1064,
+          "fn": 1305,
+          "f1": 0.7734098517455763,
+          "precision": 0.7916585079302918,
+          "recall": 0.755983545250561
+        }
+      }
+    },
+    {
+      "fold": "2025_q3",
+      "outer_rows": 176619,
+      "inner_rows": 80736,
+      "outer_start": "2025-07-01T00:00:00+09:00",
+      "outer_end": "2025-10-01T00:00:00+09:00",
+      "inner_start": "2025-04-11T00:00:00+09:00",
+      "inner_end": "2025-06-10T00:00:00+09:00",
+      "purge_days": 21,
+      "previously_exposed_development_replay": true,
+      "inner_train_rows": 347004,
+      "inner_train_max": "2025-03-20T14:50:00+00:00",
+      "outer_train_rows": 444081,
+      "outer_train_max": "2025-06-09T14:50:00+00:00",
+      "calibrations": {
+        "original": {
+          "threshold": 0.5,
+          "inner_f1": 0.839806427596476
+        },
+        "balanced": {
+          "threshold": 0.3,
+          "inner_f1": 0.826076076076076
+        },
+        "flank": {
+          "threshold": 0.1,
+          "inner_f1": 0.8769796021791461
+        },
+        "balanced_union": {
+          "threshold": 0.5,
+          "inner_f1": 0.845163663111438
+        },
+        "flank_union": {
+          "threshold": 0.15,
+          "inner_f1": 0.8573511543134873
+        }
+      },
+      "selected_control": "balanced_union",
+      "selected_candidate": "flank",
+      "intact": {
+        "original": {
+          "rows": 176619,
+          "tp": 4725,
+          "fp": 21,
+          "fn": 1553,
+          "f1": 0.8572206095791002,
+          "precision": 0.995575221238938,
+          "recall": 0.7526282255495381,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5044893378226711,
+          "long_probability_mean": 0.5100628694300388,
+          "long_below_probability_005": 704,
+          "normal_fp_rate": 0.0001232821223310888,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 208,
+          "removed_fp": 2,
+          "partial_event_missing_rows": 1288,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 585,
+              "fp": 0,
+              "fn": 410,
+              "f1": 0.740506329113924,
+              "precision": 1.0,
+              "recall": 0.5879396984924623
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1792,
+              "fp": 1,
+              "fn": 473,
+              "f1": 0.8831936914736324,
+              "precision": 0.9994422755158952,
+              "recall": 0.7911699779249448
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2348,
+              "fp": 20,
+              "fn": 670,
+              "f1": 0.8718900854066097,
+              "precision": 0.9915540540540541,
+              "recall": 0.777998674618953
+            }
+          }
+        },
+        "balanced": {
+          "rows": 176619,
+          "tp": 4915,
+          "fp": 44,
+          "fn": 1363,
+          "f1": 0.874788644656047,
+          "precision": 0.9911272433958459,
+          "recall": 0.7828926409684613,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5409652076318743,
+          "long_probability_mean": 0.5100628694300388,
+          "long_below_probability_005": 704,
+          "normal_fp_rate": 0.0002583053991699004,
+          "added_tp": 82,
+          "added_fp": 34,
+          "removed_tp": 100,
+          "removed_fp": 13,
+          "partial_event_missing_rows": 1099,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 603,
+              "fp": 0,
+              "fn": 392,
+              "f1": 0.7546933667083855,
+              "precision": 1.0,
+              "recall": 0.6060301507537689
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1846,
+              "fp": 33,
+              "fn": 419,
+              "f1": 0.890926640926641,
+              "precision": 0.9824374667376264,
+              "recall": 0.8150110375275939
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2466,
+              "fp": 11,
+              "fn": 552,
+              "f1": 0.8975432211101001,
+              "precision": 0.9955591441259588,
+              "recall": 0.8170974155069582
+            }
+          }
+        },
+        "flank": {
+          "rows": 176619,
+          "tp": 4998,
+          "fp": 526,
+          "fn": 1280,
+          "f1": 0.8469750889679716,
+          "precision": 0.9047791455467052,
+          "recall": 0.7961134119146225,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5864197530864198,
+          "long_probability_mean": 0.4916887472510444,
+          "long_below_probability_005": 674,
+          "normal_fp_rate": 0.003087923635531082,
+          "added_tp": 239,
+          "added_fp": 505,
+          "removed_tp": 174,
+          "removed_fp": 2,
+          "partial_event_missing_rows": 1273,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 628,
+              "fp": 0,
+              "fn": 367,
+              "f1": 0.773875539125077,
+              "precision": 1.0,
+              "recall": 0.6311557788944724
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1853,
+              "fp": 218,
+              "fn": 412,
+              "f1": 0.8547047970479705,
+              "precision": 0.8947368421052632,
+              "recall": 0.8181015452538631
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2517,
+              "fp": 308,
+              "fn": 501,
+              "f1": 0.8615437275372241,
+              "precision": 0.8909734513274337,
+              "recall": 0.8339960238568589
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 176619,
+          "tp": 5015,
+          "fp": 57,
+          "fn": 1263,
+          "f1": 0.8837004405286344,
+          "precision": 0.9887618296529969,
+          "recall": 0.7988212806626314,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5527497194163861,
+          "long_probability_mean": 0.5100628694300388,
+          "long_below_probability_005": 704,
+          "normal_fp_rate": 0.00033462290347009824,
+          "added_tp": 82,
+          "added_fp": 34,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 999,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 603,
+              "fp": 0,
+              "fn": 392,
+              "f1": 0.7546933667083855,
+              "precision": 1.0,
+              "recall": 0.6060301507537689
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1910,
+              "fp": 33,
+              "fn": 355,
+              "f1": 0.9077946768060836,
+              "precision": 0.9830159547092125,
+              "recall": 0.8432671081677704
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2502,
+              "fp": 24,
+              "fn": 516,
+              "f1": 0.9025974025974026,
+              "precision": 0.9904988123515439,
+              "recall": 0.8290258449304175
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 176619,
+          "tp": 4933,
+          "fp": 23,
+          "fn": 1345,
+          "f1": 0.878226811465195,
+          "precision": 0.9953591606133979,
+          "recall": 0.785759796113412,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5415263748597082,
+          "long_probability_mean": 0.5100628694300388,
+          "long_below_probability_005": 704,
+          "normal_fp_rate": 0.00013502327683881157,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1080,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 597,
+              "fp": 0,
+              "fn": 398,
+              "f1": 0.75,
+              "precision": 1.0,
+              "recall": 0.6
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1889,
+              "fp": 1,
+              "fn": 376,
+              "f1": 0.909265944645006,
+              "precision": 0.9994708994708995,
+              "recall": 0.8339955849889624
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2447,
+              "fp": 22,
+              "fn": 571,
+              "f1": 0.8919263714233643,
+              "precision": 0.9910895099230458,
+              "recall": 0.8108018555334658
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 176619,
+          "tp": 5040,
+          "fp": 362,
+          "fn": 1238,
+          "f1": 0.863013698630137,
+          "precision": 0.9329877823028508,
+          "recall": 0.8028034405861739,
+          "long_positive_rows": 1782,
+          "long_recall": 0.579685746352413,
+          "long_probability_mean": 0.4916887472510444,
+          "long_below_probability_005": 674,
+          "normal_fp_rate": 0.002125148965897817,
+          "added_tp": 201,
+          "added_fp": 340,
+          "removed_tp": 94,
+          "removed_fp": 1,
+          "partial_event_missing_rows": 1231,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 610,
+              "fp": 0,
+              "fn": 385,
+              "f1": 0.7601246105919003,
+              "precision": 1.0,
+              "recall": 0.6130653266331658
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1843,
+              "fp": 126,
+              "fn": 422,
+              "f1": 0.8705715635333019,
+              "precision": 0.93600812595226,
+              "recall": 0.8136865342163355
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2587,
+              "fp": 236,
+              "fn": 431,
+              "f1": 0.8858072247902756,
+              "precision": 0.916400991852639,
+              "recall": 0.8571901921802518
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 176619,
+          "tp": 4933,
+          "fp": 23,
+          "fn": 1345,
+          "f1": 0.878226811465195,
+          "precision": 0.9953591606133979,
+          "recall": 0.785759796113412,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5415263748597082,
+          "long_probability_mean": 0.5100628694300388,
+          "long_below_probability_005": 704,
+          "normal_fp_rate": 0.00013502327683881157,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1080,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 597,
+              "fp": 0,
+              "fn": 398,
+              "f1": 0.75,
+              "precision": 1.0,
+              "recall": 0.6
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1889,
+              "fp": 1,
+              "fn": 376,
+              "f1": 0.909265944645006,
+              "precision": 0.9994708994708995,
+              "recall": 0.8339955849889624
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2447,
+              "fp": 22,
+              "fn": 571,
+              "f1": 0.8919263714233643,
+              "precision": 0.9910895099230458,
+              "recall": 0.8108018555334658
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 176619,
+          "tp": 4998,
+          "fp": 526,
+          "fn": 1280,
+          "f1": 0.8469750889679716,
+          "precision": 0.9047791455467052,
+          "recall": 0.7961134119146225,
+          "long_positive_rows": 1782,
+          "long_recall": 0.5864197530864198,
+          "long_probability_mean": 0.4916887472510444,
+          "long_below_probability_005": 674,
+          "normal_fp_rate": 0.003087923635531082,
+          "added_tp": 239,
+          "added_fp": 505,
+          "removed_tp": 174,
+          "removed_fp": 2,
+          "partial_event_missing_rows": 1273,
+          "station": {
+            "G-ORS": {
+              "rows": 7714,
+              "tp": 628,
+              "fp": 0,
+              "fn": 367,
+              "f1": 0.773875539125077,
+              "precision": 1.0,
+              "recall": 0.6311557788944724
+            },
+            "I-ORS": {
+              "rows": 76129,
+              "tp": 1853,
+              "fp": 218,
+              "fn": 412,
+              "f1": 0.8547047970479705,
+              "precision": 0.8947368421052632,
+              "recall": 0.8181015452538631
+            },
+            "S-ORS": {
+              "rows": 92776,
+              "tp": 2517,
+              "fp": 308,
+              "fn": 501,
+              "f1": 0.8615437275372241,
+              "precision": 0.8909734513274337,
+              "recall": 0.8339960238568589
+            }
+          }
+        }
+      },
+      "fragmented": {
+        "original": {
+          "rows": 172127,
+          "tp": 4562,
+          "fp": 47,
+          "fn": 1571,
+          "f1": 0.8493762800223422,
+          "precision": 0.9898025602082882,
+          "recall": 0.7438447741725094,
+          "long_positive_rows": 1450,
+          "long_recall": 0.4986206896551724,
+          "long_probability_mean": 0.4717911277214663,
+          "long_below_probability_005": 639,
+          "normal_fp_rate": 0.00028314276419629626,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 170,
+          "removed_fp": 1,
+          "partial_event_missing_rows": 1224,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 575,
+              "fp": 0,
+              "fn": 404,
+              "f1": 0.7400257400257401,
+              "precision": 1.0,
+              "recall": 0.5873340143003064
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1824,
+              "fp": 1,
+              "fn": 440,
+              "f1": 0.8921496698459281,
+              "precision": 0.9994520547945206,
+              "recall": 0.8056537102473498
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2163,
+              "fp": 46,
+              "fn": 727,
+              "f1": 0.8484016473818395,
+              "precision": 0.9791760977818017,
+              "recall": 0.7484429065743945
+            }
+          }
+        },
+        "balanced": {
+          "rows": 172127,
+          "tp": 4629,
+          "fp": 24,
+          "fn": 1504,
+          "f1": 0.8583348785462637,
+          "precision": 0.9948420373952289,
+          "recall": 0.7547692809391815,
+          "long_positive_rows": 1450,
+          "long_recall": 0.4806896551724138,
+          "long_probability_mean": 0.4717911277214663,
+          "long_below_probability_005": 639,
+          "normal_fp_rate": 0.00014458353916406617,
+          "added_tp": 53,
+          "added_fp": 11,
+          "removed_tp": 156,
+          "removed_fp": 35,
+          "partial_event_missing_rows": 1241,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 588,
+              "fp": 0,
+              "fn": 391,
+              "f1": 0.7504786215698788,
+              "precision": 1.0,
+              "recall": 0.6006128702757916
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1839,
+              "fp": 4,
+              "fn": 425,
+              "f1": 0.8955441928414901,
+              "precision": 0.9978296256104178,
+              "recall": 0.8122791519434629
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2202,
+              "fp": 20,
+              "fn": 688,
+              "f1": 0.8615023474178404,
+              "precision": 0.990999099909991,
+              "recall": 0.7619377162629758
+            }
+          }
+        },
+        "flank": {
+          "rows": 172127,
+          "tp": 4527,
+          "fp": 276,
+          "fn": 1606,
+          "f1": 0.8279078273591807,
+          "precision": 0.9425359150530919,
+          "recall": 0.7381379422794717,
+          "long_positive_rows": 1450,
+          "long_recall": 0.516551724137931,
+          "long_probability_mean": 0.4420448622988513,
+          "long_below_probability_005": 610,
+          "normal_fp_rate": 0.001662710700386761,
+          "added_tp": 214,
+          "added_fp": 259,
+          "removed_tp": 419,
+          "removed_fp": 31,
+          "partial_event_missing_rows": 1600,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 615,
+              "fp": 0,
+              "fn": 364,
+              "f1": 0.7716436637390214,
+              "precision": 1.0,
+              "recall": 0.6281920326864147
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1638,
+              "fp": 80,
+              "fn": 626,
+              "f1": 0.8227021597187343,
+              "precision": 0.9534342258440046,
+              "recall": 0.7234982332155477
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2274,
+              "fp": 196,
+              "fn": 616,
+              "f1": 0.8485074626865672,
+              "precision": 0.9206477732793522,
+              "recall": 0.7868512110726643
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 172127,
+          "tp": 4785,
+          "fp": 59,
+          "fn": 1348,
+          "f1": 0.8718229024323586,
+          "precision": 0.9878199834847233,
+          "recall": 0.7802054459481493,
+          "long_positive_rows": 1450,
+          "long_recall": 0.5055172413793103,
+          "long_probability_mean": 0.4717911277214663,
+          "long_below_probability_005": 639,
+          "normal_fp_rate": 0.00035543453377832933,
+          "added_tp": 53,
+          "added_fp": 11,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1085,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 589,
+              "fp": 0,
+              "fn": 390,
+              "f1": 0.7512755102040817,
+              "precision": 1.0,
+              "recall": 0.6016343207354443
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1943,
+              "fp": 4,
+              "fn": 321,
+              "f1": 0.9228211826169556,
+              "precision": 0.9979455572675912,
+              "recall": 0.8582155477031802
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2253,
+              "fp": 55,
+              "fn": 637,
+              "f1": 0.8668718737976144,
+              "precision": 0.9761698440207972,
+              "recall": 0.7795847750865051
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 172127,
+          "tp": 4732,
+          "fp": 48,
+          "fn": 1401,
+          "f1": 0.8672225785760103,
+          "precision": 0.9899581589958159,
+          "recall": 0.7715636719386924,
+          "long_positive_rows": 1450,
+          "long_recall": 0.5027586206896552,
+          "long_probability_mean": 0.4717911277214663,
+          "long_below_probability_005": 639,
+          "normal_fp_rate": 0.00028916707832813234,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1137,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 585,
+              "fp": 0,
+              "fn": 394,
+              "f1": 0.7480818414322251,
+              "precision": 1.0,
+              "recall": 0.5975485188968335
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1921,
+              "fp": 1,
+              "fn": 343,
+              "f1": 0.917821309125657,
+              "precision": 0.9994797086368367,
+              "recall": 0.8484982332155477
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2226,
+              "fp": 47,
+              "fn": 664,
+              "f1": 0.862289366647298,
+              "precision": 0.9793224813022438,
+              "recall": 0.770242214532872
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 172127,
+          "tp": 4790,
+          "fp": 202,
+          "fn": 1343,
+          "f1": 0.861123595505618,
+          "precision": 0.9595352564102564,
+          "recall": 0.7810207076471547,
+          "long_positive_rows": 1450,
+          "long_recall": 0.5110344827586207,
+          "long_probability_mean": 0.4420448622988513,
+          "long_below_probability_005": 610,
+          "normal_fp_rate": 0.0012169114546308902,
+          "added_tp": 152,
+          "added_fp": 154,
+          "removed_tp": 94,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1079,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 597,
+              "fp": 0,
+              "fn": 382,
+              "f1": 0.7576142131979695,
+              "precision": 1.0,
+              "recall": 0.609805924412666
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1865,
+              "fp": 41,
+              "fn": 399,
+              "f1": 0.894484412470024,
+              "precision": 0.978488982161595,
+              "recall": 0.8237632508833922
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2328,
+              "fp": 161,
+              "fn": 562,
+              "f1": 0.8655883993307306,
+              "precision": 0.9353153877059059,
+              "recall": 0.8055363321799308
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 172127,
+          "tp": 4732,
+          "fp": 48,
+          "fn": 1401,
+          "f1": 0.8672225785760103,
+          "precision": 0.9899581589958159,
+          "recall": 0.7715636719386924,
+          "long_positive_rows": 1450,
+          "long_recall": 0.5027586206896552,
+          "long_probability_mean": 0.4717911277214663,
+          "long_below_probability_005": 639,
+          "normal_fp_rate": 0.00028916707832813234,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 1137,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 585,
+              "fp": 0,
+              "fn": 394,
+              "f1": 0.7480818414322251,
+              "precision": 1.0,
+              "recall": 0.5975485188968335
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1921,
+              "fp": 1,
+              "fn": 343,
+              "f1": 0.917821309125657,
+              "precision": 0.9994797086368367,
+              "recall": 0.8484982332155477
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2226,
+              "fp": 47,
+              "fn": 664,
+              "f1": 0.862289366647298,
+              "precision": 0.9793224813022438,
+              "recall": 0.770242214532872
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 172127,
+          "tp": 4527,
+          "fp": 276,
+          "fn": 1606,
+          "f1": 0.8279078273591807,
+          "precision": 0.9425359150530919,
+          "recall": 0.7381379422794717,
+          "long_positive_rows": 1450,
+          "long_recall": 0.516551724137931,
+          "long_probability_mean": 0.4420448622988513,
+          "long_below_probability_005": 610,
+          "normal_fp_rate": 0.001662710700386761,
+          "added_tp": 214,
+          "added_fp": 259,
+          "removed_tp": 419,
+          "removed_fp": 31,
+          "partial_event_missing_rows": 1600,
+          "station": {
+            "G-ORS": {
+              "rows": 7486,
+              "tp": 615,
+              "fp": 0,
+              "fn": 364,
+              "f1": 0.7716436637390214,
+              "precision": 1.0,
+              "recall": 0.6281920326864147
+            },
+            "I-ORS": {
+              "rows": 75146,
+              "tp": 1638,
+              "fp": 80,
+              "fn": 626,
+              "f1": 0.8227021597187343,
+              "precision": 0.9534342258440046,
+              "recall": 0.7234982332155477
+            },
+            "S-ORS": {
+              "rows": 89495,
+              "tp": 2274,
+              "fp": 196,
+              "fn": 616,
+              "f1": 0.8485074626865672,
+              "precision": 0.9206477732793522,
+              "recall": 0.7868512110726643
+            }
+          }
+        }
+      },
+      "intact_same_retained_rows": {
+        "original": {
+          "rows": 172127,
+          "tp": 4647,
+          "fp": 21,
+          "fn": 1486,
+          "f1": 0.8604758818627904,
+          "precision": 0.9955012853470437,
+          "recall": 0.7577042230556008
+        },
+        "balanced": {
+          "rows": 172127,
+          "tp": 4808,
+          "fp": 44,
+          "fn": 1325,
+          "f1": 0.8753755120619026,
+          "precision": 0.9909315746084089,
+          "recall": 0.7839556497635741
+        },
+        "flank": {
+          "rows": 172127,
+          "tp": 4886,
+          "fp": 524,
+          "fn": 1247,
+          "f1": 0.8465736810187993,
+          "precision": 0.9031423290203328,
+          "recall": 0.796673732268058
+        },
+        "original_balanced_union": {
+          "rows": 172127,
+          "tp": 4908,
+          "fp": 57,
+          "fn": 1225,
+          "f1": 0.884483690755091,
+          "precision": 0.9885196374622357,
+          "recall": 0.8002608837436818
+        },
+        "balanced_union": {
+          "rows": 172127,
+          "tp": 4834,
+          "fp": 23,
+          "fn": 1299,
+          "f1": 0.8797088262056415,
+          "precision": 0.9952645666049001,
+          "recall": 0.7881950105984021
+        },
+        "flank_union": {
+          "rows": 172127,
+          "tp": 4929,
+          "fp": 360,
+          "fn": 1204,
+          "f1": 0.8630712659779373,
+          "precision": 0.9319342030629608,
+          "recall": 0.8036849828795043
+        },
+        "selected_control": {
+          "rows": 172127,
+          "tp": 4834,
+          "fp": 23,
+          "fn": 1299,
+          "f1": 0.8797088262056415,
+          "precision": 0.9952645666049001,
+          "recall": 0.7881950105984021
+        },
+        "selected_candidate": {
+          "rows": 172127,
+          "tp": 4886,
+          "fp": 524,
+          "fn": 1247,
+          "f1": 0.8465736810187993,
+          "precision": 0.9031423290203328,
+          "recall": 0.796673732268058
+        }
+      }
+    },
+    {
+      "fold": "2025_q4",
+      "outer_rows": 111243,
+      "inner_rows": 123372,
+      "outer_start": "2025-10-01T00:00:00+09:00",
+      "outer_end": "2025-12-11T00:00:00+09:00",
+      "inner_start": "2025-07-12T00:00:00+09:00",
+      "inner_end": "2025-09-10T00:00:00+09:00",
+      "purge_days": 21,
+      "previously_exposed_development_replay": true,
+      "inner_train_rows": 467282,
+      "inner_train_max": "2025-06-20T14:50:00+00:00",
+      "outer_train_rows": 635297,
+      "outer_train_max": "2025-09-09T14:50:00+00:00",
+      "calibrations": {
+        "original": {
+          "threshold": 0.2,
+          "inner_f1": 0.891901795529498
+        },
+        "balanced": {
+          "threshold": 0.2,
+          "inner_f1": 0.8931250768663141
+        },
+        "flank": {
+          "threshold": 0.2,
+          "inner_f1": 0.8794604537093808
+        },
+        "balanced_union": {
+          "threshold": 0.3,
+          "inner_f1": 0.8946535135793448
+        },
+        "flank_union": {
+          "threshold": 0.4,
+          "inner_f1": 0.8949848942598188
+        }
+      },
+      "selected_control": "balanced_union",
+      "selected_candidate": "flank_union",
+      "intact": {
+        "original": {
+          "rows": 111243,
+          "tp": 3801,
+          "fp": 104,
+          "fn": 606,
+          "f1": 0.9145813282001924,
+          "precision": 0.9733674775928297,
+          "recall": 0.8624914908100749,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6881066403424273,
+          "long_below_probability_005": 418,
+          "normal_fp_rate": 0.000973454640757797,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 141,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1026,
+              "fp": 4,
+              "fn": 553,
+              "f1": 0.786508240705251,
+              "precision": 0.996116504854369,
+              "recall": 0.6497783407219759
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 100,
+              "fn": 53,
+              "f1": 0.97317201472909,
+              "precision": 0.9652173913043478,
+              "recall": 0.9812588401697313
+            }
+          }
+        },
+        "balanced": {
+          "rows": 111243,
+          "tp": 3748,
+          "fp": 83,
+          "fn": 659,
+          "f1": 0.9099295945617868,
+          "precision": 0.9783346384755939,
+          "recall": 0.8504651690492399,
+          "long_positive_rows": 1514,
+          "long_recall": 0.7159841479524438,
+          "long_probability_mean": 0.6881066403424273,
+          "long_below_probability_005": 418,
+          "normal_fp_rate": 0.0007768916844509341,
+          "added_tp": 17,
+          "added_fp": 6,
+          "removed_tp": 70,
+          "removed_fp": 27,
+          "partial_event_missing_rows": 198,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 989,
+              "fp": 1,
+              "fn": 590,
+              "f1": 0.7699493966523939,
+              "precision": 0.998989898989899,
+              "recall": 0.6263457884737176
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2759,
+              "fp": 82,
+              "fn": 69,
+              "f1": 0.9733639089786559,
+              "precision": 0.9711369236184442,
+              "recall": 0.9756011315417256
+            }
+          }
+        },
+        "flank": {
+          "rows": 111243,
+          "tp": 3523,
+          "fp": 183,
+          "fn": 884,
+          "f1": 0.8684826821151239,
+          "precision": 0.9506206152185644,
+          "recall": 0.799410029498525,
+          "long_positive_rows": 1514,
+          "long_recall": 0.6380449141347424,
+          "long_probability_mean": 0.6066598749513944,
+          "long_below_probability_005": 482,
+          "normal_fp_rate": 0.001712905762102662,
+          "added_tp": 24,
+          "added_fp": 165,
+          "removed_tp": 302,
+          "removed_fp": 86,
+          "partial_event_missing_rows": 423,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 913,
+              "fp": 0,
+              "fn": 666,
+              "f1": 0.7327447833065811,
+              "precision": 1.0,
+              "recall": 0.578214059531349
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2610,
+              "fp": 183,
+              "fn": 218,
+              "f1": 0.9286603807151752,
+              "precision": 0.9344790547798066,
+              "recall": 0.9229137199434229
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 111243,
+          "tp": 3818,
+          "fp": 110,
+          "fn": 589,
+          "f1": 0.9161367726454709,
+          "precision": 0.9719959266802444,
+          "recall": 0.8663489902427955,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6881066403424273,
+          "long_below_probability_005": 418,
+          "normal_fp_rate": 0.0010296154854169007,
+          "added_tp": 17,
+          "added_fp": 6,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 225,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1043,
+              "fp": 4,
+              "fn": 536,
+              "f1": 0.7943640517897944,
+              "precision": 0.9961795606494747,
+              "recall": 0.6605446485117162
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 106,
+              "fn": 53,
+              "f1": 0.9721492380451918,
+              "precision": 0.9632072197153766,
+              "recall": 0.9812588401697313
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 111243,
+          "tp": 3801,
+          "fp": 104,
+          "fn": 606,
+          "f1": 0.9145813282001924,
+          "precision": 0.9733674775928297,
+          "recall": 0.8624914908100749,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6881066403424273,
+          "long_below_probability_005": 418,
+          "normal_fp_rate": 0.000973454640757797,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 141,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1026,
+              "fp": 4,
+              "fn": 553,
+              "f1": 0.786508240705251,
+              "precision": 0.996116504854369,
+              "recall": 0.6497783407219759
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 100,
+              "fn": 53,
+              "f1": 0.97317201472909,
+              "precision": 0.9652173913043478,
+              "recall": 0.9812588401697313
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 111243,
+          "tp": 3801,
+          "fp": 168,
+          "fn": 606,
+          "f1": 0.9075931232091691,
+          "precision": 0.9576719576719577,
+          "recall": 0.8624914908100749,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6066598749513944,
+          "long_below_probability_005": 482,
+          "normal_fp_rate": 0.0015725036504549029,
+          "added_tp": 0,
+          "added_fp": 64,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 141,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1026,
+              "fp": 4,
+              "fn": 553,
+              "f1": 0.786508240705251,
+              "precision": 0.996116504854369,
+              "recall": 0.6497783407219759
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 164,
+              "fn": 53,
+              "f1": 0.9623721172186579,
+              "precision": 0.944198707043212,
+              "recall": 0.9812588401697313
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 111243,
+          "tp": 3801,
+          "fp": 104,
+          "fn": 606,
+          "f1": 0.9145813282001924,
+          "precision": 0.9733674775928297,
+          "recall": 0.8624914908100749,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6881066403424273,
+          "long_below_probability_005": 418,
+          "normal_fp_rate": 0.000973454640757797,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 141,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1026,
+              "fp": 4,
+              "fn": 553,
+              "f1": 0.786508240705251,
+              "precision": 0.996116504854369,
+              "recall": 0.6497783407219759
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 100,
+              "fn": 53,
+              "f1": 0.97317201472909,
+              "precision": 0.9652173913043478,
+              "recall": 0.9812588401697313
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 111243,
+          "tp": 3801,
+          "fp": 168,
+          "fn": 606,
+          "f1": 0.9075931232091691,
+          "precision": 0.9576719576719577,
+          "recall": 0.8624914908100749,
+          "long_positive_rows": 1514,
+          "long_recall": 0.725891677675033,
+          "long_probability_mean": 0.6066598749513944,
+          "long_below_probability_005": 482,
+          "normal_fp_rate": 0.0015725036504549029,
+          "added_tp": 0,
+          "added_fp": 64,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 141,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 50715,
+              "tp": 1026,
+              "fp": 4,
+              "fn": 553,
+              "f1": 0.786508240705251,
+              "precision": 0.996116504854369,
+              "recall": 0.6497783407219759
+            },
+            "S-ORS": {
+              "rows": 58669,
+              "tp": 2775,
+              "fp": 164,
+              "fn": 53,
+              "f1": 0.9623721172186579,
+              "precision": 0.944198707043212,
+              "recall": 0.9812588401697313
+            }
+          }
+        }
+      },
+      "fragmented": {
+        "original": {
+          "rows": 107812,
+          "tp": 3672,
+          "fp": 40,
+          "fn": 648,
+          "f1": 0.9143426294820717,
+          "precision": 0.9892241379310345,
+          "recall": 0.85,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.8324902978877847,
+          "long_below_probability_005": 91,
+          "normal_fp_rate": 0.00038650330460325436,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 189,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1016,
+              "fp": 4,
+              "fn": 557,
+              "f1": 0.7836482838411107,
+              "precision": 0.996078431372549,
+              "recall": 0.645899554990464
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 36,
+              "fn": 91,
+              "f1": 0.9766501195072623,
+              "precision": 0.986627043090639,
+              "recall": 0.9668729523116126
+            }
+          }
+        },
+        "balanced": {
+          "rows": 107812,
+          "tp": 3594,
+          "fp": 22,
+          "fn": 726,
+          "f1": 0.9057459677419355,
+          "precision": 0.9939159292035398,
+          "recall": 0.8319444444444445,
+          "long_positive_rows": 1114,
+          "long_recall": 0.8716337522441652,
+          "long_probability_mean": 0.8324902978877847,
+          "long_below_probability_005": 91,
+          "normal_fp_rate": 0.0002125768175317899,
+          "added_tp": 19,
+          "added_fp": 1,
+          "removed_tp": 97,
+          "removed_fp": 19,
+          "partial_event_missing_rows": 271,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 992,
+              "fp": 1,
+              "fn": 581,
+              "f1": 0.7731878409976617,
+              "precision": 0.998992950654582,
+              "recall": 0.6306420851875397
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2602,
+              "fp": 21,
+              "fn": 145,
+              "f1": 0.9690875232774674,
+              "precision": 0.9919939001143728,
+              "recall": 0.947215143793229
+            }
+          }
+        },
+        "flank": {
+          "rows": 107812,
+          "tp": 3419,
+          "fp": 176,
+          "fn": 901,
+          "f1": 0.8639292482627922,
+          "precision": 0.9510431154381085,
+          "recall": 0.7914351851851852,
+          "long_positive_rows": 1114,
+          "long_recall": 0.796229802513465,
+          "long_probability_mean": 0.6539865467769153,
+          "long_below_probability_005": 172,
+          "normal_fp_rate": 0.0017006145402543192,
+          "added_tp": 26,
+          "added_fp": 160,
+          "removed_tp": 279,
+          "removed_fp": 24,
+          "partial_event_missing_rows": 446,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 903,
+              "fp": 0,
+              "fn": 670,
+              "f1": 0.7294022617124394,
+              "precision": 1.0,
+              "recall": 0.5740623013350286
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2516,
+              "fp": 176,
+              "fn": 231,
+              "f1": 0.9251700680272109,
+              "precision": 0.9346210995542348,
+              "recall": 0.9159082635602476
+            }
+          }
+        },
+        "original_balanced_union": {
+          "rows": 107812,
+          "tp": 3691,
+          "fp": 41,
+          "fn": 629,
+          "f1": 0.9167908594138102,
+          "precision": 0.9890139335476956,
+          "recall": 0.8543981481481482,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.8324902978877847,
+          "long_below_probability_005": 91,
+          "normal_fp_rate": 0.0003961658872183357,
+          "added_tp": 19,
+          "added_fp": 1,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 271,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1035,
+              "fp": 4,
+              "fn": 538,
+              "f1": 0.7924961715160797,
+              "precision": 0.9961501443695862,
+              "recall": 0.6579783852511125
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 37,
+              "fn": 91,
+              "f1": 0.9764705882352941,
+              "precision": 0.9862606758262161,
+              "recall": 0.9668729523116126
+            }
+          }
+        },
+        "balanced_union": {
+          "rows": 107812,
+          "tp": 3672,
+          "fp": 40,
+          "fn": 648,
+          "f1": 0.9143426294820717,
+          "precision": 0.9892241379310345,
+          "recall": 0.85,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.8324902978877847,
+          "long_below_probability_005": 91,
+          "normal_fp_rate": 0.00038650330460325436,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 189,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1016,
+              "fp": 4,
+              "fn": 557,
+              "f1": 0.7836482838411107,
+              "precision": 0.996078431372549,
+              "recall": 0.645899554990464
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 36,
+              "fn": 91,
+              "f1": 0.9766501195072623,
+              "precision": 0.986627043090639,
+              "recall": 0.9668729523116126
+            }
+          }
+        },
+        "flank_union": {
+          "rows": 107812,
+          "tp": 3672,
+          "fp": 104,
+          "fn": 648,
+          "f1": 0.9071146245059288,
+          "precision": 0.972457627118644,
+          "recall": 0.85,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.6539865467769153,
+          "long_below_probability_005": 172,
+          "normal_fp_rate": 0.0010049085919684613,
+          "added_tp": 0,
+          "added_fp": 64,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 189,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1016,
+              "fp": 4,
+              "fn": 557,
+              "f1": 0.7836482838411107,
+              "precision": 0.996078431372549,
+              "recall": 0.645899554990464
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 100,
+              "fn": 91,
+              "f1": 0.9652916590950391,
+              "precision": 0.9637155297532656,
+              "recall": 0.9668729523116126
+            }
+          }
+        },
+        "selected_control": {
+          "rows": 107812,
+          "tp": 3672,
+          "fp": 40,
+          "fn": 648,
+          "f1": 0.9143426294820717,
+          "precision": 0.9892241379310345,
+          "recall": 0.85,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.8324902978877847,
+          "long_below_probability_005": 91,
+          "normal_fp_rate": 0.00038650330460325436,
+          "added_tp": 0,
+          "added_fp": 0,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 189,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1016,
+              "fp": 4,
+              "fn": 557,
+              "f1": 0.7836482838411107,
+              "precision": 0.996078431372549,
+              "recall": 0.645899554990464
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 36,
+              "fn": 91,
+              "f1": 0.9766501195072623,
+              "precision": 0.986627043090639,
+              "recall": 0.9668729523116126
+            }
+          }
+        },
+        "selected_candidate": {
+          "rows": 107812,
+          "tp": 3672,
+          "fp": 104,
+          "fn": 648,
+          "f1": 0.9071146245059288,
+          "precision": 0.972457627118644,
+          "recall": 0.85,
+          "long_positive_rows": 1114,
+          "long_recall": 0.9192100538599641,
+          "long_probability_mean": 0.6539865467769153,
+          "long_below_probability_005": 172,
+          "normal_fp_rate": 0.0010049085919684613,
+          "added_tp": 0,
+          "added_fp": 64,
+          "removed_tp": 0,
+          "removed_fp": 0,
+          "partial_event_missing_rows": 189,
+          "station": {
+            "G-ORS": {
+              "rows": 1859,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "I-ORS": {
+              "rows": 49191,
+              "tp": 1016,
+              "fp": 4,
+              "fn": 557,
+              "f1": 0.7836482838411107,
+              "precision": 0.996078431372549,
+              "recall": 0.645899554990464
+            },
+            "S-ORS": {
+              "rows": 56762,
+              "tp": 2656,
+              "fp": 100,
+              "fn": 91,
+              "f1": 0.9652916590950391,
+              "precision": 0.9637155297532656,
+              "recall": 0.9668729523116126
+            }
+          }
+        }
+      },
+      "intact_same_retained_rows": {
+        "original": {
+          "rows": 107812,
+          "tp": 3720,
+          "fp": 43,
+          "fn": 600,
+          "f1": 0.9204503278485711,
+          "precision": 0.9885729471166622,
+          "recall": 0.8611111111111112
+        },
+        "balanced": {
+          "rows": 107812,
+          "tp": 3667,
+          "fp": 27,
+          "fn": 653,
+          "f1": 0.9151484901422511,
+          "precision": 0.9926908500270709,
+          "recall": 0.8488425925925925
+        },
+        "flank": {
+          "rows": 107812,
+          "tp": 3471,
+          "fp": 183,
+          "fn": 849,
+          "f1": 0.8705793829947329,
+          "precision": 0.9499178981937603,
+          "recall": 0.8034722222222223
+        },
+        "original_balanced_union": {
+          "rows": 107812,
+          "tp": 3737,
+          "fp": 49,
+          "fn": 583,
+          "f1": 0.922033061929435,
+          "precision": 0.9870575805599577,
+          "recall": 0.8650462962962963
+        },
+        "balanced_union": {
+          "rows": 107812,
+          "tp": 3720,
+          "fp": 43,
+          "fn": 600,
+          "f1": 0.9204503278485711,
+          "precision": 0.9885729471166622,
+          "recall": 0.8611111111111112
+        },
+        "flank_union": {
+          "rows": 107812,
+          "tp": 3720,
+          "fp": 107,
+          "fn": 600,
+          "f1": 0.913219590033141,
+          "precision": 0.9720407629997387,
+          "recall": 0.8611111111111112
+        },
+        "selected_control": {
+          "rows": 107812,
+          "tp": 3720,
+          "fp": 43,
+          "fn": 600,
+          "f1": 0.9204503278485711,
+          "precision": 0.9885729471166622,
+          "recall": 0.8611111111111112
+        },
+        "selected_candidate": {
+          "rows": 107812,
+          "tp": 3720,
+          "fp": 107,
+          "fn": 600,
+          "f1": 0.913219590033141,
+          "precision": 0.9720407629997387,
+          "recall": 0.8611111111111112
+        }
+      }
+    }
+  ],
+  "recipe_hashes": {
+    "configs/p1.toml": "d04c8a5759645f11bcf0d987fff44829e47f4092f310a48704ef644ac6bc3e80",
+    "configs/p1_meaningful_learning_curve_generation_v1.json": "45ed39e3cf2d84c254828b217d46166c2a511d4c7e7f9111d02896352c4d45f7"
+  },
+  "stage": "TERMINAL",
+  "runtime_seconds": 763.4219999999914,
+  "pooled": {
+    "intact": {
+      "original": {
+        "rows": 421032,
+        "tp": 12586,
+        "fp": 1211,
+        "fn": 3469,
+        "f1": 0.8432265844834517,
+        "precision": 0.9122272957889396,
+        "recall": 0.7839302398006851
+      },
+      "balanced": {
+        "rows": 421032,
+        "tp": 12568,
+        "fp": 1067,
+        "fn": 3487,
+        "f1": 0.8466150218928933,
+        "precision": 0.9217455078841218,
+        "recall": 0.7828090937402679
+      },
+      "flank": {
+        "rows": 421032,
+        "tp": 12327,
+        "fp": 937,
+        "fn": 3728,
+        "f1": 0.8408881612606159,
+        "precision": 0.9293576598311218,
+        "recall": 0.7677981937091248
+      },
+      "original_balanced_union": {
+        "rows": 421032,
+        "tp": 12904,
+        "fp": 1438,
+        "fn": 3151,
+        "f1": 0.8490311543902359,
+        "precision": 0.8997350439269279,
+        "recall": 0.8037371535347244
+      },
+      "balanced_union": {
+        "rows": 421032,
+        "tp": 12794,
+        "fp": 1222,
+        "fn": 3261,
+        "f1": 0.8509194905390576,
+        "precision": 0.9128139269406392,
+        "recall": 0.7968857053877296
+      },
+      "flank_union": {
+        "rows": 421032,
+        "tp": 12906,
+        "fp": 1658,
+        "fn": 3149,
+        "f1": 0.8430059766811457,
+        "precision": 0.8861576489975281,
+        "recall": 0.8038617253192152
+      },
+      "selected_control": {
+        "rows": 421032,
+        "tp": 12794,
+        "fp": 1213,
+        "fn": 3261,
+        "f1": 0.8511742399041979,
+        "precision": 0.913400442635825,
+        "recall": 0.7968857053877296
+      },
+      "selected_candidate": {
+        "rows": 421032,
+        "tp": 12864,
+        "fp": 1822,
+        "fn": 3191,
+        "f1": 0.8369278813311213,
+        "precision": 0.875936265831404,
+        "recall": 0.8012457178449082
+      }
+    },
+    "fragmented": {
+      "original": {
+        "rows": 408789,
+        "tp": 12265,
+        "fp": 1100,
+        "fn": 3536,
+        "f1": 0.8410477953781801,
+        "precision": 0.9176954732510288,
+        "recall": 0.7762166951458769
+      },
+      "balanced": {
+        "rows": 408789,
+        "tp": 12097,
+        "fp": 969,
+        "fn": 3704,
+        "f1": 0.8381196521980115,
+        "precision": 0.9258380529618858,
+        "recall": 0.765584456679957
+      },
+      "flank": {
+        "rows": 408789,
+        "tp": 11519,
+        "fp": 581,
+        "fn": 4282,
+        "f1": 0.8257051718576395,
+        "precision": 0.9519834710743802,
+        "recall": 0.7290044933864945
+      },
+      "original_balanced_union": {
+        "rows": 408789,
+        "tp": 12517,
+        "fp": 1352,
+        "fn": 3284,
+        "f1": 0.8437478934951129,
+        "precision": 0.9025164034897973,
+        "recall": 0.7921650528447567
+      },
+      "balanced_union": {
+        "rows": 408789,
+        "tp": 12435,
+        "fp": 1104,
+        "fn": 3366,
+        "f1": 0.8476482617586912,
+        "precision": 0.9184577886106803,
+        "recall": 0.7869755078792482
+      },
+      "flank_union": {
+        "rows": 408789,
+        "tp": 12497,
+        "fp": 1326,
+        "fn": 3304,
+        "f1": 0.8437078044828518,
+        "precision": 0.9040729219416914,
+        "recall": 0.7908993101702424
+      },
+      "selected_control": {
+        "rows": 408789,
+        "tp": 12435,
+        "fp": 1101,
+        "fn": 3366,
+        "f1": 0.8477349422231312,
+        "precision": 0.9186613475177305,
+        "recall": 0.7869755078792482
+      },
+      "selected_candidate": {
+        "rows": 408789,
+        "tp": 12234,
+        "fp": 1400,
+        "fn": 3567,
+        "f1": 0.8312553083064379,
+        "precision": 0.8973155346926801,
+        "recall": 0.7742547940003798
+      }
+    }
+  },
+  "delta_f1": -0.014246358573076656,
+  "conditional_public_points_if_transferred": -0.37895313804383907,
+  "status": "SCREEN_NO_GO_RETAIN_CONTROL",
+  "official_score": "UNMEASURED; current official 28.909341 is not this retrained control"
+}

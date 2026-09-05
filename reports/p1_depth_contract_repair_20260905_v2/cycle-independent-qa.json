@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "checks": {
+    "A_exact_16fits": true,
+    "A_reused_control_12": true,
+    "A_fresh_process_replay": true,
+    "A_result_hash": true,
+    "A_code_config_hash": true,
+    "A_all_model_hashes": true,
+    "B_not_combined_wrong_split": true,
+    "C_A_hash": true,
+    "C_B_hash": true,
+    "C_code_hash": true,
+    "C_decoder_hash": true,
+    "C_only_fixed_policy": true,
+    "C_oof_hash": true,
+    "C_full_transition_hash": true,
+    "official_hidden_csv_upload_zero": true,
+    "same_exact_421032_keys": true,
+    "same_truth_and_OFF": true,
+    "control_metrics": true,
+    "control_change_counts": true,
+    "candidate_metrics": true,
+    "candidate_change_counts": true,
+    "candidate_decoder_on_metrics": true,
+    "candidate_decoder_on_change_counts": true,
+    "selection_rule_recalculated": true
+  },
+  "check_count": 24,
+  "passed": 24,
+  "independent_metrics": {
+    "control": {
+      "f1": 0.8511742399041979,
+      "tp": 12794,
+      "fp": 1213,
+      "fn": 3261
+    },
+    "candidate": {
+      "f1": 0.8489614440241555,
+      "tp": 12793,
+      "fp": 1290,
+      "fn": 3262
+    },
+    "candidate_decoder_on": {
+      "f1": 0.8498715853373804,
+      "tp": 12740,
+      "fp": 1186,
+      "fn": 3315
+    }
+  },
+  "chosen_development_policy": "control",
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_written": 0,
+  "upload": 0,
+  "qa_scope": "independent sklearn/confusion and change-count arithmetic, exact keys, artifact hashes; A verifier separately reruns saved models in a fresh process",
+  "not_claimed": "repeated training determinism, fresh holdout significance or official score uplift",
+  "source_hashes": {
+    "result.json": "e1c9051222dbd5cc0a391c699ee3f1ab5bb73d628c17aed139bf28b76b9accd7",
+    "independent-qa.json": "6ee5c67ebd7d02e357073e0729411f916b912cc059ef1969c651aec7032d9626",
+    "provenance-audit.json": "32a11c758f76f1e079da573d83f801adb6e4f031fb7b16da391db26f6091db33",
+    "decoder-result.json": "ef2c1ed0f2d9251bee208f2317f713ab8016beba53aab48c9c79a26e52bdc5bd"
+  }
+}

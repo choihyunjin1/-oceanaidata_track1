@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "keys_unique": true,
+  "rows": 421032,
+  "metrics": {
+    "control": {
+      "f1": 0.8511742399041979,
+      "tp": 12794,
+      "fp": 1213,
+      "fn": 3261
+    },
+    "candidate": {
+      "f1": 0.8489614440241555,
+      "tp": 12793,
+      "fp": 1290,
+      "fn": 3262
+    },
+    "candidate_fixed_control_threshold": {
+      "f1": 0.8500613009046025,
+      "tp": 12827,
+      "fp": 1297,
+      "fn": 3228
+    }
+  },
+  "replay": [
+    {
+      "fold": "2025_q2",
+      "model": "original",
+      "max_abs_diff": 0.0
+    },
+    {
+      "fold": "2025_q2",
+      "model": "balanced",
+      "max_abs_diff": 0.0
+    },
+    {
+      "fold": "2025_q3",
+      "model": "original",
+      "max_abs_diff": 0.0
+    },
+    {
+      "fold": "2025_q3",
+      "model": "balanced",
+      "max_abs_diff": 0.0
+    },
+    {
+      "fold": "2025_q4",
+      "model": "original",
+      "max_abs_diff": 0.0
+    },
+    {
+      "fold": "2025_q4",
+      "model": "balanced",
+      "max_abs_diff": 0.0
+    }
+  ],
+  "all_16_model_hashes_match": true,
+  "full_model_probe": [
+    {
+      "model": "original",
+      "probe_rows": 4096,
+      "finite": true
+    },
+    {
+      "model": "balanced",
+      "probe_rows": 4096,
+      "finite": true
+    }
+  ],
+  "result_sha256": "e1c9051222dbd5cc0a391c699ee3f1ab5bb73d628c17aed139bf28b76b9accd7",
+  "oof_sha256": "9b85f5ec4e9792bcecced2c8cbfc055a51ca572157d219412e883c6e7f365b01",
+  "screen_fits": 12,
+  "final_inner_fits": 2,
+  "full_fits": 2,
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_written": 0,
+  "upload": 0,
+  "verify_seconds": 21.594000000011874,
+  "scope": "independent sklearn/confusion arithmetic and saved-model fresh-process replay; not retraining"
+}

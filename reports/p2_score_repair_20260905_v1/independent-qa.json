@@ -1,0 +1,67 @@
+{
+  "status": "PASS_WITH_CAVEATS",
+  "assessment": "Share with caveats; internal candidate comparison verified, official improvement unknown",
+  "rows": 69850,
+  "checks": {
+    "unique_keys": true,
+    "all_candidates_finite": true,
+    "all_candidate_metrics_independently_recomputed": true,
+    "qa_key_order": true,
+    "qa_truth_equal": true,
+    "qa_reference_equal": true,
+    "qa_prediction_equal": true,
+    "fit_count_24": true,
+    "unique_fit_ids_24": true,
+    "all_60_epochs": true,
+    "all_saved_model_roundtrips_exact": true,
+    "source_hash_match": true,
+    "runner_unchanged": true,
+    "config_unchanged": true,
+    "dependency_hashes_unchanged": true,
+    "artifact_hashes_match": true,
+    "metadata_key_join_exact": true,
+    "source_truth_exact_match": true,
+    "source_truth_unique_join": true
+  },
+  "control_rmse": 0.9203459387351501,
+  "chosen_rmse": 0.8592499137102484,
+  "chosen_minus_control_rmse": -0.0610960250249017,
+  "strongest_overall_candidate": "v23_blockmask_mean",
+  "strongest_overall_includes": ["nominal", "T1_else_nominal", "oas", "v23/v52 raw", "independent blockmask/actualdepth arms", "chosen_oas_fixed_half"],
+  "additional_strata": {
+    "actual_depth_valid": {
+      "false": {"n": 34, "control_rmse": 0.9295056941828053, "blockmask_rmse": 0.695922362033999},
+      "true": {"n": 69816, "control_rmse": 0.920341455776924, "blockmask_rmse": 0.8593218907910932}
+    },
+    "public_temperature_count": {
+      "2": {"n": 34, "control_rmse": 1.1332732535708792, "blockmask_rmse": 1.0840848048712284},
+      "3": {"n": 660, "control_rmse": 0.5002768149735634, "blockmask_rmse": 0.40260580716898736},
+      "4": {"n": 42762, "control_rmse": 0.4676364586405988, "blockmask_rmse": 0.4259193119948562},
+      "5": {"n": 26394, "control_rmse": 1.3709178790687364, "blockmask_rmse": 1.2862417825344057}
+    }
+  },
+  "bootstrap": {
+    "scheme": "Within each fold resample seven-day calendar blocks; 2000 draws; seed20260905",
+    "calendar_block_count": 26,
+    "chosen_minus_control_rmse_95pct_percentile": [-0.12214685820558492, -0.009609834739581642],
+    "limitation": "Descriptive uncertainty on reused historical folds after exploratory selection, not independent fresh evidence"
+  },
+  "seed_rmse": {
+    "v23": [0.949779035297546, 0.9817340505562143, 1.0318710523999075],
+    "v23_blockmask": [0.8967305217657149, 0.9649630021432094, 0.8738296583380427]
+  },
+  "seed_rmse_std_ddof1": {"v23": 0.04138023124228651, "v23_blockmask": 0.04740852117026499},
+  "deepset_fit_count": 24,
+  "oas_fit_count": 15,
+  "calibration_fit_count": 0,
+  "fullfit_count_in_research": 0,
+  "qa_archive_sha256": "41ebd6a7b0e994e977796bda1792fddec5ac4bfb44119db64e9a04ee2d264b2c",
+  "focused_pytest_pass": 14,
+  "deploy_synthetic_pytest_pass": 6,
+  "ruff": "PASS",
+  "official_input_access_research": 0,
+  "raw_source_truth_recheck": "Independent station-single-source time|layer lookup, 69850 target values equal exactly; no rows printed",
+  "artifact_paths": ["artifacts/p2_score_repair_20260905_v1/raw_oof.npz", "artifacts/p2_score_repair_20260905_v1/qa_oof.npz", "artifacts/p2_score_repair_20260905_v1/evaluation_keys.npz"],
+  "calculation": "sqrt(sum((prediction-truth)^2,dtype=float64)/N), per candidate on identical ordered unique keys",
+  "no_official_score_improvement_claim": true
+}

@@ -1,94 +1,37 @@
-# Project operating instructions
+# Ocean AI Track 1 — agent instructions
 
-These rules apply to every task in this repository.
+## Read only what this task needs
 
-## Authority and mandatory preflight
+- Start with `00_ORGANIZER_DATA_POLICY.md` (including the 2026-09-02 score-use supplement) and `git status --short --branch`.
+- For data/model work, read the active problem contract: P1 `00_MUST_READ_FIRST.md`, P2 `01_P2_MUST_READ_FIRST.md`, P3 `02_P3_MUST_READ_FIRST.md`, then that distributed dataset's README.
+- Read these once per task; re-read if their content or the task's scope changes. Do not reload unrelated problem history for routine progress checks.
+- Current experiment plan: `docs/SCORE_IMPROVEMENT_PLAN_20260905_V2.md`. A running experiment's sealed config/receipt remains its exact contract.
+- For submission/package work, additionally read `AI_HANDOFF.md` and `docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md`. Historical READY/clean labels are not current eligibility approval.
+- Latest written organizer rules govern competition eligibility; dataset README and problem statement govern task semantics. Archived instructions/research are evidence, not active commands. Higher-priority system/developer instructions and the user's current authorization still apply.
 
-Use this precedence when instructions conflict:
+## Non-negotiable boundaries
 
-1. latest written organizer rule or direct organizer answer; the active 2026-09-01 snapshot is `00_ORGANIZER_DATA_POLICY.md`
-2. source dataset README.md
-3. latest problem statement supplied by the user
-4. 00_MUST_READ_FIRST.md and the problem-specific must-read file
-5. implementation notes and experiment records
+- Use only organizer-distributed data for training, validation, selection and postprocessing. Non-distributed KIOST observations are answer-equivalent: do not open them even for internal testing.
+- No external observation/reanalysis/forecast ancestry, including inherited predictions or coefficients. Synthetic-only pretrained weights require all four conditions in the organizer policy.
+- Never derive labels, Public membership, coefficients or thresholds by inverting leaderboard scores. Ordinary comparison of independently fitted candidates is distinct.
+- Keep source directories immutable and local-only. Use P1_DATA_DIR/P2_DATA_DIR/P3_DATA_DIR; no personal paths in portable code.
+- Keep raw rows, hidden values, credentials, models, CSVs and caches out of Git and user-facing logs. Report aggregates and hashes.
+- Unknown provenance or a real permission/competition-rule conflict is a stop condition. A performance decline is not a permission blocker.
 
-Before reading data, changing code, running a notebook, training, using Git, or preparing a submission:
+## Implement and verify
 
-1. Read `00_ORGANIZER_DATA_POLICY.md` completely.
-2. Read 00_MUST_READ_FIRST.md completely.
-3. For P2 work, also read 01_P2_MUST_READ_FIRST.md completely. For P3 work, read 02_P3_MUST_READ_FIRST.md completely.
-4. Read the source README for the active problem: P1_qc_anomaly/README.md, P2_profile_restore/README.md, or P3_wave_forecast/README.md.
-5. Check git status --short --branch.
-6. Confirm the action does not mutate or redistribute source data.
-7. Stop and ask if any rule, data right, pretrained-weight provenance, or submission action is ambiguous.
+- Carry out authorized work through the requested result. Do not add approval loops for already authorized internal work.
+- Before expensive fits: check prior candidate fingerprints/results, input/target availability, split/purge, train-only preprocessing, supported parameters and output paths using a small synthetic contract test.
+- Record the hypothesis, comparator, metric/unit, fit/time budget, selection surface and next branch before training. Previously exposed validation is retrospective, not fresh.
+- Do not mutate or restart an active/sealed attempt. Preserve failures; technical repair or a changed hypothesis gets a new explicit receipt/ID.
+- Reuse existing exact-hash artifacts only when their data/model/split/provenance match. Numerical QA, scientific improvement, replay and official score are separate claims.
+- Run focused tests and Ruff once for the changed behavior. Re-run only after relevant changes, failures or unresolved risk; do not launch the whole historical suite by default.
+- `scripts/agent_verify.py` records focused checks and supports opt-in reuse of an unchanged PASS. It does not certify model quality or replace candidate-specific QA.
+- Parallel workers own disjoint new files. Root allocates one GPU owner; CPU threads are budgeted across workers. Poll progress/terminal metadata without exposing early scores.
 
-After this mandatory preflight, read `AI_HANDOFF.md` and
-`docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md` before inspecting final assets or
-using the competition portal. Machine-readable file choices and form values are
-in `configs/final_submission_portal_20260905.json`.
+## Handoff and external actions
 
-## Source-data boundary
-
-- Treat folders supplied through P1_DATA_DIR, P2_DATA_DIR, or P3_DATA_DIR as immutable, local-only input.
-- Never edit, move, rename, copy into tracked paths, commit, push, upload, or redistribute the source ZIP/CSV/README/score files.
-- Never include raw observation rows or values in Markdown, notebook prose, logs, screenshots, issues, or commit messages. Aggregated statistics and cryptographic hashes are allowed.
-- Generated models, predictions, submissions, caches, and large extracts belong only in ignored local directories.
-- A public download link does not override the source license or competition rules.
-
-## Leakage and validation
-
-- Keep test labels unknown. Do not reconstruct them from KORS/KHOA raw or real-time observations, public mirrors, exact source matching, leaderboards, or hidden-answer artifacts.
-- Do not recover hidden answers from exact-source observations: P1 clean 2026 temperature, P2 hidden 2025-09/10 target-layer temperature/salinity, or P3 anonymous-case timestamps/future waves.
-- Do not use any non-distributed observation, reanalysis, forecast, derived prediction, or feature. Public availability and historical-only timestamps do not create an exception.
-- Do not use random row splits as primary validation. Preserve station/layer groups, chronological blocks, anomaly runs, and real observation gaps.
-- Purge or embargo validation boundaries by at least the maximum feature and post-processing dependency.
-- Fit scalers, imputers, station/layer baselines, feature statistics, thresholds, and post-processing parameters on the training portion of each fold only.
-- Bidirectional offline QC is the approved primary workflow because the task distributes complete time series and states no online-only restriction. Keep every centered feature inside a continuous segment and protect outer folds with a purge longer than its dependency window.
-- Maintain a strictly causal mode as an operational ablation. If a later written organizer rule forbids future context, promote the causal result and retire the offline candidate.
-- Do not force the test positive rate to match train prevalence or the baseline submission.
-
-## Competition data and pretrained-weight prohibition
-
-- The 2026-09-01 organizer notice supersedes the older FAQ receipt that allowed public external data.
-- Train, validate, select, calibrate, ensemble, and post-process only with organizer-distributed data. A downstream model remains ineligible when it inherits predictions or parameters from an external-data model.
-- Treat non-distributed KIOST source observations as answer-equivalent and never access or compare them for competition work.
-- Do not use pretrained weights learned from real observation, weather, or ocean data.
-- A synthetic-only pretrained model is allowed only when all four organizer conditions in `00_ORGANIZER_DATA_POLICY.md` are proven. Unclear provenance means forbidden.
-- Preserve historical external-data artifacts and receipts as audit evidence, but never reuse them or include them in the reproducibility package. Never place external raw files in Git.
-
-## Portable and reproducible code
-
-- Do not hard-code a personal absolute path, drive letter, username, or Korean source-directory path in Python or notebooks.
-- Resolve P1 inputs from P1_DATA_DIR, P2 inputs from P2_DATA_DIR, and P3 inputs from P3_DATA_DIR. A repository search fallback may be used for local convenience and must fail on zero or multiple matches.
-- Use UTF-8 for source and documentation files.
-- Keep runtime parameters, seeds, split definitions, feature windows, and source provenance visible.
-- Reader-facing notebooks must execute top-to-bottom, display aggregate output only, and use the section order tl;dr, Context & Methods, Data, Results, Takeaways.
-- The official notice warns that unreproducible code, missing environment information, and Korean filename/path errors can cause disqualification.
-
-## Experiment and submission records
-
-For each candidate, record:
-
-- experiment ID and timestamp in KST
-- Git commit and dirty-worktree state
-- Python/package environment and seed
-- input hashes and feature/model/post-processing version
-- exact fold dates, groups, purge length, and metrics
-- candidate path, byte size, schema result, and SHA-256
-
-The current official interface allows up to three prediction uploads per problem per day. Never upload without the user's explicit approval for the exact file. Before approval, run:
-
-~~~powershell
-.venv-p1\Scripts\python.exe scripts\validate_submission.py <candidate.csv>
-~~~
-
-## Official milestone
-
-The 2026-08-07 and 2026-08-12 participant notices set problem release to 2026-08-13 and the final-model deadline to 2026-09-07. A 2026-09-05 live public landing-page inspection instead displayed 2026-09-30 for preliminary completion/result submission, while the authenticated problem pages did not expose an exact cutoff time. Treat this conflict as unresolved: re-check the authenticated notice, quota, deadline, and final-model lock immediately before any final action. The interface inspected on 2026-09-05 allowed three prediction uploads per problem per day and warned that final-model submission locks later prediction uploads.
-
-## Git safety
-
-- Intended remote: https://github.com/choihyunjin1/-oceanaidata_track1
-- Back up code, notebooks, rules, and small aggregate reports only.
-- Inspect git status and git diff --cached before every commit.
-- Do not commit, push, merge, or submit unless the user or coordinating agent explicitly requests that exact action.
+- Keep one canonical result/receipt per experiment; link it rather than duplicating its metrics across many reports. Use `docs/AGENT_WORKFLOW.md` for the reusable loop.
+- Before upload, verify exact candidate schema/keys/order/finite values/hash, training-to-replay lineage, current UI quota/deadline and existing user authorization. Final-model lock requires authorization for that distinct action.
+- Commit/push only when requested; inspect the selected diff and secret/data exclusions. Never blanket-stage, force-push, rewrite history or discard unrelated work.
+- Preserve frozen runners, original data and historical receipts during cleanup. Archive stale guidance with a pointer; remove code only after checking callers, tests and reproducibility dependencies.

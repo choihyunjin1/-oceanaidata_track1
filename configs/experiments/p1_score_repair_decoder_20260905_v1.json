@@ -1,0 +1,18 @@
+{
+  "experiment_id": "p1_score_repair_decoder_20260905_v1",
+  "source_screen": "p1_score_repair_20260905_v1",
+  "source_result_sha256": "ba10a102c69d1f6c0500d59ec6c2e89b3931da61ce5b6f3ebf2695479daf21a3",
+  "decoder": "binary_empirical_transition_viterbi",
+  "lambda": 1.0,
+  "laplace": 1.0,
+  "probability_clip": 0.000001,
+  "backbone_fits": 0,
+  "transition_estimates": 6,
+  "inner_on_off_selections": 3,
+  "inner_selection_rule": "enable only if decoder F1 strictly exceeds existing control F1; tie off",
+  "unary": "max of relevant logit(probability)-logit(existing inner high threshold); scoring heuristic NOT calibrated likelihood",
+  "hard_rule": "preserve existing control-positive plateau and confirmed singleton spikes only",
+  "duration_or_extension_grid": null,
+  "official_access_authorized": false,
+  "wall_cap_seconds": 3600
+}

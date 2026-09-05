@@ -1,0 +1,86 @@
+{
+  "status": "LOCAL_PREPARATION_QA_PASS_NOT_UPLOADED_NOT_FINAL_BUNDLE",
+  "scope": "New distributed-source-only clean baseline rebuild; no new hybrid OOF claim",
+  "source_prepare": {
+    "anchors": 24360,
+    "feature_count": 591,
+    "runtime_seconds": 697.8306537000171,
+    "historical_cache_reads": 0,
+    "official_input_rows": 0
+  },
+  "independent_pandas_numpy_oof_recalculation": {
+    "rows": 1086,
+    "unique_station_episode_cases": 181,
+    "duplicate_fold_anchor_station_lead_keys": 0,
+    "rmse_m": 0.7791048399763751,
+    "historical_reference_rmse_m": 0.7791048399763751,
+    "aggregate_rmse_drift_m": 0.0,
+    "oof_sha256": "709eb149de9aedaa620f75acc964d5b05a085e6b01e2a790ff87c966769e32ea",
+    "historical_oof_not_read_by_rebuild": true,
+    "baseline_gate_pass": true,
+    "gate_reference": "persistence, not a newly improved challenger",
+    "fresh_independent_confirmation": false
+  },
+  "tests": {
+    "focused_pytest_screen_and_deploy": {"passed": 14},
+    "deploy_ruff": "PASS"
+  },
+  "training": {
+    "catboost_fits": 8,
+    "tabpfn_fitted_context_fits": 1,
+    "router_fits": 3,
+    "train_seconds": 927.5707380000094,
+    "local_synthetic_weight_sha256": "311ce18d97e9533d8585eaadafe040fbdd8070533209ed8696641dadc97a7301",
+    "license_receipt_verified": true,
+    "full_saved_artifact_hashes_independently_verified_by_root": 6,
+    "additional_fits_or_tuning": 0
+  },
+  "fresh_process_replay": {
+    "status": "PASS",
+    "pid": 10804,
+    "rows": 1086,
+    "cases": 181,
+    "baseline_max_abs_difference_m": 0.0,
+    "candidate_max_abs_difference_m": 0.0,
+    "seconds": 24.813944800000172,
+    "generalization_test": false
+  },
+  "local_csv_qa": {
+    "rows_per_file": 1200,
+    "cases": 200,
+    "columns_exact": true,
+    "keys_match": true,
+    "duplicate_keys": 0,
+    "finite_and_range_0_30": true,
+    "changed_rows": 200,
+    "changed_leads": [6],
+    "non6_values_exactly_unchanged": true,
+    "clean_baseline_sha256": "6bfa23d25f944df4711c11d1fce82978a96df08b58fdc57f666ac792a7da96b7",
+    "tabpfn25_6h_only_sha256": "a7c7b247e5d74e7a0b6c8be42a7d4298a220b73881acb99490fcf7fe85f82f29",
+    "csv_is_not_fresh_scored": true
+  },
+  "authorized_final_materialization": {
+    "root_explicit_approval_after_replay_pass": true,
+    "official_context_rows": 57800,
+    "official_index_rows": 1200,
+    "hidden_rows": 0,
+    "sample_rows": 0,
+    "previous_submission_runtime_inputs": 0,
+    "prediction_seconds": 28.197457400005078
+  },
+  "timing": {
+    "prepare_train_replay_predict_seconds": 1678.4127939000318,
+    "under_six_hours_current_host": true,
+    "hardware": "RTX 5090; P3 CPU 2 threads",
+    "organizer_hardware_time_limit_verified": false,
+    "isolated_environment_bundle_verified": false
+  },
+  "caveats": [
+    "A zero aggregate RMSE drift is not a fresh generalization result.",
+    "Historical 6h-only TabPFN blend effect -0.0007650883m is recipe-level exploratory evidence, not the score of a newly materialized CSV.",
+    "Full-training replay can verify serialization only, not held-out performance.",
+    "Final ZIP, isolated relocated environment and organizer-hardware time guarantee are not verified."
+  ],
+  "uploads": 0,
+  "git_stage_commit_push": 0
+}

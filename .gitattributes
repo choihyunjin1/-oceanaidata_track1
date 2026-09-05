@@ -3,3 +3,11 @@
 *.py text eol=lf
 *.txt text eol=lf
 *.ipynb text eol=lf
+
+# Preserve the byte hashes of the September 5 sealed research records.
+# Scope excludes older records and does not rewrite any working-tree data.
+/configs/experiments/*20260905*.json -text
+/configs/compliance/organizer_score_use_policy_20260902.json -text
+/reports/*20260905*/*.json -text
+/notebooks/parallel_score_repair_20260905_v1.ipynb -text
+/reports/p1_depth_contract_repair_20260905_v2/analysis-companion.ipynb -text

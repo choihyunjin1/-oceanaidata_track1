@@ -1,0 +1,36 @@
+{
+  "experiment_id": "p3_direct_sse_meta_20260905_v2",
+  "status": "FROZEN_BEFORE_META_FITTING",
+  "parent_plan": "docs/SCORE_IMPROVEMENT_PLAN_20260905_V2.md",
+  "inputs": {
+    "artifacts/p3_score_repair_deploy_20260905_v1/oof.parquet": "709eb149de9aedaa620f75acc964d5b05a085e6b01e2a790ff87c966769e32ea",
+    "artifacts/p3_score_repair_deploy_20260905_v1/validation_keys.parquet": "88d4ea7c3a4aed662536b0d067c74b1c9ddbcdca349fd6ad8ddf9640f71af131",
+    "artifacts/p3_score_repair_deploy_20260905_v1/train_anchors.parquet": "d90486257c725856357959e30ffd0f35c35f3b9c06be6ab93bcdd221bfa9bfe0",
+    "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169"
+  },
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "fold_order": ["2024_h2_storm", "winter_transition", "2025_h1"],
+  "fold_starts_utc": ["2024-07-01", "2024-11-01", "2025-03-01"],
+  "expected_cases_by_fold": [49, 79, 53],
+  "expected_meta_past_cases": [0, 49, 128],
+  "official_leads": [3, 6, 9, 12, 18, 24],
+  "long_leads": [12, 18, 24],
+  "policies": ["no_op", "long_simplex", "global_bias"],
+  "simplex_components": ["single_prediction", "multi_prediction", "persistence"],
+  "simplex_objective": "past_only_long_lead_SSE_nonnegative_sum_one_two_degrees_of_freedom",
+  "bias_objective": "past_only_all_lead_mean_truth_minus_final_prediction_one_degree_of_freedom",
+  "first_fold": "exact_baseline_no_op",
+  "selection": "lowest_pooled_postclip_RMSE_ties_no_op_then_global_bias_then_long_simplex",
+  "clip_m": [0.0, 30.0],
+  "bootstrap": {"replicates": 5000, "seed": 20260905, "unit": "complete_six_lead_case", "confidence": 0.95},
+  "fit_budget": {"historical_meta": 4, "selected_full_meta_max": 1, "backbone": 0},
+  "resources": {"cpu_threads": 2, "gpu": false},
+  "official_input_rows": 0,
+  "submission_csv": false,
+  "upload": false,
+  "public_scores_used_for_fitting": false,
+  "repeated_historical_development_not_fresh_confirmation": true
+}
