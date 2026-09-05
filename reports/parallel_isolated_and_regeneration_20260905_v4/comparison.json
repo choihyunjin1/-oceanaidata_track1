@@ -1,0 +1,461 @@
+{
+  "status": "DESCRIPTIVE_RECOMPUTATION_COMPLETE",
+  "source_hashes": {
+    "reports/p1_ts_disagreement_20260905_v4/result.json": "28388e145f7d86377c66df772de79409d88ad8cd3f93fb2825f07e1974c7713d",
+    "artifacts/p1_ts_disagreement_20260905_v4/2025_q2_intact.parquet": "365f5c2027b7103b6b970c649604b124a0d5bb6d2a31405c4f1160ccd83b0ecd",
+    "artifacts/p1_ts_disagreement_20260905_v4/2025_q3_intact.parquet": "5e619e4204c3d86e705ab1967ec423e4ede84243abae7ca3a2dbb09066bec7a0",
+    "artifacts/p1_ts_disagreement_20260905_v4/2025_q4_intact.parquet": "5f069283392f9019153ceb5d7a0742cb28a7fa739dff9cc0b264f18d9d8beb51",
+    "artifacts/p2_profile_copula_residual_20260905_v4/historical_eval.npz": "17a3b87e7ae106d619435627cafe57c66f73464a31de9c222d0c3fa0aa3cb8b8",
+    "artifacts/p3_wind_only_dropout_20260905_v4/oof.parquet": "0f1d6478f2e4f1cfb496267fcd150884661ac5d1e1711250d08cd695bc19b25f",
+    "artifacts/p3_wind_only_dropout_20260905_v4/reference.parquet": "36e7bb31526d7acb63a11acfe436a65cf679ab52792a737c81d7e5ed227cbdd4"
+  },
+  "results": {
+    "P1_TS_vs_control": {
+      "rows": 421032,
+      "metric": "f1",
+      "control": 0.8511742399041979,
+      "candidate": 0.8421017559057742,
+      "candidate_minus_control": -0.009072483998423753,
+      "ci90_descriptive": [
+        -0.01869584131016493,
+        -0.000545898156403202
+      ],
+      "bootstrap_improvement_fraction_not_posterior": 0.0405,
+      "cluster_count": 254,
+      "valid_bootstrap_replicates": 2000,
+      "worst_fold_harm": 0.02520139077060135,
+      "maximum_slice_harm": 0.027219330425802934,
+      "slices": [
+        {
+          "dimension": "fold",
+          "key": "2025_q2",
+          "rows": 133170,
+          "delta": 0.0,
+          "harm": -0.0
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_q3",
+          "rows": 176619,
+          "delta": -0.02520139077060135,
+          "harm": 0.02520139077060135
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_q4",
+          "rows": 111243,
+          "delta": 0.0012144675956033968,
+          "harm": -0.0012144675956033968
+        },
+        {
+          "dimension": "station",
+          "key": "G-ORS",
+          "rows": 16316,
+          "delta": 0.01273420791972435,
+          "harm": -0.01273420791972435
+        },
+        {
+          "dimension": "station",
+          "key": "I-ORS",
+          "rows": 165553,
+          "delta": -0.021794478562789266,
+          "harm": 0.021794478562789266
+        },
+        {
+          "dimension": "station",
+          "key": "S-ORS",
+          "rows": 239163,
+          "delta": -0.003242879231774576,
+          "harm": 0.003242879231774576
+        },
+        {
+          "dimension": "layer",
+          "key": "1",
+          "rows": 78898,
+          "delta": -0.015973599790698456,
+          "harm": 0.015973599790698456
+        },
+        {
+          "dimension": "layer",
+          "key": "2",
+          "rows": 50403,
+          "delta": -0.000616853750227464,
+          "harm": 0.000616853750227464
+        },
+        {
+          "dimension": "layer",
+          "key": "3",
+          "rows": 50016,
+          "delta": -0.027219330425802934,
+          "harm": 0.027219330425802934
+        },
+        {
+          "dimension": "layer",
+          "key": "4",
+          "rows": 50034,
+          "delta": 0.011932061485843803,
+          "harm": -0.011932061485843803
+        },
+        {
+          "dimension": "layer",
+          "key": "5",
+          "rows": 37873,
+          "delta": -0.004191390350411162,
+          "harm": 0.004191390350411162
+        },
+        {
+          "dimension": "layer",
+          "key": "6",
+          "rows": 58605,
+          "delta": -0.015040373500583626,
+          "harm": 0.015040373500583626
+        },
+        {
+          "dimension": "layer",
+          "key": "7",
+          "rows": 59156,
+          "delta": 0.00015509702511973256,
+          "harm": -0.00015509702511973256
+        },
+        {
+          "dimension": "layer",
+          "key": "8",
+          "rows": 36047,
+          "delta": -0.010998874597338282,
+          "harm": 0.010998874597338282
+        }
+      ]
+    },
+    "P2_profile_primary_autumn": {
+      "rows": 26273,
+      "metric": "rmse",
+      "control": 0.4882843263308928,
+      "candidate": 0.47227186678698596,
+      "candidate_minus_control": -0.016012459543906843,
+      "ci90_descriptive": [
+        -0.03092230581440102,
+        -0.000906705645470325
+      ],
+      "bootstrap_improvement_fraction_not_posterior": 0.957,
+      "cluster_count": 10,
+      "valid_bootstrap_replicates": 2000,
+      "worst_fold_harm": -0.016012459543906843,
+      "maximum_slice_harm": -0.009284605296251747,
+      "slices": [
+        {
+          "dimension": "fold",
+          "key": "2024_sep_oct",
+          "rows": 26273,
+          "delta": -0.016012459543906843,
+          "harm": -0.016012459543906843
+        },
+        {
+          "dimension": "layer",
+          "key": "2",
+          "rows": 8777,
+          "delta": -0.02260713552228366,
+          "harm": -0.02260713552228366
+        },
+        {
+          "dimension": "layer",
+          "key": "3",
+          "rows": 8774,
+          "delta": -0.03470627359393136,
+          "harm": -0.03470627359393136
+        },
+        {
+          "dimension": "layer",
+          "key": "4",
+          "rows": 8722,
+          "delta": -0.009284605296251747,
+          "harm": -0.009284605296251747
+        }
+      ]
+    },
+    "P2_profile_pooled": {
+      "rows": 69850,
+      "metric": "rmse",
+      "control": 0.8592499137102433,
+      "candidate": 0.8535080592584082,
+      "candidate_minus_control": -0.00574185445183506,
+      "ci90_descriptive": [
+        -0.014449182334589505,
+        0.0028044237132449352
+      ],
+      "bootstrap_improvement_fraction_not_posterior": 0.846,
+      "cluster_count": 26,
+      "valid_bootstrap_replicates": 2000,
+      "worst_fold_harm": -0.0035069211521487897,
+      "maximum_slice_harm": 0.004712354100565808,
+      "slices": [
+        {
+          "dimension": "fold",
+          "key": "2024_sep_oct",
+          "rows": 26273,
+          "delta": -0.016012459543906843,
+          "harm": -0.016012459543906843
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_jul_aug",
+          "rows": 26693,
+          "delta": -0.0035069211521487897,
+          "harm": -0.0035069211521487897
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_nov_dec",
+          "rows": 16884,
+          "delta": -0.004855906854016989,
+          "harm": -0.004855906854016989
+        },
+        {
+          "dimension": "layer",
+          "key": "2",
+          "rows": 23298,
+          "delta": -0.016178488530927793,
+          "harm": -0.016178488530927793
+        },
+        {
+          "dimension": "layer",
+          "key": "3",
+          "rows": 23280,
+          "delta": -0.017910669736616702,
+          "harm": -0.017910669736616702
+        },
+        {
+          "dimension": "layer",
+          "key": "4",
+          "rows": 23272,
+          "delta": 0.004712354100565808,
+          "harm": 0.004712354100565808
+        }
+      ]
+    },
+    "P3_wind_vs_matched_control": {
+      "rows": 1086,
+      "metric": "rmse",
+      "control": 0.8077177140367751,
+      "candidate": 0.8188287708172243,
+      "candidate_minus_control": 0.011111056780449213,
+      "ci90_descriptive": [
+        -0.0018334551889899015,
+        0.02395265314148336
+      ],
+      "bootstrap_improvement_fraction_not_posterior": 0.073,
+      "cluster_count": 181,
+      "valid_bootstrap_replicates": 2000,
+      "worst_fold_harm": 0.027667381937075075,
+      "maximum_slice_harm": 0.026697567246736997,
+      "slices": [
+        {
+          "dimension": "fold",
+          "key": "2024_h2_storm",
+          "rows": 294,
+          "delta": 0.027667381937075075,
+          "harm": 0.027667381937075075
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_h1",
+          "rows": 318,
+          "delta": -0.005193520783543959,
+          "harm": -0.005193520783543959
+        },
+        {
+          "dimension": "fold",
+          "key": "winter_transition",
+          "rows": 474,
+          "delta": 0.012643317594939085,
+          "harm": 0.012643317594939085
+        },
+        {
+          "dimension": "station",
+          "key": "G-ORS",
+          "rows": 402,
+          "delta": -9.479218324082161e-05,
+          "harm": -9.479218324082161e-05
+        },
+        {
+          "dimension": "station",
+          "key": "I-ORS",
+          "rows": 276,
+          "delta": 0.0049001655119936816,
+          "harm": 0.0049001655119936816
+        },
+        {
+          "dimension": "station",
+          "key": "S-ORS",
+          "rows": 408,
+          "delta": 0.026697567246736997,
+          "harm": 0.026697567246736997
+        },
+        {
+          "dimension": "lead_h",
+          "key": "3",
+          "rows": 181,
+          "delta": 0.01833416461618398,
+          "harm": 0.01833416461618398
+        },
+        {
+          "dimension": "lead_h",
+          "key": "6",
+          "rows": 181,
+          "delta": 0.003949057709825121,
+          "harm": 0.003949057709825121
+        },
+        {
+          "dimension": "lead_h",
+          "key": "9",
+          "rows": 181,
+          "delta": 0.0075520407283221624,
+          "harm": 0.0075520407283221624
+        },
+        {
+          "dimension": "lead_h",
+          "key": "12",
+          "rows": 181,
+          "delta": 0.014207805609621316,
+          "harm": 0.014207805609621316
+        },
+        {
+          "dimension": "lead_h",
+          "key": "18",
+          "rows": 181,
+          "delta": 0.009577392791814687,
+          "harm": 0.009577392791814687
+        },
+        {
+          "dimension": "lead_h",
+          "key": "24",
+          "rows": 181,
+          "delta": 0.01400008721595647,
+          "harm": 0.01400008721595647
+        }
+      ]
+    },
+    "P3_wind_vs_clean": {
+      "rows": 1086,
+      "metric": "rmse",
+      "control": 0.7791048399763748,
+      "candidate": 0.8188287708172243,
+      "candidate_minus_control": 0.039723930840849464,
+      "ci90_descriptive": [
+        0.022049275895568838,
+        0.057205514343446714
+      ],
+      "bootstrap_improvement_fraction_not_posterior": 0.0005,
+      "cluster_count": 181,
+      "valid_bootstrap_replicates": 2000,
+      "worst_fold_harm": 0.08103053232984347,
+      "maximum_slice_harm": 0.05259628667688332,
+      "slices": [
+        {
+          "dimension": "fold",
+          "key": "2024_h2_storm",
+          "rows": 294,
+          "delta": 0.08103053232984347,
+          "harm": 0.08103053232984347
+        },
+        {
+          "dimension": "fold",
+          "key": "2025_h1",
+          "rows": 318,
+          "delta": 0.01965049405126751,
+          "harm": 0.01965049405126751
+        },
+        {
+          "dimension": "fold",
+          "key": "winter_transition",
+          "rows": 474,
+          "delta": 0.029667214954183563,
+          "harm": 0.029667214954183563
+        },
+        {
+          "dimension": "station",
+          "key": "G-ORS",
+          "rows": 402,
+          "delta": 0.03089643662544861,
+          "harm": 0.03089643662544861
+        },
+        {
+          "dimension": "station",
+          "key": "I-ORS",
+          "rows": 276,
+          "delta": 0.03492218007359349,
+          "harm": 0.03492218007359349
+        },
+        {
+          "dimension": "station",
+          "key": "S-ORS",
+          "rows": 408,
+          "delta": 0.05217641495461933,
+          "harm": 0.05217641495461933
+        },
+        {
+          "dimension": "lead_h",
+          "key": "3",
+          "rows": 181,
+          "delta": 0.04012983205576137,
+          "harm": 0.04012983205576137
+        },
+        {
+          "dimension": "lead_h",
+          "key": "6",
+          "rows": 181,
+          "delta": 0.02461430328969816,
+          "harm": 0.02461430328969816
+        },
+        {
+          "dimension": "lead_h",
+          "key": "9",
+          "rows": 181,
+          "delta": 0.030311788745305268,
+          "harm": 0.030311788745305268
+        },
+        {
+          "dimension": "lead_h",
+          "key": "12",
+          "rows": 181,
+          "delta": 0.04219761124776544,
+          "harm": 0.04219761124776544
+        },
+        {
+          "dimension": "lead_h",
+          "key": "18",
+          "rows": 181,
+          "delta": 0.046312780419662025,
+          "harm": 0.046312780419662025
+        },
+        {
+          "dimension": "lead_h",
+          "key": "24",
+          "rows": 181,
+          "delta": 0.05259628667688332,
+          "harm": 0.05259628667688332
+        }
+      ]
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20260905,
+    "strata": "existing fold",
+    "clusters": {
+      "P1": "KST calendar day, all stations together",
+      "P2": "KST nonoverlapping 7-day calendar block",
+      "P3": "station x saved episode"
+    }
+  },
+  "limitations": [
+    "post-hoc descriptive protocol, not preregistered confirmation",
+    "historical periods previously exposed; CI ignores adaptive selection and future distribution shift",
+    "bootstrap fraction is not probability of official score gain",
+    "no decision threshold applied; original trial decisions unchanged",
+    "baseline regeneration and clean-machine packaging are separate checks"
+  ],
+  "fits": 0,
+  "official_rows": 0,
+  "csv_written": 0,
+  "uploads": 0
+}

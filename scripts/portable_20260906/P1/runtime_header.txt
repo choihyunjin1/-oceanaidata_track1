@@ -1,0 +1,50 @@
+"""Portable P1 v5-equivalent fresh training and answer generation."""
+from __future__ import annotations
+import argparse
+import gc
+import hashlib
+import importlib.metadata
+import json
+import os
+import sys
+import tempfile
+import time
+from pathlib import Path
+from types import SimpleNamespace
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+import core as screen
+import decoder
+joblib, np, pd = screen.joblib, screen.np, screen.pd
+OUT = ROOT.parent
+REPORT = OUT / "06_docs"
+RUN = "p1_portable_cleanroom_20260906_v1"
+THREADS = 4
+MAX_FITS = 4
+WALL_SECONDS = 3600
+EXPECTED_ANSWER_SHA = "5971e145f1ac38b8ee3e34cfd302973ba7a64b8873db11c354d3331221fdb28a"
+POLICIES = ("original", "balanced", "original_balanced_union", "balanced_union")
+
+def align_answer(frame, bits, keys):
+    if frame.duplicated(screen.KEYS).any() or keys.duplicated(screen.KEYS).any():
+        raise ValueError("duplicate answer keys")
+    answer = frame[screen.KEYS].copy()
+    answer["label"] = bits
+    answer = keys.merge(answer, on=screen.KEYS, how="left", validate="one_to_one", sort=False)
+    if len(answer) != len(frame) or answer.isna().any().any() or not answer.label.isin([0, 1]).all():
+        raise ValueError("answer keys or binary values invalid")
+    answer["label"] = answer.label.astype(np.int8)
+    if not answer[screen.KEYS].equals(keys):
+        raise ValueError("answer key order changed")
+    return answer
+
+canonical = SimpleNamespace(align_answer=align_answer, decoder=decoder)
+
+def source_contract():
+    manifest = json.loads((ROOT / "source-manifest.json").read_text(encoding="utf-8"))
+    hashes = {name: item["sha256"] for name, item in manifest.items()}
+    hashes["source-manifest.json"] = screen.sha(ROOT / "source-manifest.json")
+    assert_sources(hashes)
+    frozen = json.loads((ROOT / "configs/feature.json").read_text(encoding="utf-8"))
+    return {}, frozen, hashes
+

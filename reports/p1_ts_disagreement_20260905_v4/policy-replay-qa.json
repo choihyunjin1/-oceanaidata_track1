@@ -1,0 +1,862 @@
+{
+  "status": "PASS",
+  "checks": {
+    "terminal_complete": true,
+    "six_fits": true,
+    "fresh_pid": true,
+    "runner_hash": true,
+    "config_hash": true,
+    "model/2025_q2/inner": true,
+    "model/2025_q2/outer": true,
+    "model/2025_q3/inner": true,
+    "model/2025_q3/outer": true,
+    "model/2025_q4/inner": true,
+    "model/2025_q4/outer": true,
+    "artifact/2025_q2_fragmented.parquet": true,
+    "keys/2025_q2_fragmented.parquet": true,
+    "targets/2025_q2_fragmented.parquet": true,
+    "probability/2025_q2_fragmented.parquet": true,
+    "policy_bits/2025_q2_fragmented.parquet": true,
+    "artifact/2025_q2_intact.parquet": true,
+    "keys/2025_q2_intact.parquet": true,
+    "targets/2025_q2_intact.parquet": true,
+    "probability/2025_q2_intact.parquet": true,
+    "policy_bits/2025_q2_intact.parquet": true,
+    "artifact/2025_q3_fragmented.parquet": true,
+    "keys/2025_q3_fragmented.parquet": true,
+    "targets/2025_q3_fragmented.parquet": true,
+    "probability/2025_q3_fragmented.parquet": true,
+    "policy_bits/2025_q3_fragmented.parquet": true,
+    "artifact/2025_q3_intact.parquet": true,
+    "keys/2025_q3_intact.parquet": true,
+    "targets/2025_q3_intact.parquet": true,
+    "probability/2025_q3_intact.parquet": true,
+    "policy_bits/2025_q3_intact.parquet": true,
+    "artifact/2025_q4_fragmented.parquet": true,
+    "keys/2025_q4_fragmented.parquet": true,
+    "targets/2025_q4_fragmented.parquet": true,
+    "probability/2025_q4_fragmented.parquet": true,
+    "policy_bits/2025_q4_fragmented.parquet": true,
+    "artifact/2025_q4_intact.parquet": true,
+    "keys/2025_q4_intact.parquet": true,
+    "targets/2025_q4_intact.parquet": true,
+    "probability/2025_q4_intact.parquet": true,
+    "policy_bits/2025_q4_intact.parquet": true,
+    "disjoint_folds/fragmented": true,
+    "arithmetic/fragmented/control": true,
+    "arithmetic/fragmented/candidate": true,
+    "disjoint_folds/intact": true,
+    "arithmetic/intact/control": true,
+    "arithmetic/intact/candidate": true
+  },
+  "check_count": 47,
+  "passed": 47,
+  "slices": [
+    {
+      "surface": "fragmented",
+      "dimension": "fold",
+      "value": "2025_q2",
+      "control": {
+        "rows": 128850,
+        "tp": 4031,
+        "fp": 1013,
+        "fn": 1317,
+        "f1": 0.7757890685142417
+      },
+      "candidate": {
+        "rows": 128850,
+        "tp": 4031,
+        "fp": 1013,
+        "fn": 1317,
+        "f1": 0.7757890685142417
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "fold",
+      "value": "2025_q3",
+      "control": {
+        "rows": 172127,
+        "tp": 4732,
+        "fp": 48,
+        "fn": 1401,
+        "f1": 0.8672225785760103
+      },
+      "candidate": {
+        "rows": 172127,
+        "tp": 4772,
+        "fp": 126,
+        "fn": 1361,
+        "f1": 0.865198078143414
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "fold",
+      "value": "2025_q4",
+      "control": {
+        "rows": 107812,
+        "tp": 3672,
+        "fp": 40,
+        "fn": 648,
+        "f1": 0.9143426294820717
+      },
+      "candidate": {
+        "rows": 107812,
+        "tp": 3689,
+        "fp": 42,
+        "fn": 631,
+        "f1": 0.9164078996397963
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "station",
+      "value": "G-ORS",
+      "control": {
+        "rows": 15761,
+        "tp": 649,
+        "fp": 0,
+        "fn": 401,
+        "f1": 0.7639788110653325
+      },
+      "candidate": {
+        "rows": 15761,
+        "tp": 666,
+        "fp": 0,
+        "fn": 384,
+        "f1": 0.7762237762237763
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "station",
+      "value": "I-ORS",
+      "control": {
+        "rows": 161894,
+        "tp": 4677,
+        "fp": 274,
+        "fn": 1487,
+        "f1": 0.8415654520917679
+      },
+      "candidate": {
+        "rows": 161894,
+        "tp": 4539,
+        "fp": 319,
+        "fn": 1625,
+        "f1": 0.8236254763200871
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "station",
+      "value": "S-ORS",
+      "control": {
+        "rows": 231134,
+        "tp": 7109,
+        "fp": 827,
+        "fn": 1478,
+        "f1": 0.8604974883495733
+      },
+      "candidate": {
+        "rows": 231134,
+        "tp": 7287,
+        "fp": 862,
+        "fn": 1300,
+        "f1": 0.8708173996175909
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "drift",
+      "control": {
+        "rows": 4006,
+        "tp": 2636,
+        "fp": 0,
+        "fn": 1370,
+        "f1": 0.7937368262571515
+      },
+      "candidate": {
+        "rows": 4006,
+        "tp": 2526,
+        "fp": 0,
+        "fn": 1480,
+        "f1": 0.7734231475811391
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "drift+offset",
+      "control": {
+        "rows": 45,
+        "tp": 0,
+        "fp": 0,
+        "fn": 45,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 45,
+        "tp": 0,
+        "fp": 0,
+        "fn": 45,
+        "f1": 0.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "flatline",
+      "control": {
+        "rows": 3138,
+        "tp": 3137,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9998406374501992
+      },
+      "candidate": {
+        "rows": 3138,
+        "tp": 3137,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9998406374501992
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "flatline+drift",
+      "control": {
+        "rows": 150,
+        "tp": 150,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 150,
+        "tp": 150,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "flatline+flatline",
+      "control": {
+        "rows": 132,
+        "tp": 132,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 132,
+        "tp": 132,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "flatline+spike",
+      "control": {
+        "rows": 2,
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 2,
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "noise",
+      "control": {
+        "rows": 4269,
+        "tp": 3840,
+        "fp": 0,
+        "fn": 429,
+        "f1": 0.9470958194598594
+      },
+      "candidate": {
+        "rows": 4269,
+        "tp": 4084,
+        "fp": 0,
+        "fn": 185,
+        "f1": 0.9778522686459955
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "noise+drift",
+      "control": {
+        "rows": 95,
+        "tp": 0,
+        "fp": 0,
+        "fn": 95,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 95,
+        "tp": 0,
+        "fp": 0,
+        "fn": 95,
+        "f1": 0.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "noise+flatline",
+      "control": {
+        "rows": 91,
+        "tp": 91,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 91,
+        "tp": 91,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "noise+offset",
+      "control": {
+        "rows": 28,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 28,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "offset",
+      "control": {
+        "rows": 3687,
+        "tp": 2271,
+        "fp": 0,
+        "fn": 1416,
+        "f1": 0.7623363544813696
+      },
+      "candidate": {
+        "rows": 3687,
+        "tp": 2196,
+        "fp": 0,
+        "fn": 1491,
+        "f1": 0.7465578786333503
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "offset+drift",
+      "control": {
+        "rows": 63,
+        "tp": 63,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 63,
+        "tp": 58,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.9586776859504132
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "offset+flatline",
+      "control": {
+        "rows": 36,
+        "tp": 36,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 36,
+        "tp": 36,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "spike",
+      "control": {
+        "rows": 59,
+        "tp": 49,
+        "fp": 0,
+        "fn": 10,
+        "f1": 0.9074074074074074
+      },
+      "candidate": {
+        "rows": 59,
+        "tp": 52,
+        "fp": 0,
+        "fn": 7,
+        "f1": 0.9369369369369369
+      }
+    },
+    {
+      "surface": "fragmented",
+      "dimension": "anomaly_type",
+      "value": "nan",
+      "control": {
+        "rows": 392988,
+        "tp": 0,
+        "fp": 1101,
+        "fn": 0,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 392988,
+        "tp": 0,
+        "fp": 1181,
+        "fn": 0,
+        "f1": 0.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "fold",
+      "value": "2025_q2",
+      "control": {
+        "rows": 133170,
+        "tp": 4060,
+        "fp": 1086,
+        "fn": 1310,
+        "f1": 0.7721567135793077
+      },
+      "candidate": {
+        "rows": 133170,
+        "tp": 4060,
+        "fp": 1086,
+        "fn": 1310,
+        "f1": 0.7721567135793077
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "fold",
+      "value": "2025_q3",
+      "control": {
+        "rows": 176619,
+        "tp": 4933,
+        "fp": 23,
+        "fn": 1345,
+        "f1": 0.878226811465195
+      },
+      "candidate": {
+        "rows": 176619,
+        "tp": 4765,
+        "fp": 129,
+        "fn": 1513,
+        "f1": 0.8530254206945936
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "fold",
+      "value": "2025_q4",
+      "control": {
+        "rows": 111243,
+        "tp": 3801,
+        "fp": 104,
+        "fn": 606,
+        "f1": 0.9145813282001924
+      },
+      "candidate": {
+        "rows": 111243,
+        "tp": 3812,
+        "fp": 106,
+        "fn": 595,
+        "f1": 0.9157957957957958
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "station",
+      "value": "G-ORS",
+      "control": {
+        "rows": 16316,
+        "tp": 661,
+        "fp": 0,
+        "fn": 405,
+        "f1": 0.7654892877822814
+      },
+      "candidate": {
+        "rows": 16316,
+        "tp": 679,
+        "fp": 0,
+        "fn": 387,
+        "f1": 0.7782234957020058
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "station",
+      "value": "I-ORS",
+      "control": {
+        "rows": 165553,
+        "tp": 4663,
+        "fp": 278,
+        "fn": 1508,
+        "f1": 0.8392728581713463
+      },
+      "candidate": {
+        "rows": 165553,
+        "tp": 4490,
+        "fp": 324,
+        "fn": 1681,
+        "f1": 0.8174783796085571
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "station",
+      "value": "S-ORS",
+      "control": {
+        "rows": 239163,
+        "tp": 7470,
+        "fp": 935,
+        "fn": 1348,
+        "f1": 0.8674446960459851
+      },
+      "candidate": {
+        "rows": 239163,
+        "tp": 7468,
+        "fp": 997,
+        "fn": 1350,
+        "f1": 0.8642018168142105
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "drift",
+      "control": {
+        "rows": 4050,
+        "tp": 2667,
+        "fp": 0,
+        "fn": 1383,
+        "f1": 0.794104510942385
+      },
+      "candidate": {
+        "rows": 4050,
+        "tp": 2508,
+        "fp": 0,
+        "fn": 1542,
+        "f1": 0.7648673376029277
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "drift+offset",
+      "control": {
+        "rows": 45,
+        "tp": 0,
+        "fp": 0,
+        "fn": 45,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 45,
+        "tp": 0,
+        "fp": 0,
+        "fn": 45,
+        "f1": 0.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "flatline",
+      "control": {
+        "rows": 3153,
+        "tp": 3152,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9998413957176844
+      },
+      "candidate": {
+        "rows": 3153,
+        "tp": 3152,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9998413957176844
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "flatline+drift",
+      "control": {
+        "rows": 150,
+        "tp": 150,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 150,
+        "tp": 150,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "flatline+flatline",
+      "control": {
+        "rows": 132,
+        "tp": 132,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 132,
+        "tp": 132,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "flatline+spike",
+      "control": {
+        "rows": 2,
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 2,
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "noise",
+      "control": {
+        "rows": 4421,
+        "tp": 4090,
+        "fp": 0,
+        "fn": 331,
+        "f1": 0.9611091528610034
+      },
+      "candidate": {
+        "rows": 4421,
+        "tp": 4144,
+        "fp": 0,
+        "fn": 277,
+        "f1": 0.9676590776415646
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "noise+drift",
+      "control": {
+        "rows": 95,
+        "tp": 0,
+        "fp": 0,
+        "fn": 95,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 95,
+        "tp": 0,
+        "fp": 0,
+        "fn": 95,
+        "f1": 0.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "noise+flatline",
+      "control": {
+        "rows": 91,
+        "tp": 91,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 91,
+        "tp": 91,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "noise+offset",
+      "control": {
+        "rows": 28,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 28,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "offset",
+      "control": {
+        "rows": 3730,
+        "tp": 2334,
+        "fp": 0,
+        "fn": 1396,
+        "f1": 0.7697889182058048
+      },
+      "candidate": {
+        "rows": 3730,
+        "tp": 2286,
+        "fp": 0,
+        "fn": 1444,
+        "f1": 0.7599734042553191
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "offset+drift",
+      "control": {
+        "rows": 63,
+        "tp": 63,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 63,
+        "tp": 56,
+        "fp": 0,
+        "fn": 7,
+        "f1": 0.9411764705882353
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "offset+flatline",
+      "control": {
+        "rows": 36,
+        "tp": 36,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "candidate": {
+        "rows": 36,
+        "tp": 36,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "spike",
+      "control": {
+        "rows": 59,
+        "tp": 49,
+        "fp": 0,
+        "fn": 10,
+        "f1": 0.9074074074074074
+      },
+      "candidate": {
+        "rows": 59,
+        "tp": 52,
+        "fp": 0,
+        "fn": 7,
+        "f1": 0.9369369369369369
+      }
+    },
+    {
+      "surface": "intact",
+      "dimension": "anomaly_type",
+      "value": "nan",
+      "control": {
+        "rows": 404977,
+        "tp": 0,
+        "fp": 1213,
+        "fn": 0,
+        "f1": 0.0
+      },
+      "candidate": {
+        "rows": 404977,
+        "tp": 0,
+        "fp": 1321,
+        "fn": 0,
+        "f1": 0.0
+      }
+    }
+  ],
+  "training_pid": 35268,
+  "replay_pid": 38312,
+  "source_result_sha256": "28388e145f7d86377c66df772de79409d88ad8cd3f93fb2825f07e1974c7713d",
+  "new_fits": 0,
+  "official_rows": 0,
+  "csv_written": 0,
+  "uploads": 0,
+  "baseline_regeneration_check": "SEPARATE_REPORT_REQUIRED_NOT_CERTIFIED_BY_THIS_REPLAY"
+}

@@ -1,0 +1,34 @@
+{
+  "experiment_id": "p1_ts_disagreement_20260905_v4",
+  "hypothesis": "Adding gap-aware temperature/salinity jump and roughness disagreement to clean B improves anomaly discrimination without changing depth, backbone recipe or decoder.",
+  "source_screen": "artifacts/p1_score_repair_20260905_v1",
+  "pinned_inputs": {
+    "scripts/run_p1_depth_contract_repair_20260905_v2.py": "4f6db75d1ba45cba6e5bd4159712a6d1ab1851e691dbb21c371bbed09b5e2a0c",
+    "scripts/run_p1_score_repair_decoder_20260905_v1.py": "d5ed9ff15745b7e400066eff2331c533d6fd3a420e941d04cf317ef40b530db9",
+    "artifacts/p1_score_repair_20260905_v1/contract.json": "ae26f7a8eb2311505ca138596b7c52a04fbd32c4da8cf26163aeaa1f514bc993",
+    "artifacts/p1_score_repair_20260905_v1/terminal_result.json": "ba10a102c69d1f6c0500d59ec6c2e89b3931da61ce5b6f3ebf2695479daf21a3"
+  },
+  "windows_rows": [
+    6,
+    36,
+    144
+  ],
+  "epsilon": "median finite positive absolute salinity delta from training only, floor 1e-6; no labels",
+  "seed": 20260813,
+  "threads": 3,
+  "max_historical_fits": 6,
+  "wall_cap_seconds": 2400,
+  "primary": "pooled intact F1 from TP/FP/FN across previously exposed Q2/Q3/Q4",
+  "selection": "same four O/B policies and threshold grid as control, earlier-inner only; B replaced by TS-B; no outer-dependent gating",
+  "secondary": [
+    "fragmented with same label-independent keep mask",
+    "period/station/type counts",
+    "matched balanced-only diagnostic"
+  ],
+  "next_branch": "If pooled primary improves, retain as internal candidate for separately specified full-fit/replay; if not, close this exact fingerprint, do not retune windows/epsilon. Report long-event error decomposition for next mechanism.",
+  "official_access": false,
+  "full_fits": 0,
+  "csv_written": 0,
+  "uploads": 0,
+  "expected_official_score": null
+}

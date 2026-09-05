@@ -1,0 +1,367 @@
+{
+  "audit_id": "p1_twosided_support_20260906_v1",
+  "status": "SUPPORT_AUDIT_COMPLETE_NOT_EVALUATOR_EXECUTION_READY",
+  "proposal": "Separate retrospective two-sided train-label support; not forward forecasting.",
+  "fits": 0,
+  "metric_evaluations": 0,
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "feature_values_loaded": 0,
+  "old_models_or_predictions_read": 0,
+  "csv_written": 0,
+  "uploads": 0,
+  "source_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "source_read_columns": [
+    "station",
+    "year",
+    "layer",
+    "time",
+    "label"
+  ],
+  "source_pins": {
+    "scripts/ocean_evaluation_contract_v5.py": "36581e8ac358463670b368e2da4ded98d5479c8a98c7c3917774c0dd68eb6e39",
+    "configs/evaluation/ocean_forward_v5.json": "ca6f610aa087c5d2f4c3c25e7af487178c2d344b527d987f0571ddeb178b8a5b"
+  },
+  "runner_sha256": "0c7f9718c87b1f78c95016d716d88da4fb4ce4011e13a028cdda64f01701556d",
+  "folds": [
+    {
+      "fold": "H2_2024",
+      "train_rows": 565539,
+      "validation_rows": 172638,
+      "train_positive": 23212,
+      "validation_positive": 7320,
+      "forward_train_rows": 86987,
+      "forward_unseen_station_layer_rows": 0,
+      "twosided_unseen_station_layer_rows": 0,
+      "twosided_unseen_fraction": 0.0,
+      "calendar_purge_or_validation_rows": 211041,
+      "whole_run_additional_excluded_rows": 126,
+      "train_keys_sha256": "67cb919a91267ade409b7f679ff5e557e0c27c87825115c539f33a5f2f373258",
+      "validation_keys_sha256": "222ef45e4ca209008f92b841fcfeac23160b731a33cb75b05969ab3bf5875280",
+      "same_forward_validation_keys": true,
+      "station_layer_support": [
+        {
+          "station": "S-ORS",
+          "layer": 1,
+          "train_rows": 69083,
+          "validation_rows": 26114,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 2,
+          "train_rows": 29275,
+          "validation_rows": 23644,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 3,
+          "train_rows": 28937,
+          "validation_rows": 23622,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 4,
+          "train_rows": 28961,
+          "validation_rows": 23553,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 5,
+          "train_rows": 60416,
+          "validation_rows": 26054,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 6,
+          "train_rows": 37463,
+          "validation_rows": 23552,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 7,
+          "train_rows": 55830,
+          "validation_rows": 26099,
+          "unseen": false
+        }
+      ],
+      "train_left_exclusive": "2024-06-10T00:00:00+09:00",
+      "train_right_inclusive": "2025-01-22T00:00:00+09:00"
+    },
+    {
+      "fold": "H1_2025",
+      "train_rows": 514367,
+      "validation_rows": 208093,
+      "train_positive": 19937,
+      "validation_positive": 9911,
+      "forward_train_rows": 270708,
+      "forward_unseen_station_layer_rows": 107125,
+      "twosided_unseen_station_layer_rows": 0,
+      "twosided_unseen_fraction": 0.0,
+      "calendar_purge_or_validation_rows": 262326,
+      "whole_run_additional_excluded_rows": 13,
+      "train_keys_sha256": "2461db67fbb3d68f63603a443d8f0518b4ff94ab2292ede105fa1b16637134d8",
+      "validation_keys_sha256": "67eb253ddbb09179493035633fa2173b6a110867521d8623a6d1ec5ba3139184",
+      "same_forward_validation_keys": true,
+      "station_layer_support": [
+        {
+          "station": "G-ORS",
+          "layer": 1,
+          "train_rows": 7608,
+          "validation_rows": 16930,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 1,
+          "train_rows": 16910,
+          "validation_rows": 19227,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 2,
+          "train_rows": 16957,
+          "validation_rows": 5802,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 3,
+          "train_rows": 16886,
+          "validation_rows": 5804,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 4,
+          "train_rows": 16890,
+          "validation_rows": 5801,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 5,
+          "train_rows": 7334,
+          "validation_rows": 2856,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 6,
+          "train_rows": 16858,
+          "validation_rows": 5799,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 7,
+          "train_rows": 16889,
+          "validation_rows": 19232,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 1,
+          "train_rows": 69290,
+          "validation_rows": 26039,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 2,
+          "train_rows": 42493,
+          "validation_rows": 10112,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 3,
+          "train_rows": 42430,
+          "validation_rows": 9797,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 4,
+          "train_rows": 42411,
+          "validation_rows": 9771,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 5,
+          "train_rows": 61035,
+          "validation_rows": 25550,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 6,
+          "train_rows": 50901,
+          "validation_rows": 9839,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 7,
+          "train_rows": 69220,
+          "validation_rows": 9860,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 8,
+          "train_rows": 20255,
+          "validation_rows": 25674,
+          "unseen": false
+        }
+      ],
+      "train_left_exclusive": "2024-12-11T00:00:00+09:00",
+      "train_right_inclusive": "2025-07-22T00:00:00+09:00"
+    },
+    {
+      "fold": "H2_2025",
+      "train_rows": 444081,
+      "validation_rows": 287862,
+      "train_positive": 20461,
+      "validation_positive": 10685,
+      "forward_train_rows": 444081,
+      "forward_unseen_station_layer_rows": 0,
+      "twosided_unseen_station_layer_rows": 0,
+      "twosided_unseen_fraction": 0.0,
+      "calendar_purge_or_validation_rows": 332625,
+      "whole_run_additional_excluded_rows": 0,
+      "train_keys_sha256": "590c1f4767d6fb267b286fc09a68d1f78e8040ad5429fc10f87c6b62854e1361",
+      "validation_keys_sha256": "f37d0242dc92858a8163f7dbd6e2c0aaebd5d0a6ef1ec6e131c031efa050d154",
+      "same_forward_validation_keys": true,
+      "station_layer_support": [
+        {
+          "station": "G-ORS",
+          "layer": 1,
+          "train_rows": 13980,
+          "validation_rows": 9573,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 1,
+          "train_rows": 16284,
+          "validation_rows": 19926,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 2,
+          "train_rows": 2855,
+          "validation_rows": 19968,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 3,
+          "train_rows": 2857,
+          "validation_rows": 19909,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 4,
+          "train_rows": 2854,
+          "validation_rows": 19912,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 5,
+          "train_rows": 2856,
+          "validation_rows": 7334,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 6,
+          "train_rows": 2857,
+          "validation_rows": 19882,
+          "unseen": false
+        },
+        {
+          "station": "I-ORS",
+          "layer": 7,
+          "train_rows": 16285,
+          "validation_rows": 19913,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 1,
+          "train_rows": 74964,
+          "validation_rows": 23256,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 2,
+          "train_rows": 38401,
+          "validation_rows": 14521,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 3,
+          "train_rows": 38057,
+          "validation_rows": 14506,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 4,
+          "train_rows": 37964,
+          "validation_rows": 14550,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 5,
+          "train_rows": 74423,
+          "validation_rows": 15083,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 6,
+          "train_rows": 37928,
+          "validation_rows": 23139,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 7,
+          "train_rows": 58866,
+          "validation_rows": 23111,
+          "unseen": false
+        },
+        {
+          "station": "S-ORS",
+          "layer": 8,
+          "train_rows": 22650,
+          "validation_rows": 23279,
+          "unseen": false
+        }
+      ],
+      "train_left_exclusive": "2025-06-10T00:00:00+09:00",
+      "train_right_inclusive": "2026-01-22T00:00:00+09:00"
+    }
+  ],
+  "unresolved_before_fit": [
+    "Root must freeze separate prospective contract, including inner policy-selection folds.",
+    "Train/inner/outer partition isolation and feature/decoder sentinel tests for two-sided context.",
+    "No v1/v5 metric replacement, no automatic training, no score transfer or causal support claim."
+  ],
+  "runtime_seconds": 26.938013400009368
+}

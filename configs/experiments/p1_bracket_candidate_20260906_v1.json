@@ -1,0 +1,39 @@
+{
+  "experiment_id": "p1_bracket_candidate_20260906_v1",
+  "threads": 4,
+  "gpu": false,
+  "max_fits": 4,
+  "workflow_wall_cap_seconds": 3600,
+  "fit_order": ["inner_balanced", "inner_original", "full_original", "full_balanced"],
+  "trees": 700,
+  "features": {"original": 80, "balanced": 107},
+  "windows_hours": [6, 24, 72],
+  "flank_hours": 1,
+  "max_bracket_dependency_hours": 37,
+  "inner_start": "2025-07-12T00:00:00+09:00",
+  "inner_end": "2025-09-10T00:00:00+09:00",
+  "training_stop": "2025-06-21T00:00:00+09:00",
+  "expected_inner_training_rows": 467282,
+  "expected_inner_evaluation_rows": 123372,
+  "expected_training_rows": 776706,
+  "expected_official_rows": 169011,
+  "full_probe_rows": 4096,
+  "full_probe_scope": "first sorted train-feature rows; in-sample determinism only, no quality metric",
+  "selection": "unchanged clean select_policy; rederive exclusively on current final-inner predictions",
+  "depth_policy": "unchanged station-year-layer lookup; no new fallback",
+  "extra_decoder_enabled": false,
+  "context": "partition first; stats fit on training only; features/rules/decoder use their complete allowed partition",
+  "official_gate": "complete four fits plus fresh model replay plus separately signed root training QA linked to exact hashes",
+  "local_official_inference_authorized_after_gate": true,
+  "uploads": 0,
+  "baseline_original_model_sha_metadata_only": {
+    "inner": "3cd6c8f842ebdcb42ae7532f0dc20e7900bf1a2bdb64f0f9c0bae13cfb4ddd33",
+    "full": "567ea9c80e7e51c8cefbcd889ef46516268188ff22000b44e61c61209db1df3b"
+  },
+  "limitations": [
+    "One new four-fit workflow, not two independently retrained workflows.",
+    "Final-inner F1 is a policy-selection score, not fresh holdout performance.",
+    "Historical two-sided and unknown-year stress gains do not guarantee official improvement.",
+    "No target answer hash or target positive count is prescribed."
+  ]
+}

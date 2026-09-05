@@ -1,0 +1,31 @@
+
+def install_boundary_guard(phase):
+    data = Path(os.environ["P1_DATA_DIR"]).resolve()
+    denied_repo = os.environ.get("P1_DENY_REPO")
+    denied_repo = Path(denied_repo).resolve() if denied_repo else None
+    allowed_data = {"train.csv"} if phase == "train" else {"test.csv", "sample_submission.csv"}
+    def audit(event, args):
+        if event in {"socket.connect", "socket.bind", "socket.getaddrinfo"}:
+            raise PermissionError("offline package: network disabled")
+        if event != "open" or not isinstance(args[0], (str, bytes, os.PathLike)):
+            return
+        path = Path(os.fsdecode(args[0])).resolve()
+        if path.is_relative_to(data) and path.name not in allowed_data:
+            raise PermissionError("data file not authorized for this phase")
+        if denied_repo and path.is_relative_to(denied_repo):
+            if not path.is_relative_to(data) and not path.is_relative_to(Path(sys.prefix)):
+                raise PermissionError("original repository access denied")
+    sys.addaudithook(audit)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("action", choices=["train", "infer", "verify", "self-test"])
+    args = parser.parse_args()
+    if args.action == "self-test":
+        self_test()
+    else:
+        install_boundary_guard(args.action)
+        if args.action == "train":
+            train()
+        else:
+            infer(args.action == "verify")

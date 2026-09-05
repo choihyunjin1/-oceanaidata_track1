@@ -11,3 +11,11 @@
 /reports/*20260905*/*.json -text
 /notebooks/parallel_score_repair_20260905_v1.ipynb -text
 /reports/p1_depth_contract_repair_20260905_v2/analysis-companion.ipynb -text
+
+# Preserve September 6 sealed JSON and portable source-contract byte hashes.
+# This changes Git storage/checkout only; existing evidence is not reformatted.
+/configs/experiments/*20260906*.json -text
+/reports/*20260906*/*.json -text
+/reports/*20260906*/**/*.json -text
+/scripts/portable_20260906/**/*.json -text
+/scripts/portable_20260906/**/*.ps1 text eol=lf

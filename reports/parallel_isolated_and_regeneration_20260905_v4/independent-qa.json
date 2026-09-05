@@ -1,0 +1,141 @@
+{
+  "status": "SHARE_WITH_CAVEATS",
+  "scope": "20260905 isolated historical trials, clean baseline regeneration, local P2 candidate; not official submission or final package certification",
+  "checked_at_utc": "2026-09-05 15:14:46 UTC",
+  "receipt_sha256": [
+    {
+      "path": "reports/p1_ts_disagreement_20260905_v4/result.json",
+      "sha256": "28388e145f7d86377c66df772de79409d88ad8cd3f93fb2825f07e1974c7713d"
+    },
+    {
+      "path": "reports/p1_ts_disagreement_20260905_v4/policy-replay-qa.json",
+      "sha256": "67c3145a9f7ec6905c194262e104738367c6c7cdc51574208473d8e9f4978e92"
+    },
+    {
+      "path": "reports/p2_profile_copula_residual_20260905_v4/result.json",
+      "sha256": "1372e87ca9e9a30d39680f7c5ac824d789eb7532905fcb0c143205765f489cb8"
+    },
+    {
+      "path": "reports/p2_profile_copula_residual_20260905_v4/independent-qa.json",
+      "sha256": "4ddbc4fdb7ab849e1ec1bd6282e22fa467c9996a0edb632959dddf2d746cf938"
+    },
+    {
+      "path": "reports/p3_wind_only_dropout_20260905_v4/result.json",
+      "sha256": "d2a1ff8820a09209314cd003bb6906d0e6a4e01f24e1a73a6a37ad0900918361"
+    },
+    {
+      "path": "reports/p3_wind_only_dropout_20260905_v4/independent-qa.json",
+      "sha256": "25d7a9010a6c3d1c6c903a862b9db8f364315df57351540b50af5fb527212a0b"
+    },
+    {
+      "path": "reports/p1_clean_regeneration_20260905_v5/independent-qa.json",
+      "sha256": "910cc3ed84f0ddf179329bab74a5832037de367bc9739807f9b9bb9d060e5df0"
+    },
+    {
+      "path": "reports/p2_clean_regeneration_20260905_v6/independent-qa.json",
+      "sha256": "1869ea42d2aa1db3634a4217027512a974789b0f9071e5a05cf5a6881681d0e5"
+    },
+    {
+      "path": "reports/p3_clean_regeneration_20260905_v4/independent-qa.json",
+      "sha256": "5850cc130731153f69698a30864380d4be657a3e7e5b1d3f9cdc04cd074795ed"
+    },
+    {
+      "path": "reports/p2_profile_copula_deploy_20260905_v4/independent-qa.json",
+      "sha256": "2f0d70dcee1547ca8d8e7a6e00a3431d0017bbe211ac52c909a9051c30a432b4"
+    },
+    {
+      "path": "reports/parallel_isolated_and_regeneration_20260905_v4/comparison.json",
+      "sha256": "b816d40ca41d2d4d35eefc5d68742a41426500e0fed169f0f83b13d4d942832c"
+    }
+  ],
+  "numerical_qa": {
+    "P1_historical_replay": 47,
+    "P2_historical": 367,
+    "P3_historical": 222,
+    "root_summary_tests": 6,
+    "root_summary_ruff": "PASS",
+    "root_summary_external_review": "No material arithmetic/join/table error; seven historical source hashes matched"
+  },
+  "regeneration": {
+    "P1": {
+      "id": "p1_clean_regeneration_20260905_v5",
+      "new_training_to_answer": "PASS",
+      "saved_model_fresh_pid_replay": "PASS",
+      "prior_official_answer_exact": "FAIL",
+      "checks": 21,
+      "answer_sha256": "5971e145f1ac38b8ee3e34cfd302973ba7a64b8873db11c354d3331221fdb28a",
+      "previous_positive_rows": 6505,
+      "new_positive_rows": 6395,
+      "exact_changed_rows": null,
+      "minimum_changed_rows": 110
+    },
+    "P2": {
+      "id": "p2_clean_regeneration_20260905_v6",
+      "new_training_to_answer": "PASS",
+      "saved_model_fresh_pid_replay": "PASS",
+      "prior_official_answer_exact": "PASS",
+      "checks": 27,
+      "answer_sha256": "46d194a1ef40a1deaebd084916644d9359433d2e6ce7d5c0b53d9f515bbec071"
+    },
+    "P3": {
+      "id": "p3_clean_regeneration_20260905_v4",
+      "new_training_to_answer": "PASS",
+      "saved_model_fresh_pid_replay": "PASS",
+      "prior_official_answer_exact": "PASS",
+      "checks": 133,
+      "answer_sha256": "6bfa23d25f944df4711c11d1fce82978a96df08b58fdc57f666ac792a7da96b7"
+    }
+  },
+  "P2_candidate": {
+    "id": "p2_profile_copula_deploy_20260905_v4",
+    "status": "LOCAL_READY_NOT_UPLOADED",
+    "rows": 26061,
+    "checks": 28,
+    "full_copula_fits": 1,
+    "answer_sha256": "3dff2982f38ef2306248e76494c8d2c95b730244ce5730ba59335418dd3f557b",
+    "root_file_sha256_rechecked": true,
+    "official_score": null,
+    "risk": "Autumn primary improved, extra autumn 7/14-day outages worsened"
+  },
+  "observed_data_fit_counts_excluding_synthetic": {
+    "P1": {
+      "TS": 6,
+      "failed_regeneration_v4": 2,
+      "regeneration_v5": 4
+    },
+    "P2": {
+      "historical_copula": 3,
+      "failed_regeneration_v4": 1,
+      "failed_regeneration_v5": 1,
+      "regeneration_v6": 3,
+      "full_copula": 1
+    },
+    "P3": {
+      "wind_trial": 6,
+      "regeneration_backbone": 8,
+      "regeneration_router": 3
+    },
+    "total": 38
+  },
+  "preserved_failures": [
+    "p1_clean_regeneration_20260905_v4",
+    "p2_clean_regeneration_20260905_v4",
+    "p2_clean_regeneration_20260905_v5"
+  ],
+  "boundaries": {
+    "hidden_values_read": 0,
+    "prior_answers_used_as_input": 0,
+    "external_data_used": 0,
+    "uploads": 0,
+    "final_model_locks": 0,
+    "independent_machine_network_isolated_package": "NOT_VERIFIED"
+  },
+  "limitations": [
+    "Historical surfaces were previously exposed; descriptive CI does not correct model-selection bias",
+    "P1 regenerated answer does not inherit old official score",
+    "P2 stress harm retained, no post-hoc retuning",
+    "P3 station-episode clusters are not guaranteed independent across stations",
+    "Local checked code snapshots are not self-contained verified final archives",
+    "Roadmap v5 evaluator source-support audit must precede any new fit"
+  ]
+}

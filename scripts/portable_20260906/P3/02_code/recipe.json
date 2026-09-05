@@ -1,0 +1,106 @@
+{
+  "validation": {
+    "windows": [
+      [
+        "2024_h2_storm",
+        "2024-07-01",
+        "2024-11-01"
+      ],
+      [
+        "winter_transition",
+        "2024-11-01",
+        "2025-03-01"
+      ],
+      [
+        "2025_h1",
+        "2025-03-01",
+        "2025-06-25"
+      ]
+    ],
+    "selection": "station_global_chronological_first_eligible_across_all_windows",
+    "gap_hours": 78,
+    "context_hours": 48,
+    "target_hours": 24,
+    "footprint_hours": 72,
+    "storm_threshold_hs_m": 1.5,
+    "raw_wave_episode_contiguous_minutes": 20,
+    "episode_reuse_within_validation": false,
+    "same_episode_train_validation": false,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260822
+  },
+  "features": {
+    "surface": "compact_feature_columns_fixed_v1",
+    "expected_feature_count": 591,
+    "test_feature_semantics": "one row per anonymous case, derived only from that case's 48-hour context"
+  },
+  "model": {
+    "single": {
+      "loss_function": "RMSE",
+      "iterations": 700,
+      "learning_rate": 0.035,
+      "depth": 6,
+      "l2_leaf_reg": 8.0,
+      "random_strength": 0.2,
+      "thread_count": 2
+    },
+    "multi": {
+      "loss_function": "MultiRMSE",
+      "iterations": 1200,
+      "learning_rate": 0.03,
+      "depth": 7,
+      "l2_leaf_reg": 10.0,
+      "random_strength": 0.15,
+      "task_type": "GPU",
+      "devices": "0",
+      "boosting_type": "Plain",
+      "thread_count": 2
+    },
+    "fold_seeds": [
+      20260816,
+      20260817,
+      20260818
+    ],
+    "full_train_seed": 20260817,
+    "single_weight": 0.5,
+    "multi_weight": 0.5,
+    "residual_target": "target_hs_minus_current_hs",
+    "case_weight": "exp(-0.45*max(current_hs-1.5,0))_mean_normalized",
+    "prediction_clip_m": [
+      0.0,
+      30.0
+    ]
+  },
+  "router": {
+    "granularity": "lead_long",
+    "name": "smooth_medium",
+    "alpha": 10.0,
+    "temperature_multiplier": 2.0,
+    "strength": 0.5,
+    "active_leads": [
+      12,
+      18,
+      24
+    ],
+    "fold_one": "exact_equal_component_no_op",
+    "later_folds": "fixed_config_refit_on_completed_corrected_oof_only",
+    "hyperparameter_search": false
+  },
+  "shrink": {
+    "active_leads": [
+      12,
+      18,
+      24
+    ],
+    "persistence_weight": 0.2
+  },
+  "gate": {
+    "baseline": "persistence_on_identical_corrected_cases",
+    "pooled_rmse_below_persistence": true,
+    "paired_case_bootstrap_ci90_upper_below_zero": true,
+    "minimum_improved_folds": 2,
+    "all_split_and_integrity_contracts": true,
+    "on_pass": "full_train_then_same_case_only_200_test_inference",
+    "on_fail": "stop_before_test_feature_or_test_index_read"
+  }
+}

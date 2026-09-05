@@ -1,0 +1,22 @@
+{
+  "experiment_id": "p1_tuning_depth_stress_20260906_v1",
+  "threads": 2,
+  "gpu": false,
+  "max_fits": 0,
+  "wall_cap_seconds": 600,
+  "changed_columns": ["nominal_depth_m", "depth_regime"],
+  "conditions": ["standard_twosided", "unknown_year", "training_year_median_fallback"],
+  "fallback": "finite per-year medians from each frozen model training stats, equal-year median, existing np.round(depth/2)*2; unsupported remains NaN/unknown",
+  "fixed": ["outer_models", "700_iterations", "training_stats", "encoder", "labels", "keys", "order", "calendar", "raw_depth", "rules", "earlier_inner_policy", "thresholds"],
+  "selection": false,
+  "official_rows": 0,
+  "csv_written": 0,
+  "uploads": 0,
+  "source_pins": {
+    "scripts/run_p1_tuning_twosided_20260906_v1.py": "2e2d17b704b39c31427ccca23170fc07accd7875f15d282089b9151c1ab9af30",
+    "configs/experiments/p1_tuning_twosided_20260906_v1.json": "ae54d833113b34b48ff0c64b9eba382bc785e9750134c565c9d3cf0eca608145",
+    "reports/p1_tuning_twosided_20260906_v1/result.json": "746c6a0a5987620bcd6fd3487ffeab617dd0ef78a605818c6dccd8f2e0610710",
+    "reports/p1_tuning_twosided_20260906_v1/independent-qa.json": "b27c3659123eea135b1d8702062c592ad5cab204f3952b5a2f246c4d91504871"
+  },
+  "interpretation": "Retrospective counterfactual diagnostics only; no future performance proof, policy selection or automatic official materialization"
+}

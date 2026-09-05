@@ -1,0 +1,385 @@
+
+def budget_guard(started_unix):
+    remaining = WALL_SECONDS - (time.time() - started_unix)
+    if remaining <= 0:
+        raise RuntimeError("workflow wall cap consumed; no restart")
+    def expired():
+        write(REPORT / "wall-cap-terminal.json", {
+            "status": "TERMINAL_WALL_CAP", "pid": os.getpid(), "max_seconds": WALL_SECONDS})
+        os._exit(124)
+    timer = threading.Timer(remaining, expired)
+    timer.daemon = True
+    timer.start()
+    return timer
+
+
+def array_sha(value):
+    return hashlib.sha256(np.ascontiguousarray(value).tobytes()).hexdigest()
+
+
+def key_sha(frame):
+    return array_sha(pd.util.hash_pandas_object(frame[screen.KEYS], index=False).to_numpy())
+
+
+def checked_probability(value, rows):
+    if value.shape != (rows,) or not np.isfinite(value).all() or ((value < 0) | (value > 1)).any():
+        raise ValueError("invalid probability shape/range/finite")
+    return value
+
+
+def arm_bundle(frame, stats, frozen, cfg, name):
+    if name not in ("original", "balanced"):
+        raise ValueError("unknown model arm")
+    base = screen.feature_pair(frame, stats, frozen)[0]
+    if base.frame.shape[1] != 80:
+        raise ValueError("clean 80-feature contract changed")
+    if name == "original":
+        return base
+    extra = bracket.bracket_features(frame[screen.RAW], cfg)
+    if extra.shape[1] != 27 or set(extra) & set(base.frame):
+        raise ValueError("bracket feature contract changed")
+    combined = pd.concat([base.frame, extra], axis=1)
+    return screen.FeatureBundle(combined, tuple(combined), base.categorical_columns)
+
+
+def inner_split(frame, frozen, cfg):
+    # Select before stats/features/encoder/rules. Never consult later labels to trim a run.
+    fold = next(f for f in frozen["folds"] if f["name"] == "2025_q4")
+    end = pd.Timestamp(fold["start"]) - pd.Timedelta(days=frozen["purge_days"])
+    start = end - pd.Timedelta(days=frozen["inner_days"])
+    stop = start - pd.Timedelta(days=frozen["purge_days"])
+    if (start, end, stop) != tuple(pd.Timestamp(cfg[k]) for k in
+                                  ("inner_start", "inner_end", "training_stop")):
+        raise ValueError("final-inner dates changed")
+    times = pd.to_datetime(frame.time, utc=True)
+    evaluation = frame.loc[(times >= start) & (times < end)].reset_index(drop=True)
+    training = screen.train_slice(frame, stop)
+    if not len(training) or not len(evaluation) or not pd.to_datetime(training.time, utc=True).max() < stop:
+        raise ValueError("invalid final-inner partition")
+    return training, evaluation
+
+
+def read_train(frozen, cfg):
+    path = Path(os.environ["P1_DATA_DIR"]) / "train.csv"
+    if screen.sha(path) != frozen["expected_training_sha256"]:
+        raise ValueError("training data hash mismatch")
+    frame = pd.read_csv(path, usecols=screen.RAW + ["label", "anomaly_type"])
+    if len(frame) != cfg["expected_training_rows"] or frame[screen.KEYS].isna().any().any():
+        raise ValueError("training count or missing keys")
+    if frame.duplicated(screen.KEYS).any() or not frame.label.isin([0, 1]).all():
+        raise ValueError("training keys or labels invalid")
+    frame["row_id"] = np.arange(len(frame))
+    frame.sort_values(["station", "layer", "time"], kind="stable", inplace=True)
+    frame.reset_index(drop=True, inplace=True)
+    return frame
+
+
+def fit_pair(training, evaluation, stage, frozen, cfg, receipt):
+    stats = screen.stats_fit(training)
+    target = training.label.to_numpy(dtype=np.int8)
+    base = screen.load_config(ROOT / frozen["base_config"], env={})
+    lgb = json.loads((ROOT / frozen["lightgbm_recipe"]).read_text(encoding="utf-8"))
+    probabilities = {}
+    order = ("balanced", "original") if stage == "inner" else ("original", "balanced")
+    for name in order:
+        if len(receipt["fits"]) >= MAX_FITS:
+            raise RuntimeError("fit budget exceeded")
+        begin = time.monotonic()
+        bundle = arm_bundle(training, stats, frozen, cfg, name)
+        encoder = screen.TabularEncoder().fit(bundle, np.arange(len(training)))
+        features = encoder.transform(bundle)
+        if features.shape != (len(training), cfg["features"][name]):
+            raise ValueError("training feature shape mismatch")
+        if name == "original":
+            if base.raw["models"]["xgboost"]["n_estimators"] != cfg["trees"]:
+                raise ValueError("O tree count changed")
+            model = screen._fit_model("xgboost", base.raw["models"]["xgboost"], frozen["seed"],
+                                      THREADS, features, target)
+        else:
+            params = screen._lgb_parameters(lgb, frozen["seed"], multiclass=False)
+            params["n_jobs"] = THREADS
+            if params["n_estimators"] != cfg["trees"]:
+                raise ValueError("B tree count changed")
+            model = screen.lgb.LGBMClassifier(**params)
+            model.fit(features, target, sample_weight=screen._event_day_weight(training, target))
+        path = OUT / "03_model" / (stage + "_" + name + ".joblib")
+        if path.exists():
+            raise FileExistsError("model path exists; no overwrite")
+        joblib.dump({"model": model, "encoder": encoder, "train_stats": stats}, path, compress=3)
+        if evaluation is not None:
+            eval_bundle = arm_bundle(evaluation, stats, frozen, cfg, name)
+            x_probe = encoder.transform(eval_bundle)
+            rows = len(evaluation)
+        else:
+            rows = min(cfg["full_probe_rows"], len(features))
+            x_probe = features[:rows]
+        probability = checked_probability(model.predict_proba(x_probe)[:, 1], rows)
+        if evaluation is not None:
+            probabilities[name] = probability
+        probe_path = OUT / "04_logs" / (stage + "_" + name + "_probability.npy")
+        with probe_path.open("xb") as handle:
+            np.save(handle, probability, allow_pickle=False)
+        item = {"stage": stage, "model": name, "model_file": path.name,
+                "sha256": screen.sha(path), "training_rows": len(training),
+                "training_keys_sha256": key_sha(training), "features": features.shape[1],
+                "feature_columns_sha256": hashlib.sha256(json.dumps(list(bundle.frame)).encode()).hexdigest(),
+                "probability_file": probe_path.name, "probability_sha256": screen.sha(probe_path),
+                "probability_values_sha256": array_sha(probability), "probe_rows": rows,
+                "seconds": time.monotonic() - begin, "fresh_initialization": True,
+                "training_max": pd.to_datetime(training.time, utc=True).max().isoformat()}
+        if name == "original":
+            item["same_as_baseline_original_model_sha_metadata"] = (
+                item["sha256"] == cfg["baseline_original_model_sha_metadata_only"][stage])
+        receipt["fits"].append(item)
+        write(OUT / "progress.json", {"status": "RUNNING", "completed_fits": len(receipt["fits"]),
+                                      "stage": stage, "pid": os.getpid()})
+        print(json.dumps({"stage": stage, "completed_fits": len(receipt["fits"]),
+                          "seconds": item["seconds"]}), flush=True)
+        del model, encoder, bundle, features, x_probe
+        gc.collect()
+    return probabilities, stats
+
+
+def train():
+    cfg, frozen, hashes = source_contract()
+    if cfg["max_fits"] != MAX_FITS or cfg["threads"] != THREADS or cfg["gpu"]:
+        raise ValueError("resource contract mismatch")
+    ensure_empty_models(OUT / "03_model")
+    for directory in (OUT / "05_answer", OUT / "04_logs"):
+        if any(directory.iterdir()):
+            raise FileExistsError("fresh model/probe/answer folders required")
+    started = time.monotonic()
+    receipt = {"experiment_id": RUN, "status": "RUNNING", "pid": os.getpid(),
+               "started_unix": time.time(), "fits": [], "max_fits": MAX_FITS,
+               "threads": THREADS, "gpu": False, "workflow_wall_cap_seconds": WALL_SECONDS,
+               "empty_03_model_verified_before_training": True, "prior_models_read": 0,
+               "prior_answer_values_read": 0, "official_rows": 0, "sample_values_read": 0,
+               "hidden_rows": 0, "external_observation_rows": 0, "csv_written": 0, "uploads": 0,
+               "score_inversion_used": False, "source_hashes": hashes, "seed": frozen["seed"],
+               "fit_order": cfg["fit_order"], "versions": {k: importlib.metadata.version(k)
+                for k in ("numpy", "pandas", "scikit-learn", "lightgbm", "xgboost", "joblib")}}
+    with (OUT / "ATTEMPT_LOCK.json").open("x", encoding="utf-8") as handle:
+        json.dump(receipt, handle)
+    timer = budget_guard(receipt["started_unix"])
+    try:
+        frame = read_train(frozen, cfg)
+        training, evaluation = inner_split(frame, frozen, cfg)
+        if (len(training), len(evaluation)) != (cfg["expected_inner_training_rows"], cfg["expected_inner_evaluation_rows"]):
+            raise ValueError("final-inner support counts changed")
+        receipt["train_sha256"] = frozen["expected_training_sha256"]
+        receipt["inner_split"] = {"start": cfg["inner_start"], "end": cfg["inner_end"],
+                                  "training_stop": cfg["training_stop"], "purge_days": frozen["purge_days"],
+                                  "training_rows": len(training), "rows": len(evaluation),
+                                  "evaluation_keys_sha256": key_sha(evaluation),
+                                  "evaluation_target_sha256": array_sha(evaluation.label.to_numpy(dtype=np.int8)),
+                                  "positive_rows": int(evaluation.label.sum())}
+        probabilities, stats = fit_pair(training, evaluation, "inner", frozen, cfg, receipt)
+        selected, calibrations, metrics = select_policy(evaluation, probabilities, screen.rule_masks(evaluation, stats), frozen)
+        receipt["rederived_inner"] = {"selected": selected, "calibrations": calibrations, "metrics": metrics,
+                                      "outer_labels_used": 0, "scope": "final-inner selection score, not fresh holdout"}
+        del training, evaluation, probabilities
+        gc.collect()
+        fit_pair(frame.drop(columns="row_id"), None, "full", frozen, cfg, receipt)
+        assert_sources(hashes)
+        recipe = {"feature_contract": frozen, "candidate_contract": cfg, "selection": selected,
+                  "calibrations": calibrations, "extra_decoder_enabled": False,
+                  "model_hashes": {f["model"]: f["sha256"] for f in receipt["fits"] if f["stage"] == "full"},
+                  "source_hashes": hashes, "training_pid": os.getpid(), "official_rows_before_seal": 0}
+        write(OUT / "03_model/frozen_recipe.json", recipe)
+        receipt["recipe_sha256"] = screen.sha(OUT / "03_model/frozen_recipe.json")
+        receipt["status"] = "FOUR_FITS_COMPLETE_OFFICIAL_UNREAD"
+    except Exception as exc:
+        receipt.update(status="TERMINAL_TECHNICAL_FAILURE", error=str(exc))
+        raise
+    finally:
+        receipt["runtime_seconds"] = time.monotonic() - started
+        write(OUT / "train_result.json", receipt)
+        write(REPORT / "train-result.json", receipt)
+        timer.cancel()
+
+
+def checked_training():
+    training = json.loads((OUT / "train_result.json").read_text(encoding="utf-8"))
+    if training["status"] != "FOUR_FITS_COMPLETE_OFFICIAL_UNREAD" or len(training["fits"]) != MAX_FITS:
+        raise ValueError("complete four-fit seal required")
+    if training["pid"] == os.getpid():
+        raise ValueError("separate process required")
+    assert_sources(training["source_hashes"])
+    recipe_path = OUT / "03_model/frozen_recipe.json"
+    if screen.sha(recipe_path) != training["recipe_sha256"]:
+        raise ValueError("recipe hash mismatch")
+    recipe = json.loads(recipe_path.read_text(encoding="utf-8"))
+    for fit in training["fits"]:
+        if screen.sha(OUT / "03_model" / fit["model_file"]) != fit["sha256"]:
+            raise ValueError("new model hash mismatch")
+    return training, recipe
+
+
+def independent_metric(y, bits):
+    truth, predicted = np.asarray(y, dtype=bool), np.asarray(bits, dtype=bool)
+    tp = int((truth & predicted).sum())
+    fp = int((~truth & predicted).sum())
+    fn = int((truth & ~predicted).sum())
+    return {"tp": tp, "fp": fp, "fn": fn, "f1": 2 * tp / max(1, 2 * tp + fp + fn)}
+
+
+def model_qa():
+    started = time.monotonic()
+    training, recipe = checked_training()
+    timer = budget_guard(training["started_unix"])
+    cfg, frozen = recipe["candidate_contract"], recipe["feature_contract"]
+    frame = read_train(frozen, cfg)
+    inner_train, inner_eval = inner_split(frame, frozen, cfg)
+    if key_sha(inner_eval) != training["inner_split"]["evaluation_keys_sha256"]:
+        raise ValueError("inner evaluation key mismatch")
+    checks, probabilities, stats = [], {}, None
+    for fit in training["fits"]:
+        stage, name = fit["stage"], fit["model"]
+        fit_frame = inner_train if stage == "inner" else frame.drop(columns="row_id")
+        eval_frame = inner_eval if stage == "inner" else fit_frame
+        package = joblib.load(OUT / "03_model" / fit["model_file"])
+        if key_sha(fit_frame) != fit["training_keys_sha256"]:
+            raise ValueError("training key replay mismatch")
+        fresh_stats = screen.stats_fit(fit_frame)
+        if joblib.hash(fresh_stats) != joblib.hash(package["train_stats"]):
+            raise ValueError("training statistics replay mismatch")
+        bundle = arm_bundle(eval_frame, fresh_stats, frozen, cfg, name)
+        x = package["encoder"].transform(bundle)
+        if list(bundle.frame) != list(package["encoder"].feature_columns):
+            raise ValueError("encoder columns mismatch")
+        if stage == "full":
+            x = x[:cfg["full_probe_rows"]]
+        actual = checked_probability(package["model"].predict_proba(x)[:, 1], fit["probe_rows"])
+        path = OUT / "04_logs" / fit["probability_file"]
+        if screen.sha(path) != fit["probability_sha256"]:
+            raise ValueError("sealed probability file changed")
+        expected = np.load(path, allow_pickle=False)
+        if not np.array_equal(actual, expected) or array_sha(actual) != fit["probability_values_sha256"]:
+            raise ValueError("fresh model probability replay mismatch")
+        checks.append({"stage": stage, "model": name, "rows": len(actual), "features": x.shape[1],
+                       "exact_probability_replay": True, "training_stats_recomputed": True,
+                       "model_sha256": fit["sha256"]})
+        if stage == "inner":
+            probabilities[name], stats = actual, fresh_stats
+        del package, bundle, x
+        gc.collect()
+    selected, cals, metrics = select_policy(inner_eval, probabilities, screen.rule_masks(inner_eval, stats), frozen)
+    if (selected != recipe["selection"] or cals != recipe["calibrations"] or metrics != training["rederived_inner"]["metrics"]):
+        raise ValueError("inner policy/calibration/metrics replay mismatch")
+    all_bits = policy_bits(inner_eval, probabilities, screen.rule_masks(inner_eval, stats), frozen, cals)
+    independent = {name: independent_metric(inner_eval.label, value) for name, value in all_bits.items()}
+    if any(abs(independent[k]["f1"] - metrics[k]["f1"]) > 1e-14 for k in POLICIES):
+        raise ValueError("independent F1 arithmetic mismatch")
+    qa = {"status": "PASS", "pid": os.getpid(), "training_pid": training["pid"],
+          "train_result_sha256": screen.sha(OUT / "train_result.json"), "recipe_sha256": training["recipe_sha256"],
+          "fresh_process": True, "model_checks": checks, "inner_policy_exact": True,
+          "independent_inner_metrics": independent, "full_probe_quality_metric_calculated": False,
+          "official_rows": 0, "sample_prediction_values_read": 0, "hidden_rows": 0, "new_fits": 0,
+          "runtime_seconds": time.monotonic() - started, "workflow_elapsed_seconds": time.time() - training["started_unix"],
+          "scope": "four newly trained models reloaded in another PID; not two full training workflows"}
+    with (REPORT / "model-replay-qa.json").open("x", encoding="utf-8") as handle:
+        json.dump(qa, handle, indent=2)
+    timer.cancel()
+    print(json.dumps(qa), flush=True)
+
+
+def require_official_gate(training):
+    replay_path = REPORT / "model-replay-qa.json"
+    independent_path = REPORT / "independent-training-qa.json"
+    replay = json.loads(replay_path.read_text(encoding="utf-8"))
+    independent = json.loads(independent_path.read_text(encoding="utf-8"))
+    digest = screen.sha(OUT / "train_result.json")
+    if (replay["status"] != "PASS" or not replay["fresh_process"] or replay["pid"] == training["pid"]
+        or replay["train_result_sha256"] != digest or replay["recipe_sha256"] != training["recipe_sha256"]):
+        raise ValueError("fresh training-model replay gate failed")
+    if (independent["status"] != "PASS" or independent["pid"] in (training["pid"], replay["pid"])
+        or independent["train_result_sha256"] != digest or independent["recipe_sha256"] != training["recipe_sha256"]
+        or independent["model_replay_qa_sha256"] != screen.sha(replay_path)):
+        raise ValueError("independent training QA gate failed")
+    return {"model_replay_qa_sha256": screen.sha(replay_path),
+            "independent_training_qa_sha256": screen.sha(independent_path)}
+
+
+def infer(verify=False):
+    started = time.monotonic()
+    training, recipe = checked_training()
+    gate = require_official_gate(training)  # BEFORE any official data/hash read.
+    timer = budget_guard(training["started_unix"])
+    cfg, frozen = recipe["candidate_contract"], recipe["feature_contract"]
+    root_data = Path(os.environ["P1_DATA_DIR"])
+    evaluation = pd.read_csv(root_data / "test.csv", usecols=screen.RAW)
+    keys = pd.read_csv(root_data / "sample_submission.csv", usecols=screen.KEYS)
+    if len(evaluation) != cfg["expected_official_rows"] or len(keys) != cfg["expected_official_rows"]:
+        raise ValueError("official row count mismatch")
+    if not evaluation[screen.KEYS].equals(keys):
+        raise ValueError("official original key/order mismatch")
+    evaluation.sort_values(["station", "layer", "time"], kind="stable", inplace=True)
+    evaluation.reset_index(drop=True, inplace=True)
+    probabilities, stats = {}, None
+    for name in ("original", "balanced"):
+        package = joblib.load(OUT / "03_model" / ("full_" + name + ".joblib"))
+        stats = package["train_stats"]
+        bundle = arm_bundle(evaluation, stats, frozen, cfg, name)
+        probabilities[name] = checked_probability(package["model"].predict_proba(
+            package["encoder"].transform(bundle))[:, 1], len(evaluation))
+    bits, _, _ = canonical.decoder.control_components(evaluation, probabilities,
+        screen.rule_masks(evaluation, stats), frozen, recipe["selection"], recipe["calibrations"], 1e-6)
+    answer = align_answer(evaluation, bits, keys)
+    data = answer.to_csv(index=False, lineterminator="\n").encode("utf-8")
+    digest = hashlib.sha256(data).hexdigest()
+    path = OUT / "05_answer/P1_submission.csv"
+    if verify:
+        first = json.loads((REPORT / "inference-qa.json").read_text(encoding="utf-8"))
+        if first["pid"] == os.getpid() or digest != first["sha256"] or data != path.read_bytes():
+            raise ValueError("new-process complete answer replay mismatch")
+    else:
+        with path.open("xb") as handle:
+            handle.write(data)
+    qa = {"experiment_id": RUN, "status": "FRESH_PROCESS_ANSWER_REPLAY_PASS" if verify else "LOCAL_CANDIDATE_CREATED",
+          "pid": os.getpid(), "training_pid": training["pid"], "fresh_process": True,
+          "sha256": digest, "rows": len(answer), "positive_rows": int(answer.label.sum()),
+          "schema": list(answer), "schema_key_order_binary_finite_unique_pass": True,
+          "prior_answer_values_read": 0, "prior_models_read": 0, "new_models_loaded": 2,
+          "official_test_rows": len(evaluation), "sample_key_rows": len(keys),
+          "sample_prediction_values_read": 0, "hidden_rows": 0, "uploads": 0, "new_fits": 0,
+          "train_result_sha256": screen.sha(OUT / "train_result.json"), "recipe_sha256": training["recipe_sha256"],
+          **gate, "runtime_seconds": time.monotonic() - started,
+          "workflow_elapsed_seconds": time.time() - training["started_unix"],
+          "whole_training_runs": 1, "isolated_clean_machine_verified": False,
+          "final_model_locked": False, "official_score_verified": False}
+    with (REPORT / ("answer-replay-qa.json" if verify else "inference-qa.json")).open("x", encoding="utf-8") as handle:
+        json.dump(qa, handle, indent=2)
+    timer.cancel()
+    print(json.dumps(qa), flush=True)
+
+
+def install_boundary_guard(phase):
+    data = Path(os.environ["P1_DATA_DIR"]).resolve()
+    denied_repo = os.environ.get("P1_DENY_REPO")
+    denied_repo = Path(denied_repo).resolve() if denied_repo else None
+    allowed_data = {"train.csv"} if phase in {"train", "model-qa"} else {"test.csv", "sample_submission.csv"}
+    def audit(event, args):
+        if event in {"socket.connect", "socket.bind", "socket.getaddrinfo"}:
+            raise PermissionError("offline package: network disabled")
+        if event != "open" or not isinstance(args[0], (str, bytes, os.PathLike)):
+            return
+        path = Path(os.fsdecode(args[0])).resolve()
+        if path.is_relative_to(data) and path.name not in allowed_data:
+            raise PermissionError("data file not authorized for this phase")
+        if denied_repo and path.is_relative_to(denied_repo):
+            if not path.is_relative_to(data) and not path.is_relative_to(Path(sys.prefix)):
+                raise PermissionError("original repository access denied")
+    sys.addaudithook(audit)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("action", choices=["train", "model-qa", "infer", "verify"])
+    args = parser.parse_args()
+    install_boundary_guard(args.action)
+    if args.action == "train":
+        train()
+    elif args.action == "model-qa":
+        model_qa()
+    else:
+        infer(args.action == "verify")

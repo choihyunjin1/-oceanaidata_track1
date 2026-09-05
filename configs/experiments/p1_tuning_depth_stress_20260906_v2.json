@@ -1,0 +1,23 @@
+{
+  "experiment_id": "p1_tuning_depth_stress_20260906_v2",
+  "threads": 2,
+  "gpu": false,
+  "max_fits": 0,
+  "wall_cap_seconds": 900,
+  "budget_scope": "continuation execution plus separate-process replay compute; stage-boundary soft cap",
+  "reused_folds": ["H2_2024", "H1_2025"],
+  "remaining_folds": ["H2_2025"],
+  "conditions": ["standard_twosided", "unknown_year", "training_year_median_fallback"],
+  "changed_columns": ["nominal_depth_m", "depth_regime"],
+  "fallback": "exact v1 equal-year median-of-training-year-medians then existing 2m rounding; no rule selection",
+  "new_model_fits": 0,
+  "official_rows": 0,
+  "csv_written": 0,
+  "uploads": 0,
+  "source_pins": {
+    "scripts/run_p1_tuning_depth_stress_20260906_v1.py": "6791a7665dfa4e3fd4572f2b399ebe056f667d76fbd9b7a9ef0aaaf968e1c425",
+    "configs/experiments/p1_tuning_depth_stress_20260906_v1.json": "279c3c3d9a8bffdcf7216a0b56b6799af369f125642b25bc83933d22da945fb8",
+    "reports/p1_tuning_depth_stress_20260906_v2/partial-manifest.json": "7b1d9c858b93db5e6427d4f0e5d4cea970069835fc361d7779a24383643ec877"
+  },
+  "interpretation": "retrospective counterfactual diagnostics only; no future proof or automatic candidate generation"
+}

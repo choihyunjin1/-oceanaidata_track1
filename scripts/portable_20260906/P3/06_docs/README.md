@@ -1,0 +1,1 @@
+See the package-root README.md for commands, environment, answer selection, time limits and claim boundaries. source-provenance.json records exact function ancestry, not a dependency on the research repository.

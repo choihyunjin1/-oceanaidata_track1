@@ -1,0 +1,48 @@
+{
+  "constant": 0.2,
+  "active_leads": [
+    12,
+    18,
+    24
+  ],
+  "classification": "historical train-OOF adaptive local choice then fixed; not virgin holdout; not Public-inverse coefficient",
+  "origin_receipt": "artifacts/p3/long_persistence_shrink/metrics.json",
+  "origin_receipt_sha256": "41ed5676fc993fc6debefd271f74f28be69340bb4b7a5621ab5d83322a81c46e",
+  "origin_time": "2026-08-17T15:54:42.599176+09:00",
+  "evidence_lines": {
+    "artifacts/p3/long_persistence_shrink/metrics.json": [
+      2,
+      16,
+      17,
+      120,
+      121,
+      122
+    ],
+    "scripts/run_p3_long_persistence_shrink.py": [
+      67,
+      74,
+      83,
+      97,
+      104,
+      113,
+      135,
+      136,
+      137
+    ],
+    "src/p3_wave/persistence_shrink.py": [
+      11,
+      18,
+      54
+    ]
+  },
+  "source_evaluator_sha256": "d907eab7a3f1ad8191703a12045f3ae52313893171837c4d803c6f530aa2342c",
+  "source_constant_module_sha256": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+  "source_evaluator_inputs": "local historical OOF target/prediction/persistence only; bounded sensitivity 0.15/0.20/0.25; no leaderboard inversion code",
+  "receipt_invariants": {
+    "external_observations_used": 0,
+    "hidden_test_labels_used": 0,
+    "official_score": false
+  },
+  "current_execution": "Copies only the fixed constant and pure function; freshly trains backbone and OOF router; old OOF/models/answers are not loaded.",
+  "provenance_limit": "Historical local-selection receipt/code inspection is not an OS event audit of the 2026-08-17 session."
+}

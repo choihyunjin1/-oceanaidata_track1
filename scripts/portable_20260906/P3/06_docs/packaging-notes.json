@@ -1,0 +1,57 @@
+{
+  "source_runner": "scripts/run_p3_clean_regeneration_20260905_v4.py",
+  "source_runner_sha256": "9933a4559216897643d2f03185db29bb1080eed769ee103dbe7b66e868b8442b",
+  "unchanged_algorithms": [
+    "selected clean module functions and constant AST comparison:60 PASS",
+    "rows_for_cases",
+    "predict_cases",
+    "official_frame",
+    "csv_bytes"
+  ],
+  "packaging_changes": [
+    "local 02_code/p3_clean import closure only",
+    "data reference instead of source CSV copy",
+    "own 04_logs instead of original repository reports and validation paths",
+    "manifest and environment verification",
+    "fresh training-only independent QA prerequisite before official inference",
+    "actual prepare-start to answer wall cap includes process gaps"
+  ],
+  "supplementary_constants": {
+    "module": "persistence_shrink.py",
+    "OFFICIAL_LEADS": [
+      3,
+      6,
+      9,
+      12,
+      18,
+      24
+    ],
+    "LONG_LEADS": [
+      12,
+      18,
+      24
+    ],
+    "FROZEN_LONG_PERSISTENCE_WEIGHT": 0.2,
+    "source": "src/p3_wave/persistence_shrink.py"
+  },
+  "synthetic_qa": {
+    "cases": 9,
+    "first_suite_passed": 8,
+    "first_suite_failed": 1,
+    "corrected_test_only_before_seal": "Compare 0.8*3+0.2*2 with same arithmetic instead of independently rounded literal 2.8; no runtime algorithm or tolerance changed.",
+    "corrected_case_rerun_passed": 1,
+    "native_synthetic_cpu_fits": 2,
+    "iterations_each": 3,
+    "ruff": "PASS",
+    "historical_fits": 0,
+    "official_inputs": 0
+  },
+  "authority": {
+    "two_independent_empty_training_runs": true,
+    "maximum_total_backbone_fits": 16,
+    "maximum_total_router_fits": 6,
+    "root_assigned_gpu": true,
+    "each_run_seconds_cap": 21600,
+    "upload": false
+  }
+}

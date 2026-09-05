@@ -1,0 +1,73 @@
+{
+  "experiment_id": "p1_bracket_candidate_20260906_v1",
+  "status": "LOCAL_CANDIDATE_AND_REPLAY_QA_PASS_NOT_UPLOADED",
+  "package_root": "artifacts/p1_bracket_candidate_20260906_v1/package",
+  "answer": {
+    "path": "artifacts/p1_bracket_candidate_20260906_v1/package/05_answer/P1_submission.csv",
+    "sha256": "9031c84ea72dfa4294406dd995525e89e8975a76983e9f9d7a7b2ba74dbad93a",
+    "rows": 169011,
+    "positive_rows": 7014,
+    "official_score": null
+  },
+  "new_fits": 4,
+  "threads": 4,
+  "gpu": false,
+  "trees_per_model": 700,
+  "features": {"original": 80, "balanced": 107},
+  "selected_policy": "balanced",
+  "selected_threshold": 0.1,
+  "final_inner": {
+    "rows": 123372,
+    "positive_rows": 4445,
+    "training_rows": 467282,
+    "candidate_f1": 0.9002041551579201,
+    "candidate_tp": 3748,
+    "candidate_fp": 134,
+    "candidate_fn": 697,
+    "baseline_f1": 0.8946535135793448,
+    "delta_f1": 0.0055506415785753,
+    "scope": "same final-inner policy-selection interval, not fresh holdout"
+  },
+  "qa": {
+    "synthetic_tests_passed": 17,
+    "ruff": "PASS",
+    "new_models_fresh_probability_replay_exact": 4,
+    "original_inner_and_full_baseline_sha_exact": true,
+    "root_training_checks_passed": 49,
+    "full_answer_new_process_bytes_exact": true,
+    "root_answer_checks_passed": 26,
+    "preservation_files": 41,
+    "preservation_hash_mismatches": 0,
+    "preservation_bytes": 15113252
+  },
+  "timing_seconds": {
+    "training": 254.907,
+    "model_replay": 105.828,
+    "root_training_qa": 24.219,
+    "inference": 25.938,
+    "answer_replay": 25.906,
+    "workflow_through_answer_replay": 589.3174910545349,
+    "cap": 3600
+  },
+  "train_result_sha256": "958f35f640c0c45d557f56ea0235026c102a8881b4c8abd2ee19d28ebcdaa7ec",
+  "recipe_sha256": "2c7c0cd68eb87ce3c4d331fae10f3cb4a3bd74c86aeb658bc6972d952936b9b7",
+  "source_manifest_sha256": "ba3f9b9f1e3d0642df0aaa05eb8822f7356e28383ef916bfb45c3f97952629c4",
+  "answer_replay_qa_sha256": "bf79d83d57113e2aa92b87c7d1e30af6b17016d157a7833c9ba2d6e23854c057",
+  "root_answer_qa_sha256": "6757af4f5b42eb37c98b9da9483a4c4eb1e72b4ae3076156a133ea61ca758b8c",
+  "hidden_rows": 0,
+  "sample_prediction_values_read": 0,
+  "external_observation_rows": 0,
+  "uploads": 0,
+  "final_model_locked": false,
+  "whole_training_runs": 1,
+  "isolated_clean_machine_verified": false,
+  "completed_folder_permanent_inference_adapter": false,
+  "postseal_baseline_comparison": {
+    "source": "root-answer-qa.json",
+    "changed_rows": 1417,
+    "zero_to_one": 1018,
+    "one_to_zero": 399,
+    "known_corrections": false,
+    "used_for_tuning": false
+  }
+}

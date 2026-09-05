@@ -1,0 +1,51 @@
+{
+  "package_id": "p3_portable_clean_regeneration_20260906_v1",
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "pyarrow": "25.0.1",
+      "scipy": "1.18.0",
+      "scikit-learn": "1.9.0",
+      "catboost": "1.2.10",
+      "joblib": "1.5.3"
+    }
+  },
+  "expected_clean_rmse_m_qa_only": 0.7791048399763751,
+  "expected_clean_csv_sha256_qa_only": "6bfa23d25f944df4711c11d1fce82978a96df08b58fdc57f666ac792a7da96b7",
+  "ancestry": {
+    "recipe": "source-only fixed CatBoost single/multi + newly trained OOF loss router + fixed long-lead persistence shrink 0.2",
+    "source_model": "all models from scratch on organizer-distributed P3 train",
+    "router": "Ridge alpha10 is regularization; no copied coefficients or public inverse",
+    "historical_windows": "canonical clean v4 three corrected forward windows; NOT v5 experiment",
+    "external": 0,
+    "old_models_oof_answers": 0,
+    "pretrained": 0
+  },
+  "budget": {
+    "cpu_threads": 2,
+    "multi_gpu": true,
+    "backbone_fits": 8,
+    "router_fits": 3,
+    "seconds_cap_per_regeneration": 21600,
+    "independent_regenerations": 2
+  },
+  "qa_policy": {
+    "old_sha_equality": "report exact equality without adjusting parameters or tolerance",
+    "current_saved_prediction_replay_max_abs_m": 0,
+    "current_csv_replay": "byte-exact",
+    "between_gpu_regeneration": "report exact SHA equality and max_abs/RMSE prediction differences; no post-hoc tolerance enlargement"
+  },
+  "limits": {
+    "upload": false,
+    "official_model_lock": false,
+    "git": false,
+    "raw_data_redistribution": false,
+    "os_network_sandbox_certified": false
+  }
+}
