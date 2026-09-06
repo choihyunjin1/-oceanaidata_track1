@@ -1,0 +1,79 @@
+{
+  "id": "p1_champion_reconstruction_20260906_v2_union_evaluation",
+  "role": "previously_exposed_retrospective_reconstruction_diagnostic_not_fresh_confirmation",
+  "fit_budget": 0,
+  "cpu_threads": 1,
+  "gpu": false,
+  "primary": "Q3+Q4 pooled binary F1 from summed TP/FP/FN; OR minus the same tree arm",
+  "tree_arms": [
+    "O",
+    "B",
+    "union",
+    "router"
+  ],
+  "secondary": [
+    "each fold",
+    "station",
+    "station-layer",
+    "KST 7-day blocks"
+  ],
+  "proposal": "fixed original width512/165-feature e150 3-seed mean, threshold0.8/0.4, snap12, minimum19; no retuning",
+  "tree_feature_caveat": "train-only year-depth dictionary / 168h plateau cap / 80 features; not exact original preprocessing or guaranteed original score",
+  "join": "preserve original Q3 then Q4 concatenation ownership using exact source per-fold ordered key digests; canonical station/year/layer/time plus fold full equality; no dropped/intersection rows",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20260906,
+    "block_days": 7,
+    "anchor_kst": "2025-01-01T00:00:00+09:00",
+    "stratify": "fold",
+    "cluster": "all stations/layers in each calendar 7-day time block; original owner fold boundaries separate clusters",
+    "minimum_clusters_per_fold": 2,
+    "ci_quantiles": [
+      0.05,
+      0.95
+    ],
+    "probability": "fraction of paired bootstrap pooled-F1 deltas > 0, descriptive not Bayesian probability or fresh-test p-value"
+  },
+  "risk": "negative fold/station/station-layer/block deltas; worst-block and counts; no post-hoc gates",
+  "required_feature_dependency_hours": 337,
+  "registered_minimum_holdout_gap_hours": 504.1666666666667,
+  "folds": [
+    {
+      "id": "2025_q3",
+      "phase": "q3",
+      "start": "2025-07-01T00:00:00+09:00",
+      "end": "2025-10-01T00:00:00+09:00",
+      "training_max_utc": "2025-06-09T14:50:00+00:00",
+      "source_rows": 176738,
+      "ordered_source_key_sha256": "8e4b225fc912a335383ebdcffd2c5a5304020f80acd5e52d53ff1b893248baec"
+    },
+    {
+      "id": "2025_q4",
+      "phase": "q4",
+      "start": "2025-10-01T00:00:00+09:00",
+      "end": "2025-12-11T00:00:00+09:00",
+      "training_max_utc": "2025-09-09T14:50:00+00:00",
+      "source_rows": 111124,
+      "ordered_source_key_sha256": "4a91345f68decb5e25d02c721ae53063b0807c3e5b3acdd970093ca36d857f6a"
+    }
+  ],
+  "inputs": {
+    "tree_directory": "artifacts/p1_champion_reconstruction_20260906_v1/tree_historical",
+    "tree_seal": "reports/p1_champion_reconstruction_20260906_v1/tree-seal.json",
+    "tree_runner_sha256": "c4a7d76f660cfaf5e094b1816c65cc30246b096aa26b9fd03c1d73ca0c857844",
+    "proposal_directory": "artifacts/p1_champion_reconstruction_20260906_v1_historical_proposals",
+    "proposal_sha256": "03852a318cbf7e17ea9cffbeb850a843d094da61b613353f066eb72cad3cb73d",
+    "proposal_qa_sha256": "ea4866a3d80f1c91bfbc2f1cd44a9a87574ac84bc60c42885600ac2a0fccacc3"
+  },
+  "amendment": {
+    "previous_id": "p1_champion_reconstruction_20260906_v1_union_evaluation",
+    "reason": "original positive-run fold owner must not be reassigned by calendar time; 119 Q3-owned October rows",
+    "scope": "fold metadata interpretation only; original full key set, labels, prediction arrays, metrics, resamples, thresholds, seeds unchanged",
+    "original_failure": "reports/p1_champion_reconstruction_20260906_v1/union-evaluation-v1-technical-failure.json"
+  },
+  "selection": "none; all four comparisons; root separately decides materialization",
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_outputs": 0,
+  "upload": 0
+}

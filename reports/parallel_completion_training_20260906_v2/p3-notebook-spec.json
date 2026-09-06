@@ -1,0 +1,12 @@
+{
+  "problem": "P3",
+  "TRAIN": [
+    ["02_code/run.py", "prepare", "--prepare-approved"],
+    ["02_code/run.py", "train", "--training-approved", "--gpu-approved", "--variant", "numeric"],
+    ["02_code/run.py", "qa"]
+  ],
+  "PREDICT": [
+    ["02_code/run.py", "infer", "--official-approved"],
+    ["02_code/run.py", "verify-answer", "--official-approved"]
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "experiment_id": "p3_numeric_lead_forward_gpu_20260906_v2",
+  "hypothesis": "Categorical -> numeric lead in CPU single only; freshly trained shared canonical GPU multi. Same frozen v5 rows and postprocessing.",
+  "contract": "configs/evaluation/ocean_forward_v5.json",
+  "source_support": "reports/ocean_forward_support_20260906_v1/result.json",
+  "cache": "artifacts/p3_clean_regeneration_20260905_v4/04_validation",
+  "cache_prepare": "reports/p3_clean_regeneration_20260905_v4/prepare.json",
+  "recipe": "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json",
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "inputs": {
+    "configs/evaluation/ocean_forward_v5.json": "ca6f610aa087c5d2f4c3c25e7af487178c2d344b527d987f0571ddeb178b8a5b",
+    "scripts/ocean_evaluation_contract_v5.py": "36581e8ac358463670b368e2da4ded98d5479c8a98c7c3917774c0dd68eb6e39",
+    "scripts/audit_ocean_forward_support_20260906_v1.py": "c377112ac1e6e34f09303e6f39d67b593bf718f0517354c7b6b2dfd0af65309e",
+    "reports/ocean_forward_support_20260906_v1/result.json": "06a38461dbe30673752fed16565c78e01198089fc6c8d2eaa0e091b150626f0d",
+    "reports/p3_clean_regeneration_20260905_v4/prepare.json": "131725d81b17ef09a038cb3802c5cf960cd82381c36e4c2d0b8f2012cd592e57",
+    "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/train_features.parquet": "2cbfbc7e521c395a17d9595982fa5773fb0ad8e9c5ca5484f392769e9dff0c3f",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/train_anchors.parquet": "d90486257c725856357959e30ffd0f35c35f3b9c06be6ab93bcdd221bfa9bfe0",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/feature_columns.json": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+    "src/p3_wave/__init__.py": "5259579e0cb5cc66a8416c1631efb8b7342df69f4d0c624f31a353e473cd6bb1",
+    "src/p3_wave/data.py": "cdbbbe8e8e03f91b81dd6074a3e3b75ca21092fda86e53fc9d15b16ae47d0432",
+    "src/p3_wave/features.py": "c7c2d8f1e6301d57899ee807e97bfd4c28575d2f40ea97801122e29c1701fdb2",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/loss_router.py": "2e357a9f428cdf52d2f3e38b364ebd6a156571067435d1c75622313976219000",
+    "src/p3_wave/persistence_shrink.py": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914"
+  },
+  "fold_seeds": [
+    20260816,
+    20260817,
+    20260818,
+    20260819,
+    20260820
+  ],
+  "expected_train": [
+    7057,
+    7912,
+    10665,
+    15974,
+    22808
+  ],
+  "expected_validation": [
+    1051,
+    2628,
+    5388,
+    6708,
+    1492
+  ],
+  "expected_anchors": 24360,
+  "expected_features": 591,
+  "expected_oof_rows": 103602,
+  "budget": {
+    "cpu_threads": 2,
+    "gpu": 1,
+    "wall_seconds": 5400,
+    "backbone_fits": 15,
+    "router_fits": 8,
+    "full_fits": 0,
+    "pilot": "first planned CPU categorical single + canonical GPU multi, reused within this new attempt",
+    "pilot_estimate_margin": 1.2
+  },
+  "constants_provenance": {
+    "fold_seeds": "first three clean recipe seeds, two consecutive extensions fixed before outcomes",
+    "model_parameters": "clean canonical CPU single/GPU Plain multi; thread_count2 both arms; new resource baseline not old CPU/GPU score inheritance",
+    "shrink": "clean v2 pre-fixed long-lead 0.2; no public inversion",
+    "router": "clean v2 Ridge alpha10/temperature2/strength0.5; refit each arm prior OOF only",
+    "lead_numeric": "exact public lead hours float, no fitted transform"
+  },
+  "selection": "strict unweighted pooled RMSE mean improvement retains candidate; risk separate, no 0.8 gate",
+  "onset": "NOT_ENABLED",
+  "greedy": "NOT_ENABLED",
+  "permissions": {
+    "official_inputs": false,
+    "hidden": false,
+    "csv": false,
+    "upload": false,
+    "full_fit": false,
+    "old_predictions": false,
+    "old_models": false,
+    "external": false
+  },
+  "fingerprint": "new exact v5 CPU-single/GPU-multi baseline versus numeric CPU-single; no previous outcome/model reuse; hmax arm separately preregistered",
+  "resource_amendment": {
+    "supersedes_resource_only": "p3_numeric_lead_forward_20260906_v1",
+    "prior_attempt": "preserved; no old models or OOF reuse",
+    "single": "CPU2 unchanged clean recipe",
+    "multi": "GPU0 Plain canonical recipe restores pre-CPU override; both arms same new model",
+    "gpu_callback": "not supported; before/after stages wall checks plus fixed 1200 iterations, not OS hard-timeout",
+    "wall_seconds": 5400
+  }
+}

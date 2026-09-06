@@ -1,0 +1,40 @@
+{
+  "status": "TERMINAL_TECHNICAL_FAILURE_BEFORE_PERFORMANCE_READ",
+  "id": "p1_champion_reconstruction_20260906_v1_union_evaluation",
+  "stage": "chronology_and_key_metadata",
+  "exception": "ValueError: historical MS-TCN cutoff/holdout population mismatch",
+  "runner_sha256": "9ee798a14dcc68ddc8f1530223db4991e87f1217dfc17bbf21cbfc65a4b5e043",
+  "contract_sha256": "828d71f569c76f4d2893a96bebbecfa688157da4e7a057e27763dd3903656558",
+  "seal_sha256": "4e7b713bf54ba233c3c0abf50a36de000f443ce3ec14ddbb600c387a16bfc602",
+  "proposal_sha256": "03852a318cbf7e17ea9cffbeb850a843d094da61b613353f066eb72cad3cb73d",
+  "proposal_qa_sha256": "ea4866a3d80f1c91bfbc2f1cd44a9a87574ac84bc60c42885600ac2a0fccacc3",
+  "cause": "Evaluator incorrectly assigned the proposal fold by calendar timestamp instead of preserving the existing whole-positive-run owner. Exactly 119 October rows belong to source Q3, not calendar Q4.",
+  "tree_fold_counts": {"2025_q3": 176738, "2025_q4": 111124},
+  "source_fold_counts": {"q3": 176738, "q4": 111124},
+  "incorrect_calendar_fold_counts": {"2025_q3": 176619, "2025_q4": 111243},
+  "incorrect_calendar_join_diagnostic": {
+    "tree_rows": 287862,
+    "proposal_rows": 287862,
+    "key_plus_calendar_fold_matches": 287743,
+    "tree_without_proposal": 119,
+    "proposal_without_tree": 119,
+    "not_evidence_of_missing_observations": true
+  },
+  "read_only_provenance_diagnostic": {
+    "method": "Original extractor concatenates q3 then q4. Slice only projected keys at the recorded 176738/111124 boundary and recompute the original length-prefixed station/year/layer/time digest.",
+    "q3_ordered_source_key_sha_match": true,
+    "q4_ordered_source_key_sha_match": true,
+    "prediction_values_read": 0,
+    "labels_read": 0
+  },
+  "evaluation_rows_scored": 0,
+  "implicit_intersection_rows_scored": 0,
+  "new_fits": 0,
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_outputs": 0,
+  "upload": 0,
+  "existing_training_modified": false,
+  "existing_evaluation_runner_modified": false,
+  "next_action": "Await root's explicit technical-amendment direction; do not rerun or silently join a subset. An approved new evaluator must preserve the original fold ownership and verify each original ordered key hash before joining."
+}

@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "pid": 40080,
+  "training_pid": 9712,
+  "train_result_sha256": "795390a775edb176ab2c36c799e28659cc98639357157a01d6b59603194c6df2",
+  "recipe_sha256": "cb54ca37d728fb2b7d65e5a9cbce6accb710d12926638f40850355e7d62e1dba",
+  "fresh_process": true,
+  "model_checks": [
+    {
+      "stage": "inner",
+      "model": "balanced",
+      "rows": 123372,
+      "features": 107,
+      "exact_probability_replay": true,
+      "training_stats_recomputed": true,
+      "model_sha256": "36a561971572436d268306498042b987ae3df096da371c2baf9dcb90ed48f823"
+    },
+    {
+      "stage": "inner",
+      "model": "original",
+      "rows": 123372,
+      "features": 80,
+      "exact_probability_replay": true,
+      "training_stats_recomputed": true,
+      "model_sha256": "b51ed572f0e4a4c5e6174801d1757e2f81e75312a1458b4381b419331a91133b"
+    },
+    {
+      "stage": "full",
+      "model": "original",
+      "rows": 4096,
+      "features": 80,
+      "exact_probability_replay": true,
+      "training_stats_recomputed": true,
+      "model_sha256": "58430c8327b674e40c16a09e9bd19fd77cbef691bef6f3282c9a8140bb2aa696"
+    },
+    {
+      "stage": "full",
+      "model": "balanced",
+      "rows": 4096,
+      "features": 107,
+      "exact_probability_replay": true,
+      "training_stats_recomputed": true,
+      "model_sha256": "1a1839f75fab65bb71eb419e8f7bb1d3834688a8f6b59df2d51a3e6c197931c0"
+    }
+  ],
+  "inner_policy_exact": true,
+  "independent_inner_metrics": {
+    "original": {
+      "tp": 3688,
+      "fp": 142,
+      "fn": 757,
+      "f1": 0.8913595166163142
+    },
+    "balanced": {
+      "tp": 3748,
+      "fp": 134,
+      "fn": 697,
+      "f1": 0.9002041551579201
+    },
+    "original_balanced_union": {
+      "tp": 3802,
+      "fp": 246,
+      "fn": 643,
+      "f1": 0.895325562227717
+    },
+    "balanced_union": {
+      "tp": 3771,
+      "fp": 197,
+      "fn": 674,
+      "f1": 0.8964697491976703
+    }
+  },
+  "full_probe_quality_metric_calculated": false,
+  "official_rows": 0,
+  "sample_prediction_values_read": 0,
+  "hidden_rows": 0,
+  "new_fits": 0,
+  "runtime_seconds": 119.46900000004098,
+  "workflow_elapsed_seconds": 556.9028079509735,
+  "scope": "four newly trained models reloaded in another PID; not two full training workflows"
+}

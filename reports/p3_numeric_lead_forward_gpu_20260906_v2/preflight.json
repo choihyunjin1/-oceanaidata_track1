@@ -1,0 +1,91 @@
+{
+  "status": "FEATURE_AND_TARGET_SUPPORT_PASS",
+  "seconds": 3.8696779999881983,
+  "source_rows": {
+    "wave": 118152,
+    "atmos": 130896
+  },
+  "anchors": 24360,
+  "features": 591,
+  "validation_anchors": 17267,
+  "validation_rows": 103602,
+  "folds": [
+    {
+      "fold": "Q2_2024",
+      "train_anchors": 7057,
+      "validation_anchors": 1051,
+      "meta_prior_safe_anchors": 0,
+      "prior_anchors_excluded_by_78h_episode_rule": 0,
+      "station_episodes": 150
+    },
+    {
+      "fold": "Q3_2024",
+      "train_anchors": 7912,
+      "validation_anchors": 2628,
+      "meta_prior_safe_anchors": 819,
+      "prior_anchors_excluded_by_78h_episode_rule": 232,
+      "station_episodes": 188
+    },
+    {
+      "fold": "Q4_2024",
+      "train_anchors": 10665,
+      "validation_anchors": 5388,
+      "meta_prior_safe_anchors": 3572,
+      "prior_anchors_excluded_by_78h_episode_rule": 107,
+      "station_episodes": 203
+    },
+    {
+      "fold": "Q1_2025",
+      "train_anchors": 15974,
+      "validation_anchors": 6708,
+      "meta_prior_safe_anchors": 8881,
+      "prior_anchors_excluded_by_78h_episode_rule": 186,
+      "station_episodes": 262
+    },
+    {
+      "fold": "Q2_2025",
+      "train_anchors": 22808,
+      "validation_anchors": 1492,
+      "meta_prior_safe_anchors": 15715,
+      "prior_anchors_excluded_by_78h_episode_rule": 60,
+      "station_episodes": 149
+    }
+  ],
+  "raw_context_recomputed_cases": 45,
+  "raw_context_max_feature_error": 0.0,
+  "all_anchor_six_targets_source_recomputed": true,
+  "future_outside_context_perturbation_no_effect": true,
+  "episode_source": "raw20min high hs>=1.5 runs; missing/low/gap break; target eligibility does not split runs",
+  "dense_validation_not_sparse_official_case_distribution": true,
+  "onset": "NOT_ENABLED",
+  "cpu_threads": 2,
+  "gpu": 1,
+  "verified_inputs": {
+    "configs/evaluation/ocean_forward_v5.json": "ca6f610aa087c5d2f4c3c25e7af487178c2d344b527d987f0571ddeb178b8a5b",
+    "scripts/ocean_evaluation_contract_v5.py": "36581e8ac358463670b368e2da4ded98d5479c8a98c7c3917774c0dd68eb6e39",
+    "scripts/audit_ocean_forward_support_20260906_v1.py": "c377112ac1e6e34f09303e6f39d67b593bf718f0517354c7b6b2dfd0af65309e",
+    "reports/ocean_forward_support_20260906_v1/result.json": "06a38461dbe30673752fed16565c78e01198089fc6c8d2eaa0e091b150626f0d",
+    "reports/p3_clean_regeneration_20260905_v4/prepare.json": "131725d81b17ef09a038cb3802c5cf960cd82381c36e4c2d0b8f2012cd592e57",
+    "configs/experiments/p3_corrected_repeated_forward_catboost_v2.json": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/train_features.parquet": "2cbfbc7e521c395a17d9595982fa5773fb0ad8e9c5ca5484f392769e9dff0c3f",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/train_anchors.parquet": "d90486257c725856357959e30ffd0f35c35f3b9c06be6ab93bcdd221bfa9bfe0",
+    "artifacts/p3_clean_regeneration_20260905_v4/04_validation/feature_columns.json": "49f1e03b43cce691f046027a4c59aac1bcb6846970c32ebf94c4b02382d4fa7a",
+    "src/p3_wave/__init__.py": "5259579e0cb5cc66a8416c1631efb8b7342df69f4d0c624f31a353e473cd6bb1",
+    "src/p3_wave/data.py": "cdbbbe8e8e03f91b81dd6074a3e3b75ca21092fda86e53fc9d15b16ae47d0432",
+    "src/p3_wave/features.py": "c7c2d8f1e6301d57899ee807e97bfd4c28575d2f40ea97801122e29c1701fdb2",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/loss_router.py": "2e357a9f428cdf52d2f3e38b364ebd6a156571067435d1c75622313976219000",
+    "src/p3_wave/persistence_shrink.py": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914"
+  },
+  "anchors_sha256": "e38ae810c7afd8e9f9e968f63dce488b010ab6002c48ab600424b5bb2c08d738",
+  "official_rows": 0,
+  "sample_rows": 0,
+  "hidden_rows": 0,
+  "csv_rows": 0,
+  "uploads": 0,
+  "external_rows": 0,
+  "old_model_reads": 0,
+  "old_prediction_reads": 0,
+  "full_fits": 0
+}

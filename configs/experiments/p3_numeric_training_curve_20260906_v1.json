@@ -1,0 +1,28 @@
+{
+  "experiment_id": "p3_numeric_training_curve_20260906_v1",
+  "hypothesis": "Jointly scale numeric single/multi tree counts and inverse learning rates, preserving all features, weights, routing and long shrink.",
+  "baseline": "p3_numeric_lead_forward_gpu_20260906_v2",
+  "recipes": [
+    {"id": "baseline", "scale": 1.0, "single_iterations": 700, "single_learning_rate": 0.035, "multi_iterations": 1200, "multi_learning_rate": 0.03},
+    {"id": "compact", "scale": 0.75, "single_iterations": 525, "single_learning_rate": 0.04666666666666667, "multi_iterations": 900, "multi_learning_rate": 0.04},
+    {"id": "gentle", "scale": 1.5, "single_iterations": 1050, "single_learning_rate": 0.023333333333333334, "multi_iterations": 1800, "multi_learning_rate": 0.02}
+  ],
+  "held_inner": {"start": "2024-03-01T00:00:00+00:00", "end": "2024-03-25T00:00:00+00:00", "purge_hours": 78, "parent_train_fold": "Q2_2024", "seed": 20260816, "selection": "unweighted_pooled_six_lead_SSE_argmin_exact_ties_recipe_order_baseline_first", "policy": "Q1 warmup has no prior OOF router; equal single/multi then unchanged long0.2 for every recipe", "selected_before_any_outer_fit": true},
+  "outer": {"contract": "configs/evaluation/ocean_forward_v5.json", "expected_rows": 103602, "expected_anchors": 17267, "fold_count": 5, "selection_on_outer": false, "router": "selected_recipe_only_completed_previous_OOF_with78h_and_episode_exclusion", "full_materialization": false},
+  "pins": {
+    "scripts/run_p3_numeric_lead_forward_gpu_20260906_v2.py": "d9c3b5d6e628d768f66725ea091f91175e1949eb5e38bf344da81aedb5568563",
+    "scripts/p3_forward_candidate_materialize_20260906_v1.py": "de74d271e45a7dcc520ee553ca1bc86c915ccc30d7c3f3250a77cb8b35fcd5ea",
+    "scripts/p3_forward_independent_statistics_20260906_v2.py": "badb7266a6dfcc8aaf7ad614e1dacb45bd4c29c045642304a159c59811cc560d",
+    "configs/experiments/p3_numeric_lead_forward_gpu_20260906_v2.json": "0800f97d1be20d297b763e05a233b6884ab2aa71421403d60d7afc036c8490dc",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/result.json": "66b65d55c09f7eae557a4055a9b7cbe0ba2401c579a5b58f5d56144adbf1d8f3",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/independent-qa.json": "dd64d4434e8c437e367b11c2ea82c45fec5dad5f65046197d463ebf4bbc3863e",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/fresh-process-replay.json": "9981e18dd79fa8edf6096e3d88521acd5cfbf7beb593d1de394eb4df46ba22e2",
+    "artifacts/p3_numeric_lead_forward_gpu_20260906_v2/anchors.parquet": "e38ae810c7afd8e9f9e968f63dce488b010ab6002c48ab600424b5bb2c08d738",
+    "artifacts/p3_numeric_lead_forward_gpu_20260906_v2/candidate_oof.parquet": "b7a28e2d52ba0c8d65d39e08775bf7a0248b2dd128c23c7f9afe0f489551ded2"
+  },
+  "budget": {"max_new_backbones": 16, "max_new_routers": 4, "max_all_new_historical_fits": 20, "wall_seconds": 3600, "cpu_threads": 2, "gpu_device": "0", "pilot": "first planned inner baseline single+multi reused; estimate before scores", "margin": 1.2},
+  "fixed": {"numeric_lead": true, "feature_count": 591, "hmax_removed": false, "case_weights": "unchanged", "router_alpha": 10.0, "router_temperature": 2.0, "router_strength": 0.5, "long_persistence": 0.2, "onset": "NOT_ENABLED"},
+  "permissions": {"official": false, "hidden": false, "external": false, "csv": false, "upload": false, "full_fit": false, "historical_models_read": false, "same_cycle_numeric_oof_reuse": true},
+  "interpretation": "Retrospective fixed five-quarter outer assessment. Inner March belongs to earliest outer training population; no claimed virgin dataset. Only one inner-selected recipe gets new outer fits.",
+  "duplicate_audit": {"prior_prefix_curve": "p3_meaningful_learning_curve_v1 changes training prefixes and structure, not these numeric paired schedules", "prior_hpo": "p3_catboost_valid_hpo_20260829_v2 changed categorical single regularization/structures with different split and KMA downstream; ineligible old model/result lineage not reused", "same_numeric_schedule_receipt_found": false}
+}

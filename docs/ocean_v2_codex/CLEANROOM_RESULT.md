@@ -1,4 +1,26 @@
-# 최종 패키지 cleanroom — 로컬 독립 검증 진행
+# 최종 패키지 cleanroom — 최신 결과와 이력
+
+## 2026-09-07 현재 선택본
+
+최신 파일 선택은 [최종 패키지 안내](../FINAL_RELEASE_20260907.md), 실제 archive/노트북/해시 검증은 [최종 보고서](../../reports/final_release_20260907_v1/report-source.md)를 따른다.
+
+- P1 원형 O+B+MS: 배포자료부터 7fit/6323.356초, 답안 `57844ef2` exact, 원형 28.909341점 파일 복원. 실제 CLI 완료, RUN_ALL notebook schema 검증은 별개.
+- P2 L120: 새 ZIP 추출/빈 모델→TRAIN/PREDICT notebook/3fit/173.010초, 답안 `fee6118b` 및 모델 bytes exact. 새 환경 설치·OS 차단망 검증은 아님.
+- P3 numeric: 새 ID whole-cold 12 backbone+5 router=17fit, 수치 replay까지 1,497.613초, 실제 TRAIN/PREDICT notebook 완료. 새 답안 `56e289af`는 채점본 `ff42a6a0`와 660/1,200행이 다름(최대 0.003506m, 예측 간 RMSE 0.000546m; 정답 대비 RMSE 아님). 채점 당시 저장 모델 ZIP의 실제 새 추출 추론은 6.026초/0fit/`ff42a6a0` exact. 새 cold의 공식 점수 승계·bit 결정론·운영진 허용오차 충족은 주장하지 않는다.
+
+아래의 bracket·hmax·baseline 및 초기 NOT_RUN은 날짜별 보존 기록이며 현재 선택본이 아니다.
+
+## 후속 P3 hmax 후보 — 09-06 whole-cold 완료
+
+배포 `train_wave.csv`·`train_atmos.csv`부터 새 특징을 생성하고 빈 모델 폴더에서 **12 backbone + 5 router**를 학습했다. 별도 PID 학습 QA, 1,200행 추론, 다시 새 PID byte-exact 답안 replay까지 **1,611.919초(26분 52초)**였다. 답안 SHA는 `d45605922ae8ce699c07405d8361765290c39bd38ddd0123f4e2e9ccd01808c5`. 새 학습 내부 RMSE 0.68246927556은 이전 연구 실행 수치와 별도다.
+
+[cold 보고서](../../reports/p3_forward_candidate_cold_20260906_v1/report-source.md), [root 22-check QA](../../reports/remaining_work_completion_20260906_v1/p3-pre-upload-root-qa.json). 보존본은 `artifacts/p3_forward_candidate_cold_20260906_v1/completed/P3/`. 이 폴더를 재시작하거나 lock을 삭제하지 않는다. 새 전체 GPU 학습은 1회이며 반복 전체 학습의 byte 결정론/새 OS·차단망 설치 검증은 아니다. 저장 모델 ZIP의 별도 추출 검증은 [saved 보고서](../../reports/p3_forward_saved_20260906_v1/report-source.md)를 확인한다.
+
+## 후속 P1 bracket 후보 — 09-06 완료
+
+오늘 채점한 `9031c84e…d93a` 후보도 [독립 portable 검증](../../reports/p1_bracket_portable_20260906_v2/report-source.md)을 완료했다. 빈 `03_model`의 새 ZIP 추출본에서 **CPU2 4회 학습 → 모델 새 PID replay → 독립47-check QA → 추론 → 별도 PID 답안 replay**가 완료됐고, **169,011행/7,014 양성/동일 답안 SHA**를 재현했다. 학습376.750초, 단계 대기 포함 전체753.030초. 기존 CPU4 모델 bytes와는 다르며, 같은 답안 재현과 같은 모델 bytes 재현을 혼동하지 않는다.
+
+별도 장기 저장 추론 ZIP도 실제 새 폴더 추출/새 PID/학습0/29.234초로 같은 답안 SHA를 재현했다. [root 9개 hash/link 대조](../../reports/remaining_work_completion_20260906_v1/p1-package-root-check.json) 및 [공식 F1 0.785944 영수증](../../reports/p1_bracket_official_submission_20260906_v1/receipt.json)을 연결한다. 전체 CPU2 scratch 1회이며 새 머신·새 의존환경·OS 차단망 검증은 아니다. 기존 세 문제 기준 fallback은 아래 그대로 보존한다.
 
 ## 2026-09-06 04:17 KST 갱신
 

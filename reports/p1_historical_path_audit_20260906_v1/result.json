@@ -1,0 +1,124 @@
+{
+  "status": "EXACT_HISTORICAL_ROUTER_OOF_REPLAY_PASS_NOT_FULL_RESTORATION",
+  "hashes": {
+    "artifacts/p1_matched_budget_local_compare_20260825_v1/predictions.parquet": "23f9b59cc54a7502c87786280ef76319e64288a95a44f8c9ec37188a761033c5",
+    "artifacts/runs/20260813T153038+0900_cv_378a4e89/oof.parquet": "d1b9439db6d0d906fa080bd01f1eb8fc21d051c3d056a274e2b02e43c1e55f4a",
+    "artifacts/p1_current_router_oof_anchor_v1/anchor.parquet": "fc5c594aadabec98e0fbf032ff33422691d94d8525d134495a81a47586024536",
+    "scripts/package_preregistered_submission_20260826.py": "36903d7693a28f43fe62ec8f28ca80ed4c002c5ad3a7ac8b126e32346ce1357e",
+    "scripts/build_p1_current_router_oof_anchor_v1.py": "6235536f4cde74394579a1732225bb2de3375e28628cb962b3c410cc6335b08d",
+    "scripts/build_preregistered_3x3_evidence_round_20260827.py": "82b4aaba2cf9e03c223142d12904dba572457aebe74b49d4cdc0b30d44f7b27f",
+    "scripts/build_deadline_probe_set_20260828.py": "9687ce3a7ac7a457894215759da8a701fcd525e9c3aba70025278e7fab161cfd",
+    "artifacts/p1_target_covariate_density_ratio_xgb_v1/models/P1_EVENT_DAY_BALANCED_LGBM_FALLBACK_V1.joblib": "5f7933a6fa7e2c03a84ce255538a74fa4e697052c546e87af2d8c8a3982f4895"
+  },
+  "script_sha256": "a42d95d3ee2b9611548924494a3b204df5520b655286c383dc083230efe6b11f",
+  "ordered_keys_and_folds_exact": true,
+  "router_mismatch_rows": 0,
+  "additions_vs_B": 43,
+  "removals_vs_B": 31,
+  "metrics": {
+    "O": {
+      "rows": 421032,
+      "tp": 12989,
+      "fp": 1146,
+      "fn": 3066,
+      "positive_rows": 14135,
+      "f1": 0.8604836038423319
+    },
+    "B": {
+      "rows": 421032,
+      "tp": 12718,
+      "fp": 644,
+      "fn": 3337,
+      "positive_rows": 13362,
+      "f1": 0.8646700887242071
+    },
+    "router": {
+      "rows": 421032,
+      "tp": 12756,
+      "fp": 618,
+      "fn": 3299,
+      "positive_rows": 13374,
+      "f1": 0.8668999966019912
+    },
+    "union": {
+      "rows": 421032,
+      "tp": 13094,
+      "fp": 1230,
+      "fn": 2961,
+      "positive_rows": 14324,
+      "f1": 0.8620428585536061
+    }
+  },
+  "folds": {
+    "2025_q2": {
+      "B": {
+        "rows": 133170,
+        "tp": 3795,
+        "fp": 420,
+        "fn": 1575,
+        "positive_rows": 4215,
+        "f1": 0.7918622848200313
+      },
+      "router": {
+        "rows": 133170,
+        "tp": 3795,
+        "fp": 415,
+        "fn": 1575,
+        "positive_rows": 4210,
+        "f1": 0.7922755741127349
+      }
+    },
+    "2025_q3": {
+      "B": {
+        "rows": 176738,
+        "tp": 5203,
+        "fp": 97,
+        "fn": 1194,
+        "positive_rows": 5300,
+        "f1": 0.8896298196118663
+      },
+      "router": {
+        "rows": 176738,
+        "tp": 5241,
+        "fp": 74,
+        "fn": 1156,
+        "positive_rows": 5315,
+        "f1": 0.8949795081967213
+      }
+    },
+    "2025_q4": {
+      "B": {
+        "rows": 111124,
+        "tp": 3720,
+        "fp": 127,
+        "fn": 568,
+        "positive_rows": 3847,
+        "f1": 0.9145666871542717
+      },
+      "router": {
+        "rows": 111124,
+        "tp": 3720,
+        "fp": 129,
+        "fn": 568,
+        "positive_rows": 3849,
+        "f1": 0.9143418950473148
+      }
+    }
+  },
+  "selection_scope": "Historical prescribed cells; original selector NOT recovered. Same development OOF was used for historical selection; not fresh.",
+  "original_O_model": {
+    "path": "output/2026-08-20/retrain/P1/model.joblib",
+    "current_audit_sha256": "d4b60c543691f51526b3909101763309a6560cc274386a8fb3323773ad469d12",
+    "historical_receipt_hash_match": "NOT_YET_LINKED",
+    "loaded": false
+  },
+  "GI_general_rule": "SOURCE_RESTORED_SYNTHETIC_ONLY_NOT_REAL_INFERENCE_VERIFIED",
+  "official_inputs_read": 0,
+  "archived_answer_csv_reads": 0,
+  "model_deserializations": 0,
+  "model_fits": 0,
+  "candidate_csv_writes": 0,
+  "uploads": 0,
+  "hidden_truth_reads": 0,
+  "runtime_seconds": 0.7065154999727383
+}

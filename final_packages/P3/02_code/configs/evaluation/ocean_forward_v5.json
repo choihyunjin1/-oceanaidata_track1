@@ -1,0 +1,121 @@
+{
+  "contract_id": "ocean_forward_v5",
+  "status": "CONFIG_FROZEN_PENDING_TRAIN_ONLY_SUPPORT_AUDIT",
+  "contract_revision": "2026-09-06",
+  "interpretation": "Modified proposal preserving the active chronological P1/P3 contracts, not the roadmap verbatim; no retrospective v4 rescoring.",
+  "authority": [
+    "00_ORGANIZER_DATA_POLICY.md",
+    "00_MUST_READ_FIRST.md",
+    "01_P2_MUST_READ_FIRST.md",
+    "02_P3_MUST_READ_FIRST.md"
+  ],
+  "source_documents": [
+    "docs/ocean_v2_codex/ROADMAP_after_codex_review_20260905.md",
+    "reports/parallel_isolated_and_regeneration_20260905_v4/roadmap-review.md",
+    "reports/parallel_isolated_and_regeneration_20260905_v4/evaluation-contract-readiness.md"
+  ],
+  "execution": {
+    "fit_budget": 0,
+    "official_input_access": false,
+    "csv_generation": false,
+    "upload": false,
+    "support_audit": "NOT_RUN",
+    "model_execution_ready": false
+  },
+  "common": {
+    "interval": "start_inclusive_end_exclusive",
+    "timezone_naive_input": "REJECT",
+    "prediction_alignment": "exact_key_and_order_no_silent_drop",
+    "missing_or_nonfinite_evaluation_values": "REJECT",
+    "delta": "candidate_minus_control",
+    "pooled_not_fold_mean": true,
+    "bootstrap": {
+      "resamples": 2000,
+      "seed": 20260906,
+      "ci_quantiles": [0.05, 0.95],
+      "paired": true,
+      "ties_improve": false,
+      "minimum_clusters": 2,
+      "insufficient_clusters": "NOT_ESTIMABLE",
+      "interpretation": "Empirical paired-cluster improvement fraction, not official improvement probability"
+    },
+    "selection": {
+      "candidate_retention": "strict_primary_pooled_mean_improvement",
+      "bootstrap_probability_hard_gate": null,
+      "risk": "report_worst_block_and_slices_separately",
+      "automatic_promotion_or_submission": false
+    }
+  },
+  "P1": {
+    "timezone": "Asia/Seoul",
+    "direction": "forward",
+    "purge_days": 21,
+    "training_time_boundary": "strictly_before_fold_start_minus_purge",
+    "folds": [
+      {"id": "H1_2024", "start": "2024-01-01T00:00:00+09:00", "end": "2024-07-01T00:00:00+09:00", "warmup": true},
+      {"id": "H2_2024", "start": "2024-07-01T00:00:00+09:00", "end": "2025-01-01T00:00:00+09:00", "warmup": false},
+      {"id": "H1_2025", "start": "2025-01-01T00:00:00+09:00", "end": "2025-07-01T00:00:00+09:00", "warmup": false},
+      {"id": "H2_2025", "start": "2025-07-01T00:00:00+09:00", "end": "2026-01-01T00:00:00+09:00", "warmup": false}
+    ],
+    "positive_runs": {
+      "group": ["station", "layer"],
+      "cadence_minutes": 10,
+      "year_boundary_breaks_run": false,
+      "owner": "fold_containing_run_start",
+      "validation": "whole_positive_run_once_plus_calendar_negative_rows",
+      "training": "exclude_entire_run_if_run_end_reaches_training_cutoff"
+    },
+    "primary": {"name": "calendar_H1_2025_pooled_f1", "metric": "f1", "start": "2025-01-01T00:00:00+09:00", "end": "2025-07-01T00:00:00+09:00"},
+    "diagnostics": ["all_forward_oof_pooled_f1", "run_owner_fold_f1", "station_layer_slices"],
+    "bootstrap_unit": "KST_calendar_day_shared_across_station_layer",
+    "feature_context": "NOT_AUDITED_purge_alone_does_not_validate_unbounded_features",
+    "stress_masks": "NOT_ENABLED_requires_label_independent_preregistration",
+    "support_required": ["fold_station_layer_train_validation_rows", "positive_runs", "boundary_moved_rows", "purged_rows", "independent_days", "feature_context_footprints"]
+  },
+  "P2": {
+    "timezone": "Asia/Seoul",
+    "direction": "two_sided_purged",
+    "purge_days": 7,
+    "training_time_boundary": "time_lt_start_minus_7days_or_time_ge_end_plus_7days",
+    "folds": [
+      {"id": "B1", "start": "2024-05-01T00:00:00+09:00", "end": "2024-07-01T00:00:00+09:00", "warmup": false},
+      {"id": "B2", "start": "2024-07-01T00:00:00+09:00", "end": "2024-09-01T00:00:00+09:00", "warmup": false},
+      {"id": "B3", "start": "2024-09-01T00:00:00+09:00", "end": "2024-11-01T00:00:00+09:00", "warmup": false},
+      {"id": "B4", "start": "2024-11-01T00:00:00+09:00", "end": "2025-01-01T00:00:00+09:00", "warmup": false},
+      {"id": "B5", "start": "2025-04-01T00:00:00+09:00", "end": "2025-06-01T00:00:00+09:00", "warmup": false},
+      {"id": "B6", "start": "2025-06-01T00:00:00+09:00", "end": "2025-08-01T00:00:00+09:00", "warmup": false},
+      {"id": "B7", "start": "2025-08-01T00:00:00+09:00", "end": "2025-09-01T00:00:00+09:00", "warmup": false},
+      {"id": "B8", "start": "2025-11-01T00:00:00+09:00", "end": "2026-01-01T00:00:00+09:00", "warmup": false}
+    ],
+    "primary": {"name": "B3_seasonal_pooled_rmse", "metric": "rmse", "fold": "B3", "surface": "natural_public_T5_with_targets_jointly_hidden"},
+    "target_mask": {"layers": [2, 3, 4], "variables": ["temp", "psal"], "scope": "entire_validation_interval"},
+    "outage": {"last_days": 17, "public_channel": "T5", "variables": ["temp", "psal"], "scope": "last_17_calendar_days_of_each_fold", "score_denominator": "same_eligible_target_keys_within_masked_interval", "feature_recomputation_required": true},
+    "diagnostics": ["all_8_blocks_natural_pooled_rmse", "joint_T5_outage_interval_rmse", "whole_fold_testmatched_rmse"],
+    "composite": "NOT_ENABLED_no_document_0_29_weight_or_duplicate_primary",
+    "bootstrap_unit": "KST_calendar_7day_shared_across_layers",
+    "bootstrap_origin": "2024-01-01T00:00:00+09:00",
+    "feature_context": "NOT_AUDITED_mask_all_derived_features_before_use",
+    "support_required": ["eligible_target_keys_per_fold_layer", "two_public_temperature_layers", "natural_missingness", "outage_additional_mask_counts", "purged_train_rows", "independent_7day_blocks", "feature_context_footprints"]
+  },
+  "P3": {
+    "timezone": "UTC",
+    "direction": "forward",
+    "purge_hours": 78,
+    "training_time_boundary": "strictly_before_fold_start_minus_78hours",
+    "folds": [
+      {"id": "Q1_2024", "start": "2024-01-01T00:00:00+00:00", "end": "2024-04-01T00:00:00+00:00", "warmup": true},
+      {"id": "Q2_2024", "start": "2024-04-01T00:00:00+00:00", "end": "2024-07-01T00:00:00+00:00", "warmup": false},
+      {"id": "Q3_2024", "start": "2024-07-01T00:00:00+00:00", "end": "2024-10-01T00:00:00+00:00", "warmup": false},
+      {"id": "Q4_2024", "start": "2024-10-01T00:00:00+00:00", "end": "2025-01-01T00:00:00+00:00", "warmup": false},
+      {"id": "Q1_2025", "start": "2025-01-01T00:00:00+00:00", "end": "2025-04-01T00:00:00+00:00", "warmup": false},
+      {"id": "Q2_2025", "start": "2025-04-01T00:00:00+00:00", "end": "2025-07-01T00:00:00+00:00", "warmup": false}
+    ],
+    "episode": {"id_source": "caller_supplied_train_only_protocol_pending_support_audit", "exclusion": "same_station_and_episode_as_validation", "unknown_id": "REJECT"},
+    "context_hours": 48,
+    "leads_hours": [3, 6, 9, 12, 18, 24],
+    "primary": {"name": "all_forward_oof_unweighted_pooled_rmse", "metric": "rmse"},
+    "diagnostics": {"onset_weighted_rmse": "NOT_ENABLED", "greedy": "NOT_ENABLED", "reason": "onset_support_mixture_and_greedy_protocol_not_frozen"},
+    "bootstrap_unit": "station_episode_with_all_six_leads",
+    "support_required": ["quarter_station_train_validation_anchors", "all_six_targets_ready", "78h_purge", "station_episode_exclusions", "independent_episodes", "context_footprints"]
+  }
+}

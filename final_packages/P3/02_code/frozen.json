@@ -1,0 +1,130 @@
+{
+  "package_id": "p3_forward_candidate_cold_20260906_v1",
+  "scope": "one explicit candidate, not a new search; prepare common before choice",
+  "source_files": {
+    "train_wave.csv": "64b015499785b004eb1df60104c6e24b344b09b80b1bd66681dfff1e5881aa2e",
+    "train_atmos.csv": "5bf0491a0a781f1084055e40bb4065916c7b6c2f555f38a819199bca3427615f"
+  },
+  "source_recipe_sha256": "e5c2eff7bc9fcd44759d0bc30d965c86eca10c038807f186b1379131aed9b169",
+  "shrink_provenance_sha256": "4ce75e96e945544b39d93d131b11e89b3c8b5d05e463a15d788f2ef02264b495",
+  "recipe": {
+    "model": {
+      "single": {
+        "loss_function": "RMSE",
+        "iterations": 700,
+        "learning_rate": 0.035,
+        "depth": 6,
+        "l2_leaf_reg": 8.0,
+        "random_strength": 0.2,
+        "thread_count": 8
+      },
+      "multi": {
+        "loss_function": "MultiRMSE",
+        "iterations": 1200,
+        "learning_rate": 0.03,
+        "depth": 7,
+        "l2_leaf_reg": 10.0,
+        "random_strength": 0.15,
+        "task_type": "GPU",
+        "devices": "0",
+        "boosting_type": "Plain"
+      },
+      "fold_seeds": [
+        20260816,
+        20260817,
+        20260818
+      ],
+      "full_train_seed": 20260817,
+      "single_weight": 0.5,
+      "multi_weight": 0.5,
+      "residual_target": "target_hs_minus_current_hs",
+      "case_weight": "exp(-0.45*max(current_hs-1.5,0))_mean_normalized",
+      "prediction_clip_m": [
+        0.0,
+        30.0
+      ]
+    },
+    "router": {
+      "granularity": "lead_long",
+      "name": "smooth_medium",
+      "alpha": 10.0,
+      "temperature_multiplier": 2.0,
+      "strength": 0.5,
+      "active_leads": [
+        12,
+        18,
+        24
+      ],
+      "fold_one": "exact_equal_component_no_op",
+      "later_folds": "fixed_config_refit_on_completed_corrected_oof_only",
+      "hyperparameter_search": false
+    },
+    "shrink": {
+      "active_leads": [
+        12,
+        18,
+        24
+      ],
+      "persistence_weight": 0.2
+    }
+  },
+  "fold_seeds": [
+    20260816,
+    20260817,
+    20260818,
+    20260819,
+    20260820
+  ],
+  "expected_train": [
+    7057,
+    7912,
+    10665,
+    15974,
+    22808
+  ],
+  "expected_validation": [
+    1051,
+    2628,
+    5388,
+    6708,
+    1492
+  ],
+  "expected_anchors": 24360,
+  "expected_oof_rows": 103602,
+  "variants": {
+    "numeric": {
+      "features": 591,
+      "single_kind": "numeric_single"
+    },
+    "hmax": {
+      "features": 527,
+      "single_kind": "categorical_single"
+    }
+  },
+  "budget": {
+    "cpu_threads": 2,
+    "exclusive_gpu_device": 0,
+    "backbone_fits": 12,
+    "router_fits": 5,
+    "total_seconds": 21600
+  },
+  "source_snapshot": {
+    "scripts/run_p3_numeric_lead_forward_gpu_20260906_v2.py": "d9c3b5d6e628d768f66725ea091f91175e1949eb5e38bf344da81aedb5568563",
+    "scripts/run_p3_hmax_removed_forward_20260906_v1.py": "3011ad945208196d9cca1468f39d29c9746bf26e2d892810fb4ab7efedfb63ad",
+    "scripts/p3_forward_candidate_materialize_20260906_v1.py": "de74d271e45a7dcc520ee553ca1bc86c915ccc30d7c3f3250a77cb8b35fcd5ea",
+    "scripts/ocean_evaluation_contract_v5.py": "36581e8ac358463670b368e2da4ded98d5479c8a98c7c3917774c0dd68eb6e39",
+    "scripts/audit_ocean_forward_support_20260906_v1.py": "c377112ac1e6e34f09303e6f39d67b593bf718f0517354c7b6b2dfd0af65309e",
+    "src/p3_wave/__init__.py": "5259579e0cb5cc66a8416c1631efb8b7342df69f4d0c624f31a353e473cd6bb1",
+    "src/p3_wave/data.py": "cdbbbe8e8e03f91b81dd6074a3e3b75ca21092fda86e53fc9d15b16ae47d0432",
+    "src/p3_wave/features.py": "c7c2d8f1e6301d57899ee807e97bfd4c28575d2f40ea97801122e29c1701fdb2",
+    "src/p3_wave/models.py": "543bb68ccdb16af9d4b456689418142ade4f6eba20e042a0602bf5875cb5a084",
+    "src/p3_wave/validation.py": "2e76445dd69bcfa2a48efec571a3f9876b7ba104494a159c33338caa347f8e30",
+    "src/p3_wave/loss_router.py": "2e357a9f428cdf52d2f3e38b364ebd6a156571067435d1c75622313976219000",
+    "src/p3_wave/persistence_shrink.py": "f6afbb6f3f7cf6ee3f7f39b54dbb0d47d943ee8804921de5787af34253b64914",
+    "configs/evaluation/ocean_forward_v5.json": "ca6f610aa087c5d2f4c3c25e7af487178c2d344b527d987f0571ddeb178b8a5b"
+  },
+  "old_cache_oof_models_answers": "FORBIDDEN",
+  "selection": "variant explicitly sealed before fit; no score/grid/threshold reselection",
+  "whole_cold_execution": "NOT_RUN",
+  "official_input_execution": "NOT_RUN"
+}

@@ -1,6 +1,30 @@
-# Portable 기준 패키지 — 사용/재학습 안내
+# Portable 기준 패키지 — 09-06 이력 / fallback 안내
 
-2026-09-06 검증 완료본. P1/P2/P3 로컬 빈 폴더 재생성 및 답안 검증을 완료했다. P3는 별도 복구 비교와 최신 ZIP의 실제 추출·저장 모델 추론까지 검증했다. [CLEANROOM_RESULT](CLEANROOM_RESULT.md)는 검증 범위와 한계를 기록한다. **답안 CSV 채점, 재현 ZIP 첨부, 최종 모델 지정은 서로 다른 작업이다.** 이번 작업에는 업로드/최종 잠금/commit/push가 없다.
+**현재 최종 선택은 이 문서의 옛 표가 아니라 [09-07 최종 패키지 안내](../FINAL_RELEASE_20260907.md)를 따른다.** P1 원형 복원, P2 L120, P3 numeric의 코드·모델·답안·제출 양식·실제 검증은 그 문서와 연결된 release manifest에 있다. 아래 `최신` 등의 표현은 09-06 당시의 이력이며 현재 최종 지정이 아니다. 과거 ZIP/lock은 삭제하지 않는다.
+
+## 최신 P1 선택 — bracket 9031
+
+P1은 후속 bracket 후보를 09-06 06:39에 채점했고 **F1 0.785944 / 27.644124점**이다. 아래 `5971…` 표와 명령은 이전 기준 fallback이다. 오늘 개선된 P1을 사용할 때는 다음 파일을 선택한다.
+
+- 답안: `artifacts/p1_bracket_candidate_20260906_v1/package/05_answer/P1_submission.csv` (169,011행, SHA `9031c84ea72dfa4294406dd995525e89e8975a76983e9f9d7a7b2ba74dbad93a`). 이미 채점했으므로 중복 제출하지 않는다.
+- 장기 저장 모델 추론: `artifacts/p1_bracket_portable_20260906_v2/P1_bracket_saved_v2.zip`.
+- 빈 모델 폴더부터 전체 재학습: 같은 폴더의 `P1_bracket_cold_v2.zip`. 코드만 든 이 ZIP에서 4fit/753.030초/새 PID 답안 exact를 실제 검증했다.
+- 두 ZIP의 역할·실행 명령·SHA와 검증 한계는 [P1 portable v2 보고서](../../reports/p1_bracket_portable_20260906_v2/report-source.md)를 따른다. `cold-validation/P1`은 완료된 보존본이므로 재시작하지 않는다.
+
+P2/P3 새 비교·전체 학습·재생·공식 채점까지 완료했으나 기존 기준을 넘지 못했으므로 아래 채점된 기준 fallback을 보존한다. 모델 최종 잠금은 하지 않았다.
+
+## 후속 P2/P3 연구 후보 — 기준본과 구분
+
+- P2 CPU 대조/후보: `artifacts/p2_crossfit_copula_materialization_20260906_v3/05_answer/P2_C3_control.csv`와 `P2_insample_full.csv`. 공식 .489080→.475174℃로 개선했지만 아래 CUDA 기준 .455143℃보다 나쁘다. 같은 폴더의 `06_docs/P2_CPU_COPULA_REPRODUCIBILITY.zip`은 연구 재현용이며 최종 선택을 대체하지 않는다. [보고서](../../reports/p2_crossfit_copula_materialization_20260906_v3/report-source.md).
+- P3 hmax 연구 답안: `artifacts/p3_forward_candidate_cold_20260906_v1/completed/P3/05_answer/submission.csv`, SHA `d45605922ae8ce699c07405d8361765290c39bd38ddd0123f4e2e9ccd01808c5`. 공식 .608184m으로 아래6bfa 기준 .607183m보다 나쁘다. 이미 채점했으므로 중복 제출하지 않는다.
+- P3 hmax 빈 모델 전체학습용: `artifacts/p3_forward_candidate_cold_20260906_v1/P3_hmax_forward_cold_v1.zip`, SHA `ff61fbc326d049d3d0066e18258ec41d96986f87609deaafb5a29740af2dc3e1`. 새 빈 경로에만 추출하고 포함 README의 prepare→train→qa→infer→verify-answer를 따른다. 실제 12+5fit/1611.919초 검증은 [cold 보고서](../../reports/p3_forward_candidate_cold_20260906_v1/report-source.md). 완료된 `completed/P3`의 lock을 지우거나 재실행하지 않는다.
+- P3 hmax 저장 모델 추론용: `artifacts/portable_cleanroom_20260906_v1/P3_forward_saved_v1.zip`, SHA `56d4f5adbaea70a1ac6d0a2d962727ab0ba3ba4217d7feeaef17e139a695b9a3`. 새 폴더에 추출, `P3_DATA_DIR` 지정 후 `python -I 02_code/infer.py --preflight`, 이어 `python -I 02_code/infer.py --infer --official-approved --output-dir <새 절대경로>`를 실행한다. 학습0, full모델3개만 사용. 실제 새PID6.088초 exact 검증과 제한은 [saved 보고서](../../reports/p3_forward_saved_20260906_v1/report-source.md). 이 ZIP만으로 전체 학습이 되는 것은 아니며 위 cold 코드와 역할이 다르다.
+
+세 문제 답안은 해당 문제 페이지 하단의 CSV 답안 카드에 각각 넣는다. `모델 최종 제출하기`는 별도 최종 잠금 작업이므로 이 재생/채점 안내를 승인으로 해석하지 않는다. 위 연구 후보를 아래 기준 fallback과 자동 교체하지 않는다.
+
+## 기존 세 문제 기준 fallback
+
+2026-09-06 검증 완료본. P1/P2/P3 로컬 빈 폴더 재생성 및 답안 검증을 완료했다. P3는 별도 복구 비교와 최신 ZIP의 실제 추출·저장 모델 추론까지 검증했다. [CLEANROOM_RESULT](CLEANROOM_RESULT.md)는 검증 범위와 한계를 기록한다. **답안 CSV 채점, 재현 ZIP 첨부, 최종 모델 지정은 서로 다른 작업이다.** 초기 패키지 작업에는 업로드가 없었고 후속 승인된 CSV 채점은 위 영수증에 별도로 기록했다. 최종 잠금/후속 commit/push는 하지 않았다.
 
 ## 파일 선택
 
@@ -62,6 +86,6 @@ P2 ZIP의 `04_logs/*_ATTEMPT_LOCK.json`은 완료된 검증 실행의 영수증�
 
 ## 제출 전 마지막 확인
 
-후속 P1 bracket-only 후보가 별도로 학습·답안 생성·독립 검증을 완료했다. 신규 SHA `9031c84e…ad93a`의 정확한 경로와 범위는 [P1 후보 안내](P1_BRACKET_CANDIDATE_HANDOFF_20260906.md)를 따른다. 아직 공식 채점/영구 재현 패키지 교체는 하지 않았으며, 위 표의 기준 답안·패키지는 fallback으로 그대로 보존한다.
+후속 P1 bracket-only 후보의 공식 채점과 새 portable 검증은 맨 위 최신 갱신을 따른다. 신규 SHA `9031c84e…ad93a`의 정확한 경로와 범위는 [P1 후보 안내](P1_BRACKET_CANDIDATE_HANDOFF_20260906.md)에 있다. 위 표의 이전 기준 답안·패키지는 fallback으로 그대로 보존한다.
 
 이미 채점된 SHA와 같은 P1/P2/P3 기준 답안이다. 같은 답안을 다시 올려 새 성능 증거를 얻었다고 하지 않는다. 개선 실험이 만든 후보는 이 기준 패키지와 섞지 않고 새 계보/내부 검증/재현/공식 채점 절차로 판단한다. 포털에 실제 올릴 때는 [현재 실행서](../OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)에 따라 당일 횟수·마감·첨부 제한과 사용자 승인 범위를 확인한다. 모델 잠금 전에는 특히 후속 업로드 제한을 확인한다.

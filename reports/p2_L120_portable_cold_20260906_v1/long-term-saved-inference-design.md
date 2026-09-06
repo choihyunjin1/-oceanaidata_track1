@@ -1,0 +1,9 @@
+# Long-term saved L120 inference — proposal only
+
+Current savedZIP is preservation-only. Its source stages consume existing locks and an elapsed1800-second clock, so it is not correct to instruct a later user to rerun PREDICT there. Do not delete/reset those artifacts or rewrite historical receipts.
+
+A future separately named adapter can verify the existing trainingmanifest/three modelSHAs/historicalQA, preserve those inputs read-only, create a new emptyanswer/logoutput directory, and invoke the exact numericalcore on authorized officialpublickeys/features. It should have its own inference-only lock and timebudget,0newfits,strictschema/order/finite/hash,then another-process fullCSVreplay. Its model path must be explicit; oldOOF/probe or referenceanswer values are not required. The old answerSHA may be compared only after new inference, never fitted.
+
+CPU-only execution is numerically possible for this small Torch model, but exact CUDA-generated12-significant-digitCSV identity has not been tested and must not be promised. The existing core automatically choosesCUDAwhenavailable; a CPUadapter would need an explicit resource contract and could produce harmless floating-point differences. Do not silently change that device policy while claiming exact reproduction. Current best numerical proof is two fullCUDAreconstructions and a same-device fullCSVreplay.
+
+If exactfee6118byteidentity is the requirement, request a short exclusiveGPUinference allocation (priorfullinference11.453s +replay11.313s,0fits) after P3 releasesGPU. A CPUcomparison could instead be authorized as a separately reported tolerance study with tolerances fixed before output, preserving any SHA mismatch. Neither route is executed or considered approved by this document. Currentsource-only cold PASS remains complete regardless of this extra usability feature.

@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "scope": "RESOURCE_STOP_INTEGRITY_ONLY_NOT_SCIENTIFIC_VALIDATION",
+  "experiment_status": "RESOURCE_STOP",
+  "successful_backbone_fits": 2,
+  "router_fits": 0,
+  "single_fit_seconds": 113.87762460001977,
+  "multi_fit_seconds_inferred_from_pilot_total": 23.171392699994612,
+  "first_two_fit_seconds": 137.04901730001438,
+  "forecast_seconds_recomputed": 3941.5814541587156,
+  "forecast_minutes": 65.6930242359786,
+  "fixed_budget_seconds": 3600,
+  "forecast_formula": "1.2 * 137.04901730001438 * (3.25 + 1.5 * 64416 / 4664)",
+  "lock_to_failure_seconds": 138.603629,
+  "metrics_inspected": false,
+  "native_model_load_only": true,
+  "additional_predict_calls": 0,
+  "additional_fits": 0,
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_rows": 0,
+  "uploads": 0,
+  "checks": {
+    "runner_matches_seal": true,
+    "config_matches_seal": true,
+    "prior_preflight_pass_preserved": true,
+    "prior_focused_16_tests_and_ruff_pass_preserved": true,
+    "pilot_status_resource_stop": true,
+    "failure_status_resource_stop": true,
+    "failure_pid_matches_attempt_lock": true,
+    "forecast_recomputed_exact": true,
+    "forecast_exceeds_fixed_3600_seconds": true,
+    "pilot_records_metrics_not_inspected": true,
+    "single_model_sha_matches_original_receipt": true,
+    "single_native_tree_count_700": true,
+    "multi_native_tree_count_1200": true,
+    "both_native_categorical_indices_station_only": true,
+    "selection_and_outer_start_absent": true,
+    "candidate_and_paired_oof_absent": true,
+    "scientific_result_absent": true,
+    "training_processes_28068_40488_exited": true
+  },
+  "check_count": 18,
+  "models": {
+    "numeric_single": {
+      "sha256": "e26e30cb5c0daf6c3e49f09276097dcc9d0342c7b0ec305fd5c796eeb9b8b811",
+      "hash_evidence": "original_fit_receipt_and_current_native_load",
+      "tree_count": 700,
+      "native_feature_count": 594,
+      "cat_feature_indices": [0],
+      "native_learning_rate": 0.03500000015,
+      "task_type": "CPU"
+    },
+    "multi": {
+      "sha256": "f7197f8aea417642fb51047d2f69dc0c4f109d858f1c812d154d990c04913ff2",
+      "hash_evidence": "acceptance_time_only_original_per_fit_receipt_not_persisted",
+      "tree_count": 1200,
+      "native_feature_count": 592,
+      "cat_feature_indices": [0],
+      "native_learning_rate": 0.02999999933,
+      "task_type": "GPU"
+    }
+  },
+  "evidence_sha256": {
+    "runner": "9deb4ab890b164e00ca1039195beda3b801591165ad7f54482fde44fdc5c9b5e",
+    "config": "866f7ae818e8be5558cf8f5dd4cd8ed80665f1eb84317aae3048fba8189d9e80",
+    "preflight": "2751be33dbb5ad9d53c6a085050232d61efeb384a8dfaa660caef96f3b133e96",
+    "resource_pilot": "8ea24d1cde95c8da362be98dd646f3af4e7711be18f9298f3e0682515dd4f426",
+    "execute_failure": "dea1a96cc966607924fbb59423ce58c802f549d5b37a1ea7328ba6cccc2dc83a",
+    "attempt_lock": "30b2bb5edf5f7c1c430ae422c95a342e6d4b717f05468c54a9dcf24d44cd1e3c",
+    "fit_receipts": "ac652788c08cd334ee5d82d0ae5443b4717ff45ce32b5601962e3ff63b32e67a"
+  },
+  "limitations": [
+    "This is a conservative cost forecast, not a measured 65.7-minute completed experiment.",
+    "Progress and fit-receipts were last persisted before the second fit. They show one; native model metadata and the completed-two-fit pilot show two actual successful fits.",
+    "The multi model's individual original receipt and prediction hash remained in process memory and were lost on the deliberate resource exception.",
+    "No scientific selection, outer evaluation, new candidate, or saved-prediction replay was completed."
+  ]
+}

@@ -8,27 +8,50 @@ P1은 수온 이상 탐지, P2는 중간층 수온 복원, P3는 유의파고 �
 
 1. [에이전트 작업 규칙](AGENTS.md)과 [운영진 규정](00_ORGANIZER_DATA_POLICY.md)
 2. 해당 문제 계약: [P1](00_MUST_READ_FIRST.md) · [P2](01_P2_MUST_READ_FIRST.md) · [P3](02_P3_MUST_READ_FIRST.md)
-3. [9월 6일 연구·재현 체크포인트](docs/RESEARCH_CHECKPOINT_20260906.md): 현재 결과와 다음 작업
+3. **[9월 7일 최종 패키지·파일 선택 안내](docs/FINAL_RELEASE_20260907.md)**: 현재 선택본·학습/추론·첨부 방법
 4. [짧은 개발·검증 루프](docs/AGENT_WORKFLOW.md)
 5. 제출·재현 작업이면 [인수인계](AI_HANDOFF.md)와 [제출 실행서](docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)
 
-## 현재 재생성 기준선의 공식 기록 — 2026-09-06 정리
+## 현재 최종 선택 — 2026-09-07
+
+| 문제 | 현재 선택 | 공식 지표 | 공식 점수 | 답안 SHA 앞자리 |
+|---|---|---:|---:|---|
+| P1 | 원형 O+B+MS-TCN, 배포자료부터 7fit 복원 | F1 0.833548 | **28.909341** | `57844ef2` |
+| P2 | C3 DeepSet L120, 3-seed | RMSE 0.418892℃ | **28.077280** | `fee6118b` |
+| P3 | CatBoost numeric lead + train-OOF router | RMSE 0.604351m | **23.741446** | `ff42a6a0` |
+
+로컬 묶음: `C:/Users/cedis/Documents/OceanFinalRelease_20260907`.
+학습 코드·동봉 모델·채점 CSV·노트북·첨부 안내를 문제별로 구분한다.
+Git에는 코드·설정·집계 QA·문서만 올리므로 데이터/가중치/답안 ZIP은 로컬에서 선택한다.
+[최종 검증 보고서](reports/final_release_20260907_v1/report-source.md)를 통해 실제 완료 범위를 확인한다.
+P1 전체 재학습 답안은 역사적 최고 답안과 SHA가 같고, 09-07 서버에서도 중복 내용으로 확인됐다. 새 점수를 받은 것은 아니다.
+P3 전체 재학습(17fit, 약 1,498초)은 완료했으나 채점본과 660/1,200행이 달라 위 점수를 승계하지 않습니다. 채점 당시 저장 모델 ZIP은 새 추출 추론으로 위 채점 SHA를 정확히 재생했습니다. 두 결과는 분리 보존하며 운영진 재학습 허용오차 충족 여부는 미확인입니다.
+
+## 이전 기준선·분리 실험 이력 — 현재 선택 아님
 
 | 문제 | 코드로 재생성한 기준 후보 | 공식 지표 | 공식 점수 |
 |---|---|---:|---:|
 | P1 | clean baseline, SHA `5971e145…128a` | F1 0.777749 | 27.426319 |
+| P1 새 후보 | bracket, SHA `9031c84e…d93a` | F1 0.785944 | 27.644124 |
 | P2 | full scratch clean rebuild | RMSE 0.455143℃ | 27.622418 |
+| P2 CPU 비교 | C3 control, SHA `ae2df148…a479` | RMSE 0.489080℃ | 27.196585 |
+| P2 CPU copula | in-sample, SHA `e0b4005b…498a` | RMSE 0.475174℃ | 27.371078 |
 | P3 | clean baseline rebuild | RMSE 0.607183m | 23.696500 |
+| P3 hmax 제거 | whole-cold, SHA `d4560592…08c5` | RMSE 0.608184m | 23.680619 |
 
 P1은 [9월 6일 재생성 기준 답안 영수증](reports/p1_regenerated_baseline_official_submission_20260906_v1/receipt.json),
 P2·P3는 [9월 5일 공식 영수증](reports/official_score_repair_submissions_20260905_v1/receipt.json)에 귀속합니다.
 P1의 이전 F1 0.790733은 다른 답안의 기록이므로 현재 파일에 승계하지 않습니다.
 이 표는 과거 모든 모델 중 최고라는 뜻이 아닙니다.
-P1 과거 F1 0.833548 계보는 전체 학습·router provenance를 재검토 중입니다.
+P1 F1 0.833548 원형은 이후 전체 재학습·답안 동일성을 복원했습니다. 원형 셀 선택 프로그램은 미복구이며 고정 로컬 OOF 설정을 사용합니다.
 P2 0.424019℃와 P3 0.583892m의 과거 Public-계수 계보는 최신 규정상 재적합 대상이며 현재 최종본으로 자동 선택하지 않습니다.
 
-**최신 P1 bracket 후보는 내부 검증·로컬 답안 QA 완료, 공식 미채점입니다.**
-SHA `9031c84e…d93a`를 위 기준 답안과 혼동하지 마십시오.
+P1 bracket 후보는 09-06 06:39 공식 채점과 빈 모델 폴더부터의 portable 재학습·답안 재현을 완료한 **이전 fallback**입니다.
+[채점 영수증](reports/p1_bracket_official_submission_20260906_v1/receipt.json),
+[새 portable 검증](reports/p1_bracket_portable_20260906_v2/report-source.md).
+SHA `9031c84e…d93a`를 이전 기준 답안과 혼동하지 마십시오. 범위/셀 정책 추가는 별도 내부 비교에서 비승격이며 이 파일에 섞지 않았습니다.
+P2의 07:28 CPU 대조 제출은 copula의 같은 CPU 기준 대비 개선을 확인했지만 기존 CUDA C3 기준은 넘지 못했습니다. 따라서 기존 P2 기준본을 보존합니다. [공식 대조 영수증](reports/p2_copula_official_submission_20260906_v1/receipt.json).
+P3도 배포 원자료부터 12+5회 학습·독립 QA·ZIP 추출 재생을 마친 뒤 08:08 채점했지만 기존 기준보다 +0.001001m 악화했습니다. 기존 P3 기준을 보존합니다. [공식 영수증](reports/p3_hmax_official_submission_20260906_v1/receipt.json). [이번 순서 전체 완료 보고서](reports/remaining_work_completion_20260906_v1/report-source.md)에서 실행 범위와 남은 공백을 확인하십시오.
 파일 선택·실행 제한은 [P1 후보 안내](docs/ocean_v2_codex/P1_BRACKET_CANDIDATE_HANDOFF_20260906.md),
 세 문제의 기준 ZIP·학습/추론 절차는 [portable 패키지 안내](docs/ocean_v2_codex/PORTABLE_PACKAGE_HANDOFF_20260906.md)를 따릅니다.
 

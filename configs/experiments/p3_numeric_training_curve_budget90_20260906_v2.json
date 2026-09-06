@@ -1,0 +1,122 @@
+{
+  "experiment_id": "p3_numeric_training_curve_budget90_20260906_v2",
+  "hypothesis": "Jointly scale numeric single/multi tree counts and inverse learning rates, preserving all features, weights, routing and long shrink.",
+  "baseline": "p3_numeric_lead_forward_gpu_20260906_v2",
+  "recipes": [
+    {
+      "id": "baseline",
+      "scale": 1,
+      "single_iterations": 700,
+      "single_learning_rate": 0.035,
+      "multi_iterations": 1200,
+      "multi_learning_rate": 0.03
+    },
+    {
+      "id": "compact",
+      "scale": 0.75,
+      "single_iterations": 525,
+      "single_learning_rate": 0.04666666666666667,
+      "multi_iterations": 900,
+      "multi_learning_rate": 0.04
+    },
+    {
+      "id": "gentle",
+      "scale": 1.5,
+      "single_iterations": 1050,
+      "single_learning_rate": 0.023333333333333334,
+      "multi_iterations": 1800,
+      "multi_learning_rate": 0.02
+    }
+  ],
+  "held_inner": {
+    "start": "2024-03-01T00:00:00+00:00",
+    "end": "2024-03-25T00:00:00+00:00",
+    "purge_hours": 78,
+    "parent_train_fold": "Q2_2024",
+    "seed": 20260816,
+    "selection": "unweighted_pooled_six_lead_SSE_argmin_exact_ties_recipe_order_baseline_first",
+    "policy": "Q1 warmup has no prior OOF router; equal single/multi then unchanged long0.2 for every recipe",
+    "selected_before_any_outer_fit": true
+  },
+  "outer": {
+    "contract": "configs/evaluation/ocean_forward_v5.json",
+    "expected_rows": 103602,
+    "expected_anchors": 17267,
+    "fold_count": 5,
+    "selection_on_outer": false,
+    "router": "selected_recipe_only_completed_previous_OOF_with78h_and_episode_exclusion",
+    "full_materialization": false
+  },
+  "pins": {
+    "scripts/run_p3_numeric_lead_forward_gpu_20260906_v2.py": "d9c3b5d6e628d768f66725ea091f91175e1949eb5e38bf344da81aedb5568563",
+    "scripts/p3_forward_candidate_materialize_20260906_v1.py": "de74d271e45a7dcc520ee553ca1bc86c915ccc30d7c3f3250a77cb8b35fcd5ea",
+    "scripts/p3_forward_independent_statistics_20260906_v2.py": "badb7266a6dfcc8aaf7ad614e1dacb45bd4c29c045642304a159c59811cc560d",
+    "configs/experiments/p3_numeric_lead_forward_gpu_20260906_v2.json": "0800f97d1be20d297b763e05a233b6884ab2aa71421403d60d7afc036c8490dc",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/result.json": "66b65d55c09f7eae557a4055a9b7cbe0ba2401c579a5b58f5d56144adbf1d8f3",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/independent-qa.json": "dd64d4434e8c437e367b11c2ea82c45fec5dad5f65046197d463ebf4bbc3863e",
+    "reports/p3_numeric_lead_forward_gpu_20260906_v2/fresh-process-replay.json": "9981e18dd79fa8edf6096e3d88521acd5cfbf7beb593d1de394eb4df46ba22e2",
+    "artifacts/p3_numeric_lead_forward_gpu_20260906_v2/anchors.parquet": "e38ae810c7afd8e9f9e968f63dce488b010ab6002c48ab600424b5bb2c08d738",
+    "artifacts/p3_numeric_lead_forward_gpu_20260906_v2/candidate_oof.parquet": "b7a28e2d52ba0c8d65d39e08775bf7a0248b2dd128c23c7f9afe0f489551ded2",
+    "scripts/run_p3_numeric_training_curve_20260906_v1.py": "9deb4ab890b164e00ca1039195beda3b801591165ad7f54482fde44fdc5c9b5e",
+    "configs/experiments/p3_numeric_training_curve_20260906_v1.json": "866f7ae818e8be5558cf8f5dd4cd8ed80665f1eb84317aae3048fba8189d9e80",
+    "reports/p3_numeric_training_curve_20260906_v1/preflight.json": "2751be33dbb5ad9d53c6a085050232d61efeb384a8dfaa660caef96f3b133e96",
+    "reports/p3_numeric_training_curve_20260906_v1/resource-pilot.json": "8ea24d1cde95c8da362be98dd646f3af4e7711be18f9298f3e0682515dd4f426",
+    "reports/p3_numeric_training_curve_20260906_v1/execute-failure.json": "dea1a96cc966607924fbb59423ce58c802f549d5b37a1ea7328ba6cccc2dc83a",
+    "artifacts/p3_numeric_training_curve_20260906_v1/fit-receipts.json": "ac652788c08cd334ee5d82d0ae5443b4717ff45ce32b5601962e3ff63b32e67a"
+  },
+  "budget": {
+    "max_new_backbones": 14,
+    "max_new_routers": 4,
+    "max_new_fits": 18,
+    "max_total_historical_fits_including_reused": 20,
+    "wall_seconds": 5400,
+    "cpu_threads": 2,
+    "gpu_device": "0",
+    "margin": 1.2,
+    "pilot": "v1 first two measured fits; outcomes uninspected; user authorized >60min and root fixed 90min"
+  },
+  "fixed": {
+    "numeric_lead": true,
+    "feature_count": 591,
+    "hmax_removed": false,
+    "case_weights": "unchanged",
+    "router_alpha": 10,
+    "router_temperature": 2,
+    "router_strength": 0.5,
+    "long_persistence": 0.2,
+    "onset": "NOT_ENABLED"
+  },
+  "permissions": {
+    "official": false,
+    "hidden": false,
+    "external": false,
+    "csv": false,
+    "upload": false,
+    "full_fit": false,
+    "historical_models_read": "only_exact_two_prior_inner_models_in_reuse_allowlist",
+    "same_cycle_numeric_oof_reuse": true
+  },
+  "interpretation": "Retrospective fixed five-quarter outer assessment. Inner March belongs to earliest outer training population; no claimed virgin dataset. Only one inner-selected recipe gets new outer fits.",
+  "duplicate_audit": {
+    "prior_prefix_curve": "p3_meaningful_learning_curve_v1 changes training prefixes and structure, not these numeric paired schedules",
+    "prior_hpo": "p3_catboost_valid_hpo_20260829_v2 changed categorical single regularization/structures with different split and KMA downstream; ineligible old model/result lineage not reused",
+    "same_numeric_schedule_receipt_found": false
+  },
+  "reuse": {
+    "model_count": 2,
+    "source_experiment": "p3_numeric_training_curve_20260906_v1",
+    "reason": "RESOURCE_STOP with no selection or outer evaluation; user explicitly approved longer resource budget",
+    "models": {
+      "numeric_single": {
+        "source": "artifacts/p3_numeric_training_curve_20260906_v1/models/baseline_INNER/numeric_single.cbm",
+        "sha256": "e26e30cb5c0daf6c3e49f09276097dcc9d0342c7b0ec305fd5c796eeb9b8b811",
+        "hash_evidence": "original_fit_receipt"
+      },
+      "multi": {
+        "source": "artifacts/p3_numeric_training_curve_20260906_v1/models/baseline_INNER/multi.cbm",
+        "sha256": "f7197f8aea417642fb51047d2f69dc0c4f109d858f1c812d154d990c04913ff2",
+        "hash_evidence": "post_stop_acceptance_only_original_individual_receipt_not_persisted"
+      }
+    }
+  }
+}

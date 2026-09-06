@@ -2,6 +2,8 @@
 
 ## 지금 적용할 기준
 
+현재 후보와 로컬 첨부 파일은 **[09-07 최종 패키지 안내](FINAL_RELEASE_20260907.md)**를 먼저 확인한다. 이 실행서의 절차와 현재 후보의 해시/영수증을 함께 대조한다. 과거 후보·낡은 FORM을 자동 선택하지 않는다.
+
 9월 2일 점수 역산 금지와 최신 [운영진 규정](../00_ORGANIZER_DATA_POLICY.md)이 옛 clean/READY보다 우선합니다.
 [9월 5일 공식 영수증](../reports/official_score_repair_submissions_20260905_v1/receipt.json)은 이미 제출한 파일의 근거이며,
 새 후보는 해당 실험의 내부 QA와 최신 candidate receipt로 확인합니다.

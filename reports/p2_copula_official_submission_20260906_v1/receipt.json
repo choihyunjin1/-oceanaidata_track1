@@ -1,0 +1,52 @@
+{
+  "status": "SCORED",
+  "problem": "OCN-02",
+  "submitted_at_kst": "2026-09-06T07:28:00+09:00",
+  "timestamp_precision": "UI minute; both submissions displayed 07:28",
+  "source_url": "https://oceanaidata.org/app/submissions",
+  "submissions": [
+    {
+      "arm": "C3_control",
+      "file": "artifacts/p2_crossfit_copula_materialization_20260906_v3/05_answer/P2_C3_control.csv",
+      "sha256": "ae2df14842ea3dc2d0997662ab98e8cd3b644a75742361ad624018b25a00a479",
+      "rows": 26061,
+      "public_rmse": 0.48908,
+      "public_points": 27.196585,
+      "quota_before": 3,
+      "quota_after": 2,
+      "submit_clicks": 1,
+      "server_id": null
+    },
+    {
+      "arm": "insample_full",
+      "file": "artifacts/p2_crossfit_copula_materialization_20260906_v3/05_answer/P2_insample_full.csv",
+      "sha256": "e0b4005b961180a46198ad3947cfb79c5d49bb043c1ef8d2b7190d5a958c498a",
+      "rows": 26061,
+      "public_rmse": 0.475174,
+      "public_points": 27.371078,
+      "quota_before": 2,
+      "quota_after": 1,
+      "submit_clicks": 1,
+      "server_id": null
+    }
+  ],
+  "paired_change": {
+    "rmse_celsius": -0.013906,
+    "points": 0.174493
+  },
+  "versus_preserved_cuda_fallback": {
+    "rmse": 0.455143,
+    "points": 27.622418,
+    "sha256": "46d194a1ef40a1deaebd084916644d9359433d2e6ce7d5c0b53d9f515bbec071",
+    "candidate_rmse_change": 0.020031,
+    "candidate_points_change": -0.25134
+  },
+  "conclusion": "CPU matched copula improvement verified publicly, but not better than preserved CUDA C3 fallback. Preserve fallback. No policy or coefficient changed from scores.",
+  "preupload_root_qa": "../remaining_work_completion_20260906_v1/p2-pre-upload-root-qa.json",
+  "independent_qa": "../p2_crossfit_copula_materialization_20260906_v3/independent-qa.json",
+  "evidence": "Exact file hashes checked locally; filenames confirmed in browser screenshots before one submit click each; score/quota observed on problem page and two new scored records corroborated in submission management. Server CSV hash and submission ID not exposed.",
+  "hidden_truth_rows": 0,
+  "final_model_lock": false,
+  "git_commit": false,
+  "git_push": false
+}

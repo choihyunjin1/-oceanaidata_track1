@@ -1,0 +1,163 @@
+{
+  "status": "LOCAL_RELEASE_ARCHIVES_AND_SAVED_REPLAY_VERIFIED",
+  "candidates": {
+    "P1": {
+      "full_cold_fits": 7,
+      "full_cold_seconds": 6323.356084823608,
+      "saved_inference_seconds": 35.65600000001723,
+      "saved_inference_status": "EXTRACTED_SAVED_NOTEBOOK_EXACT_ANSWER_PASS",
+      "answer_sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+      "archives": [
+        {
+          "file": "P1_SOURCE_ONLY.zip",
+          "sha256": "ba9fabd4b3d87a6030658dd2826c080d64b48952adf0b28b5f70c545c213507a",
+          "bytes": 138507,
+          "files": 33
+        },
+        {
+          "file": "P1_SAVED_MODELS.zip",
+          "sha256": "61e796c2304a7899dd2dd94ec280c99f8937c46b2a1f5b197e9090ac9f870fa8",
+          "bytes": 590000061,
+          "files": 62
+        }
+      ],
+      "split_parts": 15,
+      "answer": {
+        "rows": 169011,
+        "columns": [
+          "station",
+          "year",
+          "layer",
+          "time",
+          "label"
+        ],
+        "sha256": "57844ef235f987059d17bddb035cc0a98b92bb0d53263cf878c68b31bbc53687",
+        "duplicate_keys": 0,
+        "nonfinite": 0
+      },
+      "answer_file": "P1/ANSWER/P1_submission.csv",
+      "official_metric": "F1 0.833548",
+      "official_score": "28.909341"
+    },
+    "P2": {
+      "full_cold_fits": 3,
+      "full_cold_seconds": 173.0102961063385,
+      "saved_inference_seconds": 30.89100000000326,
+      "saved_inference_status": "EXTRACTED_SAVED_NOTEBOOK_EXACT_ANSWER_PASS",
+      "answer_sha256": "fee6118bb4a4d1d421094aa0174d634cf73e919804ea1b62ab0bab4f1384ce4d",
+      "archives": [
+        {
+          "file": "P2_SOURCE_ONLY.zip",
+          "sha256": "60e9a90053ab23397124d77edbe1fe00d9c83092b333bf8ab81b4c52d85e841b",
+          "bytes": 64442,
+          "files": 19
+        },
+        {
+          "file": "P2_SAVED_MODELS.zip",
+          "sha256": "8a42c1dc693c509dfe69a67ab4818645691879636303e17425615b0f1bb0c077",
+          "bytes": 129780,
+          "files": 26
+        }
+      ],
+      "split_parts": 0,
+      "answer": {
+        "rows": 26061,
+        "columns": [
+          "station",
+          "layer",
+          "time",
+          "temp"
+        ],
+        "sha256": "fee6118bb4a4d1d421094aa0174d634cf73e919804ea1b62ab0bab4f1384ce4d",
+        "duplicate_keys": 0,
+        "nonfinite": 0
+      },
+      "answer_file": "P2/ANSWER/submission_p2_L120_3seed.csv",
+      "official_metric": "RMSE 0.418892 C",
+      "official_score": "28.077280"
+    },
+    "P3": {
+      "saved_inference_status": "EXACT_SAVED_REPLAY_PASS",
+      "answer_sha256": "ff42a6a08c76f0d58ed2f3a9ea31a08819ada5fa6e9007af942fe0b891937960",
+      "saved_inference_seconds": 6.026327700004913,
+      "full_cold_fits": {
+        "backbone": 12,
+        "router": 5
+      },
+      "full_cold_seconds": 1497.6125390529633,
+      "cold_answer_sha256": "56e289af18d1ebfe4cf37410a277668a5cc9d502d5e5692ac99ab20ba6828784",
+      "cold_answer_equals_scored": false,
+      "cold_vs_scored": {
+        "changed_rows": 660,
+        "rows": 1200,
+        "max_abs_m": 0.0035060905563752964,
+        "mean_abs_m": 0.0001601851401365397,
+        "prediction_difference_rmse_m": 0.0005459156056845382,
+        "meaning": "difference between predictions, not RMSE against hidden truth"
+      },
+      "checks": {
+        "cold_12_backbone_5_router": true,
+        "cold_training_QA": true,
+        "cold_replay": true,
+        "cold_6h": true,
+        "cold_training_official_zero": true,
+        "cold_hidden_zero": true,
+        "cold_train_notebook": true,
+        "cold_predict_notebook": true,
+        "scored_saved_exact": true,
+        "scored_original_exact": true,
+        "scored_extracted_exact": true,
+        "saved_hidden_zero": true,
+        "saved_fits_zero": true,
+        "saved_old_answers_zero": true,
+        "saved_archive_hash": true,
+        "cold_own_answer_hash": true,
+        "load_policy_computation_AST_unchanged": true,
+        "make_answer_computation_AST_unchanged": true
+      },
+      "checks_passed": 18,
+      "archives": [
+        {
+          "file": "P3_SOURCE_ONLY.zip",
+          "sha256": "17035c0f8c29d5112bd6da59229d3eb058a363a39998aefaf5dcc4d684c59fe6",
+          "bytes": 78010,
+          "files": 21
+        },
+        {
+          "file": "P3_SAVED_MODELS.zip",
+          "sha256": "2c9cddf448c3122ad0ac9dd498b26131b8f0b6a7ee989471fbf28051cba2f3a5",
+          "bytes": 4083406,
+          "files": 22
+        }
+      ],
+      "training_qa_sha256": "197c25d7e5829f7172c72703dee976012125987c97f079a60fcb8134b107545d",
+      "scored_saved_qa_sha256": "381b6c33b9a18076e7eeb905b05ce8db26adfae2a76984e8e204b8c3c591eead",
+      "split_parts": 0,
+      "official_score_for_new_cold": null,
+      "status": "SCORED_SAVED_EXACT_AND_SEPARATE_COLD_PASS_NOT_BYTE_IDENTICAL",
+      "package_build_prefit_failure": "First metadata-only package copy stopped on overlapping provenance text replacement; preserved, fixed in new v2 folder. Fits and inference before that correction: 0.",
+      "answer": {
+        "rows": 1200,
+        "columns": [
+          "case_id",
+          "station",
+          "lead_h",
+          "hs_pred"
+        ],
+        "sha256": "ff42a6a08c76f0d58ed2f3a9ea31a08819ada5fa6e9007af942fe0b891937960",
+        "duplicate_keys": 0,
+        "nonfinite": 0
+      },
+      "answer_file": "P3/ANSWER/submission_scored_numeric.csv",
+      "official_metric": "RMSE 0.604351 m",
+      "official_score": "23.741446"
+    }
+  },
+  "raw_data_in_github": 0,
+  "weights_answers_archives_in_github": 0,
+  "uploads": 0,
+  "final_model_designations": 0,
+  "fresh_venv_OS_offline_test": false,
+  "portal_attachment_limits_rechecked": false,
+  "portal_read_blocker": "Chrome Debugger unattached; no final action attempted"
+}

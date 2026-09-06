@@ -1,0 +1,25 @@
+{
+  "experiment_id": "p1_trainfit_postpolicy_20260906_v1",
+  "hypotheses": ["global training-normal temperature bounds OR frozen bracket policy", "station-layer choice among O, B, AND, OR on inner predictions only"],
+  "threads": 2,
+  "gpu": false,
+  "new_backbone_fits": 0,
+  "wall_cap_seconds": 1800,
+  "primary": "H1_2025 same-calendar retrospective two-sided pooled F1",
+  "baseline": "existing bracket arm with inner-selected global policy",
+  "range": "finite label0 training temp min/max, inclusive; no test-derived endpoints",
+  "cell_order": ["B", "O", "AND", "OR"],
+  "cell_fallback": "global inner-selected policy for unseen/single-class inner cells",
+  "thresholds": "existing global inner calibrations, no per-cell threshold search",
+  "combined": "reported as prespecified secondary; deploy only if both separate hypotheses have positive primary mean delta",
+  "decision": "positive primary mean delta retains candidate; CI and harms reported, not an added hard veto",
+  "official_input_access": false,
+  "csv_written": false,
+  "upload": false,
+  "source_pins": {
+    "scripts/run_p1_tuning_twosided_20260906_v1.py": "2e2d17b704b39c31427ccca23170fc07accd7875f15d282089b9151c1ab9af30",
+    "artifacts/p1_tuning_twosided_20260906_v1/terminal_result.json": "746c6a0a5987620bcd6fd3487ffeab617dd0ef78a605818c6dccd8f2e0610710",
+    "reports/p1_tuning_twosided_20260906_v1/independent-qa.json": "b27c3659123eea135b1d8702062c592ad5cab204f3952b5a2f246c4d91504871",
+    "artifacts/p1_tuning_twosided_20260906_v1/oof.parquet": "37f39981e25e98a2eca5c227003ecf3aad746359a96d564e79a44f534b6ac644"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "status": "PASS_WITH_DOCUMENTED_LIMITATIONS",
+  "scope": "Agreed remaining work, not all historical roadmap proposals",
+  "completed_at_kst_date": "2026-09-06",
+  "root_final_checks": {
+    "passed": 13,
+    "total": 13,
+    "method": "Read-only standalone hashlib/json: four scored CSV receipt states and actual file SHAs; P3 saved QA state/all checks/archive hash; cold answer-to-saved linkage and whole-clock budget",
+    "checker_development_note": "First generic receipt reader expected only file/sha256/SCORED; P1 actually uses answer_path/answer_sha256/OFFICIALLY_SCORED. Reader corrected after inspecting schema; all 13 then passed. No artifact/model changed."
+  },
+  "root_problem_checks": {
+    "p1_package": "p1-package-root-check.json",
+    "p2_statistics": "p2-root-arithmetic-qa.json",
+    "p2_upload": "p2-pre-upload-root-qa.json",
+    "p3_numeric_statistics": "p3-numeric-root-arithmetic-qa.json",
+    "p3_hmax_statistics": "p3-hmax-root-arithmetic-qa.json",
+    "p3_upload": "p3-pre-upload-root-qa.json"
+  },
+  "evidence_sha256": {
+    "../p1_bracket_official_submission_20260906_v1/receipt.json": "7218c0a003dd7e5a0637f81d74c08a2dfc682183fb8bacb7e0c4878f8bc0df8b",
+    "../p2_copula_official_submission_20260906_v1/receipt.json": "c303467854a44c5d028e9eec27010c6017cd3577b72164caef5c9bdff15d602e",
+    "../p3_hmax_official_submission_20260906_v1/receipt.json": "cdbc8142858c89ab8801c477135440086c631e99453e849dbbcbf4bad66c322d",
+    "../p3_forward_saved_20260906_v1/extracted-replay-qa.json": "dcf26e6763e7c830bd755dce98528015d6832fec7755b79b0621b7d72744fbc6",
+    "../p3_forward_candidate_cold_20260906_v1/completion.json": "7ae504aaa42943e6794475dc844e8b03fd97c4ba1248701d2b880698bcb1e74a"
+  },
+  "selected_preservation": {
+    "P1": {"sha256": "9031c84ea72dfa4294406dd995525e89e8975a76983e9f9d7a7b2ba74dbad93a", "public_f1": 0.785944, "public_points": 27.644124},
+    "P2": {"sha256": "46d194a1ef40a1deaebd084916644d9359433d2e6ce7d5c0b53d9f515bbec071", "public_rmse_celsius": 0.455143, "public_points": 27.622418},
+    "P3": {"sha256": "6bfa23d25f944df4711c11d1fce82978a96df08b58fdc57f666ac792a7da96b7", "public_rmse_m": 0.607183, "public_points": 23.6965}
+  },
+  "focused_tests_and_ruff": "Per-experiment code-hash-linked receipts retained; unchanged expensive training not repeated for documentation-only edits",
+  "external_observation_or_hidden_truth_access": 0,
+  "score_derived_retuning": false,
+  "final_model_locked": false,
+  "new_commit_or_push": false,
+  "new_OS_offline_verified": false,
+  "limitations": ["Public is not Private performance", "one P3 full GPU cold run plus exact saved-weight replays is not repeated whole-training determinism", "All old HPO/zt_real/context proposals are not claimed executed", "Formal final-model selection/upload and clean OS offline dependency installation remain separate"]
+}

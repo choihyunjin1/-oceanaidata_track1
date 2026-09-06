@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "task_id": "p3_forward_saved_20260906_v1",
+  "recorded_utc": "2026-09-05T22:54:10Z",
+  "status": "CODE_SYNTHETIC_QA_PASS_REAL_PACKAGE_REPLAY_PENDING",
+  "code_sha256": {
+    "scripts/portable_20260906/P3_forward_saved_v1/infer.py": "7a79bd97bc5b19c88f353cd80abd3bbd9101967fd167c76eb000ffd343279b9d",
+    "scripts/portable_20260906/P3_forward_saved_v1/build_package.py": "907034434ae4d7bed4fbbad0a5dc6be72c0cd905a97822a11dc8114d89cae633",
+    "scripts/portable_20260906/P3_forward_saved_v1/source-pins.json": "75bd8344d31e95b4584a8f536bb0e4adba89292023a3c36fd598c32b9e62e6e2",
+    "scripts/portable_20260906/P3_forward_saved_v1/README.md": "2f960507197980dcdae56fafa59b194cb8a8647cd45ce31bbcbe2a3b138f4feb",
+    "tests/test_p3_forward_saved_20260906_v1.py": "296d42917f4cd65a26203fe2e7e57f11e8facbd1e612e3201ffa1f25c19a7486"
+  },
+  "focused_pytest": {
+    "command": ".venv-p1/Scripts/python.exe -m pytest -q tests/test_p3_forward_saved_20260906_v1.py",
+    "passed": 35,
+    "failed": 0,
+    "scope": "synthetic data and fake model bytes/stubs only; real models not loaded"
+  },
+  "ruff": {
+    "command": ".venv-p1/Scripts/python.exe -m ruff check scripts/portable_20260906/P3_forward_saved_v1 tests/test_p3_forward_saved_20260906_v1.py",
+    "status": "PASS"
+  },
+  "independent_static_review": {
+    "reviewer": "p2_next_design",
+    "status": "NO_MATERIAL_BLOCKER_IDENTIFIED",
+    "runtime_verification": false
+  },
+  "guard_evidence": {
+    "synthetic_callback_allow_deny": "PASS",
+    "actual_extracted_process": "PENDING",
+    "python_guard_not_OS_network_isolation": true
+  },
+  "scope_counts": {
+    "new_fits": 0,
+    "gpu_fits": 0,
+    "real_model_reads": 0,
+    "real_official_input_rows": 0,
+    "real_answer_csv_writes": 0,
+    "uploads": 0
+  },
+  "real_validation": "Await uninterrupted cold 12 backbone + 5 router completion, independent fresh-process training QA, authorized official answer, and exact separate-PID answer replay before packaging.",
+  "initial_test_issue": "One test-only pandas low-level reader invocation failed; replaced with captured public read_csv on in-memory synthetic bytes. No real experiment was run or restarted.",
+  "package_purpose": "Long-term saved inference only; does not reset or replace cold-training six-hour validation."
+}

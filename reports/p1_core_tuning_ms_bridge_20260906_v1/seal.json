@@ -1,0 +1,66 @@
+{
+  "id": "p1_core_tuning_ms_bridge_20260906_v1",
+  "status": "SEALED_BEFORE_BRIDGE_METRICS",
+  "source_pins": {
+    "scripts/p1_core_tuning_20260906_v1/ms_bridge.py": "db7ecac7f5b9dbd1d5ab63260c9ee0990fe4aaf319b3eb7c551f6bba2fc6ec88",
+    "tests/test_p1_core_tuning_ms_bridge_20260906_v1.py": "4a5baf58d7f33b3ead359d414f738c5202539eb6ddc20c82a0bdb702152e7036",
+    "reports/p1_core_tuning_20260906_v1/seal.json": "938063dc9c3c75aa98624e0bf9d5603b513da96cd3e2648f2ee0c93c76fd82f1",
+    "reports/p1_champion_reconstruction_20260906_v1/union-seal-v2.json": "961ecd4a751fe49500bc33e508cb2c249c1f6da7825d6ed85b9a4d60de6088fc",
+    "scripts/p1_champion_reconstruction_20260906_v1/evaluate_union_v2.py": "b56f2e7f2461eeec2f8e2080674b6af372346a81d85dcfd5f2bbc47fd9eb0564",
+    "scripts/p1_champion_reconstruction_20260906_v1/evaluate_union.py": "9ee798a14dcc68ddc8f1530223db4991e87f1217dfc17bbf21cbfc65a4b5e043",
+    "scripts/p1_champion_reconstruction_20260906_v1/qa_union.py": "38139c5d50f8f2708c40343080cd9de68c4fa0ce8ad84430bb65345d3d84c84b",
+    "scripts/p1_champion_reconstruction_20260906_v1/qa_union_v2.py": "5f1fa25e051b4a42ea6a2ea72304bf66c84aabe135303dd7e9e8598baab62cce",
+    "scripts/p1_champion_reconstruction_20260906_v1/composition.py": "42fcfe13da0f4fc10c05c25b4706e5f3d418cd202b781f60e30b9f3fd70010e0",
+    "reports/p1_champion_reconstruction_20260906_v1/union-contract-v2.json": "2937bb38986c8256f0b2cc6a529e21af5bf3b92279e50a00aaf2ea08ce6a2aed",
+    "tests/test_p1_champion_union_v2_20260906_v1.py": "6b8164c77d6139eaa6d54108ad7ea5fd63e1e758561f9f1262bc705798e8db98",
+    "reports/p1_champion_reconstruction_20260906_v1/union-contract.json": "828d71f569c76f4d2893a96bebbecfa688157da4e7a057e27763dd3903656558",
+    "reports/p1_champion_reconstruction_20260906_v1/union-seal.json": "4e7b713bf54ba233c3c0abf50a36de000f443ce3ec14ddbb600c387a16bfc602",
+    "reports/p1_champion_reconstruction_20260906_v1/union-evaluation-v1-technical-failure.json": "1406a59b8d60cff9c48ca3e37572346f7dd3c67c1c147c9e165d61421a6797d2"
+  },
+  "rows": 287862,
+  "fit_budget": 0,
+  "cpu_threads": 2,
+  "gpu": false,
+  "scope": "separate retrospective diagnostic; does not replace new tree overall primary",
+  "comparison": "same frozen MS proposal OR new CPU2 control vs OR new CPU2 inner-selected candidate",
+  "proposal": "fixed original width512/165-feature e150 3-seed mean, threshold0.8/0.4, snap12, minimum19; no retuning",
+  "folds": [
+    {
+      "id": "2025_q3",
+      "phase": "q3",
+      "start": "2025-07-01T00:00:00+09:00",
+      "end": "2025-10-01T00:00:00+09:00",
+      "training_max_utc": "2025-06-09T14:50:00+00:00",
+      "source_rows": 176738,
+      "ordered_source_key_sha256": "8e4b225fc912a335383ebdcffd2c5a5304020f80acd5e52d53ff1b893248baec"
+    },
+    {
+      "id": "2025_q4",
+      "phase": "q4",
+      "start": "2025-10-01T00:00:00+09:00",
+      "end": "2025-12-11T00:00:00+09:00",
+      "training_max_utc": "2025-09-09T14:50:00+00:00",
+      "source_rows": 111124,
+      "ordered_source_key_sha256": "4a91345f68decb5e25d02c721ae53063b0807c3e5b3acdd970093ca36d857f6a"
+    }
+  ],
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20260906,
+    "block_days": 7,
+    "anchor_kst": "2025-01-01T00:00:00+09:00",
+    "stratify": "fold",
+    "cluster": "all stations/layers in each calendar 7-day time block; original owner fold boundaries separate clusters",
+    "minimum_clusters_per_fold": 2,
+    "ci_quantiles": [
+      0.05,
+      0.95
+    ],
+    "probability": "fraction of paired bootstrap pooled-F1 deltas > 0, descriptive not Bayesian probability or fresh-test p-value"
+  },
+  "selection": "none, no recipe/threshold/rule/row changes",
+  "old_CPU4_OOF_read": false,
+  "official_rows": 0,
+  "csv_outputs": 0,
+  "upload": 0
+}

@@ -1,0 +1,39 @@
+{
+  "id": "p1_core_tuning_20260906_v1",
+  "status": "PREREGISTERED_RETROSPECTIVE_CPU_COMPARISON",
+  "threads": 2,
+  "gpu": false,
+  "fit_cap": 48,
+  "wall_seconds": 5400,
+  "baseline_actual_fits": 24,
+  "alternative_inner_actual_fits": 15,
+  "selected_outer_max_actual_fits": 9,
+  "baseline_reuse": false,
+  "components": {
+    "O_control": {"arm": "O", "overrides": {}},
+    "B_control": {"arm": "B", "overrides": {}},
+    "O_slow": {"arm": "O", "overrides": {"learning_rate": 0.02, "n_estimators": 1400}},
+    "O_regular": {"arm": "O", "overrides": {"max_depth": 5, "min_child_weight": 40.0, "reg_lambda": 4.0}},
+    "B_regular": {"arm": "B", "overrides": {"num_leaves": 31, "min_child_samples": 120, "reg_lambda": 4.0}}
+  },
+  "policies": {
+    "control": ["O_control", "B_control"],
+    "O_slow": ["O_slow", "B_control"],
+    "O_regular": ["O_regular", "B_control"],
+    "B_regular": ["O_control", "B_regular"]
+  },
+  "policy_tie_order": ["control", "O_slow", "O_regular", "B_regular"],
+  "selection": "Each component threshold selected on its earlier inner only with existing grid and higher-threshold tie. Complete O OR B policy selected on inner pooled F1 with listed tie order; only selected altered component refitted for outer. No outer-based recipe selection.",
+  "feature_postprocess": "Unchanged champion active train-only year-depth and 168h cap 80 features, O global class weights, B event-day weights, inner threshold grid and decoder; no cell router, bracket, depth fallback, hard rule or row exclusion added.",
+  "primary": "All Q2/Q3/Q4 pooled F1 on exactly 421032 outer rows; new retrospective tuning contract, not replacement or re-scoring of previous studies.",
+  "secondary": ["Q3/Q4 pooled old diagnostic primary", "each quarter", "station-layer", "train-supported versus unseen station-layer", "paired calendar-day bootstrap CI90 and probability of improvement", "worst day and station-layer"],
+  "support_expected": {"2025_q2": 133170, "2025_q3": 176738, "2025_q4": 111124},
+  "bootstrap": {"seed": 20260906, "resamples": 2000, "ci_quantiles": [0.05, 0.95], "minimum_clusters": 2},
+  "decision": "Retain mean-improving selected policy; quarter declines, uncertainty and support gaps are risk columns, not automatic 0.8 gates. No automatic full fit or official inference.",
+  "not_run": "B_slow excluded before fit for actual-model budget. Prior two-sided single-B same-rate 1400 curve is not this chronological O1/B3 learning-rate/complexity comparison.",
+  "parameter_provenance": "Baseline exact legitimate training recipe. Alternatives are pre-fit bounded complexity/regularization and half-rate/double-round choices from prior train-only curve review, not derived from Public scores.",
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_written": 0,
+  "upload": 0
+}

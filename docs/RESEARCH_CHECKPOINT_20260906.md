@@ -1,5 +1,19 @@
 # 2026-09-06 연구·재현 체크포인트
 
+> 09-07 갱신: 현재 선택본은 P1 원형 28.909341 / P2 L120 28.077280 / P3 numeric 23.741446이다. [최종 패키지 안내](FINAL_RELEASE_20260907.md)와 [실제 검증 보고서](../reports/final_release_20260907_v1/report-source.md)가 우선한다. 아래 순서별 기록은 보존된 연구 이력이다.
+
+## 게시 이후 사용자 승인 실행 — 06:39 이후
+
+**P1 bracket 공식 채점 완료: F1 0.785944 / 27.644124점, 기준 대비 +0.008195 / +0.217805점.** 정확한 SHA9031과 [영수증](../reports/p1_bracket_official_submission_20260906_v1/receipt.json)을 연결했다. 최종 모델 잠금은 하지 않았다.
+
+[실행 결과와 공백](../reports/remaining_work_completion_20260906_v1/report-source.md)을 최신 근거로 읽는다. P1 portable cold4fit/753.030초·동일9031 답안·독립47QA 완료. P1 범위/셀 정책은 [독립190QA 비교](../reports/p1_trainfit_postpolicy_20260906_v1/report-source.md)에서 주평가 동률/악화로 비승격이다.
+
+P2 새 수치정정48fit 완료·독립1117QA 후 별도full4fit/167.125초·26,061행 생성/replay/ZIP QA를 완료했다. [07:28 공식대조](../reports/p2_copula_official_submission_20260906_v1/receipt.json) CPU C3 .489080→copula .475174℃로 개선했지만 보존CUDA .455143℃는 못넘었다. 기존P2기준유지.
+
+P3 numeric/hmax 비교는 각각15/10 backbone fit와 독립149/134QA·전체replay를 완료했다. hmax 단독의 새 패키지도 원자료부터12backbone+5router→새PID QA→1200답안→새PIDexact replay를1611.919초에 완료했다. 저장ZIP추출·새PID6.088초exact/28QA도 통과했다. [08:08 공식 채점](../reports/p3_hmax_official_submission_20260906_v1/receipt.json)은 .608184m으로 기존 .607183m을 못넘었다. 기존P3기준유지. **이번 확정 순서 전체는 완료**, 모든 옛 설계/HPO를 실행한 것은 아니다. 과거 기술실패는 보존하며 후속작업은 새 Git 게시를 하지 않았다.
+
+## 아래는 직전 Git 게시 시점의 보존 기록
+
 결론: 세 문제 모두 코드로 다시 학습해 공식 채점된 기준 답안을 재현한 로컬 패키지가 있다. 추가로 P1 bracket 후보의 4-fit 학습·내부 검증·답안 QA를 완료했지만 **새 후보는 공식 미채점**이다. 이번 작업은 연구 자산의 Git 기록·공유이며 대회 업로드나 최종 모델 지정이 아니다.
 
 ## 가장 먼저 읽을 문서

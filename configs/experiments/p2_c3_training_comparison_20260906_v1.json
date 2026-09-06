@@ -1,0 +1,76 @@
+{
+  "experiment_id": "p2_c3_training_comparison_20260906_v1",
+  "source_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+  "expected_source_rows": 789408,
+  "expected_eligible_rows": 166268,
+  "train_start": "2024-05-01T00:00:00+09:00",
+  "train_stop": "2026-01-01T00:00:00+09:00",
+  "evaluation_contract": "configs/evaluation/ocean_forward_v5.json",
+  "primary_fold": "B3",
+  "core_source": "scripts/portable_20260906/P2/02_code/core.py",
+  "core_sha256": "b18a8279a542f38f5ed550307772824ed8f597e088ad2ba7070ebfeff9020c84",
+  "recipes": [
+    {
+      "id": "C60",
+      "epochs": 60,
+      "weight_decay": 0.0001
+    },
+    {
+      "id": "L120",
+      "epochs": 120,
+      "weight_decay": 0.0001
+    },
+    {
+      "id": "D60",
+      "epochs": 60,
+      "weight_decay": 0.001
+    }
+  ],
+  "base_recipe": {
+    "arm": "v23_blockmask",
+    "batch_size": 4096,
+    "learning_rate": 0.001,
+    "gradient_coefficient": 0.01,
+    "cpu_threads": 2,
+    "device": "cuda",
+    "loader_workers": 0,
+    "blockmask": {
+      "coverage": 0.3,
+      "length_days": [
+        3,
+        7,
+        14
+      ],
+      "seed": 20260905
+    }
+  },
+  "seeds": [
+    20260901,
+    20260902,
+    20260903
+  ],
+  "screen_fits": 24,
+  "primary_additional_seed_fits": 4,
+  "maximum_fits": 28,
+  "max_seconds": 5400,
+  "pilot": {
+    "fold": "B1",
+    "recipe": "C60",
+    "seed": 20260901,
+    "safety_factor": 1.5,
+    "remaining_nonfit_allowance_seconds": 300
+  },
+  "selection": "among L120,D60 rank firstseed B3 natural absolute Celsius RMSE then 8fold pooled RMSE then declared recipe order; held-back seeds are seed sensitivity, not new independent holdout; always complete control+winner additional2seeds on B3 within wallcap",
+  "retention": "strict B3 three-seed mean RMSE improvement only; report firstseed selection and heldback2seed sensitivity; no CI/probability/outage automatic veto",
+  "support_policy": "same intact eligible keys; no unsupported outage row deletion; scenario with unsupported rows is SUPPORT_BLOCKED; empty final17day interval is NOT_ESTIMABLE_NO_ROWS",
+  "replay": "new PID reload all own newly saved models and reproduce complete natural/outage per-fit predictions exactly; no probe-only claim",
+  "duplicate_exclusion": {
+    "absolute_C_MSE": "same v23 blockmask/MSE domain and uniform arms already executed in p2_objective_alignment_20260905_v2; excluded",
+    "crossfit_copula": "failed fixed crossfit family not rerun; no residual calibration in this experiment"
+  },
+  "claim_scope": "retrospective exposed evaluation; firstseed B3 selects winner; additional seeds are not unbiased independent confirmation; full8fold3seed not evaluated",
+  "official_rows": 0,
+  "hidden_rows": 0,
+  "csv_written": 0,
+  "upload": 0
+}

@@ -1,5 +1,15 @@
 # P1 bracket-only 후보 — 별도 학습 및 답안 준비
 
+> 09-07 현재 이 후보는 fallback이다. 원형 7fit 전체 재학습으로 `57844ef2`/28.909341점 답안을 복원했다. 현재 파일 선택은 [최종 패키지 안내](../FINAL_RELEASE_20260907.md)를 따른다. 아래 bracket 기록과 소비된 실행은 그대로 보존한다.
+
+## 최신 갱신 — 09-06 06:39 공식 채점 완료
+
+동일 SHA `9031c84e…d93a`를 실제 업로드해 **Public F1 0.785944 / 27.644124점**을 확인했다. 기준 5971 대비 +0.008195 / +0.217805점이다. [영수증](../../reports/p1_bracket_official_submission_20260906_v1/receipt.json). 마지막 확인 시 당일 1회가 남았으며 다음 업로드 직전 재확인이 필요하다. 최종 모델 제출/잠금은 하지 않았다.
+
+장기 저장 모델 재생은 [새 portable v2](../../reports/p1_bracket_portable_20260906_v2/report-source.md)를 따른다. 원 실험 runner의 시계/lock은 수정하지 않았다. 범위 및 셀별 조합 추가는 [독립 비교](../../reports/p1_trainfit_postpolicy_20260906_v1/report-source.md)에서 비승격이므로 이 후보에 넣지 않는다.
+
+## 이하 원 후보 준비 시점 기록
+
 상태: **새 P1 후보의 4회 학습, 독립 내부 QA, 로컬 답안 생성 및 별도 프로세스 전체 replay 완료.** 공식 채점은 하지 않았다. 기존 [기준 패키지](PORTABLE_PACKAGE_HANDOFF_20260906.md)는 fallback으로 보존한다. 이 작업은 로컬 후보 생성이며 업로드, 최종 모델 지정, commit/push를 포함하지 않는다.
 
 ## 답안 선택과 검증 범위
