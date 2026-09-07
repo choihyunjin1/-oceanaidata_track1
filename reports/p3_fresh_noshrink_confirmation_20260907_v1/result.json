@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "checks": {
+    "schema": true,
+    "rows": true,
+    "key_order": true,
+    "unique_keys": true,
+    "finite_range": true,
+    "separate_pid_replay": true,
+    "candidate_hash": true,
+    "base_equals_2015b387": true,
+    "final_equals_70761aff": true,
+    "fresh_models_unchanged": true,
+    "audit_models_unchanged": true,
+    "source_pins_unchanged": true,
+    "archives_unchanged": true
+  },
+  "confidence": "Share with caveats",
+  "fresh_cold_receipt": {
+    "run": "fresh_cold_2",
+    "answer_sha256": "2015b38750d357630d5b2e9eee32807d2961ce752e35eb2b454ee16e579dda56",
+    "current_run_seconds": 22182.108999999997,
+    "run_kind": "FRESH_COLD",
+    "reused_backbone_fits": 0,
+    "new_production_fits": 41,
+    "answer_replay": "EXACT_REPLAY_PASS"
+  },
+  "addon_stages": [
+    {
+      "stage": "adopt-trained",
+      "exit_code": 0,
+      "seconds": 1.922000000020489
+    },
+    {
+      "stage": "infer",
+      "exit_code": 0,
+      "seconds": 5.75
+    },
+    {
+      "stage": "replay",
+      "exit_code": 0,
+      "seconds": 5.780999999959022
+    }
+  ],
+  "addon_wall_seconds": 14.01600000000326,
+  "answer": {
+    "path": "C:\\Users\\cedis\\Documents\\OceanFinalDay_20260907\\P3_fresh_noshrink_confirmation_20260907_v1\\05_answer\\submission_p3_numeric_cpudet_noshrink.csv",
+    "sha256": "70761affca4d3fc6f1d24ae53467e5b185b23465926ebb4b851f0300872cddbd",
+    "rows": 1200,
+    "bytes": 39869
+  },
+  "infer": {
+    "status": "LOCAL_NOT_UPLOADED",
+    "pid": 37196,
+    "rows": 1200,
+    "bytes": 39869,
+    "candidate_sha256": "70761affca4d3fc6f1d24ae53467e5b185b23465926ebb4b851f0300872cddbd",
+    "base_sha256": "2015b38750d357630d5b2e9eee32807d2961ce752e35eb2b454ee16e579dda56",
+    "base_exact_reconstruction": false,
+    "short_leads_exact_unchanged": true,
+    "changed_rows": 600,
+    "model_manifest_sha256": "c0a4274c04cfff3e52da85550f20c880b666b72577a41e2a915aada8ec822d24",
+    "input_sha256": {
+      "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+      "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc"
+    },
+    "inference_threads": 2,
+    "seconds": 3.9839999999967404,
+    "new_fits": 0,
+    "old_answer_values_read": 0,
+    "hidden_rows": 0,
+    "uploads": 0,
+    "base_cold_status": "FRESH_COLD",
+    "fresh_two_cold_proof": false
+  },
+  "replay": {
+    "status": "EXACT_REPLAY_PASS",
+    "pid": 29580,
+    "rows": 1200,
+    "bytes": 39869,
+    "candidate_sha256": "70761affca4d3fc6f1d24ae53467e5b185b23465926ebb4b851f0300872cddbd",
+    "base_sha256": "2015b38750d357630d5b2e9eee32807d2961ce752e35eb2b454ee16e579dda56",
+    "base_exact_reconstruction": false,
+    "short_leads_exact_unchanged": true,
+    "changed_rows": 600,
+    "model_manifest_sha256": "c0a4274c04cfff3e52da85550f20c880b666b72577a41e2a915aada8ec822d24",
+    "input_sha256": {
+      "test_context.parquet": "4051ce6af55c320cbaad9a0d3367c654349f7ff3965709b7132d45957d3f1c0c",
+      "test_index.csv": "004551346ca5be6e3445d8b8e9c8121c16283eea72a363cbd673c5e3edcd2acc"
+    },
+    "inference_threads": 2,
+    "seconds": 3.9839999999967404,
+    "new_fits": 0,
+    "old_answer_values_read": 0,
+    "hidden_rows": 0,
+    "uploads": 0,
+    "base_cold_status": "FRESH_COLD",
+    "fresh_two_cold_proof": false
+  },
+  "fresh_training_sha256": "c7259cba95c9460db02808f09f586b1292f43f01995c113db5962f359a688bf6",
+  "packaged_addon_sha256": "aa40719365ad430a2b63caeda30183a3f3a1fd386ba285e8a15b6ea7225ebf44",
+  "source_zip_sha256": "c3aed055873bed601397073be4610fb06fa085021122f3656d65c1939faa6e78",
+  "saved_zip_sha256": "f0451b9cfe7a3042b9848679d9cfd654e7800e958d6a6e3374bd56332ecfdc7b",
+  "new_fits": 0,
+  "uploads": 0,
+  "historical_outputs_modified": false,
+  "completed_fresh_colds": 1,
+  "not_two_fresh_colds": true,
+  "caveats": [
+    "same Windows PC only; not fresh OS/offline/network-blocked test",
+    "base elapsed exceeds six hours; general official scope unverified",
+    "chained completed base run plus packaged addon stages, not one new training notebook execution",
+    "adopt-trained sets expected_base_answer_sha256 null; independent checks above test exact historical hashes"
+  ]
+}

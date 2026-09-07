@@ -1,5 +1,9 @@
 # 최종 패키지 — 2026-09-07
 
+> **최신 상태 — 2026-09-07 20:01 KST 접수 확인:** P1 20:00 / P2 19:44 / P3 19:59, 모두 `최종 제출(모델) / 모델 · 검증 대기 / 채점중`입니다. 첨부 목록 P1 21개·P2 3개(v2)·P3 4개를 저장된 양식에서 확인했습니다. [현재 상태·재현 근거·파일 안내](ocean_v2_codex/CURRENT_FINAL_STATUS_20260907.md)가 아래 역사적 보류/진행 기록보다 우선합니다. 운영진 검증 통과나 서버 파일 다운로드 SHA 검증을 뜻하지 않습니다. 재제출·삭제하지 마세요.
+
+> 15:46 현재 P2 첨부는 `C:/Users/cedis/Documents/OceanFinalSelected_20260907/P2_v2/P2_FINAL_REPRODUCTION_794268f1_v2.zip`입니다. 역사적 예측 SHA 차이 차단 수정 후 새 cold/saved exact PASS. [정정 근거·새 SHA·상위 안내](ocean_v2_codex/P2_PORTABILITY_REPAIR_AND_AUDIT_RESPONSE_20260907.md)를 우선 읽으세요. 이전 P2 ZIP을 자동 선택하지 않으며 최종 확인은 보류합니다.
+
 ## 최우선 갱신 — 15:12 KST / Fable 검토 대기
 
 현재 선택·증거·파일 경계는 **[최신 최종 검토 정본](ocean_v2_codex/FINAL_SELECTION_REVIEW_HANDOFF_20260907.md)**을 따른다. P1 원형 `57844ef2`, P2 smooth7 projection `794268f1`, P3 CPU no-shrink `70761aff`가 우선이며 답안 잔여 0/0/0. P2 최종 ZIP은 `C:/Users/cedis/Documents/OceanFinalSelected_20260907/P2`에 별도 준비했다. 아래 옛 P2/P3 경로를 현재 최종본으로 선택하지 않는다.

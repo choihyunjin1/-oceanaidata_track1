@@ -1,5 +1,7 @@
 # Ocean AI Data Track 1 — P1 / P2 / P3
 
+> **최신 상태 — 2026-09-07 20:01 KST 접수 확인:** P1 20:00 / P2 19:44 / P3 19:59, 모두 `최종 제출(모델) / 모델 · 검증 대기 / 채점중`입니다. 첨부 목록 P1 21개·P2 3개(v2)·P3 4개를 저장된 양식에서 확인했습니다. [현재 상태·재현 근거·파일 안내](docs/ocean_v2_codex/CURRENT_FINAL_STATUS_20260907.md)가 아래 역사적 보류/진행 기록보다 우선합니다. 운영진 검증 통과나 서버 파일 다운로드 SHA 검증을 뜻하지 않습니다. 재제출·삭제하지 마세요.
+
 세 문제의 연구·학습·내부 검증·재현 자료를 관리하는 통합 저장소입니다.
 P1은 수온 이상 탐지, P2는 중간층 수온 복원, P3는 유의파고 예측입니다.
 패키지 이름 `p1-qc`는 초기 구현명이며 저장소 범위를 P1로 제한하지 않습니다.
@@ -13,6 +15,8 @@ P1은 수온 이상 탐지, P2는 중간층 수온 복원, P3는 유의파고 �
 5. 제출·재현 작업이면 [인수인계](AI_HANDOFF.md)와 [제출 실행서](docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)
 
 ## 현재 채점 우선 후보 — 2026-09-07 15:12 KST (최종 제출 보류)
+
+**15:46 정정:** P2 역사적 예측 SHA 차단을 새 v2 패키지에서 수정하고 cold 3fit + saved 노트북을 재실행해 같은 채점 답안 SHA를 확인했습니다. 현재 P2 첨부는 `OceanFinalSelected_20260907/P2_v2/P2_FINAL_REPRODUCTION_794268f1_v2.zip`입니다. [정정 결과·새 ZIP SHA](docs/ocean_v2_codex/P2_PORTABILITY_REPAIR_AND_AUDIT_RESPONSE_20260907.md)와 [Fable 재검토 요청](docs/ocean_v2_codex/FABLE_FINAL_SELECTION_RECHECK_PROMPT_20260907.md)을 우선합니다. 최종 확인 보류는 유지됩니다.
 
 | 문제 | 현재 선택 | 공식 지표 | 공식 점수 | 답안 SHA 앞자리 |
 |---|---|---:|---:|---|
