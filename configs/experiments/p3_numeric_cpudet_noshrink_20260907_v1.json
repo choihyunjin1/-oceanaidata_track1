@@ -1,0 +1,19 @@
+{
+  "id": "p3_numeric_cpudet_noshrink_20260907_v1",
+  "mechanism": "Remove only fixed 0.2 persistence shrink on leads 12,18,24; retain CPU 3-seed components, learned routers, clipping and short leads",
+  "base": "C:/Users/cedis/Documents/OceanFinalDay_20260907/P3_numeric_cpudet_unbounded_v2/completion_1",
+  "base_answer_sha256": "2015b38750d357630d5b2e9eee32807d2961ce752e35eb2b454ee16e579dda56",
+  "new_persistence_weight": 0.0,
+  "old_persistence_weight": 0.2,
+  "active_leads": [12, 18, 24],
+  "new_fits": 0,
+  "inference_cpu_threads": 2,
+  "comparison": "Current CPU completion OOF, 103602 rows, retrospective paired RMSE from SSE/N; not old GPU OOF",
+  "bootstrap": {"unit": "station x episode_id", "resamples": 4000, "seed": 20260907, "ci": 0.90, "paired": true},
+  "risk_reports": ["fold", "station", "lead_h", "station x episode_id", "current_hs < 1.7"],
+  "selection": "Prepare the single preregistered w=0 candidate after technical QA, report mean improvement and P(delta<0); no worst-block automatic veto, no automatic final designation",
+  "full_fresh_cold_status": "BASE_FRESH_COLD_2_PENDING; addon has no fresh training claim",
+  "public_score_used_to_derive_parameters": false,
+  "no_actions": ["fit", "retune", "OLS", "upload", "delete", "final_designation", "commit", "push", "change active base run"],
+  "maximum_execution_seconds": null
+}

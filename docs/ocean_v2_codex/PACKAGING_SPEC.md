@@ -1,6 +1,9 @@
 # PACKAGING_SPEC — 최종 재현 패키지 v2 (`artifacts/official_final_submission_v2_20260907/`)
 
 ## 0. 목적
+
+2026-09-07 정정: 이 사양의 일반 모델 6시간 목표는 내부 목표이며 공식 원문 인용이 아니다. 목표는 유지하되 공식 공지의 합성 사전학습 예외 조건 3과 구분하고, 일반 적용 범위는 문제지 Ⅳ-2 미열람으로 미확인이다.
+
 운영진 재현 검증(인터넷 차단, 6시간, 1항 상수 리터럴·4항 학습 산출물 제거 후 예측 재생성)을 통과하도록, 문제별로 "배포 데이터 → 학습 → 가중치 → 예측 → 답안"이 코드만으로 재생성되는 원자적 폴더를 만든다. 기존 `artifacts/official_final_submission_20260905/`와 `scripts/build_official_final_submission_20260905.py`는 **수정하지 않고** 참고만 한다(폴더 계약·contract·노트북 골격은 그대로 따른다).
 
 ## 1. 빌더 `scripts/ocean_v2/build_final_package_v2.py`

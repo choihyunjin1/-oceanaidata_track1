@@ -1,0 +1,23 @@
+{
+  "id": "p1_champion_bracketb_20260907_v1",
+  "threads": 4,
+  "gpu_training": false,
+  "hard_runtime_cap": null,
+  "seeds": [20260813, 20260829, 20260847],
+  "fits": 17,
+  "historical_fits": 14,
+  "full_bracket_fits": 3,
+  "windows_hours": [6, 24, 72],
+  "flank_hours": 1,
+  "mechanism": "Original B80 plus 27 bracket features, same original recipe, 3 seeds, 700 trees, event/day weights and fixed .2/.1 decoder. O, MS, historical cells and GI composition unchanged between arms.",
+  "primary": "Q3/Q4 pooled composed binary F1 on exactly 287862 original MS-owned keys; retrospective previously exposed, not fresh.",
+  "comparison": "New paired O1+B80x3 versus same O1+B107x3 per fold, original feature implementation on partitioned observations; 21-day train cutoff; fixed reused historical MS. Not exact historical 28.909 score replay.",
+  "decision": "Mean pooled F1 improvement retained; block/station degradation reported separately, not automatic rejection. Full candidate prepared after technical internal QA regardless; not uploaded or designated automatically.",
+  "postprocess": {"high_threshold": 0.2, "low_threshold": 0.1, "close_gap_rows": 0, "minimum_positive_run": 12},
+  "train_sha256": "20b656b0cbd524ad9da0bae8ecb6e0bacfc006e05810b37e83f29a5fa8e65cd2",
+  "proposal_sha256": "03852a318cbf7e17ea9cffbeb850a843d094da61b613353f066eb72cad3cb73d",
+  "proposal_qa_sha256": "ea4866a3d80f1c91bfbc2f1cd44a9a87574ac84bc60c42885600ac2a0fccacc3",
+  "official_access": "Only after completed historical internal evaluation and QA, local candidate generation authorized; hidden truth never",
+  "uploads": 0,
+  "score_inversion": false
+}

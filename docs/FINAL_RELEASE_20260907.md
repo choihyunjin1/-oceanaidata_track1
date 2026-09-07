@@ -1,5 +1,27 @@
 # 최종 패키지 — 2026-09-07
 
+## 최신 후보 변경 — 12:30 KST
+
+12:17~12:19 리더보드 4건 채점 결과 P2 우선 후보는 **L120 s3 projection / SHA 9c5fec38 / RMSE 0.405920℃ / 28.240037점**으로 바뀌었다. 별도 로컬 패키지 `C:/Users/cedis/Documents/OceanFinalDay_20260907/P2_L120_s3_proj_v2`의 답안·FORM을 사용한다. 아래 기존 OceanFinalRelease 묶음과 fee6118b 안내는 보존된 이전 패키지 이력이다. P1 원형과 P3 ff42 비교 후보는 유지하되 P3 whole-cold 불일치 문제는 미해결이다. 최종 모델 지정은 하지 않았다.
+
+최신 파일·점수·제약 정본: [UPLOAD_SET_2](ocean_v2_codex/UPLOAD_SET_2.md), [공식 영수증](../reports/final_day_candidate_official_submissions_20260907_v1/receipt.json). 새 P3 no-shrink는 별도 로컬 QA 완료/공식 미채점이고 CPU fresh cold가 진행 중이다.
+
+## 09-07 시간·출처 정정 (ZIP 불변)
+
+공식 6시간 제한의 일반 모델 적용 범위는 **미확인**이다. 사용자 전달 공지와 [Fable 검토 2](ocean_v2_codex/FABLE_INDEPENDENT_REVIEW_2_20260907.md)에 따르면 09-01 사전학습 예외 조건 3에만 명시되어 있으며 문제지 Ⅳ-2는 미열람이다. 아래 시간은 우리 PC(Windows, Python 3.12.10, Ryzen 7800X3D, RTX 5090)의 실측이지 규정 충족 인증이 아니다.
+
+| 실행 | 기존 receipt 실측 | 자원 설정 |
+|---|---:|---|
+| P1 whole-cold / saved replay | 6,323.356초 / 35.656초 | O/B CPU8, MS CPU2 + CUDA0 bf16 |
+| P2 L120 cold / saved replay | 173.010초 / 30.891초 | CPU2 + CUDA0 |
+| P2 투영 후처리 / 새 saved ZIP replay | 4.860초 / 43.703초 | 후처리 새 fit 0, 별도 thread cap 코드 없음; L120 추론 CPU2 + CUDA0 |
+| P3 기존 whole-cold / 채점 모델 saved replay | 1,497.613초 / 6.026초 | cold README: single CPU2, multi CUDA0; 세부 버전·설정은 해당 패키지와 receipt |
+| P3 cpudet 첫 실패 | 14,405.344초, 첫 cold 4시간 초과 | CPU4, 후보 미완료·준수 증명 없음 |
+
+근거: 로컬 `RELEASE_MANIFEST.json`, P2 신규 `ANSWER_QA.json` 및 `saved_notebook` receipt. P2 cold와 후처리 시간은 별도 실행 측정이며 새 결합 full cold 실측으로 합쳐 주장하지 않는다. 새 P3 무제한 실행은 [launch](../reports/p3_numeric_cpudet_unbounded_20260907_v2/launch.md)를 따르며 기존 후보와 혼동하지 않는다.
+
+검증된 ZIP·내부 README·manifest·모델·답안은 수정하지 않고, 상위 START_HERE/FORM/RELEASE_MANIFEST에만 정정한다. ZIP 재생 QA는 기존 결과를 유지하며 이번 문구 수정으로 재실행하지 않는다. 공식 마감 시각, 문제지 Ⅳ-2, 모델 첨부 개수·크기, 하루 3회 리셋 기준은 미확인이다.
+
 현재 선택은 **P1 원형 복원 / P2 L120 / P3 numeric**이다. 과거 bracket, 60-epoch C3, hmax 제거 후보는 fallback·연구 이력이며 자동 선택하지 않는다. 로컬 패키지 준비와 GitHub 공개는 대회의 최종 모델 지정·접수가 아니다.
 
 **P3 주의:** 채점 당시 저장 모델은 채점 답안을 정확히 재생하지만, 이번 전체 재학습 답안은 660/1,200행이 달랐다(최대 0.003506m). 새 재학습본의 공식 점수와 운영진 재학습 허용오차 충족 여부는 미확인이다. `NOT_SCORED_whole_cold.csv`나 `P3_COLD_SAVED_MODELS.zip`을 채점본 파일 대신 선택하지 않는다.
@@ -67,7 +89,7 @@ SAVED_MODELS에서는 `SAVED_PREDICT.ipynb`로 기존 모델을 사용한다. �
 
 ### P3
 
-`P3_DATA_DIR`을 배포 `P3_wave_forecast` 폴더로 지정한다. SOURCE_ONLY에서 `TRAIN.ipynb`→`PREDICT.ipynb`를 실행한다. 준비부터 QA·답안 replay까지 전체 6시간 한도이며 긴 수동 대기를 넣지 않는다. 기존 prepared-only 시도는 보존하고 이번 검증은 새 폴더에서 수행한다.
+`P3_DATA_DIR`을 배포 `P3_wave_forecast` 폴더로 지정한다. SOURCE_ONLY에서 `TRAIN.ipynb`→`PREDICT.ipynb`를 실행한다. 이 보존된 패키지 코드에는 준비부터 QA·답안 replay까지 내부 6시간 watchdog이 있으므로 긴 수동 대기를 넣지 않는다. 이는 공식 일반 모델 제한의 확인이 아니다. 별도 무제한 cpudet 실행에는 이 제한이 적용되지 않는다. 기존 prepared-only 시도는 보존하고 이번 검증은 새 폴더에서 수행했다.
 
 이번 SOURCE_ONLY 실제 TRAIN/PREDICT 실행은 12 backbone+5 router=17fit, 수치 replay까지 1,497.613초였다. 자체 fresh-process replay는 통과했지만 과거 채점 답안과는 위 차이가 있다. 차이의 원인은 아직 확정하지 않았으며 재시작·재튜닝하지 않았다.
 

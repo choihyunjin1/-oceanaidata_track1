@@ -1,0 +1,59 @@
+{
+  "id": "P3_numeric_cpudet_unbounded_20260907_v2",
+  "hypothesis": "CPU-only single/multi 3-seed ensembles eliminate observed cold answer drift; score effect unknown",
+  "comparator": "numeric-lead scored ff42a6a0, historical own numeric OOF; no official inverse coefficients",
+  "seeds": [
+    20260817,
+    20260818,
+    20260819
+  ],
+  "same_seed_each_fold": true,
+  "ensemble": "mean of clipped per-seed component forecasts, then one TRAIN-OOF loss router",
+  "cpu_threads": 4,
+  "gpu_workers": 0,
+  "cold_repetitions": 2,
+  "maximum_seconds_per_cold": null,
+  "backbone_fits_per_cold": 36,
+  "router_fits_per_cold": 5,
+  "fit_accounting": "5 historical folds x 3 seeds x 2 backbones + full 3 seeds x 2 backbones + 4 prior-only routers + full router = 41; two cold runs = 82 fits",
+  "expected_features": 591,
+  "iterations": {
+    "single": 700,
+    "multi": 1200
+  },
+  "shrink": {
+    "leads": [
+      12,
+      18,
+      24
+    ],
+    "weight": 0.2
+  },
+  "router": {
+    "alpha": 10,
+    "temperature_multiplier": 2,
+    "strength": 0.5
+  },
+  "other_model_parameters": "copy frozen numeric recipe, remove GPU devices and set CPU/thread count; record resolved CatBoost parameters",
+  "internal_surface": "existing 5-fold forward/purged contract, 103602 rows, station-episode paired diagnostics; exposed retrospective validation",
+  "retain_rule": "complete full iterations, numerical QA, separate-PID OOF/answer replay, and two cold answer SHA exact; no automatic worst-block veto",
+  "round1_official_rule_user_only": "RMSE >0.610 triggers bug investigation, not coefficient tuning; final selection per plan simplicity tie rule",
+  "round2": "noshrink only after user round1 result recorded; no new w=0.1 candidate selected from this audit",
+  "round3": "reserve until actual cold equality and user round results; no automatic seed expansion",
+  "prior_inputs": "only distributed data and pinned source; no prior model/cache/OOF/answer input to either cold",
+  "stop_rule": "timeout or technical failure preserves attempt, no automatic retry; report blocker",
+  "uploads": 0,
+  "deletions": 0,
+  "final_submission": 0,
+  "execution_amendment": {
+    "authorization": "User: remove P3 execution time limit and continue (2026-09-07)",
+    "hard_runtime_cap": false,
+    "internal_1500_cutoff": false,
+    "first_run": "new-directory completion using 29 verified same-recipe fits; 7 new backbones +5 routers",
+    "second_run": "fresh empty-model uncapped 41-fit reproduction, no inherited artifacts",
+    "total_new_production_fits": 53,
+    "two_fresh_cold_claim": false,
+    "official_six_hour_scope": "UNVERIFIED_FOR_GENERAL_P3; explicit supplied notice only established synthetic-pretrained exception; elapsed duration report only, not execution gate",
+    "prior_stop_rule_superseded": "runtime timeout removed in new ID; other technical failures preserve attempt and are not automatically retried"
+  }
+}

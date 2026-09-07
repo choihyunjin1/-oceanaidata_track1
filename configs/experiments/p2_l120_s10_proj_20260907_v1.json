@@ -1,0 +1,20 @@
+{
+  "experiment_id": "p2_l120_s10_proj_20260907_v1",
+  "hypothesis": "Fixed L120 equal mean of ten seeds reduces seed variance versus exact three-seed mean; identical projection after ensemble.",
+  "recipe": "L120", "seeds": [20260901,20260902,20260903,20260904,20260905,20260906,20260907,20260908,20260909,20260910],
+  "new_seeds": [20260904,20260905,20260906,20260907,20260908,20260909,20260910],
+  "new_internal_fits": 56, "new_full_fits": 7, "reused_internal_models": 24, "reused_full_models": 3,
+  "maximum_new_fits": 63, "additional_portable_fresh_cold_fits": 10,
+  "order": ["B3","B1","B2","B4","B5","B6","B7","B8","FULL"],
+  "primary": "B3 natural projected RMSE Celsius; retrospective previously exposed validation",
+  "secondary": "pooled eight folds and all block/layer/outage slices, no worst-block automatic veto",
+  "decision": "Report mean delta and 7-day block bootstrap P/improvement/CI90. Keep prepared candidate distinct from promotion; no public coefficient tuning.",
+  "projection": "Complete layers 2/3/4, finite T1 and first finite T5/T6/T7/T8; clip then exact endpoint-direction PAVA; missing endpoints/incomplete profiles no-op",
+  "cpu_threads": 2, "device": "cuda", "hard_wallcap_seconds": null,
+  "cpu_reason": "Same deterministic recipe and coexistence with frozen CPU4 P3/P1 worker; GPU0 exclusive to this task",
+  "source_sha256": "cc5d6fd9ea398a613e485b34fd530c7dc064fa040fa675127a12318856ab178a",
+  "baseline_answer_sha256": "9c5fec385930ab5a997a70c10550f3ada18872a452938bfc3fa78232e17a5118",
+  "bootstrap": {"resamples":2000,"seed":20260907,"days":7},
+  "upload": 0, "external_data": 0, "hidden_truth": 0,
+  "authorization": "2026-09-07 user explicitly execute pending P1/P2 work; candidate preparation need not await round1 score; no upload/final designation."
+}

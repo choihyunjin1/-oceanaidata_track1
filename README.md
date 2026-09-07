@@ -12,15 +12,18 @@ P1은 수온 이상 탐지, P2는 중간층 수온 복원, P3는 유의파고 �
 4. [짧은 개발·검증 루프](docs/AGENT_WORKFLOW.md)
 5. 제출·재현 작업이면 [인수인계](AI_HANDOFF.md)와 [제출 실행서](docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)
 
-## 현재 최종 선택 — 2026-09-07
+## 현재 채점 우선 후보 — 2026-09-07 12:30 KST (최종 지정 아님)
 
 | 문제 | 현재 선택 | 공식 지표 | 공식 점수 | 답안 SHA 앞자리 |
 |---|---|---:|---:|---|
 | P1 | 원형 O+B+MS-TCN, 배포자료부터 7fit 복원 | F1 0.833548 | **28.909341** | `57844ef2` |
-| P2 | C3 DeepSet L120, 3-seed | RMSE 0.418892℃ | **28.077280** | `fee6118b` |
+| P2 | C3 DeepSet L120, 3-seed + endpoint projection | RMSE 0.405920℃ | **28.240037** | `9c5fec38` |
 | P3 | CatBoost numeric lead + train-OOF router | RMSE 0.604351m | **23.741446** | `ff42a6a0` |
 
-로컬 묶음: `C:/Users/cedis/Documents/OceanFinalRelease_20260907`.
+최신 4건 실제 채점·파일 해시는 [공식 영수증](reports/final_day_candidate_official_submissions_20260907_v1/receipt.json), 후보·제약은 [UPLOAD_SET_2](docs/ocean_v2_codex/UPLOAD_SET_2.md), 다음 독립 검토 요청은 [Fable 프롬프트](docs/ocean_v2_codex/FABLE_REMAINING_SLOTS_PROMPT_20260907.md)를 따른다.
+P1 bracket B(28.7598), P2 10-seed projection(28.083729), P3 CPU3seed(23.654388)는 각 우선 후보를 넘지 못했다. P3 no-shrink `70761aff`는 내부 QA·패키지 replay 완료/공식 미채점이며, CPU fresh_cold_2는 실행 중이다. 제출 직후 잔여 P1 2/P2 1/P3 2는 시각 고정 기록이므로 다음 실행 전에 다시 확인한다.
+
+기존 로컬 묶음: `C:/Users/cedis/Documents/OceanFinalRelease_20260907`. 새 P2 우선본은 `C:/Users/cedis/Documents/OceanFinalDay_20260907/P2_L120_s3_proj_v2`에 별도 보존하며 기존 묶음을 덮어쓰지 않았다.
 학습 코드·동봉 모델·채점 CSV·노트북·첨부 안내를 문제별로 구분한다.
 Git에는 코드·설정·집계 QA·문서만 올리므로 데이터/가중치/답안 ZIP은 로컬에서 선택한다.
 [최종 검증 보고서](reports/final_release_20260907_v1/report-source.md)를 통해 실제 완료 범위를 확인한다.
@@ -84,6 +87,7 @@ P3도 배포 원자료부터 12+5회 학습·독립 QA·ZIP 추출 재생을 마
 `artifacts/official_final_submission_20260905/`의 옛 READY 표시는 최신 규정 통과를 뜻하지 않습니다.
 최종본은 데이터 참조 → 학습 코드 → 학습된 모델 → 답안 → 재현 안내를 분리하고,
 배포 자료만으로 네트워크 없이 6시간 안에 재현해야 합니다.
+위 6시간을 일반 모델에 적용하는 것은 내부 목표이며 공식 원문 인용이 아닙니다. 공식 공지에서는 합성 사전학습 예외 조건 3에 명시되어 있고, 일반 모델 적용 범위는 문제지 Ⅳ-2 미열람으로 미확인입니다(2026-09-07 정정).
 실제 제출 전에는 로그인된 공지의 마감·잔여 횟수·최종 모델 잠금 효과를 확인합니다.
 GitHub push는 대회 제출이 아닙니다.
 

@@ -1,0 +1,34 @@
+{
+  "id": "final_day_evidence_check_20260907_v1",
+  "mode": "read_only_recalculation_no_candidate",
+  "new_model_fits": 0,
+  "maximum_seconds": 600,
+  "p2": {
+    "prediction": "natural_L120",
+    "rows": 166268,
+    "order": "clip_to_public_envelope_then_unit_weight_endpoint_direction_PAVA",
+    "deep_priority": [5, 6, 7, 8],
+    "incomplete_profiles": "report_complete_only_and_available_targets_variants_separately; no candidate if unspecified variant changes match",
+    "expected_rmse": {"B3": [0.4835, 0.4633], "pooled": [1.2518, 1.2396], "B8": [0.2177, 0.2065]},
+    "rounded_metric_tolerance": 0.0001
+  },
+  "p3": {
+    "rows": 103602,
+    "undo_shrink_leads": [12, 18, 24],
+    "weights": [0.0, 0.1, 0.2, 0.3],
+    "bootstrap": {"cluster": "station_x_episode", "resamples": 10000, "seed": 20260907, "ci_quantiles": [0.05, 0.95]},
+    "expected_rmse": {"w0": 0.6798, "w02": 0.6835},
+    "ols": "report both target-on-prediction through-origin and change-from-persistence through-origin; coefficient definition must be explicit",
+    "rounded_metric_tolerance": 0.0001,
+    "bootstrap_approx_tolerance": {"probability": 0.03, "ci_endpoint_m": 0.002}
+  },
+  "p1": {
+    "rule": "strictly outside finite full-training-label0 minimum/maximum",
+    "expected_counts": {"train_label0_outside": 0, "train_label1_outside": 805, "test_outside": 123, "test_outside_already_positive": 103},
+    "diagnostic_comparator_only": "0..35 stated in old Fable report, not a fitted threshold and not deployment authority"
+  },
+  "decision": "Only numerically verified, unambiguous candidates may be preregistered for materialization; discrepancies reported without threshold/recipe adjustment",
+  "hidden_truth_access": 0,
+  "uploads": 0,
+  "deletions": 0
+}
