@@ -1,0 +1,22 @@
+{
+  "id": "p2_l120_s3_smooth7_projection_20260907_v1",
+  "hypothesis": "Reduce noisy time variation in L120 three-seed predictions by centered plus/minus 30-minute averaging before unchanged endpoint projection",
+  "window_grid_steps": 7,
+  "step_minutes": 10,
+  "minimum_periods": 1,
+  "order": "unprojected L120 mean3 -> station/layer complete 10-minute grid centered rolling 7 -> unchanged clip then endpoint-direction PAVA",
+  "missing_rows": "Missing prediction times participate as NaN; return only original requested rows. No interpolation, no cross-station/layer/fold smoothing.",
+  "selection_provenance": "Fable selected window7 after inspecting exposed OOF windows 1,7,13,...73; NOT selected before all data access. This config fixes an execution candidate before Codex evaluation/materialization, not a fresh confirmatory preregistration.",
+  "evaluation_sha256": "4ce3a80171e40cdb3ee760eec43e86b48441de05db9b2c587ef3e12ac2f695a5",
+  "primary": "B3 September-October natural RMSE; pooled/outage/layer risks also reported",
+  "comparator": "L120 s3 projection only, same rows/same projection",
+  "bootstrap": {"days": 7, "resamples": 2000, "seed": 20260907},
+  "new_fits": 0,
+  "retrospective": true,
+  "estimated_diagnostic_seconds": 60,
+  "hard_wallcap": null,
+  "decision": "Verify Fable values and full scope, then prepare fixed window7 after independent numerical QA. Public score is never used to adjust window/weights. Worst-fold decline reported separately, not automatic veto.",
+  "official_before_internal_qa": false,
+  "hidden_access": false,
+  "external_data": false
+}

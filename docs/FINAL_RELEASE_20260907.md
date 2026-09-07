@@ -1,5 +1,11 @@
 # 최종 패키지 — 2026-09-07
 
+## 최우선 갱신 — 15:12 KST / Fable 검토 대기
+
+현재 선택·증거·파일 경계는 **[최신 최종 검토 정본](ocean_v2_codex/FINAL_SELECTION_REVIEW_HANDOFF_20260907.md)**을 따른다. P1 원형 `57844ef2`, P2 smooth7 projection `794268f1`, P3 CPU no-shrink `70761aff`가 우선이며 답안 잔여 0/0/0. P2 최종 ZIP은 `C:/Users/cedis/Documents/OceanFinalSelected_20260907/P2`에 별도 준비했다. 아래 옛 P2/P3 경로를 현재 최종본으로 선택하지 않는다.
+
+최종 모델 제출은 사용자 요청으로 보류했다. P2 첫 버튼 뒤 확인창 OK 미클릭·접수 미확인, P1/P3 최종 클릭 없음. P3 fresh cold는 변경 없이 진행 중이다. 아래 12:30 및 초기 빌드 상태는 역사적 기록이다. 파일당 50MB는 이후 UI에서 확인했으나 첨부 개수 상한과 정확한 모델 마감 시각은 여전히 미확인이다.
+
 ## 최신 후보 변경 — 12:30 KST
 
 12:17~12:19 리더보드 4건 채점 결과 P2 우선 후보는 **L120 s3 projection / SHA 9c5fec38 / RMSE 0.405920℃ / 28.240037점**으로 바뀌었다. 별도 로컬 패키지 `C:/Users/cedis/Documents/OceanFinalDay_20260907/P2_L120_s3_proj_v2`의 답안·FORM을 사용한다. 아래 기존 OceanFinalRelease 묶음과 fee6118b 안내는 보존된 이전 패키지 이력이다. P1 원형과 P3 ff42 비교 후보는 유지하되 P3 whole-cold 불일치 문제는 미해결이다. 최종 모델 지정은 하지 않았다.

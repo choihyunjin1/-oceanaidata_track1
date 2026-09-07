@@ -1,0 +1,19 @@
+{
+  "id": "p2_c60_l120_equal_projection_20260907_v1",
+  "hypothesis": "A fixed equal average of C60 and L120 three-seed predictors may retain complementary learning-stage errors; apply the same endpoint clip then PAVA used by L120 s3 projection.",
+  "weights": [0.5, 0.5],
+  "weight_source": "structural equal weighting, not fitted to Public or outer OOF",
+  "evaluation": "exact existing 166268-row eight-fold OOF, B3 Sep-Oct primary; pooled and missingness/outage are separate risk reports",
+  "evaluation_sha256": "4ce3a80171e40cdb3ee760eec43e86b48441de05db9b2c587ef3e12ac2f695a5",
+  "projection": "average unprojected predictions then clip to finite public endpoint envelope and endpoint-direction exact PAVA; incomplete profiles/missing endpoints unchanged",
+  "comparator": "L120 three-seed with identical projection (9c5fec38 recipe)",
+  "diagnostic_fits": 0,
+  "if_materialized": "fresh C60 three-seed full fits as needed, exact-hash L120 full reuse; independent model and CSV replay; full train-from-empty code included",
+  "expected_diagnostic_seconds": 60,
+  "time_cap": null,
+  "bootstrap": {"days": 7, "resamples": 2000, "seed": 20260907},
+  "retrospective": true,
+  "decision": "Numerical validity first; report B3 mean/P(improve), pooled and outage. Average gain is prioritized; worst subset alone is not a veto. If no mean support, retain an information-value option and compare with Fable's alternative before last slot. No weight grid or score-based coefficient fitting.",
+  "official_inputs_before_internal_qa": false,
+  "external_data": false
+}

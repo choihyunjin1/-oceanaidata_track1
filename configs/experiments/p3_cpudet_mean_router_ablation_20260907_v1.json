@@ -1,0 +1,21 @@
+{
+  "id": "p3_cpudet_mean_router_ablation_20260907_v1",
+  "registered_at_kst": "2026-09-07T14:12:00+09:00",
+  "hypothesis": "The learned long-lead loss router may add variance; remove it while holding component models and the original 0.2 persistence shrink fixed. Equal component weighting is structural, not fitted to Public scores.",
+  "source": "C:/Users/cedis/Documents/OceanFinalDay_20260907/P3_numeric_cpudet_unbounded_v2/completion_1/04_logs/candidate_oof.parquet",
+  "source_sha256": "bede4edff8ce229d66c6209bce4227f85d63b1c065113a39100b12a0ea40ec16",
+  "expected_rows": 103602,
+  "candidate": "0.5 * single_prediction + 0.5 * multi_prediction; apply unchanged 0.2 persistence shrink at 12/18/24h only",
+  "comparator": "CPU completion_1 final_prediction (2015b387 recipe), not GPU or previous no-shrink answer",
+  "component_semantics": "Mean across three seeds AFTER per-seed current+residual clipping to [0,30], as unbounded.component_predictions and historical define",
+  "metric": "pooled RMSE metres from total SSE / rows; paired station x episode bootstrap",
+  "bootstrap": {"resamples": 4000, "seed": 20260907},
+  "risk_tables": ["fold", "station", "lead_h", "current_hs < 1.7"],
+  "new_fits": 0,
+  "expected_diagnostic_seconds": 30,
+  "cutoff_seconds": null,
+  "decision": "After numerical QA, use mean/P(improve) and report risk separately. Information-value eligibility is allowed by user, not automatic promotion. No tuning following Public result. Before any official answer, verify independent inference/replay/packaging and duplicate hashes.",
+  "retrospective_validation": true,
+  "public_derived_parameters": false,
+  "active_cold_mutation": false
+}

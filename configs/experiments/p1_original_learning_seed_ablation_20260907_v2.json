@@ -1,0 +1,31 @@
+{
+  "id": "p1_original_learning_seed_ablation_20260907_v2",
+  "changes": {
+    "O_slow": {
+      "learning_rate": 0.02,
+      "n_estimators": 1400
+    },
+    "B5": {
+      "additional_seeds": [
+        20260861,
+        20260875
+      ]
+    }
+  },
+  "hypothesis": "Independently change original O learning amount or original B seed variance, retaining original 80-feature preprocessing, fixed decoder, MS and historical composition.",
+  "comparison": "Exact replay of original-feature Q3/Q4 control from p1_champion_bracketb_20260907_v1; NOT bracket variant and NOT the earlier core_tuning preprocessing",
+  "primary": "287862 Q3/Q4 common MS-owned rows pooled binary F1",
+  "scope_caveat": "Q2 MS historical proposal is not available in this original-composition contract. Do not claim three-fold composed assessment; report absence rather than mixing a different MS/feature lineage.",
+  "new_fits": 9,
+  "historical_fits": 6,
+  "full_fits": 3,
+  "cpu_threads": 4,
+  "gpu": false,
+  "estimated_seconds": 1200,
+  "hard_wallcap": null,
+  "selection": "Both predeclared independent variants evaluated. Mean improvement prioritized; risk separately reported. Information-value submission allowed after independent QA/replay. No seed/threshold choice from official scores.",
+  "retrospective": true,
+  "official_before_internal_qa": false,
+  "public_derived_parameters": false,
+  "technical_amendment": "v1 completed first O fit but failed before saving/receipt due wrapper get_booster attribute; preserve v1. v2 checks model.model.get_booster with synthetic coverage. Same scientific parameters and folds; no prior performance inspected. v1 production trained=1, persisted=0; v2 budget9 separately."
+}

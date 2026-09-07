@@ -1,5 +1,9 @@
 # 다음 AI 인수인계 — 현재 상태와 근거부터
 
+## 최우선 갱신 — 09-07 15:12 KST / 제출 보류
+
+**[최신 정본](docs/ocean_v2_codex/FINAL_SELECTION_REVIEW_HANDOFF_20260907.md)**부터 읽습니다. 우선 후보 P1 `57844ef2` / P2 `794268f1` / P3 `70761aff`; 답안 잔여 0/0/0. P2 새 whole cold/saved exact, P3 fresh cold 진행 중(15:12 PID26996 생존, 23/36 backbone). 사용자가 Fable 검토 전 최종 확인을 멈추라고 지시했습니다. P2 첫 버튼 뒤 확인창 OK는 누르지 않았고 접수 미확인; P1/P3 최종 클릭 없음. GitHub 정리 승인은 제출 재개 승인이 아닙니다. 아래 이전 선택과 미채점/잔여 표시는 역사적 이력입니다.
+
 ## 시작
 
 [AGENTS.md](AGENTS.md)를 따라 운영진 규정과 **담당 문제만** 읽습니다.

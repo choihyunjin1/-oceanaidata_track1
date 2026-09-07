@@ -12,23 +12,23 @@ P1은 수온 이상 탐지, P2는 중간층 수온 복원, P3는 유의파고 �
 4. [짧은 개발·검증 루프](docs/AGENT_WORKFLOW.md)
 5. 제출·재현 작업이면 [인수인계](AI_HANDOFF.md)와 [제출 실행서](docs/OFFICIAL_SUBMISSION_RUNBOOK_20260905.md)
 
-## 현재 채점 우선 후보 — 2026-09-07 12:30 KST (최종 지정 아님)
+## 현재 채점 우선 후보 — 2026-09-07 15:12 KST (최종 제출 보류)
 
 | 문제 | 현재 선택 | 공식 지표 | 공식 점수 | 답안 SHA 앞자리 |
 |---|---|---:|---:|---|
 | P1 | 원형 O+B+MS-TCN, 배포자료부터 7fit 복원 | F1 0.833548 | **28.909341** | `57844ef2` |
-| P2 | C3 DeepSet L120, 3-seed + endpoint projection | RMSE 0.405920℃ | **28.240037** | `9c5fec38` |
-| P3 | CatBoost numeric lead + train-OOF router | RMSE 0.604351m | **23.741446** | `ff42a6a0` |
+| P2 | C3 DeepSet L120, 3-seed + smooth7 + endpoint projection | RMSE 0.395254℃ | **28.373869** | `794268f1` |
+| P3 | CatBoost CPU numeric 3-seed + router, no-shrink | RMSE 0.595521m | **23.881592** | `70761aff` |
 
-최신 4건 실제 채점·파일 해시는 [공식 영수증](reports/final_day_candidate_official_submissions_20260907_v1/receipt.json), 후보·제약은 [UPLOAD_SET_2](docs/ocean_v2_codex/UPLOAD_SET_2.md), 다음 독립 검토 요청은 [Fable 프롬프트](docs/ocean_v2_codex/FABLE_REMAINING_SLOTS_PROMPT_20260907.md)를 따른다.
-P1 bracket B(28.7598), P2 10-seed projection(28.083729), P3 CPU3seed(23.654388)는 각 우선 후보를 넘지 못했다. P3 no-shrink `70761aff`는 내부 QA·패키지 replay 완료/공식 미채점이며, CPU fresh_cold_2는 실행 중이다. 제출 직후 잔여 P1 2/P2 1/P3 2는 시각 고정 기록이므로 다음 실행 전에 다시 확인한다.
+**[최신 상태·전체 증거·로컬 패키지 정본](docs/ocean_v2_codex/FINAL_SELECTION_REVIEW_HANDOFF_20260907.md)**과 [Fable 검토 프롬프트](docs/ocean_v2_codex/FABLE_FINAL_SELECTION_AUDIT_PROMPT_20260907.md)를 먼저 읽는다. 남은 5개 답안을 모두 채점하여 잔여는 **0/0/0**이다. P1 B5(28.858163), O_slow(28.711047)는 원형보다 낮았다. P2는 새 cold/saved 노트북 exact PASS, P3는 saved replay PASS이나 fresh cold는 아직 진행 중이다.
+사용자 요청으로 **최종 제출 보류**: P2 첫 최종 버튼 뒤 확인창 OK는 누르지 않았고 접수 receipt도 없다. 이후 브라우저 읽기 연결 실패로 현재 서버 상태를 새로 확인하지 못했다. P1/P3 최종 버튼은 누르지 않았다. 검토 후 명시적 재개 지시 없이 제출하지 않는다.
 
-기존 로컬 묶음: `C:/Users/cedis/Documents/OceanFinalRelease_20260907`. 새 P2 우선본은 `C:/Users/cedis/Documents/OceanFinalDay_20260907/P2_L120_s3_proj_v2`에 별도 보존하며 기존 묶음을 덮어쓰지 않았다.
+기존 로컬 묶음: `C:/Users/cedis/Documents/OceanFinalRelease_20260907` (P1 원형은 유지, P2/P3는 이전 선택). 새 P2 최종 검토 ZIP은 `C:/Users/cedis/Documents/OceanFinalSelected_20260907/P2`에, P3 no-shrink는 `C:/Users/cedis/Documents/OceanFinalDay_20260907/P3_numeric_cpudet_noshrink_v2`에 별도 보존한다.
 학습 코드·동봉 모델·채점 CSV·노트북·첨부 안내를 문제별로 구분한다.
 Git에는 코드·설정·집계 QA·문서만 올리므로 데이터/가중치/답안 ZIP은 로컬에서 선택한다.
 [최종 검증 보고서](reports/final_release_20260907_v1/report-source.md)를 통해 실제 완료 범위를 확인한다.
 P1 전체 재학습 답안은 역사적 최고 답안과 SHA가 같고, 09-07 서버에서도 중복 내용으로 확인됐다. 새 점수를 받은 것은 아니다.
-P3 전체 재학습(17fit, 약 1,498초)은 완료했으나 채점본과 660/1,200행이 달라 위 점수를 승계하지 않습니다. 채점 당시 저장 모델 ZIP은 새 추출 추론으로 위 채점 SHA를 정확히 재생했습니다. 두 결과는 분리 보존하며 운영진 재학습 허용오차 충족 여부는 미확인입니다.
+이전 GPU P3 전체 재학습(17fit, 약 1,498초)은 당시 채점본 `ff42a6a0`와 660/1,200행이 달랐습니다. 이 증거를 현재 CPU `70761aff`의 cold 증거로 쓰지 않습니다. 현재 CPU fresh cold 및 운영진 재학습 허용오차는 별도 미완료·미확인입니다.
 
 ## 이전 기준선·분리 실험 이력 — 현재 선택 아님
 

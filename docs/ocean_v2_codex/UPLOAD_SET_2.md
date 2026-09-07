@@ -1,5 +1,21 @@
 # UPLOAD_SET_2 — 공식 채점 갱신 (2026-09-07 12:23 KST)
 
+## 최우선 갱신 — 15:12 KST / 모든 답안 슬롯 소모·최종 확인 보류
+
+잔여 **P1 0 / P2 0 / P3 0**. P1 B5 `cbeb7426` 28.858163점, O_slow `c38ace7a` 28.711047점으로 원형을 넘지 못했다. [공식 receipt](../../reports/p1_original_learning_seed_ablation_20260907_v2/official-receipts.json). 현재 우선 P1 `57844ef2` / P2 `794268f1` / P3 `70761aff`이며, **[최신 패키지·재현·권한 정본](FINAL_SELECTION_REVIEW_HANDOFF_20260907.md)**을 따른다. P2 최종 확인창 OK는 누르지 않았고 접수 미확인이다. 사용자 Fable 검토 후 재개 지시 전 최종 제출 금지. 아래 P1 잔여2/패키징 중은 과거 상태다.
+
+## 최우선 최신 갱신 — 14:45 KST
+
+현재 잔여 **P1 2 / P2 0 / P3 0**. 아래 이전 시각의 잔여 숫자는 이력이다.
+
+| 추가 채점 후보 | SHA 앞8자 | Public RMSE | Public 점수 | 증거 |
+|---|---|---:|---:|---|
+| P2 L120 s3 smooth7 projection | 794268f1 | 0.395254℃ | 28.373869 | [receipt](../../reports/p2_l120_s3_smooth7_projection_20260907_v1/official-receipt.json) |
+| P3 CPU no-shrink | 70761aff | 0.595521m | 23.881592 | [receipt](../../reports/p3_numeric_cpudet_noshrink_20260907_v1/official-receipt.json) |
+| P3 CPU equal-component / original shrink | c9fa5366 | 0.600933m | 23.795692 | [receipt](../../reports/p3_cpudet_mean_router_ablation_20260907_v1/official-receipt.json) |
+
+P2新 후보는 별도 ZIP 추출의 빈 모델 학습→추론→후처리와 저장 모델 재생까지 exact SHA PASS. [답안 경로·bytes·SHA·노트북 실측](../../reports/p2_l120_s3_smooth7_projection_20260907_v1/candidate-ready.json). P3는 저장 모델 재생 PASS, fresh_cold_2 진행 중. Private 성능·공식 적격성·최종 모델 접수는 아직 증명하지 않는다. P1 두 새 후보는 별도 학습과 내부 QA를 마쳐 패키징 중.
+
 ## 최신 상태 — 답안 4건 제출·채점 완료
 
 사용자의 최신 직접 지시 “그럼 제출하고 진행하세요”에 따라 리더보드 답안을 업로드했다. 아래 기존 10:32~11:56 기록의 '업로드하지 않음/미완료/점수 미확인'은 당시 이력이며, 현재 상태는 이 절과 [공식 채점 receipt](../../reports/final_day_candidate_official_submissions_20260907_v1/receipt.json)를 따른다. 모델 최종 지정·삭제·commit/push는 하지 않았다.
